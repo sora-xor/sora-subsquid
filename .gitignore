@@ -7,3 +7,6 @@
 
 # IDE files
 /.idea
+
+/archive/prod/cockroach-data
+/archive/dev/cockroach-data
