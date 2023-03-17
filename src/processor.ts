@@ -14,11 +14,14 @@ import { demeterGetRewardsHandler } from './handlers/calls/demeterGetRewardsHand
 import { demeterWithdrawHandler } from './handlers/calls/demeterWithdrawHandler'
 import { irohaMigrationHandler } from './handlers/calls/irohaMigrationHandler'
 import { liquidityDepositHandler } from './handlers/calls/liquidityDepositHandler'
+import { liquidityRemovalHandler } from './handlers/calls/liquidityRemovalHandler'
 import { referralReserveHandler } from './handlers/calls/referralReserveHandler'
 import { referralUnreserveHandler } from './handlers/calls/referralUnreserveHandler'
 import { rewardsHandler } from './handlers/calls/rewardsHandler'
 import { setReferralHandler } from './handlers/calls/setReferralHandler'
 import { soraEthTransferHandler } from './handlers/calls/soraEthTransferHandler'
+import { swapsHandler } from './handlers/calls/swapsHandler'
+import { swapTransfersHandler } from './handlers/calls/swapTransfersHandler'
 import { transfersHandler } from './handlers/calls/transfersHandler'
 import { ethSoraTransferHandler } from './handlers/events/ethSoraTransferHandler'
 import { handleNetworkFee } from './handlers/events/networkFee'
@@ -98,10 +101,10 @@ processor.run(new TypeormDatabase(), async (ctx: Context) => {
 
                 await assetRegistrationHandler(...props)
                 await transfersHandler(...props)
-                // await handleSwaps(...props)
-                // await handleSwapTransfers(...props)
+                await swapsHandler(...props)
+                await swapTransfersHandler(...props)
                 await liquidityDepositHandler(...props)
-                // await liquidityRemovalHandler(...props)
+                await liquidityRemovalHandler(...props)
                 await irohaMigrationHandler(...props)
                 // batchTransactionsHandler(...props)
                 await soraEthTransferHandler(...props)

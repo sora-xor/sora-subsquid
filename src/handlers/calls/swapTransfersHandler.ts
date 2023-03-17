@@ -1,18 +1,18 @@
 import { Block, CallEntity, Context } from '../../processor'
-import { LiquidityProxySwapCall } from '../../types/calls'
+import { LiquidityProxySwapTransferCall } from '../../types/calls'
 import { CallRec, handleAndSaveExtrinsic, SwapAmount } from '../../utils/swaps'
 
-export async function swapsHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
+export async function swapTransfersHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
 
-    if (callEntity.name !== 'LiquidityProxy.swap') return
+    if (callEntity.name !== 'LiquidityProxy.swap_transfer') return
 
-    ctx.log.debug('Caught swap extrinsic')
+    ctx.log.debug('Caught swap transfer extrinsic')
 
-	const call = new LiquidityProxySwapCall(ctx, callEntity.call)
+	const call = new LiquidityProxySwapTransferCall(ctx, callEntity.call)
 
 	let callRec: CallRec
-	if (call.isV1) {
-		const { inputAssetId, outputAssetId, swapAmount: swapAmountV1, selectedSourceTypes } = call.asV1
+	if (call.isV33) {
+		const { inputAssetId, outputAssetId, swapAmount: swapAmountV1, selectedSourceTypes, receiver } = call.asV33
 		let swapAmount: SwapAmount
 		if (swapAmountV1.__kind === 'WithDesiredInput') {
 			swapAmount = {
@@ -31,10 +31,11 @@ export async function swapsHandler(ctx: Context, block: Block, callEntity: CallE
 			inputAssetId,
 			outputAssetId,
 			swapAmount,
-			liquiditySources: selectedSourceTypes.map(type => type.__kind)
+			liquiditySources: selectedSourceTypes.map(type => type.__kind),
+			receiver
 		}
 	} else if (call.isV42) {
-		const { inputAssetId, outputAssetId, swapAmount: swapAmountV42, selectedSourceTypes } = call.asV42
+		const { inputAssetId, outputAssetId, swapAmount: swapAmountV42, selectedSourceTypes, receiver } = call.asV42
 		let swapAmount: SwapAmount
 		if (swapAmountV42.__kind === 'WithDesiredInput') {
 			swapAmount = {
@@ -53,7 +54,8 @@ export async function swapsHandler(ctx: Context, block: Block, callEntity: CallE
 			inputAssetId: inputAssetId.code,
 			outputAssetId: outputAssetId.code,
 			swapAmount,
-			liquiditySources: selectedSourceTypes.map(type => type.__kind)
+			liquiditySources: selectedSourceTypes.map(type => type.__kind),
+			receiver
 		}
 	} else {
 		throw new Error('Unsupported spec')
@@ -61,5 +63,5 @@ export async function swapsHandler(ctx: Context, block: Block, callEntity: CallE
 
     await handleAndSaveExtrinsic(ctx, block, callEntity, callRec)
 
-    ctx.log.debug(`===== Saved swap with ${callEntity.extrinsic.hash} txid =====`)
+    ctx.log.debug(`===== Saved swap and transfer with ${callEntity.extrinsic.hash} txid =====`)
 }

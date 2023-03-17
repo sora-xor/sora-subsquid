@@ -1,8 +1,9 @@
 {
   "cSpell.words": [
-    "iroha",
-    "Mintable",
-    "txid"
-  ],
+	"iroha",
+	"Mintable",
+	"Multicollateral",
+	"txid"
+],
   "editor.detectIndentation": false
 }
