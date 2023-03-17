@@ -2,7 +2,7 @@ import { networkSnapshotsStorage } from '../../utils/network'
 import { formatDateTimestamp } from '../../utils'
 import { Block, Context, EventEntity } from '../../processor'
 
-export async function handleNetworkFee(ctx: Context, block: Block, event: EventEntity): Promise<void> {
+export async function networkFeeHandler(ctx: Context, block: Block, event: EventEntity): Promise<void> {
   if (event.kind !== 'event' || event.name !== 'XorFee.FeeWithdrawn') return
 
   const [account, fee] = event.event.args

@@ -1,5 +1,6 @@
 import { toHex } from "@subsquid/substrate-processor"
 import { CallItem } from "@subsquid/substrate-processor/lib/interfaces/dataSelection"
+import BigNumber from "bignumber.js"
 import { formatDateTimestamp } from "."
 import { Block, Context } from "../processor"
 import { LiquidityProxyExchangeEvent } from "../types/events"
@@ -66,10 +67,17 @@ export const handleAndSaveExtrinsic = async (
     const blockTimestamp = formatDateTimestamp(new Date(block.header.timestamp))
     const historyElement = await getOrCreateHistoryElement(ctx, block, callEntity)
 
-    // TODO: FIX
     const { liquiditySources, swapAmount, outputAssetId, inputAssetId, receiver } = callRec
 
-    const details: any = {}
+    const details: {
+		baseAssetId?: string
+		targetAssetId?: string
+		selectedMarket?: string
+		baseAssetAmount?: string
+		targetAssetAmount?: string
+		liquidityProviderFee?: string
+		to?: string
+	} = {}
 
     details.baseAssetId = toHex(inputAssetId)
     details.targetAssetId = toHex(outputAssetId)
@@ -81,7 +89,12 @@ export const handleAndSaveExtrinsic = async (
 
     if (historyElement.execution.success) {
 		const eventEntity = findEventWithExtrinsic('LiquidityProxy.Exchange', block, extrinsicHash)
-        if (!eventEntity) throw new Error('Cannot find event: LiquidityProxy.Exchange')
+        if (!eventEntity) {
+			ctx.log.error('Cannot find event: LiquidityProxy.Exchange')
+			return
+		} else if (block.header.height === 5001) {
+			ctx.log.info('Found event on block 5001: LiquidityProxy.Exchange')
+		}
 		const event = new LiquidityProxyExchangeEvent(ctx, eventEntity.event)
 
 		let eventRec: {
@@ -114,7 +127,7 @@ export const handleAndSaveExtrinsic = async (
 
     // update assets volume
     if (historyElement.execution.success) {
-        await assetSnapshotsStorage.updateVolume(ctx, inputAssetId, details.baseAssetAmount, blockTimestamp)
-        await assetSnapshotsStorage.updateVolume(ctx, outputAssetId, details.targetAssetAmount, blockTimestamp)
+        await assetSnapshotsStorage.updateVolume(ctx, inputAssetId, BigNumber(details.baseAssetAmount), blockTimestamp)
+        await assetSnapshotsStorage.updateVolume(ctx, outputAssetId, BigNumber(details.targetAssetAmount), blockTimestamp)
     }
 }

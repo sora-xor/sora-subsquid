@@ -3,7 +3,7 @@
 // import { getTransferEventData } from '../../utils/events'
 // import { poolAccounts, poolsStorage, PoolsPrices } from '../../utils/pools'
 
-// export async function handleTransferEvent(ctx: Context, block: Block, event: EventEntity): Promise<void> {
+// export async function transferEventHandler(ctx: Context, block: Block, event: EventEntity): Promise<void> {
 //   if (event.name !== 'Tokens.Transfer') return
 
 //   const { assetId, from, to, amount } = getTransferEventData(event)

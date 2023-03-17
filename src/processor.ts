@@ -9,6 +9,7 @@ import {
 import { CallItem, EventItem } from '@subsquid/substrate-processor/lib/interfaces/dataSelection'
 import { Store, TypeormDatabase } from "@subsquid/typeorm-store"
 import { assetRegistrationHandler } from "./handlers/calls/assetRegistrationHandler"
+// import { batchTransactionsHandler } from './handlers/calls/batchTransactionsHandler'
 import { demeterDepositHandler } from './handlers/calls/demeterDepositHandler'
 import { demeterGetRewardsHandler } from './handlers/calls/demeterGetRewardsHandler'
 import { demeterWithdrawHandler } from './handlers/calls/demeterWithdrawHandler'
@@ -24,8 +25,10 @@ import { swapsHandler } from './handlers/calls/swapsHandler'
 import { swapTransfersHandler } from './handlers/calls/swapTransfersHandler'
 import { transfersHandler } from './handlers/calls/transfersHandler'
 import { ethSoraTransferHandler } from './handlers/events/ethSoraTransferHandler'
-import { handleNetworkFee } from './handlers/events/networkFee'
+import { tokenBurnHandler, tokenMintHandler, xorBurnHandler, xorMintHandler } from './handlers/events/mintAndBurn'
+import { networkFeeHandler } from './handlers/events/networkFee'
 import { referrerRewardHandler } from './handlers/events/referrerRewardHandler'
+// import { transferEventHandler } from './handlers/events/transfer'
 import { initializeAssets } from './handlers/models/initializeAssets'
 import { initializePools } from './handlers/models/initializePools'
 
@@ -106,7 +109,7 @@ processor.run(new TypeormDatabase(), async (ctx: Context) => {
                 await liquidityDepositHandler(...props)
                 await liquidityRemovalHandler(...props)
                 await irohaMigrationHandler(...props)
-                // batchTransactionsHandler(...props)
+                // await batchTransactionsHandler(...props)
                 await soraEthTransferHandler(...props)
                 await rewardsHandler(...props)
                 await setReferralHandler(...props)
@@ -121,13 +124,13 @@ processor.run(new TypeormDatabase(), async (ctx: Context) => {
                 const props = [ctx, block, item] as const
             
                 await ethSoraTransferHandler(...props)
-                // await handleTokenBurn(...props)
-                // await handleXorBurn(...props)
-                // await handleTokenMint(...props)
-                // await handleXorMint(...props)
-                await handleNetworkFee(...props)
+                await tokenBurnHandler(...props)
+                await xorBurnHandler(...props)
+                await tokenMintHandler(...props)
+                await xorMintHandler(...props)
+                await networkFeeHandler(...props)
                 await referrerRewardHandler(...props)
-                // await handleTransferEvent(...props)
+                // await transferEventHandler(...props)
             }
         }
     }

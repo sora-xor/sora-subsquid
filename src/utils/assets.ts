@@ -76,7 +76,7 @@ class AssetSnapshotsStorage {
   }
 
   private getId(assetId: Uint8Array, type: SnapshotType, index: number) {
-    return [assetId, type, index].join('-')
+    return [toHex(assetId), type, index].join('-')
   }
 
   async sync(ctx: Context, blockTimestamp: number): Promise<void> {
@@ -161,7 +161,7 @@ class AssetSnapshotsStorage {
     await this.assetStorage.updatePrice(ctx, assetId, price)
   }
 
-  async updateVolume(ctx: Context, assetId: Uint8Array, amount: bigint, blockTimestamp: number): Promise<void> {
+  async updateVolume(ctx: Context, assetId: Uint8Array, amount: BigNumber, blockTimestamp: number): Promise<void> {
     const asset = await this.assetStorage.getAsset(ctx, assetId)
 
     const assetPrice = DAI === assetId
@@ -169,7 +169,7 @@ class AssetSnapshotsStorage {
       : BigInt(asset?.priceUSD ?? 0)
 
     const volume = amount
-    const volumeUSD = volume * assetPrice
+    const volumeUSD = volume.multipliedBy(assetPrice.toString())
 
     for (const type of AssetSnapshots) {
       const snapshot = await this.getSnapshot(ctx, assetId, type, blockTimestamp)
