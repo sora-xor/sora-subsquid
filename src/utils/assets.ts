@@ -3,23 +3,19 @@ import { SnapshotType, Asset, AssetSnapshot, AssetVolume, AssetPrice } from '../
 import { Context } from '../processor'
 import { SnapshotSecondsMap, DAI } from './consts'
 import { networkSnapshotsStorage } from '../utils/network'
+import { decodeHex, toHex } from '@subsquid/substrate-processor'
 
 export const AssetSnapshots = [SnapshotType.DEFAULT, SnapshotType.HOUR, SnapshotType.DAY]
 
 export let assetPrecisions = new Map<string, number>()
 
-export const formatU128ToBalance = (u128: string, assetId: string): string => {
-  let decimals = assetPrecisions.get(assetId) ?? 18
-  let padded = u128.padStart(decimals + 1, '0')
+export const formatU128ToBalance = (u128: bigint, assetId: Uint8Array): string => {
+  let decimals = assetPrecisions.get(toHex(assetId)) ?? 18
+  let padded = u128.toString().padStart(decimals + 1, '0')
   if (decimals === 0) {
       return padded
   }
   return `${padded.slice(0, -decimals)}.${padded.slice(-decimals)}`
-}
-
-export const getAssetId = (asset: any): string => {
-  // TODO: check it
-  return asset?.code?.code ?? asset?.code ?? asset // // .toHuman()
 }
 
 class AssetStorage {
@@ -34,17 +30,17 @@ class AssetStorage {
     ctx.store.save([...this.storage.values()])
   }
 
-  async getAsset(ctx: Context, id: string): Promise<Asset> {
-    let asset = this.storage.get(id)
+  async getAsset(ctx: Context, id: Uint8Array): Promise<Asset> {
+    let asset = this.storage.get(toHex(id))
     if (asset) {
       return asset
     }
 
-    asset = await ctx.store.get(Asset, id)
+    asset = await ctx.store.get(Asset, toHex(id))
 
     if (!asset) {
       asset = new Asset()
-      asset.id = id
+      asset.id = toHex(id)
       asset.liquidity = BigInt(0)
       asset.priceUSD = '0'
       asset.supply = BigInt(0)
@@ -59,7 +55,7 @@ class AssetStorage {
     return asset
   }
 
-  async updatePrice(ctx: Context, id: string, price: string): Promise<void> {
+  async updatePrice(ctx: Context, id: Uint8Array, price: string): Promise<void> {
     const asset = await this.getAsset(ctx, id)
 
     if (asset.priceUSD !== price) {
@@ -79,7 +75,7 @@ class AssetSnapshotsStorage {
     this.assetStorage = assetStorage
   }
 
-  private getId(assetId: string, type: SnapshotType, index: number) {
+  private getId(assetId: Uint8Array, type: SnapshotType, index: number) {
     return [assetId, type, index].join('-')
   }
 
@@ -106,7 +102,7 @@ class AssetSnapshotsStorage {
     ctx.log.debug(`[AssetSnapshotsStorage] ${this.storage.size} snaphots in storage after sync`)
   }
 
-  async getSnapshot(ctx: Context, assetId: string, type: SnapshotType, blockTimestamp: number): Promise<AssetSnapshot> {
+  async getSnapshot(ctx: Context, assetId: Uint8Array, type: SnapshotType, blockTimestamp: number): Promise<AssetSnapshot> {
     const seconds = SnapshotSecondsMap[type]
     const shapshotIndex = Math.floor(blockTimestamp / seconds) // rounded snapshot index (from 0)
     const id = this.getId(assetId, type, shapshotIndex)
@@ -150,7 +146,7 @@ class AssetSnapshotsStorage {
     return snapshot
   }
 
-  async updatePrice(ctx: Context, assetId: string, price: string, blockTimestamp: number): Promise<void> {
+  async updatePrice(ctx: Context, assetId: Uint8Array, price: string, blockTimestamp: number): Promise<void> {
     const bnPrice = new BigNumber(price)
 
     for (const type of AssetSnapshots) {
@@ -165,28 +161,28 @@ class AssetSnapshotsStorage {
     await this.assetStorage.updatePrice(ctx, assetId, price)
   }
 
-  async updateVolume(ctx: Context, assetId: string, amount: string, blockTimestamp: number): Promise<void> {
+  async updateVolume(ctx: Context, assetId: Uint8Array, amount: bigint, blockTimestamp: number): Promise<void> {
     const asset = await this.assetStorage.getAsset(ctx, assetId)
 
     const assetPrice = DAI === assetId
-      ? new BigNumber(1)
-      : new BigNumber(asset?.priceUSD ?? 0)
+      ? BigInt(1)
+      : BigInt(asset?.priceUSD ?? 0)
 
-    const volume = new BigNumber(amount)
-    const volumeUSD = volume.multipliedBy(assetPrice)
+    const volume = amount
+    const volumeUSD = volume * assetPrice
 
     for (const type of AssetSnapshots) {
       const snapshot = await this.getSnapshot(ctx, assetId, type, blockTimestamp)
 
       // TODO: remove !
-      snapshot!.volume!.amount = new BigNumber(snapshot!.volume!.amount).plus(volume).toString()
-      snapshot!.volume!.amountUSD = new BigNumber(snapshot!.volume!.amountUSD).plus(volumeUSD).toFixed(2)
+      snapshot!.volume!.amount = new BigNumber(snapshot!.volume!.amount).plus(volume.toString()).toString()
+      snapshot!.volume!.amountUSD = new BigNumber(snapshot!.volume!.amountUSD).plus(volumeUSD.toString()).toFixed(2)
     }
 
-    await networkSnapshotsStorage.updateVolumeStats(ctx, volumeUSD, blockTimestamp)
+    await networkSnapshotsStorage.updateVolumeStats(ctx, new BigNumber(volumeUSD.toString()), blockTimestamp)
   }
 
-  async updateLiquidity(ctx: Context, assetId: string, liquidity: bigint, blockTimestamp: number): Promise<void> {
+  async updateLiquidity(ctx: Context, assetId: Uint8Array, liquidity: bigint, blockTimestamp: number): Promise<void> {
     for (const type of AssetSnapshots) {
       const snapshot = await this.getSnapshot(ctx, assetId, type, blockTimestamp)
 
@@ -198,7 +194,7 @@ class AssetSnapshotsStorage {
     asset.liquidity = liquidity
   }
 
-  async updateMinted(ctx: Context, assetId: string, amount: bigint, blockTimestamp: number): Promise<void> {
+  async updateMinted(ctx: Context, assetId: Uint8Array, amount: bigint, blockTimestamp: number): Promise<void> {
     for (const type of AssetSnapshots) {
       const snapshot = await this.getSnapshot(ctx, assetId, type, blockTimestamp)
 
@@ -210,7 +206,7 @@ class AssetSnapshotsStorage {
     asset.supply = asset.supply + amount
   }
 
-  async updateBurned(ctx: Context, assetId: string, amount: bigint, blockTimestamp: number): Promise<void> {
+  async updateBurned(ctx: Context, assetId: Uint8Array, amount: bigint, blockTimestamp: number): Promise<void> {
     for (const type of AssetSnapshots) {
       const snapshot = await this.getSnapshot(ctx, assetId, type, blockTimestamp)
 

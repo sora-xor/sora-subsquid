@@ -2,56 +2,50 @@ import { addDataToHistoryElement, getOrCreateHistoryElement, updateHistoryElemen
 import { formatU128ToBalance } from '../../utils/assets'
 import { XOR } from '../../utils/consts'
 import { Block, CallEntity, Context } from '../../processor'
-import { findEventEntityWithExtrinsic } from '../../utils/events'
-import { BalancesTransferEvent } from '../../types/events'
-import { decodeUint8 } from '../../utils'
+import { findEventWithExtrinsic, getTransferEventData } from '../../utils/events'
+import { ReferralsUnreserveCall } from '../../types/calls'
+import { toHex } from '@subsquid/substrate-processor'
 
-export async function referralUnreserveHandler(ctx: Context, block: Block, call: CallEntity): Promise<void> {
+export async function referralUnreserveHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
 
-    if (call.kind !== 'call' || call.name !== 'Referrals.unreserve') return
+    if (callEntity.name !== 'Referrals.unreserve') return
 
     ctx.log.debug('Caught referral unreserve extrinsic')
 
-    const historyElement = await getOrCreateHistoryElement(ctx, block, call)
-    const extrinsicHash = call.extrinsic.hash
+    const extrinsicHash = callEntity.extrinsic.hash
+    const historyElement = await getOrCreateHistoryElement(ctx, block, callEntity)
 
     if (!historyElement) return
 
-    let details = new Object()
+    let details: {
+        from?: string
+        to?: string
+        amount: string
+    }
 
     if (historyElement.execution.success) {
-        const balancesTransferEventEntity = findEventEntityWithExtrinsic('Balances.Transfer', block, extrinsicHash)
+        const balancesTransferEventEntity = findEventWithExtrinsic('Balances.Transfer', block, extrinsicHash)
 
         if (balancesTransferEventEntity) {
-            const balancesTransferEvent = new BalancesTransferEvent(ctx, balancesTransferEventEntity.event)
+            const { from, to, amount } = getTransferEventData(ctx, balancesTransferEventEntity)
 
-            if (balancesTransferEvent.isV1) {
-                const [from, to, amount] = balancesTransferEvent.asV1
-
-                details = {
-                    from: decodeUint8(from),
-                    to: decodeUint8(to),
-                    amount: formatU128ToBalance(amount.toString(), XOR)
-                }
-            } else if (balancesTransferEvent.asV42) {
-                const { from, to, amount } = balancesTransferEvent.asV42
-
-                details = {
-                    from: from.toString(),
-                    to: to.toString(),
-                    amount: formatU128ToBalance(amount.toString(), XOR)
-                }
-            } else {
-                throw new Error('Unsupported spec')
+            details = {
+                from: toHex(from),
+                to: toHex(to),
+                amount: formatU128ToBalance(amount, XOR)
             }
         } else {
-            ctx.log.error('Cannot find "Balances.Transfer" event')
+            throw new Error('Cannot find event: Balances.Transfer')
         }
     } else {
-        const [amount] = call.call.args
+        const call = new ReferralsUnreserveCall(ctx, callEntity.call)
 
-        details = {
-            amount: formatU128ToBalance(amount.toString(), XOR)
+        if (call.isV22) {
+            details = {
+                amount: formatU128ToBalance(call.asV22.balance, XOR)
+            }
+        } else {
+            throw new Error('Unsupported spec')
         }
     }
 

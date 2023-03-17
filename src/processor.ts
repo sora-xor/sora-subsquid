@@ -9,54 +9,22 @@ import {
 import { CallItem, EventItem } from '@subsquid/substrate-processor/lib/interfaces/dataSelection'
 import { Store, TypeormDatabase } from "@subsquid/typeorm-store"
 import { assetRegistrationHandler } from "./handlers/calls/assetRegistrationHandler"
-import { demeterDepositHandler, demeterGetRewardsHandler, demeterWithdrawHandler } from './handlers/calls/demeterFarmingPlatform'
-import { handlerIrohaMigration } from './handlers/calls/irohaMigrationHandler'
-import { handleLiquidityDeposit } from './handlers/calls/liquidityDepositHandler'
-import { handleLiquidityRemoval } from './handlers/calls/liquidityRemovalHandler'
+import { demeterDepositHandler } from './handlers/calls/demeterDepositHandler'
+import { demeterGetRewardsHandler } from './handlers/calls/demeterGetRewardsHandler'
+import { demeterWithdrawHandler } from './handlers/calls/demeterWithdrawHandler'
+import { irohaMigrationHandler } from './handlers/calls/irohaMigrationHandler'
+import { liquidityDepositHandler } from './handlers/calls/liquidityDepositHandler'
 import { referralReserveHandler } from './handlers/calls/referralReserveHandler'
 import { referralUnreserveHandler } from './handlers/calls/referralUnreserveHandler'
 import { rewardsHandler } from './handlers/calls/rewardsHandler'
 import { setReferralHandler } from './handlers/calls/setReferralHandler'
 import { soraEthTransferHandler } from './handlers/calls/soraEthTransferHandler'
-import { handleSwaps, handleSwapTransfers } from './handlers/calls/swapsHandler'
-import { handlerTransfers } from './handlers/calls/transfersHandler'
+import { transfersHandler } from './handlers/calls/transfersHandler'
 import { ethSoraTransferHandler } from './handlers/events/ethSoraTransferHandler'
-import { handleTokenBurn, handleTokenMint, handleXorBurn, handleXorMint } from './handlers/events/mintAndBurn'
 import { handleNetworkFee } from './handlers/events/networkFee'
 import { referrerRewardHandler } from './handlers/events/referrerRewardHandler'
-import { handleTransferEvent } from './handlers/events/transfer'
-import { createHistoryElement } from './utils/history'
-
-const eventParams = {
-    data: {
-        event: {
-            args: true,
-            extrinsic: {
-                hash: true,
-                fee: true
-            }
-        }
-    }
-} as const
-
-const callParams = {
-    data: {
-        call: {
-            args: true,
-            extrinsic: {
-                hash: true,
-                fee: true
-            },
-            origin: true
-        },
-        extrinsic: {
-            hash: true,
-            fee: true,
-            error: true
-        }
-    }
-} as const
-
+import { initializeAssets } from './handlers/models/initializeAssets'
+import { initializePools } from './handlers/models/initializePools'
 
 const processor = new SubstrateBatchProcessor()
     .setDataSource({
@@ -70,69 +38,71 @@ const processor = new SubstrateBatchProcessor()
     .setTypesBundle('archive/prod/typesBundle.json')
     .setBlockRange({ from: 0 })
 
-    .addEvent('EthBridge.IncomingRequestFinalized') // , eventParams)
-    .addEvent('EthBridge.IncomingRequestFinalizationFailed') // , eventParams)
-    .addEvent('EthBridge.RequestRegistered') // , eventParams)
-    .addEvent('Tokens.Deposited') // , eventParams)
-    .addEvent('Tokens.Withdrawn') // , eventParams)
-    .addEvent('Tokens.Transfer') // , eventParams)
-    .addEvent('Balances.Deposit') // , eventParams)
-    .addEvent('Balances.Withdraw') // , eventParams)
-    .addEvent('Balances.Transfer') // , eventParams)
-    .addEvent('Currencies.Transferred') // , eventParams)
-    .addEvent('Currencies.Deposited') // , eventParams)
-    .addEvent('XorFee.FeeWithdrawn') // , eventParams)
-    .addEvent('XorFee.ReferrerRewarded') // , eventParams)
-    .addEvent('Assets.AssetRegistered') // , eventParams)
-    .addEvent('Assets.Transfer') // , eventParams)
-    .addEvent('LiquidityProxy.Exchange') // , eventParams)
+    .addEvent('EthBridge.IncomingRequestFinalized')
+    .addEvent('EthBridge.IncomingRequestFinalizationFailed')
+    .addEvent('EthBridge.RequestRegistered')
+    .addEvent('Tokens.Deposited')
+    .addEvent('Tokens.Withdrawn')
+    .addEvent('Tokens.Transfer')
+    .addEvent('Balances.Deposit')
+    .addEvent('Balances.Withdraw')
+    .addEvent('Balances.Transfer')
+    .addEvent('Currencies.Transferred')
+    .addEvent('Currencies.Deposited')
+    .addEvent('XorFee.FeeWithdrawn')
+    .addEvent('XorFee.ReferrerRewarded')
+    .addEvent('Assets.AssetRegistered')
+    .addEvent('Assets.Transfer')
+    .addEvent('LiquidityProxy.Exchange')
+    .addEvent('DemeterFarmingPlatform.Deposited')
+    .addEvent('DemeterFarmingPlatform.RewardWithdrawn')
+    .addEvent('DemeterFarmingPlatform.Withdrawn')
 
-    .addCall('Assets.register') // , callParams)
-    .addCall('Assets.transfer') // , callParams)
-    .addCall('LiquidityProxy.swap') // , callParams)
-    .addCall('LiquidityProxy.swap_transfer') // , callParams)
-    .addCall('PoolXYK.deposit_liquidity') // , callParams)
-    .addCall('PoolXYK.withdraw_liquidity') // , callParams)
-    .addCall('IrohaMigration.migrate') // , callParams)
-    .addCall('Utility.batch_all') // , callParams)
-    .addCall('EthBridge.transfer_to_sidechain') // , callParams)
-    .addCall('PswapDistribution.claim_incentive') // , callParams)
-    .addCall('Rewards.claim') // , callParams)
-    .addCall('VestedRewards.claim_rewards') // , callParams)
-    .addCall('VestedRewards.claim_crowdloan_rewards') // , callParams)
-    .addCall('Referrals.set_referrer') // , callParams)
-    .addCall('Referrals.reserve') // , callParams)
-    .addCall('Referrals.unreserve') // , callParams)
-    .addCall('DemeterFarmingPlatform.deposit') // , callParams)
-    .addCall('DemeterFarmingPlatform.withdraw') // , callParams)
-    .addCall('DemeterFarmingPlatform.get_rewards') // , callParams)
+    .addCall('Assets.register')
+    .addCall('Assets.transfer')
+    .addCall('LiquidityProxy.swap')
+    .addCall('LiquidityProxy.swap_transfer')
+    .addCall('PoolXYK.deposit_liquidity')
+    .addCall('PoolXYK.withdraw_liquidity')
+    .addCall('IrohaMigration.migrate')
+    .addCall('Utility.batch_all')
+    .addCall('EthBridge.transfer_to_sidechain')
+    .addCall('PswapDistribution.claim_incentive')
+    .addCall('Rewards.claim')
+    .addCall('VestedRewards.claim_rewards')
+    .addCall('VestedRewards.claim_crowdloan_rewards')
+    .addCall('Referrals.set_referrer')
+    .addCall('Referrals.reserve')
+    .addCall('Referrals.unreserve')
+    .addCall('DemeterFarmingPlatform.deposit')
+    .addCall('DemeterFarmingPlatform.withdraw')
+    .addCall('DemeterFarmingPlatform.get_rewards')
 
-
-export type Item = BatchProcessorItem<typeof processor> // Exclude<Exclude<BatchProcessorItem<typeof processor>, EventItem<'*'>>, CallItem<'*'>>
+export type Item = BatchProcessorItem<typeof processor>
 export type EventEntity = Exclude<BatchProcessorEventItem<typeof processor>, EventItem<'*'>>
 export type CallEntity = Exclude<BatchProcessorCallItem<typeof processor>, CallItem<'*'>>
 export type Context = BatchContext<Store, Item>
 export type BlockHeader = SubstrateBlock
 export type Block = { header: BlockHeader, items: Item[] }
 
-
 processor.run(new TypeormDatabase(), async (ctx: Context) => {
-
     for (let block of ctx.blocks) {
+        await initializeAssets(ctx, block)
+        await initializePools(ctx, block)
+
         for (let item of block.items) {
             if (item.name === '*') continue
 
             if (item.kind === 'call') {
                 const props = [ctx, block, item] as const
 
-                await createHistoryElement(...props)
                 await assetRegistrationHandler(...props)
-                await handlerTransfers(...props)
-                await handleSwaps(...props)
-                await handleSwapTransfers(...props)
-                await handleLiquidityDeposit(...props)
-                await handleLiquidityRemoval(...props)
-                await handlerIrohaMigration(...props)
+                // await transfersHandler(...props)
+                // await handleSwaps(...props)
+                // await handleSwapTransfers(...props)
+                await liquidityDepositHandler(...props)
+                // await liquidityRemovalHandler(...props)
+                await irohaMigrationHandler(...props)
                 // batchTransactionsHandler(...props)
                 await soraEthTransferHandler(...props)
                 await rewardsHandler(...props)
@@ -148,13 +118,13 @@ processor.run(new TypeormDatabase(), async (ctx: Context) => {
                 const props = [ctx, block, item] as const
             
                 await ethSoraTransferHandler(...props)
-                await handleTokenBurn(...props)
-                await handleXorBurn(...props)
-                await handleTokenMint(...props)
-                await handleXorMint(...props)
+                // await handleTokenBurn(...props)
+                // await handleXorBurn(...props)
+                // await handleTokenMint(...props)
+                // await handleXorMint(...props)
                 await handleNetworkFee(...props)
                 await referrerRewardHandler(...props)
-                await handleTransferEvent(...props)
+                // await handleTransferEvent(...props)
             }
         }
     }

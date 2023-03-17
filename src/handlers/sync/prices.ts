@@ -8,6 +8,7 @@ import { poolAccounts, PoolsPrices, poolsStorage } from '../../utils/pools'
 import { XOR, PSWAP, DAI, BASE_ASSETS } from '../../utils/consts'
 import { formatDateTimestamp } from '../../utils'
 import { Block, Context } from '../../processor'
+import { decodeHex, toHex } from '@subsquid/substrate-processor'
 
 export async function syncPoolXykPrices(ctx: Context, block: Block): Promise<void> {
     if (!PoolsPrices.get()) return
@@ -36,7 +37,7 @@ export async function syncPoolXykPrices(ctx: Context, block: Block): Promise<voi
         ctx.log.debug(`[${blockNumber}]: Update ${poolsMap.size} ${baseAssetId} based pools`)
 
         for (const poolId of poolsMap.values()) {
-            const pool = await poolsStorage.getPoolById(ctx, poolId)
+            const pool = await poolsStorage.getPoolById(ctx, block, poolId)
 
             if (!pool) continue
 
@@ -46,7 +47,7 @@ export async function syncPoolXykPrices(ctx: Context, block: Block): Promise<voi
             baseAssetInPools = baseAssetInPools.plus(baseAssetReservesBN)
             baseAssetWithDoublePools = baseAssetWithDoublePools.plus(baseAssetReservesBN.multipliedBy(new BigNumber(pool.multiplier)))
 
-            if (pool.targetAsset.id === DAI) {
+            if (pool.targetAsset.id === toHex(DAI)) {
                 baseAssetPriceInDAI = targetAssetReservesBN.div(baseAssetReservesBN)
             }
 
@@ -76,7 +77,7 @@ export async function syncPoolXykPrices(ctx: Context, block: Block): Promise<voi
                 p.priceUSD = daiPrice.toFixed(18)
 
                 // update pswap price (scope)
-                if (p.targetAsset.id === PSWAP && pswapPriceInDAI.isZero()) {
+                if (p.targetAsset.id === toHex(PSWAP) && pswapPriceInDAI.isZero()) {
                     pswapPriceInDAI = daiPrice
                 }
             })
@@ -93,7 +94,7 @@ export async function syncPoolXykPrices(ctx: Context, block: Block): Promise<voi
             }
         }
 
-        const baseAssetInPoolsFormatted = formatU128ToBalance(baseAssetInPools.toFixed(0), baseAssetId)
+        const baseAssetInPoolsFormatted = formatU128ToBalance(BigInt(baseAssetInPools.toFixed(0)), baseAssetId)
 
         // update liquidities data
         liquiditiesUSD = liquiditiesUSD.plus(
@@ -106,7 +107,7 @@ export async function syncPoolXykPrices(ctx: Context, block: Block): Promise<voi
         if (baseAssetId === XOR) {
             for (const pool of pools) {
                 // TODO: remove string type
-                await assetSnapshotsStorage.updatePrice(ctx, pool.targetAsset.id, pool.priceUSD as string, blockTimestamp)
+                await assetSnapshotsStorage.updatePrice(ctx, decodeHex(pool.targetAsset.id), pool.priceUSD as string, blockTimestamp)
             }
 
             await assetSnapshotsStorage.updatePrice(ctx, baseAssetId, baseAssetPriceInDAI.toFixed(18), blockTimestamp)
@@ -115,7 +116,7 @@ export async function syncPoolXykPrices(ctx: Context, block: Block): Promise<voi
 
     // update locked luqidity for assets
     for (const [assetId, liquidity] of assetsLockedInPools.entries()) {
-        await assetSnapshotsStorage.updateLiquidity(ctx, assetId, liquidity, blockTimestamp)
+        await assetSnapshotsStorage.updateLiquidity(ctx, decodeHex(assetId), liquidity, blockTimestamp)
     }
 
     // update total liquidity in USD

@@ -1,53 +1,63 @@
 import { addDataToHistoryElement, getOrCreateHistoryElement, updateHistoryElementStats } from '../../utils/history'
-import { getAssetId, formatU128ToBalance } from '../../utils/assets'
+import { formatU128ToBalance } from '../../utils/assets'
 import { Block, CallEntity, Context } from '../../processor'
+import { findEventWithExtrinsic } from '../../utils/events'
+import { CurrenciesDepositedEvent, CurrenciesTransferredEvent } from '../../types/events'
+import { toHex } from '@subsquid/substrate-processor'
 
-export async function handlerIrohaMigration(ctx: Context, block: Block, call: CallEntity): Promise<void> {
+export async function irohaMigrationHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
 
-    if (call.kind !== 'call' || call.name !== 'IrohaMigration.migrate') return
+    if (callEntity.name !== 'IrohaMigration.migrate') return
 
     ctx.log.debug('Caught iroha migration extrinsic')
 
-    const historyElement = await getOrCreateHistoryElement(ctx, block, call)
+    const historyElement = await getOrCreateHistoryElement(ctx, block, callEntity)
+    const extrinsicHash = callEntity.extrinsic.hash
 
-    if (!historyElement) return
-
-    let details = new Object()
+    let details: {
+        assetId: string
+        amount: string
+    }
 
     if (historyElement.execution.success) {
-
-        const assetTransferEvent = block.items.find(e => e.name === 'Currencies.Deposited')
-
-        if (assetTransferEvent?.kind !== 'event') return
+        const currenciesDepositedEventEntity = findEventWithExtrinsic('Currencies.Deposited', block, extrinsicHash)
         
-        if (assetTransferEvent) {
-            const [asset, , amount] = assetTransferEvent.event.args
-            let assetId = getAssetId(asset)
-            details = {
-                assetId: assetId,
-                amount: formatU128ToBalance(amount.toString(), assetId)
-            }
+        if (currenciesDepositedEventEntity) {
+            const currenciesDepositedEvent = new CurrenciesDepositedEvent(ctx, currenciesDepositedEventEntity.event)
 
-        } else {
-            const assetTransferEvent = block.items.find(e => e.name === 'Currencies.Transferred')
-
-            if (assetTransferEvent?.kind !== 'event') return
-
-            if (assetTransferEvent) {
-                const [asset, , , amount] = assetTransferEvent.event.args
-                let assetId = getAssetId(asset)
+            if (currenciesDepositedEvent.isV1) {
+                const [assetId, , amount] = currenciesDepositedEvent.asV1
                 details = {
-                    assetId: assetId,
-                    amount: formatU128ToBalance(amount.toString(), assetId)
+                    assetId: toHex(assetId),
+                    amount: formatU128ToBalance(amount, assetId)
                 }
+            } else {
+                throw new Error('Unsupported spec')
+            }
+        } else {
+            const currenciesTransferredEventEntity = findEventWithExtrinsic('Currencies.Transferred', block, extrinsicHash)
 
+            if (currenciesTransferredEventEntity) {
+                const currenciesTransferredEvent = new CurrenciesTransferredEvent(ctx, currenciesTransferredEventEntity.event)
+
+                if (currenciesTransferredEvent.isV1) {
+                    const [assetId, , , amount] = currenciesTransferredEvent.asV1
+                    details = {
+                        assetId: toHex(assetId),
+                        amount: formatU128ToBalance(amount, assetId)
+                    }
+                } else {
+                    throw new Error('Unsupported spec')
+                }
+            } else {
+                throw new Error('Cannot find event: Currencies.Transferred')
             }
         }
 
         await addDataToHistoryElement(ctx, historyElement, details)
         await updateHistoryElementStats(ctx, historyElement)
 
-        ctx.log.debug(`===== Saved iroha migration with ${call.extrinsic.hash} txid =====`)
+        ctx.log.debug(`===== Saved iroha migration with ${extrinsicHash} txid =====`)
 
     }
 

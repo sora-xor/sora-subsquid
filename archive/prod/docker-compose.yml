@@ -10,6 +10,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: squid-archive-prod
+      
     ports:
      - "26257:26257"
      - "8080:8080"
@@ -27,7 +28,8 @@ services:
        #  "--start-block", "1000000", # uncomment to specify a non-zero start block
        "--out", "postgres://root@db:26257/defaultdb",
        "--types-bundle", "/configs/typesBundle.json",
-       "--start-block", "0"
+       "--start-block", "0",
+       "--write-batch-size", "10"
     ]
 
   gateway:
@@ -42,7 +44,7 @@ services:
        # "--evm-support" # uncomment for chains with Frontier EVM pallet
                          # (e.g. Moonbeam/Moonriver or Astar/Shiden)
        "--scan-start-value", "1",
-       "--scan-max-value", "100",
+       "--scan-max-value", "10000",
     ]
     ports:
       - "8888:8000"

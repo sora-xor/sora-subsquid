@@ -1,48 +1,68 @@
 import { addDataToHistoryElement, getOrCreateHistoryElement, updateHistoryElementStats } from '../../utils/history'
-import { getAssetId, formatU128ToBalance } from '../../utils/assets'
-import { findEventsWithExtrinsic } from '../../utils/events'
+import { formatU128ToBalance } from '../../utils/assets'
+import { findEventsWithExtrinsic, getTransferEventData } from '../../utils/events'
 import { poolsStorage } from '../../utils/pools'
 import { Block, CallEntity, Context } from '../../processor'
+import { PoolXykWithdrawLiquidityCall } from '../../types/calls'
+import { toHex } from '@subsquid/substrate-processor'
 
-export async function handleLiquidityRemoval(ctx: Context, block: Block, call: CallEntity): Promise<void> {
+export async function liquidityRemovalHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
 
-    if (call.kind !== 'call' || call.name !== 'PoolXYK.withdraw_liquidity') return
+    if (callEntity.name !== 'PoolXYK.withdraw_liquidity') return
 
     ctx.log.debug('Caught liquidity removal extrinsic')
 
-    const historyElement = await getOrCreateHistoryElement(ctx, block, call)
+    const extrinsicHash = callEntity.extrinsic.hash
+    const historyElement = await getOrCreateHistoryElement(ctx, block, callEntity)
 
-    if (!historyElement) return
+    const call = new PoolXykWithdrawLiquidityCall(ctx, callEntity.call)
 
-    // TODO: use generated types with versioning
-    const { dexId, outputAssetA, outputAssetB, poolTokensDesired, outputAMin, outputBMin } = call.call.args
-
-    const baseAssetId = getAssetId(outputAssetA)
-    const targetAssetId = getAssetId(outputAssetB)
-
-    const details = {
-        type: 'Removal',
-        baseAssetId,
-        targetAssetId,
-        baseAssetAmount: formatU128ToBalance(outputAMin, baseAssetId),
-        targetAssetAmount: formatU128ToBalance(outputBMin, targetAssetId)
+    let callRec: {
+        assetAId: Uint8Array
+        assetBId: Uint8Array
+        assetAMin: bigint
+        assetBMin: bigint
+    }
+    if (call.isV1) {
+        const { outputAssetA, outputAssetB, outputAMin, outputBMin } = call.asV1
+        callRec = {
+            assetAId: outputAssetA,
+            assetBId: outputAssetB,
+            assetAMin: outputAMin,
+            assetBMin: outputBMin
+        }
+    } else if (call.isV42) {
+        const { outputAssetA, outputAssetB, outputAMin, outputBMin } = call.asV42
+        callRec = {
+            assetAId: outputAssetA.code,
+            assetBId: outputAssetB.code,
+            assetAMin: outputAMin,
+            assetBMin: outputBMin
+        }
+    } else {
+        throw new Error('Unsupported spec')
     }
 
-    const extrinsicHash = call.extrinsic.hash
+    const baseAssetId = callRec.assetAId
+    const targetAssetId = callRec.assetBId
+    const details = {
+        type: 'Removal',
+        baseAssetId: baseAssetId,
+        targetAssetId: targetAssetId,
+        baseAssetAmount: formatU128ToBalance(callRec.assetAMin, baseAssetId),
+        targetAssetAmount: formatU128ToBalance(callRec.assetBMin, targetAssetId)
+    }
 
     if (historyElement.execution.success) {
 
-        const transfers = [
-            ...findEventsWithExtrinsic('Balances.Transfer', block, extrinsicHash),
-            ...findEventsWithExtrinsic('Tokens.Transfer', block, extrinsicHash)
-        ]
+        const transfers = findEventsWithExtrinsic(['Balances.Transfer', 'Tokens.Transfer'], block, extrinsicHash)
 
         if (transfers.length === 2) {
             const [baseAssetTransfer, targetAssetTransfer] = transfers
-
-            const { amount: amountA } = baseAssetTransfer.event.args
-            const { amount: amountB } = targetAssetTransfer.event.args
-
+    
+            const { amount: amountA } = getTransferEventData(ctx, baseAssetTransfer)
+            const { amount: amountB } = getTransferEventData(ctx, targetAssetTransfer)
+    
             details.baseAssetAmount = formatU128ToBalance(amountA, baseAssetId)
             details.targetAssetAmount = formatU128ToBalance(amountB, targetAssetId)
         }
@@ -52,6 +72,6 @@ export async function handleLiquidityRemoval(ctx: Context, block: Block, call: C
 
     ctx.log.debug(`===== Saved liquidity removal with ${extrinsicHash} txid =====`)
 
-    await poolsStorage.getPool(ctx, baseAssetId, targetAssetId)
+    await poolsStorage.getPool(ctx, block, baseAssetId, targetAssetId)
     await updateHistoryElementStats(ctx, historyElement)
 }

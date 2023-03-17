@@ -2,44 +2,53 @@ import { addDataToHistoryElement, getOrCreateHistoryElement, updateHistoryElemen
 import { formatU128ToBalance } from '../../utils/assets'
 import { XOR } from '../../utils/consts'
 import { Block, CallEntity, Context } from '../../processor'
+import { ReferralsReserveCall } from '../../types/calls'
+import { findEventWithExtrinsic, getTransferEventData } from '../../utils/events'
+import { toHex } from '@subsquid/substrate-processor'
 
-export async function referralReserveHandler(ctx: Context, block: Block, call: CallEntity): Promise<void> {
-    if (call.kind !== 'call' || call.name !== 'Referrals.reserve') return
+export async function referralReserveHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
+
+    if (callEntity.name !== 'Referrals.reserve') return
 
     ctx.log.debug('Caught referral reserve extrinsic')
 
-    const historyElement = await getOrCreateHistoryElement(ctx, block, call)
+    const extrinsicHash = callEntity.extrinsic.hash
+    const historyElement = await getOrCreateHistoryElement(ctx, block, callEntity)
 
-    if (!historyElement) return
-
-    let details = new Object()
+    let details: {
+        from?: string
+        to?: string
+        amount: string
+    }
 
     if (historyElement.execution.success) {
+        const balancesTransferEventEntity = findEventWithExtrinsic('Balances.Transfer', block, extrinsicHash)
 
-        const referralReserveEvent = block.items.find(e => e.name === 'Balances.Transfer')
+        if (balancesTransferEventEntity) {
+            const { from, to, amount } = getTransferEventData(ctx, balancesTransferEventEntity)
 
-        if (!referralReserveEvent || referralReserveEvent.name !== 'Balances.Transfer') {
-            ctx.log.debug('No currencies.Transferred event is found')
-            return
-        }
-
-        const { from, to, amount } = referralReserveEvent.event.args
-
-        details = {
-            from: from.toString(),
-            to: to.toString(),
-            amount: formatU128ToBalance(amount.toString(), XOR)
+            details = {
+                from: toHex(from),
+                to: toHex(to),
+                amount: formatU128ToBalance(amount, XOR)
+            }
+        } else {
+            throw new Error('Cannot find event: Balances.Transfer')
         }
     } else {
-        const [amount] = call.call.args
-
-        details = {
-            amount: formatU128ToBalance(amount.toString(), XOR)
+        const call = new ReferralsReserveCall(ctx, callEntity.call)
+        
+        if (call.isV22) {
+            details = {
+                amount: formatU128ToBalance(call.asV22.balance, XOR)
+            }
+        } else {
+            throw new Error('Unsupported spec')
         }
     }
 
     await addDataToHistoryElement(ctx, historyElement, details)
     await updateHistoryElementStats(ctx, historyElement)
 
-    ctx.log.debug(`===== Saved referral reserve with ${call.extrinsic.hash} txid =====`)
+    ctx.log.debug(`===== Saved referral reserve with ${extrinsicHash} txid =====`)
 }
