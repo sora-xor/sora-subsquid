@@ -1,46 +1,89 @@
-// import { addDataToHistoryElement, getOrCreateHistoryElement, updateHistoryElementStats } from '../../utils/history'
-// import { formatU128ToBalance } from '../../utils/assets'
-// import { Block, CallEntity, Context } from '../../processor'
+import { addDataToHistoryElement, getOrCreateHistoryElement, updateHistoryElementStats } from '../../utils/history'
+import { formatU128ToBalance } from '../../utils/assets'
+import { Block, CallEntity, Context } from '../../processor'
+import { AssetsTransferEvent } from '../../types/events'
+import { findEventWithExtrinsic } from '../../utils/events'
+import { toHex } from '@subsquid/substrate-processor'
+import { AssetsTransferCall } from '../../types/calls'
 
-// export async function transfersHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
+export async function transfersHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
 
-//     if (callEntity.name !== 'Assets.transfer') return
+    if (callEntity.name !== 'Assets.transfer') return
 
-//     ctx.log.debug('Caught transfer extrinsic')
+    ctx.log.debug('Caught transfer extrinsic')
 
-//     const historyElement = await getOrCreateHistoryElement(ctx, block, callEntity)
+	const extrinsicHash = callEntity.extrinsic.hash
+    const historyElement = await getOrCreateHistoryElement(ctx, block, callEntity)
 
-//     if (!historyElement) return
+    if (!historyElement) return
 
-//     let details = new Object()
+    let details = new Object()
 
-//     if (historyElement.execution.success) {
-//         const transferEvent = block.items.find(e => e.name === 'Assets.Transfer')
-//         if (!transferEvent || transferEvent.kind !== 'event') return // TODO: make proper exit
-//         const [, to, assetId, amount] = transferEvent.event.args
+    if (historyElement.execution.success) {
+		const eventEntity = findEventWithExtrinsic('Assets.Transfer', block, extrinsicHash)
+        if (!eventEntity) throw new Error('Cannot find event: Assets.Transfer')
 
-//         details = {
-//             from: call.call.origin.value.value,  // TODO: check it
-//             to: to.toString(),
-//             amount: formatU128ToBalance(amount.toString(), getAssetId(assetId)),
-//             assetId: getAssetId(assetId)
-//         }
-//     }
+		const event = new AssetsTransferEvent(ctx, eventEntity.event)
 
-//     else {
-//         const [assetId, to, amount] = call.call.args
+		let eventRec: {
+			from: Uint8Array,
+			to: Uint8Array,
+			assetId: Uint8Array,
+			amount: bigint
+		}
+		if (event.isV1) {
+			const [from, to, assetId, amount] = event.asV1
+			eventRec = { from, to, assetId, amount }
+		} else if (event.isV42) {
+			const [from, to, assetId, amount] = event.asV42
+			eventRec = { from, to, assetId: assetId.code, amount }
+		} else {
+			throw new Error('Unsupported spec')
+		}
+		const { from, to, assetId, amount } = eventRec
 
-//         details = {
-//             from: call.call.origin.value.value, // TODO: check it
-//             to: to.toString(),
-//             amount: formatU128ToBalance(amount.toString(), getAssetId(assetId)),
-//             assetId: getAssetId(assetId)
-//         }
-//     }
+		if (callEntity.call.origin.value.value !== toHex(from)) {
+			throw new Error('Transfer event sender is not the extrinsic signer')
+		}
 
-//     await addDataToHistoryElement(ctx, historyElement, details)
-//     await updateHistoryElementStats(ctx, historyElement)
+        details = {
+            from: toHex(from),
+            to: toHex(to),
+            assetId: toHex(assetId),
+            amount: formatU128ToBalance(amount, assetId)
+        }
+    }
 
-//     ctx.log.debug(`===== Saved transfer with ${callEntity.extrinsic.hash} txid =====`)
+    else {
+		const call = new AssetsTransferCall(ctx, callEntity.call)
 
-// }
+		let callRec: {
+			to: Uint8Array,
+			assetId: Uint8Array,
+			amount: bigint
+		}
+		if (call.isV1) {
+			const { to, assetId, amount } = call.asV1
+			callRec = { to, assetId, amount }
+		} else if (call.isV42) {
+			const { to, assetId, amount } = call.asV42
+			callRec = { to, assetId: assetId.code, amount }
+		} else {
+			throw new Error('Unsupported spec')
+		}
+		const { to, assetId, amount } = callRec
+
+        details = {
+            from: callEntity.call.origin.value.value, // TODO: check it
+            to: toHex(to),
+            amount: formatU128ToBalance(amount, assetId),
+            assetId: toHex(assetId)
+        }
+    }
+
+    await addDataToHistoryElement(ctx, historyElement, details)
+    await updateHistoryElementStats(ctx, historyElement)
+
+    ctx.log.debug(`===== Saved transfer with ${extrinsicHash} txid =====`)
+
+}

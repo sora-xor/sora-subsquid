@@ -19,7 +19,7 @@ import { referralUnreserveHandler } from './handlers/calls/referralUnreserveHand
 import { rewardsHandler } from './handlers/calls/rewardsHandler'
 import { setReferralHandler } from './handlers/calls/setReferralHandler'
 import { soraEthTransferHandler } from './handlers/calls/soraEthTransferHandler'
-// import { transfersHandler } from './handlers/calls/transfersHandler'
+import { transfersHandler } from './handlers/calls/transfersHandler'
 import { ethSoraTransferHandler } from './handlers/events/ethSoraTransferHandler'
 import { handleNetworkFee } from './handlers/events/networkFee'
 import { referrerRewardHandler } from './handlers/events/referrerRewardHandler'
@@ -97,7 +97,7 @@ processor.run(new TypeormDatabase(), async (ctx: Context) => {
                 const props = [ctx, block, item] as const
 
                 await assetRegistrationHandler(...props)
-                // await transfersHandler(...props)
+                await transfersHandler(...props)
                 // await handleSwaps(...props)
                 // await handleSwapTransfers(...props)
                 await liquidityDepositHandler(...props)

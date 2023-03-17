@@ -58,6 +58,9 @@ export async function liquidityDepositHandler(ctx: Context, block: Block, callEn
     if (transfers.length === 2) {
         const [baseAssetTransfer, targetAssetTransfer] = transfers
 
+
+		// We assume that events go in the same order as in the blockchain
+		// First the event with the base asset, and then the event with the target asset
         const { amount: amountA } = getTransferEventData(ctx, baseAssetTransfer)
         const { amount: amountB } = getTransferEventData(ctx, targetAssetTransfer)
 
