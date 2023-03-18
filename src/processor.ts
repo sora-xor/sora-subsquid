@@ -8,29 +8,31 @@ import {
 } from '@subsquid/substrate-processor'
 import { CallItem, EventItem } from '@subsquid/substrate-processor/lib/interfaces/dataSelection'
 import { Store, TypeormDatabase } from "@subsquid/typeorm-store"
-import { assetRegistrationHandler } from "./handlers/calls/assetRegistrationHandler"
-// import { batchTransactionsHandler } from './handlers/calls/batchTransactionsHandler'
-import { demeterDepositHandler } from './handlers/calls/demeterDepositHandler'
-import { demeterGetRewardsHandler } from './handlers/calls/demeterGetRewardsHandler'
-import { demeterWithdrawHandler } from './handlers/calls/demeterWithdrawHandler'
-import { irohaMigrationHandler } from './handlers/calls/irohaMigrationHandler'
-import { liquidityDepositHandler } from './handlers/calls/liquidityDepositHandler'
-import { liquidityRemovalHandler } from './handlers/calls/liquidityRemovalHandler'
-import { referralReserveHandler } from './handlers/calls/referralReserveHandler'
-import { referralUnreserveHandler } from './handlers/calls/referralUnreserveHandler'
-import { rewardsHandler } from './handlers/calls/rewardsHandler'
-import { setReferralHandler } from './handlers/calls/setReferralHandler'
-import { soraEthTransferHandler } from './handlers/calls/soraEthTransferHandler'
-import { swapsHandler } from './handlers/calls/swapsHandler'
-import { swapTransfersHandler } from './handlers/calls/swapTransfersHandler'
-import { transfersHandler } from './handlers/calls/transfersHandler'
-import { ethSoraTransferHandler } from './handlers/events/ethSoraTransferHandler'
+import { assetRegistrationHandler } from "./handlers/calls/assetRegistration"
+import { batchTransactionsHandler } from './handlers/calls/batchTransactions'
+import { demeterDepositHandler } from './handlers/calls/demeterDeposit'
+import { demeterGetRewardsHandler } from './handlers/calls/demeterGetRewards'
+import { demeterWithdrawHandler } from './handlers/calls/demeterWithdraw'
+import { irohaMigrationHandler } from './handlers/calls/irohaMigration'
+import { liquidityDepositHandler } from './handlers/calls/liquidityDeposit'
+import { liquidityRemovalHandler } from './handlers/calls/liquidityRemoval'
+import { referralReserveHandler } from './handlers/calls/referralReserve'
+import { referralUnreserveHandler } from './handlers/calls/referralUnreserve'
+import { rewardsHandler } from './handlers/calls/rewards'
+import { setReferralHandler } from './handlers/calls/setReferral'
+import { soraEthTransferHandler } from './handlers/calls/soraEthTransfer'
+import { swapsHandler } from './handlers/calls/swaps'
+import { swapTransfersHandler } from './handlers/calls/swapTransfers'
+import { transfersHandler } from './handlers/calls/transfers'
+import { ethSoraTransferHandler } from './handlers/events/ethSoraTransfer'
 import { tokenBurnHandler, tokenMintHandler, xorBurnHandler, xorMintHandler } from './handlers/events/mintAndBurn'
 import { networkFeeHandler } from './handlers/events/networkFee'
-import { referrerRewardHandler } from './handlers/events/referrerRewardHandler'
-// import { transferEventHandler } from './handlers/events/transfer'
+import { referrerRewardHandler } from './handlers/events/referrerReward'
+import { transferEventHandler } from './handlers/events/transfer'
 import { initializeAssets } from './handlers/models/initializeAssets'
 import { initializePools } from './handlers/models/initializePools'
+import { syncModels } from './handlers/sync/models'
+import { syncPoolXykPrices } from './handlers/sync/poolXykPrices'
 
 const processor = new SubstrateBatchProcessor()
     .setDataSource({
@@ -95,6 +97,8 @@ processor.run(new TypeormDatabase(), async (ctx: Context) => {
     for (let block of ctx.blocks) {
         await initializeAssets(ctx, block)
         await initializePools(ctx, block)
+		await syncModels(ctx, block)
+		await syncPoolXykPrices(ctx, block)
 
         for (let item of block.items) {
             if (item.name === '*') continue
@@ -109,7 +113,7 @@ processor.run(new TypeormDatabase(), async (ctx: Context) => {
                 await liquidityDepositHandler(...props)
                 await liquidityRemovalHandler(...props)
                 await irohaMigrationHandler(...props)
-                // await batchTransactionsHandler(...props)
+                await batchTransactionsHandler(...props)
                 await soraEthTransferHandler(...props)
                 await rewardsHandler(...props)
                 await setReferralHandler(...props)
@@ -130,7 +134,7 @@ processor.run(new TypeormDatabase(), async (ctx: Context) => {
                 await xorMintHandler(...props)
                 await networkFeeHandler(...props)
                 await referrerRewardHandler(...props)
-                // await transferEventHandler(...props)
+                await transferEventHandler(...props)
             }
         }
     }

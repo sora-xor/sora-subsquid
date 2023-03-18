@@ -18,6 +18,13 @@ export const formatU128ToBalance = (u128: bigint, assetId: Uint8Array): string =
   return `${padded.slice(0, -decimals)}.${padded.slice(-decimals)}`
 }
 
+export const getAssetId = (asset: Uint8Array | { code: Uint8Array }): Uint8Array => {
+	if ('code' in asset) {
+		return asset.code
+	}
+	return asset
+}
+
 class AssetStorage {
   private storage!: Map<string, Asset>
 

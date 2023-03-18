@@ -90,10 +90,10 @@ export const handleAndSaveExtrinsic = async (
     if (historyElement.execution.success) {
 		const eventEntity = findEventWithExtrinsic('LiquidityProxy.Exchange', block, extrinsicHash)
         if (!eventEntity) {
-			ctx.log.error('Cannot find event: LiquidityProxy.Exchange')
+			ctx.log.error(`Cannot find event on block ${block.header.height}: LiquidityProxy.Exchange`)
 			return
-		} else if (block.header.height === 5001) {
-			ctx.log.info('Found event on block 5001: LiquidityProxy.Exchange')
+		} else {
+			// ctx.log.info(`Found event on block ${block.header.height}: LiquidityProxy.Exchange`)
 		}
 		const event = new LiquidityProxyExchangeEvent(ctx, eventEntity.event)
 

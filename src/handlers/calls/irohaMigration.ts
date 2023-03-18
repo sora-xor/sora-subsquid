@@ -50,7 +50,8 @@ export async function irohaMigrationHandler(ctx: Context, block: Block, callEnti
                     throw new Error('Unsupported spec')
                 }
             } else {
-                throw new Error('Cannot find event: Currencies.Transferred')
+                ctx.log.error('Cannot find event: Currencies.Transferred')
+				return
             }
         }
 

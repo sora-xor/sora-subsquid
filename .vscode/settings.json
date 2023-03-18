@@ -3,6 +3,8 @@
 	"iroha",
 	"Mintable",
 	"Multicollateral",
+	"pswap",
+	"subsquid",
 	"txid"
 ],
   "editor.detectIndentation": false
