@@ -8,6 +8,7 @@ import { networkSnapshotsStorage } from './network'
 import { XOR } from './consts'
 import { formatDateTimestamp } from './index'
 import { nToU8a } from '@polkadot/util'
+import { toJSON } from '@subsquid/util-internal-json'
 import { SubstrateExtrinsic } from "@subsquid/substrate-processor"
 import { findEventWithExtrinsic } from "./events"
 import { XorFeeFeeWithdrawnEvent } from "../types/events"
@@ -82,8 +83,7 @@ export const getHistoryElement = async (ctx: Context, extrinsicHash: SubstrateEx
 }
 
 export const addDataToHistoryElement = async (ctx: Context, historyElement: HistoryElement, details: any) => {
-    // TODO: fix it
-    // historyElement.data = details
+	historyElement.data = toJSON(details)
 
     await ctx.store.save(historyElement)
 }

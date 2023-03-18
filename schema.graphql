@@ -1,108 +1,104 @@
 enum SnapshotType {
-  DEFAULT
-  HOUR
-  DAY
-  MONTH
+	DEFAULT
+	HOUR
+	DAY
+	MONTH
 }
 
 type NetworkStats @entity {
-  id: ID!
-  totalFees: BigInt!
-  totalAccounts: Int!
-  totalTransactions: Int!
-  totalBridgeIncomingTransactions: Int!
-  totalBridgeOutgoingTransactions: Int!
+	id: ID!
+	totalFees: BigInt!
+	totalAccounts: Int!
+	totalTransactions: Int!
+	totalBridgeIncomingTransactions: Int!
+	totalBridgeOutgoingTransactions: Int!
 }
 
 type NetworkSnapshot @entity {
-  id: ID!
-  type: SnapshotType!
-  timestamp: Int!
-  accounts: Int!
-  transactions: Int!
-  fees: BigInt!
-  liquidityUSD: String!
-  volumeUSD: String!
-  bridgeIncomingTransactions: Int!
-  bridgeOutgoingTransactions: Int!
+	id: ID!
+	type: SnapshotType!
+	timestamp: Int!
+	accounts: Int!
+	transactions: Int!
+	fees: BigInt!
+	liquidityUSD: String!
+	volumeUSD: String!
+	bridgeIncomingTransactions: Int!
+	bridgeOutgoingTransactions: Int!
 }
 
 type Asset @entity {
-  id: ID!
-  data: [AssetSnapshot!]! @derivedFrom(field: "asset")
-  poolXYK: [PoolXYK] @derivedFrom(field: "targetAsset")
-  priceUSD: String!
-  supply: BigInt!
-  liquidity: BigInt! # locked in pairs (in tokens)
+	id: ID!
+	data: [AssetSnapshot!]! @derivedFrom(field: "asset")
+	poolXYK: [PoolXYK] @derivedFrom(field: "targetAsset")
+	priceUSD: String!
+	supply: BigInt!
+	liquidity: BigInt! # locked in pairs (in tokens)
 }
 
 type AssetPrice @jsonField {
-  open: String!
-  close: String!
-  high: String!
-  low: String!
+	open: String!
+	close: String!
+	high: String!
+	low: String!
 }
 
 type AssetVolume @jsonField {
-  amount: String!
-  amountUSD: String!
+	amount: String!
+	amountUSD: String!
 }
 
 type AssetSnapshot @entity {
-  id: ID!
-  asset: Asset! @index #relation to Asset
-  timestamp: Int!
-  type: SnapshotType!
-  priceUSD: AssetPrice
-  volume: AssetVolume
-  liquidity: BigInt # locked in pairs (in tokens)
-  supply: BigInt!
-  mint: BigInt!
-  burn: BigInt!
+	id: ID!
+	asset: Asset! @index #relation to Asset
+	timestamp: Int!
+	type: SnapshotType!
+	priceUSD: AssetPrice
+	volume: AssetVolume
+	liquidity: BigInt # locked in pairs (in tokens)
+	supply: BigInt!
+	mint: BigInt!
+	burn: BigInt!
 }
 
 type PoolXYK @entity {
-  id: ID!
-  baseAsset: Asset!
-  targetAsset: Asset!
-  baseAssetReserves: BigInt!
-  targetAssetReserves: BigInt!
-  multiplier: Int!
-  priceUSD: String
-  strategicBonusApy: String
+	id: ID!
+	baseAsset: Asset!
+	targetAsset: Asset!
+	baseAssetReserves: BigInt!
+	targetAssetReserves: BigInt!
+	multiplier: Int!
+	priceUSD: String
+	strategicBonusApy: String
 }
 
 type Account @entity {
-  id: ID!
-  latestHistoryElement: HistoryElement
+	id: ID!
+	latestHistoryElement: HistoryElement
 }
 
 type HistoryElement @entity {
-  id: ID!
-  blockHeight: BigInt!
-  blockHash: String! @index
-  module: String!
-  method: String!
-  address: String! @index
-  networkFee: String!
-  execution: ExecutionResult!
-  timestamp: Int!
-  data: HistoryElementDetails
+	id: ID!
+	blockHeight: BigInt!
+	blockHash: String! @index
+	module: String!
+	method: String!
+	address: String! @index
+	networkFee: String!
+	execution: ExecutionResult!
+	timestamp: Int!
+	data: JSON
 }
 
 type ExecutionResult @jsonField {
-  success: Boolean!
-  error: ExecutionError
+	success: Boolean!
+	error: ExecutionError
 }
 
 type ExecutionError @jsonField {
-  moduleErrorId: Int
-  moduleErrorIndex: Int
-  nonModuleErrorMessage: String
-}
-
-type HistoryElementDetails @jsonField {
-  data: String # API is implemented by bypassing the scheme - `data` in all mappings is an object, not a String. See https://github.com/subquery/subql/issues/522.
+	moduleErrorId: Int
+	moduleErrorIndex: Int
+	nonModuleErrorMessage: String
 }
 
 type ReferrerReward @entity {

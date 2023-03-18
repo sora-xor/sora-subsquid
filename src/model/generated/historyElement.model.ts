@@ -1,7 +1,6 @@
 import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, Index as Index_} from "typeorm"
 import * as marshal from "./marshal"
 import {ExecutionResult} from "./_executionResult"
-import {HistoryElementDetails} from "./_historyElementDetails"
 
 @Entity_()
 export class HistoryElement {
@@ -38,6 +37,6 @@ export class HistoryElement {
     @Column_("int4", {nullable: false})
     timestamp!: number
 
-    @Column_("jsonb", {transformer: {to: obj => obj == null ? undefined : obj.toJSON(), from: obj => obj == null ? undefined : new HistoryElementDetails(undefined, obj)}, nullable: true})
-    data!: HistoryElementDetails | undefined | null
+    @Column_("jsonb", {nullable: true})
+    data!: unknown | undefined | null
 }
