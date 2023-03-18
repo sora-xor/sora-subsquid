@@ -1,6 +1,7 @@
 import { poolAccounts, getAllReserves, getAllProperties, poolsStorage } from '../../utils/pools'
 import { BASE_ASSETS, XOR, DOUBLE_PRICE_POOL } from '../../utils/consts'
 import { Block, Context } from '../../processor'
+import { toHex } from '@subsquid/substrate-processor'
 
 let isFirstBlockIndexed = false
 
@@ -30,8 +31,7 @@ export async function initializePools(ctx: Context, block: Block): Promise<void>
               targetAssetId,
               baseAssetReserves: BigInt(0),
               targetAssetReserves: BigInt(0),
-              // TODO: make proper equation of Uint8Array
-              multiplier: baseAssetId === XOR && DOUBLE_PRICE_POOL.includes(targetAssetId) ? 2 : 1,
+              multiplier: toHex(baseAssetId) === toHex(XOR) && DOUBLE_PRICE_POOL.includes(targetAssetId) ? 2 : 1,
           })
       })
 
