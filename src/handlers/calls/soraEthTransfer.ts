@@ -6,6 +6,8 @@ import { EthBridgeTransferToSidechainCall } from '../../types/calls'
 import { findEventWithExtrinsic } from '../../utils/events'
 import { EthBridgeRequestRegisteredEvent } from '../../types/events'
 import { toHex } from '@subsquid/substrate-processor'
+import { AddressEthereum, AssetAmount, AssetId } from '../../types'
+import { toAddressEthereum, toAssetId } from '../../utils'
 
 export async function soraEthTransferHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
 
@@ -19,16 +21,24 @@ export async function soraEthTransferHandler(ctx: Context, block: Block, callEnt
     const call = new EthBridgeTransferToSidechainCall(ctx, callEntity.call)
 
     let rec: {
-        assetId: Uint8Array,
-        sidechainAddress: Uint8Array,
-        amount: bigint
+        assetId: AssetId,
+        sidechainAddress: AddressEthereum,
+        amount: AssetAmount
     }
     if (call.isV1) {
         const { assetId, to, amount } = call.asV1
-        rec = { assetId, sidechainAddress: to, amount }
+        rec = {
+			assetId: toAssetId(assetId),
+			sidechainAddress: toAddressEthereum(to),
+			amount: amount as AssetAmount
+		}
     } else if (call.isV42) {
         const { assetId, to, amount } = call.asV42
-        rec = { assetId: assetId.code, sidechainAddress: to, amount }
+        rec = {
+			assetId: toAssetId(assetId.code),
+			sidechainAddress: toAddressEthereum(to),
+			amount: amount as AssetAmount
+		}
     } else {
         throw new Error('Unsupported spec')
     }
@@ -37,8 +47,8 @@ export async function soraEthTransferHandler(ctx: Context, block: Block, callEnt
 
     let details: {
         requestHash?: string,
-        assetId: string,
-        sidechainAddress: string,
+        assetId: AssetId,
+        sidechainAddress: AddressEthereum,
         amount: string
     }
     if (historyElement.execution.success) {
@@ -55,9 +65,10 @@ export async function soraEthTransferHandler(ctx: Context, block: Block, callEnt
             }
 
             details = {
+				// TODO: check it
                 requestHash: toHex(requestHash),
-                assetId: toHex(assetId),
-                sidechainAddress: toHex(sidechainAddress),
+                assetId,
+                sidechainAddress,
                 amount: formatU128ToBalance(amount, assetId)
             }
         } else {
@@ -65,8 +76,8 @@ export async function soraEthTransferHandler(ctx: Context, block: Block, callEnt
         }
     } else {
         details = {
-            assetId: toHex(assetId),
-            sidechainAddress: toHex(sidechainAddress),
+            assetId,
+            sidechainAddress,
             amount: formatU128ToBalance(amount, assetId)
         }
     }

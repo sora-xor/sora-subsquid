@@ -3,6 +3,8 @@ import { EventItem } from '@subsquid/substrate-processor/src/interfaces/dataSele
 import { SubstrateExtrinsic } from '@subsquid/substrate-processor'
 import { BalancesTransferEvent, TokensTransferEvent } from '../types/events'
 import { XOR } from './consts'
+import { Address, AssetAmount, AssetId } from '../types'
+import { toAddress, toAssetId } from '.'
 
 export function findEventsWithExtrinsic<T extends (EventEntity['name'] | EventEntity['name'][])>(
   eventName: T,
@@ -42,9 +44,9 @@ export const isAssetTransferEvent = (e: EventEntity): boolean => {
 }
 
 type TransferEventData = {
-  assetId: Uint8Array,
-  from: Uint8Array
-  to: Uint8Array
+  assetId: AssetId,
+  from: Address
+  to: Address
   amount: bigint
 }
 
@@ -61,16 +63,16 @@ export const getTransferEventData = (
       const [ from, to, amount ] = event.asV1
       eventRec = {
         assetId: XOR,
-        from: from,
-        to: to,
+        from: toAddress(from),
+        to: toAddress(to),
         amount
       }
     } else if (event.isV42) {
       const { from, to, amount } = event.asV42
       eventRec = {
         assetId: XOR,
-        from: from,
-        to: to,
+        from: toAddress(from),
+        to: toAddress(to),
         amount
       }
     } else {
@@ -82,10 +84,10 @@ export const getTransferEventData = (
     if (event.isV42) {
       const { currencyId, from, to, amount } = event.asV42
       eventRec = {
-        assetId: currencyId.code,
-        from: from,
-        to: to,
-        amount
+        assetId: toAssetId(currencyId.code),
+        from: toAddress(from),
+        to: toAddress(to),
+        amount: amount as AssetAmount
       }
     } else {
       throw new Error('Unsupported spec')

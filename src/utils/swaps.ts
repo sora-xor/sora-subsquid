@@ -8,6 +8,7 @@ import { assetSnapshotsStorage, formatU128ToBalance } from "./assets"
 import { XOR } from "./consts"
 import { findEventWithExtrinsic } from "./events"
 import { addDataToHistoryElement, getOrCreateHistoryElement, updateHistoryElementStats } from "./history"
+import { Address, AssetId } from "../types"
 
 export type SwapAmount = SwapAmount_WithDesiredInput | SwapAmount_WithDesiredOutput
 
@@ -35,14 +36,14 @@ export type LiquiditySourceType = (
 )
 
 export type CallRec = {
-	inputAssetId: Uint8Array
-	outputAssetId: Uint8Array
+	inputAssetId: AssetId
+	outputAssetId: AssetId
 	swapAmount: SwapAmount
 	liquiditySources: LiquiditySourceType[]
-	receiver?: Uint8Array
+	receiver?: Address
 }
 
-const receiveExtrinsicSwapAmounts = (swapAmount: SwapAmount, assetId: Uint8Array): string[] => {
+const receiveExtrinsicSwapAmounts = (swapAmount: SwapAmount, assetId: AssetId): string[] => {
 	if (swapAmount.kind === 'WithDesiredOutput') {
 		return [
 			formatU128ToBalance(swapAmount.maxAmountIn, assetId),
@@ -64,6 +65,7 @@ export const handleAndSaveExtrinsic = async (
 ): Promise<void> => {
 
 	const extrinsicHash = callEntity.extrinsic.hash
+	const blockHeight = block.header.height
     const blockTimestamp = formatDateTimestamp(new Date(block.header.timestamp))
     const historyElement = await getOrCreateHistoryElement(ctx, block, callEntity)
 
@@ -79,21 +81,21 @@ export const handleAndSaveExtrinsic = async (
 		to?: string
 	} = {}
 
-    details.baseAssetId = toHex(inputAssetId)
-    details.targetAssetId = toHex(outputAssetId)
+    details.baseAssetId = inputAssetId
+    details.targetAssetId = outputAssetId
     details.selectedMarket = liquiditySources.toString()
 
     if (receiver) {
-        details.to = toHex(receiver)
+        details.to = receiver
     }
 
     if (historyElement.execution.success) {
 		const eventEntity = findEventWithExtrinsic('LiquidityProxy.Exchange', block, extrinsicHash)
         if (!eventEntity) {
-			ctx.log.error(`Cannot find event on block ${block.header.height}: LiquidityProxy.Exchange`)
+			ctx.log.error(`Cannot find event on block ${blockHeight}: LiquidityProxy.Exchange`)
 			return
 		} else {
-			// ctx.log.info(`Found event on block ${block.header.height}: LiquidityProxy.Exchange`)
+			// ctx.log.info(`Found event on block ${blockHeight}: LiquidityProxy.Exchange`)
 		}
 		const event = new LiquidityProxyExchangeEvent(ctx, eventEntity.event)
 

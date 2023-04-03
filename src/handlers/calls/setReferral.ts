@@ -11,6 +11,7 @@ export async function setReferralHandler(ctx: Context, block: Block, callEntity:
 
     const historyElement = await getOrCreateHistoryElement(ctx, block, callEntity)
     
+	// TODO: add type for details
     let details = new Object()
     
     const call = new ReferralsSetReferrerCall(ctx, callEntity.call)

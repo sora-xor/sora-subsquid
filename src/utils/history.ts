@@ -6,10 +6,10 @@ import { formatU128ToBalance } from './assets'
 import { getOrCreateAccountEntity } from './account'
 import { networkSnapshotsStorage } from './network'
 import { XOR } from './consts'
-import { formatDateTimestamp } from './index'
+import { formatDateTimestamp, toAddress } from './index'
 import { nToU8a } from '@polkadot/util'
 import { toJSON } from '@subsquid/util-internal-json'
-import { SubstrateExtrinsic } from "@subsquid/substrate-processor"
+import { SubstrateExtrinsic, decodeHex } from "@subsquid/substrate-processor"
 import { findEventWithExtrinsic } from "./events"
 import { XorFeeFeeWithdrawnEvent } from "../types/events"
 
@@ -28,18 +28,22 @@ const getCallEntityNetworkFee = (ctx: Context, block: Block, callEntity: CallEnt
         
         return feeAmount
     }
-    return BigInt(0)
+    return 0n
 }
 
 export const createHistoryElement = (ctx: Context, block: Block, callEntity: CallEntity): HistoryElement => {
     const element = new HistoryElement()
+
+	if (!block.header.validator) {
+		throw Error('There is no block validator')
+	}
 
     element.id = callEntity.extrinsic.hash
     element.blockHeight = BigInt(block.header.height)
     element.blockHash = block.header.hash.toString()
     element.module = callEntity.name.split('.')[0]
     element.method = callEntity.name.split('.')[1]
-    element.address = block.header.validator?.toString() ?? ''
+    element.address = toAddress(callEntity.extrinsic.signature?.address)
     element.networkFee = formatU128ToBalance(getCallEntityNetworkFee(ctx, block, callEntity), XOR)
     element.timestamp = formatDateTimestamp(new Date(block.header.timestamp))
 
@@ -82,8 +86,8 @@ export const getHistoryElement = async (ctx: Context, extrinsicHash: SubstrateEx
     return element
 }
 
-export const addDataToHistoryElement = async (ctx: Context, historyElement: HistoryElement, details: any) => {
-	historyElement.data = toJSON(details)
+export const addDataToHistoryElement = async (ctx: Context, historyElement: HistoryElement, details: {} | null) => {
+	historyElement.data = details ? toJSON(details) : null
 
     await ctx.store.save(historyElement)
 }

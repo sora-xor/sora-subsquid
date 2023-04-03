@@ -4,7 +4,8 @@ import { Block, CallEntity, Context } from '../../processor'
 import { findEventWithExtrinsic } from '../../utils/events'
 import { DemeterFarmingPlatformRewardWithdrawnEvent } from '../../types/events'
 import { DemeterFarmingPlatformGetRewardsCall } from '../../types/calls'
-import { toHex } from '@subsquid/substrate-processor'
+import { toAssetId } from '../../utils'
+import { AssetId } from '../../types'
 
 export async function demeterGetRewardsHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
 
@@ -17,25 +18,25 @@ export async function demeterGetRewardsHandler(ctx: Context, block: Block, callE
   const call = new DemeterFarmingPlatformGetRewardsCall(ctx, callEntity.call)
 
   let callRec: {
-    assetId: Uint8Array
+    assetId: AssetId
     isFarm: boolean
   }
   if (call.isV33) {
     const { rewardAsset, isFarm } = call.asV33
     callRec = {
-      assetId: rewardAsset,
+      assetId: toAssetId(rewardAsset),
       isFarm
     }
   } else if (call.isV42) {
     const { rewardAsset, isFarm } = call.asV42
     callRec = {
-      assetId: rewardAsset.code,
+      assetId: toAssetId(rewardAsset.code),
       isFarm
     }
   } else if (call.isV43) {
     const { rewardAsset, isFarm } = call.asV43
     callRec = {
-      assetId: rewardAsset.code,
+      assetId: toAssetId(rewardAsset.code),
       isFarm
     }
   } else {

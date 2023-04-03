@@ -4,7 +4,8 @@ import { poolsStorage } from '../../utils/pools'
 import { findEventsWithExtrinsic, getTransferEventData } from '../../utils/events'
 import { Block, CallEntity, Context } from '../../processor'
 import { PoolXykDepositLiquidityCall } from '../../types/calls'
-import { toHex } from '@subsquid/substrate-processor'
+import { toAssetId } from '../../utils'
+
 
 export async function liquidityDepositHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
 
@@ -43,12 +44,12 @@ export async function liquidityDepositHandler(ctx: Context, block: Block, callEn
         throw new Error('Unsupported spec')
     }
 
-    const baseAssetId = callRec.assetAId
-    const targetAssetId = callRec.assetBId
+    const baseAssetId = toAssetId(callRec.assetAId)
+    const targetAssetId = toAssetId(callRec.assetBId)
     const details = {
         type: 'Deposit',
-        baseAssetId: toHex(baseAssetId),
-        targetAssetId: toHex(callRec.assetBId),
+        baseAssetId: baseAssetId,
+        targetAssetId: toAssetId(callRec.assetBId),
         baseAssetAmount: formatU128ToBalance(callRec.assetADesired, baseAssetId),
         targetAssetAmount: formatU128ToBalance(callRec.assetBDesired, targetAssetId)
     }

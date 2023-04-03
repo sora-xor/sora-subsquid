@@ -1,5 +1,6 @@
 import { Block, CallEntity, Context } from '../../processor'
 import { LiquidityProxySwapCall } from '../../types/calls'
+import { toAssetId } from '../../utils'
 import { CallRec, handleAndSaveExtrinsic, SwapAmount } from '../../utils/swaps'
 
 export async function swapsHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
@@ -28,8 +29,8 @@ export async function swapsHandler(ctx: Context, block: Block, callEntity: CallE
 			}
 		}
 		callRec = {
-			inputAssetId,
-			outputAssetId,
+			inputAssetId: toAssetId(inputAssetId),
+			outputAssetId: toAssetId(outputAssetId),
 			swapAmount,
 			liquiditySources: selectedSourceTypes.map(type => type.__kind)
 		}
@@ -50,8 +51,8 @@ export async function swapsHandler(ctx: Context, block: Block, callEntity: CallE
 			}
 		}
 		callRec = {
-			inputAssetId: inputAssetId.code,
-			outputAssetId: outputAssetId.code,
+			inputAssetId: toAssetId(inputAssetId.code),
+			outputAssetId: toAssetId(outputAssetId.code),
 			swapAmount,
 			liquiditySources: selectedSourceTypes.map(type => type.__kind)
 		}

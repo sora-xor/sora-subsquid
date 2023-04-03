@@ -4,6 +4,7 @@ import { findEventsWithExtrinsic, getTransferEventData } from '../../utils/event
 import { poolsStorage } from '../../utils/pools'
 import { Block, CallEntity, Context } from '../../processor'
 import { PoolXykWithdrawLiquidityCall } from '../../types/calls'
+import { toAssetId } from '../../utils'
 
 export async function liquidityRemovalHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
 
@@ -42,8 +43,8 @@ export async function liquidityRemovalHandler(ctx: Context, block: Block, callEn
         throw new Error('Unsupported spec')
     }
 
-    const baseAssetId = callRec.assetAId
-    const targetAssetId = callRec.assetBId
+    const baseAssetId = toAssetId(callRec.assetAId)
+    const targetAssetId = toAssetId(callRec.assetBId)
     const details = {
         type: 'Removal',
         baseAssetId: baseAssetId,

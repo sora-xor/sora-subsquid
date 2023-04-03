@@ -3,8 +3,10 @@ import { formatU128ToBalance } from '../../utils/assets'
 import { Block, CallEntity, Context } from '../../processor'
 import { AssetsTransferEvent } from '../../types/events'
 import { findEventWithExtrinsic } from '../../utils/events'
-import { toHex } from '@subsquid/substrate-processor'
 import { AssetsTransferCall } from '../../types/calls'
+import { Address, AssetAmount, AssetId } from '../../types'
+import { decodeAddress, toAddress, toAssetId } from '../../utils'
+import { decodeHex, toHex } from '@subsquid/substrate-processor'
 
 export async function transfersHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
 
@@ -13,11 +15,17 @@ export async function transfersHandler(ctx: Context, block: Block, callEntity: C
     ctx.log.debug('Caught transfer extrinsic')
 
 	const extrinsicHash = callEntity.extrinsic.hash
+	const extrinsicSigner = toAddress(callEntity.call.origin.value.value)
     const historyElement = await getOrCreateHistoryElement(ctx, block, callEntity)
 
     if (!historyElement) return
 
-    let details = new Object()
+    let details: {
+		from: Address
+		to: Address
+		assetId: AssetId
+		amount: string
+	}
 
     if (historyElement.execution.success) {
 		const eventEntity = findEventWithExtrinsic('Assets.Transfer', block, extrinsicHash)
@@ -26,30 +34,40 @@ export async function transfersHandler(ctx: Context, block: Block, callEntity: C
 		const event = new AssetsTransferEvent(ctx, eventEntity.event)
 
 		let eventRec: {
-			from: Uint8Array,
-			to: Uint8Array,
-			assetId: Uint8Array,
+			from: Address,
+			to: Address,
+			assetId: AssetId,
 			amount: bigint
 		}
 		if (event.isV1) {
 			const [from, to, assetId, amount] = event.asV1
-			eventRec = { from, to, assetId, amount }
+			eventRec = {
+				from: toAddress(from),
+				to: toAddress(to),
+				assetId: toAssetId(assetId),
+				amount
+			}
 		} else if (event.isV42) {
 			const [from, to, assetId, amount] = event.asV42
-			eventRec = { from, to, assetId: assetId.code, amount }
+			eventRec = {
+				from: toAddress(from),
+				to: toAddress(to),
+				assetId: toAssetId(assetId.code),
+				amount
+			}
 		} else {
 			throw new Error('Unsupported spec')
 		}
 		const { from, to, assetId, amount } = eventRec
 
-		if (callEntity.call.origin.value.value !== toHex(from)) {
+		if (extrinsicSigner !== from) {
 			throw new Error('Transfer event sender is not the extrinsic signer')
 		}
 
         details = {
-            from: toHex(from),
-            to: toHex(to),
-            assetId: toHex(assetId),
+            from,
+            to,
+            assetId,
             amount: formatU128ToBalance(amount, assetId)
         }
     }
@@ -58,26 +76,34 @@ export async function transfersHandler(ctx: Context, block: Block, callEntity: C
 		const call = new AssetsTransferCall(ctx, callEntity.call)
 
 		let callRec: {
-			to: Uint8Array,
-			assetId: Uint8Array,
+			to: Address,
+			assetId: AssetId,
 			amount: bigint
 		}
 		if (call.isV1) {
 			const { to, assetId, amount } = call.asV1
-			callRec = { to, assetId, amount }
+			callRec = {
+				to: toAddress(to),
+				assetId: toAssetId(assetId),
+				amount
+			}
 		} else if (call.isV42) {
 			const { to, assetId, amount } = call.asV42
-			callRec = { to, assetId: assetId.code, amount }
+			callRec = {
+				to: toAddress(to),
+				assetId: toAssetId(assetId.code),
+				amount
+			}
 		} else {
 			throw new Error('Unsupported spec')
 		}
 		const { to, assetId, amount } = callRec
 
         details = {
-            from: callEntity.call.origin.value.value, // TODO: check it
-            to: toHex(to),
+            from: extrinsicSigner,
+            to,
             amount: formatU128ToBalance(amount, assetId),
-            assetId: toHex(assetId)
+            assetId
         }
     }
 

@@ -5,7 +5,8 @@ import { findEventWithExtrinsic } from '../../utils/events'
 import { DemeterFarmingPlatformWithdrawnEvent } from '../../types/events'
 import { DemeterFarmingPlatformWithdrawCall } from '../../types/calls'
 import { XOR } from '../../utils/consts'
-import { decodeHex, toHex } from '@subsquid/substrate-processor'
+import { AssetId } from '../../types'
+import { toAssetId } from '../../utils'
 
 export async function demeterWithdrawHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
 
@@ -18,9 +19,9 @@ export async function demeterWithdrawHandler(ctx: Context, block: Block, callEnt
   const call = new DemeterFarmingPlatformWithdrawCall(ctx, callEntity.call)
 
   let callRec: {
-    baseAssetId: Uint8Array
-    assetId: Uint8Array
-    rewardAssetId: Uint8Array
+    baseAssetId: AssetId
+    assetId: AssetId
+    rewardAssetId: AssetId
     isFarm: boolean
     desiredAmount: bigint
   }
@@ -28,8 +29,8 @@ export async function demeterWithdrawHandler(ctx: Context, block: Block, callEnt
     const { poolAsset, rewardAsset, isFarm, pooledTokens } = call.asV33
     callRec = {
       baseAssetId: XOR,
-      assetId: poolAsset,
-      rewardAssetId: rewardAsset,
+      assetId: toAssetId(poolAsset),
+      rewardAssetId: toAssetId(rewardAsset),
       isFarm,
       desiredAmount: pooledTokens
     }
@@ -37,17 +38,17 @@ export async function demeterWithdrawHandler(ctx: Context, block: Block, callEnt
     const { poolAsset, rewardAsset, isFarm, pooledTokens } = call.asV42
     callRec = {
       baseAssetId: XOR,
-      assetId: poolAsset.code,
-      rewardAssetId: rewardAsset.code,
+      assetId: toAssetId(poolAsset.code),
+      rewardAssetId: toAssetId(rewardAsset.code),
       isFarm,
       desiredAmount: pooledTokens
     }
   } else if (call.isV43) {
     const { baseAsset, poolAsset, rewardAsset, isFarm, pooledTokens } = call.asV43
     callRec = {
-      baseAssetId: baseAsset.code,
-      assetId: poolAsset.code,
-      rewardAssetId: rewardAsset.code,
+      baseAssetId: toAssetId(baseAsset.code),
+      assetId: toAssetId(poolAsset.code),
+      rewardAssetId: toAssetId(rewardAsset.code),
       isFarm,
       desiredAmount: pooledTokens
     }
@@ -80,9 +81,9 @@ export async function demeterWithdrawHandler(ctx: Context, block: Block, callEnt
   }
 
   let details = {
-    baseAssetId: toHex(callRec.baseAssetId),
-    assetId: toHex(callRec.assetId),
-    rewardAssetId: toHex(callRec.rewardAssetId),
+    baseAssetId: callRec.baseAssetId,
+    assetId: callRec.assetId,
+    rewardAssetId: callRec.rewardAssetId,
     isFarm: callRec.isFarm,
     amount: amount.toString()
   }

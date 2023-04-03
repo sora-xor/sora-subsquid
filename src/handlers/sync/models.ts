@@ -5,10 +5,10 @@ import { formatDateTimestamp } from '../../utils'
 import { Block, Context } from '../../processor'
 
 export async function syncModels(ctx: Context, block: Block): Promise<void> {
-  const blockTimestamp: number = formatDateTimestamp(new Date(block.header.timestamp))
+	const blockTimestamp: number = formatDateTimestamp(new Date(block.header.timestamp))
 
-  await poolsStorage.sync(ctx)
-  await assetStorage.sync(ctx)
-  await assetSnapshotsStorage.sync(ctx, blockTimestamp)
-  await networkSnapshotsStorage.sync(ctx, blockTimestamp)
+	await poolsStorage.sync(ctx)
+	await assetStorage.sync(ctx)
+	await assetSnapshotsStorage.sync(ctx, blockTimestamp)
+	await networkSnapshotsStorage.sync(ctx, blockTimestamp)
 }

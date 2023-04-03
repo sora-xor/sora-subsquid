@@ -4,6 +4,7 @@ import { poolsStorage } from '../../utils/pools'
 import { Block, CallEntity, Context } from '../../processor'
 import { UtilityBatchAllCall } from '../../types/calls'
 import { HistoryElement } from '../../model'
+import { AssetId } from '../../types'
 
 const versions = [1, 3, 7, 19, 22, 23, 26, 32, 33, 35, 37, 38, 42, 43, 45, 46, 47] as const
 
@@ -127,8 +128,8 @@ export async function batchTransactionsHandler(ctx: Context, block: Block, callE
 			//TODO: Determine wether or not typization is applicable here
 			const data: {
 				dexId: number
-				assetA: Uint8Array
-				assetB: Uint8Array
+				assetA: AssetId
+				assetB: AssetId
 			} = initializePool.data as any
             await poolsStorage.getPool(ctx, block, data.assetA, data.assetB)
         }

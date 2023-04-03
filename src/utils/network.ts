@@ -29,13 +29,13 @@ class NetworkStatsStorage {
     let entity = await ctx.store.get(NetworkStats, this.id)
 
     if (!entity) {
-      entity = new NetworkStats()
-      entity.id = this.id
-      entity.totalFees = BigInt(0)
-      entity.totalAccounts = 0
-      entity.totalTransactions = 0
-      entity.totalBridgeIncomingTransactions = 0
-      entity.totalBridgeOutgoingTransactions = 0
+		entity = new NetworkStats()
+		entity.id = this.id
+		entity.totalFees = 0n
+		entity.totalAccounts = 0
+		entity.totalTransactions = 0
+		entity.totalBridgeIncomingTransactions = 0
+		entity.totalBridgeOutgoingTransactions = 0
     }
 
     this.storage = entity
@@ -70,8 +70,8 @@ class NetworkSnapshotsStorage {
     for (const snapshot of this.storage.values()) {
       const { type, timestamp } = snapshot
       const seconds = SnapshotSecondsMap[type]
-      const currentShapshotIndex =  Math.floor(blockTimestamp / seconds)
-      const currentTimestamp = currentShapshotIndex * seconds
+      const currentSnapshotIndex =  Math.floor(blockTimestamp / seconds)
+      const currentTimestamp = currentSnapshotIndex * seconds
 
       if (currentTimestamp > timestamp) {
         this.storage.delete(snapshot.id)
@@ -87,8 +87,8 @@ class NetworkSnapshotsStorage {
 
   async getSnapshot(ctx: Context, type: SnapshotType, blockTimestamp: number): Promise<NetworkSnapshot> {
     const seconds = SnapshotSecondsMap[type]
-    const shapshotIndex =  Math.floor(blockTimestamp / seconds)
-    const id = this.getId(type, shapshotIndex)
+    const snapshotIndex =  Math.floor(blockTimestamp / seconds)
+    const id = this.getId(type, snapshotIndex)
 
     let snapshot = this.storage.get(id)
     if (snapshot) {
@@ -98,7 +98,7 @@ class NetworkSnapshotsStorage {
     snapshot = await ctx.store.get(NetworkSnapshot, id)
 
     if (!snapshot) {
-      const timestamp = shapshotIndex * seconds // rounded snapshot timestamp
+      const timestamp = snapshotIndex * seconds // rounded snapshot timestamp
 
       snapshot = new NetworkSnapshot()
       snapshot.id = id
@@ -106,7 +106,7 @@ class NetworkSnapshotsStorage {
       snapshot.timestamp = timestamp
       snapshot.accounts = 0
       snapshot.transactions = 0
-      snapshot.fees = BigInt(0)
+      snapshot.fees = 0n
       snapshot.liquidityUSD = '0'
       snapshot.volumeUSD = '0'
       snapshot.bridgeIncomingTransactions = 0

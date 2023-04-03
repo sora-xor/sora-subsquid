@@ -1,8 +1,9 @@
 import { assetSnapshotsStorage } from '../../utils/assets'
-import { formatDateTimestamp } from '../../utils'
+import { formatDateTimestamp, toAssetId } from '../../utils'
 import { XOR } from '../../utils/consts'
 import { Block, Context, EventEntity } from '../../processor'
 import { BalancesDepositEvent, BalancesWithdrawEvent, TokensDepositedEvent, TokensWithdrawnEvent } from '../../types/events'
+import { AssetAmount } from '../../types'
 
 export async function tokenBurnHandler(ctx: Context, block: Block, eventEntity: EventEntity): Promise<void> {
     if (eventEntity.name !== 'Tokens.Withdrawn') return
@@ -12,7 +13,7 @@ export async function tokenBurnHandler(ctx: Context, block: Block, eventEntity: 
 	
 	const { currencyId, amount } = event.asV42
 
-    const assetId = currencyId.code
+    const assetId = toAssetId(currencyId.code)
     const blockTimestamp = formatDateTimestamp(new Date(block.header.timestamp))
 
     await assetSnapshotsStorage.updateBurned(ctx, assetId, BigInt(amount), blockTimestamp)
@@ -40,7 +41,7 @@ export async function tokenMintHandler(ctx: Context, block: Block, eventEntity: 
 
     const { currencyId, amount } = event.asV42
 
-    const assetId = currencyId.code
+    const assetId = toAssetId(currencyId.code)
     const blockTimestamp = formatDateTimestamp(new Date(block.header.timestamp))
 
     await assetSnapshotsStorage.updateMinted(ctx, assetId, amount, blockTimestamp)
@@ -51,11 +52,11 @@ export async function xorMintHandler(ctx: Context, block: Block, eventEntity: Ev
 
 	const event = new BalancesDepositEvent(ctx, eventEntity.event)
 
-	let amount: bigint
+	let amount: AssetAmount
 	if (event.isV1) {
-		amount = event.asV1[1]
+		amount = event.asV1[1] as AssetAmount
 	} else if (event.isV42) {
-		amount = event.asV42.amount
+		amount = event.asV42.amount as AssetAmount
 	} else {
 		throw new Error('Unsupported spec')
 	}

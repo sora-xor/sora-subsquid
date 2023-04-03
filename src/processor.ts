@@ -1,8 +1,5 @@
 import {
     BatchContext,
-    BatchProcessorCallItem,
-    BatchProcessorEventItem,
-    BatchProcessorItem,
     SubstrateBatchProcessor,
     SubstrateBlock
 } from '@subsquid/substrate-processor'
@@ -28,11 +25,58 @@ import { ethSoraTransferHandler } from './handlers/events/ethSoraTransfer'
 import { tokenBurnHandler, tokenMintHandler, xorBurnHandler, xorMintHandler } from './handlers/events/mintAndBurn'
 import { networkFeeHandler } from './handlers/events/networkFee'
 import { referrerRewardHandler } from './handlers/events/referrerReward'
-import { transferEventHandler } from './handlers/events/transfer'
+import { transferHandler } from './handlers/events/transfer'
 import { initializeAssets } from './handlers/models/initializeAssets'
 import { initializePools } from './handlers/models/initializePools'
 import { syncModels } from './handlers/sync/models'
 import { syncPoolXykPrices } from './handlers/sync/poolXykPrices'
+import { SystemNumberStorage } from './types/storage'
+
+const events = [
+	'*',
+	'EthBridge.IncomingRequestFinalized',
+    'EthBridge.IncomingRequestFinalizationFailed',
+    'EthBridge.RequestRegistered',
+    'Tokens.Deposited',
+    'Tokens.Withdrawn',
+    'Tokens.Transfer',
+    'Balances.Deposit',
+    'Balances.Withdraw',
+    'Balances.Transfer',
+    'Currencies.Transferred',
+    'Currencies.Deposited',
+    'XorFee.FeeWithdrawn',
+    'XorFee.ReferrerRewarded',
+    'Assets.AssetRegistered',
+    'Assets.Transfer',
+    'LiquidityProxy.Exchange',
+    'DemeterFarmingPlatform.Deposited',
+    'DemeterFarmingPlatform.RewardWithdrawn',
+    'DemeterFarmingPlatform.Withdrawn',
+] as const
+
+const calls = [
+	'*',
+	'Assets.register',
+    'Assets.transfer',
+    'LiquidityProxy.swap',
+    'LiquidityProxy.swap_transfer',
+    'PoolXYK.deposit_liquidity',
+    'PoolXYK.withdraw_liquidity',
+    'IrohaMigration.migrate',
+    'Utility.batch_all',
+    'EthBridge.transfer_to_sidechain',
+    'PswapDistribution.claim_incentive',
+    'Rewards.claim',
+    'VestedRewards.claim_rewards',
+    'VestedRewards.claim_crowdloan_rewards',
+    'Referrals.set_referrer',
+    'Referrals.reserve',
+    'Referrals.unreserve',
+    'DemeterFarmingPlatform.deposit',
+    'DemeterFarmingPlatform.withdraw',
+    'DemeterFarmingPlatform.get_rewards',
+] as const
 
 const processor = new SubstrateBatchProcessor()
     .setDataSource({
@@ -44,67 +88,47 @@ const processor = new SubstrateBatchProcessor()
         archive: `http://localhost:8888/graphql`
     })
     .setTypesBundle('archive/prod/typesBundle.json')
-    .setBlockRange({ from: 0 })
+    .setBlockRange({ from: 8_035_060 })
 
-    .addEvent('EthBridge.IncomingRequestFinalized')
-    .addEvent('EthBridge.IncomingRequestFinalizationFailed')
-    .addEvent('EthBridge.RequestRegistered')
-    .addEvent('Tokens.Deposited')
-    .addEvent('Tokens.Withdrawn')
-    .addEvent('Tokens.Transfer')
-    .addEvent('Balances.Deposit')
-    .addEvent('Balances.Withdraw')
-    .addEvent('Balances.Transfer')
-    .addEvent('Currencies.Transferred')
-    .addEvent('Currencies.Deposited')
-    .addEvent('XorFee.FeeWithdrawn')
-    .addEvent('XorFee.ReferrerRewarded')
-    .addEvent('Assets.AssetRegistered')
-    .addEvent('Assets.Transfer')
-    .addEvent('LiquidityProxy.Exchange')
-    .addEvent('DemeterFarmingPlatform.Deposited')
-    .addEvent('DemeterFarmingPlatform.RewardWithdrawn')
-    .addEvent('DemeterFarmingPlatform.Withdrawn')
+events.forEach(eventName => {
+	processor.addEvent(eventName)
+})
 
-    .addCall('Assets.register')
-    .addCall('Assets.transfer')
-    .addCall('LiquidityProxy.swap')
-    .addCall('LiquidityProxy.swap_transfer')
-    .addCall('PoolXYK.deposit_liquidity')
-    .addCall('PoolXYK.withdraw_liquidity')
-    .addCall('IrohaMigration.migrate')
-    .addCall('Utility.batch_all')
-    .addCall('EthBridge.transfer_to_sidechain')
-    .addCall('PswapDistribution.claim_incentive')
-    .addCall('Rewards.claim')
-    .addCall('VestedRewards.claim_rewards')
-    .addCall('VestedRewards.claim_crowdloan_rewards')
-    .addCall('Referrals.set_referrer')
-    .addCall('Referrals.reserve')
-    .addCall('Referrals.unreserve')
-    .addCall('DemeterFarmingPlatform.deposit')
-    .addCall('DemeterFarmingPlatform.withdraw')
-    .addCall('DemeterFarmingPlatform.get_rewards')
+calls.forEach(callName => {
+	processor.addCall(callName)
+})
 
-export type Item = BatchProcessorItem<typeof processor>
-export type EventEntity = Exclude<BatchProcessorEventItem<typeof processor>, EventItem<'*'>>
-export type CallEntity = Exclude<BatchProcessorCallItem<typeof processor>, CallItem<'*'>>
-export type Context = BatchContext<Store, Item>
+type EventItemUnion<U> = U extends string ? EventItem<U, true> : never
+type CallItemUnion<U> = U extends string ? CallItem<U, true> : never
+
+export type Entity = EventEntity | CallEntity
+export type EventEntity = EventItemUnion<typeof events[number]>
+export type CallEntity = CallItemUnion<typeof calls[number]>
+export type Context = BatchContext<Store, Entity>
 export type BlockHeader = SubstrateBlock
-export type Block = { header: BlockHeader, items: Item[] }
+export type Block = { header: BlockHeader, items: Entity[] }
 
-processor.run(new TypeormDatabase(), async (ctx: Context) => {
-    for (let block of ctx.blocks) {
-        await initializeAssets(ctx, block)
-        await initializePools(ctx, block)
-		await syncModels(ctx, block)
-		await syncPoolXykPrices(ctx, block)
+processor.run(new TypeormDatabase(), async (ctx) => {
+	const context = ctx as Context
+
+    for (let block of context.blocks) {
+		const lastBlock = context.blocks[context.blocks.length - 1].header.hash === block.header.hash
+
+        await initializeAssets(context, block)
+        await initializePools(context, block)
+
+		await syncPoolXykPrices(context, block)
+		if (lastBlock) {
+			await syncModels(context, block)
+		}
 
         for (let item of block.items) {
-            if (item.name === '*') continue
+            if (item.name === '*') {
+				throw new Error('Unknown item: ' + JSON.stringify(item))
+			}
 
             if (item.kind === 'call') {
-                const props = [ctx, block, item] as const
+                const props = [context, block, item] as const
 
                 await assetRegistrationHandler(...props)
                 await transfersHandler(...props)
@@ -125,7 +149,7 @@ processor.run(new TypeormDatabase(), async (ctx: Context) => {
             
             }
             if (item.kind === 'event') {
-                const props = [ctx, block, item] as const
+                const props = [context, block, item] as const
             
                 await ethSoraTransferHandler(...props)
                 await tokenBurnHandler(...props)
@@ -134,7 +158,7 @@ processor.run(new TypeormDatabase(), async (ctx: Context) => {
                 await xorMintHandler(...props)
                 await networkFeeHandler(...props)
                 await referrerRewardHandler(...props)
-                await transferEventHandler(...props)
+                await transferHandler(...props)
             }
         }
     }

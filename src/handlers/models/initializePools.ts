@@ -3,18 +3,19 @@ import { BASE_ASSETS, XOR, DOUBLE_PRICE_POOL } from '../../utils/consts'
 import { Block, Context } from '../../processor'
 import { decodeHex, toHex } from '@subsquid/substrate-processor'
 import { Asset, PoolXYK } from '../../model'
+import { Address } from '../../types'
 
 let isFirstBlockIndexed = false
 
 export async function initializePools(ctx: Context, block: Block): Promise<void> {
     if (isFirstBlockIndexed) return
 
-    const blockNumber = block.header.height
+    const blockHeight = block.header.height
 
-    ctx.log.debug(`[${blockNumber}]: Initialize Pool XYK entities`)
+    ctx.log.debug(`[${blockHeight}]: Initialize Pool XYK entities`)
 
     const poolsBuffer = new Map<string, {
-		id: Uint8Array
+		id: Address
 		baseAsset: Asset
 		targetAsset: Asset
 		baseAssetReserves: bigint
@@ -34,28 +35,28 @@ export async function initializePools(ctx: Context, block: Block): Promise<void>
 			poolAccounts.add(ctx, baseAssetId, targetAssetId, poolAccountId)
 
 			const [baseAsset, targetAsset] = await Promise.all([
-				ctx.store.get(Asset, toHex(baseAssetId)),
-				ctx.store.get(Asset, toHex(baseAssetId))
+				ctx.store.get(Asset, baseAssetId),
+				ctx.store.get(Asset, targetAssetId)
 			])
 			if (!baseAsset) throw new Error('Cannot find base asset')
 			if (!targetAsset) throw new Error('Cannot find target asset')
 
-			poolsBuffer.set(toHex(poolAccountId), {
+			poolsBuffer.set(poolAccountId, {
 				id: poolAccountId,
 				baseAsset,
 				targetAsset,
-				baseAssetReserves: BigInt(0),
-				targetAssetReserves: BigInt(0),
-				multiplier: toHex(baseAssetId) === toHex(XOR) && DOUBLE_PRICE_POOL.includes(targetAssetId) ? 2 : 1,
+				baseAssetReserves: 0n,
+				targetAssetReserves: 0n,
+				multiplier: baseAssetId === XOR && DOUBLE_PRICE_POOL.includes(targetAssetId) ? 2 : 1,
 			})
 		}
 
 		reserves.forEach(item => {
 			const { targetAssetId, baseBalance, targetBalance } = item
 			const poolAccountId = poolAccounts.get(baseAssetId, targetAssetId)
-			if (poolAccountId) {
-				const pool = poolsBuffer.get(toHex(poolAccountId))
 
+			if (poolAccountId) {
+				const pool = poolsBuffer.get(poolAccountId)
 				if (pool) {
 					pool.baseAssetReserves = baseBalance
 					pool.targetAssetReserves = targetBalance
@@ -66,15 +67,15 @@ export async function initializePools(ctx: Context, block: Block): Promise<void>
 
     const entities = [...poolsBuffer.values()].map(pool => new PoolXYK({
 		...pool,
-		id: toHex(pool.id),
+		id: pool.id,
 	}))
 
     if (entities.length) {
         await ctx.store.save(entities)
-        await Promise.all(entities.map(entity => poolsStorage.getPoolById(ctx, block, decodeHex(entity.id))))
-        ctx.log.debug(`[${blockNumber}]: ${entities.length} Pool XYKs initialized!`)
+        await Promise.all(entities.map(entity => poolsStorage.getPoolById(ctx, block, entity.id as Address)))
+        ctx.log.debug(`[${blockHeight}]: ${entities.length} Pool XYKs initialized!`)
     } else {
-        ctx.log.debug(`[${blockNumber}]: No Pool XYKs to initialize!`)
+        ctx.log.debug(`[${blockHeight}]: No Pool XYKs to initialize!`)
     }
 
     isFirstBlockIndexed = true

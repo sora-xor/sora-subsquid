@@ -1,5 +1,6 @@
 import { Block, CallEntity, Context } from '../../processor'
 import { LiquidityProxySwapTransferCall } from '../../types/calls'
+import { toAddress, toAssetId } from '../../utils'
 import { CallRec, handleAndSaveExtrinsic, SwapAmount } from '../../utils/swaps'
 
 export async function swapTransfersHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
@@ -28,11 +29,11 @@ export async function swapTransfersHandler(ctx: Context, block: Block, callEntit
 			}
 		}
 		callRec = {
-			inputAssetId,
-			outputAssetId,
+			inputAssetId: toAssetId(inputAssetId),
+			outputAssetId: toAssetId(outputAssetId),
 			swapAmount,
 			liquiditySources: selectedSourceTypes.map(type => type.__kind),
-			receiver
+			receiver: toAddress(receiver)
 		}
 	} else if (call.isV42) {
 		const { inputAssetId, outputAssetId, swapAmount: swapAmountV42, selectedSourceTypes, receiver } = call.asV42
@@ -51,11 +52,11 @@ export async function swapTransfersHandler(ctx: Context, block: Block, callEntit
 			}
 		}
 		callRec = {
-			inputAssetId: inputAssetId.code,
-			outputAssetId: outputAssetId.code,
+			inputAssetId: toAssetId(inputAssetId.code),
+			outputAssetId: toAssetId(outputAssetId.code),
 			swapAmount,
 			liquiditySources: selectedSourceTypes.map(type => type.__kind),
-			receiver
+			receiver: toAddress(receiver)
 		}
 	} else {
 		throw new Error('Unsupported spec')

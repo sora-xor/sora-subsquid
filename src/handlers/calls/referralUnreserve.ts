@@ -30,8 +30,8 @@ export async function referralUnreserveHandler(ctx: Context, block: Block, callE
             const { from, to, amount } = getTransferEventData(ctx, balancesTransferEventEntity)
 
             details = {
-                from: toHex(from),
-                to: toHex(to),
+                from,
+                to,
                 amount: formatU128ToBalance(amount, XOR)
             }
         } else {

@@ -1,8 +1,9 @@
-import { toHex } from '@subsquid/substrate-processor'
 import { Asset, PoolXYK } from '../model'
 import { Block, Context } from '../processor'
 import { PoolXYKReservesStorage, PoolXYKPropertiesStorage } from '../types/storage'
 import { XOR, DOUBLE_PRICE_POOL } from './consts'
+import { decodeAssetId, toAssetId, toAddress } from '.'
+import { AssetId, Address } from '../types'
 
 // getters & setter for flag, should we sync poolXYK reserves
 // and then calc asset prices
@@ -16,32 +17,44 @@ export const PoolsPrices = {
   },
 }
 
-export const getAllReserves = async (ctx: Context, block: Block, baseAssetId: Uint8Array) => {
+export const getAllReserves = async (ctx: Context, block: Block, baseAssetId: AssetId) => {
 	try {
-		ctx.log.debug(`[${toHex(baseAssetId)}] Pools XYK Reserves request...`)
+		ctx.log.debug(`[${baseAssetId}] Pools XYK Reserves request...`)
 		const storage = new PoolXYKReservesStorage(ctx, block.header)
 
 		let reserves: { 
-		baseAssetId: Uint8Array,
-		targetAssetId: Uint8Array,
-		baseBalance: bigint,
-		targetBalance: bigint
+			baseAssetId: AssetId,
+			targetAssetId: AssetId,
+			baseBalance: bigint,
+			targetBalance: bigint
 		}[]
+
 		if (storage.isV1) {
-		reserves = (await storage.asV1.getPairs(baseAssetId)).map(pair => {
-			const [[baseAssetId, targetAssetId], [baseBalance, targetBalance]] = pair
-			return { baseAssetId, targetAssetId, baseBalance, targetBalance }
-		})
+			reserves = (await storage.asV1.getPairs(decodeAssetId(baseAssetId))).map(pair => {
+				const [[, targetAssetId], [baseBalance, targetBalance]] = pair
+				return {
+					baseAssetId,
+					targetAssetId: toAssetId(targetAssetId),
+					baseBalance,
+					targetBalance
+				}
+			})
 		} else if (storage.isV42) {
-		reserves = (await storage.asV42.getPairs({ code: baseAssetId })).map(pair => {
-			const [[baseAsset, targetAsset], [baseBalance, targetBalance]] = pair
-			return { baseAssetId: baseAsset.code, targetAssetId: targetAsset.code, baseBalance, targetBalance }
-		})
+			reserves = (await storage.asV42.getPairs({ code: decodeAssetId(baseAssetId) })).map(pair => {
+				const [[, targetAsset], [baseBalance, targetBalance]] = pair
+				return {
+					baseAssetId,
+					targetAssetId: toAssetId(targetAsset.code),
+					baseBalance,
+					targetBalance
+				}
+			})
 		} else {
-		throw new Error('Unsupported spec')
+			throw new Error('Unsupported spec')
 		}
 
-		ctx.log.debug(`[${toHex(baseAssetId)}] Pools XYK Reserves request completed.`)
+		ctx.log.debug(`[${baseAssetId}] Pools XYK Reserves request completed.`)
+
 		return reserves
 	} catch (e: any) {
 		ctx.log.error('Error getting Reserves')
@@ -50,37 +63,55 @@ export const getAllReserves = async (ctx: Context, block: Block, baseAssetId: Ui
 	}
 }
 
-export const getAllProperties = async (ctx: Context, block: Block, baseAssetId: Uint8Array) => {
+export const getAllProperties = async (ctx: Context, block: Block, baseAssetId: AssetId) => {
 	try {
-		ctx.log.debug(`[${toHex(baseAssetId)}] Pools XYK Properties request...`)
+		ctx.log.debug(`[${baseAssetId}] Pools XYK Properties request...`)
 		const storage = new PoolXYKPropertiesStorage(ctx, block.header)
 
+		const baseAssetIdDecoded = decodeAssetId(baseAssetId)
+
 		let properties: { 
-			baseAssetId: Uint8Array,
-			targetAssetId: Uint8Array,
-			reservesAccountId: Uint8Array,
-			feesAccountId: Uint8Array
+			baseAssetId: AssetId,
+			targetAssetId: AssetId,
+			reservesAccountId: Address,
+			feesAccountId: Address
 		}[]
+
 		if (storage.isV1) {
-			properties = (await storage.asV1.getPairs(baseAssetId)).map(pair => {
-			const [[baseAssetId, targetAssetId], [reservesAccountId, feesAccountId]] = pair
-			return { baseAssetId, targetAssetId, reservesAccountId, feesAccountId }
-		})
+			properties = (await storage.asV1.getPairs(baseAssetIdDecoded)).map(pair => {
+				const [[, targetAssetId], [reservesAccountId, feesAccountId]] = pair
+				return {
+					baseAssetId,
+					targetAssetId: toAssetId(targetAssetId),
+					reservesAccountId: toAddress(reservesAccountId),
+					feesAccountId: toAddress(feesAccountId)
+				}
+			})
 		} else if (storage.isV7) {
-			properties = (await storage.asV7.getPairs(baseAssetId)).map(pair => {
-			const [[baseAssetId, targetAssetId], [reservesAccountId, feesAccountId]] = pair
-			return { baseAssetId, targetAssetId, reservesAccountId, feesAccountId }
-		})
+			properties = (await storage.asV7.getPairs(baseAssetIdDecoded)).map(pair => {
+				const [[, targetAssetId], [reservesAccountId, feesAccountId]] = pair
+				return {
+					baseAssetId,
+					targetAssetId: toAssetId(targetAssetId),
+					reservesAccountId: toAddress(reservesAccountId),
+					feesAccountId: toAddress(feesAccountId)
+				}
+			})
 		} else if (storage.isV42) {
-			properties = (await storage.asV42.getPairs({ code: baseAssetId })).map(pair => {
-			const [[baseAsset, targetAsset], [reservesAccountId, feesAccountId]] = pair
-			return { baseAssetId: baseAsset.code, targetAssetId: targetAsset.code, reservesAccountId, feesAccountId }
-		})
+			properties = (await storage.asV42.getPairs({ code: baseAssetIdDecoded })).map(pair => {
+				const [[, targetAsset], [reservesAccountId, feesAccountId]] = pair
+				return {
+					baseAssetId,
+					targetAssetId: toAssetId(targetAsset.code),
+					reservesAccountId: toAddress(reservesAccountId),
+					feesAccountId: toAddress(feesAccountId)
+				}
+			})
 		} else {
 			throw new Error('Unsupported spec')
 		}
 
-		ctx.log.debug(`[${toHex(baseAssetId)}] Pools XYK Properties request completed.`)
+		ctx.log.debug(`[${baseAssetId}] Pools XYK Properties request completed.`)
 		return properties
 	} catch (e: any) {
 		ctx.log.error('Error getting Properties')
@@ -89,38 +120,46 @@ export const getAllProperties = async (ctx: Context, block: Block, baseAssetId: 
 	}
 }
 
-export const getPoolProperties = async (ctx: Context, block: Block, baseAssetId: Uint8Array, targetAssetId: Uint8Array) => {
+export const getPoolProperties = async (ctx: Context, block: Block, baseAssetId: AssetId, targetAssetId: AssetId) => {
 	try {
 		ctx.log.debug(`[${baseAssetId}${targetAssetId}] Pool properties request...`)
 		const storage = new PoolXYKPropertiesStorage(ctx, block.header)
+
+		const baseAssetIdDecoded = decodeAssetId(baseAssetId)
+		const targetAssetIdDecoded = decodeAssetId(targetAssetId)
 		
-		let properties: { 
-			baseAssetId: Uint8Array,
-			targetAssetId: Uint8Array,
+		let properties: {
 			reservesAccountId: Uint8Array,
 			feesAccountId: Uint8Array
 		}[]
+
 		if (storage.isV1) {
-			properties = (await storage.asV1.getPairs(baseAssetId, targetAssetId)).map(pair => {
-			const [[baseAssetId, targetAssetId], [reservesAccountId, feesAccountId]] = pair
-			return { baseAssetId, targetAssetId, reservesAccountId, feesAccountId }
-		})
-		} else if (storage.isV7) {
-			properties = (await storage.asV7.getPairs(baseAssetId, targetAssetId)).map(pair => {
-			const [[baseAssetId, targetAssetId], [reservesAccountId, feesAccountId]] = pair
-			return { baseAssetId, targetAssetId, reservesAccountId, feesAccountId }
-		})
-		} else if (storage.isV42) {
-			properties = (await storage.asV42.getPairs({ code: baseAssetId }, { code: targetAssetId })).map(pair => {
-			const [[baseAsset, targetAsset], [reservesAccountId, feesAccountId]] = pair
-			return { baseAssetId: baseAsset.code, targetAssetId: targetAsset.code, reservesAccountId, feesAccountId }
-		})
-		} else {
-		throw new Error('Unsupported spec')
+			properties = (await storage.asV1.getPairs(baseAssetIdDecoded, targetAssetIdDecoded)).map(pair => {
+				const [reservesAccountId, feesAccountId] = pair[1]
+				return { reservesAccountId, feesAccountId }
+			})
+		} 
+		else if (storage.isV7) {
+			properties = (await storage.asV7.getPairs(baseAssetIdDecoded, targetAssetIdDecoded)).map(pair => {
+				const [reservesAccountId, feesAccountId] = pair[1]
+				return { reservesAccountId, feesAccountId }
+			})
+		}
+		else if (storage.isV42) {
+			const data = await storage.asV42.get({ code: baseAssetIdDecoded }, { code: targetAssetIdDecoded })
+			properties = data ? [{ reservesAccountId: data[0], feesAccountId: data[1] }] : []
+		}
+		else {
+			throw new Error('Unsupported spec')
 		}
 		ctx.log.debug(`[${baseAssetId}${targetAssetId}] Pool properties request completed`)
 
-		return properties[0] ?? null
+		return {
+			baseAssetId,
+			targetAssetId,
+			reservesAccountId: toAddress(properties[0].reservesAccountId),
+			feesAccountId: toAddress(properties[0].feesAccountId)
+		}
 	} catch (error: any) {
 		ctx.log.error('Error getting pool properties')
 		ctx.log.error(error)
@@ -129,51 +168,50 @@ export const getPoolProperties = async (ctx: Context, block: Block, baseAssetId:
 }
 
 class PoolAccountsStorage {
-	private storage: Map<string, Map<Uint8Array, Uint8Array>>
-	private accountIds: Map<string, [Uint8Array, Uint8Array]>
+	private storage: Map<AssetId, Map<AssetId, Address>>
+	private accountIds: Map<Address, [AssetId, AssetId]>
 
 	constructor() {
 		this.storage = new Map()
 		this.accountIds = new Map()
 	}
 
-	add(ctx: Context, baseAssetId: Uint8Array, targetAssetId: Uint8Array, poolAccountId: Uint8Array): void {
-		if (!this.storage.has(toHex(baseAssetId))) {
-			this.storage.set(toHex(baseAssetId), new Map())
+	add(ctx: Context, baseAssetId: AssetId, targetAssetId: AssetId, poolAccountId: Address): void {
+		if (!this.storage.has(baseAssetId)) {
+			this.storage.set(baseAssetId, new Map())
 		}
-		this.storage.get(toHex(baseAssetId))!.set(targetAssetId, poolAccountId)
-		this.accountIds.set(toHex(poolAccountId), [baseAssetId, targetAssetId])
+		this.storage.get(baseAssetId)!.set(targetAssetId, poolAccountId)
+		this.accountIds.set(poolAccountId, [baseAssetId, targetAssetId])
 	}
 
-	get(baseAssetId: Uint8Array, targetAssetId: Uint8Array): Uint8Array | undefined {
+	get(baseAssetId: AssetId, targetAssetId: AssetId): Address | undefined {
 		return this.getMap(baseAssetId)?.get(targetAssetId)
 	}
 
-	getById(poolAccountId: Uint8Array) {
-		return this.accountIds.get(toHex(poolAccountId))
+	getById(poolAccountId: Address) {
+		return this.accountIds.get(poolAccountId)
 	}
 
-	getMap(baseAssetId: Uint8Array) {
-		return this.storage.get(toHex(baseAssetId))
+	getMap(baseAssetId: AssetId) {
+		return this.storage.get(baseAssetId)
 	}
 
-	has(poolAccountId: Uint8Array): boolean {
-		return this.accountIds.has(toHex(poolAccountId))
+	has(poolAccountId: Address): boolean {
+		return this.accountIds.has(poolAccountId)
 	}
 
-	async getPoolAccountId (ctx: Context, block: Block, baseAssetId: Uint8Array, targetAssetId: Uint8Array): Promise<Uint8Array | null> {
+	async getPoolAccountId (ctx: Context, block: Block, baseAssetId: AssetId, targetAssetId: AssetId): Promise<Address | null> {
 		const id = this.get(baseAssetId, targetAssetId)
 
 		if (id) return id
 
-		// TODO: return api request
 		const properties = await getPoolProperties(ctx, block, baseAssetId, targetAssetId)
 		const poolAccountId = properties?.reservesAccountId ?? null
 
 		if (poolAccountId) {
 			poolAccounts.add(ctx, baseAssetId, targetAssetId, poolAccountId)
 		} else {
-			ctx.log.error(`Cannot find pool id ${toHex(baseAssetId)}:${toHex(targetAssetId)}`)
+			ctx.log.error(`Cannot find pool id ${baseAssetId}:${targetAssetId}`)
 		}
 
 		return poolAccountId
@@ -187,17 +225,17 @@ class PoolsStorage {
 		this.storage = new Map()
 	}
 
-	async getPoolById(ctx: Context, block: Block, poolId: Uint8Array): Promise<PoolXYK | null> {
-		let pool = this.storage.get(toHex(poolId))
+	async getPoolById(ctx: Context, block: Block, poolId: Address): Promise<PoolXYK | null> {
+		let pool = this.storage.get(poolId)
 
 		if (pool) {
 			return pool
 		}
 
-		const addresses = poolAccounts.getById(poolId)
+		const assetIds = poolAccounts.getById(poolId)
 
-		if (addresses) {
-			return await this.getPool(ctx, block, ...addresses)
+		if (assetIds) {
+			return await this.getPool(ctx, block, ...assetIds)
 		}
 
 		return null
@@ -208,33 +246,42 @@ class PoolsStorage {
 		await ctx.store.save([...this.storage.values()])
 	}
 
-	async getPool(ctx: Context, block: Block, baseAssetId: Uint8Array, targetAssetId: Uint8Array): Promise<PoolXYK | null> {
+	async getPool(ctx: Context, block: Block, baseAssetId: AssetId, targetAssetId: AssetId): Promise<PoolXYK | null> {
 		const poolId = await poolAccounts.getPoolAccountId(ctx, block, baseAssetId, targetAssetId)
 
 		if (!poolId) return null
 
-		let pool = this.storage.get(toHex(poolId))
+		let pool = this.storage.get(poolId)
 	
 		if (pool) {
 			return pool
 		}
 
-		pool = await ctx.store.get(PoolXYK, toHex(poolId))
+		pool = (await ctx.store.find(PoolXYK, {
+			relations: {
+				baseAsset: true,
+				targetAsset: true
+			},
+			where: {
+				id: poolId
+			},
+		}))[0]
+		
 
 		if (!pool) {
 			const [baseAsset, targetAsset] = await Promise.all([
-				ctx.store.get(Asset, toHex(baseAssetId)),
-				ctx.store.get(Asset, toHex(targetAssetId))
+				ctx.store.get(Asset, baseAssetId),
+				ctx.store.get(Asset, targetAssetId)
 			])
-			if (!baseAsset) throw new Error(`Cannot find base asset: ${toHex(baseAssetId)}`)
-			if (!targetAsset) throw new Error(`Cannot find target asset: ${toHex(targetAssetId)}`)
+			if (!baseAsset) throw new Error(`Cannot find base asset: ${baseAssetId}`)
+			if (!targetAsset) throw new Error(`Cannot find target asset: ${targetAssetId}`)
 
 			pool = new PoolXYK({
-				id: toHex(poolId),
+				id: poolId,
 				baseAsset,
 				targetAsset,
-				baseAssetReserves: BigInt(0),
-				targetAssetReserves: BigInt(0),
+				baseAssetReserves: 0n,
+				targetAssetReserves: 0n,
 				multiplier: baseAssetId === XOR && DOUBLE_PRICE_POOL.includes(targetAssetId) ? 2 : 1,
 				priceUSD: '0',
 				strategicBonusApy: '0'
@@ -245,7 +292,7 @@ class PoolsStorage {
 			ctx.log.debug(`[${poolId}] Created Pool XYK`)
 		}
 
-		this.storage.set(toHex(poolId), pool)
+		this.storage.set(poolId, pool)
 
 		return pool
 	}

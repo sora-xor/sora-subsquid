@@ -28,8 +28,8 @@ export async function referralReserveHandler(ctx: Context, block: Block, callEnt
             const { from, to, amount } = getTransferEventData(ctx, balancesTransferEventEntity)
 
             details = {
-                from: toHex(from),
-                to: toHex(to),
+                from,
+                to,
                 amount: formatU128ToBalance(amount, XOR)
             }
         } else {

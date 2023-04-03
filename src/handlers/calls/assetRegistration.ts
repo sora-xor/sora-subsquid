@@ -5,7 +5,8 @@ import { findEventWithExtrinsic } from '../../utils/events'
 import { AssetsAssetRegisteredEvent } from '../../types/events'
 import { AssetsRegisterCall } from '../../types/calls'
 import { AssetsAssetInfosStorage } from '../../types/storage'
-import { toHex } from '@subsquid/substrate-processor'
+import { AssetId } from '../../types'
+import { toAssetId } from '../../utils'
 
 export async function assetRegistrationHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
     if (callEntity.name !== 'Assets.register') return
@@ -18,7 +19,9 @@ export async function assetRegistrationHandler(ctx: Context, block: Block, callE
 
     if (!historyElement) return
 
-    let details = new Object()
+    let details: {
+		assetId: AssetId
+	}
 
     if (historyElement.execution.success) {
         const assetRegistrationEventEntity = findEventWithExtrinsic('Assets.AssetRegistered', block, extrinsicHash)
@@ -26,33 +29,36 @@ export async function assetRegistrationHandler(ctx: Context, block: Block, callE
         if (assetRegistrationEventEntity) {
             const assetRegistrationEvent = new AssetsAssetRegisteredEvent(ctx, assetRegistrationEventEntity.event)
 
-            let assetId: Uint8Array
+            let assetIdDecoded: Uint8Array
 
             if (assetRegistrationEvent.isV1) {
-                assetId = assetRegistrationEvent.asV1[0]
+                assetIdDecoded = assetRegistrationEvent.asV1[0]
             } else if (assetRegistrationEvent.isV42) {
-                assetId = assetRegistrationEvent.asV42[0].code
+                assetIdDecoded = assetRegistrationEvent.asV42[0].code
             } else {
                 throw new Error('Unsupported spec')
             }
+
+			const assetId = toAssetId(assetIdDecoded)
     
             details = {
-                assetId: toHex(assetId)
+                assetId
             }
     
-            if (!assetPrecisions.has(toHex(assetId))) {
+            if (!assetPrecisions.has(assetId)) {
                 const assetInfosStorage = new AssetsAssetInfosStorage(ctx, block.header)
                 let precision: number
+
                 if (assetInfosStorage.isV1) {
-                    precision = (await assetInfosStorage.asV1.get(assetId))[2]
+                    precision = (await assetInfosStorage.asV1.get(assetIdDecoded))[2]
                 } else if (assetInfosStorage.isV26) {
-                    precision = (await assetInfosStorage.asV26.get(assetId))[2]
+                    precision = (await assetInfosStorage.asV26.get(assetIdDecoded))[2]
                 } else if (assetInfosStorage.isV42) {
-                    precision = (await assetInfosStorage.asV42.get({ code: assetId }))[2]
+                    precision = (await assetInfosStorage.asV42.get({ code: assetIdDecoded }))[2]
                 } else {
                     throw new Error('Unsupported spec')
                 }
-                assetPrecisions.set(toHex(assetId), precision);
+                assetPrecisions.set(assetId, precision);
             }
     
             await assetStorage.getAsset(ctx, assetId)
@@ -64,19 +70,21 @@ export async function assetRegistrationHandler(ctx: Context, block: Block, callE
     else {
         const call = new AssetsRegisterCall(ctx, callEntity.call)
 
-        let symbol: Uint8Array
+        let symbolDecoded: Uint8Array
+
         if (call.isV1) {
-            symbol = call.asV1.symbol
+            symbolDecoded = call.asV1.symbol
         } else if (call.isV22) {
-            symbol = call.asV22.symbol
+            symbolDecoded = call.asV22.symbol
         } else if (call.isV26) {
-            symbol = call.asV26.symbol
+            symbolDecoded = call.asV26.symbol
         } else {
             throw new Error('Unsupported spec')
         }
+		const symbol = toAssetId(symbolDecoded)
 
         details = {
-            assetId: toHex(symbol)
+            assetId: symbol
         }
     }
 
