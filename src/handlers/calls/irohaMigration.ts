@@ -7,7 +7,6 @@ import { IrohaMigrationMigrateCall } from '../../types/calls'
 import { toAssetId } from '../../utils'
 
 export async function irohaMigrationHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
-
     if (callEntity.name !== 'IrohaMigration.migrate') return
 
     ctx.log.debug('Caught iroha migration extrinsic')
@@ -38,7 +37,7 @@ export async function irohaMigrationHandler(ctx: Context, block: Block, callEnti
 						amount: formatU128ToBalance(amount, assetId)
 					}
 				} else {
-					throw new Error('Unsupported spec')
+					throw new Error(`[${blockHeight}] Unsupported spec`)
 				}
 			} else {
 				const currenciesTransferredEventEntity = findEventWithExtrinsic('Currencies.Transferred', block, extrinsicHash)
@@ -54,10 +53,10 @@ export async function irohaMigrationHandler(ctx: Context, block: Block, callEnti
 							amount: formatU128ToBalance(amount, assetId)
 						}
 					} else {
-						throw new Error('Unsupported spec')
+						throw new Error(`[${blockHeight}] Unsupported spec`)
 					}
 				} else {
-					ctx.log.error(`[${blockHeight}] Cannot find event: Currencies.Transferred`)
+					ctx.log.error(`[${blockHeight}] Cannot find event "Currencies.Transferred" with extrinsic hash ${extrinsicHash}`)
 				}
 			}
 		} else {
@@ -74,7 +73,7 @@ export async function irohaMigrationHandler(ctx: Context, block: Block, callEnti
 						amount: formatU128ToBalance(amount, assetId)
 					}
 				} else {
-					throw new Error('Unsupported spec')
+					throw new Error(`[${blockHeight}] Unsupported spec`)
 				}
 			} else {
 				const currenciesTransferredEventEntity = findEventWithExtrinsic('Currencies.Transferred', block, extrinsicHash)
@@ -90,10 +89,10 @@ export async function irohaMigrationHandler(ctx: Context, block: Block, callEnti
 							amount: formatU128ToBalance(amount, assetId)
 						}
 					} else {
-						throw new Error('Unsupported spec')
+						throw new Error(`[${blockHeight}] Unsupported spec`)
 					}
 				} else {
-					ctx.log.error(`[${blockHeight}] Cannot find event: Currencies.Transferred`)
+					ctx.log.error(`[${blockHeight}] Cannot find event "Currencies.Transferred" with extrinsic hash ${extrinsicHash}`)
 				}
 			}
 		}

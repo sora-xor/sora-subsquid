@@ -4,8 +4,9 @@ import { toAddress, toAssetId } from '../../utils'
 import { CallRec, handleAndSaveExtrinsic, SwapAmount } from '../../utils/swaps'
 
 export async function swapTransfersHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
-
     if (callEntity.name !== 'LiquidityProxy.swap_transfer') return
+
+	const blockHeight = block.header.height
 
     ctx.log.debug('Caught swap transfer extrinsic')
 
@@ -59,7 +60,7 @@ export async function swapTransfersHandler(ctx: Context, block: Block, callEntit
 			receiver: toAddress(receiver)
 		}
 	} else {
-		throw new Error('Unsupported spec')
+		throw new Error(`[${blockHeight}] Unsupported spec`)
 	}
 
     await handleAndSaveExtrinsic(ctx, block, callEntity, callRec)

@@ -1,4 +1,3 @@
-import { toHex } from "@subsquid/substrate-processor"
 import { CallItem } from "@subsquid/substrate-processor/lib/interfaces/dataSelection"
 import BigNumber from "bignumber.js"
 import { formatDateTimestamp } from "."
@@ -92,7 +91,7 @@ export const handleAndSaveExtrinsic = async (
     if (historyElement.execution.success) {
 		const eventEntity = findEventWithExtrinsic('LiquidityProxy.Exchange', block, extrinsicHash)
         if (!eventEntity) {
-			ctx.log.error(`Cannot find event on block ${blockHeight}: LiquidityProxy.Exchange`)
+			ctx.log.error(`[${blockHeight}] Cannot find event "LiquidityProxy.Exchange" with extrinsic hash ${extrinsicHash}`)
 			return
 		} else {
 			// ctx.log.info(`Found event on block ${blockHeight}: LiquidityProxy.Exchange`)
@@ -111,7 +110,7 @@ export const handleAndSaveExtrinsic = async (
 			const [, , , , baseAssetAmount, targetAssetAmount, liquidityProviderFee] = event.asV42
 			eventRec = { baseAssetAmount, targetAssetAmount, liquidityProviderFee }
 		} else {
-			throw new Error('Unsupported spec')
+			throw new Error(`[${blockHeight}] Unsupported spec`)
 		}
 		const { baseAssetAmount, targetAssetAmount, liquidityProviderFee } = eventRec
 

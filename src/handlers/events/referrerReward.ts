@@ -6,8 +6,10 @@ import { formatDateTimestamp, toAddress } from '../../utils'
 export async function referrerRewardHandler(ctx: Context, block: Block, eventEntity: EventEntity): Promise<void> {
 	if (eventEntity.kind !== 'event' || eventEntity.name !== 'XorFee.ReferrerRewarded') return
 
+	const blockHeight = block.header.height
+
 	const event = new XorFeeReferrerRewardedEvent(ctx, eventEntity.event)
-	if (!event.isV22) throw new Error('Unsupported spec')
+	if (!event.isV22) throw new Error(`[${blockHeight}] Unsupported spec`)
 
 	const [referral, referrer, amount] = event.asV22
 

@@ -14,6 +14,7 @@ export async function transfersHandler(ctx: Context, block: Block, callEntity: C
 
     ctx.log.debug('Caught transfer extrinsic')
 
+	const blockHeight = block.header.height
 	const extrinsicHash = callEntity.extrinsic.hash
 	const extrinsicSigner = toAddress(callEntity.call.origin.value.value)
     const historyElement = await getOrCreateHistoryElement(ctx, block, callEntity)
@@ -29,7 +30,10 @@ export async function transfersHandler(ctx: Context, block: Block, callEntity: C
 
     if (historyElement.execution.success) {
 		const eventEntity = findEventWithExtrinsic('Assets.Transfer', block, extrinsicHash)
-        if (!eventEntity) throw new Error('Cannot find event: Assets.Transfer')
+        if (!eventEntity) {
+			throw new Error(`[${blockHeight}] Cannot find event "Assets.Transfer" with extrinsic hash ${extrinsicHash}`)
+		}
+		
 
 		const event = new AssetsTransferEvent(ctx, eventEntity.event)
 
@@ -56,7 +60,7 @@ export async function transfersHandler(ctx: Context, block: Block, callEntity: C
 				amount
 			}
 		} else {
-			throw new Error('Unsupported spec')
+			throw new Error(`[${blockHeight}] Unsupported spec`)
 		}
 		const { from, to, assetId, amount } = eventRec
 
@@ -95,7 +99,7 @@ export async function transfersHandler(ctx: Context, block: Block, callEntity: C
 				amount
 			}
 		} else {
-			throw new Error('Unsupported spec')
+			throw new Error(`[${blockHeight}] Unsupported spec`)
 		}
 		const { to, assetId, amount } = callRec
 

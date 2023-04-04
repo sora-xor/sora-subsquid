@@ -30,7 +30,31 @@ import { initializeAssets } from './handlers/models/initializeAssets'
 import { initializePools } from './handlers/models/initializePools'
 import { syncModels } from './handlers/sync/models'
 import { syncPoolXykPrices } from './handlers/sync/poolXykPrices'
-import { SystemNumberStorage } from './types/storage'
+
+const calls = [
+	'*',
+	'Assets.register',
+    'Assets.transfer',
+    'LiquidityProxy.swap',
+    'LiquidityProxy.swap_transfer',
+    'PoolXYK.deposit_liquidity',
+    'PoolXYK.withdraw_liquidity',
+    'IrohaMigration.migrate',
+    'Utility.batch_all',
+    'EthBridge.transfer_to_sidechain',
+    'PswapDistribution.claim_incentive',
+    'Rewards.claim',
+    'VestedRewards.claim_rewards',
+    'VestedRewards.claim_crowdloan_rewards',
+    'Referrals.set_referrer',
+    'Referrals.reserve',
+    'Referrals.unreserve',
+    'DemeterFarmingPlatform.deposit',
+    'DemeterFarmingPlatform.withdraw',
+    'DemeterFarmingPlatform.get_rewards',
+	'BridgeMultisig.as_multi'
+] as const
+
 
 const events = [
 	'*',
@@ -54,30 +78,6 @@ const events = [
     'DemeterFarmingPlatform.RewardWithdrawn',
     'DemeterFarmingPlatform.Withdrawn',
 ] as const
-
-const calls = [
-	'*',
-	'Assets.register',
-    'Assets.transfer',
-    'LiquidityProxy.swap',
-    'LiquidityProxy.swap_transfer',
-    'PoolXYK.deposit_liquidity',
-    'PoolXYK.withdraw_liquidity',
-    'IrohaMigration.migrate',
-    'Utility.batch_all',
-    'EthBridge.transfer_to_sidechain',
-    'PswapDistribution.claim_incentive',
-    'Rewards.claim',
-    'VestedRewards.claim_rewards',
-    'VestedRewards.claim_crowdloan_rewards',
-    'Referrals.set_referrer',
-    'Referrals.reserve',
-    'Referrals.unreserve',
-    'DemeterFarmingPlatform.deposit',
-    'DemeterFarmingPlatform.withdraw',
-    'DemeterFarmingPlatform.get_rewards',
-] as const
-
 const processor = new SubstrateBatchProcessor()
     .setDataSource({
         // Lookup archive by the network name in the Subsquid registry
@@ -88,14 +88,14 @@ const processor = new SubstrateBatchProcessor()
         archive: `http://localhost:8888/graphql`
     })
     .setTypesBundle('archive/prod/typesBundle.json')
-    .setBlockRange({ from: 8_035_060 })
-
-events.forEach(eventName => {
-	processor.addEvent(eventName)
-})
+    .setBlockRange({ from: 8_035_052 })
 
 calls.forEach(callName => {
 	processor.addCall(callName)
+})
+
+events.forEach(eventName => {
+	processor.addEvent(eventName)
 })
 
 type EventItemUnion<U> = U extends string ? EventItem<U, true> : never
@@ -112,15 +112,10 @@ processor.run(new TypeormDatabase(), async (ctx) => {
 	const context = ctx as Context
 
     for (let block of context.blocks) {
-		const lastBlock = context.blocks[context.blocks.length - 1].header.hash === block.header.hash
+		const lastBlockInTheBatch = context.blocks[context.blocks.length - 1].header.hash === block.header.hash
 
         await initializeAssets(context, block)
         await initializePools(context, block)
-
-		await syncPoolXykPrices(context, block)
-		if (lastBlock) {
-			await syncModels(context, block)
-		}
 
         for (let item of block.items) {
             if (item.name === '*') {
@@ -161,5 +156,10 @@ processor.run(new TypeormDatabase(), async (ctx) => {
                 await transferHandler(...props)
             }
         }
+
+		await syncPoolXykPrices(context, block)
+		if (lastBlockInTheBatch) {
+			await syncModels(context, block)
+		}
     }
 })

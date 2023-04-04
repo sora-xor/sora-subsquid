@@ -8,11 +8,11 @@ import { toAssetId } from '../../utils'
 
 
 export async function liquidityDepositHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
-
     if (callEntity.name !== 'PoolXYK.deposit_liquidity') return
 
     ctx.log.debug('Caught liquidity adding extrinsic')
 
+	const blockHeight = block.header.height
     const extrinsicHash = callEntity.extrinsic.hash
     const historyElement = await getOrCreateHistoryElement(ctx, block, callEntity)
 
@@ -41,7 +41,7 @@ export async function liquidityDepositHandler(ctx: Context, block: Block, callEn
             assetBDesired: inputBDesired
         }
     } else {
-        throw new Error('Unsupported spec')
+        throw new Error(`[${blockHeight}] Unsupported spec`)
     }
 
     const baseAssetId = toAssetId(callRec.assetAId)

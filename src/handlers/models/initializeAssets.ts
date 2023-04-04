@@ -11,6 +11,8 @@ import { AssetAmount, AssetId } from '../../types'
 let isFirstBlockIndexed = false
 
 export const getAssetInfos = async (ctx: Context, block: Block) => {
+	const blockHeight = block.header.height
+
     try {
       	ctx.log.debug(`Asset infos request...`)
       	const storage = new AssetsAssetInfosStorage(ctx, block.header)
@@ -57,7 +59,7 @@ export const getAssetInfos = async (ctx: Context, block: Block) => {
 				}
 			})
 		} else {
-			throw new Error('Unsupported spec')
+			throw new Error(`[${blockHeight}] Unsupported spec`)
 		}
 
 		ctx.log.debug(`Asset infos request completed.`)
@@ -70,6 +72,8 @@ export const getAssetInfos = async (ctx: Context, block: Block) => {
 }
 
 export const getTokensIssuances = async (ctx: Context, block: Block) => {
+	const blockHeight = block.header.height
+
     try {
 		ctx.log.debug(`Tokens issuances request...`)
 		const storage = new TokensTotalIssuanceStorage(ctx, block.header)
@@ -96,7 +100,7 @@ export const getTokensIssuances = async (ctx: Context, block: Block) => {
 				}
 			})
 		} else {
-			throw new Error('Unsupported spec')
+			throw new Error(`[${blockHeight}] Unsupported spec`)
 		}
 
 		ctx.log.debug(`Tokens issuances request completed.`)
@@ -109,6 +113,8 @@ export const getTokensIssuances = async (ctx: Context, block: Block) => {
 }
 
 export const getXorIssuance = async (ctx: Context, block: Block) => {
+	const blockHeight = block.header.height
+	
     try {
 		ctx.log.debug(`XOR issuance request...`)
 		const storage = new BalancesTotalIssuanceStorage(ctx, block.header)
@@ -118,7 +124,7 @@ export const getXorIssuance = async (ctx: Context, block: Block) => {
 		if (storage.isV1) {
 			issuance = await storage.asV1.get()
 		} else {
-			throw new Error('Unsupported spec')
+			throw new Error(`[${blockHeight}] Unsupported spec`)
 		}
 
 		ctx.log.debug(`XOR issuance request completed.`)

@@ -9,11 +9,11 @@ import { AssetId } from '../../types'
 import { toAssetId } from '../../utils'
 
 export async function demeterDepositHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
-
   if (callEntity.name !== 'DemeterFarmingPlatform.deposit') return
 
   ctx.log.debug('Caught demeterFarmingPlatform deposit extrinsic')
 
+  const blockHeight = block.header.height
   const extrinsicHash = callEntity.extrinsic.hash
 
   const call = new DemeterFarmingPlatformDepositCall(ctx, callEntity.call)
@@ -53,7 +53,7 @@ export async function demeterDepositHandler(ctx: Context, block: Block, callEnti
       desiredAmount: pooledTokens
     }
   } else {
-    throw new Error('Unsupported spec')
+    throw new Error(`[${blockHeight}] Unsupported spec`)
   }
 
   let amount: string
@@ -71,7 +71,7 @@ export async function demeterDepositHandler(ctx: Context, block: Block, callEnti
     } else if (event.isV43) {
       eventRec = { amount: event.asV43[5] }
     } else {
-      throw new Error('Unsupported spec')
+      throw new Error(`[${blockHeight}] Unsupported spec`)
     }
     
     // a little trick - we get decimals from pool asset, not lp token

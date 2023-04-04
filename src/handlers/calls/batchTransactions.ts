@@ -86,7 +86,8 @@ function mapCalls({ version, calls }: BatchCalls, historyElement: HistoryElement
 	return calls.map((call, idx) => extractCall({ version, call } as BatchCall, idx, historyElement.blockHeight.toString()))
 }
 
-function mapCallsForAllVersions(utilityBatchAllCall: UtilityBatchAllCall, historyElement: HistoryElement): ReturnType<typeof mapCalls> {
+function mapCallsForAllVersions(utilityBatchAllCall: UtilityBatchAllCall, historyElement: HistoryElement, block: Block): ReturnType<typeof mapCalls> {
+	const blockHeight = block.header.height
 	let calls: ReturnType<typeof mapCalls> | null = null
 	versions.forEach((version) => {
 		if (utilityBatchAllCall['isV' + version as IsVersion]) {
@@ -99,7 +100,7 @@ function mapCallsForAllVersions(utilityBatchAllCall: UtilityBatchAllCall, histor
 			)
 		}
 	})
-	if (calls === null) throw new Error('Unsupported spec')
+	if (calls === null) throw new Error(`[${blockHeight}] Unsupported spec`)
 	return calls
 }
 
@@ -113,7 +114,7 @@ export async function batchTransactionsHandler(ctx: Context, block: Block, callE
 
 	const utilityBatchAllCall = new UtilityBatchAllCall(ctx, callEntity.call)
 
-	let calls = mapCallsForAllVersions(utilityBatchAllCall, historyElement)
+	let calls = mapCallsForAllVersions(utilityBatchAllCall, historyElement, block)
 
     await addDataToHistoryElement(ctx, historyElement, calls)
     await updateHistoryElementStats(ctx, historyElement)

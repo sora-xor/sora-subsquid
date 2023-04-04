@@ -12,6 +12,7 @@ export async function liquidityRemovalHandler(ctx: Context, block: Block, callEn
 
     ctx.log.debug('Caught liquidity removal extrinsic')
 
+	const blockHeight = block.header.height
     const extrinsicHash = callEntity.extrinsic.hash
     const historyElement = await getOrCreateHistoryElement(ctx, block, callEntity)
 
@@ -40,7 +41,7 @@ export async function liquidityRemovalHandler(ctx: Context, block: Block, callEn
             assetBMin: outputBMin
         }
     } else {
-        throw new Error('Unsupported spec')
+        throw new Error(`[${blockHeight}] Unsupported spec`)
     }
 
     const baseAssetId = toAssetId(callRec.assetAId)

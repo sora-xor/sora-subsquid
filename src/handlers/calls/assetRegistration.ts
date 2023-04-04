@@ -13,6 +13,7 @@ export async function assetRegistrationHandler(ctx: Context, block: Block, callE
 
     ctx.log.debug('Caught asset registration extrinsic')
 
+	const blockHeight = block.header.height
     const extrinsicHash = callEntity.extrinsic.hash
 
     const historyElement = await getOrCreateHistoryElement(ctx, block, callEntity)
@@ -36,7 +37,7 @@ export async function assetRegistrationHandler(ctx: Context, block: Block, callE
             } else if (assetRegistrationEvent.isV42) {
                 assetIdDecoded = assetRegistrationEvent.asV42[0].code
             } else {
-                throw new Error('Unsupported spec')
+                throw new Error(`[${blockHeight}] Unsupported spec`)
             }
 
 			const assetId = toAssetId(assetIdDecoded)
@@ -56,14 +57,14 @@ export async function assetRegistrationHandler(ctx: Context, block: Block, callE
                 } else if (assetInfosStorage.isV42) {
                     precision = (await assetInfosStorage.asV42.get({ code: assetIdDecoded }))[2]
                 } else {
-                    throw new Error('Unsupported spec')
+                    throw new Error(`[${blockHeight}] Unsupported spec`)
                 }
                 assetPrecisions.set(assetId, precision);
             }
     
             await assetStorage.getAsset(ctx, assetId)
         } else {
-            throw new Error('Cannot find event: Assets.AssetRegistered')
+			throw new Error(`[${blockHeight}] Cannot find event "Assets.AssetRegistered" with extrinsic hash ${extrinsicHash}`)
         }
     }
 
@@ -79,7 +80,7 @@ export async function assetRegistrationHandler(ctx: Context, block: Block, callE
         } else if (call.isV26) {
             symbolDecoded = call.asV26.symbol
         } else {
-            throw new Error('Unsupported spec')
+            throw new Error(`[${blockHeight}] Unsupported spec`)
         }
 		const symbol = toAssetId(symbolDecoded)
 

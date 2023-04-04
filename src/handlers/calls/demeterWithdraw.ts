@@ -14,6 +14,7 @@ export async function demeterWithdrawHandler(ctx: Context, block: Block, callEnt
 
   ctx.log.debug('Caught demeterFarmingPlatform withdraw extrinsic')
 
+  const blockHeight = block.header.height
   const extrinsicHash = callEntity.extrinsic.hash
 
   const call = new DemeterFarmingPlatformWithdrawCall(ctx, callEntity.call)
@@ -53,7 +54,7 @@ export async function demeterWithdrawHandler(ctx: Context, block: Block, callEnt
       desiredAmount: pooledTokens
     }
   } else {
-    throw new Error('Unsupported spec')
+    throw new Error(`[${blockHeight}] Unsupported spec`)
   }
 
   let amount: string
@@ -71,7 +72,7 @@ export async function demeterWithdrawHandler(ctx: Context, block: Block, callEnt
     } else if (event.isV43) {
       eventRec = { amount: event.asV43[1] }
     } else {
-      throw new Error('Unsupported spec')
+      throw new Error(`[${blockHeight}] Unsupported spec`)
     }
     
     // a little trick - we get decimals from pool asset, not lp token

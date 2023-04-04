@@ -1,7 +1,5 @@
-// import type { SubstrateExtrinsic } from "@subql/types";
-
-import { ExecutionResult, ExecutionError, HistoryElement } from "../model"
-import { Block, Context, CallEntity } from "../processor"
+import { ExecutionResult, ExecutionError, HistoryElement } from '../model'
+import { Block, Context, CallEntity } from '../processor'
 import { formatU128ToBalance } from './assets'
 import { getOrCreateAccountEntity } from './account'
 import { networkSnapshotsStorage } from './network'
@@ -9,9 +7,9 @@ import { XOR } from './consts'
 import { formatDateTimestamp, toAddress } from './index'
 import { nToU8a } from '@polkadot/util'
 import { toJSON } from '@subsquid/util-internal-json'
-import { SubstrateExtrinsic, decodeHex } from "@subsquid/substrate-processor"
-import { findEventWithExtrinsic } from "./events"
-import { XorFeeFeeWithdrawnEvent } from "../types/events"
+import { SubstrateExtrinsic } from '@subsquid/substrate-processor'
+import { findEventWithExtrinsic } from './events'
+import { XorFeeFeeWithdrawnEvent } from '../types/events'
 
 const INCOMING_TRANSFER_METHODS = ['transfer', 'swap_transfer']
 
@@ -23,7 +21,7 @@ const getCallEntityNetworkFee = (ctx: Context, block: Block, callEntity: CallEnt
         if (feeWithdrawnEvent.isV1) {
             feeAmount = feeWithdrawnEvent.asV1[1]
         } else {
-            throw new Error('Unsupported spec')
+            throw new Error(`[${blockHeight}] Unsupported spec`)
         }
         
         return feeAmount

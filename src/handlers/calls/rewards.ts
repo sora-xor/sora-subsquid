@@ -13,7 +13,8 @@ export async function rewardsHandler(ctx: Context, block: Block, callEntity: Cal
     )) return
 
     ctx.log.debug('Caught rewards claim extrinsic')
-
+	
+	const blockHeight = block.header.height
     const extrinsicHash = callEntity.extrinsic.hash
     const historyElement = await getOrCreateHistoryElement(ctx, block, callEntity)
 
@@ -28,7 +29,7 @@ export async function rewardsHandler(ctx: Context, block: Block, callEntity: Cal
                 const { currencyId, amount } = event.asV42
                 buffer.push({ assetId: toHex(currencyId.code), amount: amount.toString() })
             } else {
-                throw new Error('Unsupported spec')
+                throw new Error(`[${blockHeight}] Unsupported spec`)
             }
             return buffer
         }, [])

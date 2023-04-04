@@ -50,7 +50,7 @@ export const getAllReserves = async (ctx: Context, block: Block, baseAssetId: As
 				}
 			})
 		} else {
-			throw new Error('Unsupported spec')
+			throw new Error(`[${blockHeight}] Unsupported spec`)
 		}
 
 		ctx.log.debug(`[${baseAssetId}] Pools XYK Reserves request completed.`)
@@ -108,7 +108,7 @@ export const getAllProperties = async (ctx: Context, block: Block, baseAssetId: 
 				}
 			})
 		} else {
-			throw new Error('Unsupported spec')
+			throw new Error(`[${blockHeight}] Unsupported spec`)
 		}
 
 		ctx.log.debug(`[${baseAssetId}] Pools XYK Properties request completed.`)
@@ -150,7 +150,7 @@ export const getPoolProperties = async (ctx: Context, block: Block, baseAssetId:
 			properties = data ? [{ reservesAccountId: data[0], feesAccountId: data[1] }] : []
 		}
 		else {
-			throw new Error('Unsupported spec')
+			throw new Error(`[${blockHeight}] Unsupported spec`)
 		}
 		ctx.log.debug(`[${baseAssetId}${targetAssetId}] Pool properties request completed`)
 

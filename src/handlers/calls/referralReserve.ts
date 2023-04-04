@@ -4,7 +4,6 @@ import { XOR } from '../../utils/consts'
 import { Block, CallEntity, Context } from '../../processor'
 import { ReferralsReserveCall } from '../../types/calls'
 import { findEventWithExtrinsic, getTransferEventData } from '../../utils/events'
-import { toHex } from '@subsquid/substrate-processor'
 
 export async function referralReserveHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
 
@@ -12,6 +11,7 @@ export async function referralReserveHandler(ctx: Context, block: Block, callEnt
 
     ctx.log.debug('Caught referral reserve extrinsic')
 
+	const blockHeight = block.header.height
     const extrinsicHash = callEntity.extrinsic.hash
     const historyElement = await getOrCreateHistoryElement(ctx, block, callEntity)
 
@@ -33,7 +33,7 @@ export async function referralReserveHandler(ctx: Context, block: Block, callEnt
                 amount: formatU128ToBalance(amount, XOR)
             }
         } else {
-            throw new Error('Cannot find event: Balances.Transfer')
+			throw new Error(`[${blockHeight}] Cannot find event "Balances.Transfer" with extrinsic hash ${extrinsicHash}`)
         }
     } else {
         const call = new ReferralsReserveCall(ctx, callEntity.call)
@@ -43,7 +43,7 @@ export async function referralReserveHandler(ctx: Context, block: Block, callEnt
                 amount: formatU128ToBalance(call.asV22.balance, XOR)
             }
         } else {
-            throw new Error('Unsupported spec')
+            throw new Error(`[${blockHeight}] Unsupported spec`)
         }
     }
 

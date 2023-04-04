@@ -9,6 +9,8 @@ export async function swapsHandler(ctx: Context, block: Block, callEntity: CallE
 
     ctx.log.debug('Caught swap extrinsic')
 
+	const blockHeight = block.header.height
+
 	const call = new LiquidityProxySwapCall(ctx, callEntity.call)
 
 	let callRec: CallRec
@@ -57,7 +59,7 @@ export async function swapsHandler(ctx: Context, block: Block, callEntity: CallE
 			liquiditySources: selectedSourceTypes.map(type => type.__kind)
 		}
 	} else {
-		throw new Error('Unsupported spec')
+		throw new Error(`[${blockHeight}] Unsupported spec`)
 	}
 
     await handleAndSaveExtrinsic(ctx, block, callEntity, callRec)

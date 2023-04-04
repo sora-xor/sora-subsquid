@@ -4,8 +4,9 @@ import { ReferralsSetReferrerCall } from '../../types/calls'
 import { addDataToHistoryElement, getOrCreateHistoryElement, updateHistoryElementStats } from '../../utils/history'
 
 export async function setReferralHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
-
     if (callEntity.name !== 'Referrals.set_referrer') return
+
+	const blockHeight = block.header.height
 
 	ctx.log.debug('Caught set referral extrinsic')
 
@@ -20,7 +21,7 @@ export async function setReferralHandler(ctx: Context, block: Block, callEntity:
     if (call.isV22) {
         referrer = call.asV22.referrer
     } else {
-        throw new Error('Unsupported spec')
+        throw new Error(`[${blockHeight}] Unsupported spec`)
     }
 
     details = {

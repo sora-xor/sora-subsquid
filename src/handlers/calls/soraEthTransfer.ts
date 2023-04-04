@@ -15,6 +15,7 @@ export async function soraEthTransferHandler(ctx: Context, block: Block, callEnt
 
     ctx.log.debug('Caught SORA->ETH transfer extrinsic')
 
+	const blockHeight = block.header.height
     const extrinsicHash = callEntity.extrinsic.hash
     const historyElement = await getOrCreateHistoryElement(ctx, block, callEntity)
 
@@ -40,7 +41,7 @@ export async function soraEthTransferHandler(ctx: Context, block: Block, callEnt
 			amount: amount as AssetAmount
 		}
     } else {
-        throw new Error('Unsupported spec')
+        throw new Error(`[${blockHeight}] Unsupported spec`)
     }
 
     const { assetId, sidechainAddress, amount } = rec
@@ -61,7 +62,7 @@ export async function soraEthTransferHandler(ctx: Context, block: Block, callEnt
             if (soraEthTransferEvent.isV1) {
                 requestHash = soraEthTransferEvent.asV1
             } else {
-                throw new Error('Unsupported spec')
+                throw new Error(`[${blockHeight}] Unsupported spec`)
             }
 
             details = {
@@ -72,7 +73,7 @@ export async function soraEthTransferHandler(ctx: Context, block: Block, callEnt
                 amount: formatU128ToBalance(amount, assetId)
             }
         } else {
-            throw new Error('Cannot find event: EthBridge.RequestRegistered')
+			throw new Error(`[${blockHeight}] Cannot find event "EthBridge.RequestRegistered" with extrinsic hash ${extrinsicHash}`)
         }
     } else {
         details = {

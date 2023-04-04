@@ -11,7 +11,6 @@ import { Block, Context } from '../../processor'
 import { AssetId } from '../../types'
 
 export async function syncPoolXykPrices(ctx: Context, block: Block): Promise<void> {
-	// ctx.log.error('syncPoolXykPrices ' + block.header.height + ' ' + block.header.hash)
     if (!PoolsPrices.get()) return
 
     const blockHeight = block.header.height

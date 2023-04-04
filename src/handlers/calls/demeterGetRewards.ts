@@ -8,11 +8,11 @@ import { toAssetId } from '../../utils'
 import { AssetId } from '../../types'
 
 export async function demeterGetRewardsHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
-
   if (callEntity.name !== 'DemeterFarmingPlatform.get_rewards') return
 
   ctx.log.debug('Caught demeterFarmingPlatform getRewards extrinsic')
 
+  const blockHeight = block.header.height
   const extrinsicHash = callEntity.extrinsic.hash
 
   const call = new DemeterFarmingPlatformGetRewardsCall(ctx, callEntity.call)
@@ -40,7 +40,7 @@ export async function demeterGetRewardsHandler(ctx: Context, block: Block, callE
       isFarm
     }
   } else {
-    throw new Error('Unsupported spec')
+    throw new Error(`[${blockHeight}] Unsupported spec`)
   }
 
   let amount: string
@@ -58,7 +58,7 @@ export async function demeterGetRewardsHandler(ctx: Context, block: Block, callE
     } else if (event.isV43) {
       eventRec = { amount: event.asV43[1] }
     } else {
-      throw new Error('Unsupported spec')
+      throw new Error(`[${blockHeight}] Unsupported spec`)
     }
 
     amount = formatU128ToBalance(eventRec.amount, callRec.assetId)
