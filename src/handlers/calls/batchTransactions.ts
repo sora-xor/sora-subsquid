@@ -2,7 +2,7 @@ import { addDataToHistoryElement, getOrCreateHistoryElement, updateHistoryElemen
 import { formatU128ToBalance, getAssetId } from '../../utils/assets'
 import { poolsStorage } from '../../utils/pools'
 import { Block, CallEntity, Context } from '../../processor'
-import { UtilityBatchAllCall } from '../../types/calls'
+import { UtilityBatchAllCall } from '../../types/generated/calls'
 import { HistoryElement } from '../../model'
 import { AssetId } from '../../types'
 

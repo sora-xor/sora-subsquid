@@ -1,6 +1,6 @@
 import { toHex } from '@subsquid/substrate-processor'
 import { Block, CallEntity, Context } from '../../processor'
-import { ReferralsSetReferrerCall } from '../../types/calls'
+import { ReferralsSetReferrerCall } from '../../types/generated/calls'
 import { addDataToHistoryElement, getOrCreateHistoryElement, updateHistoryElementStats } from '../../utils/history'
 
 export async function setReferralHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {

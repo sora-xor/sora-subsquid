@@ -4,7 +4,7 @@ import { XOR } from '../../utils/consts'
 import { Block, CallEntity, Context } from '../../processor'
 import { findEventWithExtrinsic } from '../../utils/events'
 import { DemeterFarmingPlatformDepositedEvent } from '../../types/events'
-import { DemeterFarmingPlatformDepositCall } from '../../types/calls'
+import { DemeterFarmingPlatformDepositCall } from '../../types/generated/calls'
 import { AssetId } from '../../types'
 import { toAssetId } from '../../utils'
 

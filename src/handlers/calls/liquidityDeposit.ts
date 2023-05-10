@@ -3,7 +3,7 @@ import { formatU128ToBalance } from '../../utils/assets'
 import { poolsStorage } from '../../utils/pools'
 import { findEventsWithExtrinsic, getTransferEventData } from '../../utils/events'
 import { Block, CallEntity, Context } from '../../processor'
-import { PoolXykDepositLiquidityCall } from '../../types/calls'
+import { PoolXykDepositLiquidityCall } from '../../types/generated/calls'
 import { toAssetId } from '../../utils'
 
 

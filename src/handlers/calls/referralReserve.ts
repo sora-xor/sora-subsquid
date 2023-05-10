@@ -2,7 +2,7 @@ import { addDataToHistoryElement, getOrCreateHistoryElement, updateHistoryElemen
 import { formatU128ToBalance } from '../../utils/assets'
 import { XOR } from '../../utils/consts'
 import { Block, CallEntity, Context } from '../../processor'
-import { ReferralsReserveCall } from '../../types/calls'
+import { ReferralsReserveCall } from '../../types/generated/calls'
 import { findEventWithExtrinsic, getTransferEventData } from '../../utils/events'
 
 export async function referralReserveHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {

@@ -3,7 +3,7 @@ import { formatU128ToBalance } from '../../utils/assets'
 import { XOR } from '../../utils/consts'
 import { Block, CallEntity, Context } from '../../processor'
 import { findEventWithExtrinsic, getTransferEventData } from '../../utils/events'
-import { ReferralsUnreserveCall } from '../../types/calls'
+import { ReferralsUnreserveCall } from '../../types/generated/calls'
 
 export async function referralUnreserveHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
 

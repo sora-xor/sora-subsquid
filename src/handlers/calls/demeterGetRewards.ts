@@ -3,7 +3,7 @@ import { formatU128ToBalance } from '../../utils/assets'
 import { Block, CallEntity, Context } from '../../processor'
 import { findEventWithExtrinsic } from '../../utils/events'
 import { DemeterFarmingPlatformRewardWithdrawnEvent } from '../../types/events'
-import { DemeterFarmingPlatformGetRewardsCall } from '../../types/calls'
+import { DemeterFarmingPlatformGetRewardsCall } from '../../types/generated/calls'
 import { toAssetId } from '../../utils'
 import { AssetId } from '../../types'
 

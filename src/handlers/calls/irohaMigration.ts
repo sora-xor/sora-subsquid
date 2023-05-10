@@ -3,7 +3,7 @@ import { formatU128ToBalance } from '../../utils/assets'
 import { Block, CallEntity, Context } from '../../processor'
 import { findEventWithExtrinsic } from '../../utils/events'
 import { BalancesTransferEvent, CurrenciesDepositedEvent, CurrenciesTransferredEvent } from '../../types/events'
-import { IrohaMigrationMigrateCall } from '../../types/calls'
+import { IrohaMigrationMigrateCall } from '../../types/generated/calls'
 import { toAssetId } from '../../utils'
 
 export async function irohaMigrationHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {

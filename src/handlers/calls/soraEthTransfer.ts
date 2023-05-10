@@ -2,7 +2,7 @@ import { addDataToHistoryElement, getOrCreateHistoryElement, updateHistoryElemen
 import { formatU128ToBalance } from '../../utils/assets'
 import { networkSnapshotsStorage } from '../../utils/network'
 import { Block, CallEntity, Context } from '../../processor'
-import { EthBridgeTransferToSidechainCall } from '../../types/calls'
+import { EthBridgeTransferToSidechainCall } from '../../types/generated/calls'
 import { findEventWithExtrinsic } from '../../utils/events'
 import { EthBridgeRequestRegisteredEvent } from '../../types/events'
 import { toHex } from '@subsquid/substrate-processor'

@@ -1,5 +1,5 @@
 import { Block, CallEntity, Context } from '../../processor'
-import { LiquidityProxySwapTransferCall } from '../../types/calls'
+import { LiquidityProxySwapTransferCall } from '../../types/generated/calls'
 import { toAddress, toAssetId } from '../../utils'
 import { CallRec, handleAndSaveExtrinsic, SwapAmount } from '../../utils/swaps'
 

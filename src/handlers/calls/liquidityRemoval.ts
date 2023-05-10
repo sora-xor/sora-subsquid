@@ -3,7 +3,7 @@ import { formatU128ToBalance } from '../../utils/assets'
 import { findEventsWithExtrinsic, getTransferEventData } from '../../utils/events'
 import { poolsStorage } from '../../utils/pools'
 import { Block, CallEntity, Context } from '../../processor'
-import { PoolXykWithdrawLiquidityCall } from '../../types/calls'
+import { PoolXykWithdrawLiquidityCall } from '../../types/generated/calls'
 import { toAssetId } from '../../utils'
 
 export async function liquidityRemovalHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
