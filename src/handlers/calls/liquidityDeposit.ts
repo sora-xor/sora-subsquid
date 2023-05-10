@@ -62,8 +62,8 @@ export async function liquidityDepositHandler(ctx: Context, block: Block, callEn
 
 		// We assume that events go in the same order as in the blockchain
 		// First the event with the base asset, and then the event with the target asset
-        const { amount: amountA } = getTransferEventData(ctx, baseAssetTransfer)
-        const { amount: amountB } = getTransferEventData(ctx, targetAssetTransfer)
+        const { amount: amountA } = getTransferEventData(ctx, block, baseAssetTransfer)
+        const { amount: amountB } = getTransferEventData(ctx, block, targetAssetTransfer)
 
         details.baseAssetAmount = formatU128ToBalance(amountA, baseAssetId)
         details.targetAssetAmount = formatU128ToBalance(amountB, targetAssetId)

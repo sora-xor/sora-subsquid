@@ -14,6 +14,7 @@ import { XorFeeFeeWithdrawnEvent } from '../types/events'
 const INCOMING_TRANSFER_METHODS = ['transfer', 'swap_transfer']
 
 const getCallEntityNetworkFee = (ctx: Context, block: Block, callEntity: CallEntity): bigint => {
+	const blockHeight = block.header.height
     const feeWithdrawnEventEntity = findEventWithExtrinsic('XorFee.FeeWithdrawn', block, callEntity.extrinsic.hash)
     if (feeWithdrawnEventEntity) {
         const feeWithdrawnEvent = new XorFeeFeeWithdrawnEvent(ctx, feeWithdrawnEventEntity.event)

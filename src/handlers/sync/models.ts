@@ -7,8 +7,8 @@ import { Block, Context } from '../../processor'
 export async function syncModels(ctx: Context, block: Block): Promise<void> {
 	const blockTimestamp: number = formatDateTimestamp(new Date(block.header.timestamp))
 
-	await poolsStorage.sync(ctx)
-	await assetStorage.sync(ctx)
+	await poolsStorage.sync(ctx, block)
+	await assetStorage.sync(ctx, block)
 	await assetSnapshotsStorage.sync(ctx, blockTimestamp)
 	await networkSnapshotsStorage.sync(ctx, blockTimestamp)
 }

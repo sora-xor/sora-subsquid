@@ -6,7 +6,7 @@ import { poolAccounts, poolsStorage, PoolsPrices } from '../../utils/pools'
 export async function transferHandler(ctx: Context, block: Block, eventEntity: EventEntity): Promise<void> {
 	if (eventEntity.name !== 'Tokens.Transfer' && eventEntity.name !== 'Balances.Transfer') return
 
-	const { assetId, from, to, amount } = getTransferEventData(ctx, eventEntity)
+	const { assetId, from, to, amount } = getTransferEventData(ctx, block, eventEntity)
 
 	// withdraw token from pool
 	if (poolAccounts.has(from)) {

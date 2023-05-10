@@ -1,4 +1,3 @@
-import { decodeHex, toHex } from '@subsquid/substrate-processor'
 import { Asset } from '../../model'
 import { Block, Context } from '../../processor'
 import { AssetsAssetInfosStorage, BalancesTotalIssuanceStorage, TokensTotalIssuanceStorage } from '../../types/storage'
@@ -114,7 +113,7 @@ export const getTokensIssuances = async (ctx: Context, block: Block) => {
 
 export const getXorIssuance = async (ctx: Context, block: Block) => {
 	const blockHeight = block.header.height
-	
+
     try {
 		ctx.log.debug(`XOR issuance request...`)
 		const storage = new BalancesTotalIssuanceStorage(ctx, block.header)

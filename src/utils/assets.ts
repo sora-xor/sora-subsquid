@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js'
 import { SnapshotType, Asset, AssetSnapshot, AssetVolume, AssetPrice } from '../model'
-import { Context } from '../processor'
+import { Block, Context } from '../processor'
 import { SnapshotSecondsMap, DAI } from './consts'
 import { networkSnapshotsStorage } from '../utils/network'
 import { AssetId } from '../types'
@@ -33,8 +33,9 @@ class AssetStorage {
 		this.storage = new Map()
 	}
 
-	async sync(ctx: Context): Promise<void> {
-		ctx.log.debug(`[AssetStorage] ${this.storage.size} entities sync`)
+	async sync(ctx: Context, block: Block): Promise<void> {
+		const blockHeight = block.header.height
+		ctx.log.debug(`[${blockHeight}] [AssetStorage] ${this.storage.size} entities sync`)
 		ctx.store.save([...this.storage.values()])
 	}
 

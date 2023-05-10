@@ -52,8 +52,11 @@ type TransferEventData = {
 
 export const getTransferEventData = (
 	ctx: Context,
+	block: Block,
 	eventEntity: EventItem<'Balances.Transfer' | 'Tokens.Transfer', true>
 ): TransferEventData => {
+	const blockHeight = block.header.height
+
 	let eventRec: TransferEventData
 
 	if (eventEntity.name === 'Balances.Transfer') {

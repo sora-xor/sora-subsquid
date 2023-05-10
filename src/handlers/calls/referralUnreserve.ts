@@ -27,7 +27,7 @@ export async function referralUnreserveHandler(ctx: Context, block: Block, callE
         const balancesTransferEventEntity = findEventWithExtrinsic('Balances.Transfer', block, extrinsicHash)
 
         if (balancesTransferEventEntity) {
-            const { from, to, amount } = getTransferEventData(ctx, balancesTransferEventEntity)
+            const { from, to, amount } = getTransferEventData(ctx, block, balancesTransferEventEntity)
 
             details = {
                 from,

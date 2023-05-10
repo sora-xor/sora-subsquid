@@ -18,8 +18,10 @@ export const PoolsPrices = {
 }
 
 export const getAllReserves = async (ctx: Context, block: Block, baseAssetId: AssetId) => {
+	const blockHeight = block.header.height
+
 	try {
-		ctx.log.debug(`[${baseAssetId}] Pools XYK Reserves request...`)
+		ctx.log.debug(`[${blockHeight}] [${baseAssetId}] Pools XYK Reserves request...`)
 		const storage = new PoolXYKReservesStorage(ctx, block.header)
 
 		let reserves: { 
@@ -53,19 +55,21 @@ export const getAllReserves = async (ctx: Context, block: Block, baseAssetId: As
 			throw new Error(`[${blockHeight}] Unsupported spec`)
 		}
 
-		ctx.log.debug(`[${baseAssetId}] Pools XYK Reserves request completed.`)
+		ctx.log.debug(`[${blockHeight}] [${baseAssetId}] Pools XYK Reserves request completed.`)
 
 		return reserves
 	} catch (e: any) {
-		ctx.log.error('Error getting Reserves')
+		ctx.log.error(`[${blockHeight}] Error getting Reserves`)
 		ctx.log.error(e)
 		return null
 	}
 }
 
 export const getAllProperties = async (ctx: Context, block: Block, baseAssetId: AssetId) => {
+	const blockHeight = block.header.height
+
 	try {
-		ctx.log.debug(`[${baseAssetId}] Pools XYK Properties request...`)
+		ctx.log.debug(`[${blockHeight}] [${baseAssetId}] Pools XYK Properties request...`)
 		const storage = new PoolXYKPropertiesStorage(ctx, block.header)
 
 		const baseAssetIdDecoded = decodeAssetId(baseAssetId)
@@ -111,16 +115,18 @@ export const getAllProperties = async (ctx: Context, block: Block, baseAssetId: 
 			throw new Error(`[${blockHeight}] Unsupported spec`)
 		}
 
-		ctx.log.debug(`[${baseAssetId}] Pools XYK Properties request completed.`)
+		ctx.log.debug(`[${blockHeight}] [${baseAssetId}] Pools XYK Properties request completed`)
 		return properties
 	} catch (e: any) {
-		ctx.log.error('Error getting Properties')
+		ctx.log.error(`[${blockHeight}] Error getting Properties`)
 		ctx.log.error(e)
 		return null
 	}
 }
 
 export const getPoolProperties = async (ctx: Context, block: Block, baseAssetId: AssetId, targetAssetId: AssetId) => {
+	const blockHeight = block.header.height
+
 	try {
 		ctx.log.debug(`[${baseAssetId}${targetAssetId}] Pool properties request...`)
 		const storage = new PoolXYKPropertiesStorage(ctx, block.header)
@@ -152,7 +158,7 @@ export const getPoolProperties = async (ctx: Context, block: Block, baseAssetId:
 		else {
 			throw new Error(`[${blockHeight}] Unsupported spec`)
 		}
-		ctx.log.debug(`[${baseAssetId}${targetAssetId}] Pool properties request completed`)
+		ctx.log.debug(`[${blockHeight}] [${baseAssetId}:${targetAssetId}] Pool properties request completed`)
 
 		return {
 			baseAssetId,
@@ -161,7 +167,7 @@ export const getPoolProperties = async (ctx: Context, block: Block, baseAssetId:
 			feesAccountId: toAddress(properties[0].feesAccountId)
 		}
 	} catch (error: any) {
-		ctx.log.error('Error getting pool properties')
+		ctx.log.error(`[${blockHeight}] Error getting pool properties`)
 		ctx.log.error(error)
 		return null
 	}
@@ -201,8 +207,9 @@ class PoolAccountsStorage {
 	}
 
 	async getPoolAccountId (ctx: Context, block: Block, baseAssetId: AssetId, targetAssetId: AssetId): Promise<Address | null> {
-		const id = this.get(baseAssetId, targetAssetId)
+		const blockHeight = block.header.height
 
+		const id = this.get(baseAssetId, targetAssetId)
 		if (id) return id
 
 		const properties = await getPoolProperties(ctx, block, baseAssetId, targetAssetId)
@@ -211,7 +218,7 @@ class PoolAccountsStorage {
 		if (poolAccountId) {
 			poolAccounts.add(ctx, baseAssetId, targetAssetId, poolAccountId)
 		} else {
-			ctx.log.error(`Cannot find pool id ${baseAssetId}:${targetAssetId}`)
+			ctx.log.error(`[${blockHeight}] Cannot find pool id ${baseAssetId}:${targetAssetId}`)
 		}
 
 		return poolAccountId
@@ -241,12 +248,15 @@ class PoolsStorage {
 		return null
 	}
 
-	async sync(ctx: Context): Promise<void> {
-		ctx.log.debug(`[PoolsStorage] ${this.storage.size} entities sync`)
+	async sync(ctx: Context, block: Block): Promise<void> {
+		const blockHeight = block.header.height
+		ctx.log.debug(`[${blockHeight}] [PoolsStorage] ${this.storage.size} entities sync`)
 		await ctx.store.save([...this.storage.values()])
 	}
 
 	async getPool(ctx: Context, block: Block, baseAssetId: AssetId, targetAssetId: AssetId): Promise<PoolXYK | null> {
+		const blockHeight = block.header.height
+
 		const poolId = await poolAccounts.getPoolAccountId(ctx, block, baseAssetId, targetAssetId)
 
 		if (!poolId) return null
@@ -273,8 +283,8 @@ class PoolsStorage {
 				ctx.store.get(Asset, baseAssetId),
 				ctx.store.get(Asset, targetAssetId)
 			])
-			if (!baseAsset) throw new Error(`Cannot find base asset: ${baseAssetId}`)
-			if (!targetAsset) throw new Error(`Cannot find target asset: ${targetAssetId}`)
+			if (!baseAsset) throw new Error(`[${blockHeight}] Cannot find base asset: ${baseAssetId}`)
+			if (!targetAsset) throw new Error(`[${blockHeight}] Cannot find target asset: ${targetAssetId}`)
 
 			pool = new PoolXYK({
 				id: poolId,
@@ -289,7 +299,7 @@ class PoolsStorage {
 
 			await ctx.store.save(pool)
 
-			ctx.log.debug(`[${poolId}] Created Pool XYK`)
+			ctx.log.debug(`[${blockHeight}] [${poolId}] Created Pool XYK`)
 		}
 
 		this.storage.set(poolId, pool)

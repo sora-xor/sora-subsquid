@@ -3,6 +3,7 @@ import {
     SubstrateBatchProcessor,
     SubstrateBlock
 } from '@subsquid/substrate-processor'
+import typesBundle from './typesBundle.json'
 import { CallItem, EventItem } from '@subsquid/substrate-processor/lib/interfaces/dataSelection'
 import { Store, TypeormDatabase } from "@subsquid/typeorm-store"
 import { assetRegistrationHandler } from "./handlers/calls/assetRegistration"
@@ -85,10 +86,10 @@ const processor = new SubstrateBatchProcessor()
 
         // Use archive created by archive/docker-compose.yml
         chain: 'wss://mof2.sora.org',
-        archive: `http://localhost:8888/graphql`
+        archive: `https://sora.archive.subsquid.io/graphql`
     })
-    .setTypesBundle('archive/prod/typesBundle.json')
-    .setBlockRange({ from: 8_035_052 })
+    .setTypesBundle(typesBundle as any)
+    .setBlockRange({ from: 9_900_000 }) // .setBlockRange({ from: 8_035_052 })
 
 calls.forEach(callName => {
 	processor.addCall(callName)
