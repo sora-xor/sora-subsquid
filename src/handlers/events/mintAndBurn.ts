@@ -2,7 +2,7 @@ import { assetSnapshotsStorage } from '../../utils/assets'
 import { formatDateTimestamp, toAssetId } from '../../utils'
 import { XOR } from '../../utils/consts'
 import { Block, Context, EventEntity } from '../../processor'
-import { BalancesDepositEvent, BalancesWithdrawEvent, TokensDepositedEvent, TokensWithdrawnEvent } from '../../types/events'
+import { BalancesDepositEvent, BalancesWithdrawEvent, TokensDepositedEvent, TokensWithdrawnEvent } from '../../types/generated/events'
 import { AssetAmount } from '../../types'
 
 export async function tokenBurnHandler(ctx: Context, block: Block, eventEntity: EventEntity): Promise<void> {

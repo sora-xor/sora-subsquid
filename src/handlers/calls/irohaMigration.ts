@@ -1,8 +1,8 @@
-import { addDataToHistoryElement, getOrCreateHistoryElement, updateHistoryElementStats } from '../../utils/history'
+import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { formatU128ToBalance } from '../../utils/assets'
 import { Block, CallEntity, Context } from '../../processor'
 import { findEventWithExtrinsic } from '../../utils/events'
-import { BalancesTransferEvent, CurrenciesDepositedEvent, CurrenciesTransferredEvent } from '../../types/events'
+import { BalancesTransferEvent, CurrenciesDepositedEvent, CurrenciesTransferredEvent } from '../../types/generated/events'
 import { IrohaMigrationMigrateCall } from '../../types/generated/calls'
 import { toAssetId } from '../../utils'
 
@@ -11,7 +11,7 @@ export async function irohaMigrationHandler(ctx: Context, block: Block, callEnti
 
     ctx.log.debug('Caught iroha migration extrinsic')
 
-    const historyElement = await getOrCreateHistoryElement(ctx, block, callEntity)
+    const historyElement = await createHistoryElement(ctx, block, callEntity)
 	const blockHeight = block.header.height
     const extrinsicHash = callEntity.extrinsic.hash
 

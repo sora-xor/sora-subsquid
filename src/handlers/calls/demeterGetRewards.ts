@@ -1,8 +1,8 @@
-import { addDataToHistoryElement, getOrCreateHistoryElement, updateHistoryElementStats } from '../../utils/history'
+import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { formatU128ToBalance } from '../../utils/assets'
 import { Block, CallEntity, Context } from '../../processor'
 import { findEventWithExtrinsic } from '../../utils/events'
-import { DemeterFarmingPlatformRewardWithdrawnEvent } from '../../types/events'
+import { DemeterFarmingPlatformRewardWithdrawnEvent } from '../../types/generated/events'
 import { DemeterFarmingPlatformGetRewardsCall } from '../../types/generated/calls'
 import { toAssetId } from '../../utils'
 import { AssetId } from '../../types'
@@ -72,7 +72,7 @@ export async function demeterGetRewardsHandler(ctx: Context, block: Block, callE
     amount
   }
 
-  const historyElement = await getOrCreateHistoryElement(ctx, block, callEntity)
+  const historyElement = await createHistoryElement(ctx, block, callEntity)
   if (!historyElement) return
   await addDataToHistoryElement(ctx, historyElement, details)
   await updateHistoryElementStats(ctx, historyElement)

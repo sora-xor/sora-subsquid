@@ -18,6 +18,8 @@ import * as v43 from './v43'
 import * as v45 from './v45'
 import * as v46 from './v46'
 import * as v47 from './v47'
+import * as v50 from './v50'
+import * as v53 from './v53'
 
 export class AssetsAssetContentSourceStorage extends StorageBase {
     protected getPrefix() {
@@ -1343,6 +1345,38 @@ export interface BalancesAccountStorageV1 {
     getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v1.AccountData][]>
     getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v1.AccountData][]>
     getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v1.AccountData][]>
+}
+
+export class BalancesInactiveIssuanceStorage extends StorageBase {
+    protected getPrefix() {
+        return 'Balances'
+    }
+
+    protected getName() {
+        return 'InactiveIssuance'
+    }
+
+    /**
+     *  The total units of outstanding deactivated balance in the system.
+     */
+    get isV53(): boolean {
+        return this.getTypeHash() === 'f8ebe28eb30158172c0ccf672f7747c46a244f892d08ef2ebcbaadde34a26bc0'
+    }
+
+    /**
+     *  The total units of outstanding deactivated balance in the system.
+     */
+    get asV53(): BalancesInactiveIssuanceStorageV53 {
+        assert(this.isV53)
+        return this as any
+    }
+}
+
+/**
+ *  The total units of outstanding deactivated balance in the system.
+ */
+export interface BalancesInactiveIssuanceStorageV53 {
+    get(): Promise<bigint>
 }
 
 export class BalancesLocksStorage extends StorageBase {
@@ -3225,6 +3259,36 @@ export class CouncilProposalOfStorage extends StorageBase {
         assert(this.isV47)
         return this as any
     }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get isV50(): boolean {
+        return this.getTypeHash() === 'd162443f8171e8f904ec108547bdb453f56814e1e48d9162412c83b5e8f70164'
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get asV50(): CouncilProposalOfStorageV50 {
+        assert(this.isV50)
+        return this as any
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get isV53(): boolean {
+        return this.getTypeHash() === 'd2773567919162384ea1616ce56d8764b7fcbd22b8f4899fab492e6285b532f6'
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get asV53(): CouncilProposalOfStorageV53 {
+        assert(this.isV53)
+        return this as any
+    }
 }
 
 /**
@@ -3310,6 +3374,40 @@ export interface CouncilProposalOfStorageV47 {
     getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v47.Call][]>
     getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v47.Call][]>
     getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v47.Call][]>
+}
+
+/**
+ *  Actual proposal for a given hash, if it's current.
+ */
+export interface CouncilProposalOfStorageV50 {
+    get(key: Uint8Array): Promise<(v50.Call | undefined)>
+    getAll(): Promise<v50.Call[]>
+    getMany(keys: Uint8Array[]): Promise<(v50.Call | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v50.Call][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v50.Call][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v50.Call][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v50.Call][]>
+}
+
+/**
+ *  Actual proposal for a given hash, if it's current.
+ */
+export interface CouncilProposalOfStorageV53 {
+    get(key: Uint8Array): Promise<(v53.Call | undefined)>
+    getAll(): Promise<v53.Call[]>
+    getMany(keys: Uint8Array[]): Promise<(v53.Call | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v53.Call][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v53.Call][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v53.Call][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v53.Call][]>
 }
 
 export class CouncilProposalsStorage extends StorageBase {
@@ -4136,6 +4234,27 @@ export class DemocracyNextExternalStorage extends StorageBase {
         assert(this.isV1)
         return this as any
     }
+
+    /**
+     *  The referendum to be tabled whenever it would be valid to table an external proposal.
+     *  This happens when a referendum needs to be tabled and one of two conditions are met:
+     *  - `LastTabledWasExternal` is `false`; or
+     *  - `PublicProps` is empty.
+     */
+    get isV53(): boolean {
+        return this.getTypeHash() === '5ae273b3f6176aae8ebabb6d92e749499c9e5de5bc8e85ade788f86e508314ea'
+    }
+
+    /**
+     *  The referendum to be tabled whenever it would be valid to table an external proposal.
+     *  This happens when a referendum needs to be tabled and one of two conditions are met:
+     *  - `LastTabledWasExternal` is `false`; or
+     *  - `PublicProps` is empty.
+     */
+    get asV53(): DemocracyNextExternalStorageV53 {
+        assert(this.isV53)
+        return this as any
+    }
 }
 
 /**
@@ -4146,6 +4265,16 @@ export class DemocracyNextExternalStorage extends StorageBase {
  */
 export interface DemocracyNextExternalStorageV1 {
     get(): Promise<([Uint8Array, v1.VoteThreshold] | undefined)>
+}
+
+/**
+ *  The referendum to be tabled whenever it would be valid to table an external proposal.
+ *  This happens when a referendum needs to be tabled and one of two conditions are met:
+ *  - `LastTabledWasExternal` is `false`; or
+ *  - `PublicProps` is empty.
+ */
+export interface DemocracyNextExternalStorageV53 {
+    get(): Promise<([v53.Bounded, v53.VoteThreshold] | undefined)>
 }
 
 export class DemocracyPreimagesStorage extends StorageBase {
@@ -4283,6 +4412,21 @@ export class DemocracyPublicPropsStorage extends StorageBase {
         assert(this.isV1)
         return this as any
     }
+
+    /**
+     *  The public proposals. Unsorted. The second item is the proposal.
+     */
+    get isV53(): boolean {
+        return this.getTypeHash() === '3472d1c9441381a2b9709395dfc47ee60b049d41fbd71ce557eb1a61ef656bec'
+    }
+
+    /**
+     *  The public proposals. Unsorted. The second item is the proposal.
+     */
+    get asV53(): DemocracyPublicPropsStorageV53 {
+        assert(this.isV53)
+        return this as any
+    }
 }
 
 /**
@@ -4290,6 +4434,13 @@ export class DemocracyPublicPropsStorage extends StorageBase {
  */
 export interface DemocracyPublicPropsStorageV1 {
     get(): Promise<[number, Uint8Array, Uint8Array][]>
+}
+
+/**
+ *  The public proposals. Unsorted. The second item is the proposal.
+ */
+export interface DemocracyPublicPropsStorageV53 {
+    get(): Promise<[number, v53.Bounded, Uint8Array][]>
 }
 
 export class DemocracyReferendumCountStorage extends StorageBase {
@@ -4370,6 +4521,25 @@ export class DemocracyReferendumInfoOfStorage extends StorageBase {
         assert(this.isV42)
         return this as any
     }
+
+    /**
+     *  Information concerning any given referendum.
+     * 
+     *  TWOX-NOTE: SAFE as indexes are not under an attacker’s control.
+     */
+    get isV53(): boolean {
+        return this.getTypeHash() === 'ba926738202889ee118b1f40d70a1edbd71f0893c703c708a73330af6ca468e1'
+    }
+
+    /**
+     *  Information concerning any given referendum.
+     * 
+     *  TWOX-NOTE: SAFE as indexes are not under an attacker’s control.
+     */
+    get asV53(): DemocracyReferendumInfoOfStorageV53 {
+        assert(this.isV53)
+        return this as any
+    }
 }
 
 /**
@@ -4408,6 +4578,25 @@ export interface DemocracyReferendumInfoOfStorageV42 {
     getPairs(key: number): Promise<[k: number, v: v42.ReferendumInfo][]>
     getPairsPaged(pageSize: number): AsyncIterable<[k: number, v: v42.ReferendumInfo][]>
     getPairsPaged(pageSize: number, key: number): AsyncIterable<[k: number, v: v42.ReferendumInfo][]>
+}
+
+/**
+ *  Information concerning any given referendum.
+ * 
+ *  TWOX-NOTE: SAFE as indexes are not under an attacker’s control.
+ */
+export interface DemocracyReferendumInfoOfStorageV53 {
+    get(key: number): Promise<(v53.ReferendumInfo | undefined)>
+    getAll(): Promise<v53.ReferendumInfo[]>
+    getMany(keys: number[]): Promise<(v53.ReferendumInfo | undefined)[]>
+    getKeys(): Promise<number[]>
+    getKeys(key: number): Promise<number[]>
+    getKeysPaged(pageSize: number): AsyncIterable<number[]>
+    getKeysPaged(pageSize: number, key: number): AsyncIterable<number[]>
+    getPairs(): Promise<[k: number, v: v53.ReferendumInfo][]>
+    getPairs(key: number): Promise<[k: number, v: v53.ReferendumInfo][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: number, v: v53.ReferendumInfo][]>
+    getPairsPaged(pageSize: number, key: number): AsyncIterable<[k: number, v: v53.ReferendumInfo][]>
 }
 
 export class DemocracyStorageVersionStorage extends StorageBase {
@@ -4791,6 +4980,31 @@ export class ElectionProviderMultiPhaseSignedSubmissionIndicesStorage extends St
         assert(this.isV42)
         return this as any
     }
+
+    /**
+     *  A sorted, bounded vector of `(score, block_number, index)`, where each `index` points to a
+     *  value in `SignedSubmissions`.
+     * 
+     *  We never need to process more than a single signed submission at a time. Signed submissions
+     *  can be quite large, so we're willing to pay the cost of multiple database accesses to access
+     *  them one at a time instead of reading and decoding all of them at once.
+     */
+    get isV53(): boolean {
+        return this.getTypeHash() === 'aecbdca3369396b8f7ae7da45a210e0b48c62258a15e0f7c1a7cb29c941f666c'
+    }
+
+    /**
+     *  A sorted, bounded vector of `(score, block_number, index)`, where each `index` points to a
+     *  value in `SignedSubmissions`.
+     * 
+     *  We never need to process more than a single signed submission at a time. Signed submissions
+     *  can be quite large, so we're willing to pay the cost of multiple database accesses to access
+     *  them one at a time instead of reading and decoding all of them at once.
+     */
+    get asV53(): ElectionProviderMultiPhaseSignedSubmissionIndicesStorageV53 {
+        assert(this.isV53)
+        return this as any
+    }
 }
 
 /**
@@ -4803,6 +5017,18 @@ export class ElectionProviderMultiPhaseSignedSubmissionIndicesStorage extends St
  */
 export interface ElectionProviderMultiPhaseSignedSubmissionIndicesStorageV42 {
     get(): Promise<[v42.ElectionScore, number][]>
+}
+
+/**
+ *  A sorted, bounded vector of `(score, block_number, index)`, where each `index` points to a
+ *  value in `SignedSubmissions`.
+ * 
+ *  We never need to process more than a single signed submission at a time. Signed submissions
+ *  can be quite large, so we're willing to pay the cost of multiple database accesses to access
+ *  them one at a time instead of reading and decoding all of them at once.
+ */
+export interface ElectionProviderMultiPhaseSignedSubmissionIndicesStorageV53 {
+    get(): Promise<[v53.ElectionScore, number, number][]>
 }
 
 export class ElectionProviderMultiPhaseSignedSubmissionNextIndexStorage extends StorageBase {
@@ -6435,6 +6661,21 @@ export class EthBridgeRequestStatusesStorage extends StorageBase {
         assert(this.isV42)
         return this as any
     }
+
+    /**
+     *  Requests statuses.
+     */
+    get isV53(): boolean {
+        return this.getTypeHash() === '783467a44eeb9862d3371681e516ce5dcf85669490ea9de558a35bb294de220d'
+    }
+
+    /**
+     *  Requests statuses.
+     */
+    get asV53(): EthBridgeRequestStatusesStorageV53 {
+        assert(this.isV53)
+        return this as any
+    }
 }
 
 /**
@@ -6477,6 +6718,27 @@ export interface EthBridgeRequestStatusesStorageV42 {
     getPairsPaged(pageSize: number): AsyncIterable<[k: [number, Uint8Array], v: v42.RequestStatus][]>
     getPairsPaged(pageSize: number, key1: number): AsyncIterable<[k: [number, Uint8Array], v: v42.RequestStatus][]>
     getPairsPaged(pageSize: number, key1: number, key2: Uint8Array): AsyncIterable<[k: [number, Uint8Array], v: v42.RequestStatus][]>
+}
+
+/**
+ *  Requests statuses.
+ */
+export interface EthBridgeRequestStatusesStorageV53 {
+    get(key1: number, key2: Uint8Array): Promise<(v53.RequestStatus | undefined)>
+    getAll(): Promise<v53.RequestStatus[]>
+    getMany(keys: [number, Uint8Array][]): Promise<(v53.RequestStatus | undefined)[]>
+    getKeys(): Promise<[number, Uint8Array][]>
+    getKeys(key1: number): Promise<[number, Uint8Array][]>
+    getKeys(key1: number, key2: Uint8Array): Promise<[number, Uint8Array][]>
+    getKeysPaged(pageSize: number): AsyncIterable<[number, Uint8Array][]>
+    getKeysPaged(pageSize: number, key1: number): AsyncIterable<[number, Uint8Array][]>
+    getKeysPaged(pageSize: number, key1: number, key2: Uint8Array): AsyncIterable<[number, Uint8Array][]>
+    getPairs(): Promise<[k: [number, Uint8Array], v: v53.RequestStatus][]>
+    getPairs(key1: number): Promise<[k: [number, Uint8Array], v: v53.RequestStatus][]>
+    getPairs(key1: number, key2: Uint8Array): Promise<[k: [number, Uint8Array], v: v53.RequestStatus][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: [number, Uint8Array], v: v53.RequestStatus][]>
+    getPairsPaged(pageSize: number, key1: number): AsyncIterable<[k: [number, Uint8Array], v: v53.RequestStatus][]>
+    getPairsPaged(pageSize: number, key1: number, key2: Uint8Array): AsyncIterable<[k: [number, Uint8Array], v: v53.RequestStatus][]>
 }
 
 export class EthBridgeRequestSubmissionHeightStorage extends StorageBase {
@@ -9886,6 +10148,21 @@ export class MulticollateralBondingCurvePoolDistributionAccountsEntryStorage ext
         assert(this.isV46)
         return this as any
     }
+
+    /**
+     *  Accounts that receive 20% buy/sell margin according to predefined proportions
+     */
+    get isV53(): boolean {
+        return this.getTypeHash() === '7f74ccff0e7458037935219ffc9964bcf264d537f22c20893cb10a6eb021a4e1'
+    }
+
+    /**
+     *  Accounts that receive 20% buy/sell margin according to predefined proportions
+     */
+    get asV53(): MulticollateralBondingCurvePoolDistributionAccountsEntryStorageV53 {
+        assert(this.isV53)
+        return this as any
+    }
 }
 
 /**
@@ -9907,6 +10184,13 @@ export interface MulticollateralBondingCurvePoolDistributionAccountsEntryStorage
  */
 export interface MulticollateralBondingCurvePoolDistributionAccountsEntryStorageV46 {
     get(): Promise<v46.DistributionAccounts>
+}
+
+/**
+ *  Accounts that receive 20% buy/sell margin according to predefined proportions
+ */
+export interface MulticollateralBondingCurvePoolDistributionAccountsEntryStorageV53 {
+    get(): Promise<v53.DistributionAccounts>
 }
 
 export class MulticollateralBondingCurvePoolEnabledTargetsStorage extends StorageBase {
@@ -11616,6 +11900,81 @@ export interface PoolXYKTotalIssuancesStorageV7 {
     getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: bigint][]>
 }
 
+export class PreimagePreimageForStorage extends StorageBase {
+    protected getPrefix() {
+        return 'Preimage'
+    }
+
+    protected getName() {
+        return 'PreimageFor'
+    }
+
+    get isV53(): boolean {
+        return this.getTypeHash() === '55fa1a08a9fac4bcf15d53fce590e3fb5af7fbc408ac4b8e1ed28f5f8a242534'
+    }
+
+    get asV53(): PreimagePreimageForStorageV53 {
+        assert(this.isV53)
+        return this as any
+    }
+}
+
+export interface PreimagePreimageForStorageV53 {
+    get(key: [Uint8Array, number]): Promise<(Uint8Array | undefined)>
+    getAll(): Promise<Uint8Array[]>
+    getMany(keys: [Uint8Array, number][]): Promise<(Uint8Array | undefined)[]>
+    getKeys(): Promise<[Uint8Array, number][]>
+    getKeys(key: [Uint8Array, number]): Promise<[Uint8Array, number][]>
+    getKeysPaged(pageSize: number): AsyncIterable<[Uint8Array, number][]>
+    getKeysPaged(pageSize: number, key: [Uint8Array, number]): AsyncIterable<[Uint8Array, number][]>
+    getPairs(): Promise<[k: [Uint8Array, number], v: Uint8Array][]>
+    getPairs(key: [Uint8Array, number]): Promise<[k: [Uint8Array, number], v: Uint8Array][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: [Uint8Array, number], v: Uint8Array][]>
+    getPairsPaged(pageSize: number, key: [Uint8Array, number]): AsyncIterable<[k: [Uint8Array, number], v: Uint8Array][]>
+}
+
+export class PreimageStatusForStorage extends StorageBase {
+    protected getPrefix() {
+        return 'Preimage'
+    }
+
+    protected getName() {
+        return 'StatusFor'
+    }
+
+    /**
+     *  The request status of a given hash.
+     */
+    get isV53(): boolean {
+        return this.getTypeHash() === '16647d6a818ed8802ff108ffe98014d8de07d069008bb466b26b7367e684d574'
+    }
+
+    /**
+     *  The request status of a given hash.
+     */
+    get asV53(): PreimageStatusForStorageV53 {
+        assert(this.isV53)
+        return this as any
+    }
+}
+
+/**
+ *  The request status of a given hash.
+ */
+export interface PreimageStatusForStorageV53 {
+    get(key: Uint8Array): Promise<(v53.Type_683 | undefined)>
+    getAll(): Promise<v53.Type_683[]>
+    getMany(keys: Uint8Array[]): Promise<(v53.Type_683 | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v53.Type_683][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v53.Type_683][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v53.Type_683][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v53.Type_683][]>
+}
+
 export class PriceToolsPriceInfosStorage extends StorageBase {
     protected getPrefix() {
         return 'PriceTools'
@@ -11801,6 +12160,38 @@ export interface PswapDistributionBurnUpdateInfoStorageV1 {
  */
 export interface PswapDistributionBurnUpdateInfoStorageV42 {
     get(): Promise<[v42.FixedPoint, v42.FixedPoint]>
+}
+
+export class PswapDistributionBuyBackXSTFractionStorage extends StorageBase {
+    protected getPrefix() {
+        return 'PswapDistribution'
+    }
+
+    protected getName() {
+        return 'BuyBackXSTFraction'
+    }
+
+    /**
+     *  Fraction of PSWAP that could be buy backed to XST
+     */
+    get isV53(): boolean {
+        return this.getTypeHash() === 'e365f94b43a2babdffb536594311f62361cc55ba0f1a6f5f0b5fbd86711c99b1'
+    }
+
+    /**
+     *  Fraction of PSWAP that could be buy backed to XST
+     */
+    get asV53(): PswapDistributionBuyBackXSTFractionStorageV53 {
+        assert(this.isV53)
+        return this as any
+    }
+}
+
+/**
+ *  Fraction of PSWAP that could be buy backed to XST
+ */
+export interface PswapDistributionBuyBackXSTFractionStorageV53 {
+    get(): Promise<v53.FixedPoint>
 }
 
 export class PswapDistributionClaimableSharesStorage extends StorageBase {
@@ -13028,6 +13419,36 @@ export class SchedulerAgendaStorage extends StorageBase {
         assert(this.isV47)
         return this as any
     }
+
+    /**
+     *  Items to be executed, indexed by the block number that they should be executed on.
+     */
+    get isV50(): boolean {
+        return this.getTypeHash() === '696fb8608d85354370cd1f515780f829e433b6cff8e5210f68e295ef75c16a2b'
+    }
+
+    /**
+     *  Items to be executed, indexed by the block number that they should be executed on.
+     */
+    get asV50(): SchedulerAgendaStorageV50 {
+        assert(this.isV50)
+        return this as any
+    }
+
+    /**
+     *  Items to be executed, indexed by the block number that they should be executed on.
+     */
+    get isV53(): boolean {
+        return this.getTypeHash() === '63bcd14246ac86eb31686fde82dee685388f1ec42aef598a2b7047ace8ac3e47'
+    }
+
+    /**
+     *  Items to be executed, indexed by the block number that they should be executed on.
+     */
+    get asV53(): SchedulerAgendaStorageV53 {
+        assert(this.isV53)
+        return this as any
+    }
 }
 
 /**
@@ -13319,6 +13740,63 @@ export interface SchedulerAgendaStorageV47 {
     getPairsPaged(pageSize: number, key: number): AsyncIterable<[k: number, v: (v47.ScheduledV3 | undefined)[]][]>
 }
 
+/**
+ *  Items to be executed, indexed by the block number that they should be executed on.
+ */
+export interface SchedulerAgendaStorageV50 {
+    get(key: number): Promise<(v50.ScheduledV3 | undefined)[]>
+    getAll(): Promise<(v50.ScheduledV3 | undefined)[][]>
+    getMany(keys: number[]): Promise<(v50.ScheduledV3 | undefined)[][]>
+    getKeys(): Promise<number[]>
+    getKeys(key: number): Promise<number[]>
+    getKeysPaged(pageSize: number): AsyncIterable<number[]>
+    getKeysPaged(pageSize: number, key: number): AsyncIterable<number[]>
+    getPairs(): Promise<[k: number, v: (v50.ScheduledV3 | undefined)[]][]>
+    getPairs(key: number): Promise<[k: number, v: (v50.ScheduledV3 | undefined)[]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: number, v: (v50.ScheduledV3 | undefined)[]][]>
+    getPairsPaged(pageSize: number, key: number): AsyncIterable<[k: number, v: (v50.ScheduledV3 | undefined)[]][]>
+}
+
+/**
+ *  Items to be executed, indexed by the block number that they should be executed on.
+ */
+export interface SchedulerAgendaStorageV53 {
+    get(key: number): Promise<(v53.Scheduled | undefined)[]>
+    getAll(): Promise<(v53.Scheduled | undefined)[][]>
+    getMany(keys: number[]): Promise<(v53.Scheduled | undefined)[][]>
+    getKeys(): Promise<number[]>
+    getKeys(key: number): Promise<number[]>
+    getKeysPaged(pageSize: number): AsyncIterable<number[]>
+    getKeysPaged(pageSize: number, key: number): AsyncIterable<number[]>
+    getPairs(): Promise<[k: number, v: (v53.Scheduled | undefined)[]][]>
+    getPairs(key: number): Promise<[k: number, v: (v53.Scheduled | undefined)[]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: number, v: (v53.Scheduled | undefined)[]][]>
+    getPairsPaged(pageSize: number, key: number): AsyncIterable<[k: number, v: (v53.Scheduled | undefined)[]][]>
+}
+
+export class SchedulerIncompleteSinceStorage extends StorageBase {
+    protected getPrefix() {
+        return 'Scheduler'
+    }
+
+    protected getName() {
+        return 'IncompleteSince'
+    }
+
+    get isV53(): boolean {
+        return this.getTypeHash() === 'a926ad48d1a07d1162c5fdb99f3f6cef39c7c5a115a92ff9ccf0357bae4bf2ed'
+    }
+
+    get asV53(): SchedulerIncompleteSinceStorageV53 {
+        assert(this.isV53)
+        return this as any
+    }
+}
+
+export interface SchedulerIncompleteSinceStorageV53 {
+    get(): Promise<(number | undefined)>
+}
+
 export class SchedulerLookupStorage extends StorageBase {
     protected getPrefix() {
         return 'Scheduler'
@@ -13342,12 +13820,53 @@ export class SchedulerLookupStorage extends StorageBase {
         assert(this.isV1)
         return this as any
     }
+
+    /**
+     *  Lookup from a name to the block number and index of the task.
+     * 
+     *  For v3 -> v4 the previously unbounded identities are Blake2-256 hashed to form the v4
+     *  identities.
+     */
+    get isV53(): boolean {
+        return this.getTypeHash() === '2072b6dc95511eafaaa8d3c8e8abab0becedb083c12e24f0be979006686149cd'
+    }
+
+    /**
+     *  Lookup from a name to the block number and index of the task.
+     * 
+     *  For v3 -> v4 the previously unbounded identities are Blake2-256 hashed to form the v4
+     *  identities.
+     */
+    get asV53(): SchedulerLookupStorageV53 {
+        assert(this.isV53)
+        return this as any
+    }
 }
 
 /**
  *  Lookup from identity to the block number and index of the task.
  */
 export interface SchedulerLookupStorageV1 {
+    get(key: Uint8Array): Promise<([number, number] | undefined)>
+    getAll(): Promise<[number, number][]>
+    getMany(keys: Uint8Array[]): Promise<([number, number] | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: [number, number]][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: [number, number]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: [number, number]][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: [number, number]][]>
+}
+
+/**
+ *  Lookup from a name to the block number and index of the task.
+ * 
+ *  For v3 -> v4 the previously unbounded identities are Blake2-256 hashed to form the v4
+ *  identities.
+ */
+export interface SchedulerLookupStorageV53 {
     get(key: Uint8Array): Promise<([number, number] | undefined)>
     getAll(): Promise<[number, number][]>
     getMany(keys: Uint8Array[]): Promise<([number, number] | undefined)[]>
@@ -14942,6 +15461,38 @@ export interface StakingMinValidatorBondStorageV42 {
     get(): Promise<bigint>
 }
 
+export class StakingMinimumActiveStakeStorage extends StorageBase {
+    protected getPrefix() {
+        return 'Staking'
+    }
+
+    protected getName() {
+        return 'MinimumActiveStake'
+    }
+
+    /**
+     *  The minimum active nominator stake of the last successful election.
+     */
+    get isV53(): boolean {
+        return this.getTypeHash() === 'f8ebe28eb30158172c0ccf672f7747c46a244f892d08ef2ebcbaadde34a26bc0'
+    }
+
+    /**
+     *  The minimum active nominator stake of the last successful election.
+     */
+    get asV53(): StakingMinimumActiveStakeStorageV53 {
+        assert(this.isV53)
+        return this as any
+    }
+}
+
+/**
+ *  The minimum active nominator stake of the last successful election.
+ */
+export interface StakingMinimumActiveStakeStorageV53 {
+    get(): Promise<bigint>
+}
+
 export class StakingMinimumValidatorCountStorage extends StorageBase {
     protected getPrefix() {
         return 'Staking'
@@ -15919,6 +16470,21 @@ export class SystemBlockWeightStorage extends StorageBase {
         assert(this.isV1)
         return this as any
     }
+
+    /**
+     *  The current weight for the block.
+     */
+    get isV53(): boolean {
+        return this.getTypeHash() === '1b5ecb31f1f780ce8b20535384ce7b3159da495c9f1cbf13a2f253ccb02ae175'
+    }
+
+    /**
+     *  The current weight for the block.
+     */
+    get asV53(): SystemBlockWeightStorageV53 {
+        assert(this.isV53)
+        return this as any
+    }
 }
 
 /**
@@ -15926,6 +16492,13 @@ export class SystemBlockWeightStorage extends StorageBase {
  */
 export interface SystemBlockWeightStorageV1 {
     get(): Promise<v1.ConsumedWeight>
+}
+
+/**
+ *  The current weight for the block.
+ */
+export interface SystemBlockWeightStorageV53 {
+    get(): Promise<v53.PerDispatchClass>
 }
 
 export class SystemDigestStorage extends StorageBase {
@@ -16406,6 +16979,33 @@ export class SystemEventsStorage extends StorageBase {
         assert(this.isV47)
         return this as any
     }
+
+    /**
+     *  Events deposited for the current block.
+     * 
+     *  NOTE: The item is unbound and should therefore never be read on chain.
+     *  It could otherwise inflate the PoV size of a block.
+     * 
+     *  Events have a large in-memory size. Box the events to not go out-of-memory
+     *  just in case someone still reads them from within the runtime.
+     */
+    get isV53(): boolean {
+        return this.getTypeHash() === '90072d69e61b6917e2671d693e93195a964ae9eb9b537d887b9e17c29375e43c'
+    }
+
+    /**
+     *  Events deposited for the current block.
+     * 
+     *  NOTE: The item is unbound and should therefore never be read on chain.
+     *  It could otherwise inflate the PoV size of a block.
+     * 
+     *  Events have a large in-memory size. Box the events to not go out-of-memory
+     *  just in case someone still reads them from within the runtime.
+     */
+    get asV53(): SystemEventsStorageV53 {
+        assert(this.isV53)
+        return this as any
+    }
 }
 
 /**
@@ -16555,6 +17155,19 @@ export interface SystemEventsStorageV46 {
  */
 export interface SystemEventsStorageV47 {
     get(): Promise<v47.EventRecord[]>
+}
+
+/**
+ *  Events deposited for the current block.
+ * 
+ *  NOTE: The item is unbound and should therefore never be read on chain.
+ *  It could otherwise inflate the PoV size of a block.
+ * 
+ *  Events have a large in-memory size. Box the events to not go out-of-memory
+ *  just in case someone still reads them from within the runtime.
+ */
+export interface SystemEventsStorageV53 {
+    get(): Promise<v53.EventRecord[]>
 }
 
 export class SystemExecutionPhaseStorage extends StorageBase {
@@ -17136,6 +17749,36 @@ export class TechnicalCommitteeProposalOfStorage extends StorageBase {
         assert(this.isV47)
         return this as any
     }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get isV50(): boolean {
+        return this.getTypeHash() === 'd162443f8171e8f904ec108547bdb453f56814e1e48d9162412c83b5e8f70164'
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get asV50(): TechnicalCommitteeProposalOfStorageV50 {
+        assert(this.isV50)
+        return this as any
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get isV53(): boolean {
+        return this.getTypeHash() === 'd2773567919162384ea1616ce56d8764b7fcbd22b8f4899fab492e6285b532f6'
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get asV53(): TechnicalCommitteeProposalOfStorageV53 {
+        assert(this.isV53)
+        return this as any
+    }
 }
 
 /**
@@ -17221,6 +17864,40 @@ export interface TechnicalCommitteeProposalOfStorageV47 {
     getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v47.Call][]>
     getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v47.Call][]>
     getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v47.Call][]>
+}
+
+/**
+ *  Actual proposal for a given hash, if it's current.
+ */
+export interface TechnicalCommitteeProposalOfStorageV50 {
+    get(key: Uint8Array): Promise<(v50.Call | undefined)>
+    getAll(): Promise<v50.Call[]>
+    getMany(keys: Uint8Array[]): Promise<(v50.Call | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v50.Call][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v50.Call][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v50.Call][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v50.Call][]>
+}
+
+/**
+ *  Actual proposal for a given hash, if it's current.
+ */
+export interface TechnicalCommitteeProposalOfStorageV53 {
+    get(key: Uint8Array): Promise<(v53.Call | undefined)>
+    getAll(): Promise<v53.Call[]>
+    getMany(keys: Uint8Array[]): Promise<(v53.Call | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v53.Call][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v53.Call][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v53.Call][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v53.Call][]>
 }
 
 export class TechnicalCommitteeProposalsStorage extends StorageBase {
@@ -17992,6 +18669,48 @@ export interface VestedRewardsCrowdloanClaimHistoryStorageV42 {
     getPairsPaged(pageSize: number, key1: Uint8Array, key2: v42.AssetId32): AsyncIterable<[k: [Uint8Array, v42.AssetId32], v: number][]>
 }
 
+export class VestedRewardsCrowdloanInfosStorage extends StorageBase {
+    protected getPrefix() {
+        return 'VestedRewards'
+    }
+
+    protected getName() {
+        return 'CrowdloanInfos'
+    }
+
+    /**
+     *  Information about crowdloan
+     */
+    get isV53(): boolean {
+        return this.getTypeHash() === '4b5d49e82b760937552ae22f16177bfa396b3c8f32469fac40efaf42738bbf8e'
+    }
+
+    /**
+     *  Information about crowdloan
+     */
+    get asV53(): VestedRewardsCrowdloanInfosStorageV53 {
+        assert(this.isV53)
+        return this as any
+    }
+}
+
+/**
+ *  Information about crowdloan
+ */
+export interface VestedRewardsCrowdloanInfosStorageV53 {
+    get(key: Uint8Array): Promise<(v53.CrowdloanInfo | undefined)>
+    getAll(): Promise<v53.CrowdloanInfo[]>
+    getMany(keys: Uint8Array[]): Promise<(v53.CrowdloanInfo | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v53.CrowdloanInfo][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v53.CrowdloanInfo][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v53.CrowdloanInfo][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v53.CrowdloanInfo][]>
+}
+
 export class VestedRewardsCrowdloanRewardsStorage extends StorageBase {
     protected getPrefix() {
         return 'VestedRewards'
@@ -18064,6 +18783,52 @@ export interface VestedRewardsCrowdloanRewardsStorageV42 {
     getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v42.CrowdloanReward][]>
     getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v42.CrowdloanReward][]>
     getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v42.CrowdloanReward][]>
+}
+
+export class VestedRewardsCrowdloanUserInfosStorage extends StorageBase {
+    protected getPrefix() {
+        return 'VestedRewards'
+    }
+
+    protected getName() {
+        return 'CrowdloanUserInfos'
+    }
+
+    /**
+     *  Information about crowdloan rewards claimed by user
+     */
+    get isV53(): boolean {
+        return this.getTypeHash() === '9ba63c4324aab6be9eb9243aeb76282adc876a75a16f7647d197b8f0a224d3bc'
+    }
+
+    /**
+     *  Information about crowdloan rewards claimed by user
+     */
+    get asV53(): VestedRewardsCrowdloanUserInfosStorageV53 {
+        assert(this.isV53)
+        return this as any
+    }
+}
+
+/**
+ *  Information about crowdloan rewards claimed by user
+ */
+export interface VestedRewardsCrowdloanUserInfosStorageV53 {
+    get(key1: Uint8Array, key2: Uint8Array): Promise<(v53.CrowdloanUserInfo | undefined)>
+    getAll(): Promise<v53.CrowdloanUserInfo[]>
+    getMany(keys: [Uint8Array, Uint8Array][]): Promise<(v53.CrowdloanUserInfo | undefined)[]>
+    getKeys(): Promise<[Uint8Array, Uint8Array][]>
+    getKeys(key1: Uint8Array): Promise<[Uint8Array, Uint8Array][]>
+    getKeys(key1: Uint8Array, key2: Uint8Array): Promise<[Uint8Array, Uint8Array][]>
+    getKeysPaged(pageSize: number): AsyncIterable<[Uint8Array, Uint8Array][]>
+    getKeysPaged(pageSize: number, key1: Uint8Array): AsyncIterable<[Uint8Array, Uint8Array][]>
+    getKeysPaged(pageSize: number, key1: Uint8Array, key2: Uint8Array): AsyncIterable<[Uint8Array, Uint8Array][]>
+    getPairs(): Promise<[k: [Uint8Array, Uint8Array], v: v53.CrowdloanUserInfo][]>
+    getPairs(key1: Uint8Array): Promise<[k: [Uint8Array, Uint8Array], v: v53.CrowdloanUserInfo][]>
+    getPairs(key1: Uint8Array, key2: Uint8Array): Promise<[k: [Uint8Array, Uint8Array], v: v53.CrowdloanUserInfo][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: [Uint8Array, Uint8Array], v: v53.CrowdloanUserInfo][]>
+    getPairsPaged(pageSize: number, key1: Uint8Array): AsyncIterable<[k: [Uint8Array, Uint8Array], v: v53.CrowdloanUserInfo][]>
+    getPairsPaged(pageSize: number, key1: Uint8Array, key2: Uint8Array): AsyncIterable<[k: [Uint8Array, Uint8Array], v: v53.CrowdloanUserInfo][]>
 }
 
 export class VestedRewardsMarketMakersRegistryStorage extends StorageBase {

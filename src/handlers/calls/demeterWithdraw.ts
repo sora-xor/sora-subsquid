@@ -1,8 +1,8 @@
-import { addDataToHistoryElement, getOrCreateHistoryElement, updateHistoryElementStats } from '../../utils/history'
+import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { formatU128ToBalance } from '../../utils/assets'
 import { Block, CallEntity, Context } from '../../processor'
 import { findEventWithExtrinsic } from '../../utils/events'
-import { DemeterFarmingPlatformWithdrawnEvent } from '../../types/events'
+import { DemeterFarmingPlatformWithdrawnEvent } from '../../types/generated/events'
 import { DemeterFarmingPlatformWithdrawCall } from '../../types/generated/calls'
 import { XOR } from '../../utils/consts'
 import { AssetId } from '../../types'
@@ -89,7 +89,7 @@ export async function demeterWithdrawHandler(ctx: Context, block: Block, callEnt
     amount: amount.toString()
   }
 
-  const historyElement = await getOrCreateHistoryElement(ctx, block, callEntity)
+  const historyElement = await createHistoryElement(ctx, block, callEntity)
   if (!historyElement) return
   await addDataToHistoryElement(ctx, historyElement, details)
   await updateHistoryElementStats(ctx, historyElement)

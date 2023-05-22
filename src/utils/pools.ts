@@ -1,6 +1,6 @@
 import { Asset, PoolXYK } from '../model'
 import { Block, Context } from '../processor'
-import { PoolXYKReservesStorage, PoolXYKPropertiesStorage } from '../types/storage'
+import { PoolXYKReservesStorage, PoolXYKPropertiesStorage } from "../types/generated/storage"
 import { XOR, DOUBLE_PRICE_POOL } from './consts'
 import { decodeAssetId, toAssetId, toAddress } from '.'
 import { AssetId, Address } from '../types'
@@ -152,8 +152,11 @@ export const getPoolProperties = async (ctx: Context, block: Block, baseAssetId:
 			})
 		}
 		else if (storage.isV42) {
-			const data = await storage.asV42.get({ code: baseAssetIdDecoded }, { code: targetAssetIdDecoded })
-			properties = data ? [{ reservesAccountId: data[0], feesAccountId: data[1] }] : []
+			console.log('baseAssetIdDecoded', toAssetId(baseAssetIdDecoded))
+			console.log('targetAssetIdDecoded', toAssetId(targetAssetIdDecoded))
+			const data = await storage.asV42.getPairs({ code: baseAssetIdDecoded }, { code: targetAssetIdDecoded })
+			console.log('data', data)
+			properties = data ? [{ reservesAccountId: data[0][1][0], feesAccountId: data[0][1][1] }] : []
 		}
 		else {
 			throw new Error(`[${blockHeight}] Unsupported spec`)

@@ -1,7 +1,7 @@
 import { Context, Block, EventEntity } from '../processor'
 import { EventItem } from '@subsquid/substrate-processor/src/interfaces/dataSelection'
 import { SubstrateExtrinsic } from '@subsquid/substrate-processor'
-import { BalancesTransferEvent, TokensTransferEvent } from '../types/events'
+import { BalancesTransferEvent, TokensTransferEvent } from '../types/generated/events'
 import { XOR } from './consts'
 import { Address, AssetAmount, AssetId } from '../types'
 import { toAddress, toAssetId } from '.'

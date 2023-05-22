@@ -1,7 +1,7 @@
-import { addDataToHistoryElement, getOrCreateHistoryElement, updateHistoryElementStats } from '../../utils/history'
+import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { formatU128ToBalance } from '../../utils/assets'
 import { Block, CallEntity, Context } from '../../processor'
-import { AssetsTransferEvent } from '../../types/events'
+import { AssetsTransferEvent } from '../../types/generated/events'
 import { findEventWithExtrinsic } from '../../utils/events'
 import { AssetsTransferCall } from '../../types/generated/calls'
 import { Address, AssetAmount, AssetId } from '../../types'
@@ -17,7 +17,7 @@ export async function transfersHandler(ctx: Context, block: Block, callEntity: C
 	const blockHeight = block.header.height
 	const extrinsicHash = callEntity.extrinsic.hash
 	const extrinsicSigner = toAddress(callEntity.call.origin.value.value)
-    const historyElement = await getOrCreateHistoryElement(ctx, block, callEntity)
+    const historyElement = await createHistoryElement(ctx, block, callEntity)
 
     if (!historyElement) return
 

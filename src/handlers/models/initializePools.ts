@@ -1,7 +1,6 @@
 import { poolAccounts, getAllReserves, getAllProperties, poolsStorage } from '../../utils/pools'
 import { BASE_ASSETS, XOR, DOUBLE_PRICE_POOL } from '../../utils/consts'
 import { Block, Context } from '../../processor'
-import { decodeHex, toHex } from '@subsquid/substrate-processor'
 import { Asset, PoolXYK } from '../../model'
 import { Address } from '../../types'
 

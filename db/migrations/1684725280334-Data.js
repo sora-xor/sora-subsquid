@@ -1,5 +1,5 @@
-module.exports = class Data1679112045187 {
-    name = 'Data1679112045187'
+module.exports = class Data1684725280334 {
+    name = 'Data1684725280334'
 
     async up(db) {
         await db.query(`CREATE TABLE "network_stats" ("id" character varying NOT NULL, "total_fees" numeric NOT NULL, "total_accounts" integer NOT NULL, "total_transactions" integer NOT NULL, "total_bridge_incoming_transactions" integer NOT NULL, "total_bridge_outgoing_transactions" integer NOT NULL, CONSTRAINT "PK_effcbe3ac1e89754b4a9012ce8b" PRIMARY KEY ("id"))`)
@@ -10,6 +10,8 @@ module.exports = class Data1679112045187 {
         await db.query(`CREATE INDEX "IDX_eff58aeb80b9b16ba07cef0603" ON "pool_xyk" ("base_asset_id") `)
         await db.query(`CREATE INDEX "IDX_1b684933f8b4a37d6539777054" ON "pool_xyk" ("target_asset_id") `)
         await db.query(`CREATE TABLE "asset" ("id" character varying NOT NULL, "price_usd" text NOT NULL, "supply" numeric NOT NULL, "liquidity" numeric NOT NULL, CONSTRAINT "PK_1209d107fe21482beaea51b745e" PRIMARY KEY ("id"))`)
+        await db.query(`CREATE TABLE "history_element_call" ("id" character varying NOT NULL, "module" text, "method" text, "data" jsonb, "history_element_id" character varying, CONSTRAINT "PK_6cd85a528bf4c7caf94b2425b85" PRIMARY KEY ("id"))`)
+        await db.query(`CREATE INDEX "IDX_e39508832989706565bce9ee5c" ON "history_element_call" ("history_element_id") `)
         await db.query(`CREATE TABLE "history_element" ("id" character varying NOT NULL, "block_height" numeric NOT NULL, "block_hash" text NOT NULL, "module" text NOT NULL, "method" text NOT NULL, "address" text NOT NULL, "network_fee" text NOT NULL, "execution" jsonb NOT NULL, "timestamp" integer NOT NULL, "data" jsonb, CONSTRAINT "PK_b10b09ee684b794e1ca6dc2470c" PRIMARY KEY ("id"))`)
         await db.query(`CREATE INDEX "IDX_a3a82e778d9710e7594003348d" ON "history_element" ("block_hash") `)
         await db.query(`CREATE INDEX "IDX_5016ee8c1a40ad844bd4d430d3" ON "history_element" ("address") `)
@@ -20,6 +22,7 @@ module.exports = class Data1679112045187 {
         await db.query(`ALTER TABLE "asset_snapshot" ADD CONSTRAINT "FK_fc1d8b36eaafcc1250f7af6cd07" FOREIGN KEY ("asset_id") REFERENCES "asset"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`)
         await db.query(`ALTER TABLE "pool_xyk" ADD CONSTRAINT "FK_eff58aeb80b9b16ba07cef0603a" FOREIGN KEY ("base_asset_id") REFERENCES "asset"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`)
         await db.query(`ALTER TABLE "pool_xyk" ADD CONSTRAINT "FK_1b684933f8b4a37d65397770547" FOREIGN KEY ("target_asset_id") REFERENCES "asset"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`)
+        await db.query(`ALTER TABLE "history_element_call" ADD CONSTRAINT "FK_e39508832989706565bce9ee5c4" FOREIGN KEY ("history_element_id") REFERENCES "history_element"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`)
         await db.query(`ALTER TABLE "account" ADD CONSTRAINT "FK_19e8de4a9f0438f6c7968d85cd9" FOREIGN KEY ("latest_history_element_id") REFERENCES "history_element"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`)
     }
 
@@ -32,6 +35,8 @@ module.exports = class Data1679112045187 {
         await db.query(`DROP INDEX "public"."IDX_eff58aeb80b9b16ba07cef0603"`)
         await db.query(`DROP INDEX "public"."IDX_1b684933f8b4a37d6539777054"`)
         await db.query(`DROP TABLE "asset"`)
+        await db.query(`DROP TABLE "history_element_call"`)
+        await db.query(`DROP INDEX "public"."IDX_e39508832989706565bce9ee5c"`)
         await db.query(`DROP TABLE "history_element"`)
         await db.query(`DROP INDEX "public"."IDX_a3a82e778d9710e7594003348d"`)
         await db.query(`DROP INDEX "public"."IDX_5016ee8c1a40ad844bd4d430d3"`)
@@ -42,6 +47,7 @@ module.exports = class Data1679112045187 {
         await db.query(`ALTER TABLE "asset_snapshot" DROP CONSTRAINT "FK_fc1d8b36eaafcc1250f7af6cd07"`)
         await db.query(`ALTER TABLE "pool_xyk" DROP CONSTRAINT "FK_eff58aeb80b9b16ba07cef0603a"`)
         await db.query(`ALTER TABLE "pool_xyk" DROP CONSTRAINT "FK_1b684933f8b4a37d65397770547"`)
+        await db.query(`ALTER TABLE "history_element_call" DROP CONSTRAINT "FK_e39508832989706565bce9ee5c4"`)
         await db.query(`ALTER TABLE "account" DROP CONSTRAINT "FK_19e8de4a9f0438f6c7968d85cd9"`)
     }
 }

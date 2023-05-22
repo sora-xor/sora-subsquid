@@ -1,4 +1,4 @@
-import { addDataToHistoryElement, getOrCreateHistoryElement, updateHistoryElementStats } from '../../utils/history'
+import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { formatU128ToBalance } from '../../utils/assets'
 import { poolsStorage } from '../../utils/pools'
 import { findEventsWithExtrinsic, getTransferEventData } from '../../utils/events'
@@ -14,7 +14,7 @@ export async function liquidityDepositHandler(ctx: Context, block: Block, callEn
 
 	const blockHeight = block.header.height
     const extrinsicHash = callEntity.extrinsic.hash
-    const historyElement = await getOrCreateHistoryElement(ctx, block, callEntity)
+    const historyElement = await createHistoryElement(ctx, block, callEntity)
 
     const call = new PoolXykDepositLiquidityCall(ctx, callEntity.call)
 

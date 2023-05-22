@@ -1,10 +1,10 @@
-import { addDataToHistoryElement, getOrCreateHistoryElement, updateHistoryElementStats } from '../../utils/history'
+import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { formatU128ToBalance } from '../../utils/assets'
 import { networkSnapshotsStorage } from '../../utils/network'
 import { Block, CallEntity, Context } from '../../processor'
 import { EthBridgeTransferToSidechainCall } from '../../types/generated/calls'
 import { findEventWithExtrinsic } from '../../utils/events'
-import { EthBridgeRequestRegisteredEvent } from '../../types/events'
+import { EthBridgeRequestRegisteredEvent } from '../../types/generated/events'
 import { toHex } from '@subsquid/substrate-processor'
 import { AddressEthereum, AssetAmount, AssetId } from '../../types'
 import { toAddressEthereum, toAssetId } from '../../utils'
@@ -17,7 +17,7 @@ export async function soraEthTransferHandler(ctx: Context, block: Block, callEnt
 
 	const blockHeight = block.header.height
     const extrinsicHash = callEntity.extrinsic.hash
-    const historyElement = await getOrCreateHistoryElement(ctx, block, callEntity)
+    const historyElement = await createHistoryElement(ctx, block, callEntity)
 
     const call = new EthBridgeTransferToSidechainCall(ctx, callEntity.call)
 

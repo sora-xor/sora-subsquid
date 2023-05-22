@@ -1,6 +1,6 @@
 import { Asset } from '../../model'
 import { Block, Context } from '../../processor'
-import { AssetsAssetInfosStorage, BalancesTotalIssuanceStorage, TokensTotalIssuanceStorage } from '../../types/storage'
+import { AssetsAssetInfosStorage, BalancesTotalIssuanceStorage, TokensTotalIssuanceStorage } from '../../types/generated/storage'
 
 import { assetPrecisions, assetStorage } from '../../utils/assets'
 import { XOR } from '../../utils/consts'

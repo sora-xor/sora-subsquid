@@ -88,6 +88,15 @@ type HistoryElement @entity {
 	execution: ExecutionResult!
 	timestamp: Int!
 	data: JSON
+	calls: [HistoryElementCall!]! @derivedFrom(field: "historyElement")
+}
+
+type HistoryElementCall @entity {
+	id: ID!
+	historyElement: HistoryElement! @index #relation to HistoryElement
+	module: String!
+	method: String!
+	data: JSON!
 }
 
 type ExecutionResult @jsonField {

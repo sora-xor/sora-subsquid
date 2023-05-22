@@ -1,10 +1,10 @@
-import { addDataToHistoryElement, getOrCreateHistoryElement, updateHistoryElementStats } from '../../utils/history'
+import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { assetPrecisions, assetStorage } from '../../utils/assets'
 import { Block, CallEntity, Context } from '../../processor'
 import { findEventWithExtrinsic } from '../../utils/events'
-import { AssetsAssetRegisteredEvent } from '../../types/events'
+import { AssetsAssetRegisteredEvent } from '../../types/generated/events'
 import { AssetsRegisterCall } from '../../types/generated/calls'
-import { AssetsAssetInfosStorage } from '../../types/storage'
+import { AssetsAssetInfosStorage } from '../../types/generated/storage'
 import { AssetId } from '../../types'
 import { toAssetId } from '../../utils'
 
@@ -16,7 +16,7 @@ export async function assetRegistrationHandler(ctx: Context, block: Block, callE
 	const blockHeight = block.header.height
     const extrinsicHash = callEntity.extrinsic.hash
 
-    const historyElement = await getOrCreateHistoryElement(ctx, block, callEntity)
+    const historyElement = await createHistoryElement(ctx, block, callEntity)
 
     if (!historyElement) return
 

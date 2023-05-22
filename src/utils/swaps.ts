@@ -2,11 +2,11 @@ import { CallItem } from "@subsquid/substrate-processor/lib/interfaces/dataSelec
 import BigNumber from "bignumber.js"
 import { formatDateTimestamp } from "."
 import { Block, Context } from "../processor"
-import { LiquidityProxyExchangeEvent } from "../types/events"
+import { LiquidityProxyExchangeEvent } from "../types/generated/events"
 import { assetSnapshotsStorage, formatU128ToBalance } from "./assets"
 import { XOR } from "./consts"
 import { findEventWithExtrinsic } from "./events"
-import { addDataToHistoryElement, getOrCreateHistoryElement, updateHistoryElementStats } from "./history"
+import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from "./history"
 import { Address, AssetId } from "../types"
 
 export type SwapAmount = SwapAmount_WithDesiredInput | SwapAmount_WithDesiredOutput
@@ -66,7 +66,7 @@ export const handleAndSaveExtrinsic = async (
 	const extrinsicHash = callEntity.extrinsic.hash
 	const blockHeight = block.header.height
     const blockTimestamp = formatDateTimestamp(new Date(block.header.timestamp))
-    const historyElement = await getOrCreateHistoryElement(ctx, block, callEntity)
+    const historyElement = await createHistoryElement(ctx, block, callEntity)
 
     const { liquiditySources, swapAmount, outputAssetId, inputAssetId, receiver } = callRec
 

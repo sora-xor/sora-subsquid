@@ -1,4 +1,4 @@
-import { addDataToHistoryElement, getOrCreateHistoryElement, updateHistoryElementStats } from '../../utils/history'
+import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { formatU128ToBalance } from '../../utils/assets'
 import { XOR } from '../../utils/consts'
 import { Block, CallEntity, Context } from '../../processor'
@@ -13,7 +13,7 @@ export async function referralReserveHandler(ctx: Context, block: Block, callEnt
 
 	const blockHeight = block.header.height
     const extrinsicHash = callEntity.extrinsic.hash
-    const historyElement = await getOrCreateHistoryElement(ctx, block, callEntity)
+    const historyElement = await createHistoryElement(ctx, block, callEntity)
 
     let details: {
         from?: string

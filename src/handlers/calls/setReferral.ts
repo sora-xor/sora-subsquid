@@ -1,7 +1,7 @@
 import { toHex } from '@subsquid/substrate-processor'
 import { Block, CallEntity, Context } from '../../processor'
 import { ReferralsSetReferrerCall } from '../../types/generated/calls'
-import { addDataToHistoryElement, getOrCreateHistoryElement, updateHistoryElementStats } from '../../utils/history'
+import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 
 export async function setReferralHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
     if (callEntity.name !== 'Referrals.set_referrer') return
@@ -10,7 +10,7 @@ export async function setReferralHandler(ctx: Context, block: Block, callEntity:
 
 	ctx.log.debug('Caught set referral extrinsic')
 
-    const historyElement = await getOrCreateHistoryElement(ctx, block, callEntity)
+    const historyElement = await createHistoryElement(ctx, block, callEntity)
     
 	// TODO: add type for details
     let details = new Object()

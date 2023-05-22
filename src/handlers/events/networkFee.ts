@@ -1,7 +1,7 @@
 import { networkSnapshotsStorage } from '../../utils/network'
 import { formatDateTimestamp } from '../../utils'
 import { Block, Context, EventEntity } from '../../processor'
-import { XorFeeFeeWithdrawnEvent } from '../../types/events'
+import { XorFeeFeeWithdrawnEvent } from '../../types/generated/events'
 
 export async function networkFeeHandler(ctx: Context, block: Block, eventEntity: EventEntity): Promise<void> {
   	if (eventEntity.kind !== 'event' || eventEntity.name !== 'XorFee.FeeWithdrawn') return

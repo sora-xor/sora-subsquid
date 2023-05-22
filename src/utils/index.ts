@@ -35,3 +35,41 @@ export const toAddress = (data: Uint8Array | string): Address => {
 export const decodeAddress = (data: Address): Uint8Array => {
 	return ss58.codec('sora').decode(data)
 }
+
+
+export const toCamelCase = (s: string): string => {
+	// Step 1: Trim the string
+	const trimmedString = s.trim()
+  
+	// Step 2: Split the string
+	const words = trimmedString.split(/[\s-_]+/)
+  
+	// Step 3: Transform the words
+	let transformedWords: string[][] = words.map(word => {
+	  if (word === word.toUpperCase()) {
+		return [word.toLowerCase()]
+	  }
+	  // Make sure to always return an array of strings
+	  return word.split(/(?=[A-Z])/).map(part => part.toLowerCase())
+	})
+  
+	// Step 4: Flat the result array
+	const flatWords: string[] = transformedWords.flat()
+  
+	// Step 5: Make all words lowercase
+	const lowerCaseWords = flatWords.map(word => word.toLowerCase())
+  
+	// Step 6: Make the first letter of each word uppercase, except for the first word
+	const camelCaseWords = lowerCaseWords.map((word, i) =>
+	  i === 0 ? word : word[0].toUpperCase() + word.slice(1)
+	)
+  
+	// Step 7: Join the words
+	const finalString = camelCaseWords.join('')
+  
+	// Step 8: Return the result
+	return finalString
+  }
+  
+
+  

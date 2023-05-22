@@ -1,8 +1,8 @@
-import { addDataToHistoryElement, getHistoryElement, getOrCreateHistoryElement, updateHistoryElementStats } from '../../utils/history'
+import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { networkSnapshotsStorage } from '../../utils/network'
 import { findEventWithExtrinsic, } from '../../utils/events'
 import { Block, Context, EventEntity } from '../../processor'
-import { BalancesTransferEvent, EthBridgeRequestRegisteredEvent, TokensTransferEvent } from '../../types/events'
+import { BalancesTransferEvent, EthBridgeRequestRegisteredEvent, TokensTransferEvent } from '../../types/generated/events'
 import { XOR } from '../../utils/consts'
 import { toHex } from '@subsquid/substrate-processor'
 import { Address, AssetAmount } from '../../types'
@@ -99,7 +99,7 @@ export async function ethSoraTransferHandler(ctx: Context, block: Block, eventEn
 		throw new Error(`[${blockHeight}] Cannot find call "BridgeMultisig.as_multi" with extrinsic hash ${extrinsicHash}`)
 	}
 
-	const historyElement = await getOrCreateHistoryElement(ctx, block, callEntity)
+	const historyElement = await createHistoryElement(ctx, block, callEntity)
 	await addDataToHistoryElement(ctx, historyElement, details)
 	await updateHistoryElementStats(ctx, historyElement)
 	await networkSnapshotsStorage.updateBridgeIncomingTransactionsStats(ctx, historyElement.timestamp)

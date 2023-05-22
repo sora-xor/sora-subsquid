@@ -1,6 +1,7 @@
-import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, Index as Index_} from "typeorm"
+import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, Index as Index_, OneToMany as OneToMany_} from "typeorm"
 import * as marshal from "./marshal"
 import {ExecutionResult} from "./_executionResult"
+import {HistoryElementCall} from "./historyElementCall.model"
 
 @Entity_()
 export class HistoryElement {
@@ -39,4 +40,7 @@ export class HistoryElement {
 
     @Column_("jsonb", {nullable: true})
     data!: unknown | undefined | null
+
+    @OneToMany_(() => HistoryElementCall, e => e.historyElement)
+    calls!: HistoryElementCall[]
 }

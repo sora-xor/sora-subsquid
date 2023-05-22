@@ -1,6 +1,6 @@
 import { ReferrerReward } from '../../model'
 import { Block, Context, EventEntity } from '../../processor'
-import { XorFeeReferrerRewardedEvent } from '../../types/events'
+import { XorFeeReferrerRewardedEvent } from '../../types/generated/events'
 import { formatDateTimestamp, toAddress } from '../../utils'
 
 export async function referrerRewardHandler(ctx: Context, block: Block, eventEntity: EventEntity): Promise<void> {

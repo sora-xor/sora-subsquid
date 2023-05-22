@@ -1,9 +1,9 @@
-import { addDataToHistoryElement, getOrCreateHistoryElement, updateHistoryElementStats } from '../../utils/history'
+import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { formatU128ToBalance } from '../../utils/assets'
 import { XOR } from '../../utils/consts'
 import { Block, CallEntity, Context } from '../../processor'
 import { findEventWithExtrinsic } from '../../utils/events'
-import { DemeterFarmingPlatformDepositedEvent } from '../../types/events'
+import { DemeterFarmingPlatformDepositedEvent } from '../../types/generated/events'
 import { DemeterFarmingPlatformDepositCall } from '../../types/generated/calls'
 import { AssetId } from '../../types'
 import { toAssetId } from '../../utils'
@@ -88,7 +88,7 @@ export async function demeterDepositHandler(ctx: Context, block: Block, callEnti
     amount: amount.toString()
   }
 
-  const historyElement = await getOrCreateHistoryElement(ctx, block, callEntity)
+  const historyElement = await createHistoryElement(ctx, block, callEntity)
   await addDataToHistoryElement(ctx, historyElement, details)
   await updateHistoryElementStats(ctx, historyElement)
 

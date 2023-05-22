@@ -89,7 +89,7 @@ const processor = new SubstrateBatchProcessor()
         archive: `https://sora.archive.subsquid.io/graphql`
     })
     .setTypesBundle(typesBundle as any)
-    .setBlockRange({ from: 9_900_000 }) // .setBlockRange({ from: 8_035_052 })
+    .setBlockRange({ from: 8_995_225 }) // .setBlockRange({ from: 8_035_052 })
 
 calls.forEach(callName => {
 	processor.addCall(callName)

@@ -1,7 +1,7 @@
-import { addDataToHistoryElement, getOrCreateHistoryElement, updateHistoryElementStats } from '../../utils/history'
+import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { Block, CallEntity, Context } from '../../processor'
 import { findEventsWithExtrinsic } from '../../utils/events'
-import { TokensTransferEvent } from '../../types/events'
+import { TokensTransferEvent } from '../../types/generated/events'
 import { toHex } from '@subsquid/substrate-processor'
 
 export async function rewardsHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
@@ -16,7 +16,7 @@ export async function rewardsHandler(ctx: Context, block: Block, callEntity: Cal
 	
 	const blockHeight = block.header.height
     const extrinsicHash = callEntity.extrinsic.hash
-    const historyElement = await getOrCreateHistoryElement(ctx, block, callEntity)
+    const historyElement = await createHistoryElement(ctx, block, callEntity)
 
     if (historyElement.execution.success) {
         const rewards = findEventsWithExtrinsic(

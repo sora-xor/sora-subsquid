@@ -1,15 +1,15 @@
-import { ExecutionResult, ExecutionError, HistoryElement } from '../model'
+import { ExecutionResult, ExecutionError, HistoryElement, HistoryElementCall } from '../model'
 import { Block, Context, CallEntity } from '../processor'
 import { formatU128ToBalance } from './assets'
 import { getOrCreateAccountEntity } from './account'
 import { networkSnapshotsStorage } from './network'
 import { XOR } from './consts'
-import { formatDateTimestamp, toAddress } from './index'
+import { formatDateTimestamp, toAddress, toCamelCase } from './index'
 import { nToU8a } from '@polkadot/util'
 import { toJSON } from '@subsquid/util-internal-json'
 import { SubstrateExtrinsic } from '@subsquid/substrate-processor'
 import { findEventWithExtrinsic } from './events'
-import { XorFeeFeeWithdrawnEvent } from '../types/events'
+import { XorFeeFeeWithdrawnEvent } from '../types/generated/events'
 
 const INCOMING_TRANSFER_METHODS = ['transfer', 'swap_transfer']
 
@@ -40,8 +40,8 @@ export const createHistoryElement = (ctx: Context, block: Block, callEntity: Cal
     element.id = callEntity.extrinsic.hash
     element.blockHeight = BigInt(block.header.height)
     element.blockHash = block.header.hash.toString()
-    element.module = callEntity.name.split('.')[0]
-    element.method = callEntity.name.split('.')[1]
+    element.module = toCamelCase(callEntity.name.split('.')[0])
+    element.method = toCamelCase(callEntity.name.split('.')[1])
     element.address = toAddress(callEntity.extrinsic.signature?.address)
     element.networkFee = formatU128ToBalance(getCallEntityNetworkFee(ctx, block, callEntity), XOR)
     element.timestamp = formatDateTimestamp(new Date(block.header.timestamp))
@@ -72,21 +72,8 @@ export const createHistoryElement = (ctx: Context, block: Block, callEntity: Cal
     return element
 }
 
-export const getOrCreateHistoryElement = async (ctx: Context, block: Block, callEntity: CallEntity) => {
-    let element = await ctx.store.get(HistoryElement, callEntity.extrinsic.hash)
-    if (!element) {
-        element = await createHistoryElement(ctx, block, callEntity)
-    }
-    return element
-}
-
-export const getHistoryElement = async (ctx: Context, extrinsicHash: SubstrateExtrinsic['hash']) => {
-    let element = await ctx.store.get(HistoryElement, extrinsicHash) ?? null
-    return element
-}
-
-export const addDataToHistoryElement = async (ctx: Context, historyElement: HistoryElement, details: {} | null) => {
-	historyElement.data = details ? toJSON(details) : null
+export const addDataToHistoryElement = async (ctx: Context, historyElement: HistoryElement, data: {} | null) => {
+	historyElement.data = data ? toJSON(data) : null
 
     await ctx.store.save(historyElement)
 }

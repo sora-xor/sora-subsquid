@@ -1,12 +1,13 @@
-import { addDataToHistoryElement, getOrCreateHistoryElement, updateHistoryElementStats } from '../../utils/history'
+import { createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { formatU128ToBalance, getAssetId } from '../../utils/assets'
 import { poolsStorage } from '../../utils/pools'
 import { Block, CallEntity, Context } from '../../processor'
 import { UtilityBatchAllCall } from '../../types/generated/calls'
-import { HistoryElement } from '../../model'
+import { HistoryElement, HistoryElementCall } from '../../model'
 import { AssetId } from '../../types'
+import { toCamelCase } from '../../utils'
 
-const versions = [1, 3, 7, 19, 22, 23, 26, 32, 33, 35, 37, 38, 42, 43, 45, 46, 47] as const
+const versions = [1, 3, 7, 19, 22, 23, 26, 32, 33, 35, 37, 38, 42, 43, 45, 46, 47, 50, 53] as const
 
 type Version = typeof versions[number]
 type IsVersion = { [V in Version]: `isV${V}` }[Version]
@@ -69,26 +70,27 @@ function formatSpecificCall(call: BatchCall) {
 function extractCall(
     call: BatchCall,
     id: number,
-    parentCallId: string
-) {
-    return {
-        callId: `${parentCallId}-${id}`,
-        module: call.call.__kind,
-        method: call.call.value.__kind,
+	historyElement: HistoryElement
+): HistoryElementCall {
+    return new HistoryElementCall({
+        id: `${historyElement.blockHeight}-${id}`,
+		historyElement,
+        module: toCamelCase(call.call.__kind),
+        method: toCamelCase(call.call.value.__kind),
 		// TODO: determine where to get call hash
         // hash: call.hash,
         data: formatSpecificCall(call)
-    }
+    })
 
 }
 
-function mapCalls({ version, calls }: BatchCalls, historyElement: HistoryElement) {
-	return calls.map((call, idx) => extractCall({ version, call } as BatchCall, idx, historyElement.blockHeight.toString()))
+function mapCalls({ version, calls }: BatchCalls, historyElement: HistoryElement): HistoryElementCall[] {
+	return calls.map((call, idx) => extractCall({ version, call } as BatchCall, idx, historyElement))
 }
 
-function mapCallsForAllVersions(utilityBatchAllCall: UtilityBatchAllCall, historyElement: HistoryElement, block: Block): ReturnType<typeof mapCalls> {
+function mapCallsForAllVersions(utilityBatchAllCall: UtilityBatchAllCall, historyElement: HistoryElement, block: Block): HistoryElementCall[] {
 	const blockHeight = block.header.height
-	let calls: ReturnType<typeof mapCalls> | null = null
+	let calls: HistoryElementCall[] | null = null
 	versions.forEach((version) => {
 		if (utilityBatchAllCall['isV' + version as IsVersion]) {
 			calls = mapCalls(
@@ -108,22 +110,26 @@ export async function batchTransactionsHandler(ctx: Context, block: Block, callE
 
     if (callEntity.name !== 'Utility.batch_all') return
 
+	if (block.header.hash.toString() === '0xbbcc64a040a782722cfa051a5f33efda66916fb8c3d907ed016b66ef2ef57371') {
+		console.log('callEntity', callEntity)
+	}
+
     ctx.log.debug('Caught batch transaction extrinsic')
 
-    const historyElement = await getOrCreateHistoryElement(ctx, block, callEntity)
+    const historyElement = await createHistoryElement(ctx, block, callEntity)
 
 	const utilityBatchAllCall = new UtilityBatchAllCall(ctx, callEntity.call)
 
-	let calls = mapCallsForAllVersions(utilityBatchAllCall, historyElement, block)
+	let historyElementCalls = mapCallsForAllVersions(utilityBatchAllCall, historyElement, block)
+    ctx.store.save(historyElementCalls)
 
-    await addDataToHistoryElement(ctx, historyElement, calls)
     await updateHistoryElementStats(ctx, historyElement)
 
     ctx.log.debug(`===== Saved batch extrinsic with ${historyElement.id.toString()} txid =====`)
 
     if (historyElement.execution.success) {
         // If initialize pool call exists, create new Pool
-        const initializePool = calls.find(call => call.method === 'initialize_pool' && call.module === 'PoolXYK')
+        const initializePool = historyElementCalls.find(call => call.method === 'initializePool' && call.module === 'poolXYK')
 
         if (initializePool) {
 			//TODO: Determine wether or not typization is applicable here
