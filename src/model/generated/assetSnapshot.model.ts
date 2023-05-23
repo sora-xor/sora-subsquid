@@ -41,4 +41,7 @@ export class AssetSnapshot {
 
     @Column_("numeric", {transformer: marshal.bigintTransformer, nullable: false})
     burn!: bigint
+
+    @Column_("int4", {nullable: false})
+    updatedAtBlock!: number
 }

@@ -4,9 +4,8 @@ import { Block, CallEntity, Context } from '../../processor'
 import { AssetsTransferEvent } from '../../types/generated/events'
 import { findEventWithExtrinsic } from '../../utils/events'
 import { AssetsTransferCall } from '../../types/generated/calls'
-import { Address, AssetAmount, AssetId } from '../../types'
-import { decodeAddress, toAddress, toAssetId } from '../../utils'
-import { decodeHex, toHex } from '@subsquid/substrate-processor'
+import { Address, AssetId } from '../../types'
+import { toAddress, toAssetId } from '../../utils'
 
 export async function transfersHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
 
@@ -111,8 +110,8 @@ export async function transfersHandler(ctx: Context, block: Block, callEntity: C
         }
     }
 
-    await addDataToHistoryElement(ctx, historyElement, details)
-    await updateHistoryElementStats(ctx, historyElement)
+    await addDataToHistoryElement(ctx, block, historyElement, details)
+    await updateHistoryElementStats(ctx, block,historyElement)
 
     ctx.log.debug(`===== Saved transfer with ${extrinsicHash} txid =====`)
 

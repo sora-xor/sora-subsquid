@@ -62,7 +62,7 @@ export async function assetRegistrationHandler(ctx: Context, block: Block, callE
                 assetPrecisions.set(assetId, precision);
             }
     
-            await assetStorage.getAsset(ctx, assetId)
+            await assetStorage.getOrCreateAsset(ctx, block, assetId)
         } else {
 			throw new Error(`[${blockHeight}] Cannot find event "Assets.AssetRegistered" with extrinsic hash ${extrinsicHash}`)
         }
@@ -89,8 +89,8 @@ export async function assetRegistrationHandler(ctx: Context, block: Block, callE
         }
     }
 
-    await addDataToHistoryElement(ctx, historyElement, details)
-    await updateHistoryElementStats(ctx, historyElement)
+    await addDataToHistoryElement(ctx, block, historyElement, details)
+    await updateHistoryElementStats(ctx, block, historyElement)
 
     ctx.log.debug(`===== Saved asset registration with ${extrinsicHash} txid =====`)
 

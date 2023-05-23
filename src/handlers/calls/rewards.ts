@@ -34,10 +34,10 @@ export async function rewardsHandler(ctx: Context, block: Block, callEntity: Cal
             return buffer
         }, [])
 
-        await addDataToHistoryElement(ctx, historyElement, rewards)
+        await addDataToHistoryElement(ctx, block, historyElement, rewards)
     }
 
-    await updateHistoryElementStats(ctx, historyElement)
+    await updateHistoryElementStats(ctx, block,historyElement)
 
     ctx.log.debug(`===== Saved reward claim extrinsic with ${extrinsicHash} txid =====`)
 }

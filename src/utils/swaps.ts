@@ -123,12 +123,12 @@ export const handleAndSaveExtrinsic = async (
         details.liquidityProviderFee = '0'
     }
 
-    await addDataToHistoryElement(ctx, historyElement, details)
-    await updateHistoryElementStats(ctx, historyElement)
+    await addDataToHistoryElement(ctx, block, historyElement, details)
+    await updateHistoryElementStats(ctx, block,historyElement)
 
     // update assets volume
     if (historyElement.execution.success) {
-        await assetSnapshotsStorage.updateVolume(ctx, inputAssetId, BigNumber(details.baseAssetAmount), blockTimestamp)
-        await assetSnapshotsStorage.updateVolume(ctx, outputAssetId, BigNumber(details.targetAssetAmount), blockTimestamp)
+        await assetSnapshotsStorage.updateVolume(ctx, block, inputAssetId, BigNumber(details.baseAssetAmount))
+        await assetSnapshotsStorage.updateVolume(ctx, block, outputAssetId, BigNumber(details.targetAssetAmount))
     }
 }

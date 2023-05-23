@@ -6,7 +6,6 @@ import { formatU128ToBalance, assetSnapshotsStorage } from '../../utils/assets'
 import { networkSnapshotsStorage } from '../../utils/network'
 import { poolAccounts, PoolsPrices, poolsStorage } from '../../utils/pools'
 import { XOR, PSWAP, DAI, BASE_ASSETS } from '../../utils/consts'
-import { formatDateTimestamp } from '../../utils'
 import { Block, Context } from '../../processor'
 import { AssetId } from '../../types'
 
@@ -17,7 +16,6 @@ export async function syncPoolXykPrices(ctx: Context, block: Block): Promise<voi
 
     ctx.log.debug(`[${blockHeight}]: Update prices in PoolXYK entities`)
 
-    const blockTimestamp: number = formatDateTimestamp(new Date(block.header.timestamp))
     const assetsLockedInPools = new Map<AssetId, bigint>()
 
     let pswapPriceInDAI = new BigNumber(0)
@@ -107,20 +105,20 @@ export async function syncPoolXykPrices(ctx: Context, block: Block): Promise<voi
         if (baseAssetId === XOR) {
             for (const pool of pools) {
                 // TODO: check if '0' is right decision here
-                await assetSnapshotsStorage.updatePrice(ctx, pool.targetAsset.id as AssetId, pool.priceUSD ?? '0', blockTimestamp)
+                await assetSnapshotsStorage.updatePrice(ctx, block, pool.targetAsset.id as AssetId, pool.priceUSD ?? '0')
             }
 
-            await assetSnapshotsStorage.updatePrice(ctx, baseAssetId, baseAssetPriceInDAI.toFixed(18), blockTimestamp)
+            await assetSnapshotsStorage.updatePrice(ctx, block, baseAssetId, baseAssetPriceInDAI.toFixed(18))
         }
     }
 
     // update locked liquidity for assets
     for (const [assetId, liquidity] of assetsLockedInPools.entries()) {
-        await assetSnapshotsStorage.updateLiquidity(ctx, assetId as AssetId, liquidity, blockTimestamp)
+        await assetSnapshotsStorage.updateLiquidity(ctx, block, assetId as AssetId, liquidity)
     }
 
     // update total liquidity in USD
-    await networkSnapshotsStorage.updateLiquidityStats(ctx, liquiditiesUSD, blockTimestamp)
+    await networkSnapshotsStorage.updateLiquidityStats(ctx, block, liquiditiesUSD)
 
     ctx.log.debug(`[${blockHeight}]: PoolXYK prices updated`)
 

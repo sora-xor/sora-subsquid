@@ -1,17 +1,18 @@
 import { Account } from '../model'
-import { Context } from '../processor'
+import { Block, Context } from '../processor'
 
 import { networkSnapshotsStorage } from './network'
 
-export const getOrCreateAccountEntity = async (ctx: Context, accountAddress: string, timestamp: number) => {
-  let account = await ctx.store.get(Account, accountAddress)
+export const getOrCreateAccountEntity = async (ctx: Context, block: Block, accountAddress: string) => {
+	let account = await ctx.store.get(Account, accountAddress)
 
-  if (!account) {
-      account = new Account()
-      account.id = accountAddress
-      ctx.store.save(account)
-      await networkSnapshotsStorage.updateAccountsStats(ctx, timestamp)
-  }
+	if (!account) {
+		account = new Account()
+		account.id = accountAddress
+		account.updatedAtBlock = block.header.height
+		ctx.store.save(account)
+		await networkSnapshotsStorage.updateAccountsStats(ctx, block)
+	}
 
-  return account
+	return account
 }

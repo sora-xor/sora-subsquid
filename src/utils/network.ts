@@ -1,8 +1,9 @@
 import BigNumber from 'bignumber.js'
 
 import { SnapshotType, NetworkSnapshot, NetworkStats } from '../model'
-import { Context } from '../processor'
+import { Block, Context } from '../processor'
 import { SnapshotSecondsMap } from './consts'
+import { formatDateTimestamp } from '.'
 
 export const NetworkSnapshots = [SnapshotType.HOUR, SnapshotType.DAY, SnapshotType.MONTH]
 
@@ -23,7 +24,7 @@ class NetworkStatsStorage {
     }
   }
 
-  async getStats(ctx: Context): Promise<NetworkStats> {
+  async getOrCreateStats(ctx: Context): Promise<NetworkStats> {
     if (this.storage) return this.storage
 
     let entity = await ctx.store.get(NetworkStats, this.id)
@@ -53,8 +54,8 @@ class NetworkSnapshotsStorage {
     this.networkStatsStorage = new NetworkStatsStorage(NetworkStatsId)
   }
 
-  async sync(ctx: Context, blockTimestamp: number): Promise<void> {
-    await this.syncSnapshots(ctx, blockTimestamp)
+  async sync(ctx: Context, block: Block): Promise<void> {
+    await this.syncSnapshots(ctx, block)
     await this.syncStats(ctx)
   }
 
@@ -62,7 +63,7 @@ class NetworkSnapshotsStorage {
     this.networkStatsStorage.sync(ctx)
   }
 
-  private async syncSnapshots(ctx: Context, blockTimestamp: number): Promise<void> {
+  private async syncSnapshots(ctx: Context, block: Block): Promise<void> {
     ctx.log.debug(`[NetworkSnapshotsStorage] ${this.storage.size} snapshots sync`)
 
     await ctx.store.save([...this.storage.values()])
@@ -70,6 +71,7 @@ class NetworkSnapshotsStorage {
     for (const snapshot of this.storage.values()) {
       const { type, timestamp } = snapshot
       const seconds = SnapshotSecondsMap[type]
+	  const blockTimestamp = formatDateTimestamp(new Date(block.header.timestamp))
       const currentSnapshotIndex =  Math.floor(blockTimestamp / seconds)
       const currentTimestamp = currentSnapshotIndex * seconds
 
@@ -85,8 +87,9 @@ class NetworkSnapshotsStorage {
     return [type, index].join('-')
   }
 
-  async getSnapshot(ctx: Context, type: SnapshotType, blockTimestamp: number): Promise<NetworkSnapshot> {
+  async getOrCreateSnapshot(ctx: Context, type: SnapshotType, block: Block): Promise<NetworkSnapshot> {
     const seconds = SnapshotSecondsMap[type]
+	const blockTimestamp = formatDateTimestamp(new Date(block.header.timestamp))
     const snapshotIndex =  Math.floor(blockTimestamp / seconds)
     const id = this.getId(type, snapshotIndex)
 
@@ -118,79 +121,91 @@ class NetworkSnapshotsStorage {
     return snapshot
   }
 
-  async updateAccountsStats(ctx: Context, blockTimestamp: number): Promise<void> {
-    const stats = await this.networkStatsStorage.getStats(ctx)
+  async updateAccountsStats(ctx: Context, block: Block): Promise<void> {
+    const stats = await this.networkStatsStorage.getOrCreateStats(ctx)
 
     stats.totalAccounts = stats.totalAccounts + 1
+	stats.updatedAtBlock = block.header.height
 
     for (const type of NetworkSnapshots) {
-      const snapshot = await this.getSnapshot(ctx, type, blockTimestamp)
+      const snapshot = await this.getOrCreateSnapshot(ctx, type, block)
   
       snapshot.accounts = snapshot.accounts + 1
+	  snapshot.updatedAtBlock = block.header.height
     }
   }
 
-  async updateTransactionsStats(ctx: Context, blockTimestamp: number): Promise<void> {
-    const stats = await this.networkStatsStorage.getStats(ctx)
+  async updateTransactionsStats(ctx: Context, block: Block): Promise<void> {
+    const stats = await this.networkStatsStorage.getOrCreateStats(ctx)
 
     stats.totalTransactions = stats.totalTransactions + 1
+	stats.updatedAtBlock = block.header.height
 
     for (const type of NetworkSnapshots) {
-      const snapshot = await this.getSnapshot(ctx, type, blockTimestamp)
+      const snapshot = await this.getOrCreateSnapshot(ctx, type, block)
 
       snapshot.transactions = snapshot.transactions + 1
+	  snapshot.updatedAtBlock = block.header.height
     }
   }
 
-  async updateBridgeIncomingTransactionsStats(ctx: Context, blockTimestamp: number): Promise<void> {
-    const stats = await this.networkStatsStorage.getStats(ctx)
+  async updateBridgeIncomingTransactionsStats(ctx: Context, block: Block): Promise<void> {
+    const stats = await this.networkStatsStorage.getOrCreateStats(ctx)
 
     stats.totalBridgeIncomingTransactions = stats.totalBridgeIncomingTransactions + 1
+	stats.updatedAtBlock = block.header.height
 
     for (const type of NetworkSnapshots) {
-      const snapshot = await this.getSnapshot(ctx, type, blockTimestamp)
+      const snapshot = await this.getOrCreateSnapshot(ctx, type, block)
 
       snapshot.bridgeIncomingTransactions = snapshot.bridgeIncomingTransactions + 1
+	  snapshot.updatedAtBlock = block.header.height
     }
   }
 
-  async updateBridgeOutgoingTransactionsStats(ctx: Context, blockTimestamp: number): Promise<void> {
-    const stats = await this.networkStatsStorage.getStats(ctx)
+  async updateBridgeOutgoingTransactionsStats(ctx: Context, block: Block): Promise<void> {
+    const stats = await this.networkStatsStorage.getOrCreateStats(ctx)
 
     stats.totalBridgeOutgoingTransactions = stats.totalBridgeOutgoingTransactions + 1
+	stats.updatedAtBlock = block.header.height
 
     for (const type of NetworkSnapshots) {
-      const snapshot = await this.getSnapshot(ctx, type, blockTimestamp)
+      const snapshot = await this.getOrCreateSnapshot(ctx, type, block)
 
       snapshot.bridgeOutgoingTransactions = snapshot.bridgeOutgoingTransactions + 1
+	  snapshot.updatedAtBlock = block.header.height
     }
   }
 
-  async updateFeesStats(ctx: Context, fee: bigint, blockTimestamp: number): Promise<void> {
-    const stats = await this.networkStatsStorage.getStats(ctx)
+  async updateFeesStats(ctx: Context, block: Block, fee: bigint): Promise<void> {
+    const stats = await this.networkStatsStorage.getOrCreateStats(ctx)
 
     stats.totalFees = stats.totalFees + fee
+	stats.updatedAtBlock = block.header.height
 
     for (const type of NetworkSnapshots) {
-      const snapshot = await this.getSnapshot(ctx, type, blockTimestamp)
+      const snapshot = await this.getOrCreateSnapshot(ctx, type, block)
 
       snapshot.fees = snapshot.fees + fee
+	  snapshot.updatedAtBlock = block.header.height
     }
   }
 
-  async updateLiquidityStats(ctx: Context, liquiditiesUSD: BigNumber, blockTimestamp: number): Promise<void> {
+  async updateLiquidityStats(ctx: Context, block: Block, liquiditiesUSD: BigNumber): Promise<void> {
     for (const type of NetworkSnapshots) {
-      const snapshot = await this.getSnapshot(ctx, type, blockTimestamp)
+      const snapshot = await this.getOrCreateSnapshot(ctx, type, block)
 
       snapshot.liquidityUSD = liquiditiesUSD.toFixed(2)
+	  snapshot.updatedAtBlock = block.header.height
     }
   }
 
-  async updateVolumeStats(ctx: Context, volumeUSD: BigNumber, blockTimestamp: number): Promise<void> {
+  async updateVolumeStats(ctx: Context, block: Block, volumeUSD: BigNumber): Promise<void> {
     for (const type of NetworkSnapshots) {
-      const snapshot = await this.getSnapshot(ctx, type, blockTimestamp)
+      const snapshot = await this.getOrCreateSnapshot(ctx, type, block)
   
       snapshot.volumeUSD = new BigNumber(snapshot.volumeUSD).plus(volumeUSD).toFixed(2)
+	  snapshot.updatedAtBlock = block.header.height
     }
   }
 }

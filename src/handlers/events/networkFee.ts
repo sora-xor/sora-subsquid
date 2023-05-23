@@ -1,5 +1,4 @@
 import { networkSnapshotsStorage } from '../../utils/network'
-import { formatDateTimestamp } from '../../utils'
 import { Block, Context, EventEntity } from '../../processor'
 import { XorFeeFeeWithdrawnEvent } from '../../types/generated/events'
 
@@ -12,7 +11,6 @@ export async function networkFeeHandler(ctx: Context, block: Block, eventEntity:
 	if (!event.isV1) throw new Error(`[${blockHeight}] Unsupported spec`)
 
   	const [account, fee] = event.asV1
-  	const blockTimestamp = formatDateTimestamp(new Date(block.header.timestamp))
 
-  	await networkSnapshotsStorage.updateFeesStats(ctx, fee, blockTimestamp)
+  	await networkSnapshotsStorage.updateFeesStats(ctx, block, fee)
 }

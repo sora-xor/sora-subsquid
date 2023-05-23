@@ -89,8 +89,8 @@ export async function demeterDepositHandler(ctx: Context, block: Block, callEnti
   }
 
   const historyElement = await createHistoryElement(ctx, block, callEntity)
-  await addDataToHistoryElement(ctx, historyElement, details)
-  await updateHistoryElementStats(ctx, historyElement)
+  await addDataToHistoryElement(ctx, block, historyElement, details)
+  await updateHistoryElementStats(ctx, block, historyElement)
 
   ctx.log.debug(`===== Saved demeterFarmingPlatform deposit with ${extrinsicHash} txid =====`)
 }

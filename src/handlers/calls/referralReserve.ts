@@ -47,8 +47,8 @@ export async function referralReserveHandler(ctx: Context, block: Block, callEnt
         }
     }
 
-    await addDataToHistoryElement(ctx, historyElement, details)
-    await updateHistoryElementStats(ctx, historyElement)
+    await addDataToHistoryElement(ctx, block, historyElement, details)
+    await updateHistoryElementStats(ctx, block,historyElement)
 
     ctx.log.debug(`===== Saved referral reserve with ${extrinsicHash} txid =====`)
 }

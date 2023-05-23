@@ -29,8 +29,8 @@ export async function setReferralHandler(ctx: Context, block: Block, callEntity:
         to: toHex(referrer)
     }
 
-    await addDataToHistoryElement(ctx, historyElement, details)
-    await updateHistoryElementStats(ctx, historyElement)
+    await addDataToHistoryElement(ctx, block, historyElement, details)
+    await updateHistoryElementStats(ctx, block,historyElement)
 
     ctx.log.debug(`===== Saved set referral with ${callEntity.extrinsic.hash} txid =====`)
 

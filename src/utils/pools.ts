@@ -152,10 +152,7 @@ export const getPoolProperties = async (ctx: Context, block: Block, baseAssetId:
 			})
 		}
 		else if (storage.isV42) {
-			console.log('baseAssetIdDecoded', toAssetId(baseAssetIdDecoded))
-			console.log('targetAssetIdDecoded', toAssetId(targetAssetIdDecoded))
 			const data = await storage.asV42.getPairs({ code: baseAssetIdDecoded }, { code: targetAssetIdDecoded })
-			console.log('data', data)
 			properties = data ? [{ reservesAccountId: data[0][1][0], feesAccountId: data[0][1][1] }] : []
 		}
 		else {
@@ -185,7 +182,7 @@ class PoolAccountsStorage {
 		this.accountIds = new Map()
 	}
 
-	add(ctx: Context, baseAssetId: AssetId, targetAssetId: AssetId, poolAccountId: Address): void {
+	add(baseAssetId: AssetId, targetAssetId: AssetId, poolAccountId: Address): void {
 		if (!this.storage.has(baseAssetId)) {
 			this.storage.set(baseAssetId, new Map())
 		}
@@ -219,7 +216,7 @@ class PoolAccountsStorage {
 		const poolAccountId = properties?.reservesAccountId ?? null
 
 		if (poolAccountId) {
-			poolAccounts.add(ctx, baseAssetId, targetAssetId, poolAccountId)
+			poolAccounts.add(baseAssetId, targetAssetId, poolAccountId)
 		} else {
 			ctx.log.error(`[${blockHeight}] Cannot find pool id ${baseAssetId}:${targetAssetId}`)
 		}
@@ -245,7 +242,7 @@ class PoolsStorage {
 		const assetIds = poolAccounts.getById(poolId)
 
 		if (assetIds) {
-			return await this.getPool(ctx, block, ...assetIds)
+			return await this.getOrCreatePool(ctx, block, ...assetIds)
 		}
 
 		return null
@@ -257,7 +254,7 @@ class PoolsStorage {
 		await ctx.store.save([...this.storage.values()])
 	}
 
-	async getPool(ctx: Context, block: Block, baseAssetId: AssetId, targetAssetId: AssetId): Promise<PoolXYK | null> {
+	async getOrCreatePool(ctx: Context, block: Block, baseAssetId: AssetId, targetAssetId: AssetId): Promise<PoolXYK | null> {
 		const blockHeight = block.header.height
 
 		const poolId = await poolAccounts.getPoolAccountId(ctx, block, baseAssetId, targetAssetId)
@@ -297,7 +294,8 @@ class PoolsStorage {
 				targetAssetReserves: 0n,
 				multiplier: baseAssetId === XOR && DOUBLE_PRICE_POOL.includes(targetAssetId) ? 2 : 1,
 				priceUSD: '0',
-				strategicBonusApy: '0'
+				strategicBonusApy: '0',
+				updatedAtBlock: block.header.height
 			})
 
 			await ctx.store.save(pool)

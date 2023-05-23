@@ -7,7 +7,6 @@ import { XOR } from './consts'
 import { formatDateTimestamp, toAddress, toCamelCase } from './index'
 import { nToU8a } from '@polkadot/util'
 import { toJSON } from '@subsquid/util-internal-json'
-import { SubstrateExtrinsic } from '@subsquid/substrate-processor'
 import { findEventWithExtrinsic } from './events'
 import { XorFeeFeeWithdrawnEvent } from '../types/generated/events'
 
@@ -31,25 +30,26 @@ const getCallEntityNetworkFee = (ctx: Context, block: Block, callEntity: CallEnt
 }
 
 export const createHistoryElement = (ctx: Context, block: Block, callEntity: CallEntity): HistoryElement => {
-    const element = new HistoryElement()
+    const historyElement = new HistoryElement()
 
 	if (!block.header.validator) {
 		throw Error('There is no block validator')
 	}
 
-    element.id = callEntity.extrinsic.hash
-    element.blockHeight = BigInt(block.header.height)
-    element.blockHash = block.header.hash.toString()
-    element.module = toCamelCase(callEntity.name.split('.')[0])
-    element.method = toCamelCase(callEntity.name.split('.')[1])
-    element.address = toAddress(callEntity.extrinsic.signature?.address)
-    element.networkFee = formatU128ToBalance(getCallEntityNetworkFee(ctx, block, callEntity), XOR)
-    element.timestamp = formatDateTimestamp(new Date(block.header.timestamp))
+    historyElement.id = callEntity.extrinsic.hash
+    historyElement.blockHeight = BigInt(block.header.height)
+    historyElement.blockHash = block.header.hash.toString()
+    historyElement.module = toCamelCase(callEntity.name.split('.')[0])
+    historyElement.method = toCamelCase(callEntity.name.split('.')[1])
+    historyElement.address = toAddress(callEntity.extrinsic.signature?.address)
+    historyElement.networkFee = formatU128ToBalance(getCallEntityNetworkFee(ctx, block, callEntity), XOR)
+    historyElement.timestamp = formatDateTimestamp(new Date(block.header.timestamp))
+	historyElement.updatedAtBlock = block.header.height
 
     const success = callEntity.extrinsic.success
 
     if (success) {
-        element.execution = new ExecutionResult({
+        historyElement.execution = new ExecutionResult({
             success
         })
     } else {
@@ -62,40 +62,41 @@ export const createHistoryElement = (ctx: Context, block: Block, callEntity: Cal
                 nonModuleErrorMessage: JSON.stringify(callEntity.extrinsic.error)
             })
 
-        element.execution = new ExecutionResult({
+        historyElement.execution = new ExecutionResult({
             success,
             error
         })
     }
 
-    ctx.store.save(element)
-    return element
+    ctx.store.save(historyElement)
+    return historyElement
 }
 
-export const addDataToHistoryElement = async (ctx: Context, historyElement: HistoryElement, data: {} | null) => {
+export const addDataToHistoryElement = async (ctx: Context, block: Block, historyElement: HistoryElement, data: {} | null) => {
 	historyElement.data = data ? toJSON(data) : null
+	historyElement.updatedAtBlock = block.header.height
 
     await ctx.store.save(historyElement)
 }
 
-export const updateHistoryElementStats = async (ctx: Context, element: HistoryElement) => {
-    const addresses = [element.address.toString()]
-    const timestamp = element.timestamp
+export const updateHistoryElementStats = async (ctx: Context, block: Block, historyElement: HistoryElement) => {
+    const addresses = [historyElement.address.toString()]
 
     if (
-        INCOMING_TRANSFER_METHODS.includes(element.method.toString()) &&
-        element.data &&
-        (element.data as any)['to']
+        INCOMING_TRANSFER_METHODS.includes(historyElement.method.toString()) &&
+        historyElement.data &&
+        (historyElement.data as any)['to']
     ) {
-        addresses.push(((element.data as any)['to'] as string).toString())
+        addresses.push(((historyElement.data as any)['to'] as string).toString())
     }
 
     // update accounts data
     for (const address of addresses) {
-        const account = await getOrCreateAccountEntity(ctx, address, timestamp)
-        account.latestHistoryElement = element
+        const account = await getOrCreateAccountEntity(ctx, block, address)
+        account.latestHistoryElement = historyElement
+		account.updatedAtBlock = block.header.height
         ctx.store.save(account)
     }
 
-    await networkSnapshotsStorage.updateTransactionsStats(ctx, timestamp)
+    await networkSnapshotsStorage.updateTransactionsStats(ctx, block)
 }

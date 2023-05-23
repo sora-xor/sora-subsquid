@@ -74,8 +74,8 @@ export async function demeterGetRewardsHandler(ctx: Context, block: Block, callE
 
   const historyElement = await createHistoryElement(ctx, block, callEntity)
   if (!historyElement) return
-  await addDataToHistoryElement(ctx, historyElement, details)
-  await updateHistoryElementStats(ctx, historyElement)
+  await addDataToHistoryElement(ctx, block, historyElement, details)
+  await updateHistoryElementStats(ctx, block,historyElement)
 
   ctx.log.debug(`===== Saved demeterFarmingPlatform getRewards with ${extrinsicHash} txid =====`)
 }

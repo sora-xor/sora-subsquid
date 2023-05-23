@@ -4,7 +4,7 @@ import { Block, Context } from '../processor'
 import { SnapshotSecondsMap, DAI } from './consts'
 import { networkSnapshotsStorage } from '../utils/network'
 import { AssetId } from '../types'
-import { toAssetId } from '.'
+import { formatDateTimestamp, toAssetId } from '.'
 
 export const AssetSnapshots = [SnapshotType.DEFAULT, SnapshotType.HOUR, SnapshotType.DAY]
 
@@ -39,7 +39,7 @@ class AssetStorage {
 		ctx.store.save([...this.storage.values()])
 	}
 
-	async getAsset(ctx: Context, id: AssetId): Promise<Asset> {
+	async getOrCreateAsset(ctx: Context, block: Block, id: AssetId): Promise<Asset> {
 		let asset = this.storage.get(id)
 		if (asset) {
 			return asset
@@ -53,6 +53,7 @@ class AssetStorage {
 			asset.liquidity = 0n
 			asset.priceUSD = '0'
 			asset.supply = 0n
+			asset.updatedAtBlock = block.header.height
 
 			await ctx.store.save(asset)
 
@@ -64,11 +65,12 @@ class AssetStorage {
 		return asset
 	}
 
-	async updatePrice(ctx: Context, id: AssetId, price: string): Promise<void> {
-		const asset = await this.getAsset(ctx, id)
+	async updatePrice(ctx: Context, block: Block, id: AssetId, price: string): Promise<void> {
+		const asset = await this.getOrCreateAsset(ctx, block, id)
 
 		if (asset.priceUSD !== price) {
 			asset.priceUSD = price
+			asset.updatedAtBlock = block.header.height
 			// to update asset price by ws subscription instantly
 			await ctx.store.save(asset)
 		}
@@ -88,11 +90,11 @@ class AssetSnapshotsStorage {
 		return [assetId, type, index].join('-')
 	}
 
-	async sync(ctx: Context, blockTimestamp: number): Promise<void> {
-		await this.syncSnapshots(ctx, blockTimestamp)
+	async sync(ctx: Context, block: Block): Promise<void> {
+		await this.syncSnapshots(ctx, block)
 	}
 
-	private async syncSnapshots(ctx: Context, blockTimestamp: number): Promise<void> {
+	private async syncSnapshots(ctx: Context, block: Block): Promise<void> {
 		ctx.log.debug(`[AssetSnapshotsStorage] ${this.storage.size} snapshots sync`)
 
 		await ctx.store.save([...this.storage.values()])
@@ -100,6 +102,7 @@ class AssetSnapshotsStorage {
 		for (const snapshot of this.storage.values()) {
 			const { type, timestamp } = snapshot
 			const seconds = SnapshotSecondsMap[type]
+			const blockTimestamp = formatDateTimestamp(new Date(block.header.timestamp))
 			const currentSnapshotIndex = Math.floor(blockTimestamp / seconds)
 			const currentTimestamp = currentSnapshotIndex * seconds
 
@@ -111,8 +114,9 @@ class AssetSnapshotsStorage {
 		ctx.log.debug(`[AssetSnapshotsStorage] ${this.storage.size} snaphots in storage after sync`)
 	}
 
-	async getSnapshot(ctx: Context, assetId: AssetId, type: SnapshotType, blockTimestamp: number): Promise<AssetSnapshot> {
+	async getOrCreateSnapshot(ctx: Context, block: Block, assetId: AssetId, type: SnapshotType): Promise<AssetSnapshot> {
 		const seconds = SnapshotSecondsMap[type]
+		const blockTimestamp = formatDateTimestamp(new Date(block.header.timestamp))
 		const snapshotIndex = Math.floor(blockTimestamp / seconds) // rounded snapshot index (from 0)
 		const id = this.getId(assetId, type, snapshotIndex)
 		
@@ -125,7 +129,7 @@ class AssetSnapshotsStorage {
 
 		if (!snapshot) {
 			const timestamp = snapshotIndex * seconds // rounded snapshot timestamp
-			const asset = await this.assetStorage.getAsset(ctx, assetId)
+			const asset = await this.assetStorage.getOrCreateAsset(ctx, block, assetId)
 
 			snapshot = new AssetSnapshot()
 			snapshot.id = id
@@ -148,6 +152,7 @@ class AssetSnapshotsStorage {
 				high: asset.priceUSD,
 				low: asset.priceUSD,
 			})
+			snapshot.updatedAtBlock = block.header.height
 		}
 
 		this.storage.set(snapshot.id, snapshot)
@@ -155,11 +160,11 @@ class AssetSnapshotsStorage {
 		return snapshot
 	}
 
-	async updatePrice(ctx: Context, assetId: AssetId, price: string, blockTimestamp: number): Promise<void> {
+	async updatePrice(ctx: Context, block: Block, assetId: AssetId, price: string): Promise<void> {
 		const bnPrice = new BigNumber(price)
 
 		for (const type of AssetSnapshots) {
-			const snapshot = await this.getSnapshot(ctx, assetId, type, blockTimestamp)
+			const snapshot = await this.getOrCreateSnapshot(ctx, block, assetId, type)
 
 			if (snapshot.priceUSD) {
 				snapshot.priceUSD.close = price
@@ -170,11 +175,11 @@ class AssetSnapshotsStorage {
 			}
 		}
 
-		await this.assetStorage.updatePrice(ctx, assetId, price)
+		await this.assetStorage.updatePrice(ctx, block, assetId, price)
 	}
 
-	async updateVolume(ctx: Context, assetId: AssetId, amount: BigNumber, blockTimestamp: number): Promise<void> {
-		const asset = await this.assetStorage.getAsset(ctx, assetId)
+	async updateVolume(ctx: Context, block: Block, assetId: AssetId, amount: BigNumber): Promise<void> {
+		const asset = await this.assetStorage.getOrCreateAsset(ctx, block, assetId)
 
 		const assetPrice = DAI === assetId
 			? BigNumber(1)
@@ -184,53 +189,60 @@ class AssetSnapshotsStorage {
 		const volumeUSD = volume.multipliedBy(assetPrice.toString())
 
 		for (const type of AssetSnapshots) {
-			const snapshot = await this.getSnapshot(ctx, assetId, type, blockTimestamp)
+			const snapshot = await this.getOrCreateSnapshot(ctx, block, assetId, type)
 
 			if (snapshot.volume) {
 				snapshot.volume.amount = new BigNumber(snapshot.volume.amount).plus(volume.toString()).toString()
 				snapshot.volume.amountUSD = new BigNumber(snapshot.volume!.amountUSD).plus(volumeUSD.toString()).toFixed(2)
+				snapshot.updatedAtBlock = block.header.height
 			} else {
 				throw new Error(`${snapshot.id} snapshot doesn't have volume`)
 			}
 		}
 
-		await networkSnapshotsStorage.updateVolumeStats(ctx, new BigNumber(volumeUSD.toString()), blockTimestamp)
+		await networkSnapshotsStorage.updateVolumeStats(ctx, block, new BigNumber(volumeUSD.toString()))
 	}
 
-	async updateLiquidity(ctx: Context, assetId: AssetId, liquidity: bigint, blockTimestamp: number): Promise<void> {
+	async updateLiquidity(ctx: Context, block: Block, assetId: AssetId, liquidity: bigint): Promise<void> {
 		for (const type of AssetSnapshots) {
-			const snapshot = await this.getSnapshot(ctx, assetId, type, blockTimestamp)
+			const snapshot = await this.getOrCreateSnapshot(ctx, block, assetId, type)
 
 			snapshot.liquidity = liquidity
+			snapshot.updatedAtBlock = block.header.height
 		}
 
-		const asset = await this.assetStorage.getAsset(ctx, assetId)
+		const asset = await this.assetStorage.getOrCreateAsset(ctx, block, assetId)
 
 		asset.liquidity = liquidity
+		asset.updatedAtBlock = block.header.height
 	}
 
-	async updateMinted(ctx: Context, assetId: AssetId, amount: bigint, blockTimestamp: number): Promise<void> {
+	async updateMinted(ctx: Context, block: Block, assetId: AssetId, amount: bigint): Promise<void> {
 		for (const type of AssetSnapshots) {
-			const snapshot = await this.getSnapshot(ctx, assetId, type, blockTimestamp)
+			const snapshot = await this.getOrCreateSnapshot(ctx, block, assetId, type)
 
 			snapshot.mint = snapshot.mint + amount
+			snapshot.updatedAtBlock = block.header.height
 		}
 
-		const asset = await this.assetStorage.getAsset(ctx, assetId)
+		const asset = await this.assetStorage.getOrCreateAsset(ctx, block, assetId)
 
 		asset.supply = asset.supply + amount
+		asset.updatedAtBlock = block.header.height
 	}
 
-	async updateBurned(ctx: Context, assetId: AssetId, amount: bigint, blockTimestamp: number): Promise<void> {
+	async updateBurned(ctx: Context, block: Block, assetId: AssetId, amount: bigint): Promise<void> {
 		for (const type of AssetSnapshots) {
-			const snapshot = await this.getSnapshot(ctx, assetId, type, blockTimestamp)
+			const snapshot = await this.getOrCreateSnapshot(ctx, block, assetId, type)
 
 			snapshot.burn = snapshot.burn + amount
+			snapshot.updatedAtBlock = block.header.height
 		}
 
-		const asset = await this.assetStorage.getAsset(ctx, assetId)
+		const asset = await this.assetStorage.getOrCreateAsset(ctx, block, assetId)
 
 		asset.supply = asset.supply - amount
+		asset.updatedAtBlock = block.header.height
 	}
 }
 

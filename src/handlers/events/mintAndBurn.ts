@@ -16,9 +16,8 @@ export async function tokenBurnHandler(ctx: Context, block: Block, eventEntity: 
 	const { currencyId, amount } = event.asV42
 
     const assetId = toAssetId(currencyId.code)
-    const blockTimestamp = formatDateTimestamp(new Date(block.header.timestamp))
 
-    await assetSnapshotsStorage.updateBurned(ctx, assetId, BigInt(amount), blockTimestamp)
+    await assetSnapshotsStorage.updateBurned(ctx, block, assetId, BigInt(amount))
 }
 
 export async function xorBurnHandler(ctx: Context, block: Block, eventEntity: EventEntity): Promise<void> {
@@ -32,9 +31,8 @@ export async function xorBurnHandler(ctx: Context, block: Block, eventEntity: Ev
     const { amount } = event.asV42
 
     const assetId = XOR
-    const blockTimestamp = formatDateTimestamp(new Date(block.header.timestamp))
 
-    await assetSnapshotsStorage.updateBurned(ctx, assetId, amount, blockTimestamp)
+    await assetSnapshotsStorage.updateBurned(ctx, block, assetId, amount)
 }
 
 export async function tokenMintHandler(ctx: Context, block: Block, eventEntity: EventEntity): Promise<void> {
@@ -48,9 +46,8 @@ export async function tokenMintHandler(ctx: Context, block: Block, eventEntity: 
     const { currencyId, amount } = event.asV42
 
     const assetId = toAssetId(currencyId.code)
-    const blockTimestamp = formatDateTimestamp(new Date(block.header.timestamp))
 
-    await assetSnapshotsStorage.updateMinted(ctx, assetId, amount, blockTimestamp)
+    await assetSnapshotsStorage.updateMinted(ctx, block, assetId, amount)
 }
 
 export async function xorMintHandler(ctx: Context, block: Block, eventEntity: EventEntity): Promise<void> {
@@ -70,7 +67,6 @@ export async function xorMintHandler(ctx: Context, block: Block, eventEntity: Ev
 	}
 
     const assetId = XOR
-    const blockTimestamp = formatDateTimestamp(new Date(block.header.timestamp))
 
-    await assetSnapshotsStorage.updateMinted(ctx, assetId, amount, blockTimestamp)
+    await assetSnapshotsStorage.updateMinted(ctx, block, assetId, amount)
 }

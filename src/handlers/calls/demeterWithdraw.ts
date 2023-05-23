@@ -91,8 +91,8 @@ export async function demeterWithdrawHandler(ctx: Context, block: Block, callEnt
 
   const historyElement = await createHistoryElement(ctx, block, callEntity)
   if (!historyElement) return
-  await addDataToHistoryElement(ctx, historyElement, details)
-  await updateHistoryElementStats(ctx, historyElement)
+  await addDataToHistoryElement(ctx, block, historyElement, details)
+  await updateHistoryElementStats(ctx, block,historyElement)
 
   ctx.log.debug(`===== Saved demeterFarmingPlatform withdraw with ${extrinsicHash} txid =====`)
 }

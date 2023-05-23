@@ -100,9 +100,9 @@ export async function ethSoraTransferHandler(ctx: Context, block: Block, eventEn
 	}
 
 	const historyElement = await createHistoryElement(ctx, block, callEntity)
-	await addDataToHistoryElement(ctx, historyElement, details)
-	await updateHistoryElementStats(ctx, historyElement)
-	await networkSnapshotsStorage.updateBridgeIncomingTransactionsStats(ctx, historyElement.timestamp)
+	await addDataToHistoryElement(ctx, block, historyElement, details)
+	await updateHistoryElementStats(ctx, block,historyElement)
+	await networkSnapshotsStorage.updateBridgeIncomingTransactionsStats(ctx, block)
 
     ctx.log.debug(`===== Saved ETH->SORA transfer extrinsic with ${extrinsicHash} txid =====`)
 }

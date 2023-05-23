@@ -198,12 +198,13 @@ export async function initializeAssets(ctx: Context, block: Block): Promise<void
     }
 
     const entities = [...assets.values()].map(asset => new Asset({
-		...asset
+		...asset,
+		updatedAtBlock: block.header.height
 	}))
 
     if (entities.length) {
         await ctx.store.save(entities)
-        await Promise.all(entities.map(entity => assetStorage.getAsset(ctx, entity.id as AssetId)))
+        await Promise.all(entities.map(entity => assetStorage.getOrCreateAsset(ctx, block, entity.id as AssetId)))
         ctx.log.debug(`[${blockHeight}]: ${entities.length} Assets initialized!`)
     } else {
         ctx.log.debug(`[${blockHeight}]: No Assets to initialize!`)

@@ -31,7 +31,7 @@ export async function initializePools(ctx: Context, block: Block): Promise<void>
 			const targetAssetId = item.targetAssetId
 			const poolAccountId = item.reservesAccountId
 
-			poolAccounts.add(ctx, baseAssetId, targetAssetId, poolAccountId)
+			poolAccounts.add(baseAssetId, targetAssetId, poolAccountId)
 
 			const [baseAsset, targetAsset] = await Promise.all([
 				ctx.store.get(Asset, baseAssetId),
@@ -67,6 +67,7 @@ export async function initializePools(ctx: Context, block: Block): Promise<void>
     const entities = [...poolsBuffer.values()].map(pool => new PoolXYK({
 		...pool,
 		id: pool.id,
+		updatedAtBlock: block.header.height
 	}))
 
     if (entities.length) {

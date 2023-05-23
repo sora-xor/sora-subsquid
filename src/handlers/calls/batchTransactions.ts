@@ -6,6 +6,7 @@ import { UtilityBatchAllCall } from '../../types/generated/calls'
 import { HistoryElement, HistoryElementCall } from '../../model'
 import { AssetId } from '../../types'
 import { toCamelCase } from '../../utils'
+import { toJSON } from '@subsquid/util-internal-json'
 
 const versions = [1, 3, 7, 19, 22, 23, 26, 32, 33, 35, 37, 38, 42, 43, 45, 46, 47, 50, 53] as const
 
@@ -70,7 +71,8 @@ function formatSpecificCall(call: BatchCall) {
 function extractCall(
     call: BatchCall,
     id: number,
-	historyElement: HistoryElement
+	historyElement: HistoryElement,
+	block: Block
 ): HistoryElementCall {
     return new HistoryElementCall({
         id: `${historyElement.blockHeight}-${id}`,
@@ -79,13 +81,14 @@ function extractCall(
         method: toCamelCase(call.call.value.__kind),
 		// TODO: determine where to get call hash
         // hash: call.hash,
-        data: formatSpecificCall(call)
+        data: toJSON(formatSpecificCall(call)),
+		updatedAtBlock: block.header.height
     })
 
 }
 
-function mapCalls({ version, calls }: BatchCalls, historyElement: HistoryElement): HistoryElementCall[] {
-	return calls.map((call, idx) => extractCall({ version, call } as BatchCall, idx, historyElement))
+function mapCalls({ version, calls }: BatchCalls, historyElement: HistoryElement, block: Block): HistoryElementCall[] {
+	return calls.map((call, idx) => extractCall({ version, call } as BatchCall, idx, historyElement, block))
 }
 
 function mapCallsForAllVersions(utilityBatchAllCall: UtilityBatchAllCall, historyElement: HistoryElement, block: Block): HistoryElementCall[] {
@@ -98,7 +101,8 @@ function mapCallsForAllVersions(utilityBatchAllCall: UtilityBatchAllCall, histor
 					version,
 					calls: utilityBatchAllCall['asV' + version as AsVersion].calls
 				} as BatchCalls,
-				historyElement
+				historyElement,
+				block
 			)
 		}
 	})
@@ -110,10 +114,6 @@ export async function batchTransactionsHandler(ctx: Context, block: Block, callE
 
     if (callEntity.name !== 'Utility.batch_all') return
 
-	if (block.header.hash.toString() === '0xbbcc64a040a782722cfa051a5f33efda66916fb8c3d907ed016b66ef2ef57371') {
-		console.log('callEntity', callEntity)
-	}
-
     ctx.log.debug('Caught batch transaction extrinsic')
 
     const historyElement = await createHistoryElement(ctx, block, callEntity)
@@ -123,7 +123,7 @@ export async function batchTransactionsHandler(ctx: Context, block: Block, callE
 	let historyElementCalls = mapCallsForAllVersions(utilityBatchAllCall, historyElement, block)
     ctx.store.save(historyElementCalls)
 
-    await updateHistoryElementStats(ctx, historyElement)
+    await updateHistoryElementStats(ctx, block,historyElement)
 
     ctx.log.debug(`===== Saved batch extrinsic with ${historyElement.id.toString()} txid =====`)
 
@@ -138,7 +138,7 @@ export async function batchTransactionsHandler(ctx: Context, block: Block, callE
 				assetA: AssetId
 				assetB: AssetId
 			} = initializePool.data as any
-            await poolsStorage.getPool(ctx, block, data.assetA, data.assetB)
+            await poolsStorage.getOrCreatePool(ctx, block, data.assetA, data.assetB)
         }
     }
 }

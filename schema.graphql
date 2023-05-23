@@ -12,6 +12,7 @@ type NetworkStats @entity {
 	totalTransactions: Int!
 	totalBridgeIncomingTransactions: Int!
 	totalBridgeOutgoingTransactions: Int!
+	updatedAtBlock: Int!
 }
 
 type NetworkSnapshot @entity {
@@ -25,6 +26,7 @@ type NetworkSnapshot @entity {
 	volumeUSD: String!
 	bridgeIncomingTransactions: Int!
 	bridgeOutgoingTransactions: Int!
+	updatedAtBlock: Int!
 }
 
 type Asset @entity {
@@ -34,6 +36,7 @@ type Asset @entity {
 	priceUSD: String!
 	supply: BigInt!
 	liquidity: BigInt! # locked in pairs (in tokens)
+	updatedAtBlock: Int!
 }
 
 type AssetPrice @jsonField {
@@ -59,6 +62,7 @@ type AssetSnapshot @entity {
 	supply: BigInt!
 	mint: BigInt!
 	burn: BigInt!
+	updatedAtBlock: Int!
 }
 
 type PoolXYK @entity {
@@ -70,11 +74,13 @@ type PoolXYK @entity {
 	multiplier: Int!
 	priceUSD: String
 	strategicBonusApy: String
+	updatedAtBlock: Int!
 }
 
 type Account @entity {
 	id: ID!
 	latestHistoryElement: HistoryElement
+	updatedAtBlock: Int!
 }
 
 type HistoryElement @entity {
@@ -89,6 +95,7 @@ type HistoryElement @entity {
 	timestamp: Int!
 	data: JSON
 	calls: [HistoryElementCall!]! @derivedFrom(field: "historyElement")
+	updatedAtBlock: Int!
 }
 
 type HistoryElementCall @entity {
@@ -97,6 +104,7 @@ type HistoryElementCall @entity {
 	module: String!
 	method: String!
 	data: JSON!
+	updatedAtBlock: Int!
 }
 
 type ExecutionResult @jsonField {
@@ -116,4 +124,5 @@ type ReferrerReward @entity {
 	referrer: String!
 	updated: Int!
 	amount: BigInt!
+	updatedAtBlock: Int!
 }

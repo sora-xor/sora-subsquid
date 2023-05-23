@@ -24,4 +24,7 @@ export class NetworkStats {
 
     @Column_("int4", {nullable: false})
     totalBridgeOutgoingTransactions!: number
+
+    @Column_("int4", {nullable: false})
+    updatedAtBlock!: number
 }

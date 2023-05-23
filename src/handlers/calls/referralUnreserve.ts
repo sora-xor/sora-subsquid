@@ -49,8 +49,8 @@ export async function referralUnreserveHandler(ctx: Context, block: Block, callE
         }
     }
 
-    await addDataToHistoryElement(ctx, historyElement, details)
-    await updateHistoryElementStats(ctx, historyElement)
+    await addDataToHistoryElement(ctx, block, historyElement, details)
+    await updateHistoryElementStats(ctx, block,historyElement)
 
     ctx.log.debug(`===== Saved referral unreserve with ${extrinsicHash} txid =====`)
 }

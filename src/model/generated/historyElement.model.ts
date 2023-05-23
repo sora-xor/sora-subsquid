@@ -43,4 +43,7 @@ export class HistoryElement {
 
     @OneToMany_(() => HistoryElementCall, e => e.historyElement)
     calls!: HistoryElementCall[]
+
+    @Column_("int4", {nullable: false})
+    updatedAtBlock!: number
 }

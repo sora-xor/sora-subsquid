@@ -71,10 +71,10 @@ export async function liquidityRemovalHandler(ctx: Context, block: Block, callEn
         }
     }
 
-    await addDataToHistoryElement(ctx, historyElement, details)
+    await addDataToHistoryElement(ctx, block, historyElement, details)
 
     ctx.log.debug(`===== Saved liquidity removal with ${extrinsicHash} txid =====`)
 
-    await poolsStorage.getPool(ctx, block, baseAssetId, targetAssetId)
-    await updateHistoryElementStats(ctx, historyElement)
+    await poolsStorage.getOrCreatePool(ctx, block, baseAssetId, targetAssetId)
+    await updateHistoryElementStats(ctx, block,historyElement)
 }

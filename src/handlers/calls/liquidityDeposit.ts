@@ -69,10 +69,10 @@ export async function liquidityDepositHandler(ctx: Context, block: Block, callEn
         details.targetAssetAmount = formatU128ToBalance(amountB, targetAssetId)
     }
 
-    await addDataToHistoryElement(ctx, historyElement, details)
+    await addDataToHistoryElement(ctx, block, historyElement, details)
 
     ctx.log.debug(`===== Saved liquidity deposit with ${extrinsicHash} txid =====`)
 
-    await poolsStorage.getPool(ctx, block, baseAssetId, targetAssetId)
-    await updateHistoryElementStats(ctx, historyElement)
+    await poolsStorage.getOrCreatePool(ctx, block, baseAssetId, targetAssetId)
+    await updateHistoryElementStats(ctx, block,historyElement)
 }

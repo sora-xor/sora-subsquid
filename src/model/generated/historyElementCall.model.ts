@@ -22,4 +22,7 @@ export class HistoryElementCall {
 
     @Column_("jsonb", {nullable: false})
     data!: unknown
+
+    @Column_("int4", {nullable: false})
+    updatedAtBlock!: number
 }

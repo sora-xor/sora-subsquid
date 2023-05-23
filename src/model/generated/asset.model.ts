@@ -26,4 +26,7 @@ export class Asset {
 
     @Column_("numeric", {transformer: marshal.bigintTransformer, nullable: false})
     liquidity!: bigint
+
+    @Column_("int4", {nullable: false})
+    updatedAtBlock!: number
 }
