@@ -31,6 +31,7 @@ import { initializeAssets } from './handlers/models/initializeAssets'
 import { initializePools } from './handlers/models/initializePools'
 import { syncModels } from './handlers/sync/models'
 import { syncPoolXykPrices } from './handlers/sync/poolXykPrices'
+import { lookupArchive } from '@subsquid/archive-registry'
 
 const calls = [
 	'*',
@@ -86,7 +87,7 @@ const processor = new SubstrateBatchProcessor()
 
         // Use archive created by archive/docker-compose.yml
         chain: 'wss://mof2.sora.org',
-        archive: `https://sora.archive.subsquid.io/graphql`
+        archive: lookupArchive('sora')
     })
     .setTypesBundle(typesBundle as any)
     .setBlockRange({ from: 8_035_052 }) // .setBlockRange({ from: 8_035_052 })
