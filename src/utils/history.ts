@@ -45,6 +45,7 @@ export const createHistoryElement = (ctx: Context, block: Block, callEntity: Cal
     historyElement.networkFee = formatU128ToBalance(getCallEntityNetworkFee(ctx, block, callEntity), XOR)
     historyElement.timestamp = formatDateTimestamp(new Date(block.header.timestamp))
 	historyElement.updatedAtBlock = block.header.height
+	historyElement.callNames = []
 
     const success = callEntity.extrinsic.success
 
@@ -77,6 +78,14 @@ export const addDataToHistoryElement = async (ctx: Context, block: Block, histor
 	historyElement.updatedAtBlock = block.header.height
 
     await ctx.store.save(historyElement)
+}
+
+export const addCallsToHistoryElement = async (ctx: Context, block: Block, historyElement: HistoryElement, calls: HistoryElementCall[]) => {
+	historyElement.callNames = calls.map(call => call.module + '.' + call.method)
+	historyElement.updatedAtBlock = block.header.height
+
+    await ctx.store.save(historyElement)
+    await ctx.store.save(calls)
 }
 
 export const updateHistoryElementStats = async (ctx: Context, block: Block, historyElement: HistoryElement) => {

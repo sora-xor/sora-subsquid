@@ -95,6 +95,7 @@ type HistoryElement @entity {
 	timestamp: Int!
 	data: JSON
 	calls: [HistoryElementCall!]! @derivedFrom(field: "historyElement")
+	callNames: [String]!
 	updatedAtBlock: Int!
 }
 

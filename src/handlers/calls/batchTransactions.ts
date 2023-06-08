@@ -1,4 +1,4 @@
-import { createHistoryElement, updateHistoryElementStats } from '../../utils/history'
+import { addCallsToHistoryElement, addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { formatU128ToBalance, getAssetId } from '../../utils/assets'
 import { poolsStorage } from '../../utils/pools'
 import { Block, CallEntity, Context } from '../../processor'
@@ -121,9 +121,9 @@ export async function batchTransactionsHandler(ctx: Context, block: Block, callE
 	const utilityBatchAllCall = new UtilityBatchAllCall(ctx, callEntity.call)
 
 	let historyElementCalls = mapCallsForAllVersions(utilityBatchAllCall, historyElement, block)
-    ctx.store.save(historyElementCalls)
 
-    await updateHistoryElementStats(ctx, block,historyElement)
+	await addCallsToHistoryElement(ctx, block, historyElement, historyElementCalls)
+    await updateHistoryElementStats(ctx, block, historyElement)
 
     ctx.log.debug(`===== Saved batch extrinsic with ${historyElement.id.toString()} txid =====`)
 
