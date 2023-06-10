@@ -2,27 +2,41 @@ import { Block, CallEntity } from '../processor'
 import { SubstrateExtrinsic } from '@subsquid/substrate-processor'
 import { CallItem } from '@subsquid/substrate-processor/lib/interfaces/dataSelection'
 
-export function findCallsWithExtrinsic<T extends (CallEntity['name'] | CallEntity['name'][])>(
-	callName: T,
+type SpecificCallItem<T extends CallEntity['name']> = CallItem<T, true>;
+
+export function getAllCallsByExtrinsicHash<T extends (CallEntity['name'] | CallEntity['name'][])>(
 	block: Block,
 	extrinsicHash: SubstrateExtrinsic['hash']
 ): CallItem<T extends CallEntity['name'] ? T : T[0], true>[] {
 	const calls = block.items.filter(
 		c => c.kind === 'call'
 		&& c.name !== '*'
-		&& (
-			(typeof callName === 'string' && callName === c.name)
-			|| (Array.isArray(callName) && callName.includes(c.name))
-		)
 		&& c.extrinsic.hash === extrinsicHash
 	)
 	return calls as unknown as CallItem<T extends CallEntity['name'] ? T : T[0], true>[]
 }
 
-export function findCallWithExtrinsic<T extends (CallEntity['name'] | CallEntity['name'][])>(
-	callName: T,
+export function findCallsByExtrinsicHash<T extends CallEntity['name'][]>(
+	callNames: T,
 	block: Block,
 	extrinsicHash: SubstrateExtrinsic['hash']
-): CallItem<T extends CallEntity['name'] ? T : T[0], true> | null {
-	return findCallsWithExtrinsic(callName, block, extrinsicHash)[0] ?? null
+): { [K in T[number]]: SpecificCallItem<K> }[T[number]][] {
+	const calls = block.items.filter(
+		c => c.kind === 'call'
+		&& c.name !== '*'
+		&& (
+			(typeof callNames === 'string' && callNames === c.name)
+			|| (Array.isArray(callNames) && callNames.includes(c.name))
+		)
+		&& c.extrinsic.hash === extrinsicHash
+	)
+	return calls as { [K in T[number]]: SpecificCallItem<K> }[T[number]][];
+}
+
+export function findCallByExtrinsicHash<T extends CallEntity['name'][]>(
+	callNames: T,
+	block: Block,
+	extrinsicHash: SubstrateExtrinsic['hash']
+): { [K in T[number]]: SpecificCallItem<K> }[T[number]] | null {
+	return findCallsByExtrinsicHash(callNames, block, extrinsicHash)[0] ?? null;
 }

@@ -54,7 +54,8 @@ const calls = [
     'DemeterFarmingPlatform.deposit',
     'DemeterFarmingPlatform.withdraw',
     'DemeterFarmingPlatform.get_rewards',
-	'BridgeMultisig.as_multi'
+	'BridgeMultisig.as_multi',
+	'BridgeMultisig.as_multi_threshold_1',
 ] as const
 
 
@@ -90,7 +91,7 @@ const processor = new SubstrateBatchProcessor()
         archive: lookupArchive('sora')
     })
     .setTypesBundle(typesBundle as any)
-    .setBlockRange({ from: 8_035_052 }) // .setBlockRange({ from: 8_035_052 })
+    .setBlockRange({ from: 0 }) // .setBlockRange({ from: 8_035_052 })
 
 calls.forEach(callName => {
 	processor.addCall(callName)

@@ -7,7 +7,7 @@ import { XOR } from '../../utils/consts'
 import { toHex } from '@subsquid/substrate-processor'
 import { Address, AssetAmount } from '../../types'
 import { toAddress } from '../../utils'
-import { findCallWithExtrinsic } from '../../utils/calls'
+import { findCallByExtrinsicHash } from '../../utils/calls'
 
 export async function ethSoraTransferHandler(ctx: Context, block: Block, eventEntity: EventEntity): Promise<void> {
 
@@ -94,7 +94,7 @@ export async function ethSoraTransferHandler(ctx: Context, block: Block, eventEn
         return
     }
 
-	const callEntity = findCallWithExtrinsic('BridgeMultisig.as_multi', block, extrinsicHash)
+	const callEntity = findCallByExtrinsicHash(['BridgeMultisig.as_multi', 'BridgeMultisig.as_multi_threshold_1'], block, extrinsicHash)
 	if (!callEntity) {
 		throw new Error(`[${blockHeight}] Cannot find call "BridgeMultisig.as_multi" with extrinsic hash ${extrinsicHash}`)
 	}
