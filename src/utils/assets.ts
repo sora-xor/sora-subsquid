@@ -170,6 +170,11 @@ class AssetSnapshotsStorage {
 				snapshot.priceUSD.close = price
 				snapshot.priceUSD.high = BigNumber.max(new BigNumber(snapshot.priceUSD.high), bnPrice).toString()
 				snapshot.priceUSD.low = BigNumber.min(new BigNumber(snapshot.priceUSD.low), bnPrice).toString()
+
+				// set open price to current price at first update (after start or restart)
+				if (Number(snapshot.priceUSD.open) === 0) {
+				  snapshot.priceUSD.open = price;
+				}
 			} else {
 				throw new Error(`${snapshot.id} snapshot doesn't have priceUSD`)
 			}
