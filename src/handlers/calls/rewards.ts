@@ -1,9 +1,6 @@
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { Block, CallItem, Context } from '../../processor'
-import { findEventsByExtrinsicHash } from '../../utils/events'
-import { TokensTransferEvent } from '../../types/generated/events'
-import { toHex } from '@subsquid/substrate-processor'
-import { unsupportedSpecError } from '../../utils/error'
+import { findEventsByExtrinsicHash, getAssetsTransferEventData } from '../../utils/events'
 
 export async function rewardsHandler(
 	ctx: Context,
@@ -26,13 +23,11 @@ export async function rewardsHandler(
             extrinsicHash,
 			['Tokens.Transfer']
         ).reduce((buffer: { assetId: string, amount: string }[], eventItem) => {
-            const event = new TokensTransferEvent(ctx, eventItem.event)
-            if (event.isV42) {
-                const { currencyId, amount } = event.asV42
-                buffer.push({ assetId: toHex(currencyId.code), amount: amount.toString() })
-            } else {
-                throw unsupportedSpecError(block)
-            }
+			const data = getAssetsTransferEventData(ctx, block, eventItem)
+            buffer.push({
+				assetId: data.assetId,
+				amount: data.amount.toString(),
+			})
             return buffer
         }, [])
 
