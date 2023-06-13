@@ -1,14 +1,11 @@
 import { networkSnapshotsStorage } from '../../utils/network'
-import { Block, Context, EventEntity } from '../../processor'
+import { Block, Context, EventItem } from '../../processor'
 import { XorFeeFeeWithdrawnEvent } from '../../types/generated/events'
+import { unsupportedSpecError } from '../../utils/error'
 
-export async function networkFeeHandler(ctx: Context, block: Block, eventEntity: EventEntity): Promise<void> {
-  	if (eventEntity.kind !== 'event' || eventEntity.name !== 'XorFee.FeeWithdrawn') return
-
-	const blockHeight = block.header.height
-
-	const event = new XorFeeFeeWithdrawnEvent(ctx, eventEntity.event)
-	if (!event.isV1) throw new Error(`[${blockHeight}] Unsupported spec`)
+export async function networkFeeHandler(ctx: Context, block: Block, eventItem: EventItem<'XorFee.FeeWithdrawn', true>): Promise<void> {
+  	const event = new XorFeeFeeWithdrawnEvent(ctx, eventItem.event)
+	if (!event.isV1) throw unsupportedSpecError(block)
 
   	const [account, fee] = event.asV1
 

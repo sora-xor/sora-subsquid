@@ -1,17 +1,13 @@
-import { Block, CallEntity, Context } from '../../processor'
+import { Block, Context, CallItem } from '../../processor'
 import { LiquidityProxySwapCall } from '../../types/generated/calls'
 import { toAssetId } from '../../utils'
+import { unsupportedSpecError } from '../../utils/error'
 import { CallRec, handleAndSaveExtrinsic, SwapAmount } from '../../utils/swaps'
 
-export async function swapsHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
-
-    if (callEntity.name !== 'LiquidityProxy.swap') return
-
+export async function swapsHandler(ctx: Context, block: Block, callItem: CallItem<'LiquidityProxy.swap', true>): Promise<void> {
     ctx.log.debug('Caught swap extrinsic')
 
-	const blockHeight = block.header.height
-
-	const call = new LiquidityProxySwapCall(ctx, callEntity.call)
+	const call = new LiquidityProxySwapCall(ctx, callItem.call)
 
 	let callRec: CallRec
 	if (call.isV1) {
@@ -59,10 +55,10 @@ export async function swapsHandler(ctx: Context, block: Block, callEntity: CallE
 			liquiditySources: selectedSourceTypes.map(type => type.__kind)
 		}
 	} else {
-		throw new Error(`[${blockHeight}] Unsupported spec`)
+		throw unsupportedSpecError(block)
 	}
 
-    await handleAndSaveExtrinsic(ctx, block, callEntity, callRec)
+    await handleAndSaveExtrinsic(ctx, block, callItem, callRec)
 
-    ctx.log.debug(`===== Saved swap with ${callEntity.extrinsic.hash} txid =====`)
+    ctx.log.debug(`===== Saved swap with ${callItem.extrinsic.hash} txid =====`)
 }

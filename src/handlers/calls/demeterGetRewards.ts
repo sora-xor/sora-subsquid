@@ -1,21 +1,19 @@
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { formatU128ToBalance } from '../../utils/assets'
-import { Block, CallEntity, Context } from '../../processor'
-import { findEventWithExtrinsic } from '../../utils/events'
+import { Block, CallItem, Context } from '../../processor'
+import { findEventByExtrinsicHash } from '../../utils/events'
 import { DemeterFarmingPlatformRewardWithdrawnEvent } from '../../types/generated/events'
 import { DemeterFarmingPlatformGetRewardsCall } from '../../types/generated/calls'
 import { toAssetId } from '../../utils'
 import { AssetId } from '../../types'
+import { unsupportedSpecError } from '../../utils/error'
 
-export async function demeterGetRewardsHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
-  if (callEntity.name !== 'DemeterFarmingPlatform.get_rewards') return
+export async function demeterGetRewardsHandler(ctx: Context, block: Block, callItem: CallItem<'DemeterFarmingPlatform.get_rewards', true>): Promise<void> {
+	ctx.log.debug('Caught demeterFarmingPlatform getRewards extrinsic')
 
-  ctx.log.debug('Caught demeterFarmingPlatform getRewards extrinsic')
+  const extrinsicHash = callItem.extrinsic.hash
 
-  const blockHeight = block.header.height
-  const extrinsicHash = callEntity.extrinsic.hash
-
-  const call = new DemeterFarmingPlatformGetRewardsCall(ctx, callEntity.call)
+  const call = new DemeterFarmingPlatformGetRewardsCall(ctx, callItem.call)
 
   let callRec: {
     assetId: AssetId
@@ -40,15 +38,15 @@ export async function demeterGetRewardsHandler(ctx: Context, block: Block, callE
       isFarm
     }
   } else {
-    throw new Error(`[${blockHeight}] Unsupported spec`)
+    throw unsupportedSpecError(block)
   }
 
   let amount: string
 
-  const eventEntity = findEventWithExtrinsic('DemeterFarmingPlatform.RewardWithdrawn', block, extrinsicHash)
+  const eventItem = findEventByExtrinsicHash(block, extrinsicHash, ['DemeterFarmingPlatform.RewardWithdrawn'])
 
-  if (eventEntity) {
-    const event = new DemeterFarmingPlatformRewardWithdrawnEvent(ctx, eventEntity.event)
+  if (eventItem) {
+    const event = new DemeterFarmingPlatformRewardWithdrawnEvent(ctx, eventItem.event)
 
     let eventRec: { amount: bigint }
     if (event.isV33) {
@@ -58,7 +56,7 @@ export async function demeterGetRewardsHandler(ctx: Context, block: Block, callE
     } else if (event.isV43) {
       eventRec = { amount: event.asV43[1] }
     } else {
-      throw new Error(`[${blockHeight}] Unsupported spec`)
+      throw unsupportedSpecError(block)
     }
 
     amount = formatU128ToBalance(eventRec.amount, callRec.assetId)
@@ -72,7 +70,7 @@ export async function demeterGetRewardsHandler(ctx: Context, block: Block, callE
     amount
   }
 
-  const historyElement = await createHistoryElement(ctx, block, callEntity)
+  const historyElement = await createHistoryElement(ctx, block, callItem)
   if (!historyElement) return
   await addDataToHistoryElement(ctx, block, historyElement, details)
   await updateHistoryElementStats(ctx, block,historyElement)

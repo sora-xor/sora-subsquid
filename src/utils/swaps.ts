@@ -5,7 +5,7 @@ import { Block, Context } from "../processor"
 import { LiquidityProxyExchangeEvent } from "../types/generated/events"
 import { assetSnapshotsStorage, formatU128ToBalance } from "./assets"
 import { XOR } from "./consts"
-import { findEventWithExtrinsic } from "./events"
+import { findEventByExtrinsicHash } from "./events"
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from "./history"
 import { Address, AssetId } from "../types"
 
@@ -59,14 +59,14 @@ const receiveExtrinsicSwapAmounts = (swapAmount: SwapAmount, assetId: AssetId): 
 export const handleAndSaveExtrinsic = async (
 	ctx: Context,
 	block: Block,
-	callEntity: CallItem<'LiquidityProxy.swap', true> | CallItem<'LiquidityProxy.swap_transfer', true>,
+	callItem: CallItem<'LiquidityProxy.swap', true> | CallItem<'LiquidityProxy.swap_transfer', true>,
 	callRec: CallRec
 ): Promise<void> => {
 
-	const extrinsicHash = callEntity.extrinsic.hash
+	const extrinsicHash = callItem.extrinsic.hash
 	const blockHeight = block.header.height
     const blockTimestamp = formatDateTimestamp(new Date(block.header.timestamp))
-    const historyElement = await createHistoryElement(ctx, block, callEntity)
+    const historyElement = await createHistoryElement(ctx, block, callItem)
 
     const { liquiditySources, swapAmount, outputAssetId, inputAssetId, receiver } = callRec
 
@@ -89,14 +89,14 @@ export const handleAndSaveExtrinsic = async (
     }
 
     if (historyElement.execution.success) {
-		const eventEntity = findEventWithExtrinsic('LiquidityProxy.Exchange', block, extrinsicHash)
-        if (!eventEntity) {
+		const eventItem = findEventByExtrinsicHash('LiquidityProxy.Exchange', block, extrinsicHash)
+        if (!eventItem) {
 			ctx.log.error(`[${blockHeight}] Cannot find event "LiquidityProxy.Exchange" with extrinsic hash ${extrinsicHash}`)
 			return
 		} else {
 			// ctx.log.info(`Found event on block ${blockHeight}: LiquidityProxy.Exchange`)
 		}
-		const event = new LiquidityProxyExchangeEvent(ctx, eventEntity.event)
+		const event = new LiquidityProxyExchangeEvent(ctx, eventItem.event)
 
 		let eventRec: {
 			baseAssetAmount: bigint
@@ -110,7 +110,7 @@ export const handleAndSaveExtrinsic = async (
 			const [, , , , baseAssetAmount, targetAssetAmount, liquidityProviderFee] = event.asV42
 			eventRec = { baseAssetAmount, targetAssetAmount, liquidityProviderFee }
 		} else {
-			throw new Error(`[${blockHeight}] Unsupported spec`)
+			throw unsupportedSpecError(block)
 		}
 		const { baseAssetAmount, targetAssetAmount, liquidityProviderFee } = eventRec
 

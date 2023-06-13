@@ -1,25 +1,23 @@
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { formatU128ToBalance } from '../../utils/assets'
 import { networkSnapshotsStorage } from '../../utils/network'
-import { Block, CallEntity, Context } from '../../processor'
+import { Block, CallItem, Context } from '../../processor'
 import { EthBridgeTransferToSidechainCall } from '../../types/generated/calls'
-import { findEventWithExtrinsic } from '../../utils/events'
+import { findEventByExtrinsicHash } from '../../utils/events'
 import { EthBridgeRequestRegisteredEvent } from '../../types/generated/events'
 import { toHex } from '@subsquid/substrate-processor'
 import { AddressEthereum, AssetAmount, AssetId } from '../../types'
 import { toAddressEthereum, toAssetId } from '../../utils'
+import { unsupportedSpecError } from '../../utils/error'
 
-export async function soraEthTransferHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
-
-    if (callEntity.name !== 'EthBridge.transfer_to_sidechain') return
-
+export async function soraEthTransferHandler(ctx: Context, block: Block, callItem: CallItem<'EthBridge.transfer_to_sidechain', true>): Promise<void> {
     ctx.log.debug('Caught SORA->ETH transfer extrinsic')
 
 	const blockHeight = block.header.height
-    const extrinsicHash = callEntity.extrinsic.hash
-    const historyElement = await createHistoryElement(ctx, block, callEntity)
+    const extrinsicHash = callItem.extrinsic.hash
+    const historyElement = await createHistoryElement(ctx, block, callItem)
 
-    const call = new EthBridgeTransferToSidechainCall(ctx, callEntity.call)
+    const call = new EthBridgeTransferToSidechainCall(ctx, callItem.call)
 
     let rec: {
         assetId: AssetId,
@@ -41,7 +39,7 @@ export async function soraEthTransferHandler(ctx: Context, block: Block, callEnt
 			amount: amount as AssetAmount
 		}
     } else {
-        throw new Error(`[${blockHeight}] Unsupported spec`)
+        throw unsupportedSpecError(block)
     }
 
     const { assetId, sidechainAddress, amount } = rec
@@ -53,7 +51,7 @@ export async function soraEthTransferHandler(ctx: Context, block: Block, callEnt
         amount: string
     }
     if (historyElement.execution.success) {
-        const soraEthTransferEventEntity = findEventWithExtrinsic('EthBridge.RequestRegistered', block, extrinsicHash)
+        const soraEthTransferEventEntity = findEventByExtrinsicHash(block, extrinsicHash, ['EthBridge.RequestRegistered'])
 
         if (soraEthTransferEventEntity) {
             const soraEthTransferEvent = new EthBridgeRequestRegisteredEvent(ctx, soraEthTransferEventEntity.event)
@@ -62,7 +60,7 @@ export async function soraEthTransferHandler(ctx: Context, block: Block, callEnt
             if (soraEthTransferEvent.isV1) {
                 requestHash = soraEthTransferEvent.asV1
             } else {
-                throw new Error(`[${blockHeight}] Unsupported spec`)
+                throw unsupportedSpecError(block)
             }
 
             details = {

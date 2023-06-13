@@ -1,22 +1,19 @@
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { formatU128ToBalance } from '../../utils/assets'
-import { findEventsWithExtrinsic, getTransferEventData } from '../../utils/events'
+import { findEventsByExtrinsicHash, getTransferEventData } from '../../utils/events'
 import { poolsStorage } from '../../utils/pools'
-import { Block, CallEntity, Context } from '../../processor'
+import { Block, CallItem, Context } from '../../processor'
 import { PoolXykWithdrawLiquidityCall } from '../../types/generated/calls'
 import { toAssetId } from '../../utils'
+import { unsupportedSpecError } from '../../utils/error'
 
-export async function liquidityRemovalHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
-
-    if (callEntity.name !== 'PoolXYK.withdraw_liquidity') return
-
+export async function liquidityRemovalHandler(ctx: Context, block: Block, callItem: CallItem<'PoolXYK.withdraw_liquidity', true>): Promise<void> {
     ctx.log.debug('Caught liquidity removal extrinsic')
 
-	const blockHeight = block.header.height
-    const extrinsicHash = callEntity.extrinsic.hash
-    const historyElement = await createHistoryElement(ctx, block, callEntity)
+    const extrinsicHash = callItem.extrinsic.hash
+    const historyElement = await createHistoryElement(ctx, block, callItem)
 
-    const call = new PoolXykWithdrawLiquidityCall(ctx, callEntity.call)
+    const call = new PoolXykWithdrawLiquidityCall(ctx, callItem.call)
 
     let callRec: {
         assetAId: Uint8Array
@@ -41,7 +38,7 @@ export async function liquidityRemovalHandler(ctx: Context, block: Block, callEn
             assetBMin: outputBMin
         }
     } else {
-        throw new Error(`[${blockHeight}] Unsupported spec`)
+        throw unsupportedSpecError(block)
     }
 
     const baseAssetId = toAssetId(callRec.assetAId)
@@ -56,7 +53,7 @@ export async function liquidityRemovalHandler(ctx: Context, block: Block, callEn
 
     if (historyElement.execution.success) {
 
-        const transfers = findEventsWithExtrinsic(['Balances.Transfer', 'Tokens.Transfer'], block, extrinsicHash)
+        const transfers = findEventsByExtrinsicHash(block, extrinsicHash, ['Balances.Transfer', 'Tokens.Transfer'])
 
         if (transfers.length === 2) {
             const [baseAssetTransfer, targetAssetTransfer] = transfers

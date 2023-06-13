@@ -1,12 +1,17 @@
-import { Block, Context, EventEntity } from '../../processor'
+import { Block, Context, EventItem } from '../../processor'
 
 import { getTransferEventData } from '../../utils/events'
 import { poolAccounts, poolsStorage, PoolsPrices } from '../../utils/pools'
 
-export async function transferHandler(ctx: Context, block: Block, eventEntity: EventEntity): Promise<void> {
-	if (eventEntity.name !== 'Tokens.Transfer' && eventEntity.name !== 'Balances.Transfer') return
-
-	const { assetId, from, to, amount } = getTransferEventData(ctx, block, eventEntity)
+export async function transferHandler(
+	ctx: Context,
+	block: Block,
+	eventItem: (
+		| EventItem<'Tokens.Transfer', true>
+		| EventItem<'Balances.Transfer', true>
+	)
+): Promise<void> {
+	const { assetId, from, to, amount } = getTransferEventData(ctx, block, eventItem)
 
 	// withdraw token from pool
 	if (poolAccounts.has(from)) {

@@ -1,23 +1,20 @@
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { formatU128ToBalance } from '../../utils/assets'
-import { Block, CallEntity, Context } from '../../processor'
-import { findEventWithExtrinsic } from '../../utils/events'
+import { Block, CallItem, Context } from '../../processor'
+import { findEventByExtrinsicHash } from '../../utils/events'
 import { DemeterFarmingPlatformWithdrawnEvent } from '../../types/generated/events'
 import { DemeterFarmingPlatformWithdrawCall } from '../../types/generated/calls'
 import { XOR } from '../../utils/consts'
 import { AssetId } from '../../types'
 import { toAssetId } from '../../utils'
+import { unsupportedSpecError } from '../../utils/error'
 
-export async function demeterWithdrawHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
-
-  if (callEntity.name !== 'DemeterFarmingPlatform.withdraw') return
-
+export async function demeterWithdrawHandler(ctx: Context, block: Block, callItem: CallItem<'DemeterFarmingPlatform.withdraw', true>): Promise<void> {
   ctx.log.debug('Caught demeterFarmingPlatform withdraw extrinsic')
 
-  const blockHeight = block.header.height
-  const extrinsicHash = callEntity.extrinsic.hash
+  const extrinsicHash = callItem.extrinsic.hash
 
-  const call = new DemeterFarmingPlatformWithdrawCall(ctx, callEntity.call)
+  const call = new DemeterFarmingPlatformWithdrawCall(ctx, callItem.call)
 
   let callRec: {
     baseAssetId: AssetId
@@ -54,15 +51,15 @@ export async function demeterWithdrawHandler(ctx: Context, block: Block, callEnt
       desiredAmount: pooledTokens
     }
   } else {
-    throw new Error(`[${blockHeight}] Unsupported spec`)
+    throw unsupportedSpecError(block)
   }
 
   let amount: string
 
-  const eventEntity = findEventWithExtrinsic('DemeterFarmingPlatform.Withdrawn', block, extrinsicHash)
+  const eventItem = findEventByExtrinsicHash(block, extrinsicHash, ['DemeterFarmingPlatform.Withdrawn'])
 
-  if (eventEntity) {
-    const event = new DemeterFarmingPlatformWithdrawnEvent(ctx, eventEntity.event)
+  if (eventItem) {
+    const event = new DemeterFarmingPlatformWithdrawnEvent(ctx, eventItem.event)
 
     let eventRec: { amount: bigint }
     if (event.isV33) {
@@ -72,7 +69,7 @@ export async function demeterWithdrawHandler(ctx: Context, block: Block, callEnt
     } else if (event.isV43) {
       eventRec = { amount: event.asV43[1] }
     } else {
-      throw new Error(`[${blockHeight}] Unsupported spec`)
+      throw unsupportedSpecError(block)
     }
     
     // a little trick - we get decimals from pool asset, not lp token
@@ -89,7 +86,7 @@ export async function demeterWithdrawHandler(ctx: Context, block: Block, callEnt
     amount: amount.toString()
   }
 
-  const historyElement = await createHistoryElement(ctx, block, callEntity)
+  const historyElement = await createHistoryElement(ctx, block, callItem)
   if (!historyElement) return
   await addDataToHistoryElement(ctx, block, historyElement, details)
   await updateHistoryElementStats(ctx, block,historyElement)

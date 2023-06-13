@@ -1,22 +1,20 @@
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { formatU128ToBalance } from '../../utils/assets'
 import { poolsStorage } from '../../utils/pools'
-import { findEventsWithExtrinsic, getTransferEventData } from '../../utils/events'
-import { Block, CallEntity, Context } from '../../processor'
+import { findEventsByExtrinsicHash, getTransferEventData } from '../../utils/events'
+import { Block, CallItem, Context } from '../../processor'
 import { PoolXykDepositLiquidityCall } from '../../types/generated/calls'
 import { toAssetId } from '../../utils'
+import { unsupportedSpecError } from '../../utils/error'
 
 
-export async function liquidityDepositHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
-    if (callEntity.name !== 'PoolXYK.deposit_liquidity') return
-
+export async function liquidityDepositHandler(ctx: Context, block: Block, callItem: CallItem<'PoolXYK.deposit_liquidity', true>): Promise<void> {
     ctx.log.debug('Caught liquidity adding extrinsic')
 
-	const blockHeight = block.header.height
-    const extrinsicHash = callEntity.extrinsic.hash
-    const historyElement = await createHistoryElement(ctx, block, callEntity)
+    const extrinsicHash = callItem.extrinsic.hash
+    const historyElement = await createHistoryElement(ctx, block, callItem)
 
-    const call = new PoolXykDepositLiquidityCall(ctx, callEntity.call)
+    const call = new PoolXykDepositLiquidityCall(ctx, callItem.call)
 
     let callRec: {
         assetAId: Uint8Array
@@ -41,7 +39,7 @@ export async function liquidityDepositHandler(ctx: Context, block: Block, callEn
             assetBDesired: inputBDesired
         }
     } else {
-        throw new Error(`[${blockHeight}] Unsupported spec`)
+        throw unsupportedSpecError(block)
     }
 
     const baseAssetId = toAssetId(callRec.assetAId)
@@ -54,7 +52,7 @@ export async function liquidityDepositHandler(ctx: Context, block: Block, callEn
         targetAssetAmount: formatU128ToBalance(callRec.assetBDesired, targetAssetId)
     }
 
-    const transfers = findEventsWithExtrinsic(['Balances.Transfer', 'Tokens.Transfer'], block, extrinsicHash)
+    const transfers = findEventsByExtrinsicHash(block, extrinsicHash, ['Balances.Transfer', 'Tokens.Transfer'])
 
     if (transfers.length === 2) {
         const [baseAssetTransfer, targetAssetTransfer] = transfers

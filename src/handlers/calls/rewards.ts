@@ -1,35 +1,37 @@
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
-import { Block, CallEntity, Context } from '../../processor'
-import { findEventsWithExtrinsic } from '../../utils/events'
+import { Block, CallItem, Context } from '../../processor'
+import { findEventsByExtrinsicHash } from '../../utils/events'
 import { TokensTransferEvent } from '../../types/generated/events'
 import { toHex } from '@subsquid/substrate-processor'
+import { unsupportedSpecError } from '../../utils/error'
 
-export async function rewardsHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
-    if (!(
-           callEntity.name === 'PswapDistribution.claim_incentive'
-        || callEntity.name === 'Rewards.claim'
-        || callEntity.name === 'VestedRewards.claim_rewards'
-        || callEntity.name === 'VestedRewards.claim_crowdloan_rewards'
-    )) return
-
+export async function rewardsHandler(
+	ctx: Context,
+	block: Block,
+	callItem: (
+		| CallItem<'PswapDistribution.claim_incentive', true>
+		| CallItem<'Rewards.claim', true>
+		| CallItem<'VestedRewards.claim_rewards', true>
+		| CallItem<'VestedRewards.claim_crowdloan_rewards', true>
+	)
+): Promise<void> {
     ctx.log.debug('Caught rewards claim extrinsic')
-	
-	const blockHeight = block.header.height
-    const extrinsicHash = callEntity.extrinsic.hash
-    const historyElement = await createHistoryElement(ctx, block, callEntity)
+
+    const extrinsicHash = callItem.extrinsic.hash
+    const historyElement = await createHistoryElement(ctx, block, callItem)
 
     if (historyElement.execution.success) {
-        const rewards = findEventsWithExtrinsic(
-            'Tokens.Transfer',
+        const rewards = findEventsByExtrinsicHash(
             block,
-            extrinsicHash
-        ).reduce((buffer: { assetId: string, amount: string }[], eventEntity) => {
-            const event = new TokensTransferEvent(ctx, eventEntity.event)
+            extrinsicHash,
+			['Tokens.Transfer']
+        ).reduce((buffer: { assetId: string, amount: string }[], eventItem) => {
+            const event = new TokensTransferEvent(ctx, eventItem.event)
             if (event.isV42) {
                 const { currencyId, amount } = event.asV42
                 buffer.push({ assetId: toHex(currencyId.code), amount: amount.toString() })
             } else {
-                throw new Error(`[${blockHeight}] Unsupported spec`)
+                throw unsupportedSpecError(block)
             }
             return buffer
         }, [])

@@ -1,12 +1,13 @@
 import { addCallsToHistoryElement, addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { formatU128ToBalance, getAssetId } from '../../utils/assets'
 import { poolsStorage } from '../../utils/pools'
-import { Block, CallEntity, Context } from '../../processor'
+import { Block, CallItem, Context } from '../../processor'
 import { UtilityBatchAllCall } from '../../types/generated/calls'
 import { HistoryElement, HistoryElementCall } from '../../model'
 import { AssetId } from '../../types'
 import { toCamelCase } from '../../utils'
 import { toJSON } from '@subsquid/util-internal-json'
+import { unsupportedSpecError } from '../../utils/error'
 
 const versions = [1, 3, 7, 19, 22, 23, 26, 32, 33, 35, 37, 38, 42, 43, 45, 46, 47, 50, 53] as const
 
@@ -92,7 +93,6 @@ function mapCalls({ version, calls }: BatchCalls, historyElement: HistoryElement
 }
 
 function mapCallsForAllVersions(utilityBatchAllCall: UtilityBatchAllCall, historyElement: HistoryElement, block: Block): HistoryElementCall[] {
-	const blockHeight = block.header.height
 	let calls: HistoryElementCall[] | null = null
 	versions.forEach((version) => {
 		if (utilityBatchAllCall['isV' + version as IsVersion]) {
@@ -106,19 +106,16 @@ function mapCallsForAllVersions(utilityBatchAllCall: UtilityBatchAllCall, histor
 			)
 		}
 	})
-	if (calls === null) throw new Error(`[${blockHeight}] Unsupported spec`)
+	if (calls === null) throw unsupportedSpecError(block)
 	return calls
 }
 
-export async function batchTransactionsHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
-
-    if (callEntity.name !== 'Utility.batch_all') return
-
+export async function batchTransactionsHandler(ctx: Context, block: Block, callItem: CallItem<'Utility.batch_all', true>): Promise<void> {
     ctx.log.debug('Caught batch transaction extrinsic')
 
-    const historyElement = await createHistoryElement(ctx, block, callEntity)
+    const historyElement = await createHistoryElement(ctx, block, callItem)
 
-	const utilityBatchAllCall = new UtilityBatchAllCall(ctx, callEntity.call)
+	const utilityBatchAllCall = new UtilityBatchAllCall(ctx, callItem.call)
 
 	let historyElementCalls = mapCallsForAllVersions(utilityBatchAllCall, historyElement, block)
 

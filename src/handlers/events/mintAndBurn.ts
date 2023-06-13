@@ -1,17 +1,14 @@
 import { assetSnapshotsStorage } from '../../utils/assets'
-import { formatDateTimestamp, toAssetId } from '../../utils'
+import { toAssetId } from '../../utils'
 import { XOR } from '../../utils/consts'
-import { Block, Context, EventEntity } from '../../processor'
+import { Block, Context, EventItem } from '../../processor'
 import { BalancesDepositEvent, BalancesWithdrawEvent, TokensDepositedEvent, TokensWithdrawnEvent } from '../../types/generated/events'
 import { AssetAmount } from '../../types'
+import { unsupportedSpecError } from '../../utils/error'
 
-export async function tokenBurnHandler(ctx: Context, block: Block, eventEntity: EventEntity): Promise<void> {
-    if (eventEntity.name !== 'Tokens.Withdrawn') return
-
-	const blockHeight = block.header.height
-
-	const event = new TokensWithdrawnEvent(ctx, eventEntity.event)
-	if (!event.isV42) throw new Error(`[${blockHeight}] Unsupported spec`)
+export async function tokenBurnHandler(ctx: Context, block: Block, eventItem: EventItem<'Tokens.Withdrawn', true>): Promise<void> {
+	const event = new TokensWithdrawnEvent(ctx, eventItem.event)
+	if (!event.isV42) throw unsupportedSpecError(block)
 	
 	const { currencyId, amount } = event.asV42
 
@@ -20,13 +17,9 @@ export async function tokenBurnHandler(ctx: Context, block: Block, eventEntity: 
     await assetSnapshotsStorage.updateBurned(ctx, block, assetId, BigInt(amount))
 }
 
-export async function xorBurnHandler(ctx: Context, block: Block, eventEntity: EventEntity): Promise<void> {
-    if (eventEntity.name !== 'Balances.Withdraw') return
-	
-	const blockHeight = block.header.height
-
-	const event = new BalancesWithdrawEvent(ctx, eventEntity.event)
-	if (!event.isV42) throw new Error(`[${blockHeight}] Unsupported spec`)
+export async function xorBurnHandler(ctx: Context, block: Block, eventItem: EventItem<'Balances.Withdraw', true>): Promise<void> {
+	const event = new BalancesWithdrawEvent(ctx, eventItem.event)
+	if (!event.isV42) throw unsupportedSpecError(block)
 
     const { amount } = event.asV42
 
@@ -35,13 +28,9 @@ export async function xorBurnHandler(ctx: Context, block: Block, eventEntity: Ev
     await assetSnapshotsStorage.updateBurned(ctx, block, assetId, amount)
 }
 
-export async function tokenMintHandler(ctx: Context, block: Block, eventEntity: EventEntity): Promise<void> {
-    if (eventEntity.name !== 'Tokens.Deposited') return
-
-	const blockHeight = block.header.height
-
-	const event = new TokensDepositedEvent(ctx, eventEntity.event)
-	if (!event.isV42) throw new Error(`[${blockHeight}] Unsupported spec`)
+export async function tokenMintHandler(ctx: Context, block: Block, eventItem: EventItem<'Tokens.Deposited', true>): Promise<void> {
+	const event = new TokensDepositedEvent(ctx, eventItem.event)
+	if (!event.isV42) throw unsupportedSpecError(block)
 
     const { currencyId, amount } = event.asV42
 
@@ -50,12 +39,8 @@ export async function tokenMintHandler(ctx: Context, block: Block, eventEntity: 
     await assetSnapshotsStorage.updateMinted(ctx, block, assetId, amount)
 }
 
-export async function xorMintHandler(ctx: Context, block: Block, eventEntity: EventEntity): Promise<void> {
-    if (eventEntity.name !== 'Balances.Deposit') return
-
-	const blockHeight = block.header.height
-
-	const event = new BalancesDepositEvent(ctx, eventEntity.event)
+export async function xorMintHandler(ctx: Context, block: Block, eventItem: EventItem<'Balances.Deposit', true>): Promise<void> {
+	const event = new BalancesDepositEvent(ctx, eventItem.event)
 
 	let amount: AssetAmount
 	if (event.isV1) {
@@ -63,7 +48,7 @@ export async function xorMintHandler(ctx: Context, block: Block, eventEntity: Ev
 	} else if (event.isV42) {
 		amount = event.asV42.amount as AssetAmount
 	} else {
-		throw new Error(`[${blockHeight}] Unsupported spec`)
+		throw unsupportedSpecError(block)
 	}
 
     const assetId = XOR

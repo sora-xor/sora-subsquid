@@ -1,22 +1,20 @@
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { formatU128ToBalance } from '../../utils/assets'
 import { XOR } from '../../utils/consts'
-import { Block, CallEntity, Context } from '../../processor'
-import { findEventWithExtrinsic } from '../../utils/events'
+import { Block, CallItem, Context } from '../../processor'
+import { findEventByExtrinsicHash } from '../../utils/events'
 import { DemeterFarmingPlatformDepositedEvent } from '../../types/generated/events'
 import { DemeterFarmingPlatformDepositCall } from '../../types/generated/calls'
 import { AssetId } from '../../types'
 import { toAssetId } from '../../utils'
+import { unsupportedSpecError } from '../../utils/error'
 
-export async function demeterDepositHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
-  if (callEntity.name !== 'DemeterFarmingPlatform.deposit') return
+export async function demeterDepositHandler(ctx: Context, block: Block, callItem: CallItem<'DemeterFarmingPlatform.deposit', true>): Promise<void> {
+	ctx.log.debug('Caught demeterFarmingPlatform deposit extrinsic')
 
-  ctx.log.debug('Caught demeterFarmingPlatform deposit extrinsic')
+  const extrinsicHash = callItem.extrinsic.hash
 
-  const blockHeight = block.header.height
-  const extrinsicHash = callEntity.extrinsic.hash
-
-  const call = new DemeterFarmingPlatformDepositCall(ctx, callEntity.call)
+  const call = new DemeterFarmingPlatformDepositCall(ctx, callItem.call)
 
   let callRec: {
     baseAssetId: AssetId
@@ -53,15 +51,15 @@ export async function demeterDepositHandler(ctx: Context, block: Block, callEnti
       desiredAmount: pooledTokens
     }
   } else {
-    throw new Error(`[${blockHeight}] Unsupported spec`)
+    throw unsupportedSpecError(block)
   }
 
   let amount: string
 
-  const eventEntity = findEventWithExtrinsic('DemeterFarmingPlatform.Deposited', block, extrinsicHash)
+  const eventItem = findEventByExtrinsicHash(block, extrinsicHash, ['DemeterFarmingPlatform.Deposited'])
 
-  if (eventEntity) {
-    const event = new DemeterFarmingPlatformDepositedEvent(ctx, eventEntity.event)
+  if (eventItem) {
+    const event = new DemeterFarmingPlatformDepositedEvent(ctx, eventItem.event)
 
     let eventRec: { amount: bigint }
     if (event.isV33) {
@@ -71,7 +69,7 @@ export async function demeterDepositHandler(ctx: Context, block: Block, callEnti
     } else if (event.isV43) {
       eventRec = { amount: event.asV43[5] }
     } else {
-      throw new Error(`[${blockHeight}] Unsupported spec`)
+      throw unsupportedSpecError(block)
     }
     
     // a little trick - we get decimals from pool asset, not lp token
@@ -88,7 +86,7 @@ export async function demeterDepositHandler(ctx: Context, block: Block, callEnti
     amount: amount.toString()
   }
 
-  const historyElement = await createHistoryElement(ctx, block, callEntity)
+  const historyElement = await createHistoryElement(ctx, block, callItem)
   await addDataToHistoryElement(ctx, block, historyElement, details)
   await updateHistoryElementStats(ctx, block, historyElement)
 

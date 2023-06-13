@@ -7,21 +7,21 @@ import { XOR } from './consts'
 import { formatDateTimestamp, toAddress, toCamelCase } from './index'
 import { nToU8a } from '@polkadot/util'
 import { toJSON } from '@subsquid/util-internal-json'
-import { findEventWithExtrinsic } from './events'
+import { findEventByExtrinsicHash } from './events'
 import { XorFeeFeeWithdrawnEvent } from '../types/generated/events'
+import { unsupportedSpecError } from './error'
 
 const INCOMING_TRANSFER_METHODS = ['transfer', 'swap_transfer']
 
-const getCallEntityNetworkFee = (ctx: Context, block: Block, callEntity: CallEntity): bigint => {
-	const blockHeight = block.header.height
-    const feeWithdrawnEventEntity = findEventWithExtrinsic('XorFee.FeeWithdrawn', block, callEntity.extrinsic.hash)
+const getCallEntityNetworkFee = (ctx: Context, block: Block, callItem: CallEntity): bigint => {
+    const feeWithdrawnEventEntity = findEventByExtrinsicHash(block, callItem.extrinsic.hash, ['XorFee.FeeWithdrawn'])
     if (feeWithdrawnEventEntity) {
         const feeWithdrawnEvent = new XorFeeFeeWithdrawnEvent(ctx, feeWithdrawnEventEntity.event)
         let feeAmount: bigint
         if (feeWithdrawnEvent.isV1) {
             feeAmount = feeWithdrawnEvent.asV1[1]
         } else {
-            throw new Error(`[${blockHeight}] Unsupported spec`)
+            throw unsupportedSpecError(block)
         }
         
         return feeAmount
@@ -29,38 +29,38 @@ const getCallEntityNetworkFee = (ctx: Context, block: Block, callEntity: CallEnt
     return 0n
 }
 
-export const createHistoryElement = (ctx: Context, block: Block, callEntity: CallEntity): HistoryElement => {
+export const createHistoryElement = (ctx: Context, block: Block, callItem: CallEntity): HistoryElement => {
     const historyElement = new HistoryElement()
 
 	if (!block.header.validator) {
 		throw Error('There is no block validator')
 	}
 
-    historyElement.id = callEntity.extrinsic.hash
+    historyElement.id = callItem.extrinsic.hash
     historyElement.blockHeight = BigInt(block.header.height)
     historyElement.blockHash = block.header.hash.toString()
-    historyElement.module = toCamelCase(callEntity.name.split('.')[0])
-    historyElement.method = toCamelCase(callEntity.name.split('.')[1])
-    historyElement.address = toAddress(callEntity.extrinsic.signature?.address)
-    historyElement.networkFee = formatU128ToBalance(getCallEntityNetworkFee(ctx, block, callEntity), XOR)
+    historyElement.module = toCamelCase(callItem.name.split('.')[0])
+    historyElement.method = toCamelCase(callItem.name.split('.')[1])
+    historyElement.address = toAddress(callItem.extrinsic.signature?.address)
+    historyElement.networkFee = formatU128ToBalance(getCallEntityNetworkFee(ctx, block, callItem), XOR)
     historyElement.timestamp = formatDateTimestamp(new Date(block.header.timestamp))
 	historyElement.updatedAtBlock = block.header.height
 	historyElement.callNames = []
 
-    const success = callEntity.extrinsic.success
+    const success = callItem.extrinsic.success
 
     if (success) {
         historyElement.execution = new ExecutionResult({
             success
         })
     } else {
-        const error = callEntity.extrinsic.error.__kind === 'Module'
+        const error = callItem.extrinsic.error.__kind === 'Module'
             ? new ExecutionError({
-                moduleErrorId: nToU8a(callEntity.extrinsic.error.value.error).at(-1),
-                moduleErrorIndex: callEntity.extrinsic.error.value.index
+                moduleErrorId: nToU8a(callItem.extrinsic.error.value.error).at(-1),
+                moduleErrorIndex: callItem.extrinsic.error.value.index
             })
             : new ExecutionError({
-                nonModuleErrorMessage: JSON.stringify(callEntity.extrinsic.error)
+                nonModuleErrorMessage: JSON.stringify(callItem.extrinsic.error)
             })
 
         historyElement.execution = new ExecutionResult({

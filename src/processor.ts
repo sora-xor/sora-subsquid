@@ -110,6 +110,7 @@ export type CallEntity = CallItemUnion<typeof calls[number]>
 export type Context = BatchContext<Store, Entity>
 export type BlockHeader = SubstrateBlock
 export type Block = { header: BlockHeader, items: Entity[] }
+export { CallItem, EventItem }
 
 processor.run(new TypeormDatabase(), async (ctx) => {
 	const context = ctx as Context
@@ -126,37 +127,40 @@ processor.run(new TypeormDatabase(), async (ctx) => {
 			}
 
             if (item.kind === 'call') {
-                const props = [context, block, item] as const
-
-                await assetRegistrationHandler(...props)
-                await transfersHandler(...props)
-                await swapsHandler(...props)
-                await swapTransfersHandler(...props)
-                await liquidityDepositHandler(...props)
-                await liquidityRemovalHandler(...props)
-                await irohaMigrationHandler(...props)
-                await batchTransactionsHandler(...props)
-                await soraEthTransferHandler(...props)
-                await rewardsHandler(...props)
-                await setReferralHandler(...props)
-                await referralReserveHandler(...props)
-                await referralUnreserveHandler(...props)
-                await demeterDepositHandler(...props)
-                await demeterWithdrawHandler(...props)
-                await demeterGetRewardsHandler(...props)
-            
+				if (item.name === 'Assets.register') await assetRegistrationHandler(context, block, item)
+				if (item.name === 'Assets.transfer') await transfersHandler(context, block, item)
+				if (item.name === 'LiquidityProxy.swap') await swapsHandler(context, block, item)
+				if (item.name === 'LiquidityProxy.swap_transfer') await swapTransfersHandler(context, block, item)
+				if (item.name === 'PoolXYK.deposit_liquidity') await liquidityDepositHandler(context, block, item)
+				if (item.name === 'PoolXYK.withdraw_liquidity') await liquidityRemovalHandler(context, block, item)
+				if (item.name === 'IrohaMigration.migrate') await irohaMigrationHandler(context, block, item)
+				if (item.name === 'Utility.batch_all') await batchTransactionsHandler(context, block, item)
+				if (item.name === 'EthBridge.transfer_to_sidechain') await soraEthTransferHandler(context, block, item)
+				if (
+					item.name === 'PswapDistribution.claim_incentive' ||
+					item.name === 'Rewards.claim' ||
+					item.name === 'VestedRewards.claim_rewards' ||
+					item.name === 'VestedRewards.claim_crowdloan_rewards'
+				) await rewardsHandler(context, block, item)
+				if (item.name === 'Referrals.set_referrer') await setReferralHandler(context, block, item)
+				if (item.name === 'Referrals.reserve') await referralReserveHandler(context, block, item)
+				if (item.name === 'Referrals.unreserve') await referralUnreserveHandler(context, block, item)
+				if (item.name === 'DemeterFarmingPlatform.deposit') await demeterDepositHandler(context, block, item)
+				if (item.name === 'DemeterFarmingPlatform.withdraw') await demeterWithdrawHandler(context, block, item)
+				if (item.name === 'DemeterFarmingPlatform.get_rewards') await demeterGetRewardsHandler(context, block, item)
             }
             if (item.kind === 'event') {
-                const props = [context, block, item] as const
-            
-                await ethSoraTransferHandler(...props)
-                await tokenBurnHandler(...props)
-                await xorBurnHandler(...props)
-                await tokenMintHandler(...props)
-                await xorMintHandler(...props)
-                await networkFeeHandler(...props)
-                await referrerRewardHandler(...props)
-                await transferHandler(...props)
+				if (item.name === 'EthBridge.IncomingRequestFinalized') await ethSoraTransferHandler(context, block, item)
+				if (item.name === 'Tokens.Withdrawn') await tokenBurnHandler(context, block, item)
+				if (item.name === 'Balances.Withdraw') await xorBurnHandler(context, block, item)
+				if (item.name === 'Tokens.Deposited') await tokenMintHandler(context, block, item)
+				if (item.name === 'Balances.Deposit') await xorMintHandler(context, block, item)
+				if (item.name === 'XorFee.FeeWithdrawn') await networkFeeHandler(context, block, item)
+				if (item.name === 'XorFee.ReferrerRewarded') await referrerRewardHandler(context, block, item)
+				if (
+					item.name === 'Tokens.Transfer' ||
+					item.name === 'Balances.Transfer'
+				) await transferHandler(context, block, item)
             }
         }
 

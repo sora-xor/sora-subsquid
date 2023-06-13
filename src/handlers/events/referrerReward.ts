@@ -1,15 +1,13 @@
 import { ReferrerReward } from '../../model'
-import { Block, Context, EventEntity } from '../../processor'
+import { Block, Context, EventItem } from '../../processor'
 import { XorFeeReferrerRewardedEvent } from '../../types/generated/events'
 import { formatDateTimestamp, toAddress } from '../../utils'
+import { unsupportedSpecError } from '../../utils/error'
 
-export async function referrerRewardHandler(ctx: Context, block: Block, eventEntity: EventEntity): Promise<void> {
-	if (eventEntity.kind !== 'event' || eventEntity.name !== 'XorFee.ReferrerRewarded') return
+export async function referrerRewardHandler(ctx: Context, block: Block, eventItem: EventItem<'XorFee.ReferrerRewarded', true>): Promise<void> {
+	const event = new XorFeeReferrerRewardedEvent(ctx, eventItem.event)
 
-	const blockHeight = block.header.height
-
-	const event = new XorFeeReferrerRewardedEvent(ctx, eventEntity.event)
-	if (!event.isV22) throw new Error(`[${blockHeight}] Unsupported spec`)
+	if (!event.isV22) throw unsupportedSpecError(block)
 
 	const [referral, referrer, amount] = event.asV22
 

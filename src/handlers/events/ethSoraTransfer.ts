@@ -1,29 +1,31 @@
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { networkSnapshotsStorage } from '../../utils/network'
-import { findEventWithExtrinsic, } from '../../utils/events'
-import { Block, Context, EventEntity } from '../../processor'
-import { BalancesTransferEvent, EthBridgeRequestRegisteredEvent, TokensTransferEvent } from '../../types/generated/events'
-import { XOR } from '../../utils/consts'
-import { toHex } from '@subsquid/substrate-processor'
-import { Address, AssetAmount } from '../../types'
-import { toAddress } from '../../utils'
+import { findEventByExtrinsicHash, getTransferEventData, } from '../../utils/events'
+import { Block, Context, EventItem } from '../../processor'
+import { EthBridgeRequestRegisteredEvent } from '../../types/generated/events'
 import { findCallByExtrinsicHash } from '../../utils/calls'
+import { unsupportedSpecError } from '../../utils/error'
 
-export async function ethSoraTransferHandler(ctx: Context, block: Block, eventEntity: EventEntity): Promise<void> {
-
-    if (eventEntity.event.name !== 'EthBridge.IncomingRequestFinalized' && eventEntity.event.name !== 'EthBridge.IncomingRequestFinalizationFailed') return
-    if (!eventEntity.event.extrinsic) {
+export async function ethSoraTransferHandler(
+	ctx: Context,
+	block: Block,
+	eventItem: (
+		| EventItem<'EthBridge.IncomingRequestFinalized', true>
+		| EventItem<'EthBridge.IncomingRequestFinalizationFailed', true>
+	)
+): Promise<void> {
+    if (!eventItem.event.extrinsic) {
 		throw new Error('There is no extrinsic in the event')
 	}
 
     ctx.log.debug('Caught ETH->SORA transfer extrinsic')
 
-    const extrinsicHash = eventEntity.event.extrinsic.hash
+    const extrinsicHash = eventItem.event.extrinsic.hash
     const blockHeight = block.header.height
 
-    let registeredRequestEventEntity = findEventWithExtrinsic('EthBridge.RequestRegistered', block, extrinsicHash)
-    let tokensTransferEventEntity = findEventWithExtrinsic('Tokens.Transfer', block, extrinsicHash)
-    let balancesTransferEventEntity = findEventWithExtrinsic('Balances.Transfer', block, extrinsicHash)
+    let registeredRequestEventEntity = findEventByExtrinsicHash(block, extrinsicHash, ['EthBridge.RequestRegistered'])
+    let tokensTransferEventEntity = findEventByExtrinsicHash(block, extrinsicHash, ['Tokens.Transfer'])
+    let balancesTransferEventEntity = findEventByExtrinsicHash(block, extrinsicHash, ['Balances.Transfer'])
 
     if (!registeredRequestEventEntity) return
 
@@ -34,7 +36,7 @@ export async function ethSoraTransferHandler(ctx: Context, block: Block, eventEn
     if (registeredRequestEvent.isV1) {
         requestHash = registeredRequestEvent.asV1[0].toString()
     } else {
-        throw new Error(`[${blockHeight}] Unsupported spec`)
+        throw unsupportedSpecError(block)
     }
 
     let details: {
@@ -44,62 +46,25 @@ export async function ethSoraTransferHandler(ctx: Context, block: Block, eventEn
         to: string
     }
 
-    if (tokensTransferEventEntity) {
-        const tokensTransferEvent = new TokensTransferEvent(ctx, tokensTransferEventEntity.event)
+	const assetsTransferEventEntity = tokensTransferEventEntity || balancesTransferEventEntity
+	if (assetsTransferEventEntity) {
+		const { assetId, to, amount } = getTransferEventData(ctx, block, assetsTransferEventEntity)
+		details = {
+			requestHash,
+			assetId,
+			to,
+			amount: amount.toString()
+		}
+	} else {
+		return
+	}
 
-        if (tokensTransferEvent.isV42) {
-            const { currencyId, amount, to } = tokensTransferEvent.asV42
-
-            details = {
-                requestHash,
-                assetId: toHex(currencyId.code),
-                amount: amount.toString(),
-                to: toHex(to),
-            }
-        } else {
-            throw new Error(`[${blockHeight}] Unsupported spec`)
-        }
-    } else if (balancesTransferEventEntity) {
-        const balancesTransferEvent = new BalancesTransferEvent(ctx, balancesTransferEventEntity.event)
-
-        let eventRec: {
-            amount: AssetAmount
-            to: Address
-        }
-		
-        if (balancesTransferEvent.isV1) {
-            const [, to, amount] = balancesTransferEvent.asV1
-            eventRec = {
-                amount: amount as AssetAmount,
-                to: toAddress(to)
-            }
-        } else if (balancesTransferEvent.isV42) {
-            const { amount, to } = balancesTransferEvent.asV42
-            eventRec = {
-                amount: amount as AssetAmount,
-                to: toAddress(to)
-            }
-        } else {
-            throw new Error(`[${blockHeight}] Unsupported spec`)
-        }
-
-        details = {
-            requestHash: requestHash.toString(),
-            assetId: XOR,
-            amount: eventRec.amount.toString(),
-            to: eventRec.to,
-        }
-
-    } else {
-        return
-    }
-
-	const callEntity = findCallByExtrinsicHash(['BridgeMultisig.as_multi', 'BridgeMultisig.as_multi_threshold_1'], block, extrinsicHash)
-	if (!callEntity) {
+	const callItem = findCallByExtrinsicHash(['BridgeMultisig.as_multi', 'BridgeMultisig.as_multi_threshold_1'], block, extrinsicHash)
+	if (!callItem) {
 		throw new Error(`[${blockHeight}] Cannot find call "BridgeMultisig.as_multi" with extrinsic hash ${extrinsicHash}`)
 	}
 
-	const historyElement = await createHistoryElement(ctx, block, callEntity)
+	const historyElement = await createHistoryElement(ctx, block, callItem)
 	await addDataToHistoryElement(ctx, block, historyElement, details)
 	await updateHistoryElementStats(ctx, block,historyElement)
 	await networkSnapshotsStorage.updateBridgeIncomingTransactionsStats(ctx, block)

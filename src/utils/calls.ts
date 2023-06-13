@@ -1,19 +1,17 @@
-import { Block, CallEntity } from '../processor'
+import { Block, CallEntity, CallItem } from '../processor'
 import { SubstrateExtrinsic } from '@subsquid/substrate-processor'
-import { CallItem } from '@subsquid/substrate-processor/lib/interfaces/dataSelection'
 
 type SpecificCallItem<T extends CallEntity['name']> = CallItem<T, true>;
 
-export function getAllCallsByExtrinsicHash<T extends (CallEntity['name'] | CallEntity['name'][])>(
+export function getBlockCalls(block: Block): CallEntity[] {
+	return block.items.filter(c => c.kind === 'call') as CallEntity[]
+}
+
+export function getAllCallsByExtrinsicHash(
 	block: Block,
 	extrinsicHash: SubstrateExtrinsic['hash']
-): CallItem<T extends CallEntity['name'] ? T : T[0], true>[] {
-	const calls = block.items.filter(
-		c => c.kind === 'call'
-		&& c.name !== '*'
-		&& c.extrinsic.hash === extrinsicHash
-	)
-	return calls as unknown as CallItem<T extends CallEntity['name'] ? T : T[0], true>[]
+): CallEntity[] {
+	return getBlockCalls(block).filter(c => c.extrinsic.hash === extrinsicHash)
 }
 
 export function findCallsByExtrinsicHash<T extends CallEntity['name'][]>(
@@ -21,10 +19,8 @@ export function findCallsByExtrinsicHash<T extends CallEntity['name'][]>(
 	block: Block,
 	extrinsicHash: SubstrateExtrinsic['hash']
 ): { [K in T[number]]: SpecificCallItem<K> }[T[number]][] {
-	const calls = block.items.filter(
-		c => c.kind === 'call'
-		&& c.name !== '*'
-		&& (
+	const calls = getBlockCalls(block).filter(c =>
+		(
 			(typeof callNames === 'string' && callNames === c.name)
 			|| (Array.isArray(callNames) && callNames.includes(c.name))
 		)

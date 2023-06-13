@@ -1,21 +1,20 @@
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { formatU128ToBalance } from '../../utils/assets'
-import { Block, CallEntity, Context } from '../../processor'
-import { findEventWithExtrinsic } from '../../utils/events'
+import { Block, CallItem, Context } from '../../processor'
+import { findEventByExtrinsicHash } from '../../utils/events'
 import { BalancesTransferEvent, CurrenciesDepositedEvent, CurrenciesTransferredEvent } from '../../types/generated/events'
 import { IrohaMigrationMigrateCall } from '../../types/generated/calls'
 import { toAssetId } from '../../utils'
+import { unsupportedSpecError } from '../../utils/error'
 
-export async function irohaMigrationHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
-    if (callEntity.name !== 'IrohaMigration.migrate') return
-
+export async function irohaMigrationHandler(ctx: Context, block: Block, callItem: CallItem<'IrohaMigration.migrate', true>): Promise<void> {
     ctx.log.debug('Caught iroha migration extrinsic')
 
-    const historyElement = await createHistoryElement(ctx, block, callEntity)
+    const historyElement = await createHistoryElement(ctx, block, callItem)
 	const blockHeight = block.header.height
-    const extrinsicHash = callEntity.extrinsic.hash
+    const extrinsicHash = callItem.extrinsic.hash
 
-	const call = new IrohaMigrationMigrateCall(ctx, callEntity.call)
+	const call = new IrohaMigrationMigrateCall(ctx, callItem.call)
 
     let details: {
         assetId: string
@@ -24,7 +23,7 @@ export async function irohaMigrationHandler(ctx: Context, block: Block, callEnti
 
     if (historyElement.execution.success) {
 		if (call.isV1) {
-			const currenciesDepositedEventEntity = findEventWithExtrinsic('Currencies.Deposited', block, extrinsicHash)
+			const currenciesDepositedEventEntity = findEventByExtrinsicHash(block, extrinsicHash, ['Currencies.Deposited'])
 			
 			if (currenciesDepositedEventEntity) {
 				const currenciesDepositedEvent = new CurrenciesDepositedEvent(ctx, currenciesDepositedEventEntity.event)
@@ -37,10 +36,10 @@ export async function irohaMigrationHandler(ctx: Context, block: Block, callEnti
 						amount: formatU128ToBalance(amount, assetId)
 					}
 				} else {
-					throw new Error(`[${blockHeight}] Unsupported spec`)
+					throw unsupportedSpecError(block)
 				}
 			} else {
-				const currenciesTransferredEventEntity = findEventWithExtrinsic('Currencies.Transferred', block, extrinsicHash)
+				const currenciesTransferredEventEntity = findEventByExtrinsicHash(block, extrinsicHash, ['Currencies.Transferred'])
 
 				if (currenciesTransferredEventEntity) {
 					const currenciesTransferredEvent = new CurrenciesTransferredEvent(ctx, currenciesTransferredEventEntity.event)
@@ -53,14 +52,14 @@ export async function irohaMigrationHandler(ctx: Context, block: Block, callEnti
 							amount: formatU128ToBalance(amount, assetId)
 						}
 					} else {
-						throw new Error(`[${blockHeight}] Unsupported spec`)
+						throw unsupportedSpecError(block)
 					}
 				} else {
 					ctx.log.error(`[${blockHeight}] Cannot find event "Currencies.Transferred" with extrinsic hash ${extrinsicHash}`)
 				}
 			}
 		} else {
-			const balancesTransferEventEntity = findEventWithExtrinsic('Balances.Transfer', block, extrinsicHash)
+			const balancesTransferEventEntity = findEventByExtrinsicHash(block, extrinsicHash, ['Balances.Transfer'])
 			
 			if (balancesTransferEventEntity) {
 				const balancesTransferEvent = new BalancesTransferEvent(ctx, balancesTransferEventEntity.event)
@@ -73,10 +72,10 @@ export async function irohaMigrationHandler(ctx: Context, block: Block, callEnti
 						amount: formatU128ToBalance(amount, assetId)
 					}
 				} else {
-					throw new Error(`[${blockHeight}] Unsupported spec`)
+					throw unsupportedSpecError(block)
 				}
 			} else {
-				const currenciesTransferredEventEntity = findEventWithExtrinsic('Currencies.Transferred', block, extrinsicHash)
+				const currenciesTransferredEventEntity = findEventByExtrinsicHash(block, extrinsicHash, ['Currencies.Transferred'])
 
 				if (currenciesTransferredEventEntity) {
 					const currenciesTransferredEvent = new CurrenciesTransferredEvent(ctx, currenciesTransferredEventEntity.event)
@@ -89,7 +88,7 @@ export async function irohaMigrationHandler(ctx: Context, block: Block, callEnti
 							amount: formatU128ToBalance(amount, assetId)
 						}
 					} else {
-						throw new Error(`[${blockHeight}] Unsupported spec`)
+						throw unsupportedSpecError(block)
 					}
 				} else {
 					ctx.log.error(`[${blockHeight}] Cannot find event "Currencies.Transferred" with extrinsic hash ${extrinsicHash}`)

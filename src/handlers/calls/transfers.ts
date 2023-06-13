@@ -1,22 +1,20 @@
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { formatU128ToBalance } from '../../utils/assets'
-import { Block, CallEntity, Context } from '../../processor'
+import { Block, CallItem, Context } from '../../processor'
 import { AssetsTransferEvent } from '../../types/generated/events'
-import { findEventWithExtrinsic } from '../../utils/events'
+import { findEventByExtrinsicHash } from '../../utils/events'
 import { AssetsTransferCall } from '../../types/generated/calls'
 import { Address, AssetId } from '../../types'
 import { toAddress, toAssetId } from '../../utils'
+import { unsupportedSpecError } from '../../utils/error'
 
-export async function transfersHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
-
-    if (callEntity.name !== 'Assets.transfer') return
-
+export async function transfersHandler(ctx: Context, block: Block, callItem: CallItem<'Assets.transfer', true>): Promise<void> {
     ctx.log.debug('Caught transfer extrinsic')
 
 	const blockHeight = block.header.height
-	const extrinsicHash = callEntity.extrinsic.hash
-	const extrinsicSigner = toAddress(callEntity.call.origin.value.value)
-    const historyElement = await createHistoryElement(ctx, block, callEntity)
+	const extrinsicHash = callItem.extrinsic.hash
+	const extrinsicSigner = toAddress(callItem.call.origin.value.value)
+    const historyElement = await createHistoryElement(ctx, block, callItem)
 
     if (!historyElement) return
 
@@ -28,13 +26,13 @@ export async function transfersHandler(ctx: Context, block: Block, callEntity: C
 	}
 
     if (historyElement.execution.success) {
-		const eventEntity = findEventWithExtrinsic('Assets.Transfer', block, extrinsicHash)
-        if (!eventEntity) {
+		const eventItem = findEventByExtrinsicHash(block, extrinsicHash, ['Assets.Transfer'])
+        if (!eventItem) {
 			throw new Error(`[${blockHeight}] Cannot find event "Assets.Transfer" with extrinsic hash ${extrinsicHash}`)
 		}
 		
 
-		const event = new AssetsTransferEvent(ctx, eventEntity.event)
+		const event = new AssetsTransferEvent(ctx, eventItem.event)
 
 		let eventRec: {
 			from: Address,
@@ -59,7 +57,7 @@ export async function transfersHandler(ctx: Context, block: Block, callEntity: C
 				amount
 			}
 		} else {
-			throw new Error(`[${blockHeight}] Unsupported spec`)
+			throw unsupportedSpecError(block)
 		}
 		const { from, to, assetId, amount } = eventRec
 
@@ -76,7 +74,7 @@ export async function transfersHandler(ctx: Context, block: Block, callEntity: C
     }
 
     else {
-		const call = new AssetsTransferCall(ctx, callEntity.call)
+		const call = new AssetsTransferCall(ctx, callItem.call)
 
 		let callRec: {
 			to: Address,
@@ -98,7 +96,7 @@ export async function transfersHandler(ctx: Context, block: Block, callEntity: C
 				amount
 			}
 		} else {
-			throw new Error(`[${blockHeight}] Unsupported spec`)
+			throw unsupportedSpecError(block)
 		}
 		const { to, assetId, amount } = callRec
 

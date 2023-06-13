@@ -1,19 +1,17 @@
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { formatU128ToBalance } from '../../utils/assets'
 import { XOR } from '../../utils/consts'
-import { Block, CallEntity, Context } from '../../processor'
-import { findEventWithExtrinsic, getTransferEventData } from '../../utils/events'
+import { Block, CallItem, Context } from '../../processor'
+import { findEventByExtrinsicHash, getTransferEventData } from '../../utils/events'
 import { ReferralsUnreserveCall } from '../../types/generated/calls'
+import { unsupportedSpecError } from '../../utils/error'
 
-export async function referralUnreserveHandler(ctx: Context, block: Block, callEntity: CallEntity): Promise<void> {
-
-    if (callEntity.name !== 'Referrals.unreserve') return
-
+export async function referralUnreserveHandler(ctx: Context, block: Block, callItem: CallItem<'Referrals.unreserve', true>): Promise<void> {
     ctx.log.debug('Caught referral unreserve extrinsic')
 
 	const blockHeight = block.header.height
-    const extrinsicHash = callEntity.extrinsic.hash
-    const historyElement = await createHistoryElement(ctx, block, callEntity)
+    const extrinsicHash = callItem.extrinsic.hash
+    const historyElement = await createHistoryElement(ctx, block, callItem)
 
     if (!historyElement) return
 
@@ -24,7 +22,7 @@ export async function referralUnreserveHandler(ctx: Context, block: Block, callE
     }
 
     if (historyElement.execution.success) {
-        const balancesTransferEventEntity = findEventWithExtrinsic('Balances.Transfer', block, extrinsicHash)
+        const balancesTransferEventEntity = findEventByExtrinsicHash(block, extrinsicHash, ['Balances.Transfer'])
 
         if (balancesTransferEventEntity) {
             const { from, to, amount } = getTransferEventData(ctx, block, balancesTransferEventEntity)
@@ -38,14 +36,14 @@ export async function referralUnreserveHandler(ctx: Context, block: Block, callE
 			throw new Error(`[${blockHeight}] Cannot find event "Balances.Transfer" with extrinsic hash ${extrinsicHash}`)
         }
     } else {
-        const call = new ReferralsUnreserveCall(ctx, callEntity.call)
+        const call = new ReferralsUnreserveCall(ctx, callItem.call)
 
         if (call.isV22) {
             details = {
                 amount: formatU128ToBalance(call.asV22.balance, XOR)
             }
         } else {
-            throw new Error(`[${blockHeight}] Unsupported spec`)
+            throw unsupportedSpecError(block)
         }
     }
 
