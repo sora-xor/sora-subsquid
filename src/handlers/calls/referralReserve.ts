@@ -3,7 +3,7 @@ import { formatU128ToBalance } from '../../utils/assets'
 import { XOR } from '../../utils/consts'
 import { Block, CallItem, Context } from '../../processor'
 import { ReferralsReserveCall } from '../../types/generated/calls'
-import { findEventByExtrinsicHash, getAssetTransferEventData } from '../../utils/events'
+import { findEventByExtrinsicHash, getAssetsTransferEventData } from '../../utils/events'
 import { unsupportedSpecError } from '../../utils/error'
 
 export async function referralReserveHandler(ctx: Context, block: Block, callItem: CallItem<'Referrals.reserve', true>): Promise<void> {
@@ -23,7 +23,7 @@ export async function referralReserveHandler(ctx: Context, block: Block, callIte
         const balancesTransferEventEntity = findEventByExtrinsicHash(block, extrinsicHash, ['Balances.Transfer'])
 
         if (balancesTransferEventEntity) {
-            const { from, to, amount } = getAssetTransferEventData(ctx, block, balancesTransferEventEntity)
+            const { from, to, amount } = getAssetsTransferEventData(ctx, block, balancesTransferEventEntity)
 
             details = {
                 from,

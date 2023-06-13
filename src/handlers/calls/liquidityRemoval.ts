@@ -1,6 +1,6 @@
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { formatU128ToBalance } from '../../utils/assets'
-import { findEventsByExtrinsicHash, getAssetTransferEventData } from '../../utils/events'
+import { findEventsByExtrinsicHash, getAssetsTransferEventData } from '../../utils/events'
 import { poolsStorage } from '../../utils/pools'
 import { Block, CallItem, Context } from '../../processor'
 import { PoolXykWithdrawLiquidityCall } from '../../types/generated/calls'
@@ -60,8 +60,8 @@ export async function liquidityRemovalHandler(ctx: Context, block: Block, callIt
     
 			// We assume that events go in the same order as in the blockchain
 			// First the event with the base asset, and then the event with the target asset
-            const { amount: amountA } = getAssetTransferEventData(ctx, block, baseAssetTransfer)
-            const { amount: amountB } = getAssetTransferEventData(ctx, block, targetAssetTransfer)
+            const { amount: amountA } = getAssetsTransferEventData(ctx, block, baseAssetTransfer)
+            const { amount: amountB } = getAssetsTransferEventData(ctx, block, targetAssetTransfer)
     
             details.baseAssetAmount = formatU128ToBalance(amountA, baseAssetId)
             details.targetAssetAmount = formatU128ToBalance(amountB, targetAssetId)

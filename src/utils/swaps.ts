@@ -8,6 +8,7 @@ import { XOR } from "./consts"
 import { findEventByExtrinsicHash } from "./events"
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from "./history"
 import { Address, AssetId } from "../types"
+import { unsupportedSpecError } from "./error"
 
 export type SwapAmount = SwapAmount_WithDesiredInput | SwapAmount_WithDesiredOutput
 
@@ -89,7 +90,7 @@ export const handleAndSaveExtrinsic = async (
     }
 
     if (historyElement.execution.success) {
-		const eventItem = findEventByExtrinsicHash('LiquidityProxy.Exchange', block, extrinsicHash)
+		const eventItem = findEventByExtrinsicHash(block, extrinsicHash, ['LiquidityProxy.Exchange'])
         if (!eventItem) {
 			ctx.log.error(`[${blockHeight}] Cannot find event "LiquidityProxy.Exchange" with extrinsic hash ${extrinsicHash}`)
 			return

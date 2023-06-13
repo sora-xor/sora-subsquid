@@ -2,7 +2,7 @@ import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStat
 import { formatU128ToBalance } from '../../utils/assets'
 import { XOR } from '../../utils/consts'
 import { Block, CallItem, Context } from '../../processor'
-import { findEventByExtrinsicHash, getAssetTransferEventData } from '../../utils/events'
+import { findEventByExtrinsicHash, getAssetsTransferEventData } from '../../utils/events'
 import { ReferralsUnreserveCall } from '../../types/generated/calls'
 import { unsupportedSpecError } from '../../utils/error'
 
@@ -25,7 +25,7 @@ export async function referralUnreserveHandler(ctx: Context, block: Block, callI
         const balancesTransferEventEntity = findEventByExtrinsicHash(block, extrinsicHash, ['Balances.Transfer'])
 
         if (balancesTransferEventEntity) {
-            const { from, to, amount } = getAssetTransferEventData(ctx, block, balancesTransferEventEntity)
+            const { from, to, amount } = getAssetsTransferEventData(ctx, block, balancesTransferEventEntity)
 
             details = {
                 from,

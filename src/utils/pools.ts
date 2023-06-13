@@ -4,6 +4,7 @@ import { PoolXYKReservesStorage, PoolXYKPropertiesStorage } from "../types/gener
 import { XOR, DOUBLE_PRICE_POOL } from './consts'
 import { decodeAssetId, toAssetId, toAddress } from '.'
 import { AssetId, Address } from '../types'
+import { unsupportedSpecError } from './error'
 
 // getters & setter for flag, should we sync poolXYK reserves
 // and then calc asset prices
