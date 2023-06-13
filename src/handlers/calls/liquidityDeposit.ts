@@ -1,7 +1,7 @@
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { formatU128ToBalance } from '../../utils/assets'
 import { poolsStorage } from '../../utils/pools'
-import { findEventsByExtrinsicHash, getTransferEventData } from '../../utils/events'
+import { findEventsByExtrinsicHash, getAssetTransferEventData } from '../../utils/events'
 import { Block, CallItem, Context } from '../../processor'
 import { PoolXykDepositLiquidityCall } from '../../types/generated/calls'
 import { toAssetId } from '../../utils'
@@ -60,8 +60,8 @@ export async function liquidityDepositHandler(ctx: Context, block: Block, callIt
 
 		// We assume that events go in the same order as in the blockchain
 		// First the event with the base asset, and then the event with the target asset
-        const { amount: amountA } = getTransferEventData(ctx, block, baseAssetTransfer)
-        const { amount: amountB } = getTransferEventData(ctx, block, targetAssetTransfer)
+        const { amount: amountA } = getAssetTransferEventData(ctx, block, baseAssetTransfer)
+        const { amount: amountB } = getAssetTransferEventData(ctx, block, targetAssetTransfer)
 
         details.baseAssetAmount = formatU128ToBalance(amountA, baseAssetId)
         details.targetAssetAmount = formatU128ToBalance(amountB, targetAssetId)

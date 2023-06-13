@@ -9,6 +9,13 @@ import { unsupportedSpecError } from './error'
 
 type SpecificEventItem<T extends EventEntity['name']> = EventItem<T, true>;
 
+export type TransferEventData = {
+	assetId: AssetId,
+	from: Address
+	to: Address
+	amount: bigint
+}
+
 export function getBlockEvents(block: Block): EventEntity[] {
 	return block.items.filter(c => c.kind === 'event') as EventEntity[]
 }
@@ -44,13 +51,6 @@ export const isTokenTransferEvent = (e: EventEntity) => {
 
 export const isAssetTransferEvent = (e: EventEntity): boolean => {
   	return isXorTransferEvent(e) || isTokenTransferEvent(e)
-}
-
-type TransferEventData = {
-	assetId: AssetId,
-	from: Address
-	to: Address
-	amount: bigint
 }
 
 export const getBalancesTransferEventData = (
@@ -110,7 +110,7 @@ export const getTokensTransferEventData = (
 }
 	
 
-export const getTransferEventData = (
+export const getAssetsTransferEventData = (
 	ctx: Context,
 	block: Block,
 	eventItem: EventItem<'Balances.Transfer', true> | EventItem<'Tokens.Transfer', true>
@@ -119,5 +119,74 @@ export const getTransferEventData = (
 		return getBalancesTransferEventData(ctx, block, eventItem)
 	} else {
 		return getTokensTransferEventData(ctx, block, eventItem)
+	}
+}
+
+export const getBalancesDepositedEventData = (
+	ctx: Context,
+	block: Block,
+	eventItem: EventItem<'Balances.Deposited', true>
+): TransferEventData => {
+	let eventRec: TransferEventData
+
+	const event = new BalancesTransferEvent(ctx, eventItem.event)
+
+	if (event.isV1) {
+		const [ from, to, amount ] = event.asV1
+		eventRec = {
+			assetId: XOR,
+			from: toAddress(from),
+			to: toAddress(to),
+			amount
+		}
+	} else if (event.isV42) {
+		const { from, to, amount } = event.asV42
+		eventRec = {
+			assetId: XOR,
+			from: toAddress(from),
+			to: toAddress(to),
+			amount
+		}
+	} else {
+		throw unsupportedSpecError(block)
+	}
+	
+	return eventRec
+}
+
+export const getTokensDepositedEventData = (
+	ctx: Context,
+	block: Block,
+	eventItem: EventItem<'Tokens.Deposited', true>
+): TransferEventData => {
+	let eventRec: TransferEventData
+
+	const event = new TokensTransferEvent(ctx, eventItem.event)
+
+	if (event.isV42) {
+		const { currencyId, from, to, amount } = event.asV42
+		eventRec = {
+			assetId: toAssetId(currencyId.code),
+			from: toAddress(from),
+			to: toAddress(to),
+			amount: amount as AssetAmount
+		}
+	} else {
+		throw unsupportedSpecError(block)
+	}
+	
+	return eventRec
+}
+	
+
+export const getAssetsDepositedEventData = (
+	ctx: Context,
+	block: Block,
+	eventItem: EventItem<'Balances.Deposited', true> | EventItem<'Tokens.Deposited', true>
+): TransferEventData => {
+	if (eventItem.name === 'Balances.Deposited') {
+		return getBalancesDepositedEventData(ctx, block, eventItem)
+	} else {
+		return getTokensDepositedEventData(ctx, block, eventItem)
 	}
 }

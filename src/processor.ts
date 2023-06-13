@@ -68,6 +68,7 @@ const events = [
     'Tokens.Withdrawn',
     'Tokens.Transfer',
     'Balances.Deposit',
+    'Balances.Deposited',
     'Balances.Withdraw',
     'Balances.Transfer',
     'Currencies.Transferred',
