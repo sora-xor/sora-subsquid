@@ -12,5 +12,4 @@
 /archive/stage/cockroach-data
 /archive/dev/cockroach-data
 
-# squid.yaml
 # typegen.json
