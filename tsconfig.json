@@ -13,7 +13,7 @@
     "emitDecoratorMetadata": true,
     "skipLibCheck": true
   },
-  "include": ["src"],
+  "include": ["src", "src/config.ts"],
   "exclude": [
     "node_modules"
   ]

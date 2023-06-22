@@ -1,15 +1,13 @@
 import { ReferrerReward } from '../../model'
-import { Block, Context, EventItem } from '../../processor'
+import { Block, Context, EventItem } from '../../types'
 import { XorFeeReferrerRewardedEvent } from '../../types/generated/events'
 import { formatDateTimestamp, toAddress } from '../../utils'
-import { unsupportedSpecError } from '../../utils/error'
+import { getEntityData } from '../../utils/entities'
 
-export async function referrerRewardHandler(ctx: Context, block: Block, eventItem: EventItem<'XorFee.ReferrerRewarded', true>): Promise<void> {
+export async function referrerRewardEventHandler(ctx: Context, block: Block, eventItem: EventItem<'XorFee.ReferrerRewarded'>): Promise<void> {
 	const event = new XorFeeReferrerRewardedEvent(ctx, eventItem.event)
 
-	if (!event.isV22) throw unsupportedSpecError(block)
-
-	const [referral, referrer, amount] = event.asV22
+	const [referral, referrer, amount] = getEntityData(ctx, block, event, eventItem)
 
 	ctx.log.debug(`Caught referrer reward`)
 

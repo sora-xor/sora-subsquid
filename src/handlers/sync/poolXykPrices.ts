@@ -6,7 +6,7 @@ import { formatU128ToBalance, assetSnapshotsStorage } from '../../utils/assets'
 import { networkSnapshotsStorage } from '../../utils/network'
 import { poolAccounts, PoolsPrices, poolsStorage } from '../../utils/pools'
 import { XOR, PSWAP, DAI, BASE_ASSETS } from '../../utils/consts'
-import { Block, Context } from '../../processor'
+import { Block, Context } from '../../types'
 import { AssetId } from '../../types'
 
 export async function syncPoolXykPrices(ctx: Context, block: Block): Promise<void> {
@@ -21,11 +21,12 @@ export async function syncPoolXykPrices(ctx: Context, block: Block): Promise<voi
     let pswapPriceInDAI = new BigNumber(0)
     let liquiditiesUSD = new BigNumber(0)
 
-    let baseAssetWithDoublePoolsPrice = new BigNumber(0);
+    let baseAssetWithDoublePoolsPrice = new BigNumber(0)
 
-    const pools: Record<string, PoolXYK[]> = {};
+    const pools: Record<string, PoolXYK[]> = {}
+	const assetsPrices: Record<AssetId, { reserves: bigint; price: string; }> = {}
 
-    for (const baseAssetId of BASE_ASSETS) {
+    for (const baseAssetId of [...BASE_ASSETS].reverse()) {
         const poolsMap = poolAccounts.getMap(baseAssetId)
 
         if (!poolsMap) continue
@@ -97,13 +98,20 @@ export async function syncPoolXykPrices(ctx: Context, block: Block): Promise<voi
         )
 
         // update price samples
-        if (baseAssetId === XOR) {
-            for (const pool of pools[baseAssetId]) {
-                // TODO: check if '0' is right decision here
-                await assetSnapshotsStorage.updatePrice(ctx, block, pool.targetAsset.id as AssetId, pool.priceUSD ?? '0')
+		for (const pool of pools[baseAssetId]) {
+            if (!assetsPrices[pool.targetAsset.id as AssetId] || assetsPrices[pool.targetAsset.id as AssetId].reserves < pool.targetAssetReserves) {
+				if (pool.priceUSD) {
+					assetsPrices[pool.targetAsset.id as AssetId] = {
+						reserves: pool.targetAssetReserves,
+						price: pool.priceUSD,
+					}
+				}
+               
             }
-
-            await assetSnapshotsStorage.updatePrice(ctx, block, baseAssetId, baseAssetPriceInDAI.toFixed(18))
+        }
+		assetsPrices[baseAssetId] = {
+            reserves: BigInt(0),
+            price: baseAssetPriceInDAI.toFixed(18),
         }
     }
 
@@ -124,6 +132,11 @@ export async function syncPoolXykPrices(ctx: Context, block: Block): Promise<voi
 				});
 			}
         }
+    }
+
+    // update assets prices
+    for (const [assetId, { price }] of Object.entries(assetsPrices)) {
+        await assetSnapshotsStorage.updatePrice(ctx, block, assetId as AssetId, price);
     }
 
     // update locked liquidity for assets

@@ -1,10 +1,10 @@
 import { toHex } from '@subsquid/substrate-processor'
-import { Block, CallItem, Context } from '../../processor'
+import { Block, CallItem, Context } from '../../types'
 import { ReferralsSetReferrerCall } from '../../types/generated/calls'
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
-import { unsupportedSpecError } from '../../utils/error'
+import { getEntityData } from '../../utils/entities'
 
-export async function setReferralHandler(ctx: Context, block: Block, callItem: CallItem<'Referrals.set_referrer', true>): Promise<void> {
+export async function setReferralCallHandler(ctx: Context, block: Block, callItem: CallItem<'Referrals.set_referrer'>): Promise<void> {
 	ctx.log.debug('Caught set referral extrinsic')
 
     const historyElement = await createHistoryElement(ctx, block, callItem)
@@ -13,17 +13,13 @@ export async function setReferralHandler(ctx: Context, block: Block, callItem: C
     let details = new Object()
     
     const call = new ReferralsSetReferrerCall(ctx, callItem.call)
+	const data = getEntityData(ctx, block, call, callItem)
 
-    let referrer: Uint8Array
-    if (call.isV22) {
-        referrer = call.asV22.referrer
-    } else {
-        throw unsupportedSpecError(block)
-    }
+	const referrer = toHex(data.referrer)
 
     details = {
         from: historyElement.address,
-        to: toHex(referrer)
+        to: referrer
     }
 
     await addDataToHistoryElement(ctx, block, historyElement, details)

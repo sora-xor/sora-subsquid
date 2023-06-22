@@ -1,8 +1,8 @@
 {
-  "outDir": "src/types/generated",
-  "specVersions": "https://sora.archive.subsquid.io/graphql",
-  "typesBundle": "src/typesBundle.json",
-  "events": true,
-  "calls": true,
-  "storage": true
+    "outDir": "src/types/generated",
+    "specVersions": "https://sora.archive.subsquid.io/graphql",
+    "typesBundle": "src/typesBundle.json",
+    "events": true,
+    "calls": true,
+    "storage": true
 }

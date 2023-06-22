@@ -1,7 +1,7 @@
 import BigNumber from 'bignumber.js'
 
 import { SnapshotType, NetworkSnapshot, NetworkStats } from '../model'
-import { Block, Context } from '../processor'
+import { AssetAmount, Block, Context } from '../types'
 import { SnapshotSecondsMap } from './consts'
 import { formatDateTimestamp } from '.'
 
@@ -177,7 +177,7 @@ class NetworkSnapshotsStorage {
     }
   }
 
-  async updateFeesStats(ctx: Context, block: Block, fee: bigint): Promise<void> {
+  async updateFeesStats(ctx: Context, block: Block, fee: AssetAmount): Promise<void> {
     const stats = await this.networkStatsStorage.getOrCreateStats(ctx)
 
     stats.totalFees = stats.totalFees + fee

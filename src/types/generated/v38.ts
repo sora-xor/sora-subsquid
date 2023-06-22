@@ -1,6 +1,6 @@
 import type {Result, Option} from './support'
 
-export type LiquiditySourceType = LiquiditySourceType_XYKPool | LiquiditySourceType_BondingCurvePool | LiquiditySourceType_MulticollateralBondingCurvePool | LiquiditySourceType_MockPool | LiquiditySourceType_MockPool2 | LiquiditySourceType_MockPool3 | LiquiditySourceType_MockPool4 | LiquiditySourceType_XSTPool
+export type LiquiditySourceType = LiquiditySourceType_XYKPool | LiquiditySourceType_BondingCurvePool | LiquiditySourceType_MulticollateralBondingCurvePool | LiquiditySourceType_MockPool | LiquiditySourceType_MockPool2 | LiquiditySourceType_MockPool3 | LiquiditySourceType_MockPool4 | LiquiditySourceType_XSTPool | LiquiditySourceType_OrderBook
 
 export interface LiquiditySourceType_XYKPool {
     __kind: 'XYKPool'
@@ -32,6 +32,10 @@ export interface LiquiditySourceType_MockPool4 {
 
 export interface LiquiditySourceType_XSTPool {
     __kind: 'XSTPool'
+}
+
+export interface LiquiditySourceType_OrderBook {
+    __kind: 'OrderBook'
 }
 
 export type Type_56 = Type_56_System | Type_56_Timestamp | Type_56_Balances | Type_56_RandomnessCollectiveFlip | Type_56_Permissions | Type_56_Referrals | Type_56_Rewards | Type_56_XorFee | Type_56_BridgeMultisig | Type_56_Utility | Type_56_Session | Type_56_Babe | Type_56_Grandpa | Type_56_Authorship | Type_56_Staking | Type_56_Currencies | Type_56_TradingPair | Type_56_Assets | Type_56_MulticollateralBondingCurvePool | Type_56_Technical | Type_56_PoolXYK | Type_56_LiquidityProxy | Type_56_Council | Type_56_TechnicalCommittee | Type_56_Democracy | Type_56_DEXAPI | Type_56_EthBridge | Type_56_PswapDistribution | Type_56_Multisig | Type_56_Scheduler | Type_56_IrohaMigration | Type_56_ImOnline | Type_56_Offences | Type_56_TechnicalMembership | Type_56_ElectionsPhragmen | Type_56_VestedRewards | Type_56_Identity | Type_56_Farming | Type_56_XSTPool | Type_56_CeresStaking | Type_56_CeresLiquidityLocker | Type_56_CeresTokenLocker | Type_56_CeresGovernancePlatform | Type_56_CeresLaunchpad | Type_56_DemeterFarmingPlatform
@@ -493,7 +497,7 @@ export interface Proposal_DemeterFarmingPlatform {
     value: DemeterFarmingPlatformCall
 }
 
-export type BridgeSignatureVersion = BridgeSignatureVersion_V1 | BridgeSignatureVersion_V2
+export type BridgeSignatureVersion = BridgeSignatureVersion_V1 | BridgeSignatureVersion_V2 | BridgeSignatureVersion_V3
 
 export interface BridgeSignatureVersion_V1 {
     __kind: 'V1'
@@ -501,6 +505,10 @@ export interface BridgeSignatureVersion_V1 {
 
 export interface BridgeSignatureVersion_V2 {
     __kind: 'V2'
+}
+
+export interface BridgeSignatureVersion_V3 {
+    __kind: 'V3'
 }
 
 export interface Scheduled {

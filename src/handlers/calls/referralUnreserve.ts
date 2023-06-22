@@ -1,15 +1,15 @@
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { formatU128ToBalance } from '../../utils/assets'
 import { XOR } from '../../utils/consts'
-import { Block, CallItem, Context } from '../../processor'
+import { AssetAmount, Block, CallItem, Context } from '../../types'
 import { findEventByExtrinsicHash, getAssetsTransferEventData } from '../../utils/events'
 import { ReferralsUnreserveCall } from '../../types/generated/calls'
-import { unsupportedSpecError } from '../../utils/error'
+import { getEntityData } from '../../utils/entities'
+import { CannotFindEventError } from '../../utils/errors'
 
-export async function referralUnreserveHandler(ctx: Context, block: Block, callItem: CallItem<'Referrals.unreserve', true>): Promise<void> {
+export async function referralUnreserveCallHandler(ctx: Context, block: Block, callItem: CallItem<'Referrals.unreserve'>): Promise<void> {
     ctx.log.debug('Caught referral unreserve extrinsic')
 
-	const blockHeight = block.header.height
     const extrinsicHash = callItem.extrinsic.hash
     const historyElement = await createHistoryElement(ctx, block, callItem)
 
@@ -22,10 +22,11 @@ export async function referralUnreserveHandler(ctx: Context, block: Block, callI
     }
 
     if (historyElement.execution.success) {
-        const balancesTransferEventEntity = findEventByExtrinsicHash(block, extrinsicHash, ['Balances.Transfer'])
+		const balancesTransferEventName = 'Balances.Transfer'
+        const balancesTransferEventItem = findEventByExtrinsicHash(block, extrinsicHash, [balancesTransferEventName])
 
-        if (balancesTransferEventEntity) {
-            const { from, to, amount } = getAssetsTransferEventData(ctx, block, balancesTransferEventEntity)
+        if (balancesTransferEventItem) {
+            const { from, to, amount } = getAssetsTransferEventData(ctx, block, balancesTransferEventItem)
 
             details = {
                 from,
@@ -33,18 +34,15 @@ export async function referralUnreserveHandler(ctx: Context, block: Block, callI
                 amount: formatU128ToBalance(amount, XOR)
             }
         } else {
-			throw new Error(`[${blockHeight}] Cannot find event "Balances.Transfer" with extrinsic hash ${extrinsicHash}`)
+			throw new CannotFindEventError(block, extrinsicHash, balancesTransferEventName)
         }
     } else {
         const call = new ReferralsUnreserveCall(ctx, callItem.call)
-
-        if (call.isV22) {
-            details = {
-                amount: formatU128ToBalance(call.asV22.balance, XOR)
-            }
-        } else {
-            throw unsupportedSpecError(block)
-        }
+		const data = getEntityData(ctx, block, call, callItem)
+		
+		details = {
+			amount: formatU128ToBalance(data.balance as AssetAmount, XOR)
+		}
     }
 
     await addDataToHistoryElement(ctx, block, historyElement, details)

@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js'
 import { SnapshotType, Asset, AssetSnapshot, AssetVolume, AssetPrice } from '../model'
-import { Block, Context } from '../processor'
+import { Block, Context, ReferenceSymbol } from '../types'
 import { SnapshotSecondsMap, DAI } from './consts'
 import { networkSnapshotsStorage } from '../utils/network'
 import { AssetId } from '../types'
@@ -9,6 +9,8 @@ import { formatDateTimestamp, toAssetId } from '.'
 export const AssetSnapshots = [SnapshotType.DEFAULT, SnapshotType.HOUR, SnapshotType.DAY]
 
 export let assetPrecisions = new Map<AssetId, number>()
+
+export let tickerSyntheticAssetId = new Map<ReferenceSymbol, AssetId>()
 
 export const formatU128ToBalance = (u128: bigint, assetId: AssetId): string => {
 	let decimals = assetPrecisions.get(assetId) ?? 18

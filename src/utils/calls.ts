@@ -1,38 +1,29 @@
-import { Block, CallEntity, CallItem } from '../processor'
+import { Block, CallItem, CallItemName } from '../types'
 import { SubstrateExtrinsic } from '@subsquid/substrate-processor'
 
-type SpecificCallItem<T extends CallEntity['name']> = CallItem<T, true>;
+type SpecificCallItem<T extends CallItemName> = CallItem<T>;
 
-export function getBlockCalls(block: Block): CallEntity[] {
-	return block.items.filter(c => c.kind === 'call') as CallEntity[]
+export function getBlockCalls(block: Block): CallItem<CallItemName>[] {
+	return block.items.filter(c => c.kind === 'call') as CallItem<CallItemName>[]
 }
 
-export function getAllCallsByExtrinsicHash(
+export function findCallsByExtrinsicHash<T extends CallItemName[]>(
 	block: Block,
-	extrinsicHash: SubstrateExtrinsic['hash']
-): CallEntity[] {
-	return getBlockCalls(block).filter(c => c.extrinsic.hash === extrinsicHash)
-}
-
-export function findCallsByExtrinsicHash<T extends CallEntity['name'][]>(
-	callNames: T,
-	block: Block,
-	extrinsicHash: SubstrateExtrinsic['hash']
+	extrinsicHash: SubstrateExtrinsic['hash'],
+	callNames?: T,
 ): { [K in T[number]]: SpecificCallItem<K> }[T[number]][] {
 	const calls = getBlockCalls(block).filter(c =>
-		(
-			(typeof callNames === 'string' && callNames === c.name)
-			|| (Array.isArray(callNames) && callNames.includes(c.name))
-		)
-		&& c.extrinsic.hash === extrinsicHash
+		(!callNames || callNames.includes(c.name))
+		&& c.extrinsic?.hash === extrinsicHash
 	)
-	return calls as { [K in T[number]]: SpecificCallItem<K> }[T[number]][];
+	// TODO: get rid of this unknown type
+	return calls as unknown as { [K in T[number]]: SpecificCallItem<K> }[T[number]][];
 }
 
-export function findCallByExtrinsicHash<T extends CallEntity['name'][]>(
-	callNames: T,
+export function findCallByExtrinsicHash<T extends CallItemName[]>(
 	block: Block,
-	extrinsicHash: SubstrateExtrinsic['hash']
+	extrinsicHash: SubstrateExtrinsic['hash'],
+	callNames?: T,
 ): { [K in T[number]]: SpecificCallItem<K> }[T[number]] | null {
-	return findCallsByExtrinsicHash(callNames, block, extrinsicHash)[0] ?? null;
+	return findCallsByExtrinsicHash(block, extrinsicHash, callNames)[0] ?? null;
 }

@@ -137,6 +137,40 @@ export interface LiquiditySourceId {
     liquiditySourceIndex: LiquiditySourceType
 }
 
+export type LiquiditySourceType = LiquiditySourceType_XYKPool | LiquiditySourceType_BondingCurvePool | LiquiditySourceType_MulticollateralBondingCurvePool | LiquiditySourceType_MockPool | LiquiditySourceType_MockPool2 | LiquiditySourceType_MockPool3 | LiquiditySourceType_MockPool4 | LiquiditySourceType_XSTPool
+
+export interface LiquiditySourceType_XYKPool {
+    __kind: 'XYKPool'
+}
+
+export interface LiquiditySourceType_BondingCurvePool {
+    __kind: 'BondingCurvePool'
+}
+
+export interface LiquiditySourceType_MulticollateralBondingCurvePool {
+    __kind: 'MulticollateralBondingCurvePool'
+}
+
+export interface LiquiditySourceType_MockPool {
+    __kind: 'MockPool'
+}
+
+export interface LiquiditySourceType_MockPool2 {
+    __kind: 'MockPool2'
+}
+
+export interface LiquiditySourceType_MockPool3 {
+    __kind: 'MockPool3'
+}
+
+export interface LiquiditySourceType_MockPool4 {
+    __kind: 'MockPool4'
+}
+
+export interface LiquiditySourceType_XSTPool {
+    __kind: 'XSTPool'
+}
+
 export interface FixedPoint {
     inner: bigint
 }
@@ -559,20 +593,6 @@ export interface IncomingRequest_ChangePeersCompat {
     value: IncomingChangePeersCompat
 }
 
-export type BridgeSignatureVersion = BridgeSignatureVersion_V1 | BridgeSignatureVersion_V2 | BridgeSignatureVersion_V3
-
-export interface BridgeSignatureVersion_V1 {
-    __kind: 'V1'
-}
-
-export interface BridgeSignatureVersion_V2 {
-    __kind: 'V2'
-}
-
-export interface BridgeSignatureVersion_V3 {
-    __kind: 'V3'
-}
-
 export type SwapAmount = SwapAmount_WithDesiredInput | SwapAmount_WithDesiredOutput
 
 export interface SwapAmount_WithDesiredInput {
@@ -585,40 +605,6 @@ export interface SwapAmount_WithDesiredOutput {
     __kind: 'WithDesiredOutput'
     desiredAmountOut: bigint
     maxAmountIn: bigint
-}
-
-export type LiquiditySourceType = LiquiditySourceType_XYKPool | LiquiditySourceType_BondingCurvePool | LiquiditySourceType_MulticollateralBondingCurvePool | LiquiditySourceType_MockPool | LiquiditySourceType_MockPool2 | LiquiditySourceType_MockPool3 | LiquiditySourceType_MockPool4 | LiquiditySourceType_XSTPool
-
-export interface LiquiditySourceType_XYKPool {
-    __kind: 'XYKPool'
-}
-
-export interface LiquiditySourceType_BondingCurvePool {
-    __kind: 'BondingCurvePool'
-}
-
-export interface LiquiditySourceType_MulticollateralBondingCurvePool {
-    __kind: 'MulticollateralBondingCurvePool'
-}
-
-export interface LiquiditySourceType_MockPool {
-    __kind: 'MockPool'
-}
-
-export interface LiquiditySourceType_MockPool2 {
-    __kind: 'MockPool2'
-}
-
-export interface LiquiditySourceType_MockPool3 {
-    __kind: 'MockPool3'
-}
-
-export interface LiquiditySourceType_MockPool4 {
-    __kind: 'MockPool4'
-}
-
-export interface LiquiditySourceType_XSTPool {
-    __kind: 'XSTPool'
 }
 
 export type FilterMode = FilterMode_Disabled | FilterMode_ForbidSelected | FilterMode_AllowSelected
@@ -6211,6 +6197,20 @@ export interface Heartbeat {
     sessionIndex: number
     authorityIndex: number
     validatorsLen: number
+}
+
+export type BridgeSignatureVersion = BridgeSignatureVersion_V1 | BridgeSignatureVersion_V2 | BridgeSignatureVersion_V3
+
+export interface BridgeSignatureVersion_V1 {
+    __kind: 'V1'
+}
+
+export interface BridgeSignatureVersion_V2 {
+    __kind: 'V2'
+}
+
+export interface BridgeSignatureVersion_V3 {
+    __kind: 'V3'
 }
 
 export type IncomingRequestKind = IncomingRequestKind_Transaction | IncomingRequestKind_Meta

@@ -1,14 +1,14 @@
-import { Block, Context, EventItem } from '../../processor'
+import { Block, Context, EventItem } from '../../types'
 
 import { getAssetsTransferEventData } from '../../utils/events'
 import { poolAccounts, poolsStorage, PoolsPrices } from '../../utils/pools'
 
-export async function transferHandler(
+export async function transferEventHandler(
 	ctx: Context,
 	block: Block,
 	eventItem: (
-		| EventItem<'Tokens.Transfer', true>
-		| EventItem<'Balances.Transfer', true>
+		| EventItem<'Tokens.Transfer'>
+		| EventItem<'Balances.Transfer'>
 	)
 ): Promise<void> {
 	const { assetId, from, to, amount } = getAssetsTransferEventData(ctx, block, eventItem)

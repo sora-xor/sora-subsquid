@@ -1,69 +1,36 @@
 import { Asset } from '../../model'
-import { Block, Context } from '../../processor'
-import { AssetsAssetInfosStorage, BalancesTotalIssuanceStorage, TokensTotalIssuanceStorage } from '../../types/generated/storage'
+import { Block, Context, ReferenceSymbol } from '../../types'
+import { AssetsAssetInfosStorage, BalancesTotalIssuanceStorage, BandSymbolRatesStorage, TokensTotalIssuanceStorage, XSTPoolEnabledSyntheticsStorage } from '../../types/generated/storage'
 
-import { assetPrecisions, assetStorage } from '../../utils/assets'
+import { assetPrecisions, assetStorage, formatU128ToBalance, getAssetId, tickerSyntheticAssetId } from '../../utils/assets'
 import { XOR } from '../../utils/consts'
-import { toAssetId, toText } from '../../utils'
+import { toText, toReferenceSymbol } from '../../utils'
 import { AssetAmount, AssetId } from '../../types'
-import { unsupportedSpecError } from '../../utils/error'
+import { getEntityData } from '../../utils/entities'
 
 let isFirstBlockIndexed = false
 
 export const getAssetInfos = async (ctx: Context, block: Block) => {
-	const blockHeight = block.header.height
-
     try {
       	ctx.log.debug(`Asset infos request...`)
+
       	const storage = new AssetsAssetInfosStorage(ctx, block.header)
+		const data = await getEntityData(ctx, block, storage, { kind: 'storage', name: AssetsAssetInfosStorage.name }).getPairs()
 
-		let data: { 
-			assetId: AssetId,
-			symbol: string,
-			name: string,
-			precision: number,
-			isMintable: boolean
-		}[]
+		const infos = data.map(pair => {
+			const [assetId, [symbol, name, precision, isMintable]] = pair
+			return {
+				assetId: getAssetId(assetId),
+				symbol: toText(symbol),
+				name: toText(name),
+				precision,
+				isMintable
+			}
+		})
 
-		if (storage.isV1) {
-			data = (await storage.asV1.getPairs()).map(pair => {
-				const [assetId, [symbol, name, precision, isMintable]] = pair
-				return {
-					assetId: toAssetId(assetId),
-					symbol: toText(symbol),
-					name: toText(name),
-					precision,
-					isMintable
-				}
-			})
-		} else if (storage.isV26) {
-			data = (await storage.asV26.getPairs()).map(pair => {
-				const [assetId, [symbol, name, precision, isMintable]] = pair
-				return {
-					assetId: toAssetId(assetId),
-					symbol: toText(symbol),
-					name: toText(name),
-					precision,
-					isMintable
-				}
-			})
-		} else if (storage.isV42) {
-			data = (await storage.asV42.getPairs()).map(pair => {
-				const [assetId, [symbol, name, precision, isMintable]] = pair
-				return {
-					assetId: toAssetId(assetId.code),
-					symbol: toText(symbol),
-					name: toText(name),
-					precision,
-					isMintable
-				}
-			})
-		} else {
-			throw unsupportedSpecError(block)
-		}
-
-		ctx.log.debug(`Asset infos request completed.`)
-		return data
+		ctx.log.debug('Asset infos request completed.')
+		
+		return infos
     } catch (e: any) {
 		ctx.log.error('Error getting Asset infos')
 		ctx.log.error(e)
@@ -71,38 +38,87 @@ export const getAssetInfos = async (ctx: Context, block: Block) => {
     }
 }
 
+export const getSyntheticAssets = async (ctx: Context, block: Block) => {
+    try {
+		ctx.log.debug('Synthetic assets request...')
+
+		const storage = new XSTPoolEnabledSyntheticsStorage(ctx, block.header)
+		if (!storage.isExists || !('isV54' in storage && storage.isV54)) return null
+		// TODO: remove any after spec versions update
+		const representation: any = getEntityData(ctx, block, storage, { kind: 'storage', name: XSTPoolEnabledSyntheticsStorage.name }, [54] as const)
+
+		const data = await representation.getPairs()
+
+		// TODO: remove any after spec versions update
+		const syntheticAssets = data.map((pair: any) => {
+			console.log('pair',	pair)
+			const [asset, syntheticInfo] = pair
+			const assetId = getAssetId(asset)
+			return {
+				assetId,
+				value: {
+					referenceSymbol: toReferenceSymbol(syntheticInfo.referenceSymbol),
+					feeRatio: syntheticInfo.feeRatio,
+				},
+			}
+		})
+
+		ctx.log.debug('Synthetic assets request completed.')
+
+		return syntheticAssets
+    } catch (e) {
+		ctx.log.error('Error getting Synthetic assets')
+		ctx.log.error(e as string)
+
+      	return null
+    }
+};
+
+export const getBandRates = async (ctx: Context, block: Block) => {
+    try {
+		ctx.log.debug('Band rates request...')
+
+		const storage = new BandSymbolRatesStorage(ctx, block.header)
+		if (!storage.isExists) return null
+		const data = await getEntityData(ctx, block, storage, { kind: 'storage', name: BandSymbolRatesStorage.name }).getPairs()
+
+		const rates = data.map(pair => {
+			const [ticker, rate] = pair
+			const referenceSymbol = typeof ticker === 'string' ? ticker as ReferenceSymbol : toReferenceSymbol(ticker)
+			return {
+				referenceSymbol,
+				rate,
+			}
+		})
+
+		ctx.log.debug('Band rates request completed.')
+		
+		return rates
+    } catch (e) {
+		ctx.log.error('Error getting Band rates')
+		ctx.log.error(e as string)
+
+		return null
+    }
+};
+
 export const getTokensIssuances = async (ctx: Context, block: Block) => {
     try {
 		ctx.log.debug(`Tokens issuances request...`)
+
 		const storage = new TokensTotalIssuanceStorage(ctx, block.header)
+		const data = await getEntityData(ctx, block, storage, { kind: 'storage', name: TokensTotalIssuanceStorage.name }).getPairs()
 
-		let data: { 
-			assetId: AssetId,
-			issuances: AssetAmount
-		}[]
-
-		if (storage.isV1) {
-			data = (await storage.asV1.getPairs()).map(pair => {
-				const [assetId, issuances] = pair
-				return {
-					assetId: toAssetId(assetId),
-					issuances: issuances as AssetAmount
-				}
-			})
-		} else if (storage.isV42) {
-			data = (await storage.asV42.getPairs()).map(pair => {
-				const [assetId, issuances] = pair
-				return {
-					assetId: toAssetId(assetId.code),
-					issuances: issuances as AssetAmount
-				}
-			})
-		} else {
-			throw unsupportedSpecError(block)
-		}
+		const issuances = data.map(pair => {
+			const [assetId, issuances] = pair
+			return {
+				assetId: getAssetId(assetId),
+				issuances: issuances as AssetAmount
+			}
+		})
 
 		ctx.log.debug(`Tokens issuances request completed.`)
-		return data
+		return issuances
     } catch (e: any) {
 		ctx.log.error('Error getting Tokens issuances')
 		ctx.log.error(e)
@@ -111,19 +127,10 @@ export const getTokensIssuances = async (ctx: Context, block: Block) => {
 }
 
 export const getXorIssuance = async (ctx: Context, block: Block) => {
-	const blockHeight = block.header.height
-
     try {
 		ctx.log.debug(`XOR issuance request...`)
 		const storage = new BalancesTotalIssuanceStorage(ctx, block.header)
-
-		let issuance: bigint
-
-		if (storage.isV1) {
-			issuance = await storage.asV1.get()
-		} else {
-			throw unsupportedSpecError(block)
-		}
+		const issuance = await getEntityData(ctx, block, storage, { kind: 'storage', name: BalancesTotalIssuanceStorage.name }).get() as AssetAmount
 
 		ctx.log.debug(`XOR issuance request completed.`)
 		return issuance
@@ -143,10 +150,14 @@ export async function initializeAssets(ctx: Context, block: Block): Promise<void
 
     const [
         assetInfos,
+        syntheticAssets,
+        bandRates,
         tokensIssuances,
         xorIssuance,
     ] = await Promise.all([
         getAssetInfos(ctx, block),
+        getSyntheticAssets(ctx, block),
+        getBandRates(ctx, block),
         getTokensIssuances(ctx, block),
         getXorIssuance(ctx, block)
     ])
@@ -179,6 +190,40 @@ export async function initializeAssets(ctx: Context, block: Block): Promise<void
             assetPrecisions.set(assetInfo.assetId, assetInfo.precision)
 
             getOrCreate(assetInfo.assetId)
+        }
+    }
+
+	if (syntheticAssets) {
+        for (const { assetId, value: { referenceSymbol } } of syntheticAssets) {
+            assetPrecisions.set(assetId, 18)
+            tickerSyntheticAssetId.set(referenceSymbol, assetId)
+
+			const blockHeight = block.header.height
+            ctx.log.debug(`[${blockHeight}]: ${referenceSymbol} ticker and synthetic asset ${assetId} added`)
+
+            getOrCreate(assetId)
+        }
+    }
+
+    if (bandRates) {
+        for (const { referenceSymbol, rate } of bandRates) {
+            const assetId = tickerSyntheticAssetId.get(referenceSymbol)
+
+            if (!assetId || !rate) {
+                continue
+            }
+
+            getOrCreate(assetId)
+
+            const price = rate.value
+            const priceUSD = formatU128ToBalance(price, assetId)
+
+            ctx.log.debug(`${referenceSymbol} ticker price: ${priceUSD}`)
+
+			const asset = assets.get(assetId)
+			if (asset) {
+				asset.priceUSD = priceUSD
+			}
         }
     }
 

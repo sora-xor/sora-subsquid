@@ -1,94 +1,55 @@
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
-import { formatU128ToBalance } from '../../utils/assets'
+import { formatU128ToBalance, getAssetId } from '../../utils/assets'
 import { XOR } from '../../utils/consts'
-import { Block, CallItem, Context } from '../../processor'
+import { AssetAmount, Block, CallItem, Context } from '../../types'
 import { findEventByExtrinsicHash } from '../../utils/events'
 import { DemeterFarmingPlatformDepositedEvent } from '../../types/generated/events'
 import { DemeterFarmingPlatformDepositCall } from '../../types/generated/calls'
-import { AssetId } from '../../types'
-import { toAssetId } from '../../utils'
-import { unsupportedSpecError } from '../../utils/error'
+import { getEntityData } from '../../utils/entities'
 
-export async function demeterDepositHandler(ctx: Context, block: Block, callItem: CallItem<'DemeterFarmingPlatform.deposit', true>): Promise<void> {
+export async function demeterDepositCallHandler(ctx: Context, block: Block, callItem: CallItem<'DemeterFarmingPlatform.deposit'>): Promise<void> {
 	ctx.log.debug('Caught demeterFarmingPlatform deposit extrinsic')
 
-  const extrinsicHash = callItem.extrinsic.hash
+	const extrinsicHash = callItem.extrinsic.hash
 
-  const call = new DemeterFarmingPlatformDepositCall(ctx, callItem.call)
+	const call = new DemeterFarmingPlatformDepositCall(ctx, callItem.call)
 
-  let callRec: {
-    baseAssetId: AssetId
-    assetId: AssetId
-    rewardAssetId: AssetId
-    isFarm: boolean
-    desiredAmount: bigint
-  }
-  if (call.isV33) {
-    const { poolAsset, rewardAsset, isFarm, pooledTokens } = call.asV33
-    callRec = {
-      baseAssetId: XOR,
-      assetId: toAssetId(poolAsset),
-      rewardAssetId: toAssetId(rewardAsset),
-      isFarm,
-      desiredAmount: pooledTokens
-    }
-  } else if (call.isV42) {
-    const { poolAsset, rewardAsset, isFarm, pooledTokens } = call.asV42
-    callRec = {
-      baseAssetId: XOR,
-      assetId: toAssetId(poolAsset.code),
-      rewardAssetId: toAssetId(rewardAsset.code),
-      isFarm,
-      desiredAmount: pooledTokens
-    }
-  } else if (call.isV43) {
-    const { baseAsset, poolAsset, rewardAsset, isFarm, pooledTokens } = call.asV43
-    callRec = {
-      baseAssetId: toAssetId(baseAsset.code),
-      assetId: toAssetId(poolAsset.code),
-      rewardAssetId: toAssetId(rewardAsset.code),
-      isFarm,
-      desiredAmount: pooledTokens
-    }
-  } else {
-    throw unsupportedSpecError(block)
-  }
+	const data = getEntityData(ctx, block, call, callItem)
 
-  let amount: string
+	const baseAssetId = 'baseAsset' in data ? getAssetId(data.baseAsset) : XOR
+	const assetId = getAssetId(data.poolAsset)
+	const rewardAssetId = getAssetId(data.rewardAsset)
+	const isFarm = data.isFarm
+	const desiredAmount = data.pooledTokens as AssetAmount
 
-  const eventItem = findEventByExtrinsicHash(block, extrinsicHash, ['DemeterFarmingPlatform.Deposited'])
+	let amount: string
 
-  if (eventItem) {
-    const event = new DemeterFarmingPlatformDepositedEvent(ctx, eventItem.event)
+	const eventItem = findEventByExtrinsicHash(block, extrinsicHash, ['DemeterFarmingPlatform.Deposited'])
 
-    let eventRec: { amount: bigint }
-    if (event.isV33) {
-      eventRec = { amount: event.asV33[4] }
-    } else if (event.isV42) {
-      eventRec = { amount: event.asV42[4] }
-    } else if (event.isV43) {
-      eventRec = { amount: event.asV43[5] }
-    } else {
-      throw unsupportedSpecError(block)
-    }
-    
-    // a little trick - we get decimals from pool asset, not lp token
-    amount = formatU128ToBalance(eventRec.amount, callRec.assetId)
-  } else {
-    amount = formatU128ToBalance(callRec.desiredAmount, callRec.assetId)
-  }
+	if (eventItem) {
+		const event = new DemeterFarmingPlatformDepositedEvent(ctx, eventItem.event)
 
-  let details = {
-    baseAssetId: callRec.baseAssetId,
-    assetId: callRec.assetId,
-    rewardAssetId: callRec.rewardAssetId,
-    isFarm: callRec.isFarm,
-    amount: amount.toString()
-  }
+		const data = getEntityData(ctx, block, event, eventItem)
 
-  const historyElement = await createHistoryElement(ctx, block, callItem)
-  await addDataToHistoryElement(ctx, block, historyElement, details)
-  await updateHistoryElementStats(ctx, block, historyElement)
+		const assetAmount = typeof data[4] === 'bigint' ? data[4] : data[5] as AssetAmount
 
-  ctx.log.debug(`===== Saved demeterFarmingPlatform deposit with ${extrinsicHash} txid =====`)
+		// a little trick - we get decimals from pool asset, not lp token
+		amount = formatU128ToBalance(assetAmount, assetId)
+	} else {
+		amount = formatU128ToBalance(desiredAmount, assetId)
+	}
+
+	let details = {
+		baseAssetId,
+		assetId,
+		rewardAssetId,
+		isFarm,
+		amount
+	}
+
+	const historyElement = await createHistoryElement(ctx, block, callItem)
+	await addDataToHistoryElement(ctx, block, historyElement, details)
+	await updateHistoryElementStats(ctx, block, historyElement)
+
+	ctx.log.debug(`===== Saved demeterFarmingPlatform deposit with ${extrinsicHash} txid =====`)
 }

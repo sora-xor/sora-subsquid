@@ -1,10 +1,11 @@
 import { Asset, PoolXYK } from '../model'
-import { Block, Context } from '../processor'
+import { AssetAmount, Block, Context } from '../types'
 import { PoolXYKReservesStorage, PoolXYKPropertiesStorage } from "../types/generated/storage"
 import { XOR, DOUBLE_PRICE_POOL } from './consts'
-import { decodeAssetId, toAssetId, toAddress } from '.'
+import { decodeAssetId, toAddress } from '.'
 import { AssetId, Address } from '../types'
-import { unsupportedSpecError } from './error'
+import { getEntityData } from './entities'
+import { getAssetId } from './assets'
 
 // getters & setter for flag, should we sync poolXYK reserves
 // and then calc asset prices
@@ -24,37 +25,17 @@ export const getAllReserves = async (ctx: Context, block: Block, baseAssetId: As
 	try {
 		ctx.log.debug(`[${blockHeight}] [${baseAssetId}] Pools XYK Reserves request...`)
 		const storage = new PoolXYKReservesStorage(ctx, block.header)
+		const data = await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKReservesStorage.name }).getPairs(decodeAssetId(baseAssetId))
 
-		let reserves: { 
-			baseAssetId: AssetId,
-			targetAssetId: AssetId,
-			baseBalance: bigint,
-			targetBalance: bigint
-		}[]
-
-		if (storage.isV1) {
-			reserves = (await storage.asV1.getPairs(decodeAssetId(baseAssetId))).map(pair => {
-				const [[, targetAssetId], [baseBalance, targetBalance]] = pair
-				return {
-					baseAssetId,
-					targetAssetId: toAssetId(targetAssetId),
-					baseBalance,
-					targetBalance
-				}
-			})
-		} else if (storage.isV42) {
-			reserves = (await storage.asV42.getPairs({ code: decodeAssetId(baseAssetId) })).map(pair => {
-				const [[, targetAsset], [baseBalance, targetBalance]] = pair
-				return {
-					baseAssetId,
-					targetAssetId: toAssetId(targetAsset.code),
-					baseBalance,
-					targetBalance
-				}
-			})
-		} else {
-			throw unsupportedSpecError(block)
-		}
+		const reserves = data.map(pair => {
+			const [[, targetAssetId], [baseBalance, targetBalance]] = pair
+			return {
+				baseAssetId,
+				targetAssetId: getAssetId(targetAssetId),
+				baseBalance: baseBalance as AssetAmount,
+				targetBalance: targetBalance as AssetAmount,
+			}
+		})
 
 		ctx.log.debug(`[${blockHeight}] [${baseAssetId}] Pools XYK Reserves request completed.`)
 
@@ -72,49 +53,17 @@ export const getAllProperties = async (ctx: Context, block: Block, baseAssetId: 
 	try {
 		ctx.log.debug(`[${blockHeight}] [${baseAssetId}] Pools XYK Properties request...`)
 		const storage = new PoolXYKPropertiesStorage(ctx, block.header)
+		const data = await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKPropertiesStorage.name }).getPairs(decodeAssetId(baseAssetId))
 
-		const baseAssetIdDecoded = decodeAssetId(baseAssetId)
-
-		let properties: { 
-			baseAssetId: AssetId,
-			targetAssetId: AssetId,
-			reservesAccountId: Address,
-			feesAccountId: Address
-		}[]
-
-		if (storage.isV1) {
-			properties = (await storage.asV1.getPairs(baseAssetIdDecoded)).map(pair => {
-				const [[, targetAssetId], [reservesAccountId, feesAccountId]] = pair
-				return {
-					baseAssetId,
-					targetAssetId: toAssetId(targetAssetId),
-					reservesAccountId: toAddress(reservesAccountId),
-					feesAccountId: toAddress(feesAccountId)
-				}
-			})
-		} else if (storage.isV7) {
-			properties = (await storage.asV7.getPairs(baseAssetIdDecoded)).map(pair => {
-				const [[, targetAssetId], [reservesAccountId, feesAccountId]] = pair
-				return {
-					baseAssetId,
-					targetAssetId: toAssetId(targetAssetId),
-					reservesAccountId: toAddress(reservesAccountId),
-					feesAccountId: toAddress(feesAccountId)
-				}
-			})
-		} else if (storage.isV42) {
-			properties = (await storage.asV42.getPairs({ code: baseAssetIdDecoded })).map(pair => {
-				const [[, targetAsset], [reservesAccountId, feesAccountId]] = pair
-				return {
-					baseAssetId,
-					targetAssetId: toAssetId(targetAsset.code),
-					reservesAccountId: toAddress(reservesAccountId),
-					feesAccountId: toAddress(feesAccountId)
-				}
-			})
-		} else {
-			throw unsupportedSpecError(block)
-		}
+		const properties = data.map(pair => {
+			const [[, targetAssetId], [reservesAccountId, feesAccountId]] = pair
+			return {
+				baseAssetId,
+				targetAssetId: getAssetId(targetAssetId),
+				reservesAccountId: toAddress(reservesAccountId),
+				feesAccountId: toAddress(feesAccountId)
+			}
+		})
 
 		ctx.log.debug(`[${blockHeight}] [${baseAssetId}] Pools XYK Properties request completed`)
 		return properties
@@ -131,41 +80,35 @@ export const getPoolProperties = async (ctx: Context, block: Block, baseAssetId:
 	try {
 		ctx.log.debug(`[${baseAssetId}${targetAssetId}] Pool properties request...`)
 		const storage = new PoolXYKPropertiesStorage(ctx, block.header)
+		const data =(
+			('isV1' in storage && storage.isV1) ||
+			('isV7' in storage && storage.isV7) ||
+			('isV33' in storage && storage.isV33)
+		)
+			? await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKPropertiesStorage.name }, [1, 7, 33] as const).getPairs(
+				decodeAssetId(baseAssetId),
+				decodeAssetId(targetAssetId)
+			)
+			: await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKPropertiesStorage.name }, [42] as const).getPairs(
+				{ code: decodeAssetId(baseAssetId) },
+				{ code: decodeAssetId(targetAssetId) }
+			)
 
-		const baseAssetIdDecoded = decodeAssetId(baseAssetId)
-		const targetAssetIdDecoded = decodeAssetId(targetAssetId)
+		const properties = data.map(pair => {
+			const [reservesAccountId, feesAccountId] = pair[1]
+			return {
+				reservesAccountId: toAddress(reservesAccountId),
+				feesAccountId: toAddress(feesAccountId),
+			}
+		})
 		
-		let properties: {
-			reservesAccountId: Uint8Array,
-			feesAccountId: Uint8Array
-		}[]
-
-		if (storage.isV1) {
-			properties = (await storage.asV1.getPairs(baseAssetIdDecoded, targetAssetIdDecoded)).map(pair => {
-				const [reservesAccountId, feesAccountId] = pair[1]
-				return { reservesAccountId, feesAccountId }
-			})
-		} 
-		else if (storage.isV7) {
-			properties = (await storage.asV7.getPairs(baseAssetIdDecoded, targetAssetIdDecoded)).map(pair => {
-				const [reservesAccountId, feesAccountId] = pair[1]
-				return { reservesAccountId, feesAccountId }
-			})
-		}
-		else if (storage.isV42) {
-			const data = await storage.asV42.getPairs({ code: baseAssetIdDecoded }, { code: targetAssetIdDecoded })
-			properties = data ? [{ reservesAccountId: data[0][1][0], feesAccountId: data[0][1][1] }] : []
-		}
-		else {
-			throw unsupportedSpecError(block)
-		}
 		ctx.log.debug(`[${blockHeight}] [${baseAssetId}:${targetAssetId}] Pool properties request completed`)
 
 		return {
 			baseAssetId,
 			targetAssetId,
-			reservesAccountId: toAddress(properties[0].reservesAccountId),
-			feesAccountId: toAddress(properties[0].feesAccountId)
+			reservesAccountId: properties[0].reservesAccountId,
+			feesAccountId: properties[0].feesAccountId
 		}
 	} catch (error: any) {
 		ctx.log.error(`[${blockHeight}] Error getting pool properties`)

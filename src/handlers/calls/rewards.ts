@@ -1,15 +1,15 @@
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
-import { Block, CallItem, Context } from '../../processor'
+import { Block, CallItem, Context } from '../../types'
 import { findEventsByExtrinsicHash, getAssetsTransferEventData } from '../../utils/events'
 
-export async function rewardsHandler(
+export async function rewardsCallHandler(
 	ctx: Context,
 	block: Block,
 	callItem: (
-		| CallItem<'PswapDistribution.claim_incentive', true>
-		| CallItem<'Rewards.claim', true>
-		| CallItem<'VestedRewards.claim_rewards', true>
-		| CallItem<'VestedRewards.claim_crowdloan_rewards', true>
+		| CallItem<'PswapDistribution.claim_incentive'>
+		| CallItem<'Rewards.claim'>
+		| CallItem<'VestedRewards.claim_rewards'>
+		| CallItem<'VestedRewards.claim_crowdloan_rewards'>
 	)
 ): Promise<void> {
     ctx.log.debug('Caught rewards claim extrinsic')

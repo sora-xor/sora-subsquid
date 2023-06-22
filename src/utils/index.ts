@@ -1,5 +1,5 @@
 import * as ss58 from '@subsquid/ss58'
-import { AssetId, Address, AddressEthereum } from '../types'
+import { AssetId, Address, AddressEthereum, ReferenceSymbol } from '../types'
 import { toHex, decodeHex } from '@subsquid/substrate-processor'
 
 export const formatDateTimestamp = (date: Date): number => parseInt((date.getTime() * 0.001).toFixed(0))
@@ -10,6 +10,14 @@ export const toText = (data: Uint8Array): string => {
 }
 export const decodeText = (data: string): Uint8Array => {
 	return new TextEncoder().encode(data)
+}
+
+
+export const toReferenceSymbol = (data: Uint8Array): ReferenceSymbol => {
+	return toText(data) as ReferenceSymbol
+}
+export const decodeReferenceSymbol = (data: ReferenceSymbol): Uint8Array => {
+	return decodeText(data)
 }
 
 
@@ -69,7 +77,4 @@ export const toCamelCase = (s: string): string => {
   
 	// Step 8: Return the result
 	return finalString
-  }
-  
-
-  
+}

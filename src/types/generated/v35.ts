@@ -483,6 +483,7 @@ export interface ILOInfo {
     lpTokens: bigint
     claimedLpTokens: boolean
     finishTimestamp: bigint
+    baseAsset: Uint8Array
 }
 
 export interface PoolData {
@@ -4784,7 +4785,7 @@ export interface SwapAmount_WithDesiredOutput {
     value: SwapWithDesiredOutput
 }
 
-export type LiquiditySourceType = LiquiditySourceType_XYKPool | LiquiditySourceType_BondingCurvePool | LiquiditySourceType_MulticollateralBondingCurvePool | LiquiditySourceType_MockPool | LiquiditySourceType_MockPool2 | LiquiditySourceType_MockPool3 | LiquiditySourceType_MockPool4 | LiquiditySourceType_XSTPool
+export type LiquiditySourceType = LiquiditySourceType_XYKPool | LiquiditySourceType_BondingCurvePool | LiquiditySourceType_MulticollateralBondingCurvePool | LiquiditySourceType_MockPool | LiquiditySourceType_MockPool2 | LiquiditySourceType_MockPool3 | LiquiditySourceType_MockPool4 | LiquiditySourceType_XSTPool | LiquiditySourceType_OrderBook
 
 export interface LiquiditySourceType_XYKPool {
     __kind: 'XYKPool'
@@ -4816,6 +4817,10 @@ export interface LiquiditySourceType_MockPool4 {
 
 export interface LiquiditySourceType_XSTPool {
     __kind: 'XSTPool'
+}
+
+export interface LiquiditySourceType_OrderBook {
+    __kind: 'OrderBook'
 }
 
 export type FilterMode = FilterMode_Disabled | FilterMode_ForbidSelected | FilterMode_AllowSelected

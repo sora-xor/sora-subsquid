@@ -459,6 +459,32 @@ export interface Proposal_DemeterFarmingPlatform {
     value: DemeterFarmingPlatformCall
 }
 
+export interface ILOInfo {
+    iloOrganizer: Uint8Array
+    tokensForIlo: bigint
+    tokensForLiquidity: bigint
+    iloPrice: bigint
+    softCap: bigint
+    hardCap: bigint
+    minContribution: bigint
+    maxContribution: bigint
+    refundType: boolean
+    liquidityPercent: bigint
+    listingPrice: bigint
+    lockupDays: number
+    startTimestamp: bigint
+    endTimestamp: bigint
+    contributorsVesting: ContributorsVesting
+    teamVesting: TeamVesting
+    soldTokens: bigint
+    fundsRaised: bigint
+    succeeded: boolean
+    failed: boolean
+    lpTokens: bigint
+    claimedLpTokens: boolean
+    finishTimestamp: bigint
+}
+
 export interface Scheduled {
     maybeId: (Uint8Array | undefined)
     priority: number
@@ -4408,6 +4434,19 @@ export interface MultiChainHeight_Sidechain {
     value: bigint
 }
 
+export interface ContributorsVesting {
+    firstReleasePercent: bigint
+    vestingPeriod: bigint
+    vestingPercent: bigint
+}
+
+export interface TeamVesting {
+    teamVestingTotalTokens: bigint
+    teamVestingFirstReleasePercent: bigint
+    teamVestingPeriod: bigint
+    teamVestingPercent: bigint
+}
+
 export type PalletsOrigin = PalletsOrigin_System | PalletsOrigin_Council | PalletsOrigin_TechnicalCommittee
 
 export interface PalletsOrigin_System {
@@ -4732,7 +4771,7 @@ export interface SwapAmount_WithDesiredOutput {
     value: SwapWithDesiredOutput
 }
 
-export type LiquiditySourceType = LiquiditySourceType_XYKPool | LiquiditySourceType_BondingCurvePool | LiquiditySourceType_MulticollateralBondingCurvePool | LiquiditySourceType_MockPool | LiquiditySourceType_MockPool2 | LiquiditySourceType_MockPool3 | LiquiditySourceType_MockPool4 | LiquiditySourceType_XSTPool
+export type LiquiditySourceType = LiquiditySourceType_XYKPool | LiquiditySourceType_BondingCurvePool | LiquiditySourceType_MulticollateralBondingCurvePool | LiquiditySourceType_MockPool | LiquiditySourceType_MockPool2 | LiquiditySourceType_MockPool3 | LiquiditySourceType_MockPool4 | LiquiditySourceType_XSTPool | LiquiditySourceType_OrderBook
 
 export interface LiquiditySourceType_XYKPool {
     __kind: 'XYKPool'
@@ -4764,6 +4803,10 @@ export interface LiquiditySourceType_MockPool4 {
 
 export interface LiquiditySourceType_XSTPool {
     __kind: 'XSTPool'
+}
+
+export interface LiquiditySourceType_OrderBook {
+    __kind: 'OrderBook'
 }
 
 export type FilterMode = FilterMode_Disabled | FilterMode_ForbidSelected | FilterMode_AllowSelected

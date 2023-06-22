@@ -1,58 +1,26 @@
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
-import { formatU128ToBalance } from '../../utils/assets'
-import { Block, CallItem, Context } from '../../processor'
+import { formatU128ToBalance, getAssetId } from '../../utils/assets'
+import { AssetAmount, Block, CallItem, Context } from '../../types'
 import { findEventByExtrinsicHash } from '../../utils/events'
 import { DemeterFarmingPlatformWithdrawnEvent } from '../../types/generated/events'
 import { DemeterFarmingPlatformWithdrawCall } from '../../types/generated/calls'
 import { XOR } from '../../utils/consts'
-import { AssetId } from '../../types'
-import { toAssetId } from '../../utils'
-import { unsupportedSpecError } from '../../utils/error'
+import { getEntityData } from '../../utils/entities'
 
-export async function demeterWithdrawHandler(ctx: Context, block: Block, callItem: CallItem<'DemeterFarmingPlatform.withdraw', true>): Promise<void> {
+export async function demeterWithdrawCallHandler(ctx: Context, block: Block, callItem: CallItem<'DemeterFarmingPlatform.withdraw'>): Promise<void> {
   ctx.log.debug('Caught demeterFarmingPlatform withdraw extrinsic')
 
   const extrinsicHash = callItem.extrinsic.hash
 
   const call = new DemeterFarmingPlatformWithdrawCall(ctx, callItem.call)
 
-  let callRec: {
-    baseAssetId: AssetId
-    assetId: AssetId
-    rewardAssetId: AssetId
-    isFarm: boolean
-    desiredAmount: bigint
-  }
-  if (call.isV33) {
-    const { poolAsset, rewardAsset, isFarm, pooledTokens } = call.asV33
-    callRec = {
-      baseAssetId: XOR,
-      assetId: toAssetId(poolAsset),
-      rewardAssetId: toAssetId(rewardAsset),
-      isFarm,
-      desiredAmount: pooledTokens
-    }
-  } else if (call.isV42) {
-    const { poolAsset, rewardAsset, isFarm, pooledTokens } = call.asV42
-    callRec = {
-      baseAssetId: XOR,
-      assetId: toAssetId(poolAsset.code),
-      rewardAssetId: toAssetId(rewardAsset.code),
-      isFarm,
-      desiredAmount: pooledTokens
-    }
-  } else if (call.isV43) {
-    const { baseAsset, poolAsset, rewardAsset, isFarm, pooledTokens } = call.asV43
-    callRec = {
-      baseAssetId: toAssetId(baseAsset.code),
-      assetId: toAssetId(poolAsset.code),
-      rewardAssetId: toAssetId(rewardAsset.code),
-      isFarm,
-      desiredAmount: pooledTokens
-    }
-  } else {
-    throw unsupportedSpecError(block)
-  }
+  const data = getEntityData(ctx, block, call, callItem)
+
+	const baseAssetId = 'baseAsset' in data ? getAssetId(data.baseAsset) : XOR
+	const assetId = getAssetId(data.poolAsset)
+	const rewardAssetId = getAssetId(data.rewardAsset)
+	const isFarm = data.isFarm
+	const desiredAmount = data.pooledTokens as AssetAmount
 
   let amount: string
 
@@ -61,29 +29,22 @@ export async function demeterWithdrawHandler(ctx: Context, block: Block, callIte
   if (eventItem) {
     const event = new DemeterFarmingPlatformWithdrawnEvent(ctx, eventItem.event)
 
-    let eventRec: { amount: bigint }
-    if (event.isV33) {
-      eventRec = { amount: event.asV33[1] }
-    } else if (event.isV42) {
-      eventRec = { amount: event.asV42[1] }
-    } else if (event.isV43) {
-      eventRec = { amount: event.asV43[1] }
-    } else {
-      throw unsupportedSpecError(block)
-    }
+	const data = getEntityData(ctx, block, event, eventItem)
+
+	const assetAmount = data[1] as AssetAmount
     
     // a little trick - we get decimals from pool asset, not lp token
-    amount = formatU128ToBalance(eventRec.amount, callRec.assetId)
+    amount = formatU128ToBalance(assetAmount, assetId)
   } else {
-    amount = formatU128ToBalance(callRec.desiredAmount, callRec.assetId)
+    amount = formatU128ToBalance(desiredAmount, assetId)
   }
 
   let details = {
-    baseAssetId: callRec.baseAssetId,
-    assetId: callRec.assetId,
-    rewardAssetId: callRec.rewardAssetId,
-    isFarm: callRec.isFarm,
-    amount: amount.toString()
+    baseAssetId,
+    assetId,
+    rewardAssetId,
+    isFarm,
+    amount,
   }
 
   const historyElement = await createHistoryElement(ctx, block, callItem)

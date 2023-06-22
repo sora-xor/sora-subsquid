@@ -21,14 +21,13 @@ services:
     restart: on-failure
     image: subsquid/substrate-ingest:firesquid
     volumes:
-      - "./typesBundle.json:/configs/typesBundle.json"
+      - "../../src/typesBundle.json:/configs/typesBundle.json"
     command: [
        "-e", "wss://mof2.sora.org",
        "-c", "5", # allow up to 20 pending requests for the above endpoint (default is 5)
-       #  "--start-block", "1000000", # uncomment to specify a non-zero start block
+       #  "--start-block", "1000000",
        "--out", "postgres://root@db:26257/defaultdb",
        "--types-bundle", "/configs/typesBundle.json",
-       "--start-block", "0",
        "--write-batch-size", "10"
     ]
 

@@ -1,5 +1,5 @@
 import { Account } from '../model'
-import { Block, Context } from '../processor'
+import { Block, Context } from '../types'
 
 import { networkSnapshotsStorage } from './network'
 

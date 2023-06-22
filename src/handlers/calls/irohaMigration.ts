@@ -1,20 +1,15 @@
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
-import { formatU128ToBalance } from '../../utils/assets'
-import { Block, CallItem, Context } from '../../processor'
+import { formatU128ToBalance, getAssetId } from '../../utils/assets'
+import { AssetAmount, Block, CallItem, Context } from '../../types'
 import { findEventByExtrinsicHash } from '../../utils/events'
-import { BalancesTransferEvent, CurrenciesDepositedEvent, CurrenciesTransferredEvent } from '../../types/generated/events'
-import { IrohaMigrationMigrateCall } from '../../types/generated/calls'
-import { toAssetId } from '../../utils'
-import { unsupportedSpecError } from '../../utils/error'
+import { CurrenciesDepositedEvent, CurrenciesTransferredEvent } from '../../types/generated/events'
+import { getEntityData } from '../../utils/entities'
 
-export async function irohaMigrationHandler(ctx: Context, block: Block, callItem: CallItem<'IrohaMigration.migrate', true>): Promise<void> {
+export async function irohaMigrationCallHandler(ctx: Context, block: Block, callItem: CallItem<'IrohaMigration.migrate'>): Promise<void> {
     ctx.log.debug('Caught iroha migration extrinsic')
 
     const historyElement = await createHistoryElement(ctx, block, callItem)
-	const blockHeight = block.header.height
     const extrinsicHash = callItem.extrinsic.hash
-
-	const call = new IrohaMigrationMigrateCall(ctx, callItem.call)
 
     let details: {
         assetId: string
@@ -22,77 +17,32 @@ export async function irohaMigrationHandler(ctx: Context, block: Block, callItem
     } | null = null
 
     if (historyElement.execution.success) {
-		if (call.isV1) {
-			const currenciesDepositedEventEntity = findEventByExtrinsicHash(block, extrinsicHash, ['Currencies.Deposited'])
+		const currenciesDepositedEventItem = findEventByExtrinsicHash(block, extrinsicHash, ['Currencies.Deposited'])
+		const currenciesTransferredEventItem = findEventByExtrinsicHash(block, extrinsicHash, ['Currencies.Transferred'])
 			
-			if (currenciesDepositedEventEntity) {
-				const currenciesDepositedEvent = new CurrenciesDepositedEvent(ctx, currenciesDepositedEventEntity.event)
+		if (currenciesDepositedEventItem) {
+			const event = new CurrenciesDepositedEvent(ctx, currenciesDepositedEventItem.event)
+			const data = getEntityData(ctx, block, event, currenciesDepositedEventItem)
 
-				if (currenciesDepositedEvent.isV1) {
-					const [assetIdDecoded, , amount] = currenciesDepositedEvent.asV1
-					const assetId = toAssetId(assetIdDecoded)
-					details = {
-						assetId: assetId,
-						amount: formatU128ToBalance(amount, assetId)
-					}
-				} else {
-					throw unsupportedSpecError(block)
-				}
-			} else {
-				const currenciesTransferredEventEntity = findEventByExtrinsicHash(block, extrinsicHash, ['Currencies.Transferred'])
+			const assetId = getAssetId(data[0])
+			const assetAmount = data[2] as AssetAmount
+			const amount = formatU128ToBalance(assetAmount, assetId)
 
-				if (currenciesTransferredEventEntity) {
-					const currenciesTransferredEvent = new CurrenciesTransferredEvent(ctx, currenciesTransferredEventEntity.event)
-
-					if (currenciesTransferredEvent.isV1) {
-						const [assetIdDecoded, , , amount] = currenciesTransferredEvent.asV1
-						const assetId = toAssetId(assetIdDecoded)
-						details = {
-							assetId: assetId,
-							amount: formatU128ToBalance(amount, assetId)
-						}
-					} else {
-						throw unsupportedSpecError(block)
-					}
-				} else {
-					ctx.log.error(`[${blockHeight}] Cannot find event "Currencies.Transferred" with extrinsic hash ${extrinsicHash}`)
-				}
+			details = {
+				assetId,
+				amount,
 			}
-		} else {
-			const balancesTransferEventEntity = findEventByExtrinsicHash(block, extrinsicHash, ['Balances.Transfer'])
-			
-			if (balancesTransferEventEntity) {
-				const balancesTransferEvent = new BalancesTransferEvent(ctx, balancesTransferEventEntity.event)
+		} else if (currenciesTransferredEventItem) {
+			const event = new CurrenciesTransferredEvent(ctx, currenciesTransferredEventItem.event)
+			const data = getEntityData(ctx, block, event, currenciesTransferredEventItem)
 
-				if (balancesTransferEvent.isV1) {
-					const [assetIdDecoded, , amount] = balancesTransferEvent.asV1
-					const assetId = toAssetId(assetIdDecoded)
-					details = {
-						assetId: assetId,
-						amount: formatU128ToBalance(amount, assetId)
-					}
-				} else {
-					throw unsupportedSpecError(block)
-				}
-			} else {
-				const currenciesTransferredEventEntity = findEventByExtrinsicHash(block, extrinsicHash, ['Currencies.Transferred'])
+			const assetId = getAssetId(data[0])
+			const assetAmount = data[3] as AssetAmount
+			const amount = formatU128ToBalance(assetAmount, assetId)
 
-				if (currenciesTransferredEventEntity) {
-					const currenciesTransferredEvent = new CurrenciesTransferredEvent(ctx, currenciesTransferredEventEntity.event)
-
-					if (currenciesTransferredEvent.isV1) {
-						const [assetIdDecoded, , , amount] = currenciesTransferredEvent.asV1
-						const assetId = toAssetId(assetIdDecoded)
-						details = {
-							assetId: assetId,
-							amount: formatU128ToBalance(amount, assetId)
-						}
-					} else {
-						throw unsupportedSpecError(block)
-					}
-				} else {
-					ctx.log.error(`[${blockHeight}] Cannot find event "Currencies.Transferred" with extrinsic hash ${extrinsicHash}`)
-				}
+			details = {
+				assetId,
+				amount,
 			}
 		}
 

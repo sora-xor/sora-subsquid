@@ -1,54 +1,31 @@
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
-import { formatU128ToBalance } from '../../utils/assets'
+import { formatU128ToBalance, getAssetId } from '../../utils/assets'
 import { findEventsByExtrinsicHash, getAssetsTransferEventData } from '../../utils/events'
 import { poolsStorage } from '../../utils/pools'
-import { Block, CallItem, Context } from '../../processor'
+import { AssetAmount, Block, CallItem, Context } from '../../types'
 import { PoolXykWithdrawLiquidityCall } from '../../types/generated/calls'
-import { toAssetId } from '../../utils'
-import { unsupportedSpecError } from '../../utils/error'
+import { getEntityData } from '../../utils/entities'
 
-export async function liquidityRemovalHandler(ctx: Context, block: Block, callItem: CallItem<'PoolXYK.withdraw_liquidity', true>): Promise<void> {
+export async function liquidityRemovalCallHandler(ctx: Context, block: Block, callItem: CallItem<'PoolXYK.withdraw_liquidity'>): Promise<void> {
     ctx.log.debug('Caught liquidity removal extrinsic')
 
     const extrinsicHash = callItem.extrinsic.hash
     const historyElement = await createHistoryElement(ctx, block, callItem)
 
     const call = new PoolXykWithdrawLiquidityCall(ctx, callItem.call)
+	const data = getEntityData(ctx, block, call, callItem)
 
-    let callRec: {
-        assetAId: Uint8Array
-        assetBId: Uint8Array
-        assetAMin: bigint
-        assetBMin: bigint
-    }
-    if (call.isV1) {
-        const { outputAssetA, outputAssetB, outputAMin, outputBMin } = call.asV1
-        callRec = {
-            assetAId: outputAssetA,
-            assetBId: outputAssetB,
-            assetAMin: outputAMin,
-            assetBMin: outputBMin
-        }
-    } else if (call.isV42) {
-        const { outputAssetA, outputAssetB, outputAMin, outputBMin } = call.asV42
-        callRec = {
-            assetAId: outputAssetA.code,
-            assetBId: outputAssetB.code,
-            assetAMin: outputAMin,
-            assetBMin: outputBMin
-        }
-    } else {
-        throw unsupportedSpecError(block)
-    }
+	const baseAssetId = getAssetId(data.outputAssetA)
+	const targetAssetId = getAssetId(data.outputAssetB)
+	const baseAssetAmount = formatU128ToBalance(data.outputAMin as AssetAmount, baseAssetId)
+	const targetAssetAmount = formatU128ToBalance(data.outputBMin as AssetAmount, targetAssetId)
 
-    const baseAssetId = toAssetId(callRec.assetAId)
-    const targetAssetId = toAssetId(callRec.assetBId)
     const details = {
         type: 'Removal',
-        baseAssetId: baseAssetId,
-        targetAssetId: targetAssetId,
-        baseAssetAmount: formatU128ToBalance(callRec.assetAMin, baseAssetId),
-        targetAssetAmount: formatU128ToBalance(callRec.assetBMin, targetAssetId)
+        baseAssetId,
+        targetAssetId,
+        baseAssetAmount,
+        targetAssetAmount,
     }
 
     if (historyElement.execution.success) {

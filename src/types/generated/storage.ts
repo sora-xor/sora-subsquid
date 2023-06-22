@@ -2286,11 +2286,20 @@ export class CeresLaunchpadILOsStorage extends StorageBase {
     }
 
     get isV35(): boolean {
-        return this.getTypeHash() === '7380f03663ce1efc03a9f8095b4d67eca5dcd7094ebe63d709fb93cfa0f11664'
+        return this.getTypeHash() === '928df8ea2b877cf55ca77bd1b922165317f163bb82509a1775e7c7fe2878c48c'
     }
 
     get asV35(): CeresLaunchpadILOsStorageV35 {
         assert(this.isV35)
+        return this as any
+    }
+
+    get isV37(): boolean {
+        return this.getTypeHash() === '7380f03663ce1efc03a9f8095b4d67eca5dcd7094ebe63d709fb93cfa0f11664'
+    }
+
+    get asV37(): CeresLaunchpadILOsStorageV37 {
+        assert(this.isV37)
         return this as any
     }
 
@@ -2353,6 +2362,20 @@ export interface CeresLaunchpadILOsStorageV35 {
     getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v35.ILOInfo][]>
     getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v35.ILOInfo][]>
     getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v35.ILOInfo][]>
+}
+
+export interface CeresLaunchpadILOsStorageV37 {
+    get(key: Uint8Array): Promise<v37.ILOInfo>
+    getAll(): Promise<v37.ILOInfo[]>
+    getMany(keys: Uint8Array[]): Promise<v37.ILOInfo[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v37.ILOInfo][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v37.ILOInfo][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v37.ILOInfo][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v37.ILOInfo][]>
 }
 
 export interface CeresLaunchpadILOsStorageV42 {
@@ -3501,10 +3524,36 @@ export class DEXAPIEnabledSourceTypesStorage extends StorageBase {
         assert(this.isV1)
         return this as any
     }
+
+    get isV33(): boolean {
+        return this.getTypeHash() === '40ff80c97aa9e77fa3e488210b0244a6e903dcb8bb2bab96195ce9012cb444a5'
+    }
+
+    get asV33(): DEXAPIEnabledSourceTypesStorageV33 {
+        assert(this.isV33)
+        return this as any
+    }
+
+    get isV42(): boolean {
+        return this.getTypeHash() === 'b3e2e66fd93d12bfc55510be49dfb54e3a3a08182855f144a1cb9068eaf711dd'
+    }
+
+    get asV42(): DEXAPIEnabledSourceTypesStorageV42 {
+        assert(this.isV42)
+        return this as any
+    }
 }
 
 export interface DEXAPIEnabledSourceTypesStorageV1 {
     get(): Promise<v1.LiquiditySourceType[]>
+}
+
+export interface DEXAPIEnabledSourceTypesStorageV33 {
+    get(): Promise<v33.LiquiditySourceType[]>
+}
+
+export interface DEXAPIEnabledSourceTypesStorageV42 {
+    get(): Promise<v42.LiquiditySourceType[]>
 }
 
 export class DEXManagerDEXInfosStorage extends StorageBase {
@@ -5651,20 +5700,11 @@ export class EthBridgeBridgeSignatureVersionsStorage extends StorageBase {
     }
 
     get isV38(): boolean {
-        return this.getTypeHash() === 'f07abf076dccd707ce6697235f17eeda24f7725daa2f24300cb644868799dba0'
+        return this.getTypeHash() === '3031aeed3f8d041e6b91e771fbaeafea93f01e45f18aed4ffe6b3bf95a261f51'
     }
 
     get asV38(): EthBridgeBridgeSignatureVersionsStorageV38 {
         assert(this.isV38)
-        return this as any
-    }
-
-    get isV42(): boolean {
-        return this.getTypeHash() === '3031aeed3f8d041e6b91e771fbaeafea93f01e45f18aed4ffe6b3bf95a261f51'
-    }
-
-    get asV42(): EthBridgeBridgeSignatureVersionsStorageV42 {
-        assert(this.isV42)
         return this as any
     }
 }
@@ -5681,20 +5721,6 @@ export interface EthBridgeBridgeSignatureVersionsStorageV38 {
     getPairs(key: number): Promise<[k: number, v: v38.BridgeSignatureVersion][]>
     getPairsPaged(pageSize: number): AsyncIterable<[k: number, v: v38.BridgeSignatureVersion][]>
     getPairsPaged(pageSize: number, key: number): AsyncIterable<[k: number, v: v38.BridgeSignatureVersion][]>
-}
-
-export interface EthBridgeBridgeSignatureVersionsStorageV42 {
-    get(key: number): Promise<v42.BridgeSignatureVersion>
-    getAll(): Promise<v42.BridgeSignatureVersion[]>
-    getMany(keys: number[]): Promise<v42.BridgeSignatureVersion[]>
-    getKeys(): Promise<number[]>
-    getKeys(key: number): Promise<number[]>
-    getKeysPaged(pageSize: number): AsyncIterable<number[]>
-    getKeysPaged(pageSize: number, key: number): AsyncIterable<number[]>
-    getPairs(): Promise<[k: number, v: v42.BridgeSignatureVersion][]>
-    getPairs(key: number): Promise<[k: number, v: v42.BridgeSignatureVersion][]>
-    getPairsPaged(pageSize: number): AsyncIterable<[k: number, v: v42.BridgeSignatureVersion][]>
-    getPairsPaged(pageSize: number, key: number): AsyncIterable<[k: number, v: v42.BridgeSignatureVersion][]>
 }
 
 export class EthBridgeBridgeStatusesStorage extends StorageBase {
@@ -6139,20 +6165,11 @@ export class EthBridgePendingBridgeSignatureVersionsStorage extends StorageBase 
     }
 
     get isV38(): boolean {
-        return this.getTypeHash() === 'd0208b7c63c9242f8a0a6656579aeff7b199cbf52d65d115cd3ed9ae56f35914'
+        return this.getTypeHash() === '4c3a59cc57b46b097da713499cb977af06a9d415a78675aeb9cc7a01064c091e'
     }
 
     get asV38(): EthBridgePendingBridgeSignatureVersionsStorageV38 {
         assert(this.isV38)
-        return this as any
-    }
-
-    get isV42(): boolean {
-        return this.getTypeHash() === '4c3a59cc57b46b097da713499cb977af06a9d415a78675aeb9cc7a01064c091e'
-    }
-
-    get asV42(): EthBridgePendingBridgeSignatureVersionsStorageV42 {
-        assert(this.isV42)
         return this as any
     }
 }
@@ -6169,20 +6186,6 @@ export interface EthBridgePendingBridgeSignatureVersionsStorageV38 {
     getPairs(key: number): Promise<[k: number, v: v38.BridgeSignatureVersion][]>
     getPairsPaged(pageSize: number): AsyncIterable<[k: number, v: v38.BridgeSignatureVersion][]>
     getPairsPaged(pageSize: number, key: number): AsyncIterable<[k: number, v: v38.BridgeSignatureVersion][]>
-}
-
-export interface EthBridgePendingBridgeSignatureVersionsStorageV42 {
-    get(key: number): Promise<(v42.BridgeSignatureVersion | undefined)>
-    getAll(): Promise<v42.BridgeSignatureVersion[]>
-    getMany(keys: number[]): Promise<(v42.BridgeSignatureVersion | undefined)[]>
-    getKeys(): Promise<number[]>
-    getKeys(key: number): Promise<number[]>
-    getKeysPaged(pageSize: number): AsyncIterable<number[]>
-    getKeysPaged(pageSize: number, key: number): AsyncIterable<number[]>
-    getPairs(): Promise<[k: number, v: v42.BridgeSignatureVersion][]>
-    getPairs(key: number): Promise<[k: number, v: v42.BridgeSignatureVersion][]>
-    getPairsPaged(pageSize: number): AsyncIterable<[k: number, v: v42.BridgeSignatureVersion][]>
-    getPairsPaged(pageSize: number, key: number): AsyncIterable<[k: number, v: v42.BridgeSignatureVersion][]>
 }
 
 export class EthBridgePendingEthPeersSyncStorage extends StorageBase {
@@ -8442,7 +8445,7 @@ export class Instance1CollectiveProposalOfStorage extends StorageBase {
      *  Actual proposal for a given hash, if it's current.
      */
     get isV33(): boolean {
-        return this.getTypeHash() === '81d83cd56d051a4a604d79d7efba4deb37334b02aa495b613206a41f00dbfb9f'
+        return this.getTypeHash() === '03f268b87ecfa68d7e4c5ed9b9a0906a1f9a54db72362382e8180e1b0e76e343'
     }
 
     /**
@@ -8457,7 +8460,7 @@ export class Instance1CollectiveProposalOfStorage extends StorageBase {
      *  Actual proposal for a given hash, if it's current.
      */
     get isV35(): boolean {
-        return this.getTypeHash() === '978baf0832b78d398109e968608720414fbccefb2ab6bc04c46a8fb9fa45998b'
+        return this.getTypeHash() === '3adc3859bbcb7e397b63c7171043a792e00ec2fa6d829e88e299381c2672a3c1'
     }
 
     /**
@@ -8472,7 +8475,7 @@ export class Instance1CollectiveProposalOfStorage extends StorageBase {
      *  Actual proposal for a given hash, if it's current.
      */
     get isV37(): boolean {
-        return this.getTypeHash() === '0ea177c8f080f4f45cf8b36f81bacb3ea26e40a929f7fbce4ce8efe49de2ff2f'
+        return this.getTypeHash() === 'aa98e287f467d3f21f8b5e090d0a3828cd16adaeac8d8a1d5c9b6dcb9c930f0c'
     }
 
     /**
@@ -8487,7 +8490,7 @@ export class Instance1CollectiveProposalOfStorage extends StorageBase {
      *  Actual proposal for a given hash, if it's current.
      */
     get isV38(): boolean {
-        return this.getTypeHash() === '7703c97839822db9dcc48f5ec3cec86cd825005d311163ebe12d690e4d24e0cc'
+        return this.getTypeHash() === '942af09c9641bd6f328037ac8627a6810d1a8f32348ec5fa1bdad54c4cc60308'
     }
 
     /**
@@ -9070,7 +9073,7 @@ export class Instance2CollectiveProposalOfStorage extends StorageBase {
      *  Actual proposal for a given hash, if it's current.
      */
     get isV33(): boolean {
-        return this.getTypeHash() === '81d83cd56d051a4a604d79d7efba4deb37334b02aa495b613206a41f00dbfb9f'
+        return this.getTypeHash() === '03f268b87ecfa68d7e4c5ed9b9a0906a1f9a54db72362382e8180e1b0e76e343'
     }
 
     /**
@@ -9085,7 +9088,7 @@ export class Instance2CollectiveProposalOfStorage extends StorageBase {
      *  Actual proposal for a given hash, if it's current.
      */
     get isV35(): boolean {
-        return this.getTypeHash() === '978baf0832b78d398109e968608720414fbccefb2ab6bc04c46a8fb9fa45998b'
+        return this.getTypeHash() === '3adc3859bbcb7e397b63c7171043a792e00ec2fa6d829e88e299381c2672a3c1'
     }
 
     /**
@@ -9100,7 +9103,7 @@ export class Instance2CollectiveProposalOfStorage extends StorageBase {
      *  Actual proposal for a given hash, if it's current.
      */
     get isV37(): boolean {
-        return this.getTypeHash() === '0ea177c8f080f4f45cf8b36f81bacb3ea26e40a929f7fbce4ce8efe49de2ff2f'
+        return this.getTypeHash() === 'aa98e287f467d3f21f8b5e090d0a3828cd16adaeac8d8a1d5c9b6dcb9c930f0c'
     }
 
     /**
@@ -9115,7 +9118,7 @@ export class Instance2CollectiveProposalOfStorage extends StorageBase {
      *  Actual proposal for a given hash, if it's current.
      */
     get isV38(): boolean {
-        return this.getTypeHash() === '7703c97839822db9dcc48f5ec3cec86cd825005d311163ebe12d690e4d24e0cc'
+        return this.getTypeHash() === '942af09c9641bd6f328037ac8627a6810d1a8f32348ec5fa1bdad54c4cc60308'
     }
 
     /**
@@ -13289,7 +13292,7 @@ export class SchedulerAgendaStorage extends StorageBase {
      *  Items to be executed, indexed by the block number that they should be executed on.
      */
     get isV33(): boolean {
-        return this.getTypeHash() === 'c1ffcf3ae7ff4f99769de052a80f3e4e6b14724b8190790d72ba30b1851b10d0'
+        return this.getTypeHash() === 'dadd875f889fde2d0fc12b3425a101b97279b0283893462cddb1aec35858993c'
     }
 
     /**
@@ -13304,7 +13307,7 @@ export class SchedulerAgendaStorage extends StorageBase {
      *  Items to be executed, indexed by the block number that they should be executed on.
      */
     get isV35(): boolean {
-        return this.getTypeHash() === '4f15d2653cdd1d581d126188cfbee07bcf578ac813ab59cff05b341fa6697d6a'
+        return this.getTypeHash() === '0ef969012614dc464b8ee4228ad9170e46f8e7bfcff9ae675056ccbf12f4f550'
     }
 
     /**
@@ -13319,7 +13322,7 @@ export class SchedulerAgendaStorage extends StorageBase {
      *  Items to be executed, indexed by the block number that they should be executed on.
      */
     get isV37(): boolean {
-        return this.getTypeHash() === '9ae7ced4e73f03d335a777f75ea4a3f0260b52fdaf6bb80fdbd2d4325fd73bbf'
+        return this.getTypeHash() === 'ddef121211a869cefffa9f955946c47e8129134529d7f5c78990d10ac5f25cb6'
     }
 
     /**
@@ -13334,7 +13337,7 @@ export class SchedulerAgendaStorage extends StorageBase {
      *  Items to be executed, indexed by the block number that they should be executed on.
      */
     get isV38(): boolean {
-        return this.getTypeHash() === '13e95f7a3662f95bbf1d59231ea72c8f1a530443ec501de4452b01db177ad536'
+        return this.getTypeHash() === '1e99651cf24ffc80a47828df5431df7b1899d74efdb89259532dc70160763c12'
     }
 
     /**
@@ -16834,7 +16837,7 @@ export class SystemEventsStorage extends StorageBase {
      *  Events deposited for the current block.
      */
     get isV38(): boolean {
-        return this.getTypeHash() === '9a4c089071285341836a24e24acf3b21000ac5fedaa208b997290febf56e1ff9'
+        return this.getTypeHash() === '33a685691b8aeea5bd7516f7617cd8a9193e1a9ab6f6bfd7386d641b638613b2'
     }
 
     /**
@@ -18440,6 +18443,15 @@ export class TradingPairEnabledSourcesStorage extends StorageBase {
         return this as any
     }
 
+    get isV33(): boolean {
+        return this.getTypeHash() === '51bc2bb73ac62b09c7b7818a15a05afd027b89e8107143ccc9f8ec397e3f1432'
+    }
+
+    get asV33(): TradingPairEnabledSourcesStorageV33 {
+        assert(this.isV33)
+        return this as any
+    }
+
     get isV42(): boolean {
         return this.getTypeHash() === '2400101ab12706538c3db8bb31d7441f00fd581bc095fdae423d558028e8a177'
     }
@@ -18466,6 +18478,24 @@ export interface TradingPairEnabledSourcesStorageV1 {
     getPairsPaged(pageSize: number): AsyncIterable<[k: [number, v1.TradingPair], v: v1.LiquiditySourceType[]][]>
     getPairsPaged(pageSize: number, key1: number): AsyncIterable<[k: [number, v1.TradingPair], v: v1.LiquiditySourceType[]][]>
     getPairsPaged(pageSize: number, key1: number, key2: v1.TradingPair): AsyncIterable<[k: [number, v1.TradingPair], v: v1.LiquiditySourceType[]][]>
+}
+
+export interface TradingPairEnabledSourcesStorageV33 {
+    get(key1: number, key2: v33.TradingPair): Promise<(v33.LiquiditySourceType[] | undefined)>
+    getAll(): Promise<v33.LiquiditySourceType[][]>
+    getMany(keys: [number, v33.TradingPair][]): Promise<(v33.LiquiditySourceType[] | undefined)[]>
+    getKeys(): Promise<[number, v33.TradingPair][]>
+    getKeys(key1: number): Promise<[number, v33.TradingPair][]>
+    getKeys(key1: number, key2: v33.TradingPair): Promise<[number, v33.TradingPair][]>
+    getKeysPaged(pageSize: number): AsyncIterable<[number, v33.TradingPair][]>
+    getKeysPaged(pageSize: number, key1: number): AsyncIterable<[number, v33.TradingPair][]>
+    getKeysPaged(pageSize: number, key1: number, key2: v33.TradingPair): AsyncIterable<[number, v33.TradingPair][]>
+    getPairs(): Promise<[k: [number, v33.TradingPair], v: v33.LiquiditySourceType[]][]>
+    getPairs(key1: number): Promise<[k: [number, v33.TradingPair], v: v33.LiquiditySourceType[]][]>
+    getPairs(key1: number, key2: v33.TradingPair): Promise<[k: [number, v33.TradingPair], v: v33.LiquiditySourceType[]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: [number, v33.TradingPair], v: v33.LiquiditySourceType[]][]>
+    getPairsPaged(pageSize: number, key1: number): AsyncIterable<[k: [number, v33.TradingPair], v: v33.LiquiditySourceType[]][]>
+    getPairsPaged(pageSize: number, key1: number, key2: v33.TradingPair): AsyncIterable<[k: [number, v33.TradingPair], v: v33.LiquiditySourceType[]][]>
 }
 
 export interface TradingPairEnabledSourcesStorageV42 {
@@ -18496,17 +18526,30 @@ export class TradingPairLockedLiquiditySourcesStorage extends StorageBase {
     }
 
     get isV38(): boolean {
-        return this.getTypeHash() === 'b3e2e66fd93d12bfc55510be49dfb54e3a3a08182855f144a1cb9068eaf711dd'
+        return this.getTypeHash() === '40ff80c97aa9e77fa3e488210b0244a6e903dcb8bb2bab96195ce9012cb444a5'
     }
 
     get asV38(): TradingPairLockedLiquiditySourcesStorageV38 {
         assert(this.isV38)
         return this as any
     }
+
+    get isV42(): boolean {
+        return this.getTypeHash() === 'b3e2e66fd93d12bfc55510be49dfb54e3a3a08182855f144a1cb9068eaf711dd'
+    }
+
+    get asV42(): TradingPairLockedLiquiditySourcesStorageV42 {
+        assert(this.isV42)
+        return this as any
+    }
 }
 
 export interface TradingPairLockedLiquiditySourcesStorageV38 {
     get(): Promise<v38.LiquiditySourceType[]>
+}
+
+export interface TradingPairLockedLiquiditySourcesStorageV42 {
+    get(): Promise<v42.LiquiditySourceType[]>
 }
 
 export class TransactionPaymentNextFeeMultiplierStorage extends StorageBase {

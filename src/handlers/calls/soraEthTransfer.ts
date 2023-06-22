@@ -1,16 +1,17 @@
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
-import { formatU128ToBalance } from '../../utils/assets'
+import { formatU128ToBalance, getAssetId } from '../../utils/assets'
 import { networkSnapshotsStorage } from '../../utils/network'
-import { Block, CallItem, Context } from '../../processor'
+import { Block, CallItem, Context } from '../../types'
 import { EthBridgeTransferToSidechainCall } from '../../types/generated/calls'
 import { findEventByExtrinsicHash } from '../../utils/events'
 import { EthBridgeRequestRegisteredEvent } from '../../types/generated/events'
 import { toHex } from '@subsquid/substrate-processor'
 import { AddressEthereum, AssetAmount, AssetId } from '../../types'
-import { toAddressEthereum, toAssetId } from '../../utils'
-import { unsupportedSpecError } from '../../utils/error'
+import { toAddressEthereum } from '../../utils'
+import { getEntityData } from '../../utils/entities'
+import { CannotFindEventError } from '../../utils/errors'
 
-export async function soraEthTransferHandler(ctx: Context, block: Block, callItem: CallItem<'EthBridge.transfer_to_sidechain', true>): Promise<void> {
+export async function soraEthTransferCallHandler(ctx: Context, block: Block, callItem: CallItem<'EthBridge.transfer_to_sidechain'>): Promise<void> {
     ctx.log.debug('Caught SORA->ETH transfer extrinsic')
 
 	const blockHeight = block.header.height
@@ -18,60 +19,37 @@ export async function soraEthTransferHandler(ctx: Context, block: Block, callIte
     const historyElement = await createHistoryElement(ctx, block, callItem)
 
     const call = new EthBridgeTransferToSidechainCall(ctx, callItem.call)
-
-    let rec: {
-        assetId: AssetId,
-        sidechainAddress: AddressEthereum,
-        amount: AssetAmount
-    }
-    if (call.isV1) {
-        const { assetId, to, amount } = call.asV1
-        rec = {
-			assetId: toAssetId(assetId),
-			sidechainAddress: toAddressEthereum(to),
-			amount: amount as AssetAmount
-		}
-    } else if (call.isV42) {
-        const { assetId, to, amount } = call.asV42
-        rec = {
-			assetId: toAssetId(assetId.code),
-			sidechainAddress: toAddressEthereum(to),
-			amount: amount as AssetAmount
-		}
-    } else {
-        throw unsupportedSpecError(block)
-    }
-
-    const { assetId, sidechainAddress, amount } = rec
+	const data = getEntityData(ctx, block, call, callItem)
+	
+	const assetId = getAssetId(data.assetId)
+	const sidechainAddress = toAddressEthereum(data.to)
+	const amount = data.amount as AssetAmount
 
     let details: {
         requestHash?: string,
         assetId: AssetId,
         sidechainAddress: AddressEthereum,
         amount: string
-    }
+    } | null = null
+
     if (historyElement.execution.success) {
-        const soraEthTransferEventEntity = findEventByExtrinsicHash(block, extrinsicHash, ['EthBridge.RequestRegistered'])
+		const soraEthTransferEventName = 'EthBridge.RequestRegistered' 
+        const soraEthTransferEventItem = findEventByExtrinsicHash(block, extrinsicHash, [soraEthTransferEventName])
 
-        if (soraEthTransferEventEntity) {
-            const soraEthTransferEvent = new EthBridgeRequestRegisteredEvent(ctx, soraEthTransferEventEntity.event)
+        if (soraEthTransferEventItem) {
+            const soraEthTransferEvent = new EthBridgeRequestRegisteredEvent(ctx, soraEthTransferEventItem.event)
 
-            let requestHash: Uint8Array
-            if (soraEthTransferEvent.isV1) {
-                requestHash = soraEthTransferEvent.asV1
-            } else {
-                throw unsupportedSpecError(block)
-            }
+			const soraEthTransferEventData = getEntityData(ctx, block, soraEthTransferEvent, soraEthTransferEventItem)
 
             details = {
-				// TODO: check it
-                requestHash: toHex(requestHash),
+                requestHash: toHex(soraEthTransferEventData),
                 assetId,
                 sidechainAddress,
                 amount: formatU128ToBalance(amount, assetId)
             }
         } else {
-			throw new Error(`[${blockHeight}] Cannot find event "EthBridge.RequestRegistered" with extrinsic hash ${extrinsicHash}`)
+			const error = new CannotFindEventError(block, extrinsicHash, soraEthTransferEventName)
+			ctx.log.error(error.message)
         }
     } else {
         details = {
@@ -81,7 +59,9 @@ export async function soraEthTransferHandler(ctx: Context, block: Block, callIte
         }
     }
 
-    await addDataToHistoryElement(ctx, block, historyElement, details)
+	if (details) {
+		await addDataToHistoryElement(ctx, block, historyElement, details)
+	}
     await updateHistoryElementStats(ctx, block, historyElement)
     await networkSnapshotsStorage.updateBridgeOutgoingTransactionsStats(ctx, block)
 

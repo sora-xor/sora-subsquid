@@ -1,5 +1,5 @@
 import { ExecutionResult, ExecutionError, HistoryElement, HistoryElementCall } from '../model'
-import { Block, Context, CallEntity } from '../processor'
+import { AnyCallItem, AssetAmount, Block, CallItem, CallItemName, Context } from '../types'
 import { formatU128ToBalance } from './assets'
 import { getOrCreateAccountEntity } from './account'
 import { networkSnapshotsStorage } from './network'
@@ -9,27 +9,23 @@ import { nToU8a } from '@polkadot/util'
 import { toJSON } from '@subsquid/util-internal-json'
 import { findEventByExtrinsicHash } from './events'
 import { XorFeeFeeWithdrawnEvent } from '../types/generated/events'
-import { unsupportedSpecError } from './error'
+import { getEntityData } from './entities'
 
 const INCOMING_TRANSFER_METHODS = ['transfer', 'swap_transfer']
 
-const getCallEntityNetworkFee = (ctx: Context, block: Block, callItem: CallEntity): bigint => {
-    const feeWithdrawnEventEntity = findEventByExtrinsicHash(block, callItem.extrinsic.hash, ['XorFee.FeeWithdrawn'])
-    if (feeWithdrawnEventEntity) {
-        const feeWithdrawnEvent = new XorFeeFeeWithdrawnEvent(ctx, feeWithdrawnEventEntity.event)
-        let feeAmount: bigint
-        if (feeWithdrawnEvent.isV1) {
-            feeAmount = feeWithdrawnEvent.asV1[1]
-        } else {
-            throw unsupportedSpecError(block)
-        }
+const getCallItemNetworkFee = (ctx: Context, block: Block, callItem: AnyCallItem): AssetAmount => {
+    const eventItem = findEventByExtrinsicHash(block, callItem.extrinsic.hash, ['XorFee.FeeWithdrawn'])
+
+    if (eventItem) {
+        const event = new XorFeeFeeWithdrawnEvent(ctx, eventItem.event)
+		const eventData = getEntityData(ctx, block, event, eventItem)
         
-        return feeAmount
+        return eventData[1] as AssetAmount
     }
-    return 0n
+    return 0n as AssetAmount
 }
 
-export const createHistoryElement = (ctx: Context, block: Block, callItem: CallEntity): HistoryElement => {
+export const createHistoryElement = (ctx: Context, block: Block, callItem: CallItem<CallItemName>): HistoryElement => {
     const historyElement = new HistoryElement()
 
 	if (!block.header.validator) {
@@ -42,7 +38,7 @@ export const createHistoryElement = (ctx: Context, block: Block, callItem: CallE
     historyElement.module = toCamelCase(callItem.name.split('.')[0])
     historyElement.method = toCamelCase(callItem.name.split('.')[1])
     historyElement.address = toAddress(callItem.extrinsic.signature?.address)
-    historyElement.networkFee = formatU128ToBalance(getCallEntityNetworkFee(ctx, block, callItem), XOR)
+    historyElement.networkFee = formatU128ToBalance(getCallItemNetworkFee(ctx, block, callItem), XOR)
     historyElement.timestamp = formatDateTimestamp(new Date(block.header.timestamp))
 	historyElement.updatedAtBlock = block.header.height
 	historyElement.callNames = []

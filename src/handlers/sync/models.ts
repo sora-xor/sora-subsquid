@@ -1,7 +1,7 @@
 import { assetSnapshotsStorage, assetStorage } from '../../utils/assets'
 import { networkSnapshotsStorage } from '../../utils/network'
 import { poolsStorage } from '../../utils/pools'
-import { Block, Context } from '../../processor'
+import { Block, Context } from '../../types'
 
 export async function syncModels(ctx: Context, block: Block): Promise<void> {
 	await poolsStorage.sync(ctx, block)

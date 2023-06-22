@@ -5590,7 +5590,7 @@ export class LiquidityProxyLiquiditySourceDisabledEvent {
      *  Liquidity source was disabled
      */
     get isV38(): boolean {
-        return this._chain.getEventHash('LiquidityProxy.LiquiditySourceDisabled') === '261493d49c343688c6e341bce0e026855feacbd7a85f1bb2f4477030b8a0c4d8'
+        return this._chain.getEventHash('LiquidityProxy.LiquiditySourceDisabled') === '56f813b5fcd4a7e12152808c737397d2cd460f4d29400c640164bbeb391e3ba2'
     }
 
     /**
@@ -5598,6 +5598,21 @@ export class LiquidityProxyLiquiditySourceDisabledEvent {
      */
     get asV38(): v38.LiquiditySourceType {
         assert(this.isV38)
+        return this._chain.decodeEvent(this.event)
+    }
+
+    /**
+     * Liquidity source was disabled
+     */
+    get isV42(): boolean {
+        return this._chain.getEventHash('LiquidityProxy.LiquiditySourceDisabled') === '261493d49c343688c6e341bce0e026855feacbd7a85f1bb2f4477030b8a0c4d8'
+    }
+
+    /**
+     * Liquidity source was disabled
+     */
+    get asV42(): v42.LiquiditySourceType {
+        assert(this.isV42)
         return this._chain.decodeEvent(this.event)
     }
 }
@@ -5619,7 +5634,7 @@ export class LiquidityProxyLiquiditySourceEnabledEvent {
      *  Liquidity source was enabled
      */
     get isV38(): boolean {
-        return this._chain.getEventHash('LiquidityProxy.LiquiditySourceEnabled') === '261493d49c343688c6e341bce0e026855feacbd7a85f1bb2f4477030b8a0c4d8'
+        return this._chain.getEventHash('LiquidityProxy.LiquiditySourceEnabled') === '56f813b5fcd4a7e12152808c737397d2cd460f4d29400c640164bbeb391e3ba2'
     }
 
     /**
@@ -5627,6 +5642,21 @@ export class LiquidityProxyLiquiditySourceEnabledEvent {
      */
     get asV38(): v38.LiquiditySourceType {
         assert(this.isV38)
+        return this._chain.decodeEvent(this.event)
+    }
+
+    /**
+     * Liquidity source was enabled
+     */
+    get isV42(): boolean {
+        return this._chain.getEventHash('LiquidityProxy.LiquiditySourceEnabled') === '261493d49c343688c6e341bce0e026855feacbd7a85f1bb2f4477030b8a0c4d8'
+    }
+
+    /**
+     * Liquidity source was enabled
+     */
+    get asV42(): v42.LiquiditySourceType {
+        assert(this.isV42)
         return this._chain.decodeEvent(this.event)
     }
 }

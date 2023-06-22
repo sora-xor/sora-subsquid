@@ -1,17 +1,15 @@
-import { addCallsToHistoryElement, addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
+import { addCallsToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { formatU128ToBalance, getAssetId } from '../../utils/assets'
 import { poolsStorage } from '../../utils/pools'
-import { Block, CallItem, Context } from '../../processor'
-import { UtilityBatchAllCall } from '../../types/generated/calls'
+import { Block, CallItem, Context } from '../../types'
+import { UtilityBatchAllCall, utilityBatchAllCallVersions } from '../../types/generated/calls'
 import { HistoryElement, HistoryElementCall } from '../../model'
 import { AssetId } from '../../types'
 import { toCamelCase } from '../../utils'
 import { toJSON } from '@subsquid/util-internal-json'
-import { unsupportedSpecError } from '../../utils/error'
+import { UnsupportedSpecError } from '../../utils/errors'
 
-const versions = [1, 3, 7, 19, 22, 23, 26, 32, 33, 35, 37, 38, 42, 43, 45, 46, 47, 50, 53] as const
-
-type Version = typeof versions[number]
+type Version = typeof utilityBatchAllCallVersions[number]
 type IsVersion = { [V in Version]: `isV${V}` }[Version]
 type AsVersion = { [V in Version]: `asV${V}` }[Version]
 
@@ -92,9 +90,11 @@ function mapCalls({ version, calls }: BatchCalls, historyElement: HistoryElement
 	return calls.map((call, idx) => extractCall({ version, call } as BatchCall, idx, historyElement, block))
 }
 
-function mapCallsForAllVersions(utilityBatchAllCall: UtilityBatchAllCall, historyElement: HistoryElement, block: Block): HistoryElementCall[] {
+function mapCallsForAllVersions(ctx: Context, block: Block, callItem: CallItem<'Utility.batch_all'>, historyElement: HistoryElement): HistoryElementCall[] {
+	const utilityBatchAllCall = new UtilityBatchAllCall(ctx, callItem.call)
+
 	let calls: HistoryElementCall[] | null = null
-	versions.forEach((version) => {
+	utilityBatchAllCallVersions.forEach((version) => {
 		if (utilityBatchAllCall['isV' + version as IsVersion]) {
 			calls = mapCalls(
 				{
@@ -106,18 +106,16 @@ function mapCallsForAllVersions(utilityBatchAllCall: UtilityBatchAllCall, histor
 			)
 		}
 	})
-	if (calls === null) throw unsupportedSpecError(block)
+	if (calls === null) throw new UnsupportedSpecError(ctx, block, callItem)
 	return calls
 }
 
-export async function batchTransactionsHandler(ctx: Context, block: Block, callItem: CallItem<'Utility.batch_all', true>): Promise<void> {
+export async function batchTransactionsCallHandler(ctx: Context, block: Block, callItem: CallItem<'Utility.batch_all'>): Promise<void> {
     ctx.log.debug('Caught batch transaction extrinsic')
 
     const historyElement = await createHistoryElement(ctx, block, callItem)
 
-	const utilityBatchAllCall = new UtilityBatchAllCall(ctx, callItem.call)
-
-	let historyElementCalls = mapCallsForAllVersions(utilityBatchAllCall, historyElement, block)
+	let historyElementCalls = mapCallsForAllVersions(ctx, block, callItem, historyElement)
 
 	await addCallsToHistoryElement(ctx, block, historyElement, historyElementCalls)
     await updateHistoryElementStats(ctx, block, historyElement)

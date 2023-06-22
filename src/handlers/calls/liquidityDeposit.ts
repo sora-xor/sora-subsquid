@@ -1,62 +1,40 @@
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
-import { formatU128ToBalance } from '../../utils/assets'
+import { formatU128ToBalance, getAssetId } from '../../utils/assets'
 import { poolsStorage } from '../../utils/pools'
 import { findEventsByExtrinsicHash, getAssetsTransferEventData } from '../../utils/events'
-import { Block, CallItem, Context } from '../../processor'
+import { AssetAmount, Block, CallItem, Context } from '../../types'
 import { PoolXykDepositLiquidityCall } from '../../types/generated/calls'
-import { toAssetId } from '../../utils'
-import { unsupportedSpecError } from '../../utils/error'
+import { getEntityData } from '../../utils/entities'
 
 
-export async function liquidityDepositHandler(ctx: Context, block: Block, callItem: CallItem<'PoolXYK.deposit_liquidity', true>): Promise<void> {
+export async function liquidityDepositCallHandler(ctx: Context, block: Block, callItem: CallItem<'PoolXYK.deposit_liquidity'>): Promise<void> {
     ctx.log.debug('Caught liquidity adding extrinsic')
 
     const extrinsicHash = callItem.extrinsic.hash
     const historyElement = await createHistoryElement(ctx, block, callItem)
 
     const call = new PoolXykDepositLiquidityCall(ctx, callItem.call)
+	const data = getEntityData(ctx, block, call, callItem)
 
-    let callRec: {
-        assetAId: Uint8Array
-        assetBId: Uint8Array
-        assetADesired: bigint
-        assetBDesired: bigint
-    }
-    if (call.isV1) {
-        const { inputAssetA, inputAssetB, inputADesired, inputBDesired } = call.asV1
-        callRec = {
-            assetAId: inputAssetA,
-            assetBId: inputAssetB,
-            assetADesired: inputADesired,
-            assetBDesired: inputBDesired
-        }
-    } else if (call.isV42) {
-        const { inputAssetA, inputAssetB, inputADesired, inputBDesired } = call.asV42
-        callRec = {
-            assetAId: inputAssetA.code,
-            assetBId: inputAssetB.code,
-            assetADesired: inputADesired,
-            assetBDesired: inputBDesired
-        }
-    } else {
-        throw unsupportedSpecError(block)
-    }
-
-    const baseAssetId = toAssetId(callRec.assetAId)
-    const targetAssetId = toAssetId(callRec.assetBId)
+	const baseAssetId = getAssetId(data.inputAssetA)
+	const targetAssetId = getAssetId(data.inputAssetB)
+	const assetADesired = data.inputADesired as AssetAmount
+	const assetBDesired = data.inputBDesired as AssetAmount
+	const baseAssetAmount = formatU128ToBalance(assetADesired, baseAssetId)
+	const targetAssetAmount = formatU128ToBalance(assetBDesired, targetAssetId)
+	
     const details = {
         type: 'Deposit',
-        baseAssetId: baseAssetId,
-        targetAssetId: toAssetId(callRec.assetBId),
-        baseAssetAmount: formatU128ToBalance(callRec.assetADesired, baseAssetId),
-        targetAssetAmount: formatU128ToBalance(callRec.assetBDesired, targetAssetId)
+        baseAssetId,
+        targetAssetId,
+        baseAssetAmount,
+        targetAssetAmount,
     }
 
     const transfers = findEventsByExtrinsicHash(block, extrinsicHash, ['Balances.Transfer', 'Tokens.Transfer'])
 
     if (transfers.length === 2) {
         const [baseAssetTransfer, targetAssetTransfer] = transfers
-
 
 		// We assume that events go in the same order as in the blockchain
 		// First the event with the base asset, and then the event with the target asset

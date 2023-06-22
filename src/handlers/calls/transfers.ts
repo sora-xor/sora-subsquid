@@ -1,68 +1,53 @@
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
-import { formatU128ToBalance } from '../../utils/assets'
-import { Block, CallItem, Context } from '../../processor'
+import { formatU128ToBalance, getAssetId } from '../../utils/assets'
+import { AssetAmount, Block, CallItem, Context } from '../../types'
 import { AssetsTransferEvent } from '../../types/generated/events'
 import { findEventByExtrinsicHash } from '../../utils/events'
 import { AssetsTransferCall } from '../../types/generated/calls'
 import { Address, AssetId } from '../../types'
-import { toAddress, toAssetId } from '../../utils'
-import { unsupportedSpecError } from '../../utils/error'
+import { toAddress } from '../../utils'
+import { getEntityData } from '../../utils/entities'
+import { CannotFindEventError } from '../../utils/errors'
 
-export async function transfersHandler(ctx: Context, block: Block, callItem: CallItem<'Assets.transfer', true>): Promise<void> {
+export async function transfersCallHandler(ctx: Context, block: Block, callItem: CallItem<'Assets.transfer'>): Promise<void> {
     ctx.log.debug('Caught transfer extrinsic')
 
 	const blockHeight = block.header.height
 	const extrinsicHash = callItem.extrinsic.hash
-	const extrinsicSigner = toAddress(callItem.call.origin.value.value)
+	const extrinsicSigner: Address | null = callItem.call.origin ? toAddress(callItem.call.origin.value.value) : null
+	if (!extrinsicSigner) {
+		ctx.log.error(`[${blockHeight}]: Cannot get extrinsic signer`)
+		console.log(callItem)
+	}
     const historyElement = await createHistoryElement(ctx, block, callItem)
 
     if (!historyElement) return
 
     let details: {
-		from: Address
+		from: Address | null
 		to: Address
 		assetId: AssetId
 		amount: string
 	}
 
     if (historyElement.execution.success) {
-		const eventItem = findEventByExtrinsicHash(block, extrinsicHash, ['Assets.Transfer'])
+		const eventName = 'Assets.Transfer'
+		const eventItem = findEventByExtrinsicHash(block, extrinsicHash, [eventName])
+
         if (!eventItem) {
-			throw new Error(`[${blockHeight}] Cannot find event "Assets.Transfer" with extrinsic hash ${extrinsicHash}`)
+			throw new CannotFindEventError(block, extrinsicHash, eventName)
 		}
 		
-
 		const event = new AssetsTransferEvent(ctx, eventItem.event)
+		const data = getEntityData(ctx, block, event, eventItem)
 
-		let eventRec: {
-			from: Address,
-			to: Address,
-			assetId: AssetId,
-			amount: bigint
-		}
-		if (event.isV1) {
-			const [from, to, assetId, amount] = event.asV1
-			eventRec = {
-				from: toAddress(from),
-				to: toAddress(to),
-				assetId: toAssetId(assetId),
-				amount
-			}
-		} else if (event.isV42) {
-			const [from, to, assetId, amount] = event.asV42
-			eventRec = {
-				from: toAddress(from),
-				to: toAddress(to),
-				assetId: toAssetId(assetId.code),
-				amount
-			}
-		} else {
-			throw unsupportedSpecError(block)
-		}
-		const { from, to, assetId, amount } = eventRec
+		const from = toAddress(data[0])
+		const to = toAddress(data[1])
+		const assetId = getAssetId(data[2])
+		const amount = data[3] as AssetAmount
 
 		if (extrinsicSigner !== from) {
-			throw new Error('Transfer event sender is not the extrinsic signer')
+			throw new Error(`[${blockHeight}] Transfer event sender is not the extrinsic signer`)
 		}
 
         details = {
@@ -75,30 +60,11 @@ export async function transfersHandler(ctx: Context, block: Block, callItem: Cal
 
     else {
 		const call = new AssetsTransferCall(ctx, callItem.call)
+		const data = getEntityData(ctx, block, call, callItem)
 
-		let callRec: {
-			to: Address,
-			assetId: AssetId,
-			amount: bigint
-		}
-		if (call.isV1) {
-			const { to, assetId, amount } = call.asV1
-			callRec = {
-				to: toAddress(to),
-				assetId: toAssetId(assetId),
-				amount
-			}
-		} else if (call.isV42) {
-			const { to, assetId, amount } = call.asV42
-			callRec = {
-				to: toAddress(to),
-				assetId: toAssetId(assetId.code),
-				amount
-			}
-		} else {
-			throw unsupportedSpecError(block)
-		}
-		const { to, assetId, amount } = callRec
+		const to = toAddress(data.to)
+		const assetId = getAssetId(data.assetId)
+		const amount = data.amount
 
         details = {
             from: extrinsicSigner,

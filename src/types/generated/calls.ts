@@ -2191,7 +2191,7 @@ export class BridgeMultisigAsMultiThreshold1Call {
      *  # </weight>
      */
     get isV33(): boolean {
-        return this._chain.getCallHash('BridgeMultisig.as_multi_threshold_1') === '269859168a7cdc874bcf8ff086b3523fb9d9415e63b4a0189af0cf9e65ded14b'
+        return this._chain.getCallHash('BridgeMultisig.as_multi_threshold_1') === 'a6d0ef5a0547182c5dba04a285ebdc606c439fc53536694bc88eb7d1b77cba33'
     }
 
     /**
@@ -2238,7 +2238,7 @@ export class BridgeMultisigAsMultiThreshold1Call {
      *  # </weight>
      */
     get isV35(): boolean {
-        return this._chain.getCallHash('BridgeMultisig.as_multi_threshold_1') === '2e222ebbd27f4a37a82110cd9fbed41ef19335acf3c701ff01d091d64e572412'
+        return this._chain.getCallHash('BridgeMultisig.as_multi_threshold_1') === '7ce91564946af5647107e0e7cde520dd7864989c0c063745ebb790d28c14e2fd'
     }
 
     /**
@@ -2285,7 +2285,7 @@ export class BridgeMultisigAsMultiThreshold1Call {
      *  # </weight>
      */
     get isV37(): boolean {
-        return this._chain.getCallHash('BridgeMultisig.as_multi_threshold_1') === '0c45faf19d519c3aaa20c2c68725c9533875b475242b40b95cc476a36d0e472d'
+        return this._chain.getCallHash('BridgeMultisig.as_multi_threshold_1') === '097c751ce619cbea253212fc492b4399e9eca22036e7d94687f13475126b7aed'
     }
 
     /**
@@ -2332,7 +2332,7 @@ export class BridgeMultisigAsMultiThreshold1Call {
      *  # </weight>
      */
     get isV38(): boolean {
-        return this._chain.getCallHash('BridgeMultisig.as_multi_threshold_1') === '2ed61e5695e41cb58a74264f2b136c5233f9ab3117c191fff216148730d2def1'
+        return this._chain.getCallHash('BridgeMultisig.as_multi_threshold_1') === 'afa3f3c02641c4a6388dc427324aa8236fded8e20cd71c6a94b14ad0cac6a0cc'
     }
 
     /**
@@ -4452,7 +4452,7 @@ export class CouncilExecuteCall {
      *  # </weight>
      */
     get isV33(): boolean {
-        return this._chain.getCallHash('Council.execute') === 'ebb0ee4aa0ab1fd3d41437f11885ed19bcd3dfd9a4fe46c4b6456caeb7d3c435'
+        return this._chain.getCallHash('Council.execute') === 'd49f3dc32a13dc2f7543b5838cbf08c92eb6c2a0410582827e45edb1ff2a3865'
     }
 
     /**
@@ -4485,7 +4485,7 @@ export class CouncilExecuteCall {
      *  # </weight>
      */
     get isV35(): boolean {
-        return this._chain.getCallHash('Council.execute') === '06e7e452be2d8c3edfeb852299275ac1e5834406ef3e1c49ea7acd46e337bc29'
+        return this._chain.getCallHash('Council.execute') === 'b3b92140b4a74b7e656a344ec397bc8b1ce87e0dc75b0f4361a2792a53832f65'
     }
 
     /**
@@ -4518,7 +4518,7 @@ export class CouncilExecuteCall {
      *  # </weight>
      */
     get isV37(): boolean {
-        return this._chain.getCallHash('Council.execute') === '099286fab95e7d374bba7f4ad28c637691d44ce035a6dbbd5fbea6f94129cbb9'
+        return this._chain.getCallHash('Council.execute') === '4109071bee53be89e63bb7b5f18c278b5ee3230eaed50a099da6919f0e795409'
     }
 
     /**
@@ -4551,7 +4551,7 @@ export class CouncilExecuteCall {
      *  # </weight>
      */
     get isV38(): boolean {
-        return this._chain.getCallHash('Council.execute') === '703fe40fc07caee2f716396bd0b0cb3240b07023722fb03c617848cc3a49bd26'
+        return this._chain.getCallHash('Council.execute') === '5c34eabc73904971ea5975846ba311472dd4e93e5f214d1a2617d0a0f9859df5'
     }
 
     /**
@@ -5396,7 +5396,7 @@ export class CouncilProposeCall {
      *  # </weight>
      */
     get isV33(): boolean {
-        return this._chain.getCallHash('Council.propose') === '95ff331c979a73cc7c0cf77f3cba07f5ab9c079f55cbb0409a9813332f5456b9'
+        return this._chain.getCallHash('Council.propose') === '09cd3fa7e842066dfe4e466bd3ce4077bc4974ca86a8dcd9e166b939d9172864'
     }
 
     /**
@@ -5463,7 +5463,7 @@ export class CouncilProposeCall {
      *  # </weight>
      */
     get isV35(): boolean {
-        return this._chain.getCallHash('Council.propose') === '0d13b093252b61eb2677be7e42d086f1291dfc2cc1031a908e1b5d8736fef263'
+        return this._chain.getCallHash('Council.propose') === '7ad1ce43b5d2dee2139748f8fae5ad187ce1f747f81731e531982faddb26a295'
     }
 
     /**
@@ -5530,7 +5530,7 @@ export class CouncilProposeCall {
      *  # </weight>
      */
     get isV37(): boolean {
-        return this._chain.getCallHash('Council.propose') === '96e0bf7a74899d164a5b87c574ca07c493bc8f492a3c80a96de6a6af62198cea'
+        return this._chain.getCallHash('Council.propose') === '86d5ec973abecfe59740cc016ef3847cd4fa9b46ad1e673e1ef75a8c8ef07b36'
     }
 
     /**
@@ -5597,7 +5597,7 @@ export class CouncilProposeCall {
      *  # </weight>
      */
     get isV38(): boolean {
-        return this._chain.getCallHash('Council.propose') === '61c8afb7701a816ebca524c9d92af9de96e112055c6e829df1ec55354f8d472e'
+        return this._chain.getCallHash('Council.propose') === 'b3efd39e71a403a7ec50d466e6f35fd1edc215d6c0309dd624aaa17b5eaf1549'
     }
 
     /**
@@ -9521,7 +9521,7 @@ export class EthBridgeMigrateCall {
      *  - `network_id` - bridge network identifier.
      */
     get isV38(): boolean {
-        return this._chain.getCallHash('EthBridge.migrate') === '2ee4ce095b618cbd3529d01ccc6342259476a15b0b0010164c9ef1833680566a'
+        return this._chain.getCallHash('EthBridge.migrate') === '5dbdb1f3ff572df374e5e9d5e779c4bd5bf2b3acf7141785d25a61b3140c5826'
     }
 
     /**
@@ -9536,35 +9536,6 @@ export class EthBridgeMigrateCall {
      */
     get asV38(): {newContractAddress: Uint8Array, erc20NativeTokens: Uint8Array[], networkId: number, newSignatureVersion: v38.BridgeSignatureVersion} {
         assert(this.isV38)
-        return this._chain.decodeCall(this.call)
-    }
-
-    /**
-     * Migrate the given bridge to a new smart-contract.
-     * 
-     * Can only be called by an authority.
-     * 
-     * Parameters:
-     * - `new_contract_address` - new sidechain ocntract address.
-     * - `erc20_native_tokens` - migrated assets ids.
-     * - `network_id` - bridge network identifier.
-     */
-    get isV42(): boolean {
-        return this._chain.getCallHash('EthBridge.migrate') === '5dbdb1f3ff572df374e5e9d5e779c4bd5bf2b3acf7141785d25a61b3140c5826'
-    }
-
-    /**
-     * Migrate the given bridge to a new smart-contract.
-     * 
-     * Can only be called by an authority.
-     * 
-     * Parameters:
-     * - `new_contract_address` - new sidechain ocntract address.
-     * - `erc20_native_tokens` - migrated assets ids.
-     * - `network_id` - bridge network identifier.
-     */
-    get asV42(): {newContractAddress: Uint8Array, erc20NativeTokens: Uint8Array[], networkId: number, newSignatureVersion: v42.BridgeSignatureVersion} {
-        assert(this.isV42)
         return this._chain.decodeCall(this.call)
     }
 }
@@ -9678,7 +9649,7 @@ export class EthBridgeRegisterBridgeCall {
      *  - `initial_peers` - a set of initial network peers.
      */
     get isV38(): boolean {
-        return this._chain.getCallHash('EthBridge.register_bridge') === '962c8611032d389b929f2a66d1ce71b535100a42e22dd1b7a5a919b4f06e986d'
+        return this._chain.getCallHash('EthBridge.register_bridge') === '161f1016c7a6177231ae9788f487475a5469386ec85c01f9ddf83c401c77ead8'
     }
 
     /**
@@ -9691,31 +9662,6 @@ export class EthBridgeRegisterBridgeCall {
      */
     get asV38(): {bridgeContractAddress: Uint8Array, initialPeers: Uint8Array[], signatureVersion: v38.BridgeSignatureVersion} {
         assert(this.isV38)
-        return this._chain.decodeCall(this.call)
-    }
-
-    /**
-     * Register a new bridge.
-     * 
-     * Parameters:
-     * - `bridge_contract_address` - address of smart-contract deployed on a corresponding
-     * network.
-     * - `initial_peers` - a set of initial network peers.
-     */
-    get isV42(): boolean {
-        return this._chain.getCallHash('EthBridge.register_bridge') === '161f1016c7a6177231ae9788f487475a5469386ec85c01f9ddf83c401c77ead8'
-    }
-
-    /**
-     * Register a new bridge.
-     * 
-     * Parameters:
-     * - `bridge_contract_address` - address of smart-contract deployed on a corresponding
-     * network.
-     * - `initial_peers` - a set of initial network peers.
-     */
-    get asV42(): {bridgeContractAddress: Uint8Array, initialPeers: Uint8Array[], signatureVersion: v42.BridgeSignatureVersion} {
-        assert(this.isV42)
         return this._chain.decodeCall(this.call)
     }
 }
@@ -11453,7 +11399,7 @@ export class LiquidityProxyDisableLiquiditySourceCall {
      *  - `liquidity_source`: the liquidity source to be disabled.
      */
     get isV38(): boolean {
-        return this._chain.getCallHash('LiquidityProxy.disable_liquidity_source') === '88a6f8a985d53772e1003bbff8e437d78148310374d7ab036e56ea94749715ac'
+        return this._chain.getCallHash('LiquidityProxy.disable_liquidity_source') === 'd075d71210112005f0ca3a713782952225e711d5d70fd36bb9822df9d74ef8f4'
     }
 
     /**
@@ -11463,6 +11409,25 @@ export class LiquidityProxyDisableLiquiditySourceCall {
      */
     get asV38(): {liquiditySource: v38.LiquiditySourceType} {
         assert(this.isV38)
+        return this._chain.decodeCall(this.call)
+    }
+
+    /**
+     * Disables XST or TBC liquidity source. The liquidity source becomes unavailable for swap.
+     * 
+     * - `liquidity_source`: the liquidity source to be disabled.
+     */
+    get isV42(): boolean {
+        return this._chain.getCallHash('LiquidityProxy.disable_liquidity_source') === '88a6f8a985d53772e1003bbff8e437d78148310374d7ab036e56ea94749715ac'
+    }
+
+    /**
+     * Disables XST or TBC liquidity source. The liquidity source becomes unavailable for swap.
+     * 
+     * - `liquidity_source`: the liquidity source to be disabled.
+     */
+    get asV42(): {liquiditySource: v42.LiquiditySourceType} {
+        assert(this.isV42)
         return this._chain.decodeCall(this.call)
     }
 }
@@ -11486,7 +11451,7 @@ export class LiquidityProxyEnableLiquiditySourceCall {
      *  - `liquidity_source`: the liquidity source to be enabled.
      */
     get isV38(): boolean {
-        return this._chain.getCallHash('LiquidityProxy.enable_liquidity_source') === '88a6f8a985d53772e1003bbff8e437d78148310374d7ab036e56ea94749715ac'
+        return this._chain.getCallHash('LiquidityProxy.enable_liquidity_source') === 'd075d71210112005f0ca3a713782952225e711d5d70fd36bb9822df9d74ef8f4'
     }
 
     /**
@@ -11496,6 +11461,25 @@ export class LiquidityProxyEnableLiquiditySourceCall {
      */
     get asV38(): {liquiditySource: v38.LiquiditySourceType} {
         assert(this.isV38)
+        return this._chain.decodeCall(this.call)
+    }
+
+    /**
+     * Enables XST or TBC liquidity source.
+     * 
+     * - `liquidity_source`: the liquidity source to be enabled.
+     */
+    get isV42(): boolean {
+        return this._chain.getCallHash('LiquidityProxy.enable_liquidity_source') === '88a6f8a985d53772e1003bbff8e437d78148310374d7ab036e56ea94749715ac'
+    }
+
+    /**
+     * Enables XST or TBC liquidity source.
+     * 
+     * - `liquidity_source`: the liquidity source to be enabled.
+     */
+    get asV42(): {liquiditySource: v42.LiquiditySourceType} {
+        assert(this.isV42)
         return this._chain.decodeCall(this.call)
     }
 }
@@ -11541,6 +11525,37 @@ export class LiquidityProxySwapCall {
      */
     get asV1(): {dexId: number, inputAssetId: Uint8Array, outputAssetId: Uint8Array, swapAmount: v1.SwapAmount, selectedSourceTypes: v1.LiquiditySourceType[], filterMode: v1.FilterMode} {
         assert(this.isV1)
+        return this._chain.decodeCall(this.call)
+    }
+
+    /**
+     *  Perform swap of tokens (input/output defined via SwapAmount direction).
+     * 
+     *  - `origin`: the account on whose behalf the transaction is being executed,
+     *  - `dex_id`: DEX ID for which liquidity sources aggregation is being done,
+     *  - `input_asset_id`: ID of the asset being sold,
+     *  - `output_asset_id`: ID of the asset being bought,
+     *  - `swap_amount`: the exact amount to be sold (either in input_asset_id or output_asset_id units with corresponding slippage tolerance absolute bound),
+     *  - `selected_source_types`: list of selected LiquiditySource types, selection effect is determined by filter_mode,
+     *  - `filter_mode`: indicate either to allow or forbid selected types only, or disable filtering.
+     */
+    get isV33(): boolean {
+        return this._chain.getCallHash('LiquidityProxy.swap') === '243db239c0790a225cdae07ab111cfa2bef46fc34fd7d8cbe3b39ecf6e137a6f'
+    }
+
+    /**
+     *  Perform swap of tokens (input/output defined via SwapAmount direction).
+     * 
+     *  - `origin`: the account on whose behalf the transaction is being executed,
+     *  - `dex_id`: DEX ID for which liquidity sources aggregation is being done,
+     *  - `input_asset_id`: ID of the asset being sold,
+     *  - `output_asset_id`: ID of the asset being bought,
+     *  - `swap_amount`: the exact amount to be sold (either in input_asset_id or output_asset_id units with corresponding slippage tolerance absolute bound),
+     *  - `selected_source_types`: list of selected LiquiditySource types, selection effect is determined by filter_mode,
+     *  - `filter_mode`: indicate either to allow or forbid selected types only, or disable filtering.
+     */
+    get asV33(): {dexId: number, inputAssetId: Uint8Array, outputAssetId: Uint8Array, swapAmount: v33.SwapAmount, selectedSourceTypes: v33.LiquiditySourceType[], filterMode: v33.FilterMode} {
+        assert(this.isV33)
         return this._chain.decodeCall(this.call)
     }
 
@@ -11602,7 +11617,7 @@ export class LiquidityProxySwapTransferCall {
      *  - `filter_mode`: indicate either to allow or forbid selected types only, or disable filtering.
      */
     get isV33(): boolean {
-        return this._chain.getCallHash('LiquidityProxy.swap_transfer') === '1a683882a212973c3e088e444ad525d0f1d07a2115fde966d7eb34e4d7d2697c'
+        return this._chain.getCallHash('LiquidityProxy.swap_transfer') === '48f60719fa664b1a0e1296c9fca3e5b51922501ca87d53b157dd7d79c1a52962'
     }
 
     /**
@@ -12735,7 +12750,7 @@ export class MultisigAsMultiThreshold1Call {
      *  # </weight>
      */
     get isV33(): boolean {
-        return this._chain.getCallHash('Multisig.as_multi_threshold_1') === '978b48ebf7e30bc89cfad88fa12eb2f9cc33aed234b44666a00c65f3a2210fa6'
+        return this._chain.getCallHash('Multisig.as_multi_threshold_1') === 'e9559ccbd55abcaf9fa924173a913881e87e1a1100d1ea7e40c60e0866a8b038'
     }
 
     /**
@@ -12780,7 +12795,7 @@ export class MultisigAsMultiThreshold1Call {
      *  # </weight>
      */
     get isV35(): boolean {
-        return this._chain.getCallHash('Multisig.as_multi_threshold_1') === '185f16e2796d971cbe98ac3a28fde371a4acba79b4830627229be0d2fd50cf7c'
+        return this._chain.getCallHash('Multisig.as_multi_threshold_1') === '2fc6caebd9ecd8633151e65ea7ce61284405fa53c1aad43d131afa46772b5781'
     }
 
     /**
@@ -12825,7 +12840,7 @@ export class MultisigAsMultiThreshold1Call {
      *  # </weight>
      */
     get isV37(): boolean {
-        return this._chain.getCallHash('Multisig.as_multi_threshold_1') === '63ed19682efa7e7908ff4a496b68eb3b2b3d8d2131a7700a2daab780b6a15ca5'
+        return this._chain.getCallHash('Multisig.as_multi_threshold_1') === '73e745179d40b9f06f196848d7c12abdcc2cf1cbe05964a6c6977ff46d7263d8'
     }
 
     /**
@@ -12870,7 +12885,7 @@ export class MultisigAsMultiThreshold1Call {
      *  # </weight>
      */
     get isV38(): boolean {
-        return this._chain.getCallHash('Multisig.as_multi_threshold_1') === 'e7f4ad777662a7c2f3bc73bb64bb99d2db46b15700e37128a19b807005d3057b'
+        return this._chain.getCallHash('Multisig.as_multi_threshold_1') === 'e9e37f6031310cf2de58a6227001f968d3164ede4107279f1e2393e5aa427d99'
     }
 
     /**
@@ -14220,7 +14235,7 @@ export class SchedulerScheduleCall {
      *  # </weight>
      */
     get isV33(): boolean {
-        return this._chain.getCallHash('Scheduler.schedule') === '4de5e6aeac1b74488ca3cafe9e25d4bbc470b1b4c27b6eec7f8d236db2555a3b'
+        return this._chain.getCallHash('Scheduler.schedule') === '48c2d5f9473dbb8a160cfa9c66d7f31d2a599f985e9358c828ea0ed3de14c834'
     }
 
     /**
@@ -14253,7 +14268,7 @@ export class SchedulerScheduleCall {
      *  # </weight>
      */
     get isV35(): boolean {
-        return this._chain.getCallHash('Scheduler.schedule') === 'a6f239c0a3e654bc715a04bb25c3a12d726bd1d93b579a490ecacc197c45ffd5'
+        return this._chain.getCallHash('Scheduler.schedule') === 'd8d4042724bf8c43d6af045d51b1584ec0c544135e21c895af6c023b6a3c53ff'
     }
 
     /**
@@ -14286,7 +14301,7 @@ export class SchedulerScheduleCall {
      *  # </weight>
      */
     get isV37(): boolean {
-        return this._chain.getCallHash('Scheduler.schedule') === 'e4a914428f6298d515859b79abda6d2bc466a275302e427c26f4db287903c233'
+        return this._chain.getCallHash('Scheduler.schedule') === '3e15eb8bb01ff41a76462757897d1c6413b1d1d1f58c9b24053929d6be62166b'
     }
 
     /**
@@ -14319,7 +14334,7 @@ export class SchedulerScheduleCall {
      *  # </weight>
      */
     get isV38(): boolean {
-        return this._chain.getCallHash('Scheduler.schedule') === '620355fbc24deb119978b4800be1207c4799b2c01dbf85dc36892339bfb132a8'
+        return this._chain.getCallHash('Scheduler.schedule') === '1f635339a92c58554b9fcd91f6219594a73aad9e05053f647644567422021785'
     }
 
     /**
@@ -14650,7 +14665,7 @@ export class SchedulerScheduleAfterCall {
      *  # </weight>
      */
     get isV33(): boolean {
-        return this._chain.getCallHash('Scheduler.schedule_after') === 'e7b0d9b10115a4bec335f138dbdae84c6d2cc2e705a69087c11475960f0bb56a'
+        return this._chain.getCallHash('Scheduler.schedule_after') === '6fe971dd7ad22e615623b2dd5f7992c837ca940a0d0d4928d613714aaf434c9d'
     }
 
     /**
@@ -14673,7 +14688,7 @@ export class SchedulerScheduleAfterCall {
      *  # </weight>
      */
     get isV35(): boolean {
-        return this._chain.getCallHash('Scheduler.schedule_after') === '52cb93bc742bd82adc007f0c4c95244108b0c3e944b52eb60b29788ed2b82f2e'
+        return this._chain.getCallHash('Scheduler.schedule_after') === '0d4c1ab75bce0bf61d2a44d09700e6b5a5d479e7a1758409ab5f9121a1535aac'
     }
 
     /**
@@ -14696,7 +14711,7 @@ export class SchedulerScheduleAfterCall {
      *  # </weight>
      */
     get isV37(): boolean {
-        return this._chain.getCallHash('Scheduler.schedule_after') === '89f05c17c77405f2f5df4e01e41f97334bfa7655ae77d722ac181bf1e896c1d9'
+        return this._chain.getCallHash('Scheduler.schedule_after') === '1d972f5bc181f8e33f324507d7ea99bf1123cfccb003cb55bd57b57592ff547a'
     }
 
     /**
@@ -14719,7 +14734,7 @@ export class SchedulerScheduleAfterCall {
      *  # </weight>
      */
     get isV38(): boolean {
-        return this._chain.getCallHash('Scheduler.schedule_after') === '07ef791496d5ca65d07ede0bb436e5e9d04cc6c9fca8824067642791495b922a'
+        return this._chain.getCallHash('Scheduler.schedule_after') === '0511a5a8e6935314dca6b7bcacc5eb0bb688652f62be2148ed1d9e6be6d07154'
     }
 
     /**
@@ -15186,7 +15201,7 @@ export class SchedulerScheduleNamedCall {
      *  # </weight>
      */
     get isV33(): boolean {
-        return this._chain.getCallHash('Scheduler.schedule_named') === 'd620e6818f9a3220ae9dda6eab69392803185cf92b0e52e9816c6df230d987d8'
+        return this._chain.getCallHash('Scheduler.schedule_named') === 'c206b85017713070812e05d19b40e252264e64bed7b92548cfbff85c07b5f354'
     }
 
     /**
@@ -15219,7 +15234,7 @@ export class SchedulerScheduleNamedCall {
      *  # </weight>
      */
     get isV35(): boolean {
-        return this._chain.getCallHash('Scheduler.schedule_named') === '1ae1ae13f35acda7beec641c2e3320b66781b88ea4120f2d112fa75c97e78032'
+        return this._chain.getCallHash('Scheduler.schedule_named') === 'a1b9e7aa6e696974c143f91a8db12b9feba64e0f4c0e2b161f663ac4ea678466'
     }
 
     /**
@@ -15252,7 +15267,7 @@ export class SchedulerScheduleNamedCall {
      *  # </weight>
      */
     get isV37(): boolean {
-        return this._chain.getCallHash('Scheduler.schedule_named') === '305706f8893a3c706c2e1beeafbd0d660d80aae325972c04c0353e02b803b855'
+        return this._chain.getCallHash('Scheduler.schedule_named') === 'd9bdbcb2ba0159669275bce342551750ce340bdffa8e7ff5952ae7e61fd89162'
     }
 
     /**
@@ -15285,7 +15300,7 @@ export class SchedulerScheduleNamedCall {
      *  # </weight>
      */
     get isV38(): boolean {
-        return this._chain.getCallHash('Scheduler.schedule_named') === '4ebedc3b278fef5e9eeff1c6a3dda6b81c31c416a9d2d8b91d4d3472fb9ae347'
+        return this._chain.getCallHash('Scheduler.schedule_named') === 'c1246b2454bc70df542bf47d101f1a939821b2d09c37c994fa123c078b0cc475'
     }
 
     /**
@@ -15616,7 +15631,7 @@ export class SchedulerScheduleNamedAfterCall {
      *  # </weight>
      */
     get isV33(): boolean {
-        return this._chain.getCallHash('Scheduler.schedule_named_after') === 'e52e71cc7627230193bc0f7cb25c7939887a2943aa597f066e8418141dbf82cf'
+        return this._chain.getCallHash('Scheduler.schedule_named_after') === 'a4aca968a87269fc241c9fb1cc471fc6fc5d955bf5da34d550d68cf1e26b4741'
     }
 
     /**
@@ -15639,7 +15654,7 @@ export class SchedulerScheduleNamedAfterCall {
      *  # </weight>
      */
     get isV35(): boolean {
-        return this._chain.getCallHash('Scheduler.schedule_named_after') === 'dc7c9d84e0b6d0448d30cbaaecd4f8fe2b9039d4e46ab94f36bf8e44b2f8a2cf'
+        return this._chain.getCallHash('Scheduler.schedule_named_after') === '465e1f07998aae5049360c6d421f2d0875816ece37187ba429e004815079de20'
     }
 
     /**
@@ -15662,7 +15677,7 @@ export class SchedulerScheduleNamedAfterCall {
      *  # </weight>
      */
     get isV37(): boolean {
-        return this._chain.getCallHash('Scheduler.schedule_named_after') === '0a2e75ca465fb0661d485671fdf156df6a10ea01277cbd9a2552361ba16d21b6'
+        return this._chain.getCallHash('Scheduler.schedule_named_after') === 'f5bc2af492647582c0e7b6739de630556457e10635d5317bea0d3d995bab3e55'
     }
 
     /**
@@ -15685,7 +15700,7 @@ export class SchedulerScheduleNamedAfterCall {
      *  # </weight>
      */
     get isV38(): boolean {
-        return this._chain.getCallHash('Scheduler.schedule_named_after') === '8d6e135e588420118b183ed8c833af2915aa12c79b4e9c3388c98e54f36a58d2'
+        return this._chain.getCallHash('Scheduler.schedule_named_after') === '0e30270068487dabaa9008ba78f968bf9098044f5f6adfde42d33ab4a217f471'
     }
 
     /**
@@ -18932,7 +18947,7 @@ export class TechnicalCommitteeExecuteCall {
      *  # </weight>
      */
     get isV33(): boolean {
-        return this._chain.getCallHash('TechnicalCommittee.execute') === 'ebb0ee4aa0ab1fd3d41437f11885ed19bcd3dfd9a4fe46c4b6456caeb7d3c435'
+        return this._chain.getCallHash('TechnicalCommittee.execute') === 'd49f3dc32a13dc2f7543b5838cbf08c92eb6c2a0410582827e45edb1ff2a3865'
     }
 
     /**
@@ -18965,7 +18980,7 @@ export class TechnicalCommitteeExecuteCall {
      *  # </weight>
      */
     get isV35(): boolean {
-        return this._chain.getCallHash('TechnicalCommittee.execute') === '06e7e452be2d8c3edfeb852299275ac1e5834406ef3e1c49ea7acd46e337bc29'
+        return this._chain.getCallHash('TechnicalCommittee.execute') === 'b3b92140b4a74b7e656a344ec397bc8b1ce87e0dc75b0f4361a2792a53832f65'
     }
 
     /**
@@ -18998,7 +19013,7 @@ export class TechnicalCommitteeExecuteCall {
      *  # </weight>
      */
     get isV37(): boolean {
-        return this._chain.getCallHash('TechnicalCommittee.execute') === '099286fab95e7d374bba7f4ad28c637691d44ce035a6dbbd5fbea6f94129cbb9'
+        return this._chain.getCallHash('TechnicalCommittee.execute') === '4109071bee53be89e63bb7b5f18c278b5ee3230eaed50a099da6919f0e795409'
     }
 
     /**
@@ -19031,7 +19046,7 @@ export class TechnicalCommitteeExecuteCall {
      *  # </weight>
      */
     get isV38(): boolean {
-        return this._chain.getCallHash('TechnicalCommittee.execute') === '703fe40fc07caee2f716396bd0b0cb3240b07023722fb03c617848cc3a49bd26'
+        return this._chain.getCallHash('TechnicalCommittee.execute') === '5c34eabc73904971ea5975846ba311472dd4e93e5f214d1a2617d0a0f9859df5'
     }
 
     /**
@@ -19876,7 +19891,7 @@ export class TechnicalCommitteeProposeCall {
      *  # </weight>
      */
     get isV33(): boolean {
-        return this._chain.getCallHash('TechnicalCommittee.propose') === '95ff331c979a73cc7c0cf77f3cba07f5ab9c079f55cbb0409a9813332f5456b9'
+        return this._chain.getCallHash('TechnicalCommittee.propose') === '09cd3fa7e842066dfe4e466bd3ce4077bc4974ca86a8dcd9e166b939d9172864'
     }
 
     /**
@@ -19943,7 +19958,7 @@ export class TechnicalCommitteeProposeCall {
      *  # </weight>
      */
     get isV35(): boolean {
-        return this._chain.getCallHash('TechnicalCommittee.propose') === '0d13b093252b61eb2677be7e42d086f1291dfc2cc1031a908e1b5d8736fef263'
+        return this._chain.getCallHash('TechnicalCommittee.propose') === '7ad1ce43b5d2dee2139748f8fae5ad187ce1f747f81731e531982faddb26a295'
     }
 
     /**
@@ -20010,7 +20025,7 @@ export class TechnicalCommitteeProposeCall {
      *  # </weight>
      */
     get isV37(): boolean {
-        return this._chain.getCallHash('TechnicalCommittee.propose') === '96e0bf7a74899d164a5b87c574ca07c493bc8f492a3c80a96de6a6af62198cea'
+        return this._chain.getCallHash('TechnicalCommittee.propose') === '86d5ec973abecfe59740cc016ef3847cd4fa9b46ad1e673e1ef75a8c8ef07b36'
     }
 
     /**
@@ -20077,7 +20092,7 @@ export class TechnicalCommitteeProposeCall {
      *  # </weight>
      */
     get isV38(): boolean {
-        return this._chain.getCallHash('TechnicalCommittee.propose') === '61c8afb7701a816ebca524c9d92af9de96e112055c6e829df1ec55354f8d472e'
+        return this._chain.getCallHash('TechnicalCommittee.propose') === 'b3efd39e71a403a7ec50d466e6f35fd1edc215d6c0309dd624aaa17b5eaf1549'
     }
 
     /**
@@ -21417,7 +21432,7 @@ export class UtilityAsDerivativeCall {
      *  The dispatch origin for this call must be _Signed_.
      */
     get isV33(): boolean {
-        return this._chain.getCallHash('Utility.as_derivative') === 'd82edd4c268d689f87045e376f39ed968b5d56d75f5e0e2141f5a43d4d1aba74'
+        return this._chain.getCallHash('Utility.as_derivative') === 'c865f00aa6c37aa68d0e5a6dd6e0277c32d1d0e6ed9f4223e9dfe98417e26168'
     }
 
     /**
@@ -21456,7 +21471,7 @@ export class UtilityAsDerivativeCall {
      *  The dispatch origin for this call must be _Signed_.
      */
     get isV35(): boolean {
-        return this._chain.getCallHash('Utility.as_derivative') === 'c33c02049c92f391cf527155bbc2041fa55b9e7a1a886ff9c05dc1377065333d'
+        return this._chain.getCallHash('Utility.as_derivative') === 'c529ce32a2f8c741f5c4228fc858519661731ce0db01dbc36fdf6e75984c2ac3'
     }
 
     /**
@@ -21495,7 +21510,7 @@ export class UtilityAsDerivativeCall {
      *  The dispatch origin for this call must be _Signed_.
      */
     get isV37(): boolean {
-        return this._chain.getCallHash('Utility.as_derivative') === '4f195e9f0574c500388ad32007cf61ef9d06b9303b134acb8d9dbea3e58e2fad'
+        return this._chain.getCallHash('Utility.as_derivative') === '64528eaf7de0b09b53d6fc942d76b402d4bf0a4af3abb786f7fdecf49622df75'
     }
 
     /**
@@ -21534,7 +21549,7 @@ export class UtilityAsDerivativeCall {
      *  The dispatch origin for this call must be _Signed_.
      */
     get isV38(): boolean {
-        return this._chain.getCallHash('Utility.as_derivative') === '1189ed3de42cd43bcd591cc6d66f32a40cb53cedaae681552b47cf858f0a1709'
+        return this._chain.getCallHash('Utility.as_derivative') === '4dd269629273fb59ef50daf5956c094d04f798a057bda34d8450d009268cd326'
     }
 
     /**
@@ -22257,7 +22272,7 @@ export class UtilityBatchCall {
      *  event is deposited.
      */
     get isV33(): boolean {
-        return this._chain.getCallHash('Utility.batch') === '57eca6bf5e58ae8182de88e781e0152b4a96b3768f396952ab0e41bd2d28c88e'
+        return this._chain.getCallHash('Utility.batch') === 'fa563973090d69ed0ada3234cc78917a56970a8dca2a8a641128e5966e59587e'
     }
 
     /**
@@ -22306,7 +22321,7 @@ export class UtilityBatchCall {
      *  event is deposited.
      */
     get isV35(): boolean {
-        return this._chain.getCallHash('Utility.batch') === 'b3ea0abd99b94fed30020d407b05153e16b978616b7440b16c4738165152e9de'
+        return this._chain.getCallHash('Utility.batch') === 'bb5268a743e58a4fe4d77bbf0ef9404d509a820cf2e9934e50d63c828bb04585'
     }
 
     /**
@@ -22355,7 +22370,7 @@ export class UtilityBatchCall {
      *  event is deposited.
      */
     get isV37(): boolean {
-        return this._chain.getCallHash('Utility.batch') === '0b483a3b5970d0d158eaa74031a32ec37ffe6eab6a478d3a8f40c16ff68405cb'
+        return this._chain.getCallHash('Utility.batch') === '8c39d08b7c69d5a1407728f3f4cd61fd30a2499b4832b87ce3e1e48ff81979d3'
     }
 
     /**
@@ -22404,7 +22419,7 @@ export class UtilityBatchCall {
      *  event is deposited.
      */
     get isV38(): boolean {
-        return this._chain.getCallHash('Utility.batch') === '4f7313de82f22bcb2c151bd027aef0b8e71824e8ac4489949dc7af410d691a5d'
+        return this._chain.getCallHash('Utility.batch') === 'b495e5821e54a935e4c470d45a40a63e268820e3f78f2d34c48e08fc22398606'
     }
 
     /**
@@ -23131,7 +23146,7 @@ export class UtilityBatchAllCall {
      *  # </weight>
      */
     get isV33(): boolean {
-        return this._chain.getCallHash('Utility.batch_all') === '57eca6bf5e58ae8182de88e781e0152b4a96b3768f396952ab0e41bd2d28c88e'
+        return this._chain.getCallHash('Utility.batch_all') === 'fa563973090d69ed0ada3234cc78917a56970a8dca2a8a641128e5966e59587e'
     }
 
     /**
@@ -23170,7 +23185,7 @@ export class UtilityBatchAllCall {
      *  # </weight>
      */
     get isV35(): boolean {
-        return this._chain.getCallHash('Utility.batch_all') === 'b3ea0abd99b94fed30020d407b05153e16b978616b7440b16c4738165152e9de'
+        return this._chain.getCallHash('Utility.batch_all') === 'bb5268a743e58a4fe4d77bbf0ef9404d509a820cf2e9934e50d63c828bb04585'
     }
 
     /**
@@ -23209,7 +23224,7 @@ export class UtilityBatchAllCall {
      *  # </weight>
      */
     get isV37(): boolean {
-        return this._chain.getCallHash('Utility.batch_all') === '0b483a3b5970d0d158eaa74031a32ec37ffe6eab6a478d3a8f40c16ff68405cb'
+        return this._chain.getCallHash('Utility.batch_all') === '8c39d08b7c69d5a1407728f3f4cd61fd30a2499b4832b87ce3e1e48ff81979d3'
     }
 
     /**
@@ -23248,7 +23263,7 @@ export class UtilityBatchAllCall {
      *  # </weight>
      */
     get isV38(): boolean {
-        return this._chain.getCallHash('Utility.batch_all') === '4f7313de82f22bcb2c151bd027aef0b8e71824e8ac4489949dc7af410d691a5d'
+        return this._chain.getCallHash('Utility.batch_all') === 'b495e5821e54a935e4c470d45a40a63e268820e3f78f2d34c48e08fc22398606'
     }
 
     /**
@@ -24516,3 +24531,5 @@ export class XorFeeUpdateMultiplierCall {
         return this._chain.decodeCall(this.call)
     }
 }
+
+export const utilityBatchAllCallVersions = [1, 3, 7, 19, 22, 23, 26, 32, 33, 35, 37, 38, 42, 43, 45, 46, 47, 50, 53] as const

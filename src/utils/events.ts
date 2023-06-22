@@ -1,13 +1,13 @@
-import { Context, Block, EventEntity } from '../processor'
-import { EventItem } from '@subsquid/substrate-processor/src/interfaces/dataSelection'
+import { Context, Block, EventItem, EventItemName } from '../types'
 import { SubstrateExtrinsic } from '@subsquid/substrate-processor'
-import { BalancesTransferEvent, TokensTransferEvent } from '../types/generated/events'
+import { BalancesTransferEvent, TokensTransferEvent, BalancesDepositEvent, TokensDepositedEvent } from '../types/generated/events'
 import { XOR } from './consts'
 import { Address, AssetAmount, AssetId } from '../types'
-import { toAddress, toAssetId } from '.'
-import { unsupportedSpecError } from './error'
+import { toAddress } from '.'
+import { getEntityData } from './entities'
+import { getAssetId } from './assets'
 
-type SpecificEventItem<T extends EventEntity['name']> = EventItem<T, true>;
+type SpecificEventItem<T extends EventItemName> = EventItem<T>;
 
 export type TransferEventData = {
 	assetId: AssetId,
@@ -16,11 +16,17 @@ export type TransferEventData = {
 	amount: bigint
 }
 
-export function getBlockEvents(block: Block): EventEntity[] {
-	return block.items.filter(c => c.kind === 'event') as EventEntity[]
+export type DepositEventData = {
+	assetId: AssetId,
+	to: Address
+	amount: bigint
 }
 
-export function findEventsByExtrinsicHash<T extends EventEntity['name'][]>(
+export function getBlockEvents(block: Block): EventItem<EventItemName>[] {
+	return block.items.filter(c => c.kind === 'event') as EventItem<EventItemName>[]
+}
+
+export function findEventsByExtrinsicHash<T extends EventItemName[]>(
 	block: Block,
 	extrinsicHash: SubstrateExtrinsic['hash'],
 	eventNames?: T,
@@ -33,7 +39,7 @@ export function findEventsByExtrinsicHash<T extends EventEntity['name'][]>(
 	return events as unknown as { [K in T[number]]: SpecificEventItem<K> }[T[number]][];
 }
 
-export function findEventByExtrinsicHash<T extends EventEntity['name'][]>(
+export function findEventByExtrinsicHash<T extends EventItemName[]>(
 	block: Block,
 	extrinsicHash: SubstrateExtrinsic['hash'],
 	eventNames?: T,
@@ -41,79 +47,57 @@ export function findEventByExtrinsicHash<T extends EventEntity['name'][]>(
 	return findEventsByExtrinsicHash(block, extrinsicHash, eventNames)[0] ?? null;
 }
 
-export const isXorTransferEvent = (e: EventEntity) => {
+export const isXorTransferEvent = (e: EventItem<EventItemName>) => {
   	return e.name === 'Balances.Transfer'
 }
 
-export const isTokenTransferEvent = (e: EventEntity) => {
+export const isTokenTransferEvent = (e: EventItem<EventItemName>) => {
   	return e.name === 'Tokens.Transfer'
 }
 
-export const isAssetTransferEvent = (e: EventEntity): boolean => {
+export const isAssetTransferEvent = (e: EventItem<EventItemName>): boolean => {
   	return isXorTransferEvent(e) || isTokenTransferEvent(e)
 }
 
 export const getBalancesTransferEventData = (
 	ctx: Context,
 	block: Block,
-	eventItem: EventItem<'Balances.Transfer', true>
+	eventItem: EventItem<'Balances.Transfer'>
 ): TransferEventData => {
-	let eventRec: TransferEventData
-
 	const event = new BalancesTransferEvent(ctx, eventItem.event)
 
-	if (event.isV1) {
-		const [ from, to, amount ] = event.asV1
-		eventRec = {
-			assetId: XOR,
-			from: toAddress(from),
-			to: toAddress(to),
-			amount
-		}
-	} else if (event.isV42) {
-		const { from, to, amount } = event.asV42
-		eventRec = {
-			assetId: XOR,
-			from: toAddress(from),
-			to: toAddress(to),
-			amount
-		}
-	} else {
-		throw unsupportedSpecError(block)
-	}
+	const data = getEntityData(ctx, block, event, eventItem)
 	
-	return eventRec
+	return {
+		assetId: XOR,
+		from: toAddress('from' in data ? data.from : data[0]),
+		to: toAddress('to' in data ? data.to : data[1]),
+		amount: ('amount' in data ? data.amount : data[2]) as AssetAmount,
+	}
 }
 
 export const getTokensTransferEventData = (
 	ctx: Context,
 	block: Block,
-	eventItem: EventItem<'Tokens.Transfer', true>
+	eventItem: EventItem<'Tokens.Transfer'>
 ): TransferEventData => {
-	let eventRec: TransferEventData
-
 	const event = new TokensTransferEvent(ctx, eventItem.event)
 
-	if (event.isV42) {
-		const { currencyId, from, to, amount } = event.asV42
-		eventRec = {
-			assetId: toAssetId(currencyId.code),
-			from: toAddress(from),
-			to: toAddress(to),
-			amount: amount as AssetAmount
-		}
-	} else {
-		throw unsupportedSpecError(block)
-	}
+	const { currencyId, from, to, amount } = getEntityData(ctx, block, event, eventItem)
 	
-	return eventRec
+	return {
+		assetId: getAssetId(currencyId),
+		from: toAddress(from),
+		to: toAddress(to),
+		amount: amount as AssetAmount
+	}
 }
 	
 
 export const getAssetsTransferEventData = (
 	ctx: Context,
 	block: Block,
-	eventItem: EventItem<'Balances.Transfer', true> | EventItem<'Tokens.Transfer', true>
+	eventItem: EventItem<'Balances.Transfer'> | EventItem<'Tokens.Transfer'>
 ): TransferEventData => {
 	if (eventItem.name === 'Balances.Transfer') {
 		return getBalancesTransferEventData(ctx, block, eventItem)
@@ -122,70 +106,46 @@ export const getAssetsTransferEventData = (
 	}
 }
 
-export const getBalancesDepositedEventData = (
+export const getBalancesDepositEventData = (
 	ctx: Context,
 	block: Block,
-	eventItem: EventItem<'Balances.Deposited', true>
-): TransferEventData => {
-	let eventRec: TransferEventData
+	eventItem: EventItem<'Balances.Deposited'>
+): DepositEventData => {
+	const event = new BalancesDepositEvent(ctx, eventItem.event)
 
-	const event = new BalancesTransferEvent(ctx, eventItem.event)
+	const data = getEntityData(ctx, block, event, eventItem)
 
-	if (event.isV1) {
-		const [ from, to, amount ] = event.asV1
-		eventRec = {
-			assetId: XOR,
-			from: toAddress(from),
-			to: toAddress(to),
-			amount
-		}
-	} else if (event.isV42) {
-		const { from, to, amount } = event.asV42
-		eventRec = {
-			assetId: XOR,
-			from: toAddress(from),
-			to: toAddress(to),
-			amount
-		}
-	} else {
-		throw unsupportedSpecError(block)
+	return {
+		assetId: XOR,
+		to: toAddress('who' in data ? data.who : data[0]),
+		amount: ('amount' in data ? data.amount : data[1]) as AssetAmount,
 	}
-	
-	return eventRec
 }
 
 export const getTokensDepositedEventData = (
 	ctx: Context,
 	block: Block,
-	eventItem: EventItem<'Tokens.Deposited', true>
-): TransferEventData => {
-	let eventRec: TransferEventData
+	eventItem: EventItem<'Tokens.Deposited'>
+): DepositEventData => {
+	const event = new TokensDepositedEvent(ctx, eventItem.event)
 
-	const event = new TokensTransferEvent(ctx, eventItem.event)
+	const { currencyId, who, amount } = getEntityData(ctx, block, event, eventItem)
 
-	if (event.isV42) {
-		const { currencyId, from, to, amount } = event.asV42
-		eventRec = {
-			assetId: toAssetId(currencyId.code),
-			from: toAddress(from),
-			to: toAddress(to),
-			amount: amount as AssetAmount
-		}
-	} else {
-		throw unsupportedSpecError(block)
+	return {
+		assetId: getAssetId(currencyId),
+		to: toAddress(who),
+		amount: amount as AssetAmount,
 	}
-	
-	return eventRec
 }
 	
 
-export const getAssetsDepositedEventData = (
+export const getAssetsDepositEventData = (
 	ctx: Context,
 	block: Block,
-	eventItem: EventItem<'Balances.Deposited', true> | EventItem<'Tokens.Deposited', true>
-): TransferEventData => {
+	eventItem: EventItem<'Balances.Deposited'> | EventItem<'Tokens.Deposited'>
+): DepositEventData => {
 	if (eventItem.name === 'Balances.Deposited') {
-		return getBalancesDepositedEventData(ctx, block, eventItem)
+		return getBalancesDepositEventData(ctx, block, eventItem)
 	} else {
 		return getTokensDepositedEventData(ctx, block, eventItem)
 	}
