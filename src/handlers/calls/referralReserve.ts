@@ -17,7 +17,7 @@ export async function referralReserveCallHandler(ctx: Context, block: Block, cal
         from?: string
         to?: string
         amount: string
-    }
+    } | null = null
 
     if (historyElement.execution.success) {
 		const balancesTransferEventName = 'Balances.Transfer'
@@ -32,7 +32,8 @@ export async function referralReserveCallHandler(ctx: Context, block: Block, cal
                 amount: formatU128ToBalance(amount, XOR),
             }
         } else {
-			throw new CannotFindEventError(block, extrinsicHash, balancesTransferEventName)
+			const error = new CannotFindEventError(block, extrinsicHash, balancesTransferEventName)
+			ctx.log.error(error.message)
         }
     } else {
         const call = new ReferralsReserveCall(ctx, callItem.call)
@@ -45,8 +46,8 @@ export async function referralReserveCallHandler(ctx: Context, block: Block, cal
 		}
     }
 
-    await addDataToHistoryElement(ctx, block, historyElement, details)
-    await updateHistoryElementStats(ctx, block,historyElement)
+	if (details) await addDataToHistoryElement(ctx, block, historyElement, details)
+    await updateHistoryElementStats(ctx, block, historyElement)
 
     ctx.log.debug(`===== Saved referral reserve with ${extrinsicHash} txid =====`)
 }

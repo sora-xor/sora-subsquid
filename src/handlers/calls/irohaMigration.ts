@@ -46,7 +46,7 @@ export async function irohaMigrationCallHandler(ctx: Context, block: Block, call
 			}
 		}
 
-        await addDataToHistoryElement(ctx, block, historyElement, details)
+        if (details) await addDataToHistoryElement(ctx, block, historyElement, details)
         await updateHistoryElementStats(ctx, block,historyElement)
 
         ctx.log.debug(`===== Saved iroha migration with ${extrinsicHash} txid =====`)

@@ -19,7 +19,7 @@ export async function referralUnreserveCallHandler(ctx: Context, block: Block, c
         from?: string
         to?: string
         amount: string
-    }
+    } | null = null
 
     if (historyElement.execution.success) {
 		const balancesTransferEventName = 'Balances.Transfer'
@@ -34,7 +34,8 @@ export async function referralUnreserveCallHandler(ctx: Context, block: Block, c
                 amount: formatU128ToBalance(amount, XOR)
             }
         } else {
-			throw new CannotFindEventError(block, extrinsicHash, balancesTransferEventName)
+			const error = new CannotFindEventError(block, extrinsicHash, balancesTransferEventName)
+			ctx.log.error(error.message)
         }
     } else {
         const call = new ReferralsUnreserveCall(ctx, callItem.call)
@@ -45,7 +46,7 @@ export async function referralUnreserveCallHandler(ctx: Context, block: Block, c
 		}
     }
 
-    await addDataToHistoryElement(ctx, block, historyElement, details)
+	if (details) await addDataToHistoryElement(ctx, block, historyElement, details)
     await updateHistoryElementStats(ctx, block,historyElement)
 
     ctx.log.debug(`===== Saved referral unreserve with ${extrinsicHash} txid =====`)

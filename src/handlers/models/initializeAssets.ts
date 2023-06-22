@@ -51,7 +51,6 @@ export const getSyntheticAssets = async (ctx: Context, block: Block) => {
 
 		// TODO: remove any after spec versions update
 		const syntheticAssets = data.map((pair: any) => {
-			console.log('pair',	pair)
 			const [asset, syntheticInfo] = pair
 			const assetId = getAssetId(asset)
 			return {
