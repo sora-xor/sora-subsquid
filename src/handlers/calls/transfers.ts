@@ -8,17 +8,13 @@ import { Address, AssetId } from '../../types'
 import { toAddress } from '../../utils'
 import { getEntityData } from '../../utils/entities'
 import { CannotFindEventError } from '../../utils/errors'
+import { toJSON } from '@subsquid/util-internal-json'
 
 export async function transfersCallHandler(ctx: Context, block: Block, callItem: CallItem<'Assets.transfer'>): Promise<void> {
     ctx.log.debug('Caught transfer extrinsic')
 
 	const blockHeight = block.header.height
 	const extrinsicHash = callItem.extrinsic.hash
-	const extrinsicSigner: Address | null = callItem.call.origin ? toAddress(callItem.call.origin.value.value) : null
-	if (!extrinsicSigner) {
-		ctx.log.error(`[${blockHeight}]: Cannot get extrinsic signer`)
-		console.log(callItem)
-	}
     const historyElement = await createHistoryElement(ctx, block, callItem)
 
     if (!historyElement) return
@@ -46,10 +42,6 @@ export async function transfersCallHandler(ctx: Context, block: Block, callItem:
 		const assetId = getAssetId(data[2])
 		const amount = data[3] as AssetAmount
 
-		if (extrinsicSigner !== from) {
-			throw new Error(`[${blockHeight}] Transfer event sender is not the extrinsic signer`)
-		}
-
         details = {
             from,
             to,
@@ -65,6 +57,12 @@ export async function transfersCallHandler(ctx: Context, block: Block, callItem:
 		const to = toAddress(data.to)
 		const assetId = getAssetId(data.assetId)
 		const amount = data.amount
+
+		const extrinsicSigner: Address | null = callItem.call.origin ? toAddress(callItem.call.origin.value.value) : null
+		if (!extrinsicSigner) {
+			ctx.log.error(`[${blockHeight}]: Cannot get extrinsic signer`)
+			console.log(toJSON(callItem))
+		}
 
         details = {
             from: extrinsicSigner,
