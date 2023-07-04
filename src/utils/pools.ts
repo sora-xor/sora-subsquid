@@ -25,7 +25,15 @@ export const getAllReserves = async (ctx: Context, block: Block, baseAssetId: As
 	try {
 		ctx.log.debug(`[${blockHeight}] [${baseAssetId}] Pools XYK Reserves request...`)
 		const storage = new PoolXYKReservesStorage(ctx, block.header)
-		const data = await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKReservesStorage.name }).getPairs(decodeAssetId(baseAssetId))
+		const data = (
+			('isV1' in storage && storage.isV1) ||
+			('isV33' in storage && storage.isV33)
+		)
+			? await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKReservesStorage.name }, [1, 33] as const)
+				.getPairs(decodeAssetId(baseAssetId))
+			: await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKReservesStorage.name }, [42] as const)
+				.getPairs({ code: decodeAssetId(baseAssetId) })
+
 
 		const reserves = data.map(pair => {
 			const [[, targetAssetId], [baseBalance, targetBalance]] = pair
@@ -53,7 +61,15 @@ export const getAllProperties = async (ctx: Context, block: Block, baseAssetId: 
 	try {
 		ctx.log.debug(`[${blockHeight}] [${baseAssetId}] Pools XYK Properties request...`)
 		const storage = new PoolXYKPropertiesStorage(ctx, block.header)
-		const data = await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKPropertiesStorage.name }).getPairs(decodeAssetId(baseAssetId))
+		const data = (
+			('isV1' in storage && storage.isV1) ||
+			('isV7' in storage && storage.isV7) ||
+			('isV33' in storage && storage.isV33)
+		)
+			? await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKPropertiesStorage.name }, [1, 7, 33] as const)
+				.getPairs(decodeAssetId(baseAssetId))
+			: await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKPropertiesStorage.name }, [42] as const)
+				.getPairs({ code: decodeAssetId(baseAssetId) })
 
 		const properties = data.map(pair => {
 			const [[, targetAssetId], [reservesAccountId, feesAccountId]] = pair
@@ -80,7 +96,7 @@ export const getPoolProperties = async (ctx: Context, block: Block, baseAssetId:
 	try {
 		ctx.log.debug(`[${baseAssetId}${targetAssetId}] Pool properties request...`)
 		const storage = new PoolXYKPropertiesStorage(ctx, block.header)
-		const data =(
+		const data = (
 			('isV1' in storage && storage.isV1) ||
 			('isV7' in storage && storage.isV7) ||
 			('isV33' in storage && storage.isV33)
