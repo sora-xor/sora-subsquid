@@ -41,6 +41,14 @@ export class HistoryElement {
     @Column_("jsonb", {nullable: true})
     data!: unknown | undefined | null
 
+    @Index_()
+    @Column_("text", {nullable: true})
+    dataTo!: string | undefined | null
+
+    @Index_()
+    @Column_("text", {nullable: true})
+    dataFrom!: string | undefined | null
+
     @OneToMany_(() => HistoryElementCall, e => e.historyElement)
     calls!: HistoryElementCall[]
 

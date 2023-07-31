@@ -19,6 +19,7 @@ import * as v46 from './v46'
 import * as v47 from './v47'
 import * as v50 from './v50'
 import * as v53 from './v53'
+import * as v57 from './v57'
 
 export class AssetsBurnCall {
     private readonly _chain: Chain
@@ -2687,6 +2688,53 @@ export class BridgeMultisigAsMultiThreshold1Call {
         assert(this.isV53)
         return this._chain.decodeCall(this.call)
     }
+
+    /**
+     * Immediately dispatch a multi-signature call using a single approval from the caller.
+     * 
+     * The dispatch origin for this call must be _Signed_.
+     * 
+     * - `other_signatories`: The accounts (other than the sender) who are part of the
+     * multi-signature, but do not participate in the approval process.
+     * - `call`: The call to be executed.
+     * 
+     * Result is equivalent to the dispatched result.
+     * 
+     * # <weight>
+     * O(Z + C) where Z is the length of the call and C its execution weight.
+     * -------------------------------
+     * - Base Weight: 33.72 + 0.002 * Z µs
+     * - DB Weight: None
+     * - Plus Call Weight
+     * # </weight>
+     */
+    get isV57(): boolean {
+        return this._chain.getCallHash('BridgeMultisig.as_multi_threshold_1') === 'bdb7e440de396bcf771f2ac40fac55582f7de584255d9491e1467ed8fbd00739'
+    }
+
+    /**
+     * Immediately dispatch a multi-signature call using a single approval from the caller.
+     * 
+     * The dispatch origin for this call must be _Signed_.
+     * 
+     * - `other_signatories`: The accounts (other than the sender) who are part of the
+     * multi-signature, but do not participate in the approval process.
+     * - `call`: The call to be executed.
+     * 
+     * Result is equivalent to the dispatched result.
+     * 
+     * # <weight>
+     * O(Z + C) where Z is the length of the call and C its execution weight.
+     * -------------------------------
+     * - Base Weight: 33.72 + 0.002 * Z µs
+     * - DB Weight: None
+     * - Plus Call Weight
+     * # </weight>
+     */
+    get asV57(): {id: Uint8Array, call: v57.Call, timepoint: v57.BridgeTimepoint} {
+        assert(this.isV57)
+        return this._chain.decodeCall(this.call)
+    }
 }
 
 export class BridgeMultisigCancelAsMultiCall {
@@ -4815,6 +4863,41 @@ export class CouncilExecuteCall {
         assert(this.isV53)
         return this._chain.decodeCall(this.call)
     }
+
+    /**
+     * Dispatch a proposal from a member using the `Member` origin.
+     * 
+     * Origin must be a member of the collective.
+     * 
+     * # <weight>
+     * ## Weight
+     * - `O(M + P)` where `M` members-count (code-bounded) and `P` complexity of dispatching
+     *   `proposal`
+     * - DB: 1 read (codec `O(M)`) + DB access of `proposal`
+     * - 1 event
+     * # </weight>
+     */
+    get isV57(): boolean {
+        return this._chain.getCallHash('Council.execute') === 'b5cddf14aff36930addce409213c11cc237a383bbdbf576bea7a15830d707e66'
+    }
+
+    /**
+     * Dispatch a proposal from a member using the `Member` origin.
+     * 
+     * Origin must be a member of the collective.
+     * 
+     * # <weight>
+     * ## Weight
+     * - `O(M + P)` where `M` members-count (code-bounded) and `P` complexity of dispatching
+     *   `proposal`
+     * - DB: 1 read (codec `O(M)`) + DB access of `proposal`
+     * - 1 event
+     * # </weight>
+     */
+    get asV57(): {proposal: v57.Call, lengthBound: number} {
+        assert(this.isV57)
+        return this._chain.decodeCall(this.call)
+    }
 }
 
 export class CouncilProposeCall {
@@ -6100,6 +6183,73 @@ export class CouncilProposeCall {
      */
     get asV53(): {threshold: number, proposal: v53.Call, lengthBound: number} {
         assert(this.isV53)
+        return this._chain.decodeCall(this.call)
+    }
+
+    /**
+     * Add a new proposal to either be voted on or executed directly.
+     * 
+     * Requires the sender to be member.
+     * 
+     * `threshold` determines whether `proposal` is executed directly (`threshold < 2`)
+     * or put up for voting.
+     * 
+     * # <weight>
+     * ## Weight
+     * - `O(B + M + P1)` or `O(B + M + P2)` where:
+     *   - `B` is `proposal` size in bytes (length-fee-bounded)
+     *   - `M` is members-count (code- and governance-bounded)
+     *   - branching is influenced by `threshold` where:
+     *     - `P1` is proposal execution complexity (`threshold < 2`)
+     *     - `P2` is proposals-count (code-bounded) (`threshold >= 2`)
+     * - DB:
+     *   - 1 storage read `is_member` (codec `O(M)`)
+     *   - 1 storage read `ProposalOf::contains_key` (codec `O(1)`)
+     *   - DB accesses influenced by `threshold`:
+     *     - EITHER storage accesses done by `proposal` (`threshold < 2`)
+     *     - OR proposal insertion (`threshold <= 2`)
+     *       - 1 storage mutation `Proposals` (codec `O(P2)`)
+     *       - 1 storage mutation `ProposalCount` (codec `O(1)`)
+     *       - 1 storage write `ProposalOf` (codec `O(B)`)
+     *       - 1 storage write `Voting` (codec `O(M)`)
+     *   - 1 event
+     * # </weight>
+     */
+    get isV57(): boolean {
+        return this._chain.getCallHash('Council.propose') === 'c00d588e46b416f06fbb7eca814450c82fa0b9e87419448c07b17e307ebb58d4'
+    }
+
+    /**
+     * Add a new proposal to either be voted on or executed directly.
+     * 
+     * Requires the sender to be member.
+     * 
+     * `threshold` determines whether `proposal` is executed directly (`threshold < 2`)
+     * or put up for voting.
+     * 
+     * # <weight>
+     * ## Weight
+     * - `O(B + M + P1)` or `O(B + M + P2)` where:
+     *   - `B` is `proposal` size in bytes (length-fee-bounded)
+     *   - `M` is members-count (code- and governance-bounded)
+     *   - branching is influenced by `threshold` where:
+     *     - `P1` is proposal execution complexity (`threshold < 2`)
+     *     - `P2` is proposals-count (code-bounded) (`threshold >= 2`)
+     * - DB:
+     *   - 1 storage read `is_member` (codec `O(M)`)
+     *   - 1 storage read `ProposalOf::contains_key` (codec `O(1)`)
+     *   - DB accesses influenced by `threshold`:
+     *     - EITHER storage accesses done by `proposal` (`threshold < 2`)
+     *     - OR proposal insertion (`threshold <= 2`)
+     *       - 1 storage mutation `Proposals` (codec `O(P2)`)
+     *       - 1 storage mutation `ProposalCount` (codec `O(1)`)
+     *       - 1 storage write `ProposalOf` (codec `O(B)`)
+     *       - 1 storage write `Voting` (codec `O(M)`)
+     *   - 1 event
+     * # </weight>
+     */
+    get asV57(): {threshold: number, proposal: v57.Call, lengthBound: number} {
+        assert(this.isV57)
         return this._chain.decodeCall(this.call)
     }
 }
@@ -10324,6 +10474,21 @@ export class HermesGovernancePlatformCreatePollCall {
         assert(this.isV47)
         return this._chain.decodeCall(this.call)
     }
+
+    /**
+     * Create poll
+     */
+    get isV57(): boolean {
+        return this._chain.getCallHash('HermesGovernancePlatform.create_poll') === '91b33041c98804b12dc33a841bb11eec93fe8c814aafbf743677df462214e194'
+    }
+
+    /**
+     * Create poll
+     */
+    get asV57(): {pollStartTimestamp: bigint, pollEndTimestamp: bigint, title: Uint8Array, description: Uint8Array, options: Uint8Array[]} {
+        assert(this.isV57)
+        return this._chain.decodeCall(this.call)
+    }
 }
 
 export class HermesGovernancePlatformVoteCall {
@@ -10351,6 +10516,21 @@ export class HermesGovernancePlatformVoteCall {
      */
     get asV47(): {pollId: Uint8Array, votingOption: v47.VotingOption} {
         assert(this.isV47)
+        return this._chain.decodeCall(this.call)
+    }
+
+    /**
+     * Vote for some option
+     */
+    get isV57(): boolean {
+        return this._chain.getCallHash('HermesGovernancePlatform.vote') === '1ad755890a5f777883292c5870f6967485d96cbb808278014872b122b29c572c'
+    }
+
+    /**
+     * Vote for some option
+     */
+    get asV57(): {pollId: Uint8Array, votingOption: Uint8Array} {
+        assert(this.isV57)
         return this._chain.decodeCall(this.call)
     }
 }
@@ -11484,6 +11664,29 @@ export class LiquidityProxyEnableLiquiditySourceCall {
     }
 }
 
+export class LiquidityProxySetAdarCommissionRatioCall {
+    private readonly _chain: Chain
+    private readonly call: Call
+
+    constructor(ctx: CallContext)
+    constructor(ctx: ChainContext, call: Call)
+    constructor(ctx: CallContext, call?: Call) {
+        call = call || ctx.call
+        assert(call.name === 'LiquidityProxy.set_adar_commission_ratio')
+        this._chain = ctx._chain
+        this.call = call
+    }
+
+    get isV57(): boolean {
+        return this._chain.getCallHash('LiquidityProxy.set_adar_commission_ratio') === '914017aa9ac41b46e80daa8a3491319ba9fd1e88aef39a273e90d15cb116b51f'
+    }
+
+    get asV57(): {commissionRatio: bigint} {
+        assert(this.isV57)
+        return this._chain.decodeCall(this.call)
+    }
+}
+
 export class LiquidityProxySwapCall {
     private readonly _chain: Chain
     private readonly call: Call
@@ -12356,6 +12559,109 @@ export class MultisigAsMultiCall {
         assert(this.isV53)
         return this._chain.decodeCall(this.call)
     }
+
+    /**
+     * Register approval for a dispatch to be made from a deterministic composite account if
+     * approved by a total of `threshold - 1` of `other_signatories`.
+     * 
+     * If there are enough, then dispatch the call.
+     * 
+     * Payment: `DepositBase` will be reserved if this is the first approval, plus
+     * `threshold` times `DepositFactor`. It is returned once this dispatch happens or
+     * is cancelled.
+     * 
+     * The dispatch origin for this call must be _Signed_.
+     * 
+     * - `threshold`: The total number of approvals for this dispatch before it is executed.
+     * - `other_signatories`: The accounts (other than the sender) who can approve this
+     * dispatch. May not be empty.
+     * - `maybe_timepoint`: If this is the first approval, then this must be `None`. If it is
+     * not the first approval, then it must be `Some`, with the timepoint (block number and
+     * transaction index) of the first approval transaction.
+     * - `call`: The call to be executed.
+     * 
+     * NOTE: Unless this is the final approval, you will generally want to use
+     * `approve_as_multi` instead, since it only requires a hash of the call.
+     * 
+     * Result is equivalent to the dispatched result if `threshold` is exactly `1`. Otherwise
+     * on success, result is `Ok` and the result from the interior call, if it was executed,
+     * may be found in the deposited `MultisigExecuted` event.
+     * 
+     * # <weight>
+     * - `O(S + Z + Call)`.
+     * - Up to one balance-reserve or unreserve operation.
+     * - One passthrough operation, one insert, both `O(S)` where `S` is the number of
+     *   signatories. `S` is capped by `MaxSignatories`, with weight being proportional.
+     * - One call encode & hash, both of complexity `O(Z)` where `Z` is tx-len.
+     * - One encode & hash, both of complexity `O(S)`.
+     * - Up to one binary search and insert (`O(logS + S)`).
+     * - I/O: 1 read `O(S)`, up to 1 mutate `O(S)`. Up to one remove.
+     * - One event.
+     * - The weight of the `call`.
+     * - Storage: inserts one item, value size bounded by `MaxSignatories`, with a deposit
+     *   taken for its lifetime of `DepositBase + threshold * DepositFactor`.
+     * -------------------------------
+     * - DB Weight:
+     *     - Reads: Multisig Storage, [Caller Account]
+     *     - Writes: Multisig Storage, [Caller Account]
+     * - Plus Call Weight
+     * # </weight>
+     */
+    get isV57(): boolean {
+        return this._chain.getCallHash('Multisig.as_multi') === 'cdf225d9486924c36f73c3a9bcff092509c46621dc45843c731d838981bf73b9'
+    }
+
+    /**
+     * Register approval for a dispatch to be made from a deterministic composite account if
+     * approved by a total of `threshold - 1` of `other_signatories`.
+     * 
+     * If there are enough, then dispatch the call.
+     * 
+     * Payment: `DepositBase` will be reserved if this is the first approval, plus
+     * `threshold` times `DepositFactor`. It is returned once this dispatch happens or
+     * is cancelled.
+     * 
+     * The dispatch origin for this call must be _Signed_.
+     * 
+     * - `threshold`: The total number of approvals for this dispatch before it is executed.
+     * - `other_signatories`: The accounts (other than the sender) who can approve this
+     * dispatch. May not be empty.
+     * - `maybe_timepoint`: If this is the first approval, then this must be `None`. If it is
+     * not the first approval, then it must be `Some`, with the timepoint (block number and
+     * transaction index) of the first approval transaction.
+     * - `call`: The call to be executed.
+     * 
+     * NOTE: Unless this is the final approval, you will generally want to use
+     * `approve_as_multi` instead, since it only requires a hash of the call.
+     * 
+     * Result is equivalent to the dispatched result if `threshold` is exactly `1`. Otherwise
+     * on success, result is `Ok` and the result from the interior call, if it was executed,
+     * may be found in the deposited `MultisigExecuted` event.
+     * 
+     * # <weight>
+     * - `O(S + Z + Call)`.
+     * - Up to one balance-reserve or unreserve operation.
+     * - One passthrough operation, one insert, both `O(S)` where `S` is the number of
+     *   signatories. `S` is capped by `MaxSignatories`, with weight being proportional.
+     * - One call encode & hash, both of complexity `O(Z)` where `Z` is tx-len.
+     * - One encode & hash, both of complexity `O(S)`.
+     * - Up to one binary search and insert (`O(logS + S)`).
+     * - I/O: 1 read `O(S)`, up to 1 mutate `O(S)`. Up to one remove.
+     * - One event.
+     * - The weight of the `call`.
+     * - Storage: inserts one item, value size bounded by `MaxSignatories`, with a deposit
+     *   taken for its lifetime of `DepositBase + threshold * DepositFactor`.
+     * -------------------------------
+     * - DB Weight:
+     *     - Reads: Multisig Storage, [Caller Account]
+     *     - Writes: Multisig Storage, [Caller Account]
+     * - Plus Call Weight
+     * # </weight>
+     */
+    get asV57(): {threshold: number, otherSignatories: Uint8Array[], maybeTimepoint: (v57.Timepoint | undefined), call: v57.Call, maxWeight: v57.Weight} {
+        assert(this.isV57)
+        return this._chain.decodeCall(this.call)
+    }
 }
 
 export class MultisigAsMultiThreshold1Call {
@@ -13223,6 +13529,51 @@ export class MultisigAsMultiThreshold1Call {
      */
     get asV53(): {otherSignatories: Uint8Array[], call: v53.Call} {
         assert(this.isV53)
+        return this._chain.decodeCall(this.call)
+    }
+
+    /**
+     * Immediately dispatch a multi-signature call using a single approval from the caller.
+     * 
+     * The dispatch origin for this call must be _Signed_.
+     * 
+     * - `other_signatories`: The accounts (other than the sender) who are part of the
+     * multi-signature, but do not participate in the approval process.
+     * - `call`: The call to be executed.
+     * 
+     * Result is equivalent to the dispatched result.
+     * 
+     * # <weight>
+     * O(Z + C) where Z is the length of the call and C its execution weight.
+     * -------------------------------
+     * - DB Weight: None
+     * - Plus Call Weight
+     * # </weight>
+     */
+    get isV57(): boolean {
+        return this._chain.getCallHash('Multisig.as_multi_threshold_1') === 'b822b3ea6ab1eba7dbfa3b153fb6e7d2a98b25aa90b22dee60e3a9498eef2ee2'
+    }
+
+    /**
+     * Immediately dispatch a multi-signature call using a single approval from the caller.
+     * 
+     * The dispatch origin for this call must be _Signed_.
+     * 
+     * - `other_signatories`: The accounts (other than the sender) who are part of the
+     * multi-signature, but do not participate in the approval process.
+     * - `call`: The call to be executed.
+     * 
+     * Result is equivalent to the dispatched result.
+     * 
+     * # <weight>
+     * O(Z + C) where Z is the length of the call and C its execution weight.
+     * -------------------------------
+     * - DB Weight: None
+     * - Plus Call Weight
+     * # </weight>
+     */
+    get asV57(): {otherSignatories: Uint8Array[], call: v57.Call} {
+        assert(this.isV57)
         return this._chain.decodeCall(this.call)
     }
 }
@@ -14458,6 +14809,21 @@ export class SchedulerScheduleCall {
         assert(this.isV53)
         return this._chain.decodeCall(this.call)
     }
+
+    /**
+     * Anonymously schedule a task.
+     */
+    get isV57(): boolean {
+        return this._chain.getCallHash('Scheduler.schedule') === '24e064c209266862daa16892ea23feb4c52cf449cad6754cec6e782d8bc81504'
+    }
+
+    /**
+     * Anonymously schedule a task.
+     */
+    get asV57(): {when: number, maybePeriodic: ([number, number] | undefined), priority: number, call: v57.Call} {
+        assert(this.isV57)
+        return this._chain.decodeCall(this.call)
+    }
 }
 
 export class SchedulerScheduleAfterCall {
@@ -14907,6 +15273,29 @@ export class SchedulerScheduleAfterCall {
      */
     get asV53(): {after: number, maybePeriodic: ([number, number] | undefined), priority: number, call: v53.Call} {
         assert(this.isV53)
+        return this._chain.decodeCall(this.call)
+    }
+
+    /**
+     * Anonymously schedule a task after a delay.
+     * 
+     * # <weight>
+     * Same as [`schedule`].
+     * # </weight>
+     */
+    get isV57(): boolean {
+        return this._chain.getCallHash('Scheduler.schedule_after') === 'aed17ee0af3f654c5165d2f71689e9c8688ed5b958ae1537df52f7db12d0a4aa'
+    }
+
+    /**
+     * Anonymously schedule a task after a delay.
+     * 
+     * # <weight>
+     * Same as [`schedule`].
+     * # </weight>
+     */
+    get asV57(): {after: number, maybePeriodic: ([number, number] | undefined), priority: number, call: v57.Call} {
+        assert(this.isV57)
         return this._chain.decodeCall(this.call)
     }
 }
@@ -15424,6 +15813,21 @@ export class SchedulerScheduleNamedCall {
         assert(this.isV53)
         return this._chain.decodeCall(this.call)
     }
+
+    /**
+     * Schedule a named task.
+     */
+    get isV57(): boolean {
+        return this._chain.getCallHash('Scheduler.schedule_named') === '294be2bdab2f0554ac377a56b00b28ff0bfda17448a91c0d85a175273fce6da4'
+    }
+
+    /**
+     * Schedule a named task.
+     */
+    get asV57(): {id: Uint8Array, when: number, maybePeriodic: ([number, number] | undefined), priority: number, call: v57.Call} {
+        assert(this.isV57)
+        return this._chain.decodeCall(this.call)
+    }
 }
 
 export class SchedulerScheduleNamedAfterCall {
@@ -15873,6 +16277,29 @@ export class SchedulerScheduleNamedAfterCall {
      */
     get asV53(): {id: Uint8Array, after: number, maybePeriodic: ([number, number] | undefined), priority: number, call: v53.Call} {
         assert(this.isV53)
+        return this._chain.decodeCall(this.call)
+    }
+
+    /**
+     * Schedule a named task after a delay.
+     * 
+     * # <weight>
+     * Same as [`schedule_named`](Self::schedule_named).
+     * # </weight>
+     */
+    get isV57(): boolean {
+        return this._chain.getCallHash('Scheduler.schedule_named_after') === '313e50a283f3b2080f3d6a7d3ae22e5cec7b37b3a04de2a2a51c8b1c6ecbae14'
+    }
+
+    /**
+     * Schedule a named task after a delay.
+     * 
+     * # <weight>
+     * Same as [`schedule_named`](Self::schedule_named).
+     * # </weight>
+     */
+    get asV57(): {id: Uint8Array, after: number, maybePeriodic: ([number, number] | undefined), priority: number, call: v57.Call} {
+        assert(this.isV57)
         return this._chain.decodeCall(this.call)
     }
 }
@@ -19310,6 +19737,41 @@ export class TechnicalCommitteeExecuteCall {
         assert(this.isV53)
         return this._chain.decodeCall(this.call)
     }
+
+    /**
+     * Dispatch a proposal from a member using the `Member` origin.
+     * 
+     * Origin must be a member of the collective.
+     * 
+     * # <weight>
+     * ## Weight
+     * - `O(M + P)` where `M` members-count (code-bounded) and `P` complexity of dispatching
+     *   `proposal`
+     * - DB: 1 read (codec `O(M)`) + DB access of `proposal`
+     * - 1 event
+     * # </weight>
+     */
+    get isV57(): boolean {
+        return this._chain.getCallHash('TechnicalCommittee.execute') === 'b5cddf14aff36930addce409213c11cc237a383bbdbf576bea7a15830d707e66'
+    }
+
+    /**
+     * Dispatch a proposal from a member using the `Member` origin.
+     * 
+     * Origin must be a member of the collective.
+     * 
+     * # <weight>
+     * ## Weight
+     * - `O(M + P)` where `M` members-count (code-bounded) and `P` complexity of dispatching
+     *   `proposal`
+     * - DB: 1 read (codec `O(M)`) + DB access of `proposal`
+     * - 1 event
+     * # </weight>
+     */
+    get asV57(): {proposal: v57.Call, lengthBound: number} {
+        assert(this.isV57)
+        return this._chain.decodeCall(this.call)
+    }
 }
 
 export class TechnicalCommitteeProposeCall {
@@ -20597,6 +21059,73 @@ export class TechnicalCommitteeProposeCall {
         assert(this.isV53)
         return this._chain.decodeCall(this.call)
     }
+
+    /**
+     * Add a new proposal to either be voted on or executed directly.
+     * 
+     * Requires the sender to be member.
+     * 
+     * `threshold` determines whether `proposal` is executed directly (`threshold < 2`)
+     * or put up for voting.
+     * 
+     * # <weight>
+     * ## Weight
+     * - `O(B + M + P1)` or `O(B + M + P2)` where:
+     *   - `B` is `proposal` size in bytes (length-fee-bounded)
+     *   - `M` is members-count (code- and governance-bounded)
+     *   - branching is influenced by `threshold` where:
+     *     - `P1` is proposal execution complexity (`threshold < 2`)
+     *     - `P2` is proposals-count (code-bounded) (`threshold >= 2`)
+     * - DB:
+     *   - 1 storage read `is_member` (codec `O(M)`)
+     *   - 1 storage read `ProposalOf::contains_key` (codec `O(1)`)
+     *   - DB accesses influenced by `threshold`:
+     *     - EITHER storage accesses done by `proposal` (`threshold < 2`)
+     *     - OR proposal insertion (`threshold <= 2`)
+     *       - 1 storage mutation `Proposals` (codec `O(P2)`)
+     *       - 1 storage mutation `ProposalCount` (codec `O(1)`)
+     *       - 1 storage write `ProposalOf` (codec `O(B)`)
+     *       - 1 storage write `Voting` (codec `O(M)`)
+     *   - 1 event
+     * # </weight>
+     */
+    get isV57(): boolean {
+        return this._chain.getCallHash('TechnicalCommittee.propose') === 'c00d588e46b416f06fbb7eca814450c82fa0b9e87419448c07b17e307ebb58d4'
+    }
+
+    /**
+     * Add a new proposal to either be voted on or executed directly.
+     * 
+     * Requires the sender to be member.
+     * 
+     * `threshold` determines whether `proposal` is executed directly (`threshold < 2`)
+     * or put up for voting.
+     * 
+     * # <weight>
+     * ## Weight
+     * - `O(B + M + P1)` or `O(B + M + P2)` where:
+     *   - `B` is `proposal` size in bytes (length-fee-bounded)
+     *   - `M` is members-count (code- and governance-bounded)
+     *   - branching is influenced by `threshold` where:
+     *     - `P1` is proposal execution complexity (`threshold < 2`)
+     *     - `P2` is proposals-count (code-bounded) (`threshold >= 2`)
+     * - DB:
+     *   - 1 storage read `is_member` (codec `O(M)`)
+     *   - 1 storage read `ProposalOf::contains_key` (codec `O(1)`)
+     *   - DB accesses influenced by `threshold`:
+     *     - EITHER storage accesses done by `proposal` (`threshold < 2`)
+     *     - OR proposal insertion (`threshold <= 2`)
+     *       - 1 storage mutation `Proposals` (codec `O(P2)`)
+     *       - 1 storage mutation `ProposalCount` (codec `O(1)`)
+     *       - 1 storage write `ProposalOf` (codec `O(B)`)
+     *       - 1 storage write `Voting` (codec `O(M)`)
+     *   - 1 event
+     * # </weight>
+     */
+    get asV57(): {threshold: number, proposal: v57.Call, lengthBound: number} {
+        assert(this.isV57)
+        return this._chain.decodeCall(this.call)
+    }
 }
 
 export class TechnicalCommitteeSetMembersCall {
@@ -21844,6 +22373,45 @@ export class UtilityAsDerivativeCall {
         assert(this.isV53)
         return this._chain.decodeCall(this.call)
     }
+
+    /**
+     * Send a call through an indexed pseudonym of the sender.
+     * 
+     * Filter from origin are passed along. The call will be dispatched with an origin which
+     * use the same filter as the origin of this call.
+     * 
+     * NOTE: If you need to ensure that any account-based filtering is not honored (i.e.
+     * because you expect `proxy` to have been used prior in the call stack and you do not want
+     * the call restrictions to apply to any sub-accounts), then use `as_multi_threshold_1`
+     * in the Multisig pallet instead.
+     * 
+     * NOTE: Prior to version *12, this was called `as_limited_sub`.
+     * 
+     * The dispatch origin for this call must be _Signed_.
+     */
+    get isV57(): boolean {
+        return this._chain.getCallHash('Utility.as_derivative') === 'f31da2b4cbfa41043b76f501033935cc13db3f4c0feb31e954160d490d3c0811'
+    }
+
+    /**
+     * Send a call through an indexed pseudonym of the sender.
+     * 
+     * Filter from origin are passed along. The call will be dispatched with an origin which
+     * use the same filter as the origin of this call.
+     * 
+     * NOTE: If you need to ensure that any account-based filtering is not honored (i.e.
+     * because you expect `proxy` to have been used prior in the call stack and you do not want
+     * the call restrictions to apply to any sub-accounts), then use `as_multi_threshold_1`
+     * in the Multisig pallet instead.
+     * 
+     * NOTE: Prior to version *12, this was called `as_limited_sub`.
+     * 
+     * The dispatch origin for this call must be _Signed_.
+     */
+    get asV57(): {index: number, call: v57.Call} {
+        assert(this.isV57)
+        return this._chain.decodeCall(this.call)
+    }
 }
 
 export class UtilityBatchCall {
@@ -22803,6 +23371,57 @@ export class UtilityBatchCall {
         assert(this.isV53)
         return this._chain.decodeCall(this.call)
     }
+
+    /**
+     * Send a batch of dispatch calls.
+     * 
+     * May be called from any origin except `None`.
+     * 
+     * - `calls`: The calls to be dispatched from the same origin. The number of call must not
+     *   exceed the constant: `batched_calls_limit` (available in constant metadata).
+     * 
+     * If origin is root then the calls are dispatched without checking origin filter. (This
+     * includes bypassing `frame_system::Config::BaseCallFilter`).
+     * 
+     * # <weight>
+     * - Complexity: O(C) where C is the number of calls to be batched.
+     * # </weight>
+     * 
+     * This will return `Ok` in all circumstances. To determine the success of the batch, an
+     * event is deposited. If a call failed and the batch was interrupted, then the
+     * `BatchInterrupted` event is deposited, along with the number of successful calls made
+     * and the error of the failed call. If all were successful, then the `BatchCompleted`
+     * event is deposited.
+     */
+    get isV57(): boolean {
+        return this._chain.getCallHash('Utility.batch') === 'c44549a293cc03a1fb4d46e91c7a6e0216e4c667f4f984fc7ee8fd70391cdc66'
+    }
+
+    /**
+     * Send a batch of dispatch calls.
+     * 
+     * May be called from any origin except `None`.
+     * 
+     * - `calls`: The calls to be dispatched from the same origin. The number of call must not
+     *   exceed the constant: `batched_calls_limit` (available in constant metadata).
+     * 
+     * If origin is root then the calls are dispatched without checking origin filter. (This
+     * includes bypassing `frame_system::Config::BaseCallFilter`).
+     * 
+     * # <weight>
+     * - Complexity: O(C) where C is the number of calls to be batched.
+     * # </weight>
+     * 
+     * This will return `Ok` in all circumstances. To determine the success of the batch, an
+     * event is deposited. If a call failed and the batch was interrupted, then the
+     * `BatchInterrupted` event is deposited, along with the number of successful calls made
+     * and the error of the failed call. If all were successful, then the `BatchCompleted`
+     * event is deposited.
+     */
+    get asV57(): {calls: v57.Call[]} {
+        assert(this.isV57)
+        return this._chain.decodeCall(this.call)
+    }
 }
 
 export class UtilityBatchAllCall {
@@ -23572,6 +24191,47 @@ export class UtilityBatchAllCall {
         assert(this.isV53)
         return this._chain.decodeCall(this.call)
     }
+
+    /**
+     * Send a batch of dispatch calls and atomically execute them.
+     * The whole transaction will rollback and fail if any of the calls failed.
+     * 
+     * May be called from any origin except `None`.
+     * 
+     * - `calls`: The calls to be dispatched from the same origin. The number of call must not
+     *   exceed the constant: `batched_calls_limit` (available in constant metadata).
+     * 
+     * If origin is root then the calls are dispatched without checking origin filter. (This
+     * includes bypassing `frame_system::Config::BaseCallFilter`).
+     * 
+     * # <weight>
+     * - Complexity: O(C) where C is the number of calls to be batched.
+     * # </weight>
+     */
+    get isV57(): boolean {
+        return this._chain.getCallHash('Utility.batch_all') === 'c44549a293cc03a1fb4d46e91c7a6e0216e4c667f4f984fc7ee8fd70391cdc66'
+    }
+
+    /**
+     * Send a batch of dispatch calls and atomically execute them.
+     * The whole transaction will rollback and fail if any of the calls failed.
+     * 
+     * May be called from any origin except `None`.
+     * 
+     * - `calls`: The calls to be dispatched from the same origin. The number of call must not
+     *   exceed the constant: `batched_calls_limit` (available in constant metadata).
+     * 
+     * If origin is root then the calls are dispatched without checking origin filter. (This
+     * includes bypassing `frame_system::Config::BaseCallFilter`).
+     * 
+     * # <weight>
+     * - Complexity: O(C) where C is the number of calls to be batched.
+     * # </weight>
+     */
+    get asV57(): {calls: v57.Call[]} {
+        assert(this.isV57)
+        return this._chain.decodeCall(this.call)
+    }
 }
 
 export class UtilityDispatchAsCall {
@@ -23815,6 +24475,39 @@ export class UtilityDispatchAsCall {
      */
     get asV53(): {asOrigin: v53.OriginCaller, call: v53.Call} {
         assert(this.isV53)
+        return this._chain.decodeCall(this.call)
+    }
+
+    /**
+     * Dispatches a function call with a provided origin.
+     * 
+     * The dispatch origin for this call must be _Root_.
+     * 
+     * # <weight>
+     * - O(1).
+     * - Limited storage reads.
+     * - One DB write (event).
+     * - Weight of derivative `call` execution + T::WeightInfo::dispatch_as().
+     * # </weight>
+     */
+    get isV57(): boolean {
+        return this._chain.getCallHash('Utility.dispatch_as') === 'c7dd77d6e1d32a89c039a967b23d610ed286dd8d346a2c920d8d424cc81ca57f'
+    }
+
+    /**
+     * Dispatches a function call with a provided origin.
+     * 
+     * The dispatch origin for this call must be _Root_.
+     * 
+     * # <weight>
+     * - O(1).
+     * - Limited storage reads.
+     * - One DB write (event).
+     * - Weight of derivative `call` execution + T::WeightInfo::dispatch_as().
+     * # </weight>
+     */
+    get asV57(): {asOrigin: v57.OriginCaller, call: v57.Call} {
+        assert(this.isV57)
         return this._chain.decodeCall(this.call)
     }
 }
@@ -24118,6 +24811,47 @@ export class UtilityForceBatchCall {
         assert(this.isV53)
         return this._chain.decodeCall(this.call)
     }
+
+    /**
+     * Send a batch of dispatch calls.
+     * Unlike `batch`, it allows errors and won't interrupt.
+     * 
+     * May be called from any origin except `None`.
+     * 
+     * - `calls`: The calls to be dispatched from the same origin. The number of call must not
+     *   exceed the constant: `batched_calls_limit` (available in constant metadata).
+     * 
+     * If origin is root then the calls are dispatch without checking origin filter. (This
+     * includes bypassing `frame_system::Config::BaseCallFilter`).
+     * 
+     * # <weight>
+     * - Complexity: O(C) where C is the number of calls to be batched.
+     * # </weight>
+     */
+    get isV57(): boolean {
+        return this._chain.getCallHash('Utility.force_batch') === 'c44549a293cc03a1fb4d46e91c7a6e0216e4c667f4f984fc7ee8fd70391cdc66'
+    }
+
+    /**
+     * Send a batch of dispatch calls.
+     * Unlike `batch`, it allows errors and won't interrupt.
+     * 
+     * May be called from any origin except `None`.
+     * 
+     * - `calls`: The calls to be dispatched from the same origin. The number of call must not
+     *   exceed the constant: `batched_calls_limit` (available in constant metadata).
+     * 
+     * If origin is root then the calls are dispatch without checking origin filter. (This
+     * includes bypassing `frame_system::Config::BaseCallFilter`).
+     * 
+     * # <weight>
+     * - Complexity: O(C) where C is the number of calls to be batched.
+     * # </weight>
+     */
+    get asV57(): {calls: v57.Call[]} {
+        assert(this.isV57)
+        return this._chain.decodeCall(this.call)
+    }
 }
 
 export class UtilityWithWeightCall {
@@ -24155,6 +24889,31 @@ export class UtilityWithWeightCall {
      */
     get asV53(): {call: v53.Call, weight: v53.Weight} {
         assert(this.isV53)
+        return this._chain.decodeCall(this.call)
+    }
+
+    /**
+     * Dispatch a function call with a specified weight.
+     * 
+     * This function does not check the weight of the call, and instead allows the
+     * Root origin to specify the weight of the call.
+     * 
+     * The dispatch origin for this call must be _Root_.
+     */
+    get isV57(): boolean {
+        return this._chain.getCallHash('Utility.with_weight') === 'bb8d3ec9121870ec5be4ba3ce9b676f355ed0d67f355f824fd5f911475fbed88'
+    }
+
+    /**
+     * Dispatch a function call with a specified weight.
+     * 
+     * This function does not check the weight of the call, and instead allows the
+     * Root origin to specify the weight of the call.
+     * 
+     * The dispatch origin for this call must be _Root_.
+     */
+    get asV57(): {call: v57.Call, weight: v57.Weight} {
+        assert(this.isV57)
         return this._chain.decodeCall(this.call)
     }
 }
@@ -24348,6 +25107,49 @@ export class VestedRewardsUpdateRewardsCall {
     }
 }
 
+export class XstPoolDisableSyntheticAssetCall {
+    private readonly _chain: Chain
+    private readonly call: Call
+
+    constructor(ctx: CallContext)
+    constructor(ctx: ChainContext, call: Call)
+    constructor(ctx: CallContext, call?: Call) {
+        call = call || ctx.call
+        assert(call.name === 'XSTPool.disable_synthetic_asset')
+        this._chain = ctx._chain
+        this.call = call
+    }
+
+    /**
+     * Disable synthetic asset.
+     * 
+     * Just remove synthetic from exchanging.
+     * Will not unregister trading pair because `trading_pair` pallet does not provide this
+     * ability. And will not unregister trading synthetic asset because of that.
+     * 
+     * - `origin`: the sudo account on whose behalf the transaction is being executed,
+     * - `synthetic_asset`: synthetic asset id to disable.
+     */
+    get isV57(): boolean {
+        return this._chain.getCallHash('XSTPool.disable_synthetic_asset') === 'b3d8cbeec8b655ff3ab7ed68a09a3fbbac71dd2bc30bba9349c9e796a47ce838'
+    }
+
+    /**
+     * Disable synthetic asset.
+     * 
+     * Just remove synthetic from exchanging.
+     * Will not unregister trading pair because `trading_pair` pallet does not provide this
+     * ability. And will not unregister trading synthetic asset because of that.
+     * 
+     * - `origin`: the sudo account on whose behalf the transaction is being executed,
+     * - `synthetic_asset`: synthetic asset id to disable.
+     */
+    get asV57(): {syntheticAsset: v57.AssetId32} {
+        assert(this.isV57)
+        return this._chain.decodeCall(this.call)
+    }
+}
+
 export class XstPoolEnableSyntheticAssetCall {
     private readonly _chain: Chain
     private readonly call: Call
@@ -24376,6 +25178,15 @@ export class XstPoolEnableSyntheticAssetCall {
 
     get asV42(): {syntheticAsset: v42.AssetId32} {
         assert(this.isV42)
+        return this._chain.decodeCall(this.call)
+    }
+
+    get isV57(): boolean {
+        return this._chain.getCallHash('XSTPool.enable_synthetic_asset') === 'd22a7502120b8177b82ef64f69b84ff89675862cdd465a43020e0377e3fb0f4c'
+    }
+
+    get asV57(): {assetId: v57.AssetId32, referenceSymbol: Uint8Array, feeRatio: v57.FixedPoint} {
+        assert(this.isV57)
         return this._chain.decodeCall(this.call)
     }
 }
@@ -24424,6 +25235,35 @@ export class XstPoolInitializePoolCall {
     }
 }
 
+export class XstPoolRegisterSyntheticAssetCall {
+    private readonly _chain: Chain
+    private readonly call: Call
+
+    constructor(ctx: CallContext)
+    constructor(ctx: ChainContext, call: Call)
+    constructor(ctx: CallContext, call?: Call) {
+        call = call || ctx.call
+        assert(call.name === 'XSTPool.register_synthetic_asset')
+        this._chain = ctx._chain
+        this.call = call
+    }
+
+    /**
+     * Register and enable new synthetic asset with `reference_symbol` price binding
+     */
+    get isV57(): boolean {
+        return this._chain.getCallHash('XSTPool.register_synthetic_asset') === '40cc076cc09aa9b25fdcdd7d1bd4eee2cbdcd23921236fc531c8f9aa1b180646'
+    }
+
+    /**
+     * Register and enable new synthetic asset with `reference_symbol` price binding
+     */
+    get asV57(): {assetSymbol: Uint8Array, assetName: Uint8Array, referenceSymbol: Uint8Array, feeRatio: v57.FixedPoint} {
+        assert(this.isV57)
+        return this._chain.decodeCall(this.call)
+    }
+}
+
 export class XstPoolSetReferenceAssetCall {
     private readonly _chain: Chain
     private readonly call: Call
@@ -24464,6 +25304,49 @@ export class XstPoolSetReferenceAssetCall {
      */
     get asV42(): {referenceAssetId: v42.AssetId32} {
         assert(this.isV42)
+        return this._chain.decodeCall(this.call)
+    }
+}
+
+export class XstPoolSetSyntheticAssetFeeCall {
+    private readonly _chain: Chain
+    private readonly call: Call
+
+    constructor(ctx: CallContext)
+    constructor(ctx: ChainContext, call: Call)
+    constructor(ctx: CallContext, call?: Call) {
+        call = call || ctx.call
+        assert(call.name === 'XSTPool.set_synthetic_asset_fee')
+        this._chain = ctx._chain
+        this.call = call
+    }
+
+    /**
+     * Set synthetic asset fee.
+     * 
+     * This fee will be used to determine the amount of synthetic base asset (e.g. XST) to be
+     * burned when user buys synthetic asset.
+     * 
+     * - `origin`: the sudo account on whose behalf the transaction is being executed,
+     * - `synthetic_asset`: synthetic asset id to set fee for,
+     * - `fee_ratio`: fee ratio with precision = 18, so 1000000000000000000 = 1 = 100% fee.
+     */
+    get isV57(): boolean {
+        return this._chain.getCallHash('XSTPool.set_synthetic_asset_fee') === 'c402f720dbecfef87097ee63e185d6b8e4d419d9ec6b464a102a2596784986a6'
+    }
+
+    /**
+     * Set synthetic asset fee.
+     * 
+     * This fee will be used to determine the amount of synthetic base asset (e.g. XST) to be
+     * burned when user buys synthetic asset.
+     * 
+     * - `origin`: the sudo account on whose behalf the transaction is being executed,
+     * - `synthetic_asset`: synthetic asset id to set fee for,
+     * - `fee_ratio`: fee ratio with precision = 18, so 1000000000000000000 = 1 = 100% fee.
+     */
+    get asV57(): {syntheticAsset: v57.AssetId32, feeRatio: v57.FixedPoint} {
+        assert(this.isV57)
         return this._chain.decodeCall(this.call)
     }
 }
@@ -24532,4 +25415,4 @@ export class XorFeeUpdateMultiplierCall {
     }
 }
 
-export const utilityBatchAllCallVersions = [1, 3, 7, 19, 22, 23, 26, 32, 33, 35, 37, 38, 42, 43, 45, 46, 47, 50, 53] as const
+export const utilityBatchAllCallVersions = [1, 3, 7, 19, 22, 23, 26, 32, 33, 35, 37, 38, 42, 43, 45, 46, 47, 50, 53, 57] as const

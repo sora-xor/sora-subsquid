@@ -94,6 +94,8 @@ type HistoryElement @entity {
 	execution: ExecutionResult!
 	timestamp: Int!
 	data: JSON
+	dataTo: String @index
+	dataFrom: String @index
 	calls: [HistoryElementCall!]! @derivedFrom(field: "historyElement")
 	callNames: [String]!
 	updatedAtBlock: Int!
@@ -124,6 +126,13 @@ type ReferrerReward @entity {
 	referral: String! @index
 	referrer: String!
 	updated: Int!
+	amount: BigInt!
+	updatedAtBlock: Int!
+}
+
+type StakingReward @entity {
+	id: ID!
+	account: String! @index
 	amount: BigInt!
 	updatedAtBlock: Int!
 }

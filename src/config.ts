@@ -11,4 +11,4 @@ if (!environmentConfig) {
 }
  
 export const { chain, archive } = environmentConfig
-export const startBlock = process.env.START_BLOCK ? parseInt(process.env.START_BLOCK) : 0
+export const startBlock = process.env.INDEXER_START_BLOCK ? parseInt(process.env.INDEXER_START_BLOCK) : 0

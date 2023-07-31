@@ -71,6 +71,12 @@ export const createHistoryElement = (ctx: Context, block: Block, callItem: CallI
 
 export const addDataToHistoryElement = async (ctx: Context, block: Block, historyElement: HistoryElement, data: {}) => {
 	historyElement.data = toJSON(data)
+	if ('to' in data && typeof data.to === 'string') {
+		historyElement.dataTo = data.to
+	}
+	if ('from' in data && typeof data.from === 'string') {
+		historyElement.dataFrom = data.from
+	}
 	historyElement.updatedAtBlock = block.header.height
 
     await ctx.store.save(historyElement)

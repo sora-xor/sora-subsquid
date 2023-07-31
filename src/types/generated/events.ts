@@ -11,6 +11,7 @@ import * as v45 from './v45'
 import * as v46 from './v46'
 import * as v47 from './v47'
 import * as v53 from './v53'
+import * as v57 from './v57'
 
 export class AssetsAssetRegisteredEvent {
     private readonly _chain: Chain
@@ -822,6 +823,21 @@ export class BandSymbolsRelayedEvent {
      */
     get asV45(): Uint8Array[] {
         assert(this.isV45)
+        return this._chain.decodeEvent(this.event)
+    }
+
+    /**
+     * New symbol rates were successfully relayed. [symbols]
+     */
+    get isV57(): boolean {
+        return this._chain.getEventHash('Band.SymbolsRelayed') === 'aeecc2946b2812d355559be362ff8a0f855cd4b8cee89da7ec213e5bb279c08e'
+    }
+
+    /**
+     * New symbol rates were successfully relayed. [symbols]
+     */
+    get asV57(): [Uint8Array, bigint][] {
+        assert(this.isV57)
         return this._chain.decodeEvent(this.event)
     }
 }
@@ -4771,6 +4787,21 @@ export class HermesGovernancePlatformCreatedEvent {
         assert(this.isV47)
         return this._chain.decodeEvent(this.event)
     }
+
+    /**
+     * Create poll [who, title, start_timestamp, end_timestamp]
+     */
+    get isV57(): boolean {
+        return this._chain.getEventHash('HermesGovernancePlatform.Created') === '321c553894b4e645eb1d256dd648baa58c54c041b4f9631d1d7bd797ae28a72d'
+    }
+
+    /**
+     * Create poll [who, title, start_timestamp, end_timestamp]
+     */
+    get asV57(): [Uint8Array, Uint8Array, bigint, bigint] {
+        assert(this.isV57)
+        return this._chain.decodeEvent(this.event)
+    }
 }
 
 export class HermesGovernancePlatformCreatorFundsWithdrawnEvent {
@@ -4885,6 +4916,21 @@ export class HermesGovernancePlatformVotedEvent {
      */
     get asV47(): [Uint8Array, Uint8Array, v47.VotingOption] {
         assert(this.isV47)
+        return this._chain.decodeEvent(this.event)
+    }
+
+    /**
+     * Voting [who, poll, option]
+     */
+    get isV57(): boolean {
+        return this._chain.getEventHash('HermesGovernancePlatform.Voted') === '1794a5df6e71f8ceb9882994f762465a4a5bee5a2c4b3bc50c73caa5e894cc8d'
+    }
+
+    /**
+     * Voting [who, poll, option]
+     */
+    get asV57(): [Uint8Array, Uint8Array, Uint8Array] {
+        assert(this.isV57)
         return this._chain.decodeEvent(this.event)
     }
 }
@@ -5521,6 +5567,37 @@ export class IrohaMigrationMigratedEvent {
      */
     get asV42(): [string, Uint8Array] {
         assert(this.isV42)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class LiquidityProxyBatchSwapExecutedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'LiquidityProxy.BatchSwapExecuted')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * Batch of swap transfers has been performed
+     * [ADAR Fee, Input amount]
+     */
+    get isV57(): boolean {
+        return this._chain.getEventHash('LiquidityProxy.BatchSwapExecuted') === 'f7d5bd1431cb954502149f64a8137986d660e0729a3d9731d421496b4298be52'
+    }
+
+    /**
+     * Batch of swap transfers has been performed
+     * [ADAR Fee, Input amount]
+     */
+    get asV57(): [bigint, bigint] {
+        assert(this.isV57)
         return this._chain.decodeEvent(this.event)
     }
 }
@@ -8357,6 +8434,23 @@ export class TechnicalBurnedEvent {
         assert(this.isV46)
         return this._chain.decodeEvent(this.event)
     }
+
+    /**
+     * Some pure technical assets were burned. [asset, owner, burned_amount, total_exist].
+     * For full kind of accounts like in Minted.
+     */
+    get isV57(): boolean {
+        return this._chain.getEventHash('Technical.Burned') === '8d00268fd57ecce8e18da2d4606277a4ced45b7a2a4820442d8bc29372dd2bba'
+    }
+
+    /**
+     * Some pure technical assets were burned. [asset, owner, burned_amount, total_exist].
+     * For full kind of accounts like in Minted.
+     */
+    get asV57(): [v57.TechAssetId, v57.TechAccountId, bigint, bigint] {
+        assert(this.isV57)
+        return this._chain.decodeEvent(this.event)
+    }
 }
 
 export class TechnicalInputTransferredEvent {
@@ -8437,6 +8531,23 @@ export class TechnicalInputTransferredEvent {
      */
     get asV46(): [v46.TechAssetId, Uint8Array, v46.TechAccountId, bigint] {
         assert(this.isV46)
+        return this._chain.decodeEvent(this.event)
+    }
+
+    /**
+     * Some assets were transferred in. [asset, from, to, amount].
+     * TechAccountId is only pure TechAccountId.
+     */
+    get isV57(): boolean {
+        return this._chain.getEventHash('Technical.InputTransferred') === 'dd064d8b8bfe125fc82b9100e3d06ed1ddff18fd18a6e5164a8aad152ad91681'
+    }
+
+    /**
+     * Some assets were transferred in. [asset, from, to, amount].
+     * TechAccountId is only pure TechAccountId.
+     */
+    get asV57(): [v57.TechAssetId, Uint8Array, v57.TechAccountId, bigint] {
+        assert(this.isV57)
         return this._chain.decodeEvent(this.event)
     }
 }
@@ -8529,6 +8640,25 @@ export class TechnicalMintedEvent {
         assert(this.isV46)
         return this._chain.decodeEvent(this.event)
     }
+
+    /**
+     * Some pure technical assets were minted. [asset, owner, minted_amount, total_exist].
+     * This is not only for pure TechAccountId.
+     * TechAccountId can be just wrapped AccountId.
+     */
+    get isV57(): boolean {
+        return this._chain.getEventHash('Technical.Minted') === '8d00268fd57ecce8e18da2d4606277a4ced45b7a2a4820442d8bc29372dd2bba'
+    }
+
+    /**
+     * Some pure technical assets were minted. [asset, owner, minted_amount, total_exist].
+     * This is not only for pure TechAccountId.
+     * TechAccountId can be just wrapped AccountId.
+     */
+    get asV57(): [v57.TechAssetId, v57.TechAccountId, bigint, bigint] {
+        assert(this.isV57)
+        return this._chain.decodeEvent(this.event)
+    }
 }
 
 export class TechnicalOutputTransferredEvent {
@@ -8609,6 +8739,23 @@ export class TechnicalOutputTransferredEvent {
      */
     get asV46(): [v46.TechAssetId, v46.TechAccountId, Uint8Array, bigint] {
         assert(this.isV46)
+        return this._chain.decodeEvent(this.event)
+    }
+
+    /**
+     * Some assets were transferred out. [asset, from, to, amount].
+     * TechAccountId is only pure TechAccountId.
+     */
+    get isV57(): boolean {
+        return this._chain.getEventHash('Technical.OutputTransferred') === '60fe0d60c03a129214e7aaf1d9443956e4ac1de7fed87934849d026b6e59b22a'
+    }
+
+    /**
+     * Some assets were transferred out. [asset, from, to, amount].
+     * TechAccountId is only pure TechAccountId.
+     */
+    get asV57(): [v57.TechAssetId, v57.TechAccountId, Uint8Array, bigint] {
+        assert(this.isV57)
         return this._chain.decodeEvent(this.event)
     }
 }
@@ -10272,6 +10419,35 @@ export class XstPoolReferenceAssetChangedEvent {
     }
 }
 
+export class XstPoolSyntheticAssetDisabledEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'XSTPool.SyntheticAssetDisabled')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * Synthetic asset has been disabled. [Synthetic Asset Id]
+     */
+    get isV57(): boolean {
+        return this._chain.getEventHash('XSTPool.SyntheticAssetDisabled') === 'd95efc7b29a22298fded1b8a3d6268f031f1ecb06d36663796cb5be07bd8bfc1'
+    }
+
+    /**
+     * Synthetic asset has been disabled. [Synthetic Asset Id]
+     */
+    get asV57(): v57.AssetId32 {
+        assert(this.isV57)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
 export class XstPoolSyntheticAssetEnabledEvent {
     private readonly _chain: Chain
     private readonly event: Event
@@ -10297,6 +10473,50 @@ export class XstPoolSyntheticAssetEnabledEvent {
      */
     get asV45(): v45.AssetId32 {
         assert(this.isV45)
+        return this._chain.decodeEvent(this.event)
+    }
+
+    /**
+     * Synthetic asset has been enabled. [Synthetic Asset Id, Reference Symbol]
+     */
+    get isV57(): boolean {
+        return this._chain.getEventHash('XSTPool.SyntheticAssetEnabled') === 'f1a493e143982a38e21e7f50da7b073d2a8b733dab1ba49ececbb308c031423f'
+    }
+
+    /**
+     * Synthetic asset has been enabled. [Synthetic Asset Id, Reference Symbol]
+     */
+    get asV57(): [v57.AssetId32, Uint8Array] {
+        assert(this.isV57)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class XstPoolSyntheticAssetFeeChangedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'XSTPool.SyntheticAssetFeeChanged')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * Synthetic asset fee has been changed. [Synthetic Asset Id, New Fee]
+     */
+    get isV57(): boolean {
+        return this._chain.getEventHash('XSTPool.SyntheticAssetFeeChanged') === '8e93767f9dcb69608756db13abb73914fa7140df859465e6b6c00f4a456709d5'
+    }
+
+    /**
+     * Synthetic asset fee has been changed. [Synthetic Asset Id, New Fee]
+     */
+    get asV57(): [v57.AssetId32, v57.FixedPoint] {
+        assert(this.isV57)
         return this._chain.decodeEvent(this.event)
     }
 }

@@ -217,7 +217,7 @@ export async function initializeAssets(ctx: Context, block: Block): Promise<void
             const price = rate.value
             const priceUSD = formatU128ToBalance(price, assetId)
 
-            ctx.log.debug(`${referenceSymbol} ticker price: ${priceUSD}`)
+            ctx.log.debug(`[${blockHeight}]: ${referenceSymbol} ticker price: ${priceUSD}`)
 
 			const asset = assets.get(assetId)
 			if (asset) {

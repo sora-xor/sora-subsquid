@@ -30,6 +30,7 @@ import { calls, events } from './consts'
 import { assetRegistrationEventHandler, syntheticAssetEnabledEventHandler } from './handlers/events/assetsRegistration'
 import { bandRateUpdateHandler } from './handlers/events/band'
 import { chain, archive, startBlock } from './config'
+import { stakingRewardedEventHandler } from './handlers/events/rewards'
 
 const processor = new SubstrateBatchProcessor()
     .setDataSource({
@@ -101,6 +102,7 @@ processor.run(new TypeormDatabase(), async (ctx) => {
 				if (item.name === 'Assets.AssetRegistered') await assetRegistrationEventHandler(context, block, item)
 				if (item.name === 'XstPool.SyntheticAssetEnabled') await syntheticAssetEnabledEventHandler(context, block, item)
 				if (item.name === 'Band.SymbolsRelayed') await bandRateUpdateHandler(context, block, item)
+				if (item.name === 'Staking.Rewarded') await stakingRewardedEventHandler(context, block, item)
             }
         }
 

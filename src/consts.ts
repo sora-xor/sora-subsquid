@@ -48,4 +48,5 @@ export const events = [
     'DemeterFarmingPlatform.Withdrawn',
 	'XstPool.SyntheticAssetEnabled',
 	'Band.SymbolsRelayed',
+	'Staking.Rewarded'
 ] as const
