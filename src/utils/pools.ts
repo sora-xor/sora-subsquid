@@ -29,9 +29,9 @@ export const getAllReserves = async (ctx: Context, block: Block, baseAssetId: As
 			('isV1' in storage && storage.isV1) ||
 			('isV33' in storage && storage.isV33)
 		)
-			? await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKReservesStorage.name }, [1, 33] as const)
+			? await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKReservesStorage.name }, [42] as const)
 				.getPairs(decodeAssetId(baseAssetId))
-			: await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKReservesStorage.name }, [42] as const)
+			: await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKReservesStorage.name }, [1, 33] as const)
 				.getPairs({ code: decodeAssetId(baseAssetId) })
 
 
@@ -66,10 +66,12 @@ export const getAllProperties = async (ctx: Context, block: Block, baseAssetId: 
 			('isV7' in storage && storage.isV7) ||
 			('isV33' in storage && storage.isV33)
 		)
-			? await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKPropertiesStorage.name }, [1, 7, 33] as const)
+			? await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKPropertiesStorage.name }, [42] as const)
 				.getPairs(decodeAssetId(baseAssetId))
-			: await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKPropertiesStorage.name }, [42] as const)
+			: await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKPropertiesStorage.name }, [1, 7, 33] as const)
 				.getPairs({ code: decodeAssetId(baseAssetId) })
+
+		const data2 = getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKPropertiesStorage.name })
 
 		const properties = data.map(pair => {
 			const [[, targetAssetId], [reservesAccountId, feesAccountId]] = pair
@@ -101,11 +103,11 @@ export const getPoolProperties = async (ctx: Context, block: Block, baseAssetId:
 			('isV7' in storage && storage.isV7) ||
 			('isV33' in storage && storage.isV33)
 		)
-			? await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKPropertiesStorage.name }, [1, 7, 33] as const).getPairs(
+			? await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKPropertiesStorage.name }, [42] as const).getPairs(
 				decodeAssetId(baseAssetId),
 				decodeAssetId(targetAssetId)
 			)
-			: await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKPropertiesStorage.name }, [42] as const).getPairs(
+			: await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKPropertiesStorage.name }, [1, 7, 33] as const).getPairs(
 				{ code: decodeAssetId(baseAssetId) },
 				{ code: decodeAssetId(targetAssetId) }
 			)

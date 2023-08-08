@@ -43,14 +43,10 @@ export const getSyntheticAssets = async (ctx: Context, block: Block) => {
 		ctx.log.debug('Synthetic assets request...')
 
 		const storage = new XSTPoolEnabledSyntheticsStorage(ctx, block.header)
-		if (!storage.isExists || !('isV54' in storage && storage.isV54)) return null
-		// TODO: remove any after spec versions update
-		const representation: any = getEntityData(ctx, block, storage, { kind: 'storage', name: XSTPoolEnabledSyntheticsStorage.name }, [54] as const)
+		if (!storage.isExists || ('isV19' in storage && storage.isV19) || ('isV42' in storage && storage.isV42)) return null
+		const data = await getEntityData(ctx, block, storage, { kind: 'storage', name: XSTPoolEnabledSyntheticsStorage.name }, [19, 42] as const).getPairs()
 
-		const data = await representation.getPairs()
-
-		// TODO: remove any after spec versions update
-		const syntheticAssets = data.map((pair: any) => {
+		const syntheticAssets = data.map((pair) => {
 			const [asset, syntheticInfo] = pair
 			const assetId = getAssetId(asset)
 			return {
