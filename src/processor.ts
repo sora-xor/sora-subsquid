@@ -70,7 +70,7 @@ processor.run(new TypeormDatabase(), async (ctx) => {
 					item.name === 'LiquidityProxy.swap' ||
 					item.name === 'LiquidityProxy.swap_transfer'
 				) await swapsCallHandler(context, block, item)
-				if (item.name === 'LiquidityProxy.swap_transfer_batch') await swapTransferBatchHandler(context, block, item)
+				// if (item.name === 'LiquidityProxy.swap_transfer_batch') await swapTransferBatchHandler(context, block, item)
 				if (item.name === 'PoolXYK.deposit_liquidity') await liquidityDepositCallHandler(context, block, item)
 				if (item.name === 'PoolXYK.withdraw_liquidity') await liquidityRemovalCallHandler(context, block, item)
 				if (item.name === 'IrohaMigration.migrate') await irohaMigrationCallHandler(context, block, item)

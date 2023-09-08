@@ -1,4 +1,4 @@
-import { Block, Context } from '../types'
+import { Block, Context, EntityItem } from '../types'
 import { UnsupportedSpecError } from './errors'
 
 type VersionedObject = {
@@ -75,23 +75,34 @@ export function getEntityData<T extends VersionedObject, V extends readonly numb
   ctx: Context,
   block: Block,
   entity: T,
-  { kind, name }: { kind: 'call' | 'event' | 'storage', name: string },
+  entityItem: { kind: 'storage', name: string } | EntityItem<any>,
   excludeVersions?: V
 ): Exclude<ExcludeVersions<T, V>[keyof ExcludeVersions<T, V>], boolean> {
-  const allVersions = getAllVersions(entity) as V;
+  const allVersions = getAllVersions(entity) as V
   // Exclude the specified versions
   const versions: V = excludeVersions
 	? (allVersions.filter((v) => !excludeVersions.includes(v)) as readonly number[]) as V
-	: allVersions as V;
+	: allVersions as V
 
-  const narrowedObject = narrowVersionedObject(entity, versions);
-  const data = getDataFromVersionedObject(narrowedObject);
+  const narrowedObject = narrowVersionedObject(entity, versions)
+  let data = getDataFromVersionedObject(narrowedObject)
 
   if (data === null) {
-    const specVersion = findCurrentSpecVersion(narrowedObject);
-    if (!specVersion) throw new Error('No spec version found');
-    throw new UnsupportedSpecError(ctx, block, { kind, name });
+    const specVersion = findCurrentSpecVersion(narrowedObject)
+    if (!specVersion) ctx.log.error('No spec version found')
+	const unsupportedSpecError = new UnsupportedSpecError(ctx, block, entityItem)
+	if (entityItem.kind === 'call') {
+		data = entityItem.call.args as any
+	} else if (entityItem.kind === 'event') {
+		data = entityItem.event.args as any
+	} else {
+		throw unsupportedSpecError
+	}
+	ctx.log.error(unsupportedSpecError.message)
+  }
+  if (data === null) {
+	throw new Error('Entity data is null')
   }
 
-  return data;
+  return data
 }
