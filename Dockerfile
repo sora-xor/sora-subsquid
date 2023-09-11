@@ -28,7 +28,6 @@ RUN echo -e "loglevel=silent\nupdate-notifier=false" > /squid/.npmrc
 ADD db db
 ADD assets assets
 ADD schema.graphql .
-ADD typesBundle.json .
 # TODO: use shorter PROMETHEUS_PORT
 ENV PROCESSOR_PROMETHEUS_PORT 9000
 EXPOSE 3000

@@ -23,7 +23,7 @@ services:
     volumes:
       - "../../src/typesBundle.json:/configs/typesBundle.json"
     command: [
-       "-e", "wss://mof2.sora.org",
+       "-e", "wss://ws.framenode-1.r0.dev.sora2.soramitsu.co.jp",
        "-c", "5", # allow up to 20 pending requests for the above endpoint (default is 5)
        #  "--start-block", "1000000",
       "--out", "${DATABASE_URL}",

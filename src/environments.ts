@@ -1,6 +1,7 @@
 enum Environment {
 	PRODUCTION = 'production',
 	STAGE = 'stage',
+	DEV = 'dev'
 }
 
 interface EnvironmentAddresses {
@@ -20,7 +21,11 @@ const environments: Environments = {
 	[Environment.STAGE]: {
 		chain: 'wss://ws.framenode-7.s4.stg1.sora2.soramitsu.co.jp',
 		archive: 'https://sora-testnet.archive.subsquid.io/graphql'
-	}
+	},
+	[Environment.DEV]: {
+		chain: 'wss://ws.framenode-1.r0.dev.sora2.soramitsu.co.jp"',
+		archive: 'http://localhost:5555/graphql'
+	},
 }
 
 export default environments

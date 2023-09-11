@@ -7,7 +7,6 @@ import { HistoryElement, HistoryElementCall } from '../../model'
 import { AssetId } from '../../types'
 import { toCamelCase } from '../../utils'
 import { toJSON } from '@subsquid/util-internal-json'
-import { UnsupportedSpecError } from '../../utils/errors'
 
 type Version = typeof utilityBatchAllCallVersions[number]
 type IsVersion = { [V in Version]: `isV${V}` }[Version]
@@ -94,8 +93,9 @@ function mapCallsForAllVersions(ctx: Context, block: Block, callItem: CallItem<'
 	const utilityBatchAllCall = new UtilityBatchAllCall(ctx, callItem.call)
 
 	let calls: HistoryElementCall[] | null = null
-	utilityBatchAllCallVersions.forEach((version) => {
-		if (utilityBatchAllCall['isV' + version as IsVersion]) {
+	Object.keys(utilityBatchAllCall).forEach((isVersionKey) => {
+		if (isVersionKey.startsWith('isV') && utilityBatchAllCall[isVersionKey as IsVersion]) {
+			const version = Number(isVersionKey.replace('isV', '')) as Version
 			calls = mapCalls(
 				{
 					version,
@@ -106,7 +106,16 @@ function mapCallsForAllVersions(ctx: Context, block: Block, callItem: CallItem<'
 			)
 		}
 	})
-	if (calls === null) throw new UnsupportedSpecError(ctx, block, callItem)
+	if (calls === null) {
+		calls = mapCalls(
+			{
+				version: 'unknown' as any,
+				calls: callItem.call.args.calls
+			} as BatchCalls,
+			historyElement,
+			block
+		)
+	}
 	return calls
 }
 

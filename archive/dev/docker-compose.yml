@@ -20,14 +20,14 @@ services:
     restart: on-failure
     image: subsquid/substrate-ingest:firesquid
     volumes:
-      - "./typesBundle.json:/configs/typesBundle.json"
+      - "../../src/typesBundle.json:/configs/typesBundle.json"
     command: [
-       "-e", "wss://ws.framenode-1.s1.dev.sora2.soramitsu.co.jp",
+       "-e", "wss://ws.framenode-1.r0.dev.sora2.soramitsu.co.jp",
        "-c", "5", # allow up to 20 pending requests for the above endpoint (default is 5)
        #  "--start-block", "1000000", # uncomment to specify a non-zero start block
        "--out", "${DATABASE_URL}",
        "--types-bundle", "/configs/typesBundle.json",
-       "--start-block", "0"
+       "--write-batch-size", "10"
     ]
 
   gateway:
@@ -41,6 +41,8 @@ services:
        "--database-max-connections", "100", # max number of concurrent database connections
        # "--evm-support" # uncomment for chains with Frontier EVM pallet
                          # (e.g. Moonbeam/Moonriver or Astar/Shiden)
+       "--scan-start-value", "1",
+       "--scan-max-value", "10000",
     ]
     ports:
       - "7777:8000"
