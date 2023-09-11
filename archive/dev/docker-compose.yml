@@ -35,7 +35,7 @@ services:
     environment:
       RUST_LOG: "substrate_gateway=info,actix_server=info"
     command: [
-       "--database-url", "postgres://${DB_USERNAME}:${DB_PASS}@db:5432/squid-archive-dev",
+       "--database-url", "${DATABASE_URL}",
        "--database-max-connections", "100",
        "--scan-start-value", "1",
        "--scan-max-value", "10000",
