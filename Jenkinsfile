@@ -9,7 +9,8 @@ def pipeline = new org.js.AppPipeline(
     buildDockerImage:   'docker.soramitsu.co.jp/build-tools/node:16-cypress-corepack',
     sonarProjectName:   'sora-subsquid',
     sonarProjectKey:    'jp.co.soramitsu:sora-subsquid',
-    preBuildCmds:       ['npm run update', 'npm ci'],
+    preBuildCmds:       ['npm i -g sqd-cli', 'npm ci --include=dev'],
+    buildCmds:          ['npm run build'],
     dockerImageTags:    ['main': 'dev']
 )
 pipeline.runPipeline()
