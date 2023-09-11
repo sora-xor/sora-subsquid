@@ -11,6 +11,6 @@ def pipeline = new org.js.AppPipeline(
     sonarProjectKey:    'jp.co.soramitsu:sora-subsquid',
     preBuildCmds:       ['npm i -g sqd-cli', 'npm ci --include=dev'],
     buildCmds:          ['npm run build'],
-    dockerImageTags:    ['main': 'dev']
+    dockerImageTags:    ['feature/dops-2732-subsquid': 'dev']
 )
 pipeline.runPipeline()
