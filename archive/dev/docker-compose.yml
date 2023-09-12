@@ -17,9 +17,9 @@ services:
     depends_on:
       - db
     restart: on-failure
-    image: subsquid:dev2
-    # volumes:
-    #   - ./src/typesBundle.json:/configs/typesBundle.json
+    image: subsquid/substrate-ingest:firesquid
+    volumes:
+      - ./src/typesBundle.json:/configs/typesBundle.json
     command: [
        "-e", "${NODE_NAME}",
        "-c", "5",

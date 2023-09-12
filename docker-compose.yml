@@ -3,7 +3,7 @@ version: "3"
 services:
   db:
     healthcheck:
-      test: ["CMD-SHELL", "sh -c 'pg_isready -U postgres -d ${DB_PASS}'"]
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U postgres -d ${DB_NAME}'"]
       interval: 10s
       timeout: 3s
       retries: 3
