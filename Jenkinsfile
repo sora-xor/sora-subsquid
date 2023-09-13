@@ -3,8 +3,6 @@
 def pipeline = new org.js.AppPipeline(
     steps:              this,
     test:               false,
-    targetEnvironment: 'dev',
-    upstreamJobList: '../sora2-' + targetEnvironment,
     secretScannerExclusion: '.*squid.yaml\$',
     dockerRegistryCred: 'bot-sora2-rw',
     dockerImageName:    'sora2/subsquid',
