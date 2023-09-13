@@ -19,7 +19,7 @@ services:
     restart: on-failure
     image: subsquid/substrate-ingest:firesquid
     volumes:
-      - ./src/typesBundle.json:/configs/typesBundle.json
+      - "../../src/typesBundle.json:/configs/typesBundle.json
     command: [
        "-e", "${NODE_NAME}",
        "-c", "5",
