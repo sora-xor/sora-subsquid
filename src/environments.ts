@@ -24,7 +24,7 @@ const environments: Environments = {
 	},
 	[Environment.DEV]: {
 		chain: 'wss://ws.framenode-1.r0.dev.sora2.soramitsu.co.jp"',
-		archive: 'http://localhost:5555/graphql'
+        archive: 'https://subsquid.sq1.dev.sora2.soramitsu.co.jp/graphql'
 	},
 }
 
