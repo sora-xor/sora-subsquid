@@ -1,4 +1,4 @@
-enum Environment {
+export enum Environment {
 	PRODUCTION = 'production',
 	STAGE = 'stage',
 	DEV = 'dev'
@@ -13,7 +13,7 @@ type Environments = {
 	[environment in Environment]: EnvironmentAddresses
 }
 
-const environments: Environments = {
+export const environments: Environments = {
 	[Environment.PRODUCTION]: {
 		chain: 'wss://mof2.sora.org',
 		archive: 'https://sora.archive.subsquid.io/graphql'
