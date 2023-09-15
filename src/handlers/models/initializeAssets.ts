@@ -43,10 +43,12 @@ export const getSyntheticAssets = async (ctx: Context, block: Block) => {
 		ctx.log.debug('Synthetic assets request...')
 
 		const storage = new XSTPoolEnabledSyntheticsStorage(ctx, block.header)
-		if (!storage.isExists || ('isV19' in storage && storage.isV19) || ('isV42' in storage && storage.isV42)) return null
-		const data = await getEntityData(ctx, block, storage, { kind: 'storage', name: XSTPoolEnabledSyntheticsStorage.name }, [19, 42] as const).getPairs()
+		if (!storage.isExists) return null
+		const data = getEntityData(ctx, block, storage, { kind: 'storage', name: XSTPoolEnabledSyntheticsStorage.name })
+		if (!('getPairs' in data)) return null
+		const pairs = await data.getPairs()
 
-		const syntheticAssets = data.map((pair) => {
+		const syntheticAssets = pairs.map((pair) => {
 			const [asset, syntheticInfo] = pair
 			const assetId = getAssetId(asset)
 			return {
@@ -75,9 +77,9 @@ export const getBandRates = async (ctx: Context, block: Block) => {
 
 		const storage = new BandSymbolRatesStorage(ctx, block.header)
 		if (!storage.isExists) return null
-		const data = await getEntityData(ctx, block, storage, { kind: 'storage', name: BandSymbolRatesStorage.name }).getPairs()
+		const pairs = await getEntityData(ctx, block, storage, { kind: 'storage', name: BandSymbolRatesStorage.name }).getPairs()
 
-		const rates = data.map(pair => {
+		const rates = pairs.map(pair => {
 			const [ticker, rate] = pair
 			const referenceSymbol = typeof ticker === 'string' ? ticker as ReferenceSymbol : toReferenceSymbol(ticker)
 			return {

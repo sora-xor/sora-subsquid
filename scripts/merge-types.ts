@@ -67,7 +67,7 @@ import { Environment } from '../src/environments'
 
 	Object.entries(classes).forEach(([className, classInfoArray]) => {
 		if (entityType === 'storage') {
-			outputData.push(`export class ${className} extends StorageBase {`)
+			outputData.push(`export class ${className} {`)
 		} else {
 			outputData.push(`export class ${className} {`)
 		}
@@ -89,14 +89,17 @@ import { Environment } from '../src/environments'
 		} else {
 			outputData.push(`\tconstructor(ctx: ChainContext, ${entityTypeSingle}: ${entityTypeSingleCapital}) {`)
 		}
-		if (entityType === 'storage') {
-			outputData.push(`\t\tsuper(ctx, ${entityTypeSingle})`)
-		}
 		environments.forEach(environment => {
 			outputData.push(`\t\tthis.${environment} = new ${environment}${entityTypeCapital}.${className}(ctx, ${entityTypeSingle})`)
 		})
 		outputData.push(`\t}`)
 		outputData.push(``)
+		if (entityType === 'storage') {
+			outputData.push(`\tget isExists(): boolean {`)
+			outputData.push(`\t\treturn ${Array.from(environments).map(environment => `this.${environment}.isExists`).join(' || ')}`)
+			outputData.push('\t}')
+			outputData.push(``)
+		}
 
 		classInfoArray.forEach(classInfo => {
 			const match = classInfo.path.match(/\/(\w+)\/\w+.ts$/)
@@ -104,10 +107,10 @@ import { Environment } from '../src/environments'
 			const prefix = environment === Environment.PRODUCTION ? '' : environment.charAt(0).toUpperCase() + environment.slice(1)
 
 			classInfo.versions.forEach(version => {
-				outputData.push(`\tget is${prefix}V${version}(): ${environment}${entityTypeCapital}.${className}['isV${version}'] {`)
+				outputData.push(`\tget isV${version}${prefix}(): ${environment}${entityTypeCapital}.${className}['isV${version}'] {`)
 				outputData.push(`\t\treturn this.${environment}.isV${version}`)
 				outputData.push('\t}')
-				outputData.push(`\tget as${prefix}V${version}(): ${environment}${entityTypeCapital}.${className}['asV${version}'] {`)
+				outputData.push(`\tget asV${version}${prefix}(): ${environment}${entityTypeCapital}.${className}['asV${version}'] {`)
 				outputData.push(`\t\treturn this.${environment}.asV${version}`)
 				outputData.push('\t}')
 			})
