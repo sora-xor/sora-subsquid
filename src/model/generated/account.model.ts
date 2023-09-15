@@ -1,21 +1,19 @@
-import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, OneToMany as OneToMany_} from "typeorm"
-import {Transfer} from "./transfer.model"
+import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, ManyToOne as ManyToOne_, Index as Index_} from "typeorm"
+import {HistoryElement} from "./historyElement.model"
 
 @Entity_()
 export class Account {
-  constructor(props?: Partial<Account>) {
-    Object.assign(this, props)
-  }
+    constructor(props?: Partial<Account>) {
+        Object.assign(this, props)
+    }
 
-  /**
-   * Account address
-   */
-  @PrimaryColumn_()
-  id!: string
+    @PrimaryColumn_()
+    id!: string
 
-  @OneToMany_(() => Transfer, e => e.to)
-  transfersTo!: Transfer[]
+    @Index_()
+    @ManyToOne_(() => HistoryElement, {nullable: true})
+    latestHistoryElement!: HistoryElement | undefined | null
 
-  @OneToMany_(() => Transfer, e => e.from)
-  transfersFrom!: Transfer[]
+    @Column_("int4", {nullable: false})
+    updatedAtBlock!: number
 }
