@@ -8,7 +8,7 @@ services:
       - "${PWD}/archive/stage/cockroach-data/crdb:/cockroach/cockroach-data"
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: ${DB_PASS}
       POSTGRES_DB: squid-archive-prod
       
     ports:
@@ -38,7 +38,7 @@ services:
     environment:
       RUST_LOG: "substrate_gateway=info,actix_server=info"
     command: [
-       "--database-url", "postgres://root@db:26257/defaultdb",
+       "--database-url", "${DATABASE_URL}",
        "--database-max-connections", "100", # max number of concurrent database connections
        # "--evm-support" # uncomment for chains with Frontier EVM pallet
                          # (e.g. Moonbeam/Moonriver or Astar/Shiden)

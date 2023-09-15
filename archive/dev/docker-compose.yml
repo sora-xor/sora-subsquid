@@ -1,18 +1,17 @@
-name: archive-dev
+version: '2.4'
 services:
   db:
-    image: cockroachdb/cockroach:v22.2.6 # CockroachDB cluster might be a better fit for production deployment
+    image: postgres:15
     restart: always
-    command: start-single-node --insecure
+    # command: start-single-node --insecure
     volumes:
-      - "${PWD}/archive/dev/cockroach-data/crdb:/cockroach/cockroach-data"
+      - ./db:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASS}
       POSTGRES_DB: squid-archive-dev
     ports:
-     - "26257:26257"
-     - "8080:8080"
+      - "5432:5432"
 
   ingest:
     depends_on:
@@ -22,10 +21,9 @@ services:
     volumes:
       - "../../src/typesBundle.json:/configs/typesBundle.json"
     command: [
-       "-e", "wss://ws.framenode-1.r0.dev.sora2.soramitsu.co.jp",
-       "-c", "5", # allow up to 20 pending requests for the above endpoint (default is 5)
-       #  "--start-block", "1000000",
-       "--out", "postgres://root@db:26257/defaultdb",
+       "-e", "${NODE_NAME}",
+       "-c", "5",
+       "--out", "${DATABASE_URL}",
        "--types-bundle", "/configs/typesBundle.json",
        "--write-batch-size", "10"
     ]
@@ -37,27 +35,22 @@ services:
     environment:
       RUST_LOG: "substrate_gateway=info,actix_server=info"
     command: [
-       "--database-url", "postgres://root@db:26257/defaultdb",
-       "--database-max-connections", "100", # max number of concurrent database connections
-       # "--evm-support" # uncomment for chains with Frontier EVM pallet
-                         # (e.g. Moonbeam/Moonriver or Astar/Shiden)
+       "--database-url", "${DATABASE_URL}",
+       "--database-max-connections", "100",
        "--scan-start-value", "1",
        "--scan-max-value", "10000",
     ]
     ports:
-      - "7777:8000"
+      - "8000:8000"
 
-  # Explorer service is optional.
-  # It provides rich GraphQL API for querying archived data.
-  # Many developers find it very useful for exploration and debugging.
   explorer:
     image: subsquid/substrate-explorer:firesquid
     environment:
-      DB_TYPE: cockroach # set to `cockroach` for Cockroach DB
+      DB_TYPE: postgres
       DB_HOST: db
-      DB_PORT: "26257"
-      DB_NAME: "defaultdb"
-      DB_USER: "root"
-      DB_PASS: ""
+      DB_PORT: "5432"
+      DB_NAME: "squid-archive-dev"
+      DB_USER: ${DB_USERNAME}
+      DB_PASS: ${DB_PASS}
     ports:
-      - "5555:3000"
+      - "3000:3000"

@@ -1,5 +1,5 @@
 manifestVersion: subsquid.io/v0.1
-name: sora-staking
+name: sora
 version: 11
 description: 'Sora squid'
 build: 
@@ -31,7 +31,7 @@ scale:
   dedicated: true
   addons:
      postgres:
-         profile: large
+         profile: small
   processor:
      profile: large
   api:
