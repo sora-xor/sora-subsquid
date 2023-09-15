@@ -22,7 +22,7 @@ export const formatU128ToBalance = (u128: bigint, assetId: AssetId): string => {
 }
 
 export const getAssetId = (asset: Uint8Array | { code: Uint8Array }): AssetId => {
-	if ('code' in asset) {
+	if (typeof asset === 'object' && 'code' in asset) {
 		return toAssetId(asset.code)
 	}
 	return toAssetId(asset)
