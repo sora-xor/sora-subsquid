@@ -30,36 +30,6 @@ export class AssetsAssetRegisteredEvent {
 	get asV42(): productionEvents.AssetsAssetRegisteredEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.AssetsAssetRegisteredEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.AssetsAssetRegisteredEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.AssetsAssetRegisteredEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.AssetsAssetRegisteredEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.AssetsAssetRegisteredEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.AssetsAssetRegisteredEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.AssetsAssetRegisteredEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.AssetsAssetRegisteredEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.AssetsAssetRegisteredEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.AssetsAssetRegisteredEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class AssetsAssetSetNonMintableEvent {
@@ -87,36 +57,6 @@ export class AssetsAssetSetNonMintableEvent {
 	get asV42(): productionEvents.AssetsAssetSetNonMintableEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.AssetsAssetSetNonMintableEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.AssetsAssetSetNonMintableEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.AssetsAssetSetNonMintableEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.AssetsAssetSetNonMintableEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.AssetsAssetSetNonMintableEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.AssetsAssetSetNonMintableEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.AssetsAssetSetNonMintableEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.AssetsAssetSetNonMintableEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.AssetsAssetSetNonMintableEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.AssetsAssetSetNonMintableEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class AssetsAssetUpdatedEvent {
@@ -135,18 +75,6 @@ export class AssetsAssetUpdatedEvent {
 	}
 	get asV53(): productionEvents.AssetsAssetUpdatedEvent['asV53'] {
 		return this.production.asV53
-	}
-	get isV52Stage(): stageEvents.AssetsAssetUpdatedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.AssetsAssetUpdatedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.AssetsAssetUpdatedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.AssetsAssetUpdatedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -175,36 +103,6 @@ export class AssetsBurnEvent {
 	get asV42(): productionEvents.AssetsBurnEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.AssetsBurnEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.AssetsBurnEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.AssetsBurnEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.AssetsBurnEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.AssetsBurnEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.AssetsBurnEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.AssetsBurnEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.AssetsBurnEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.AssetsBurnEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.AssetsBurnEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class AssetsMintEvent {
@@ -231,36 +129,6 @@ export class AssetsMintEvent {
 	}
 	get asV42(): productionEvents.AssetsMintEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV33Stage(): stageEvents.AssetsMintEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.AssetsMintEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.AssetsMintEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.AssetsMintEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.AssetsMintEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.AssetsMintEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.AssetsMintEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.AssetsMintEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.AssetsMintEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.AssetsMintEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -289,36 +157,6 @@ export class AssetsTransferEvent {
 	get asV42(): productionEvents.AssetsTransferEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.AssetsTransferEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.AssetsTransferEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.AssetsTransferEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.AssetsTransferEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.AssetsTransferEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.AssetsTransferEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.AssetsTransferEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.AssetsTransferEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.AssetsTransferEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.AssetsTransferEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BagsListRebaggedEvent {
@@ -340,24 +178,6 @@ export class BagsListRebaggedEvent {
 	get asV42(): productionEvents.BagsListRebaggedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.BagsListRebaggedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.BagsListRebaggedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV42Test(): testEvents.BagsListRebaggedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.BagsListRebaggedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.BagsListRebaggedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BagsListRebaggedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BagsListScoreUpdatedEvent {
@@ -378,24 +198,6 @@ export class BagsListScoreUpdatedEvent {
 	}
 	get asV42(): productionEvents.BagsListScoreUpdatedEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV42Stage(): stageEvents.BagsListScoreUpdatedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.BagsListScoreUpdatedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV42Test(): testEvents.BagsListScoreUpdatedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.BagsListScoreUpdatedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.BagsListScoreUpdatedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BagsListScoreUpdatedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -424,36 +226,6 @@ export class BalancesBalanceSetEvent {
 	get asV42(): productionEvents.BalancesBalanceSetEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.BalancesBalanceSetEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.BalancesBalanceSetEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.BalancesBalanceSetEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.BalancesBalanceSetEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.BalancesBalanceSetEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.BalancesBalanceSetEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.BalancesBalanceSetEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.BalancesBalanceSetEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.BalancesBalanceSetEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BalancesBalanceSetEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BalancesDepositEvent {
@@ -480,36 +252,6 @@ export class BalancesDepositEvent {
 	}
 	get asV42(): productionEvents.BalancesDepositEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV33Stage(): stageEvents.BalancesDepositEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.BalancesDepositEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.BalancesDepositEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.BalancesDepositEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.BalancesDepositEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.BalancesDepositEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.BalancesDepositEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.BalancesDepositEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.BalancesDepositEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BalancesDepositEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -538,36 +280,6 @@ export class BalancesDustLostEvent {
 	get asV42(): productionEvents.BalancesDustLostEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.BalancesDustLostEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.BalancesDustLostEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.BalancesDustLostEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.BalancesDustLostEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.BalancesDustLostEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.BalancesDustLostEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.BalancesDustLostEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.BalancesDustLostEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.BalancesDustLostEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BalancesDustLostEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BalancesEndowedEvent {
@@ -594,36 +306,6 @@ export class BalancesEndowedEvent {
 	}
 	get asV42(): productionEvents.BalancesEndowedEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV33Stage(): stageEvents.BalancesEndowedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.BalancesEndowedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.BalancesEndowedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.BalancesEndowedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.BalancesEndowedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.BalancesEndowedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.BalancesEndowedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.BalancesEndowedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.BalancesEndowedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BalancesEndowedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -652,36 +334,6 @@ export class BalancesReserveRepatriatedEvent {
 	get asV42(): productionEvents.BalancesReserveRepatriatedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.BalancesReserveRepatriatedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.BalancesReserveRepatriatedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.BalancesReserveRepatriatedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.BalancesReserveRepatriatedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.BalancesReserveRepatriatedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.BalancesReserveRepatriatedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.BalancesReserveRepatriatedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.BalancesReserveRepatriatedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.BalancesReserveRepatriatedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BalancesReserveRepatriatedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BalancesReservedEvent {
@@ -709,36 +361,6 @@ export class BalancesReservedEvent {
 	get asV42(): productionEvents.BalancesReservedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.BalancesReservedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.BalancesReservedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.BalancesReservedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.BalancesReservedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.BalancesReservedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.BalancesReservedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.BalancesReservedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.BalancesReservedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.BalancesReservedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BalancesReservedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BalancesSlashedEvent {
@@ -759,24 +381,6 @@ export class BalancesSlashedEvent {
 	}
 	get asV42(): productionEvents.BalancesSlashedEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV42Stage(): stageEvents.BalancesSlashedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.BalancesSlashedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV42Test(): testEvents.BalancesSlashedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.BalancesSlashedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.BalancesSlashedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BalancesSlashedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -805,36 +409,6 @@ export class BalancesTransferEvent {
 	get asV42(): productionEvents.BalancesTransferEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.BalancesTransferEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.BalancesTransferEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.BalancesTransferEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.BalancesTransferEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.BalancesTransferEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.BalancesTransferEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.BalancesTransferEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.BalancesTransferEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.BalancesTransferEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BalancesTransferEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BalancesUnreservedEvent {
@@ -862,36 +436,6 @@ export class BalancesUnreservedEvent {
 	get asV42(): productionEvents.BalancesUnreservedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.BalancesUnreservedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.BalancesUnreservedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.BalancesUnreservedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.BalancesUnreservedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.BalancesUnreservedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.BalancesUnreservedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.BalancesUnreservedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.BalancesUnreservedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.BalancesUnreservedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BalancesUnreservedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BalancesWithdrawEvent {
@@ -913,34 +457,18 @@ export class BalancesWithdrawEvent {
 	get asV42(): productionEvents.BalancesWithdrawEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.BalancesWithdrawEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.BalancesWithdrawEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV42Test(): testEvents.BalancesWithdrawEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.BalancesWithdrawEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.BalancesWithdrawEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BalancesWithdrawEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BandRelayersAddedEvent {
 	private readonly production: productionEvents.BandRelayersAddedEvent
 	private readonly stage: stageEvents.BandRelayersAddedEvent
+	private readonly test: testEvents.BandRelayersAddedEvent
 	private readonly dev: devEvents.BandRelayersAddedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.BandRelayersAddedEvent(ctx, event)
 		this.stage = new stageEvents.BandRelayersAddedEvent(ctx, event)
+		this.test = new testEvents.BandRelayersAddedEvent(ctx, event)
 		this.dev = new devEvents.BandRelayersAddedEvent(ctx, event)
 	}
 
@@ -950,28 +478,18 @@ export class BandRelayersAddedEvent {
 	get asV45(): productionEvents.BandRelayersAddedEvent['asV45'] {
 		return this.production.asV45
 	}
-	get isV44Stage(): stageEvents.BandRelayersAddedEvent['isV44'] {
-		return this.stage.isV44
-	}
-	get asV44Stage(): stageEvents.BandRelayersAddedEvent['asV44'] {
-		return this.stage.asV44
-	}
-	get isV60Dev(): devEvents.BandRelayersAddedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BandRelayersAddedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BandRelayersRemovedEvent {
 	private readonly production: productionEvents.BandRelayersRemovedEvent
 	private readonly stage: stageEvents.BandRelayersRemovedEvent
+	private readonly test: testEvents.BandRelayersRemovedEvent
 	private readonly dev: devEvents.BandRelayersRemovedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.BandRelayersRemovedEvent(ctx, event)
 		this.stage = new stageEvents.BandRelayersRemovedEvent(ctx, event)
+		this.test = new testEvents.BandRelayersRemovedEvent(ctx, event)
 		this.dev = new devEvents.BandRelayersRemovedEvent(ctx, event)
 	}
 
@@ -981,28 +499,18 @@ export class BandRelayersRemovedEvent {
 	get asV45(): productionEvents.BandRelayersRemovedEvent['asV45'] {
 		return this.production.asV45
 	}
-	get isV44Stage(): stageEvents.BandRelayersRemovedEvent['isV44'] {
-		return this.stage.isV44
-	}
-	get asV44Stage(): stageEvents.BandRelayersRemovedEvent['asV44'] {
-		return this.stage.asV44
-	}
-	get isV60Dev(): devEvents.BandRelayersRemovedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BandRelayersRemovedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BandSymbolsRelayedEvent {
 	private readonly production: productionEvents.BandSymbolsRelayedEvent
 	private readonly stage: stageEvents.BandSymbolsRelayedEvent
+	private readonly test: testEvents.BandSymbolsRelayedEvent
 	private readonly dev: devEvents.BandSymbolsRelayedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.BandSymbolsRelayedEvent(ctx, event)
 		this.stage = new stageEvents.BandSymbolsRelayedEvent(ctx, event)
+		this.test = new testEvents.BandSymbolsRelayedEvent(ctx, event)
 		this.dev = new devEvents.BandSymbolsRelayedEvent(ctx, event)
 	}
 
@@ -1023,24 +531,6 @@ export class BandSymbolsRelayedEvent {
 	}
 	get asV44Stage(): stageEvents.BandSymbolsRelayedEvent['asV44'] {
 		return this.stage.asV44
-	}
-	get isV45Stage(): stageEvents.BandSymbolsRelayedEvent['isV45'] {
-		return this.stage.isV45
-	}
-	get asV45Stage(): stageEvents.BandSymbolsRelayedEvent['asV45'] {
-		return this.stage.asV45
-	}
-	get isV54Stage(): stageEvents.BandSymbolsRelayedEvent['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageEvents.BandSymbolsRelayedEvent['asV54'] {
-		return this.stage.asV54
-	}
-	get isV60Dev(): devEvents.BandSymbolsRelayedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BandSymbolsRelayedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -1063,24 +553,6 @@ export class BridgeMultisigMultisigAccountCreatedEvent {
 	get asV1(): productionEvents.BridgeMultisigMultisigAccountCreatedEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.BridgeMultisigMultisigAccountCreatedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.BridgeMultisigMultisigAccountCreatedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.BridgeMultisigMultisigAccountCreatedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.BridgeMultisigMultisigAccountCreatedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.BridgeMultisigMultisigAccountCreatedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BridgeMultisigMultisigAccountCreatedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BridgeMultisigMultisigApprovalEvent {
@@ -1102,24 +574,6 @@ export class BridgeMultisigMultisigApprovalEvent {
 	get asV1(): productionEvents.BridgeMultisigMultisigApprovalEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.BridgeMultisigMultisigApprovalEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.BridgeMultisigMultisigApprovalEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.BridgeMultisigMultisigApprovalEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.BridgeMultisigMultisigApprovalEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.BridgeMultisigMultisigApprovalEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BridgeMultisigMultisigApprovalEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BridgeMultisigMultisigCancelledEvent {
@@ -1140,24 +594,6 @@ export class BridgeMultisigMultisigCancelledEvent {
 	}
 	get asV1(): productionEvents.BridgeMultisigMultisigCancelledEvent['asV1'] {
 		return this.production.asV1
-	}
-	get isV33Stage(): stageEvents.BridgeMultisigMultisigCancelledEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.BridgeMultisigMultisigCancelledEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.BridgeMultisigMultisigCancelledEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.BridgeMultisigMultisigCancelledEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.BridgeMultisigMultisigCancelledEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BridgeMultisigMultisigCancelledEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -1192,42 +628,6 @@ export class BridgeMultisigMultisigExecutedEvent {
 	get asV53(): productionEvents.BridgeMultisigMultisigExecutedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV33Stage(): stageEvents.BridgeMultisigMultisigExecutedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.BridgeMultisigMultisigExecutedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.BridgeMultisigMultisigExecutedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.BridgeMultisigMultisigExecutedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.BridgeMultisigMultisigExecutedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.BridgeMultisigMultisigExecutedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV41Test(): testEvents.BridgeMultisigMultisigExecutedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.BridgeMultisigMultisigExecutedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.BridgeMultisigMultisigExecutedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.BridgeMultisigMultisigExecutedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.BridgeMultisigMultisigExecutedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BridgeMultisigMultisigExecutedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BridgeMultisigNewMultisigEvent {
@@ -1248,24 +648,6 @@ export class BridgeMultisigNewMultisigEvent {
 	}
 	get asV1(): productionEvents.BridgeMultisigNewMultisigEvent['asV1'] {
 		return this.production.asV1
-	}
-	get isV33Stage(): stageEvents.BridgeMultisigNewMultisigEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.BridgeMultisigNewMultisigEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.BridgeMultisigNewMultisigEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.BridgeMultisigNewMultisigEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.BridgeMultisigNewMultisigEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BridgeMultisigNewMultisigEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -1294,30 +676,6 @@ export class CeresGovernancePlatformCreatedEvent {
 	get asV37(): productionEvents.CeresGovernancePlatformCreatedEvent['asV37'] {
 		return this.production.asV37
 	}
-	get isV33Stage(): stageEvents.CeresGovernancePlatformCreatedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresGovernancePlatformCreatedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV37Stage(): stageEvents.CeresGovernancePlatformCreatedEvent['isV37'] {
-		return this.stage.isV37
-	}
-	get asV37Stage(): stageEvents.CeresGovernancePlatformCreatedEvent['asV37'] {
-		return this.stage.asV37
-	}
-	get isV41Test(): testEvents.CeresGovernancePlatformCreatedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.CeresGovernancePlatformCreatedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.CeresGovernancePlatformCreatedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresGovernancePlatformCreatedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresGovernancePlatformVotedEvent {
@@ -1339,24 +697,6 @@ export class CeresGovernancePlatformVotedEvent {
 	get asV26(): productionEvents.CeresGovernancePlatformVotedEvent['asV26'] {
 		return this.production.asV26
 	}
-	get isV33Stage(): stageEvents.CeresGovernancePlatformVotedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresGovernancePlatformVotedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.CeresGovernancePlatformVotedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.CeresGovernancePlatformVotedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.CeresGovernancePlatformVotedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresGovernancePlatformVotedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresGovernancePlatformWithdrawnEvent {
@@ -1377,24 +717,6 @@ export class CeresGovernancePlatformWithdrawnEvent {
 	}
 	get asV26(): productionEvents.CeresGovernancePlatformWithdrawnEvent['asV26'] {
 		return this.production.asV26
-	}
-	get isV33Stage(): stageEvents.CeresGovernancePlatformWithdrawnEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresGovernancePlatformWithdrawnEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.CeresGovernancePlatformWithdrawnEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.CeresGovernancePlatformWithdrawnEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.CeresGovernancePlatformWithdrawnEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresGovernancePlatformWithdrawnEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -1423,36 +745,6 @@ export class CeresLaunchpadClaimedEvent {
 	get asV42(): productionEvents.CeresLaunchpadClaimedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.CeresLaunchpadClaimedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresLaunchpadClaimedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.CeresLaunchpadClaimedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.CeresLaunchpadClaimedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.CeresLaunchpadClaimedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.CeresLaunchpadClaimedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.CeresLaunchpadClaimedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.CeresLaunchpadClaimedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.CeresLaunchpadClaimedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresLaunchpadClaimedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresLaunchpadClaimedLpEvent {
@@ -1480,36 +772,6 @@ export class CeresLaunchpadClaimedLpEvent {
 	get asV42(): productionEvents.CeresLaunchpadClaimedLpEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.CeresLaunchpadClaimedLpEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresLaunchpadClaimedLpEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.CeresLaunchpadClaimedLpEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.CeresLaunchpadClaimedLpEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.CeresLaunchpadClaimedLpEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.CeresLaunchpadClaimedLpEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.CeresLaunchpadClaimedLpEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.CeresLaunchpadClaimedLpEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.CeresLaunchpadClaimedLpEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresLaunchpadClaimedLpEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresLaunchpadClaimedPswapEvent {
@@ -1530,24 +792,6 @@ export class CeresLaunchpadClaimedPswapEvent {
 	}
 	get asV26(): productionEvents.CeresLaunchpadClaimedPswapEvent['asV26'] {
 		return this.production.asV26
-	}
-	get isV33Stage(): stageEvents.CeresLaunchpadClaimedPswapEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresLaunchpadClaimedPswapEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.CeresLaunchpadClaimedPswapEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.CeresLaunchpadClaimedPswapEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.CeresLaunchpadClaimedPswapEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresLaunchpadClaimedPswapEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -1576,36 +820,6 @@ export class CeresLaunchpadContributedEvent {
 	get asV42(): productionEvents.CeresLaunchpadContributedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.CeresLaunchpadContributedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresLaunchpadContributedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.CeresLaunchpadContributedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.CeresLaunchpadContributedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.CeresLaunchpadContributedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.CeresLaunchpadContributedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.CeresLaunchpadContributedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.CeresLaunchpadContributedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.CeresLaunchpadContributedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresLaunchpadContributedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresLaunchpadEmergencyWithdrawnEvent {
@@ -1633,36 +847,6 @@ export class CeresLaunchpadEmergencyWithdrawnEvent {
 	get asV42(): productionEvents.CeresLaunchpadEmergencyWithdrawnEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.CeresLaunchpadEmergencyWithdrawnEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresLaunchpadEmergencyWithdrawnEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.CeresLaunchpadEmergencyWithdrawnEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.CeresLaunchpadEmergencyWithdrawnEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.CeresLaunchpadEmergencyWithdrawnEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.CeresLaunchpadEmergencyWithdrawnEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.CeresLaunchpadEmergencyWithdrawnEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.CeresLaunchpadEmergencyWithdrawnEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.CeresLaunchpadEmergencyWithdrawnEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresLaunchpadEmergencyWithdrawnEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresLaunchpadFeeChangedEvent {
@@ -1683,24 +867,6 @@ export class CeresLaunchpadFeeChangedEvent {
 	}
 	get asV26(): productionEvents.CeresLaunchpadFeeChangedEvent['asV26'] {
 		return this.production.asV26
-	}
-	get isV33Stage(): stageEvents.CeresLaunchpadFeeChangedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresLaunchpadFeeChangedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.CeresLaunchpadFeeChangedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.CeresLaunchpadFeeChangedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.CeresLaunchpadFeeChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresLaunchpadFeeChangedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -1729,36 +895,6 @@ export class CeresLaunchpadIloCreatedEvent {
 	get asV42(): productionEvents.CeresLaunchpadIloCreatedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.CeresLaunchpadIloCreatedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresLaunchpadIloCreatedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.CeresLaunchpadIloCreatedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.CeresLaunchpadIloCreatedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.CeresLaunchpadIloCreatedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.CeresLaunchpadIloCreatedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.CeresLaunchpadIloCreatedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.CeresLaunchpadIloCreatedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.CeresLaunchpadIloCreatedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresLaunchpadIloCreatedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresLaunchpadIloFinishedEvent {
@@ -1786,36 +922,6 @@ export class CeresLaunchpadIloFinishedEvent {
 	get asV42(): productionEvents.CeresLaunchpadIloFinishedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.CeresLaunchpadIloFinishedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresLaunchpadIloFinishedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.CeresLaunchpadIloFinishedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.CeresLaunchpadIloFinishedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.CeresLaunchpadIloFinishedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.CeresLaunchpadIloFinishedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.CeresLaunchpadIloFinishedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.CeresLaunchpadIloFinishedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.CeresLaunchpadIloFinishedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresLaunchpadIloFinishedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresLaunchpadRemovedWhitelistedContributorEvent {
@@ -1836,24 +942,6 @@ export class CeresLaunchpadRemovedWhitelistedContributorEvent {
 	}
 	get asV33(): productionEvents.CeresLaunchpadRemovedWhitelistedContributorEvent['asV33'] {
 		return this.production.asV33
-	}
-	get isV33Stage(): stageEvents.CeresLaunchpadRemovedWhitelistedContributorEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresLaunchpadRemovedWhitelistedContributorEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.CeresLaunchpadRemovedWhitelistedContributorEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.CeresLaunchpadRemovedWhitelistedContributorEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.CeresLaunchpadRemovedWhitelistedContributorEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresLaunchpadRemovedWhitelistedContributorEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -1876,24 +964,6 @@ export class CeresLaunchpadRemovedWhitelistedIloOrganizerEvent {
 	get asV33(): productionEvents.CeresLaunchpadRemovedWhitelistedIloOrganizerEvent['asV33'] {
 		return this.production.asV33
 	}
-	get isV33Stage(): stageEvents.CeresLaunchpadRemovedWhitelistedIloOrganizerEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresLaunchpadRemovedWhitelistedIloOrganizerEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.CeresLaunchpadRemovedWhitelistedIloOrganizerEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.CeresLaunchpadRemovedWhitelistedIloOrganizerEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.CeresLaunchpadRemovedWhitelistedIloOrganizerEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresLaunchpadRemovedWhitelistedIloOrganizerEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresLaunchpadWhitelistedContributorEvent {
@@ -1915,24 +985,6 @@ export class CeresLaunchpadWhitelistedContributorEvent {
 	get asV33(): productionEvents.CeresLaunchpadWhitelistedContributorEvent['asV33'] {
 		return this.production.asV33
 	}
-	get isV33Stage(): stageEvents.CeresLaunchpadWhitelistedContributorEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresLaunchpadWhitelistedContributorEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.CeresLaunchpadWhitelistedContributorEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.CeresLaunchpadWhitelistedContributorEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.CeresLaunchpadWhitelistedContributorEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresLaunchpadWhitelistedContributorEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresLaunchpadWhitelistedIloOrganizerEvent {
@@ -1953,24 +1005,6 @@ export class CeresLaunchpadWhitelistedIloOrganizerEvent {
 	}
 	get asV33(): productionEvents.CeresLaunchpadWhitelistedIloOrganizerEvent['asV33'] {
 		return this.production.asV33
-	}
-	get isV33Stage(): stageEvents.CeresLaunchpadWhitelistedIloOrganizerEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresLaunchpadWhitelistedIloOrganizerEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.CeresLaunchpadWhitelistedIloOrganizerEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.CeresLaunchpadWhitelistedIloOrganizerEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.CeresLaunchpadWhitelistedIloOrganizerEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresLaunchpadWhitelistedIloOrganizerEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -1999,30 +1033,6 @@ export class CeresLiquidityLockerLockedEvent {
 	get asV37(): productionEvents.CeresLiquidityLockerLockedEvent['asV37'] {
 		return this.production.asV37
 	}
-	get isV33Stage(): stageEvents.CeresLiquidityLockerLockedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresLiquidityLockerLockedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV37Stage(): stageEvents.CeresLiquidityLockerLockedEvent['isV37'] {
-		return this.stage.isV37
-	}
-	get asV37Stage(): stageEvents.CeresLiquidityLockerLockedEvent['asV37'] {
-		return this.stage.asV37
-	}
-	get isV41Test(): testEvents.CeresLiquidityLockerLockedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.CeresLiquidityLockerLockedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.CeresLiquidityLockerLockedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresLiquidityLockerLockedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresStakingDepositedEvent {
@@ -2043,24 +1053,6 @@ export class CeresStakingDepositedEvent {
 	}
 	get asV19(): productionEvents.CeresStakingDepositedEvent['asV19'] {
 		return this.production.asV19
-	}
-	get isV33Stage(): stageEvents.CeresStakingDepositedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresStakingDepositedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.CeresStakingDepositedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.CeresStakingDepositedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.CeresStakingDepositedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresStakingDepositedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -2083,24 +1075,6 @@ export class CeresStakingRewardsChangedEvent {
 	get asV26(): productionEvents.CeresStakingRewardsChangedEvent['asV26'] {
 		return this.production.asV26
 	}
-	get isV33Stage(): stageEvents.CeresStakingRewardsChangedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresStakingRewardsChangedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.CeresStakingRewardsChangedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.CeresStakingRewardsChangedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.CeresStakingRewardsChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresStakingRewardsChangedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresStakingWithdrawnEvent {
@@ -2122,24 +1096,6 @@ export class CeresStakingWithdrawnEvent {
 	get asV19(): productionEvents.CeresStakingWithdrawnEvent['asV19'] {
 		return this.production.asV19
 	}
-	get isV33Stage(): stageEvents.CeresStakingWithdrawnEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresStakingWithdrawnEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.CeresStakingWithdrawnEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.CeresStakingWithdrawnEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.CeresStakingWithdrawnEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresStakingWithdrawnEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresTokenLockerFeeChangedEvent {
@@ -2160,24 +1116,6 @@ export class CeresTokenLockerFeeChangedEvent {
 	}
 	get asV26(): productionEvents.CeresTokenLockerFeeChangedEvent['asV26'] {
 		return this.production.asV26
-	}
-	get isV33Stage(): stageEvents.CeresTokenLockerFeeChangedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresTokenLockerFeeChangedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.CeresTokenLockerFeeChangedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.CeresTokenLockerFeeChangedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.CeresTokenLockerFeeChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresTokenLockerFeeChangedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -2206,36 +1144,6 @@ export class CeresTokenLockerLockedEvent {
 	get asV42(): productionEvents.CeresTokenLockerLockedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.CeresTokenLockerLockedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresTokenLockerLockedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.CeresTokenLockerLockedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.CeresTokenLockerLockedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.CeresTokenLockerLockedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.CeresTokenLockerLockedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.CeresTokenLockerLockedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.CeresTokenLockerLockedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.CeresTokenLockerLockedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresTokenLockerLockedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresTokenLockerWithdrawnEvent {
@@ -2262,36 +1170,6 @@ export class CeresTokenLockerWithdrawnEvent {
 	}
 	get asV42(): productionEvents.CeresTokenLockerWithdrawnEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV33Stage(): stageEvents.CeresTokenLockerWithdrawnEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresTokenLockerWithdrawnEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.CeresTokenLockerWithdrawnEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.CeresTokenLockerWithdrawnEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.CeresTokenLockerWithdrawnEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.CeresTokenLockerWithdrawnEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.CeresTokenLockerWithdrawnEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.CeresTokenLockerWithdrawnEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.CeresTokenLockerWithdrawnEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresTokenLockerWithdrawnEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -2320,36 +1198,6 @@ export class CouncilApprovedEvent {
 	get asV42(): productionEvents.CouncilApprovedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.CouncilApprovedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CouncilApprovedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.CouncilApprovedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.CouncilApprovedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.CouncilApprovedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.CouncilApprovedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.CouncilApprovedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.CouncilApprovedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.CouncilApprovedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CouncilApprovedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CouncilClosedEvent {
@@ -2377,36 +1225,6 @@ export class CouncilClosedEvent {
 	get asV42(): productionEvents.CouncilClosedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.CouncilClosedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CouncilClosedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.CouncilClosedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.CouncilClosedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.CouncilClosedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.CouncilClosedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.CouncilClosedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.CouncilClosedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.CouncilClosedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CouncilClosedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CouncilDisapprovedEvent {
@@ -2433,36 +1251,6 @@ export class CouncilDisapprovedEvent {
 	}
 	get asV42(): productionEvents.CouncilDisapprovedEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV33Stage(): stageEvents.CouncilDisapprovedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CouncilDisapprovedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.CouncilDisapprovedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.CouncilDisapprovedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.CouncilDisapprovedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.CouncilDisapprovedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.CouncilDisapprovedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.CouncilDisapprovedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.CouncilDisapprovedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CouncilDisapprovedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -2497,42 +1285,6 @@ export class CouncilExecutedEvent {
 	get asV53(): productionEvents.CouncilExecutedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV33Stage(): stageEvents.CouncilExecutedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CouncilExecutedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.CouncilExecutedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.CouncilExecutedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.CouncilExecutedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.CouncilExecutedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV41Test(): testEvents.CouncilExecutedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.CouncilExecutedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.CouncilExecutedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.CouncilExecutedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.CouncilExecutedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CouncilExecutedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CouncilMemberExecutedEvent {
@@ -2566,42 +1318,6 @@ export class CouncilMemberExecutedEvent {
 	get asV53(): productionEvents.CouncilMemberExecutedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV33Stage(): stageEvents.CouncilMemberExecutedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CouncilMemberExecutedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.CouncilMemberExecutedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.CouncilMemberExecutedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.CouncilMemberExecutedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.CouncilMemberExecutedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV41Test(): testEvents.CouncilMemberExecutedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.CouncilMemberExecutedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.CouncilMemberExecutedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.CouncilMemberExecutedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.CouncilMemberExecutedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CouncilMemberExecutedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CouncilProposedEvent {
@@ -2628,36 +1344,6 @@ export class CouncilProposedEvent {
 	}
 	get asV42(): productionEvents.CouncilProposedEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV33Stage(): stageEvents.CouncilProposedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CouncilProposedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.CouncilProposedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.CouncilProposedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.CouncilProposedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.CouncilProposedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.CouncilProposedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.CouncilProposedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.CouncilProposedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CouncilProposedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -2686,36 +1372,6 @@ export class CouncilVotedEvent {
 	get asV42(): productionEvents.CouncilVotedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.CouncilVotedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CouncilVotedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.CouncilVotedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.CouncilVotedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.CouncilVotedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.CouncilVotedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.CouncilVotedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.CouncilVotedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.CouncilVotedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CouncilVotedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CurrenciesBalanceUpdatedEvent {
@@ -2734,18 +1390,6 @@ export class CurrenciesBalanceUpdatedEvent {
 	}
 	get asV1(): productionEvents.CurrenciesBalanceUpdatedEvent['asV1'] {
 		return this.production.asV1
-	}
-	get isV33Stage(): stageEvents.CurrenciesBalanceUpdatedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CurrenciesBalanceUpdatedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.CurrenciesBalanceUpdatedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.CurrenciesBalanceUpdatedEvent['asV41'] {
-		return this.test.asV41
 	}
 }
 
@@ -2766,18 +1410,6 @@ export class CurrenciesDepositedEvent {
 	get asV1(): productionEvents.CurrenciesDepositedEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.CurrenciesDepositedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CurrenciesDepositedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.CurrenciesDepositedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.CurrenciesDepositedEvent['asV41'] {
-		return this.test.asV41
-	}
 }
 
 export class CurrenciesTransferredEvent {
@@ -2797,18 +1429,6 @@ export class CurrenciesTransferredEvent {
 	get asV1(): productionEvents.CurrenciesTransferredEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.CurrenciesTransferredEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CurrenciesTransferredEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.CurrenciesTransferredEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.CurrenciesTransferredEvent['asV41'] {
-		return this.test.asV41
-	}
 }
 
 export class CurrenciesWithdrawnEvent {
@@ -2827,18 +1447,6 @@ export class CurrenciesWithdrawnEvent {
 	}
 	get asV1(): productionEvents.CurrenciesWithdrawnEvent['asV1'] {
 		return this.production.asV1
-	}
-	get isV33Stage(): stageEvents.CurrenciesWithdrawnEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CurrenciesWithdrawnEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.CurrenciesWithdrawnEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.CurrenciesWithdrawnEvent['asV41'] {
-		return this.test.asV41
 	}
 }
 
@@ -2888,48 +1496,6 @@ export class DemeterFarmingPlatformDepositFeeChangedEvent {
 	get asV43(): productionEvents.DemeterFarmingPlatformDepositFeeChangedEvent['asV43'] {
 		return this.production.asV43
 	}
-	get isV33Stage(): stageEvents.DemeterFarmingPlatformDepositFeeChangedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemeterFarmingPlatformDepositFeeChangedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemeterFarmingPlatformDepositFeeChangedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemeterFarmingPlatformDepositFeeChangedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV43Stage(): stageEvents.DemeterFarmingPlatformDepositFeeChangedEvent['isV43'] {
-		return this.stage.isV43
-	}
-	get asV43Stage(): stageEvents.DemeterFarmingPlatformDepositFeeChangedEvent['asV43'] {
-		return this.stage.asV43
-	}
-	get isV41Test(): testEvents.DemeterFarmingPlatformDepositFeeChangedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.DemeterFarmingPlatformDepositFeeChangedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.DemeterFarmingPlatformDepositFeeChangedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.DemeterFarmingPlatformDepositFeeChangedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV43Test(): testEvents.DemeterFarmingPlatformDepositFeeChangedEvent['isV43'] {
-		return this.test.isV43
-	}
-	get asV43Test(): testEvents.DemeterFarmingPlatformDepositFeeChangedEvent['asV43'] {
-		return this.test.asV43
-	}
-	get isV60Dev(): devEvents.DemeterFarmingPlatformDepositFeeChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemeterFarmingPlatformDepositFeeChangedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemeterFarmingPlatformDepositedEvent {
@@ -2962,48 +1528,6 @@ export class DemeterFarmingPlatformDepositedEvent {
 	}
 	get asV43(): productionEvents.DemeterFarmingPlatformDepositedEvent['asV43'] {
 		return this.production.asV43
-	}
-	get isV33Stage(): stageEvents.DemeterFarmingPlatformDepositedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemeterFarmingPlatformDepositedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemeterFarmingPlatformDepositedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemeterFarmingPlatformDepositedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV43Stage(): stageEvents.DemeterFarmingPlatformDepositedEvent['isV43'] {
-		return this.stage.isV43
-	}
-	get asV43Stage(): stageEvents.DemeterFarmingPlatformDepositedEvent['asV43'] {
-		return this.stage.asV43
-	}
-	get isV41Test(): testEvents.DemeterFarmingPlatformDepositedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.DemeterFarmingPlatformDepositedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.DemeterFarmingPlatformDepositedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.DemeterFarmingPlatformDepositedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV43Test(): testEvents.DemeterFarmingPlatformDepositedEvent['isV43'] {
-		return this.test.isV43
-	}
-	get asV43Test(): testEvents.DemeterFarmingPlatformDepositedEvent['asV43'] {
-		return this.test.asV43
-	}
-	get isV60Dev(): devEvents.DemeterFarmingPlatformDepositedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemeterFarmingPlatformDepositedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -3038,48 +1562,6 @@ export class DemeterFarmingPlatformInfoChangedEvent {
 	get asV43(): productionEvents.DemeterFarmingPlatformInfoChangedEvent['asV43'] {
 		return this.production.asV43
 	}
-	get isV35Stage(): stageEvents.DemeterFarmingPlatformInfoChangedEvent['isV35'] {
-		return this.stage.isV35
-	}
-	get asV35Stage(): stageEvents.DemeterFarmingPlatformInfoChangedEvent['asV35'] {
-		return this.stage.asV35
-	}
-	get isV42Stage(): stageEvents.DemeterFarmingPlatformInfoChangedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemeterFarmingPlatformInfoChangedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV43Stage(): stageEvents.DemeterFarmingPlatformInfoChangedEvent['isV43'] {
-		return this.stage.isV43
-	}
-	get asV43Stage(): stageEvents.DemeterFarmingPlatformInfoChangedEvent['asV43'] {
-		return this.stage.asV43
-	}
-	get isV41Test(): testEvents.DemeterFarmingPlatformInfoChangedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.DemeterFarmingPlatformInfoChangedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.DemeterFarmingPlatformInfoChangedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.DemeterFarmingPlatformInfoChangedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV43Test(): testEvents.DemeterFarmingPlatformInfoChangedEvent['isV43'] {
-		return this.test.isV43
-	}
-	get asV43Test(): testEvents.DemeterFarmingPlatformInfoChangedEvent['asV43'] {
-		return this.test.asV43
-	}
-	get isV60Dev(): devEvents.DemeterFarmingPlatformInfoChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemeterFarmingPlatformInfoChangedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemeterFarmingPlatformMultiplierChangedEvent {
@@ -3112,48 +1594,6 @@ export class DemeterFarmingPlatformMultiplierChangedEvent {
 	}
 	get asV43(): productionEvents.DemeterFarmingPlatformMultiplierChangedEvent['asV43'] {
 		return this.production.asV43
-	}
-	get isV33Stage(): stageEvents.DemeterFarmingPlatformMultiplierChangedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemeterFarmingPlatformMultiplierChangedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemeterFarmingPlatformMultiplierChangedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemeterFarmingPlatformMultiplierChangedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV43Stage(): stageEvents.DemeterFarmingPlatformMultiplierChangedEvent['isV43'] {
-		return this.stage.isV43
-	}
-	get asV43Stage(): stageEvents.DemeterFarmingPlatformMultiplierChangedEvent['asV43'] {
-		return this.stage.asV43
-	}
-	get isV41Test(): testEvents.DemeterFarmingPlatformMultiplierChangedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.DemeterFarmingPlatformMultiplierChangedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.DemeterFarmingPlatformMultiplierChangedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.DemeterFarmingPlatformMultiplierChangedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV43Test(): testEvents.DemeterFarmingPlatformMultiplierChangedEvent['isV43'] {
-		return this.test.isV43
-	}
-	get asV43Test(): testEvents.DemeterFarmingPlatformMultiplierChangedEvent['asV43'] {
-		return this.test.asV43
-	}
-	get isV60Dev(): devEvents.DemeterFarmingPlatformMultiplierChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemeterFarmingPlatformMultiplierChangedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -3188,48 +1628,6 @@ export class DemeterFarmingPlatformPoolAddedEvent {
 	get asV43(): productionEvents.DemeterFarmingPlatformPoolAddedEvent['asV43'] {
 		return this.production.asV43
 	}
-	get isV33Stage(): stageEvents.DemeterFarmingPlatformPoolAddedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemeterFarmingPlatformPoolAddedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemeterFarmingPlatformPoolAddedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemeterFarmingPlatformPoolAddedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV43Stage(): stageEvents.DemeterFarmingPlatformPoolAddedEvent['isV43'] {
-		return this.stage.isV43
-	}
-	get asV43Stage(): stageEvents.DemeterFarmingPlatformPoolAddedEvent['asV43'] {
-		return this.stage.asV43
-	}
-	get isV41Test(): testEvents.DemeterFarmingPlatformPoolAddedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.DemeterFarmingPlatformPoolAddedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.DemeterFarmingPlatformPoolAddedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.DemeterFarmingPlatformPoolAddedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV43Test(): testEvents.DemeterFarmingPlatformPoolAddedEvent['isV43'] {
-		return this.test.isV43
-	}
-	get asV43Test(): testEvents.DemeterFarmingPlatformPoolAddedEvent['asV43'] {
-		return this.test.asV43
-	}
-	get isV60Dev(): devEvents.DemeterFarmingPlatformPoolAddedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemeterFarmingPlatformPoolAddedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemeterFarmingPlatformPoolRemovedEvent {
@@ -3262,48 +1660,6 @@ export class DemeterFarmingPlatformPoolRemovedEvent {
 	}
 	get asV43(): productionEvents.DemeterFarmingPlatformPoolRemovedEvent['asV43'] {
 		return this.production.asV43
-	}
-	get isV33Stage(): stageEvents.DemeterFarmingPlatformPoolRemovedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemeterFarmingPlatformPoolRemovedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemeterFarmingPlatformPoolRemovedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemeterFarmingPlatformPoolRemovedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV43Stage(): stageEvents.DemeterFarmingPlatformPoolRemovedEvent['isV43'] {
-		return this.stage.isV43
-	}
-	get asV43Stage(): stageEvents.DemeterFarmingPlatformPoolRemovedEvent['asV43'] {
-		return this.stage.asV43
-	}
-	get isV41Test(): testEvents.DemeterFarmingPlatformPoolRemovedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.DemeterFarmingPlatformPoolRemovedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.DemeterFarmingPlatformPoolRemovedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.DemeterFarmingPlatformPoolRemovedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV43Test(): testEvents.DemeterFarmingPlatformPoolRemovedEvent['isV43'] {
-		return this.test.isV43
-	}
-	get asV43Test(): testEvents.DemeterFarmingPlatformPoolRemovedEvent['asV43'] {
-		return this.test.asV43
-	}
-	get isV60Dev(): devEvents.DemeterFarmingPlatformPoolRemovedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemeterFarmingPlatformPoolRemovedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -3338,48 +1694,6 @@ export class DemeterFarmingPlatformRewardWithdrawnEvent {
 	get asV43(): productionEvents.DemeterFarmingPlatformRewardWithdrawnEvent['asV43'] {
 		return this.production.asV43
 	}
-	get isV33Stage(): stageEvents.DemeterFarmingPlatformRewardWithdrawnEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemeterFarmingPlatformRewardWithdrawnEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemeterFarmingPlatformRewardWithdrawnEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemeterFarmingPlatformRewardWithdrawnEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV43Stage(): stageEvents.DemeterFarmingPlatformRewardWithdrawnEvent['isV43'] {
-		return this.stage.isV43
-	}
-	get asV43Stage(): stageEvents.DemeterFarmingPlatformRewardWithdrawnEvent['asV43'] {
-		return this.stage.asV43
-	}
-	get isV41Test(): testEvents.DemeterFarmingPlatformRewardWithdrawnEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.DemeterFarmingPlatformRewardWithdrawnEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.DemeterFarmingPlatformRewardWithdrawnEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.DemeterFarmingPlatformRewardWithdrawnEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV43Test(): testEvents.DemeterFarmingPlatformRewardWithdrawnEvent['isV43'] {
-		return this.test.isV43
-	}
-	get asV43Test(): testEvents.DemeterFarmingPlatformRewardWithdrawnEvent['asV43'] {
-		return this.test.asV43
-	}
-	get isV60Dev(): devEvents.DemeterFarmingPlatformRewardWithdrawnEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemeterFarmingPlatformRewardWithdrawnEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemeterFarmingPlatformTokenInfoChangedEvent {
@@ -3407,36 +1721,6 @@ export class DemeterFarmingPlatformTokenInfoChangedEvent {
 	get asV42(): productionEvents.DemeterFarmingPlatformTokenInfoChangedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.DemeterFarmingPlatformTokenInfoChangedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemeterFarmingPlatformTokenInfoChangedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemeterFarmingPlatformTokenInfoChangedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemeterFarmingPlatformTokenInfoChangedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.DemeterFarmingPlatformTokenInfoChangedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.DemeterFarmingPlatformTokenInfoChangedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.DemeterFarmingPlatformTokenInfoChangedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.DemeterFarmingPlatformTokenInfoChangedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.DemeterFarmingPlatformTokenInfoChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemeterFarmingPlatformTokenInfoChangedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemeterFarmingPlatformTokenRegisteredEvent {
@@ -3463,36 +1747,6 @@ export class DemeterFarmingPlatformTokenRegisteredEvent {
 	}
 	get asV42(): productionEvents.DemeterFarmingPlatformTokenRegisteredEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV33Stage(): stageEvents.DemeterFarmingPlatformTokenRegisteredEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemeterFarmingPlatformTokenRegisteredEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemeterFarmingPlatformTokenRegisteredEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemeterFarmingPlatformTokenRegisteredEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.DemeterFarmingPlatformTokenRegisteredEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.DemeterFarmingPlatformTokenRegisteredEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.DemeterFarmingPlatformTokenRegisteredEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.DemeterFarmingPlatformTokenRegisteredEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.DemeterFarmingPlatformTokenRegisteredEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemeterFarmingPlatformTokenRegisteredEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -3527,48 +1781,6 @@ export class DemeterFarmingPlatformTotalTokensChangedEvent {
 	get asV43(): productionEvents.DemeterFarmingPlatformTotalTokensChangedEvent['asV43'] {
 		return this.production.asV43
 	}
-	get isV35Stage(): stageEvents.DemeterFarmingPlatformTotalTokensChangedEvent['isV35'] {
-		return this.stage.isV35
-	}
-	get asV35Stage(): stageEvents.DemeterFarmingPlatformTotalTokensChangedEvent['asV35'] {
-		return this.stage.asV35
-	}
-	get isV42Stage(): stageEvents.DemeterFarmingPlatformTotalTokensChangedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemeterFarmingPlatformTotalTokensChangedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV43Stage(): stageEvents.DemeterFarmingPlatformTotalTokensChangedEvent['isV43'] {
-		return this.stage.isV43
-	}
-	get asV43Stage(): stageEvents.DemeterFarmingPlatformTotalTokensChangedEvent['asV43'] {
-		return this.stage.asV43
-	}
-	get isV41Test(): testEvents.DemeterFarmingPlatformTotalTokensChangedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.DemeterFarmingPlatformTotalTokensChangedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.DemeterFarmingPlatformTotalTokensChangedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.DemeterFarmingPlatformTotalTokensChangedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV43Test(): testEvents.DemeterFarmingPlatformTotalTokensChangedEvent['isV43'] {
-		return this.test.isV43
-	}
-	get asV43Test(): testEvents.DemeterFarmingPlatformTotalTokensChangedEvent['asV43'] {
-		return this.test.asV43
-	}
-	get isV60Dev(): devEvents.DemeterFarmingPlatformTotalTokensChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemeterFarmingPlatformTotalTokensChangedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemeterFarmingPlatformWithdrawnEvent {
@@ -3602,48 +1814,6 @@ export class DemeterFarmingPlatformWithdrawnEvent {
 	get asV43(): productionEvents.DemeterFarmingPlatformWithdrawnEvent['asV43'] {
 		return this.production.asV43
 	}
-	get isV33Stage(): stageEvents.DemeterFarmingPlatformWithdrawnEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemeterFarmingPlatformWithdrawnEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemeterFarmingPlatformWithdrawnEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemeterFarmingPlatformWithdrawnEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV43Stage(): stageEvents.DemeterFarmingPlatformWithdrawnEvent['isV43'] {
-		return this.stage.isV43
-	}
-	get asV43Stage(): stageEvents.DemeterFarmingPlatformWithdrawnEvent['asV43'] {
-		return this.stage.asV43
-	}
-	get isV41Test(): testEvents.DemeterFarmingPlatformWithdrawnEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.DemeterFarmingPlatformWithdrawnEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.DemeterFarmingPlatformWithdrawnEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.DemeterFarmingPlatformWithdrawnEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV43Test(): testEvents.DemeterFarmingPlatformWithdrawnEvent['isV43'] {
-		return this.test.isV43
-	}
-	get asV43Test(): testEvents.DemeterFarmingPlatformWithdrawnEvent['asV43'] {
-		return this.test.asV43
-	}
-	get isV60Dev(): devEvents.DemeterFarmingPlatformWithdrawnEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemeterFarmingPlatformWithdrawnEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemocracyBlacklistedEvent {
@@ -3670,36 +1840,6 @@ export class DemocracyBlacklistedEvent {
 	}
 	get asV42(): productionEvents.DemocracyBlacklistedEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV33Stage(): stageEvents.DemocracyBlacklistedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyBlacklistedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemocracyBlacklistedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyBlacklistedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.DemocracyBlacklistedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.DemocracyBlacklistedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.DemocracyBlacklistedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.DemocracyBlacklistedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.DemocracyBlacklistedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemocracyBlacklistedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -3728,36 +1868,6 @@ export class DemocracyCancelledEvent {
 	get asV42(): productionEvents.DemocracyCancelledEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.DemocracyCancelledEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyCancelledEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemocracyCancelledEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyCancelledEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.DemocracyCancelledEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.DemocracyCancelledEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.DemocracyCancelledEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.DemocracyCancelledEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.DemocracyCancelledEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemocracyCancelledEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemocracyDelegatedEvent {
@@ -3785,36 +1895,6 @@ export class DemocracyDelegatedEvent {
 	get asV42(): productionEvents.DemocracyDelegatedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.DemocracyDelegatedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyDelegatedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemocracyDelegatedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyDelegatedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.DemocracyDelegatedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.DemocracyDelegatedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.DemocracyDelegatedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.DemocracyDelegatedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.DemocracyDelegatedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemocracyDelegatedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemocracyExecutedEvent {
@@ -3840,30 +1920,6 @@ export class DemocracyExecutedEvent {
 	get asV42(): productionEvents.DemocracyExecutedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.DemocracyExecutedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyExecutedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemocracyExecutedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyExecutedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.DemocracyExecutedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.DemocracyExecutedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.DemocracyExecutedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.DemocracyExecutedEvent['asV42'] {
-		return this.test.asV42
-	}
 }
 
 export class DemocracyExternalTabledEvent {
@@ -3884,24 +1940,6 @@ export class DemocracyExternalTabledEvent {
 	}
 	get asV1(): productionEvents.DemocracyExternalTabledEvent['asV1'] {
 		return this.production.asV1
-	}
-	get isV33Stage(): stageEvents.DemocracyExternalTabledEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyExternalTabledEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.DemocracyExternalTabledEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.DemocracyExternalTabledEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.DemocracyExternalTabledEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemocracyExternalTabledEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -3930,36 +1968,6 @@ export class DemocracyNotPassedEvent {
 	get asV42(): productionEvents.DemocracyNotPassedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.DemocracyNotPassedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyNotPassedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemocracyNotPassedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyNotPassedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.DemocracyNotPassedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.DemocracyNotPassedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.DemocracyNotPassedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.DemocracyNotPassedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.DemocracyNotPassedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemocracyNotPassedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemocracyPassedEvent {
@@ -3987,36 +1995,6 @@ export class DemocracyPassedEvent {
 	get asV42(): productionEvents.DemocracyPassedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.DemocracyPassedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyPassedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemocracyPassedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyPassedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.DemocracyPassedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.DemocracyPassedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.DemocracyPassedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.DemocracyPassedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.DemocracyPassedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemocracyPassedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemocracyPreimageInvalidEvent {
@@ -4041,30 +2019,6 @@ export class DemocracyPreimageInvalidEvent {
 	}
 	get asV42(): productionEvents.DemocracyPreimageInvalidEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV33Stage(): stageEvents.DemocracyPreimageInvalidEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyPreimageInvalidEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemocracyPreimageInvalidEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyPreimageInvalidEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.DemocracyPreimageInvalidEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.DemocracyPreimageInvalidEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.DemocracyPreimageInvalidEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.DemocracyPreimageInvalidEvent['asV42'] {
-		return this.test.asV42
 	}
 }
 
@@ -4091,30 +2045,6 @@ export class DemocracyPreimageMissingEvent {
 	get asV42(): productionEvents.DemocracyPreimageMissingEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.DemocracyPreimageMissingEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyPreimageMissingEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemocracyPreimageMissingEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyPreimageMissingEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.DemocracyPreimageMissingEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.DemocracyPreimageMissingEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.DemocracyPreimageMissingEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.DemocracyPreimageMissingEvent['asV42'] {
-		return this.test.asV42
-	}
 }
 
 export class DemocracyPreimageNotedEvent {
@@ -4139,30 +2069,6 @@ export class DemocracyPreimageNotedEvent {
 	}
 	get asV42(): productionEvents.DemocracyPreimageNotedEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV33Stage(): stageEvents.DemocracyPreimageNotedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyPreimageNotedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemocracyPreimageNotedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyPreimageNotedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.DemocracyPreimageNotedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.DemocracyPreimageNotedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.DemocracyPreimageNotedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.DemocracyPreimageNotedEvent['asV42'] {
-		return this.test.asV42
 	}
 }
 
@@ -4189,30 +2095,6 @@ export class DemocracyPreimageReapedEvent {
 	get asV42(): productionEvents.DemocracyPreimageReapedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.DemocracyPreimageReapedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyPreimageReapedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemocracyPreimageReapedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyPreimageReapedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.DemocracyPreimageReapedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.DemocracyPreimageReapedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.DemocracyPreimageReapedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.DemocracyPreimageReapedEvent['asV42'] {
-		return this.test.asV42
-	}
 }
 
 export class DemocracyPreimageUsedEvent {
@@ -4238,30 +2120,6 @@ export class DemocracyPreimageUsedEvent {
 	get asV42(): productionEvents.DemocracyPreimageUsedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.DemocracyPreimageUsedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyPreimageUsedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemocracyPreimageUsedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyPreimageUsedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.DemocracyPreimageUsedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.DemocracyPreimageUsedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.DemocracyPreimageUsedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.DemocracyPreimageUsedEvent['asV42'] {
-		return this.test.asV42
-	}
 }
 
 export class DemocracyProposalCanceledEvent {
@@ -4282,24 +2140,6 @@ export class DemocracyProposalCanceledEvent {
 	}
 	get asV42(): productionEvents.DemocracyProposalCanceledEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV42Stage(): stageEvents.DemocracyProposalCanceledEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyProposalCanceledEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV42Test(): testEvents.DemocracyProposalCanceledEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.DemocracyProposalCanceledEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.DemocracyProposalCanceledEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemocracyProposalCanceledEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -4328,36 +2168,6 @@ export class DemocracyProposedEvent {
 	get asV42(): productionEvents.DemocracyProposedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.DemocracyProposedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyProposedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemocracyProposedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyProposedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.DemocracyProposedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.DemocracyProposedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.DemocracyProposedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.DemocracyProposedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.DemocracyProposedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemocracyProposedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemocracySecondedEvent {
@@ -4378,24 +2188,6 @@ export class DemocracySecondedEvent {
 	}
 	get asV42(): productionEvents.DemocracySecondedEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV42Stage(): stageEvents.DemocracySecondedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracySecondedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV42Test(): testEvents.DemocracySecondedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.DemocracySecondedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.DemocracySecondedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemocracySecondedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -4423,36 +2215,6 @@ export class DemocracyStartedEvent {
 	}
 	get asV42(): productionEvents.DemocracyStartedEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV33Stage(): stageEvents.DemocracyStartedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyStartedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemocracyStartedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyStartedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.DemocracyStartedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.DemocracyStartedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.DemocracyStartedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.DemocracyStartedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.DemocracyStartedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemocracyStartedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -4487,42 +2249,6 @@ export class DemocracyTabledEvent {
 	get asV53(): productionEvents.DemocracyTabledEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV33Stage(): stageEvents.DemocracyTabledEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyTabledEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemocracyTabledEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyTabledEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.DemocracyTabledEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.DemocracyTabledEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV41Test(): testEvents.DemocracyTabledEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.DemocracyTabledEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.DemocracyTabledEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.DemocracyTabledEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.DemocracyTabledEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemocracyTabledEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemocracyUndelegatedEvent {
@@ -4550,36 +2276,6 @@ export class DemocracyUndelegatedEvent {
 	get asV42(): productionEvents.DemocracyUndelegatedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.DemocracyUndelegatedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyUndelegatedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemocracyUndelegatedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyUndelegatedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.DemocracyUndelegatedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.DemocracyUndelegatedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.DemocracyUndelegatedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.DemocracyUndelegatedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.DemocracyUndelegatedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemocracyUndelegatedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemocracyUnlockedEvent {
@@ -4598,18 +2294,6 @@ export class DemocracyUnlockedEvent {
 	}
 	get asV1(): productionEvents.DemocracyUnlockedEvent['asV1'] {
 		return this.production.asV1
-	}
-	get isV33Stage(): stageEvents.DemocracyUnlockedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyUnlockedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.DemocracyUnlockedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.DemocracyUnlockedEvent['asV41'] {
-		return this.test.asV41
 	}
 }
 
@@ -4638,36 +2322,6 @@ export class DemocracyVetoedEvent {
 	get asV42(): productionEvents.DemocracyVetoedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.DemocracyVetoedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyVetoedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemocracyVetoedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyVetoedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.DemocracyVetoedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.DemocracyVetoedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.DemocracyVetoedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.DemocracyVetoedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.DemocracyVetoedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemocracyVetoedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemocracyVotedEvent {
@@ -4689,24 +2343,6 @@ export class DemocracyVotedEvent {
 	get asV42(): productionEvents.DemocracyVotedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.DemocracyVotedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyVotedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV42Test(): testEvents.DemocracyVotedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.DemocracyVotedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.DemocracyVotedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemocracyVotedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class ElectionProviderMultiPhaseElectionFailedEvent {
@@ -4725,18 +2361,6 @@ export class ElectionProviderMultiPhaseElectionFailedEvent {
 	}
 	get asV53(): productionEvents.ElectionProviderMultiPhaseElectionFailedEvent['asV53'] {
 		return this.production.asV53
-	}
-	get isV52Stage(): stageEvents.ElectionProviderMultiPhaseElectionFailedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.ElectionProviderMultiPhaseElectionFailedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.ElectionProviderMultiPhaseElectionFailedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.ElectionProviderMultiPhaseElectionFailedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -4765,30 +2389,6 @@ export class ElectionProviderMultiPhaseElectionFinalizedEvent {
 	get asV53(): productionEvents.ElectionProviderMultiPhaseElectionFinalizedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV42Stage(): stageEvents.ElectionProviderMultiPhaseElectionFinalizedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.ElectionProviderMultiPhaseElectionFinalizedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.ElectionProviderMultiPhaseElectionFinalizedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.ElectionProviderMultiPhaseElectionFinalizedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV42Test(): testEvents.ElectionProviderMultiPhaseElectionFinalizedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.ElectionProviderMultiPhaseElectionFinalizedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.ElectionProviderMultiPhaseElectionFinalizedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.ElectionProviderMultiPhaseElectionFinalizedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class ElectionProviderMultiPhasePhaseTransitionedEvent {
@@ -4807,18 +2407,6 @@ export class ElectionProviderMultiPhasePhaseTransitionedEvent {
 	}
 	get asV53(): productionEvents.ElectionProviderMultiPhasePhaseTransitionedEvent['asV53'] {
 		return this.production.asV53
-	}
-	get isV52Stage(): stageEvents.ElectionProviderMultiPhasePhaseTransitionedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.ElectionProviderMultiPhasePhaseTransitionedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.ElectionProviderMultiPhasePhaseTransitionedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.ElectionProviderMultiPhasePhaseTransitionedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -4841,24 +2429,6 @@ export class ElectionProviderMultiPhaseRewardedEvent {
 	get asV42(): productionEvents.ElectionProviderMultiPhaseRewardedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.ElectionProviderMultiPhaseRewardedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.ElectionProviderMultiPhaseRewardedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV42Test(): testEvents.ElectionProviderMultiPhaseRewardedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.ElectionProviderMultiPhaseRewardedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.ElectionProviderMultiPhaseRewardedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.ElectionProviderMultiPhaseRewardedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class ElectionProviderMultiPhaseSignedPhaseStartedEvent {
@@ -4877,18 +2447,6 @@ export class ElectionProviderMultiPhaseSignedPhaseStartedEvent {
 	}
 	get asV42(): productionEvents.ElectionProviderMultiPhaseSignedPhaseStartedEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV42Stage(): stageEvents.ElectionProviderMultiPhaseSignedPhaseStartedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.ElectionProviderMultiPhaseSignedPhaseStartedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV42Test(): testEvents.ElectionProviderMultiPhaseSignedPhaseStartedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.ElectionProviderMultiPhaseSignedPhaseStartedEvent['asV42'] {
-		return this.test.asV42
 	}
 }
 
@@ -4910,24 +2468,6 @@ export class ElectionProviderMultiPhaseSlashedEvent {
 	}
 	get asV42(): productionEvents.ElectionProviderMultiPhaseSlashedEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV42Stage(): stageEvents.ElectionProviderMultiPhaseSlashedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.ElectionProviderMultiPhaseSlashedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV42Test(): testEvents.ElectionProviderMultiPhaseSlashedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.ElectionProviderMultiPhaseSlashedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.ElectionProviderMultiPhaseSlashedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.ElectionProviderMultiPhaseSlashedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -4956,30 +2496,6 @@ export class ElectionProviderMultiPhaseSolutionStoredEvent {
 	get asV53(): productionEvents.ElectionProviderMultiPhaseSolutionStoredEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV42Stage(): stageEvents.ElectionProviderMultiPhaseSolutionStoredEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.ElectionProviderMultiPhaseSolutionStoredEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.ElectionProviderMultiPhaseSolutionStoredEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.ElectionProviderMultiPhaseSolutionStoredEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV42Test(): testEvents.ElectionProviderMultiPhaseSolutionStoredEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.ElectionProviderMultiPhaseSolutionStoredEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.ElectionProviderMultiPhaseSolutionStoredEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.ElectionProviderMultiPhaseSolutionStoredEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class ElectionProviderMultiPhaseUnsignedPhaseStartedEvent {
@@ -4998,18 +2514,6 @@ export class ElectionProviderMultiPhaseUnsignedPhaseStartedEvent {
 	}
 	get asV42(): productionEvents.ElectionProviderMultiPhaseUnsignedPhaseStartedEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV42Stage(): stageEvents.ElectionProviderMultiPhaseUnsignedPhaseStartedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.ElectionProviderMultiPhaseUnsignedPhaseStartedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV42Test(): testEvents.ElectionProviderMultiPhaseUnsignedPhaseStartedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.ElectionProviderMultiPhaseUnsignedPhaseStartedEvent['asV42'] {
-		return this.test.asV42
 	}
 }
 
@@ -5038,36 +2542,6 @@ export class ElectionsPhragmenCandidateSlashedEvent {
 	get asV42(): productionEvents.ElectionsPhragmenCandidateSlashedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.ElectionsPhragmenCandidateSlashedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.ElectionsPhragmenCandidateSlashedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.ElectionsPhragmenCandidateSlashedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.ElectionsPhragmenCandidateSlashedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.ElectionsPhragmenCandidateSlashedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.ElectionsPhragmenCandidateSlashedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.ElectionsPhragmenCandidateSlashedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.ElectionsPhragmenCandidateSlashedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.ElectionsPhragmenCandidateSlashedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.ElectionsPhragmenCandidateSlashedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class ElectionsPhragmenElectionErrorEvent {
@@ -5089,24 +2563,6 @@ export class ElectionsPhragmenElectionErrorEvent {
 	get asV1(): productionEvents.ElectionsPhragmenElectionErrorEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.ElectionsPhragmenElectionErrorEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.ElectionsPhragmenElectionErrorEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.ElectionsPhragmenElectionErrorEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.ElectionsPhragmenElectionErrorEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.ElectionsPhragmenElectionErrorEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.ElectionsPhragmenElectionErrorEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class ElectionsPhragmenEmptyTermEvent {
@@ -5127,24 +2583,6 @@ export class ElectionsPhragmenEmptyTermEvent {
 	}
 	get asV1(): productionEvents.ElectionsPhragmenEmptyTermEvent['asV1'] {
 		return this.production.asV1
-	}
-	get isV33Stage(): stageEvents.ElectionsPhragmenEmptyTermEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.ElectionsPhragmenEmptyTermEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.ElectionsPhragmenEmptyTermEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.ElectionsPhragmenEmptyTermEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.ElectionsPhragmenEmptyTermEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.ElectionsPhragmenEmptyTermEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -5173,36 +2611,6 @@ export class ElectionsPhragmenMemberKickedEvent {
 	get asV42(): productionEvents.ElectionsPhragmenMemberKickedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.ElectionsPhragmenMemberKickedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.ElectionsPhragmenMemberKickedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.ElectionsPhragmenMemberKickedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.ElectionsPhragmenMemberKickedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.ElectionsPhragmenMemberKickedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.ElectionsPhragmenMemberKickedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.ElectionsPhragmenMemberKickedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.ElectionsPhragmenMemberKickedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.ElectionsPhragmenMemberKickedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.ElectionsPhragmenMemberKickedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class ElectionsPhragmenNewTermEvent {
@@ -5229,36 +2637,6 @@ export class ElectionsPhragmenNewTermEvent {
 	}
 	get asV42(): productionEvents.ElectionsPhragmenNewTermEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV33Stage(): stageEvents.ElectionsPhragmenNewTermEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.ElectionsPhragmenNewTermEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.ElectionsPhragmenNewTermEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.ElectionsPhragmenNewTermEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.ElectionsPhragmenNewTermEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.ElectionsPhragmenNewTermEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.ElectionsPhragmenNewTermEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.ElectionsPhragmenNewTermEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.ElectionsPhragmenNewTermEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.ElectionsPhragmenNewTermEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -5287,36 +2665,6 @@ export class ElectionsPhragmenRenouncedEvent {
 	get asV42(): productionEvents.ElectionsPhragmenRenouncedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.ElectionsPhragmenRenouncedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.ElectionsPhragmenRenouncedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.ElectionsPhragmenRenouncedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.ElectionsPhragmenRenouncedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.ElectionsPhragmenRenouncedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.ElectionsPhragmenRenouncedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.ElectionsPhragmenRenouncedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.ElectionsPhragmenRenouncedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.ElectionsPhragmenRenouncedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.ElectionsPhragmenRenouncedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class ElectionsPhragmenSeatHolderSlashedEvent {
@@ -5344,36 +2692,6 @@ export class ElectionsPhragmenSeatHolderSlashedEvent {
 	get asV42(): productionEvents.ElectionsPhragmenSeatHolderSlashedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.ElectionsPhragmenSeatHolderSlashedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.ElectionsPhragmenSeatHolderSlashedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.ElectionsPhragmenSeatHolderSlashedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.ElectionsPhragmenSeatHolderSlashedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.ElectionsPhragmenSeatHolderSlashedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.ElectionsPhragmenSeatHolderSlashedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.ElectionsPhragmenSeatHolderSlashedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.ElectionsPhragmenSeatHolderSlashedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.ElectionsPhragmenSeatHolderSlashedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.ElectionsPhragmenSeatHolderSlashedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class EthBridgeApprovalsCollectedEvent {
@@ -5394,24 +2712,6 @@ export class EthBridgeApprovalsCollectedEvent {
 	}
 	get asV1(): productionEvents.EthBridgeApprovalsCollectedEvent['asV1'] {
 		return this.production.asV1
-	}
-	get isV33Stage(): stageEvents.EthBridgeApprovalsCollectedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.EthBridgeApprovalsCollectedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.EthBridgeApprovalsCollectedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.EthBridgeApprovalsCollectedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.EthBridgeApprovalsCollectedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.EthBridgeApprovalsCollectedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -5434,24 +2734,6 @@ export class EthBridgeCancellationFailedEvent {
 	get asV3(): productionEvents.EthBridgeCancellationFailedEvent['asV3'] {
 		return this.production.asV3
 	}
-	get isV33Stage(): stageEvents.EthBridgeCancellationFailedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.EthBridgeCancellationFailedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.EthBridgeCancellationFailedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.EthBridgeCancellationFailedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.EthBridgeCancellationFailedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.EthBridgeCancellationFailedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class EthBridgeIncomingRequestFinalizationFailedEvent {
@@ -5472,24 +2754,6 @@ export class EthBridgeIncomingRequestFinalizationFailedEvent {
 	}
 	get asV1(): productionEvents.EthBridgeIncomingRequestFinalizationFailedEvent['asV1'] {
 		return this.production.asV1
-	}
-	get isV33Stage(): stageEvents.EthBridgeIncomingRequestFinalizationFailedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.EthBridgeIncomingRequestFinalizationFailedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.EthBridgeIncomingRequestFinalizationFailedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.EthBridgeIncomingRequestFinalizationFailedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.EthBridgeIncomingRequestFinalizationFailedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.EthBridgeIncomingRequestFinalizationFailedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -5512,24 +2776,6 @@ export class EthBridgeIncomingRequestFinalizedEvent {
 	get asV1(): productionEvents.EthBridgeIncomingRequestFinalizedEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.EthBridgeIncomingRequestFinalizedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.EthBridgeIncomingRequestFinalizedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.EthBridgeIncomingRequestFinalizedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.EthBridgeIncomingRequestFinalizedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.EthBridgeIncomingRequestFinalizedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.EthBridgeIncomingRequestFinalizedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class EthBridgeRegisterRequestFailedEvent {
@@ -5548,18 +2794,6 @@ export class EthBridgeRegisterRequestFailedEvent {
 	}
 	get asV53(): productionEvents.EthBridgeRegisterRequestFailedEvent['asV53'] {
 		return this.production.asV53
-	}
-	get isV52Stage(): stageEvents.EthBridgeRegisterRequestFailedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.EthBridgeRegisterRequestFailedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.EthBridgeRegisterRequestFailedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.EthBridgeRegisterRequestFailedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -5582,24 +2816,6 @@ export class EthBridgeRequestAbortedEvent {
 	get asV1(): productionEvents.EthBridgeRequestAbortedEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.EthBridgeRequestAbortedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.EthBridgeRequestAbortedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.EthBridgeRequestAbortedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.EthBridgeRequestAbortedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.EthBridgeRequestAbortedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.EthBridgeRequestAbortedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class EthBridgeRequestFinalizationFailedEvent {
@@ -5620,24 +2836,6 @@ export class EthBridgeRequestFinalizationFailedEvent {
 	}
 	get asV1(): productionEvents.EthBridgeRequestFinalizationFailedEvent['asV1'] {
 		return this.production.asV1
-	}
-	get isV33Stage(): stageEvents.EthBridgeRequestFinalizationFailedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.EthBridgeRequestFinalizationFailedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.EthBridgeRequestFinalizationFailedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.EthBridgeRequestFinalizationFailedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.EthBridgeRequestFinalizationFailedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.EthBridgeRequestFinalizationFailedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -5660,24 +2858,6 @@ export class EthBridgeRequestRegisteredEvent {
 	get asV1(): productionEvents.EthBridgeRequestRegisteredEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.EthBridgeRequestRegisteredEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.EthBridgeRequestRegisteredEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.EthBridgeRequestRegisteredEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.EthBridgeRequestRegisteredEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.EthBridgeRequestRegisteredEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.EthBridgeRequestRegisteredEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class FaucetTransferredEvent {
@@ -5698,24 +2878,6 @@ export class FaucetTransferredEvent {
 	}
 	get asV22(): productionEvents.FaucetTransferredEvent['asV22'] {
 		return this.production.asV22
-	}
-	get isV33Stage(): stageEvents.FaucetTransferredEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.FaucetTransferredEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.FaucetTransferredEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.FaucetTransferredEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.FaucetTransferredEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.FaucetTransferredEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -5744,36 +2906,6 @@ export class GrandpaNewAuthoritiesEvent {
 	get asV42(): productionEvents.GrandpaNewAuthoritiesEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.GrandpaNewAuthoritiesEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.GrandpaNewAuthoritiesEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.GrandpaNewAuthoritiesEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.GrandpaNewAuthoritiesEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.GrandpaNewAuthoritiesEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.GrandpaNewAuthoritiesEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.GrandpaNewAuthoritiesEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.GrandpaNewAuthoritiesEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.GrandpaNewAuthoritiesEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.GrandpaNewAuthoritiesEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class GrandpaPausedEvent {
@@ -5794,24 +2926,6 @@ export class GrandpaPausedEvent {
 	}
 	get asV1(): productionEvents.GrandpaPausedEvent['asV1'] {
 		return this.production.asV1
-	}
-	get isV33Stage(): stageEvents.GrandpaPausedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.GrandpaPausedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.GrandpaPausedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.GrandpaPausedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.GrandpaPausedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.GrandpaPausedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -5834,34 +2948,18 @@ export class GrandpaResumedEvent {
 	get asV1(): productionEvents.GrandpaResumedEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.GrandpaResumedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.GrandpaResumedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.GrandpaResumedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.GrandpaResumedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.GrandpaResumedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.GrandpaResumedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class HermesGovernancePlatformCreatedEvent {
 	private readonly production: productionEvents.HermesGovernancePlatformCreatedEvent
 	private readonly stage: stageEvents.HermesGovernancePlatformCreatedEvent
+	private readonly test: testEvents.HermesGovernancePlatformCreatedEvent
 	private readonly dev: devEvents.HermesGovernancePlatformCreatedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.HermesGovernancePlatformCreatedEvent(ctx, event)
 		this.stage = new stageEvents.HermesGovernancePlatformCreatedEvent(ctx, event)
+		this.test = new testEvents.HermesGovernancePlatformCreatedEvent(ctx, event)
 		this.dev = new devEvents.HermesGovernancePlatformCreatedEvent(ctx, event)
 	}
 
@@ -5877,34 +2975,18 @@ export class HermesGovernancePlatformCreatedEvent {
 	get asV57(): productionEvents.HermesGovernancePlatformCreatedEvent['asV57'] {
 		return this.production.asV57
 	}
-	get isV47Stage(): stageEvents.HermesGovernancePlatformCreatedEvent['isV47'] {
-		return this.stage.isV47
-	}
-	get asV47Stage(): stageEvents.HermesGovernancePlatformCreatedEvent['asV47'] {
-		return this.stage.asV47
-	}
-	get isV55Stage(): stageEvents.HermesGovernancePlatformCreatedEvent['isV55'] {
-		return this.stage.isV55
-	}
-	get asV55Stage(): stageEvents.HermesGovernancePlatformCreatedEvent['asV55'] {
-		return this.stage.asV55
-	}
-	get isV60Dev(): devEvents.HermesGovernancePlatformCreatedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.HermesGovernancePlatformCreatedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class HermesGovernancePlatformCreatorFundsWithdrawnEvent {
 	private readonly production: productionEvents.HermesGovernancePlatformCreatorFundsWithdrawnEvent
 	private readonly stage: stageEvents.HermesGovernancePlatformCreatorFundsWithdrawnEvent
+	private readonly test: testEvents.HermesGovernancePlatformCreatorFundsWithdrawnEvent
 	private readonly dev: devEvents.HermesGovernancePlatformCreatorFundsWithdrawnEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.HermesGovernancePlatformCreatorFundsWithdrawnEvent(ctx, event)
 		this.stage = new stageEvents.HermesGovernancePlatformCreatorFundsWithdrawnEvent(ctx, event)
+		this.test = new testEvents.HermesGovernancePlatformCreatorFundsWithdrawnEvent(ctx, event)
 		this.dev = new devEvents.HermesGovernancePlatformCreatorFundsWithdrawnEvent(ctx, event)
 	}
 
@@ -5914,28 +2996,18 @@ export class HermesGovernancePlatformCreatorFundsWithdrawnEvent {
 	get asV47(): productionEvents.HermesGovernancePlatformCreatorFundsWithdrawnEvent['asV47'] {
 		return this.production.asV47
 	}
-	get isV47Stage(): stageEvents.HermesGovernancePlatformCreatorFundsWithdrawnEvent['isV47'] {
-		return this.stage.isV47
-	}
-	get asV47Stage(): stageEvents.HermesGovernancePlatformCreatorFundsWithdrawnEvent['asV47'] {
-		return this.stage.asV47
-	}
-	get isV60Dev(): devEvents.HermesGovernancePlatformCreatorFundsWithdrawnEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.HermesGovernancePlatformCreatorFundsWithdrawnEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class HermesGovernancePlatformMinimumHermesForCreatingPollChangedEvent {
 	private readonly production: productionEvents.HermesGovernancePlatformMinimumHermesForCreatingPollChangedEvent
 	private readonly stage: stageEvents.HermesGovernancePlatformMinimumHermesForCreatingPollChangedEvent
+	private readonly test: testEvents.HermesGovernancePlatformMinimumHermesForCreatingPollChangedEvent
 	private readonly dev: devEvents.HermesGovernancePlatformMinimumHermesForCreatingPollChangedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.HermesGovernancePlatformMinimumHermesForCreatingPollChangedEvent(ctx, event)
 		this.stage = new stageEvents.HermesGovernancePlatformMinimumHermesForCreatingPollChangedEvent(ctx, event)
+		this.test = new testEvents.HermesGovernancePlatformMinimumHermesForCreatingPollChangedEvent(ctx, event)
 		this.dev = new devEvents.HermesGovernancePlatformMinimumHermesForCreatingPollChangedEvent(ctx, event)
 	}
 
@@ -5945,28 +3017,18 @@ export class HermesGovernancePlatformMinimumHermesForCreatingPollChangedEvent {
 	get asV47(): productionEvents.HermesGovernancePlatformMinimumHermesForCreatingPollChangedEvent['asV47'] {
 		return this.production.asV47
 	}
-	get isV47Stage(): stageEvents.HermesGovernancePlatformMinimumHermesForCreatingPollChangedEvent['isV47'] {
-		return this.stage.isV47
-	}
-	get asV47Stage(): stageEvents.HermesGovernancePlatformMinimumHermesForCreatingPollChangedEvent['asV47'] {
-		return this.stage.asV47
-	}
-	get isV60Dev(): devEvents.HermesGovernancePlatformMinimumHermesForCreatingPollChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.HermesGovernancePlatformMinimumHermesForCreatingPollChangedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class HermesGovernancePlatformMinimumHermesForVotingChangedEvent {
 	private readonly production: productionEvents.HermesGovernancePlatformMinimumHermesForVotingChangedEvent
 	private readonly stage: stageEvents.HermesGovernancePlatformMinimumHermesForVotingChangedEvent
+	private readonly test: testEvents.HermesGovernancePlatformMinimumHermesForVotingChangedEvent
 	private readonly dev: devEvents.HermesGovernancePlatformMinimumHermesForVotingChangedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.HermesGovernancePlatformMinimumHermesForVotingChangedEvent(ctx, event)
 		this.stage = new stageEvents.HermesGovernancePlatformMinimumHermesForVotingChangedEvent(ctx, event)
+		this.test = new testEvents.HermesGovernancePlatformMinimumHermesForVotingChangedEvent(ctx, event)
 		this.dev = new devEvents.HermesGovernancePlatformMinimumHermesForVotingChangedEvent(ctx, event)
 	}
 
@@ -5976,28 +3038,18 @@ export class HermesGovernancePlatformMinimumHermesForVotingChangedEvent {
 	get asV47(): productionEvents.HermesGovernancePlatformMinimumHermesForVotingChangedEvent['asV47'] {
 		return this.production.asV47
 	}
-	get isV47Stage(): stageEvents.HermesGovernancePlatformMinimumHermesForVotingChangedEvent['isV47'] {
-		return this.stage.isV47
-	}
-	get asV47Stage(): stageEvents.HermesGovernancePlatformMinimumHermesForVotingChangedEvent['asV47'] {
-		return this.stage.asV47
-	}
-	get isV60Dev(): devEvents.HermesGovernancePlatformMinimumHermesForVotingChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.HermesGovernancePlatformMinimumHermesForVotingChangedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class HermesGovernancePlatformVotedEvent {
 	private readonly production: productionEvents.HermesGovernancePlatformVotedEvent
 	private readonly stage: stageEvents.HermesGovernancePlatformVotedEvent
+	private readonly test: testEvents.HermesGovernancePlatformVotedEvent
 	private readonly dev: devEvents.HermesGovernancePlatformVotedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.HermesGovernancePlatformVotedEvent(ctx, event)
 		this.stage = new stageEvents.HermesGovernancePlatformVotedEvent(ctx, event)
+		this.test = new testEvents.HermesGovernancePlatformVotedEvent(ctx, event)
 		this.dev = new devEvents.HermesGovernancePlatformVotedEvent(ctx, event)
 	}
 
@@ -6013,34 +3065,18 @@ export class HermesGovernancePlatformVotedEvent {
 	get asV57(): productionEvents.HermesGovernancePlatformVotedEvent['asV57'] {
 		return this.production.asV57
 	}
-	get isV47Stage(): stageEvents.HermesGovernancePlatformVotedEvent['isV47'] {
-		return this.stage.isV47
-	}
-	get asV47Stage(): stageEvents.HermesGovernancePlatformVotedEvent['asV47'] {
-		return this.stage.asV47
-	}
-	get isV55Stage(): stageEvents.HermesGovernancePlatformVotedEvent['isV55'] {
-		return this.stage.isV55
-	}
-	get asV55Stage(): stageEvents.HermesGovernancePlatformVotedEvent['asV55'] {
-		return this.stage.asV55
-	}
-	get isV60Dev(): devEvents.HermesGovernancePlatformVotedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.HermesGovernancePlatformVotedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class HermesGovernancePlatformVoterFundsWithdrawnEvent {
 	private readonly production: productionEvents.HermesGovernancePlatformVoterFundsWithdrawnEvent
 	private readonly stage: stageEvents.HermesGovernancePlatformVoterFundsWithdrawnEvent
+	private readonly test: testEvents.HermesGovernancePlatformVoterFundsWithdrawnEvent
 	private readonly dev: devEvents.HermesGovernancePlatformVoterFundsWithdrawnEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.HermesGovernancePlatformVoterFundsWithdrawnEvent(ctx, event)
 		this.stage = new stageEvents.HermesGovernancePlatformVoterFundsWithdrawnEvent(ctx, event)
+		this.test = new testEvents.HermesGovernancePlatformVoterFundsWithdrawnEvent(ctx, event)
 		this.dev = new devEvents.HermesGovernancePlatformVoterFundsWithdrawnEvent(ctx, event)
 	}
 
@@ -6049,18 +3085,6 @@ export class HermesGovernancePlatformVoterFundsWithdrawnEvent {
 	}
 	get asV47(): productionEvents.HermesGovernancePlatformVoterFundsWithdrawnEvent['asV47'] {
 		return this.production.asV47
-	}
-	get isV47Stage(): stageEvents.HermesGovernancePlatformVoterFundsWithdrawnEvent['isV47'] {
-		return this.stage.isV47
-	}
-	get asV47Stage(): stageEvents.HermesGovernancePlatformVoterFundsWithdrawnEvent['asV47'] {
-		return this.stage.asV47
-	}
-	get isV60Dev(): devEvents.HermesGovernancePlatformVoterFundsWithdrawnEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.HermesGovernancePlatformVoterFundsWithdrawnEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -6089,36 +3113,6 @@ export class IdentityIdentityClearedEvent {
 	get asV42(): productionEvents.IdentityIdentityClearedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.IdentityIdentityClearedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.IdentityIdentityClearedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.IdentityIdentityClearedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.IdentityIdentityClearedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.IdentityIdentityClearedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.IdentityIdentityClearedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.IdentityIdentityClearedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.IdentityIdentityClearedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.IdentityIdentityClearedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.IdentityIdentityClearedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class IdentityIdentityKilledEvent {
@@ -6145,36 +3139,6 @@ export class IdentityIdentityKilledEvent {
 	}
 	get asV42(): productionEvents.IdentityIdentityKilledEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV33Stage(): stageEvents.IdentityIdentityKilledEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.IdentityIdentityKilledEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.IdentityIdentityKilledEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.IdentityIdentityKilledEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.IdentityIdentityKilledEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.IdentityIdentityKilledEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.IdentityIdentityKilledEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.IdentityIdentityKilledEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.IdentityIdentityKilledEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.IdentityIdentityKilledEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -6203,36 +3167,6 @@ export class IdentityIdentitySetEvent {
 	get asV42(): productionEvents.IdentityIdentitySetEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.IdentityIdentitySetEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.IdentityIdentitySetEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.IdentityIdentitySetEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.IdentityIdentitySetEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.IdentityIdentitySetEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.IdentityIdentitySetEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.IdentityIdentitySetEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.IdentityIdentitySetEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.IdentityIdentitySetEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.IdentityIdentitySetEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class IdentityJudgementGivenEvent {
@@ -6259,36 +3193,6 @@ export class IdentityJudgementGivenEvent {
 	}
 	get asV42(): productionEvents.IdentityJudgementGivenEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV33Stage(): stageEvents.IdentityJudgementGivenEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.IdentityJudgementGivenEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.IdentityJudgementGivenEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.IdentityJudgementGivenEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.IdentityJudgementGivenEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.IdentityJudgementGivenEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.IdentityJudgementGivenEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.IdentityJudgementGivenEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.IdentityJudgementGivenEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.IdentityJudgementGivenEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -6317,36 +3221,6 @@ export class IdentityJudgementRequestedEvent {
 	get asV42(): productionEvents.IdentityJudgementRequestedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.IdentityJudgementRequestedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.IdentityJudgementRequestedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.IdentityJudgementRequestedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.IdentityJudgementRequestedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.IdentityJudgementRequestedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.IdentityJudgementRequestedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.IdentityJudgementRequestedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.IdentityJudgementRequestedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.IdentityJudgementRequestedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.IdentityJudgementRequestedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class IdentityJudgementUnrequestedEvent {
@@ -6373,36 +3247,6 @@ export class IdentityJudgementUnrequestedEvent {
 	}
 	get asV42(): productionEvents.IdentityJudgementUnrequestedEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV33Stage(): stageEvents.IdentityJudgementUnrequestedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.IdentityJudgementUnrequestedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.IdentityJudgementUnrequestedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.IdentityJudgementUnrequestedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.IdentityJudgementUnrequestedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.IdentityJudgementUnrequestedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.IdentityJudgementUnrequestedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.IdentityJudgementUnrequestedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.IdentityJudgementUnrequestedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.IdentityJudgementUnrequestedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -6431,36 +3275,6 @@ export class IdentityRegistrarAddedEvent {
 	get asV42(): productionEvents.IdentityRegistrarAddedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.IdentityRegistrarAddedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.IdentityRegistrarAddedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.IdentityRegistrarAddedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.IdentityRegistrarAddedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.IdentityRegistrarAddedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.IdentityRegistrarAddedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.IdentityRegistrarAddedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.IdentityRegistrarAddedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.IdentityRegistrarAddedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.IdentityRegistrarAddedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class IdentitySubIdentityAddedEvent {
@@ -6487,36 +3301,6 @@ export class IdentitySubIdentityAddedEvent {
 	}
 	get asV42(): productionEvents.IdentitySubIdentityAddedEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV33Stage(): stageEvents.IdentitySubIdentityAddedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.IdentitySubIdentityAddedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.IdentitySubIdentityAddedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.IdentitySubIdentityAddedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.IdentitySubIdentityAddedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.IdentitySubIdentityAddedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.IdentitySubIdentityAddedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.IdentitySubIdentityAddedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.IdentitySubIdentityAddedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.IdentitySubIdentityAddedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -6545,36 +3329,6 @@ export class IdentitySubIdentityRemovedEvent {
 	get asV42(): productionEvents.IdentitySubIdentityRemovedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.IdentitySubIdentityRemovedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.IdentitySubIdentityRemovedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.IdentitySubIdentityRemovedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.IdentitySubIdentityRemovedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.IdentitySubIdentityRemovedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.IdentitySubIdentityRemovedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.IdentitySubIdentityRemovedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.IdentitySubIdentityRemovedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.IdentitySubIdentityRemovedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.IdentitySubIdentityRemovedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class IdentitySubIdentityRevokedEvent {
@@ -6602,36 +3356,6 @@ export class IdentitySubIdentityRevokedEvent {
 	get asV42(): productionEvents.IdentitySubIdentityRevokedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.IdentitySubIdentityRevokedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.IdentitySubIdentityRevokedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.IdentitySubIdentityRevokedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.IdentitySubIdentityRevokedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.IdentitySubIdentityRevokedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.IdentitySubIdentityRevokedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.IdentitySubIdentityRevokedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.IdentitySubIdentityRevokedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.IdentitySubIdentityRevokedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.IdentitySubIdentityRevokedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class ImOnlineAllGoodEvent {
@@ -6652,24 +3376,6 @@ export class ImOnlineAllGoodEvent {
 	}
 	get asV1(): productionEvents.ImOnlineAllGoodEvent['asV1'] {
 		return this.production.asV1
-	}
-	get isV33Stage(): stageEvents.ImOnlineAllGoodEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.ImOnlineAllGoodEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.ImOnlineAllGoodEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.ImOnlineAllGoodEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.ImOnlineAllGoodEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.ImOnlineAllGoodEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -6698,36 +3404,6 @@ export class ImOnlineHeartbeatReceivedEvent {
 	get asV42(): productionEvents.ImOnlineHeartbeatReceivedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.ImOnlineHeartbeatReceivedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.ImOnlineHeartbeatReceivedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.ImOnlineHeartbeatReceivedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.ImOnlineHeartbeatReceivedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.ImOnlineHeartbeatReceivedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.ImOnlineHeartbeatReceivedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.ImOnlineHeartbeatReceivedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.ImOnlineHeartbeatReceivedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.ImOnlineHeartbeatReceivedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.ImOnlineHeartbeatReceivedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class ImOnlineSomeOfflineEvent {
@@ -6754,36 +3430,6 @@ export class ImOnlineSomeOfflineEvent {
 	}
 	get asV42(): productionEvents.ImOnlineSomeOfflineEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV33Stage(): stageEvents.ImOnlineSomeOfflineEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.ImOnlineSomeOfflineEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.ImOnlineSomeOfflineEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.ImOnlineSomeOfflineEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.ImOnlineSomeOfflineEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.ImOnlineSomeOfflineEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.ImOnlineSomeOfflineEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.ImOnlineSomeOfflineEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.ImOnlineSomeOfflineEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.ImOnlineSomeOfflineEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -6812,36 +3458,6 @@ export class IrohaMigrationMigratedEvent {
 	get asV42(): productionEvents.IrohaMigrationMigratedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.IrohaMigrationMigratedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.IrohaMigrationMigratedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.IrohaMigrationMigratedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.IrohaMigrationMigratedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.IrohaMigrationMigratedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.IrohaMigrationMigratedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.IrohaMigrationMigratedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.IrohaMigrationMigratedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.IrohaMigrationMigratedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.IrohaMigrationMigratedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class LiquidityProxyBatchSwapExecutedEvent {
@@ -6860,18 +3476,6 @@ export class LiquidityProxyBatchSwapExecutedEvent {
 	}
 	get asV57(): productionEvents.LiquidityProxyBatchSwapExecutedEvent['asV57'] {
 		return this.production.asV57
-	}
-	get isV55Stage(): stageEvents.LiquidityProxyBatchSwapExecutedEvent['isV55'] {
-		return this.stage.isV55
-	}
-	get asV55Stage(): stageEvents.LiquidityProxyBatchSwapExecutedEvent['asV55'] {
-		return this.stage.asV55
-	}
-	get isV60Dev(): devEvents.LiquidityProxyBatchSwapExecutedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.LiquidityProxyBatchSwapExecutedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -6899,30 +3503,6 @@ export class LiquidityProxyExchangeEvent {
 	}
 	get asV42(): productionEvents.LiquidityProxyExchangeEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV33Stage(): stageEvents.LiquidityProxyExchangeEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.LiquidityProxyExchangeEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.LiquidityProxyExchangeEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.LiquidityProxyExchangeEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.LiquidityProxyExchangeEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.LiquidityProxyExchangeEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.LiquidityProxyExchangeEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.LiquidityProxyExchangeEvent['asV42'] {
-		return this.test.asV42
 	}
 	get isV60Dev(): devEvents.LiquidityProxyExchangeEvent['isV60'] {
 		return this.dev.isV60
@@ -6957,36 +3537,6 @@ export class LiquidityProxyLiquiditySourceDisabledEvent {
 	get asV42(): productionEvents.LiquidityProxyLiquiditySourceDisabledEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV38Stage(): stageEvents.LiquidityProxyLiquiditySourceDisabledEvent['isV38'] {
-		return this.stage.isV38
-	}
-	get asV38Stage(): stageEvents.LiquidityProxyLiquiditySourceDisabledEvent['asV38'] {
-		return this.stage.asV38
-	}
-	get isV42Stage(): stageEvents.LiquidityProxyLiquiditySourceDisabledEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.LiquidityProxyLiquiditySourceDisabledEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.LiquidityProxyLiquiditySourceDisabledEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.LiquidityProxyLiquiditySourceDisabledEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.LiquidityProxyLiquiditySourceDisabledEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.LiquidityProxyLiquiditySourceDisabledEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.LiquidityProxyLiquiditySourceDisabledEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.LiquidityProxyLiquiditySourceDisabledEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class LiquidityProxyLiquiditySourceEnabledEvent {
@@ -7013,36 +3563,6 @@ export class LiquidityProxyLiquiditySourceEnabledEvent {
 	}
 	get asV42(): productionEvents.LiquidityProxyLiquiditySourceEnabledEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV38Stage(): stageEvents.LiquidityProxyLiquiditySourceEnabledEvent['isV38'] {
-		return this.stage.isV38
-	}
-	get asV38Stage(): stageEvents.LiquidityProxyLiquiditySourceEnabledEvent['asV38'] {
-		return this.stage.asV38
-	}
-	get isV42Stage(): stageEvents.LiquidityProxyLiquiditySourceEnabledEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.LiquidityProxyLiquiditySourceEnabledEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.LiquidityProxyLiquiditySourceEnabledEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.LiquidityProxyLiquiditySourceEnabledEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.LiquidityProxyLiquiditySourceEnabledEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.LiquidityProxyLiquiditySourceEnabledEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.LiquidityProxyLiquiditySourceEnabledEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.LiquidityProxyLiquiditySourceEnabledEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -7071,36 +3591,6 @@ export class MulticollateralBondingCurvePoolOptionalRewardMultiplierUpdatedEvent
 	get asV42(): productionEvents.MulticollateralBondingCurvePoolOptionalRewardMultiplierUpdatedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.MulticollateralBondingCurvePoolOptionalRewardMultiplierUpdatedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.MulticollateralBondingCurvePoolOptionalRewardMultiplierUpdatedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.MulticollateralBondingCurvePoolOptionalRewardMultiplierUpdatedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.MulticollateralBondingCurvePoolOptionalRewardMultiplierUpdatedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.MulticollateralBondingCurvePoolOptionalRewardMultiplierUpdatedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.MulticollateralBondingCurvePoolOptionalRewardMultiplierUpdatedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.MulticollateralBondingCurvePoolOptionalRewardMultiplierUpdatedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.MulticollateralBondingCurvePoolOptionalRewardMultiplierUpdatedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.MulticollateralBondingCurvePoolOptionalRewardMultiplierUpdatedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.MulticollateralBondingCurvePoolOptionalRewardMultiplierUpdatedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class MulticollateralBondingCurvePoolPoolInitializedEvent {
@@ -7128,36 +3618,6 @@ export class MulticollateralBondingCurvePoolPoolInitializedEvent {
 	get asV42(): productionEvents.MulticollateralBondingCurvePoolPoolInitializedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.MulticollateralBondingCurvePoolPoolInitializedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.MulticollateralBondingCurvePoolPoolInitializedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.MulticollateralBondingCurvePoolPoolInitializedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.MulticollateralBondingCurvePoolPoolInitializedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.MulticollateralBondingCurvePoolPoolInitializedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.MulticollateralBondingCurvePoolPoolInitializedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.MulticollateralBondingCurvePoolPoolInitializedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.MulticollateralBondingCurvePoolPoolInitializedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.MulticollateralBondingCurvePoolPoolInitializedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.MulticollateralBondingCurvePoolPoolInitializedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class MulticollateralBondingCurvePoolPriceBiasChangedEvent {
@@ -7179,24 +3639,6 @@ export class MulticollateralBondingCurvePoolPriceBiasChangedEvent {
 	get asV22(): productionEvents.MulticollateralBondingCurvePoolPriceBiasChangedEvent['asV22'] {
 		return this.production.asV22
 	}
-	get isV33Stage(): stageEvents.MulticollateralBondingCurvePoolPriceBiasChangedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.MulticollateralBondingCurvePoolPriceBiasChangedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.MulticollateralBondingCurvePoolPriceBiasChangedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.MulticollateralBondingCurvePoolPriceBiasChangedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.MulticollateralBondingCurvePoolPriceBiasChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.MulticollateralBondingCurvePoolPriceBiasChangedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class MulticollateralBondingCurvePoolPriceChangeConfigChangedEvent {
@@ -7217,24 +3659,6 @@ export class MulticollateralBondingCurvePoolPriceChangeConfigChangedEvent {
 	}
 	get asV22(): productionEvents.MulticollateralBondingCurvePoolPriceChangeConfigChangedEvent['asV22'] {
 		return this.production.asV22
-	}
-	get isV33Stage(): stageEvents.MulticollateralBondingCurvePoolPriceChangeConfigChangedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.MulticollateralBondingCurvePoolPriceChangeConfigChangedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.MulticollateralBondingCurvePoolPriceChangeConfigChangedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.MulticollateralBondingCurvePoolPriceChangeConfigChangedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.MulticollateralBondingCurvePoolPriceChangeConfigChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.MulticollateralBondingCurvePoolPriceChangeConfigChangedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -7263,36 +3687,6 @@ export class MulticollateralBondingCurvePoolReferenceAssetChangedEvent {
 	get asV42(): productionEvents.MulticollateralBondingCurvePoolReferenceAssetChangedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.MulticollateralBondingCurvePoolReferenceAssetChangedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.MulticollateralBondingCurvePoolReferenceAssetChangedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.MulticollateralBondingCurvePoolReferenceAssetChangedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.MulticollateralBondingCurvePoolReferenceAssetChangedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.MulticollateralBondingCurvePoolReferenceAssetChangedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.MulticollateralBondingCurvePoolReferenceAssetChangedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.MulticollateralBondingCurvePoolReferenceAssetChangedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.MulticollateralBondingCurvePoolReferenceAssetChangedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.MulticollateralBondingCurvePoolReferenceAssetChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.MulticollateralBondingCurvePoolReferenceAssetChangedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class MultisigMultisigApprovalEvent {
@@ -7320,36 +3714,6 @@ export class MultisigMultisigApprovalEvent {
 	get asV42(): productionEvents.MultisigMultisigApprovalEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.MultisigMultisigApprovalEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.MultisigMultisigApprovalEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.MultisigMultisigApprovalEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.MultisigMultisigApprovalEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.MultisigMultisigApprovalEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.MultisigMultisigApprovalEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.MultisigMultisigApprovalEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.MultisigMultisigApprovalEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.MultisigMultisigApprovalEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.MultisigMultisigApprovalEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class MultisigMultisigCancelledEvent {
@@ -7376,36 +3740,6 @@ export class MultisigMultisigCancelledEvent {
 	}
 	get asV42(): productionEvents.MultisigMultisigCancelledEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV33Stage(): stageEvents.MultisigMultisigCancelledEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.MultisigMultisigCancelledEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.MultisigMultisigCancelledEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.MultisigMultisigCancelledEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.MultisigMultisigCancelledEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.MultisigMultisigCancelledEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.MultisigMultisigCancelledEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.MultisigMultisigCancelledEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.MultisigMultisigCancelledEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.MultisigMultisigCancelledEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -7440,42 +3774,6 @@ export class MultisigMultisigExecutedEvent {
 	get asV53(): productionEvents.MultisigMultisigExecutedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV33Stage(): stageEvents.MultisigMultisigExecutedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.MultisigMultisigExecutedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.MultisigMultisigExecutedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.MultisigMultisigExecutedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.MultisigMultisigExecutedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.MultisigMultisigExecutedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV41Test(): testEvents.MultisigMultisigExecutedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.MultisigMultisigExecutedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.MultisigMultisigExecutedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.MultisigMultisigExecutedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.MultisigMultisigExecutedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.MultisigMultisigExecutedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class MultisigNewMultisigEvent {
@@ -7502,36 +3800,6 @@ export class MultisigNewMultisigEvent {
 	}
 	get asV42(): productionEvents.MultisigNewMultisigEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV33Stage(): stageEvents.MultisigNewMultisigEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.MultisigNewMultisigEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.MultisigNewMultisigEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.MultisigNewMultisigEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.MultisigNewMultisigEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.MultisigNewMultisigEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.MultisigNewMultisigEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.MultisigNewMultisigEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.MultisigNewMultisigEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.MultisigNewMultisigEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -7560,46 +3828,18 @@ export class OffencesOffenceEvent {
 	get asV42(): productionEvents.OffencesOffenceEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.OffencesOffenceEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.OffencesOffenceEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.OffencesOffenceEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.OffencesOffenceEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.OffencesOffenceEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.OffencesOffenceEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.OffencesOffenceEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.OffencesOffenceEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.OffencesOffenceEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.OffencesOffenceEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class OracleProxyOracleDisabledEvent {
 	private readonly production: productionEvents.OracleProxyOracleDisabledEvent
 	private readonly stage: stageEvents.OracleProxyOracleDisabledEvent
+	private readonly test: testEvents.OracleProxyOracleDisabledEvent
 	private readonly dev: devEvents.OracleProxyOracleDisabledEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.OracleProxyOracleDisabledEvent(ctx, event)
 		this.stage = new stageEvents.OracleProxyOracleDisabledEvent(ctx, event)
+		this.test = new testEvents.OracleProxyOracleDisabledEvent(ctx, event)
 		this.dev = new devEvents.OracleProxyOracleDisabledEvent(ctx, event)
 	}
 
@@ -7609,28 +3849,18 @@ export class OracleProxyOracleDisabledEvent {
 	get asV45(): productionEvents.OracleProxyOracleDisabledEvent['asV45'] {
 		return this.production.asV45
 	}
-	get isV45Stage(): stageEvents.OracleProxyOracleDisabledEvent['isV45'] {
-		return this.stage.isV45
-	}
-	get asV45Stage(): stageEvents.OracleProxyOracleDisabledEvent['asV45'] {
-		return this.stage.asV45
-	}
-	get isV60Dev(): devEvents.OracleProxyOracleDisabledEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.OracleProxyOracleDisabledEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class OracleProxyOracleEnabledEvent {
 	private readonly production: productionEvents.OracleProxyOracleEnabledEvent
 	private readonly stage: stageEvents.OracleProxyOracleEnabledEvent
+	private readonly test: testEvents.OracleProxyOracleEnabledEvent
 	private readonly dev: devEvents.OracleProxyOracleEnabledEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.OracleProxyOracleEnabledEvent(ctx, event)
 		this.stage = new stageEvents.OracleProxyOracleEnabledEvent(ctx, event)
+		this.test = new testEvents.OracleProxyOracleEnabledEvent(ctx, event)
 		this.dev = new devEvents.OracleProxyOracleEnabledEvent(ctx, event)
 	}
 
@@ -7639,18 +3869,6 @@ export class OracleProxyOracleEnabledEvent {
 	}
 	get asV45(): productionEvents.OracleProxyOracleEnabledEvent['asV45'] {
 		return this.production.asV45
-	}
-	get isV45Stage(): stageEvents.OracleProxyOracleEnabledEvent['isV45'] {
-		return this.stage.isV45
-	}
-	get asV45Stage(): stageEvents.OracleProxyOracleEnabledEvent['asV45'] {
-		return this.stage.asV45
-	}
-	get isV60Dev(): devEvents.OracleProxyOracleEnabledEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.OracleProxyOracleEnabledEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -7673,24 +3891,6 @@ export class PermissionsPermissionAssignedEvent {
 	get asV1(): productionEvents.PermissionsPermissionAssignedEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.PermissionsPermissionAssignedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.PermissionsPermissionAssignedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.PermissionsPermissionAssignedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.PermissionsPermissionAssignedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.PermissionsPermissionAssignedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.PermissionsPermissionAssignedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class PermissionsPermissionCreatedEvent {
@@ -7711,24 +3911,6 @@ export class PermissionsPermissionCreatedEvent {
 	}
 	get asV1(): productionEvents.PermissionsPermissionCreatedEvent['asV1'] {
 		return this.production.asV1
-	}
-	get isV33Stage(): stageEvents.PermissionsPermissionCreatedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.PermissionsPermissionCreatedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.PermissionsPermissionCreatedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.PermissionsPermissionCreatedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.PermissionsPermissionCreatedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.PermissionsPermissionCreatedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -7751,24 +3933,6 @@ export class PermissionsPermissionGrantedEvent {
 	get asV1(): productionEvents.PermissionsPermissionGrantedEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.PermissionsPermissionGrantedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.PermissionsPermissionGrantedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.PermissionsPermissionGrantedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.PermissionsPermissionGrantedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.PermissionsPermissionGrantedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.PermissionsPermissionGrantedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class PermissionsPermissionTransferedEvent {
@@ -7789,24 +3953,6 @@ export class PermissionsPermissionTransferedEvent {
 	}
 	get asV1(): productionEvents.PermissionsPermissionTransferedEvent['asV1'] {
 		return this.production.asV1
-	}
-	get isV33Stage(): stageEvents.PermissionsPermissionTransferedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.PermissionsPermissionTransferedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.PermissionsPermissionTransferedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.PermissionsPermissionTransferedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.PermissionsPermissionTransferedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.PermissionsPermissionTransferedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -7829,24 +3975,6 @@ export class PoolXykPoolIsInitializedEvent {
 	get asV1(): productionEvents.PoolXykPoolIsInitializedEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.PoolXykPoolIsInitializedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.PoolXykPoolIsInitializedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.PoolXykPoolIsInitializedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.PoolXykPoolIsInitializedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.PoolXykPoolIsInitializedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.PoolXykPoolIsInitializedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class PreimageClearedEvent {
@@ -7865,18 +3993,6 @@ export class PreimageClearedEvent {
 	}
 	get asV53(): productionEvents.PreimageClearedEvent['asV53'] {
 		return this.production.asV53
-	}
-	get isV52Stage(): stageEvents.PreimageClearedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.PreimageClearedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.PreimageClearedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.PreimageClearedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -7897,18 +4013,6 @@ export class PreimageNotedEvent {
 	get asV53(): productionEvents.PreimageNotedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV52Stage(): stageEvents.PreimageNotedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.PreimageNotedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.PreimageNotedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.PreimageNotedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class PreimageRequestedEvent {
@@ -7927,18 +4031,6 @@ export class PreimageRequestedEvent {
 	}
 	get asV53(): productionEvents.PreimageRequestedEvent['asV53'] {
 		return this.production.asV53
-	}
-	get isV52Stage(): stageEvents.PreimageRequestedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.PreimageRequestedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.PreimageRequestedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.PreimageRequestedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -7966,36 +4058,6 @@ export class PswapDistributionBurnRateChangedEvent {
 	}
 	get asV42(): productionEvents.PswapDistributionBurnRateChangedEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV33Stage(): stageEvents.PswapDistributionBurnRateChangedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.PswapDistributionBurnRateChangedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.PswapDistributionBurnRateChangedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.PswapDistributionBurnRateChangedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.PswapDistributionBurnRateChangedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.PswapDistributionBurnRateChangedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.PswapDistributionBurnRateChangedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.PswapDistributionBurnRateChangedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.PswapDistributionBurnRateChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.PswapDistributionBurnRateChangedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -8036,48 +4098,6 @@ export class PswapDistributionFeesExchangeFailedEvent {
 	get asV53(): productionEvents.PswapDistributionFeesExchangeFailedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV33Stage(): stageEvents.PswapDistributionFeesExchangeFailedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.PswapDistributionFeesExchangeFailedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.PswapDistributionFeesExchangeFailedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.PswapDistributionFeesExchangeFailedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV46Stage(): stageEvents.PswapDistributionFeesExchangeFailedEvent['isV46'] {
-		return this.stage.isV46
-	}
-	get asV46Stage(): stageEvents.PswapDistributionFeesExchangeFailedEvent['asV46'] {
-		return this.stage.asV46
-	}
-	get isV52Stage(): stageEvents.PswapDistributionFeesExchangeFailedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.PswapDistributionFeesExchangeFailedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV41Test(): testEvents.PswapDistributionFeesExchangeFailedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.PswapDistributionFeesExchangeFailedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.PswapDistributionFeesExchangeFailedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.PswapDistributionFeesExchangeFailedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.PswapDistributionFeesExchangeFailedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.PswapDistributionFeesExchangeFailedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class PswapDistributionFeesExchangedEvent {
@@ -8104,36 +4124,6 @@ export class PswapDistributionFeesExchangedEvent {
 	}
 	get asV42(): productionEvents.PswapDistributionFeesExchangedEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV33Stage(): stageEvents.PswapDistributionFeesExchangedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.PswapDistributionFeesExchangedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.PswapDistributionFeesExchangedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.PswapDistributionFeesExchangedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.PswapDistributionFeesExchangedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.PswapDistributionFeesExchangedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.PswapDistributionFeesExchangedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.PswapDistributionFeesExchangedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.PswapDistributionFeesExchangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.PswapDistributionFeesExchangedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -8162,36 +4152,6 @@ export class PswapDistributionIncentiveDistributedEvent {
 	get asV42(): productionEvents.PswapDistributionIncentiveDistributedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.PswapDistributionIncentiveDistributedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.PswapDistributionIncentiveDistributedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.PswapDistributionIncentiveDistributedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.PswapDistributionIncentiveDistributedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.PswapDistributionIncentiveDistributedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.PswapDistributionIncentiveDistributedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.PswapDistributionIncentiveDistributedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.PswapDistributionIncentiveDistributedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.PswapDistributionIncentiveDistributedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.PswapDistributionIncentiveDistributedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class PswapDistributionIncentiveDistributionFailedEvent {
@@ -8218,24 +4178,6 @@ export class PswapDistributionIncentiveDistributionFailedEvent {
 	}
 	get asV8(): productionEvents.PswapDistributionIncentiveDistributionFailedEvent['asV8'] {
 		return this.production.asV8
-	}
-	get isV33Stage(): stageEvents.PswapDistributionIncentiveDistributionFailedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.PswapDistributionIncentiveDistributionFailedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.PswapDistributionIncentiveDistributionFailedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.PswapDistributionIncentiveDistributionFailedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.PswapDistributionIncentiveDistributionFailedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.PswapDistributionIncentiveDistributionFailedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -8264,36 +4206,6 @@ export class PswapDistributionIncentivesBurnedAfterExchangeEvent {
 	get asV42(): productionEvents.PswapDistributionIncentivesBurnedAfterExchangeEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.PswapDistributionIncentivesBurnedAfterExchangeEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.PswapDistributionIncentivesBurnedAfterExchangeEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.PswapDistributionIncentivesBurnedAfterExchangeEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.PswapDistributionIncentivesBurnedAfterExchangeEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.PswapDistributionIncentivesBurnedAfterExchangeEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.PswapDistributionIncentivesBurnedAfterExchangeEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.PswapDistributionIncentivesBurnedAfterExchangeEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.PswapDistributionIncentivesBurnedAfterExchangeEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.PswapDistributionIncentivesBurnedAfterExchangeEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.PswapDistributionIncentivesBurnedAfterExchangeEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class PswapDistributionNothingToDistributeEvent {
@@ -8314,24 +4226,6 @@ export class PswapDistributionNothingToDistributeEvent {
 	}
 	get asV1(): productionEvents.PswapDistributionNothingToDistributeEvent['asV1'] {
 		return this.production.asV1
-	}
-	get isV33Stage(): stageEvents.PswapDistributionNothingToDistributeEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.PswapDistributionNothingToDistributeEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.PswapDistributionNothingToDistributeEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.PswapDistributionNothingToDistributeEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.PswapDistributionNothingToDistributeEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.PswapDistributionNothingToDistributeEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -8354,24 +4248,6 @@ export class PswapDistributionNothingToExchangeEvent {
 	get asV1(): productionEvents.PswapDistributionNothingToExchangeEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.PswapDistributionNothingToExchangeEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.PswapDistributionNothingToExchangeEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.PswapDistributionNothingToExchangeEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.PswapDistributionNothingToExchangeEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.PswapDistributionNothingToExchangeEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.PswapDistributionNothingToExchangeEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class RewardsClaimedEvent {
@@ -8392,24 +4268,6 @@ export class RewardsClaimedEvent {
 	}
 	get asV1(): productionEvents.RewardsClaimedEvent['asV1'] {
 		return this.production.asV1
-	}
-	get isV33Stage(): stageEvents.RewardsClaimedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.RewardsClaimedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.RewardsClaimedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.RewardsClaimedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.RewardsClaimedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.RewardsClaimedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -8432,24 +4290,6 @@ export class RewardsMigrationCompletedEvent {
 	get asV19(): productionEvents.RewardsMigrationCompletedEvent['asV19'] {
 		return this.production.asV19
 	}
-	get isV33Stage(): stageEvents.RewardsMigrationCompletedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.RewardsMigrationCompletedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.RewardsMigrationCompletedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.RewardsMigrationCompletedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.RewardsMigrationCompletedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.RewardsMigrationCompletedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class SchedulerCallLookupFailedEvent {
@@ -8469,18 +4309,6 @@ export class SchedulerCallLookupFailedEvent {
 	get asV42(): productionEvents.SchedulerCallLookupFailedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.SchedulerCallLookupFailedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.SchedulerCallLookupFailedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV42Test(): testEvents.SchedulerCallLookupFailedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.SchedulerCallLookupFailedEvent['asV42'] {
-		return this.test.asV42
-	}
 }
 
 export class SchedulerCallUnavailableEvent {
@@ -8499,18 +4327,6 @@ export class SchedulerCallUnavailableEvent {
 	}
 	get asV53(): productionEvents.SchedulerCallUnavailableEvent['asV53'] {
 		return this.production.asV53
-	}
-	get isV52Stage(): stageEvents.SchedulerCallUnavailableEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.SchedulerCallUnavailableEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.SchedulerCallUnavailableEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SchedulerCallUnavailableEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -8538,36 +4354,6 @@ export class SchedulerCanceledEvent {
 	}
 	get asV42(): productionEvents.SchedulerCanceledEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV33Stage(): stageEvents.SchedulerCanceledEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.SchedulerCanceledEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.SchedulerCanceledEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.SchedulerCanceledEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.SchedulerCanceledEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.SchedulerCanceledEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.SchedulerCanceledEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.SchedulerCanceledEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.SchedulerCanceledEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SchedulerCanceledEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -8602,42 +4388,6 @@ export class SchedulerDispatchedEvent {
 	get asV53(): productionEvents.SchedulerDispatchedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV33Stage(): stageEvents.SchedulerDispatchedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.SchedulerDispatchedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.SchedulerDispatchedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.SchedulerDispatchedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.SchedulerDispatchedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.SchedulerDispatchedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV41Test(): testEvents.SchedulerDispatchedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.SchedulerDispatchedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.SchedulerDispatchedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.SchedulerDispatchedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.SchedulerDispatchedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SchedulerDispatchedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class SchedulerPeriodicFailedEvent {
@@ -8657,18 +4407,6 @@ export class SchedulerPeriodicFailedEvent {
 	get asV53(): productionEvents.SchedulerPeriodicFailedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV52Stage(): stageEvents.SchedulerPeriodicFailedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.SchedulerPeriodicFailedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.SchedulerPeriodicFailedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SchedulerPeriodicFailedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class SchedulerPermanentlyOverweightEvent {
@@ -8687,18 +4425,6 @@ export class SchedulerPermanentlyOverweightEvent {
 	}
 	get asV53(): productionEvents.SchedulerPermanentlyOverweightEvent['asV53'] {
 		return this.production.asV53
-	}
-	get isV52Stage(): stageEvents.SchedulerPermanentlyOverweightEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.SchedulerPermanentlyOverweightEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.SchedulerPermanentlyOverweightEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SchedulerPermanentlyOverweightEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -8727,36 +4453,6 @@ export class SchedulerScheduledEvent {
 	get asV42(): productionEvents.SchedulerScheduledEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.SchedulerScheduledEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.SchedulerScheduledEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.SchedulerScheduledEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.SchedulerScheduledEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.SchedulerScheduledEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.SchedulerScheduledEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.SchedulerScheduledEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.SchedulerScheduledEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.SchedulerScheduledEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SchedulerScheduledEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class SessionNewSessionEvent {
@@ -8783,36 +4479,6 @@ export class SessionNewSessionEvent {
 	}
 	get asV42(): productionEvents.SessionNewSessionEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV33Stage(): stageEvents.SessionNewSessionEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.SessionNewSessionEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.SessionNewSessionEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.SessionNewSessionEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.SessionNewSessionEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.SessionNewSessionEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.SessionNewSessionEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.SessionNewSessionEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.SessionNewSessionEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SessionNewSessionEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -8841,30 +4507,6 @@ export class StakingBondedEvent {
 	get asV53(): productionEvents.StakingBondedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV33Stage(): stageEvents.StakingBondedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.StakingBondedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV52Stage(): stageEvents.StakingBondedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.StakingBondedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV41Test(): testEvents.StakingBondedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.StakingBondedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.StakingBondedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.StakingBondedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class StakingChilledEvent {
@@ -8891,30 +4533,6 @@ export class StakingChilledEvent {
 	}
 	get asV53(): productionEvents.StakingChilledEvent['asV53'] {
 		return this.production.asV53
-	}
-	get isV42Stage(): stageEvents.StakingChilledEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.StakingChilledEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.StakingChilledEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.StakingChilledEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV42Test(): testEvents.StakingChilledEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.StakingChilledEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.StakingChilledEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.StakingChilledEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -8943,30 +4561,6 @@ export class StakingEraPaidEvent {
 	get asV53(): productionEvents.StakingEraPaidEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV42Stage(): stageEvents.StakingEraPaidEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.StakingEraPaidEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.StakingEraPaidEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.StakingEraPaidEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV42Test(): testEvents.StakingEraPaidEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.StakingEraPaidEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.StakingEraPaidEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.StakingEraPaidEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class StakingEraPayoutEvent {
@@ -8986,18 +4580,6 @@ export class StakingEraPayoutEvent {
 	get asV1(): productionEvents.StakingEraPayoutEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.StakingEraPayoutEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.StakingEraPayoutEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.StakingEraPayoutEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.StakingEraPayoutEvent['asV41'] {
-		return this.test.asV41
-	}
 }
 
 export class StakingForceEraEvent {
@@ -9016,18 +4598,6 @@ export class StakingForceEraEvent {
 	}
 	get asV53(): productionEvents.StakingForceEraEvent['asV53'] {
 		return this.production.asV53
-	}
-	get isV52Stage(): stageEvents.StakingForceEraEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.StakingForceEraEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.StakingForceEraEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.StakingForceEraEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -9056,30 +4626,6 @@ export class StakingKickedEvent {
 	get asV53(): productionEvents.StakingKickedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV33Stage(): stageEvents.StakingKickedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.StakingKickedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV52Stage(): stageEvents.StakingKickedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.StakingKickedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV41Test(): testEvents.StakingKickedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.StakingKickedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.StakingKickedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.StakingKickedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class StakingOldSlashingReportDiscardedEvent {
@@ -9106,30 +4652,6 @@ export class StakingOldSlashingReportDiscardedEvent {
 	}
 	get asV53(): productionEvents.StakingOldSlashingReportDiscardedEvent['asV53'] {
 		return this.production.asV53
-	}
-	get isV33Stage(): stageEvents.StakingOldSlashingReportDiscardedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.StakingOldSlashingReportDiscardedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV52Stage(): stageEvents.StakingOldSlashingReportDiscardedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.StakingOldSlashingReportDiscardedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV41Test(): testEvents.StakingOldSlashingReportDiscardedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.StakingOldSlashingReportDiscardedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.StakingOldSlashingReportDiscardedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.StakingOldSlashingReportDiscardedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -9158,30 +4680,6 @@ export class StakingPayoutStartedEvent {
 	get asV53(): productionEvents.StakingPayoutStartedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV42Stage(): stageEvents.StakingPayoutStartedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.StakingPayoutStartedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.StakingPayoutStartedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.StakingPayoutStartedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV42Test(): testEvents.StakingPayoutStartedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.StakingPayoutStartedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.StakingPayoutStartedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.StakingPayoutStartedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class StakingRewardEvent {
@@ -9200,18 +4698,6 @@ export class StakingRewardEvent {
 	}
 	get asV1(): productionEvents.StakingRewardEvent['asV1'] {
 		return this.production.asV1
-	}
-	get isV33Stage(): stageEvents.StakingRewardEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.StakingRewardEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.StakingRewardEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.StakingRewardEvent['asV41'] {
-		return this.test.asV41
 	}
 }
 
@@ -9240,30 +4726,6 @@ export class StakingRewardedEvent {
 	get asV53(): productionEvents.StakingRewardedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV42Stage(): stageEvents.StakingRewardedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.StakingRewardedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.StakingRewardedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.StakingRewardedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV42Test(): testEvents.StakingRewardedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.StakingRewardedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.StakingRewardedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.StakingRewardedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class StakingSlashEvent {
@@ -9283,18 +4745,6 @@ export class StakingSlashEvent {
 	get asV1(): productionEvents.StakingSlashEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.StakingSlashEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.StakingSlashEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.StakingSlashEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.StakingSlashEvent['asV41'] {
-		return this.test.asV41
-	}
 }
 
 export class StakingSlashReportedEvent {
@@ -9313,18 +4763,6 @@ export class StakingSlashReportedEvent {
 	}
 	get asV53(): productionEvents.StakingSlashReportedEvent['asV53'] {
 		return this.production.asV53
-	}
-	get isV52Stage(): stageEvents.StakingSlashReportedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.StakingSlashReportedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.StakingSlashReportedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.StakingSlashReportedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -9353,30 +4791,6 @@ export class StakingSlashedEvent {
 	get asV53(): productionEvents.StakingSlashedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV42Stage(): stageEvents.StakingSlashedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.StakingSlashedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.StakingSlashedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.StakingSlashedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV42Test(): testEvents.StakingSlashedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.StakingSlashedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.StakingSlashedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.StakingSlashedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class StakingSolutionStoredEvent {
@@ -9395,18 +4809,6 @@ export class StakingSolutionStoredEvent {
 	}
 	get asV1(): productionEvents.StakingSolutionStoredEvent['asV1'] {
 		return this.production.asV1
-	}
-	get isV33Stage(): stageEvents.StakingSolutionStoredEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.StakingSolutionStoredEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.StakingSolutionStoredEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.StakingSolutionStoredEvent['asV41'] {
-		return this.test.asV41
 	}
 }
 
@@ -9429,24 +4831,6 @@ export class StakingStakersElectedEvent {
 	get asV42(): productionEvents.StakingStakersElectedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.StakingStakersElectedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.StakingStakersElectedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV42Test(): testEvents.StakingStakersElectedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.StakingStakersElectedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.StakingStakersElectedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.StakingStakersElectedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class StakingStakingElectionEvent {
@@ -9465,18 +4849,6 @@ export class StakingStakingElectionEvent {
 	}
 	get asV1(): productionEvents.StakingStakingElectionEvent['asV1'] {
 		return this.production.asV1
-	}
-	get isV33Stage(): stageEvents.StakingStakingElectionEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.StakingStakingElectionEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.StakingStakingElectionEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.StakingStakingElectionEvent['asV41'] {
-		return this.test.asV41
 	}
 }
 
@@ -9498,24 +4870,6 @@ export class StakingStakingElectionFailedEvent {
 	}
 	get asV42(): productionEvents.StakingStakingElectionFailedEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV42Stage(): stageEvents.StakingStakingElectionFailedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.StakingStakingElectionFailedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV42Test(): testEvents.StakingStakingElectionFailedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.StakingStakingElectionFailedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.StakingStakingElectionFailedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.StakingStakingElectionFailedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -9544,30 +4898,6 @@ export class StakingUnbondedEvent {
 	get asV53(): productionEvents.StakingUnbondedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV33Stage(): stageEvents.StakingUnbondedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.StakingUnbondedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV52Stage(): stageEvents.StakingUnbondedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.StakingUnbondedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV41Test(): testEvents.StakingUnbondedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.StakingUnbondedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.StakingUnbondedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.StakingUnbondedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class StakingValidatorPrefsSetEvent {
@@ -9594,30 +4924,6 @@ export class StakingValidatorPrefsSetEvent {
 	}
 	get asV53(): productionEvents.StakingValidatorPrefsSetEvent['asV53'] {
 		return this.production.asV53
-	}
-	get isV42Stage(): stageEvents.StakingValidatorPrefsSetEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.StakingValidatorPrefsSetEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.StakingValidatorPrefsSetEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.StakingValidatorPrefsSetEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV42Test(): testEvents.StakingValidatorPrefsSetEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.StakingValidatorPrefsSetEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.StakingValidatorPrefsSetEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.StakingValidatorPrefsSetEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -9646,30 +4952,6 @@ export class StakingWithdrawnEvent {
 	get asV53(): productionEvents.StakingWithdrawnEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV33Stage(): stageEvents.StakingWithdrawnEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.StakingWithdrawnEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV52Stage(): stageEvents.StakingWithdrawnEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.StakingWithdrawnEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV41Test(): testEvents.StakingWithdrawnEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.StakingWithdrawnEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.StakingWithdrawnEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.StakingWithdrawnEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class SudoKeyChangedEvent {
@@ -9691,35 +4973,11 @@ export class SudoKeyChangedEvent {
 	get asV22(): productionEvents.SudoKeyChangedEvent['asV22'] {
 		return this.production.asV22
 	}
-	get isV33Stage(): stageEvents.SudoKeyChangedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.SudoKeyChangedEvent['asV33'] {
-		return this.stage.asV33
-	}
 	get isV42Stage(): stageEvents.SudoKeyChangedEvent['isV42'] {
 		return this.stage.isV42
 	}
 	get asV42Stage(): stageEvents.SudoKeyChangedEvent['asV42'] {
 		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.SudoKeyChangedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.SudoKeyChangedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.SudoKeyChangedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.SudoKeyChangedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.SudoKeyChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SudoKeyChangedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -9742,12 +5000,6 @@ export class SudoSudidEvent {
 	get asV22(): productionEvents.SudoSudidEvent['asV22'] {
 		return this.production.asV22
 	}
-	get isV33Stage(): stageEvents.SudoSudidEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.SudoSudidEvent['asV33'] {
-		return this.stage.asV33
-	}
 	get isV42Stage(): stageEvents.SudoSudidEvent['isV42'] {
 		return this.stage.isV42
 	}
@@ -9759,24 +5011,6 @@ export class SudoSudidEvent {
 	}
 	get asV52Stage(): stageEvents.SudoSudidEvent['asV52'] {
 		return this.stage.asV52
-	}
-	get isV41Test(): testEvents.SudoSudidEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.SudoSudidEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.SudoSudidEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.SudoSudidEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.SudoSudidEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SudoSudidEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -9799,12 +5033,6 @@ export class SudoSudoAsDoneEvent {
 	get asV22(): productionEvents.SudoSudoAsDoneEvent['asV22'] {
 		return this.production.asV22
 	}
-	get isV33Stage(): stageEvents.SudoSudoAsDoneEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.SudoSudoAsDoneEvent['asV33'] {
-		return this.stage.asV33
-	}
 	get isV42Stage(): stageEvents.SudoSudoAsDoneEvent['isV42'] {
 		return this.stage.isV42
 	}
@@ -9816,24 +5044,6 @@ export class SudoSudoAsDoneEvent {
 	}
 	get asV52Stage(): stageEvents.SudoSudoAsDoneEvent['asV52'] {
 		return this.stage.asV52
-	}
-	get isV41Test(): testEvents.SudoSudoAsDoneEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.SudoSudoAsDoneEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.SudoSudoAsDoneEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.SudoSudoAsDoneEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.SudoSudoAsDoneEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SudoSudoAsDoneEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -9855,24 +5065,6 @@ export class SystemCodeUpdatedEvent {
 	}
 	get asV1(): productionEvents.SystemCodeUpdatedEvent['asV1'] {
 		return this.production.asV1
-	}
-	get isV33Stage(): stageEvents.SystemCodeUpdatedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.SystemCodeUpdatedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.SystemCodeUpdatedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.SystemCodeUpdatedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.SystemCodeUpdatedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SystemCodeUpdatedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -9907,42 +5099,6 @@ export class SystemExtrinsicFailedEvent {
 	get asV53(): productionEvents.SystemExtrinsicFailedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV33Stage(): stageEvents.SystemExtrinsicFailedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.SystemExtrinsicFailedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.SystemExtrinsicFailedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.SystemExtrinsicFailedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.SystemExtrinsicFailedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.SystemExtrinsicFailedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV41Test(): testEvents.SystemExtrinsicFailedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.SystemExtrinsicFailedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.SystemExtrinsicFailedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.SystemExtrinsicFailedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.SystemExtrinsicFailedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SystemExtrinsicFailedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class SystemExtrinsicSuccessEvent {
@@ -9976,42 +5132,6 @@ export class SystemExtrinsicSuccessEvent {
 	get asV53(): productionEvents.SystemExtrinsicSuccessEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV33Stage(): stageEvents.SystemExtrinsicSuccessEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.SystemExtrinsicSuccessEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.SystemExtrinsicSuccessEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.SystemExtrinsicSuccessEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.SystemExtrinsicSuccessEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.SystemExtrinsicSuccessEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV41Test(): testEvents.SystemExtrinsicSuccessEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.SystemExtrinsicSuccessEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.SystemExtrinsicSuccessEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.SystemExtrinsicSuccessEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.SystemExtrinsicSuccessEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SystemExtrinsicSuccessEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class SystemKilledAccountEvent {
@@ -10038,36 +5158,6 @@ export class SystemKilledAccountEvent {
 	}
 	get asV42(): productionEvents.SystemKilledAccountEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV33Stage(): stageEvents.SystemKilledAccountEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.SystemKilledAccountEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.SystemKilledAccountEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.SystemKilledAccountEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.SystemKilledAccountEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.SystemKilledAccountEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.SystemKilledAccountEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.SystemKilledAccountEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.SystemKilledAccountEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SystemKilledAccountEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -10096,36 +5186,6 @@ export class SystemNewAccountEvent {
 	get asV42(): productionEvents.SystemNewAccountEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.SystemNewAccountEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.SystemNewAccountEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.SystemNewAccountEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.SystemNewAccountEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.SystemNewAccountEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.SystemNewAccountEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.SystemNewAccountEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.SystemNewAccountEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.SystemNewAccountEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SystemNewAccountEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class SystemRemarkedEvent {
@@ -10146,24 +5206,6 @@ export class SystemRemarkedEvent {
 	}
 	get asV42(): productionEvents.SystemRemarkedEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV42Stage(): stageEvents.SystemRemarkedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.SystemRemarkedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV42Test(): testEvents.SystemRemarkedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.SystemRemarkedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.SystemRemarkedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SystemRemarkedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -10210,48 +5252,6 @@ export class TechnicalBurnedEvent {
 	get asV57(): productionEvents.TechnicalBurnedEvent['asV57'] {
 		return this.production.asV57
 	}
-	get isV33Stage(): stageEvents.TechnicalBurnedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalBurnedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.TechnicalBurnedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TechnicalBurnedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV46Stage(): stageEvents.TechnicalBurnedEvent['isV46'] {
-		return this.stage.isV46
-	}
-	get asV46Stage(): stageEvents.TechnicalBurnedEvent['asV46'] {
-		return this.stage.asV46
-	}
-	get isV54Stage(): stageEvents.TechnicalBurnedEvent['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageEvents.TechnicalBurnedEvent['asV54'] {
-		return this.stage.asV54
-	}
-	get isV41Test(): testEvents.TechnicalBurnedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.TechnicalBurnedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.TechnicalBurnedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.TechnicalBurnedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.TechnicalBurnedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalBurnedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TechnicalInputTransferredEvent {
@@ -10296,48 +5296,6 @@ export class TechnicalInputTransferredEvent {
 	}
 	get asV57(): productionEvents.TechnicalInputTransferredEvent['asV57'] {
 		return this.production.asV57
-	}
-	get isV33Stage(): stageEvents.TechnicalInputTransferredEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalInputTransferredEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.TechnicalInputTransferredEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TechnicalInputTransferredEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV46Stage(): stageEvents.TechnicalInputTransferredEvent['isV46'] {
-		return this.stage.isV46
-	}
-	get asV46Stage(): stageEvents.TechnicalInputTransferredEvent['asV46'] {
-		return this.stage.asV46
-	}
-	get isV54Stage(): stageEvents.TechnicalInputTransferredEvent['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageEvents.TechnicalInputTransferredEvent['asV54'] {
-		return this.stage.asV54
-	}
-	get isV41Test(): testEvents.TechnicalInputTransferredEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.TechnicalInputTransferredEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.TechnicalInputTransferredEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.TechnicalInputTransferredEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.TechnicalInputTransferredEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalInputTransferredEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -10384,48 +5342,6 @@ export class TechnicalMintedEvent {
 	get asV57(): productionEvents.TechnicalMintedEvent['asV57'] {
 		return this.production.asV57
 	}
-	get isV33Stage(): stageEvents.TechnicalMintedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalMintedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.TechnicalMintedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TechnicalMintedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV46Stage(): stageEvents.TechnicalMintedEvent['isV46'] {
-		return this.stage.isV46
-	}
-	get asV46Stage(): stageEvents.TechnicalMintedEvent['asV46'] {
-		return this.stage.asV46
-	}
-	get isV54Stage(): stageEvents.TechnicalMintedEvent['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageEvents.TechnicalMintedEvent['asV54'] {
-		return this.stage.asV54
-	}
-	get isV41Test(): testEvents.TechnicalMintedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.TechnicalMintedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.TechnicalMintedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.TechnicalMintedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.TechnicalMintedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalMintedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TechnicalOutputTransferredEvent {
@@ -10471,48 +5387,6 @@ export class TechnicalOutputTransferredEvent {
 	get asV57(): productionEvents.TechnicalOutputTransferredEvent['asV57'] {
 		return this.production.asV57
 	}
-	get isV33Stage(): stageEvents.TechnicalOutputTransferredEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalOutputTransferredEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.TechnicalOutputTransferredEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TechnicalOutputTransferredEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV46Stage(): stageEvents.TechnicalOutputTransferredEvent['isV46'] {
-		return this.stage.isV46
-	}
-	get asV46Stage(): stageEvents.TechnicalOutputTransferredEvent['asV46'] {
-		return this.stage.asV46
-	}
-	get isV54Stage(): stageEvents.TechnicalOutputTransferredEvent['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageEvents.TechnicalOutputTransferredEvent['asV54'] {
-		return this.stage.asV54
-	}
-	get isV41Test(): testEvents.TechnicalOutputTransferredEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.TechnicalOutputTransferredEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.TechnicalOutputTransferredEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.TechnicalOutputTransferredEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.TechnicalOutputTransferredEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalOutputTransferredEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TechnicalSwapSuccessEvent {
@@ -10533,24 +5407,6 @@ export class TechnicalSwapSuccessEvent {
 	}
 	get asV1(): productionEvents.TechnicalSwapSuccessEvent['asV1'] {
 		return this.production.asV1
-	}
-	get isV33Stage(): stageEvents.TechnicalSwapSuccessEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalSwapSuccessEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.TechnicalSwapSuccessEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.TechnicalSwapSuccessEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.TechnicalSwapSuccessEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalSwapSuccessEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -10579,36 +5435,6 @@ export class TechnicalCommitteeApprovedEvent {
 	get asV42(): productionEvents.TechnicalCommitteeApprovedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.TechnicalCommitteeApprovedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalCommitteeApprovedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.TechnicalCommitteeApprovedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TechnicalCommitteeApprovedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.TechnicalCommitteeApprovedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.TechnicalCommitteeApprovedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.TechnicalCommitteeApprovedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.TechnicalCommitteeApprovedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.TechnicalCommitteeApprovedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalCommitteeApprovedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TechnicalCommitteeClosedEvent {
@@ -10636,36 +5462,6 @@ export class TechnicalCommitteeClosedEvent {
 	get asV42(): productionEvents.TechnicalCommitteeClosedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.TechnicalCommitteeClosedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalCommitteeClosedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.TechnicalCommitteeClosedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TechnicalCommitteeClosedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.TechnicalCommitteeClosedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.TechnicalCommitteeClosedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.TechnicalCommitteeClosedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.TechnicalCommitteeClosedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.TechnicalCommitteeClosedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalCommitteeClosedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TechnicalCommitteeDisapprovedEvent {
@@ -10692,36 +5488,6 @@ export class TechnicalCommitteeDisapprovedEvent {
 	}
 	get asV42(): productionEvents.TechnicalCommitteeDisapprovedEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV33Stage(): stageEvents.TechnicalCommitteeDisapprovedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalCommitteeDisapprovedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.TechnicalCommitteeDisapprovedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TechnicalCommitteeDisapprovedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.TechnicalCommitteeDisapprovedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.TechnicalCommitteeDisapprovedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.TechnicalCommitteeDisapprovedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.TechnicalCommitteeDisapprovedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.TechnicalCommitteeDisapprovedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalCommitteeDisapprovedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -10756,42 +5522,6 @@ export class TechnicalCommitteeExecutedEvent {
 	get asV53(): productionEvents.TechnicalCommitteeExecutedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV33Stage(): stageEvents.TechnicalCommitteeExecutedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalCommitteeExecutedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.TechnicalCommitteeExecutedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TechnicalCommitteeExecutedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.TechnicalCommitteeExecutedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.TechnicalCommitteeExecutedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV41Test(): testEvents.TechnicalCommitteeExecutedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.TechnicalCommitteeExecutedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.TechnicalCommitteeExecutedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.TechnicalCommitteeExecutedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.TechnicalCommitteeExecutedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalCommitteeExecutedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TechnicalCommitteeMemberExecutedEvent {
@@ -10825,42 +5555,6 @@ export class TechnicalCommitteeMemberExecutedEvent {
 	get asV53(): productionEvents.TechnicalCommitteeMemberExecutedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV33Stage(): stageEvents.TechnicalCommitteeMemberExecutedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalCommitteeMemberExecutedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.TechnicalCommitteeMemberExecutedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TechnicalCommitteeMemberExecutedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.TechnicalCommitteeMemberExecutedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.TechnicalCommitteeMemberExecutedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV41Test(): testEvents.TechnicalCommitteeMemberExecutedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.TechnicalCommitteeMemberExecutedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.TechnicalCommitteeMemberExecutedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.TechnicalCommitteeMemberExecutedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.TechnicalCommitteeMemberExecutedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalCommitteeMemberExecutedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TechnicalCommitteeProposedEvent {
@@ -10887,36 +5581,6 @@ export class TechnicalCommitteeProposedEvent {
 	}
 	get asV42(): productionEvents.TechnicalCommitteeProposedEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV33Stage(): stageEvents.TechnicalCommitteeProposedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalCommitteeProposedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.TechnicalCommitteeProposedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TechnicalCommitteeProposedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.TechnicalCommitteeProposedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.TechnicalCommitteeProposedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.TechnicalCommitteeProposedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.TechnicalCommitteeProposedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.TechnicalCommitteeProposedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalCommitteeProposedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -10945,36 +5609,6 @@ export class TechnicalCommitteeVotedEvent {
 	get asV42(): productionEvents.TechnicalCommitteeVotedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.TechnicalCommitteeVotedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalCommitteeVotedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.TechnicalCommitteeVotedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TechnicalCommitteeVotedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.TechnicalCommitteeVotedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.TechnicalCommitteeVotedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.TechnicalCommitteeVotedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.TechnicalCommitteeVotedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.TechnicalCommitteeVotedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalCommitteeVotedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TechnicalMembershipDummyEvent {
@@ -10995,24 +5629,6 @@ export class TechnicalMembershipDummyEvent {
 	}
 	get asV1(): productionEvents.TechnicalMembershipDummyEvent['asV1'] {
 		return this.production.asV1
-	}
-	get isV33Stage(): stageEvents.TechnicalMembershipDummyEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalMembershipDummyEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.TechnicalMembershipDummyEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.TechnicalMembershipDummyEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.TechnicalMembershipDummyEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalMembershipDummyEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -11035,24 +5651,6 @@ export class TechnicalMembershipKeyChangedEvent {
 	get asV1(): productionEvents.TechnicalMembershipKeyChangedEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.TechnicalMembershipKeyChangedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalMembershipKeyChangedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.TechnicalMembershipKeyChangedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.TechnicalMembershipKeyChangedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.TechnicalMembershipKeyChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalMembershipKeyChangedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TechnicalMembershipMemberAddedEvent {
@@ -11073,24 +5671,6 @@ export class TechnicalMembershipMemberAddedEvent {
 	}
 	get asV1(): productionEvents.TechnicalMembershipMemberAddedEvent['asV1'] {
 		return this.production.asV1
-	}
-	get isV33Stage(): stageEvents.TechnicalMembershipMemberAddedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalMembershipMemberAddedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.TechnicalMembershipMemberAddedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.TechnicalMembershipMemberAddedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.TechnicalMembershipMemberAddedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalMembershipMemberAddedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -11113,24 +5693,6 @@ export class TechnicalMembershipMemberRemovedEvent {
 	get asV1(): productionEvents.TechnicalMembershipMemberRemovedEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.TechnicalMembershipMemberRemovedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalMembershipMemberRemovedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.TechnicalMembershipMemberRemovedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.TechnicalMembershipMemberRemovedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.TechnicalMembershipMemberRemovedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalMembershipMemberRemovedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TechnicalMembershipMembersResetEvent {
@@ -11151,24 +5713,6 @@ export class TechnicalMembershipMembersResetEvent {
 	}
 	get asV1(): productionEvents.TechnicalMembershipMembersResetEvent['asV1'] {
 		return this.production.asV1
-	}
-	get isV33Stage(): stageEvents.TechnicalMembershipMembersResetEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalMembershipMembersResetEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.TechnicalMembershipMembersResetEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.TechnicalMembershipMembersResetEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.TechnicalMembershipMembersResetEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalMembershipMembersResetEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -11191,24 +5735,6 @@ export class TechnicalMembershipMembersSwappedEvent {
 	get asV1(): productionEvents.TechnicalMembershipMembersSwappedEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.TechnicalMembershipMembersSwappedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalMembershipMembersSwappedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.TechnicalMembershipMembersSwappedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.TechnicalMembershipMembersSwappedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.TechnicalMembershipMembersSwappedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalMembershipMembersSwappedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TokensBalanceSetEvent {
@@ -11230,24 +5756,6 @@ export class TokensBalanceSetEvent {
 	get asV42(): productionEvents.TokensBalanceSetEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.TokensBalanceSetEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TokensBalanceSetEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV42Test(): testEvents.TokensBalanceSetEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.TokensBalanceSetEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.TokensBalanceSetEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TokensBalanceSetEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TokensDepositedEvent {
@@ -11268,24 +5776,6 @@ export class TokensDepositedEvent {
 	}
 	get asV42(): productionEvents.TokensDepositedEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV42Stage(): stageEvents.TokensDepositedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TokensDepositedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV42Test(): testEvents.TokensDepositedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.TokensDepositedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.TokensDepositedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TokensDepositedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -11314,36 +5804,6 @@ export class TokensDustLostEvent {
 	get asV42(): productionEvents.TokensDustLostEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.TokensDustLostEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TokensDustLostEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.TokensDustLostEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TokensDustLostEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.TokensDustLostEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.TokensDustLostEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.TokensDustLostEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.TokensDustLostEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.TokensDustLostEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TokensDustLostEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TokensEndowedEvent {
@@ -11364,24 +5824,6 @@ export class TokensEndowedEvent {
 	}
 	get asV42(): productionEvents.TokensEndowedEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV42Stage(): stageEvents.TokensEndowedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TokensEndowedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV42Test(): testEvents.TokensEndowedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.TokensEndowedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.TokensEndowedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TokensEndowedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -11404,24 +5846,6 @@ export class TokensLockRemovedEvent {
 	get asV42(): productionEvents.TokensLockRemovedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.TokensLockRemovedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TokensLockRemovedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV42Test(): testEvents.TokensLockRemovedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.TokensLockRemovedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.TokensLockRemovedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TokensLockRemovedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TokensLockSetEvent {
@@ -11443,24 +5867,6 @@ export class TokensLockSetEvent {
 	get asV42(): productionEvents.TokensLockSetEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.TokensLockSetEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TokensLockSetEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV42Test(): testEvents.TokensLockSetEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.TokensLockSetEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.TokensLockSetEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TokensLockSetEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TokensLockedEvent {
@@ -11479,18 +5885,6 @@ export class TokensLockedEvent {
 	}
 	get asV53(): productionEvents.TokensLockedEvent['asV53'] {
 		return this.production.asV53
-	}
-	get isV52Stage(): stageEvents.TokensLockedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.TokensLockedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.TokensLockedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TokensLockedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -11513,24 +5907,6 @@ export class TokensReserveRepatriatedEvent {
 	get asV42(): productionEvents.TokensReserveRepatriatedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.TokensReserveRepatriatedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TokensReserveRepatriatedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV42Test(): testEvents.TokensReserveRepatriatedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.TokensReserveRepatriatedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.TokensReserveRepatriatedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TokensReserveRepatriatedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TokensReservedEvent {
@@ -11551,24 +5927,6 @@ export class TokensReservedEvent {
 	}
 	get asV42(): productionEvents.TokensReservedEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV42Stage(): stageEvents.TokensReservedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TokensReservedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV42Test(): testEvents.TokensReservedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.TokensReservedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.TokensReservedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TokensReservedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -11591,24 +5949,6 @@ export class TokensSlashedEvent {
 	get asV42(): productionEvents.TokensSlashedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.TokensSlashedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TokensSlashedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV42Test(): testEvents.TokensSlashedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.TokensSlashedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.TokensSlashedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TokensSlashedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TokensTotalIssuanceSetEvent {
@@ -11629,24 +5969,6 @@ export class TokensTotalIssuanceSetEvent {
 	}
 	get asV42(): productionEvents.TokensTotalIssuanceSetEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV42Stage(): stageEvents.TokensTotalIssuanceSetEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TokensTotalIssuanceSetEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV42Test(): testEvents.TokensTotalIssuanceSetEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.TokensTotalIssuanceSetEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.TokensTotalIssuanceSetEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TokensTotalIssuanceSetEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -11669,24 +5991,6 @@ export class TokensTransferEvent {
 	get asV42(): productionEvents.TokensTransferEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.TokensTransferEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TokensTransferEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV42Test(): testEvents.TokensTransferEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.TokensTransferEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.TokensTransferEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TokensTransferEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TokensTransferredEvent {
@@ -11706,18 +6010,6 @@ export class TokensTransferredEvent {
 	get asV1(): productionEvents.TokensTransferredEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.TokensTransferredEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TokensTransferredEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.TokensTransferredEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.TokensTransferredEvent['asV41'] {
-		return this.test.asV41
-	}
 }
 
 export class TokensUnlockedEvent {
@@ -11736,18 +6028,6 @@ export class TokensUnlockedEvent {
 	}
 	get asV53(): productionEvents.TokensUnlockedEvent['asV53'] {
 		return this.production.asV53
-	}
-	get isV52Stage(): stageEvents.TokensUnlockedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.TokensUnlockedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.TokensUnlockedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TokensUnlockedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -11770,24 +6050,6 @@ export class TokensUnreservedEvent {
 	get asV42(): productionEvents.TokensUnreservedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.TokensUnreservedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TokensUnreservedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV42Test(): testEvents.TokensUnreservedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.TokensUnreservedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.TokensUnreservedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TokensUnreservedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TokensWithdrawnEvent {
@@ -11808,24 +6070,6 @@ export class TokensWithdrawnEvent {
 	}
 	get asV42(): productionEvents.TokensWithdrawnEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV42Stage(): stageEvents.TokensWithdrawnEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TokensWithdrawnEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV42Test(): testEvents.TokensWithdrawnEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.TokensWithdrawnEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.TokensWithdrawnEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TokensWithdrawnEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -11854,36 +6098,6 @@ export class TradingPairTradingPairStoredEvent {
 	get asV42(): productionEvents.TradingPairTradingPairStoredEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.TradingPairTradingPairStoredEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TradingPairTradingPairStoredEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.TradingPairTradingPairStoredEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TradingPairTradingPairStoredEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.TradingPairTradingPairStoredEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.TradingPairTradingPairStoredEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.TradingPairTradingPairStoredEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.TradingPairTradingPairStoredEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.TradingPairTradingPairStoredEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TradingPairTradingPairStoredEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TransactionPaymentTransactionFeePaidEvent {
@@ -11902,18 +6116,6 @@ export class TransactionPaymentTransactionFeePaidEvent {
 	}
 	get asV53(): productionEvents.TransactionPaymentTransactionFeePaidEvent['asV53'] {
 		return this.production.asV53
-	}
-	get isV52Stage(): stageEvents.TransactionPaymentTransactionFeePaidEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.TransactionPaymentTransactionFeePaidEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.TransactionPaymentTransactionFeePaidEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TransactionPaymentTransactionFeePaidEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -11936,24 +6138,6 @@ export class UtilityBatchCompletedEvent {
 	get asV1(): productionEvents.UtilityBatchCompletedEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.UtilityBatchCompletedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.UtilityBatchCompletedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.UtilityBatchCompletedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.UtilityBatchCompletedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.UtilityBatchCompletedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.UtilityBatchCompletedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class UtilityBatchCompletedWithErrorsEvent {
@@ -11974,24 +6158,6 @@ export class UtilityBatchCompletedWithErrorsEvent {
 	}
 	get asV42(): productionEvents.UtilityBatchCompletedWithErrorsEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV42Stage(): stageEvents.UtilityBatchCompletedWithErrorsEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.UtilityBatchCompletedWithErrorsEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV42Test(): testEvents.UtilityBatchCompletedWithErrorsEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.UtilityBatchCompletedWithErrorsEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.UtilityBatchCompletedWithErrorsEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.UtilityBatchCompletedWithErrorsEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -12026,42 +6192,6 @@ export class UtilityBatchInterruptedEvent {
 	get asV53(): productionEvents.UtilityBatchInterruptedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV33Stage(): stageEvents.UtilityBatchInterruptedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.UtilityBatchInterruptedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.UtilityBatchInterruptedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.UtilityBatchInterruptedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.UtilityBatchInterruptedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.UtilityBatchInterruptedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV41Test(): testEvents.UtilityBatchInterruptedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.UtilityBatchInterruptedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.UtilityBatchInterruptedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.UtilityBatchInterruptedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.UtilityBatchInterruptedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.UtilityBatchInterruptedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class UtilityDispatchedAsEvent {
@@ -12089,30 +6219,6 @@ export class UtilityDispatchedAsEvent {
 	get asV53(): productionEvents.UtilityDispatchedAsEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV42Stage(): stageEvents.UtilityDispatchedAsEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.UtilityDispatchedAsEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.UtilityDispatchedAsEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.UtilityDispatchedAsEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV42Test(): testEvents.UtilityDispatchedAsEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.UtilityDispatchedAsEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.UtilityDispatchedAsEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.UtilityDispatchedAsEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class UtilityItemCompletedEvent {
@@ -12133,24 +6239,6 @@ export class UtilityItemCompletedEvent {
 	}
 	get asV42(): productionEvents.UtilityItemCompletedEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV42Stage(): stageEvents.UtilityItemCompletedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.UtilityItemCompletedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV42Test(): testEvents.UtilityItemCompletedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.UtilityItemCompletedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.UtilityItemCompletedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.UtilityItemCompletedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -12178,30 +6266,6 @@ export class UtilityItemFailedEvent {
 	}
 	get asV53(): productionEvents.UtilityItemFailedEvent['asV53'] {
 		return this.production.asV53
-	}
-	get isV42Stage(): stageEvents.UtilityItemFailedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.UtilityItemFailedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.UtilityItemFailedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.UtilityItemFailedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV42Test(): testEvents.UtilityItemFailedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.UtilityItemFailedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.UtilityItemFailedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.UtilityItemFailedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -12236,42 +6300,6 @@ export class VestedRewardsActualDoesntMatchAvailableEvent {
 	get asV45(): productionEvents.VestedRewardsActualDoesntMatchAvailableEvent['asV45'] {
 		return this.production.asV45
 	}
-	get isV33Stage(): stageEvents.VestedRewardsActualDoesntMatchAvailableEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.VestedRewardsActualDoesntMatchAvailableEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.VestedRewardsActualDoesntMatchAvailableEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.VestedRewardsActualDoesntMatchAvailableEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV44Stage(): stageEvents.VestedRewardsActualDoesntMatchAvailableEvent['isV44'] {
-		return this.stage.isV44
-	}
-	get asV44Stage(): stageEvents.VestedRewardsActualDoesntMatchAvailableEvent['asV44'] {
-		return this.stage.asV44
-	}
-	get isV41Test(): testEvents.VestedRewardsActualDoesntMatchAvailableEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.VestedRewardsActualDoesntMatchAvailableEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.VestedRewardsActualDoesntMatchAvailableEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.VestedRewardsActualDoesntMatchAvailableEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.VestedRewardsActualDoesntMatchAvailableEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.VestedRewardsActualDoesntMatchAvailableEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class VestedRewardsAddingZeroMarketMakerRewardEvent {
@@ -12291,18 +6319,6 @@ export class VestedRewardsAddingZeroMarketMakerRewardEvent {
 	get asV7(): productionEvents.VestedRewardsAddingZeroMarketMakerRewardEvent['asV7'] {
 		return this.production.asV7
 	}
-	get isV33Stage(): stageEvents.VestedRewardsAddingZeroMarketMakerRewardEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.VestedRewardsAddingZeroMarketMakerRewardEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.VestedRewardsAddingZeroMarketMakerRewardEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.VestedRewardsAddingZeroMarketMakerRewardEvent['asV41'] {
-		return this.test.asV41
-	}
 }
 
 export class VestedRewardsCrowdloanClaimedEvent {
@@ -12321,18 +6337,6 @@ export class VestedRewardsCrowdloanClaimedEvent {
 	}
 	get asV53(): productionEvents.VestedRewardsCrowdloanClaimedEvent['asV53'] {
 		return this.production.asV53
-	}
-	get isV52Stage(): stageEvents.VestedRewardsCrowdloanClaimedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.VestedRewardsCrowdloanClaimedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.VestedRewardsCrowdloanClaimedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.VestedRewardsCrowdloanClaimedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -12355,24 +6359,6 @@ export class VestedRewardsFailedToSaveCalculatedRewardEvent {
 	get asV7(): productionEvents.VestedRewardsFailedToSaveCalculatedRewardEvent['asV7'] {
 		return this.production.asV7
 	}
-	get isV33Stage(): stageEvents.VestedRewardsFailedToSaveCalculatedRewardEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.VestedRewardsFailedToSaveCalculatedRewardEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.VestedRewardsFailedToSaveCalculatedRewardEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.VestedRewardsFailedToSaveCalculatedRewardEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.VestedRewardsFailedToSaveCalculatedRewardEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.VestedRewardsFailedToSaveCalculatedRewardEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class VestedRewardsNoEligibleMarketMakersEvent {
@@ -12391,18 +6377,6 @@ export class VestedRewardsNoEligibleMarketMakersEvent {
 	}
 	get asV7(): productionEvents.VestedRewardsNoEligibleMarketMakersEvent['asV7'] {
 		return this.production.asV7
-	}
-	get isV33Stage(): stageEvents.VestedRewardsNoEligibleMarketMakersEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.VestedRewardsNoEligibleMarketMakersEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.VestedRewardsNoEligibleMarketMakersEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.VestedRewardsNoEligibleMarketMakersEvent['asV41'] {
-		return this.test.asV41
 	}
 }
 
@@ -12424,24 +6398,6 @@ export class VestedRewardsRewardsVestedEvent {
 	}
 	get asV1(): productionEvents.VestedRewardsRewardsVestedEvent['asV1'] {
 		return this.production.asV1
-	}
-	get isV33Stage(): stageEvents.VestedRewardsRewardsVestedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.VestedRewardsRewardsVestedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.VestedRewardsRewardsVestedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.VestedRewardsRewardsVestedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.VestedRewardsRewardsVestedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.VestedRewardsRewardsVestedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -12467,30 +6423,6 @@ export class XstPoolPoolInitializedEvent {
 	}
 	get asV42(): productionEvents.XstPoolPoolInitializedEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV33Stage(): stageEvents.XstPoolPoolInitializedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.XstPoolPoolInitializedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.XstPoolPoolInitializedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.XstPoolPoolInitializedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.XstPoolPoolInitializedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.XstPoolPoolInitializedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.XstPoolPoolInitializedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.XstPoolPoolInitializedEvent['asV42'] {
-		return this.test.asV42
 	}
 }
 
@@ -12519,36 +6451,6 @@ export class XstPoolReferenceAssetChangedEvent {
 	get asV42(): productionEvents.XstPoolReferenceAssetChangedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.XstPoolReferenceAssetChangedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.XstPoolReferenceAssetChangedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.XstPoolReferenceAssetChangedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.XstPoolReferenceAssetChangedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV41Test(): testEvents.XstPoolReferenceAssetChangedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.XstPoolReferenceAssetChangedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV42Test(): testEvents.XstPoolReferenceAssetChangedEvent['isV42'] {
-		return this.test.isV42
-	}
-	get asV42Test(): testEvents.XstPoolReferenceAssetChangedEvent['asV42'] {
-		return this.test.asV42
-	}
-	get isV60Dev(): devEvents.XstPoolReferenceAssetChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.XstPoolReferenceAssetChangedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class XstPoolSyntheticAssetDisabledEvent {
@@ -12568,28 +6470,18 @@ export class XstPoolSyntheticAssetDisabledEvent {
 	get asV57(): productionEvents.XstPoolSyntheticAssetDisabledEvent['asV57'] {
 		return this.production.asV57
 	}
-	get isV54Stage(): stageEvents.XstPoolSyntheticAssetDisabledEvent['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageEvents.XstPoolSyntheticAssetDisabledEvent['asV54'] {
-		return this.stage.asV54
-	}
-	get isV60Dev(): devEvents.XstPoolSyntheticAssetDisabledEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.XstPoolSyntheticAssetDisabledEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class XstPoolSyntheticAssetEnabledEvent {
 	private readonly production: productionEvents.XstPoolSyntheticAssetEnabledEvent
 	private readonly stage: stageEvents.XstPoolSyntheticAssetEnabledEvent
+	private readonly test: testEvents.XstPoolSyntheticAssetEnabledEvent
 	private readonly dev: devEvents.XstPoolSyntheticAssetEnabledEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.XstPoolSyntheticAssetEnabledEvent(ctx, event)
 		this.stage = new stageEvents.XstPoolSyntheticAssetEnabledEvent(ctx, event)
+		this.test = new testEvents.XstPoolSyntheticAssetEnabledEvent(ctx, event)
 		this.dev = new devEvents.XstPoolSyntheticAssetEnabledEvent(ctx, event)
 	}
 
@@ -12604,24 +6496,6 @@ export class XstPoolSyntheticAssetEnabledEvent {
 	}
 	get asV57(): productionEvents.XstPoolSyntheticAssetEnabledEvent['asV57'] {
 		return this.production.asV57
-	}
-	get isV44Stage(): stageEvents.XstPoolSyntheticAssetEnabledEvent['isV44'] {
-		return this.stage.isV44
-	}
-	get asV44Stage(): stageEvents.XstPoolSyntheticAssetEnabledEvent['asV44'] {
-		return this.stage.asV44
-	}
-	get isV54Stage(): stageEvents.XstPoolSyntheticAssetEnabledEvent['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageEvents.XstPoolSyntheticAssetEnabledEvent['asV54'] {
-		return this.stage.asV54
-	}
-	get isV60Dev(): devEvents.XstPoolSyntheticAssetEnabledEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.XstPoolSyntheticAssetEnabledEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -12642,18 +6516,6 @@ export class XstPoolSyntheticAssetFeeChangedEvent {
 	get asV57(): productionEvents.XstPoolSyntheticAssetFeeChangedEvent['asV57'] {
 		return this.production.asV57
 	}
-	get isV54Stage(): stageEvents.XstPoolSyntheticAssetFeeChangedEvent['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageEvents.XstPoolSyntheticAssetFeeChangedEvent['asV54'] {
-		return this.stage.asV54
-	}
-	get isV60Dev(): devEvents.XstPoolSyntheticAssetFeeChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.XstPoolSyntheticAssetFeeChangedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class XstPoolSyntheticAssetRemovedEvent {
@@ -12673,28 +6535,18 @@ export class XstPoolSyntheticAssetRemovedEvent {
 	get asV60(): productionEvents.XstPoolSyntheticAssetRemovedEvent['asV60'] {
 		return this.production.asV60
 	}
-	get isV60Stage(): stageEvents.XstPoolSyntheticAssetRemovedEvent['isV60'] {
-		return this.stage.isV60
-	}
-	get asV60Stage(): stageEvents.XstPoolSyntheticAssetRemovedEvent['asV60'] {
-		return this.stage.asV60
-	}
-	get isV60Dev(): devEvents.XstPoolSyntheticAssetRemovedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.XstPoolSyntheticAssetRemovedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class XstPoolSyntheticBaseAssetFloorPriceChangedEvent {
 	private readonly production: productionEvents.XstPoolSyntheticBaseAssetFloorPriceChangedEvent
 	private readonly stage: stageEvents.XstPoolSyntheticBaseAssetFloorPriceChangedEvent
+	private readonly test: testEvents.XstPoolSyntheticBaseAssetFloorPriceChangedEvent
 	private readonly dev: devEvents.XstPoolSyntheticBaseAssetFloorPriceChangedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.XstPoolSyntheticBaseAssetFloorPriceChangedEvent(ctx, event)
 		this.stage = new stageEvents.XstPoolSyntheticBaseAssetFloorPriceChangedEvent(ctx, event)
+		this.test = new testEvents.XstPoolSyntheticBaseAssetFloorPriceChangedEvent(ctx, event)
 		this.dev = new devEvents.XstPoolSyntheticBaseAssetFloorPriceChangedEvent(ctx, event)
 	}
 
@@ -12703,18 +6555,6 @@ export class XstPoolSyntheticBaseAssetFloorPriceChangedEvent {
 	}
 	get asV45(): productionEvents.XstPoolSyntheticBaseAssetFloorPriceChangedEvent['asV45'] {
 		return this.production.asV45
-	}
-	get isV44Stage(): stageEvents.XstPoolSyntheticBaseAssetFloorPriceChangedEvent['isV44'] {
-		return this.stage.isV44
-	}
-	get asV44Stage(): stageEvents.XstPoolSyntheticBaseAssetFloorPriceChangedEvent['asV44'] {
-		return this.stage.asV44
-	}
-	get isV60Dev(): devEvents.XstPoolSyntheticBaseAssetFloorPriceChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.XstPoolSyntheticBaseAssetFloorPriceChangedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -12737,24 +6577,6 @@ export class XorFeeFeeWithdrawnEvent {
 	get asV1(): productionEvents.XorFeeFeeWithdrawnEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.XorFeeFeeWithdrawnEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.XorFeeFeeWithdrawnEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.XorFeeFeeWithdrawnEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.XorFeeFeeWithdrawnEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.XorFeeFeeWithdrawnEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.XorFeeFeeWithdrawnEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class XorFeeReferrerRewardedEvent {
@@ -12775,24 +6597,6 @@ export class XorFeeReferrerRewardedEvent {
 	}
 	get asV22(): productionEvents.XorFeeReferrerRewardedEvent['asV22'] {
 		return this.production.asV22
-	}
-	get isV33Stage(): stageEvents.XorFeeReferrerRewardedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.XorFeeReferrerRewardedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV41Test(): testEvents.XorFeeReferrerRewardedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.XorFeeReferrerRewardedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.XorFeeReferrerRewardedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.XorFeeReferrerRewardedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -12815,24 +6619,6 @@ export class XorFeeWeightToFeeMultiplierUpdatedEvent {
 	get asV37(): productionEvents.XorFeeWeightToFeeMultiplierUpdatedEvent['asV37'] {
 		return this.production.asV37
 	}
-	get isV37Stage(): stageEvents.XorFeeWeightToFeeMultiplierUpdatedEvent['isV37'] {
-		return this.stage.isV37
-	}
-	get asV37Stage(): stageEvents.XorFeeWeightToFeeMultiplierUpdatedEvent['asV37'] {
-		return this.stage.asV37
-	}
-	get isV41Test(): testEvents.XorFeeWeightToFeeMultiplierUpdatedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.XorFeeWeightToFeeMultiplierUpdatedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.XorFeeWeightToFeeMultiplierUpdatedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.XorFeeWeightToFeeMultiplierUpdatedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BeefyLightClientNewMmrRootEvent {
@@ -12849,12 +6635,6 @@ export class BeefyLightClientNewMmrRootEvent {
 	}
 	get asV52Stage(): stageEvents.BeefyLightClientNewMmrRootEvent['asV52'] {
 		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.BeefyLightClientNewMmrRootEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BeefyLightClientNewMmrRootEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -12873,12 +6653,6 @@ export class BeefyLightClientValidatorRegistryUpdatedEvent {
 	get asV52Stage(): stageEvents.BeefyLightClientValidatorRegistryUpdatedEvent['asV52'] {
 		return this.stage.asV52
 	}
-	get isV60Dev(): devEvents.BeefyLightClientValidatorRegistryUpdatedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BeefyLightClientValidatorRegistryUpdatedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BeefyLightClientVerificationSuccessfulEvent {
@@ -12895,12 +6669,6 @@ export class BeefyLightClientVerificationSuccessfulEvent {
 	}
 	get asV52Stage(): stageEvents.BeefyLightClientVerificationSuccessfulEvent['asV52'] {
 		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.BeefyLightClientVerificationSuccessfulEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BeefyLightClientVerificationSuccessfulEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -12919,12 +6687,6 @@ export class BridgeDataSignerAddedPeerEvent {
 	get asV54Stage(): stageEvents.BridgeDataSignerAddedPeerEvent['asV54'] {
 		return this.stage.asV54
 	}
-	get isV60Dev(): devEvents.BridgeDataSignerAddedPeerEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BridgeDataSignerAddedPeerEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BridgeDataSignerApprovalAcceptedEvent {
@@ -12941,12 +6703,6 @@ export class BridgeDataSignerApprovalAcceptedEvent {
 	}
 	get asV54Stage(): stageEvents.BridgeDataSignerApprovalAcceptedEvent['asV54'] {
 		return this.stage.asV54
-	}
-	get isV60Dev(): devEvents.BridgeDataSignerApprovalAcceptedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BridgeDataSignerApprovalAcceptedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -12965,12 +6721,6 @@ export class BridgeDataSignerApprovedEvent {
 	get asV54Stage(): stageEvents.BridgeDataSignerApprovedEvent['asV54'] {
 		return this.stage.asV54
 	}
-	get isV60Dev(): devEvents.BridgeDataSignerApprovedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BridgeDataSignerApprovedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BridgeDataSignerInitializedEvent {
@@ -12988,12 +6738,6 @@ export class BridgeDataSignerInitializedEvent {
 	get asV54Stage(): stageEvents.BridgeDataSignerInitializedEvent['asV54'] {
 		return this.stage.asV54
 	}
-	get isV60Dev(): devEvents.BridgeDataSignerInitializedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BridgeDataSignerInitializedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BridgeDataSignerRemovedPeerEvent {
@@ -13010,12 +6754,6 @@ export class BridgeDataSignerRemovedPeerEvent {
 	}
 	get asV54Stage(): stageEvents.BridgeDataSignerRemovedPeerEvent['asV54'] {
 		return this.stage.asV54
-	}
-	get isV60Dev(): devEvents.BridgeDataSignerRemovedPeerEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BridgeDataSignerRemovedPeerEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -13040,12 +6778,6 @@ export class BridgeOutboundChannelMessageAcceptedEvent {
 	get asV55Stage(): stageEvents.BridgeOutboundChannelMessageAcceptedEvent['asV55'] {
 		return this.stage.asV55
 	}
-	get isV60Dev(): devEvents.BridgeOutboundChannelMessageAcceptedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BridgeOutboundChannelMessageAcceptedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BridgeProxyRefundFailedEvent {
@@ -13063,12 +6795,6 @@ export class BridgeProxyRefundFailedEvent {
 	get asV54Stage(): stageEvents.BridgeProxyRefundFailedEvent['asV54'] {
 		return this.stage.asV54
 	}
-	get isV60Dev(): devEvents.BridgeProxyRefundFailedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BridgeProxyRefundFailedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BridgeProxyRequestStatusUpdateEvent {
@@ -13085,12 +6811,6 @@ export class BridgeProxyRequestStatusUpdateEvent {
 	}
 	get asV54Stage(): stageEvents.BridgeProxyRequestStatusUpdateEvent['asV54'] {
 		return this.stage.asV54
-	}
-	get isV60Dev(): devEvents.BridgeProxyRequestStatusUpdateEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BridgeProxyRequestStatusUpdateEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -13121,12 +6841,6 @@ export class DispatchMessageDecodeFailedEvent {
 	get asV59Stage(): stageEvents.DispatchMessageDecodeFailedEvent['asV59'] {
 		return this.stage.asV59
 	}
-	get isV60Dev(): devEvents.DispatchMessageDecodeFailedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DispatchMessageDecodeFailedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DispatchMessageDispatchedEvent {
@@ -13155,12 +6869,6 @@ export class DispatchMessageDispatchedEvent {
 	}
 	get asV59Stage(): stageEvents.DispatchMessageDispatchedEvent['asV59'] {
 		return this.stage.asV59
-	}
-	get isV60Dev(): devEvents.DispatchMessageDispatchedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DispatchMessageDispatchedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -13191,12 +6899,6 @@ export class DispatchMessageRejectedEvent {
 	get asV59Stage(): stageEvents.DispatchMessageRejectedEvent['asV59'] {
 		return this.stage.asV59
 	}
-	get isV60Dev(): devEvents.DispatchMessageRejectedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DispatchMessageRejectedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class Erc20AppBurnedEvent {
@@ -13213,12 +6915,6 @@ export class Erc20AppBurnedEvent {
 	}
 	get asV52Stage(): stageEvents.Erc20AppBurnedEvent['asV52'] {
 		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.Erc20AppBurnedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.Erc20AppBurnedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -13237,12 +6933,6 @@ export class Erc20AppMintedEvent {
 	get asV52Stage(): stageEvents.Erc20AppMintedEvent['asV52'] {
 		return this.stage.asV52
 	}
-	get isV60Dev(): devEvents.Erc20AppMintedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.Erc20AppMintedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class Erc20AppRefundedEvent {
@@ -13259,12 +6949,6 @@ export class Erc20AppRefundedEvent {
 	}
 	get asV52Stage(): stageEvents.Erc20AppRefundedEvent['asV52'] {
 		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.Erc20AppRefundedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.Erc20AppRefundedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -13283,12 +6967,6 @@ export class EthAppBurnedEvent {
 	get asV52Stage(): stageEvents.EthAppBurnedEvent['asV52'] {
 		return this.stage.asV52
 	}
-	get isV60Dev(): devEvents.EthAppBurnedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.EthAppBurnedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class EthAppMintedEvent {
@@ -13305,12 +6983,6 @@ export class EthAppMintedEvent {
 	}
 	get asV52Stage(): stageEvents.EthAppMintedEvent['asV52'] {
 		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.EthAppMintedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.EthAppMintedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -13329,12 +7001,6 @@ export class EthAppRefundedEvent {
 	get asV52Stage(): stageEvents.EthAppRefundedEvent['asV52'] {
 		return this.stage.asV52
 	}
-	get isV60Dev(): devEvents.EthAppRefundedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.EthAppRefundedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class EthereumLightClientFinalizedEvent {
@@ -13351,12 +7017,6 @@ export class EthereumLightClientFinalizedEvent {
 	}
 	get asV52Stage(): stageEvents.EthereumLightClientFinalizedEvent['asV52'] {
 		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.EthereumLightClientFinalizedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.EthereumLightClientFinalizedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -13407,18 +7067,6 @@ export class FaucetLimitUpdatedEvent {
 	get asV37Stage(): stageEvents.FaucetLimitUpdatedEvent['asV37'] {
 		return this.stage.asV37
 	}
-	get isV41Test(): testEvents.FaucetLimitUpdatedEvent['isV41'] {
-		return this.test.isV41
-	}
-	get asV41Test(): testEvents.FaucetLimitUpdatedEvent['asV41'] {
-		return this.test.asV41
-	}
-	get isV60Dev(): devEvents.FaucetLimitUpdatedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.FaucetLimitUpdatedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class MigrationAppErc20MigratedEvent {
@@ -13435,12 +7083,6 @@ export class MigrationAppErc20MigratedEvent {
 	}
 	get asV52Stage(): stageEvents.MigrationAppErc20MigratedEvent['asV52'] {
 		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.MigrationAppErc20MigratedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.MigrationAppErc20MigratedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -13459,12 +7101,6 @@ export class MigrationAppEthMigratedEvent {
 	get asV52Stage(): stageEvents.MigrationAppEthMigratedEvent['asV52'] {
 		return this.stage.asV52
 	}
-	get isV60Dev(): devEvents.MigrationAppEthMigratedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.MigrationAppEthMigratedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class MigrationAppSidechainMigratedEvent {
@@ -13481,12 +7117,6 @@ export class MigrationAppSidechainMigratedEvent {
 	}
 	get asV52Stage(): stageEvents.MigrationAppSidechainMigratedEvent['asV52'] {
 		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.MigrationAppSidechainMigratedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.MigrationAppSidechainMigratedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -13505,12 +7135,6 @@ export class MultisigVerifierNetworkInitializedEvent {
 	get asV54Stage(): stageEvents.MultisigVerifierNetworkInitializedEvent['asV54'] {
 		return this.stage.asV54
 	}
-	get isV60Dev(): devEvents.MultisigVerifierNetworkInitializedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.MultisigVerifierNetworkInitializedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class MultisigVerifierPeerAddedEvent {
@@ -13527,12 +7151,6 @@ export class MultisigVerifierPeerAddedEvent {
 	}
 	get asV54Stage(): stageEvents.MultisigVerifierPeerAddedEvent['asV54'] {
 		return this.stage.asV54
-	}
-	get isV60Dev(): devEvents.MultisigVerifierPeerAddedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.MultisigVerifierPeerAddedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -13551,12 +7169,6 @@ export class MultisigVerifierPeerRemovedEvent {
 	get asV54Stage(): stageEvents.MultisigVerifierPeerRemovedEvent['asV54'] {
 		return this.stage.asV54
 	}
-	get isV60Dev(): devEvents.MultisigVerifierPeerRemovedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.MultisigVerifierPeerRemovedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class MultisigVerifierVerificationSuccessfulEvent {
@@ -13573,12 +7185,6 @@ export class MultisigVerifierVerificationSuccessfulEvent {
 	}
 	get asV54Stage(): stageEvents.MultisigVerifierVerificationSuccessfulEvent['asV54'] {
 		return this.stage.asV54
-	}
-	get isV60Dev(): devEvents.MultisigVerifierVerificationSuccessfulEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.MultisigVerifierVerificationSuccessfulEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -13597,12 +7203,6 @@ export class SubstrateBridgeAppBurnedEvent {
 	get asV52Stage(): stageEvents.SubstrateBridgeAppBurnedEvent['asV52'] {
 		return this.stage.asV52
 	}
-	get isV60Dev(): devEvents.SubstrateBridgeAppBurnedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SubstrateBridgeAppBurnedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class SubstrateBridgeAppMintedEvent {
@@ -13619,12 +7219,6 @@ export class SubstrateBridgeAppMintedEvent {
 	}
 	get asV52Stage(): stageEvents.SubstrateBridgeAppMintedEvent['asV52'] {
 		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.SubstrateBridgeAppMintedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SubstrateBridgeAppMintedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -13648,12 +7242,6 @@ export class SubstrateBridgeOutboundChannelMessageAcceptedEvent {
 	}
 	get asV57Stage(): stageEvents.SubstrateBridgeOutboundChannelMessageAcceptedEvent['asV57'] {
 		return this.stage.asV57
-	}
-	get isV60Dev(): devEvents.SubstrateBridgeOutboundChannelMessageAcceptedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SubstrateBridgeOutboundChannelMessageAcceptedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -13684,12 +7272,6 @@ export class SubstrateDispatchMessageDecodeFailedEvent {
 	get asV59Stage(): stageEvents.SubstrateDispatchMessageDecodeFailedEvent['asV59'] {
 		return this.stage.asV59
 	}
-	get isV60Dev(): devEvents.SubstrateDispatchMessageDecodeFailedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SubstrateDispatchMessageDecodeFailedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class SubstrateDispatchMessageDispatchedEvent {
@@ -13719,12 +7301,6 @@ export class SubstrateDispatchMessageDispatchedEvent {
 	get asV59Stage(): stageEvents.SubstrateDispatchMessageDispatchedEvent['asV59'] {
 		return this.stage.asV59
 	}
-	get isV60Dev(): devEvents.SubstrateDispatchMessageDispatchedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SubstrateDispatchMessageDispatchedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class SubstrateDispatchMessageRejectedEvent {
@@ -13753,12 +7329,6 @@ export class SubstrateDispatchMessageRejectedEvent {
 	}
 	get asV59Stage(): stageEvents.SubstrateDispatchMessageRejectedEvent['asV59'] {
 		return this.stage.asV59
-	}
-	get isV60Dev(): devEvents.SubstrateDispatchMessageRejectedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SubstrateDispatchMessageRejectedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 

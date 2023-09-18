@@ -3,6 +3,10 @@ import {Chain, ChainContext, EventContext, Event, Result, Option} from './suppor
 import * as v41 from './v41'
 import * as v42 from './v42'
 import * as v43 from './v43'
+import * as v44 from './v44'
+import * as v45 from './v45'
+import * as v46 from './v46'
+import * as v48 from './v48'
 
 export class AssetsAssetRegisteredEvent {
     private readonly _chain: Chain
@@ -698,6 +702,108 @@ export class BalancesWithdrawEvent {
      */
     get asV42(): {who: Uint8Array, amount: bigint} {
         assert(this.isV42)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class BandRelayersAddedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'Band.RelayersAdded')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * Added new trusted relayer accounts. [relayers]
+     */
+    get isV44(): boolean {
+        return this._chain.getEventHash('Band.RelayersAdded') === 'b108f68a3a6ead7fe33d80e59b6d7124fdd14cd6108c81ad0b9d713fd6046122'
+    }
+
+    /**
+     * Added new trusted relayer accounts. [relayers]
+     */
+    get asV44(): Uint8Array[] {
+        assert(this.isV44)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class BandRelayersRemovedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'Band.RelayersRemoved')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * Relayer accounts were removed from trusted list. [relayers]
+     */
+    get isV44(): boolean {
+        return this._chain.getEventHash('Band.RelayersRemoved') === 'b108f68a3a6ead7fe33d80e59b6d7124fdd14cd6108c81ad0b9d713fd6046122'
+    }
+
+    /**
+     * Relayer accounts were removed from trusted list. [relayers]
+     */
+    get asV44(): Uint8Array[] {
+        assert(this.isV44)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class BandSymbolsRelayedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'Band.SymbolsRelayed')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * New symbol rates were successfully relayed. [symbols]
+     */
+    get isV44(): boolean {
+        return this._chain.getEventHash('Band.SymbolsRelayed') === '8018b517eb3d19898461f3168440e7afd85f5b5fa0946839c38ca48713c4e0c7'
+    }
+
+    /**
+     * New symbol rates were successfully relayed. [symbols]
+     */
+    get asV44(): string[] {
+        assert(this.isV44)
+        return this._chain.decodeEvent(this.event)
+    }
+
+    /**
+     * New symbol rates were successfully relayed. [symbols]
+     */
+    get isV45(): boolean {
+        return this._chain.getEventHash('Band.SymbolsRelayed') === 'f2b0cabdf20443353008549c96f80fd95d1644cc6340ec9f3b0e586acaa79fe2'
+    }
+
+    /**
+     * New symbol rates were successfully relayed. [symbols]
+     */
+    get asV45(): Uint8Array[] {
+        assert(this.isV45)
         return this._chain.decodeEvent(this.event)
     }
 }
@@ -4389,6 +4495,180 @@ export class GrandpaResumedEvent {
     }
 }
 
+export class HermesGovernancePlatformCreatedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'HermesGovernancePlatform.Created')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * Create poll [who, title, start_timestamp, end_timestamp]
+     */
+    get isV48(): boolean {
+        return this._chain.getEventHash('HermesGovernancePlatform.Created') === 'ebfe5a50f63690fc9fab57be33872850a435d03bec24186c1dde30a0d1be45bc'
+    }
+
+    /**
+     * Create poll [who, title, start_timestamp, end_timestamp]
+     */
+    get asV48(): [Uint8Array, string, bigint, bigint] {
+        assert(this.isV48)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class HermesGovernancePlatformCreatorFundsWithdrawnEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'HermesGovernancePlatform.CreatorFundsWithdrawn')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * Creator Funds Withdrawn [who, balance]
+     */
+    get isV48(): boolean {
+        return this._chain.getEventHash('HermesGovernancePlatform.CreatorFundsWithdrawn') === '23bebce4ca9ed37548947d07d4dc50e772f07401b9a416b6aa2f3e9cb5adcaf4'
+    }
+
+    /**
+     * Creator Funds Withdrawn [who, balance]
+     */
+    get asV48(): [Uint8Array, bigint] {
+        assert(this.isV48)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class HermesGovernancePlatformMinimumHermesForCreatingPollChangedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'HermesGovernancePlatform.MinimumHermesForCreatingPollChanged')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * Change minimum Hermes for creating poll [balance]
+     */
+    get isV48(): boolean {
+        return this._chain.getEventHash('HermesGovernancePlatform.MinimumHermesForCreatingPollChanged') === '47b59f698451e50cce59979f0121e842fa3f8b2bcef2e388222dbd69849514f9'
+    }
+
+    /**
+     * Change minimum Hermes for creating poll [balance]
+     */
+    get asV48(): bigint {
+        assert(this.isV48)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class HermesGovernancePlatformMinimumHermesForVotingChangedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'HermesGovernancePlatform.MinimumHermesForVotingChanged')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * Change minimum Hermes for voting [balance]
+     */
+    get isV48(): boolean {
+        return this._chain.getEventHash('HermesGovernancePlatform.MinimumHermesForVotingChanged') === '47b59f698451e50cce59979f0121e842fa3f8b2bcef2e388222dbd69849514f9'
+    }
+
+    /**
+     * Change minimum Hermes for voting [balance]
+     */
+    get asV48(): bigint {
+        assert(this.isV48)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class HermesGovernancePlatformVotedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'HermesGovernancePlatform.Voted')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * Voting [who, poll, option]
+     */
+    get isV48(): boolean {
+        return this._chain.getEventHash('HermesGovernancePlatform.Voted') === '752a0ac8a4f811d1071ff5cae51fcd9071e3e68f0bfb99af379460baa3bcc14e'
+    }
+
+    /**
+     * Voting [who, poll, option]
+     */
+    get asV48(): [Uint8Array, Uint8Array, v48.VotingOption] {
+        assert(this.isV48)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class HermesGovernancePlatformVoterFundsWithdrawnEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'HermesGovernancePlatform.VoterFundsWithdrawn')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * Voter Funds Withdrawn [who, balance]
+     */
+    get isV48(): boolean {
+        return this._chain.getEventHash('HermesGovernancePlatform.VoterFundsWithdrawn') === '23bebce4ca9ed37548947d07d4dc50e772f07401b9a416b6aa2f3e9cb5adcaf4'
+    }
+
+    /**
+     * Voter Funds Withdrawn [who, balance]
+     */
+    get asV48(): [Uint8Array, bigint] {
+        assert(this.isV48)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
 export class IdentityIdentityClearedEvent {
     private readonly _chain: Chain
     private readonly event: Event
@@ -5554,6 +5834,64 @@ export class OffencesOffenceEvent {
     }
 }
 
+export class OracleProxyOracleDisabledEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'OracleProxy.OracleDisabled')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * Oracle was successfully disabled. [oracle]
+     */
+    get isV45(): boolean {
+        return this._chain.getEventHash('OracleProxy.OracleDisabled') === 'adeac13230a94b92e7a38f9f55429f55e67de9bcc25e4fe39b33083a9dcb522c'
+    }
+
+    /**
+     * Oracle was successfully disabled. [oracle]
+     */
+    get asV45(): v45.Oracle {
+        assert(this.isV45)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class OracleProxyOracleEnabledEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'OracleProxy.OracleEnabled')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * Oracle was successfully enabled. [oracle]
+     */
+    get isV45(): boolean {
+        return this._chain.getEventHash('OracleProxy.OracleEnabled') === 'adeac13230a94b92e7a38f9f55429f55e67de9bcc25e4fe39b33083a9dcb522c'
+    }
+
+    /**
+     * Oracle was successfully enabled. [oracle]
+     */
+    get asV45(): v45.Oracle {
+        assert(this.isV45)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
 export class PermissionsPermissionAssignedEvent {
     private readonly _chain: Chain
     private readonly event: Event
@@ -5785,6 +6123,23 @@ export class PswapDistributionFeesExchangeFailedEvent {
      */
     get asV42(): [number, Uint8Array, v42.AssetId32, bigint, v42.AssetId32] {
         assert(this.isV42)
+        return this._chain.decodeEvent(this.event)
+    }
+
+    /**
+     * Problem occurred that resulted in fees exchange not done.
+     * [DEX Id, Fees Account Id, Fees Asset Id, Available Fees Amount, Incentive Asset Id, Exchange error]
+     */
+    get isV46(): boolean {
+        return this._chain.getEventHash('PswapDistribution.FeesExchangeFailed') === '79e1d28657a4a40d98a2a20000c585a879f55b4ab6dc3bfe720a49fb3ec87a3e'
+    }
+
+    /**
+     * Problem occurred that resulted in fees exchange not done.
+     * [DEX Id, Fees Account Id, Fees Asset Id, Available Fees Amount, Incentive Asset Id, Exchange error]
+     */
+    get asV46(): [number, Uint8Array, v46.AssetId32, bigint, v46.AssetId32, v46.DispatchError] {
+        assert(this.isV46)
         return this._chain.decodeEvent(this.event)
     }
 }
@@ -7259,6 +7614,23 @@ export class TechnicalBurnedEvent {
         assert(this.isV42)
         return this._chain.decodeEvent(this.event)
     }
+
+    /**
+     * Some pure technical assets were burned. [asset, owner, burned_amount, total_exist].
+     * For full kind of accounts like in Minted.
+     */
+    get isV46(): boolean {
+        return this._chain.getEventHash('Technical.Burned') === 'ec28e5a71cb2eb1f5c8b16d1bcc8e6a52f32bb79c9bbf64dd640b961c5362656'
+    }
+
+    /**
+     * Some pure technical assets were burned. [asset, owner, burned_amount, total_exist].
+     * For full kind of accounts like in Minted.
+     */
+    get asV46(): [v46.TechAssetId, v46.TechAccountId, bigint, bigint] {
+        assert(this.isV46)
+        return this._chain.decodeEvent(this.event)
+    }
 }
 
 export class TechnicalInputTransferredEvent {
@@ -7305,6 +7677,23 @@ export class TechnicalInputTransferredEvent {
      */
     get asV42(): [v42.TechAssetId, Uint8Array, v42.TechAccountId, bigint] {
         assert(this.isV42)
+        return this._chain.decodeEvent(this.event)
+    }
+
+    /**
+     * Some assets were transferred in. [asset, from, to, amount].
+     * TechAccountId is only pure TechAccountId.
+     */
+    get isV46(): boolean {
+        return this._chain.getEventHash('Technical.InputTransferred') === '3ad7bfc405c698c6b4527aa71cab5be6ae68f91ecc643ebb3ee94a77497424c5'
+    }
+
+    /**
+     * Some assets were transferred in. [asset, from, to, amount].
+     * TechAccountId is only pure TechAccountId.
+     */
+    get asV46(): [v46.TechAssetId, Uint8Array, v46.TechAccountId, bigint] {
+        assert(this.isV46)
         return this._chain.decodeEvent(this.event)
     }
 }
@@ -7359,6 +7748,25 @@ export class TechnicalMintedEvent {
         assert(this.isV42)
         return this._chain.decodeEvent(this.event)
     }
+
+    /**
+     * Some pure technical assets were minted. [asset, owner, minted_amount, total_exist].
+     * This is not only for pure TechAccountId.
+     * TechAccountId can be just wrapped AccountId.
+     */
+    get isV46(): boolean {
+        return this._chain.getEventHash('Technical.Minted') === 'ec28e5a71cb2eb1f5c8b16d1bcc8e6a52f32bb79c9bbf64dd640b961c5362656'
+    }
+
+    /**
+     * Some pure technical assets were minted. [asset, owner, minted_amount, total_exist].
+     * This is not only for pure TechAccountId.
+     * TechAccountId can be just wrapped AccountId.
+     */
+    get asV46(): [v46.TechAssetId, v46.TechAccountId, bigint, bigint] {
+        assert(this.isV46)
+        return this._chain.decodeEvent(this.event)
+    }
 }
 
 export class TechnicalOutputTransferredEvent {
@@ -7405,6 +7813,23 @@ export class TechnicalOutputTransferredEvent {
      */
     get asV42(): [v42.TechAssetId, v42.TechAccountId, Uint8Array, bigint] {
         assert(this.isV42)
+        return this._chain.decodeEvent(this.event)
+    }
+
+    /**
+     * Some assets were transferred out. [asset, from, to, amount].
+     * TechAccountId is only pure TechAccountId.
+     */
+    get isV46(): boolean {
+        return this._chain.getEventHash('Technical.OutputTransferred') === '5190d7a4694b4cf6dab7a213789366fe12b6a3b46e6defac1490ae10d2969bfa'
+    }
+
+    /**
+     * Some assets were transferred out. [asset, from, to, amount].
+     * TechAccountId is only pure TechAccountId.
+     */
+    get asV46(): [v46.TechAssetId, v46.TechAccountId, Uint8Array, bigint] {
+        assert(this.isV46)
         return this._chain.decodeEvent(this.event)
     }
 }
@@ -8652,6 +9077,21 @@ export class VestedRewardsActualDoesntMatchAvailableEvent {
         assert(this.isV42)
         return this._chain.decodeEvent(this.event)
     }
+
+    /**
+     * Attempted to claim reward, but actual claimed amount is less than expected. [reason for reward]
+     */
+    get isV44(): boolean {
+        return this._chain.getEventHash('VestedRewards.ActualDoesntMatchAvailable') === 'be78b8bbc6254473ae26507c5aa6ae411c59850f71a46c165fa747685b687589'
+    }
+
+    /**
+     * Attempted to claim reward, but actual claimed amount is less than expected. [reason for reward]
+     */
+    get asV44(): v44.RewardReason {
+        assert(this.isV44)
+        return this._chain.decodeEvent(this.event)
+    }
 }
 
 export class VestedRewardsAddingZeroMarketMakerRewardEvent {
@@ -8854,6 +9294,64 @@ export class XstPoolReferenceAssetChangedEvent {
      */
     get asV42(): v42.AssetId32 {
         assert(this.isV42)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class XstPoolSyntheticAssetEnabledEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'XSTPool.SyntheticAssetEnabled')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * Synthetic asset was enabled. [Synthetic Asset Id]
+     */
+    get isV44(): boolean {
+        return this._chain.getEventHash('XSTPool.SyntheticAssetEnabled') === 'd95efc7b29a22298fded1b8a3d6268f031f1ecb06d36663796cb5be07bd8bfc1'
+    }
+
+    /**
+     * Synthetic asset was enabled. [Synthetic Asset Id]
+     */
+    get asV44(): v44.AssetId32 {
+        assert(this.isV44)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class XstPoolSyntheticBaseAssetFloorPriceChangedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'XSTPool.SyntheticBaseAssetFloorPriceChanged')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * Floor price of the synthetic base asset has been changed. [New Floor Price]
+     */
+    get isV44(): boolean {
+        return this._chain.getEventHash('XSTPool.SyntheticBaseAssetFloorPriceChanged') === '47b59f698451e50cce59979f0121e842fa3f8b2bcef2e388222dbd69849514f9'
+    }
+
+    /**
+     * Floor price of the synthetic base asset has been changed. [New Floor Price]
+     */
+    get asV44(): bigint {
+        assert(this.isV44)
         return this._chain.decodeEvent(this.event)
     }
 }

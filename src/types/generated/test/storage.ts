@@ -3,6 +3,10 @@ import {Block, BlockContext, Chain, ChainContext, Option, Result, StorageBase} f
 import * as v41 from './v41'
 import * as v42 from './v42'
 import * as v43 from './v43'
+import * as v44 from './v44'
+import * as v45 from './v45'
+import * as v46 from './v46'
+import * as v48 from './v48'
 
 export class AssetsAssetInfosStorage extends StorageBase {
     protected getPrefix() {
@@ -1367,6 +1371,85 @@ export interface BalancesTotalIssuanceStorageV41 {
     get(): Promise<bigint>
 }
 
+export class BandSymbolRatesStorage extends StorageBase {
+    protected getPrefix() {
+        return 'Band'
+    }
+
+    protected getName() {
+        return 'SymbolRates'
+    }
+
+    get isV44(): boolean {
+        return this.getTypeHash() === 'e40be0e44c29bc8729940459a4a4cc199fcfcd316d710eb07e05d8e3386ae65d'
+    }
+
+    get asV44(): BandSymbolRatesStorageV44 {
+        assert(this.isV44)
+        return this as any
+    }
+
+    get isV45(): boolean {
+        return this.getTypeHash() === '2868670806b077361a748379da382a31bba9587a7096d240aaae3f7123024e18'
+    }
+
+    get asV45(): BandSymbolRatesStorageV45 {
+        assert(this.isV45)
+        return this as any
+    }
+}
+
+export interface BandSymbolRatesStorageV44 {
+    get(key: string): Promise<(v44.Rate | undefined)>
+    getAll(): Promise<(v44.Rate | undefined)[]>
+    getMany(keys: string[]): Promise<(v44.Rate | undefined)[]>
+    getKeys(): Promise<string[]>
+    getKeys(key: string): Promise<string[]>
+    getKeysPaged(pageSize: number): AsyncIterable<string[]>
+    getKeysPaged(pageSize: number, key: string): AsyncIterable<string[]>
+    getPairs(): Promise<[k: string, v: (v44.Rate | undefined)][]>
+    getPairs(key: string): Promise<[k: string, v: (v44.Rate | undefined)][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: string, v: (v44.Rate | undefined)][]>
+    getPairsPaged(pageSize: number, key: string): AsyncIterable<[k: string, v: (v44.Rate | undefined)][]>
+}
+
+export interface BandSymbolRatesStorageV45 {
+    get(key: Uint8Array): Promise<(v45.BandRate | undefined)>
+    getAll(): Promise<(v45.BandRate | undefined)[]>
+    getMany(keys: Uint8Array[]): Promise<(v45.BandRate | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: (v45.BandRate | undefined)][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: (v45.BandRate | undefined)][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: (v45.BandRate | undefined)][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: (v45.BandRate | undefined)][]>
+}
+
+export class BandTrustedRelayersStorage extends StorageBase {
+    protected getPrefix() {
+        return 'Band'
+    }
+
+    protected getName() {
+        return 'TrustedRelayers'
+    }
+
+    get isV44(): boolean {
+        return this.getTypeHash() === '215c9d892fd7dcb1c19e9e4a7fa5848984bdbf3a79a842166eacdb84766538c2'
+    }
+
+    get asV44(): BandTrustedRelayersStorageV44 {
+        assert(this.isV44)
+        return this as any
+    }
+}
+
+export interface BandTrustedRelayersStorageV44 {
+    get(): Promise<(Uint8Array[] | undefined)>
+}
+
 export class BeefyAuthoritiesStorage extends StorageBase {
     protected getPrefix() {
         return 'Beefy'
@@ -1950,6 +2033,38 @@ export interface CeresLaunchpadContributionsStorageV42 {
     getPairsPaged(pageSize: number, key1: v42.AssetId32, key2: Uint8Array): AsyncIterable<[k: [v42.AssetId32, Uint8Array], v: v42.ContributionInfo][]>
 }
 
+export class CeresLaunchpadFeePercentOnRaisedFundsStorage extends StorageBase {
+    protected getPrefix() {
+        return 'CeresLaunchpad'
+    }
+
+    protected getName() {
+        return 'FeePercentOnRaisedFunds'
+    }
+
+    /**
+     *  Fee percent on raised funds in successful ILO
+     */
+    get isV48(): boolean {
+        return this.getTypeHash() === 'f8ebe28eb30158172c0ccf672f7747c46a244f892d08ef2ebcbaadde34a26bc0'
+    }
+
+    /**
+     *  Fee percent on raised funds in successful ILO
+     */
+    get asV48(): CeresLaunchpadFeePercentOnRaisedFundsStorageV48 {
+        assert(this.isV48)
+        return this as any
+    }
+}
+
+/**
+ *  Fee percent on raised funds in successful ILO
+ */
+export interface CeresLaunchpadFeePercentOnRaisedFundsStorageV48 {
+    get(): Promise<bigint>
+}
+
 export class CeresLaunchpadILOsStorage extends StorageBase {
     protected getPrefix() {
         return 'CeresLaunchpad'
@@ -1974,6 +2089,15 @@ export class CeresLaunchpadILOsStorage extends StorageBase {
 
     get asV42(): CeresLaunchpadILOsStorageV42 {
         assert(this.isV42)
+        return this as any
+    }
+
+    get isV48(): boolean {
+        return this.getTypeHash() === 'ca84a1a09dc4d0e7482ffddea595231e8c4bcce744ba2b7a266be8396342b1cc'
+    }
+
+    get asV48(): CeresLaunchpadILOsStorageV48 {
+        assert(this.isV48)
         return this as any
     }
 }
@@ -2004,6 +2128,20 @@ export interface CeresLaunchpadILOsStorageV42 {
     getPairs(key: v42.AssetId32): Promise<[k: v42.AssetId32, v: v42.ILOInfo][]>
     getPairsPaged(pageSize: number): AsyncIterable<[k: v42.AssetId32, v: v42.ILOInfo][]>
     getPairsPaged(pageSize: number, key: v42.AssetId32): AsyncIterable<[k: v42.AssetId32, v: v42.ILOInfo][]>
+}
+
+export interface CeresLaunchpadILOsStorageV48 {
+    get(key: v48.AssetId32): Promise<(v48.ILOInfo | undefined)>
+    getAll(): Promise<v48.ILOInfo[]>
+    getMany(keys: v48.AssetId32[]): Promise<(v48.ILOInfo | undefined)[]>
+    getKeys(): Promise<v48.AssetId32[]>
+    getKeys(key: v48.AssetId32): Promise<v48.AssetId32[]>
+    getKeysPaged(pageSize: number): AsyncIterable<v48.AssetId32[]>
+    getKeysPaged(pageSize: number, key: v48.AssetId32): AsyncIterable<v48.AssetId32[]>
+    getPairs(): Promise<[k: v48.AssetId32, v: v48.ILOInfo][]>
+    getPairs(key: v48.AssetId32): Promise<[k: v48.AssetId32, v: v48.ILOInfo][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: v48.AssetId32, v: v48.ILOInfo][]>
+    getPairsPaged(pageSize: number, key: v48.AssetId32): AsyncIterable<[k: v48.AssetId32, v: v48.ILOInfo][]>
 }
 
 export class CeresLaunchpadPenaltiesAccountStorage extends StorageBase {
@@ -2800,6 +2938,66 @@ export class CouncilProposalOfStorage extends StorageBase {
         assert(this.isV43)
         return this as any
     }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get isV44(): boolean {
+        return this.getTypeHash() === '8e3c7ae77a7b44b275eeddd524283699e232484b53611eb637650ab8241e5783'
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get asV44(): CouncilProposalOfStorageV44 {
+        assert(this.isV44)
+        return this as any
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get isV45(): boolean {
+        return this.getTypeHash() === '37e96fa34649a7c5cc03015b3d9fcb4baa840ef547be2374fef903769fcfc769'
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get asV45(): CouncilProposalOfStorageV45 {
+        assert(this.isV45)
+        return this as any
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get isV46(): boolean {
+        return this.getTypeHash() === 'c0ad4c3a4bcadce1385bc9aec7caf26bfce55d1b935f9bf9fa5fb85b67caa2cc'
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get asV46(): CouncilProposalOfStorageV46 {
+        assert(this.isV46)
+        return this as any
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get isV48(): boolean {
+        return this.getTypeHash() === 'fedd302420ac53b1117af61a831f8441d4bbc139216a0753639de782f3129252'
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get asV48(): CouncilProposalOfStorageV48 {
+        assert(this.isV48)
+        return this as any
+    }
 }
 
 /**
@@ -2834,6 +3032,74 @@ export interface CouncilProposalOfStorageV43 {
     getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v43.Call][]>
     getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v43.Call][]>
     getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v43.Call][]>
+}
+
+/**
+ *  Actual proposal for a given hash, if it's current.
+ */
+export interface CouncilProposalOfStorageV44 {
+    get(key: Uint8Array): Promise<(v44.Call | undefined)>
+    getAll(): Promise<v44.Call[]>
+    getMany(keys: Uint8Array[]): Promise<(v44.Call | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v44.Call][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v44.Call][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v44.Call][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v44.Call][]>
+}
+
+/**
+ *  Actual proposal for a given hash, if it's current.
+ */
+export interface CouncilProposalOfStorageV45 {
+    get(key: Uint8Array): Promise<(v45.Call | undefined)>
+    getAll(): Promise<v45.Call[]>
+    getMany(keys: Uint8Array[]): Promise<(v45.Call | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v45.Call][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v45.Call][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v45.Call][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v45.Call][]>
+}
+
+/**
+ *  Actual proposal for a given hash, if it's current.
+ */
+export interface CouncilProposalOfStorageV46 {
+    get(key: Uint8Array): Promise<(v46.Call | undefined)>
+    getAll(): Promise<v46.Call[]>
+    getMany(keys: Uint8Array[]): Promise<(v46.Call | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v46.Call][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v46.Call][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v46.Call][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v46.Call][]>
+}
+
+/**
+ *  Actual proposal for a given hash, if it's current.
+ */
+export interface CouncilProposalOfStorageV48 {
+    get(key: Uint8Array): Promise<(v48.Call | undefined)>
+    getAll(): Promise<v48.Call[]>
+    getMany(keys: Uint8Array[]): Promise<(v48.Call | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v48.Call][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v48.Call][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v48.Call][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v48.Call][]>
 }
 
 export class CouncilProposalsStorage extends StorageBase {
@@ -2972,6 +3238,15 @@ export class DEXManagerDEXInfosStorage extends StorageBase {
         assert(this.isV42)
         return this as any
     }
+
+    get isV44(): boolean {
+        return this.getTypeHash() === '494dff123a3c227cdb05691512a6deb17a90a41b14b3c18babca089a87d64b6a'
+    }
+
+    get asV44(): DEXManagerDEXInfosStorageV44 {
+        assert(this.isV44)
+        return this as any
+    }
 }
 
 export interface DEXManagerDEXInfosStorageV41 {
@@ -3000,6 +3275,20 @@ export interface DEXManagerDEXInfosStorageV42 {
     getPairs(key: number): Promise<[k: number, v: v42.DEXInfo][]>
     getPairsPaged(pageSize: number): AsyncIterable<[k: number, v: v42.DEXInfo][]>
     getPairsPaged(pageSize: number, key: number): AsyncIterable<[k: number, v: v42.DEXInfo][]>
+}
+
+export interface DEXManagerDEXInfosStorageV44 {
+    get(key: number): Promise<(v44.DEXInfo | undefined)>
+    getAll(): Promise<v44.DEXInfo[]>
+    getMany(keys: number[]): Promise<(v44.DEXInfo | undefined)[]>
+    getKeys(): Promise<number[]>
+    getKeys(key: number): Promise<number[]>
+    getKeysPaged(pageSize: number): AsyncIterable<number[]>
+    getKeysPaged(pageSize: number, key: number): AsyncIterable<number[]>
+    getPairs(): Promise<[k: number, v: v44.DEXInfo][]>
+    getPairs(key: number): Promise<[k: number, v: v44.DEXInfo][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: number, v: v44.DEXInfo][]>
+    getPairsPaged(pageSize: number, key: number): AsyncIterable<[k: number, v: v44.DEXInfo][]>
 }
 
 export class DemeterFarmingPlatformAuthorityAccountStorage extends StorageBase {
@@ -6520,6 +6809,163 @@ export interface GrandpaFinalityStateStorageV41 {
     get(): Promise<v41.StoredState>
 }
 
+export class HermesGovernancePlatformAuthorityAccountStorage extends StorageBase {
+    protected getPrefix() {
+        return 'HermesGovernancePlatform'
+    }
+
+    protected getName() {
+        return 'AuthorityAccount'
+    }
+
+    /**
+     *  Account which has permissions for changing Hermes minimum amount for voting and creating a poll
+     */
+    get isV48(): boolean {
+        return this.getTypeHash() === '146c0d1dce070e2a43f497c479248a882f4ed48937203ea336e85dcf2fa0ec6c'
+    }
+
+    /**
+     *  Account which has permissions for changing Hermes minimum amount for voting and creating a poll
+     */
+    get asV48(): HermesGovernancePlatformAuthorityAccountStorageV48 {
+        assert(this.isV48)
+        return this as any
+    }
+}
+
+/**
+ *  Account which has permissions for changing Hermes minimum amount for voting and creating a poll
+ */
+export interface HermesGovernancePlatformAuthorityAccountStorageV48 {
+    get(): Promise<Uint8Array>
+}
+
+export class HermesGovernancePlatformHermesPollDataStorage extends StorageBase {
+    protected getPrefix() {
+        return 'HermesGovernancePlatform'
+    }
+
+    protected getName() {
+        return 'HermesPollData'
+    }
+
+    get isV48(): boolean {
+        return this.getTypeHash() === '70900c5a70fc6ec4845a7580a07cc9e8ca70495ebaaa6eb93fd60efe3b30972a'
+    }
+
+    get asV48(): HermesGovernancePlatformHermesPollDataStorageV48 {
+        assert(this.isV48)
+        return this as any
+    }
+}
+
+export interface HermesGovernancePlatformHermesPollDataStorageV48 {
+    get(key: Uint8Array): Promise<(v48.HermesPollInfo | undefined)>
+    getAll(): Promise<v48.HermesPollInfo[]>
+    getMany(keys: Uint8Array[]): Promise<(v48.HermesPollInfo | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v48.HermesPollInfo][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v48.HermesPollInfo][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v48.HermesPollInfo][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v48.HermesPollInfo][]>
+}
+
+export class HermesGovernancePlatformHermesVotingsStorage extends StorageBase {
+    protected getPrefix() {
+        return 'HermesGovernancePlatform'
+    }
+
+    protected getName() {
+        return 'HermesVotings'
+    }
+
+    /**
+     *  A vote of a particular user for a particular poll
+     */
+    get isV48(): boolean {
+        return this.getTypeHash() === 'c0dcc97c5ee2455ac4cd07d8b036305a497ee773d248805439cda25a550b2100'
+    }
+
+    /**
+     *  A vote of a particular user for a particular poll
+     */
+    get asV48(): HermesGovernancePlatformHermesVotingsStorageV48 {
+        assert(this.isV48)
+        return this as any
+    }
+}
+
+/**
+ *  A vote of a particular user for a particular poll
+ */
+export interface HermesGovernancePlatformHermesVotingsStorageV48 {
+    get(key1: Uint8Array, key2: Uint8Array): Promise<(v48.HermesVotingInfo | undefined)>
+    getAll(): Promise<v48.HermesVotingInfo[]>
+    getMany(keys: [Uint8Array, Uint8Array][]): Promise<(v48.HermesVotingInfo | undefined)[]>
+    getKeys(): Promise<[Uint8Array, Uint8Array][]>
+    getKeys(key1: Uint8Array): Promise<[Uint8Array, Uint8Array][]>
+    getKeys(key1: Uint8Array, key2: Uint8Array): Promise<[Uint8Array, Uint8Array][]>
+    getKeysPaged(pageSize: number): AsyncIterable<[Uint8Array, Uint8Array][]>
+    getKeysPaged(pageSize: number, key1: Uint8Array): AsyncIterable<[Uint8Array, Uint8Array][]>
+    getKeysPaged(pageSize: number, key1: Uint8Array, key2: Uint8Array): AsyncIterable<[Uint8Array, Uint8Array][]>
+    getPairs(): Promise<[k: [Uint8Array, Uint8Array], v: v48.HermesVotingInfo][]>
+    getPairs(key1: Uint8Array): Promise<[k: [Uint8Array, Uint8Array], v: v48.HermesVotingInfo][]>
+    getPairs(key1: Uint8Array, key2: Uint8Array): Promise<[k: [Uint8Array, Uint8Array], v: v48.HermesVotingInfo][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: [Uint8Array, Uint8Array], v: v48.HermesVotingInfo][]>
+    getPairsPaged(pageSize: number, key1: Uint8Array): AsyncIterable<[k: [Uint8Array, Uint8Array], v: v48.HermesVotingInfo][]>
+    getPairsPaged(pageSize: number, key1: Uint8Array, key2: Uint8Array): AsyncIterable<[k: [Uint8Array, Uint8Array], v: v48.HermesVotingInfo][]>
+}
+
+export class HermesGovernancePlatformMinimumHermesAmountForCreatingPollStorage extends StorageBase {
+    protected getPrefix() {
+        return 'HermesGovernancePlatform'
+    }
+
+    protected getName() {
+        return 'MinimumHermesAmountForCreatingPoll'
+    }
+
+    get isV48(): boolean {
+        return this.getTypeHash() === 'f8ebe28eb30158172c0ccf672f7747c46a244f892d08ef2ebcbaadde34a26bc0'
+    }
+
+    get asV48(): HermesGovernancePlatformMinimumHermesAmountForCreatingPollStorageV48 {
+        assert(this.isV48)
+        return this as any
+    }
+}
+
+export interface HermesGovernancePlatformMinimumHermesAmountForCreatingPollStorageV48 {
+    get(): Promise<bigint>
+}
+
+export class HermesGovernancePlatformMinimumHermesVotingAmountStorage extends StorageBase {
+    protected getPrefix() {
+        return 'HermesGovernancePlatform'
+    }
+
+    protected getName() {
+        return 'MinimumHermesVotingAmount'
+    }
+
+    get isV48(): boolean {
+        return this.getTypeHash() === 'f8ebe28eb30158172c0ccf672f7747c46a244f892d08ef2ebcbaadde34a26bc0'
+    }
+
+    get asV48(): HermesGovernancePlatformMinimumHermesVotingAmountStorageV48 {
+        assert(this.isV48)
+        return this as any
+    }
+}
+
+export interface HermesGovernancePlatformMinimumHermesVotingAmountStorageV48 {
+    get(): Promise<bigint>
+}
+
 export class IdentityIdentityOfStorage extends StorageBase {
     protected getPrefix() {
         return 'Identity'
@@ -8140,6 +8586,21 @@ export class MulticollateralBondingCurvePoolDistributionAccountsEntryStorage ext
         assert(this.isV42)
         return this as any
     }
+
+    /**
+     *  Accounts that receive 20% buy/sell margin according to predefined proportions
+     */
+    get isV46(): boolean {
+        return this.getTypeHash() === '3475cf6ed2ccf27ac07a80c148e19c9fd9b42c4a2aaddd7cd5f2909f41df39fe'
+    }
+
+    /**
+     *  Accounts that receive 20% buy/sell margin according to predefined proportions
+     */
+    get asV46(): MulticollateralBondingCurvePoolDistributionAccountsEntryStorageV46 {
+        assert(this.isV46)
+        return this as any
+    }
 }
 
 /**
@@ -8154,6 +8615,13 @@ export interface MulticollateralBondingCurvePoolDistributionAccountsEntryStorage
  */
 export interface MulticollateralBondingCurvePoolDistributionAccountsEntryStorageV42 {
     get(): Promise<v42.DistributionAccounts>
+}
+
+/**
+ *  Accounts that receive 20% buy/sell margin according to predefined proportions
+ */
+export interface MulticollateralBondingCurvePoolDistributionAccountsEntryStorageV46 {
+    get(): Promise<v46.DistributionAccounts>
 }
 
 export class MulticollateralBondingCurvePoolEnabledTargetsStorage extends StorageBase {
@@ -8639,6 +9107,21 @@ export class MulticollateralBondingCurvePoolReservesAccStorage extends StorageBa
         assert(this.isV42)
         return this as any
     }
+
+    /**
+     *  Technical account used to store collateral tokens.
+     */
+    get isV46(): boolean {
+        return this.getTypeHash() === '3cbc8553bacd4bc7573e7f755c0bf9eb2dbc0093d473ecb7568212ea45b2ddf8'
+    }
+
+    /**
+     *  Technical account used to store collateral tokens.
+     */
+    get asV46(): MulticollateralBondingCurvePoolReservesAccStorageV46 {
+        assert(this.isV46)
+        return this as any
+    }
 }
 
 /**
@@ -8653,6 +9136,13 @@ export interface MulticollateralBondingCurvePoolReservesAccStorageV41 {
  */
 export interface MulticollateralBondingCurvePoolReservesAccStorageV42 {
     get(): Promise<v42.TechAccountId>
+}
+
+/**
+ *  Technical account used to store collateral tokens.
+ */
+export interface MulticollateralBondingCurvePoolReservesAccStorageV46 {
+    get(): Promise<v46.TechAccountId>
 }
 
 export class MulticollateralBondingCurvePoolRewardsStorage extends StorageBase {
@@ -9040,6 +9530,62 @@ export interface OffencesReportsByKindIndexStorageV41 {
     getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: Uint8Array][]>
     getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: Uint8Array][]>
     getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: Uint8Array][]>
+}
+
+export class OracleProxyEnabledOraclesStorage extends StorageBase {
+    protected getPrefix() {
+        return 'OracleProxy'
+    }
+
+    protected getName() {
+        return 'EnabledOracles'
+    }
+
+    get isV45(): boolean {
+        return this.getTypeHash() === 'a9a4634dbfaf89d5e8065d6f375312008207fb0df8a769802806756f030fa9f4'
+    }
+
+    get asV45(): OracleProxyEnabledOraclesStorageV45 {
+        assert(this.isV45)
+        return this as any
+    }
+}
+
+export interface OracleProxyEnabledOraclesStorageV45 {
+    get(): Promise<v45.Oracle[]>
+}
+
+export class OracleProxySymbolProvidersStorage extends StorageBase {
+    protected getPrefix() {
+        return 'OracleProxy'
+    }
+
+    protected getName() {
+        return 'SymbolProviders'
+    }
+
+    get isV45(): boolean {
+        return this.getTypeHash() === '59d555c6e6b4211dd00871be545b4b88c9b1437a76b92cc04bb994aa71fff20a'
+    }
+
+    get asV45(): OracleProxySymbolProvidersStorageV45 {
+        assert(this.isV45)
+        return this as any
+    }
+}
+
+export interface OracleProxySymbolProvidersStorageV45 {
+    get(key: Uint8Array): Promise<(v45.Oracle | undefined)>
+    getAll(): Promise<v45.Oracle[]>
+    getMany(keys: Uint8Array[]): Promise<(v45.Oracle | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v45.Oracle][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v45.Oracle][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v45.Oracle][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v45.Oracle][]>
 }
 
 export class PermissionsOwnersStorage extends StorageBase {
@@ -9696,6 +10242,15 @@ export class PriceToolsPriceInfosStorage extends StorageBase {
         assert(this.isV42)
         return this as any
     }
+
+    get isV44(): boolean {
+        return this.getTypeHash() === '96f6555f64c75ef0a7bb3fe51bc47315e7e8a8875eb6c54d9d729b68555db30e'
+    }
+
+    get asV44(): PriceToolsPriceInfosStorageV44 {
+        assert(this.isV44)
+        return this as any
+    }
 }
 
 export interface PriceToolsPriceInfosStorageV41 {
@@ -9724,6 +10279,20 @@ export interface PriceToolsPriceInfosStorageV42 {
     getPairs(key: v42.AssetId32): Promise<[k: v42.AssetId32, v: v42.PriceInfo][]>
     getPairsPaged(pageSize: number): AsyncIterable<[k: v42.AssetId32, v: v42.PriceInfo][]>
     getPairsPaged(pageSize: number, key: v42.AssetId32): AsyncIterable<[k: v42.AssetId32, v: v42.PriceInfo][]>
+}
+
+export interface PriceToolsPriceInfosStorageV44 {
+    get(key: v44.AssetId32): Promise<(v44.AggregatedPriceInfo | undefined)>
+    getAll(): Promise<v44.AggregatedPriceInfo[]>
+    getMany(keys: v44.AssetId32[]): Promise<(v44.AggregatedPriceInfo | undefined)[]>
+    getKeys(): Promise<v44.AssetId32[]>
+    getKeys(key: v44.AssetId32): Promise<v44.AssetId32[]>
+    getKeysPaged(pageSize: number): AsyncIterable<v44.AssetId32[]>
+    getKeysPaged(pageSize: number, key: v44.AssetId32): AsyncIterable<v44.AssetId32[]>
+    getPairs(): Promise<[k: v44.AssetId32, v: v44.AggregatedPriceInfo][]>
+    getPairs(key: v44.AssetId32): Promise<[k: v44.AssetId32, v: v44.AggregatedPriceInfo][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: v44.AssetId32, v: v44.AggregatedPriceInfo][]>
+    getPairsPaged(pageSize: number, key: v44.AssetId32): AsyncIterable<[k: v44.AssetId32, v: v44.AggregatedPriceInfo][]>
 }
 
 export class PswapDistributionBurnRateStorage extends StorageBase {
@@ -10396,6 +10965,15 @@ export class RewardsReservesAccStorage extends StorageBase {
         assert(this.isV42)
         return this as any
     }
+
+    get isV46(): boolean {
+        return this.getTypeHash() === '3cbc8553bacd4bc7573e7f755c0bf9eb2dbc0093d473ecb7568212ea45b2ddf8'
+    }
+
+    get asV46(): RewardsReservesAccStorageV46 {
+        assert(this.isV46)
+        return this as any
+    }
 }
 
 export interface RewardsReservesAccStorageV41 {
@@ -10404,6 +10982,10 @@ export interface RewardsReservesAccStorageV41 {
 
 export interface RewardsReservesAccStorageV42 {
     get(): Promise<v42.TechAccountId>
+}
+
+export interface RewardsReservesAccStorageV46 {
+    get(): Promise<v46.TechAccountId>
 }
 
 export class RewardsTotalClaimableValStorage extends StorageBase {
@@ -10767,6 +11349,66 @@ export class SchedulerAgendaStorage extends StorageBase {
         assert(this.isV43)
         return this as any
     }
+
+    /**
+     *  Items to be executed, indexed by the block number that they should be executed on.
+     */
+    get isV44(): boolean {
+        return this.getTypeHash() === 'f44f5f70839e0fedfae4433316887fe5a1cdf95af9f7e362c0620beef3dac9f1'
+    }
+
+    /**
+     *  Items to be executed, indexed by the block number that they should be executed on.
+     */
+    get asV44(): SchedulerAgendaStorageV44 {
+        assert(this.isV44)
+        return this as any
+    }
+
+    /**
+     *  Items to be executed, indexed by the block number that they should be executed on.
+     */
+    get isV45(): boolean {
+        return this.getTypeHash() === 'e2412bc9d17eb4b9eeeb9c1cec4a306dc493aff5d796fd35fcafbaa100b2bca7'
+    }
+
+    /**
+     *  Items to be executed, indexed by the block number that they should be executed on.
+     */
+    get asV45(): SchedulerAgendaStorageV45 {
+        assert(this.isV45)
+        return this as any
+    }
+
+    /**
+     *  Items to be executed, indexed by the block number that they should be executed on.
+     */
+    get isV46(): boolean {
+        return this.getTypeHash() === '9b8a9fe485f1078149a0091e99f11379ac86897a13dfc646f72b6220ea87802c'
+    }
+
+    /**
+     *  Items to be executed, indexed by the block number that they should be executed on.
+     */
+    get asV46(): SchedulerAgendaStorageV46 {
+        assert(this.isV46)
+        return this as any
+    }
+
+    /**
+     *  Items to be executed, indexed by the block number that they should be executed on.
+     */
+    get isV48(): boolean {
+        return this.getTypeHash() === '2257d03174f930cc50f25fbafb5fd23482b307fd05b3c4e77dc8d83a21c35aaa'
+    }
+
+    /**
+     *  Items to be executed, indexed by the block number that they should be executed on.
+     */
+    get asV48(): SchedulerAgendaStorageV48 {
+        assert(this.isV48)
+        return this as any
+    }
 }
 
 /**
@@ -10818,6 +11460,74 @@ export interface SchedulerAgendaStorageV43 {
     getPairs(key: number): Promise<[k: number, v: (v43.ScheduledV3 | undefined)[]][]>
     getPairsPaged(pageSize: number): AsyncIterable<[k: number, v: (v43.ScheduledV3 | undefined)[]][]>
     getPairsPaged(pageSize: number, key: number): AsyncIterable<[k: number, v: (v43.ScheduledV3 | undefined)[]][]>
+}
+
+/**
+ *  Items to be executed, indexed by the block number that they should be executed on.
+ */
+export interface SchedulerAgendaStorageV44 {
+    get(key: number): Promise<(v44.ScheduledV3 | undefined)[]>
+    getAll(): Promise<(v44.ScheduledV3 | undefined)[][]>
+    getMany(keys: number[]): Promise<(v44.ScheduledV3 | undefined)[][]>
+    getKeys(): Promise<number[]>
+    getKeys(key: number): Promise<number[]>
+    getKeysPaged(pageSize: number): AsyncIterable<number[]>
+    getKeysPaged(pageSize: number, key: number): AsyncIterable<number[]>
+    getPairs(): Promise<[k: number, v: (v44.ScheduledV3 | undefined)[]][]>
+    getPairs(key: number): Promise<[k: number, v: (v44.ScheduledV3 | undefined)[]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: number, v: (v44.ScheduledV3 | undefined)[]][]>
+    getPairsPaged(pageSize: number, key: number): AsyncIterable<[k: number, v: (v44.ScheduledV3 | undefined)[]][]>
+}
+
+/**
+ *  Items to be executed, indexed by the block number that they should be executed on.
+ */
+export interface SchedulerAgendaStorageV45 {
+    get(key: number): Promise<(v45.ScheduledV3 | undefined)[]>
+    getAll(): Promise<(v45.ScheduledV3 | undefined)[][]>
+    getMany(keys: number[]): Promise<(v45.ScheduledV3 | undefined)[][]>
+    getKeys(): Promise<number[]>
+    getKeys(key: number): Promise<number[]>
+    getKeysPaged(pageSize: number): AsyncIterable<number[]>
+    getKeysPaged(pageSize: number, key: number): AsyncIterable<number[]>
+    getPairs(): Promise<[k: number, v: (v45.ScheduledV3 | undefined)[]][]>
+    getPairs(key: number): Promise<[k: number, v: (v45.ScheduledV3 | undefined)[]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: number, v: (v45.ScheduledV3 | undefined)[]][]>
+    getPairsPaged(pageSize: number, key: number): AsyncIterable<[k: number, v: (v45.ScheduledV3 | undefined)[]][]>
+}
+
+/**
+ *  Items to be executed, indexed by the block number that they should be executed on.
+ */
+export interface SchedulerAgendaStorageV46 {
+    get(key: number): Promise<(v46.ScheduledV3 | undefined)[]>
+    getAll(): Promise<(v46.ScheduledV3 | undefined)[][]>
+    getMany(keys: number[]): Promise<(v46.ScheduledV3 | undefined)[][]>
+    getKeys(): Promise<number[]>
+    getKeys(key: number): Promise<number[]>
+    getKeysPaged(pageSize: number): AsyncIterable<number[]>
+    getKeysPaged(pageSize: number, key: number): AsyncIterable<number[]>
+    getPairs(): Promise<[k: number, v: (v46.ScheduledV3 | undefined)[]][]>
+    getPairs(key: number): Promise<[k: number, v: (v46.ScheduledV3 | undefined)[]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: number, v: (v46.ScheduledV3 | undefined)[]][]>
+    getPairsPaged(pageSize: number, key: number): AsyncIterable<[k: number, v: (v46.ScheduledV3 | undefined)[]][]>
+}
+
+/**
+ *  Items to be executed, indexed by the block number that they should be executed on.
+ */
+export interface SchedulerAgendaStorageV48 {
+    get(key: number): Promise<(v48.ScheduledV3 | undefined)[]>
+    getAll(): Promise<(v48.ScheduledV3 | undefined)[][]>
+    getMany(keys: number[]): Promise<(v48.ScheduledV3 | undefined)[][]>
+    getKeys(): Promise<number[]>
+    getKeys(key: number): Promise<number[]>
+    getKeysPaged(pageSize: number): AsyncIterable<number[]>
+    getKeysPaged(pageSize: number, key: number): AsyncIterable<number[]>
+    getPairs(): Promise<[k: number, v: (v48.ScheduledV3 | undefined)[]][]>
+    getPairs(key: number): Promise<[k: number, v: (v48.ScheduledV3 | undefined)[]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: number, v: (v48.ScheduledV3 | undefined)[]][]>
+    getPairsPaged(pageSize: number, key: number): AsyncIterable<[k: number, v: (v48.ScheduledV3 | undefined)[]][]>
 }
 
 export class SchedulerLookupStorage extends StorageBase {
@@ -13683,6 +14393,114 @@ export class SystemEventsStorage extends StorageBase {
         assert(this.isV43)
         return this as any
     }
+
+    /**
+     *  Events deposited for the current block.
+     * 
+     *  NOTE: The item is unbound and should therefore never be read on chain.
+     *  It could otherwise inflate the PoV size of a block.
+     * 
+     *  Events have a large in-memory size. Box the events to not go out-of-memory
+     *  just in case someone still reads them from within the runtime.
+     */
+    get isV44(): boolean {
+        return this.getTypeHash() === '143eda0454bbbe1d1e0831bda11447e8296888ec693550e8457ecd8593216642'
+    }
+
+    /**
+     *  Events deposited for the current block.
+     * 
+     *  NOTE: The item is unbound and should therefore never be read on chain.
+     *  It could otherwise inflate the PoV size of a block.
+     * 
+     *  Events have a large in-memory size. Box the events to not go out-of-memory
+     *  just in case someone still reads them from within the runtime.
+     */
+    get asV44(): SystemEventsStorageV44 {
+        assert(this.isV44)
+        return this as any
+    }
+
+    /**
+     *  Events deposited for the current block.
+     * 
+     *  NOTE: The item is unbound and should therefore never be read on chain.
+     *  It could otherwise inflate the PoV size of a block.
+     * 
+     *  Events have a large in-memory size. Box the events to not go out-of-memory
+     *  just in case someone still reads them from within the runtime.
+     */
+    get isV45(): boolean {
+        return this.getTypeHash() === '4aff3266e5f98f301944cc5b44f8ad13298fc9ea302bb20dbf273a4f99d605a2'
+    }
+
+    /**
+     *  Events deposited for the current block.
+     * 
+     *  NOTE: The item is unbound and should therefore never be read on chain.
+     *  It could otherwise inflate the PoV size of a block.
+     * 
+     *  Events have a large in-memory size. Box the events to not go out-of-memory
+     *  just in case someone still reads them from within the runtime.
+     */
+    get asV45(): SystemEventsStorageV45 {
+        assert(this.isV45)
+        return this as any
+    }
+
+    /**
+     *  Events deposited for the current block.
+     * 
+     *  NOTE: The item is unbound and should therefore never be read on chain.
+     *  It could otherwise inflate the PoV size of a block.
+     * 
+     *  Events have a large in-memory size. Box the events to not go out-of-memory
+     *  just in case someone still reads them from within the runtime.
+     */
+    get isV46(): boolean {
+        return this.getTypeHash() === 'c47d8842d918ccb80d9f140c2d9233e9d7fde29d1e429464891c6bbfa60e8007'
+    }
+
+    /**
+     *  Events deposited for the current block.
+     * 
+     *  NOTE: The item is unbound and should therefore never be read on chain.
+     *  It could otherwise inflate the PoV size of a block.
+     * 
+     *  Events have a large in-memory size. Box the events to not go out-of-memory
+     *  just in case someone still reads them from within the runtime.
+     */
+    get asV46(): SystemEventsStorageV46 {
+        assert(this.isV46)
+        return this as any
+    }
+
+    /**
+     *  Events deposited for the current block.
+     * 
+     *  NOTE: The item is unbound and should therefore never be read on chain.
+     *  It could otherwise inflate the PoV size of a block.
+     * 
+     *  Events have a large in-memory size. Box the events to not go out-of-memory
+     *  just in case someone still reads them from within the runtime.
+     */
+    get isV48(): boolean {
+        return this.getTypeHash() === 'de40493e11b02c5810ffdea240ad2122f602ba9d2768880dd864112dc1ca1205'
+    }
+
+    /**
+     *  Events deposited for the current block.
+     * 
+     *  NOTE: The item is unbound and should therefore never be read on chain.
+     *  It could otherwise inflate the PoV size of a block.
+     * 
+     *  Events have a large in-memory size. Box the events to not go out-of-memory
+     *  just in case someone still reads them from within the runtime.
+     */
+    get asV48(): SystemEventsStorageV48 {
+        assert(this.isV48)
+        return this as any
+    }
 }
 
 /**
@@ -13716,6 +14534,58 @@ export interface SystemEventsStorageV42 {
  */
 export interface SystemEventsStorageV43 {
     get(): Promise<v43.EventRecord[]>
+}
+
+/**
+ *  Events deposited for the current block.
+ * 
+ *  NOTE: The item is unbound and should therefore never be read on chain.
+ *  It could otherwise inflate the PoV size of a block.
+ * 
+ *  Events have a large in-memory size. Box the events to not go out-of-memory
+ *  just in case someone still reads them from within the runtime.
+ */
+export interface SystemEventsStorageV44 {
+    get(): Promise<v44.EventRecord[]>
+}
+
+/**
+ *  Events deposited for the current block.
+ * 
+ *  NOTE: The item is unbound and should therefore never be read on chain.
+ *  It could otherwise inflate the PoV size of a block.
+ * 
+ *  Events have a large in-memory size. Box the events to not go out-of-memory
+ *  just in case someone still reads them from within the runtime.
+ */
+export interface SystemEventsStorageV45 {
+    get(): Promise<v45.EventRecord[]>
+}
+
+/**
+ *  Events deposited for the current block.
+ * 
+ *  NOTE: The item is unbound and should therefore never be read on chain.
+ *  It could otherwise inflate the PoV size of a block.
+ * 
+ *  Events have a large in-memory size. Box the events to not go out-of-memory
+ *  just in case someone still reads them from within the runtime.
+ */
+export interface SystemEventsStorageV46 {
+    get(): Promise<v46.EventRecord[]>
+}
+
+/**
+ *  Events deposited for the current block.
+ * 
+ *  NOTE: The item is unbound and should therefore never be read on chain.
+ *  It could otherwise inflate the PoV size of a block.
+ * 
+ *  Events have a large in-memory size. Box the events to not go out-of-memory
+ *  just in case someone still reads them from within the runtime.
+ */
+export interface SystemEventsStorageV48 {
+    get(): Promise<v48.EventRecord[]>
 }
 
 export class SystemExecutionPhaseStorage extends StorageBase {
@@ -14044,6 +14914,80 @@ export interface SystemUpgradedToU32RefCountStorageV41 {
     get(): Promise<boolean>
 }
 
+export class TechnicalTechAccountsStorage extends StorageBase {
+    protected getPrefix() {
+        return 'Technical'
+    }
+
+    protected getName() {
+        return 'TechAccounts'
+    }
+
+    /**
+     *  Registered technical account identifiers. Map from repr `AccountId` into pure `TechAccountId`.
+     */
+    get isV44(): boolean {
+        return this.getTypeHash() === 'bb204d285aa6e00cafe8057571dea59e866edb23833206db03a4b4a858115b4d'
+    }
+
+    /**
+     *  Registered technical account identifiers. Map from repr `AccountId` into pure `TechAccountId`.
+     */
+    get asV44(): TechnicalTechAccountsStorageV44 {
+        assert(this.isV44)
+        return this as any
+    }
+
+    /**
+     *  Registered technical account identifiers. Map from repr `AccountId` into pure `TechAccountId`.
+     */
+    get isV46(): boolean {
+        return this.getTypeHash() === 'e67e11535e404d637d0150249e1f023ad01474acfa22faa0d23dca2264265fef'
+    }
+
+    /**
+     *  Registered technical account identifiers. Map from repr `AccountId` into pure `TechAccountId`.
+     */
+    get asV46(): TechnicalTechAccountsStorageV46 {
+        assert(this.isV46)
+        return this as any
+    }
+}
+
+/**
+ *  Registered technical account identifiers. Map from repr `AccountId` into pure `TechAccountId`.
+ */
+export interface TechnicalTechAccountsStorageV44 {
+    get(key: Uint8Array): Promise<(v44.TechAccountId | undefined)>
+    getAll(): Promise<v44.TechAccountId[]>
+    getMany(keys: Uint8Array[]): Promise<(v44.TechAccountId | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v44.TechAccountId][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v44.TechAccountId][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v44.TechAccountId][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v44.TechAccountId][]>
+}
+
+/**
+ *  Registered technical account identifiers. Map from repr `AccountId` into pure `TechAccountId`.
+ */
+export interface TechnicalTechAccountsStorageV46 {
+    get(key: Uint8Array): Promise<(v46.TechAccountId | undefined)>
+    getAll(): Promise<v46.TechAccountId[]>
+    getMany(keys: Uint8Array[]): Promise<(v46.TechAccountId | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v46.TechAccountId][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v46.TechAccountId][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v46.TechAccountId][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v46.TechAccountId][]>
+}
+
 export class TechnicalCommitteeMembersStorage extends StorageBase {
     protected getPrefix() {
         return 'TechnicalCommittee'
@@ -14178,6 +15122,66 @@ export class TechnicalCommitteeProposalOfStorage extends StorageBase {
         assert(this.isV43)
         return this as any
     }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get isV44(): boolean {
+        return this.getTypeHash() === '8e3c7ae77a7b44b275eeddd524283699e232484b53611eb637650ab8241e5783'
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get asV44(): TechnicalCommitteeProposalOfStorageV44 {
+        assert(this.isV44)
+        return this as any
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get isV45(): boolean {
+        return this.getTypeHash() === '37e96fa34649a7c5cc03015b3d9fcb4baa840ef547be2374fef903769fcfc769'
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get asV45(): TechnicalCommitteeProposalOfStorageV45 {
+        assert(this.isV45)
+        return this as any
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get isV46(): boolean {
+        return this.getTypeHash() === 'c0ad4c3a4bcadce1385bc9aec7caf26bfce55d1b935f9bf9fa5fb85b67caa2cc'
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get asV46(): TechnicalCommitteeProposalOfStorageV46 {
+        assert(this.isV46)
+        return this as any
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get isV48(): boolean {
+        return this.getTypeHash() === 'fedd302420ac53b1117af61a831f8441d4bbc139216a0753639de782f3129252'
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get asV48(): TechnicalCommitteeProposalOfStorageV48 {
+        assert(this.isV48)
+        return this as any
+    }
 }
 
 /**
@@ -14212,6 +15216,74 @@ export interface TechnicalCommitteeProposalOfStorageV43 {
     getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v43.Call][]>
     getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v43.Call][]>
     getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v43.Call][]>
+}
+
+/**
+ *  Actual proposal for a given hash, if it's current.
+ */
+export interface TechnicalCommitteeProposalOfStorageV44 {
+    get(key: Uint8Array): Promise<(v44.Call | undefined)>
+    getAll(): Promise<v44.Call[]>
+    getMany(keys: Uint8Array[]): Promise<(v44.Call | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v44.Call][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v44.Call][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v44.Call][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v44.Call][]>
+}
+
+/**
+ *  Actual proposal for a given hash, if it's current.
+ */
+export interface TechnicalCommitteeProposalOfStorageV45 {
+    get(key: Uint8Array): Promise<(v45.Call | undefined)>
+    getAll(): Promise<v45.Call[]>
+    getMany(keys: Uint8Array[]): Promise<(v45.Call | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v45.Call][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v45.Call][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v45.Call][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v45.Call][]>
+}
+
+/**
+ *  Actual proposal for a given hash, if it's current.
+ */
+export interface TechnicalCommitteeProposalOfStorageV46 {
+    get(key: Uint8Array): Promise<(v46.Call | undefined)>
+    getAll(): Promise<v46.Call[]>
+    getMany(keys: Uint8Array[]): Promise<(v46.Call | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v46.Call][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v46.Call][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v46.Call][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v46.Call][]>
+}
+
+/**
+ *  Actual proposal for a given hash, if it's current.
+ */
+export interface TechnicalCommitteeProposalOfStorageV48 {
+    get(key: Uint8Array): Promise<(v48.Call | undefined)>
+    getAll(): Promise<v48.Call[]>
+    getMany(keys: Uint8Array[]): Promise<(v48.Call | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v48.Call][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v48.Call][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v48.Call][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v48.Call][]>
 }
 
 export class TechnicalCommitteeProposalsStorage extends StorageBase {
@@ -15236,6 +16308,23 @@ export class VestedRewardsRewardsStorage extends StorageBase {
         assert(this.isV42)
         return this as any
     }
+
+    /**
+     *  Reserved for future use
+     *  Mapping between users and their owned rewards of different kinds, which are vested.
+     */
+    get isV44(): boolean {
+        return this.getTypeHash() === 'a065205d3ebbb157b5b0e521a08365c0ad77257b3c4c8b3388dbabdcb82e3e24'
+    }
+
+    /**
+     *  Reserved for future use
+     *  Mapping between users and their owned rewards of different kinds, which are vested.
+     */
+    get asV44(): VestedRewardsRewardsStorageV44 {
+        assert(this.isV44)
+        return this as any
+    }
 }
 
 /**
@@ -15272,6 +16361,24 @@ export interface VestedRewardsRewardsStorageV42 {
     getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v42.Type_586][]>
     getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v42.Type_586][]>
     getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v42.Type_586][]>
+}
+
+/**
+ *  Reserved for future use
+ *  Mapping between users and their owned rewards of different kinds, which are vested.
+ */
+export interface VestedRewardsRewardsStorageV44 {
+    get(key: Uint8Array): Promise<v44.Type_593>
+    getAll(): Promise<v44.Type_593[]>
+    getMany(keys: Uint8Array[]): Promise<v44.Type_593[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v44.Type_593][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v44.Type_593][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v44.Type_593][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v44.Type_593][]>
 }
 
 export class VestedRewardsTotalRewardsStorage extends StorageBase {
@@ -15529,6 +16636,21 @@ export class XSTPoolPermissionedTechAccountStorage extends StorageBase {
         assert(this.isV42)
         return this as any
     }
+
+    /**
+     *  Technical account used to store collateral tokens.
+     */
+    get isV46(): boolean {
+        return this.getTypeHash() === '3cbc8553bacd4bc7573e7f755c0bf9eb2dbc0093d473ecb7568212ea45b2ddf8'
+    }
+
+    /**
+     *  Technical account used to store collateral tokens.
+     */
+    get asV46(): XSTPoolPermissionedTechAccountStorageV46 {
+        assert(this.isV46)
+        return this as any
+    }
 }
 
 /**
@@ -15543,6 +16665,13 @@ export interface XSTPoolPermissionedTechAccountStorageV41 {
  */
 export interface XSTPoolPermissionedTechAccountStorageV42 {
     get(): Promise<v42.TechAccountId>
+}
+
+/**
+ *  Technical account used to store collateral tokens.
+ */
+export interface XSTPoolPermissionedTechAccountStorageV46 {
+    get(): Promise<v46.TechAccountId>
 }
 
 export class XSTPoolReferenceAssetIdStorage extends StorageBase {
@@ -15597,6 +16726,38 @@ export interface XSTPoolReferenceAssetIdStorageV41 {
  */
 export interface XSTPoolReferenceAssetIdStorageV42 {
     get(): Promise<v42.AssetId32>
+}
+
+export class XSTPoolSyntheticBaseAssetFloorPriceStorage extends StorageBase {
+    protected getPrefix() {
+        return 'XSTPool'
+    }
+
+    protected getName() {
+        return 'SyntheticBaseAssetFloorPrice'
+    }
+
+    /**
+     *  Floor price for the synthetic base asset.
+     */
+    get isV44(): boolean {
+        return this.getTypeHash() === 'f8ebe28eb30158172c0ccf672f7747c46a244f892d08ef2ebcbaadde34a26bc0'
+    }
+
+    /**
+     *  Floor price for the synthetic base asset.
+     */
+    get asV44(): XSTPoolSyntheticBaseAssetFloorPriceStorageV44 {
+        assert(this.isV44)
+        return this as any
+    }
+}
+
+/**
+ *  Floor price for the synthetic base asset.
+ */
+export interface XSTPoolSyntheticBaseAssetFloorPriceStorageV44 {
+    get(): Promise<bigint>
 }
 
 export class XorFeeMultiplierStorage extends StorageBase {

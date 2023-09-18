@@ -15,11 +15,10 @@ export async function assetRegistrationEventHandler(ctx: Context, block: Block, 
 		const storage = new AssetsAssetInfosStorage(ctx, block.header)
 		const [, , precision,] = (
 			storage.isV1   ||
-			storage.isV26 ||
-			storage.isV33Stage
+			storage.isV26
 		)
-			? await getEntityData(ctx, block, storage, { kind: 'storage', name: AssetsAssetInfosStorage.name }, ['42', '42Stage', '60Dev'] as const).get(decodeAssetId(assetId))
-			: await getEntityData(ctx, block, storage, { kind: 'storage', name: AssetsAssetInfosStorage.name }, ['1', '26', '33Stage'] as const).get({ code: decodeAssetId(assetId) })
+			? await getEntityData(ctx, block, storage, { kind: 'storage', name: AssetsAssetInfosStorage.name }, ['42'] as const).get(decodeAssetId(assetId))
+			: await getEntityData(ctx, block, storage, { kind: 'storage', name: AssetsAssetInfosStorage.name }, ['1', '26'] as const).get({ code: decodeAssetId(assetId) })
 		assetPrecisions.set(assetId, precision)
 	}
 
