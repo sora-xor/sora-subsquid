@@ -7,9 +7,9 @@ services:
     volumes:
       - ./db:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: ${DB_USERNAME}
-      POSTGRES_PASSWORD: ${DB_PASS}
-      POSTGRES_DB: squid-archive-dev
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASS}
+      POSTGRES_DB: ${DATABASE_NAME}
     ports:
       - "5432:5432"
 
@@ -46,11 +46,11 @@ services:
   explorer:
     image: subsquid/substrate-explorer:firesquid
     environment:
-      DB_TYPE: postgres
-      DB_HOST: db
-      DB_PORT: "5432"
-      DB_NAME: "squid-archive-dev"
-      DB_USER: ${DB_USERNAME}
-      DB_PASS: ${DB_PASS}
+      DATABASE_TYPE: postgres
+      DATABASE_HOST: db
+      DATABASE_PORT: 5432
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USER: ${DATABASE_USERNAME}
+      DATABASE_PASS: ${DATABASE_PASS}
     ports:
       - "3000:3000"
