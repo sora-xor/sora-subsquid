@@ -93,9 +93,10 @@ function mapCallsForAllVersions(ctx: Context, block: Block, callItem: CallItem<'
 	const utilityBatchAllCall = new UtilityBatchAllCall(ctx, callItem.call)
 
 	let calls: HistoryElementCall[] | null = null
-	Object.keys(utilityBatchAllCall).forEach((isVersionKey) => {
-		if (isVersionKey.startsWith('isV') && utilityBatchAllCall[isVersionKey as IsVersion]) {
-			const version = Number(isVersionKey.replace('isV', '')) as Version
+	utilityBatchAllCallVersions.forEach((version) => {
+		const isVersionKey = ('isV' + version) as IsVersion
+		if (isVersionKey.startsWith('isV') && utilityBatchAllCall[isVersionKey]) {
+			const version = isVersionKey.replace('isV', '') as Version
 			calls = mapCalls(
 				{
 					version,

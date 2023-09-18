@@ -5,7 +5,7 @@ dotenv.config()
 
 function getVersionsFromClass(cls: { new (...args: any[]): any }) {
     const keys = Object.getOwnPropertyNames(cls.prototype)
-    const versions = keys.filter(key => key.startsWith('isV')).map(key => parseInt(key.slice(3)))
+    const versions = keys.filter(key => key.startsWith('isV')).map(key => key.slice(3))
     return versions
 }
 
@@ -24,7 +24,7 @@ async function generateAdditionalTypes() {
 
 	const calls = await import('../src/types/generated/calls')
     const versions = getVersionsFromClass(calls.UtilityBatchAllCall)
-    const versionsArray = `[${versions.join(', ')}] as const`
+    const versionsArray = `[${versions.map(v => `'${v}'`).join(', ')}] as const`
     let fileContent = await readFile(filePath, 'utf8')
     const variableName = 'utilityBatchAllCallVersions'
     const replacementLine = `\nexport const ${variableName} = ${versionsArray}\n`
