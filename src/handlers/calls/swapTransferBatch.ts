@@ -52,10 +52,10 @@ const handleAndSaveExtrinsic = async (ctx: Context, block: Block, callItem: Call
     details.blockNumber = blockNumber
     details.from = extrinsicSigner
 
-	if ('isV45' in call && call.isV45) {
-		details.receivers = getEntityData(ctx, block, call, callItem, [50] as const).receivers
-	} else {
-		details.swapBatches = getEntityData(ctx, block, call, callItem, [45] as const).swapBatches
+	if ('receivers' in data) {
+		details.receivers = data.receivers
+	} else  if ('swapBatches' in data) {
+		details.swapBatches = data.swapBatches
 	}
     
     if (historyElement.execution.success) {
