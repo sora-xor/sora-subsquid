@@ -9,7 +9,7 @@ services:
     environment:
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASS}
-      POSTGRES_DB: squid-archive-dev
+      POSTGRES_DB: ${DB_NAME}
     ports:
       - "5432:5432"
 
@@ -23,7 +23,7 @@ services:
     command: [
        "-e", "${NODE_NAME}",
        "-c", "5",
-       "--out", "${DATABASE_URL}",
+       "--out", "${DB_URL}",
        "--types-bundle", "/configs/typesBundle.json",
        "--write-batch-size", "10"
     ]
@@ -35,7 +35,7 @@ services:
     environment:
       RUST_LOG: "substrate_gateway=info,actix_server=info"
     command: [
-       "--database-url", "${DATABASE_URL}",
+       "--database-url", "${DB_URL}",
        "--database-max-connections", "100",
        "--scan-start-value", "1",
        "--scan-max-value", "10000",
@@ -48,8 +48,8 @@ services:
     environment:
       DB_TYPE: postgres
       DB_HOST: db
-      DB_PORT: "5432"
-      DB_NAME: "squid-archive-dev"
+      DB_PORT: 5432
+      DB_NAME: ${DB_NAME}
       DB_USER: ${DB_USERNAME}
       DB_PASS: ${DB_PASS}
     ports:
