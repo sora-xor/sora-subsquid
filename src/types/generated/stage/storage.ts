@@ -17,6 +17,7 @@ import * as v55 from './v55'
 import * as v57 from './v57'
 import * as v59 from './v59'
 import * as v60 from './v60'
+import * as v62 from './v62'
 
 export class AssetsAssetInfosStorage extends StorageBase {
     protected getPrefix() {
@@ -2624,6 +2625,80 @@ export interface BridgeOutboundChannelQueuesTotalGasStorageV52 {
     getPairsPaged(pageSize: number, key: bigint): AsyncIterable<[k: bigint, v: bigint][]>
 }
 
+export class BridgeProxyConsumedTransferLimitStorage extends StorageBase {
+    protected getPrefix() {
+        return 'BridgeProxy'
+    }
+
+    protected getName() {
+        return 'ConsumedTransferLimit'
+    }
+
+    /**
+     *  Consumed transfer limit.
+     */
+    get isV62(): boolean {
+        return this.getTypeHash() === 'f8ebe28eb30158172c0ccf672f7747c46a244f892d08ef2ebcbaadde34a26bc0'
+    }
+
+    /**
+     *  Consumed transfer limit.
+     */
+    get asV62(): BridgeProxyConsumedTransferLimitStorageV62 {
+        assert(this.isV62)
+        return this as any
+    }
+}
+
+/**
+ *  Consumed transfer limit.
+ */
+export interface BridgeProxyConsumedTransferLimitStorageV62 {
+    get(): Promise<bigint>
+}
+
+export class BridgeProxyLimitedAssetsStorage extends StorageBase {
+    protected getPrefix() {
+        return 'BridgeProxy'
+    }
+
+    protected getName() {
+        return 'LimitedAssets'
+    }
+
+    /**
+     *  Assets with transfer limitation.
+     */
+    get isV62(): boolean {
+        return this.getTypeHash() === 'c174344dfddcf1721ee1639e2dd3674a34e0feb5b0b7408e99c10363afb45d50'
+    }
+
+    /**
+     *  Assets with transfer limitation.
+     */
+    get asV62(): BridgeProxyLimitedAssetsStorageV62 {
+        assert(this.isV62)
+        return this as any
+    }
+}
+
+/**
+ *  Assets with transfer limitation.
+ */
+export interface BridgeProxyLimitedAssetsStorageV62 {
+    get(key: v62.AssetId32): Promise<boolean>
+    getAll(): Promise<boolean[]>
+    getMany(keys: v62.AssetId32[]): Promise<boolean[]>
+    getKeys(): Promise<v62.AssetId32[]>
+    getKeys(key: v62.AssetId32): Promise<v62.AssetId32[]>
+    getKeysPaged(pageSize: number): AsyncIterable<v62.AssetId32[]>
+    getKeysPaged(pageSize: number, key: v62.AssetId32): AsyncIterable<v62.AssetId32[]>
+    getPairs(): Promise<[k: v62.AssetId32, v: boolean][]>
+    getPairs(key: v62.AssetId32): Promise<[k: v62.AssetId32, v: boolean][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: v62.AssetId32, v: boolean][]>
+    getPairsPaged(pageSize: number, key: v62.AssetId32): AsyncIterable<[k: v62.AssetId32, v: boolean][]>
+}
+
 export class BridgeProxyLockedAssetsStorage extends StorageBase {
     protected getPrefix() {
         return 'BridgeProxy'
@@ -2788,6 +2863,80 @@ export interface BridgeProxyTransactionsStorageV54 {
     getPairsPaged(pageSize: number): AsyncIterable<[k: [[v54.GenericNetworkId, Uint8Array], Uint8Array], v: v54.BridgeRequest][]>
     getPairsPaged(pageSize: number, key1: [v54.GenericNetworkId, Uint8Array]): AsyncIterable<[k: [[v54.GenericNetworkId, Uint8Array], Uint8Array], v: v54.BridgeRequest][]>
     getPairsPaged(pageSize: number, key1: [v54.GenericNetworkId, Uint8Array], key2: Uint8Array): AsyncIterable<[k: [[v54.GenericNetworkId, Uint8Array], Uint8Array], v: v54.BridgeRequest][]>
+}
+
+export class BridgeProxyTransferLimitStorage extends StorageBase {
+    protected getPrefix() {
+        return 'BridgeProxy'
+    }
+
+    protected getName() {
+        return 'TransferLimit'
+    }
+
+    /**
+     *  Maximum amount of assets that can be withdrawn during period of time.
+     */
+    get isV62(): boolean {
+        return this.getTypeHash() === '528249b1b19c80ce4829cb789f6272e9b2eac8a898ffda956ff359869f83a090'
+    }
+
+    /**
+     *  Maximum amount of assets that can be withdrawn during period of time.
+     */
+    get asV62(): BridgeProxyTransferLimitStorageV62 {
+        assert(this.isV62)
+        return this as any
+    }
+}
+
+/**
+ *  Maximum amount of assets that can be withdrawn during period of time.
+ */
+export interface BridgeProxyTransferLimitStorageV62 {
+    get(): Promise<v62.TransferLimitSettings>
+}
+
+export class BridgeProxyTransferLimitUnlockScheduleStorage extends StorageBase {
+    protected getPrefix() {
+        return 'BridgeProxy'
+    }
+
+    protected getName() {
+        return 'TransferLimitUnlockSchedule'
+    }
+
+    /**
+     *  Schedule for consumed transfer limit reduce.
+     */
+    get isV62(): boolean {
+        return this.getTypeHash() === 'd4b0e776f9f1d19233fe32cd062ab41a912af3d15ceb9d02d9ebc8fbe7b1cda4'
+    }
+
+    /**
+     *  Schedule for consumed transfer limit reduce.
+     */
+    get asV62(): BridgeProxyTransferLimitUnlockScheduleStorageV62 {
+        assert(this.isV62)
+        return this as any
+    }
+}
+
+/**
+ *  Schedule for consumed transfer limit reduce.
+ */
+export interface BridgeProxyTransferLimitUnlockScheduleStorageV62 {
+    get(key: number): Promise<bigint>
+    getAll(): Promise<bigint[]>
+    getMany(keys: number[]): Promise<bigint[]>
+    getKeys(): Promise<number[]>
+    getKeys(key: number): Promise<number[]>
+    getKeysPaged(pageSize: number): AsyncIterable<number[]>
+    getKeysPaged(pageSize: number, key: number): AsyncIterable<number[]>
+    getPairs(): Promise<[k: number, v: bigint][]>
+    getPairs(key: number): Promise<[k: number, v: bigint][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: number, v: bigint][]>
+    getPairsPaged(pageSize: number, key: number): AsyncIterable<[k: number, v: bigint][]>
 }
 
 export class CeresGovernancePlatformPalletStorageVersionStorage extends StorageBase {
@@ -4190,6 +4339,21 @@ export class CouncilProposalOfStorage extends StorageBase {
         assert(this.isV60)
         return this as any
     }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get isV62(): boolean {
+        return this.getTypeHash() === 'df61816865d9330415d02528eee6a7e6fd3980a5d00993a32ff0e6fddaefe46e'
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get asV62(): CouncilProposalOfStorageV62 {
+        assert(this.isV62)
+        return this as any
+    }
 }
 
 /**
@@ -4411,6 +4575,23 @@ export interface CouncilProposalOfStorageV60 {
     getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v60.Call][]>
     getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v60.Call][]>
     getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v60.Call][]>
+}
+
+/**
+ *  Actual proposal for a given hash, if it's current.
+ */
+export interface CouncilProposalOfStorageV62 {
+    get(key: Uint8Array): Promise<(v62.Call | undefined)>
+    getAll(): Promise<v62.Call[]>
+    getMany(keys: Uint8Array[]): Promise<(v62.Call | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v62.Call][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v62.Call][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v62.Call][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v62.Call][]>
 }
 
 export class CouncilProposalsStorage extends StorageBase {
@@ -19258,6 +19439,21 @@ export class TechnicalCommitteeProposalOfStorage extends StorageBase {
         assert(this.isV60)
         return this as any
     }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get isV62(): boolean {
+        return this.getTypeHash() === 'df61816865d9330415d02528eee6a7e6fd3980a5d00993a32ff0e6fddaefe46e'
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get asV62(): TechnicalCommitteeProposalOfStorageV62 {
+        assert(this.isV62)
+        return this as any
+    }
 }
 
 /**
@@ -19479,6 +19675,23 @@ export interface TechnicalCommitteeProposalOfStorageV60 {
     getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v60.Call][]>
     getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v60.Call][]>
     getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v60.Call][]>
+}
+
+/**
+ *  Actual proposal for a given hash, if it's current.
+ */
+export interface TechnicalCommitteeProposalOfStorageV62 {
+    get(key: Uint8Array): Promise<(v62.Call | undefined)>
+    getAll(): Promise<v62.Call[]>
+    getMany(keys: Uint8Array[]): Promise<(v62.Call | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v62.Call][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v62.Call][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v62.Call][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v62.Call][]>
 }
 
 export class TechnicalCommitteeProposalsStorage extends StorageBase {

@@ -1,17 +1,20 @@
 import {Chain, ChainContext, CallContext, Call, Result, Option} from './production/support'
 import * as productionCalls from './production/calls'
 import * as stageCalls from './stage/calls'
+import * as testCalls from './test/calls'
 import * as devCalls from './dev/calls'
 
 
 export class AssetsBurnCall {
 	private readonly production: productionCalls.AssetsBurnCall
 	private readonly stage: stageCalls.AssetsBurnCall
+	private readonly test: testCalls.AssetsBurnCall
 	private readonly dev: devCalls.AssetsBurnCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.AssetsBurnCall(ctx, call)
 		this.stage = new stageCalls.AssetsBurnCall(ctx, call)
+		this.test = new testCalls.AssetsBurnCall(ctx, call)
 		this.dev = new devCalls.AssetsBurnCall(ctx, call)
 	}
 
@@ -38,6 +41,18 @@ export class AssetsBurnCall {
 	}
 	get asV42Stage(): stageCalls.AssetsBurnCall['asV42'] {
 		return this.stage.asV42
+	}
+	get isV41Test(): testCalls.AssetsBurnCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.AssetsBurnCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.AssetsBurnCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.AssetsBurnCall['asV42'] {
+		return this.test.asV42
 	}
 	get isV60Dev(): devCalls.AssetsBurnCall['isV60'] {
 		return this.dev.isV60
@@ -81,11 +96,13 @@ export class AssetsForceMintCall {
 export class AssetsMintCall {
 	private readonly production: productionCalls.AssetsMintCall
 	private readonly stage: stageCalls.AssetsMintCall
+	private readonly test: testCalls.AssetsMintCall
 	private readonly dev: devCalls.AssetsMintCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.AssetsMintCall(ctx, call)
 		this.stage = new stageCalls.AssetsMintCall(ctx, call)
+		this.test = new testCalls.AssetsMintCall(ctx, call)
 		this.dev = new devCalls.AssetsMintCall(ctx, call)
 	}
 
@@ -113,6 +130,18 @@ export class AssetsMintCall {
 	get asV42Stage(): stageCalls.AssetsMintCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV41Test(): testCalls.AssetsMintCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.AssetsMintCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.AssetsMintCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.AssetsMintCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.AssetsMintCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -124,11 +153,13 @@ export class AssetsMintCall {
 export class AssetsRegisterCall {
 	private readonly production: productionCalls.AssetsRegisterCall
 	private readonly stage: stageCalls.AssetsRegisterCall
+	private readonly test: testCalls.AssetsRegisterCall
 	private readonly dev: devCalls.AssetsRegisterCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.AssetsRegisterCall(ctx, call)
 		this.stage = new stageCalls.AssetsRegisterCall(ctx, call)
+		this.test = new testCalls.AssetsRegisterCall(ctx, call)
 		this.dev = new devCalls.AssetsRegisterCall(ctx, call)
 	}
 
@@ -156,6 +187,12 @@ export class AssetsRegisterCall {
 	get asV33Stage(): stageCalls.AssetsRegisterCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.AssetsRegisterCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.AssetsRegisterCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.AssetsRegisterCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -167,11 +204,13 @@ export class AssetsRegisterCall {
 export class AssetsSetNonMintableCall {
 	private readonly production: productionCalls.AssetsSetNonMintableCall
 	private readonly stage: stageCalls.AssetsSetNonMintableCall
+	private readonly test: testCalls.AssetsSetNonMintableCall
 	private readonly dev: devCalls.AssetsSetNonMintableCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.AssetsSetNonMintableCall(ctx, call)
 		this.stage = new stageCalls.AssetsSetNonMintableCall(ctx, call)
+		this.test = new testCalls.AssetsSetNonMintableCall(ctx, call)
 		this.dev = new devCalls.AssetsSetNonMintableCall(ctx, call)
 	}
 
@@ -199,6 +238,18 @@ export class AssetsSetNonMintableCall {
 	get asV42Stage(): stageCalls.AssetsSetNonMintableCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV41Test(): testCalls.AssetsSetNonMintableCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.AssetsSetNonMintableCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.AssetsSetNonMintableCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.AssetsSetNonMintableCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.AssetsSetNonMintableCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -210,11 +261,13 @@ export class AssetsSetNonMintableCall {
 export class AssetsTransferCall {
 	private readonly production: productionCalls.AssetsTransferCall
 	private readonly stage: stageCalls.AssetsTransferCall
+	private readonly test: testCalls.AssetsTransferCall
 	private readonly dev: devCalls.AssetsTransferCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.AssetsTransferCall(ctx, call)
 		this.stage = new stageCalls.AssetsTransferCall(ctx, call)
+		this.test = new testCalls.AssetsTransferCall(ctx, call)
 		this.dev = new devCalls.AssetsTransferCall(ctx, call)
 	}
 
@@ -241,6 +294,18 @@ export class AssetsTransferCall {
 	}
 	get asV42Stage(): stageCalls.AssetsTransferCall['asV42'] {
 		return this.stage.asV42
+	}
+	get isV41Test(): testCalls.AssetsTransferCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.AssetsTransferCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.AssetsTransferCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.AssetsTransferCall['asV42'] {
+		return this.test.asV42
 	}
 	get isV60Dev(): devCalls.AssetsTransferCall['isV60'] {
 		return this.dev.isV60
@@ -315,10 +380,12 @@ export class AssetsUpdateInfoCall {
 export class AuthorshipSetUnclesCall {
 	private readonly production: productionCalls.AuthorshipSetUnclesCall
 	private readonly stage: stageCalls.AuthorshipSetUnclesCall
+	private readonly test: testCalls.AuthorshipSetUnclesCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.AuthorshipSetUnclesCall(ctx, call)
 		this.stage = new stageCalls.AuthorshipSetUnclesCall(ctx, call)
+		this.test = new testCalls.AuthorshipSetUnclesCall(ctx, call)
 	}
 
 	get isV1(): productionCalls.AuthorshipSetUnclesCall['isV1'] {
@@ -345,16 +412,30 @@ export class AuthorshipSetUnclesCall {
 	get asV42Stage(): stageCalls.AuthorshipSetUnclesCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV41Test(): testCalls.AuthorshipSetUnclesCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.AuthorshipSetUnclesCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.AuthorshipSetUnclesCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.AuthorshipSetUnclesCall['asV42'] {
+		return this.test.asV42
+	}
 }
 
 export class BabePlanConfigChangeCall {
 	private readonly production: productionCalls.BabePlanConfigChangeCall
 	private readonly stage: stageCalls.BabePlanConfigChangeCall
+	private readonly test: testCalls.BabePlanConfigChangeCall
 	private readonly dev: devCalls.BabePlanConfigChangeCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.BabePlanConfigChangeCall(ctx, call)
 		this.stage = new stageCalls.BabePlanConfigChangeCall(ctx, call)
+		this.test = new testCalls.BabePlanConfigChangeCall(ctx, call)
 		this.dev = new devCalls.BabePlanConfigChangeCall(ctx, call)
 	}
 
@@ -370,6 +451,12 @@ export class BabePlanConfigChangeCall {
 	get asV42Stage(): stageCalls.BabePlanConfigChangeCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV42Test(): testCalls.BabePlanConfigChangeCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.BabePlanConfigChangeCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.BabePlanConfigChangeCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -381,11 +468,13 @@ export class BabePlanConfigChangeCall {
 export class BabeReportEquivocationCall {
 	private readonly production: productionCalls.BabeReportEquivocationCall
 	private readonly stage: stageCalls.BabeReportEquivocationCall
+	private readonly test: testCalls.BabeReportEquivocationCall
 	private readonly dev: devCalls.BabeReportEquivocationCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.BabeReportEquivocationCall(ctx, call)
 		this.stage = new stageCalls.BabeReportEquivocationCall(ctx, call)
+		this.test = new testCalls.BabeReportEquivocationCall(ctx, call)
 		this.dev = new devCalls.BabeReportEquivocationCall(ctx, call)
 	}
 
@@ -413,6 +502,18 @@ export class BabeReportEquivocationCall {
 	get asV42Stage(): stageCalls.BabeReportEquivocationCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV41Test(): testCalls.BabeReportEquivocationCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.BabeReportEquivocationCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.BabeReportEquivocationCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.BabeReportEquivocationCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.BabeReportEquivocationCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -424,11 +525,13 @@ export class BabeReportEquivocationCall {
 export class BabeReportEquivocationUnsignedCall {
 	private readonly production: productionCalls.BabeReportEquivocationUnsignedCall
 	private readonly stage: stageCalls.BabeReportEquivocationUnsignedCall
+	private readonly test: testCalls.BabeReportEquivocationUnsignedCall
 	private readonly dev: devCalls.BabeReportEquivocationUnsignedCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.BabeReportEquivocationUnsignedCall(ctx, call)
 		this.stage = new stageCalls.BabeReportEquivocationUnsignedCall(ctx, call)
+		this.test = new testCalls.BabeReportEquivocationUnsignedCall(ctx, call)
 		this.dev = new devCalls.BabeReportEquivocationUnsignedCall(ctx, call)
 	}
 
@@ -456,6 +559,18 @@ export class BabeReportEquivocationUnsignedCall {
 	get asV42Stage(): stageCalls.BabeReportEquivocationUnsignedCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV41Test(): testCalls.BabeReportEquivocationUnsignedCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.BabeReportEquivocationUnsignedCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.BabeReportEquivocationUnsignedCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.BabeReportEquivocationUnsignedCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.BabeReportEquivocationUnsignedCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -467,11 +582,13 @@ export class BabeReportEquivocationUnsignedCall {
 export class BagsListPutInFrontOfCall {
 	private readonly production: productionCalls.BagsListPutInFrontOfCall
 	private readonly stage: stageCalls.BagsListPutInFrontOfCall
+	private readonly test: testCalls.BagsListPutInFrontOfCall
 	private readonly dev: devCalls.BagsListPutInFrontOfCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.BagsListPutInFrontOfCall(ctx, call)
 		this.stage = new stageCalls.BagsListPutInFrontOfCall(ctx, call)
+		this.test = new testCalls.BagsListPutInFrontOfCall(ctx, call)
 		this.dev = new devCalls.BagsListPutInFrontOfCall(ctx, call)
 	}
 
@@ -487,6 +604,12 @@ export class BagsListPutInFrontOfCall {
 	get asV42Stage(): stageCalls.BagsListPutInFrontOfCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV42Test(): testCalls.BagsListPutInFrontOfCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.BagsListPutInFrontOfCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.BagsListPutInFrontOfCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -498,11 +621,13 @@ export class BagsListPutInFrontOfCall {
 export class BagsListRebagCall {
 	private readonly production: productionCalls.BagsListRebagCall
 	private readonly stage: stageCalls.BagsListRebagCall
+	private readonly test: testCalls.BagsListRebagCall
 	private readonly dev: devCalls.BagsListRebagCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.BagsListRebagCall(ctx, call)
 		this.stage = new stageCalls.BagsListRebagCall(ctx, call)
+		this.test = new testCalls.BagsListRebagCall(ctx, call)
 		this.dev = new devCalls.BagsListRebagCall(ctx, call)
 	}
 
@@ -518,6 +643,12 @@ export class BagsListRebagCall {
 	get asV42Stage(): stageCalls.BagsListRebagCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV42Test(): testCalls.BagsListRebagCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.BagsListRebagCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.BagsListRebagCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -529,10 +660,12 @@ export class BagsListRebagCall {
 export class BalancesForceTransferCall {
 	private readonly production: productionCalls.BalancesForceTransferCall
 	private readonly stage: stageCalls.BalancesForceTransferCall
+	private readonly test: testCalls.BalancesForceTransferCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.BalancesForceTransferCall(ctx, call)
 		this.stage = new stageCalls.BalancesForceTransferCall(ctx, call)
+		this.test = new testCalls.BalancesForceTransferCall(ctx, call)
 	}
 
 	get isV1(): productionCalls.BalancesForceTransferCall['isV1'] {
@@ -547,15 +680,23 @@ export class BalancesForceTransferCall {
 	get asV33Stage(): stageCalls.BalancesForceTransferCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.BalancesForceTransferCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.BalancesForceTransferCall['asV41'] {
+		return this.test.asV41
+	}
 }
 
 export class BalancesForceUnreserveCall {
 	private readonly production: productionCalls.BalancesForceUnreserveCall
 	private readonly stage: stageCalls.BalancesForceUnreserveCall
+	private readonly test: testCalls.BalancesForceUnreserveCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.BalancesForceUnreserveCall(ctx, call)
 		this.stage = new stageCalls.BalancesForceUnreserveCall(ctx, call)
+		this.test = new testCalls.BalancesForceUnreserveCall(ctx, call)
 	}
 
 	get isV42(): productionCalls.BalancesForceUnreserveCall['isV42'] {
@@ -570,15 +711,23 @@ export class BalancesForceUnreserveCall {
 	get asV42Stage(): stageCalls.BalancesForceUnreserveCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV42Test(): testCalls.BalancesForceUnreserveCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.BalancesForceUnreserveCall['asV42'] {
+		return this.test.asV42
+	}
 }
 
 export class BalancesSetBalanceCall {
 	private readonly production: productionCalls.BalancesSetBalanceCall
 	private readonly stage: stageCalls.BalancesSetBalanceCall
+	private readonly test: testCalls.BalancesSetBalanceCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.BalancesSetBalanceCall(ctx, call)
 		this.stage = new stageCalls.BalancesSetBalanceCall(ctx, call)
+		this.test = new testCalls.BalancesSetBalanceCall(ctx, call)
 	}
 
 	get isV1(): productionCalls.BalancesSetBalanceCall['isV1'] {
@@ -593,15 +742,23 @@ export class BalancesSetBalanceCall {
 	get asV33Stage(): stageCalls.BalancesSetBalanceCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.BalancesSetBalanceCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.BalancesSetBalanceCall['asV41'] {
+		return this.test.asV41
+	}
 }
 
 export class BalancesTransferCall {
 	private readonly production: productionCalls.BalancesTransferCall
 	private readonly stage: stageCalls.BalancesTransferCall
+	private readonly test: testCalls.BalancesTransferCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.BalancesTransferCall(ctx, call)
 		this.stage = new stageCalls.BalancesTransferCall(ctx, call)
+		this.test = new testCalls.BalancesTransferCall(ctx, call)
 	}
 
 	get isV1(): productionCalls.BalancesTransferCall['isV1'] {
@@ -616,15 +773,23 @@ export class BalancesTransferCall {
 	get asV33Stage(): stageCalls.BalancesTransferCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.BalancesTransferCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.BalancesTransferCall['asV41'] {
+		return this.test.asV41
+	}
 }
 
 export class BalancesTransferAllCall {
 	private readonly production: productionCalls.BalancesTransferAllCall
 	private readonly stage: stageCalls.BalancesTransferAllCall
+	private readonly test: testCalls.BalancesTransferAllCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.BalancesTransferAllCall(ctx, call)
 		this.stage = new stageCalls.BalancesTransferAllCall(ctx, call)
+		this.test = new testCalls.BalancesTransferAllCall(ctx, call)
 	}
 
 	get isV42(): productionCalls.BalancesTransferAllCall['isV42'] {
@@ -639,15 +804,23 @@ export class BalancesTransferAllCall {
 	get asV42Stage(): stageCalls.BalancesTransferAllCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV42Test(): testCalls.BalancesTransferAllCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.BalancesTransferAllCall['asV42'] {
+		return this.test.asV42
+	}
 }
 
 export class BalancesTransferKeepAliveCall {
 	private readonly production: productionCalls.BalancesTransferKeepAliveCall
 	private readonly stage: stageCalls.BalancesTransferKeepAliveCall
+	private readonly test: testCalls.BalancesTransferKeepAliveCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.BalancesTransferKeepAliveCall(ctx, call)
 		this.stage = new stageCalls.BalancesTransferKeepAliveCall(ctx, call)
+		this.test = new testCalls.BalancesTransferKeepAliveCall(ctx, call)
 	}
 
 	get isV1(): productionCalls.BalancesTransferKeepAliveCall['isV1'] {
@@ -661,6 +834,12 @@ export class BalancesTransferKeepAliveCall {
 	}
 	get asV33Stage(): stageCalls.BalancesTransferKeepAliveCall['asV33'] {
 		return this.stage.asV33
+	}
+	get isV41Test(): testCalls.BalancesTransferKeepAliveCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.BalancesTransferKeepAliveCall['asV41'] {
+		return this.test.asV41
 	}
 }
 
@@ -834,11 +1013,13 @@ export class BandSetDynamicFeeParametersCall {
 export class BridgeMultisigAddSignatoryCall {
 	private readonly production: productionCalls.BridgeMultisigAddSignatoryCall
 	private readonly stage: stageCalls.BridgeMultisigAddSignatoryCall
+	private readonly test: testCalls.BridgeMultisigAddSignatoryCall
 	private readonly dev: devCalls.BridgeMultisigAddSignatoryCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.BridgeMultisigAddSignatoryCall(ctx, call)
 		this.stage = new stageCalls.BridgeMultisigAddSignatoryCall(ctx, call)
+		this.test = new testCalls.BridgeMultisigAddSignatoryCall(ctx, call)
 		this.dev = new devCalls.BridgeMultisigAddSignatoryCall(ctx, call)
 	}
 
@@ -854,6 +1035,12 @@ export class BridgeMultisigAddSignatoryCall {
 	get asV33Stage(): stageCalls.BridgeMultisigAddSignatoryCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.BridgeMultisigAddSignatoryCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.BridgeMultisigAddSignatoryCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.BridgeMultisigAddSignatoryCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -865,11 +1052,13 @@ export class BridgeMultisigAddSignatoryCall {
 export class BridgeMultisigApproveAsMultiCall {
 	private readonly production: productionCalls.BridgeMultisigApproveAsMultiCall
 	private readonly stage: stageCalls.BridgeMultisigApproveAsMultiCall
+	private readonly test: testCalls.BridgeMultisigApproveAsMultiCall
 	private readonly dev: devCalls.BridgeMultisigApproveAsMultiCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.BridgeMultisigApproveAsMultiCall(ctx, call)
 		this.stage = new stageCalls.BridgeMultisigApproveAsMultiCall(ctx, call)
+		this.test = new testCalls.BridgeMultisigApproveAsMultiCall(ctx, call)
 		this.dev = new devCalls.BridgeMultisigApproveAsMultiCall(ctx, call)
 	}
 
@@ -897,6 +1086,12 @@ export class BridgeMultisigApproveAsMultiCall {
 	get asV52Stage(): stageCalls.BridgeMultisigApproveAsMultiCall['asV52'] {
 		return this.stage.asV52
 	}
+	get isV41Test(): testCalls.BridgeMultisigApproveAsMultiCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.BridgeMultisigApproveAsMultiCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.BridgeMultisigApproveAsMultiCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -908,11 +1103,13 @@ export class BridgeMultisigApproveAsMultiCall {
 export class BridgeMultisigAsMultiCall {
 	private readonly production: productionCalls.BridgeMultisigAsMultiCall
 	private readonly stage: stageCalls.BridgeMultisigAsMultiCall
+	private readonly test: testCalls.BridgeMultisigAsMultiCall
 	private readonly dev: devCalls.BridgeMultisigAsMultiCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.BridgeMultisigAsMultiCall(ctx, call)
 		this.stage = new stageCalls.BridgeMultisigAsMultiCall(ctx, call)
+		this.test = new testCalls.BridgeMultisigAsMultiCall(ctx, call)
 		this.dev = new devCalls.BridgeMultisigAsMultiCall(ctx, call)
 	}
 
@@ -940,6 +1137,12 @@ export class BridgeMultisigAsMultiCall {
 	get asV52Stage(): stageCalls.BridgeMultisigAsMultiCall['asV52'] {
 		return this.stage.asV52
 	}
+	get isV41Test(): testCalls.BridgeMultisigAsMultiCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.BridgeMultisigAsMultiCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.BridgeMultisigAsMultiCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -951,11 +1154,13 @@ export class BridgeMultisigAsMultiCall {
 export class BridgeMultisigAsMultiThreshold1Call {
 	private readonly production: productionCalls.BridgeMultisigAsMultiThreshold1Call
 	private readonly stage: stageCalls.BridgeMultisigAsMultiThreshold1Call
+	private readonly test: testCalls.BridgeMultisigAsMultiThreshold1Call
 	private readonly dev: devCalls.BridgeMultisigAsMultiThreshold1Call
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.BridgeMultisigAsMultiThreshold1Call(ctx, call)
 		this.stage = new stageCalls.BridgeMultisigAsMultiThreshold1Call(ctx, call)
+		this.test = new testCalls.BridgeMultisigAsMultiThreshold1Call(ctx, call)
 		this.dev = new devCalls.BridgeMultisigAsMultiThreshold1Call(ctx, call)
 	}
 
@@ -1193,6 +1398,30 @@ export class BridgeMultisigAsMultiThreshold1Call {
 	get asV60Stage(): stageCalls.BridgeMultisigAsMultiThreshold1Call['asV60'] {
 		return this.stage.asV60
 	}
+	get isV62Stage(): stageCalls.BridgeMultisigAsMultiThreshold1Call['isV62'] {
+		return this.stage.isV62
+	}
+	get asV62Stage(): stageCalls.BridgeMultisigAsMultiThreshold1Call['asV62'] {
+		return this.stage.asV62
+	}
+	get isV41Test(): testCalls.BridgeMultisigAsMultiThreshold1Call['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.BridgeMultisigAsMultiThreshold1Call['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.BridgeMultisigAsMultiThreshold1Call['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.BridgeMultisigAsMultiThreshold1Call['asV42'] {
+		return this.test.asV42
+	}
+	get isV43Test(): testCalls.BridgeMultisigAsMultiThreshold1Call['isV43'] {
+		return this.test.isV43
+	}
+	get asV43Test(): testCalls.BridgeMultisigAsMultiThreshold1Call['asV43'] {
+		return this.test.asV43
+	}
 	get isV60Dev(): devCalls.BridgeMultisigAsMultiThreshold1Call['isV60'] {
 		return this.dev.isV60
 	}
@@ -1204,11 +1433,13 @@ export class BridgeMultisigAsMultiThreshold1Call {
 export class BridgeMultisigCancelAsMultiCall {
 	private readonly production: productionCalls.BridgeMultisigCancelAsMultiCall
 	private readonly stage: stageCalls.BridgeMultisigCancelAsMultiCall
+	private readonly test: testCalls.BridgeMultisigCancelAsMultiCall
 	private readonly dev: devCalls.BridgeMultisigCancelAsMultiCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.BridgeMultisigCancelAsMultiCall(ctx, call)
 		this.stage = new stageCalls.BridgeMultisigCancelAsMultiCall(ctx, call)
+		this.test = new testCalls.BridgeMultisigCancelAsMultiCall(ctx, call)
 		this.dev = new devCalls.BridgeMultisigCancelAsMultiCall(ctx, call)
 	}
 
@@ -1224,6 +1455,12 @@ export class BridgeMultisigCancelAsMultiCall {
 	get asV33Stage(): stageCalls.BridgeMultisigCancelAsMultiCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.BridgeMultisigCancelAsMultiCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.BridgeMultisigCancelAsMultiCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.BridgeMultisigCancelAsMultiCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -1235,11 +1472,13 @@ export class BridgeMultisigCancelAsMultiCall {
 export class BridgeMultisigRegisterMultisigCall {
 	private readonly production: productionCalls.BridgeMultisigRegisterMultisigCall
 	private readonly stage: stageCalls.BridgeMultisigRegisterMultisigCall
+	private readonly test: testCalls.BridgeMultisigRegisterMultisigCall
 	private readonly dev: devCalls.BridgeMultisigRegisterMultisigCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.BridgeMultisigRegisterMultisigCall(ctx, call)
 		this.stage = new stageCalls.BridgeMultisigRegisterMultisigCall(ctx, call)
+		this.test = new testCalls.BridgeMultisigRegisterMultisigCall(ctx, call)
 		this.dev = new devCalls.BridgeMultisigRegisterMultisigCall(ctx, call)
 	}
 
@@ -1261,6 +1500,12 @@ export class BridgeMultisigRegisterMultisigCall {
 	get asV33Stage(): stageCalls.BridgeMultisigRegisterMultisigCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.BridgeMultisigRegisterMultisigCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.BridgeMultisigRegisterMultisigCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.BridgeMultisigRegisterMultisigCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -1272,11 +1517,13 @@ export class BridgeMultisigRegisterMultisigCall {
 export class BridgeMultisigRemoveSignatoryCall {
 	private readonly production: productionCalls.BridgeMultisigRemoveSignatoryCall
 	private readonly stage: stageCalls.BridgeMultisigRemoveSignatoryCall
+	private readonly test: testCalls.BridgeMultisigRemoveSignatoryCall
 	private readonly dev: devCalls.BridgeMultisigRemoveSignatoryCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.BridgeMultisigRemoveSignatoryCall(ctx, call)
 		this.stage = new stageCalls.BridgeMultisigRemoveSignatoryCall(ctx, call)
+		this.test = new testCalls.BridgeMultisigRemoveSignatoryCall(ctx, call)
 		this.dev = new devCalls.BridgeMultisigRemoveSignatoryCall(ctx, call)
 	}
 
@@ -1292,6 +1539,12 @@ export class BridgeMultisigRemoveSignatoryCall {
 	get asV33Stage(): stageCalls.BridgeMultisigRemoveSignatoryCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.BridgeMultisigRemoveSignatoryCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.BridgeMultisigRemoveSignatoryCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.BridgeMultisigRemoveSignatoryCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -1303,11 +1556,13 @@ export class BridgeMultisigRemoveSignatoryCall {
 export class CeresGovernancePlatformCreatePollCall {
 	private readonly production: productionCalls.CeresGovernancePlatformCreatePollCall
 	private readonly stage: stageCalls.CeresGovernancePlatformCreatePollCall
+	private readonly test: testCalls.CeresGovernancePlatformCreatePollCall
 	private readonly dev: devCalls.CeresGovernancePlatformCreatePollCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.CeresGovernancePlatformCreatePollCall(ctx, call)
 		this.stage = new stageCalls.CeresGovernancePlatformCreatePollCall(ctx, call)
+		this.test = new testCalls.CeresGovernancePlatformCreatePollCall(ctx, call)
 		this.dev = new devCalls.CeresGovernancePlatformCreatePollCall(ctx, call)
 	}
 
@@ -1335,6 +1590,12 @@ export class CeresGovernancePlatformCreatePollCall {
 	get asV37Stage(): stageCalls.CeresGovernancePlatformCreatePollCall['asV37'] {
 		return this.stage.asV37
 	}
+	get isV41Test(): testCalls.CeresGovernancePlatformCreatePollCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.CeresGovernancePlatformCreatePollCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.CeresGovernancePlatformCreatePollCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -1346,11 +1607,13 @@ export class CeresGovernancePlatformCreatePollCall {
 export class CeresGovernancePlatformVoteCall {
 	private readonly production: productionCalls.CeresGovernancePlatformVoteCall
 	private readonly stage: stageCalls.CeresGovernancePlatformVoteCall
+	private readonly test: testCalls.CeresGovernancePlatformVoteCall
 	private readonly dev: devCalls.CeresGovernancePlatformVoteCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.CeresGovernancePlatformVoteCall(ctx, call)
 		this.stage = new stageCalls.CeresGovernancePlatformVoteCall(ctx, call)
+		this.test = new testCalls.CeresGovernancePlatformVoteCall(ctx, call)
 		this.dev = new devCalls.CeresGovernancePlatformVoteCall(ctx, call)
 	}
 
@@ -1366,6 +1629,12 @@ export class CeresGovernancePlatformVoteCall {
 	get asV33Stage(): stageCalls.CeresGovernancePlatformVoteCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.CeresGovernancePlatformVoteCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.CeresGovernancePlatformVoteCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.CeresGovernancePlatformVoteCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -1377,11 +1646,13 @@ export class CeresGovernancePlatformVoteCall {
 export class CeresGovernancePlatformWithdrawCall {
 	private readonly production: productionCalls.CeresGovernancePlatformWithdrawCall
 	private readonly stage: stageCalls.CeresGovernancePlatformWithdrawCall
+	private readonly test: testCalls.CeresGovernancePlatformWithdrawCall
 	private readonly dev: devCalls.CeresGovernancePlatformWithdrawCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.CeresGovernancePlatformWithdrawCall(ctx, call)
 		this.stage = new stageCalls.CeresGovernancePlatformWithdrawCall(ctx, call)
+		this.test = new testCalls.CeresGovernancePlatformWithdrawCall(ctx, call)
 		this.dev = new devCalls.CeresGovernancePlatformWithdrawCall(ctx, call)
 	}
 
@@ -1397,6 +1668,12 @@ export class CeresGovernancePlatformWithdrawCall {
 	get asV33Stage(): stageCalls.CeresGovernancePlatformWithdrawCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.CeresGovernancePlatformWithdrawCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.CeresGovernancePlatformWithdrawCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.CeresGovernancePlatformWithdrawCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -1408,11 +1685,13 @@ export class CeresGovernancePlatformWithdrawCall {
 export class CeresLaunchpadAddWhitelistedContributorCall {
 	private readonly production: productionCalls.CeresLaunchpadAddWhitelistedContributorCall
 	private readonly stage: stageCalls.CeresLaunchpadAddWhitelistedContributorCall
+	private readonly test: testCalls.CeresLaunchpadAddWhitelistedContributorCall
 	private readonly dev: devCalls.CeresLaunchpadAddWhitelistedContributorCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.CeresLaunchpadAddWhitelistedContributorCall(ctx, call)
 		this.stage = new stageCalls.CeresLaunchpadAddWhitelistedContributorCall(ctx, call)
+		this.test = new testCalls.CeresLaunchpadAddWhitelistedContributorCall(ctx, call)
 		this.dev = new devCalls.CeresLaunchpadAddWhitelistedContributorCall(ctx, call)
 	}
 
@@ -1428,6 +1707,12 @@ export class CeresLaunchpadAddWhitelistedContributorCall {
 	get asV33Stage(): stageCalls.CeresLaunchpadAddWhitelistedContributorCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.CeresLaunchpadAddWhitelistedContributorCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.CeresLaunchpadAddWhitelistedContributorCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.CeresLaunchpadAddWhitelistedContributorCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -1439,11 +1724,13 @@ export class CeresLaunchpadAddWhitelistedContributorCall {
 export class CeresLaunchpadAddWhitelistedIloOrganizerCall {
 	private readonly production: productionCalls.CeresLaunchpadAddWhitelistedIloOrganizerCall
 	private readonly stage: stageCalls.CeresLaunchpadAddWhitelistedIloOrganizerCall
+	private readonly test: testCalls.CeresLaunchpadAddWhitelistedIloOrganizerCall
 	private readonly dev: devCalls.CeresLaunchpadAddWhitelistedIloOrganizerCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.CeresLaunchpadAddWhitelistedIloOrganizerCall(ctx, call)
 		this.stage = new stageCalls.CeresLaunchpadAddWhitelistedIloOrganizerCall(ctx, call)
+		this.test = new testCalls.CeresLaunchpadAddWhitelistedIloOrganizerCall(ctx, call)
 		this.dev = new devCalls.CeresLaunchpadAddWhitelistedIloOrganizerCall(ctx, call)
 	}
 
@@ -1459,6 +1746,12 @@ export class CeresLaunchpadAddWhitelistedIloOrganizerCall {
 	get asV33Stage(): stageCalls.CeresLaunchpadAddWhitelistedIloOrganizerCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.CeresLaunchpadAddWhitelistedIloOrganizerCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.CeresLaunchpadAddWhitelistedIloOrganizerCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.CeresLaunchpadAddWhitelistedIloOrganizerCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -1470,11 +1763,13 @@ export class CeresLaunchpadAddWhitelistedIloOrganizerCall {
 export class CeresLaunchpadChangeCeresBurnFeeCall {
 	private readonly production: productionCalls.CeresLaunchpadChangeCeresBurnFeeCall
 	private readonly stage: stageCalls.CeresLaunchpadChangeCeresBurnFeeCall
+	private readonly test: testCalls.CeresLaunchpadChangeCeresBurnFeeCall
 	private readonly dev: devCalls.CeresLaunchpadChangeCeresBurnFeeCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.CeresLaunchpadChangeCeresBurnFeeCall(ctx, call)
 		this.stage = new stageCalls.CeresLaunchpadChangeCeresBurnFeeCall(ctx, call)
+		this.test = new testCalls.CeresLaunchpadChangeCeresBurnFeeCall(ctx, call)
 		this.dev = new devCalls.CeresLaunchpadChangeCeresBurnFeeCall(ctx, call)
 	}
 
@@ -1490,6 +1785,12 @@ export class CeresLaunchpadChangeCeresBurnFeeCall {
 	get asV33Stage(): stageCalls.CeresLaunchpadChangeCeresBurnFeeCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.CeresLaunchpadChangeCeresBurnFeeCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.CeresLaunchpadChangeCeresBurnFeeCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.CeresLaunchpadChangeCeresBurnFeeCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -1501,11 +1802,13 @@ export class CeresLaunchpadChangeCeresBurnFeeCall {
 export class CeresLaunchpadChangeCeresContributionFeeCall {
 	private readonly production: productionCalls.CeresLaunchpadChangeCeresContributionFeeCall
 	private readonly stage: stageCalls.CeresLaunchpadChangeCeresContributionFeeCall
+	private readonly test: testCalls.CeresLaunchpadChangeCeresContributionFeeCall
 	private readonly dev: devCalls.CeresLaunchpadChangeCeresContributionFeeCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.CeresLaunchpadChangeCeresContributionFeeCall(ctx, call)
 		this.stage = new stageCalls.CeresLaunchpadChangeCeresContributionFeeCall(ctx, call)
+		this.test = new testCalls.CeresLaunchpadChangeCeresContributionFeeCall(ctx, call)
 		this.dev = new devCalls.CeresLaunchpadChangeCeresContributionFeeCall(ctx, call)
 	}
 
@@ -1520,6 +1823,12 @@ export class CeresLaunchpadChangeCeresContributionFeeCall {
 	}
 	get asV33Stage(): stageCalls.CeresLaunchpadChangeCeresContributionFeeCall['asV33'] {
 		return this.stage.asV33
+	}
+	get isV41Test(): testCalls.CeresLaunchpadChangeCeresContributionFeeCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.CeresLaunchpadChangeCeresContributionFeeCall['asV41'] {
+		return this.test.asV41
 	}
 	get isV60Dev(): devCalls.CeresLaunchpadChangeCeresContributionFeeCall['isV60'] {
 		return this.dev.isV60
@@ -1563,11 +1872,13 @@ export class CeresLaunchpadChangeFeePercentForRaisedFundsCall {
 export class CeresLaunchpadClaimCall {
 	private readonly production: productionCalls.CeresLaunchpadClaimCall
 	private readonly stage: stageCalls.CeresLaunchpadClaimCall
+	private readonly test: testCalls.CeresLaunchpadClaimCall
 	private readonly dev: devCalls.CeresLaunchpadClaimCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.CeresLaunchpadClaimCall(ctx, call)
 		this.stage = new stageCalls.CeresLaunchpadClaimCall(ctx, call)
+		this.test = new testCalls.CeresLaunchpadClaimCall(ctx, call)
 		this.dev = new devCalls.CeresLaunchpadClaimCall(ctx, call)
 	}
 
@@ -1595,6 +1906,18 @@ export class CeresLaunchpadClaimCall {
 	get asV42Stage(): stageCalls.CeresLaunchpadClaimCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV41Test(): testCalls.CeresLaunchpadClaimCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.CeresLaunchpadClaimCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.CeresLaunchpadClaimCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.CeresLaunchpadClaimCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.CeresLaunchpadClaimCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -1606,11 +1929,13 @@ export class CeresLaunchpadClaimCall {
 export class CeresLaunchpadClaimLpTokensCall {
 	private readonly production: productionCalls.CeresLaunchpadClaimLpTokensCall
 	private readonly stage: stageCalls.CeresLaunchpadClaimLpTokensCall
+	private readonly test: testCalls.CeresLaunchpadClaimLpTokensCall
 	private readonly dev: devCalls.CeresLaunchpadClaimLpTokensCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.CeresLaunchpadClaimLpTokensCall(ctx, call)
 		this.stage = new stageCalls.CeresLaunchpadClaimLpTokensCall(ctx, call)
+		this.test = new testCalls.CeresLaunchpadClaimLpTokensCall(ctx, call)
 		this.dev = new devCalls.CeresLaunchpadClaimLpTokensCall(ctx, call)
 	}
 
@@ -1638,6 +1963,18 @@ export class CeresLaunchpadClaimLpTokensCall {
 	get asV42Stage(): stageCalls.CeresLaunchpadClaimLpTokensCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV41Test(): testCalls.CeresLaunchpadClaimLpTokensCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.CeresLaunchpadClaimLpTokensCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.CeresLaunchpadClaimLpTokensCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.CeresLaunchpadClaimLpTokensCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.CeresLaunchpadClaimLpTokensCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -1649,11 +1986,13 @@ export class CeresLaunchpadClaimLpTokensCall {
 export class CeresLaunchpadClaimPswapRewardsCall {
 	private readonly production: productionCalls.CeresLaunchpadClaimPswapRewardsCall
 	private readonly stage: stageCalls.CeresLaunchpadClaimPswapRewardsCall
+	private readonly test: testCalls.CeresLaunchpadClaimPswapRewardsCall
 	private readonly dev: devCalls.CeresLaunchpadClaimPswapRewardsCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.CeresLaunchpadClaimPswapRewardsCall(ctx, call)
 		this.stage = new stageCalls.CeresLaunchpadClaimPswapRewardsCall(ctx, call)
+		this.test = new testCalls.CeresLaunchpadClaimPswapRewardsCall(ctx, call)
 		this.dev = new devCalls.CeresLaunchpadClaimPswapRewardsCall(ctx, call)
 	}
 
@@ -1669,6 +2008,12 @@ export class CeresLaunchpadClaimPswapRewardsCall {
 	get asV33Stage(): stageCalls.CeresLaunchpadClaimPswapRewardsCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.CeresLaunchpadClaimPswapRewardsCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.CeresLaunchpadClaimPswapRewardsCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.CeresLaunchpadClaimPswapRewardsCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -1680,11 +2025,13 @@ export class CeresLaunchpadClaimPswapRewardsCall {
 export class CeresLaunchpadContributeCall {
 	private readonly production: productionCalls.CeresLaunchpadContributeCall
 	private readonly stage: stageCalls.CeresLaunchpadContributeCall
+	private readonly test: testCalls.CeresLaunchpadContributeCall
 	private readonly dev: devCalls.CeresLaunchpadContributeCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.CeresLaunchpadContributeCall(ctx, call)
 		this.stage = new stageCalls.CeresLaunchpadContributeCall(ctx, call)
+		this.test = new testCalls.CeresLaunchpadContributeCall(ctx, call)
 		this.dev = new devCalls.CeresLaunchpadContributeCall(ctx, call)
 	}
 
@@ -1712,6 +2059,18 @@ export class CeresLaunchpadContributeCall {
 	get asV42Stage(): stageCalls.CeresLaunchpadContributeCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV41Test(): testCalls.CeresLaunchpadContributeCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.CeresLaunchpadContributeCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.CeresLaunchpadContributeCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.CeresLaunchpadContributeCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.CeresLaunchpadContributeCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -1723,11 +2082,13 @@ export class CeresLaunchpadContributeCall {
 export class CeresLaunchpadCreateIloCall {
 	private readonly production: productionCalls.CeresLaunchpadCreateIloCall
 	private readonly stage: stageCalls.CeresLaunchpadCreateIloCall
+	private readonly test: testCalls.CeresLaunchpadCreateIloCall
 	private readonly dev: devCalls.CeresLaunchpadCreateIloCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.CeresLaunchpadCreateIloCall(ctx, call)
 		this.stage = new stageCalls.CeresLaunchpadCreateIloCall(ctx, call)
+		this.test = new testCalls.CeresLaunchpadCreateIloCall(ctx, call)
 		this.dev = new devCalls.CeresLaunchpadCreateIloCall(ctx, call)
 	}
 
@@ -1785,6 +2146,18 @@ export class CeresLaunchpadCreateIloCall {
 	get asV47Stage(): stageCalls.CeresLaunchpadCreateIloCall['asV47'] {
 		return this.stage.asV47
 	}
+	get isV41Test(): testCalls.CeresLaunchpadCreateIloCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.CeresLaunchpadCreateIloCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.CeresLaunchpadCreateIloCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.CeresLaunchpadCreateIloCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.CeresLaunchpadCreateIloCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -1796,11 +2169,13 @@ export class CeresLaunchpadCreateIloCall {
 export class CeresLaunchpadEmergencyWithdrawCall {
 	private readonly production: productionCalls.CeresLaunchpadEmergencyWithdrawCall
 	private readonly stage: stageCalls.CeresLaunchpadEmergencyWithdrawCall
+	private readonly test: testCalls.CeresLaunchpadEmergencyWithdrawCall
 	private readonly dev: devCalls.CeresLaunchpadEmergencyWithdrawCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.CeresLaunchpadEmergencyWithdrawCall(ctx, call)
 		this.stage = new stageCalls.CeresLaunchpadEmergencyWithdrawCall(ctx, call)
+		this.test = new testCalls.CeresLaunchpadEmergencyWithdrawCall(ctx, call)
 		this.dev = new devCalls.CeresLaunchpadEmergencyWithdrawCall(ctx, call)
 	}
 
@@ -1828,6 +2203,18 @@ export class CeresLaunchpadEmergencyWithdrawCall {
 	get asV42Stage(): stageCalls.CeresLaunchpadEmergencyWithdrawCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV41Test(): testCalls.CeresLaunchpadEmergencyWithdrawCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.CeresLaunchpadEmergencyWithdrawCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.CeresLaunchpadEmergencyWithdrawCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.CeresLaunchpadEmergencyWithdrawCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.CeresLaunchpadEmergencyWithdrawCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -1839,11 +2226,13 @@ export class CeresLaunchpadEmergencyWithdrawCall {
 export class CeresLaunchpadFinishIloCall {
 	private readonly production: productionCalls.CeresLaunchpadFinishIloCall
 	private readonly stage: stageCalls.CeresLaunchpadFinishIloCall
+	private readonly test: testCalls.CeresLaunchpadFinishIloCall
 	private readonly dev: devCalls.CeresLaunchpadFinishIloCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.CeresLaunchpadFinishIloCall(ctx, call)
 		this.stage = new stageCalls.CeresLaunchpadFinishIloCall(ctx, call)
+		this.test = new testCalls.CeresLaunchpadFinishIloCall(ctx, call)
 		this.dev = new devCalls.CeresLaunchpadFinishIloCall(ctx, call)
 	}
 
@@ -1871,6 +2260,18 @@ export class CeresLaunchpadFinishIloCall {
 	get asV42Stage(): stageCalls.CeresLaunchpadFinishIloCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV41Test(): testCalls.CeresLaunchpadFinishIloCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.CeresLaunchpadFinishIloCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.CeresLaunchpadFinishIloCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.CeresLaunchpadFinishIloCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.CeresLaunchpadFinishIloCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -1882,11 +2283,13 @@ export class CeresLaunchpadFinishIloCall {
 export class CeresLaunchpadRemoveWhitelistedContributorCall {
 	private readonly production: productionCalls.CeresLaunchpadRemoveWhitelistedContributorCall
 	private readonly stage: stageCalls.CeresLaunchpadRemoveWhitelistedContributorCall
+	private readonly test: testCalls.CeresLaunchpadRemoveWhitelistedContributorCall
 	private readonly dev: devCalls.CeresLaunchpadRemoveWhitelistedContributorCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.CeresLaunchpadRemoveWhitelistedContributorCall(ctx, call)
 		this.stage = new stageCalls.CeresLaunchpadRemoveWhitelistedContributorCall(ctx, call)
+		this.test = new testCalls.CeresLaunchpadRemoveWhitelistedContributorCall(ctx, call)
 		this.dev = new devCalls.CeresLaunchpadRemoveWhitelistedContributorCall(ctx, call)
 	}
 
@@ -1902,6 +2305,12 @@ export class CeresLaunchpadRemoveWhitelistedContributorCall {
 	get asV33Stage(): stageCalls.CeresLaunchpadRemoveWhitelistedContributorCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.CeresLaunchpadRemoveWhitelistedContributorCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.CeresLaunchpadRemoveWhitelistedContributorCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.CeresLaunchpadRemoveWhitelistedContributorCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -1913,11 +2322,13 @@ export class CeresLaunchpadRemoveWhitelistedContributorCall {
 export class CeresLaunchpadRemoveWhitelistedIloOrganizerCall {
 	private readonly production: productionCalls.CeresLaunchpadRemoveWhitelistedIloOrganizerCall
 	private readonly stage: stageCalls.CeresLaunchpadRemoveWhitelistedIloOrganizerCall
+	private readonly test: testCalls.CeresLaunchpadRemoveWhitelistedIloOrganizerCall
 	private readonly dev: devCalls.CeresLaunchpadRemoveWhitelistedIloOrganizerCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.CeresLaunchpadRemoveWhitelistedIloOrganizerCall(ctx, call)
 		this.stage = new stageCalls.CeresLaunchpadRemoveWhitelistedIloOrganizerCall(ctx, call)
+		this.test = new testCalls.CeresLaunchpadRemoveWhitelistedIloOrganizerCall(ctx, call)
 		this.dev = new devCalls.CeresLaunchpadRemoveWhitelistedIloOrganizerCall(ctx, call)
 	}
 
@@ -1933,6 +2344,12 @@ export class CeresLaunchpadRemoveWhitelistedIloOrganizerCall {
 	get asV33Stage(): stageCalls.CeresLaunchpadRemoveWhitelistedIloOrganizerCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.CeresLaunchpadRemoveWhitelistedIloOrganizerCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.CeresLaunchpadRemoveWhitelistedIloOrganizerCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.CeresLaunchpadRemoveWhitelistedIloOrganizerCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -1944,11 +2361,13 @@ export class CeresLaunchpadRemoveWhitelistedIloOrganizerCall {
 export class CeresLiquidityLockerChangeCeresFeeCall {
 	private readonly production: productionCalls.CeresLiquidityLockerChangeCeresFeeCall
 	private readonly stage: stageCalls.CeresLiquidityLockerChangeCeresFeeCall
+	private readonly test: testCalls.CeresLiquidityLockerChangeCeresFeeCall
 	private readonly dev: devCalls.CeresLiquidityLockerChangeCeresFeeCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.CeresLiquidityLockerChangeCeresFeeCall(ctx, call)
 		this.stage = new stageCalls.CeresLiquidityLockerChangeCeresFeeCall(ctx, call)
+		this.test = new testCalls.CeresLiquidityLockerChangeCeresFeeCall(ctx, call)
 		this.dev = new devCalls.CeresLiquidityLockerChangeCeresFeeCall(ctx, call)
 	}
 
@@ -1964,6 +2383,12 @@ export class CeresLiquidityLockerChangeCeresFeeCall {
 	get asV33Stage(): stageCalls.CeresLiquidityLockerChangeCeresFeeCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.CeresLiquidityLockerChangeCeresFeeCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.CeresLiquidityLockerChangeCeresFeeCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.CeresLiquidityLockerChangeCeresFeeCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -1975,11 +2400,13 @@ export class CeresLiquidityLockerChangeCeresFeeCall {
 export class CeresLiquidityLockerLockLiquidityCall {
 	private readonly production: productionCalls.CeresLiquidityLockerLockLiquidityCall
 	private readonly stage: stageCalls.CeresLiquidityLockerLockLiquidityCall
+	private readonly test: testCalls.CeresLiquidityLockerLockLiquidityCall
 	private readonly dev: devCalls.CeresLiquidityLockerLockLiquidityCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.CeresLiquidityLockerLockLiquidityCall(ctx, call)
 		this.stage = new stageCalls.CeresLiquidityLockerLockLiquidityCall(ctx, call)
+		this.test = new testCalls.CeresLiquidityLockerLockLiquidityCall(ctx, call)
 		this.dev = new devCalls.CeresLiquidityLockerLockLiquidityCall(ctx, call)
 	}
 
@@ -2019,6 +2446,18 @@ export class CeresLiquidityLockerLockLiquidityCall {
 	get asV42Stage(): stageCalls.CeresLiquidityLockerLockLiquidityCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV41Test(): testCalls.CeresLiquidityLockerLockLiquidityCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.CeresLiquidityLockerLockLiquidityCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.CeresLiquidityLockerLockLiquidityCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.CeresLiquidityLockerLockLiquidityCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.CeresLiquidityLockerLockLiquidityCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -2030,11 +2469,13 @@ export class CeresLiquidityLockerLockLiquidityCall {
 export class CeresStakingChangeRewardsRemainingCall {
 	private readonly production: productionCalls.CeresStakingChangeRewardsRemainingCall
 	private readonly stage: stageCalls.CeresStakingChangeRewardsRemainingCall
+	private readonly test: testCalls.CeresStakingChangeRewardsRemainingCall
 	private readonly dev: devCalls.CeresStakingChangeRewardsRemainingCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.CeresStakingChangeRewardsRemainingCall(ctx, call)
 		this.stage = new stageCalls.CeresStakingChangeRewardsRemainingCall(ctx, call)
+		this.test = new testCalls.CeresStakingChangeRewardsRemainingCall(ctx, call)
 		this.dev = new devCalls.CeresStakingChangeRewardsRemainingCall(ctx, call)
 	}
 
@@ -2050,6 +2491,12 @@ export class CeresStakingChangeRewardsRemainingCall {
 	get asV33Stage(): stageCalls.CeresStakingChangeRewardsRemainingCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.CeresStakingChangeRewardsRemainingCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.CeresStakingChangeRewardsRemainingCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.CeresStakingChangeRewardsRemainingCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -2061,11 +2508,13 @@ export class CeresStakingChangeRewardsRemainingCall {
 export class CeresStakingDepositCall {
 	private readonly production: productionCalls.CeresStakingDepositCall
 	private readonly stage: stageCalls.CeresStakingDepositCall
+	private readonly test: testCalls.CeresStakingDepositCall
 	private readonly dev: devCalls.CeresStakingDepositCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.CeresStakingDepositCall(ctx, call)
 		this.stage = new stageCalls.CeresStakingDepositCall(ctx, call)
+		this.test = new testCalls.CeresStakingDepositCall(ctx, call)
 		this.dev = new devCalls.CeresStakingDepositCall(ctx, call)
 	}
 
@@ -2081,6 +2530,12 @@ export class CeresStakingDepositCall {
 	get asV33Stage(): stageCalls.CeresStakingDepositCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.CeresStakingDepositCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.CeresStakingDepositCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.CeresStakingDepositCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -2092,11 +2547,13 @@ export class CeresStakingDepositCall {
 export class CeresStakingWithdrawCall {
 	private readonly production: productionCalls.CeresStakingWithdrawCall
 	private readonly stage: stageCalls.CeresStakingWithdrawCall
+	private readonly test: testCalls.CeresStakingWithdrawCall
 	private readonly dev: devCalls.CeresStakingWithdrawCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.CeresStakingWithdrawCall(ctx, call)
 		this.stage = new stageCalls.CeresStakingWithdrawCall(ctx, call)
+		this.test = new testCalls.CeresStakingWithdrawCall(ctx, call)
 		this.dev = new devCalls.CeresStakingWithdrawCall(ctx, call)
 	}
 
@@ -2112,6 +2569,12 @@ export class CeresStakingWithdrawCall {
 	get asV33Stage(): stageCalls.CeresStakingWithdrawCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.CeresStakingWithdrawCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.CeresStakingWithdrawCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.CeresStakingWithdrawCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -2123,11 +2586,13 @@ export class CeresStakingWithdrawCall {
 export class CeresTokenLockerChangeFeeCall {
 	private readonly production: productionCalls.CeresTokenLockerChangeFeeCall
 	private readonly stage: stageCalls.CeresTokenLockerChangeFeeCall
+	private readonly test: testCalls.CeresTokenLockerChangeFeeCall
 	private readonly dev: devCalls.CeresTokenLockerChangeFeeCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.CeresTokenLockerChangeFeeCall(ctx, call)
 		this.stage = new stageCalls.CeresTokenLockerChangeFeeCall(ctx, call)
+		this.test = new testCalls.CeresTokenLockerChangeFeeCall(ctx, call)
 		this.dev = new devCalls.CeresTokenLockerChangeFeeCall(ctx, call)
 	}
 
@@ -2143,6 +2608,12 @@ export class CeresTokenLockerChangeFeeCall {
 	get asV33Stage(): stageCalls.CeresTokenLockerChangeFeeCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.CeresTokenLockerChangeFeeCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.CeresTokenLockerChangeFeeCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.CeresTokenLockerChangeFeeCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -2154,11 +2625,13 @@ export class CeresTokenLockerChangeFeeCall {
 export class CeresTokenLockerLockTokensCall {
 	private readonly production: productionCalls.CeresTokenLockerLockTokensCall
 	private readonly stage: stageCalls.CeresTokenLockerLockTokensCall
+	private readonly test: testCalls.CeresTokenLockerLockTokensCall
 	private readonly dev: devCalls.CeresTokenLockerLockTokensCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.CeresTokenLockerLockTokensCall(ctx, call)
 		this.stage = new stageCalls.CeresTokenLockerLockTokensCall(ctx, call)
+		this.test = new testCalls.CeresTokenLockerLockTokensCall(ctx, call)
 		this.dev = new devCalls.CeresTokenLockerLockTokensCall(ctx, call)
 	}
 
@@ -2198,6 +2671,18 @@ export class CeresTokenLockerLockTokensCall {
 	get asV42Stage(): stageCalls.CeresTokenLockerLockTokensCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV41Test(): testCalls.CeresTokenLockerLockTokensCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.CeresTokenLockerLockTokensCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.CeresTokenLockerLockTokensCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.CeresTokenLockerLockTokensCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.CeresTokenLockerLockTokensCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -2209,11 +2694,13 @@ export class CeresTokenLockerLockTokensCall {
 export class CeresTokenLockerWithdrawTokensCall {
 	private readonly production: productionCalls.CeresTokenLockerWithdrawTokensCall
 	private readonly stage: stageCalls.CeresTokenLockerWithdrawTokensCall
+	private readonly test: testCalls.CeresTokenLockerWithdrawTokensCall
 	private readonly dev: devCalls.CeresTokenLockerWithdrawTokensCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.CeresTokenLockerWithdrawTokensCall(ctx, call)
 		this.stage = new stageCalls.CeresTokenLockerWithdrawTokensCall(ctx, call)
+		this.test = new testCalls.CeresTokenLockerWithdrawTokensCall(ctx, call)
 		this.dev = new devCalls.CeresTokenLockerWithdrawTokensCall(ctx, call)
 	}
 
@@ -2253,6 +2740,18 @@ export class CeresTokenLockerWithdrawTokensCall {
 	get asV42Stage(): stageCalls.CeresTokenLockerWithdrawTokensCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV41Test(): testCalls.CeresTokenLockerWithdrawTokensCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.CeresTokenLockerWithdrawTokensCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.CeresTokenLockerWithdrawTokensCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.CeresTokenLockerWithdrawTokensCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.CeresTokenLockerWithdrawTokensCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -2264,11 +2763,13 @@ export class CeresTokenLockerWithdrawTokensCall {
 export class CouncilCloseCall {
 	private readonly production: productionCalls.CouncilCloseCall
 	private readonly stage: stageCalls.CouncilCloseCall
+	private readonly test: testCalls.CouncilCloseCall
 	private readonly dev: devCalls.CouncilCloseCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.CouncilCloseCall(ctx, call)
 		this.stage = new stageCalls.CouncilCloseCall(ctx, call)
+		this.test = new testCalls.CouncilCloseCall(ctx, call)
 		this.dev = new devCalls.CouncilCloseCall(ctx, call)
 	}
 
@@ -2295,6 +2796,12 @@ export class CouncilCloseCall {
 	}
 	get asV52Stage(): stageCalls.CouncilCloseCall['asV52'] {
 		return this.stage.asV52
+	}
+	get isV41Test(): testCalls.CouncilCloseCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.CouncilCloseCall['asV41'] {
+		return this.test.asV41
 	}
 	get isV60Dev(): devCalls.CouncilCloseCall['isV60'] {
 		return this.dev.isV60
@@ -2338,11 +2845,13 @@ export class CouncilCloseOldWeightCall {
 export class CouncilDisapproveProposalCall {
 	private readonly production: productionCalls.CouncilDisapproveProposalCall
 	private readonly stage: stageCalls.CouncilDisapproveProposalCall
+	private readonly test: testCalls.CouncilDisapproveProposalCall
 	private readonly dev: devCalls.CouncilDisapproveProposalCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.CouncilDisapproveProposalCall(ctx, call)
 		this.stage = new stageCalls.CouncilDisapproveProposalCall(ctx, call)
+		this.test = new testCalls.CouncilDisapproveProposalCall(ctx, call)
 		this.dev = new devCalls.CouncilDisapproveProposalCall(ctx, call)
 	}
 
@@ -2358,6 +2867,12 @@ export class CouncilDisapproveProposalCall {
 	get asV33Stage(): stageCalls.CouncilDisapproveProposalCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.CouncilDisapproveProposalCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.CouncilDisapproveProposalCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.CouncilDisapproveProposalCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -2369,11 +2884,13 @@ export class CouncilDisapproveProposalCall {
 export class CouncilExecuteCall {
 	private readonly production: productionCalls.CouncilExecuteCall
 	private readonly stage: stageCalls.CouncilExecuteCall
+	private readonly test: testCalls.CouncilExecuteCall
 	private readonly dev: devCalls.CouncilExecuteCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.CouncilExecuteCall(ctx, call)
 		this.stage = new stageCalls.CouncilExecuteCall(ctx, call)
+		this.test = new testCalls.CouncilExecuteCall(ctx, call)
 		this.dev = new devCalls.CouncilExecuteCall(ctx, call)
 	}
 
@@ -2611,6 +3128,30 @@ export class CouncilExecuteCall {
 	get asV60Stage(): stageCalls.CouncilExecuteCall['asV60'] {
 		return this.stage.asV60
 	}
+	get isV62Stage(): stageCalls.CouncilExecuteCall['isV62'] {
+		return this.stage.isV62
+	}
+	get asV62Stage(): stageCalls.CouncilExecuteCall['asV62'] {
+		return this.stage.asV62
+	}
+	get isV41Test(): testCalls.CouncilExecuteCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.CouncilExecuteCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.CouncilExecuteCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.CouncilExecuteCall['asV42'] {
+		return this.test.asV42
+	}
+	get isV43Test(): testCalls.CouncilExecuteCall['isV43'] {
+		return this.test.isV43
+	}
+	get asV43Test(): testCalls.CouncilExecuteCall['asV43'] {
+		return this.test.asV43
+	}
 	get isV60Dev(): devCalls.CouncilExecuteCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -2622,11 +3163,13 @@ export class CouncilExecuteCall {
 export class CouncilProposeCall {
 	private readonly production: productionCalls.CouncilProposeCall
 	private readonly stage: stageCalls.CouncilProposeCall
+	private readonly test: testCalls.CouncilProposeCall
 	private readonly dev: devCalls.CouncilProposeCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.CouncilProposeCall(ctx, call)
 		this.stage = new stageCalls.CouncilProposeCall(ctx, call)
+		this.test = new testCalls.CouncilProposeCall(ctx, call)
 		this.dev = new devCalls.CouncilProposeCall(ctx, call)
 	}
 
@@ -2864,6 +3407,30 @@ export class CouncilProposeCall {
 	get asV60Stage(): stageCalls.CouncilProposeCall['asV60'] {
 		return this.stage.asV60
 	}
+	get isV62Stage(): stageCalls.CouncilProposeCall['isV62'] {
+		return this.stage.isV62
+	}
+	get asV62Stage(): stageCalls.CouncilProposeCall['asV62'] {
+		return this.stage.asV62
+	}
+	get isV41Test(): testCalls.CouncilProposeCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.CouncilProposeCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.CouncilProposeCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.CouncilProposeCall['asV42'] {
+		return this.test.asV42
+	}
+	get isV43Test(): testCalls.CouncilProposeCall['isV43'] {
+		return this.test.isV43
+	}
+	get asV43Test(): testCalls.CouncilProposeCall['asV43'] {
+		return this.test.asV43
+	}
 	get isV60Dev(): devCalls.CouncilProposeCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -2875,11 +3442,13 @@ export class CouncilProposeCall {
 export class CouncilSetMembersCall {
 	private readonly production: productionCalls.CouncilSetMembersCall
 	private readonly stage: stageCalls.CouncilSetMembersCall
+	private readonly test: testCalls.CouncilSetMembersCall
 	private readonly dev: devCalls.CouncilSetMembersCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.CouncilSetMembersCall(ctx, call)
 		this.stage = new stageCalls.CouncilSetMembersCall(ctx, call)
+		this.test = new testCalls.CouncilSetMembersCall(ctx, call)
 		this.dev = new devCalls.CouncilSetMembersCall(ctx, call)
 	}
 
@@ -2895,6 +3464,12 @@ export class CouncilSetMembersCall {
 	get asV33Stage(): stageCalls.CouncilSetMembersCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.CouncilSetMembersCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.CouncilSetMembersCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.CouncilSetMembersCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -2906,11 +3481,13 @@ export class CouncilSetMembersCall {
 export class CouncilVoteCall {
 	private readonly production: productionCalls.CouncilVoteCall
 	private readonly stage: stageCalls.CouncilVoteCall
+	private readonly test: testCalls.CouncilVoteCall
 	private readonly dev: devCalls.CouncilVoteCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.CouncilVoteCall(ctx, call)
 		this.stage = new stageCalls.CouncilVoteCall(ctx, call)
+		this.test = new testCalls.CouncilVoteCall(ctx, call)
 		this.dev = new devCalls.CouncilVoteCall(ctx, call)
 	}
 
@@ -2926,6 +3503,12 @@ export class CouncilVoteCall {
 	get asV33Stage(): stageCalls.CouncilVoteCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.CouncilVoteCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.CouncilVoteCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.CouncilVoteCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -2937,10 +3520,12 @@ export class CouncilVoteCall {
 export class CurrenciesTransferCall {
 	private readonly production: productionCalls.CurrenciesTransferCall
 	private readonly stage: stageCalls.CurrenciesTransferCall
+	private readonly test: testCalls.CurrenciesTransferCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.CurrenciesTransferCall(ctx, call)
 		this.stage = new stageCalls.CurrenciesTransferCall(ctx, call)
+		this.test = new testCalls.CurrenciesTransferCall(ctx, call)
 	}
 
 	get isV1(): productionCalls.CurrenciesTransferCall['isV1'] {
@@ -2967,15 +3552,29 @@ export class CurrenciesTransferCall {
 	get asV42Stage(): stageCalls.CurrenciesTransferCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV41Test(): testCalls.CurrenciesTransferCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.CurrenciesTransferCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.CurrenciesTransferCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.CurrenciesTransferCall['asV42'] {
+		return this.test.asV42
+	}
 }
 
 export class CurrenciesTransferNativeCurrencyCall {
 	private readonly production: productionCalls.CurrenciesTransferNativeCurrencyCall
 	private readonly stage: stageCalls.CurrenciesTransferNativeCurrencyCall
+	private readonly test: testCalls.CurrenciesTransferNativeCurrencyCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.CurrenciesTransferNativeCurrencyCall(ctx, call)
 		this.stage = new stageCalls.CurrenciesTransferNativeCurrencyCall(ctx, call)
+		this.test = new testCalls.CurrenciesTransferNativeCurrencyCall(ctx, call)
 	}
 
 	get isV1(): productionCalls.CurrenciesTransferNativeCurrencyCall['isV1'] {
@@ -2990,15 +3589,23 @@ export class CurrenciesTransferNativeCurrencyCall {
 	get asV33Stage(): stageCalls.CurrenciesTransferNativeCurrencyCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.CurrenciesTransferNativeCurrencyCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.CurrenciesTransferNativeCurrencyCall['asV41'] {
+		return this.test.asV41
+	}
 }
 
 export class CurrenciesUpdateBalanceCall {
 	private readonly production: productionCalls.CurrenciesUpdateBalanceCall
 	private readonly stage: stageCalls.CurrenciesUpdateBalanceCall
+	private readonly test: testCalls.CurrenciesUpdateBalanceCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.CurrenciesUpdateBalanceCall(ctx, call)
 		this.stage = new stageCalls.CurrenciesUpdateBalanceCall(ctx, call)
+		this.test = new testCalls.CurrenciesUpdateBalanceCall(ctx, call)
 	}
 
 	get isV1(): productionCalls.CurrenciesUpdateBalanceCall['isV1'] {
@@ -3025,6 +3632,18 @@ export class CurrenciesUpdateBalanceCall {
 	get asV42Stage(): stageCalls.CurrenciesUpdateBalanceCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV41Test(): testCalls.CurrenciesUpdateBalanceCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.CurrenciesUpdateBalanceCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.CurrenciesUpdateBalanceCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.CurrenciesUpdateBalanceCall['asV42'] {
+		return this.test.asV42
+	}
 }
 
 export class DexapiSwapCall {
@@ -3045,11 +3664,13 @@ export class DexapiSwapCall {
 export class DemeterFarmingPlatformAddPoolCall {
 	private readonly production: productionCalls.DemeterFarmingPlatformAddPoolCall
 	private readonly stage: stageCalls.DemeterFarmingPlatformAddPoolCall
+	private readonly test: testCalls.DemeterFarmingPlatformAddPoolCall
 	private readonly dev: devCalls.DemeterFarmingPlatformAddPoolCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemeterFarmingPlatformAddPoolCall(ctx, call)
 		this.stage = new stageCalls.DemeterFarmingPlatformAddPoolCall(ctx, call)
+		this.test = new testCalls.DemeterFarmingPlatformAddPoolCall(ctx, call)
 		this.dev = new devCalls.DemeterFarmingPlatformAddPoolCall(ctx, call)
 	}
 
@@ -3089,6 +3710,24 @@ export class DemeterFarmingPlatformAddPoolCall {
 	get asV43Stage(): stageCalls.DemeterFarmingPlatformAddPoolCall['asV43'] {
 		return this.stage.asV43
 	}
+	get isV41Test(): testCalls.DemeterFarmingPlatformAddPoolCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemeterFarmingPlatformAddPoolCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.DemeterFarmingPlatformAddPoolCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.DemeterFarmingPlatformAddPoolCall['asV42'] {
+		return this.test.asV42
+	}
+	get isV43Test(): testCalls.DemeterFarmingPlatformAddPoolCall['isV43'] {
+		return this.test.isV43
+	}
+	get asV43Test(): testCalls.DemeterFarmingPlatformAddPoolCall['asV43'] {
+		return this.test.asV43
+	}
 	get isV60Dev(): devCalls.DemeterFarmingPlatformAddPoolCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -3100,11 +3739,13 @@ export class DemeterFarmingPlatformAddPoolCall {
 export class DemeterFarmingPlatformChangeInfoCall {
 	private readonly production: productionCalls.DemeterFarmingPlatformChangeInfoCall
 	private readonly stage: stageCalls.DemeterFarmingPlatformChangeInfoCall
+	private readonly test: testCalls.DemeterFarmingPlatformChangeInfoCall
 	private readonly dev: devCalls.DemeterFarmingPlatformChangeInfoCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemeterFarmingPlatformChangeInfoCall(ctx, call)
 		this.stage = new stageCalls.DemeterFarmingPlatformChangeInfoCall(ctx, call)
+		this.test = new testCalls.DemeterFarmingPlatformChangeInfoCall(ctx, call)
 		this.dev = new devCalls.DemeterFarmingPlatformChangeInfoCall(ctx, call)
 	}
 
@@ -3144,6 +3785,24 @@ export class DemeterFarmingPlatformChangeInfoCall {
 	get asV43Stage(): stageCalls.DemeterFarmingPlatformChangeInfoCall['asV43'] {
 		return this.stage.asV43
 	}
+	get isV41Test(): testCalls.DemeterFarmingPlatformChangeInfoCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemeterFarmingPlatformChangeInfoCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.DemeterFarmingPlatformChangeInfoCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.DemeterFarmingPlatformChangeInfoCall['asV42'] {
+		return this.test.asV42
+	}
+	get isV43Test(): testCalls.DemeterFarmingPlatformChangeInfoCall['isV43'] {
+		return this.test.isV43
+	}
+	get asV43Test(): testCalls.DemeterFarmingPlatformChangeInfoCall['asV43'] {
+		return this.test.asV43
+	}
 	get isV60Dev(): devCalls.DemeterFarmingPlatformChangeInfoCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -3155,11 +3814,13 @@ export class DemeterFarmingPlatformChangeInfoCall {
 export class DemeterFarmingPlatformChangePoolDepositFeeCall {
 	private readonly production: productionCalls.DemeterFarmingPlatformChangePoolDepositFeeCall
 	private readonly stage: stageCalls.DemeterFarmingPlatformChangePoolDepositFeeCall
+	private readonly test: testCalls.DemeterFarmingPlatformChangePoolDepositFeeCall
 	private readonly dev: devCalls.DemeterFarmingPlatformChangePoolDepositFeeCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemeterFarmingPlatformChangePoolDepositFeeCall(ctx, call)
 		this.stage = new stageCalls.DemeterFarmingPlatformChangePoolDepositFeeCall(ctx, call)
+		this.test = new testCalls.DemeterFarmingPlatformChangePoolDepositFeeCall(ctx, call)
 		this.dev = new devCalls.DemeterFarmingPlatformChangePoolDepositFeeCall(ctx, call)
 	}
 
@@ -3199,6 +3860,24 @@ export class DemeterFarmingPlatformChangePoolDepositFeeCall {
 	get asV43Stage(): stageCalls.DemeterFarmingPlatformChangePoolDepositFeeCall['asV43'] {
 		return this.stage.asV43
 	}
+	get isV41Test(): testCalls.DemeterFarmingPlatformChangePoolDepositFeeCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemeterFarmingPlatformChangePoolDepositFeeCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.DemeterFarmingPlatformChangePoolDepositFeeCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.DemeterFarmingPlatformChangePoolDepositFeeCall['asV42'] {
+		return this.test.asV42
+	}
+	get isV43Test(): testCalls.DemeterFarmingPlatformChangePoolDepositFeeCall['isV43'] {
+		return this.test.isV43
+	}
+	get asV43Test(): testCalls.DemeterFarmingPlatformChangePoolDepositFeeCall['asV43'] {
+		return this.test.asV43
+	}
 	get isV60Dev(): devCalls.DemeterFarmingPlatformChangePoolDepositFeeCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -3210,11 +3889,13 @@ export class DemeterFarmingPlatformChangePoolDepositFeeCall {
 export class DemeterFarmingPlatformChangePoolMultiplierCall {
 	private readonly production: productionCalls.DemeterFarmingPlatformChangePoolMultiplierCall
 	private readonly stage: stageCalls.DemeterFarmingPlatformChangePoolMultiplierCall
+	private readonly test: testCalls.DemeterFarmingPlatformChangePoolMultiplierCall
 	private readonly dev: devCalls.DemeterFarmingPlatformChangePoolMultiplierCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemeterFarmingPlatformChangePoolMultiplierCall(ctx, call)
 		this.stage = new stageCalls.DemeterFarmingPlatformChangePoolMultiplierCall(ctx, call)
+		this.test = new testCalls.DemeterFarmingPlatformChangePoolMultiplierCall(ctx, call)
 		this.dev = new devCalls.DemeterFarmingPlatformChangePoolMultiplierCall(ctx, call)
 	}
 
@@ -3254,6 +3935,24 @@ export class DemeterFarmingPlatformChangePoolMultiplierCall {
 	get asV43Stage(): stageCalls.DemeterFarmingPlatformChangePoolMultiplierCall['asV43'] {
 		return this.stage.asV43
 	}
+	get isV41Test(): testCalls.DemeterFarmingPlatformChangePoolMultiplierCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemeterFarmingPlatformChangePoolMultiplierCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.DemeterFarmingPlatformChangePoolMultiplierCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.DemeterFarmingPlatformChangePoolMultiplierCall['asV42'] {
+		return this.test.asV42
+	}
+	get isV43Test(): testCalls.DemeterFarmingPlatformChangePoolMultiplierCall['isV43'] {
+		return this.test.isV43
+	}
+	get asV43Test(): testCalls.DemeterFarmingPlatformChangePoolMultiplierCall['asV43'] {
+		return this.test.asV43
+	}
 	get isV60Dev(): devCalls.DemeterFarmingPlatformChangePoolMultiplierCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -3265,11 +3964,13 @@ export class DemeterFarmingPlatformChangePoolMultiplierCall {
 export class DemeterFarmingPlatformChangeTokenInfoCall {
 	private readonly production: productionCalls.DemeterFarmingPlatformChangeTokenInfoCall
 	private readonly stage: stageCalls.DemeterFarmingPlatformChangeTokenInfoCall
+	private readonly test: testCalls.DemeterFarmingPlatformChangeTokenInfoCall
 	private readonly dev: devCalls.DemeterFarmingPlatformChangeTokenInfoCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemeterFarmingPlatformChangeTokenInfoCall(ctx, call)
 		this.stage = new stageCalls.DemeterFarmingPlatformChangeTokenInfoCall(ctx, call)
+		this.test = new testCalls.DemeterFarmingPlatformChangeTokenInfoCall(ctx, call)
 		this.dev = new devCalls.DemeterFarmingPlatformChangeTokenInfoCall(ctx, call)
 	}
 
@@ -3297,6 +3998,18 @@ export class DemeterFarmingPlatformChangeTokenInfoCall {
 	get asV42Stage(): stageCalls.DemeterFarmingPlatformChangeTokenInfoCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV41Test(): testCalls.DemeterFarmingPlatformChangeTokenInfoCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemeterFarmingPlatformChangeTokenInfoCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.DemeterFarmingPlatformChangeTokenInfoCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.DemeterFarmingPlatformChangeTokenInfoCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.DemeterFarmingPlatformChangeTokenInfoCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -3308,11 +4021,13 @@ export class DemeterFarmingPlatformChangeTokenInfoCall {
 export class DemeterFarmingPlatformChangeTotalTokensCall {
 	private readonly production: productionCalls.DemeterFarmingPlatformChangeTotalTokensCall
 	private readonly stage: stageCalls.DemeterFarmingPlatformChangeTotalTokensCall
+	private readonly test: testCalls.DemeterFarmingPlatformChangeTotalTokensCall
 	private readonly dev: devCalls.DemeterFarmingPlatformChangeTotalTokensCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemeterFarmingPlatformChangeTotalTokensCall(ctx, call)
 		this.stage = new stageCalls.DemeterFarmingPlatformChangeTotalTokensCall(ctx, call)
+		this.test = new testCalls.DemeterFarmingPlatformChangeTotalTokensCall(ctx, call)
 		this.dev = new devCalls.DemeterFarmingPlatformChangeTotalTokensCall(ctx, call)
 	}
 
@@ -3352,6 +4067,24 @@ export class DemeterFarmingPlatformChangeTotalTokensCall {
 	get asV43Stage(): stageCalls.DemeterFarmingPlatformChangeTotalTokensCall['asV43'] {
 		return this.stage.asV43
 	}
+	get isV41Test(): testCalls.DemeterFarmingPlatformChangeTotalTokensCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemeterFarmingPlatformChangeTotalTokensCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.DemeterFarmingPlatformChangeTotalTokensCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.DemeterFarmingPlatformChangeTotalTokensCall['asV42'] {
+		return this.test.asV42
+	}
+	get isV43Test(): testCalls.DemeterFarmingPlatformChangeTotalTokensCall['isV43'] {
+		return this.test.isV43
+	}
+	get asV43Test(): testCalls.DemeterFarmingPlatformChangeTotalTokensCall['asV43'] {
+		return this.test.asV43
+	}
 	get isV60Dev(): devCalls.DemeterFarmingPlatformChangeTotalTokensCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -3363,11 +4096,13 @@ export class DemeterFarmingPlatformChangeTotalTokensCall {
 export class DemeterFarmingPlatformDepositCall {
 	private readonly production: productionCalls.DemeterFarmingPlatformDepositCall
 	private readonly stage: stageCalls.DemeterFarmingPlatformDepositCall
+	private readonly test: testCalls.DemeterFarmingPlatformDepositCall
 	private readonly dev: devCalls.DemeterFarmingPlatformDepositCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemeterFarmingPlatformDepositCall(ctx, call)
 		this.stage = new stageCalls.DemeterFarmingPlatformDepositCall(ctx, call)
+		this.test = new testCalls.DemeterFarmingPlatformDepositCall(ctx, call)
 		this.dev = new devCalls.DemeterFarmingPlatformDepositCall(ctx, call)
 	}
 
@@ -3407,6 +4142,24 @@ export class DemeterFarmingPlatformDepositCall {
 	get asV43Stage(): stageCalls.DemeterFarmingPlatformDepositCall['asV43'] {
 		return this.stage.asV43
 	}
+	get isV41Test(): testCalls.DemeterFarmingPlatformDepositCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemeterFarmingPlatformDepositCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.DemeterFarmingPlatformDepositCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.DemeterFarmingPlatformDepositCall['asV42'] {
+		return this.test.asV42
+	}
+	get isV43Test(): testCalls.DemeterFarmingPlatformDepositCall['isV43'] {
+		return this.test.isV43
+	}
+	get asV43Test(): testCalls.DemeterFarmingPlatformDepositCall['asV43'] {
+		return this.test.asV43
+	}
 	get isV60Dev(): devCalls.DemeterFarmingPlatformDepositCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -3418,11 +4171,13 @@ export class DemeterFarmingPlatformDepositCall {
 export class DemeterFarmingPlatformGetRewardsCall {
 	private readonly production: productionCalls.DemeterFarmingPlatformGetRewardsCall
 	private readonly stage: stageCalls.DemeterFarmingPlatformGetRewardsCall
+	private readonly test: testCalls.DemeterFarmingPlatformGetRewardsCall
 	private readonly dev: devCalls.DemeterFarmingPlatformGetRewardsCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemeterFarmingPlatformGetRewardsCall(ctx, call)
 		this.stage = new stageCalls.DemeterFarmingPlatformGetRewardsCall(ctx, call)
+		this.test = new testCalls.DemeterFarmingPlatformGetRewardsCall(ctx, call)
 		this.dev = new devCalls.DemeterFarmingPlatformGetRewardsCall(ctx, call)
 	}
 
@@ -3462,6 +4217,24 @@ export class DemeterFarmingPlatformGetRewardsCall {
 	get asV43Stage(): stageCalls.DemeterFarmingPlatformGetRewardsCall['asV43'] {
 		return this.stage.asV43
 	}
+	get isV41Test(): testCalls.DemeterFarmingPlatformGetRewardsCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemeterFarmingPlatformGetRewardsCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.DemeterFarmingPlatformGetRewardsCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.DemeterFarmingPlatformGetRewardsCall['asV42'] {
+		return this.test.asV42
+	}
+	get isV43Test(): testCalls.DemeterFarmingPlatformGetRewardsCall['isV43'] {
+		return this.test.isV43
+	}
+	get asV43Test(): testCalls.DemeterFarmingPlatformGetRewardsCall['asV43'] {
+		return this.test.asV43
+	}
 	get isV60Dev(): devCalls.DemeterFarmingPlatformGetRewardsCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -3473,11 +4246,13 @@ export class DemeterFarmingPlatformGetRewardsCall {
 export class DemeterFarmingPlatformRegisterTokenCall {
 	private readonly production: productionCalls.DemeterFarmingPlatformRegisterTokenCall
 	private readonly stage: stageCalls.DemeterFarmingPlatformRegisterTokenCall
+	private readonly test: testCalls.DemeterFarmingPlatformRegisterTokenCall
 	private readonly dev: devCalls.DemeterFarmingPlatformRegisterTokenCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemeterFarmingPlatformRegisterTokenCall(ctx, call)
 		this.stage = new stageCalls.DemeterFarmingPlatformRegisterTokenCall(ctx, call)
+		this.test = new testCalls.DemeterFarmingPlatformRegisterTokenCall(ctx, call)
 		this.dev = new devCalls.DemeterFarmingPlatformRegisterTokenCall(ctx, call)
 	}
 
@@ -3505,6 +4280,18 @@ export class DemeterFarmingPlatformRegisterTokenCall {
 	get asV42Stage(): stageCalls.DemeterFarmingPlatformRegisterTokenCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV41Test(): testCalls.DemeterFarmingPlatformRegisterTokenCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemeterFarmingPlatformRegisterTokenCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.DemeterFarmingPlatformRegisterTokenCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.DemeterFarmingPlatformRegisterTokenCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.DemeterFarmingPlatformRegisterTokenCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -3516,11 +4303,13 @@ export class DemeterFarmingPlatformRegisterTokenCall {
 export class DemeterFarmingPlatformRemovePoolCall {
 	private readonly production: productionCalls.DemeterFarmingPlatformRemovePoolCall
 	private readonly stage: stageCalls.DemeterFarmingPlatformRemovePoolCall
+	private readonly test: testCalls.DemeterFarmingPlatformRemovePoolCall
 	private readonly dev: devCalls.DemeterFarmingPlatformRemovePoolCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemeterFarmingPlatformRemovePoolCall(ctx, call)
 		this.stage = new stageCalls.DemeterFarmingPlatformRemovePoolCall(ctx, call)
+		this.test = new testCalls.DemeterFarmingPlatformRemovePoolCall(ctx, call)
 		this.dev = new devCalls.DemeterFarmingPlatformRemovePoolCall(ctx, call)
 	}
 
@@ -3560,6 +4349,24 @@ export class DemeterFarmingPlatformRemovePoolCall {
 	get asV43Stage(): stageCalls.DemeterFarmingPlatformRemovePoolCall['asV43'] {
 		return this.stage.asV43
 	}
+	get isV41Test(): testCalls.DemeterFarmingPlatformRemovePoolCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemeterFarmingPlatformRemovePoolCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.DemeterFarmingPlatformRemovePoolCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.DemeterFarmingPlatformRemovePoolCall['asV42'] {
+		return this.test.asV42
+	}
+	get isV43Test(): testCalls.DemeterFarmingPlatformRemovePoolCall['isV43'] {
+		return this.test.isV43
+	}
+	get asV43Test(): testCalls.DemeterFarmingPlatformRemovePoolCall['asV43'] {
+		return this.test.asV43
+	}
 	get isV60Dev(): devCalls.DemeterFarmingPlatformRemovePoolCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -3571,11 +4378,13 @@ export class DemeterFarmingPlatformRemovePoolCall {
 export class DemeterFarmingPlatformWithdrawCall {
 	private readonly production: productionCalls.DemeterFarmingPlatformWithdrawCall
 	private readonly stage: stageCalls.DemeterFarmingPlatformWithdrawCall
+	private readonly test: testCalls.DemeterFarmingPlatformWithdrawCall
 	private readonly dev: devCalls.DemeterFarmingPlatformWithdrawCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemeterFarmingPlatformWithdrawCall(ctx, call)
 		this.stage = new stageCalls.DemeterFarmingPlatformWithdrawCall(ctx, call)
+		this.test = new testCalls.DemeterFarmingPlatformWithdrawCall(ctx, call)
 		this.dev = new devCalls.DemeterFarmingPlatformWithdrawCall(ctx, call)
 	}
 
@@ -3615,6 +4424,24 @@ export class DemeterFarmingPlatformWithdrawCall {
 	get asV43Stage(): stageCalls.DemeterFarmingPlatformWithdrawCall['asV43'] {
 		return this.stage.asV43
 	}
+	get isV41Test(): testCalls.DemeterFarmingPlatformWithdrawCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemeterFarmingPlatformWithdrawCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.DemeterFarmingPlatformWithdrawCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.DemeterFarmingPlatformWithdrawCall['asV42'] {
+		return this.test.asV42
+	}
+	get isV43Test(): testCalls.DemeterFarmingPlatformWithdrawCall['isV43'] {
+		return this.test.isV43
+	}
+	get asV43Test(): testCalls.DemeterFarmingPlatformWithdrawCall['asV43'] {
+		return this.test.asV43
+	}
 	get isV60Dev(): devCalls.DemeterFarmingPlatformWithdrawCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -3626,11 +4453,13 @@ export class DemeterFarmingPlatformWithdrawCall {
 export class DemocracyBlacklistCall {
 	private readonly production: productionCalls.DemocracyBlacklistCall
 	private readonly stage: stageCalls.DemocracyBlacklistCall
+	private readonly test: testCalls.DemocracyBlacklistCall
 	private readonly dev: devCalls.DemocracyBlacklistCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemocracyBlacklistCall(ctx, call)
 		this.stage = new stageCalls.DemocracyBlacklistCall(ctx, call)
+		this.test = new testCalls.DemocracyBlacklistCall(ctx, call)
 		this.dev = new devCalls.DemocracyBlacklistCall(ctx, call)
 	}
 
@@ -3646,6 +4475,12 @@ export class DemocracyBlacklistCall {
 	get asV33Stage(): stageCalls.DemocracyBlacklistCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.DemocracyBlacklistCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemocracyBlacklistCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.DemocracyBlacklistCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -3657,11 +4492,13 @@ export class DemocracyBlacklistCall {
 export class DemocracyCancelProposalCall {
 	private readonly production: productionCalls.DemocracyCancelProposalCall
 	private readonly stage: stageCalls.DemocracyCancelProposalCall
+	private readonly test: testCalls.DemocracyCancelProposalCall
 	private readonly dev: devCalls.DemocracyCancelProposalCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemocracyCancelProposalCall(ctx, call)
 		this.stage = new stageCalls.DemocracyCancelProposalCall(ctx, call)
+		this.test = new testCalls.DemocracyCancelProposalCall(ctx, call)
 		this.dev = new devCalls.DemocracyCancelProposalCall(ctx, call)
 	}
 
@@ -3677,6 +4514,12 @@ export class DemocracyCancelProposalCall {
 	get asV33Stage(): stageCalls.DemocracyCancelProposalCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.DemocracyCancelProposalCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemocracyCancelProposalCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.DemocracyCancelProposalCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -3688,10 +4531,12 @@ export class DemocracyCancelProposalCall {
 export class DemocracyCancelQueuedCall {
 	private readonly production: productionCalls.DemocracyCancelQueuedCall
 	private readonly stage: stageCalls.DemocracyCancelQueuedCall
+	private readonly test: testCalls.DemocracyCancelQueuedCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemocracyCancelQueuedCall(ctx, call)
 		this.stage = new stageCalls.DemocracyCancelQueuedCall(ctx, call)
+		this.test = new testCalls.DemocracyCancelQueuedCall(ctx, call)
 	}
 
 	get isV1(): productionCalls.DemocracyCancelQueuedCall['isV1'] {
@@ -3706,16 +4551,24 @@ export class DemocracyCancelQueuedCall {
 	get asV33Stage(): stageCalls.DemocracyCancelQueuedCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.DemocracyCancelQueuedCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemocracyCancelQueuedCall['asV41'] {
+		return this.test.asV41
+	}
 }
 
 export class DemocracyCancelReferendumCall {
 	private readonly production: productionCalls.DemocracyCancelReferendumCall
 	private readonly stage: stageCalls.DemocracyCancelReferendumCall
+	private readonly test: testCalls.DemocracyCancelReferendumCall
 	private readonly dev: devCalls.DemocracyCancelReferendumCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemocracyCancelReferendumCall(ctx, call)
 		this.stage = new stageCalls.DemocracyCancelReferendumCall(ctx, call)
+		this.test = new testCalls.DemocracyCancelReferendumCall(ctx, call)
 		this.dev = new devCalls.DemocracyCancelReferendumCall(ctx, call)
 	}
 
@@ -3731,6 +4584,12 @@ export class DemocracyCancelReferendumCall {
 	get asV33Stage(): stageCalls.DemocracyCancelReferendumCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.DemocracyCancelReferendumCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemocracyCancelReferendumCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.DemocracyCancelReferendumCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -3742,11 +4601,13 @@ export class DemocracyCancelReferendumCall {
 export class DemocracyClearPublicProposalsCall {
 	private readonly production: productionCalls.DemocracyClearPublicProposalsCall
 	private readonly stage: stageCalls.DemocracyClearPublicProposalsCall
+	private readonly test: testCalls.DemocracyClearPublicProposalsCall
 	private readonly dev: devCalls.DemocracyClearPublicProposalsCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemocracyClearPublicProposalsCall(ctx, call)
 		this.stage = new stageCalls.DemocracyClearPublicProposalsCall(ctx, call)
+		this.test = new testCalls.DemocracyClearPublicProposalsCall(ctx, call)
 		this.dev = new devCalls.DemocracyClearPublicProposalsCall(ctx, call)
 	}
 
@@ -3762,6 +4623,12 @@ export class DemocracyClearPublicProposalsCall {
 	get asV33Stage(): stageCalls.DemocracyClearPublicProposalsCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.DemocracyClearPublicProposalsCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemocracyClearPublicProposalsCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.DemocracyClearPublicProposalsCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -3773,11 +4640,13 @@ export class DemocracyClearPublicProposalsCall {
 export class DemocracyDelegateCall {
 	private readonly production: productionCalls.DemocracyDelegateCall
 	private readonly stage: stageCalls.DemocracyDelegateCall
+	private readonly test: testCalls.DemocracyDelegateCall
 	private readonly dev: devCalls.DemocracyDelegateCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemocracyDelegateCall(ctx, call)
 		this.stage = new stageCalls.DemocracyDelegateCall(ctx, call)
+		this.test = new testCalls.DemocracyDelegateCall(ctx, call)
 		this.dev = new devCalls.DemocracyDelegateCall(ctx, call)
 	}
 
@@ -3793,6 +4662,12 @@ export class DemocracyDelegateCall {
 	get asV33Stage(): stageCalls.DemocracyDelegateCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.DemocracyDelegateCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemocracyDelegateCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.DemocracyDelegateCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -3804,11 +4679,13 @@ export class DemocracyDelegateCall {
 export class DemocracyEmergencyCancelCall {
 	private readonly production: productionCalls.DemocracyEmergencyCancelCall
 	private readonly stage: stageCalls.DemocracyEmergencyCancelCall
+	private readonly test: testCalls.DemocracyEmergencyCancelCall
 	private readonly dev: devCalls.DemocracyEmergencyCancelCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemocracyEmergencyCancelCall(ctx, call)
 		this.stage = new stageCalls.DemocracyEmergencyCancelCall(ctx, call)
+		this.test = new testCalls.DemocracyEmergencyCancelCall(ctx, call)
 		this.dev = new devCalls.DemocracyEmergencyCancelCall(ctx, call)
 	}
 
@@ -3824,6 +4701,12 @@ export class DemocracyEmergencyCancelCall {
 	get asV33Stage(): stageCalls.DemocracyEmergencyCancelCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.DemocracyEmergencyCancelCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemocracyEmergencyCancelCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.DemocracyEmergencyCancelCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -3835,10 +4718,12 @@ export class DemocracyEmergencyCancelCall {
 export class DemocracyEnactProposalCall {
 	private readonly production: productionCalls.DemocracyEnactProposalCall
 	private readonly stage: stageCalls.DemocracyEnactProposalCall
+	private readonly test: testCalls.DemocracyEnactProposalCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemocracyEnactProposalCall(ctx, call)
 		this.stage = new stageCalls.DemocracyEnactProposalCall(ctx, call)
+		this.test = new testCalls.DemocracyEnactProposalCall(ctx, call)
 	}
 
 	get isV1(): productionCalls.DemocracyEnactProposalCall['isV1'] {
@@ -3853,16 +4738,24 @@ export class DemocracyEnactProposalCall {
 	get asV33Stage(): stageCalls.DemocracyEnactProposalCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.DemocracyEnactProposalCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemocracyEnactProposalCall['asV41'] {
+		return this.test.asV41
+	}
 }
 
 export class DemocracyExternalProposeCall {
 	private readonly production: productionCalls.DemocracyExternalProposeCall
 	private readonly stage: stageCalls.DemocracyExternalProposeCall
+	private readonly test: testCalls.DemocracyExternalProposeCall
 	private readonly dev: devCalls.DemocracyExternalProposeCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemocracyExternalProposeCall(ctx, call)
 		this.stage = new stageCalls.DemocracyExternalProposeCall(ctx, call)
+		this.test = new testCalls.DemocracyExternalProposeCall(ctx, call)
 		this.dev = new devCalls.DemocracyExternalProposeCall(ctx, call)
 	}
 
@@ -3890,6 +4783,12 @@ export class DemocracyExternalProposeCall {
 	get asV52Stage(): stageCalls.DemocracyExternalProposeCall['asV52'] {
 		return this.stage.asV52
 	}
+	get isV41Test(): testCalls.DemocracyExternalProposeCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemocracyExternalProposeCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.DemocracyExternalProposeCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -3901,11 +4800,13 @@ export class DemocracyExternalProposeCall {
 export class DemocracyExternalProposeDefaultCall {
 	private readonly production: productionCalls.DemocracyExternalProposeDefaultCall
 	private readonly stage: stageCalls.DemocracyExternalProposeDefaultCall
+	private readonly test: testCalls.DemocracyExternalProposeDefaultCall
 	private readonly dev: devCalls.DemocracyExternalProposeDefaultCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemocracyExternalProposeDefaultCall(ctx, call)
 		this.stage = new stageCalls.DemocracyExternalProposeDefaultCall(ctx, call)
+		this.test = new testCalls.DemocracyExternalProposeDefaultCall(ctx, call)
 		this.dev = new devCalls.DemocracyExternalProposeDefaultCall(ctx, call)
 	}
 
@@ -3933,6 +4834,12 @@ export class DemocracyExternalProposeDefaultCall {
 	get asV52Stage(): stageCalls.DemocracyExternalProposeDefaultCall['asV52'] {
 		return this.stage.asV52
 	}
+	get isV41Test(): testCalls.DemocracyExternalProposeDefaultCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemocracyExternalProposeDefaultCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.DemocracyExternalProposeDefaultCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -3944,11 +4851,13 @@ export class DemocracyExternalProposeDefaultCall {
 export class DemocracyExternalProposeMajorityCall {
 	private readonly production: productionCalls.DemocracyExternalProposeMajorityCall
 	private readonly stage: stageCalls.DemocracyExternalProposeMajorityCall
+	private readonly test: testCalls.DemocracyExternalProposeMajorityCall
 	private readonly dev: devCalls.DemocracyExternalProposeMajorityCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemocracyExternalProposeMajorityCall(ctx, call)
 		this.stage = new stageCalls.DemocracyExternalProposeMajorityCall(ctx, call)
+		this.test = new testCalls.DemocracyExternalProposeMajorityCall(ctx, call)
 		this.dev = new devCalls.DemocracyExternalProposeMajorityCall(ctx, call)
 	}
 
@@ -3976,6 +4885,12 @@ export class DemocracyExternalProposeMajorityCall {
 	get asV52Stage(): stageCalls.DemocracyExternalProposeMajorityCall['asV52'] {
 		return this.stage.asV52
 	}
+	get isV41Test(): testCalls.DemocracyExternalProposeMajorityCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemocracyExternalProposeMajorityCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.DemocracyExternalProposeMajorityCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -3987,11 +4902,13 @@ export class DemocracyExternalProposeMajorityCall {
 export class DemocracyFastTrackCall {
 	private readonly production: productionCalls.DemocracyFastTrackCall
 	private readonly stage: stageCalls.DemocracyFastTrackCall
+	private readonly test: testCalls.DemocracyFastTrackCall
 	private readonly dev: devCalls.DemocracyFastTrackCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemocracyFastTrackCall(ctx, call)
 		this.stage = new stageCalls.DemocracyFastTrackCall(ctx, call)
+		this.test = new testCalls.DemocracyFastTrackCall(ctx, call)
 		this.dev = new devCalls.DemocracyFastTrackCall(ctx, call)
 	}
 
@@ -4007,6 +4924,12 @@ export class DemocracyFastTrackCall {
 	get asV33Stage(): stageCalls.DemocracyFastTrackCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.DemocracyFastTrackCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemocracyFastTrackCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.DemocracyFastTrackCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -4018,10 +4941,12 @@ export class DemocracyFastTrackCall {
 export class DemocracyNoteImminentPreimageCall {
 	private readonly production: productionCalls.DemocracyNoteImminentPreimageCall
 	private readonly stage: stageCalls.DemocracyNoteImminentPreimageCall
+	private readonly test: testCalls.DemocracyNoteImminentPreimageCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemocracyNoteImminentPreimageCall(ctx, call)
 		this.stage = new stageCalls.DemocracyNoteImminentPreimageCall(ctx, call)
+		this.test = new testCalls.DemocracyNoteImminentPreimageCall(ctx, call)
 	}
 
 	get isV1(): productionCalls.DemocracyNoteImminentPreimageCall['isV1'] {
@@ -4036,15 +4961,23 @@ export class DemocracyNoteImminentPreimageCall {
 	get asV33Stage(): stageCalls.DemocracyNoteImminentPreimageCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.DemocracyNoteImminentPreimageCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemocracyNoteImminentPreimageCall['asV41'] {
+		return this.test.asV41
+	}
 }
 
 export class DemocracyNoteImminentPreimageOperationalCall {
 	private readonly production: productionCalls.DemocracyNoteImminentPreimageOperationalCall
 	private readonly stage: stageCalls.DemocracyNoteImminentPreimageOperationalCall
+	private readonly test: testCalls.DemocracyNoteImminentPreimageOperationalCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemocracyNoteImminentPreimageOperationalCall(ctx, call)
 		this.stage = new stageCalls.DemocracyNoteImminentPreimageOperationalCall(ctx, call)
+		this.test = new testCalls.DemocracyNoteImminentPreimageOperationalCall(ctx, call)
 	}
 
 	get isV1(): productionCalls.DemocracyNoteImminentPreimageOperationalCall['isV1'] {
@@ -4059,15 +4992,23 @@ export class DemocracyNoteImminentPreimageOperationalCall {
 	get asV33Stage(): stageCalls.DemocracyNoteImminentPreimageOperationalCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.DemocracyNoteImminentPreimageOperationalCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemocracyNoteImminentPreimageOperationalCall['asV41'] {
+		return this.test.asV41
+	}
 }
 
 export class DemocracyNotePreimageCall {
 	private readonly production: productionCalls.DemocracyNotePreimageCall
 	private readonly stage: stageCalls.DemocracyNotePreimageCall
+	private readonly test: testCalls.DemocracyNotePreimageCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemocracyNotePreimageCall(ctx, call)
 		this.stage = new stageCalls.DemocracyNotePreimageCall(ctx, call)
+		this.test = new testCalls.DemocracyNotePreimageCall(ctx, call)
 	}
 
 	get isV1(): productionCalls.DemocracyNotePreimageCall['isV1'] {
@@ -4082,15 +5023,23 @@ export class DemocracyNotePreimageCall {
 	get asV33Stage(): stageCalls.DemocracyNotePreimageCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.DemocracyNotePreimageCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemocracyNotePreimageCall['asV41'] {
+		return this.test.asV41
+	}
 }
 
 export class DemocracyNotePreimageOperationalCall {
 	private readonly production: productionCalls.DemocracyNotePreimageOperationalCall
 	private readonly stage: stageCalls.DemocracyNotePreimageOperationalCall
+	private readonly test: testCalls.DemocracyNotePreimageOperationalCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemocracyNotePreimageOperationalCall(ctx, call)
 		this.stage = new stageCalls.DemocracyNotePreimageOperationalCall(ctx, call)
+		this.test = new testCalls.DemocracyNotePreimageOperationalCall(ctx, call)
 	}
 
 	get isV1(): productionCalls.DemocracyNotePreimageOperationalCall['isV1'] {
@@ -4105,16 +5054,24 @@ export class DemocracyNotePreimageOperationalCall {
 	get asV33Stage(): stageCalls.DemocracyNotePreimageOperationalCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.DemocracyNotePreimageOperationalCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemocracyNotePreimageOperationalCall['asV41'] {
+		return this.test.asV41
+	}
 }
 
 export class DemocracyProposeCall {
 	private readonly production: productionCalls.DemocracyProposeCall
 	private readonly stage: stageCalls.DemocracyProposeCall
+	private readonly test: testCalls.DemocracyProposeCall
 	private readonly dev: devCalls.DemocracyProposeCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemocracyProposeCall(ctx, call)
 		this.stage = new stageCalls.DemocracyProposeCall(ctx, call)
+		this.test = new testCalls.DemocracyProposeCall(ctx, call)
 		this.dev = new devCalls.DemocracyProposeCall(ctx, call)
 	}
 
@@ -4142,6 +5099,12 @@ export class DemocracyProposeCall {
 	get asV52Stage(): stageCalls.DemocracyProposeCall['asV52'] {
 		return this.stage.asV52
 	}
+	get isV41Test(): testCalls.DemocracyProposeCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemocracyProposeCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.DemocracyProposeCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -4153,10 +5116,12 @@ export class DemocracyProposeCall {
 export class DemocracyReapPreimageCall {
 	private readonly production: productionCalls.DemocracyReapPreimageCall
 	private readonly stage: stageCalls.DemocracyReapPreimageCall
+	private readonly test: testCalls.DemocracyReapPreimageCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemocracyReapPreimageCall(ctx, call)
 		this.stage = new stageCalls.DemocracyReapPreimageCall(ctx, call)
+		this.test = new testCalls.DemocracyReapPreimageCall(ctx, call)
 	}
 
 	get isV1(): productionCalls.DemocracyReapPreimageCall['isV1'] {
@@ -4171,16 +5136,24 @@ export class DemocracyReapPreimageCall {
 	get asV33Stage(): stageCalls.DemocracyReapPreimageCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.DemocracyReapPreimageCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemocracyReapPreimageCall['asV41'] {
+		return this.test.asV41
+	}
 }
 
 export class DemocracyRemoveOtherVoteCall {
 	private readonly production: productionCalls.DemocracyRemoveOtherVoteCall
 	private readonly stage: stageCalls.DemocracyRemoveOtherVoteCall
+	private readonly test: testCalls.DemocracyRemoveOtherVoteCall
 	private readonly dev: devCalls.DemocracyRemoveOtherVoteCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemocracyRemoveOtherVoteCall(ctx, call)
 		this.stage = new stageCalls.DemocracyRemoveOtherVoteCall(ctx, call)
+		this.test = new testCalls.DemocracyRemoveOtherVoteCall(ctx, call)
 		this.dev = new devCalls.DemocracyRemoveOtherVoteCall(ctx, call)
 	}
 
@@ -4196,6 +5169,12 @@ export class DemocracyRemoveOtherVoteCall {
 	get asV33Stage(): stageCalls.DemocracyRemoveOtherVoteCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.DemocracyRemoveOtherVoteCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemocracyRemoveOtherVoteCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.DemocracyRemoveOtherVoteCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -4207,11 +5186,13 @@ export class DemocracyRemoveOtherVoteCall {
 export class DemocracyRemoveVoteCall {
 	private readonly production: productionCalls.DemocracyRemoveVoteCall
 	private readonly stage: stageCalls.DemocracyRemoveVoteCall
+	private readonly test: testCalls.DemocracyRemoveVoteCall
 	private readonly dev: devCalls.DemocracyRemoveVoteCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemocracyRemoveVoteCall(ctx, call)
 		this.stage = new stageCalls.DemocracyRemoveVoteCall(ctx, call)
+		this.test = new testCalls.DemocracyRemoveVoteCall(ctx, call)
 		this.dev = new devCalls.DemocracyRemoveVoteCall(ctx, call)
 	}
 
@@ -4227,6 +5208,12 @@ export class DemocracyRemoveVoteCall {
 	get asV33Stage(): stageCalls.DemocracyRemoveVoteCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.DemocracyRemoveVoteCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemocracyRemoveVoteCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.DemocracyRemoveVoteCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -4238,11 +5225,13 @@ export class DemocracyRemoveVoteCall {
 export class DemocracySecondCall {
 	private readonly production: productionCalls.DemocracySecondCall
 	private readonly stage: stageCalls.DemocracySecondCall
+	private readonly test: testCalls.DemocracySecondCall
 	private readonly dev: devCalls.DemocracySecondCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemocracySecondCall(ctx, call)
 		this.stage = new stageCalls.DemocracySecondCall(ctx, call)
+		this.test = new testCalls.DemocracySecondCall(ctx, call)
 		this.dev = new devCalls.DemocracySecondCall(ctx, call)
 	}
 
@@ -4270,6 +5259,12 @@ export class DemocracySecondCall {
 	get asV52Stage(): stageCalls.DemocracySecondCall['asV52'] {
 		return this.stage.asV52
 	}
+	get isV41Test(): testCalls.DemocracySecondCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemocracySecondCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.DemocracySecondCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -4281,11 +5276,13 @@ export class DemocracySecondCall {
 export class DemocracyUndelegateCall {
 	private readonly production: productionCalls.DemocracyUndelegateCall
 	private readonly stage: stageCalls.DemocracyUndelegateCall
+	private readonly test: testCalls.DemocracyUndelegateCall
 	private readonly dev: devCalls.DemocracyUndelegateCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemocracyUndelegateCall(ctx, call)
 		this.stage = new stageCalls.DemocracyUndelegateCall(ctx, call)
+		this.test = new testCalls.DemocracyUndelegateCall(ctx, call)
 		this.dev = new devCalls.DemocracyUndelegateCall(ctx, call)
 	}
 
@@ -4301,6 +5298,12 @@ export class DemocracyUndelegateCall {
 	get asV33Stage(): stageCalls.DemocracyUndelegateCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.DemocracyUndelegateCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemocracyUndelegateCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.DemocracyUndelegateCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -4312,11 +5315,13 @@ export class DemocracyUndelegateCall {
 export class DemocracyUnlockCall {
 	private readonly production: productionCalls.DemocracyUnlockCall
 	private readonly stage: stageCalls.DemocracyUnlockCall
+	private readonly test: testCalls.DemocracyUnlockCall
 	private readonly dev: devCalls.DemocracyUnlockCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemocracyUnlockCall(ctx, call)
 		this.stage = new stageCalls.DemocracyUnlockCall(ctx, call)
+		this.test = new testCalls.DemocracyUnlockCall(ctx, call)
 		this.dev = new devCalls.DemocracyUnlockCall(ctx, call)
 	}
 
@@ -4332,6 +5337,12 @@ export class DemocracyUnlockCall {
 	get asV33Stage(): stageCalls.DemocracyUnlockCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.DemocracyUnlockCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemocracyUnlockCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.DemocracyUnlockCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -4343,11 +5354,13 @@ export class DemocracyUnlockCall {
 export class DemocracyVetoExternalCall {
 	private readonly production: productionCalls.DemocracyVetoExternalCall
 	private readonly stage: stageCalls.DemocracyVetoExternalCall
+	private readonly test: testCalls.DemocracyVetoExternalCall
 	private readonly dev: devCalls.DemocracyVetoExternalCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemocracyVetoExternalCall(ctx, call)
 		this.stage = new stageCalls.DemocracyVetoExternalCall(ctx, call)
+		this.test = new testCalls.DemocracyVetoExternalCall(ctx, call)
 		this.dev = new devCalls.DemocracyVetoExternalCall(ctx, call)
 	}
 
@@ -4363,6 +5376,12 @@ export class DemocracyVetoExternalCall {
 	get asV33Stage(): stageCalls.DemocracyVetoExternalCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.DemocracyVetoExternalCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemocracyVetoExternalCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.DemocracyVetoExternalCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -4374,11 +5393,13 @@ export class DemocracyVetoExternalCall {
 export class DemocracyVoteCall {
 	private readonly production: productionCalls.DemocracyVoteCall
 	private readonly stage: stageCalls.DemocracyVoteCall
+	private readonly test: testCalls.DemocracyVoteCall
 	private readonly dev: devCalls.DemocracyVoteCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.DemocracyVoteCall(ctx, call)
 		this.stage = new stageCalls.DemocracyVoteCall(ctx, call)
+		this.test = new testCalls.DemocracyVoteCall(ctx, call)
 		this.dev = new devCalls.DemocracyVoteCall(ctx, call)
 	}
 
@@ -4406,6 +5427,18 @@ export class DemocracyVoteCall {
 	get asV42Stage(): stageCalls.DemocracyVoteCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV41Test(): testCalls.DemocracyVoteCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.DemocracyVoteCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.DemocracyVoteCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.DemocracyVoteCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.DemocracyVoteCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -4417,11 +5450,13 @@ export class DemocracyVoteCall {
 export class ElectionProviderMultiPhaseGovernanceFallbackCall {
 	private readonly production: productionCalls.ElectionProviderMultiPhaseGovernanceFallbackCall
 	private readonly stage: stageCalls.ElectionProviderMultiPhaseGovernanceFallbackCall
+	private readonly test: testCalls.ElectionProviderMultiPhaseGovernanceFallbackCall
 	private readonly dev: devCalls.ElectionProviderMultiPhaseGovernanceFallbackCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.ElectionProviderMultiPhaseGovernanceFallbackCall(ctx, call)
 		this.stage = new stageCalls.ElectionProviderMultiPhaseGovernanceFallbackCall(ctx, call)
+		this.test = new testCalls.ElectionProviderMultiPhaseGovernanceFallbackCall(ctx, call)
 		this.dev = new devCalls.ElectionProviderMultiPhaseGovernanceFallbackCall(ctx, call)
 	}
 
@@ -4437,6 +5472,12 @@ export class ElectionProviderMultiPhaseGovernanceFallbackCall {
 	get asV42Stage(): stageCalls.ElectionProviderMultiPhaseGovernanceFallbackCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV42Test(): testCalls.ElectionProviderMultiPhaseGovernanceFallbackCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.ElectionProviderMultiPhaseGovernanceFallbackCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.ElectionProviderMultiPhaseGovernanceFallbackCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -4448,11 +5489,13 @@ export class ElectionProviderMultiPhaseGovernanceFallbackCall {
 export class ElectionProviderMultiPhaseSetEmergencyElectionResultCall {
 	private readonly production: productionCalls.ElectionProviderMultiPhaseSetEmergencyElectionResultCall
 	private readonly stage: stageCalls.ElectionProviderMultiPhaseSetEmergencyElectionResultCall
+	private readonly test: testCalls.ElectionProviderMultiPhaseSetEmergencyElectionResultCall
 	private readonly dev: devCalls.ElectionProviderMultiPhaseSetEmergencyElectionResultCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.ElectionProviderMultiPhaseSetEmergencyElectionResultCall(ctx, call)
 		this.stage = new stageCalls.ElectionProviderMultiPhaseSetEmergencyElectionResultCall(ctx, call)
+		this.test = new testCalls.ElectionProviderMultiPhaseSetEmergencyElectionResultCall(ctx, call)
 		this.dev = new devCalls.ElectionProviderMultiPhaseSetEmergencyElectionResultCall(ctx, call)
 	}
 
@@ -4468,6 +5511,12 @@ export class ElectionProviderMultiPhaseSetEmergencyElectionResultCall {
 	get asV42Stage(): stageCalls.ElectionProviderMultiPhaseSetEmergencyElectionResultCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV42Test(): testCalls.ElectionProviderMultiPhaseSetEmergencyElectionResultCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.ElectionProviderMultiPhaseSetEmergencyElectionResultCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.ElectionProviderMultiPhaseSetEmergencyElectionResultCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -4479,11 +5528,13 @@ export class ElectionProviderMultiPhaseSetEmergencyElectionResultCall {
 export class ElectionProviderMultiPhaseSetMinimumUntrustedScoreCall {
 	private readonly production: productionCalls.ElectionProviderMultiPhaseSetMinimumUntrustedScoreCall
 	private readonly stage: stageCalls.ElectionProviderMultiPhaseSetMinimumUntrustedScoreCall
+	private readonly test: testCalls.ElectionProviderMultiPhaseSetMinimumUntrustedScoreCall
 	private readonly dev: devCalls.ElectionProviderMultiPhaseSetMinimumUntrustedScoreCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.ElectionProviderMultiPhaseSetMinimumUntrustedScoreCall(ctx, call)
 		this.stage = new stageCalls.ElectionProviderMultiPhaseSetMinimumUntrustedScoreCall(ctx, call)
+		this.test = new testCalls.ElectionProviderMultiPhaseSetMinimumUntrustedScoreCall(ctx, call)
 		this.dev = new devCalls.ElectionProviderMultiPhaseSetMinimumUntrustedScoreCall(ctx, call)
 	}
 
@@ -4499,6 +5550,12 @@ export class ElectionProviderMultiPhaseSetMinimumUntrustedScoreCall {
 	get asV42Stage(): stageCalls.ElectionProviderMultiPhaseSetMinimumUntrustedScoreCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV42Test(): testCalls.ElectionProviderMultiPhaseSetMinimumUntrustedScoreCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.ElectionProviderMultiPhaseSetMinimumUntrustedScoreCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.ElectionProviderMultiPhaseSetMinimumUntrustedScoreCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -4510,11 +5567,13 @@ export class ElectionProviderMultiPhaseSetMinimumUntrustedScoreCall {
 export class ElectionProviderMultiPhaseSubmitCall {
 	private readonly production: productionCalls.ElectionProviderMultiPhaseSubmitCall
 	private readonly stage: stageCalls.ElectionProviderMultiPhaseSubmitCall
+	private readonly test: testCalls.ElectionProviderMultiPhaseSubmitCall
 	private readonly dev: devCalls.ElectionProviderMultiPhaseSubmitCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.ElectionProviderMultiPhaseSubmitCall(ctx, call)
 		this.stage = new stageCalls.ElectionProviderMultiPhaseSubmitCall(ctx, call)
+		this.test = new testCalls.ElectionProviderMultiPhaseSubmitCall(ctx, call)
 		this.dev = new devCalls.ElectionProviderMultiPhaseSubmitCall(ctx, call)
 	}
 
@@ -4530,6 +5589,12 @@ export class ElectionProviderMultiPhaseSubmitCall {
 	get asV42Stage(): stageCalls.ElectionProviderMultiPhaseSubmitCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV42Test(): testCalls.ElectionProviderMultiPhaseSubmitCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.ElectionProviderMultiPhaseSubmitCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.ElectionProviderMultiPhaseSubmitCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -4541,11 +5606,13 @@ export class ElectionProviderMultiPhaseSubmitCall {
 export class ElectionProviderMultiPhaseSubmitUnsignedCall {
 	private readonly production: productionCalls.ElectionProviderMultiPhaseSubmitUnsignedCall
 	private readonly stage: stageCalls.ElectionProviderMultiPhaseSubmitUnsignedCall
+	private readonly test: testCalls.ElectionProviderMultiPhaseSubmitUnsignedCall
 	private readonly dev: devCalls.ElectionProviderMultiPhaseSubmitUnsignedCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.ElectionProviderMultiPhaseSubmitUnsignedCall(ctx, call)
 		this.stage = new stageCalls.ElectionProviderMultiPhaseSubmitUnsignedCall(ctx, call)
+		this.test = new testCalls.ElectionProviderMultiPhaseSubmitUnsignedCall(ctx, call)
 		this.dev = new devCalls.ElectionProviderMultiPhaseSubmitUnsignedCall(ctx, call)
 	}
 
@@ -4561,6 +5628,12 @@ export class ElectionProviderMultiPhaseSubmitUnsignedCall {
 	get asV42Stage(): stageCalls.ElectionProviderMultiPhaseSubmitUnsignedCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV42Test(): testCalls.ElectionProviderMultiPhaseSubmitUnsignedCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.ElectionProviderMultiPhaseSubmitUnsignedCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.ElectionProviderMultiPhaseSubmitUnsignedCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -4572,11 +5645,13 @@ export class ElectionProviderMultiPhaseSubmitUnsignedCall {
 export class ElectionsPhragmenCleanDefunctVotersCall {
 	private readonly production: productionCalls.ElectionsPhragmenCleanDefunctVotersCall
 	private readonly stage: stageCalls.ElectionsPhragmenCleanDefunctVotersCall
+	private readonly test: testCalls.ElectionsPhragmenCleanDefunctVotersCall
 	private readonly dev: devCalls.ElectionsPhragmenCleanDefunctVotersCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.ElectionsPhragmenCleanDefunctVotersCall(ctx, call)
 		this.stage = new stageCalls.ElectionsPhragmenCleanDefunctVotersCall(ctx, call)
+		this.test = new testCalls.ElectionsPhragmenCleanDefunctVotersCall(ctx, call)
 		this.dev = new devCalls.ElectionsPhragmenCleanDefunctVotersCall(ctx, call)
 	}
 
@@ -4592,6 +5667,12 @@ export class ElectionsPhragmenCleanDefunctVotersCall {
 	get asV33Stage(): stageCalls.ElectionsPhragmenCleanDefunctVotersCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.ElectionsPhragmenCleanDefunctVotersCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.ElectionsPhragmenCleanDefunctVotersCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.ElectionsPhragmenCleanDefunctVotersCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -4603,11 +5684,13 @@ export class ElectionsPhragmenCleanDefunctVotersCall {
 export class ElectionsPhragmenRemoveMemberCall {
 	private readonly production: productionCalls.ElectionsPhragmenRemoveMemberCall
 	private readonly stage: stageCalls.ElectionsPhragmenRemoveMemberCall
+	private readonly test: testCalls.ElectionsPhragmenRemoveMemberCall
 	private readonly dev: devCalls.ElectionsPhragmenRemoveMemberCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.ElectionsPhragmenRemoveMemberCall(ctx, call)
 		this.stage = new stageCalls.ElectionsPhragmenRemoveMemberCall(ctx, call)
+		this.test = new testCalls.ElectionsPhragmenRemoveMemberCall(ctx, call)
 		this.dev = new devCalls.ElectionsPhragmenRemoveMemberCall(ctx, call)
 	}
 
@@ -4635,6 +5718,12 @@ export class ElectionsPhragmenRemoveMemberCall {
 	get asV52Stage(): stageCalls.ElectionsPhragmenRemoveMemberCall['asV52'] {
 		return this.stage.asV52
 	}
+	get isV41Test(): testCalls.ElectionsPhragmenRemoveMemberCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.ElectionsPhragmenRemoveMemberCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.ElectionsPhragmenRemoveMemberCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -4646,11 +5735,13 @@ export class ElectionsPhragmenRemoveMemberCall {
 export class ElectionsPhragmenRemoveVoterCall {
 	private readonly production: productionCalls.ElectionsPhragmenRemoveVoterCall
 	private readonly stage: stageCalls.ElectionsPhragmenRemoveVoterCall
+	private readonly test: testCalls.ElectionsPhragmenRemoveVoterCall
 	private readonly dev: devCalls.ElectionsPhragmenRemoveVoterCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.ElectionsPhragmenRemoveVoterCall(ctx, call)
 		this.stage = new stageCalls.ElectionsPhragmenRemoveVoterCall(ctx, call)
+		this.test = new testCalls.ElectionsPhragmenRemoveVoterCall(ctx, call)
 		this.dev = new devCalls.ElectionsPhragmenRemoveVoterCall(ctx, call)
 	}
 
@@ -4666,6 +5757,12 @@ export class ElectionsPhragmenRemoveVoterCall {
 	get asV33Stage(): stageCalls.ElectionsPhragmenRemoveVoterCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.ElectionsPhragmenRemoveVoterCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.ElectionsPhragmenRemoveVoterCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.ElectionsPhragmenRemoveVoterCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -4677,11 +5774,13 @@ export class ElectionsPhragmenRemoveVoterCall {
 export class ElectionsPhragmenRenounceCandidacyCall {
 	private readonly production: productionCalls.ElectionsPhragmenRenounceCandidacyCall
 	private readonly stage: stageCalls.ElectionsPhragmenRenounceCandidacyCall
+	private readonly test: testCalls.ElectionsPhragmenRenounceCandidacyCall
 	private readonly dev: devCalls.ElectionsPhragmenRenounceCandidacyCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.ElectionsPhragmenRenounceCandidacyCall(ctx, call)
 		this.stage = new stageCalls.ElectionsPhragmenRenounceCandidacyCall(ctx, call)
+		this.test = new testCalls.ElectionsPhragmenRenounceCandidacyCall(ctx, call)
 		this.dev = new devCalls.ElectionsPhragmenRenounceCandidacyCall(ctx, call)
 	}
 
@@ -4697,6 +5796,12 @@ export class ElectionsPhragmenRenounceCandidacyCall {
 	get asV33Stage(): stageCalls.ElectionsPhragmenRenounceCandidacyCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.ElectionsPhragmenRenounceCandidacyCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.ElectionsPhragmenRenounceCandidacyCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.ElectionsPhragmenRenounceCandidacyCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -4708,11 +5813,13 @@ export class ElectionsPhragmenRenounceCandidacyCall {
 export class ElectionsPhragmenSubmitCandidacyCall {
 	private readonly production: productionCalls.ElectionsPhragmenSubmitCandidacyCall
 	private readonly stage: stageCalls.ElectionsPhragmenSubmitCandidacyCall
+	private readonly test: testCalls.ElectionsPhragmenSubmitCandidacyCall
 	private readonly dev: devCalls.ElectionsPhragmenSubmitCandidacyCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.ElectionsPhragmenSubmitCandidacyCall(ctx, call)
 		this.stage = new stageCalls.ElectionsPhragmenSubmitCandidacyCall(ctx, call)
+		this.test = new testCalls.ElectionsPhragmenSubmitCandidacyCall(ctx, call)
 		this.dev = new devCalls.ElectionsPhragmenSubmitCandidacyCall(ctx, call)
 	}
 
@@ -4728,6 +5835,12 @@ export class ElectionsPhragmenSubmitCandidacyCall {
 	get asV33Stage(): stageCalls.ElectionsPhragmenSubmitCandidacyCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.ElectionsPhragmenSubmitCandidacyCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.ElectionsPhragmenSubmitCandidacyCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.ElectionsPhragmenSubmitCandidacyCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -4739,11 +5852,13 @@ export class ElectionsPhragmenSubmitCandidacyCall {
 export class ElectionsPhragmenVoteCall {
 	private readonly production: productionCalls.ElectionsPhragmenVoteCall
 	private readonly stage: stageCalls.ElectionsPhragmenVoteCall
+	private readonly test: testCalls.ElectionsPhragmenVoteCall
 	private readonly dev: devCalls.ElectionsPhragmenVoteCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.ElectionsPhragmenVoteCall(ctx, call)
 		this.stage = new stageCalls.ElectionsPhragmenVoteCall(ctx, call)
+		this.test = new testCalls.ElectionsPhragmenVoteCall(ctx, call)
 		this.dev = new devCalls.ElectionsPhragmenVoteCall(ctx, call)
 	}
 
@@ -4759,6 +5874,12 @@ export class ElectionsPhragmenVoteCall {
 	get asV33Stage(): stageCalls.ElectionsPhragmenVoteCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.ElectionsPhragmenVoteCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.ElectionsPhragmenVoteCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.ElectionsPhragmenVoteCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -4770,11 +5891,13 @@ export class ElectionsPhragmenVoteCall {
 export class EthBridgeAbortRequestCall {
 	private readonly production: productionCalls.EthBridgeAbortRequestCall
 	private readonly stage: stageCalls.EthBridgeAbortRequestCall
+	private readonly test: testCalls.EthBridgeAbortRequestCall
 	private readonly dev: devCalls.EthBridgeAbortRequestCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.EthBridgeAbortRequestCall(ctx, call)
 		this.stage = new stageCalls.EthBridgeAbortRequestCall(ctx, call)
+		this.test = new testCalls.EthBridgeAbortRequestCall(ctx, call)
 		this.dev = new devCalls.EthBridgeAbortRequestCall(ctx, call)
 	}
 
@@ -4814,6 +5937,18 @@ export class EthBridgeAbortRequestCall {
 	get asV52Stage(): stageCalls.EthBridgeAbortRequestCall['asV52'] {
 		return this.stage.asV52
 	}
+	get isV41Test(): testCalls.EthBridgeAbortRequestCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.EthBridgeAbortRequestCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.EthBridgeAbortRequestCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.EthBridgeAbortRequestCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.EthBridgeAbortRequestCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -4825,11 +5960,13 @@ export class EthBridgeAbortRequestCall {
 export class EthBridgeAddAssetCall {
 	private readonly production: productionCalls.EthBridgeAddAssetCall
 	private readonly stage: stageCalls.EthBridgeAddAssetCall
+	private readonly test: testCalls.EthBridgeAddAssetCall
 	private readonly dev: devCalls.EthBridgeAddAssetCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.EthBridgeAddAssetCall(ctx, call)
 		this.stage = new stageCalls.EthBridgeAddAssetCall(ctx, call)
+		this.test = new testCalls.EthBridgeAddAssetCall(ctx, call)
 		this.dev = new devCalls.EthBridgeAddAssetCall(ctx, call)
 	}
 
@@ -4857,6 +5994,18 @@ export class EthBridgeAddAssetCall {
 	get asV42Stage(): stageCalls.EthBridgeAddAssetCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV41Test(): testCalls.EthBridgeAddAssetCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.EthBridgeAddAssetCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.EthBridgeAddAssetCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.EthBridgeAddAssetCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.EthBridgeAddAssetCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -4868,11 +6017,13 @@ export class EthBridgeAddAssetCall {
 export class EthBridgeAddPeerCall {
 	private readonly production: productionCalls.EthBridgeAddPeerCall
 	private readonly stage: stageCalls.EthBridgeAddPeerCall
+	private readonly test: testCalls.EthBridgeAddPeerCall
 	private readonly dev: devCalls.EthBridgeAddPeerCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.EthBridgeAddPeerCall(ctx, call)
 		this.stage = new stageCalls.EthBridgeAddPeerCall(ctx, call)
+		this.test = new testCalls.EthBridgeAddPeerCall(ctx, call)
 		this.dev = new devCalls.EthBridgeAddPeerCall(ctx, call)
 	}
 
@@ -4888,6 +6039,12 @@ export class EthBridgeAddPeerCall {
 	get asV33Stage(): stageCalls.EthBridgeAddPeerCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.EthBridgeAddPeerCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.EthBridgeAddPeerCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.EthBridgeAddPeerCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -4899,11 +6056,13 @@ export class EthBridgeAddPeerCall {
 export class EthBridgeAddSidechainTokenCall {
 	private readonly production: productionCalls.EthBridgeAddSidechainTokenCall
 	private readonly stage: stageCalls.EthBridgeAddSidechainTokenCall
+	private readonly test: testCalls.EthBridgeAddSidechainTokenCall
 	private readonly dev: devCalls.EthBridgeAddSidechainTokenCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.EthBridgeAddSidechainTokenCall(ctx, call)
 		this.stage = new stageCalls.EthBridgeAddSidechainTokenCall(ctx, call)
+		this.test = new testCalls.EthBridgeAddSidechainTokenCall(ctx, call)
 		this.dev = new devCalls.EthBridgeAddSidechainTokenCall(ctx, call)
 	}
 
@@ -4931,6 +6090,18 @@ export class EthBridgeAddSidechainTokenCall {
 	get asV42Stage(): stageCalls.EthBridgeAddSidechainTokenCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV41Test(): testCalls.EthBridgeAddSidechainTokenCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.EthBridgeAddSidechainTokenCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.EthBridgeAddSidechainTokenCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.EthBridgeAddSidechainTokenCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.EthBridgeAddSidechainTokenCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -4942,11 +6113,13 @@ export class EthBridgeAddSidechainTokenCall {
 export class EthBridgeApproveRequestCall {
 	private readonly production: productionCalls.EthBridgeApproveRequestCall
 	private readonly stage: stageCalls.EthBridgeApproveRequestCall
+	private readonly test: testCalls.EthBridgeApproveRequestCall
 	private readonly dev: devCalls.EthBridgeApproveRequestCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.EthBridgeApproveRequestCall(ctx, call)
 		this.stage = new stageCalls.EthBridgeApproveRequestCall(ctx, call)
+		this.test = new testCalls.EthBridgeApproveRequestCall(ctx, call)
 		this.dev = new devCalls.EthBridgeApproveRequestCall(ctx, call)
 	}
 
@@ -4962,6 +6135,12 @@ export class EthBridgeApproveRequestCall {
 	get asV33Stage(): stageCalls.EthBridgeApproveRequestCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.EthBridgeApproveRequestCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.EthBridgeApproveRequestCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.EthBridgeApproveRequestCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -4973,11 +6152,13 @@ export class EthBridgeApproveRequestCall {
 export class EthBridgeFinalizeIncomingRequestCall {
 	private readonly production: productionCalls.EthBridgeFinalizeIncomingRequestCall
 	private readonly stage: stageCalls.EthBridgeFinalizeIncomingRequestCall
+	private readonly test: testCalls.EthBridgeFinalizeIncomingRequestCall
 	private readonly dev: devCalls.EthBridgeFinalizeIncomingRequestCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.EthBridgeFinalizeIncomingRequestCall(ctx, call)
 		this.stage = new stageCalls.EthBridgeFinalizeIncomingRequestCall(ctx, call)
+		this.test = new testCalls.EthBridgeFinalizeIncomingRequestCall(ctx, call)
 		this.dev = new devCalls.EthBridgeFinalizeIncomingRequestCall(ctx, call)
 	}
 
@@ -4993,6 +6174,12 @@ export class EthBridgeFinalizeIncomingRequestCall {
 	get asV33Stage(): stageCalls.EthBridgeFinalizeIncomingRequestCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.EthBridgeFinalizeIncomingRequestCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.EthBridgeFinalizeIncomingRequestCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.EthBridgeFinalizeIncomingRequestCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -5004,11 +6191,13 @@ export class EthBridgeFinalizeIncomingRequestCall {
 export class EthBridgeForceAddPeerCall {
 	private readonly production: productionCalls.EthBridgeForceAddPeerCall
 	private readonly stage: stageCalls.EthBridgeForceAddPeerCall
+	private readonly test: testCalls.EthBridgeForceAddPeerCall
 	private readonly dev: devCalls.EthBridgeForceAddPeerCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.EthBridgeForceAddPeerCall(ctx, call)
 		this.stage = new stageCalls.EthBridgeForceAddPeerCall(ctx, call)
+		this.test = new testCalls.EthBridgeForceAddPeerCall(ctx, call)
 		this.dev = new devCalls.EthBridgeForceAddPeerCall(ctx, call)
 	}
 
@@ -5024,6 +6213,12 @@ export class EthBridgeForceAddPeerCall {
 	get asV33Stage(): stageCalls.EthBridgeForceAddPeerCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.EthBridgeForceAddPeerCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.EthBridgeForceAddPeerCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.EthBridgeForceAddPeerCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -5035,11 +6230,13 @@ export class EthBridgeForceAddPeerCall {
 export class EthBridgeImportIncomingRequestCall {
 	private readonly production: productionCalls.EthBridgeImportIncomingRequestCall
 	private readonly stage: stageCalls.EthBridgeImportIncomingRequestCall
+	private readonly test: testCalls.EthBridgeImportIncomingRequestCall
 	private readonly dev: devCalls.EthBridgeImportIncomingRequestCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.EthBridgeImportIncomingRequestCall(ctx, call)
 		this.stage = new stageCalls.EthBridgeImportIncomingRequestCall(ctx, call)
+		this.test = new testCalls.EthBridgeImportIncomingRequestCall(ctx, call)
 		this.dev = new devCalls.EthBridgeImportIncomingRequestCall(ctx, call)
 	}
 
@@ -5079,6 +6276,18 @@ export class EthBridgeImportIncomingRequestCall {
 	get asV52Stage(): stageCalls.EthBridgeImportIncomingRequestCall['asV52'] {
 		return this.stage.asV52
 	}
+	get isV41Test(): testCalls.EthBridgeImportIncomingRequestCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.EthBridgeImportIncomingRequestCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.EthBridgeImportIncomingRequestCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.EthBridgeImportIncomingRequestCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.EthBridgeImportIncomingRequestCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -5090,11 +6299,13 @@ export class EthBridgeImportIncomingRequestCall {
 export class EthBridgeMigrateCall {
 	private readonly production: productionCalls.EthBridgeMigrateCall
 	private readonly stage: stageCalls.EthBridgeMigrateCall
+	private readonly test: testCalls.EthBridgeMigrateCall
 	private readonly dev: devCalls.EthBridgeMigrateCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.EthBridgeMigrateCall(ctx, call)
 		this.stage = new stageCalls.EthBridgeMigrateCall(ctx, call)
+		this.test = new testCalls.EthBridgeMigrateCall(ctx, call)
 		this.dev = new devCalls.EthBridgeMigrateCall(ctx, call)
 	}
 
@@ -5122,6 +6333,12 @@ export class EthBridgeMigrateCall {
 	get asV38Stage(): stageCalls.EthBridgeMigrateCall['asV38'] {
 		return this.stage.asV38
 	}
+	get isV41Test(): testCalls.EthBridgeMigrateCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.EthBridgeMigrateCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.EthBridgeMigrateCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -5133,10 +6350,12 @@ export class EthBridgeMigrateCall {
 export class EthBridgeMigrateTo020Call {
 	private readonly production: productionCalls.EthBridgeMigrateTo020Call
 	private readonly stage: stageCalls.EthBridgeMigrateTo020Call
+	private readonly test: testCalls.EthBridgeMigrateTo020Call
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.EthBridgeMigrateTo020Call(ctx, call)
 		this.stage = new stageCalls.EthBridgeMigrateTo020Call(ctx, call)
+		this.test = new testCalls.EthBridgeMigrateTo020Call(ctx, call)
 	}
 
 	get isV19(): productionCalls.EthBridgeMigrateTo020Call['isV19'] {
@@ -5151,16 +6370,24 @@ export class EthBridgeMigrateTo020Call {
 	get asV33Stage(): stageCalls.EthBridgeMigrateTo020Call['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.EthBridgeMigrateTo020Call['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.EthBridgeMigrateTo020Call['asV41'] {
+		return this.test.asV41
+	}
 }
 
 export class EthBridgePrepareForMigrationCall {
 	private readonly production: productionCalls.EthBridgePrepareForMigrationCall
 	private readonly stage: stageCalls.EthBridgePrepareForMigrationCall
+	private readonly test: testCalls.EthBridgePrepareForMigrationCall
 	private readonly dev: devCalls.EthBridgePrepareForMigrationCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.EthBridgePrepareForMigrationCall(ctx, call)
 		this.stage = new stageCalls.EthBridgePrepareForMigrationCall(ctx, call)
+		this.test = new testCalls.EthBridgePrepareForMigrationCall(ctx, call)
 		this.dev = new devCalls.EthBridgePrepareForMigrationCall(ctx, call)
 	}
 
@@ -5176,6 +6403,12 @@ export class EthBridgePrepareForMigrationCall {
 	get asV33Stage(): stageCalls.EthBridgePrepareForMigrationCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.EthBridgePrepareForMigrationCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.EthBridgePrepareForMigrationCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.EthBridgePrepareForMigrationCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -5187,11 +6420,13 @@ export class EthBridgePrepareForMigrationCall {
 export class EthBridgeRegisterBridgeCall {
 	private readonly production: productionCalls.EthBridgeRegisterBridgeCall
 	private readonly stage: stageCalls.EthBridgeRegisterBridgeCall
+	private readonly test: testCalls.EthBridgeRegisterBridgeCall
 	private readonly dev: devCalls.EthBridgeRegisterBridgeCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.EthBridgeRegisterBridgeCall(ctx, call)
 		this.stage = new stageCalls.EthBridgeRegisterBridgeCall(ctx, call)
+		this.test = new testCalls.EthBridgeRegisterBridgeCall(ctx, call)
 		this.dev = new devCalls.EthBridgeRegisterBridgeCall(ctx, call)
 	}
 
@@ -5219,6 +6454,12 @@ export class EthBridgeRegisterBridgeCall {
 	get asV38Stage(): stageCalls.EthBridgeRegisterBridgeCall['asV38'] {
 		return this.stage.asV38
 	}
+	get isV41Test(): testCalls.EthBridgeRegisterBridgeCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.EthBridgeRegisterBridgeCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.EthBridgeRegisterBridgeCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -5230,11 +6471,13 @@ export class EthBridgeRegisterBridgeCall {
 export class EthBridgeRegisterExistingSidechainAssetCall {
 	private readonly production: productionCalls.EthBridgeRegisterExistingSidechainAssetCall
 	private readonly stage: stageCalls.EthBridgeRegisterExistingSidechainAssetCall
+	private readonly test: testCalls.EthBridgeRegisterExistingSidechainAssetCall
 	private readonly dev: devCalls.EthBridgeRegisterExistingSidechainAssetCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.EthBridgeRegisterExistingSidechainAssetCall(ctx, call)
 		this.stage = new stageCalls.EthBridgeRegisterExistingSidechainAssetCall(ctx, call)
+		this.test = new testCalls.EthBridgeRegisterExistingSidechainAssetCall(ctx, call)
 		this.dev = new devCalls.EthBridgeRegisterExistingSidechainAssetCall(ctx, call)
 	}
 
@@ -5262,6 +6505,18 @@ export class EthBridgeRegisterExistingSidechainAssetCall {
 	get asV42Stage(): stageCalls.EthBridgeRegisterExistingSidechainAssetCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV41Test(): testCalls.EthBridgeRegisterExistingSidechainAssetCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.EthBridgeRegisterExistingSidechainAssetCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.EthBridgeRegisterExistingSidechainAssetCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.EthBridgeRegisterExistingSidechainAssetCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.EthBridgeRegisterExistingSidechainAssetCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -5273,11 +6528,13 @@ export class EthBridgeRegisterExistingSidechainAssetCall {
 export class EthBridgeRegisterIncomingRequestCall {
 	private readonly production: productionCalls.EthBridgeRegisterIncomingRequestCall
 	private readonly stage: stageCalls.EthBridgeRegisterIncomingRequestCall
+	private readonly test: testCalls.EthBridgeRegisterIncomingRequestCall
 	private readonly dev: devCalls.EthBridgeRegisterIncomingRequestCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.EthBridgeRegisterIncomingRequestCall(ctx, call)
 		this.stage = new stageCalls.EthBridgeRegisterIncomingRequestCall(ctx, call)
+		this.test = new testCalls.EthBridgeRegisterIncomingRequestCall(ctx, call)
 		this.dev = new devCalls.EthBridgeRegisterIncomingRequestCall(ctx, call)
 	}
 
@@ -5305,6 +6562,18 @@ export class EthBridgeRegisterIncomingRequestCall {
 	get asV42Stage(): stageCalls.EthBridgeRegisterIncomingRequestCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV41Test(): testCalls.EthBridgeRegisterIncomingRequestCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.EthBridgeRegisterIncomingRequestCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.EthBridgeRegisterIncomingRequestCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.EthBridgeRegisterIncomingRequestCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.EthBridgeRegisterIncomingRequestCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -5316,11 +6585,13 @@ export class EthBridgeRegisterIncomingRequestCall {
 export class EthBridgeRemovePeerCall {
 	private readonly production: productionCalls.EthBridgeRemovePeerCall
 	private readonly stage: stageCalls.EthBridgeRemovePeerCall
+	private readonly test: testCalls.EthBridgeRemovePeerCall
 	private readonly dev: devCalls.EthBridgeRemovePeerCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.EthBridgeRemovePeerCall(ctx, call)
 		this.stage = new stageCalls.EthBridgeRemovePeerCall(ctx, call)
+		this.test = new testCalls.EthBridgeRemovePeerCall(ctx, call)
 		this.dev = new devCalls.EthBridgeRemovePeerCall(ctx, call)
 	}
 
@@ -5342,6 +6613,12 @@ export class EthBridgeRemovePeerCall {
 	get asV33Stage(): stageCalls.EthBridgeRemovePeerCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.EthBridgeRemovePeerCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.EthBridgeRemovePeerCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.EthBridgeRemovePeerCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -5353,11 +6630,13 @@ export class EthBridgeRemovePeerCall {
 export class EthBridgeRemoveSidechainAssetCall {
 	private readonly production: productionCalls.EthBridgeRemoveSidechainAssetCall
 	private readonly stage: stageCalls.EthBridgeRemoveSidechainAssetCall
+	private readonly test: testCalls.EthBridgeRemoveSidechainAssetCall
 	private readonly dev: devCalls.EthBridgeRemoveSidechainAssetCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.EthBridgeRemoveSidechainAssetCall(ctx, call)
 		this.stage = new stageCalls.EthBridgeRemoveSidechainAssetCall(ctx, call)
+		this.test = new testCalls.EthBridgeRemoveSidechainAssetCall(ctx, call)
 		this.dev = new devCalls.EthBridgeRemoveSidechainAssetCall(ctx, call)
 	}
 
@@ -5385,6 +6664,18 @@ export class EthBridgeRemoveSidechainAssetCall {
 	get asV42Stage(): stageCalls.EthBridgeRemoveSidechainAssetCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV41Test(): testCalls.EthBridgeRemoveSidechainAssetCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.EthBridgeRemoveSidechainAssetCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.EthBridgeRemoveSidechainAssetCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.EthBridgeRemoveSidechainAssetCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.EthBridgeRemoveSidechainAssetCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -5396,11 +6687,13 @@ export class EthBridgeRemoveSidechainAssetCall {
 export class EthBridgeRequestFromSidechainCall {
 	private readonly production: productionCalls.EthBridgeRequestFromSidechainCall
 	private readonly stage: stageCalls.EthBridgeRequestFromSidechainCall
+	private readonly test: testCalls.EthBridgeRequestFromSidechainCall
 	private readonly dev: devCalls.EthBridgeRequestFromSidechainCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.EthBridgeRequestFromSidechainCall(ctx, call)
 		this.stage = new stageCalls.EthBridgeRequestFromSidechainCall(ctx, call)
+		this.test = new testCalls.EthBridgeRequestFromSidechainCall(ctx, call)
 		this.dev = new devCalls.EthBridgeRequestFromSidechainCall(ctx, call)
 	}
 
@@ -5416,6 +6709,12 @@ export class EthBridgeRequestFromSidechainCall {
 	get asV33Stage(): stageCalls.EthBridgeRequestFromSidechainCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.EthBridgeRequestFromSidechainCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.EthBridgeRequestFromSidechainCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.EthBridgeRequestFromSidechainCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -5427,11 +6726,13 @@ export class EthBridgeRequestFromSidechainCall {
 export class EthBridgeTransferToSidechainCall {
 	private readonly production: productionCalls.EthBridgeTransferToSidechainCall
 	private readonly stage: stageCalls.EthBridgeTransferToSidechainCall
+	private readonly test: testCalls.EthBridgeTransferToSidechainCall
 	private readonly dev: devCalls.EthBridgeTransferToSidechainCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.EthBridgeTransferToSidechainCall(ctx, call)
 		this.stage = new stageCalls.EthBridgeTransferToSidechainCall(ctx, call)
+		this.test = new testCalls.EthBridgeTransferToSidechainCall(ctx, call)
 		this.dev = new devCalls.EthBridgeTransferToSidechainCall(ctx, call)
 	}
 
@@ -5459,6 +6760,18 @@ export class EthBridgeTransferToSidechainCall {
 	get asV42Stage(): stageCalls.EthBridgeTransferToSidechainCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV41Test(): testCalls.EthBridgeTransferToSidechainCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.EthBridgeTransferToSidechainCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.EthBridgeTransferToSidechainCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.EthBridgeTransferToSidechainCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.EthBridgeTransferToSidechainCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -5470,10 +6783,12 @@ export class EthBridgeTransferToSidechainCall {
 export class FarmingMigrateTo11Call {
 	private readonly production: productionCalls.FarmingMigrateTo11Call
 	private readonly stage: stageCalls.FarmingMigrateTo11Call
+	private readonly test: testCalls.FarmingMigrateTo11Call
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.FarmingMigrateTo11Call(ctx, call)
 		this.stage = new stageCalls.FarmingMigrateTo11Call(ctx, call)
+		this.test = new testCalls.FarmingMigrateTo11Call(ctx, call)
 	}
 
 	get isV7(): productionCalls.FarmingMigrateTo11Call['isV7'] {
@@ -5488,16 +6803,24 @@ export class FarmingMigrateTo11Call {
 	get asV33Stage(): stageCalls.FarmingMigrateTo11Call['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.FarmingMigrateTo11Call['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.FarmingMigrateTo11Call['asV41'] {
+		return this.test.asV41
+	}
 }
 
 export class FaucetResetRewardsCall {
 	private readonly production: productionCalls.FaucetResetRewardsCall
 	private readonly stage: stageCalls.FaucetResetRewardsCall
+	private readonly test: testCalls.FaucetResetRewardsCall
 	private readonly dev: devCalls.FaucetResetRewardsCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.FaucetResetRewardsCall(ctx, call)
 		this.stage = new stageCalls.FaucetResetRewardsCall(ctx, call)
+		this.test = new testCalls.FaucetResetRewardsCall(ctx, call)
 		this.dev = new devCalls.FaucetResetRewardsCall(ctx, call)
 	}
 
@@ -5513,6 +6836,12 @@ export class FaucetResetRewardsCall {
 	get asV33Stage(): stageCalls.FaucetResetRewardsCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.FaucetResetRewardsCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.FaucetResetRewardsCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.FaucetResetRewardsCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -5524,11 +6853,13 @@ export class FaucetResetRewardsCall {
 export class FaucetTransferCall {
 	private readonly production: productionCalls.FaucetTransferCall
 	private readonly stage: stageCalls.FaucetTransferCall
+	private readonly test: testCalls.FaucetTransferCall
 	private readonly dev: devCalls.FaucetTransferCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.FaucetTransferCall(ctx, call)
 		this.stage = new stageCalls.FaucetTransferCall(ctx, call)
+		this.test = new testCalls.FaucetTransferCall(ctx, call)
 		this.dev = new devCalls.FaucetTransferCall(ctx, call)
 	}
 
@@ -5550,6 +6881,18 @@ export class FaucetTransferCall {
 	get asV42Stage(): stageCalls.FaucetTransferCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV41Test(): testCalls.FaucetTransferCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.FaucetTransferCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.FaucetTransferCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.FaucetTransferCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.FaucetTransferCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -5561,11 +6904,13 @@ export class FaucetTransferCall {
 export class GrandpaNoteStalledCall {
 	private readonly production: productionCalls.GrandpaNoteStalledCall
 	private readonly stage: stageCalls.GrandpaNoteStalledCall
+	private readonly test: testCalls.GrandpaNoteStalledCall
 	private readonly dev: devCalls.GrandpaNoteStalledCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.GrandpaNoteStalledCall(ctx, call)
 		this.stage = new stageCalls.GrandpaNoteStalledCall(ctx, call)
+		this.test = new testCalls.GrandpaNoteStalledCall(ctx, call)
 		this.dev = new devCalls.GrandpaNoteStalledCall(ctx, call)
 	}
 
@@ -5581,6 +6926,12 @@ export class GrandpaNoteStalledCall {
 	get asV33Stage(): stageCalls.GrandpaNoteStalledCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.GrandpaNoteStalledCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.GrandpaNoteStalledCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.GrandpaNoteStalledCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -5592,11 +6943,13 @@ export class GrandpaNoteStalledCall {
 export class GrandpaReportEquivocationCall {
 	private readonly production: productionCalls.GrandpaReportEquivocationCall
 	private readonly stage: stageCalls.GrandpaReportEquivocationCall
+	private readonly test: testCalls.GrandpaReportEquivocationCall
 	private readonly dev: devCalls.GrandpaReportEquivocationCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.GrandpaReportEquivocationCall(ctx, call)
 		this.stage = new stageCalls.GrandpaReportEquivocationCall(ctx, call)
+		this.test = new testCalls.GrandpaReportEquivocationCall(ctx, call)
 		this.dev = new devCalls.GrandpaReportEquivocationCall(ctx, call)
 	}
 
@@ -5612,6 +6965,12 @@ export class GrandpaReportEquivocationCall {
 	get asV33Stage(): stageCalls.GrandpaReportEquivocationCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.GrandpaReportEquivocationCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.GrandpaReportEquivocationCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.GrandpaReportEquivocationCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -5623,11 +6982,13 @@ export class GrandpaReportEquivocationCall {
 export class GrandpaReportEquivocationUnsignedCall {
 	private readonly production: productionCalls.GrandpaReportEquivocationUnsignedCall
 	private readonly stage: stageCalls.GrandpaReportEquivocationUnsignedCall
+	private readonly test: testCalls.GrandpaReportEquivocationUnsignedCall
 	private readonly dev: devCalls.GrandpaReportEquivocationUnsignedCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.GrandpaReportEquivocationUnsignedCall(ctx, call)
 		this.stage = new stageCalls.GrandpaReportEquivocationUnsignedCall(ctx, call)
+		this.test = new testCalls.GrandpaReportEquivocationUnsignedCall(ctx, call)
 		this.dev = new devCalls.GrandpaReportEquivocationUnsignedCall(ctx, call)
 	}
 
@@ -5642,6 +7003,12 @@ export class GrandpaReportEquivocationUnsignedCall {
 	}
 	get asV33Stage(): stageCalls.GrandpaReportEquivocationUnsignedCall['asV33'] {
 		return this.stage.asV33
+	}
+	get isV41Test(): testCalls.GrandpaReportEquivocationUnsignedCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.GrandpaReportEquivocationUnsignedCall['asV41'] {
+		return this.test.asV41
 	}
 	get isV60Dev(): devCalls.GrandpaReportEquivocationUnsignedCall['isV60'] {
 		return this.dev.isV60
@@ -5864,11 +7231,13 @@ export class HermesGovernancePlatformWithdrawFundsVoterCall {
 export class IdentityAddRegistrarCall {
 	private readonly production: productionCalls.IdentityAddRegistrarCall
 	private readonly stage: stageCalls.IdentityAddRegistrarCall
+	private readonly test: testCalls.IdentityAddRegistrarCall
 	private readonly dev: devCalls.IdentityAddRegistrarCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.IdentityAddRegistrarCall(ctx, call)
 		this.stage = new stageCalls.IdentityAddRegistrarCall(ctx, call)
+		this.test = new testCalls.IdentityAddRegistrarCall(ctx, call)
 		this.dev = new devCalls.IdentityAddRegistrarCall(ctx, call)
 	}
 
@@ -5884,6 +7253,12 @@ export class IdentityAddRegistrarCall {
 	get asV33Stage(): stageCalls.IdentityAddRegistrarCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.IdentityAddRegistrarCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.IdentityAddRegistrarCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.IdentityAddRegistrarCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -5895,11 +7270,13 @@ export class IdentityAddRegistrarCall {
 export class IdentityAddSubCall {
 	private readonly production: productionCalls.IdentityAddSubCall
 	private readonly stage: stageCalls.IdentityAddSubCall
+	private readonly test: testCalls.IdentityAddSubCall
 	private readonly dev: devCalls.IdentityAddSubCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.IdentityAddSubCall(ctx, call)
 		this.stage = new stageCalls.IdentityAddSubCall(ctx, call)
+		this.test = new testCalls.IdentityAddSubCall(ctx, call)
 		this.dev = new devCalls.IdentityAddSubCall(ctx, call)
 	}
 
@@ -5915,6 +7292,12 @@ export class IdentityAddSubCall {
 	get asV33Stage(): stageCalls.IdentityAddSubCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.IdentityAddSubCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.IdentityAddSubCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.IdentityAddSubCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -5926,11 +7309,13 @@ export class IdentityAddSubCall {
 export class IdentityCancelRequestCall {
 	private readonly production: productionCalls.IdentityCancelRequestCall
 	private readonly stage: stageCalls.IdentityCancelRequestCall
+	private readonly test: testCalls.IdentityCancelRequestCall
 	private readonly dev: devCalls.IdentityCancelRequestCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.IdentityCancelRequestCall(ctx, call)
 		this.stage = new stageCalls.IdentityCancelRequestCall(ctx, call)
+		this.test = new testCalls.IdentityCancelRequestCall(ctx, call)
 		this.dev = new devCalls.IdentityCancelRequestCall(ctx, call)
 	}
 
@@ -5946,6 +7331,12 @@ export class IdentityCancelRequestCall {
 	get asV33Stage(): stageCalls.IdentityCancelRequestCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.IdentityCancelRequestCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.IdentityCancelRequestCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.IdentityCancelRequestCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -5957,11 +7348,13 @@ export class IdentityCancelRequestCall {
 export class IdentityClearIdentityCall {
 	private readonly production: productionCalls.IdentityClearIdentityCall
 	private readonly stage: stageCalls.IdentityClearIdentityCall
+	private readonly test: testCalls.IdentityClearIdentityCall
 	private readonly dev: devCalls.IdentityClearIdentityCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.IdentityClearIdentityCall(ctx, call)
 		this.stage = new stageCalls.IdentityClearIdentityCall(ctx, call)
+		this.test = new testCalls.IdentityClearIdentityCall(ctx, call)
 		this.dev = new devCalls.IdentityClearIdentityCall(ctx, call)
 	}
 
@@ -5977,6 +7370,12 @@ export class IdentityClearIdentityCall {
 	get asV33Stage(): stageCalls.IdentityClearIdentityCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.IdentityClearIdentityCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.IdentityClearIdentityCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.IdentityClearIdentityCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -5988,11 +7387,13 @@ export class IdentityClearIdentityCall {
 export class IdentityKillIdentityCall {
 	private readonly production: productionCalls.IdentityKillIdentityCall
 	private readonly stage: stageCalls.IdentityKillIdentityCall
+	private readonly test: testCalls.IdentityKillIdentityCall
 	private readonly dev: devCalls.IdentityKillIdentityCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.IdentityKillIdentityCall(ctx, call)
 		this.stage = new stageCalls.IdentityKillIdentityCall(ctx, call)
+		this.test = new testCalls.IdentityKillIdentityCall(ctx, call)
 		this.dev = new devCalls.IdentityKillIdentityCall(ctx, call)
 	}
 
@@ -6008,6 +7409,12 @@ export class IdentityKillIdentityCall {
 	get asV33Stage(): stageCalls.IdentityKillIdentityCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.IdentityKillIdentityCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.IdentityKillIdentityCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.IdentityKillIdentityCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -6019,11 +7426,13 @@ export class IdentityKillIdentityCall {
 export class IdentityProvideJudgementCall {
 	private readonly production: productionCalls.IdentityProvideJudgementCall
 	private readonly stage: stageCalls.IdentityProvideJudgementCall
+	private readonly test: testCalls.IdentityProvideJudgementCall
 	private readonly dev: devCalls.IdentityProvideJudgementCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.IdentityProvideJudgementCall(ctx, call)
 		this.stage = new stageCalls.IdentityProvideJudgementCall(ctx, call)
+		this.test = new testCalls.IdentityProvideJudgementCall(ctx, call)
 		this.dev = new devCalls.IdentityProvideJudgementCall(ctx, call)
 	}
 
@@ -6051,6 +7460,12 @@ export class IdentityProvideJudgementCall {
 	get asV52Stage(): stageCalls.IdentityProvideJudgementCall['asV52'] {
 		return this.stage.asV52
 	}
+	get isV41Test(): testCalls.IdentityProvideJudgementCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.IdentityProvideJudgementCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.IdentityProvideJudgementCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -6062,11 +7477,13 @@ export class IdentityProvideJudgementCall {
 export class IdentityQuitSubCall {
 	private readonly production: productionCalls.IdentityQuitSubCall
 	private readonly stage: stageCalls.IdentityQuitSubCall
+	private readonly test: testCalls.IdentityQuitSubCall
 	private readonly dev: devCalls.IdentityQuitSubCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.IdentityQuitSubCall(ctx, call)
 		this.stage = new stageCalls.IdentityQuitSubCall(ctx, call)
+		this.test = new testCalls.IdentityQuitSubCall(ctx, call)
 		this.dev = new devCalls.IdentityQuitSubCall(ctx, call)
 	}
 
@@ -6082,6 +7499,12 @@ export class IdentityQuitSubCall {
 	get asV33Stage(): stageCalls.IdentityQuitSubCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.IdentityQuitSubCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.IdentityQuitSubCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.IdentityQuitSubCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -6093,11 +7516,13 @@ export class IdentityQuitSubCall {
 export class IdentityRemoveSubCall {
 	private readonly production: productionCalls.IdentityRemoveSubCall
 	private readonly stage: stageCalls.IdentityRemoveSubCall
+	private readonly test: testCalls.IdentityRemoveSubCall
 	private readonly dev: devCalls.IdentityRemoveSubCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.IdentityRemoveSubCall(ctx, call)
 		this.stage = new stageCalls.IdentityRemoveSubCall(ctx, call)
+		this.test = new testCalls.IdentityRemoveSubCall(ctx, call)
 		this.dev = new devCalls.IdentityRemoveSubCall(ctx, call)
 	}
 
@@ -6113,6 +7538,12 @@ export class IdentityRemoveSubCall {
 	get asV33Stage(): stageCalls.IdentityRemoveSubCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.IdentityRemoveSubCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.IdentityRemoveSubCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.IdentityRemoveSubCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -6124,11 +7555,13 @@ export class IdentityRemoveSubCall {
 export class IdentityRenameSubCall {
 	private readonly production: productionCalls.IdentityRenameSubCall
 	private readonly stage: stageCalls.IdentityRenameSubCall
+	private readonly test: testCalls.IdentityRenameSubCall
 	private readonly dev: devCalls.IdentityRenameSubCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.IdentityRenameSubCall(ctx, call)
 		this.stage = new stageCalls.IdentityRenameSubCall(ctx, call)
+		this.test = new testCalls.IdentityRenameSubCall(ctx, call)
 		this.dev = new devCalls.IdentityRenameSubCall(ctx, call)
 	}
 
@@ -6144,6 +7577,12 @@ export class IdentityRenameSubCall {
 	get asV33Stage(): stageCalls.IdentityRenameSubCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.IdentityRenameSubCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.IdentityRenameSubCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.IdentityRenameSubCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -6155,11 +7594,13 @@ export class IdentityRenameSubCall {
 export class IdentityRequestJudgementCall {
 	private readonly production: productionCalls.IdentityRequestJudgementCall
 	private readonly stage: stageCalls.IdentityRequestJudgementCall
+	private readonly test: testCalls.IdentityRequestJudgementCall
 	private readonly dev: devCalls.IdentityRequestJudgementCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.IdentityRequestJudgementCall(ctx, call)
 		this.stage = new stageCalls.IdentityRequestJudgementCall(ctx, call)
+		this.test = new testCalls.IdentityRequestJudgementCall(ctx, call)
 		this.dev = new devCalls.IdentityRequestJudgementCall(ctx, call)
 	}
 
@@ -6175,6 +7616,12 @@ export class IdentityRequestJudgementCall {
 	get asV33Stage(): stageCalls.IdentityRequestJudgementCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.IdentityRequestJudgementCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.IdentityRequestJudgementCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.IdentityRequestJudgementCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -6186,11 +7633,13 @@ export class IdentityRequestJudgementCall {
 export class IdentitySetAccountIdCall {
 	private readonly production: productionCalls.IdentitySetAccountIdCall
 	private readonly stage: stageCalls.IdentitySetAccountIdCall
+	private readonly test: testCalls.IdentitySetAccountIdCall
 	private readonly dev: devCalls.IdentitySetAccountIdCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.IdentitySetAccountIdCall(ctx, call)
 		this.stage = new stageCalls.IdentitySetAccountIdCall(ctx, call)
+		this.test = new testCalls.IdentitySetAccountIdCall(ctx, call)
 		this.dev = new devCalls.IdentitySetAccountIdCall(ctx, call)
 	}
 
@@ -6206,6 +7655,12 @@ export class IdentitySetAccountIdCall {
 	get asV33Stage(): stageCalls.IdentitySetAccountIdCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.IdentitySetAccountIdCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.IdentitySetAccountIdCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.IdentitySetAccountIdCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -6217,11 +7672,13 @@ export class IdentitySetAccountIdCall {
 export class IdentitySetFeeCall {
 	private readonly production: productionCalls.IdentitySetFeeCall
 	private readonly stage: stageCalls.IdentitySetFeeCall
+	private readonly test: testCalls.IdentitySetFeeCall
 	private readonly dev: devCalls.IdentitySetFeeCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.IdentitySetFeeCall(ctx, call)
 		this.stage = new stageCalls.IdentitySetFeeCall(ctx, call)
+		this.test = new testCalls.IdentitySetFeeCall(ctx, call)
 		this.dev = new devCalls.IdentitySetFeeCall(ctx, call)
 	}
 
@@ -6237,6 +7694,12 @@ export class IdentitySetFeeCall {
 	get asV33Stage(): stageCalls.IdentitySetFeeCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.IdentitySetFeeCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.IdentitySetFeeCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.IdentitySetFeeCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -6248,11 +7711,13 @@ export class IdentitySetFeeCall {
 export class IdentitySetFieldsCall {
 	private readonly production: productionCalls.IdentitySetFieldsCall
 	private readonly stage: stageCalls.IdentitySetFieldsCall
+	private readonly test: testCalls.IdentitySetFieldsCall
 	private readonly dev: devCalls.IdentitySetFieldsCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.IdentitySetFieldsCall(ctx, call)
 		this.stage = new stageCalls.IdentitySetFieldsCall(ctx, call)
+		this.test = new testCalls.IdentitySetFieldsCall(ctx, call)
 		this.dev = new devCalls.IdentitySetFieldsCall(ctx, call)
 	}
 
@@ -6268,6 +7733,12 @@ export class IdentitySetFieldsCall {
 	get asV33Stage(): stageCalls.IdentitySetFieldsCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.IdentitySetFieldsCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.IdentitySetFieldsCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.IdentitySetFieldsCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -6279,11 +7750,13 @@ export class IdentitySetFieldsCall {
 export class IdentitySetIdentityCall {
 	private readonly production: productionCalls.IdentitySetIdentityCall
 	private readonly stage: stageCalls.IdentitySetIdentityCall
+	private readonly test: testCalls.IdentitySetIdentityCall
 	private readonly dev: devCalls.IdentitySetIdentityCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.IdentitySetIdentityCall(ctx, call)
 		this.stage = new stageCalls.IdentitySetIdentityCall(ctx, call)
+		this.test = new testCalls.IdentitySetIdentityCall(ctx, call)
 		this.dev = new devCalls.IdentitySetIdentityCall(ctx, call)
 	}
 
@@ -6299,6 +7772,12 @@ export class IdentitySetIdentityCall {
 	get asV33Stage(): stageCalls.IdentitySetIdentityCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.IdentitySetIdentityCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.IdentitySetIdentityCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.IdentitySetIdentityCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -6310,11 +7789,13 @@ export class IdentitySetIdentityCall {
 export class IdentitySetSubsCall {
 	private readonly production: productionCalls.IdentitySetSubsCall
 	private readonly stage: stageCalls.IdentitySetSubsCall
+	private readonly test: testCalls.IdentitySetSubsCall
 	private readonly dev: devCalls.IdentitySetSubsCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.IdentitySetSubsCall(ctx, call)
 		this.stage = new stageCalls.IdentitySetSubsCall(ctx, call)
+		this.test = new testCalls.IdentitySetSubsCall(ctx, call)
 		this.dev = new devCalls.IdentitySetSubsCall(ctx, call)
 	}
 
@@ -6330,6 +7811,12 @@ export class IdentitySetSubsCall {
 	get asV33Stage(): stageCalls.IdentitySetSubsCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.IdentitySetSubsCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.IdentitySetSubsCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.IdentitySetSubsCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -6341,11 +7828,13 @@ export class IdentitySetSubsCall {
 export class ImOnlineHeartbeatCall {
 	private readonly production: productionCalls.ImOnlineHeartbeatCall
 	private readonly stage: stageCalls.ImOnlineHeartbeatCall
+	private readonly test: testCalls.ImOnlineHeartbeatCall
 	private readonly dev: devCalls.ImOnlineHeartbeatCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.ImOnlineHeartbeatCall(ctx, call)
 		this.stage = new stageCalls.ImOnlineHeartbeatCall(ctx, call)
+		this.test = new testCalls.ImOnlineHeartbeatCall(ctx, call)
 		this.dev = new devCalls.ImOnlineHeartbeatCall(ctx, call)
 	}
 
@@ -6361,6 +7850,12 @@ export class ImOnlineHeartbeatCall {
 	get asV33Stage(): stageCalls.ImOnlineHeartbeatCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.ImOnlineHeartbeatCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.ImOnlineHeartbeatCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.ImOnlineHeartbeatCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -6372,11 +7867,13 @@ export class ImOnlineHeartbeatCall {
 export class IrohaMigrationMigrateCall {
 	private readonly production: productionCalls.IrohaMigrationMigrateCall
 	private readonly stage: stageCalls.IrohaMigrationMigrateCall
+	private readonly test: testCalls.IrohaMigrationMigrateCall
 	private readonly dev: devCalls.IrohaMigrationMigrateCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.IrohaMigrationMigrateCall(ctx, call)
 		this.stage = new stageCalls.IrohaMigrationMigrateCall(ctx, call)
+		this.test = new testCalls.IrohaMigrationMigrateCall(ctx, call)
 		this.dev = new devCalls.IrohaMigrationMigrateCall(ctx, call)
 	}
 
@@ -6404,6 +7901,18 @@ export class IrohaMigrationMigrateCall {
 	get asV42Stage(): stageCalls.IrohaMigrationMigrateCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV41Test(): testCalls.IrohaMigrationMigrateCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.IrohaMigrationMigrateCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.IrohaMigrationMigrateCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.IrohaMigrationMigrateCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.IrohaMigrationMigrateCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -6415,11 +7924,13 @@ export class IrohaMigrationMigrateCall {
 export class LiquidityProxyDisableLiquiditySourceCall {
 	private readonly production: productionCalls.LiquidityProxyDisableLiquiditySourceCall
 	private readonly stage: stageCalls.LiquidityProxyDisableLiquiditySourceCall
+	private readonly test: testCalls.LiquidityProxyDisableLiquiditySourceCall
 	private readonly dev: devCalls.LiquidityProxyDisableLiquiditySourceCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.LiquidityProxyDisableLiquiditySourceCall(ctx, call)
 		this.stage = new stageCalls.LiquidityProxyDisableLiquiditySourceCall(ctx, call)
+		this.test = new testCalls.LiquidityProxyDisableLiquiditySourceCall(ctx, call)
 		this.dev = new devCalls.LiquidityProxyDisableLiquiditySourceCall(ctx, call)
 	}
 
@@ -6447,6 +7958,18 @@ export class LiquidityProxyDisableLiquiditySourceCall {
 	get asV42Stage(): stageCalls.LiquidityProxyDisableLiquiditySourceCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV41Test(): testCalls.LiquidityProxyDisableLiquiditySourceCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.LiquidityProxyDisableLiquiditySourceCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.LiquidityProxyDisableLiquiditySourceCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.LiquidityProxyDisableLiquiditySourceCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.LiquidityProxyDisableLiquiditySourceCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -6458,11 +7981,13 @@ export class LiquidityProxyDisableLiquiditySourceCall {
 export class LiquidityProxyEnableLiquiditySourceCall {
 	private readonly production: productionCalls.LiquidityProxyEnableLiquiditySourceCall
 	private readonly stage: stageCalls.LiquidityProxyEnableLiquiditySourceCall
+	private readonly test: testCalls.LiquidityProxyEnableLiquiditySourceCall
 	private readonly dev: devCalls.LiquidityProxyEnableLiquiditySourceCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.LiquidityProxyEnableLiquiditySourceCall(ctx, call)
 		this.stage = new stageCalls.LiquidityProxyEnableLiquiditySourceCall(ctx, call)
+		this.test = new testCalls.LiquidityProxyEnableLiquiditySourceCall(ctx, call)
 		this.dev = new devCalls.LiquidityProxyEnableLiquiditySourceCall(ctx, call)
 	}
 
@@ -6489,6 +8014,18 @@ export class LiquidityProxyEnableLiquiditySourceCall {
 	}
 	get asV42Stage(): stageCalls.LiquidityProxyEnableLiquiditySourceCall['asV42'] {
 		return this.stage.asV42
+	}
+	get isV41Test(): testCalls.LiquidityProxyEnableLiquiditySourceCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.LiquidityProxyEnableLiquiditySourceCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.LiquidityProxyEnableLiquiditySourceCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.LiquidityProxyEnableLiquiditySourceCall['asV42'] {
+		return this.test.asV42
 	}
 	get isV60Dev(): devCalls.LiquidityProxyEnableLiquiditySourceCall['isV60'] {
 		return this.dev.isV60
@@ -6532,11 +8069,13 @@ export class LiquidityProxySetAdarCommissionRatioCall {
 export class LiquidityProxySwapCall {
 	private readonly production: productionCalls.LiquidityProxySwapCall
 	private readonly stage: stageCalls.LiquidityProxySwapCall
+	private readonly test: testCalls.LiquidityProxySwapCall
 	private readonly dev: devCalls.LiquidityProxySwapCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.LiquidityProxySwapCall(ctx, call)
 		this.stage = new stageCalls.LiquidityProxySwapCall(ctx, call)
+		this.test = new testCalls.LiquidityProxySwapCall(ctx, call)
 		this.dev = new devCalls.LiquidityProxySwapCall(ctx, call)
 	}
 
@@ -6570,6 +8109,18 @@ export class LiquidityProxySwapCall {
 	get asV42Stage(): stageCalls.LiquidityProxySwapCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV41Test(): testCalls.LiquidityProxySwapCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.LiquidityProxySwapCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.LiquidityProxySwapCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.LiquidityProxySwapCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.LiquidityProxySwapCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -6581,11 +8132,13 @@ export class LiquidityProxySwapCall {
 export class LiquidityProxySwapTransferCall {
 	private readonly production: productionCalls.LiquidityProxySwapTransferCall
 	private readonly stage: stageCalls.LiquidityProxySwapTransferCall
+	private readonly test: testCalls.LiquidityProxySwapTransferCall
 	private readonly dev: devCalls.LiquidityProxySwapTransferCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.LiquidityProxySwapTransferCall(ctx, call)
 		this.stage = new stageCalls.LiquidityProxySwapTransferCall(ctx, call)
+		this.test = new testCalls.LiquidityProxySwapTransferCall(ctx, call)
 		this.dev = new devCalls.LiquidityProxySwapTransferCall(ctx, call)
 	}
 
@@ -6612,6 +8165,18 @@ export class LiquidityProxySwapTransferCall {
 	}
 	get asV42Stage(): stageCalls.LiquidityProxySwapTransferCall['asV42'] {
 		return this.stage.asV42
+	}
+	get isV41Test(): testCalls.LiquidityProxySwapTransferCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.LiquidityProxySwapTransferCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.LiquidityProxySwapTransferCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.LiquidityProxySwapTransferCall['asV42'] {
+		return this.test.asV42
 	}
 	get isV60Dev(): devCalls.LiquidityProxySwapTransferCall['isV60'] {
 		return this.dev.isV60
@@ -6656,6 +8221,12 @@ export class LiquidityProxySwapTransferBatchCall {
 	get asV48Stage(): stageCalls.LiquidityProxySwapTransferBatchCall['asV48'] {
 		return this.stage.asV48
 	}
+	get isV62Stage(): stageCalls.LiquidityProxySwapTransferBatchCall['isV62'] {
+		return this.stage.isV62
+	}
+	get asV62Stage(): stageCalls.LiquidityProxySwapTransferBatchCall['asV62'] {
+		return this.stage.asV62
+	}
 	get isV60Dev(): devCalls.LiquidityProxySwapTransferBatchCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -6682,11 +8253,13 @@ export class MulticollateralBondingCurvePoolClaimIncentivesCall {
 export class MulticollateralBondingCurvePoolInitializePoolCall {
 	private readonly production: productionCalls.MulticollateralBondingCurvePoolInitializePoolCall
 	private readonly stage: stageCalls.MulticollateralBondingCurvePoolInitializePoolCall
+	private readonly test: testCalls.MulticollateralBondingCurvePoolInitializePoolCall
 	private readonly dev: devCalls.MulticollateralBondingCurvePoolInitializePoolCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.MulticollateralBondingCurvePoolInitializePoolCall(ctx, call)
 		this.stage = new stageCalls.MulticollateralBondingCurvePoolInitializePoolCall(ctx, call)
+		this.test = new testCalls.MulticollateralBondingCurvePoolInitializePoolCall(ctx, call)
 		this.dev = new devCalls.MulticollateralBondingCurvePoolInitializePoolCall(ctx, call)
 	}
 
@@ -6714,6 +8287,18 @@ export class MulticollateralBondingCurvePoolInitializePoolCall {
 	get asV42Stage(): stageCalls.MulticollateralBondingCurvePoolInitializePoolCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV41Test(): testCalls.MulticollateralBondingCurvePoolInitializePoolCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.MulticollateralBondingCurvePoolInitializePoolCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.MulticollateralBondingCurvePoolInitializePoolCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.MulticollateralBondingCurvePoolInitializePoolCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.MulticollateralBondingCurvePoolInitializePoolCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -6725,11 +8310,13 @@ export class MulticollateralBondingCurvePoolInitializePoolCall {
 export class MulticollateralBondingCurvePoolSetOptionalRewardMultiplierCall {
 	private readonly production: productionCalls.MulticollateralBondingCurvePoolSetOptionalRewardMultiplierCall
 	private readonly stage: stageCalls.MulticollateralBondingCurvePoolSetOptionalRewardMultiplierCall
+	private readonly test: testCalls.MulticollateralBondingCurvePoolSetOptionalRewardMultiplierCall
 	private readonly dev: devCalls.MulticollateralBondingCurvePoolSetOptionalRewardMultiplierCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.MulticollateralBondingCurvePoolSetOptionalRewardMultiplierCall(ctx, call)
 		this.stage = new stageCalls.MulticollateralBondingCurvePoolSetOptionalRewardMultiplierCall(ctx, call)
+		this.test = new testCalls.MulticollateralBondingCurvePoolSetOptionalRewardMultiplierCall(ctx, call)
 		this.dev = new devCalls.MulticollateralBondingCurvePoolSetOptionalRewardMultiplierCall(ctx, call)
 	}
 
@@ -6757,6 +8344,18 @@ export class MulticollateralBondingCurvePoolSetOptionalRewardMultiplierCall {
 	get asV42Stage(): stageCalls.MulticollateralBondingCurvePoolSetOptionalRewardMultiplierCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV41Test(): testCalls.MulticollateralBondingCurvePoolSetOptionalRewardMultiplierCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.MulticollateralBondingCurvePoolSetOptionalRewardMultiplierCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.MulticollateralBondingCurvePoolSetOptionalRewardMultiplierCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.MulticollateralBondingCurvePoolSetOptionalRewardMultiplierCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.MulticollateralBondingCurvePoolSetOptionalRewardMultiplierCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -6768,11 +8367,13 @@ export class MulticollateralBondingCurvePoolSetOptionalRewardMultiplierCall {
 export class MulticollateralBondingCurvePoolSetPriceBiasCall {
 	private readonly production: productionCalls.MulticollateralBondingCurvePoolSetPriceBiasCall
 	private readonly stage: stageCalls.MulticollateralBondingCurvePoolSetPriceBiasCall
+	private readonly test: testCalls.MulticollateralBondingCurvePoolSetPriceBiasCall
 	private readonly dev: devCalls.MulticollateralBondingCurvePoolSetPriceBiasCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.MulticollateralBondingCurvePoolSetPriceBiasCall(ctx, call)
 		this.stage = new stageCalls.MulticollateralBondingCurvePoolSetPriceBiasCall(ctx, call)
+		this.test = new testCalls.MulticollateralBondingCurvePoolSetPriceBiasCall(ctx, call)
 		this.dev = new devCalls.MulticollateralBondingCurvePoolSetPriceBiasCall(ctx, call)
 	}
 
@@ -6788,6 +8389,12 @@ export class MulticollateralBondingCurvePoolSetPriceBiasCall {
 	get asV33Stage(): stageCalls.MulticollateralBondingCurvePoolSetPriceBiasCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.MulticollateralBondingCurvePoolSetPriceBiasCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.MulticollateralBondingCurvePoolSetPriceBiasCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.MulticollateralBondingCurvePoolSetPriceBiasCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -6799,11 +8406,13 @@ export class MulticollateralBondingCurvePoolSetPriceBiasCall {
 export class MulticollateralBondingCurvePoolSetPriceChangeConfigCall {
 	private readonly production: productionCalls.MulticollateralBondingCurvePoolSetPriceChangeConfigCall
 	private readonly stage: stageCalls.MulticollateralBondingCurvePoolSetPriceChangeConfigCall
+	private readonly test: testCalls.MulticollateralBondingCurvePoolSetPriceChangeConfigCall
 	private readonly dev: devCalls.MulticollateralBondingCurvePoolSetPriceChangeConfigCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.MulticollateralBondingCurvePoolSetPriceChangeConfigCall(ctx, call)
 		this.stage = new stageCalls.MulticollateralBondingCurvePoolSetPriceChangeConfigCall(ctx, call)
+		this.test = new testCalls.MulticollateralBondingCurvePoolSetPriceChangeConfigCall(ctx, call)
 		this.dev = new devCalls.MulticollateralBondingCurvePoolSetPriceChangeConfigCall(ctx, call)
 	}
 
@@ -6819,6 +8428,12 @@ export class MulticollateralBondingCurvePoolSetPriceChangeConfigCall {
 	get asV33Stage(): stageCalls.MulticollateralBondingCurvePoolSetPriceChangeConfigCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.MulticollateralBondingCurvePoolSetPriceChangeConfigCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.MulticollateralBondingCurvePoolSetPriceChangeConfigCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.MulticollateralBondingCurvePoolSetPriceChangeConfigCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -6830,11 +8445,13 @@ export class MulticollateralBondingCurvePoolSetPriceChangeConfigCall {
 export class MulticollateralBondingCurvePoolSetReferenceAssetCall {
 	private readonly production: productionCalls.MulticollateralBondingCurvePoolSetReferenceAssetCall
 	private readonly stage: stageCalls.MulticollateralBondingCurvePoolSetReferenceAssetCall
+	private readonly test: testCalls.MulticollateralBondingCurvePoolSetReferenceAssetCall
 	private readonly dev: devCalls.MulticollateralBondingCurvePoolSetReferenceAssetCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.MulticollateralBondingCurvePoolSetReferenceAssetCall(ctx, call)
 		this.stage = new stageCalls.MulticollateralBondingCurvePoolSetReferenceAssetCall(ctx, call)
+		this.test = new testCalls.MulticollateralBondingCurvePoolSetReferenceAssetCall(ctx, call)
 		this.dev = new devCalls.MulticollateralBondingCurvePoolSetReferenceAssetCall(ctx, call)
 	}
 
@@ -6862,6 +8479,18 @@ export class MulticollateralBondingCurvePoolSetReferenceAssetCall {
 	get asV42Stage(): stageCalls.MulticollateralBondingCurvePoolSetReferenceAssetCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV41Test(): testCalls.MulticollateralBondingCurvePoolSetReferenceAssetCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.MulticollateralBondingCurvePoolSetReferenceAssetCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.MulticollateralBondingCurvePoolSetReferenceAssetCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.MulticollateralBondingCurvePoolSetReferenceAssetCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.MulticollateralBondingCurvePoolSetReferenceAssetCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -6873,11 +8502,13 @@ export class MulticollateralBondingCurvePoolSetReferenceAssetCall {
 export class MultisigApproveAsMultiCall {
 	private readonly production: productionCalls.MultisigApproveAsMultiCall
 	private readonly stage: stageCalls.MultisigApproveAsMultiCall
+	private readonly test: testCalls.MultisigApproveAsMultiCall
 	private readonly dev: devCalls.MultisigApproveAsMultiCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.MultisigApproveAsMultiCall(ctx, call)
 		this.stage = new stageCalls.MultisigApproveAsMultiCall(ctx, call)
+		this.test = new testCalls.MultisigApproveAsMultiCall(ctx, call)
 		this.dev = new devCalls.MultisigApproveAsMultiCall(ctx, call)
 	}
 
@@ -6905,6 +8536,12 @@ export class MultisigApproveAsMultiCall {
 	get asV52Stage(): stageCalls.MultisigApproveAsMultiCall['asV52'] {
 		return this.stage.asV52
 	}
+	get isV41Test(): testCalls.MultisigApproveAsMultiCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.MultisigApproveAsMultiCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.MultisigApproveAsMultiCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -6916,11 +8553,13 @@ export class MultisigApproveAsMultiCall {
 export class MultisigAsMultiCall {
 	private readonly production: productionCalls.MultisigAsMultiCall
 	private readonly stage: stageCalls.MultisigAsMultiCall
+	private readonly test: testCalls.MultisigAsMultiCall
 	private readonly dev: devCalls.MultisigAsMultiCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.MultisigAsMultiCall(ctx, call)
 		this.stage = new stageCalls.MultisigAsMultiCall(ctx, call)
+		this.test = new testCalls.MultisigAsMultiCall(ctx, call)
 		this.dev = new devCalls.MultisigAsMultiCall(ctx, call)
 	}
 
@@ -6996,6 +8635,18 @@ export class MultisigAsMultiCall {
 	get asV60Stage(): stageCalls.MultisigAsMultiCall['asV60'] {
 		return this.stage.asV60
 	}
+	get isV62Stage(): stageCalls.MultisigAsMultiCall['isV62'] {
+		return this.stage.isV62
+	}
+	get asV62Stage(): stageCalls.MultisigAsMultiCall['asV62'] {
+		return this.stage.asV62
+	}
+	get isV41Test(): testCalls.MultisigAsMultiCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.MultisigAsMultiCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.MultisigAsMultiCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -7007,11 +8658,13 @@ export class MultisigAsMultiCall {
 export class MultisigAsMultiThreshold1Call {
 	private readonly production: productionCalls.MultisigAsMultiThreshold1Call
 	private readonly stage: stageCalls.MultisigAsMultiThreshold1Call
+	private readonly test: testCalls.MultisigAsMultiThreshold1Call
 	private readonly dev: devCalls.MultisigAsMultiThreshold1Call
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.MultisigAsMultiThreshold1Call(ctx, call)
 		this.stage = new stageCalls.MultisigAsMultiThreshold1Call(ctx, call)
+		this.test = new testCalls.MultisigAsMultiThreshold1Call(ctx, call)
 		this.dev = new devCalls.MultisigAsMultiThreshold1Call(ctx, call)
 	}
 
@@ -7249,6 +8902,30 @@ export class MultisigAsMultiThreshold1Call {
 	get asV60Stage(): stageCalls.MultisigAsMultiThreshold1Call['asV60'] {
 		return this.stage.asV60
 	}
+	get isV62Stage(): stageCalls.MultisigAsMultiThreshold1Call['isV62'] {
+		return this.stage.isV62
+	}
+	get asV62Stage(): stageCalls.MultisigAsMultiThreshold1Call['asV62'] {
+		return this.stage.asV62
+	}
+	get isV41Test(): testCalls.MultisigAsMultiThreshold1Call['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.MultisigAsMultiThreshold1Call['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.MultisigAsMultiThreshold1Call['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.MultisigAsMultiThreshold1Call['asV42'] {
+		return this.test.asV42
+	}
+	get isV43Test(): testCalls.MultisigAsMultiThreshold1Call['isV43'] {
+		return this.test.isV43
+	}
+	get asV43Test(): testCalls.MultisigAsMultiThreshold1Call['asV43'] {
+		return this.test.asV43
+	}
 	get isV60Dev(): devCalls.MultisigAsMultiThreshold1Call['isV60'] {
 		return this.dev.isV60
 	}
@@ -7260,11 +8937,13 @@ export class MultisigAsMultiThreshold1Call {
 export class MultisigCancelAsMultiCall {
 	private readonly production: productionCalls.MultisigCancelAsMultiCall
 	private readonly stage: stageCalls.MultisigCancelAsMultiCall
+	private readonly test: testCalls.MultisigCancelAsMultiCall
 	private readonly dev: devCalls.MultisigCancelAsMultiCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.MultisigCancelAsMultiCall(ctx, call)
 		this.stage = new stageCalls.MultisigCancelAsMultiCall(ctx, call)
+		this.test = new testCalls.MultisigCancelAsMultiCall(ctx, call)
 		this.dev = new devCalls.MultisigCancelAsMultiCall(ctx, call)
 	}
 
@@ -7279,6 +8958,12 @@ export class MultisigCancelAsMultiCall {
 	}
 	get asV33Stage(): stageCalls.MultisigCancelAsMultiCall['asV33'] {
 		return this.stage.asV33
+	}
+	get isV41Test(): testCalls.MultisigCancelAsMultiCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.MultisigCancelAsMultiCall['asV41'] {
+		return this.test.asV41
 	}
 	get isV60Dev(): devCalls.MultisigCancelAsMultiCall['isV60'] {
 		return this.dev.isV60
@@ -7353,11 +9038,13 @@ export class OracleProxyEnableOracleCall {
 export class PoolXykDepositLiquidityCall {
 	private readonly production: productionCalls.PoolXykDepositLiquidityCall
 	private readonly stage: stageCalls.PoolXykDepositLiquidityCall
+	private readonly test: testCalls.PoolXykDepositLiquidityCall
 	private readonly dev: devCalls.PoolXykDepositLiquidityCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.PoolXykDepositLiquidityCall(ctx, call)
 		this.stage = new stageCalls.PoolXykDepositLiquidityCall(ctx, call)
+		this.test = new testCalls.PoolXykDepositLiquidityCall(ctx, call)
 		this.dev = new devCalls.PoolXykDepositLiquidityCall(ctx, call)
 	}
 
@@ -7385,6 +9072,18 @@ export class PoolXykDepositLiquidityCall {
 	get asV42Stage(): stageCalls.PoolXykDepositLiquidityCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV41Test(): testCalls.PoolXykDepositLiquidityCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.PoolXykDepositLiquidityCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.PoolXykDepositLiquidityCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.PoolXykDepositLiquidityCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.PoolXykDepositLiquidityCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -7396,11 +9095,13 @@ export class PoolXykDepositLiquidityCall {
 export class PoolXykInitializePoolCall {
 	private readonly production: productionCalls.PoolXykInitializePoolCall
 	private readonly stage: stageCalls.PoolXykInitializePoolCall
+	private readonly test: testCalls.PoolXykInitializePoolCall
 	private readonly dev: devCalls.PoolXykInitializePoolCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.PoolXykInitializePoolCall(ctx, call)
 		this.stage = new stageCalls.PoolXykInitializePoolCall(ctx, call)
+		this.test = new testCalls.PoolXykInitializePoolCall(ctx, call)
 		this.dev = new devCalls.PoolXykInitializePoolCall(ctx, call)
 	}
 
@@ -7428,6 +9129,18 @@ export class PoolXykInitializePoolCall {
 	get asV42Stage(): stageCalls.PoolXykInitializePoolCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV41Test(): testCalls.PoolXykInitializePoolCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.PoolXykInitializePoolCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.PoolXykInitializePoolCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.PoolXykInitializePoolCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.PoolXykInitializePoolCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -7454,11 +9167,13 @@ export class PoolXykSwapPairCall {
 export class PoolXykWithdrawLiquidityCall {
 	private readonly production: productionCalls.PoolXykWithdrawLiquidityCall
 	private readonly stage: stageCalls.PoolXykWithdrawLiquidityCall
+	private readonly test: testCalls.PoolXykWithdrawLiquidityCall
 	private readonly dev: devCalls.PoolXykWithdrawLiquidityCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.PoolXykWithdrawLiquidityCall(ctx, call)
 		this.stage = new stageCalls.PoolXykWithdrawLiquidityCall(ctx, call)
+		this.test = new testCalls.PoolXykWithdrawLiquidityCall(ctx, call)
 		this.dev = new devCalls.PoolXykWithdrawLiquidityCall(ctx, call)
 	}
 
@@ -7485,6 +9200,18 @@ export class PoolXykWithdrawLiquidityCall {
 	}
 	get asV42Stage(): stageCalls.PoolXykWithdrawLiquidityCall['asV42'] {
 		return this.stage.asV42
+	}
+	get isV41Test(): testCalls.PoolXykWithdrawLiquidityCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.PoolXykWithdrawLiquidityCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.PoolXykWithdrawLiquidityCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.PoolXykWithdrawLiquidityCall['asV42'] {
+		return this.test.asV42
 	}
 	get isV60Dev(): devCalls.PoolXykWithdrawLiquidityCall['isV60'] {
 		return this.dev.isV60
@@ -7621,11 +9348,13 @@ export class PreimageUnrequestPreimageCall {
 export class PswapDistributionClaimIncentiveCall {
 	private readonly production: productionCalls.PswapDistributionClaimIncentiveCall
 	private readonly stage: stageCalls.PswapDistributionClaimIncentiveCall
+	private readonly test: testCalls.PswapDistributionClaimIncentiveCall
 	private readonly dev: devCalls.PswapDistributionClaimIncentiveCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.PswapDistributionClaimIncentiveCall(ctx, call)
 		this.stage = new stageCalls.PswapDistributionClaimIncentiveCall(ctx, call)
+		this.test = new testCalls.PswapDistributionClaimIncentiveCall(ctx, call)
 		this.dev = new devCalls.PswapDistributionClaimIncentiveCall(ctx, call)
 	}
 
@@ -7641,6 +9370,12 @@ export class PswapDistributionClaimIncentiveCall {
 	get asV33Stage(): stageCalls.PswapDistributionClaimIncentiveCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.PswapDistributionClaimIncentiveCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.PswapDistributionClaimIncentiveCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.PswapDistributionClaimIncentiveCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -7652,11 +9387,13 @@ export class PswapDistributionClaimIncentiveCall {
 export class ReferralsReserveCall {
 	private readonly production: productionCalls.ReferralsReserveCall
 	private readonly stage: stageCalls.ReferralsReserveCall
+	private readonly test: testCalls.ReferralsReserveCall
 	private readonly dev: devCalls.ReferralsReserveCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.ReferralsReserveCall(ctx, call)
 		this.stage = new stageCalls.ReferralsReserveCall(ctx, call)
+		this.test = new testCalls.ReferralsReserveCall(ctx, call)
 		this.dev = new devCalls.ReferralsReserveCall(ctx, call)
 	}
 
@@ -7672,6 +9409,12 @@ export class ReferralsReserveCall {
 	get asV33Stage(): stageCalls.ReferralsReserveCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.ReferralsReserveCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.ReferralsReserveCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.ReferralsReserveCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -7683,11 +9426,13 @@ export class ReferralsReserveCall {
 export class ReferralsSetReferrerCall {
 	private readonly production: productionCalls.ReferralsSetReferrerCall
 	private readonly stage: stageCalls.ReferralsSetReferrerCall
+	private readonly test: testCalls.ReferralsSetReferrerCall
 	private readonly dev: devCalls.ReferralsSetReferrerCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.ReferralsSetReferrerCall(ctx, call)
 		this.stage = new stageCalls.ReferralsSetReferrerCall(ctx, call)
+		this.test = new testCalls.ReferralsSetReferrerCall(ctx, call)
 		this.dev = new devCalls.ReferralsSetReferrerCall(ctx, call)
 	}
 
@@ -7703,6 +9448,12 @@ export class ReferralsSetReferrerCall {
 	get asV33Stage(): stageCalls.ReferralsSetReferrerCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.ReferralsSetReferrerCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.ReferralsSetReferrerCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.ReferralsSetReferrerCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -7714,11 +9465,13 @@ export class ReferralsSetReferrerCall {
 export class ReferralsUnreserveCall {
 	private readonly production: productionCalls.ReferralsUnreserveCall
 	private readonly stage: stageCalls.ReferralsUnreserveCall
+	private readonly test: testCalls.ReferralsUnreserveCall
 	private readonly dev: devCalls.ReferralsUnreserveCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.ReferralsUnreserveCall(ctx, call)
 		this.stage = new stageCalls.ReferralsUnreserveCall(ctx, call)
+		this.test = new testCalls.ReferralsUnreserveCall(ctx, call)
 		this.dev = new devCalls.ReferralsUnreserveCall(ctx, call)
 	}
 
@@ -7734,6 +9487,12 @@ export class ReferralsUnreserveCall {
 	get asV33Stage(): stageCalls.ReferralsUnreserveCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.ReferralsUnreserveCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.ReferralsUnreserveCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.ReferralsUnreserveCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -7745,11 +9504,13 @@ export class ReferralsUnreserveCall {
 export class RewardsAddUmiNftReceiversCall {
 	private readonly production: productionCalls.RewardsAddUmiNftReceiversCall
 	private readonly stage: stageCalls.RewardsAddUmiNftReceiversCall
+	private readonly test: testCalls.RewardsAddUmiNftReceiversCall
 	private readonly dev: devCalls.RewardsAddUmiNftReceiversCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.RewardsAddUmiNftReceiversCall(ctx, call)
 		this.stage = new stageCalls.RewardsAddUmiNftReceiversCall(ctx, call)
+		this.test = new testCalls.RewardsAddUmiNftReceiversCall(ctx, call)
 		this.dev = new devCalls.RewardsAddUmiNftReceiversCall(ctx, call)
 	}
 
@@ -7765,6 +9526,12 @@ export class RewardsAddUmiNftReceiversCall {
 	get asV33Stage(): stageCalls.RewardsAddUmiNftReceiversCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.RewardsAddUmiNftReceiversCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.RewardsAddUmiNftReceiversCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.RewardsAddUmiNftReceiversCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -7776,11 +9543,13 @@ export class RewardsAddUmiNftReceiversCall {
 export class RewardsClaimCall {
 	private readonly production: productionCalls.RewardsClaimCall
 	private readonly stage: stageCalls.RewardsClaimCall
+	private readonly test: testCalls.RewardsClaimCall
 	private readonly dev: devCalls.RewardsClaimCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.RewardsClaimCall(ctx, call)
 		this.stage = new stageCalls.RewardsClaimCall(ctx, call)
+		this.test = new testCalls.RewardsClaimCall(ctx, call)
 		this.dev = new devCalls.RewardsClaimCall(ctx, call)
 	}
 
@@ -7796,6 +9565,12 @@ export class RewardsClaimCall {
 	get asV33Stage(): stageCalls.RewardsClaimCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.RewardsClaimCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.RewardsClaimCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.RewardsClaimCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -7807,10 +9582,12 @@ export class RewardsClaimCall {
 export class RewardsFinalizeStorageMigrationCall {
 	private readonly production: productionCalls.RewardsFinalizeStorageMigrationCall
 	private readonly stage: stageCalls.RewardsFinalizeStorageMigrationCall
+	private readonly test: testCalls.RewardsFinalizeStorageMigrationCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.RewardsFinalizeStorageMigrationCall(ctx, call)
 		this.stage = new stageCalls.RewardsFinalizeStorageMigrationCall(ctx, call)
+		this.test = new testCalls.RewardsFinalizeStorageMigrationCall(ctx, call)
 	}
 
 	get isV19(): productionCalls.RewardsFinalizeStorageMigrationCall['isV19'] {
@@ -7825,16 +9602,24 @@ export class RewardsFinalizeStorageMigrationCall {
 	get asV33Stage(): stageCalls.RewardsFinalizeStorageMigrationCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.RewardsFinalizeStorageMigrationCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.RewardsFinalizeStorageMigrationCall['asV41'] {
+		return this.test.asV41
+	}
 }
 
 export class SchedulerCancelCall {
 	private readonly production: productionCalls.SchedulerCancelCall
 	private readonly stage: stageCalls.SchedulerCancelCall
+	private readonly test: testCalls.SchedulerCancelCall
 	private readonly dev: devCalls.SchedulerCancelCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.SchedulerCancelCall(ctx, call)
 		this.stage = new stageCalls.SchedulerCancelCall(ctx, call)
+		this.test = new testCalls.SchedulerCancelCall(ctx, call)
 		this.dev = new devCalls.SchedulerCancelCall(ctx, call)
 	}
 
@@ -7850,6 +9635,12 @@ export class SchedulerCancelCall {
 	get asV33Stage(): stageCalls.SchedulerCancelCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.SchedulerCancelCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.SchedulerCancelCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.SchedulerCancelCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -7861,11 +9652,13 @@ export class SchedulerCancelCall {
 export class SchedulerCancelNamedCall {
 	private readonly production: productionCalls.SchedulerCancelNamedCall
 	private readonly stage: stageCalls.SchedulerCancelNamedCall
+	private readonly test: testCalls.SchedulerCancelNamedCall
 	private readonly dev: devCalls.SchedulerCancelNamedCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.SchedulerCancelNamedCall(ctx, call)
 		this.stage = new stageCalls.SchedulerCancelNamedCall(ctx, call)
+		this.test = new testCalls.SchedulerCancelNamedCall(ctx, call)
 		this.dev = new devCalls.SchedulerCancelNamedCall(ctx, call)
 	}
 
@@ -7893,6 +9686,12 @@ export class SchedulerCancelNamedCall {
 	get asV52Stage(): stageCalls.SchedulerCancelNamedCall['asV52'] {
 		return this.stage.asV52
 	}
+	get isV41Test(): testCalls.SchedulerCancelNamedCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.SchedulerCancelNamedCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.SchedulerCancelNamedCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -7904,11 +9703,13 @@ export class SchedulerCancelNamedCall {
 export class SchedulerScheduleCall {
 	private readonly production: productionCalls.SchedulerScheduleCall
 	private readonly stage: stageCalls.SchedulerScheduleCall
+	private readonly test: testCalls.SchedulerScheduleCall
 	private readonly dev: devCalls.SchedulerScheduleCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.SchedulerScheduleCall(ctx, call)
 		this.stage = new stageCalls.SchedulerScheduleCall(ctx, call)
+		this.test = new testCalls.SchedulerScheduleCall(ctx, call)
 		this.dev = new devCalls.SchedulerScheduleCall(ctx, call)
 	}
 
@@ -8146,6 +9947,30 @@ export class SchedulerScheduleCall {
 	get asV60Stage(): stageCalls.SchedulerScheduleCall['asV60'] {
 		return this.stage.asV60
 	}
+	get isV62Stage(): stageCalls.SchedulerScheduleCall['isV62'] {
+		return this.stage.isV62
+	}
+	get asV62Stage(): stageCalls.SchedulerScheduleCall['asV62'] {
+		return this.stage.asV62
+	}
+	get isV41Test(): testCalls.SchedulerScheduleCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.SchedulerScheduleCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.SchedulerScheduleCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.SchedulerScheduleCall['asV42'] {
+		return this.test.asV42
+	}
+	get isV43Test(): testCalls.SchedulerScheduleCall['isV43'] {
+		return this.test.isV43
+	}
+	get asV43Test(): testCalls.SchedulerScheduleCall['asV43'] {
+		return this.test.asV43
+	}
 	get isV60Dev(): devCalls.SchedulerScheduleCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -8157,11 +9982,13 @@ export class SchedulerScheduleCall {
 export class SchedulerScheduleAfterCall {
 	private readonly production: productionCalls.SchedulerScheduleAfterCall
 	private readonly stage: stageCalls.SchedulerScheduleAfterCall
+	private readonly test: testCalls.SchedulerScheduleAfterCall
 	private readonly dev: devCalls.SchedulerScheduleAfterCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.SchedulerScheduleAfterCall(ctx, call)
 		this.stage = new stageCalls.SchedulerScheduleAfterCall(ctx, call)
+		this.test = new testCalls.SchedulerScheduleAfterCall(ctx, call)
 		this.dev = new devCalls.SchedulerScheduleAfterCall(ctx, call)
 	}
 
@@ -8399,6 +10226,30 @@ export class SchedulerScheduleAfterCall {
 	get asV60Stage(): stageCalls.SchedulerScheduleAfterCall['asV60'] {
 		return this.stage.asV60
 	}
+	get isV62Stage(): stageCalls.SchedulerScheduleAfterCall['isV62'] {
+		return this.stage.isV62
+	}
+	get asV62Stage(): stageCalls.SchedulerScheduleAfterCall['asV62'] {
+		return this.stage.asV62
+	}
+	get isV41Test(): testCalls.SchedulerScheduleAfterCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.SchedulerScheduleAfterCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.SchedulerScheduleAfterCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.SchedulerScheduleAfterCall['asV42'] {
+		return this.test.asV42
+	}
+	get isV43Test(): testCalls.SchedulerScheduleAfterCall['isV43'] {
+		return this.test.isV43
+	}
+	get asV43Test(): testCalls.SchedulerScheduleAfterCall['asV43'] {
+		return this.test.asV43
+	}
 	get isV60Dev(): devCalls.SchedulerScheduleAfterCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -8410,11 +10261,13 @@ export class SchedulerScheduleAfterCall {
 export class SchedulerScheduleNamedCall {
 	private readonly production: productionCalls.SchedulerScheduleNamedCall
 	private readonly stage: stageCalls.SchedulerScheduleNamedCall
+	private readonly test: testCalls.SchedulerScheduleNamedCall
 	private readonly dev: devCalls.SchedulerScheduleNamedCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.SchedulerScheduleNamedCall(ctx, call)
 		this.stage = new stageCalls.SchedulerScheduleNamedCall(ctx, call)
+		this.test = new testCalls.SchedulerScheduleNamedCall(ctx, call)
 		this.dev = new devCalls.SchedulerScheduleNamedCall(ctx, call)
 	}
 
@@ -8652,6 +10505,30 @@ export class SchedulerScheduleNamedCall {
 	get asV60Stage(): stageCalls.SchedulerScheduleNamedCall['asV60'] {
 		return this.stage.asV60
 	}
+	get isV62Stage(): stageCalls.SchedulerScheduleNamedCall['isV62'] {
+		return this.stage.isV62
+	}
+	get asV62Stage(): stageCalls.SchedulerScheduleNamedCall['asV62'] {
+		return this.stage.asV62
+	}
+	get isV41Test(): testCalls.SchedulerScheduleNamedCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.SchedulerScheduleNamedCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.SchedulerScheduleNamedCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.SchedulerScheduleNamedCall['asV42'] {
+		return this.test.asV42
+	}
+	get isV43Test(): testCalls.SchedulerScheduleNamedCall['isV43'] {
+		return this.test.isV43
+	}
+	get asV43Test(): testCalls.SchedulerScheduleNamedCall['asV43'] {
+		return this.test.asV43
+	}
 	get isV60Dev(): devCalls.SchedulerScheduleNamedCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -8663,11 +10540,13 @@ export class SchedulerScheduleNamedCall {
 export class SchedulerScheduleNamedAfterCall {
 	private readonly production: productionCalls.SchedulerScheduleNamedAfterCall
 	private readonly stage: stageCalls.SchedulerScheduleNamedAfterCall
+	private readonly test: testCalls.SchedulerScheduleNamedAfterCall
 	private readonly dev: devCalls.SchedulerScheduleNamedAfterCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.SchedulerScheduleNamedAfterCall(ctx, call)
 		this.stage = new stageCalls.SchedulerScheduleNamedAfterCall(ctx, call)
+		this.test = new testCalls.SchedulerScheduleNamedAfterCall(ctx, call)
 		this.dev = new devCalls.SchedulerScheduleNamedAfterCall(ctx, call)
 	}
 
@@ -8905,6 +10784,30 @@ export class SchedulerScheduleNamedAfterCall {
 	get asV60Stage(): stageCalls.SchedulerScheduleNamedAfterCall['asV60'] {
 		return this.stage.asV60
 	}
+	get isV62Stage(): stageCalls.SchedulerScheduleNamedAfterCall['isV62'] {
+		return this.stage.isV62
+	}
+	get asV62Stage(): stageCalls.SchedulerScheduleNamedAfterCall['asV62'] {
+		return this.stage.asV62
+	}
+	get isV41Test(): testCalls.SchedulerScheduleNamedAfterCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.SchedulerScheduleNamedAfterCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.SchedulerScheduleNamedAfterCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.SchedulerScheduleNamedAfterCall['asV42'] {
+		return this.test.asV42
+	}
+	get isV43Test(): testCalls.SchedulerScheduleNamedAfterCall['isV43'] {
+		return this.test.isV43
+	}
+	get asV43Test(): testCalls.SchedulerScheduleNamedAfterCall['asV43'] {
+		return this.test.asV43
+	}
 	get isV60Dev(): devCalls.SchedulerScheduleNamedAfterCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -8916,11 +10819,13 @@ export class SchedulerScheduleNamedAfterCall {
 export class SessionPurgeKeysCall {
 	private readonly production: productionCalls.SessionPurgeKeysCall
 	private readonly stage: stageCalls.SessionPurgeKeysCall
+	private readonly test: testCalls.SessionPurgeKeysCall
 	private readonly dev: devCalls.SessionPurgeKeysCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.SessionPurgeKeysCall(ctx, call)
 		this.stage = new stageCalls.SessionPurgeKeysCall(ctx, call)
+		this.test = new testCalls.SessionPurgeKeysCall(ctx, call)
 		this.dev = new devCalls.SessionPurgeKeysCall(ctx, call)
 	}
 
@@ -8936,6 +10841,12 @@ export class SessionPurgeKeysCall {
 	get asV33Stage(): stageCalls.SessionPurgeKeysCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.SessionPurgeKeysCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.SessionPurgeKeysCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.SessionPurgeKeysCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -8947,11 +10858,13 @@ export class SessionPurgeKeysCall {
 export class SessionSetKeysCall {
 	private readonly production: productionCalls.SessionSetKeysCall
 	private readonly stage: stageCalls.SessionSetKeysCall
+	private readonly test: testCalls.SessionSetKeysCall
 	private readonly dev: devCalls.SessionSetKeysCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.SessionSetKeysCall(ctx, call)
 		this.stage = new stageCalls.SessionSetKeysCall(ctx, call)
+		this.test = new testCalls.SessionSetKeysCall(ctx, call)
 		this.dev = new devCalls.SessionSetKeysCall(ctx, call)
 	}
 
@@ -8979,6 +10892,18 @@ export class SessionSetKeysCall {
 	get asV42Stage(): stageCalls.SessionSetKeysCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV41Test(): testCalls.SessionSetKeysCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.SessionSetKeysCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.SessionSetKeysCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.SessionSetKeysCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.SessionSetKeysCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -8990,11 +10915,13 @@ export class SessionSetKeysCall {
 export class StakingBondCall {
 	private readonly production: productionCalls.StakingBondCall
 	private readonly stage: stageCalls.StakingBondCall
+	private readonly test: testCalls.StakingBondCall
 	private readonly dev: devCalls.StakingBondCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.StakingBondCall(ctx, call)
 		this.stage = new stageCalls.StakingBondCall(ctx, call)
+		this.test = new testCalls.StakingBondCall(ctx, call)
 		this.dev = new devCalls.StakingBondCall(ctx, call)
 	}
 
@@ -9010,6 +10937,12 @@ export class StakingBondCall {
 	get asV33Stage(): stageCalls.StakingBondCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.StakingBondCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.StakingBondCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.StakingBondCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -9021,11 +10954,13 @@ export class StakingBondCall {
 export class StakingBondExtraCall {
 	private readonly production: productionCalls.StakingBondExtraCall
 	private readonly stage: stageCalls.StakingBondExtraCall
+	private readonly test: testCalls.StakingBondExtraCall
 	private readonly dev: devCalls.StakingBondExtraCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.StakingBondExtraCall(ctx, call)
 		this.stage = new stageCalls.StakingBondExtraCall(ctx, call)
+		this.test = new testCalls.StakingBondExtraCall(ctx, call)
 		this.dev = new devCalls.StakingBondExtraCall(ctx, call)
 	}
 
@@ -9041,6 +10976,12 @@ export class StakingBondExtraCall {
 	get asV33Stage(): stageCalls.StakingBondExtraCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.StakingBondExtraCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.StakingBondExtraCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.StakingBondExtraCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -9052,11 +10993,13 @@ export class StakingBondExtraCall {
 export class StakingCancelDeferredSlashCall {
 	private readonly production: productionCalls.StakingCancelDeferredSlashCall
 	private readonly stage: stageCalls.StakingCancelDeferredSlashCall
+	private readonly test: testCalls.StakingCancelDeferredSlashCall
 	private readonly dev: devCalls.StakingCancelDeferredSlashCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.StakingCancelDeferredSlashCall(ctx, call)
 		this.stage = new stageCalls.StakingCancelDeferredSlashCall(ctx, call)
+		this.test = new testCalls.StakingCancelDeferredSlashCall(ctx, call)
 		this.dev = new devCalls.StakingCancelDeferredSlashCall(ctx, call)
 	}
 
@@ -9072,6 +11015,12 @@ export class StakingCancelDeferredSlashCall {
 	get asV33Stage(): stageCalls.StakingCancelDeferredSlashCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.StakingCancelDeferredSlashCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.StakingCancelDeferredSlashCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.StakingCancelDeferredSlashCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -9083,11 +11032,13 @@ export class StakingCancelDeferredSlashCall {
 export class StakingChillCall {
 	private readonly production: productionCalls.StakingChillCall
 	private readonly stage: stageCalls.StakingChillCall
+	private readonly test: testCalls.StakingChillCall
 	private readonly dev: devCalls.StakingChillCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.StakingChillCall(ctx, call)
 		this.stage = new stageCalls.StakingChillCall(ctx, call)
+		this.test = new testCalls.StakingChillCall(ctx, call)
 		this.dev = new devCalls.StakingChillCall(ctx, call)
 	}
 
@@ -9103,6 +11054,12 @@ export class StakingChillCall {
 	get asV33Stage(): stageCalls.StakingChillCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.StakingChillCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.StakingChillCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.StakingChillCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -9114,11 +11071,13 @@ export class StakingChillCall {
 export class StakingChillOtherCall {
 	private readonly production: productionCalls.StakingChillOtherCall
 	private readonly stage: stageCalls.StakingChillOtherCall
+	private readonly test: testCalls.StakingChillOtherCall
 	private readonly dev: devCalls.StakingChillOtherCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.StakingChillOtherCall(ctx, call)
 		this.stage = new stageCalls.StakingChillOtherCall(ctx, call)
+		this.test = new testCalls.StakingChillOtherCall(ctx, call)
 		this.dev = new devCalls.StakingChillOtherCall(ctx, call)
 	}
 
@@ -9134,6 +11093,12 @@ export class StakingChillOtherCall {
 	get asV42Stage(): stageCalls.StakingChillOtherCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV42Test(): testCalls.StakingChillOtherCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.StakingChillOtherCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.StakingChillOtherCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -9145,11 +11110,13 @@ export class StakingChillOtherCall {
 export class StakingForceApplyMinCommissionCall {
 	private readonly production: productionCalls.StakingForceApplyMinCommissionCall
 	private readonly stage: stageCalls.StakingForceApplyMinCommissionCall
+	private readonly test: testCalls.StakingForceApplyMinCommissionCall
 	private readonly dev: devCalls.StakingForceApplyMinCommissionCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.StakingForceApplyMinCommissionCall(ctx, call)
 		this.stage = new stageCalls.StakingForceApplyMinCommissionCall(ctx, call)
+		this.test = new testCalls.StakingForceApplyMinCommissionCall(ctx, call)
 		this.dev = new devCalls.StakingForceApplyMinCommissionCall(ctx, call)
 	}
 
@@ -9165,6 +11132,12 @@ export class StakingForceApplyMinCommissionCall {
 	get asV42Stage(): stageCalls.StakingForceApplyMinCommissionCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV42Test(): testCalls.StakingForceApplyMinCommissionCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.StakingForceApplyMinCommissionCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.StakingForceApplyMinCommissionCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -9176,11 +11149,13 @@ export class StakingForceApplyMinCommissionCall {
 export class StakingForceNewEraCall {
 	private readonly production: productionCalls.StakingForceNewEraCall
 	private readonly stage: stageCalls.StakingForceNewEraCall
+	private readonly test: testCalls.StakingForceNewEraCall
 	private readonly dev: devCalls.StakingForceNewEraCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.StakingForceNewEraCall(ctx, call)
 		this.stage = new stageCalls.StakingForceNewEraCall(ctx, call)
+		this.test = new testCalls.StakingForceNewEraCall(ctx, call)
 		this.dev = new devCalls.StakingForceNewEraCall(ctx, call)
 	}
 
@@ -9196,6 +11171,12 @@ export class StakingForceNewEraCall {
 	get asV33Stage(): stageCalls.StakingForceNewEraCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.StakingForceNewEraCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.StakingForceNewEraCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.StakingForceNewEraCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -9207,11 +11188,13 @@ export class StakingForceNewEraCall {
 export class StakingForceNewEraAlwaysCall {
 	private readonly production: productionCalls.StakingForceNewEraAlwaysCall
 	private readonly stage: stageCalls.StakingForceNewEraAlwaysCall
+	private readonly test: testCalls.StakingForceNewEraAlwaysCall
 	private readonly dev: devCalls.StakingForceNewEraAlwaysCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.StakingForceNewEraAlwaysCall(ctx, call)
 		this.stage = new stageCalls.StakingForceNewEraAlwaysCall(ctx, call)
+		this.test = new testCalls.StakingForceNewEraAlwaysCall(ctx, call)
 		this.dev = new devCalls.StakingForceNewEraAlwaysCall(ctx, call)
 	}
 
@@ -9227,6 +11210,12 @@ export class StakingForceNewEraAlwaysCall {
 	get asV33Stage(): stageCalls.StakingForceNewEraAlwaysCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.StakingForceNewEraAlwaysCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.StakingForceNewEraAlwaysCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.StakingForceNewEraAlwaysCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -9238,11 +11227,13 @@ export class StakingForceNewEraAlwaysCall {
 export class StakingForceNoErasCall {
 	private readonly production: productionCalls.StakingForceNoErasCall
 	private readonly stage: stageCalls.StakingForceNoErasCall
+	private readonly test: testCalls.StakingForceNoErasCall
 	private readonly dev: devCalls.StakingForceNoErasCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.StakingForceNoErasCall(ctx, call)
 		this.stage = new stageCalls.StakingForceNoErasCall(ctx, call)
+		this.test = new testCalls.StakingForceNoErasCall(ctx, call)
 		this.dev = new devCalls.StakingForceNoErasCall(ctx, call)
 	}
 
@@ -9258,6 +11249,12 @@ export class StakingForceNoErasCall {
 	get asV33Stage(): stageCalls.StakingForceNoErasCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.StakingForceNoErasCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.StakingForceNoErasCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.StakingForceNoErasCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -9269,11 +11266,13 @@ export class StakingForceNoErasCall {
 export class StakingForceUnstakeCall {
 	private readonly production: productionCalls.StakingForceUnstakeCall
 	private readonly stage: stageCalls.StakingForceUnstakeCall
+	private readonly test: testCalls.StakingForceUnstakeCall
 	private readonly dev: devCalls.StakingForceUnstakeCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.StakingForceUnstakeCall(ctx, call)
 		this.stage = new stageCalls.StakingForceUnstakeCall(ctx, call)
+		this.test = new testCalls.StakingForceUnstakeCall(ctx, call)
 		this.dev = new devCalls.StakingForceUnstakeCall(ctx, call)
 	}
 
@@ -9289,6 +11288,12 @@ export class StakingForceUnstakeCall {
 	get asV33Stage(): stageCalls.StakingForceUnstakeCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.StakingForceUnstakeCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.StakingForceUnstakeCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.StakingForceUnstakeCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -9300,11 +11305,13 @@ export class StakingForceUnstakeCall {
 export class StakingIncreaseValidatorCountCall {
 	private readonly production: productionCalls.StakingIncreaseValidatorCountCall
 	private readonly stage: stageCalls.StakingIncreaseValidatorCountCall
+	private readonly test: testCalls.StakingIncreaseValidatorCountCall
 	private readonly dev: devCalls.StakingIncreaseValidatorCountCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.StakingIncreaseValidatorCountCall(ctx, call)
 		this.stage = new stageCalls.StakingIncreaseValidatorCountCall(ctx, call)
+		this.test = new testCalls.StakingIncreaseValidatorCountCall(ctx, call)
 		this.dev = new devCalls.StakingIncreaseValidatorCountCall(ctx, call)
 	}
 
@@ -9320,6 +11327,12 @@ export class StakingIncreaseValidatorCountCall {
 	get asV33Stage(): stageCalls.StakingIncreaseValidatorCountCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.StakingIncreaseValidatorCountCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.StakingIncreaseValidatorCountCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.StakingIncreaseValidatorCountCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -9331,11 +11344,13 @@ export class StakingIncreaseValidatorCountCall {
 export class StakingKickCall {
 	private readonly production: productionCalls.StakingKickCall
 	private readonly stage: stageCalls.StakingKickCall
+	private readonly test: testCalls.StakingKickCall
 	private readonly dev: devCalls.StakingKickCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.StakingKickCall(ctx, call)
 		this.stage = new stageCalls.StakingKickCall(ctx, call)
+		this.test = new testCalls.StakingKickCall(ctx, call)
 		this.dev = new devCalls.StakingKickCall(ctx, call)
 	}
 
@@ -9351,6 +11366,12 @@ export class StakingKickCall {
 	get asV33Stage(): stageCalls.StakingKickCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.StakingKickCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.StakingKickCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.StakingKickCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -9362,11 +11383,13 @@ export class StakingKickCall {
 export class StakingNominateCall {
 	private readonly production: productionCalls.StakingNominateCall
 	private readonly stage: stageCalls.StakingNominateCall
+	private readonly test: testCalls.StakingNominateCall
 	private readonly dev: devCalls.StakingNominateCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.StakingNominateCall(ctx, call)
 		this.stage = new stageCalls.StakingNominateCall(ctx, call)
+		this.test = new testCalls.StakingNominateCall(ctx, call)
 		this.dev = new devCalls.StakingNominateCall(ctx, call)
 	}
 
@@ -9382,6 +11405,12 @@ export class StakingNominateCall {
 	get asV33Stage(): stageCalls.StakingNominateCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.StakingNominateCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.StakingNominateCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.StakingNominateCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -9393,11 +11422,13 @@ export class StakingNominateCall {
 export class StakingPayoutStakersCall {
 	private readonly production: productionCalls.StakingPayoutStakersCall
 	private readonly stage: stageCalls.StakingPayoutStakersCall
+	private readonly test: testCalls.StakingPayoutStakersCall
 	private readonly dev: devCalls.StakingPayoutStakersCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.StakingPayoutStakersCall(ctx, call)
 		this.stage = new stageCalls.StakingPayoutStakersCall(ctx, call)
+		this.test = new testCalls.StakingPayoutStakersCall(ctx, call)
 		this.dev = new devCalls.StakingPayoutStakersCall(ctx, call)
 	}
 
@@ -9413,6 +11444,12 @@ export class StakingPayoutStakersCall {
 	get asV33Stage(): stageCalls.StakingPayoutStakersCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.StakingPayoutStakersCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.StakingPayoutStakersCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.StakingPayoutStakersCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -9424,11 +11461,13 @@ export class StakingPayoutStakersCall {
 export class StakingReapStashCall {
 	private readonly production: productionCalls.StakingReapStashCall
 	private readonly stage: stageCalls.StakingReapStashCall
+	private readonly test: testCalls.StakingReapStashCall
 	private readonly dev: devCalls.StakingReapStashCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.StakingReapStashCall(ctx, call)
 		this.stage = new stageCalls.StakingReapStashCall(ctx, call)
+		this.test = new testCalls.StakingReapStashCall(ctx, call)
 		this.dev = new devCalls.StakingReapStashCall(ctx, call)
 	}
 
@@ -9444,6 +11483,12 @@ export class StakingReapStashCall {
 	get asV33Stage(): stageCalls.StakingReapStashCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.StakingReapStashCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.StakingReapStashCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.StakingReapStashCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -9455,11 +11500,13 @@ export class StakingReapStashCall {
 export class StakingRebondCall {
 	private readonly production: productionCalls.StakingRebondCall
 	private readonly stage: stageCalls.StakingRebondCall
+	private readonly test: testCalls.StakingRebondCall
 	private readonly dev: devCalls.StakingRebondCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.StakingRebondCall(ctx, call)
 		this.stage = new stageCalls.StakingRebondCall(ctx, call)
+		this.test = new testCalls.StakingRebondCall(ctx, call)
 		this.dev = new devCalls.StakingRebondCall(ctx, call)
 	}
 
@@ -9475,6 +11522,12 @@ export class StakingRebondCall {
 	get asV33Stage(): stageCalls.StakingRebondCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.StakingRebondCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.StakingRebondCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.StakingRebondCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -9486,11 +11539,13 @@ export class StakingRebondCall {
 export class StakingScaleValidatorCountCall {
 	private readonly production: productionCalls.StakingScaleValidatorCountCall
 	private readonly stage: stageCalls.StakingScaleValidatorCountCall
+	private readonly test: testCalls.StakingScaleValidatorCountCall
 	private readonly dev: devCalls.StakingScaleValidatorCountCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.StakingScaleValidatorCountCall(ctx, call)
 		this.stage = new stageCalls.StakingScaleValidatorCountCall(ctx, call)
+		this.test = new testCalls.StakingScaleValidatorCountCall(ctx, call)
 		this.dev = new devCalls.StakingScaleValidatorCountCall(ctx, call)
 	}
 
@@ -9506,6 +11561,12 @@ export class StakingScaleValidatorCountCall {
 	get asV33Stage(): stageCalls.StakingScaleValidatorCountCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.StakingScaleValidatorCountCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.StakingScaleValidatorCountCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.StakingScaleValidatorCountCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -9517,11 +11578,13 @@ export class StakingScaleValidatorCountCall {
 export class StakingSetControllerCall {
 	private readonly production: productionCalls.StakingSetControllerCall
 	private readonly stage: stageCalls.StakingSetControllerCall
+	private readonly test: testCalls.StakingSetControllerCall
 	private readonly dev: devCalls.StakingSetControllerCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.StakingSetControllerCall(ctx, call)
 		this.stage = new stageCalls.StakingSetControllerCall(ctx, call)
+		this.test = new testCalls.StakingSetControllerCall(ctx, call)
 		this.dev = new devCalls.StakingSetControllerCall(ctx, call)
 	}
 
@@ -9537,6 +11600,12 @@ export class StakingSetControllerCall {
 	get asV33Stage(): stageCalls.StakingSetControllerCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.StakingSetControllerCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.StakingSetControllerCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.StakingSetControllerCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -9548,10 +11617,12 @@ export class StakingSetControllerCall {
 export class StakingSetHistoryDepthCall {
 	private readonly production: productionCalls.StakingSetHistoryDepthCall
 	private readonly stage: stageCalls.StakingSetHistoryDepthCall
+	private readonly test: testCalls.StakingSetHistoryDepthCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.StakingSetHistoryDepthCall(ctx, call)
 		this.stage = new stageCalls.StakingSetHistoryDepthCall(ctx, call)
+		this.test = new testCalls.StakingSetHistoryDepthCall(ctx, call)
 	}
 
 	get isV1(): productionCalls.StakingSetHistoryDepthCall['isV1'] {
@@ -9566,16 +11637,24 @@ export class StakingSetHistoryDepthCall {
 	get asV33Stage(): stageCalls.StakingSetHistoryDepthCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.StakingSetHistoryDepthCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.StakingSetHistoryDepthCall['asV41'] {
+		return this.test.asV41
+	}
 }
 
 export class StakingSetInvulnerablesCall {
 	private readonly production: productionCalls.StakingSetInvulnerablesCall
 	private readonly stage: stageCalls.StakingSetInvulnerablesCall
+	private readonly test: testCalls.StakingSetInvulnerablesCall
 	private readonly dev: devCalls.StakingSetInvulnerablesCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.StakingSetInvulnerablesCall(ctx, call)
 		this.stage = new stageCalls.StakingSetInvulnerablesCall(ctx, call)
+		this.test = new testCalls.StakingSetInvulnerablesCall(ctx, call)
 		this.dev = new devCalls.StakingSetInvulnerablesCall(ctx, call)
 	}
 
@@ -9590,6 +11669,12 @@ export class StakingSetInvulnerablesCall {
 	}
 	get asV33Stage(): stageCalls.StakingSetInvulnerablesCall['asV33'] {
 		return this.stage.asV33
+	}
+	get isV41Test(): testCalls.StakingSetInvulnerablesCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.StakingSetInvulnerablesCall['asV41'] {
+		return this.test.asV41
 	}
 	get isV60Dev(): devCalls.StakingSetInvulnerablesCall['isV60'] {
 		return this.dev.isV60
@@ -9633,11 +11718,13 @@ export class StakingSetMinCommissionCall {
 export class StakingSetPayeeCall {
 	private readonly production: productionCalls.StakingSetPayeeCall
 	private readonly stage: stageCalls.StakingSetPayeeCall
+	private readonly test: testCalls.StakingSetPayeeCall
 	private readonly dev: devCalls.StakingSetPayeeCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.StakingSetPayeeCall(ctx, call)
 		this.stage = new stageCalls.StakingSetPayeeCall(ctx, call)
+		this.test = new testCalls.StakingSetPayeeCall(ctx, call)
 		this.dev = new devCalls.StakingSetPayeeCall(ctx, call)
 	}
 
@@ -9653,6 +11740,12 @@ export class StakingSetPayeeCall {
 	get asV33Stage(): stageCalls.StakingSetPayeeCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.StakingSetPayeeCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.StakingSetPayeeCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.StakingSetPayeeCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -9664,11 +11757,13 @@ export class StakingSetPayeeCall {
 export class StakingSetStakingConfigsCall {
 	private readonly production: productionCalls.StakingSetStakingConfigsCall
 	private readonly stage: stageCalls.StakingSetStakingConfigsCall
+	private readonly test: testCalls.StakingSetStakingConfigsCall
 	private readonly dev: devCalls.StakingSetStakingConfigsCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.StakingSetStakingConfigsCall(ctx, call)
 		this.stage = new stageCalls.StakingSetStakingConfigsCall(ctx, call)
+		this.test = new testCalls.StakingSetStakingConfigsCall(ctx, call)
 		this.dev = new devCalls.StakingSetStakingConfigsCall(ctx, call)
 	}
 
@@ -9684,6 +11779,12 @@ export class StakingSetStakingConfigsCall {
 	get asV42Stage(): stageCalls.StakingSetStakingConfigsCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV42Test(): testCalls.StakingSetStakingConfigsCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.StakingSetStakingConfigsCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.StakingSetStakingConfigsCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -9695,11 +11796,13 @@ export class StakingSetStakingConfigsCall {
 export class StakingSetValidatorCountCall {
 	private readonly production: productionCalls.StakingSetValidatorCountCall
 	private readonly stage: stageCalls.StakingSetValidatorCountCall
+	private readonly test: testCalls.StakingSetValidatorCountCall
 	private readonly dev: devCalls.StakingSetValidatorCountCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.StakingSetValidatorCountCall(ctx, call)
 		this.stage = new stageCalls.StakingSetValidatorCountCall(ctx, call)
+		this.test = new testCalls.StakingSetValidatorCountCall(ctx, call)
 		this.dev = new devCalls.StakingSetValidatorCountCall(ctx, call)
 	}
 
@@ -9715,6 +11818,12 @@ export class StakingSetValidatorCountCall {
 	get asV33Stage(): stageCalls.StakingSetValidatorCountCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.StakingSetValidatorCountCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.StakingSetValidatorCountCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.StakingSetValidatorCountCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -9726,10 +11835,12 @@ export class StakingSetValidatorCountCall {
 export class StakingSubmitElectionSolutionCall {
 	private readonly production: productionCalls.StakingSubmitElectionSolutionCall
 	private readonly stage: stageCalls.StakingSubmitElectionSolutionCall
+	private readonly test: testCalls.StakingSubmitElectionSolutionCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.StakingSubmitElectionSolutionCall(ctx, call)
 		this.stage = new stageCalls.StakingSubmitElectionSolutionCall(ctx, call)
+		this.test = new testCalls.StakingSubmitElectionSolutionCall(ctx, call)
 	}
 
 	get isV1(): productionCalls.StakingSubmitElectionSolutionCall['isV1'] {
@@ -9744,15 +11855,23 @@ export class StakingSubmitElectionSolutionCall {
 	get asV33Stage(): stageCalls.StakingSubmitElectionSolutionCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.StakingSubmitElectionSolutionCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.StakingSubmitElectionSolutionCall['asV41'] {
+		return this.test.asV41
+	}
 }
 
 export class StakingSubmitElectionSolutionUnsignedCall {
 	private readonly production: productionCalls.StakingSubmitElectionSolutionUnsignedCall
 	private readonly stage: stageCalls.StakingSubmitElectionSolutionUnsignedCall
+	private readonly test: testCalls.StakingSubmitElectionSolutionUnsignedCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.StakingSubmitElectionSolutionUnsignedCall(ctx, call)
 		this.stage = new stageCalls.StakingSubmitElectionSolutionUnsignedCall(ctx, call)
+		this.test = new testCalls.StakingSubmitElectionSolutionUnsignedCall(ctx, call)
 	}
 
 	get isV1(): productionCalls.StakingSubmitElectionSolutionUnsignedCall['isV1'] {
@@ -9767,16 +11886,24 @@ export class StakingSubmitElectionSolutionUnsignedCall {
 	get asV33Stage(): stageCalls.StakingSubmitElectionSolutionUnsignedCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.StakingSubmitElectionSolutionUnsignedCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.StakingSubmitElectionSolutionUnsignedCall['asV41'] {
+		return this.test.asV41
+	}
 }
 
 export class StakingUnbondCall {
 	private readonly production: productionCalls.StakingUnbondCall
 	private readonly stage: stageCalls.StakingUnbondCall
+	private readonly test: testCalls.StakingUnbondCall
 	private readonly dev: devCalls.StakingUnbondCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.StakingUnbondCall(ctx, call)
 		this.stage = new stageCalls.StakingUnbondCall(ctx, call)
+		this.test = new testCalls.StakingUnbondCall(ctx, call)
 		this.dev = new devCalls.StakingUnbondCall(ctx, call)
 	}
 
@@ -9792,6 +11919,12 @@ export class StakingUnbondCall {
 	get asV33Stage(): stageCalls.StakingUnbondCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.StakingUnbondCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.StakingUnbondCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.StakingUnbondCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -9803,11 +11936,13 @@ export class StakingUnbondCall {
 export class StakingValidateCall {
 	private readonly production: productionCalls.StakingValidateCall
 	private readonly stage: stageCalls.StakingValidateCall
+	private readonly test: testCalls.StakingValidateCall
 	private readonly dev: devCalls.StakingValidateCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.StakingValidateCall(ctx, call)
 		this.stage = new stageCalls.StakingValidateCall(ctx, call)
+		this.test = new testCalls.StakingValidateCall(ctx, call)
 		this.dev = new devCalls.StakingValidateCall(ctx, call)
 	}
 
@@ -9823,6 +11958,12 @@ export class StakingValidateCall {
 	get asV33Stage(): stageCalls.StakingValidateCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.StakingValidateCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.StakingValidateCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.StakingValidateCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -9834,11 +11975,13 @@ export class StakingValidateCall {
 export class StakingWithdrawUnbondedCall {
 	private readonly production: productionCalls.StakingWithdrawUnbondedCall
 	private readonly stage: stageCalls.StakingWithdrawUnbondedCall
+	private readonly test: testCalls.StakingWithdrawUnbondedCall
 	private readonly dev: devCalls.StakingWithdrawUnbondedCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.StakingWithdrawUnbondedCall(ctx, call)
 		this.stage = new stageCalls.StakingWithdrawUnbondedCall(ctx, call)
+		this.test = new testCalls.StakingWithdrawUnbondedCall(ctx, call)
 		this.dev = new devCalls.StakingWithdrawUnbondedCall(ctx, call)
 	}
 
@@ -9854,6 +11997,12 @@ export class StakingWithdrawUnbondedCall {
 	get asV33Stage(): stageCalls.StakingWithdrawUnbondedCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.StakingWithdrawUnbondedCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.StakingWithdrawUnbondedCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.StakingWithdrawUnbondedCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -9865,11 +12014,13 @@ export class StakingWithdrawUnbondedCall {
 export class SudoSetKeyCall {
 	private readonly production: productionCalls.SudoSetKeyCall
 	private readonly stage: stageCalls.SudoSetKeyCall
+	private readonly test: testCalls.SudoSetKeyCall
 	private readonly dev: devCalls.SudoSetKeyCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.SudoSetKeyCall(ctx, call)
 		this.stage = new stageCalls.SudoSetKeyCall(ctx, call)
+		this.test = new testCalls.SudoSetKeyCall(ctx, call)
 		this.dev = new devCalls.SudoSetKeyCall(ctx, call)
 	}
 
@@ -9885,6 +12036,12 @@ export class SudoSetKeyCall {
 	get asV33Stage(): stageCalls.SudoSetKeyCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.SudoSetKeyCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.SudoSetKeyCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.SudoSetKeyCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -9896,11 +12053,13 @@ export class SudoSetKeyCall {
 export class SudoSudoCall {
 	private readonly production: productionCalls.SudoSudoCall
 	private readonly stage: stageCalls.SudoSudoCall
+	private readonly test: testCalls.SudoSudoCall
 	private readonly dev: devCalls.SudoSudoCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.SudoSudoCall(ctx, call)
 		this.stage = new stageCalls.SudoSudoCall(ctx, call)
+		this.test = new testCalls.SudoSudoCall(ctx, call)
 		this.dev = new devCalls.SudoSudoCall(ctx, call)
 	}
 
@@ -10012,6 +12171,30 @@ export class SudoSudoCall {
 	get asV60Stage(): stageCalls.SudoSudoCall['asV60'] {
 		return this.stage.asV60
 	}
+	get isV62Stage(): stageCalls.SudoSudoCall['isV62'] {
+		return this.stage.isV62
+	}
+	get asV62Stage(): stageCalls.SudoSudoCall['asV62'] {
+		return this.stage.asV62
+	}
+	get isV41Test(): testCalls.SudoSudoCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.SudoSudoCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.SudoSudoCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.SudoSudoCall['asV42'] {
+		return this.test.asV42
+	}
+	get isV43Test(): testCalls.SudoSudoCall['isV43'] {
+		return this.test.isV43
+	}
+	get asV43Test(): testCalls.SudoSudoCall['asV43'] {
+		return this.test.asV43
+	}
 	get isV60Dev(): devCalls.SudoSudoCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -10023,11 +12206,13 @@ export class SudoSudoCall {
 export class SudoSudoAsCall {
 	private readonly production: productionCalls.SudoSudoAsCall
 	private readonly stage: stageCalls.SudoSudoAsCall
+	private readonly test: testCalls.SudoSudoAsCall
 	private readonly dev: devCalls.SudoSudoAsCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.SudoSudoAsCall(ctx, call)
 		this.stage = new stageCalls.SudoSudoAsCall(ctx, call)
+		this.test = new testCalls.SudoSudoAsCall(ctx, call)
 		this.dev = new devCalls.SudoSudoAsCall(ctx, call)
 	}
 
@@ -10139,6 +12324,30 @@ export class SudoSudoAsCall {
 	get asV60Stage(): stageCalls.SudoSudoAsCall['asV60'] {
 		return this.stage.asV60
 	}
+	get isV62Stage(): stageCalls.SudoSudoAsCall['isV62'] {
+		return this.stage.isV62
+	}
+	get asV62Stage(): stageCalls.SudoSudoAsCall['asV62'] {
+		return this.stage.asV62
+	}
+	get isV41Test(): testCalls.SudoSudoAsCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.SudoSudoAsCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.SudoSudoAsCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.SudoSudoAsCall['asV42'] {
+		return this.test.asV42
+	}
+	get isV43Test(): testCalls.SudoSudoAsCall['isV43'] {
+		return this.test.isV43
+	}
+	get asV43Test(): testCalls.SudoSudoAsCall['asV43'] {
+		return this.test.asV43
+	}
 	get isV60Dev(): devCalls.SudoSudoAsCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -10150,11 +12359,13 @@ export class SudoSudoAsCall {
 export class SudoSudoUncheckedWeightCall {
 	private readonly production: productionCalls.SudoSudoUncheckedWeightCall
 	private readonly stage: stageCalls.SudoSudoUncheckedWeightCall
+	private readonly test: testCalls.SudoSudoUncheckedWeightCall
 	private readonly dev: devCalls.SudoSudoUncheckedWeightCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.SudoSudoUncheckedWeightCall(ctx, call)
 		this.stage = new stageCalls.SudoSudoUncheckedWeightCall(ctx, call)
+		this.test = new testCalls.SudoSudoUncheckedWeightCall(ctx, call)
 		this.dev = new devCalls.SudoSudoUncheckedWeightCall(ctx, call)
 	}
 
@@ -10266,6 +12477,30 @@ export class SudoSudoUncheckedWeightCall {
 	get asV60Stage(): stageCalls.SudoSudoUncheckedWeightCall['asV60'] {
 		return this.stage.asV60
 	}
+	get isV62Stage(): stageCalls.SudoSudoUncheckedWeightCall['isV62'] {
+		return this.stage.isV62
+	}
+	get asV62Stage(): stageCalls.SudoSudoUncheckedWeightCall['asV62'] {
+		return this.stage.asV62
+	}
+	get isV41Test(): testCalls.SudoSudoUncheckedWeightCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.SudoSudoUncheckedWeightCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.SudoSudoUncheckedWeightCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.SudoSudoUncheckedWeightCall['asV42'] {
+		return this.test.asV42
+	}
+	get isV43Test(): testCalls.SudoSudoUncheckedWeightCall['isV43'] {
+		return this.test.isV43
+	}
+	get asV43Test(): testCalls.SudoSudoUncheckedWeightCall['asV43'] {
+		return this.test.asV43
+	}
 	get isV60Dev(): devCalls.SudoSudoUncheckedWeightCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -10277,10 +12512,12 @@ export class SudoSudoUncheckedWeightCall {
 export class SystemFillBlockCall {
 	private readonly production: productionCalls.SystemFillBlockCall
 	private readonly stage: stageCalls.SystemFillBlockCall
+	private readonly test: testCalls.SystemFillBlockCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.SystemFillBlockCall(ctx, call)
 		this.stage = new stageCalls.SystemFillBlockCall(ctx, call)
+		this.test = new testCalls.SystemFillBlockCall(ctx, call)
 	}
 
 	get isV1(): productionCalls.SystemFillBlockCall['isV1'] {
@@ -10295,16 +12532,24 @@ export class SystemFillBlockCall {
 	get asV33Stage(): stageCalls.SystemFillBlockCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.SystemFillBlockCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.SystemFillBlockCall['asV41'] {
+		return this.test.asV41
+	}
 }
 
 export class SystemKillPrefixCall {
 	private readonly production: productionCalls.SystemKillPrefixCall
 	private readonly stage: stageCalls.SystemKillPrefixCall
+	private readonly test: testCalls.SystemKillPrefixCall
 	private readonly dev: devCalls.SystemKillPrefixCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.SystemKillPrefixCall(ctx, call)
 		this.stage = new stageCalls.SystemKillPrefixCall(ctx, call)
+		this.test = new testCalls.SystemKillPrefixCall(ctx, call)
 		this.dev = new devCalls.SystemKillPrefixCall(ctx, call)
 	}
 
@@ -10320,6 +12565,12 @@ export class SystemKillPrefixCall {
 	get asV33Stage(): stageCalls.SystemKillPrefixCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.SystemKillPrefixCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.SystemKillPrefixCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.SystemKillPrefixCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -10331,11 +12582,13 @@ export class SystemKillPrefixCall {
 export class SystemKillStorageCall {
 	private readonly production: productionCalls.SystemKillStorageCall
 	private readonly stage: stageCalls.SystemKillStorageCall
+	private readonly test: testCalls.SystemKillStorageCall
 	private readonly dev: devCalls.SystemKillStorageCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.SystemKillStorageCall(ctx, call)
 		this.stage = new stageCalls.SystemKillStorageCall(ctx, call)
+		this.test = new testCalls.SystemKillStorageCall(ctx, call)
 		this.dev = new devCalls.SystemKillStorageCall(ctx, call)
 	}
 
@@ -10351,6 +12604,12 @@ export class SystemKillStorageCall {
 	get asV33Stage(): stageCalls.SystemKillStorageCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.SystemKillStorageCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.SystemKillStorageCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.SystemKillStorageCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -10362,11 +12621,13 @@ export class SystemKillStorageCall {
 export class SystemRemarkCall {
 	private readonly production: productionCalls.SystemRemarkCall
 	private readonly stage: stageCalls.SystemRemarkCall
+	private readonly test: testCalls.SystemRemarkCall
 	private readonly dev: devCalls.SystemRemarkCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.SystemRemarkCall(ctx, call)
 		this.stage = new stageCalls.SystemRemarkCall(ctx, call)
+		this.test = new testCalls.SystemRemarkCall(ctx, call)
 		this.dev = new devCalls.SystemRemarkCall(ctx, call)
 	}
 
@@ -10382,6 +12643,12 @@ export class SystemRemarkCall {
 	get asV33Stage(): stageCalls.SystemRemarkCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.SystemRemarkCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.SystemRemarkCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.SystemRemarkCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -10393,11 +12660,13 @@ export class SystemRemarkCall {
 export class SystemRemarkWithEventCall {
 	private readonly production: productionCalls.SystemRemarkWithEventCall
 	private readonly stage: stageCalls.SystemRemarkWithEventCall
+	private readonly test: testCalls.SystemRemarkWithEventCall
 	private readonly dev: devCalls.SystemRemarkWithEventCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.SystemRemarkWithEventCall(ctx, call)
 		this.stage = new stageCalls.SystemRemarkWithEventCall(ctx, call)
+		this.test = new testCalls.SystemRemarkWithEventCall(ctx, call)
 		this.dev = new devCalls.SystemRemarkWithEventCall(ctx, call)
 	}
 
@@ -10413,6 +12682,12 @@ export class SystemRemarkWithEventCall {
 	get asV42Stage(): stageCalls.SystemRemarkWithEventCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV42Test(): testCalls.SystemRemarkWithEventCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.SystemRemarkWithEventCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.SystemRemarkWithEventCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -10424,10 +12699,12 @@ export class SystemRemarkWithEventCall {
 export class SystemSetChangesTrieConfigCall {
 	private readonly production: productionCalls.SystemSetChangesTrieConfigCall
 	private readonly stage: stageCalls.SystemSetChangesTrieConfigCall
+	private readonly test: testCalls.SystemSetChangesTrieConfigCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.SystemSetChangesTrieConfigCall(ctx, call)
 		this.stage = new stageCalls.SystemSetChangesTrieConfigCall(ctx, call)
+		this.test = new testCalls.SystemSetChangesTrieConfigCall(ctx, call)
 	}
 
 	get isV1(): productionCalls.SystemSetChangesTrieConfigCall['isV1'] {
@@ -10442,16 +12719,24 @@ export class SystemSetChangesTrieConfigCall {
 	get asV33Stage(): stageCalls.SystemSetChangesTrieConfigCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.SystemSetChangesTrieConfigCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.SystemSetChangesTrieConfigCall['asV41'] {
+		return this.test.asV41
+	}
 }
 
 export class SystemSetCodeCall {
 	private readonly production: productionCalls.SystemSetCodeCall
 	private readonly stage: stageCalls.SystemSetCodeCall
+	private readonly test: testCalls.SystemSetCodeCall
 	private readonly dev: devCalls.SystemSetCodeCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.SystemSetCodeCall(ctx, call)
 		this.stage = new stageCalls.SystemSetCodeCall(ctx, call)
+		this.test = new testCalls.SystemSetCodeCall(ctx, call)
 		this.dev = new devCalls.SystemSetCodeCall(ctx, call)
 	}
 
@@ -10467,6 +12752,12 @@ export class SystemSetCodeCall {
 	get asV33Stage(): stageCalls.SystemSetCodeCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.SystemSetCodeCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.SystemSetCodeCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.SystemSetCodeCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -10478,11 +12769,13 @@ export class SystemSetCodeCall {
 export class SystemSetCodeWithoutChecksCall {
 	private readonly production: productionCalls.SystemSetCodeWithoutChecksCall
 	private readonly stage: stageCalls.SystemSetCodeWithoutChecksCall
+	private readonly test: testCalls.SystemSetCodeWithoutChecksCall
 	private readonly dev: devCalls.SystemSetCodeWithoutChecksCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.SystemSetCodeWithoutChecksCall(ctx, call)
 		this.stage = new stageCalls.SystemSetCodeWithoutChecksCall(ctx, call)
+		this.test = new testCalls.SystemSetCodeWithoutChecksCall(ctx, call)
 		this.dev = new devCalls.SystemSetCodeWithoutChecksCall(ctx, call)
 	}
 
@@ -10498,6 +12791,12 @@ export class SystemSetCodeWithoutChecksCall {
 	get asV33Stage(): stageCalls.SystemSetCodeWithoutChecksCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.SystemSetCodeWithoutChecksCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.SystemSetCodeWithoutChecksCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.SystemSetCodeWithoutChecksCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -10509,11 +12808,13 @@ export class SystemSetCodeWithoutChecksCall {
 export class SystemSetHeapPagesCall {
 	private readonly production: productionCalls.SystemSetHeapPagesCall
 	private readonly stage: stageCalls.SystemSetHeapPagesCall
+	private readonly test: testCalls.SystemSetHeapPagesCall
 	private readonly dev: devCalls.SystemSetHeapPagesCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.SystemSetHeapPagesCall(ctx, call)
 		this.stage = new stageCalls.SystemSetHeapPagesCall(ctx, call)
+		this.test = new testCalls.SystemSetHeapPagesCall(ctx, call)
 		this.dev = new devCalls.SystemSetHeapPagesCall(ctx, call)
 	}
 
@@ -10529,6 +12830,12 @@ export class SystemSetHeapPagesCall {
 	get asV33Stage(): stageCalls.SystemSetHeapPagesCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.SystemSetHeapPagesCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.SystemSetHeapPagesCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.SystemSetHeapPagesCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -10540,11 +12847,13 @@ export class SystemSetHeapPagesCall {
 export class SystemSetStorageCall {
 	private readonly production: productionCalls.SystemSetStorageCall
 	private readonly stage: stageCalls.SystemSetStorageCall
+	private readonly test: testCalls.SystemSetStorageCall
 	private readonly dev: devCalls.SystemSetStorageCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.SystemSetStorageCall(ctx, call)
 		this.stage = new stageCalls.SystemSetStorageCall(ctx, call)
+		this.test = new testCalls.SystemSetStorageCall(ctx, call)
 		this.dev = new devCalls.SystemSetStorageCall(ctx, call)
 	}
 
@@ -10560,6 +12869,12 @@ export class SystemSetStorageCall {
 	get asV33Stage(): stageCalls.SystemSetStorageCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.SystemSetStorageCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.SystemSetStorageCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.SystemSetStorageCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -10571,11 +12886,13 @@ export class SystemSetStorageCall {
 export class TechnicalCommitteeCloseCall {
 	private readonly production: productionCalls.TechnicalCommitteeCloseCall
 	private readonly stage: stageCalls.TechnicalCommitteeCloseCall
+	private readonly test: testCalls.TechnicalCommitteeCloseCall
 	private readonly dev: devCalls.TechnicalCommitteeCloseCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.TechnicalCommitteeCloseCall(ctx, call)
 		this.stage = new stageCalls.TechnicalCommitteeCloseCall(ctx, call)
+		this.test = new testCalls.TechnicalCommitteeCloseCall(ctx, call)
 		this.dev = new devCalls.TechnicalCommitteeCloseCall(ctx, call)
 	}
 
@@ -10602,6 +12919,12 @@ export class TechnicalCommitteeCloseCall {
 	}
 	get asV52Stage(): stageCalls.TechnicalCommitteeCloseCall['asV52'] {
 		return this.stage.asV52
+	}
+	get isV41Test(): testCalls.TechnicalCommitteeCloseCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.TechnicalCommitteeCloseCall['asV41'] {
+		return this.test.asV41
 	}
 	get isV60Dev(): devCalls.TechnicalCommitteeCloseCall['isV60'] {
 		return this.dev.isV60
@@ -10645,11 +12968,13 @@ export class TechnicalCommitteeCloseOldWeightCall {
 export class TechnicalCommitteeDisapproveProposalCall {
 	private readonly production: productionCalls.TechnicalCommitteeDisapproveProposalCall
 	private readonly stage: stageCalls.TechnicalCommitteeDisapproveProposalCall
+	private readonly test: testCalls.TechnicalCommitteeDisapproveProposalCall
 	private readonly dev: devCalls.TechnicalCommitteeDisapproveProposalCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.TechnicalCommitteeDisapproveProposalCall(ctx, call)
 		this.stage = new stageCalls.TechnicalCommitteeDisapproveProposalCall(ctx, call)
+		this.test = new testCalls.TechnicalCommitteeDisapproveProposalCall(ctx, call)
 		this.dev = new devCalls.TechnicalCommitteeDisapproveProposalCall(ctx, call)
 	}
 
@@ -10665,6 +12990,12 @@ export class TechnicalCommitteeDisapproveProposalCall {
 	get asV33Stage(): stageCalls.TechnicalCommitteeDisapproveProposalCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.TechnicalCommitteeDisapproveProposalCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.TechnicalCommitteeDisapproveProposalCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.TechnicalCommitteeDisapproveProposalCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -10676,11 +13007,13 @@ export class TechnicalCommitteeDisapproveProposalCall {
 export class TechnicalCommitteeExecuteCall {
 	private readonly production: productionCalls.TechnicalCommitteeExecuteCall
 	private readonly stage: stageCalls.TechnicalCommitteeExecuteCall
+	private readonly test: testCalls.TechnicalCommitteeExecuteCall
 	private readonly dev: devCalls.TechnicalCommitteeExecuteCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.TechnicalCommitteeExecuteCall(ctx, call)
 		this.stage = new stageCalls.TechnicalCommitteeExecuteCall(ctx, call)
+		this.test = new testCalls.TechnicalCommitteeExecuteCall(ctx, call)
 		this.dev = new devCalls.TechnicalCommitteeExecuteCall(ctx, call)
 	}
 
@@ -10918,6 +13251,30 @@ export class TechnicalCommitteeExecuteCall {
 	get asV60Stage(): stageCalls.TechnicalCommitteeExecuteCall['asV60'] {
 		return this.stage.asV60
 	}
+	get isV62Stage(): stageCalls.TechnicalCommitteeExecuteCall['isV62'] {
+		return this.stage.isV62
+	}
+	get asV62Stage(): stageCalls.TechnicalCommitteeExecuteCall['asV62'] {
+		return this.stage.asV62
+	}
+	get isV41Test(): testCalls.TechnicalCommitteeExecuteCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.TechnicalCommitteeExecuteCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.TechnicalCommitteeExecuteCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.TechnicalCommitteeExecuteCall['asV42'] {
+		return this.test.asV42
+	}
+	get isV43Test(): testCalls.TechnicalCommitteeExecuteCall['isV43'] {
+		return this.test.isV43
+	}
+	get asV43Test(): testCalls.TechnicalCommitteeExecuteCall['asV43'] {
+		return this.test.asV43
+	}
 	get isV60Dev(): devCalls.TechnicalCommitteeExecuteCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -10929,11 +13286,13 @@ export class TechnicalCommitteeExecuteCall {
 export class TechnicalCommitteeProposeCall {
 	private readonly production: productionCalls.TechnicalCommitteeProposeCall
 	private readonly stage: stageCalls.TechnicalCommitteeProposeCall
+	private readonly test: testCalls.TechnicalCommitteeProposeCall
 	private readonly dev: devCalls.TechnicalCommitteeProposeCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.TechnicalCommitteeProposeCall(ctx, call)
 		this.stage = new stageCalls.TechnicalCommitteeProposeCall(ctx, call)
+		this.test = new testCalls.TechnicalCommitteeProposeCall(ctx, call)
 		this.dev = new devCalls.TechnicalCommitteeProposeCall(ctx, call)
 	}
 
@@ -11171,6 +13530,30 @@ export class TechnicalCommitteeProposeCall {
 	get asV60Stage(): stageCalls.TechnicalCommitteeProposeCall['asV60'] {
 		return this.stage.asV60
 	}
+	get isV62Stage(): stageCalls.TechnicalCommitteeProposeCall['isV62'] {
+		return this.stage.isV62
+	}
+	get asV62Stage(): stageCalls.TechnicalCommitteeProposeCall['asV62'] {
+		return this.stage.asV62
+	}
+	get isV41Test(): testCalls.TechnicalCommitteeProposeCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.TechnicalCommitteeProposeCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.TechnicalCommitteeProposeCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.TechnicalCommitteeProposeCall['asV42'] {
+		return this.test.asV42
+	}
+	get isV43Test(): testCalls.TechnicalCommitteeProposeCall['isV43'] {
+		return this.test.isV43
+	}
+	get asV43Test(): testCalls.TechnicalCommitteeProposeCall['asV43'] {
+		return this.test.asV43
+	}
 	get isV60Dev(): devCalls.TechnicalCommitteeProposeCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -11182,11 +13565,13 @@ export class TechnicalCommitteeProposeCall {
 export class TechnicalCommitteeSetMembersCall {
 	private readonly production: productionCalls.TechnicalCommitteeSetMembersCall
 	private readonly stage: stageCalls.TechnicalCommitteeSetMembersCall
+	private readonly test: testCalls.TechnicalCommitteeSetMembersCall
 	private readonly dev: devCalls.TechnicalCommitteeSetMembersCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.TechnicalCommitteeSetMembersCall(ctx, call)
 		this.stage = new stageCalls.TechnicalCommitteeSetMembersCall(ctx, call)
+		this.test = new testCalls.TechnicalCommitteeSetMembersCall(ctx, call)
 		this.dev = new devCalls.TechnicalCommitteeSetMembersCall(ctx, call)
 	}
 
@@ -11202,6 +13587,12 @@ export class TechnicalCommitteeSetMembersCall {
 	get asV33Stage(): stageCalls.TechnicalCommitteeSetMembersCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.TechnicalCommitteeSetMembersCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.TechnicalCommitteeSetMembersCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.TechnicalCommitteeSetMembersCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -11213,11 +13604,13 @@ export class TechnicalCommitteeSetMembersCall {
 export class TechnicalCommitteeVoteCall {
 	private readonly production: productionCalls.TechnicalCommitteeVoteCall
 	private readonly stage: stageCalls.TechnicalCommitteeVoteCall
+	private readonly test: testCalls.TechnicalCommitteeVoteCall
 	private readonly dev: devCalls.TechnicalCommitteeVoteCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.TechnicalCommitteeVoteCall(ctx, call)
 		this.stage = new stageCalls.TechnicalCommitteeVoteCall(ctx, call)
+		this.test = new testCalls.TechnicalCommitteeVoteCall(ctx, call)
 		this.dev = new devCalls.TechnicalCommitteeVoteCall(ctx, call)
 	}
 
@@ -11233,6 +13626,12 @@ export class TechnicalCommitteeVoteCall {
 	get asV33Stage(): stageCalls.TechnicalCommitteeVoteCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.TechnicalCommitteeVoteCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.TechnicalCommitteeVoteCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.TechnicalCommitteeVoteCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -11244,11 +13643,13 @@ export class TechnicalCommitteeVoteCall {
 export class TechnicalMembershipAddMemberCall {
 	private readonly production: productionCalls.TechnicalMembershipAddMemberCall
 	private readonly stage: stageCalls.TechnicalMembershipAddMemberCall
+	private readonly test: testCalls.TechnicalMembershipAddMemberCall
 	private readonly dev: devCalls.TechnicalMembershipAddMemberCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.TechnicalMembershipAddMemberCall(ctx, call)
 		this.stage = new stageCalls.TechnicalMembershipAddMemberCall(ctx, call)
+		this.test = new testCalls.TechnicalMembershipAddMemberCall(ctx, call)
 		this.dev = new devCalls.TechnicalMembershipAddMemberCall(ctx, call)
 	}
 
@@ -11264,6 +13665,12 @@ export class TechnicalMembershipAddMemberCall {
 	get asV33Stage(): stageCalls.TechnicalMembershipAddMemberCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.TechnicalMembershipAddMemberCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.TechnicalMembershipAddMemberCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.TechnicalMembershipAddMemberCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -11275,11 +13682,13 @@ export class TechnicalMembershipAddMemberCall {
 export class TechnicalMembershipChangeKeyCall {
 	private readonly production: productionCalls.TechnicalMembershipChangeKeyCall
 	private readonly stage: stageCalls.TechnicalMembershipChangeKeyCall
+	private readonly test: testCalls.TechnicalMembershipChangeKeyCall
 	private readonly dev: devCalls.TechnicalMembershipChangeKeyCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.TechnicalMembershipChangeKeyCall(ctx, call)
 		this.stage = new stageCalls.TechnicalMembershipChangeKeyCall(ctx, call)
+		this.test = new testCalls.TechnicalMembershipChangeKeyCall(ctx, call)
 		this.dev = new devCalls.TechnicalMembershipChangeKeyCall(ctx, call)
 	}
 
@@ -11295,6 +13704,12 @@ export class TechnicalMembershipChangeKeyCall {
 	get asV33Stage(): stageCalls.TechnicalMembershipChangeKeyCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.TechnicalMembershipChangeKeyCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.TechnicalMembershipChangeKeyCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.TechnicalMembershipChangeKeyCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -11306,11 +13721,13 @@ export class TechnicalMembershipChangeKeyCall {
 export class TechnicalMembershipClearPrimeCall {
 	private readonly production: productionCalls.TechnicalMembershipClearPrimeCall
 	private readonly stage: stageCalls.TechnicalMembershipClearPrimeCall
+	private readonly test: testCalls.TechnicalMembershipClearPrimeCall
 	private readonly dev: devCalls.TechnicalMembershipClearPrimeCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.TechnicalMembershipClearPrimeCall(ctx, call)
 		this.stage = new stageCalls.TechnicalMembershipClearPrimeCall(ctx, call)
+		this.test = new testCalls.TechnicalMembershipClearPrimeCall(ctx, call)
 		this.dev = new devCalls.TechnicalMembershipClearPrimeCall(ctx, call)
 	}
 
@@ -11326,6 +13743,12 @@ export class TechnicalMembershipClearPrimeCall {
 	get asV33Stage(): stageCalls.TechnicalMembershipClearPrimeCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.TechnicalMembershipClearPrimeCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.TechnicalMembershipClearPrimeCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.TechnicalMembershipClearPrimeCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -11337,11 +13760,13 @@ export class TechnicalMembershipClearPrimeCall {
 export class TechnicalMembershipRemoveMemberCall {
 	private readonly production: productionCalls.TechnicalMembershipRemoveMemberCall
 	private readonly stage: stageCalls.TechnicalMembershipRemoveMemberCall
+	private readonly test: testCalls.TechnicalMembershipRemoveMemberCall
 	private readonly dev: devCalls.TechnicalMembershipRemoveMemberCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.TechnicalMembershipRemoveMemberCall(ctx, call)
 		this.stage = new stageCalls.TechnicalMembershipRemoveMemberCall(ctx, call)
+		this.test = new testCalls.TechnicalMembershipRemoveMemberCall(ctx, call)
 		this.dev = new devCalls.TechnicalMembershipRemoveMemberCall(ctx, call)
 	}
 
@@ -11357,6 +13782,12 @@ export class TechnicalMembershipRemoveMemberCall {
 	get asV33Stage(): stageCalls.TechnicalMembershipRemoveMemberCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.TechnicalMembershipRemoveMemberCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.TechnicalMembershipRemoveMemberCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.TechnicalMembershipRemoveMemberCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -11368,11 +13799,13 @@ export class TechnicalMembershipRemoveMemberCall {
 export class TechnicalMembershipResetMembersCall {
 	private readonly production: productionCalls.TechnicalMembershipResetMembersCall
 	private readonly stage: stageCalls.TechnicalMembershipResetMembersCall
+	private readonly test: testCalls.TechnicalMembershipResetMembersCall
 	private readonly dev: devCalls.TechnicalMembershipResetMembersCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.TechnicalMembershipResetMembersCall(ctx, call)
 		this.stage = new stageCalls.TechnicalMembershipResetMembersCall(ctx, call)
+		this.test = new testCalls.TechnicalMembershipResetMembersCall(ctx, call)
 		this.dev = new devCalls.TechnicalMembershipResetMembersCall(ctx, call)
 	}
 
@@ -11388,6 +13821,12 @@ export class TechnicalMembershipResetMembersCall {
 	get asV33Stage(): stageCalls.TechnicalMembershipResetMembersCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.TechnicalMembershipResetMembersCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.TechnicalMembershipResetMembersCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.TechnicalMembershipResetMembersCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -11399,11 +13838,13 @@ export class TechnicalMembershipResetMembersCall {
 export class TechnicalMembershipSetPrimeCall {
 	private readonly production: productionCalls.TechnicalMembershipSetPrimeCall
 	private readonly stage: stageCalls.TechnicalMembershipSetPrimeCall
+	private readonly test: testCalls.TechnicalMembershipSetPrimeCall
 	private readonly dev: devCalls.TechnicalMembershipSetPrimeCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.TechnicalMembershipSetPrimeCall(ctx, call)
 		this.stage = new stageCalls.TechnicalMembershipSetPrimeCall(ctx, call)
+		this.test = new testCalls.TechnicalMembershipSetPrimeCall(ctx, call)
 		this.dev = new devCalls.TechnicalMembershipSetPrimeCall(ctx, call)
 	}
 
@@ -11419,6 +13860,12 @@ export class TechnicalMembershipSetPrimeCall {
 	get asV33Stage(): stageCalls.TechnicalMembershipSetPrimeCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.TechnicalMembershipSetPrimeCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.TechnicalMembershipSetPrimeCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.TechnicalMembershipSetPrimeCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -11430,11 +13877,13 @@ export class TechnicalMembershipSetPrimeCall {
 export class TechnicalMembershipSwapMemberCall {
 	private readonly production: productionCalls.TechnicalMembershipSwapMemberCall
 	private readonly stage: stageCalls.TechnicalMembershipSwapMemberCall
+	private readonly test: testCalls.TechnicalMembershipSwapMemberCall
 	private readonly dev: devCalls.TechnicalMembershipSwapMemberCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.TechnicalMembershipSwapMemberCall(ctx, call)
 		this.stage = new stageCalls.TechnicalMembershipSwapMemberCall(ctx, call)
+		this.test = new testCalls.TechnicalMembershipSwapMemberCall(ctx, call)
 		this.dev = new devCalls.TechnicalMembershipSwapMemberCall(ctx, call)
 	}
 
@@ -11450,6 +13899,12 @@ export class TechnicalMembershipSwapMemberCall {
 	get asV33Stage(): stageCalls.TechnicalMembershipSwapMemberCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.TechnicalMembershipSwapMemberCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.TechnicalMembershipSwapMemberCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.TechnicalMembershipSwapMemberCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -11461,11 +13916,13 @@ export class TechnicalMembershipSwapMemberCall {
 export class TimestampSetCall {
 	private readonly production: productionCalls.TimestampSetCall
 	private readonly stage: stageCalls.TimestampSetCall
+	private readonly test: testCalls.TimestampSetCall
 	private readonly dev: devCalls.TimestampSetCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.TimestampSetCall(ctx, call)
 		this.stage = new stageCalls.TimestampSetCall(ctx, call)
+		this.test = new testCalls.TimestampSetCall(ctx, call)
 		this.dev = new devCalls.TimestampSetCall(ctx, call)
 	}
 
@@ -11481,6 +13938,12 @@ export class TimestampSetCall {
 	get asV33Stage(): stageCalls.TimestampSetCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.TimestampSetCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.TimestampSetCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.TimestampSetCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -11492,11 +13955,13 @@ export class TimestampSetCall {
 export class TradingPairRegisterCall {
 	private readonly production: productionCalls.TradingPairRegisterCall
 	private readonly stage: stageCalls.TradingPairRegisterCall
+	private readonly test: testCalls.TradingPairRegisterCall
 	private readonly dev: devCalls.TradingPairRegisterCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.TradingPairRegisterCall(ctx, call)
 		this.stage = new stageCalls.TradingPairRegisterCall(ctx, call)
+		this.test = new testCalls.TradingPairRegisterCall(ctx, call)
 		this.dev = new devCalls.TradingPairRegisterCall(ctx, call)
 	}
 
@@ -11524,6 +13989,18 @@ export class TradingPairRegisterCall {
 	get asV42Stage(): stageCalls.TradingPairRegisterCall['asV42'] {
 		return this.stage.asV42
 	}
+	get isV41Test(): testCalls.TradingPairRegisterCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.TradingPairRegisterCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.TradingPairRegisterCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.TradingPairRegisterCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.TradingPairRegisterCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -11535,11 +14012,13 @@ export class TradingPairRegisterCall {
 export class UtilityAsDerivativeCall {
 	private readonly production: productionCalls.UtilityAsDerivativeCall
 	private readonly stage: stageCalls.UtilityAsDerivativeCall
+	private readonly test: testCalls.UtilityAsDerivativeCall
 	private readonly dev: devCalls.UtilityAsDerivativeCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.UtilityAsDerivativeCall(ctx, call)
 		this.stage = new stageCalls.UtilityAsDerivativeCall(ctx, call)
+		this.test = new testCalls.UtilityAsDerivativeCall(ctx, call)
 		this.dev = new devCalls.UtilityAsDerivativeCall(ctx, call)
 	}
 
@@ -11777,6 +14256,30 @@ export class UtilityAsDerivativeCall {
 	get asV60Stage(): stageCalls.UtilityAsDerivativeCall['asV60'] {
 		return this.stage.asV60
 	}
+	get isV62Stage(): stageCalls.UtilityAsDerivativeCall['isV62'] {
+		return this.stage.isV62
+	}
+	get asV62Stage(): stageCalls.UtilityAsDerivativeCall['asV62'] {
+		return this.stage.asV62
+	}
+	get isV41Test(): testCalls.UtilityAsDerivativeCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.UtilityAsDerivativeCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.UtilityAsDerivativeCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.UtilityAsDerivativeCall['asV42'] {
+		return this.test.asV42
+	}
+	get isV43Test(): testCalls.UtilityAsDerivativeCall['isV43'] {
+		return this.test.isV43
+	}
+	get asV43Test(): testCalls.UtilityAsDerivativeCall['asV43'] {
+		return this.test.asV43
+	}
 	get isV60Dev(): devCalls.UtilityAsDerivativeCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -11788,11 +14291,13 @@ export class UtilityAsDerivativeCall {
 export class UtilityBatchCall {
 	private readonly production: productionCalls.UtilityBatchCall
 	private readonly stage: stageCalls.UtilityBatchCall
+	private readonly test: testCalls.UtilityBatchCall
 	private readonly dev: devCalls.UtilityBatchCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.UtilityBatchCall(ctx, call)
 		this.stage = new stageCalls.UtilityBatchCall(ctx, call)
+		this.test = new testCalls.UtilityBatchCall(ctx, call)
 		this.dev = new devCalls.UtilityBatchCall(ctx, call)
 	}
 
@@ -12030,6 +14535,30 @@ export class UtilityBatchCall {
 	get asV60Stage(): stageCalls.UtilityBatchCall['asV60'] {
 		return this.stage.asV60
 	}
+	get isV62Stage(): stageCalls.UtilityBatchCall['isV62'] {
+		return this.stage.isV62
+	}
+	get asV62Stage(): stageCalls.UtilityBatchCall['asV62'] {
+		return this.stage.asV62
+	}
+	get isV41Test(): testCalls.UtilityBatchCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.UtilityBatchCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.UtilityBatchCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.UtilityBatchCall['asV42'] {
+		return this.test.asV42
+	}
+	get isV43Test(): testCalls.UtilityBatchCall['isV43'] {
+		return this.test.isV43
+	}
+	get asV43Test(): testCalls.UtilityBatchCall['asV43'] {
+		return this.test.asV43
+	}
 	get isV60Dev(): devCalls.UtilityBatchCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -12041,11 +14570,13 @@ export class UtilityBatchCall {
 export class UtilityBatchAllCall {
 	private readonly production: productionCalls.UtilityBatchAllCall
 	private readonly stage: stageCalls.UtilityBatchAllCall
+	private readonly test: testCalls.UtilityBatchAllCall
 	private readonly dev: devCalls.UtilityBatchAllCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.UtilityBatchAllCall(ctx, call)
 		this.stage = new stageCalls.UtilityBatchAllCall(ctx, call)
+		this.test = new testCalls.UtilityBatchAllCall(ctx, call)
 		this.dev = new devCalls.UtilityBatchAllCall(ctx, call)
 	}
 
@@ -12283,6 +14814,30 @@ export class UtilityBatchAllCall {
 	get asV60Stage(): stageCalls.UtilityBatchAllCall['asV60'] {
 		return this.stage.asV60
 	}
+	get isV62Stage(): stageCalls.UtilityBatchAllCall['isV62'] {
+		return this.stage.isV62
+	}
+	get asV62Stage(): stageCalls.UtilityBatchAllCall['asV62'] {
+		return this.stage.asV62
+	}
+	get isV41Test(): testCalls.UtilityBatchAllCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.UtilityBatchAllCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.UtilityBatchAllCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.UtilityBatchAllCall['asV42'] {
+		return this.test.asV42
+	}
+	get isV43Test(): testCalls.UtilityBatchAllCall['isV43'] {
+		return this.test.isV43
+	}
+	get asV43Test(): testCalls.UtilityBatchAllCall['asV43'] {
+		return this.test.asV43
+	}
 	get isV60Dev(): devCalls.UtilityBatchAllCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -12294,11 +14849,13 @@ export class UtilityBatchAllCall {
 export class UtilityDispatchAsCall {
 	private readonly production: productionCalls.UtilityDispatchAsCall
 	private readonly stage: stageCalls.UtilityDispatchAsCall
+	private readonly test: testCalls.UtilityDispatchAsCall
 	private readonly dev: devCalls.UtilityDispatchAsCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.UtilityDispatchAsCall(ctx, call)
 		this.stage = new stageCalls.UtilityDispatchAsCall(ctx, call)
+		this.test = new testCalls.UtilityDispatchAsCall(ctx, call)
 		this.dev = new devCalls.UtilityDispatchAsCall(ctx, call)
 	}
 
@@ -12440,6 +14997,24 @@ export class UtilityDispatchAsCall {
 	get asV60Stage(): stageCalls.UtilityDispatchAsCall['asV60'] {
 		return this.stage.asV60
 	}
+	get isV62Stage(): stageCalls.UtilityDispatchAsCall['isV62'] {
+		return this.stage.isV62
+	}
+	get asV62Stage(): stageCalls.UtilityDispatchAsCall['asV62'] {
+		return this.stage.asV62
+	}
+	get isV42Test(): testCalls.UtilityDispatchAsCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.UtilityDispatchAsCall['asV42'] {
+		return this.test.asV42
+	}
+	get isV43Test(): testCalls.UtilityDispatchAsCall['isV43'] {
+		return this.test.isV43
+	}
+	get asV43Test(): testCalls.UtilityDispatchAsCall['asV43'] {
+		return this.test.asV43
+	}
 	get isV60Dev(): devCalls.UtilityDispatchAsCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -12451,11 +15026,13 @@ export class UtilityDispatchAsCall {
 export class UtilityForceBatchCall {
 	private readonly production: productionCalls.UtilityForceBatchCall
 	private readonly stage: stageCalls.UtilityForceBatchCall
+	private readonly test: testCalls.UtilityForceBatchCall
 	private readonly dev: devCalls.UtilityForceBatchCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.UtilityForceBatchCall(ctx, call)
 		this.stage = new stageCalls.UtilityForceBatchCall(ctx, call)
+		this.test = new testCalls.UtilityForceBatchCall(ctx, call)
 		this.dev = new devCalls.UtilityForceBatchCall(ctx, call)
 	}
 
@@ -12597,6 +15174,24 @@ export class UtilityForceBatchCall {
 	get asV60Stage(): stageCalls.UtilityForceBatchCall['asV60'] {
 		return this.stage.asV60
 	}
+	get isV62Stage(): stageCalls.UtilityForceBatchCall['isV62'] {
+		return this.stage.isV62
+	}
+	get asV62Stage(): stageCalls.UtilityForceBatchCall['asV62'] {
+		return this.stage.asV62
+	}
+	get isV42Test(): testCalls.UtilityForceBatchCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.UtilityForceBatchCall['asV42'] {
+		return this.test.asV42
+	}
+	get isV43Test(): testCalls.UtilityForceBatchCall['isV43'] {
+		return this.test.isV43
+	}
+	get asV43Test(): testCalls.UtilityForceBatchCall['asV43'] {
+		return this.test.asV43
+	}
 	get isV60Dev(): devCalls.UtilityForceBatchCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -12676,6 +15271,12 @@ export class UtilityWithWeightCall {
 	get asV60Stage(): stageCalls.UtilityWithWeightCall['asV60'] {
 		return this.stage.asV60
 	}
+	get isV62Stage(): stageCalls.UtilityWithWeightCall['isV62'] {
+		return this.stage.isV62
+	}
+	get asV62Stage(): stageCalls.UtilityWithWeightCall['asV62'] {
+		return this.stage.asV62
+	}
 	get isV60Dev(): devCalls.UtilityWithWeightCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -12687,11 +15288,13 @@ export class UtilityWithWeightCall {
 export class VestedRewardsClaimCrowdloanRewardsCall {
 	private readonly production: productionCalls.VestedRewardsClaimCrowdloanRewardsCall
 	private readonly stage: stageCalls.VestedRewardsClaimCrowdloanRewardsCall
+	private readonly test: testCalls.VestedRewardsClaimCrowdloanRewardsCall
 	private readonly dev: devCalls.VestedRewardsClaimCrowdloanRewardsCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.VestedRewardsClaimCrowdloanRewardsCall(ctx, call)
 		this.stage = new stageCalls.VestedRewardsClaimCrowdloanRewardsCall(ctx, call)
+		this.test = new testCalls.VestedRewardsClaimCrowdloanRewardsCall(ctx, call)
 		this.dev = new devCalls.VestedRewardsClaimCrowdloanRewardsCall(ctx, call)
 	}
 
@@ -12731,6 +15334,18 @@ export class VestedRewardsClaimCrowdloanRewardsCall {
 	get asV52Stage(): stageCalls.VestedRewardsClaimCrowdloanRewardsCall['asV52'] {
 		return this.stage.asV52
 	}
+	get isV41Test(): testCalls.VestedRewardsClaimCrowdloanRewardsCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.VestedRewardsClaimCrowdloanRewardsCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.VestedRewardsClaimCrowdloanRewardsCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.VestedRewardsClaimCrowdloanRewardsCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.VestedRewardsClaimCrowdloanRewardsCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -12742,11 +15357,13 @@ export class VestedRewardsClaimCrowdloanRewardsCall {
 export class VestedRewardsClaimRewardsCall {
 	private readonly production: productionCalls.VestedRewardsClaimRewardsCall
 	private readonly stage: stageCalls.VestedRewardsClaimRewardsCall
+	private readonly test: testCalls.VestedRewardsClaimRewardsCall
 	private readonly dev: devCalls.VestedRewardsClaimRewardsCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.VestedRewardsClaimRewardsCall(ctx, call)
 		this.stage = new stageCalls.VestedRewardsClaimRewardsCall(ctx, call)
+		this.test = new testCalls.VestedRewardsClaimRewardsCall(ctx, call)
 		this.dev = new devCalls.VestedRewardsClaimRewardsCall(ctx, call)
 	}
 
@@ -12762,6 +15379,12 @@ export class VestedRewardsClaimRewardsCall {
 	get asV33Stage(): stageCalls.VestedRewardsClaimRewardsCall['asV33'] {
 		return this.stage.asV33
 	}
+	get isV41Test(): testCalls.VestedRewardsClaimRewardsCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.VestedRewardsClaimRewardsCall['asV41'] {
+		return this.test.asV41
+	}
 	get isV60Dev(): devCalls.VestedRewardsClaimRewardsCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -12773,10 +15396,12 @@ export class VestedRewardsClaimRewardsCall {
 export class VestedRewardsInjectMarketMakersCall {
 	private readonly production: productionCalls.VestedRewardsInjectMarketMakersCall
 	private readonly stage: stageCalls.VestedRewardsInjectMarketMakersCall
+	private readonly test: testCalls.VestedRewardsInjectMarketMakersCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.VestedRewardsInjectMarketMakersCall(ctx, call)
 		this.stage = new stageCalls.VestedRewardsInjectMarketMakersCall(ctx, call)
+		this.test = new testCalls.VestedRewardsInjectMarketMakersCall(ctx, call)
 	}
 
 	get isV7(): productionCalls.VestedRewardsInjectMarketMakersCall['isV7'] {
@@ -12790,6 +15415,12 @@ export class VestedRewardsInjectMarketMakersCall {
 	}
 	get asV33Stage(): stageCalls.VestedRewardsInjectMarketMakersCall['asV33'] {
 		return this.stage.asV33
+	}
+	get isV41Test(): testCalls.VestedRewardsInjectMarketMakersCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.VestedRewardsInjectMarketMakersCall['asV41'] {
+		return this.test.asV41
 	}
 }
 
@@ -12827,10 +15458,12 @@ export class VestedRewardsRegisterCrowdloanCall {
 export class VestedRewardsSetAssetPairCall {
 	private readonly production: productionCalls.VestedRewardsSetAssetPairCall
 	private readonly stage: stageCalls.VestedRewardsSetAssetPairCall
+	private readonly test: testCalls.VestedRewardsSetAssetPairCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.VestedRewardsSetAssetPairCall(ctx, call)
 		this.stage = new stageCalls.VestedRewardsSetAssetPairCall(ctx, call)
+		this.test = new testCalls.VestedRewardsSetAssetPairCall(ctx, call)
 	}
 
 	get isV22(): productionCalls.VestedRewardsSetAssetPairCall['isV22'] {
@@ -12856,6 +15489,18 @@ export class VestedRewardsSetAssetPairCall {
 	}
 	get asV42Stage(): stageCalls.VestedRewardsSetAssetPairCall['asV42'] {
 		return this.stage.asV42
+	}
+	get isV41Test(): testCalls.VestedRewardsSetAssetPairCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.VestedRewardsSetAssetPairCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.VestedRewardsSetAssetPairCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.VestedRewardsSetAssetPairCall['asV42'] {
+		return this.test.asV42
 	}
 }
 
@@ -12924,11 +15569,13 @@ export class XstPoolDisableSyntheticAssetCall {
 export class XstPoolEnableSyntheticAssetCall {
 	private readonly production: productionCalls.XstPoolEnableSyntheticAssetCall
 	private readonly stage: stageCalls.XstPoolEnableSyntheticAssetCall
+	private readonly test: testCalls.XstPoolEnableSyntheticAssetCall
 	private readonly dev: devCalls.XstPoolEnableSyntheticAssetCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.XstPoolEnableSyntheticAssetCall(ctx, call)
 		this.stage = new stageCalls.XstPoolEnableSyntheticAssetCall(ctx, call)
+		this.test = new testCalls.XstPoolEnableSyntheticAssetCall(ctx, call)
 		this.dev = new devCalls.XstPoolEnableSyntheticAssetCall(ctx, call)
 	}
 
@@ -12968,6 +15615,18 @@ export class XstPoolEnableSyntheticAssetCall {
 	get asV54Stage(): stageCalls.XstPoolEnableSyntheticAssetCall['asV54'] {
 		return this.stage.asV54
 	}
+	get isV41Test(): testCalls.XstPoolEnableSyntheticAssetCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.XstPoolEnableSyntheticAssetCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.XstPoolEnableSyntheticAssetCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.XstPoolEnableSyntheticAssetCall['asV42'] {
+		return this.test.asV42
+	}
 	get isV60Dev(): devCalls.XstPoolEnableSyntheticAssetCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -12979,10 +15638,12 @@ export class XstPoolEnableSyntheticAssetCall {
 export class XstPoolInitializePoolCall {
 	private readonly production: productionCalls.XstPoolInitializePoolCall
 	private readonly stage: stageCalls.XstPoolInitializePoolCall
+	private readonly test: testCalls.XstPoolInitializePoolCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.XstPoolInitializePoolCall(ctx, call)
 		this.stage = new stageCalls.XstPoolInitializePoolCall(ctx, call)
+		this.test = new testCalls.XstPoolInitializePoolCall(ctx, call)
 	}
 
 	get isV19(): productionCalls.XstPoolInitializePoolCall['isV19'] {
@@ -13008,6 +15669,18 @@ export class XstPoolInitializePoolCall {
 	}
 	get asV42Stage(): stageCalls.XstPoolInitializePoolCall['asV42'] {
 		return this.stage.asV42
+	}
+	get isV41Test(): testCalls.XstPoolInitializePoolCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.XstPoolInitializePoolCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.XstPoolInitializePoolCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.XstPoolInitializePoolCall['asV42'] {
+		return this.test.asV42
 	}
 }
 
@@ -13076,11 +15749,13 @@ export class XstPoolRemoveSyntheticAssetCall {
 export class XstPoolSetReferenceAssetCall {
 	private readonly production: productionCalls.XstPoolSetReferenceAssetCall
 	private readonly stage: stageCalls.XstPoolSetReferenceAssetCall
+	private readonly test: testCalls.XstPoolSetReferenceAssetCall
 	private readonly dev: devCalls.XstPoolSetReferenceAssetCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.XstPoolSetReferenceAssetCall(ctx, call)
 		this.stage = new stageCalls.XstPoolSetReferenceAssetCall(ctx, call)
+		this.test = new testCalls.XstPoolSetReferenceAssetCall(ctx, call)
 		this.dev = new devCalls.XstPoolSetReferenceAssetCall(ctx, call)
 	}
 
@@ -13107,6 +15782,18 @@ export class XstPoolSetReferenceAssetCall {
 	}
 	get asV42Stage(): stageCalls.XstPoolSetReferenceAssetCall['asV42'] {
 		return this.stage.asV42
+	}
+	get isV41Test(): testCalls.XstPoolSetReferenceAssetCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.XstPoolSetReferenceAssetCall['asV41'] {
+		return this.test.asV41
+	}
+	get isV42Test(): testCalls.XstPoolSetReferenceAssetCall['isV42'] {
+		return this.test.isV42
+	}
+	get asV42Test(): testCalls.XstPoolSetReferenceAssetCall['asV42'] {
+		return this.test.asV42
 	}
 	get isV60Dev(): devCalls.XstPoolSetReferenceAssetCall['isV60'] {
 		return this.dev.isV60
@@ -13181,11 +15868,13 @@ export class XstPoolSetSyntheticBaseAssetFloorPriceCall {
 export class XorFeeUpdateMultiplierCall {
 	private readonly production: productionCalls.XorFeeUpdateMultiplierCall
 	private readonly stage: stageCalls.XorFeeUpdateMultiplierCall
+	private readonly test: testCalls.XorFeeUpdateMultiplierCall
 	private readonly dev: devCalls.XorFeeUpdateMultiplierCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.XorFeeUpdateMultiplierCall(ctx, call)
 		this.stage = new stageCalls.XorFeeUpdateMultiplierCall(ctx, call)
+		this.test = new testCalls.XorFeeUpdateMultiplierCall(ctx, call)
 		this.dev = new devCalls.XorFeeUpdateMultiplierCall(ctx, call)
 	}
 
@@ -13200,6 +15889,12 @@ export class XorFeeUpdateMultiplierCall {
 	}
 	get asV37Stage(): stageCalls.XorFeeUpdateMultiplierCall['asV37'] {
 		return this.stage.asV37
+	}
+	get isV41Test(): testCalls.XorFeeUpdateMultiplierCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.XorFeeUpdateMultiplierCall['asV41'] {
+		return this.test.asV41
 	}
 	get isV60Dev(): devCalls.XorFeeUpdateMultiplierCall['isV60'] {
 		return this.dev.isV60
@@ -13512,6 +16207,29 @@ export class BridgeInboundChannelSubmitCall {
 	}
 }
 
+export class BridgeProxyAddLimitedAssetCall {
+	private readonly stage: stageCalls.BridgeProxyAddLimitedAssetCall
+	private readonly dev: devCalls.BridgeProxyAddLimitedAssetCall
+
+	constructor(ctx: ChainContext, call: Call) {
+		this.stage = new stageCalls.BridgeProxyAddLimitedAssetCall(ctx, call)
+		this.dev = new devCalls.BridgeProxyAddLimitedAssetCall(ctx, call)
+	}
+
+	get isV62Stage(): stageCalls.BridgeProxyAddLimitedAssetCall['isV62'] {
+		return this.stage.isV62
+	}
+	get asV62Stage(): stageCalls.BridgeProxyAddLimitedAssetCall['asV62'] {
+		return this.stage.asV62
+	}
+	get isV60Dev(): devCalls.BridgeProxyAddLimitedAssetCall['isV60'] {
+		return this.dev.isV60
+	}
+	get asV60Dev(): devCalls.BridgeProxyAddLimitedAssetCall['asV60'] {
+		return this.dev.asV60
+	}
+}
+
 export class BridgeProxyBurnCall {
 	private readonly stage: stageCalls.BridgeProxyBurnCall
 	private readonly dev: devCalls.BridgeProxyBurnCall
@@ -13531,6 +16249,52 @@ export class BridgeProxyBurnCall {
 		return this.dev.isV60
 	}
 	get asV60Dev(): devCalls.BridgeProxyBurnCall['asV60'] {
+		return this.dev.asV60
+	}
+}
+
+export class BridgeProxyRemoveLimitedAssetCall {
+	private readonly stage: stageCalls.BridgeProxyRemoveLimitedAssetCall
+	private readonly dev: devCalls.BridgeProxyRemoveLimitedAssetCall
+
+	constructor(ctx: ChainContext, call: Call) {
+		this.stage = new stageCalls.BridgeProxyRemoveLimitedAssetCall(ctx, call)
+		this.dev = new devCalls.BridgeProxyRemoveLimitedAssetCall(ctx, call)
+	}
+
+	get isV62Stage(): stageCalls.BridgeProxyRemoveLimitedAssetCall['isV62'] {
+		return this.stage.isV62
+	}
+	get asV62Stage(): stageCalls.BridgeProxyRemoveLimitedAssetCall['asV62'] {
+		return this.stage.asV62
+	}
+	get isV60Dev(): devCalls.BridgeProxyRemoveLimitedAssetCall['isV60'] {
+		return this.dev.isV60
+	}
+	get asV60Dev(): devCalls.BridgeProxyRemoveLimitedAssetCall['asV60'] {
+		return this.dev.asV60
+	}
+}
+
+export class BridgeProxyUpdateTransferLimitCall {
+	private readonly stage: stageCalls.BridgeProxyUpdateTransferLimitCall
+	private readonly dev: devCalls.BridgeProxyUpdateTransferLimitCall
+
+	constructor(ctx: ChainContext, call: Call) {
+		this.stage = new stageCalls.BridgeProxyUpdateTransferLimitCall(ctx, call)
+		this.dev = new devCalls.BridgeProxyUpdateTransferLimitCall(ctx, call)
+	}
+
+	get isV62Stage(): stageCalls.BridgeProxyUpdateTransferLimitCall['isV62'] {
+		return this.stage.isV62
+	}
+	get asV62Stage(): stageCalls.BridgeProxyUpdateTransferLimitCall['asV62'] {
+		return this.stage.asV62
+	}
+	get isV60Dev(): devCalls.BridgeProxyUpdateTransferLimitCall['isV60'] {
+		return this.dev.isV60
+	}
+	get asV60Dev(): devCalls.BridgeProxyUpdateTransferLimitCall['asV60'] {
 		return this.dev.asV60
 	}
 }
@@ -13915,10 +16679,12 @@ export class EvmBridgeProxyBurnCall {
 
 export class FaucetUpdateLimitCall {
 	private readonly stage: stageCalls.FaucetUpdateLimitCall
+	private readonly test: testCalls.FaucetUpdateLimitCall
 	private readonly dev: devCalls.FaucetUpdateLimitCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.FaucetUpdateLimitCall(ctx, call)
+		this.test = new testCalls.FaucetUpdateLimitCall(ctx, call)
 		this.dev = new devCalls.FaucetUpdateLimitCall(ctx, call)
 	}
 
@@ -13927,6 +16693,12 @@ export class FaucetUpdateLimitCall {
 	}
 	get asV37Stage(): stageCalls.FaucetUpdateLimitCall['asV37'] {
 		return this.stage.asV37
+	}
+	get isV41Test(): testCalls.FaucetUpdateLimitCall['isV41'] {
+		return this.test.isV41
+	}
+	get asV41Test(): testCalls.FaucetUpdateLimitCall['asV41'] {
+		return this.test.asV41
 	}
 	get isV60Dev(): devCalls.FaucetUpdateLimitCall['isV60'] {
 		return this.dev.isV60
@@ -14413,51 +17185,6 @@ export class SubstrateBridgeInboundChannelSubmitCall {
 	}
 }
 
-export class BridgeProxyAddLimitedAssetCall {
-	private readonly dev: devCalls.BridgeProxyAddLimitedAssetCall
-
-	constructor(ctx: ChainContext, call: Call) {
-		this.dev = new devCalls.BridgeProxyAddLimitedAssetCall(ctx, call)
-	}
-
-	get isV60Dev(): devCalls.BridgeProxyAddLimitedAssetCall['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devCalls.BridgeProxyAddLimitedAssetCall['asV60'] {
-		return this.dev.asV60
-	}
-}
-
-export class BridgeProxyRemoveLimitedAssetCall {
-	private readonly dev: devCalls.BridgeProxyRemoveLimitedAssetCall
-
-	constructor(ctx: ChainContext, call: Call) {
-		this.dev = new devCalls.BridgeProxyRemoveLimitedAssetCall(ctx, call)
-	}
-
-	get isV60Dev(): devCalls.BridgeProxyRemoveLimitedAssetCall['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devCalls.BridgeProxyRemoveLimitedAssetCall['asV60'] {
-		return this.dev.asV60
-	}
-}
-
-export class BridgeProxyUpdateTransferLimitCall {
-	private readonly dev: devCalls.BridgeProxyUpdateTransferLimitCall
-
-	constructor(ctx: ChainContext, call: Call) {
-		this.dev = new devCalls.BridgeProxyUpdateTransferLimitCall(ctx, call)
-	}
-
-	get isV60Dev(): devCalls.BridgeProxyUpdateTransferLimitCall['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devCalls.BridgeProxyUpdateTransferLimitCall['asV60'] {
-		return this.dev.asV60
-	}
-}
-
 export class OrderBookCancelLimitOrderCall {
 	private readonly dev: devCalls.OrderBookCancelLimitOrderCall
 
@@ -14638,4 +17365,4 @@ export class QaToolsRemoveFromWhitelistCall {
 	}
 }
 
-export const utilityBatchAllCallVersions = ['1', '3', '7', '19', '22', '23', '26', '32', '33', '35', '37', '38', '42', '43', '45', '46', '47', '50', '53', '57', '59', '60', '33Stage', '35Stage', '37Stage', '38Stage', '42Stage', '43Stage', '44Stage', '45Stage', '46Stage', '47Stage', '48Stage', '52Stage', '54Stage', '55Stage', '57Stage', '59Stage', '60Stage', '60Dev'] as const
+export const utilityBatchAllCallVersions = ['1', '3', '7', '19', '22', '23', '26', '32', '33', '35', '37', '38', '42', '43', '45', '46', '47', '50', '53', '57', '59', '60', '33Stage', '35Stage', '37Stage', '38Stage', '42Stage', '43Stage', '44Stage', '45Stage', '46Stage', '47Stage', '48Stage', '52Stage', '54Stage', '55Stage', '57Stage', '59Stage', '60Stage', '62Stage', '41Test', '42Test', '43Test', '60Dev'] as const
