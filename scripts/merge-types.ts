@@ -14,7 +14,8 @@ import { Environment } from '../src/environments'
 
 	const classes: ClassList = {}
 
-	Object.values(Environment).forEach(environment => {
+	const environments = [Environment.PRODUCTION, ...Object.values(Environment).filter(environment => environment !== Environment.PRODUCTION)]
+	environments.forEach(environment => {
 		const filePath = `src/types/generated/${environment}/${entityType}.ts`
 		const content = fs.readFileSync(filePath, 'utf-8')
 		const classCodeList = content.split(/(?=export class)/g)
