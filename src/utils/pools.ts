@@ -26,12 +26,11 @@ export const getAllReserves = async (ctx: Context, block: Block, baseAssetId: As
 		ctx.log.debug(`[${blockHeight}] [${baseAssetId}] Pools XYK Reserves request...`)
 		const storage = new PoolXYKReservesStorage(ctx, block.header)
 		const data = (
-			storage.isV1 ||
-			storage.isV33Stage
+			storage.isV1
 		)
-			? await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKReservesStorage.name }, ['42', '42Stage', '60Dev'] as const)
+			? await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKReservesStorage.name }, ['42'] as const)
 				.getPairs(decodeAssetId(baseAssetId))
-			: await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKReservesStorage.name }, ['1', '33Stage'] as const)
+			: await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKReservesStorage.name }, ['1'] as const)
 				.getPairs({ code: decodeAssetId(baseAssetId) })
 
 
@@ -63,12 +62,11 @@ export const getAllProperties = async (ctx: Context, block: Block, baseAssetId: 
 		const storage = new PoolXYKPropertiesStorage(ctx, block.header)
 		const data = (
 			storage.isV1 ||
-			storage.isV7 ||
-			storage.isV33Stage
+			storage.isV7
 		)
-			? await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKPropertiesStorage.name }, ['42', '42Stage', '60Dev'] as const)
+			? await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKPropertiesStorage.name }, ['42'] as const)
 				.getPairs(decodeAssetId(baseAssetId))
-			: await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKPropertiesStorage.name }, ['1', '7', '33Stage'] as const)
+			: await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKPropertiesStorage.name }, ['1', '7'] as const)
 				.getPairs({ code: decodeAssetId(baseAssetId) })
 
 		const data2 = getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKPropertiesStorage.name })
@@ -100,14 +98,13 @@ export const getPoolProperties = async (ctx: Context, block: Block, baseAssetId:
 		const storage = new PoolXYKPropertiesStorage(ctx, block.header)
 		const data = (
 			storage.isV1 ||
-			storage.isV7 ||
-			storage.isV33Stage
+			storage.isV7
 		)
-			? await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKPropertiesStorage.name }, ['42', '42Stage', '60Dev'] as const).getPairs(
+			? await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKPropertiesStorage.name }, ['42'] as const).getPairs(
 				decodeAssetId(baseAssetId),
 				decodeAssetId(targetAssetId)
 			)
-			: await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKPropertiesStorage.name }, ['1', '7', '33Stage'] as const).getPairs(
+			: await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKPropertiesStorage.name }, ['1', '7'] as const).getPairs(
 				{ code: decodeAssetId(baseAssetId) },
 				{ code: decodeAssetId(targetAssetId) }
 			)

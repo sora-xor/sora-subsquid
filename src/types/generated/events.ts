@@ -1,17 +1,20 @@
 import {Chain, ChainContext, EventContext, Event, Result, Option} from './production/support'
 import * as productionEvents from './production/events'
 import * as stageEvents from './stage/events'
+import * as testEvents from './test/events'
 import * as devEvents from './dev/events'
 
 
 export class AssetsAssetRegisteredEvent {
 	private readonly production: productionEvents.AssetsAssetRegisteredEvent
 	private readonly stage: stageEvents.AssetsAssetRegisteredEvent
+	private readonly test: testEvents.AssetsAssetRegisteredEvent
 	private readonly dev: devEvents.AssetsAssetRegisteredEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.AssetsAssetRegisteredEvent(ctx, event)
 		this.stage = new stageEvents.AssetsAssetRegisteredEvent(ctx, event)
+		this.test = new testEvents.AssetsAssetRegisteredEvent(ctx, event)
 		this.dev = new devEvents.AssetsAssetRegisteredEvent(ctx, event)
 	}
 
@@ -27,34 +30,18 @@ export class AssetsAssetRegisteredEvent {
 	get asV42(): productionEvents.AssetsAssetRegisteredEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.AssetsAssetRegisteredEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.AssetsAssetRegisteredEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.AssetsAssetRegisteredEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.AssetsAssetRegisteredEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.AssetsAssetRegisteredEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.AssetsAssetRegisteredEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class AssetsAssetSetNonMintableEvent {
 	private readonly production: productionEvents.AssetsAssetSetNonMintableEvent
 	private readonly stage: stageEvents.AssetsAssetSetNonMintableEvent
+	private readonly test: testEvents.AssetsAssetSetNonMintableEvent
 	private readonly dev: devEvents.AssetsAssetSetNonMintableEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.AssetsAssetSetNonMintableEvent(ctx, event)
 		this.stage = new stageEvents.AssetsAssetSetNonMintableEvent(ctx, event)
+		this.test = new testEvents.AssetsAssetSetNonMintableEvent(ctx, event)
 		this.dev = new devEvents.AssetsAssetSetNonMintableEvent(ctx, event)
 	}
 
@@ -69,24 +56,6 @@ export class AssetsAssetSetNonMintableEvent {
 	}
 	get asV42(): productionEvents.AssetsAssetSetNonMintableEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV33Stage(): stageEvents.AssetsAssetSetNonMintableEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.AssetsAssetSetNonMintableEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.AssetsAssetSetNonMintableEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.AssetsAssetSetNonMintableEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.AssetsAssetSetNonMintableEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.AssetsAssetSetNonMintableEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -107,28 +76,18 @@ export class AssetsAssetUpdatedEvent {
 	get asV53(): productionEvents.AssetsAssetUpdatedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV52Stage(): stageEvents.AssetsAssetUpdatedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.AssetsAssetUpdatedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.AssetsAssetUpdatedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.AssetsAssetUpdatedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class AssetsBurnEvent {
 	private readonly production: productionEvents.AssetsBurnEvent
 	private readonly stage: stageEvents.AssetsBurnEvent
+	private readonly test: testEvents.AssetsBurnEvent
 	private readonly dev: devEvents.AssetsBurnEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.AssetsBurnEvent(ctx, event)
 		this.stage = new stageEvents.AssetsBurnEvent(ctx, event)
+		this.test = new testEvents.AssetsBurnEvent(ctx, event)
 		this.dev = new devEvents.AssetsBurnEvent(ctx, event)
 	}
 
@@ -144,34 +103,18 @@ export class AssetsBurnEvent {
 	get asV42(): productionEvents.AssetsBurnEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.AssetsBurnEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.AssetsBurnEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.AssetsBurnEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.AssetsBurnEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.AssetsBurnEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.AssetsBurnEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class AssetsMintEvent {
 	private readonly production: productionEvents.AssetsMintEvent
 	private readonly stage: stageEvents.AssetsMintEvent
+	private readonly test: testEvents.AssetsMintEvent
 	private readonly dev: devEvents.AssetsMintEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.AssetsMintEvent(ctx, event)
 		this.stage = new stageEvents.AssetsMintEvent(ctx, event)
+		this.test = new testEvents.AssetsMintEvent(ctx, event)
 		this.dev = new devEvents.AssetsMintEvent(ctx, event)
 	}
 
@@ -187,34 +130,18 @@ export class AssetsMintEvent {
 	get asV42(): productionEvents.AssetsMintEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.AssetsMintEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.AssetsMintEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.AssetsMintEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.AssetsMintEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.AssetsMintEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.AssetsMintEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class AssetsTransferEvent {
 	private readonly production: productionEvents.AssetsTransferEvent
 	private readonly stage: stageEvents.AssetsTransferEvent
+	private readonly test: testEvents.AssetsTransferEvent
 	private readonly dev: devEvents.AssetsTransferEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.AssetsTransferEvent(ctx, event)
 		this.stage = new stageEvents.AssetsTransferEvent(ctx, event)
+		this.test = new testEvents.AssetsTransferEvent(ctx, event)
 		this.dev = new devEvents.AssetsTransferEvent(ctx, event)
 	}
 
@@ -230,34 +157,18 @@ export class AssetsTransferEvent {
 	get asV42(): productionEvents.AssetsTransferEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.AssetsTransferEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.AssetsTransferEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.AssetsTransferEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.AssetsTransferEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.AssetsTransferEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.AssetsTransferEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BagsListRebaggedEvent {
 	private readonly production: productionEvents.BagsListRebaggedEvent
 	private readonly stage: stageEvents.BagsListRebaggedEvent
+	private readonly test: testEvents.BagsListRebaggedEvent
 	private readonly dev: devEvents.BagsListRebaggedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.BagsListRebaggedEvent(ctx, event)
 		this.stage = new stageEvents.BagsListRebaggedEvent(ctx, event)
+		this.test = new testEvents.BagsListRebaggedEvent(ctx, event)
 		this.dev = new devEvents.BagsListRebaggedEvent(ctx, event)
 	}
 
@@ -267,28 +178,18 @@ export class BagsListRebaggedEvent {
 	get asV42(): productionEvents.BagsListRebaggedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.BagsListRebaggedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.BagsListRebaggedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.BagsListRebaggedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BagsListRebaggedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BagsListScoreUpdatedEvent {
 	private readonly production: productionEvents.BagsListScoreUpdatedEvent
 	private readonly stage: stageEvents.BagsListScoreUpdatedEvent
+	private readonly test: testEvents.BagsListScoreUpdatedEvent
 	private readonly dev: devEvents.BagsListScoreUpdatedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.BagsListScoreUpdatedEvent(ctx, event)
 		this.stage = new stageEvents.BagsListScoreUpdatedEvent(ctx, event)
+		this.test = new testEvents.BagsListScoreUpdatedEvent(ctx, event)
 		this.dev = new devEvents.BagsListScoreUpdatedEvent(ctx, event)
 	}
 
@@ -298,28 +199,18 @@ export class BagsListScoreUpdatedEvent {
 	get asV42(): productionEvents.BagsListScoreUpdatedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.BagsListScoreUpdatedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.BagsListScoreUpdatedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.BagsListScoreUpdatedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BagsListScoreUpdatedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BalancesBalanceSetEvent {
 	private readonly production: productionEvents.BalancesBalanceSetEvent
 	private readonly stage: stageEvents.BalancesBalanceSetEvent
+	private readonly test: testEvents.BalancesBalanceSetEvent
 	private readonly dev: devEvents.BalancesBalanceSetEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.BalancesBalanceSetEvent(ctx, event)
 		this.stage = new stageEvents.BalancesBalanceSetEvent(ctx, event)
+		this.test = new testEvents.BalancesBalanceSetEvent(ctx, event)
 		this.dev = new devEvents.BalancesBalanceSetEvent(ctx, event)
 	}
 
@@ -335,34 +226,18 @@ export class BalancesBalanceSetEvent {
 	get asV42(): productionEvents.BalancesBalanceSetEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.BalancesBalanceSetEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.BalancesBalanceSetEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.BalancesBalanceSetEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.BalancesBalanceSetEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.BalancesBalanceSetEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BalancesBalanceSetEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BalancesDepositEvent {
 	private readonly production: productionEvents.BalancesDepositEvent
 	private readonly stage: stageEvents.BalancesDepositEvent
+	private readonly test: testEvents.BalancesDepositEvent
 	private readonly dev: devEvents.BalancesDepositEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.BalancesDepositEvent(ctx, event)
 		this.stage = new stageEvents.BalancesDepositEvent(ctx, event)
+		this.test = new testEvents.BalancesDepositEvent(ctx, event)
 		this.dev = new devEvents.BalancesDepositEvent(ctx, event)
 	}
 
@@ -378,34 +253,18 @@ export class BalancesDepositEvent {
 	get asV42(): productionEvents.BalancesDepositEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.BalancesDepositEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.BalancesDepositEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.BalancesDepositEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.BalancesDepositEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.BalancesDepositEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BalancesDepositEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BalancesDustLostEvent {
 	private readonly production: productionEvents.BalancesDustLostEvent
 	private readonly stage: stageEvents.BalancesDustLostEvent
+	private readonly test: testEvents.BalancesDustLostEvent
 	private readonly dev: devEvents.BalancesDustLostEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.BalancesDustLostEvent(ctx, event)
 		this.stage = new stageEvents.BalancesDustLostEvent(ctx, event)
+		this.test = new testEvents.BalancesDustLostEvent(ctx, event)
 		this.dev = new devEvents.BalancesDustLostEvent(ctx, event)
 	}
 
@@ -421,34 +280,18 @@ export class BalancesDustLostEvent {
 	get asV42(): productionEvents.BalancesDustLostEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.BalancesDustLostEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.BalancesDustLostEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.BalancesDustLostEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.BalancesDustLostEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.BalancesDustLostEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BalancesDustLostEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BalancesEndowedEvent {
 	private readonly production: productionEvents.BalancesEndowedEvent
 	private readonly stage: stageEvents.BalancesEndowedEvent
+	private readonly test: testEvents.BalancesEndowedEvent
 	private readonly dev: devEvents.BalancesEndowedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.BalancesEndowedEvent(ctx, event)
 		this.stage = new stageEvents.BalancesEndowedEvent(ctx, event)
+		this.test = new testEvents.BalancesEndowedEvent(ctx, event)
 		this.dev = new devEvents.BalancesEndowedEvent(ctx, event)
 	}
 
@@ -464,34 +307,18 @@ export class BalancesEndowedEvent {
 	get asV42(): productionEvents.BalancesEndowedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.BalancesEndowedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.BalancesEndowedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.BalancesEndowedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.BalancesEndowedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.BalancesEndowedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BalancesEndowedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BalancesReserveRepatriatedEvent {
 	private readonly production: productionEvents.BalancesReserveRepatriatedEvent
 	private readonly stage: stageEvents.BalancesReserveRepatriatedEvent
+	private readonly test: testEvents.BalancesReserveRepatriatedEvent
 	private readonly dev: devEvents.BalancesReserveRepatriatedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.BalancesReserveRepatriatedEvent(ctx, event)
 		this.stage = new stageEvents.BalancesReserveRepatriatedEvent(ctx, event)
+		this.test = new testEvents.BalancesReserveRepatriatedEvent(ctx, event)
 		this.dev = new devEvents.BalancesReserveRepatriatedEvent(ctx, event)
 	}
 
@@ -507,34 +334,18 @@ export class BalancesReserveRepatriatedEvent {
 	get asV42(): productionEvents.BalancesReserveRepatriatedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.BalancesReserveRepatriatedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.BalancesReserveRepatriatedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.BalancesReserveRepatriatedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.BalancesReserveRepatriatedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.BalancesReserveRepatriatedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BalancesReserveRepatriatedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BalancesReservedEvent {
 	private readonly production: productionEvents.BalancesReservedEvent
 	private readonly stage: stageEvents.BalancesReservedEvent
+	private readonly test: testEvents.BalancesReservedEvent
 	private readonly dev: devEvents.BalancesReservedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.BalancesReservedEvent(ctx, event)
 		this.stage = new stageEvents.BalancesReservedEvent(ctx, event)
+		this.test = new testEvents.BalancesReservedEvent(ctx, event)
 		this.dev = new devEvents.BalancesReservedEvent(ctx, event)
 	}
 
@@ -550,34 +361,18 @@ export class BalancesReservedEvent {
 	get asV42(): productionEvents.BalancesReservedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.BalancesReservedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.BalancesReservedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.BalancesReservedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.BalancesReservedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.BalancesReservedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BalancesReservedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BalancesSlashedEvent {
 	private readonly production: productionEvents.BalancesSlashedEvent
 	private readonly stage: stageEvents.BalancesSlashedEvent
+	private readonly test: testEvents.BalancesSlashedEvent
 	private readonly dev: devEvents.BalancesSlashedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.BalancesSlashedEvent(ctx, event)
 		this.stage = new stageEvents.BalancesSlashedEvent(ctx, event)
+		this.test = new testEvents.BalancesSlashedEvent(ctx, event)
 		this.dev = new devEvents.BalancesSlashedEvent(ctx, event)
 	}
 
@@ -587,28 +382,18 @@ export class BalancesSlashedEvent {
 	get asV42(): productionEvents.BalancesSlashedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.BalancesSlashedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.BalancesSlashedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.BalancesSlashedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BalancesSlashedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BalancesTransferEvent {
 	private readonly production: productionEvents.BalancesTransferEvent
 	private readonly stage: stageEvents.BalancesTransferEvent
+	private readonly test: testEvents.BalancesTransferEvent
 	private readonly dev: devEvents.BalancesTransferEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.BalancesTransferEvent(ctx, event)
 		this.stage = new stageEvents.BalancesTransferEvent(ctx, event)
+		this.test = new testEvents.BalancesTransferEvent(ctx, event)
 		this.dev = new devEvents.BalancesTransferEvent(ctx, event)
 	}
 
@@ -624,34 +409,18 @@ export class BalancesTransferEvent {
 	get asV42(): productionEvents.BalancesTransferEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.BalancesTransferEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.BalancesTransferEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.BalancesTransferEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.BalancesTransferEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.BalancesTransferEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BalancesTransferEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BalancesUnreservedEvent {
 	private readonly production: productionEvents.BalancesUnreservedEvent
 	private readonly stage: stageEvents.BalancesUnreservedEvent
+	private readonly test: testEvents.BalancesUnreservedEvent
 	private readonly dev: devEvents.BalancesUnreservedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.BalancesUnreservedEvent(ctx, event)
 		this.stage = new stageEvents.BalancesUnreservedEvent(ctx, event)
+		this.test = new testEvents.BalancesUnreservedEvent(ctx, event)
 		this.dev = new devEvents.BalancesUnreservedEvent(ctx, event)
 	}
 
@@ -667,34 +436,18 @@ export class BalancesUnreservedEvent {
 	get asV42(): productionEvents.BalancesUnreservedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.BalancesUnreservedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.BalancesUnreservedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.BalancesUnreservedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.BalancesUnreservedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.BalancesUnreservedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BalancesUnreservedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BalancesWithdrawEvent {
 	private readonly production: productionEvents.BalancesWithdrawEvent
 	private readonly stage: stageEvents.BalancesWithdrawEvent
+	private readonly test: testEvents.BalancesWithdrawEvent
 	private readonly dev: devEvents.BalancesWithdrawEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.BalancesWithdrawEvent(ctx, event)
 		this.stage = new stageEvents.BalancesWithdrawEvent(ctx, event)
+		this.test = new testEvents.BalancesWithdrawEvent(ctx, event)
 		this.dev = new devEvents.BalancesWithdrawEvent(ctx, event)
 	}
 
@@ -704,28 +457,18 @@ export class BalancesWithdrawEvent {
 	get asV42(): productionEvents.BalancesWithdrawEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.BalancesWithdrawEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.BalancesWithdrawEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.BalancesWithdrawEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BalancesWithdrawEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BandRelayersAddedEvent {
 	private readonly production: productionEvents.BandRelayersAddedEvent
 	private readonly stage: stageEvents.BandRelayersAddedEvent
+	private readonly test: testEvents.BandRelayersAddedEvent
 	private readonly dev: devEvents.BandRelayersAddedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.BandRelayersAddedEvent(ctx, event)
 		this.stage = new stageEvents.BandRelayersAddedEvent(ctx, event)
+		this.test = new testEvents.BandRelayersAddedEvent(ctx, event)
 		this.dev = new devEvents.BandRelayersAddedEvent(ctx, event)
 	}
 
@@ -735,28 +478,18 @@ export class BandRelayersAddedEvent {
 	get asV45(): productionEvents.BandRelayersAddedEvent['asV45'] {
 		return this.production.asV45
 	}
-	get isV44Stage(): stageEvents.BandRelayersAddedEvent['isV44'] {
-		return this.stage.isV44
-	}
-	get asV44Stage(): stageEvents.BandRelayersAddedEvent['asV44'] {
-		return this.stage.asV44
-	}
-	get isV60Dev(): devEvents.BandRelayersAddedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BandRelayersAddedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BandRelayersRemovedEvent {
 	private readonly production: productionEvents.BandRelayersRemovedEvent
 	private readonly stage: stageEvents.BandRelayersRemovedEvent
+	private readonly test: testEvents.BandRelayersRemovedEvent
 	private readonly dev: devEvents.BandRelayersRemovedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.BandRelayersRemovedEvent(ctx, event)
 		this.stage = new stageEvents.BandRelayersRemovedEvent(ctx, event)
+		this.test = new testEvents.BandRelayersRemovedEvent(ctx, event)
 		this.dev = new devEvents.BandRelayersRemovedEvent(ctx, event)
 	}
 
@@ -766,28 +499,18 @@ export class BandRelayersRemovedEvent {
 	get asV45(): productionEvents.BandRelayersRemovedEvent['asV45'] {
 		return this.production.asV45
 	}
-	get isV44Stage(): stageEvents.BandRelayersRemovedEvent['isV44'] {
-		return this.stage.isV44
-	}
-	get asV44Stage(): stageEvents.BandRelayersRemovedEvent['asV44'] {
-		return this.stage.asV44
-	}
-	get isV60Dev(): devEvents.BandRelayersRemovedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BandRelayersRemovedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BandSymbolsRelayedEvent {
 	private readonly production: productionEvents.BandSymbolsRelayedEvent
 	private readonly stage: stageEvents.BandSymbolsRelayedEvent
+	private readonly test: testEvents.BandSymbolsRelayedEvent
 	private readonly dev: devEvents.BandSymbolsRelayedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.BandSymbolsRelayedEvent(ctx, event)
 		this.stage = new stageEvents.BandSymbolsRelayedEvent(ctx, event)
+		this.test = new testEvents.BandSymbolsRelayedEvent(ctx, event)
 		this.dev = new devEvents.BandSymbolsRelayedEvent(ctx, event)
 	}
 
@@ -809,34 +532,18 @@ export class BandSymbolsRelayedEvent {
 	get asV44Stage(): stageEvents.BandSymbolsRelayedEvent['asV44'] {
 		return this.stage.asV44
 	}
-	get isV45Stage(): stageEvents.BandSymbolsRelayedEvent['isV45'] {
-		return this.stage.isV45
-	}
-	get asV45Stage(): stageEvents.BandSymbolsRelayedEvent['asV45'] {
-		return this.stage.asV45
-	}
-	get isV54Stage(): stageEvents.BandSymbolsRelayedEvent['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageEvents.BandSymbolsRelayedEvent['asV54'] {
-		return this.stage.asV54
-	}
-	get isV60Dev(): devEvents.BandSymbolsRelayedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BandSymbolsRelayedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BridgeMultisigMultisigAccountCreatedEvent {
 	private readonly production: productionEvents.BridgeMultisigMultisigAccountCreatedEvent
 	private readonly stage: stageEvents.BridgeMultisigMultisigAccountCreatedEvent
+	private readonly test: testEvents.BridgeMultisigMultisigAccountCreatedEvent
 	private readonly dev: devEvents.BridgeMultisigMultisigAccountCreatedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.BridgeMultisigMultisigAccountCreatedEvent(ctx, event)
 		this.stage = new stageEvents.BridgeMultisigMultisigAccountCreatedEvent(ctx, event)
+		this.test = new testEvents.BridgeMultisigMultisigAccountCreatedEvent(ctx, event)
 		this.dev = new devEvents.BridgeMultisigMultisigAccountCreatedEvent(ctx, event)
 	}
 
@@ -846,28 +553,18 @@ export class BridgeMultisigMultisigAccountCreatedEvent {
 	get asV1(): productionEvents.BridgeMultisigMultisigAccountCreatedEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.BridgeMultisigMultisigAccountCreatedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.BridgeMultisigMultisigAccountCreatedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.BridgeMultisigMultisigAccountCreatedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BridgeMultisigMultisigAccountCreatedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BridgeMultisigMultisigApprovalEvent {
 	private readonly production: productionEvents.BridgeMultisigMultisigApprovalEvent
 	private readonly stage: stageEvents.BridgeMultisigMultisigApprovalEvent
+	private readonly test: testEvents.BridgeMultisigMultisigApprovalEvent
 	private readonly dev: devEvents.BridgeMultisigMultisigApprovalEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.BridgeMultisigMultisigApprovalEvent(ctx, event)
 		this.stage = new stageEvents.BridgeMultisigMultisigApprovalEvent(ctx, event)
+		this.test = new testEvents.BridgeMultisigMultisigApprovalEvent(ctx, event)
 		this.dev = new devEvents.BridgeMultisigMultisigApprovalEvent(ctx, event)
 	}
 
@@ -877,28 +574,18 @@ export class BridgeMultisigMultisigApprovalEvent {
 	get asV1(): productionEvents.BridgeMultisigMultisigApprovalEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.BridgeMultisigMultisigApprovalEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.BridgeMultisigMultisigApprovalEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.BridgeMultisigMultisigApprovalEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BridgeMultisigMultisigApprovalEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BridgeMultisigMultisigCancelledEvent {
 	private readonly production: productionEvents.BridgeMultisigMultisigCancelledEvent
 	private readonly stage: stageEvents.BridgeMultisigMultisigCancelledEvent
+	private readonly test: testEvents.BridgeMultisigMultisigCancelledEvent
 	private readonly dev: devEvents.BridgeMultisigMultisigCancelledEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.BridgeMultisigMultisigCancelledEvent(ctx, event)
 		this.stage = new stageEvents.BridgeMultisigMultisigCancelledEvent(ctx, event)
+		this.test = new testEvents.BridgeMultisigMultisigCancelledEvent(ctx, event)
 		this.dev = new devEvents.BridgeMultisigMultisigCancelledEvent(ctx, event)
 	}
 
@@ -908,28 +595,18 @@ export class BridgeMultisigMultisigCancelledEvent {
 	get asV1(): productionEvents.BridgeMultisigMultisigCancelledEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.BridgeMultisigMultisigCancelledEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.BridgeMultisigMultisigCancelledEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.BridgeMultisigMultisigCancelledEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BridgeMultisigMultisigCancelledEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BridgeMultisigMultisigExecutedEvent {
 	private readonly production: productionEvents.BridgeMultisigMultisigExecutedEvent
 	private readonly stage: stageEvents.BridgeMultisigMultisigExecutedEvent
+	private readonly test: testEvents.BridgeMultisigMultisigExecutedEvent
 	private readonly dev: devEvents.BridgeMultisigMultisigExecutedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.BridgeMultisigMultisigExecutedEvent(ctx, event)
 		this.stage = new stageEvents.BridgeMultisigMultisigExecutedEvent(ctx, event)
+		this.test = new testEvents.BridgeMultisigMultisigExecutedEvent(ctx, event)
 		this.dev = new devEvents.BridgeMultisigMultisigExecutedEvent(ctx, event)
 	}
 
@@ -951,40 +628,18 @@ export class BridgeMultisigMultisigExecutedEvent {
 	get asV53(): productionEvents.BridgeMultisigMultisigExecutedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV33Stage(): stageEvents.BridgeMultisigMultisigExecutedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.BridgeMultisigMultisigExecutedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.BridgeMultisigMultisigExecutedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.BridgeMultisigMultisigExecutedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.BridgeMultisigMultisigExecutedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.BridgeMultisigMultisigExecutedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.BridgeMultisigMultisigExecutedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BridgeMultisigMultisigExecutedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BridgeMultisigNewMultisigEvent {
 	private readonly production: productionEvents.BridgeMultisigNewMultisigEvent
 	private readonly stage: stageEvents.BridgeMultisigNewMultisigEvent
+	private readonly test: testEvents.BridgeMultisigNewMultisigEvent
 	private readonly dev: devEvents.BridgeMultisigNewMultisigEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.BridgeMultisigNewMultisigEvent(ctx, event)
 		this.stage = new stageEvents.BridgeMultisigNewMultisigEvent(ctx, event)
+		this.test = new testEvents.BridgeMultisigNewMultisigEvent(ctx, event)
 		this.dev = new devEvents.BridgeMultisigNewMultisigEvent(ctx, event)
 	}
 
@@ -994,28 +649,18 @@ export class BridgeMultisigNewMultisigEvent {
 	get asV1(): productionEvents.BridgeMultisigNewMultisigEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.BridgeMultisigNewMultisigEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.BridgeMultisigNewMultisigEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.BridgeMultisigNewMultisigEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BridgeMultisigNewMultisigEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresGovernancePlatformCreatedEvent {
 	private readonly production: productionEvents.CeresGovernancePlatformCreatedEvent
 	private readonly stage: stageEvents.CeresGovernancePlatformCreatedEvent
+	private readonly test: testEvents.CeresGovernancePlatformCreatedEvent
 	private readonly dev: devEvents.CeresGovernancePlatformCreatedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.CeresGovernancePlatformCreatedEvent(ctx, event)
 		this.stage = new stageEvents.CeresGovernancePlatformCreatedEvent(ctx, event)
+		this.test = new testEvents.CeresGovernancePlatformCreatedEvent(ctx, event)
 		this.dev = new devEvents.CeresGovernancePlatformCreatedEvent(ctx, event)
 	}
 
@@ -1031,34 +676,18 @@ export class CeresGovernancePlatformCreatedEvent {
 	get asV37(): productionEvents.CeresGovernancePlatformCreatedEvent['asV37'] {
 		return this.production.asV37
 	}
-	get isV33Stage(): stageEvents.CeresGovernancePlatformCreatedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresGovernancePlatformCreatedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV37Stage(): stageEvents.CeresGovernancePlatformCreatedEvent['isV37'] {
-		return this.stage.isV37
-	}
-	get asV37Stage(): stageEvents.CeresGovernancePlatformCreatedEvent['asV37'] {
-		return this.stage.asV37
-	}
-	get isV60Dev(): devEvents.CeresGovernancePlatformCreatedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresGovernancePlatformCreatedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresGovernancePlatformVotedEvent {
 	private readonly production: productionEvents.CeresGovernancePlatformVotedEvent
 	private readonly stage: stageEvents.CeresGovernancePlatformVotedEvent
+	private readonly test: testEvents.CeresGovernancePlatformVotedEvent
 	private readonly dev: devEvents.CeresGovernancePlatformVotedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.CeresGovernancePlatformVotedEvent(ctx, event)
 		this.stage = new stageEvents.CeresGovernancePlatformVotedEvent(ctx, event)
+		this.test = new testEvents.CeresGovernancePlatformVotedEvent(ctx, event)
 		this.dev = new devEvents.CeresGovernancePlatformVotedEvent(ctx, event)
 	}
 
@@ -1068,28 +697,18 @@ export class CeresGovernancePlatformVotedEvent {
 	get asV26(): productionEvents.CeresGovernancePlatformVotedEvent['asV26'] {
 		return this.production.asV26
 	}
-	get isV33Stage(): stageEvents.CeresGovernancePlatformVotedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresGovernancePlatformVotedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.CeresGovernancePlatformVotedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresGovernancePlatformVotedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresGovernancePlatformWithdrawnEvent {
 	private readonly production: productionEvents.CeresGovernancePlatformWithdrawnEvent
 	private readonly stage: stageEvents.CeresGovernancePlatformWithdrawnEvent
+	private readonly test: testEvents.CeresGovernancePlatformWithdrawnEvent
 	private readonly dev: devEvents.CeresGovernancePlatformWithdrawnEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.CeresGovernancePlatformWithdrawnEvent(ctx, event)
 		this.stage = new stageEvents.CeresGovernancePlatformWithdrawnEvent(ctx, event)
+		this.test = new testEvents.CeresGovernancePlatformWithdrawnEvent(ctx, event)
 		this.dev = new devEvents.CeresGovernancePlatformWithdrawnEvent(ctx, event)
 	}
 
@@ -1099,28 +718,18 @@ export class CeresGovernancePlatformWithdrawnEvent {
 	get asV26(): productionEvents.CeresGovernancePlatformWithdrawnEvent['asV26'] {
 		return this.production.asV26
 	}
-	get isV33Stage(): stageEvents.CeresGovernancePlatformWithdrawnEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresGovernancePlatformWithdrawnEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.CeresGovernancePlatformWithdrawnEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresGovernancePlatformWithdrawnEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresLaunchpadClaimedEvent {
 	private readonly production: productionEvents.CeresLaunchpadClaimedEvent
 	private readonly stage: stageEvents.CeresLaunchpadClaimedEvent
+	private readonly test: testEvents.CeresLaunchpadClaimedEvent
 	private readonly dev: devEvents.CeresLaunchpadClaimedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.CeresLaunchpadClaimedEvent(ctx, event)
 		this.stage = new stageEvents.CeresLaunchpadClaimedEvent(ctx, event)
+		this.test = new testEvents.CeresLaunchpadClaimedEvent(ctx, event)
 		this.dev = new devEvents.CeresLaunchpadClaimedEvent(ctx, event)
 	}
 
@@ -1136,34 +745,18 @@ export class CeresLaunchpadClaimedEvent {
 	get asV42(): productionEvents.CeresLaunchpadClaimedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.CeresLaunchpadClaimedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresLaunchpadClaimedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.CeresLaunchpadClaimedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.CeresLaunchpadClaimedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.CeresLaunchpadClaimedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresLaunchpadClaimedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresLaunchpadClaimedLpEvent {
 	private readonly production: productionEvents.CeresLaunchpadClaimedLpEvent
 	private readonly stage: stageEvents.CeresLaunchpadClaimedLpEvent
+	private readonly test: testEvents.CeresLaunchpadClaimedLpEvent
 	private readonly dev: devEvents.CeresLaunchpadClaimedLpEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.CeresLaunchpadClaimedLpEvent(ctx, event)
 		this.stage = new stageEvents.CeresLaunchpadClaimedLpEvent(ctx, event)
+		this.test = new testEvents.CeresLaunchpadClaimedLpEvent(ctx, event)
 		this.dev = new devEvents.CeresLaunchpadClaimedLpEvent(ctx, event)
 	}
 
@@ -1179,34 +772,18 @@ export class CeresLaunchpadClaimedLpEvent {
 	get asV42(): productionEvents.CeresLaunchpadClaimedLpEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.CeresLaunchpadClaimedLpEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresLaunchpadClaimedLpEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.CeresLaunchpadClaimedLpEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.CeresLaunchpadClaimedLpEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.CeresLaunchpadClaimedLpEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresLaunchpadClaimedLpEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresLaunchpadClaimedPswapEvent {
 	private readonly production: productionEvents.CeresLaunchpadClaimedPswapEvent
 	private readonly stage: stageEvents.CeresLaunchpadClaimedPswapEvent
+	private readonly test: testEvents.CeresLaunchpadClaimedPswapEvent
 	private readonly dev: devEvents.CeresLaunchpadClaimedPswapEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.CeresLaunchpadClaimedPswapEvent(ctx, event)
 		this.stage = new stageEvents.CeresLaunchpadClaimedPswapEvent(ctx, event)
+		this.test = new testEvents.CeresLaunchpadClaimedPswapEvent(ctx, event)
 		this.dev = new devEvents.CeresLaunchpadClaimedPswapEvent(ctx, event)
 	}
 
@@ -1216,28 +793,18 @@ export class CeresLaunchpadClaimedPswapEvent {
 	get asV26(): productionEvents.CeresLaunchpadClaimedPswapEvent['asV26'] {
 		return this.production.asV26
 	}
-	get isV33Stage(): stageEvents.CeresLaunchpadClaimedPswapEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresLaunchpadClaimedPswapEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.CeresLaunchpadClaimedPswapEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresLaunchpadClaimedPswapEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresLaunchpadContributedEvent {
 	private readonly production: productionEvents.CeresLaunchpadContributedEvent
 	private readonly stage: stageEvents.CeresLaunchpadContributedEvent
+	private readonly test: testEvents.CeresLaunchpadContributedEvent
 	private readonly dev: devEvents.CeresLaunchpadContributedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.CeresLaunchpadContributedEvent(ctx, event)
 		this.stage = new stageEvents.CeresLaunchpadContributedEvent(ctx, event)
+		this.test = new testEvents.CeresLaunchpadContributedEvent(ctx, event)
 		this.dev = new devEvents.CeresLaunchpadContributedEvent(ctx, event)
 	}
 
@@ -1253,34 +820,18 @@ export class CeresLaunchpadContributedEvent {
 	get asV42(): productionEvents.CeresLaunchpadContributedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.CeresLaunchpadContributedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresLaunchpadContributedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.CeresLaunchpadContributedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.CeresLaunchpadContributedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.CeresLaunchpadContributedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresLaunchpadContributedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresLaunchpadEmergencyWithdrawnEvent {
 	private readonly production: productionEvents.CeresLaunchpadEmergencyWithdrawnEvent
 	private readonly stage: stageEvents.CeresLaunchpadEmergencyWithdrawnEvent
+	private readonly test: testEvents.CeresLaunchpadEmergencyWithdrawnEvent
 	private readonly dev: devEvents.CeresLaunchpadEmergencyWithdrawnEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.CeresLaunchpadEmergencyWithdrawnEvent(ctx, event)
 		this.stage = new stageEvents.CeresLaunchpadEmergencyWithdrawnEvent(ctx, event)
+		this.test = new testEvents.CeresLaunchpadEmergencyWithdrawnEvent(ctx, event)
 		this.dev = new devEvents.CeresLaunchpadEmergencyWithdrawnEvent(ctx, event)
 	}
 
@@ -1296,34 +847,18 @@ export class CeresLaunchpadEmergencyWithdrawnEvent {
 	get asV42(): productionEvents.CeresLaunchpadEmergencyWithdrawnEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.CeresLaunchpadEmergencyWithdrawnEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresLaunchpadEmergencyWithdrawnEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.CeresLaunchpadEmergencyWithdrawnEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.CeresLaunchpadEmergencyWithdrawnEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.CeresLaunchpadEmergencyWithdrawnEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresLaunchpadEmergencyWithdrawnEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresLaunchpadFeeChangedEvent {
 	private readonly production: productionEvents.CeresLaunchpadFeeChangedEvent
 	private readonly stage: stageEvents.CeresLaunchpadFeeChangedEvent
+	private readonly test: testEvents.CeresLaunchpadFeeChangedEvent
 	private readonly dev: devEvents.CeresLaunchpadFeeChangedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.CeresLaunchpadFeeChangedEvent(ctx, event)
 		this.stage = new stageEvents.CeresLaunchpadFeeChangedEvent(ctx, event)
+		this.test = new testEvents.CeresLaunchpadFeeChangedEvent(ctx, event)
 		this.dev = new devEvents.CeresLaunchpadFeeChangedEvent(ctx, event)
 	}
 
@@ -1333,28 +868,18 @@ export class CeresLaunchpadFeeChangedEvent {
 	get asV26(): productionEvents.CeresLaunchpadFeeChangedEvent['asV26'] {
 		return this.production.asV26
 	}
-	get isV33Stage(): stageEvents.CeresLaunchpadFeeChangedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresLaunchpadFeeChangedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.CeresLaunchpadFeeChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresLaunchpadFeeChangedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresLaunchpadIloCreatedEvent {
 	private readonly production: productionEvents.CeresLaunchpadIloCreatedEvent
 	private readonly stage: stageEvents.CeresLaunchpadIloCreatedEvent
+	private readonly test: testEvents.CeresLaunchpadIloCreatedEvent
 	private readonly dev: devEvents.CeresLaunchpadIloCreatedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.CeresLaunchpadIloCreatedEvent(ctx, event)
 		this.stage = new stageEvents.CeresLaunchpadIloCreatedEvent(ctx, event)
+		this.test = new testEvents.CeresLaunchpadIloCreatedEvent(ctx, event)
 		this.dev = new devEvents.CeresLaunchpadIloCreatedEvent(ctx, event)
 	}
 
@@ -1370,34 +895,18 @@ export class CeresLaunchpadIloCreatedEvent {
 	get asV42(): productionEvents.CeresLaunchpadIloCreatedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.CeresLaunchpadIloCreatedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresLaunchpadIloCreatedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.CeresLaunchpadIloCreatedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.CeresLaunchpadIloCreatedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.CeresLaunchpadIloCreatedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresLaunchpadIloCreatedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresLaunchpadIloFinishedEvent {
 	private readonly production: productionEvents.CeresLaunchpadIloFinishedEvent
 	private readonly stage: stageEvents.CeresLaunchpadIloFinishedEvent
+	private readonly test: testEvents.CeresLaunchpadIloFinishedEvent
 	private readonly dev: devEvents.CeresLaunchpadIloFinishedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.CeresLaunchpadIloFinishedEvent(ctx, event)
 		this.stage = new stageEvents.CeresLaunchpadIloFinishedEvent(ctx, event)
+		this.test = new testEvents.CeresLaunchpadIloFinishedEvent(ctx, event)
 		this.dev = new devEvents.CeresLaunchpadIloFinishedEvent(ctx, event)
 	}
 
@@ -1413,34 +922,18 @@ export class CeresLaunchpadIloFinishedEvent {
 	get asV42(): productionEvents.CeresLaunchpadIloFinishedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.CeresLaunchpadIloFinishedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresLaunchpadIloFinishedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.CeresLaunchpadIloFinishedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.CeresLaunchpadIloFinishedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.CeresLaunchpadIloFinishedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresLaunchpadIloFinishedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresLaunchpadRemovedWhitelistedContributorEvent {
 	private readonly production: productionEvents.CeresLaunchpadRemovedWhitelistedContributorEvent
 	private readonly stage: stageEvents.CeresLaunchpadRemovedWhitelistedContributorEvent
+	private readonly test: testEvents.CeresLaunchpadRemovedWhitelistedContributorEvent
 	private readonly dev: devEvents.CeresLaunchpadRemovedWhitelistedContributorEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.CeresLaunchpadRemovedWhitelistedContributorEvent(ctx, event)
 		this.stage = new stageEvents.CeresLaunchpadRemovedWhitelistedContributorEvent(ctx, event)
+		this.test = new testEvents.CeresLaunchpadRemovedWhitelistedContributorEvent(ctx, event)
 		this.dev = new devEvents.CeresLaunchpadRemovedWhitelistedContributorEvent(ctx, event)
 	}
 
@@ -1450,28 +943,18 @@ export class CeresLaunchpadRemovedWhitelistedContributorEvent {
 	get asV33(): productionEvents.CeresLaunchpadRemovedWhitelistedContributorEvent['asV33'] {
 		return this.production.asV33
 	}
-	get isV33Stage(): stageEvents.CeresLaunchpadRemovedWhitelistedContributorEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresLaunchpadRemovedWhitelistedContributorEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.CeresLaunchpadRemovedWhitelistedContributorEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresLaunchpadRemovedWhitelistedContributorEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresLaunchpadRemovedWhitelistedIloOrganizerEvent {
 	private readonly production: productionEvents.CeresLaunchpadRemovedWhitelistedIloOrganizerEvent
 	private readonly stage: stageEvents.CeresLaunchpadRemovedWhitelistedIloOrganizerEvent
+	private readonly test: testEvents.CeresLaunchpadRemovedWhitelistedIloOrganizerEvent
 	private readonly dev: devEvents.CeresLaunchpadRemovedWhitelistedIloOrganizerEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.CeresLaunchpadRemovedWhitelistedIloOrganizerEvent(ctx, event)
 		this.stage = new stageEvents.CeresLaunchpadRemovedWhitelistedIloOrganizerEvent(ctx, event)
+		this.test = new testEvents.CeresLaunchpadRemovedWhitelistedIloOrganizerEvent(ctx, event)
 		this.dev = new devEvents.CeresLaunchpadRemovedWhitelistedIloOrganizerEvent(ctx, event)
 	}
 
@@ -1481,28 +964,18 @@ export class CeresLaunchpadRemovedWhitelistedIloOrganizerEvent {
 	get asV33(): productionEvents.CeresLaunchpadRemovedWhitelistedIloOrganizerEvent['asV33'] {
 		return this.production.asV33
 	}
-	get isV33Stage(): stageEvents.CeresLaunchpadRemovedWhitelistedIloOrganizerEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresLaunchpadRemovedWhitelistedIloOrganizerEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.CeresLaunchpadRemovedWhitelistedIloOrganizerEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresLaunchpadRemovedWhitelistedIloOrganizerEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresLaunchpadWhitelistedContributorEvent {
 	private readonly production: productionEvents.CeresLaunchpadWhitelistedContributorEvent
 	private readonly stage: stageEvents.CeresLaunchpadWhitelistedContributorEvent
+	private readonly test: testEvents.CeresLaunchpadWhitelistedContributorEvent
 	private readonly dev: devEvents.CeresLaunchpadWhitelistedContributorEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.CeresLaunchpadWhitelistedContributorEvent(ctx, event)
 		this.stage = new stageEvents.CeresLaunchpadWhitelistedContributorEvent(ctx, event)
+		this.test = new testEvents.CeresLaunchpadWhitelistedContributorEvent(ctx, event)
 		this.dev = new devEvents.CeresLaunchpadWhitelistedContributorEvent(ctx, event)
 	}
 
@@ -1512,28 +985,18 @@ export class CeresLaunchpadWhitelistedContributorEvent {
 	get asV33(): productionEvents.CeresLaunchpadWhitelistedContributorEvent['asV33'] {
 		return this.production.asV33
 	}
-	get isV33Stage(): stageEvents.CeresLaunchpadWhitelistedContributorEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresLaunchpadWhitelistedContributorEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.CeresLaunchpadWhitelistedContributorEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresLaunchpadWhitelistedContributorEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresLaunchpadWhitelistedIloOrganizerEvent {
 	private readonly production: productionEvents.CeresLaunchpadWhitelistedIloOrganizerEvent
 	private readonly stage: stageEvents.CeresLaunchpadWhitelistedIloOrganizerEvent
+	private readonly test: testEvents.CeresLaunchpadWhitelistedIloOrganizerEvent
 	private readonly dev: devEvents.CeresLaunchpadWhitelistedIloOrganizerEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.CeresLaunchpadWhitelistedIloOrganizerEvent(ctx, event)
 		this.stage = new stageEvents.CeresLaunchpadWhitelistedIloOrganizerEvent(ctx, event)
+		this.test = new testEvents.CeresLaunchpadWhitelistedIloOrganizerEvent(ctx, event)
 		this.dev = new devEvents.CeresLaunchpadWhitelistedIloOrganizerEvent(ctx, event)
 	}
 
@@ -1543,28 +1006,18 @@ export class CeresLaunchpadWhitelistedIloOrganizerEvent {
 	get asV33(): productionEvents.CeresLaunchpadWhitelistedIloOrganizerEvent['asV33'] {
 		return this.production.asV33
 	}
-	get isV33Stage(): stageEvents.CeresLaunchpadWhitelistedIloOrganizerEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresLaunchpadWhitelistedIloOrganizerEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.CeresLaunchpadWhitelistedIloOrganizerEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresLaunchpadWhitelistedIloOrganizerEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresLiquidityLockerLockedEvent {
 	private readonly production: productionEvents.CeresLiquidityLockerLockedEvent
 	private readonly stage: stageEvents.CeresLiquidityLockerLockedEvent
+	private readonly test: testEvents.CeresLiquidityLockerLockedEvent
 	private readonly dev: devEvents.CeresLiquidityLockerLockedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.CeresLiquidityLockerLockedEvent(ctx, event)
 		this.stage = new stageEvents.CeresLiquidityLockerLockedEvent(ctx, event)
+		this.test = new testEvents.CeresLiquidityLockerLockedEvent(ctx, event)
 		this.dev = new devEvents.CeresLiquidityLockerLockedEvent(ctx, event)
 	}
 
@@ -1580,34 +1033,18 @@ export class CeresLiquidityLockerLockedEvent {
 	get asV37(): productionEvents.CeresLiquidityLockerLockedEvent['asV37'] {
 		return this.production.asV37
 	}
-	get isV33Stage(): stageEvents.CeresLiquidityLockerLockedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresLiquidityLockerLockedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV37Stage(): stageEvents.CeresLiquidityLockerLockedEvent['isV37'] {
-		return this.stage.isV37
-	}
-	get asV37Stage(): stageEvents.CeresLiquidityLockerLockedEvent['asV37'] {
-		return this.stage.asV37
-	}
-	get isV60Dev(): devEvents.CeresLiquidityLockerLockedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresLiquidityLockerLockedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresStakingDepositedEvent {
 	private readonly production: productionEvents.CeresStakingDepositedEvent
 	private readonly stage: stageEvents.CeresStakingDepositedEvent
+	private readonly test: testEvents.CeresStakingDepositedEvent
 	private readonly dev: devEvents.CeresStakingDepositedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.CeresStakingDepositedEvent(ctx, event)
 		this.stage = new stageEvents.CeresStakingDepositedEvent(ctx, event)
+		this.test = new testEvents.CeresStakingDepositedEvent(ctx, event)
 		this.dev = new devEvents.CeresStakingDepositedEvent(ctx, event)
 	}
 
@@ -1617,28 +1054,18 @@ export class CeresStakingDepositedEvent {
 	get asV19(): productionEvents.CeresStakingDepositedEvent['asV19'] {
 		return this.production.asV19
 	}
-	get isV33Stage(): stageEvents.CeresStakingDepositedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresStakingDepositedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.CeresStakingDepositedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresStakingDepositedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresStakingRewardsChangedEvent {
 	private readonly production: productionEvents.CeresStakingRewardsChangedEvent
 	private readonly stage: stageEvents.CeresStakingRewardsChangedEvent
+	private readonly test: testEvents.CeresStakingRewardsChangedEvent
 	private readonly dev: devEvents.CeresStakingRewardsChangedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.CeresStakingRewardsChangedEvent(ctx, event)
 		this.stage = new stageEvents.CeresStakingRewardsChangedEvent(ctx, event)
+		this.test = new testEvents.CeresStakingRewardsChangedEvent(ctx, event)
 		this.dev = new devEvents.CeresStakingRewardsChangedEvent(ctx, event)
 	}
 
@@ -1648,28 +1075,18 @@ export class CeresStakingRewardsChangedEvent {
 	get asV26(): productionEvents.CeresStakingRewardsChangedEvent['asV26'] {
 		return this.production.asV26
 	}
-	get isV33Stage(): stageEvents.CeresStakingRewardsChangedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresStakingRewardsChangedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.CeresStakingRewardsChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresStakingRewardsChangedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresStakingWithdrawnEvent {
 	private readonly production: productionEvents.CeresStakingWithdrawnEvent
 	private readonly stage: stageEvents.CeresStakingWithdrawnEvent
+	private readonly test: testEvents.CeresStakingWithdrawnEvent
 	private readonly dev: devEvents.CeresStakingWithdrawnEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.CeresStakingWithdrawnEvent(ctx, event)
 		this.stage = new stageEvents.CeresStakingWithdrawnEvent(ctx, event)
+		this.test = new testEvents.CeresStakingWithdrawnEvent(ctx, event)
 		this.dev = new devEvents.CeresStakingWithdrawnEvent(ctx, event)
 	}
 
@@ -1679,28 +1096,18 @@ export class CeresStakingWithdrawnEvent {
 	get asV19(): productionEvents.CeresStakingWithdrawnEvent['asV19'] {
 		return this.production.asV19
 	}
-	get isV33Stage(): stageEvents.CeresStakingWithdrawnEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresStakingWithdrawnEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.CeresStakingWithdrawnEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresStakingWithdrawnEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresTokenLockerFeeChangedEvent {
 	private readonly production: productionEvents.CeresTokenLockerFeeChangedEvent
 	private readonly stage: stageEvents.CeresTokenLockerFeeChangedEvent
+	private readonly test: testEvents.CeresTokenLockerFeeChangedEvent
 	private readonly dev: devEvents.CeresTokenLockerFeeChangedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.CeresTokenLockerFeeChangedEvent(ctx, event)
 		this.stage = new stageEvents.CeresTokenLockerFeeChangedEvent(ctx, event)
+		this.test = new testEvents.CeresTokenLockerFeeChangedEvent(ctx, event)
 		this.dev = new devEvents.CeresTokenLockerFeeChangedEvent(ctx, event)
 	}
 
@@ -1710,28 +1117,18 @@ export class CeresTokenLockerFeeChangedEvent {
 	get asV26(): productionEvents.CeresTokenLockerFeeChangedEvent['asV26'] {
 		return this.production.asV26
 	}
-	get isV33Stage(): stageEvents.CeresTokenLockerFeeChangedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresTokenLockerFeeChangedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.CeresTokenLockerFeeChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresTokenLockerFeeChangedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresTokenLockerLockedEvent {
 	private readonly production: productionEvents.CeresTokenLockerLockedEvent
 	private readonly stage: stageEvents.CeresTokenLockerLockedEvent
+	private readonly test: testEvents.CeresTokenLockerLockedEvent
 	private readonly dev: devEvents.CeresTokenLockerLockedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.CeresTokenLockerLockedEvent(ctx, event)
 		this.stage = new stageEvents.CeresTokenLockerLockedEvent(ctx, event)
+		this.test = new testEvents.CeresTokenLockerLockedEvent(ctx, event)
 		this.dev = new devEvents.CeresTokenLockerLockedEvent(ctx, event)
 	}
 
@@ -1747,34 +1144,18 @@ export class CeresTokenLockerLockedEvent {
 	get asV42(): productionEvents.CeresTokenLockerLockedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.CeresTokenLockerLockedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresTokenLockerLockedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.CeresTokenLockerLockedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.CeresTokenLockerLockedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.CeresTokenLockerLockedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresTokenLockerLockedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CeresTokenLockerWithdrawnEvent {
 	private readonly production: productionEvents.CeresTokenLockerWithdrawnEvent
 	private readonly stage: stageEvents.CeresTokenLockerWithdrawnEvent
+	private readonly test: testEvents.CeresTokenLockerWithdrawnEvent
 	private readonly dev: devEvents.CeresTokenLockerWithdrawnEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.CeresTokenLockerWithdrawnEvent(ctx, event)
 		this.stage = new stageEvents.CeresTokenLockerWithdrawnEvent(ctx, event)
+		this.test = new testEvents.CeresTokenLockerWithdrawnEvent(ctx, event)
 		this.dev = new devEvents.CeresTokenLockerWithdrawnEvent(ctx, event)
 	}
 
@@ -1790,34 +1171,18 @@ export class CeresTokenLockerWithdrawnEvent {
 	get asV42(): productionEvents.CeresTokenLockerWithdrawnEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.CeresTokenLockerWithdrawnEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CeresTokenLockerWithdrawnEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.CeresTokenLockerWithdrawnEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.CeresTokenLockerWithdrawnEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.CeresTokenLockerWithdrawnEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CeresTokenLockerWithdrawnEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CouncilApprovedEvent {
 	private readonly production: productionEvents.CouncilApprovedEvent
 	private readonly stage: stageEvents.CouncilApprovedEvent
+	private readonly test: testEvents.CouncilApprovedEvent
 	private readonly dev: devEvents.CouncilApprovedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.CouncilApprovedEvent(ctx, event)
 		this.stage = new stageEvents.CouncilApprovedEvent(ctx, event)
+		this.test = new testEvents.CouncilApprovedEvent(ctx, event)
 		this.dev = new devEvents.CouncilApprovedEvent(ctx, event)
 	}
 
@@ -1833,34 +1198,18 @@ export class CouncilApprovedEvent {
 	get asV42(): productionEvents.CouncilApprovedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.CouncilApprovedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CouncilApprovedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.CouncilApprovedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.CouncilApprovedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.CouncilApprovedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CouncilApprovedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CouncilClosedEvent {
 	private readonly production: productionEvents.CouncilClosedEvent
 	private readonly stage: stageEvents.CouncilClosedEvent
+	private readonly test: testEvents.CouncilClosedEvent
 	private readonly dev: devEvents.CouncilClosedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.CouncilClosedEvent(ctx, event)
 		this.stage = new stageEvents.CouncilClosedEvent(ctx, event)
+		this.test = new testEvents.CouncilClosedEvent(ctx, event)
 		this.dev = new devEvents.CouncilClosedEvent(ctx, event)
 	}
 
@@ -1876,34 +1225,18 @@ export class CouncilClosedEvent {
 	get asV42(): productionEvents.CouncilClosedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.CouncilClosedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CouncilClosedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.CouncilClosedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.CouncilClosedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.CouncilClosedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CouncilClosedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CouncilDisapprovedEvent {
 	private readonly production: productionEvents.CouncilDisapprovedEvent
 	private readonly stage: stageEvents.CouncilDisapprovedEvent
+	private readonly test: testEvents.CouncilDisapprovedEvent
 	private readonly dev: devEvents.CouncilDisapprovedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.CouncilDisapprovedEvent(ctx, event)
 		this.stage = new stageEvents.CouncilDisapprovedEvent(ctx, event)
+		this.test = new testEvents.CouncilDisapprovedEvent(ctx, event)
 		this.dev = new devEvents.CouncilDisapprovedEvent(ctx, event)
 	}
 
@@ -1919,34 +1252,18 @@ export class CouncilDisapprovedEvent {
 	get asV42(): productionEvents.CouncilDisapprovedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.CouncilDisapprovedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CouncilDisapprovedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.CouncilDisapprovedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.CouncilDisapprovedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.CouncilDisapprovedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CouncilDisapprovedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CouncilExecutedEvent {
 	private readonly production: productionEvents.CouncilExecutedEvent
 	private readonly stage: stageEvents.CouncilExecutedEvent
+	private readonly test: testEvents.CouncilExecutedEvent
 	private readonly dev: devEvents.CouncilExecutedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.CouncilExecutedEvent(ctx, event)
 		this.stage = new stageEvents.CouncilExecutedEvent(ctx, event)
+		this.test = new testEvents.CouncilExecutedEvent(ctx, event)
 		this.dev = new devEvents.CouncilExecutedEvent(ctx, event)
 	}
 
@@ -1968,40 +1285,18 @@ export class CouncilExecutedEvent {
 	get asV53(): productionEvents.CouncilExecutedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV33Stage(): stageEvents.CouncilExecutedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CouncilExecutedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.CouncilExecutedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.CouncilExecutedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.CouncilExecutedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.CouncilExecutedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.CouncilExecutedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CouncilExecutedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CouncilMemberExecutedEvent {
 	private readonly production: productionEvents.CouncilMemberExecutedEvent
 	private readonly stage: stageEvents.CouncilMemberExecutedEvent
+	private readonly test: testEvents.CouncilMemberExecutedEvent
 	private readonly dev: devEvents.CouncilMemberExecutedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.CouncilMemberExecutedEvent(ctx, event)
 		this.stage = new stageEvents.CouncilMemberExecutedEvent(ctx, event)
+		this.test = new testEvents.CouncilMemberExecutedEvent(ctx, event)
 		this.dev = new devEvents.CouncilMemberExecutedEvent(ctx, event)
 	}
 
@@ -2023,40 +1318,18 @@ export class CouncilMemberExecutedEvent {
 	get asV53(): productionEvents.CouncilMemberExecutedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV33Stage(): stageEvents.CouncilMemberExecutedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CouncilMemberExecutedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.CouncilMemberExecutedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.CouncilMemberExecutedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.CouncilMemberExecutedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.CouncilMemberExecutedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.CouncilMemberExecutedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CouncilMemberExecutedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CouncilProposedEvent {
 	private readonly production: productionEvents.CouncilProposedEvent
 	private readonly stage: stageEvents.CouncilProposedEvent
+	private readonly test: testEvents.CouncilProposedEvent
 	private readonly dev: devEvents.CouncilProposedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.CouncilProposedEvent(ctx, event)
 		this.stage = new stageEvents.CouncilProposedEvent(ctx, event)
+		this.test = new testEvents.CouncilProposedEvent(ctx, event)
 		this.dev = new devEvents.CouncilProposedEvent(ctx, event)
 	}
 
@@ -2072,34 +1345,18 @@ export class CouncilProposedEvent {
 	get asV42(): productionEvents.CouncilProposedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.CouncilProposedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CouncilProposedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.CouncilProposedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.CouncilProposedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.CouncilProposedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CouncilProposedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CouncilVotedEvent {
 	private readonly production: productionEvents.CouncilVotedEvent
 	private readonly stage: stageEvents.CouncilVotedEvent
+	private readonly test: testEvents.CouncilVotedEvent
 	private readonly dev: devEvents.CouncilVotedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.CouncilVotedEvent(ctx, event)
 		this.stage = new stageEvents.CouncilVotedEvent(ctx, event)
+		this.test = new testEvents.CouncilVotedEvent(ctx, event)
 		this.dev = new devEvents.CouncilVotedEvent(ctx, event)
 	}
 
@@ -2115,33 +1372,17 @@ export class CouncilVotedEvent {
 	get asV42(): productionEvents.CouncilVotedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.CouncilVotedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CouncilVotedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.CouncilVotedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.CouncilVotedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.CouncilVotedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.CouncilVotedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class CurrenciesBalanceUpdatedEvent {
 	private readonly production: productionEvents.CurrenciesBalanceUpdatedEvent
 	private readonly stage: stageEvents.CurrenciesBalanceUpdatedEvent
+	private readonly test: testEvents.CurrenciesBalanceUpdatedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.CurrenciesBalanceUpdatedEvent(ctx, event)
 		this.stage = new stageEvents.CurrenciesBalanceUpdatedEvent(ctx, event)
+		this.test = new testEvents.CurrenciesBalanceUpdatedEvent(ctx, event)
 	}
 
 	get isV1(): productionEvents.CurrenciesBalanceUpdatedEvent['isV1'] {
@@ -2150,21 +1391,17 @@ export class CurrenciesBalanceUpdatedEvent {
 	get asV1(): productionEvents.CurrenciesBalanceUpdatedEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.CurrenciesBalanceUpdatedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CurrenciesBalanceUpdatedEvent['asV33'] {
-		return this.stage.asV33
-	}
 }
 
 export class CurrenciesDepositedEvent {
 	private readonly production: productionEvents.CurrenciesDepositedEvent
 	private readonly stage: stageEvents.CurrenciesDepositedEvent
+	private readonly test: testEvents.CurrenciesDepositedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.CurrenciesDepositedEvent(ctx, event)
 		this.stage = new stageEvents.CurrenciesDepositedEvent(ctx, event)
+		this.test = new testEvents.CurrenciesDepositedEvent(ctx, event)
 	}
 
 	get isV1(): productionEvents.CurrenciesDepositedEvent['isV1'] {
@@ -2173,21 +1410,17 @@ export class CurrenciesDepositedEvent {
 	get asV1(): productionEvents.CurrenciesDepositedEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.CurrenciesDepositedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CurrenciesDepositedEvent['asV33'] {
-		return this.stage.asV33
-	}
 }
 
 export class CurrenciesTransferredEvent {
 	private readonly production: productionEvents.CurrenciesTransferredEvent
 	private readonly stage: stageEvents.CurrenciesTransferredEvent
+	private readonly test: testEvents.CurrenciesTransferredEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.CurrenciesTransferredEvent(ctx, event)
 		this.stage = new stageEvents.CurrenciesTransferredEvent(ctx, event)
+		this.test = new testEvents.CurrenciesTransferredEvent(ctx, event)
 	}
 
 	get isV1(): productionEvents.CurrenciesTransferredEvent['isV1'] {
@@ -2196,21 +1429,17 @@ export class CurrenciesTransferredEvent {
 	get asV1(): productionEvents.CurrenciesTransferredEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.CurrenciesTransferredEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CurrenciesTransferredEvent['asV33'] {
-		return this.stage.asV33
-	}
 }
 
 export class CurrenciesWithdrawnEvent {
 	private readonly production: productionEvents.CurrenciesWithdrawnEvent
 	private readonly stage: stageEvents.CurrenciesWithdrawnEvent
+	private readonly test: testEvents.CurrenciesWithdrawnEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.CurrenciesWithdrawnEvent(ctx, event)
 		this.stage = new stageEvents.CurrenciesWithdrawnEvent(ctx, event)
+		this.test = new testEvents.CurrenciesWithdrawnEvent(ctx, event)
 	}
 
 	get isV1(): productionEvents.CurrenciesWithdrawnEvent['isV1'] {
@@ -2218,12 +1447,6 @@ export class CurrenciesWithdrawnEvent {
 	}
 	get asV1(): productionEvents.CurrenciesWithdrawnEvent['asV1'] {
 		return this.production.asV1
-	}
-	get isV33Stage(): stageEvents.CurrenciesWithdrawnEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.CurrenciesWithdrawnEvent['asV33'] {
-		return this.stage.asV33
 	}
 }
 
@@ -2245,11 +1468,13 @@ export class DexapiDirectExchangeEvent {
 export class DemeterFarmingPlatformDepositFeeChangedEvent {
 	private readonly production: productionEvents.DemeterFarmingPlatformDepositFeeChangedEvent
 	private readonly stage: stageEvents.DemeterFarmingPlatformDepositFeeChangedEvent
+	private readonly test: testEvents.DemeterFarmingPlatformDepositFeeChangedEvent
 	private readonly dev: devEvents.DemeterFarmingPlatformDepositFeeChangedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.DemeterFarmingPlatformDepositFeeChangedEvent(ctx, event)
 		this.stage = new stageEvents.DemeterFarmingPlatformDepositFeeChangedEvent(ctx, event)
+		this.test = new testEvents.DemeterFarmingPlatformDepositFeeChangedEvent(ctx, event)
 		this.dev = new devEvents.DemeterFarmingPlatformDepositFeeChangedEvent(ctx, event)
 	}
 
@@ -2271,40 +1496,18 @@ export class DemeterFarmingPlatformDepositFeeChangedEvent {
 	get asV43(): productionEvents.DemeterFarmingPlatformDepositFeeChangedEvent['asV43'] {
 		return this.production.asV43
 	}
-	get isV33Stage(): stageEvents.DemeterFarmingPlatformDepositFeeChangedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemeterFarmingPlatformDepositFeeChangedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemeterFarmingPlatformDepositFeeChangedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemeterFarmingPlatformDepositFeeChangedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV43Stage(): stageEvents.DemeterFarmingPlatformDepositFeeChangedEvent['isV43'] {
-		return this.stage.isV43
-	}
-	get asV43Stage(): stageEvents.DemeterFarmingPlatformDepositFeeChangedEvent['asV43'] {
-		return this.stage.asV43
-	}
-	get isV60Dev(): devEvents.DemeterFarmingPlatformDepositFeeChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemeterFarmingPlatformDepositFeeChangedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemeterFarmingPlatformDepositedEvent {
 	private readonly production: productionEvents.DemeterFarmingPlatformDepositedEvent
 	private readonly stage: stageEvents.DemeterFarmingPlatformDepositedEvent
+	private readonly test: testEvents.DemeterFarmingPlatformDepositedEvent
 	private readonly dev: devEvents.DemeterFarmingPlatformDepositedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.DemeterFarmingPlatformDepositedEvent(ctx, event)
 		this.stage = new stageEvents.DemeterFarmingPlatformDepositedEvent(ctx, event)
+		this.test = new testEvents.DemeterFarmingPlatformDepositedEvent(ctx, event)
 		this.dev = new devEvents.DemeterFarmingPlatformDepositedEvent(ctx, event)
 	}
 
@@ -2326,40 +1529,18 @@ export class DemeterFarmingPlatformDepositedEvent {
 	get asV43(): productionEvents.DemeterFarmingPlatformDepositedEvent['asV43'] {
 		return this.production.asV43
 	}
-	get isV33Stage(): stageEvents.DemeterFarmingPlatformDepositedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemeterFarmingPlatformDepositedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemeterFarmingPlatformDepositedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemeterFarmingPlatformDepositedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV43Stage(): stageEvents.DemeterFarmingPlatformDepositedEvent['isV43'] {
-		return this.stage.isV43
-	}
-	get asV43Stage(): stageEvents.DemeterFarmingPlatformDepositedEvent['asV43'] {
-		return this.stage.asV43
-	}
-	get isV60Dev(): devEvents.DemeterFarmingPlatformDepositedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemeterFarmingPlatformDepositedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemeterFarmingPlatformInfoChangedEvent {
 	private readonly production: productionEvents.DemeterFarmingPlatformInfoChangedEvent
 	private readonly stage: stageEvents.DemeterFarmingPlatformInfoChangedEvent
+	private readonly test: testEvents.DemeterFarmingPlatformInfoChangedEvent
 	private readonly dev: devEvents.DemeterFarmingPlatformInfoChangedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.DemeterFarmingPlatformInfoChangedEvent(ctx, event)
 		this.stage = new stageEvents.DemeterFarmingPlatformInfoChangedEvent(ctx, event)
+		this.test = new testEvents.DemeterFarmingPlatformInfoChangedEvent(ctx, event)
 		this.dev = new devEvents.DemeterFarmingPlatformInfoChangedEvent(ctx, event)
 	}
 
@@ -2381,40 +1562,18 @@ export class DemeterFarmingPlatformInfoChangedEvent {
 	get asV43(): productionEvents.DemeterFarmingPlatformInfoChangedEvent['asV43'] {
 		return this.production.asV43
 	}
-	get isV35Stage(): stageEvents.DemeterFarmingPlatformInfoChangedEvent['isV35'] {
-		return this.stage.isV35
-	}
-	get asV35Stage(): stageEvents.DemeterFarmingPlatformInfoChangedEvent['asV35'] {
-		return this.stage.asV35
-	}
-	get isV42Stage(): stageEvents.DemeterFarmingPlatformInfoChangedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemeterFarmingPlatformInfoChangedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV43Stage(): stageEvents.DemeterFarmingPlatformInfoChangedEvent['isV43'] {
-		return this.stage.isV43
-	}
-	get asV43Stage(): stageEvents.DemeterFarmingPlatformInfoChangedEvent['asV43'] {
-		return this.stage.asV43
-	}
-	get isV60Dev(): devEvents.DemeterFarmingPlatformInfoChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemeterFarmingPlatformInfoChangedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemeterFarmingPlatformMultiplierChangedEvent {
 	private readonly production: productionEvents.DemeterFarmingPlatformMultiplierChangedEvent
 	private readonly stage: stageEvents.DemeterFarmingPlatformMultiplierChangedEvent
+	private readonly test: testEvents.DemeterFarmingPlatformMultiplierChangedEvent
 	private readonly dev: devEvents.DemeterFarmingPlatformMultiplierChangedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.DemeterFarmingPlatformMultiplierChangedEvent(ctx, event)
 		this.stage = new stageEvents.DemeterFarmingPlatformMultiplierChangedEvent(ctx, event)
+		this.test = new testEvents.DemeterFarmingPlatformMultiplierChangedEvent(ctx, event)
 		this.dev = new devEvents.DemeterFarmingPlatformMultiplierChangedEvent(ctx, event)
 	}
 
@@ -2436,40 +1595,18 @@ export class DemeterFarmingPlatformMultiplierChangedEvent {
 	get asV43(): productionEvents.DemeterFarmingPlatformMultiplierChangedEvent['asV43'] {
 		return this.production.asV43
 	}
-	get isV33Stage(): stageEvents.DemeterFarmingPlatformMultiplierChangedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemeterFarmingPlatformMultiplierChangedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemeterFarmingPlatformMultiplierChangedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemeterFarmingPlatformMultiplierChangedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV43Stage(): stageEvents.DemeterFarmingPlatformMultiplierChangedEvent['isV43'] {
-		return this.stage.isV43
-	}
-	get asV43Stage(): stageEvents.DemeterFarmingPlatformMultiplierChangedEvent['asV43'] {
-		return this.stage.asV43
-	}
-	get isV60Dev(): devEvents.DemeterFarmingPlatformMultiplierChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemeterFarmingPlatformMultiplierChangedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemeterFarmingPlatformPoolAddedEvent {
 	private readonly production: productionEvents.DemeterFarmingPlatformPoolAddedEvent
 	private readonly stage: stageEvents.DemeterFarmingPlatformPoolAddedEvent
+	private readonly test: testEvents.DemeterFarmingPlatformPoolAddedEvent
 	private readonly dev: devEvents.DemeterFarmingPlatformPoolAddedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.DemeterFarmingPlatformPoolAddedEvent(ctx, event)
 		this.stage = new stageEvents.DemeterFarmingPlatformPoolAddedEvent(ctx, event)
+		this.test = new testEvents.DemeterFarmingPlatformPoolAddedEvent(ctx, event)
 		this.dev = new devEvents.DemeterFarmingPlatformPoolAddedEvent(ctx, event)
 	}
 
@@ -2491,40 +1628,18 @@ export class DemeterFarmingPlatformPoolAddedEvent {
 	get asV43(): productionEvents.DemeterFarmingPlatformPoolAddedEvent['asV43'] {
 		return this.production.asV43
 	}
-	get isV33Stage(): stageEvents.DemeterFarmingPlatformPoolAddedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemeterFarmingPlatformPoolAddedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemeterFarmingPlatformPoolAddedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemeterFarmingPlatformPoolAddedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV43Stage(): stageEvents.DemeterFarmingPlatformPoolAddedEvent['isV43'] {
-		return this.stage.isV43
-	}
-	get asV43Stage(): stageEvents.DemeterFarmingPlatformPoolAddedEvent['asV43'] {
-		return this.stage.asV43
-	}
-	get isV60Dev(): devEvents.DemeterFarmingPlatformPoolAddedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemeterFarmingPlatformPoolAddedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemeterFarmingPlatformPoolRemovedEvent {
 	private readonly production: productionEvents.DemeterFarmingPlatformPoolRemovedEvent
 	private readonly stage: stageEvents.DemeterFarmingPlatformPoolRemovedEvent
+	private readonly test: testEvents.DemeterFarmingPlatformPoolRemovedEvent
 	private readonly dev: devEvents.DemeterFarmingPlatformPoolRemovedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.DemeterFarmingPlatformPoolRemovedEvent(ctx, event)
 		this.stage = new stageEvents.DemeterFarmingPlatformPoolRemovedEvent(ctx, event)
+		this.test = new testEvents.DemeterFarmingPlatformPoolRemovedEvent(ctx, event)
 		this.dev = new devEvents.DemeterFarmingPlatformPoolRemovedEvent(ctx, event)
 	}
 
@@ -2546,40 +1661,18 @@ export class DemeterFarmingPlatformPoolRemovedEvent {
 	get asV43(): productionEvents.DemeterFarmingPlatformPoolRemovedEvent['asV43'] {
 		return this.production.asV43
 	}
-	get isV33Stage(): stageEvents.DemeterFarmingPlatformPoolRemovedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemeterFarmingPlatformPoolRemovedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemeterFarmingPlatformPoolRemovedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemeterFarmingPlatformPoolRemovedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV43Stage(): stageEvents.DemeterFarmingPlatformPoolRemovedEvent['isV43'] {
-		return this.stage.isV43
-	}
-	get asV43Stage(): stageEvents.DemeterFarmingPlatformPoolRemovedEvent['asV43'] {
-		return this.stage.asV43
-	}
-	get isV60Dev(): devEvents.DemeterFarmingPlatformPoolRemovedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemeterFarmingPlatformPoolRemovedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemeterFarmingPlatformRewardWithdrawnEvent {
 	private readonly production: productionEvents.DemeterFarmingPlatformRewardWithdrawnEvent
 	private readonly stage: stageEvents.DemeterFarmingPlatformRewardWithdrawnEvent
+	private readonly test: testEvents.DemeterFarmingPlatformRewardWithdrawnEvent
 	private readonly dev: devEvents.DemeterFarmingPlatformRewardWithdrawnEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.DemeterFarmingPlatformRewardWithdrawnEvent(ctx, event)
 		this.stage = new stageEvents.DemeterFarmingPlatformRewardWithdrawnEvent(ctx, event)
+		this.test = new testEvents.DemeterFarmingPlatformRewardWithdrawnEvent(ctx, event)
 		this.dev = new devEvents.DemeterFarmingPlatformRewardWithdrawnEvent(ctx, event)
 	}
 
@@ -2601,40 +1694,18 @@ export class DemeterFarmingPlatformRewardWithdrawnEvent {
 	get asV43(): productionEvents.DemeterFarmingPlatformRewardWithdrawnEvent['asV43'] {
 		return this.production.asV43
 	}
-	get isV33Stage(): stageEvents.DemeterFarmingPlatformRewardWithdrawnEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemeterFarmingPlatformRewardWithdrawnEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemeterFarmingPlatformRewardWithdrawnEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemeterFarmingPlatformRewardWithdrawnEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV43Stage(): stageEvents.DemeterFarmingPlatformRewardWithdrawnEvent['isV43'] {
-		return this.stage.isV43
-	}
-	get asV43Stage(): stageEvents.DemeterFarmingPlatformRewardWithdrawnEvent['asV43'] {
-		return this.stage.asV43
-	}
-	get isV60Dev(): devEvents.DemeterFarmingPlatformRewardWithdrawnEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemeterFarmingPlatformRewardWithdrawnEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemeterFarmingPlatformTokenInfoChangedEvent {
 	private readonly production: productionEvents.DemeterFarmingPlatformTokenInfoChangedEvent
 	private readonly stage: stageEvents.DemeterFarmingPlatformTokenInfoChangedEvent
+	private readonly test: testEvents.DemeterFarmingPlatformTokenInfoChangedEvent
 	private readonly dev: devEvents.DemeterFarmingPlatformTokenInfoChangedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.DemeterFarmingPlatformTokenInfoChangedEvent(ctx, event)
 		this.stage = new stageEvents.DemeterFarmingPlatformTokenInfoChangedEvent(ctx, event)
+		this.test = new testEvents.DemeterFarmingPlatformTokenInfoChangedEvent(ctx, event)
 		this.dev = new devEvents.DemeterFarmingPlatformTokenInfoChangedEvent(ctx, event)
 	}
 
@@ -2650,34 +1721,18 @@ export class DemeterFarmingPlatformTokenInfoChangedEvent {
 	get asV42(): productionEvents.DemeterFarmingPlatformTokenInfoChangedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.DemeterFarmingPlatformTokenInfoChangedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemeterFarmingPlatformTokenInfoChangedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemeterFarmingPlatformTokenInfoChangedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemeterFarmingPlatformTokenInfoChangedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.DemeterFarmingPlatformTokenInfoChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemeterFarmingPlatformTokenInfoChangedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemeterFarmingPlatformTokenRegisteredEvent {
 	private readonly production: productionEvents.DemeterFarmingPlatformTokenRegisteredEvent
 	private readonly stage: stageEvents.DemeterFarmingPlatformTokenRegisteredEvent
+	private readonly test: testEvents.DemeterFarmingPlatformTokenRegisteredEvent
 	private readonly dev: devEvents.DemeterFarmingPlatformTokenRegisteredEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.DemeterFarmingPlatformTokenRegisteredEvent(ctx, event)
 		this.stage = new stageEvents.DemeterFarmingPlatformTokenRegisteredEvent(ctx, event)
+		this.test = new testEvents.DemeterFarmingPlatformTokenRegisteredEvent(ctx, event)
 		this.dev = new devEvents.DemeterFarmingPlatformTokenRegisteredEvent(ctx, event)
 	}
 
@@ -2693,34 +1748,18 @@ export class DemeterFarmingPlatformTokenRegisteredEvent {
 	get asV42(): productionEvents.DemeterFarmingPlatformTokenRegisteredEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.DemeterFarmingPlatformTokenRegisteredEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemeterFarmingPlatformTokenRegisteredEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemeterFarmingPlatformTokenRegisteredEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemeterFarmingPlatformTokenRegisteredEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.DemeterFarmingPlatformTokenRegisteredEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemeterFarmingPlatformTokenRegisteredEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemeterFarmingPlatformTotalTokensChangedEvent {
 	private readonly production: productionEvents.DemeterFarmingPlatformTotalTokensChangedEvent
 	private readonly stage: stageEvents.DemeterFarmingPlatformTotalTokensChangedEvent
+	private readonly test: testEvents.DemeterFarmingPlatformTotalTokensChangedEvent
 	private readonly dev: devEvents.DemeterFarmingPlatformTotalTokensChangedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.DemeterFarmingPlatformTotalTokensChangedEvent(ctx, event)
 		this.stage = new stageEvents.DemeterFarmingPlatformTotalTokensChangedEvent(ctx, event)
+		this.test = new testEvents.DemeterFarmingPlatformTotalTokensChangedEvent(ctx, event)
 		this.dev = new devEvents.DemeterFarmingPlatformTotalTokensChangedEvent(ctx, event)
 	}
 
@@ -2742,40 +1781,18 @@ export class DemeterFarmingPlatformTotalTokensChangedEvent {
 	get asV43(): productionEvents.DemeterFarmingPlatformTotalTokensChangedEvent['asV43'] {
 		return this.production.asV43
 	}
-	get isV35Stage(): stageEvents.DemeterFarmingPlatformTotalTokensChangedEvent['isV35'] {
-		return this.stage.isV35
-	}
-	get asV35Stage(): stageEvents.DemeterFarmingPlatformTotalTokensChangedEvent['asV35'] {
-		return this.stage.asV35
-	}
-	get isV42Stage(): stageEvents.DemeterFarmingPlatformTotalTokensChangedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemeterFarmingPlatformTotalTokensChangedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV43Stage(): stageEvents.DemeterFarmingPlatformTotalTokensChangedEvent['isV43'] {
-		return this.stage.isV43
-	}
-	get asV43Stage(): stageEvents.DemeterFarmingPlatformTotalTokensChangedEvent['asV43'] {
-		return this.stage.asV43
-	}
-	get isV60Dev(): devEvents.DemeterFarmingPlatformTotalTokensChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemeterFarmingPlatformTotalTokensChangedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemeterFarmingPlatformWithdrawnEvent {
 	private readonly production: productionEvents.DemeterFarmingPlatformWithdrawnEvent
 	private readonly stage: stageEvents.DemeterFarmingPlatformWithdrawnEvent
+	private readonly test: testEvents.DemeterFarmingPlatformWithdrawnEvent
 	private readonly dev: devEvents.DemeterFarmingPlatformWithdrawnEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.DemeterFarmingPlatformWithdrawnEvent(ctx, event)
 		this.stage = new stageEvents.DemeterFarmingPlatformWithdrawnEvent(ctx, event)
+		this.test = new testEvents.DemeterFarmingPlatformWithdrawnEvent(ctx, event)
 		this.dev = new devEvents.DemeterFarmingPlatformWithdrawnEvent(ctx, event)
 	}
 
@@ -2797,40 +1814,18 @@ export class DemeterFarmingPlatformWithdrawnEvent {
 	get asV43(): productionEvents.DemeterFarmingPlatformWithdrawnEvent['asV43'] {
 		return this.production.asV43
 	}
-	get isV33Stage(): stageEvents.DemeterFarmingPlatformWithdrawnEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemeterFarmingPlatformWithdrawnEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemeterFarmingPlatformWithdrawnEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemeterFarmingPlatformWithdrawnEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV43Stage(): stageEvents.DemeterFarmingPlatformWithdrawnEvent['isV43'] {
-		return this.stage.isV43
-	}
-	get asV43Stage(): stageEvents.DemeterFarmingPlatformWithdrawnEvent['asV43'] {
-		return this.stage.asV43
-	}
-	get isV60Dev(): devEvents.DemeterFarmingPlatformWithdrawnEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemeterFarmingPlatformWithdrawnEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemocracyBlacklistedEvent {
 	private readonly production: productionEvents.DemocracyBlacklistedEvent
 	private readonly stage: stageEvents.DemocracyBlacklistedEvent
+	private readonly test: testEvents.DemocracyBlacklistedEvent
 	private readonly dev: devEvents.DemocracyBlacklistedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.DemocracyBlacklistedEvent(ctx, event)
 		this.stage = new stageEvents.DemocracyBlacklistedEvent(ctx, event)
+		this.test = new testEvents.DemocracyBlacklistedEvent(ctx, event)
 		this.dev = new devEvents.DemocracyBlacklistedEvent(ctx, event)
 	}
 
@@ -2846,34 +1841,18 @@ export class DemocracyBlacklistedEvent {
 	get asV42(): productionEvents.DemocracyBlacklistedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.DemocracyBlacklistedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyBlacklistedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemocracyBlacklistedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyBlacklistedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.DemocracyBlacklistedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemocracyBlacklistedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemocracyCancelledEvent {
 	private readonly production: productionEvents.DemocracyCancelledEvent
 	private readonly stage: stageEvents.DemocracyCancelledEvent
+	private readonly test: testEvents.DemocracyCancelledEvent
 	private readonly dev: devEvents.DemocracyCancelledEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.DemocracyCancelledEvent(ctx, event)
 		this.stage = new stageEvents.DemocracyCancelledEvent(ctx, event)
+		this.test = new testEvents.DemocracyCancelledEvent(ctx, event)
 		this.dev = new devEvents.DemocracyCancelledEvent(ctx, event)
 	}
 
@@ -2889,34 +1868,18 @@ export class DemocracyCancelledEvent {
 	get asV42(): productionEvents.DemocracyCancelledEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.DemocracyCancelledEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyCancelledEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemocracyCancelledEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyCancelledEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.DemocracyCancelledEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemocracyCancelledEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemocracyDelegatedEvent {
 	private readonly production: productionEvents.DemocracyDelegatedEvent
 	private readonly stage: stageEvents.DemocracyDelegatedEvent
+	private readonly test: testEvents.DemocracyDelegatedEvent
 	private readonly dev: devEvents.DemocracyDelegatedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.DemocracyDelegatedEvent(ctx, event)
 		this.stage = new stageEvents.DemocracyDelegatedEvent(ctx, event)
+		this.test = new testEvents.DemocracyDelegatedEvent(ctx, event)
 		this.dev = new devEvents.DemocracyDelegatedEvent(ctx, event)
 	}
 
@@ -2932,33 +1895,17 @@ export class DemocracyDelegatedEvent {
 	get asV42(): productionEvents.DemocracyDelegatedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.DemocracyDelegatedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyDelegatedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemocracyDelegatedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyDelegatedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.DemocracyDelegatedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemocracyDelegatedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemocracyExecutedEvent {
 	private readonly production: productionEvents.DemocracyExecutedEvent
 	private readonly stage: stageEvents.DemocracyExecutedEvent
+	private readonly test: testEvents.DemocracyExecutedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.DemocracyExecutedEvent(ctx, event)
 		this.stage = new stageEvents.DemocracyExecutedEvent(ctx, event)
+		this.test = new testEvents.DemocracyExecutedEvent(ctx, event)
 	}
 
 	get isV1(): productionEvents.DemocracyExecutedEvent['isV1'] {
@@ -2973,28 +1920,18 @@ export class DemocracyExecutedEvent {
 	get asV42(): productionEvents.DemocracyExecutedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.DemocracyExecutedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyExecutedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemocracyExecutedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyExecutedEvent['asV42'] {
-		return this.stage.asV42
-	}
 }
 
 export class DemocracyExternalTabledEvent {
 	private readonly production: productionEvents.DemocracyExternalTabledEvent
 	private readonly stage: stageEvents.DemocracyExternalTabledEvent
+	private readonly test: testEvents.DemocracyExternalTabledEvent
 	private readonly dev: devEvents.DemocracyExternalTabledEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.DemocracyExternalTabledEvent(ctx, event)
 		this.stage = new stageEvents.DemocracyExternalTabledEvent(ctx, event)
+		this.test = new testEvents.DemocracyExternalTabledEvent(ctx, event)
 		this.dev = new devEvents.DemocracyExternalTabledEvent(ctx, event)
 	}
 
@@ -3004,28 +1941,18 @@ export class DemocracyExternalTabledEvent {
 	get asV1(): productionEvents.DemocracyExternalTabledEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.DemocracyExternalTabledEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyExternalTabledEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.DemocracyExternalTabledEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemocracyExternalTabledEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemocracyNotPassedEvent {
 	private readonly production: productionEvents.DemocracyNotPassedEvent
 	private readonly stage: stageEvents.DemocracyNotPassedEvent
+	private readonly test: testEvents.DemocracyNotPassedEvent
 	private readonly dev: devEvents.DemocracyNotPassedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.DemocracyNotPassedEvent(ctx, event)
 		this.stage = new stageEvents.DemocracyNotPassedEvent(ctx, event)
+		this.test = new testEvents.DemocracyNotPassedEvent(ctx, event)
 		this.dev = new devEvents.DemocracyNotPassedEvent(ctx, event)
 	}
 
@@ -3041,34 +1968,18 @@ export class DemocracyNotPassedEvent {
 	get asV42(): productionEvents.DemocracyNotPassedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.DemocracyNotPassedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyNotPassedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemocracyNotPassedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyNotPassedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.DemocracyNotPassedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemocracyNotPassedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemocracyPassedEvent {
 	private readonly production: productionEvents.DemocracyPassedEvent
 	private readonly stage: stageEvents.DemocracyPassedEvent
+	private readonly test: testEvents.DemocracyPassedEvent
 	private readonly dev: devEvents.DemocracyPassedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.DemocracyPassedEvent(ctx, event)
 		this.stage = new stageEvents.DemocracyPassedEvent(ctx, event)
+		this.test = new testEvents.DemocracyPassedEvent(ctx, event)
 		this.dev = new devEvents.DemocracyPassedEvent(ctx, event)
 	}
 
@@ -3084,33 +1995,17 @@ export class DemocracyPassedEvent {
 	get asV42(): productionEvents.DemocracyPassedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.DemocracyPassedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyPassedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemocracyPassedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyPassedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.DemocracyPassedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemocracyPassedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemocracyPreimageInvalidEvent {
 	private readonly production: productionEvents.DemocracyPreimageInvalidEvent
 	private readonly stage: stageEvents.DemocracyPreimageInvalidEvent
+	private readonly test: testEvents.DemocracyPreimageInvalidEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.DemocracyPreimageInvalidEvent(ctx, event)
 		this.stage = new stageEvents.DemocracyPreimageInvalidEvent(ctx, event)
+		this.test = new testEvents.DemocracyPreimageInvalidEvent(ctx, event)
 	}
 
 	get isV1(): productionEvents.DemocracyPreimageInvalidEvent['isV1'] {
@@ -3125,27 +2020,17 @@ export class DemocracyPreimageInvalidEvent {
 	get asV42(): productionEvents.DemocracyPreimageInvalidEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.DemocracyPreimageInvalidEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyPreimageInvalidEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemocracyPreimageInvalidEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyPreimageInvalidEvent['asV42'] {
-		return this.stage.asV42
-	}
 }
 
 export class DemocracyPreimageMissingEvent {
 	private readonly production: productionEvents.DemocracyPreimageMissingEvent
 	private readonly stage: stageEvents.DemocracyPreimageMissingEvent
+	private readonly test: testEvents.DemocracyPreimageMissingEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.DemocracyPreimageMissingEvent(ctx, event)
 		this.stage = new stageEvents.DemocracyPreimageMissingEvent(ctx, event)
+		this.test = new testEvents.DemocracyPreimageMissingEvent(ctx, event)
 	}
 
 	get isV1(): productionEvents.DemocracyPreimageMissingEvent['isV1'] {
@@ -3160,27 +2045,17 @@ export class DemocracyPreimageMissingEvent {
 	get asV42(): productionEvents.DemocracyPreimageMissingEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.DemocracyPreimageMissingEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyPreimageMissingEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemocracyPreimageMissingEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyPreimageMissingEvent['asV42'] {
-		return this.stage.asV42
-	}
 }
 
 export class DemocracyPreimageNotedEvent {
 	private readonly production: productionEvents.DemocracyPreimageNotedEvent
 	private readonly stage: stageEvents.DemocracyPreimageNotedEvent
+	private readonly test: testEvents.DemocracyPreimageNotedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.DemocracyPreimageNotedEvent(ctx, event)
 		this.stage = new stageEvents.DemocracyPreimageNotedEvent(ctx, event)
+		this.test = new testEvents.DemocracyPreimageNotedEvent(ctx, event)
 	}
 
 	get isV1(): productionEvents.DemocracyPreimageNotedEvent['isV1'] {
@@ -3195,27 +2070,17 @@ export class DemocracyPreimageNotedEvent {
 	get asV42(): productionEvents.DemocracyPreimageNotedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.DemocracyPreimageNotedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyPreimageNotedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemocracyPreimageNotedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyPreimageNotedEvent['asV42'] {
-		return this.stage.asV42
-	}
 }
 
 export class DemocracyPreimageReapedEvent {
 	private readonly production: productionEvents.DemocracyPreimageReapedEvent
 	private readonly stage: stageEvents.DemocracyPreimageReapedEvent
+	private readonly test: testEvents.DemocracyPreimageReapedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.DemocracyPreimageReapedEvent(ctx, event)
 		this.stage = new stageEvents.DemocracyPreimageReapedEvent(ctx, event)
+		this.test = new testEvents.DemocracyPreimageReapedEvent(ctx, event)
 	}
 
 	get isV1(): productionEvents.DemocracyPreimageReapedEvent['isV1'] {
@@ -3230,27 +2095,17 @@ export class DemocracyPreimageReapedEvent {
 	get asV42(): productionEvents.DemocracyPreimageReapedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.DemocracyPreimageReapedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyPreimageReapedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemocracyPreimageReapedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyPreimageReapedEvent['asV42'] {
-		return this.stage.asV42
-	}
 }
 
 export class DemocracyPreimageUsedEvent {
 	private readonly production: productionEvents.DemocracyPreimageUsedEvent
 	private readonly stage: stageEvents.DemocracyPreimageUsedEvent
+	private readonly test: testEvents.DemocracyPreimageUsedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.DemocracyPreimageUsedEvent(ctx, event)
 		this.stage = new stageEvents.DemocracyPreimageUsedEvent(ctx, event)
+		this.test = new testEvents.DemocracyPreimageUsedEvent(ctx, event)
 	}
 
 	get isV1(): productionEvents.DemocracyPreimageUsedEvent['isV1'] {
@@ -3265,28 +2120,18 @@ export class DemocracyPreimageUsedEvent {
 	get asV42(): productionEvents.DemocracyPreimageUsedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.DemocracyPreimageUsedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyPreimageUsedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemocracyPreimageUsedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyPreimageUsedEvent['asV42'] {
-		return this.stage.asV42
-	}
 }
 
 export class DemocracyProposalCanceledEvent {
 	private readonly production: productionEvents.DemocracyProposalCanceledEvent
 	private readonly stage: stageEvents.DemocracyProposalCanceledEvent
+	private readonly test: testEvents.DemocracyProposalCanceledEvent
 	private readonly dev: devEvents.DemocracyProposalCanceledEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.DemocracyProposalCanceledEvent(ctx, event)
 		this.stage = new stageEvents.DemocracyProposalCanceledEvent(ctx, event)
+		this.test = new testEvents.DemocracyProposalCanceledEvent(ctx, event)
 		this.dev = new devEvents.DemocracyProposalCanceledEvent(ctx, event)
 	}
 
@@ -3296,28 +2141,18 @@ export class DemocracyProposalCanceledEvent {
 	get asV42(): productionEvents.DemocracyProposalCanceledEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.DemocracyProposalCanceledEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyProposalCanceledEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.DemocracyProposalCanceledEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemocracyProposalCanceledEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemocracyProposedEvent {
 	private readonly production: productionEvents.DemocracyProposedEvent
 	private readonly stage: stageEvents.DemocracyProposedEvent
+	private readonly test: testEvents.DemocracyProposedEvent
 	private readonly dev: devEvents.DemocracyProposedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.DemocracyProposedEvent(ctx, event)
 		this.stage = new stageEvents.DemocracyProposedEvent(ctx, event)
+		this.test = new testEvents.DemocracyProposedEvent(ctx, event)
 		this.dev = new devEvents.DemocracyProposedEvent(ctx, event)
 	}
 
@@ -3333,34 +2168,18 @@ export class DemocracyProposedEvent {
 	get asV42(): productionEvents.DemocracyProposedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.DemocracyProposedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyProposedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemocracyProposedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyProposedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.DemocracyProposedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemocracyProposedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemocracySecondedEvent {
 	private readonly production: productionEvents.DemocracySecondedEvent
 	private readonly stage: stageEvents.DemocracySecondedEvent
+	private readonly test: testEvents.DemocracySecondedEvent
 	private readonly dev: devEvents.DemocracySecondedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.DemocracySecondedEvent(ctx, event)
 		this.stage = new stageEvents.DemocracySecondedEvent(ctx, event)
+		this.test = new testEvents.DemocracySecondedEvent(ctx, event)
 		this.dev = new devEvents.DemocracySecondedEvent(ctx, event)
 	}
 
@@ -3370,28 +2189,18 @@ export class DemocracySecondedEvent {
 	get asV42(): productionEvents.DemocracySecondedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.DemocracySecondedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracySecondedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.DemocracySecondedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemocracySecondedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemocracyStartedEvent {
 	private readonly production: productionEvents.DemocracyStartedEvent
 	private readonly stage: stageEvents.DemocracyStartedEvent
+	private readonly test: testEvents.DemocracyStartedEvent
 	private readonly dev: devEvents.DemocracyStartedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.DemocracyStartedEvent(ctx, event)
 		this.stage = new stageEvents.DemocracyStartedEvent(ctx, event)
+		this.test = new testEvents.DemocracyStartedEvent(ctx, event)
 		this.dev = new devEvents.DemocracyStartedEvent(ctx, event)
 	}
 
@@ -3407,34 +2216,18 @@ export class DemocracyStartedEvent {
 	get asV42(): productionEvents.DemocracyStartedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.DemocracyStartedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyStartedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemocracyStartedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyStartedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.DemocracyStartedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemocracyStartedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemocracyTabledEvent {
 	private readonly production: productionEvents.DemocracyTabledEvent
 	private readonly stage: stageEvents.DemocracyTabledEvent
+	private readonly test: testEvents.DemocracyTabledEvent
 	private readonly dev: devEvents.DemocracyTabledEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.DemocracyTabledEvent(ctx, event)
 		this.stage = new stageEvents.DemocracyTabledEvent(ctx, event)
+		this.test = new testEvents.DemocracyTabledEvent(ctx, event)
 		this.dev = new devEvents.DemocracyTabledEvent(ctx, event)
 	}
 
@@ -3456,40 +2249,18 @@ export class DemocracyTabledEvent {
 	get asV53(): productionEvents.DemocracyTabledEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV33Stage(): stageEvents.DemocracyTabledEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyTabledEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemocracyTabledEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyTabledEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.DemocracyTabledEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.DemocracyTabledEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.DemocracyTabledEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemocracyTabledEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemocracyUndelegatedEvent {
 	private readonly production: productionEvents.DemocracyUndelegatedEvent
 	private readonly stage: stageEvents.DemocracyUndelegatedEvent
+	private readonly test: testEvents.DemocracyUndelegatedEvent
 	private readonly dev: devEvents.DemocracyUndelegatedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.DemocracyUndelegatedEvent(ctx, event)
 		this.stage = new stageEvents.DemocracyUndelegatedEvent(ctx, event)
+		this.test = new testEvents.DemocracyUndelegatedEvent(ctx, event)
 		this.dev = new devEvents.DemocracyUndelegatedEvent(ctx, event)
 	}
 
@@ -3505,33 +2276,17 @@ export class DemocracyUndelegatedEvent {
 	get asV42(): productionEvents.DemocracyUndelegatedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.DemocracyUndelegatedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyUndelegatedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemocracyUndelegatedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyUndelegatedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.DemocracyUndelegatedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemocracyUndelegatedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemocracyUnlockedEvent {
 	private readonly production: productionEvents.DemocracyUnlockedEvent
 	private readonly stage: stageEvents.DemocracyUnlockedEvent
+	private readonly test: testEvents.DemocracyUnlockedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.DemocracyUnlockedEvent(ctx, event)
 		this.stage = new stageEvents.DemocracyUnlockedEvent(ctx, event)
+		this.test = new testEvents.DemocracyUnlockedEvent(ctx, event)
 	}
 
 	get isV1(): productionEvents.DemocracyUnlockedEvent['isV1'] {
@@ -3540,22 +2295,18 @@ export class DemocracyUnlockedEvent {
 	get asV1(): productionEvents.DemocracyUnlockedEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.DemocracyUnlockedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyUnlockedEvent['asV33'] {
-		return this.stage.asV33
-	}
 }
 
 export class DemocracyVetoedEvent {
 	private readonly production: productionEvents.DemocracyVetoedEvent
 	private readonly stage: stageEvents.DemocracyVetoedEvent
+	private readonly test: testEvents.DemocracyVetoedEvent
 	private readonly dev: devEvents.DemocracyVetoedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.DemocracyVetoedEvent(ctx, event)
 		this.stage = new stageEvents.DemocracyVetoedEvent(ctx, event)
+		this.test = new testEvents.DemocracyVetoedEvent(ctx, event)
 		this.dev = new devEvents.DemocracyVetoedEvent(ctx, event)
 	}
 
@@ -3571,34 +2322,18 @@ export class DemocracyVetoedEvent {
 	get asV42(): productionEvents.DemocracyVetoedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.DemocracyVetoedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.DemocracyVetoedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.DemocracyVetoedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyVetoedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.DemocracyVetoedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemocracyVetoedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DemocracyVotedEvent {
 	private readonly production: productionEvents.DemocracyVotedEvent
 	private readonly stage: stageEvents.DemocracyVotedEvent
+	private readonly test: testEvents.DemocracyVotedEvent
 	private readonly dev: devEvents.DemocracyVotedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.DemocracyVotedEvent(ctx, event)
 		this.stage = new stageEvents.DemocracyVotedEvent(ctx, event)
+		this.test = new testEvents.DemocracyVotedEvent(ctx, event)
 		this.dev = new devEvents.DemocracyVotedEvent(ctx, event)
 	}
 
@@ -3607,18 +2342,6 @@ export class DemocracyVotedEvent {
 	}
 	get asV42(): productionEvents.DemocracyVotedEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV42Stage(): stageEvents.DemocracyVotedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.DemocracyVotedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.DemocracyVotedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DemocracyVotedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -3639,28 +2362,18 @@ export class ElectionProviderMultiPhaseElectionFailedEvent {
 	get asV53(): productionEvents.ElectionProviderMultiPhaseElectionFailedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV52Stage(): stageEvents.ElectionProviderMultiPhaseElectionFailedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.ElectionProviderMultiPhaseElectionFailedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.ElectionProviderMultiPhaseElectionFailedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.ElectionProviderMultiPhaseElectionFailedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class ElectionProviderMultiPhaseElectionFinalizedEvent {
 	private readonly production: productionEvents.ElectionProviderMultiPhaseElectionFinalizedEvent
 	private readonly stage: stageEvents.ElectionProviderMultiPhaseElectionFinalizedEvent
+	private readonly test: testEvents.ElectionProviderMultiPhaseElectionFinalizedEvent
 	private readonly dev: devEvents.ElectionProviderMultiPhaseElectionFinalizedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.ElectionProviderMultiPhaseElectionFinalizedEvent(ctx, event)
 		this.stage = new stageEvents.ElectionProviderMultiPhaseElectionFinalizedEvent(ctx, event)
+		this.test = new testEvents.ElectionProviderMultiPhaseElectionFinalizedEvent(ctx, event)
 		this.dev = new devEvents.ElectionProviderMultiPhaseElectionFinalizedEvent(ctx, event)
 	}
 
@@ -3675,24 +2388,6 @@ export class ElectionProviderMultiPhaseElectionFinalizedEvent {
 	}
 	get asV53(): productionEvents.ElectionProviderMultiPhaseElectionFinalizedEvent['asV53'] {
 		return this.production.asV53
-	}
-	get isV42Stage(): stageEvents.ElectionProviderMultiPhaseElectionFinalizedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.ElectionProviderMultiPhaseElectionFinalizedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.ElectionProviderMultiPhaseElectionFinalizedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.ElectionProviderMultiPhaseElectionFinalizedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.ElectionProviderMultiPhaseElectionFinalizedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.ElectionProviderMultiPhaseElectionFinalizedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -3713,28 +2408,18 @@ export class ElectionProviderMultiPhasePhaseTransitionedEvent {
 	get asV53(): productionEvents.ElectionProviderMultiPhasePhaseTransitionedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV52Stage(): stageEvents.ElectionProviderMultiPhasePhaseTransitionedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.ElectionProviderMultiPhasePhaseTransitionedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.ElectionProviderMultiPhasePhaseTransitionedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.ElectionProviderMultiPhasePhaseTransitionedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class ElectionProviderMultiPhaseRewardedEvent {
 	private readonly production: productionEvents.ElectionProviderMultiPhaseRewardedEvent
 	private readonly stage: stageEvents.ElectionProviderMultiPhaseRewardedEvent
+	private readonly test: testEvents.ElectionProviderMultiPhaseRewardedEvent
 	private readonly dev: devEvents.ElectionProviderMultiPhaseRewardedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.ElectionProviderMultiPhaseRewardedEvent(ctx, event)
 		this.stage = new stageEvents.ElectionProviderMultiPhaseRewardedEvent(ctx, event)
+		this.test = new testEvents.ElectionProviderMultiPhaseRewardedEvent(ctx, event)
 		this.dev = new devEvents.ElectionProviderMultiPhaseRewardedEvent(ctx, event)
 	}
 
@@ -3744,27 +2429,17 @@ export class ElectionProviderMultiPhaseRewardedEvent {
 	get asV42(): productionEvents.ElectionProviderMultiPhaseRewardedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.ElectionProviderMultiPhaseRewardedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.ElectionProviderMultiPhaseRewardedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.ElectionProviderMultiPhaseRewardedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.ElectionProviderMultiPhaseRewardedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class ElectionProviderMultiPhaseSignedPhaseStartedEvent {
 	private readonly production: productionEvents.ElectionProviderMultiPhaseSignedPhaseStartedEvent
 	private readonly stage: stageEvents.ElectionProviderMultiPhaseSignedPhaseStartedEvent
+	private readonly test: testEvents.ElectionProviderMultiPhaseSignedPhaseStartedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.ElectionProviderMultiPhaseSignedPhaseStartedEvent(ctx, event)
 		this.stage = new stageEvents.ElectionProviderMultiPhaseSignedPhaseStartedEvent(ctx, event)
+		this.test = new testEvents.ElectionProviderMultiPhaseSignedPhaseStartedEvent(ctx, event)
 	}
 
 	get isV42(): productionEvents.ElectionProviderMultiPhaseSignedPhaseStartedEvent['isV42'] {
@@ -3773,22 +2448,18 @@ export class ElectionProviderMultiPhaseSignedPhaseStartedEvent {
 	get asV42(): productionEvents.ElectionProviderMultiPhaseSignedPhaseStartedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.ElectionProviderMultiPhaseSignedPhaseStartedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.ElectionProviderMultiPhaseSignedPhaseStartedEvent['asV42'] {
-		return this.stage.asV42
-	}
 }
 
 export class ElectionProviderMultiPhaseSlashedEvent {
 	private readonly production: productionEvents.ElectionProviderMultiPhaseSlashedEvent
 	private readonly stage: stageEvents.ElectionProviderMultiPhaseSlashedEvent
+	private readonly test: testEvents.ElectionProviderMultiPhaseSlashedEvent
 	private readonly dev: devEvents.ElectionProviderMultiPhaseSlashedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.ElectionProviderMultiPhaseSlashedEvent(ctx, event)
 		this.stage = new stageEvents.ElectionProviderMultiPhaseSlashedEvent(ctx, event)
+		this.test = new testEvents.ElectionProviderMultiPhaseSlashedEvent(ctx, event)
 		this.dev = new devEvents.ElectionProviderMultiPhaseSlashedEvent(ctx, event)
 	}
 
@@ -3798,28 +2469,18 @@ export class ElectionProviderMultiPhaseSlashedEvent {
 	get asV42(): productionEvents.ElectionProviderMultiPhaseSlashedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.ElectionProviderMultiPhaseSlashedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.ElectionProviderMultiPhaseSlashedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.ElectionProviderMultiPhaseSlashedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.ElectionProviderMultiPhaseSlashedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class ElectionProviderMultiPhaseSolutionStoredEvent {
 	private readonly production: productionEvents.ElectionProviderMultiPhaseSolutionStoredEvent
 	private readonly stage: stageEvents.ElectionProviderMultiPhaseSolutionStoredEvent
+	private readonly test: testEvents.ElectionProviderMultiPhaseSolutionStoredEvent
 	private readonly dev: devEvents.ElectionProviderMultiPhaseSolutionStoredEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.ElectionProviderMultiPhaseSolutionStoredEvent(ctx, event)
 		this.stage = new stageEvents.ElectionProviderMultiPhaseSolutionStoredEvent(ctx, event)
+		this.test = new testEvents.ElectionProviderMultiPhaseSolutionStoredEvent(ctx, event)
 		this.dev = new devEvents.ElectionProviderMultiPhaseSolutionStoredEvent(ctx, event)
 	}
 
@@ -3835,33 +2496,17 @@ export class ElectionProviderMultiPhaseSolutionStoredEvent {
 	get asV53(): productionEvents.ElectionProviderMultiPhaseSolutionStoredEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV42Stage(): stageEvents.ElectionProviderMultiPhaseSolutionStoredEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.ElectionProviderMultiPhaseSolutionStoredEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.ElectionProviderMultiPhaseSolutionStoredEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.ElectionProviderMultiPhaseSolutionStoredEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.ElectionProviderMultiPhaseSolutionStoredEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.ElectionProviderMultiPhaseSolutionStoredEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class ElectionProviderMultiPhaseUnsignedPhaseStartedEvent {
 	private readonly production: productionEvents.ElectionProviderMultiPhaseUnsignedPhaseStartedEvent
 	private readonly stage: stageEvents.ElectionProviderMultiPhaseUnsignedPhaseStartedEvent
+	private readonly test: testEvents.ElectionProviderMultiPhaseUnsignedPhaseStartedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.ElectionProviderMultiPhaseUnsignedPhaseStartedEvent(ctx, event)
 		this.stage = new stageEvents.ElectionProviderMultiPhaseUnsignedPhaseStartedEvent(ctx, event)
+		this.test = new testEvents.ElectionProviderMultiPhaseUnsignedPhaseStartedEvent(ctx, event)
 	}
 
 	get isV42(): productionEvents.ElectionProviderMultiPhaseUnsignedPhaseStartedEvent['isV42'] {
@@ -3870,22 +2515,18 @@ export class ElectionProviderMultiPhaseUnsignedPhaseStartedEvent {
 	get asV42(): productionEvents.ElectionProviderMultiPhaseUnsignedPhaseStartedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.ElectionProviderMultiPhaseUnsignedPhaseStartedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.ElectionProviderMultiPhaseUnsignedPhaseStartedEvent['asV42'] {
-		return this.stage.asV42
-	}
 }
 
 export class ElectionsPhragmenCandidateSlashedEvent {
 	private readonly production: productionEvents.ElectionsPhragmenCandidateSlashedEvent
 	private readonly stage: stageEvents.ElectionsPhragmenCandidateSlashedEvent
+	private readonly test: testEvents.ElectionsPhragmenCandidateSlashedEvent
 	private readonly dev: devEvents.ElectionsPhragmenCandidateSlashedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.ElectionsPhragmenCandidateSlashedEvent(ctx, event)
 		this.stage = new stageEvents.ElectionsPhragmenCandidateSlashedEvent(ctx, event)
+		this.test = new testEvents.ElectionsPhragmenCandidateSlashedEvent(ctx, event)
 		this.dev = new devEvents.ElectionsPhragmenCandidateSlashedEvent(ctx, event)
 	}
 
@@ -3901,34 +2542,18 @@ export class ElectionsPhragmenCandidateSlashedEvent {
 	get asV42(): productionEvents.ElectionsPhragmenCandidateSlashedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.ElectionsPhragmenCandidateSlashedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.ElectionsPhragmenCandidateSlashedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.ElectionsPhragmenCandidateSlashedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.ElectionsPhragmenCandidateSlashedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.ElectionsPhragmenCandidateSlashedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.ElectionsPhragmenCandidateSlashedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class ElectionsPhragmenElectionErrorEvent {
 	private readonly production: productionEvents.ElectionsPhragmenElectionErrorEvent
 	private readonly stage: stageEvents.ElectionsPhragmenElectionErrorEvent
+	private readonly test: testEvents.ElectionsPhragmenElectionErrorEvent
 	private readonly dev: devEvents.ElectionsPhragmenElectionErrorEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.ElectionsPhragmenElectionErrorEvent(ctx, event)
 		this.stage = new stageEvents.ElectionsPhragmenElectionErrorEvent(ctx, event)
+		this.test = new testEvents.ElectionsPhragmenElectionErrorEvent(ctx, event)
 		this.dev = new devEvents.ElectionsPhragmenElectionErrorEvent(ctx, event)
 	}
 
@@ -3938,28 +2563,18 @@ export class ElectionsPhragmenElectionErrorEvent {
 	get asV1(): productionEvents.ElectionsPhragmenElectionErrorEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.ElectionsPhragmenElectionErrorEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.ElectionsPhragmenElectionErrorEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.ElectionsPhragmenElectionErrorEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.ElectionsPhragmenElectionErrorEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class ElectionsPhragmenEmptyTermEvent {
 	private readonly production: productionEvents.ElectionsPhragmenEmptyTermEvent
 	private readonly stage: stageEvents.ElectionsPhragmenEmptyTermEvent
+	private readonly test: testEvents.ElectionsPhragmenEmptyTermEvent
 	private readonly dev: devEvents.ElectionsPhragmenEmptyTermEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.ElectionsPhragmenEmptyTermEvent(ctx, event)
 		this.stage = new stageEvents.ElectionsPhragmenEmptyTermEvent(ctx, event)
+		this.test = new testEvents.ElectionsPhragmenEmptyTermEvent(ctx, event)
 		this.dev = new devEvents.ElectionsPhragmenEmptyTermEvent(ctx, event)
 	}
 
@@ -3969,28 +2584,18 @@ export class ElectionsPhragmenEmptyTermEvent {
 	get asV1(): productionEvents.ElectionsPhragmenEmptyTermEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.ElectionsPhragmenEmptyTermEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.ElectionsPhragmenEmptyTermEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.ElectionsPhragmenEmptyTermEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.ElectionsPhragmenEmptyTermEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class ElectionsPhragmenMemberKickedEvent {
 	private readonly production: productionEvents.ElectionsPhragmenMemberKickedEvent
 	private readonly stage: stageEvents.ElectionsPhragmenMemberKickedEvent
+	private readonly test: testEvents.ElectionsPhragmenMemberKickedEvent
 	private readonly dev: devEvents.ElectionsPhragmenMemberKickedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.ElectionsPhragmenMemberKickedEvent(ctx, event)
 		this.stage = new stageEvents.ElectionsPhragmenMemberKickedEvent(ctx, event)
+		this.test = new testEvents.ElectionsPhragmenMemberKickedEvent(ctx, event)
 		this.dev = new devEvents.ElectionsPhragmenMemberKickedEvent(ctx, event)
 	}
 
@@ -4006,34 +2611,18 @@ export class ElectionsPhragmenMemberKickedEvent {
 	get asV42(): productionEvents.ElectionsPhragmenMemberKickedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.ElectionsPhragmenMemberKickedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.ElectionsPhragmenMemberKickedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.ElectionsPhragmenMemberKickedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.ElectionsPhragmenMemberKickedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.ElectionsPhragmenMemberKickedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.ElectionsPhragmenMemberKickedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class ElectionsPhragmenNewTermEvent {
 	private readonly production: productionEvents.ElectionsPhragmenNewTermEvent
 	private readonly stage: stageEvents.ElectionsPhragmenNewTermEvent
+	private readonly test: testEvents.ElectionsPhragmenNewTermEvent
 	private readonly dev: devEvents.ElectionsPhragmenNewTermEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.ElectionsPhragmenNewTermEvent(ctx, event)
 		this.stage = new stageEvents.ElectionsPhragmenNewTermEvent(ctx, event)
+		this.test = new testEvents.ElectionsPhragmenNewTermEvent(ctx, event)
 		this.dev = new devEvents.ElectionsPhragmenNewTermEvent(ctx, event)
 	}
 
@@ -4049,34 +2638,18 @@ export class ElectionsPhragmenNewTermEvent {
 	get asV42(): productionEvents.ElectionsPhragmenNewTermEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.ElectionsPhragmenNewTermEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.ElectionsPhragmenNewTermEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.ElectionsPhragmenNewTermEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.ElectionsPhragmenNewTermEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.ElectionsPhragmenNewTermEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.ElectionsPhragmenNewTermEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class ElectionsPhragmenRenouncedEvent {
 	private readonly production: productionEvents.ElectionsPhragmenRenouncedEvent
 	private readonly stage: stageEvents.ElectionsPhragmenRenouncedEvent
+	private readonly test: testEvents.ElectionsPhragmenRenouncedEvent
 	private readonly dev: devEvents.ElectionsPhragmenRenouncedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.ElectionsPhragmenRenouncedEvent(ctx, event)
 		this.stage = new stageEvents.ElectionsPhragmenRenouncedEvent(ctx, event)
+		this.test = new testEvents.ElectionsPhragmenRenouncedEvent(ctx, event)
 		this.dev = new devEvents.ElectionsPhragmenRenouncedEvent(ctx, event)
 	}
 
@@ -4092,34 +2665,18 @@ export class ElectionsPhragmenRenouncedEvent {
 	get asV42(): productionEvents.ElectionsPhragmenRenouncedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.ElectionsPhragmenRenouncedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.ElectionsPhragmenRenouncedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.ElectionsPhragmenRenouncedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.ElectionsPhragmenRenouncedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.ElectionsPhragmenRenouncedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.ElectionsPhragmenRenouncedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class ElectionsPhragmenSeatHolderSlashedEvent {
 	private readonly production: productionEvents.ElectionsPhragmenSeatHolderSlashedEvent
 	private readonly stage: stageEvents.ElectionsPhragmenSeatHolderSlashedEvent
+	private readonly test: testEvents.ElectionsPhragmenSeatHolderSlashedEvent
 	private readonly dev: devEvents.ElectionsPhragmenSeatHolderSlashedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.ElectionsPhragmenSeatHolderSlashedEvent(ctx, event)
 		this.stage = new stageEvents.ElectionsPhragmenSeatHolderSlashedEvent(ctx, event)
+		this.test = new testEvents.ElectionsPhragmenSeatHolderSlashedEvent(ctx, event)
 		this.dev = new devEvents.ElectionsPhragmenSeatHolderSlashedEvent(ctx, event)
 	}
 
@@ -4135,34 +2692,18 @@ export class ElectionsPhragmenSeatHolderSlashedEvent {
 	get asV42(): productionEvents.ElectionsPhragmenSeatHolderSlashedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.ElectionsPhragmenSeatHolderSlashedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.ElectionsPhragmenSeatHolderSlashedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.ElectionsPhragmenSeatHolderSlashedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.ElectionsPhragmenSeatHolderSlashedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.ElectionsPhragmenSeatHolderSlashedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.ElectionsPhragmenSeatHolderSlashedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class EthBridgeApprovalsCollectedEvent {
 	private readonly production: productionEvents.EthBridgeApprovalsCollectedEvent
 	private readonly stage: stageEvents.EthBridgeApprovalsCollectedEvent
+	private readonly test: testEvents.EthBridgeApprovalsCollectedEvent
 	private readonly dev: devEvents.EthBridgeApprovalsCollectedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.EthBridgeApprovalsCollectedEvent(ctx, event)
 		this.stage = new stageEvents.EthBridgeApprovalsCollectedEvent(ctx, event)
+		this.test = new testEvents.EthBridgeApprovalsCollectedEvent(ctx, event)
 		this.dev = new devEvents.EthBridgeApprovalsCollectedEvent(ctx, event)
 	}
 
@@ -4172,28 +2713,18 @@ export class EthBridgeApprovalsCollectedEvent {
 	get asV1(): productionEvents.EthBridgeApprovalsCollectedEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.EthBridgeApprovalsCollectedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.EthBridgeApprovalsCollectedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.EthBridgeApprovalsCollectedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.EthBridgeApprovalsCollectedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class EthBridgeCancellationFailedEvent {
 	private readonly production: productionEvents.EthBridgeCancellationFailedEvent
 	private readonly stage: stageEvents.EthBridgeCancellationFailedEvent
+	private readonly test: testEvents.EthBridgeCancellationFailedEvent
 	private readonly dev: devEvents.EthBridgeCancellationFailedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.EthBridgeCancellationFailedEvent(ctx, event)
 		this.stage = new stageEvents.EthBridgeCancellationFailedEvent(ctx, event)
+		this.test = new testEvents.EthBridgeCancellationFailedEvent(ctx, event)
 		this.dev = new devEvents.EthBridgeCancellationFailedEvent(ctx, event)
 	}
 
@@ -4203,28 +2734,18 @@ export class EthBridgeCancellationFailedEvent {
 	get asV3(): productionEvents.EthBridgeCancellationFailedEvent['asV3'] {
 		return this.production.asV3
 	}
-	get isV33Stage(): stageEvents.EthBridgeCancellationFailedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.EthBridgeCancellationFailedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.EthBridgeCancellationFailedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.EthBridgeCancellationFailedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class EthBridgeIncomingRequestFinalizationFailedEvent {
 	private readonly production: productionEvents.EthBridgeIncomingRequestFinalizationFailedEvent
 	private readonly stage: stageEvents.EthBridgeIncomingRequestFinalizationFailedEvent
+	private readonly test: testEvents.EthBridgeIncomingRequestFinalizationFailedEvent
 	private readonly dev: devEvents.EthBridgeIncomingRequestFinalizationFailedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.EthBridgeIncomingRequestFinalizationFailedEvent(ctx, event)
 		this.stage = new stageEvents.EthBridgeIncomingRequestFinalizationFailedEvent(ctx, event)
+		this.test = new testEvents.EthBridgeIncomingRequestFinalizationFailedEvent(ctx, event)
 		this.dev = new devEvents.EthBridgeIncomingRequestFinalizationFailedEvent(ctx, event)
 	}
 
@@ -4234,28 +2755,18 @@ export class EthBridgeIncomingRequestFinalizationFailedEvent {
 	get asV1(): productionEvents.EthBridgeIncomingRequestFinalizationFailedEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.EthBridgeIncomingRequestFinalizationFailedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.EthBridgeIncomingRequestFinalizationFailedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.EthBridgeIncomingRequestFinalizationFailedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.EthBridgeIncomingRequestFinalizationFailedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class EthBridgeIncomingRequestFinalizedEvent {
 	private readonly production: productionEvents.EthBridgeIncomingRequestFinalizedEvent
 	private readonly stage: stageEvents.EthBridgeIncomingRequestFinalizedEvent
+	private readonly test: testEvents.EthBridgeIncomingRequestFinalizedEvent
 	private readonly dev: devEvents.EthBridgeIncomingRequestFinalizedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.EthBridgeIncomingRequestFinalizedEvent(ctx, event)
 		this.stage = new stageEvents.EthBridgeIncomingRequestFinalizedEvent(ctx, event)
+		this.test = new testEvents.EthBridgeIncomingRequestFinalizedEvent(ctx, event)
 		this.dev = new devEvents.EthBridgeIncomingRequestFinalizedEvent(ctx, event)
 	}
 
@@ -4264,18 +2775,6 @@ export class EthBridgeIncomingRequestFinalizedEvent {
 	}
 	get asV1(): productionEvents.EthBridgeIncomingRequestFinalizedEvent['asV1'] {
 		return this.production.asV1
-	}
-	get isV33Stage(): stageEvents.EthBridgeIncomingRequestFinalizedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.EthBridgeIncomingRequestFinalizedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.EthBridgeIncomingRequestFinalizedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.EthBridgeIncomingRequestFinalizedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -4296,28 +2795,18 @@ export class EthBridgeRegisterRequestFailedEvent {
 	get asV53(): productionEvents.EthBridgeRegisterRequestFailedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV52Stage(): stageEvents.EthBridgeRegisterRequestFailedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.EthBridgeRegisterRequestFailedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.EthBridgeRegisterRequestFailedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.EthBridgeRegisterRequestFailedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class EthBridgeRequestAbortedEvent {
 	private readonly production: productionEvents.EthBridgeRequestAbortedEvent
 	private readonly stage: stageEvents.EthBridgeRequestAbortedEvent
+	private readonly test: testEvents.EthBridgeRequestAbortedEvent
 	private readonly dev: devEvents.EthBridgeRequestAbortedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.EthBridgeRequestAbortedEvent(ctx, event)
 		this.stage = new stageEvents.EthBridgeRequestAbortedEvent(ctx, event)
+		this.test = new testEvents.EthBridgeRequestAbortedEvent(ctx, event)
 		this.dev = new devEvents.EthBridgeRequestAbortedEvent(ctx, event)
 	}
 
@@ -4327,28 +2816,18 @@ export class EthBridgeRequestAbortedEvent {
 	get asV1(): productionEvents.EthBridgeRequestAbortedEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.EthBridgeRequestAbortedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.EthBridgeRequestAbortedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.EthBridgeRequestAbortedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.EthBridgeRequestAbortedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class EthBridgeRequestFinalizationFailedEvent {
 	private readonly production: productionEvents.EthBridgeRequestFinalizationFailedEvent
 	private readonly stage: stageEvents.EthBridgeRequestFinalizationFailedEvent
+	private readonly test: testEvents.EthBridgeRequestFinalizationFailedEvent
 	private readonly dev: devEvents.EthBridgeRequestFinalizationFailedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.EthBridgeRequestFinalizationFailedEvent(ctx, event)
 		this.stage = new stageEvents.EthBridgeRequestFinalizationFailedEvent(ctx, event)
+		this.test = new testEvents.EthBridgeRequestFinalizationFailedEvent(ctx, event)
 		this.dev = new devEvents.EthBridgeRequestFinalizationFailedEvent(ctx, event)
 	}
 
@@ -4358,28 +2837,18 @@ export class EthBridgeRequestFinalizationFailedEvent {
 	get asV1(): productionEvents.EthBridgeRequestFinalizationFailedEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.EthBridgeRequestFinalizationFailedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.EthBridgeRequestFinalizationFailedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.EthBridgeRequestFinalizationFailedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.EthBridgeRequestFinalizationFailedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class EthBridgeRequestRegisteredEvent {
 	private readonly production: productionEvents.EthBridgeRequestRegisteredEvent
 	private readonly stage: stageEvents.EthBridgeRequestRegisteredEvent
+	private readonly test: testEvents.EthBridgeRequestRegisteredEvent
 	private readonly dev: devEvents.EthBridgeRequestRegisteredEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.EthBridgeRequestRegisteredEvent(ctx, event)
 		this.stage = new stageEvents.EthBridgeRequestRegisteredEvent(ctx, event)
+		this.test = new testEvents.EthBridgeRequestRegisteredEvent(ctx, event)
 		this.dev = new devEvents.EthBridgeRequestRegisteredEvent(ctx, event)
 	}
 
@@ -4389,28 +2858,18 @@ export class EthBridgeRequestRegisteredEvent {
 	get asV1(): productionEvents.EthBridgeRequestRegisteredEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.EthBridgeRequestRegisteredEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.EthBridgeRequestRegisteredEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.EthBridgeRequestRegisteredEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.EthBridgeRequestRegisteredEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class FaucetTransferredEvent {
 	private readonly production: productionEvents.FaucetTransferredEvent
 	private readonly stage: stageEvents.FaucetTransferredEvent
+	private readonly test: testEvents.FaucetTransferredEvent
 	private readonly dev: devEvents.FaucetTransferredEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.FaucetTransferredEvent(ctx, event)
 		this.stage = new stageEvents.FaucetTransferredEvent(ctx, event)
+		this.test = new testEvents.FaucetTransferredEvent(ctx, event)
 		this.dev = new devEvents.FaucetTransferredEvent(ctx, event)
 	}
 
@@ -4420,28 +2879,18 @@ export class FaucetTransferredEvent {
 	get asV22(): productionEvents.FaucetTransferredEvent['asV22'] {
 		return this.production.asV22
 	}
-	get isV33Stage(): stageEvents.FaucetTransferredEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.FaucetTransferredEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.FaucetTransferredEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.FaucetTransferredEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class GrandpaNewAuthoritiesEvent {
 	private readonly production: productionEvents.GrandpaNewAuthoritiesEvent
 	private readonly stage: stageEvents.GrandpaNewAuthoritiesEvent
+	private readonly test: testEvents.GrandpaNewAuthoritiesEvent
 	private readonly dev: devEvents.GrandpaNewAuthoritiesEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.GrandpaNewAuthoritiesEvent(ctx, event)
 		this.stage = new stageEvents.GrandpaNewAuthoritiesEvent(ctx, event)
+		this.test = new testEvents.GrandpaNewAuthoritiesEvent(ctx, event)
 		this.dev = new devEvents.GrandpaNewAuthoritiesEvent(ctx, event)
 	}
 
@@ -4457,34 +2906,18 @@ export class GrandpaNewAuthoritiesEvent {
 	get asV42(): productionEvents.GrandpaNewAuthoritiesEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.GrandpaNewAuthoritiesEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.GrandpaNewAuthoritiesEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.GrandpaNewAuthoritiesEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.GrandpaNewAuthoritiesEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.GrandpaNewAuthoritiesEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.GrandpaNewAuthoritiesEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class GrandpaPausedEvent {
 	private readonly production: productionEvents.GrandpaPausedEvent
 	private readonly stage: stageEvents.GrandpaPausedEvent
+	private readonly test: testEvents.GrandpaPausedEvent
 	private readonly dev: devEvents.GrandpaPausedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.GrandpaPausedEvent(ctx, event)
 		this.stage = new stageEvents.GrandpaPausedEvent(ctx, event)
+		this.test = new testEvents.GrandpaPausedEvent(ctx, event)
 		this.dev = new devEvents.GrandpaPausedEvent(ctx, event)
 	}
 
@@ -4494,28 +2927,18 @@ export class GrandpaPausedEvent {
 	get asV1(): productionEvents.GrandpaPausedEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.GrandpaPausedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.GrandpaPausedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.GrandpaPausedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.GrandpaPausedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class GrandpaResumedEvent {
 	private readonly production: productionEvents.GrandpaResumedEvent
 	private readonly stage: stageEvents.GrandpaResumedEvent
+	private readonly test: testEvents.GrandpaResumedEvent
 	private readonly dev: devEvents.GrandpaResumedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.GrandpaResumedEvent(ctx, event)
 		this.stage = new stageEvents.GrandpaResumedEvent(ctx, event)
+		this.test = new testEvents.GrandpaResumedEvent(ctx, event)
 		this.dev = new devEvents.GrandpaResumedEvent(ctx, event)
 	}
 
@@ -4525,28 +2948,18 @@ export class GrandpaResumedEvent {
 	get asV1(): productionEvents.GrandpaResumedEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.GrandpaResumedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.GrandpaResumedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.GrandpaResumedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.GrandpaResumedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class HermesGovernancePlatformCreatedEvent {
 	private readonly production: productionEvents.HermesGovernancePlatformCreatedEvent
 	private readonly stage: stageEvents.HermesGovernancePlatformCreatedEvent
+	private readonly test: testEvents.HermesGovernancePlatformCreatedEvent
 	private readonly dev: devEvents.HermesGovernancePlatformCreatedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.HermesGovernancePlatformCreatedEvent(ctx, event)
 		this.stage = new stageEvents.HermesGovernancePlatformCreatedEvent(ctx, event)
+		this.test = new testEvents.HermesGovernancePlatformCreatedEvent(ctx, event)
 		this.dev = new devEvents.HermesGovernancePlatformCreatedEvent(ctx, event)
 	}
 
@@ -4562,34 +2975,18 @@ export class HermesGovernancePlatformCreatedEvent {
 	get asV57(): productionEvents.HermesGovernancePlatformCreatedEvent['asV57'] {
 		return this.production.asV57
 	}
-	get isV47Stage(): stageEvents.HermesGovernancePlatformCreatedEvent['isV47'] {
-		return this.stage.isV47
-	}
-	get asV47Stage(): stageEvents.HermesGovernancePlatformCreatedEvent['asV47'] {
-		return this.stage.asV47
-	}
-	get isV55Stage(): stageEvents.HermesGovernancePlatformCreatedEvent['isV55'] {
-		return this.stage.isV55
-	}
-	get asV55Stage(): stageEvents.HermesGovernancePlatformCreatedEvent['asV55'] {
-		return this.stage.asV55
-	}
-	get isV60Dev(): devEvents.HermesGovernancePlatformCreatedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.HermesGovernancePlatformCreatedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class HermesGovernancePlatformCreatorFundsWithdrawnEvent {
 	private readonly production: productionEvents.HermesGovernancePlatformCreatorFundsWithdrawnEvent
 	private readonly stage: stageEvents.HermesGovernancePlatformCreatorFundsWithdrawnEvent
+	private readonly test: testEvents.HermesGovernancePlatformCreatorFundsWithdrawnEvent
 	private readonly dev: devEvents.HermesGovernancePlatformCreatorFundsWithdrawnEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.HermesGovernancePlatformCreatorFundsWithdrawnEvent(ctx, event)
 		this.stage = new stageEvents.HermesGovernancePlatformCreatorFundsWithdrawnEvent(ctx, event)
+		this.test = new testEvents.HermesGovernancePlatformCreatorFundsWithdrawnEvent(ctx, event)
 		this.dev = new devEvents.HermesGovernancePlatformCreatorFundsWithdrawnEvent(ctx, event)
 	}
 
@@ -4599,28 +2996,18 @@ export class HermesGovernancePlatformCreatorFundsWithdrawnEvent {
 	get asV47(): productionEvents.HermesGovernancePlatformCreatorFundsWithdrawnEvent['asV47'] {
 		return this.production.asV47
 	}
-	get isV47Stage(): stageEvents.HermesGovernancePlatformCreatorFundsWithdrawnEvent['isV47'] {
-		return this.stage.isV47
-	}
-	get asV47Stage(): stageEvents.HermesGovernancePlatformCreatorFundsWithdrawnEvent['asV47'] {
-		return this.stage.asV47
-	}
-	get isV60Dev(): devEvents.HermesGovernancePlatformCreatorFundsWithdrawnEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.HermesGovernancePlatformCreatorFundsWithdrawnEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class HermesGovernancePlatformMinimumHermesForCreatingPollChangedEvent {
 	private readonly production: productionEvents.HermesGovernancePlatformMinimumHermesForCreatingPollChangedEvent
 	private readonly stage: stageEvents.HermesGovernancePlatformMinimumHermesForCreatingPollChangedEvent
+	private readonly test: testEvents.HermesGovernancePlatformMinimumHermesForCreatingPollChangedEvent
 	private readonly dev: devEvents.HermesGovernancePlatformMinimumHermesForCreatingPollChangedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.HermesGovernancePlatformMinimumHermesForCreatingPollChangedEvent(ctx, event)
 		this.stage = new stageEvents.HermesGovernancePlatformMinimumHermesForCreatingPollChangedEvent(ctx, event)
+		this.test = new testEvents.HermesGovernancePlatformMinimumHermesForCreatingPollChangedEvent(ctx, event)
 		this.dev = new devEvents.HermesGovernancePlatformMinimumHermesForCreatingPollChangedEvent(ctx, event)
 	}
 
@@ -4630,28 +3017,18 @@ export class HermesGovernancePlatformMinimumHermesForCreatingPollChangedEvent {
 	get asV47(): productionEvents.HermesGovernancePlatformMinimumHermesForCreatingPollChangedEvent['asV47'] {
 		return this.production.asV47
 	}
-	get isV47Stage(): stageEvents.HermesGovernancePlatformMinimumHermesForCreatingPollChangedEvent['isV47'] {
-		return this.stage.isV47
-	}
-	get asV47Stage(): stageEvents.HermesGovernancePlatformMinimumHermesForCreatingPollChangedEvent['asV47'] {
-		return this.stage.asV47
-	}
-	get isV60Dev(): devEvents.HermesGovernancePlatformMinimumHermesForCreatingPollChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.HermesGovernancePlatformMinimumHermesForCreatingPollChangedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class HermesGovernancePlatformMinimumHermesForVotingChangedEvent {
 	private readonly production: productionEvents.HermesGovernancePlatformMinimumHermesForVotingChangedEvent
 	private readonly stage: stageEvents.HermesGovernancePlatformMinimumHermesForVotingChangedEvent
+	private readonly test: testEvents.HermesGovernancePlatformMinimumHermesForVotingChangedEvent
 	private readonly dev: devEvents.HermesGovernancePlatformMinimumHermesForVotingChangedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.HermesGovernancePlatformMinimumHermesForVotingChangedEvent(ctx, event)
 		this.stage = new stageEvents.HermesGovernancePlatformMinimumHermesForVotingChangedEvent(ctx, event)
+		this.test = new testEvents.HermesGovernancePlatformMinimumHermesForVotingChangedEvent(ctx, event)
 		this.dev = new devEvents.HermesGovernancePlatformMinimumHermesForVotingChangedEvent(ctx, event)
 	}
 
@@ -4661,28 +3038,18 @@ export class HermesGovernancePlatformMinimumHermesForVotingChangedEvent {
 	get asV47(): productionEvents.HermesGovernancePlatformMinimumHermesForVotingChangedEvent['asV47'] {
 		return this.production.asV47
 	}
-	get isV47Stage(): stageEvents.HermesGovernancePlatformMinimumHermesForVotingChangedEvent['isV47'] {
-		return this.stage.isV47
-	}
-	get asV47Stage(): stageEvents.HermesGovernancePlatformMinimumHermesForVotingChangedEvent['asV47'] {
-		return this.stage.asV47
-	}
-	get isV60Dev(): devEvents.HermesGovernancePlatformMinimumHermesForVotingChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.HermesGovernancePlatformMinimumHermesForVotingChangedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class HermesGovernancePlatformVotedEvent {
 	private readonly production: productionEvents.HermesGovernancePlatformVotedEvent
 	private readonly stage: stageEvents.HermesGovernancePlatformVotedEvent
+	private readonly test: testEvents.HermesGovernancePlatformVotedEvent
 	private readonly dev: devEvents.HermesGovernancePlatformVotedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.HermesGovernancePlatformVotedEvent(ctx, event)
 		this.stage = new stageEvents.HermesGovernancePlatformVotedEvent(ctx, event)
+		this.test = new testEvents.HermesGovernancePlatformVotedEvent(ctx, event)
 		this.dev = new devEvents.HermesGovernancePlatformVotedEvent(ctx, event)
 	}
 
@@ -4698,34 +3065,18 @@ export class HermesGovernancePlatformVotedEvent {
 	get asV57(): productionEvents.HermesGovernancePlatformVotedEvent['asV57'] {
 		return this.production.asV57
 	}
-	get isV47Stage(): stageEvents.HermesGovernancePlatformVotedEvent['isV47'] {
-		return this.stage.isV47
-	}
-	get asV47Stage(): stageEvents.HermesGovernancePlatformVotedEvent['asV47'] {
-		return this.stage.asV47
-	}
-	get isV55Stage(): stageEvents.HermesGovernancePlatformVotedEvent['isV55'] {
-		return this.stage.isV55
-	}
-	get asV55Stage(): stageEvents.HermesGovernancePlatformVotedEvent['asV55'] {
-		return this.stage.asV55
-	}
-	get isV60Dev(): devEvents.HermesGovernancePlatformVotedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.HermesGovernancePlatformVotedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class HermesGovernancePlatformVoterFundsWithdrawnEvent {
 	private readonly production: productionEvents.HermesGovernancePlatformVoterFundsWithdrawnEvent
 	private readonly stage: stageEvents.HermesGovernancePlatformVoterFundsWithdrawnEvent
+	private readonly test: testEvents.HermesGovernancePlatformVoterFundsWithdrawnEvent
 	private readonly dev: devEvents.HermesGovernancePlatformVoterFundsWithdrawnEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.HermesGovernancePlatformVoterFundsWithdrawnEvent(ctx, event)
 		this.stage = new stageEvents.HermesGovernancePlatformVoterFundsWithdrawnEvent(ctx, event)
+		this.test = new testEvents.HermesGovernancePlatformVoterFundsWithdrawnEvent(ctx, event)
 		this.dev = new devEvents.HermesGovernancePlatformVoterFundsWithdrawnEvent(ctx, event)
 	}
 
@@ -4735,28 +3086,18 @@ export class HermesGovernancePlatformVoterFundsWithdrawnEvent {
 	get asV47(): productionEvents.HermesGovernancePlatformVoterFundsWithdrawnEvent['asV47'] {
 		return this.production.asV47
 	}
-	get isV47Stage(): stageEvents.HermesGovernancePlatformVoterFundsWithdrawnEvent['isV47'] {
-		return this.stage.isV47
-	}
-	get asV47Stage(): stageEvents.HermesGovernancePlatformVoterFundsWithdrawnEvent['asV47'] {
-		return this.stage.asV47
-	}
-	get isV60Dev(): devEvents.HermesGovernancePlatformVoterFundsWithdrawnEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.HermesGovernancePlatformVoterFundsWithdrawnEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class IdentityIdentityClearedEvent {
 	private readonly production: productionEvents.IdentityIdentityClearedEvent
 	private readonly stage: stageEvents.IdentityIdentityClearedEvent
+	private readonly test: testEvents.IdentityIdentityClearedEvent
 	private readonly dev: devEvents.IdentityIdentityClearedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.IdentityIdentityClearedEvent(ctx, event)
 		this.stage = new stageEvents.IdentityIdentityClearedEvent(ctx, event)
+		this.test = new testEvents.IdentityIdentityClearedEvent(ctx, event)
 		this.dev = new devEvents.IdentityIdentityClearedEvent(ctx, event)
 	}
 
@@ -4772,34 +3113,18 @@ export class IdentityIdentityClearedEvent {
 	get asV42(): productionEvents.IdentityIdentityClearedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.IdentityIdentityClearedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.IdentityIdentityClearedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.IdentityIdentityClearedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.IdentityIdentityClearedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.IdentityIdentityClearedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.IdentityIdentityClearedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class IdentityIdentityKilledEvent {
 	private readonly production: productionEvents.IdentityIdentityKilledEvent
 	private readonly stage: stageEvents.IdentityIdentityKilledEvent
+	private readonly test: testEvents.IdentityIdentityKilledEvent
 	private readonly dev: devEvents.IdentityIdentityKilledEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.IdentityIdentityKilledEvent(ctx, event)
 		this.stage = new stageEvents.IdentityIdentityKilledEvent(ctx, event)
+		this.test = new testEvents.IdentityIdentityKilledEvent(ctx, event)
 		this.dev = new devEvents.IdentityIdentityKilledEvent(ctx, event)
 	}
 
@@ -4815,34 +3140,18 @@ export class IdentityIdentityKilledEvent {
 	get asV42(): productionEvents.IdentityIdentityKilledEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.IdentityIdentityKilledEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.IdentityIdentityKilledEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.IdentityIdentityKilledEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.IdentityIdentityKilledEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.IdentityIdentityKilledEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.IdentityIdentityKilledEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class IdentityIdentitySetEvent {
 	private readonly production: productionEvents.IdentityIdentitySetEvent
 	private readonly stage: stageEvents.IdentityIdentitySetEvent
+	private readonly test: testEvents.IdentityIdentitySetEvent
 	private readonly dev: devEvents.IdentityIdentitySetEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.IdentityIdentitySetEvent(ctx, event)
 		this.stage = new stageEvents.IdentityIdentitySetEvent(ctx, event)
+		this.test = new testEvents.IdentityIdentitySetEvent(ctx, event)
 		this.dev = new devEvents.IdentityIdentitySetEvent(ctx, event)
 	}
 
@@ -4858,34 +3167,18 @@ export class IdentityIdentitySetEvent {
 	get asV42(): productionEvents.IdentityIdentitySetEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.IdentityIdentitySetEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.IdentityIdentitySetEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.IdentityIdentitySetEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.IdentityIdentitySetEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.IdentityIdentitySetEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.IdentityIdentitySetEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class IdentityJudgementGivenEvent {
 	private readonly production: productionEvents.IdentityJudgementGivenEvent
 	private readonly stage: stageEvents.IdentityJudgementGivenEvent
+	private readonly test: testEvents.IdentityJudgementGivenEvent
 	private readonly dev: devEvents.IdentityJudgementGivenEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.IdentityJudgementGivenEvent(ctx, event)
 		this.stage = new stageEvents.IdentityJudgementGivenEvent(ctx, event)
+		this.test = new testEvents.IdentityJudgementGivenEvent(ctx, event)
 		this.dev = new devEvents.IdentityJudgementGivenEvent(ctx, event)
 	}
 
@@ -4901,34 +3194,18 @@ export class IdentityJudgementGivenEvent {
 	get asV42(): productionEvents.IdentityJudgementGivenEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.IdentityJudgementGivenEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.IdentityJudgementGivenEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.IdentityJudgementGivenEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.IdentityJudgementGivenEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.IdentityJudgementGivenEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.IdentityJudgementGivenEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class IdentityJudgementRequestedEvent {
 	private readonly production: productionEvents.IdentityJudgementRequestedEvent
 	private readonly stage: stageEvents.IdentityJudgementRequestedEvent
+	private readonly test: testEvents.IdentityJudgementRequestedEvent
 	private readonly dev: devEvents.IdentityJudgementRequestedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.IdentityJudgementRequestedEvent(ctx, event)
 		this.stage = new stageEvents.IdentityJudgementRequestedEvent(ctx, event)
+		this.test = new testEvents.IdentityJudgementRequestedEvent(ctx, event)
 		this.dev = new devEvents.IdentityJudgementRequestedEvent(ctx, event)
 	}
 
@@ -4944,34 +3221,18 @@ export class IdentityJudgementRequestedEvent {
 	get asV42(): productionEvents.IdentityJudgementRequestedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.IdentityJudgementRequestedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.IdentityJudgementRequestedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.IdentityJudgementRequestedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.IdentityJudgementRequestedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.IdentityJudgementRequestedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.IdentityJudgementRequestedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class IdentityJudgementUnrequestedEvent {
 	private readonly production: productionEvents.IdentityJudgementUnrequestedEvent
 	private readonly stage: stageEvents.IdentityJudgementUnrequestedEvent
+	private readonly test: testEvents.IdentityJudgementUnrequestedEvent
 	private readonly dev: devEvents.IdentityJudgementUnrequestedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.IdentityJudgementUnrequestedEvent(ctx, event)
 		this.stage = new stageEvents.IdentityJudgementUnrequestedEvent(ctx, event)
+		this.test = new testEvents.IdentityJudgementUnrequestedEvent(ctx, event)
 		this.dev = new devEvents.IdentityJudgementUnrequestedEvent(ctx, event)
 	}
 
@@ -4987,34 +3248,18 @@ export class IdentityJudgementUnrequestedEvent {
 	get asV42(): productionEvents.IdentityJudgementUnrequestedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.IdentityJudgementUnrequestedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.IdentityJudgementUnrequestedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.IdentityJudgementUnrequestedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.IdentityJudgementUnrequestedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.IdentityJudgementUnrequestedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.IdentityJudgementUnrequestedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class IdentityRegistrarAddedEvent {
 	private readonly production: productionEvents.IdentityRegistrarAddedEvent
 	private readonly stage: stageEvents.IdentityRegistrarAddedEvent
+	private readonly test: testEvents.IdentityRegistrarAddedEvent
 	private readonly dev: devEvents.IdentityRegistrarAddedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.IdentityRegistrarAddedEvent(ctx, event)
 		this.stage = new stageEvents.IdentityRegistrarAddedEvent(ctx, event)
+		this.test = new testEvents.IdentityRegistrarAddedEvent(ctx, event)
 		this.dev = new devEvents.IdentityRegistrarAddedEvent(ctx, event)
 	}
 
@@ -5030,34 +3275,18 @@ export class IdentityRegistrarAddedEvent {
 	get asV42(): productionEvents.IdentityRegistrarAddedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.IdentityRegistrarAddedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.IdentityRegistrarAddedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.IdentityRegistrarAddedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.IdentityRegistrarAddedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.IdentityRegistrarAddedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.IdentityRegistrarAddedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class IdentitySubIdentityAddedEvent {
 	private readonly production: productionEvents.IdentitySubIdentityAddedEvent
 	private readonly stage: stageEvents.IdentitySubIdentityAddedEvent
+	private readonly test: testEvents.IdentitySubIdentityAddedEvent
 	private readonly dev: devEvents.IdentitySubIdentityAddedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.IdentitySubIdentityAddedEvent(ctx, event)
 		this.stage = new stageEvents.IdentitySubIdentityAddedEvent(ctx, event)
+		this.test = new testEvents.IdentitySubIdentityAddedEvent(ctx, event)
 		this.dev = new devEvents.IdentitySubIdentityAddedEvent(ctx, event)
 	}
 
@@ -5073,34 +3302,18 @@ export class IdentitySubIdentityAddedEvent {
 	get asV42(): productionEvents.IdentitySubIdentityAddedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.IdentitySubIdentityAddedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.IdentitySubIdentityAddedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.IdentitySubIdentityAddedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.IdentitySubIdentityAddedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.IdentitySubIdentityAddedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.IdentitySubIdentityAddedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class IdentitySubIdentityRemovedEvent {
 	private readonly production: productionEvents.IdentitySubIdentityRemovedEvent
 	private readonly stage: stageEvents.IdentitySubIdentityRemovedEvent
+	private readonly test: testEvents.IdentitySubIdentityRemovedEvent
 	private readonly dev: devEvents.IdentitySubIdentityRemovedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.IdentitySubIdentityRemovedEvent(ctx, event)
 		this.stage = new stageEvents.IdentitySubIdentityRemovedEvent(ctx, event)
+		this.test = new testEvents.IdentitySubIdentityRemovedEvent(ctx, event)
 		this.dev = new devEvents.IdentitySubIdentityRemovedEvent(ctx, event)
 	}
 
@@ -5116,34 +3329,18 @@ export class IdentitySubIdentityRemovedEvent {
 	get asV42(): productionEvents.IdentitySubIdentityRemovedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.IdentitySubIdentityRemovedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.IdentitySubIdentityRemovedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.IdentitySubIdentityRemovedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.IdentitySubIdentityRemovedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.IdentitySubIdentityRemovedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.IdentitySubIdentityRemovedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class IdentitySubIdentityRevokedEvent {
 	private readonly production: productionEvents.IdentitySubIdentityRevokedEvent
 	private readonly stage: stageEvents.IdentitySubIdentityRevokedEvent
+	private readonly test: testEvents.IdentitySubIdentityRevokedEvent
 	private readonly dev: devEvents.IdentitySubIdentityRevokedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.IdentitySubIdentityRevokedEvent(ctx, event)
 		this.stage = new stageEvents.IdentitySubIdentityRevokedEvent(ctx, event)
+		this.test = new testEvents.IdentitySubIdentityRevokedEvent(ctx, event)
 		this.dev = new devEvents.IdentitySubIdentityRevokedEvent(ctx, event)
 	}
 
@@ -5159,34 +3356,18 @@ export class IdentitySubIdentityRevokedEvent {
 	get asV42(): productionEvents.IdentitySubIdentityRevokedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.IdentitySubIdentityRevokedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.IdentitySubIdentityRevokedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.IdentitySubIdentityRevokedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.IdentitySubIdentityRevokedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.IdentitySubIdentityRevokedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.IdentitySubIdentityRevokedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class ImOnlineAllGoodEvent {
 	private readonly production: productionEvents.ImOnlineAllGoodEvent
 	private readonly stage: stageEvents.ImOnlineAllGoodEvent
+	private readonly test: testEvents.ImOnlineAllGoodEvent
 	private readonly dev: devEvents.ImOnlineAllGoodEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.ImOnlineAllGoodEvent(ctx, event)
 		this.stage = new stageEvents.ImOnlineAllGoodEvent(ctx, event)
+		this.test = new testEvents.ImOnlineAllGoodEvent(ctx, event)
 		this.dev = new devEvents.ImOnlineAllGoodEvent(ctx, event)
 	}
 
@@ -5196,28 +3377,18 @@ export class ImOnlineAllGoodEvent {
 	get asV1(): productionEvents.ImOnlineAllGoodEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.ImOnlineAllGoodEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.ImOnlineAllGoodEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.ImOnlineAllGoodEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.ImOnlineAllGoodEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class ImOnlineHeartbeatReceivedEvent {
 	private readonly production: productionEvents.ImOnlineHeartbeatReceivedEvent
 	private readonly stage: stageEvents.ImOnlineHeartbeatReceivedEvent
+	private readonly test: testEvents.ImOnlineHeartbeatReceivedEvent
 	private readonly dev: devEvents.ImOnlineHeartbeatReceivedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.ImOnlineHeartbeatReceivedEvent(ctx, event)
 		this.stage = new stageEvents.ImOnlineHeartbeatReceivedEvent(ctx, event)
+		this.test = new testEvents.ImOnlineHeartbeatReceivedEvent(ctx, event)
 		this.dev = new devEvents.ImOnlineHeartbeatReceivedEvent(ctx, event)
 	}
 
@@ -5233,34 +3404,18 @@ export class ImOnlineHeartbeatReceivedEvent {
 	get asV42(): productionEvents.ImOnlineHeartbeatReceivedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.ImOnlineHeartbeatReceivedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.ImOnlineHeartbeatReceivedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.ImOnlineHeartbeatReceivedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.ImOnlineHeartbeatReceivedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.ImOnlineHeartbeatReceivedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.ImOnlineHeartbeatReceivedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class ImOnlineSomeOfflineEvent {
 	private readonly production: productionEvents.ImOnlineSomeOfflineEvent
 	private readonly stage: stageEvents.ImOnlineSomeOfflineEvent
+	private readonly test: testEvents.ImOnlineSomeOfflineEvent
 	private readonly dev: devEvents.ImOnlineSomeOfflineEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.ImOnlineSomeOfflineEvent(ctx, event)
 		this.stage = new stageEvents.ImOnlineSomeOfflineEvent(ctx, event)
+		this.test = new testEvents.ImOnlineSomeOfflineEvent(ctx, event)
 		this.dev = new devEvents.ImOnlineSomeOfflineEvent(ctx, event)
 	}
 
@@ -5276,34 +3431,18 @@ export class ImOnlineSomeOfflineEvent {
 	get asV42(): productionEvents.ImOnlineSomeOfflineEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.ImOnlineSomeOfflineEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.ImOnlineSomeOfflineEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.ImOnlineSomeOfflineEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.ImOnlineSomeOfflineEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.ImOnlineSomeOfflineEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.ImOnlineSomeOfflineEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class IrohaMigrationMigratedEvent {
 	private readonly production: productionEvents.IrohaMigrationMigratedEvent
 	private readonly stage: stageEvents.IrohaMigrationMigratedEvent
+	private readonly test: testEvents.IrohaMigrationMigratedEvent
 	private readonly dev: devEvents.IrohaMigrationMigratedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.IrohaMigrationMigratedEvent(ctx, event)
 		this.stage = new stageEvents.IrohaMigrationMigratedEvent(ctx, event)
+		this.test = new testEvents.IrohaMigrationMigratedEvent(ctx, event)
 		this.dev = new devEvents.IrohaMigrationMigratedEvent(ctx, event)
 	}
 
@@ -5318,24 +3457,6 @@ export class IrohaMigrationMigratedEvent {
 	}
 	get asV42(): productionEvents.IrohaMigrationMigratedEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV33Stage(): stageEvents.IrohaMigrationMigratedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.IrohaMigrationMigratedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.IrohaMigrationMigratedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.IrohaMigrationMigratedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.IrohaMigrationMigratedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.IrohaMigrationMigratedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -5356,28 +3477,18 @@ export class LiquidityProxyBatchSwapExecutedEvent {
 	get asV57(): productionEvents.LiquidityProxyBatchSwapExecutedEvent['asV57'] {
 		return this.production.asV57
 	}
-	get isV55Stage(): stageEvents.LiquidityProxyBatchSwapExecutedEvent['isV55'] {
-		return this.stage.isV55
-	}
-	get asV55Stage(): stageEvents.LiquidityProxyBatchSwapExecutedEvent['asV55'] {
-		return this.stage.asV55
-	}
-	get isV60Dev(): devEvents.LiquidityProxyBatchSwapExecutedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.LiquidityProxyBatchSwapExecutedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class LiquidityProxyExchangeEvent {
 	private readonly production: productionEvents.LiquidityProxyExchangeEvent
 	private readonly stage: stageEvents.LiquidityProxyExchangeEvent
+	private readonly test: testEvents.LiquidityProxyExchangeEvent
 	private readonly dev: devEvents.LiquidityProxyExchangeEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.LiquidityProxyExchangeEvent(ctx, event)
 		this.stage = new stageEvents.LiquidityProxyExchangeEvent(ctx, event)
+		this.test = new testEvents.LiquidityProxyExchangeEvent(ctx, event)
 		this.dev = new devEvents.LiquidityProxyExchangeEvent(ctx, event)
 	}
 
@@ -5393,18 +3504,6 @@ export class LiquidityProxyExchangeEvent {
 	get asV42(): productionEvents.LiquidityProxyExchangeEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.LiquidityProxyExchangeEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.LiquidityProxyExchangeEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.LiquidityProxyExchangeEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.LiquidityProxyExchangeEvent['asV42'] {
-		return this.stage.asV42
-	}
 	get isV60Dev(): devEvents.LiquidityProxyExchangeEvent['isV60'] {
 		return this.dev.isV60
 	}
@@ -5416,11 +3515,13 @@ export class LiquidityProxyExchangeEvent {
 export class LiquidityProxyLiquiditySourceDisabledEvent {
 	private readonly production: productionEvents.LiquidityProxyLiquiditySourceDisabledEvent
 	private readonly stage: stageEvents.LiquidityProxyLiquiditySourceDisabledEvent
+	private readonly test: testEvents.LiquidityProxyLiquiditySourceDisabledEvent
 	private readonly dev: devEvents.LiquidityProxyLiquiditySourceDisabledEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.LiquidityProxyLiquiditySourceDisabledEvent(ctx, event)
 		this.stage = new stageEvents.LiquidityProxyLiquiditySourceDisabledEvent(ctx, event)
+		this.test = new testEvents.LiquidityProxyLiquiditySourceDisabledEvent(ctx, event)
 		this.dev = new devEvents.LiquidityProxyLiquiditySourceDisabledEvent(ctx, event)
 	}
 
@@ -5436,34 +3537,18 @@ export class LiquidityProxyLiquiditySourceDisabledEvent {
 	get asV42(): productionEvents.LiquidityProxyLiquiditySourceDisabledEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV38Stage(): stageEvents.LiquidityProxyLiquiditySourceDisabledEvent['isV38'] {
-		return this.stage.isV38
-	}
-	get asV38Stage(): stageEvents.LiquidityProxyLiquiditySourceDisabledEvent['asV38'] {
-		return this.stage.asV38
-	}
-	get isV42Stage(): stageEvents.LiquidityProxyLiquiditySourceDisabledEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.LiquidityProxyLiquiditySourceDisabledEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.LiquidityProxyLiquiditySourceDisabledEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.LiquidityProxyLiquiditySourceDisabledEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class LiquidityProxyLiquiditySourceEnabledEvent {
 	private readonly production: productionEvents.LiquidityProxyLiquiditySourceEnabledEvent
 	private readonly stage: stageEvents.LiquidityProxyLiquiditySourceEnabledEvent
+	private readonly test: testEvents.LiquidityProxyLiquiditySourceEnabledEvent
 	private readonly dev: devEvents.LiquidityProxyLiquiditySourceEnabledEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.LiquidityProxyLiquiditySourceEnabledEvent(ctx, event)
 		this.stage = new stageEvents.LiquidityProxyLiquiditySourceEnabledEvent(ctx, event)
+		this.test = new testEvents.LiquidityProxyLiquiditySourceEnabledEvent(ctx, event)
 		this.dev = new devEvents.LiquidityProxyLiquiditySourceEnabledEvent(ctx, event)
 	}
 
@@ -5479,34 +3564,18 @@ export class LiquidityProxyLiquiditySourceEnabledEvent {
 	get asV42(): productionEvents.LiquidityProxyLiquiditySourceEnabledEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV38Stage(): stageEvents.LiquidityProxyLiquiditySourceEnabledEvent['isV38'] {
-		return this.stage.isV38
-	}
-	get asV38Stage(): stageEvents.LiquidityProxyLiquiditySourceEnabledEvent['asV38'] {
-		return this.stage.asV38
-	}
-	get isV42Stage(): stageEvents.LiquidityProxyLiquiditySourceEnabledEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.LiquidityProxyLiquiditySourceEnabledEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.LiquidityProxyLiquiditySourceEnabledEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.LiquidityProxyLiquiditySourceEnabledEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class MulticollateralBondingCurvePoolOptionalRewardMultiplierUpdatedEvent {
 	private readonly production: productionEvents.MulticollateralBondingCurvePoolOptionalRewardMultiplierUpdatedEvent
 	private readonly stage: stageEvents.MulticollateralBondingCurvePoolOptionalRewardMultiplierUpdatedEvent
+	private readonly test: testEvents.MulticollateralBondingCurvePoolOptionalRewardMultiplierUpdatedEvent
 	private readonly dev: devEvents.MulticollateralBondingCurvePoolOptionalRewardMultiplierUpdatedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.MulticollateralBondingCurvePoolOptionalRewardMultiplierUpdatedEvent(ctx, event)
 		this.stage = new stageEvents.MulticollateralBondingCurvePoolOptionalRewardMultiplierUpdatedEvent(ctx, event)
+		this.test = new testEvents.MulticollateralBondingCurvePoolOptionalRewardMultiplierUpdatedEvent(ctx, event)
 		this.dev = new devEvents.MulticollateralBondingCurvePoolOptionalRewardMultiplierUpdatedEvent(ctx, event)
 	}
 
@@ -5522,34 +3591,18 @@ export class MulticollateralBondingCurvePoolOptionalRewardMultiplierUpdatedEvent
 	get asV42(): productionEvents.MulticollateralBondingCurvePoolOptionalRewardMultiplierUpdatedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.MulticollateralBondingCurvePoolOptionalRewardMultiplierUpdatedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.MulticollateralBondingCurvePoolOptionalRewardMultiplierUpdatedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.MulticollateralBondingCurvePoolOptionalRewardMultiplierUpdatedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.MulticollateralBondingCurvePoolOptionalRewardMultiplierUpdatedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.MulticollateralBondingCurvePoolOptionalRewardMultiplierUpdatedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.MulticollateralBondingCurvePoolOptionalRewardMultiplierUpdatedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class MulticollateralBondingCurvePoolPoolInitializedEvent {
 	private readonly production: productionEvents.MulticollateralBondingCurvePoolPoolInitializedEvent
 	private readonly stage: stageEvents.MulticollateralBondingCurvePoolPoolInitializedEvent
+	private readonly test: testEvents.MulticollateralBondingCurvePoolPoolInitializedEvent
 	private readonly dev: devEvents.MulticollateralBondingCurvePoolPoolInitializedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.MulticollateralBondingCurvePoolPoolInitializedEvent(ctx, event)
 		this.stage = new stageEvents.MulticollateralBondingCurvePoolPoolInitializedEvent(ctx, event)
+		this.test = new testEvents.MulticollateralBondingCurvePoolPoolInitializedEvent(ctx, event)
 		this.dev = new devEvents.MulticollateralBondingCurvePoolPoolInitializedEvent(ctx, event)
 	}
 
@@ -5565,34 +3618,18 @@ export class MulticollateralBondingCurvePoolPoolInitializedEvent {
 	get asV42(): productionEvents.MulticollateralBondingCurvePoolPoolInitializedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.MulticollateralBondingCurvePoolPoolInitializedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.MulticollateralBondingCurvePoolPoolInitializedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.MulticollateralBondingCurvePoolPoolInitializedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.MulticollateralBondingCurvePoolPoolInitializedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.MulticollateralBondingCurvePoolPoolInitializedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.MulticollateralBondingCurvePoolPoolInitializedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class MulticollateralBondingCurvePoolPriceBiasChangedEvent {
 	private readonly production: productionEvents.MulticollateralBondingCurvePoolPriceBiasChangedEvent
 	private readonly stage: stageEvents.MulticollateralBondingCurvePoolPriceBiasChangedEvent
+	private readonly test: testEvents.MulticollateralBondingCurvePoolPriceBiasChangedEvent
 	private readonly dev: devEvents.MulticollateralBondingCurvePoolPriceBiasChangedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.MulticollateralBondingCurvePoolPriceBiasChangedEvent(ctx, event)
 		this.stage = new stageEvents.MulticollateralBondingCurvePoolPriceBiasChangedEvent(ctx, event)
+		this.test = new testEvents.MulticollateralBondingCurvePoolPriceBiasChangedEvent(ctx, event)
 		this.dev = new devEvents.MulticollateralBondingCurvePoolPriceBiasChangedEvent(ctx, event)
 	}
 
@@ -5602,28 +3639,18 @@ export class MulticollateralBondingCurvePoolPriceBiasChangedEvent {
 	get asV22(): productionEvents.MulticollateralBondingCurvePoolPriceBiasChangedEvent['asV22'] {
 		return this.production.asV22
 	}
-	get isV33Stage(): stageEvents.MulticollateralBondingCurvePoolPriceBiasChangedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.MulticollateralBondingCurvePoolPriceBiasChangedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.MulticollateralBondingCurvePoolPriceBiasChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.MulticollateralBondingCurvePoolPriceBiasChangedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class MulticollateralBondingCurvePoolPriceChangeConfigChangedEvent {
 	private readonly production: productionEvents.MulticollateralBondingCurvePoolPriceChangeConfigChangedEvent
 	private readonly stage: stageEvents.MulticollateralBondingCurvePoolPriceChangeConfigChangedEvent
+	private readonly test: testEvents.MulticollateralBondingCurvePoolPriceChangeConfigChangedEvent
 	private readonly dev: devEvents.MulticollateralBondingCurvePoolPriceChangeConfigChangedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.MulticollateralBondingCurvePoolPriceChangeConfigChangedEvent(ctx, event)
 		this.stage = new stageEvents.MulticollateralBondingCurvePoolPriceChangeConfigChangedEvent(ctx, event)
+		this.test = new testEvents.MulticollateralBondingCurvePoolPriceChangeConfigChangedEvent(ctx, event)
 		this.dev = new devEvents.MulticollateralBondingCurvePoolPriceChangeConfigChangedEvent(ctx, event)
 	}
 
@@ -5633,28 +3660,18 @@ export class MulticollateralBondingCurvePoolPriceChangeConfigChangedEvent {
 	get asV22(): productionEvents.MulticollateralBondingCurvePoolPriceChangeConfigChangedEvent['asV22'] {
 		return this.production.asV22
 	}
-	get isV33Stage(): stageEvents.MulticollateralBondingCurvePoolPriceChangeConfigChangedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.MulticollateralBondingCurvePoolPriceChangeConfigChangedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.MulticollateralBondingCurvePoolPriceChangeConfigChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.MulticollateralBondingCurvePoolPriceChangeConfigChangedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class MulticollateralBondingCurvePoolReferenceAssetChangedEvent {
 	private readonly production: productionEvents.MulticollateralBondingCurvePoolReferenceAssetChangedEvent
 	private readonly stage: stageEvents.MulticollateralBondingCurvePoolReferenceAssetChangedEvent
+	private readonly test: testEvents.MulticollateralBondingCurvePoolReferenceAssetChangedEvent
 	private readonly dev: devEvents.MulticollateralBondingCurvePoolReferenceAssetChangedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.MulticollateralBondingCurvePoolReferenceAssetChangedEvent(ctx, event)
 		this.stage = new stageEvents.MulticollateralBondingCurvePoolReferenceAssetChangedEvent(ctx, event)
+		this.test = new testEvents.MulticollateralBondingCurvePoolReferenceAssetChangedEvent(ctx, event)
 		this.dev = new devEvents.MulticollateralBondingCurvePoolReferenceAssetChangedEvent(ctx, event)
 	}
 
@@ -5670,34 +3687,18 @@ export class MulticollateralBondingCurvePoolReferenceAssetChangedEvent {
 	get asV42(): productionEvents.MulticollateralBondingCurvePoolReferenceAssetChangedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.MulticollateralBondingCurvePoolReferenceAssetChangedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.MulticollateralBondingCurvePoolReferenceAssetChangedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.MulticollateralBondingCurvePoolReferenceAssetChangedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.MulticollateralBondingCurvePoolReferenceAssetChangedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.MulticollateralBondingCurvePoolReferenceAssetChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.MulticollateralBondingCurvePoolReferenceAssetChangedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class MultisigMultisigApprovalEvent {
 	private readonly production: productionEvents.MultisigMultisigApprovalEvent
 	private readonly stage: stageEvents.MultisigMultisigApprovalEvent
+	private readonly test: testEvents.MultisigMultisigApprovalEvent
 	private readonly dev: devEvents.MultisigMultisigApprovalEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.MultisigMultisigApprovalEvent(ctx, event)
 		this.stage = new stageEvents.MultisigMultisigApprovalEvent(ctx, event)
+		this.test = new testEvents.MultisigMultisigApprovalEvent(ctx, event)
 		this.dev = new devEvents.MultisigMultisigApprovalEvent(ctx, event)
 	}
 
@@ -5713,34 +3714,18 @@ export class MultisigMultisigApprovalEvent {
 	get asV42(): productionEvents.MultisigMultisigApprovalEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.MultisigMultisigApprovalEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.MultisigMultisigApprovalEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.MultisigMultisigApprovalEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.MultisigMultisigApprovalEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.MultisigMultisigApprovalEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.MultisigMultisigApprovalEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class MultisigMultisigCancelledEvent {
 	private readonly production: productionEvents.MultisigMultisigCancelledEvent
 	private readonly stage: stageEvents.MultisigMultisigCancelledEvent
+	private readonly test: testEvents.MultisigMultisigCancelledEvent
 	private readonly dev: devEvents.MultisigMultisigCancelledEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.MultisigMultisigCancelledEvent(ctx, event)
 		this.stage = new stageEvents.MultisigMultisigCancelledEvent(ctx, event)
+		this.test = new testEvents.MultisigMultisigCancelledEvent(ctx, event)
 		this.dev = new devEvents.MultisigMultisigCancelledEvent(ctx, event)
 	}
 
@@ -5756,34 +3741,18 @@ export class MultisigMultisigCancelledEvent {
 	get asV42(): productionEvents.MultisigMultisigCancelledEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.MultisigMultisigCancelledEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.MultisigMultisigCancelledEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.MultisigMultisigCancelledEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.MultisigMultisigCancelledEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.MultisigMultisigCancelledEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.MultisigMultisigCancelledEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class MultisigMultisigExecutedEvent {
 	private readonly production: productionEvents.MultisigMultisigExecutedEvent
 	private readonly stage: stageEvents.MultisigMultisigExecutedEvent
+	private readonly test: testEvents.MultisigMultisigExecutedEvent
 	private readonly dev: devEvents.MultisigMultisigExecutedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.MultisigMultisigExecutedEvent(ctx, event)
 		this.stage = new stageEvents.MultisigMultisigExecutedEvent(ctx, event)
+		this.test = new testEvents.MultisigMultisigExecutedEvent(ctx, event)
 		this.dev = new devEvents.MultisigMultisigExecutedEvent(ctx, event)
 	}
 
@@ -5805,40 +3774,18 @@ export class MultisigMultisigExecutedEvent {
 	get asV53(): productionEvents.MultisigMultisigExecutedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV33Stage(): stageEvents.MultisigMultisigExecutedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.MultisigMultisigExecutedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.MultisigMultisigExecutedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.MultisigMultisigExecutedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.MultisigMultisigExecutedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.MultisigMultisigExecutedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.MultisigMultisigExecutedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.MultisigMultisigExecutedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class MultisigNewMultisigEvent {
 	private readonly production: productionEvents.MultisigNewMultisigEvent
 	private readonly stage: stageEvents.MultisigNewMultisigEvent
+	private readonly test: testEvents.MultisigNewMultisigEvent
 	private readonly dev: devEvents.MultisigNewMultisigEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.MultisigNewMultisigEvent(ctx, event)
 		this.stage = new stageEvents.MultisigNewMultisigEvent(ctx, event)
+		this.test = new testEvents.MultisigNewMultisigEvent(ctx, event)
 		this.dev = new devEvents.MultisigNewMultisigEvent(ctx, event)
 	}
 
@@ -5854,34 +3801,18 @@ export class MultisigNewMultisigEvent {
 	get asV42(): productionEvents.MultisigNewMultisigEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.MultisigNewMultisigEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.MultisigNewMultisigEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.MultisigNewMultisigEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.MultisigNewMultisigEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.MultisigNewMultisigEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.MultisigNewMultisigEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class OffencesOffenceEvent {
 	private readonly production: productionEvents.OffencesOffenceEvent
 	private readonly stage: stageEvents.OffencesOffenceEvent
+	private readonly test: testEvents.OffencesOffenceEvent
 	private readonly dev: devEvents.OffencesOffenceEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.OffencesOffenceEvent(ctx, event)
 		this.stage = new stageEvents.OffencesOffenceEvent(ctx, event)
+		this.test = new testEvents.OffencesOffenceEvent(ctx, event)
 		this.dev = new devEvents.OffencesOffenceEvent(ctx, event)
 	}
 
@@ -5897,34 +3828,18 @@ export class OffencesOffenceEvent {
 	get asV42(): productionEvents.OffencesOffenceEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.OffencesOffenceEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.OffencesOffenceEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.OffencesOffenceEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.OffencesOffenceEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.OffencesOffenceEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.OffencesOffenceEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class OracleProxyOracleDisabledEvent {
 	private readonly production: productionEvents.OracleProxyOracleDisabledEvent
 	private readonly stage: stageEvents.OracleProxyOracleDisabledEvent
+	private readonly test: testEvents.OracleProxyOracleDisabledEvent
 	private readonly dev: devEvents.OracleProxyOracleDisabledEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.OracleProxyOracleDisabledEvent(ctx, event)
 		this.stage = new stageEvents.OracleProxyOracleDisabledEvent(ctx, event)
+		this.test = new testEvents.OracleProxyOracleDisabledEvent(ctx, event)
 		this.dev = new devEvents.OracleProxyOracleDisabledEvent(ctx, event)
 	}
 
@@ -5934,28 +3849,18 @@ export class OracleProxyOracleDisabledEvent {
 	get asV45(): productionEvents.OracleProxyOracleDisabledEvent['asV45'] {
 		return this.production.asV45
 	}
-	get isV45Stage(): stageEvents.OracleProxyOracleDisabledEvent['isV45'] {
-		return this.stage.isV45
-	}
-	get asV45Stage(): stageEvents.OracleProxyOracleDisabledEvent['asV45'] {
-		return this.stage.asV45
-	}
-	get isV60Dev(): devEvents.OracleProxyOracleDisabledEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.OracleProxyOracleDisabledEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class OracleProxyOracleEnabledEvent {
 	private readonly production: productionEvents.OracleProxyOracleEnabledEvent
 	private readonly stage: stageEvents.OracleProxyOracleEnabledEvent
+	private readonly test: testEvents.OracleProxyOracleEnabledEvent
 	private readonly dev: devEvents.OracleProxyOracleEnabledEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.OracleProxyOracleEnabledEvent(ctx, event)
 		this.stage = new stageEvents.OracleProxyOracleEnabledEvent(ctx, event)
+		this.test = new testEvents.OracleProxyOracleEnabledEvent(ctx, event)
 		this.dev = new devEvents.OracleProxyOracleEnabledEvent(ctx, event)
 	}
 
@@ -5965,28 +3870,18 @@ export class OracleProxyOracleEnabledEvent {
 	get asV45(): productionEvents.OracleProxyOracleEnabledEvent['asV45'] {
 		return this.production.asV45
 	}
-	get isV45Stage(): stageEvents.OracleProxyOracleEnabledEvent['isV45'] {
-		return this.stage.isV45
-	}
-	get asV45Stage(): stageEvents.OracleProxyOracleEnabledEvent['asV45'] {
-		return this.stage.asV45
-	}
-	get isV60Dev(): devEvents.OracleProxyOracleEnabledEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.OracleProxyOracleEnabledEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class PermissionsPermissionAssignedEvent {
 	private readonly production: productionEvents.PermissionsPermissionAssignedEvent
 	private readonly stage: stageEvents.PermissionsPermissionAssignedEvent
+	private readonly test: testEvents.PermissionsPermissionAssignedEvent
 	private readonly dev: devEvents.PermissionsPermissionAssignedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.PermissionsPermissionAssignedEvent(ctx, event)
 		this.stage = new stageEvents.PermissionsPermissionAssignedEvent(ctx, event)
+		this.test = new testEvents.PermissionsPermissionAssignedEvent(ctx, event)
 		this.dev = new devEvents.PermissionsPermissionAssignedEvent(ctx, event)
 	}
 
@@ -5996,28 +3891,18 @@ export class PermissionsPermissionAssignedEvent {
 	get asV1(): productionEvents.PermissionsPermissionAssignedEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.PermissionsPermissionAssignedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.PermissionsPermissionAssignedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.PermissionsPermissionAssignedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.PermissionsPermissionAssignedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class PermissionsPermissionCreatedEvent {
 	private readonly production: productionEvents.PermissionsPermissionCreatedEvent
 	private readonly stage: stageEvents.PermissionsPermissionCreatedEvent
+	private readonly test: testEvents.PermissionsPermissionCreatedEvent
 	private readonly dev: devEvents.PermissionsPermissionCreatedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.PermissionsPermissionCreatedEvent(ctx, event)
 		this.stage = new stageEvents.PermissionsPermissionCreatedEvent(ctx, event)
+		this.test = new testEvents.PermissionsPermissionCreatedEvent(ctx, event)
 		this.dev = new devEvents.PermissionsPermissionCreatedEvent(ctx, event)
 	}
 
@@ -6027,28 +3912,18 @@ export class PermissionsPermissionCreatedEvent {
 	get asV1(): productionEvents.PermissionsPermissionCreatedEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.PermissionsPermissionCreatedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.PermissionsPermissionCreatedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.PermissionsPermissionCreatedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.PermissionsPermissionCreatedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class PermissionsPermissionGrantedEvent {
 	private readonly production: productionEvents.PermissionsPermissionGrantedEvent
 	private readonly stage: stageEvents.PermissionsPermissionGrantedEvent
+	private readonly test: testEvents.PermissionsPermissionGrantedEvent
 	private readonly dev: devEvents.PermissionsPermissionGrantedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.PermissionsPermissionGrantedEvent(ctx, event)
 		this.stage = new stageEvents.PermissionsPermissionGrantedEvent(ctx, event)
+		this.test = new testEvents.PermissionsPermissionGrantedEvent(ctx, event)
 		this.dev = new devEvents.PermissionsPermissionGrantedEvent(ctx, event)
 	}
 
@@ -6058,28 +3933,18 @@ export class PermissionsPermissionGrantedEvent {
 	get asV1(): productionEvents.PermissionsPermissionGrantedEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.PermissionsPermissionGrantedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.PermissionsPermissionGrantedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.PermissionsPermissionGrantedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.PermissionsPermissionGrantedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class PermissionsPermissionTransferedEvent {
 	private readonly production: productionEvents.PermissionsPermissionTransferedEvent
 	private readonly stage: stageEvents.PermissionsPermissionTransferedEvent
+	private readonly test: testEvents.PermissionsPermissionTransferedEvent
 	private readonly dev: devEvents.PermissionsPermissionTransferedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.PermissionsPermissionTransferedEvent(ctx, event)
 		this.stage = new stageEvents.PermissionsPermissionTransferedEvent(ctx, event)
+		this.test = new testEvents.PermissionsPermissionTransferedEvent(ctx, event)
 		this.dev = new devEvents.PermissionsPermissionTransferedEvent(ctx, event)
 	}
 
@@ -6089,28 +3954,18 @@ export class PermissionsPermissionTransferedEvent {
 	get asV1(): productionEvents.PermissionsPermissionTransferedEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.PermissionsPermissionTransferedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.PermissionsPermissionTransferedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.PermissionsPermissionTransferedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.PermissionsPermissionTransferedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class PoolXykPoolIsInitializedEvent {
 	private readonly production: productionEvents.PoolXykPoolIsInitializedEvent
 	private readonly stage: stageEvents.PoolXykPoolIsInitializedEvent
+	private readonly test: testEvents.PoolXykPoolIsInitializedEvent
 	private readonly dev: devEvents.PoolXykPoolIsInitializedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.PoolXykPoolIsInitializedEvent(ctx, event)
 		this.stage = new stageEvents.PoolXykPoolIsInitializedEvent(ctx, event)
+		this.test = new testEvents.PoolXykPoolIsInitializedEvent(ctx, event)
 		this.dev = new devEvents.PoolXykPoolIsInitializedEvent(ctx, event)
 	}
 
@@ -6119,18 +3974,6 @@ export class PoolXykPoolIsInitializedEvent {
 	}
 	get asV1(): productionEvents.PoolXykPoolIsInitializedEvent['asV1'] {
 		return this.production.asV1
-	}
-	get isV33Stage(): stageEvents.PoolXykPoolIsInitializedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.PoolXykPoolIsInitializedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.PoolXykPoolIsInitializedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.PoolXykPoolIsInitializedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -6151,18 +3994,6 @@ export class PreimageClearedEvent {
 	get asV53(): productionEvents.PreimageClearedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV52Stage(): stageEvents.PreimageClearedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.PreimageClearedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.PreimageClearedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.PreimageClearedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class PreimageNotedEvent {
@@ -6181,18 +4012,6 @@ export class PreimageNotedEvent {
 	}
 	get asV53(): productionEvents.PreimageNotedEvent['asV53'] {
 		return this.production.asV53
-	}
-	get isV52Stage(): stageEvents.PreimageNotedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.PreimageNotedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.PreimageNotedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.PreimageNotedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -6213,28 +4032,18 @@ export class PreimageRequestedEvent {
 	get asV53(): productionEvents.PreimageRequestedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV52Stage(): stageEvents.PreimageRequestedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.PreimageRequestedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.PreimageRequestedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.PreimageRequestedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class PswapDistributionBurnRateChangedEvent {
 	private readonly production: productionEvents.PswapDistributionBurnRateChangedEvent
 	private readonly stage: stageEvents.PswapDistributionBurnRateChangedEvent
+	private readonly test: testEvents.PswapDistributionBurnRateChangedEvent
 	private readonly dev: devEvents.PswapDistributionBurnRateChangedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.PswapDistributionBurnRateChangedEvent(ctx, event)
 		this.stage = new stageEvents.PswapDistributionBurnRateChangedEvent(ctx, event)
+		this.test = new testEvents.PswapDistributionBurnRateChangedEvent(ctx, event)
 		this.dev = new devEvents.PswapDistributionBurnRateChangedEvent(ctx, event)
 	}
 
@@ -6250,34 +4059,18 @@ export class PswapDistributionBurnRateChangedEvent {
 	get asV42(): productionEvents.PswapDistributionBurnRateChangedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.PswapDistributionBurnRateChangedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.PswapDistributionBurnRateChangedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.PswapDistributionBurnRateChangedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.PswapDistributionBurnRateChangedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.PswapDistributionBurnRateChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.PswapDistributionBurnRateChangedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class PswapDistributionFeesExchangeFailedEvent {
 	private readonly production: productionEvents.PswapDistributionFeesExchangeFailedEvent
 	private readonly stage: stageEvents.PswapDistributionFeesExchangeFailedEvent
+	private readonly test: testEvents.PswapDistributionFeesExchangeFailedEvent
 	private readonly dev: devEvents.PswapDistributionFeesExchangeFailedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.PswapDistributionFeesExchangeFailedEvent(ctx, event)
 		this.stage = new stageEvents.PswapDistributionFeesExchangeFailedEvent(ctx, event)
+		this.test = new testEvents.PswapDistributionFeesExchangeFailedEvent(ctx, event)
 		this.dev = new devEvents.PswapDistributionFeesExchangeFailedEvent(ctx, event)
 	}
 
@@ -6305,46 +4098,18 @@ export class PswapDistributionFeesExchangeFailedEvent {
 	get asV53(): productionEvents.PswapDistributionFeesExchangeFailedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV33Stage(): stageEvents.PswapDistributionFeesExchangeFailedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.PswapDistributionFeesExchangeFailedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.PswapDistributionFeesExchangeFailedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.PswapDistributionFeesExchangeFailedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV46Stage(): stageEvents.PswapDistributionFeesExchangeFailedEvent['isV46'] {
-		return this.stage.isV46
-	}
-	get asV46Stage(): stageEvents.PswapDistributionFeesExchangeFailedEvent['asV46'] {
-		return this.stage.asV46
-	}
-	get isV52Stage(): stageEvents.PswapDistributionFeesExchangeFailedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.PswapDistributionFeesExchangeFailedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.PswapDistributionFeesExchangeFailedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.PswapDistributionFeesExchangeFailedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class PswapDistributionFeesExchangedEvent {
 	private readonly production: productionEvents.PswapDistributionFeesExchangedEvent
 	private readonly stage: stageEvents.PswapDistributionFeesExchangedEvent
+	private readonly test: testEvents.PswapDistributionFeesExchangedEvent
 	private readonly dev: devEvents.PswapDistributionFeesExchangedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.PswapDistributionFeesExchangedEvent(ctx, event)
 		this.stage = new stageEvents.PswapDistributionFeesExchangedEvent(ctx, event)
+		this.test = new testEvents.PswapDistributionFeesExchangedEvent(ctx, event)
 		this.dev = new devEvents.PswapDistributionFeesExchangedEvent(ctx, event)
 	}
 
@@ -6360,34 +4125,18 @@ export class PswapDistributionFeesExchangedEvent {
 	get asV42(): productionEvents.PswapDistributionFeesExchangedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.PswapDistributionFeesExchangedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.PswapDistributionFeesExchangedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.PswapDistributionFeesExchangedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.PswapDistributionFeesExchangedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.PswapDistributionFeesExchangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.PswapDistributionFeesExchangedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class PswapDistributionIncentiveDistributedEvent {
 	private readonly production: productionEvents.PswapDistributionIncentiveDistributedEvent
 	private readonly stage: stageEvents.PswapDistributionIncentiveDistributedEvent
+	private readonly test: testEvents.PswapDistributionIncentiveDistributedEvent
 	private readonly dev: devEvents.PswapDistributionIncentiveDistributedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.PswapDistributionIncentiveDistributedEvent(ctx, event)
 		this.stage = new stageEvents.PswapDistributionIncentiveDistributedEvent(ctx, event)
+		this.test = new testEvents.PswapDistributionIncentiveDistributedEvent(ctx, event)
 		this.dev = new devEvents.PswapDistributionIncentiveDistributedEvent(ctx, event)
 	}
 
@@ -6403,34 +4152,18 @@ export class PswapDistributionIncentiveDistributedEvent {
 	get asV42(): productionEvents.PswapDistributionIncentiveDistributedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.PswapDistributionIncentiveDistributedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.PswapDistributionIncentiveDistributedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.PswapDistributionIncentiveDistributedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.PswapDistributionIncentiveDistributedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.PswapDistributionIncentiveDistributedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.PswapDistributionIncentiveDistributedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class PswapDistributionIncentiveDistributionFailedEvent {
 	private readonly production: productionEvents.PswapDistributionIncentiveDistributionFailedEvent
 	private readonly stage: stageEvents.PswapDistributionIncentiveDistributionFailedEvent
+	private readonly test: testEvents.PswapDistributionIncentiveDistributionFailedEvent
 	private readonly dev: devEvents.PswapDistributionIncentiveDistributionFailedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.PswapDistributionIncentiveDistributionFailedEvent(ctx, event)
 		this.stage = new stageEvents.PswapDistributionIncentiveDistributionFailedEvent(ctx, event)
+		this.test = new testEvents.PswapDistributionIncentiveDistributionFailedEvent(ctx, event)
 		this.dev = new devEvents.PswapDistributionIncentiveDistributionFailedEvent(ctx, event)
 	}
 
@@ -6446,28 +4179,18 @@ export class PswapDistributionIncentiveDistributionFailedEvent {
 	get asV8(): productionEvents.PswapDistributionIncentiveDistributionFailedEvent['asV8'] {
 		return this.production.asV8
 	}
-	get isV33Stage(): stageEvents.PswapDistributionIncentiveDistributionFailedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.PswapDistributionIncentiveDistributionFailedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.PswapDistributionIncentiveDistributionFailedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.PswapDistributionIncentiveDistributionFailedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class PswapDistributionIncentivesBurnedAfterExchangeEvent {
 	private readonly production: productionEvents.PswapDistributionIncentivesBurnedAfterExchangeEvent
 	private readonly stage: stageEvents.PswapDistributionIncentivesBurnedAfterExchangeEvent
+	private readonly test: testEvents.PswapDistributionIncentivesBurnedAfterExchangeEvent
 	private readonly dev: devEvents.PswapDistributionIncentivesBurnedAfterExchangeEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.PswapDistributionIncentivesBurnedAfterExchangeEvent(ctx, event)
 		this.stage = new stageEvents.PswapDistributionIncentivesBurnedAfterExchangeEvent(ctx, event)
+		this.test = new testEvents.PswapDistributionIncentivesBurnedAfterExchangeEvent(ctx, event)
 		this.dev = new devEvents.PswapDistributionIncentivesBurnedAfterExchangeEvent(ctx, event)
 	}
 
@@ -6483,34 +4206,18 @@ export class PswapDistributionIncentivesBurnedAfterExchangeEvent {
 	get asV42(): productionEvents.PswapDistributionIncentivesBurnedAfterExchangeEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.PswapDistributionIncentivesBurnedAfterExchangeEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.PswapDistributionIncentivesBurnedAfterExchangeEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.PswapDistributionIncentivesBurnedAfterExchangeEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.PswapDistributionIncentivesBurnedAfterExchangeEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.PswapDistributionIncentivesBurnedAfterExchangeEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.PswapDistributionIncentivesBurnedAfterExchangeEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class PswapDistributionNothingToDistributeEvent {
 	private readonly production: productionEvents.PswapDistributionNothingToDistributeEvent
 	private readonly stage: stageEvents.PswapDistributionNothingToDistributeEvent
+	private readonly test: testEvents.PswapDistributionNothingToDistributeEvent
 	private readonly dev: devEvents.PswapDistributionNothingToDistributeEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.PswapDistributionNothingToDistributeEvent(ctx, event)
 		this.stage = new stageEvents.PswapDistributionNothingToDistributeEvent(ctx, event)
+		this.test = new testEvents.PswapDistributionNothingToDistributeEvent(ctx, event)
 		this.dev = new devEvents.PswapDistributionNothingToDistributeEvent(ctx, event)
 	}
 
@@ -6520,28 +4227,18 @@ export class PswapDistributionNothingToDistributeEvent {
 	get asV1(): productionEvents.PswapDistributionNothingToDistributeEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.PswapDistributionNothingToDistributeEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.PswapDistributionNothingToDistributeEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.PswapDistributionNothingToDistributeEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.PswapDistributionNothingToDistributeEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class PswapDistributionNothingToExchangeEvent {
 	private readonly production: productionEvents.PswapDistributionNothingToExchangeEvent
 	private readonly stage: stageEvents.PswapDistributionNothingToExchangeEvent
+	private readonly test: testEvents.PswapDistributionNothingToExchangeEvent
 	private readonly dev: devEvents.PswapDistributionNothingToExchangeEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.PswapDistributionNothingToExchangeEvent(ctx, event)
 		this.stage = new stageEvents.PswapDistributionNothingToExchangeEvent(ctx, event)
+		this.test = new testEvents.PswapDistributionNothingToExchangeEvent(ctx, event)
 		this.dev = new devEvents.PswapDistributionNothingToExchangeEvent(ctx, event)
 	}
 
@@ -6551,28 +4248,18 @@ export class PswapDistributionNothingToExchangeEvent {
 	get asV1(): productionEvents.PswapDistributionNothingToExchangeEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.PswapDistributionNothingToExchangeEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.PswapDistributionNothingToExchangeEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.PswapDistributionNothingToExchangeEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.PswapDistributionNothingToExchangeEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class RewardsClaimedEvent {
 	private readonly production: productionEvents.RewardsClaimedEvent
 	private readonly stage: stageEvents.RewardsClaimedEvent
+	private readonly test: testEvents.RewardsClaimedEvent
 	private readonly dev: devEvents.RewardsClaimedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.RewardsClaimedEvent(ctx, event)
 		this.stage = new stageEvents.RewardsClaimedEvent(ctx, event)
+		this.test = new testEvents.RewardsClaimedEvent(ctx, event)
 		this.dev = new devEvents.RewardsClaimedEvent(ctx, event)
 	}
 
@@ -6582,28 +4269,18 @@ export class RewardsClaimedEvent {
 	get asV1(): productionEvents.RewardsClaimedEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.RewardsClaimedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.RewardsClaimedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.RewardsClaimedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.RewardsClaimedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class RewardsMigrationCompletedEvent {
 	private readonly production: productionEvents.RewardsMigrationCompletedEvent
 	private readonly stage: stageEvents.RewardsMigrationCompletedEvent
+	private readonly test: testEvents.RewardsMigrationCompletedEvent
 	private readonly dev: devEvents.RewardsMigrationCompletedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.RewardsMigrationCompletedEvent(ctx, event)
 		this.stage = new stageEvents.RewardsMigrationCompletedEvent(ctx, event)
+		this.test = new testEvents.RewardsMigrationCompletedEvent(ctx, event)
 		this.dev = new devEvents.RewardsMigrationCompletedEvent(ctx, event)
 	}
 
@@ -6613,27 +4290,17 @@ export class RewardsMigrationCompletedEvent {
 	get asV19(): productionEvents.RewardsMigrationCompletedEvent['asV19'] {
 		return this.production.asV19
 	}
-	get isV33Stage(): stageEvents.RewardsMigrationCompletedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.RewardsMigrationCompletedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.RewardsMigrationCompletedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.RewardsMigrationCompletedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class SchedulerCallLookupFailedEvent {
 	private readonly production: productionEvents.SchedulerCallLookupFailedEvent
 	private readonly stage: stageEvents.SchedulerCallLookupFailedEvent
+	private readonly test: testEvents.SchedulerCallLookupFailedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.SchedulerCallLookupFailedEvent(ctx, event)
 		this.stage = new stageEvents.SchedulerCallLookupFailedEvent(ctx, event)
+		this.test = new testEvents.SchedulerCallLookupFailedEvent(ctx, event)
 	}
 
 	get isV42(): productionEvents.SchedulerCallLookupFailedEvent['isV42'] {
@@ -6641,12 +4308,6 @@ export class SchedulerCallLookupFailedEvent {
 	}
 	get asV42(): productionEvents.SchedulerCallLookupFailedEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV42Stage(): stageEvents.SchedulerCallLookupFailedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.SchedulerCallLookupFailedEvent['asV42'] {
-		return this.stage.asV42
 	}
 }
 
@@ -6667,28 +4328,18 @@ export class SchedulerCallUnavailableEvent {
 	get asV53(): productionEvents.SchedulerCallUnavailableEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV52Stage(): stageEvents.SchedulerCallUnavailableEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.SchedulerCallUnavailableEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.SchedulerCallUnavailableEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SchedulerCallUnavailableEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class SchedulerCanceledEvent {
 	private readonly production: productionEvents.SchedulerCanceledEvent
 	private readonly stage: stageEvents.SchedulerCanceledEvent
+	private readonly test: testEvents.SchedulerCanceledEvent
 	private readonly dev: devEvents.SchedulerCanceledEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.SchedulerCanceledEvent(ctx, event)
 		this.stage = new stageEvents.SchedulerCanceledEvent(ctx, event)
+		this.test = new testEvents.SchedulerCanceledEvent(ctx, event)
 		this.dev = new devEvents.SchedulerCanceledEvent(ctx, event)
 	}
 
@@ -6704,34 +4355,18 @@ export class SchedulerCanceledEvent {
 	get asV42(): productionEvents.SchedulerCanceledEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.SchedulerCanceledEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.SchedulerCanceledEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.SchedulerCanceledEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.SchedulerCanceledEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.SchedulerCanceledEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SchedulerCanceledEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class SchedulerDispatchedEvent {
 	private readonly production: productionEvents.SchedulerDispatchedEvent
 	private readonly stage: stageEvents.SchedulerDispatchedEvent
+	private readonly test: testEvents.SchedulerDispatchedEvent
 	private readonly dev: devEvents.SchedulerDispatchedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.SchedulerDispatchedEvent(ctx, event)
 		this.stage = new stageEvents.SchedulerDispatchedEvent(ctx, event)
+		this.test = new testEvents.SchedulerDispatchedEvent(ctx, event)
 		this.dev = new devEvents.SchedulerDispatchedEvent(ctx, event)
 	}
 
@@ -6753,30 +4388,6 @@ export class SchedulerDispatchedEvent {
 	get asV53(): productionEvents.SchedulerDispatchedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV33Stage(): stageEvents.SchedulerDispatchedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.SchedulerDispatchedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.SchedulerDispatchedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.SchedulerDispatchedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.SchedulerDispatchedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.SchedulerDispatchedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.SchedulerDispatchedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SchedulerDispatchedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class SchedulerPeriodicFailedEvent {
@@ -6795,18 +4406,6 @@ export class SchedulerPeriodicFailedEvent {
 	}
 	get asV53(): productionEvents.SchedulerPeriodicFailedEvent['asV53'] {
 		return this.production.asV53
-	}
-	get isV52Stage(): stageEvents.SchedulerPeriodicFailedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.SchedulerPeriodicFailedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.SchedulerPeriodicFailedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SchedulerPeriodicFailedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -6827,28 +4426,18 @@ export class SchedulerPermanentlyOverweightEvent {
 	get asV53(): productionEvents.SchedulerPermanentlyOverweightEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV52Stage(): stageEvents.SchedulerPermanentlyOverweightEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.SchedulerPermanentlyOverweightEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.SchedulerPermanentlyOverweightEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SchedulerPermanentlyOverweightEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class SchedulerScheduledEvent {
 	private readonly production: productionEvents.SchedulerScheduledEvent
 	private readonly stage: stageEvents.SchedulerScheduledEvent
+	private readonly test: testEvents.SchedulerScheduledEvent
 	private readonly dev: devEvents.SchedulerScheduledEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.SchedulerScheduledEvent(ctx, event)
 		this.stage = new stageEvents.SchedulerScheduledEvent(ctx, event)
+		this.test = new testEvents.SchedulerScheduledEvent(ctx, event)
 		this.dev = new devEvents.SchedulerScheduledEvent(ctx, event)
 	}
 
@@ -6864,34 +4453,18 @@ export class SchedulerScheduledEvent {
 	get asV42(): productionEvents.SchedulerScheduledEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.SchedulerScheduledEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.SchedulerScheduledEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.SchedulerScheduledEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.SchedulerScheduledEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.SchedulerScheduledEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SchedulerScheduledEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class SessionNewSessionEvent {
 	private readonly production: productionEvents.SessionNewSessionEvent
 	private readonly stage: stageEvents.SessionNewSessionEvent
+	private readonly test: testEvents.SessionNewSessionEvent
 	private readonly dev: devEvents.SessionNewSessionEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.SessionNewSessionEvent(ctx, event)
 		this.stage = new stageEvents.SessionNewSessionEvent(ctx, event)
+		this.test = new testEvents.SessionNewSessionEvent(ctx, event)
 		this.dev = new devEvents.SessionNewSessionEvent(ctx, event)
 	}
 
@@ -6907,34 +4480,18 @@ export class SessionNewSessionEvent {
 	get asV42(): productionEvents.SessionNewSessionEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.SessionNewSessionEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.SessionNewSessionEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.SessionNewSessionEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.SessionNewSessionEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.SessionNewSessionEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SessionNewSessionEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class StakingBondedEvent {
 	private readonly production: productionEvents.StakingBondedEvent
 	private readonly stage: stageEvents.StakingBondedEvent
+	private readonly test: testEvents.StakingBondedEvent
 	private readonly dev: devEvents.StakingBondedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.StakingBondedEvent(ctx, event)
 		this.stage = new stageEvents.StakingBondedEvent(ctx, event)
+		this.test = new testEvents.StakingBondedEvent(ctx, event)
 		this.dev = new devEvents.StakingBondedEvent(ctx, event)
 	}
 
@@ -6950,34 +4507,18 @@ export class StakingBondedEvent {
 	get asV53(): productionEvents.StakingBondedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV33Stage(): stageEvents.StakingBondedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.StakingBondedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV52Stage(): stageEvents.StakingBondedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.StakingBondedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.StakingBondedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.StakingBondedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class StakingChilledEvent {
 	private readonly production: productionEvents.StakingChilledEvent
 	private readonly stage: stageEvents.StakingChilledEvent
+	private readonly test: testEvents.StakingChilledEvent
 	private readonly dev: devEvents.StakingChilledEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.StakingChilledEvent(ctx, event)
 		this.stage = new stageEvents.StakingChilledEvent(ctx, event)
+		this.test = new testEvents.StakingChilledEvent(ctx, event)
 		this.dev = new devEvents.StakingChilledEvent(ctx, event)
 	}
 
@@ -6993,34 +4534,18 @@ export class StakingChilledEvent {
 	get asV53(): productionEvents.StakingChilledEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV42Stage(): stageEvents.StakingChilledEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.StakingChilledEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.StakingChilledEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.StakingChilledEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.StakingChilledEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.StakingChilledEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class StakingEraPaidEvent {
 	private readonly production: productionEvents.StakingEraPaidEvent
 	private readonly stage: stageEvents.StakingEraPaidEvent
+	private readonly test: testEvents.StakingEraPaidEvent
 	private readonly dev: devEvents.StakingEraPaidEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.StakingEraPaidEvent(ctx, event)
 		this.stage = new stageEvents.StakingEraPaidEvent(ctx, event)
+		this.test = new testEvents.StakingEraPaidEvent(ctx, event)
 		this.dev = new devEvents.StakingEraPaidEvent(ctx, event)
 	}
 
@@ -7036,33 +4561,17 @@ export class StakingEraPaidEvent {
 	get asV53(): productionEvents.StakingEraPaidEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV42Stage(): stageEvents.StakingEraPaidEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.StakingEraPaidEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.StakingEraPaidEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.StakingEraPaidEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.StakingEraPaidEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.StakingEraPaidEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class StakingEraPayoutEvent {
 	private readonly production: productionEvents.StakingEraPayoutEvent
 	private readonly stage: stageEvents.StakingEraPayoutEvent
+	private readonly test: testEvents.StakingEraPayoutEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.StakingEraPayoutEvent(ctx, event)
 		this.stage = new stageEvents.StakingEraPayoutEvent(ctx, event)
+		this.test = new testEvents.StakingEraPayoutEvent(ctx, event)
 	}
 
 	get isV1(): productionEvents.StakingEraPayoutEvent['isV1'] {
@@ -7070,12 +4579,6 @@ export class StakingEraPayoutEvent {
 	}
 	get asV1(): productionEvents.StakingEraPayoutEvent['asV1'] {
 		return this.production.asV1
-	}
-	get isV33Stage(): stageEvents.StakingEraPayoutEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.StakingEraPayoutEvent['asV33'] {
-		return this.stage.asV33
 	}
 }
 
@@ -7096,28 +4599,18 @@ export class StakingForceEraEvent {
 	get asV53(): productionEvents.StakingForceEraEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV52Stage(): stageEvents.StakingForceEraEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.StakingForceEraEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.StakingForceEraEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.StakingForceEraEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class StakingKickedEvent {
 	private readonly production: productionEvents.StakingKickedEvent
 	private readonly stage: stageEvents.StakingKickedEvent
+	private readonly test: testEvents.StakingKickedEvent
 	private readonly dev: devEvents.StakingKickedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.StakingKickedEvent(ctx, event)
 		this.stage = new stageEvents.StakingKickedEvent(ctx, event)
+		this.test = new testEvents.StakingKickedEvent(ctx, event)
 		this.dev = new devEvents.StakingKickedEvent(ctx, event)
 	}
 
@@ -7133,34 +4626,18 @@ export class StakingKickedEvent {
 	get asV53(): productionEvents.StakingKickedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV33Stage(): stageEvents.StakingKickedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.StakingKickedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV52Stage(): stageEvents.StakingKickedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.StakingKickedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.StakingKickedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.StakingKickedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class StakingOldSlashingReportDiscardedEvent {
 	private readonly production: productionEvents.StakingOldSlashingReportDiscardedEvent
 	private readonly stage: stageEvents.StakingOldSlashingReportDiscardedEvent
+	private readonly test: testEvents.StakingOldSlashingReportDiscardedEvent
 	private readonly dev: devEvents.StakingOldSlashingReportDiscardedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.StakingOldSlashingReportDiscardedEvent(ctx, event)
 		this.stage = new stageEvents.StakingOldSlashingReportDiscardedEvent(ctx, event)
+		this.test = new testEvents.StakingOldSlashingReportDiscardedEvent(ctx, event)
 		this.dev = new devEvents.StakingOldSlashingReportDiscardedEvent(ctx, event)
 	}
 
@@ -7176,34 +4653,18 @@ export class StakingOldSlashingReportDiscardedEvent {
 	get asV53(): productionEvents.StakingOldSlashingReportDiscardedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV33Stage(): stageEvents.StakingOldSlashingReportDiscardedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.StakingOldSlashingReportDiscardedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV52Stage(): stageEvents.StakingOldSlashingReportDiscardedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.StakingOldSlashingReportDiscardedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.StakingOldSlashingReportDiscardedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.StakingOldSlashingReportDiscardedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class StakingPayoutStartedEvent {
 	private readonly production: productionEvents.StakingPayoutStartedEvent
 	private readonly stage: stageEvents.StakingPayoutStartedEvent
+	private readonly test: testEvents.StakingPayoutStartedEvent
 	private readonly dev: devEvents.StakingPayoutStartedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.StakingPayoutStartedEvent(ctx, event)
 		this.stage = new stageEvents.StakingPayoutStartedEvent(ctx, event)
+		this.test = new testEvents.StakingPayoutStartedEvent(ctx, event)
 		this.dev = new devEvents.StakingPayoutStartedEvent(ctx, event)
 	}
 
@@ -7219,33 +4680,17 @@ export class StakingPayoutStartedEvent {
 	get asV53(): productionEvents.StakingPayoutStartedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV42Stage(): stageEvents.StakingPayoutStartedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.StakingPayoutStartedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.StakingPayoutStartedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.StakingPayoutStartedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.StakingPayoutStartedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.StakingPayoutStartedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class StakingRewardEvent {
 	private readonly production: productionEvents.StakingRewardEvent
 	private readonly stage: stageEvents.StakingRewardEvent
+	private readonly test: testEvents.StakingRewardEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.StakingRewardEvent(ctx, event)
 		this.stage = new stageEvents.StakingRewardEvent(ctx, event)
+		this.test = new testEvents.StakingRewardEvent(ctx, event)
 	}
 
 	get isV1(): productionEvents.StakingRewardEvent['isV1'] {
@@ -7254,22 +4699,18 @@ export class StakingRewardEvent {
 	get asV1(): productionEvents.StakingRewardEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.StakingRewardEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.StakingRewardEvent['asV33'] {
-		return this.stage.asV33
-	}
 }
 
 export class StakingRewardedEvent {
 	private readonly production: productionEvents.StakingRewardedEvent
 	private readonly stage: stageEvents.StakingRewardedEvent
+	private readonly test: testEvents.StakingRewardedEvent
 	private readonly dev: devEvents.StakingRewardedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.StakingRewardedEvent(ctx, event)
 		this.stage = new stageEvents.StakingRewardedEvent(ctx, event)
+		this.test = new testEvents.StakingRewardedEvent(ctx, event)
 		this.dev = new devEvents.StakingRewardedEvent(ctx, event)
 	}
 
@@ -7285,33 +4726,17 @@ export class StakingRewardedEvent {
 	get asV53(): productionEvents.StakingRewardedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV42Stage(): stageEvents.StakingRewardedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.StakingRewardedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.StakingRewardedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.StakingRewardedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.StakingRewardedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.StakingRewardedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class StakingSlashEvent {
 	private readonly production: productionEvents.StakingSlashEvent
 	private readonly stage: stageEvents.StakingSlashEvent
+	private readonly test: testEvents.StakingSlashEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.StakingSlashEvent(ctx, event)
 		this.stage = new stageEvents.StakingSlashEvent(ctx, event)
+		this.test = new testEvents.StakingSlashEvent(ctx, event)
 	}
 
 	get isV1(): productionEvents.StakingSlashEvent['isV1'] {
@@ -7319,12 +4744,6 @@ export class StakingSlashEvent {
 	}
 	get asV1(): productionEvents.StakingSlashEvent['asV1'] {
 		return this.production.asV1
-	}
-	get isV33Stage(): stageEvents.StakingSlashEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.StakingSlashEvent['asV33'] {
-		return this.stage.asV33
 	}
 }
 
@@ -7345,28 +4764,18 @@ export class StakingSlashReportedEvent {
 	get asV53(): productionEvents.StakingSlashReportedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV52Stage(): stageEvents.StakingSlashReportedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.StakingSlashReportedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.StakingSlashReportedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.StakingSlashReportedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class StakingSlashedEvent {
 	private readonly production: productionEvents.StakingSlashedEvent
 	private readonly stage: stageEvents.StakingSlashedEvent
+	private readonly test: testEvents.StakingSlashedEvent
 	private readonly dev: devEvents.StakingSlashedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.StakingSlashedEvent(ctx, event)
 		this.stage = new stageEvents.StakingSlashedEvent(ctx, event)
+		this.test = new testEvents.StakingSlashedEvent(ctx, event)
 		this.dev = new devEvents.StakingSlashedEvent(ctx, event)
 	}
 
@@ -7382,33 +4791,17 @@ export class StakingSlashedEvent {
 	get asV53(): productionEvents.StakingSlashedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV42Stage(): stageEvents.StakingSlashedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.StakingSlashedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.StakingSlashedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.StakingSlashedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.StakingSlashedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.StakingSlashedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class StakingSolutionStoredEvent {
 	private readonly production: productionEvents.StakingSolutionStoredEvent
 	private readonly stage: stageEvents.StakingSolutionStoredEvent
+	private readonly test: testEvents.StakingSolutionStoredEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.StakingSolutionStoredEvent(ctx, event)
 		this.stage = new stageEvents.StakingSolutionStoredEvent(ctx, event)
+		this.test = new testEvents.StakingSolutionStoredEvent(ctx, event)
 	}
 
 	get isV1(): productionEvents.StakingSolutionStoredEvent['isV1'] {
@@ -7417,22 +4810,18 @@ export class StakingSolutionStoredEvent {
 	get asV1(): productionEvents.StakingSolutionStoredEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.StakingSolutionStoredEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.StakingSolutionStoredEvent['asV33'] {
-		return this.stage.asV33
-	}
 }
 
 export class StakingStakersElectedEvent {
 	private readonly production: productionEvents.StakingStakersElectedEvent
 	private readonly stage: stageEvents.StakingStakersElectedEvent
+	private readonly test: testEvents.StakingStakersElectedEvent
 	private readonly dev: devEvents.StakingStakersElectedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.StakingStakersElectedEvent(ctx, event)
 		this.stage = new stageEvents.StakingStakersElectedEvent(ctx, event)
+		this.test = new testEvents.StakingStakersElectedEvent(ctx, event)
 		this.dev = new devEvents.StakingStakersElectedEvent(ctx, event)
 	}
 
@@ -7442,27 +4831,17 @@ export class StakingStakersElectedEvent {
 	get asV42(): productionEvents.StakingStakersElectedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.StakingStakersElectedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.StakingStakersElectedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.StakingStakersElectedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.StakingStakersElectedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class StakingStakingElectionEvent {
 	private readonly production: productionEvents.StakingStakingElectionEvent
 	private readonly stage: stageEvents.StakingStakingElectionEvent
+	private readonly test: testEvents.StakingStakingElectionEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.StakingStakingElectionEvent(ctx, event)
 		this.stage = new stageEvents.StakingStakingElectionEvent(ctx, event)
+		this.test = new testEvents.StakingStakingElectionEvent(ctx, event)
 	}
 
 	get isV1(): productionEvents.StakingStakingElectionEvent['isV1'] {
@@ -7471,22 +4850,18 @@ export class StakingStakingElectionEvent {
 	get asV1(): productionEvents.StakingStakingElectionEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.StakingStakingElectionEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.StakingStakingElectionEvent['asV33'] {
-		return this.stage.asV33
-	}
 }
 
 export class StakingStakingElectionFailedEvent {
 	private readonly production: productionEvents.StakingStakingElectionFailedEvent
 	private readonly stage: stageEvents.StakingStakingElectionFailedEvent
+	private readonly test: testEvents.StakingStakingElectionFailedEvent
 	private readonly dev: devEvents.StakingStakingElectionFailedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.StakingStakingElectionFailedEvent(ctx, event)
 		this.stage = new stageEvents.StakingStakingElectionFailedEvent(ctx, event)
+		this.test = new testEvents.StakingStakingElectionFailedEvent(ctx, event)
 		this.dev = new devEvents.StakingStakingElectionFailedEvent(ctx, event)
 	}
 
@@ -7496,28 +4871,18 @@ export class StakingStakingElectionFailedEvent {
 	get asV42(): productionEvents.StakingStakingElectionFailedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.StakingStakingElectionFailedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.StakingStakingElectionFailedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.StakingStakingElectionFailedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.StakingStakingElectionFailedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class StakingUnbondedEvent {
 	private readonly production: productionEvents.StakingUnbondedEvent
 	private readonly stage: stageEvents.StakingUnbondedEvent
+	private readonly test: testEvents.StakingUnbondedEvent
 	private readonly dev: devEvents.StakingUnbondedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.StakingUnbondedEvent(ctx, event)
 		this.stage = new stageEvents.StakingUnbondedEvent(ctx, event)
+		this.test = new testEvents.StakingUnbondedEvent(ctx, event)
 		this.dev = new devEvents.StakingUnbondedEvent(ctx, event)
 	}
 
@@ -7533,34 +4898,18 @@ export class StakingUnbondedEvent {
 	get asV53(): productionEvents.StakingUnbondedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV33Stage(): stageEvents.StakingUnbondedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.StakingUnbondedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV52Stage(): stageEvents.StakingUnbondedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.StakingUnbondedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.StakingUnbondedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.StakingUnbondedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class StakingValidatorPrefsSetEvent {
 	private readonly production: productionEvents.StakingValidatorPrefsSetEvent
 	private readonly stage: stageEvents.StakingValidatorPrefsSetEvent
+	private readonly test: testEvents.StakingValidatorPrefsSetEvent
 	private readonly dev: devEvents.StakingValidatorPrefsSetEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.StakingValidatorPrefsSetEvent(ctx, event)
 		this.stage = new stageEvents.StakingValidatorPrefsSetEvent(ctx, event)
+		this.test = new testEvents.StakingValidatorPrefsSetEvent(ctx, event)
 		this.dev = new devEvents.StakingValidatorPrefsSetEvent(ctx, event)
 	}
 
@@ -7576,34 +4925,18 @@ export class StakingValidatorPrefsSetEvent {
 	get asV53(): productionEvents.StakingValidatorPrefsSetEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV42Stage(): stageEvents.StakingValidatorPrefsSetEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.StakingValidatorPrefsSetEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.StakingValidatorPrefsSetEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.StakingValidatorPrefsSetEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.StakingValidatorPrefsSetEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.StakingValidatorPrefsSetEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class StakingWithdrawnEvent {
 	private readonly production: productionEvents.StakingWithdrawnEvent
 	private readonly stage: stageEvents.StakingWithdrawnEvent
+	private readonly test: testEvents.StakingWithdrawnEvent
 	private readonly dev: devEvents.StakingWithdrawnEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.StakingWithdrawnEvent(ctx, event)
 		this.stage = new stageEvents.StakingWithdrawnEvent(ctx, event)
+		this.test = new testEvents.StakingWithdrawnEvent(ctx, event)
 		this.dev = new devEvents.StakingWithdrawnEvent(ctx, event)
 	}
 
@@ -7619,34 +4952,18 @@ export class StakingWithdrawnEvent {
 	get asV53(): productionEvents.StakingWithdrawnEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV33Stage(): stageEvents.StakingWithdrawnEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.StakingWithdrawnEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV52Stage(): stageEvents.StakingWithdrawnEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.StakingWithdrawnEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.StakingWithdrawnEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.StakingWithdrawnEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class SudoKeyChangedEvent {
 	private readonly production: productionEvents.SudoKeyChangedEvent
 	private readonly stage: stageEvents.SudoKeyChangedEvent
+	private readonly test: testEvents.SudoKeyChangedEvent
 	private readonly dev: devEvents.SudoKeyChangedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.SudoKeyChangedEvent(ctx, event)
 		this.stage = new stageEvents.SudoKeyChangedEvent(ctx, event)
+		this.test = new testEvents.SudoKeyChangedEvent(ctx, event)
 		this.dev = new devEvents.SudoKeyChangedEvent(ctx, event)
 	}
 
@@ -7656,34 +4973,24 @@ export class SudoKeyChangedEvent {
 	get asV22(): productionEvents.SudoKeyChangedEvent['asV22'] {
 		return this.production.asV22
 	}
-	get isV33Stage(): stageEvents.SudoKeyChangedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.SudoKeyChangedEvent['asV33'] {
-		return this.stage.asV33
-	}
 	get isV42Stage(): stageEvents.SudoKeyChangedEvent['isV42'] {
 		return this.stage.isV42
 	}
 	get asV42Stage(): stageEvents.SudoKeyChangedEvent['asV42'] {
 		return this.stage.asV42
 	}
-	get isV60Dev(): devEvents.SudoKeyChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SudoKeyChangedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class SudoSudidEvent {
 	private readonly production: productionEvents.SudoSudidEvent
 	private readonly stage: stageEvents.SudoSudidEvent
+	private readonly test: testEvents.SudoSudidEvent
 	private readonly dev: devEvents.SudoSudidEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.SudoSudidEvent(ctx, event)
 		this.stage = new stageEvents.SudoSudidEvent(ctx, event)
+		this.test = new testEvents.SudoSudidEvent(ctx, event)
 		this.dev = new devEvents.SudoSudidEvent(ctx, event)
 	}
 
@@ -7692,12 +4999,6 @@ export class SudoSudidEvent {
 	}
 	get asV22(): productionEvents.SudoSudidEvent['asV22'] {
 		return this.production.asV22
-	}
-	get isV33Stage(): stageEvents.SudoSudidEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.SudoSudidEvent['asV33'] {
-		return this.stage.asV33
 	}
 	get isV42Stage(): stageEvents.SudoSudidEvent['isV42'] {
 		return this.stage.isV42
@@ -7711,22 +5012,18 @@ export class SudoSudidEvent {
 	get asV52Stage(): stageEvents.SudoSudidEvent['asV52'] {
 		return this.stage.asV52
 	}
-	get isV60Dev(): devEvents.SudoSudidEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SudoSudidEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class SudoSudoAsDoneEvent {
 	private readonly production: productionEvents.SudoSudoAsDoneEvent
 	private readonly stage: stageEvents.SudoSudoAsDoneEvent
+	private readonly test: testEvents.SudoSudoAsDoneEvent
 	private readonly dev: devEvents.SudoSudoAsDoneEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.SudoSudoAsDoneEvent(ctx, event)
 		this.stage = new stageEvents.SudoSudoAsDoneEvent(ctx, event)
+		this.test = new testEvents.SudoSudoAsDoneEvent(ctx, event)
 		this.dev = new devEvents.SudoSudoAsDoneEvent(ctx, event)
 	}
 
@@ -7735,12 +5032,6 @@ export class SudoSudoAsDoneEvent {
 	}
 	get asV22(): productionEvents.SudoSudoAsDoneEvent['asV22'] {
 		return this.production.asV22
-	}
-	get isV33Stage(): stageEvents.SudoSudoAsDoneEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.SudoSudoAsDoneEvent['asV33'] {
-		return this.stage.asV33
 	}
 	get isV42Stage(): stageEvents.SudoSudoAsDoneEvent['isV42'] {
 		return this.stage.isV42
@@ -7754,22 +5045,18 @@ export class SudoSudoAsDoneEvent {
 	get asV52Stage(): stageEvents.SudoSudoAsDoneEvent['asV52'] {
 		return this.stage.asV52
 	}
-	get isV60Dev(): devEvents.SudoSudoAsDoneEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SudoSudoAsDoneEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class SystemCodeUpdatedEvent {
 	private readonly production: productionEvents.SystemCodeUpdatedEvent
 	private readonly stage: stageEvents.SystemCodeUpdatedEvent
+	private readonly test: testEvents.SystemCodeUpdatedEvent
 	private readonly dev: devEvents.SystemCodeUpdatedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.SystemCodeUpdatedEvent(ctx, event)
 		this.stage = new stageEvents.SystemCodeUpdatedEvent(ctx, event)
+		this.test = new testEvents.SystemCodeUpdatedEvent(ctx, event)
 		this.dev = new devEvents.SystemCodeUpdatedEvent(ctx, event)
 	}
 
@@ -7779,28 +5066,18 @@ export class SystemCodeUpdatedEvent {
 	get asV1(): productionEvents.SystemCodeUpdatedEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.SystemCodeUpdatedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.SystemCodeUpdatedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.SystemCodeUpdatedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SystemCodeUpdatedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class SystemExtrinsicFailedEvent {
 	private readonly production: productionEvents.SystemExtrinsicFailedEvent
 	private readonly stage: stageEvents.SystemExtrinsicFailedEvent
+	private readonly test: testEvents.SystemExtrinsicFailedEvent
 	private readonly dev: devEvents.SystemExtrinsicFailedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.SystemExtrinsicFailedEvent(ctx, event)
 		this.stage = new stageEvents.SystemExtrinsicFailedEvent(ctx, event)
+		this.test = new testEvents.SystemExtrinsicFailedEvent(ctx, event)
 		this.dev = new devEvents.SystemExtrinsicFailedEvent(ctx, event)
 	}
 
@@ -7822,40 +5099,18 @@ export class SystemExtrinsicFailedEvent {
 	get asV53(): productionEvents.SystemExtrinsicFailedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV33Stage(): stageEvents.SystemExtrinsicFailedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.SystemExtrinsicFailedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.SystemExtrinsicFailedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.SystemExtrinsicFailedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.SystemExtrinsicFailedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.SystemExtrinsicFailedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.SystemExtrinsicFailedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SystemExtrinsicFailedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class SystemExtrinsicSuccessEvent {
 	private readonly production: productionEvents.SystemExtrinsicSuccessEvent
 	private readonly stage: stageEvents.SystemExtrinsicSuccessEvent
+	private readonly test: testEvents.SystemExtrinsicSuccessEvent
 	private readonly dev: devEvents.SystemExtrinsicSuccessEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.SystemExtrinsicSuccessEvent(ctx, event)
 		this.stage = new stageEvents.SystemExtrinsicSuccessEvent(ctx, event)
+		this.test = new testEvents.SystemExtrinsicSuccessEvent(ctx, event)
 		this.dev = new devEvents.SystemExtrinsicSuccessEvent(ctx, event)
 	}
 
@@ -7877,40 +5132,18 @@ export class SystemExtrinsicSuccessEvent {
 	get asV53(): productionEvents.SystemExtrinsicSuccessEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV33Stage(): stageEvents.SystemExtrinsicSuccessEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.SystemExtrinsicSuccessEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.SystemExtrinsicSuccessEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.SystemExtrinsicSuccessEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.SystemExtrinsicSuccessEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.SystemExtrinsicSuccessEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.SystemExtrinsicSuccessEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SystemExtrinsicSuccessEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class SystemKilledAccountEvent {
 	private readonly production: productionEvents.SystemKilledAccountEvent
 	private readonly stage: stageEvents.SystemKilledAccountEvent
+	private readonly test: testEvents.SystemKilledAccountEvent
 	private readonly dev: devEvents.SystemKilledAccountEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.SystemKilledAccountEvent(ctx, event)
 		this.stage = new stageEvents.SystemKilledAccountEvent(ctx, event)
+		this.test = new testEvents.SystemKilledAccountEvent(ctx, event)
 		this.dev = new devEvents.SystemKilledAccountEvent(ctx, event)
 	}
 
@@ -7926,34 +5159,18 @@ export class SystemKilledAccountEvent {
 	get asV42(): productionEvents.SystemKilledAccountEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.SystemKilledAccountEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.SystemKilledAccountEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.SystemKilledAccountEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.SystemKilledAccountEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.SystemKilledAccountEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SystemKilledAccountEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class SystemNewAccountEvent {
 	private readonly production: productionEvents.SystemNewAccountEvent
 	private readonly stage: stageEvents.SystemNewAccountEvent
+	private readonly test: testEvents.SystemNewAccountEvent
 	private readonly dev: devEvents.SystemNewAccountEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.SystemNewAccountEvent(ctx, event)
 		this.stage = new stageEvents.SystemNewAccountEvent(ctx, event)
+		this.test = new testEvents.SystemNewAccountEvent(ctx, event)
 		this.dev = new devEvents.SystemNewAccountEvent(ctx, event)
 	}
 
@@ -7969,34 +5186,18 @@ export class SystemNewAccountEvent {
 	get asV42(): productionEvents.SystemNewAccountEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.SystemNewAccountEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.SystemNewAccountEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.SystemNewAccountEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.SystemNewAccountEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.SystemNewAccountEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SystemNewAccountEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class SystemRemarkedEvent {
 	private readonly production: productionEvents.SystemRemarkedEvent
 	private readonly stage: stageEvents.SystemRemarkedEvent
+	private readonly test: testEvents.SystemRemarkedEvent
 	private readonly dev: devEvents.SystemRemarkedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.SystemRemarkedEvent(ctx, event)
 		this.stage = new stageEvents.SystemRemarkedEvent(ctx, event)
+		this.test = new testEvents.SystemRemarkedEvent(ctx, event)
 		this.dev = new devEvents.SystemRemarkedEvent(ctx, event)
 	}
 
@@ -8006,28 +5207,18 @@ export class SystemRemarkedEvent {
 	get asV42(): productionEvents.SystemRemarkedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.SystemRemarkedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.SystemRemarkedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.SystemRemarkedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SystemRemarkedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TechnicalBurnedEvent {
 	private readonly production: productionEvents.TechnicalBurnedEvent
 	private readonly stage: stageEvents.TechnicalBurnedEvent
+	private readonly test: testEvents.TechnicalBurnedEvent
 	private readonly dev: devEvents.TechnicalBurnedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TechnicalBurnedEvent(ctx, event)
 		this.stage = new stageEvents.TechnicalBurnedEvent(ctx, event)
+		this.test = new testEvents.TechnicalBurnedEvent(ctx, event)
 		this.dev = new devEvents.TechnicalBurnedEvent(ctx, event)
 	}
 
@@ -8061,46 +5252,18 @@ export class TechnicalBurnedEvent {
 	get asV57(): productionEvents.TechnicalBurnedEvent['asV57'] {
 		return this.production.asV57
 	}
-	get isV33Stage(): stageEvents.TechnicalBurnedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalBurnedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.TechnicalBurnedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TechnicalBurnedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV46Stage(): stageEvents.TechnicalBurnedEvent['isV46'] {
-		return this.stage.isV46
-	}
-	get asV46Stage(): stageEvents.TechnicalBurnedEvent['asV46'] {
-		return this.stage.asV46
-	}
-	get isV54Stage(): stageEvents.TechnicalBurnedEvent['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageEvents.TechnicalBurnedEvent['asV54'] {
-		return this.stage.asV54
-	}
-	get isV60Dev(): devEvents.TechnicalBurnedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalBurnedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TechnicalInputTransferredEvent {
 	private readonly production: productionEvents.TechnicalInputTransferredEvent
 	private readonly stage: stageEvents.TechnicalInputTransferredEvent
+	private readonly test: testEvents.TechnicalInputTransferredEvent
 	private readonly dev: devEvents.TechnicalInputTransferredEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TechnicalInputTransferredEvent(ctx, event)
 		this.stage = new stageEvents.TechnicalInputTransferredEvent(ctx, event)
+		this.test = new testEvents.TechnicalInputTransferredEvent(ctx, event)
 		this.dev = new devEvents.TechnicalInputTransferredEvent(ctx, event)
 	}
 
@@ -8134,46 +5297,18 @@ export class TechnicalInputTransferredEvent {
 	get asV57(): productionEvents.TechnicalInputTransferredEvent['asV57'] {
 		return this.production.asV57
 	}
-	get isV33Stage(): stageEvents.TechnicalInputTransferredEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalInputTransferredEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.TechnicalInputTransferredEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TechnicalInputTransferredEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV46Stage(): stageEvents.TechnicalInputTransferredEvent['isV46'] {
-		return this.stage.isV46
-	}
-	get asV46Stage(): stageEvents.TechnicalInputTransferredEvent['asV46'] {
-		return this.stage.asV46
-	}
-	get isV54Stage(): stageEvents.TechnicalInputTransferredEvent['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageEvents.TechnicalInputTransferredEvent['asV54'] {
-		return this.stage.asV54
-	}
-	get isV60Dev(): devEvents.TechnicalInputTransferredEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalInputTransferredEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TechnicalMintedEvent {
 	private readonly production: productionEvents.TechnicalMintedEvent
 	private readonly stage: stageEvents.TechnicalMintedEvent
+	private readonly test: testEvents.TechnicalMintedEvent
 	private readonly dev: devEvents.TechnicalMintedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TechnicalMintedEvent(ctx, event)
 		this.stage = new stageEvents.TechnicalMintedEvent(ctx, event)
+		this.test = new testEvents.TechnicalMintedEvent(ctx, event)
 		this.dev = new devEvents.TechnicalMintedEvent(ctx, event)
 	}
 
@@ -8207,46 +5342,18 @@ export class TechnicalMintedEvent {
 	get asV57(): productionEvents.TechnicalMintedEvent['asV57'] {
 		return this.production.asV57
 	}
-	get isV33Stage(): stageEvents.TechnicalMintedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalMintedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.TechnicalMintedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TechnicalMintedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV46Stage(): stageEvents.TechnicalMintedEvent['isV46'] {
-		return this.stage.isV46
-	}
-	get asV46Stage(): stageEvents.TechnicalMintedEvent['asV46'] {
-		return this.stage.asV46
-	}
-	get isV54Stage(): stageEvents.TechnicalMintedEvent['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageEvents.TechnicalMintedEvent['asV54'] {
-		return this.stage.asV54
-	}
-	get isV60Dev(): devEvents.TechnicalMintedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalMintedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TechnicalOutputTransferredEvent {
 	private readonly production: productionEvents.TechnicalOutputTransferredEvent
 	private readonly stage: stageEvents.TechnicalOutputTransferredEvent
+	private readonly test: testEvents.TechnicalOutputTransferredEvent
 	private readonly dev: devEvents.TechnicalOutputTransferredEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TechnicalOutputTransferredEvent(ctx, event)
 		this.stage = new stageEvents.TechnicalOutputTransferredEvent(ctx, event)
+		this.test = new testEvents.TechnicalOutputTransferredEvent(ctx, event)
 		this.dev = new devEvents.TechnicalOutputTransferredEvent(ctx, event)
 	}
 
@@ -8280,46 +5387,18 @@ export class TechnicalOutputTransferredEvent {
 	get asV57(): productionEvents.TechnicalOutputTransferredEvent['asV57'] {
 		return this.production.asV57
 	}
-	get isV33Stage(): stageEvents.TechnicalOutputTransferredEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalOutputTransferredEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.TechnicalOutputTransferredEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TechnicalOutputTransferredEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV46Stage(): stageEvents.TechnicalOutputTransferredEvent['isV46'] {
-		return this.stage.isV46
-	}
-	get asV46Stage(): stageEvents.TechnicalOutputTransferredEvent['asV46'] {
-		return this.stage.asV46
-	}
-	get isV54Stage(): stageEvents.TechnicalOutputTransferredEvent['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageEvents.TechnicalOutputTransferredEvent['asV54'] {
-		return this.stage.asV54
-	}
-	get isV60Dev(): devEvents.TechnicalOutputTransferredEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalOutputTransferredEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TechnicalSwapSuccessEvent {
 	private readonly production: productionEvents.TechnicalSwapSuccessEvent
 	private readonly stage: stageEvents.TechnicalSwapSuccessEvent
+	private readonly test: testEvents.TechnicalSwapSuccessEvent
 	private readonly dev: devEvents.TechnicalSwapSuccessEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TechnicalSwapSuccessEvent(ctx, event)
 		this.stage = new stageEvents.TechnicalSwapSuccessEvent(ctx, event)
+		this.test = new testEvents.TechnicalSwapSuccessEvent(ctx, event)
 		this.dev = new devEvents.TechnicalSwapSuccessEvent(ctx, event)
 	}
 
@@ -8329,28 +5408,18 @@ export class TechnicalSwapSuccessEvent {
 	get asV1(): productionEvents.TechnicalSwapSuccessEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.TechnicalSwapSuccessEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalSwapSuccessEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.TechnicalSwapSuccessEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalSwapSuccessEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TechnicalCommitteeApprovedEvent {
 	private readonly production: productionEvents.TechnicalCommitteeApprovedEvent
 	private readonly stage: stageEvents.TechnicalCommitteeApprovedEvent
+	private readonly test: testEvents.TechnicalCommitteeApprovedEvent
 	private readonly dev: devEvents.TechnicalCommitteeApprovedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TechnicalCommitteeApprovedEvent(ctx, event)
 		this.stage = new stageEvents.TechnicalCommitteeApprovedEvent(ctx, event)
+		this.test = new testEvents.TechnicalCommitteeApprovedEvent(ctx, event)
 		this.dev = new devEvents.TechnicalCommitteeApprovedEvent(ctx, event)
 	}
 
@@ -8366,34 +5435,18 @@ export class TechnicalCommitteeApprovedEvent {
 	get asV42(): productionEvents.TechnicalCommitteeApprovedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.TechnicalCommitteeApprovedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalCommitteeApprovedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.TechnicalCommitteeApprovedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TechnicalCommitteeApprovedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.TechnicalCommitteeApprovedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalCommitteeApprovedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TechnicalCommitteeClosedEvent {
 	private readonly production: productionEvents.TechnicalCommitteeClosedEvent
 	private readonly stage: stageEvents.TechnicalCommitteeClosedEvent
+	private readonly test: testEvents.TechnicalCommitteeClosedEvent
 	private readonly dev: devEvents.TechnicalCommitteeClosedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TechnicalCommitteeClosedEvent(ctx, event)
 		this.stage = new stageEvents.TechnicalCommitteeClosedEvent(ctx, event)
+		this.test = new testEvents.TechnicalCommitteeClosedEvent(ctx, event)
 		this.dev = new devEvents.TechnicalCommitteeClosedEvent(ctx, event)
 	}
 
@@ -8409,34 +5462,18 @@ export class TechnicalCommitteeClosedEvent {
 	get asV42(): productionEvents.TechnicalCommitteeClosedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.TechnicalCommitteeClosedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalCommitteeClosedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.TechnicalCommitteeClosedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TechnicalCommitteeClosedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.TechnicalCommitteeClosedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalCommitteeClosedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TechnicalCommitteeDisapprovedEvent {
 	private readonly production: productionEvents.TechnicalCommitteeDisapprovedEvent
 	private readonly stage: stageEvents.TechnicalCommitteeDisapprovedEvent
+	private readonly test: testEvents.TechnicalCommitteeDisapprovedEvent
 	private readonly dev: devEvents.TechnicalCommitteeDisapprovedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TechnicalCommitteeDisapprovedEvent(ctx, event)
 		this.stage = new stageEvents.TechnicalCommitteeDisapprovedEvent(ctx, event)
+		this.test = new testEvents.TechnicalCommitteeDisapprovedEvent(ctx, event)
 		this.dev = new devEvents.TechnicalCommitteeDisapprovedEvent(ctx, event)
 	}
 
@@ -8452,34 +5489,18 @@ export class TechnicalCommitteeDisapprovedEvent {
 	get asV42(): productionEvents.TechnicalCommitteeDisapprovedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.TechnicalCommitteeDisapprovedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalCommitteeDisapprovedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.TechnicalCommitteeDisapprovedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TechnicalCommitteeDisapprovedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.TechnicalCommitteeDisapprovedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalCommitteeDisapprovedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TechnicalCommitteeExecutedEvent {
 	private readonly production: productionEvents.TechnicalCommitteeExecutedEvent
 	private readonly stage: stageEvents.TechnicalCommitteeExecutedEvent
+	private readonly test: testEvents.TechnicalCommitteeExecutedEvent
 	private readonly dev: devEvents.TechnicalCommitteeExecutedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TechnicalCommitteeExecutedEvent(ctx, event)
 		this.stage = new stageEvents.TechnicalCommitteeExecutedEvent(ctx, event)
+		this.test = new testEvents.TechnicalCommitteeExecutedEvent(ctx, event)
 		this.dev = new devEvents.TechnicalCommitteeExecutedEvent(ctx, event)
 	}
 
@@ -8501,40 +5522,18 @@ export class TechnicalCommitteeExecutedEvent {
 	get asV53(): productionEvents.TechnicalCommitteeExecutedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV33Stage(): stageEvents.TechnicalCommitteeExecutedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalCommitteeExecutedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.TechnicalCommitteeExecutedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TechnicalCommitteeExecutedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.TechnicalCommitteeExecutedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.TechnicalCommitteeExecutedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.TechnicalCommitteeExecutedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalCommitteeExecutedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TechnicalCommitteeMemberExecutedEvent {
 	private readonly production: productionEvents.TechnicalCommitteeMemberExecutedEvent
 	private readonly stage: stageEvents.TechnicalCommitteeMemberExecutedEvent
+	private readonly test: testEvents.TechnicalCommitteeMemberExecutedEvent
 	private readonly dev: devEvents.TechnicalCommitteeMemberExecutedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TechnicalCommitteeMemberExecutedEvent(ctx, event)
 		this.stage = new stageEvents.TechnicalCommitteeMemberExecutedEvent(ctx, event)
+		this.test = new testEvents.TechnicalCommitteeMemberExecutedEvent(ctx, event)
 		this.dev = new devEvents.TechnicalCommitteeMemberExecutedEvent(ctx, event)
 	}
 
@@ -8556,40 +5555,18 @@ export class TechnicalCommitteeMemberExecutedEvent {
 	get asV53(): productionEvents.TechnicalCommitteeMemberExecutedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV33Stage(): stageEvents.TechnicalCommitteeMemberExecutedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalCommitteeMemberExecutedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.TechnicalCommitteeMemberExecutedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TechnicalCommitteeMemberExecutedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.TechnicalCommitteeMemberExecutedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.TechnicalCommitteeMemberExecutedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.TechnicalCommitteeMemberExecutedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalCommitteeMemberExecutedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TechnicalCommitteeProposedEvent {
 	private readonly production: productionEvents.TechnicalCommitteeProposedEvent
 	private readonly stage: stageEvents.TechnicalCommitteeProposedEvent
+	private readonly test: testEvents.TechnicalCommitteeProposedEvent
 	private readonly dev: devEvents.TechnicalCommitteeProposedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TechnicalCommitteeProposedEvent(ctx, event)
 		this.stage = new stageEvents.TechnicalCommitteeProposedEvent(ctx, event)
+		this.test = new testEvents.TechnicalCommitteeProposedEvent(ctx, event)
 		this.dev = new devEvents.TechnicalCommitteeProposedEvent(ctx, event)
 	}
 
@@ -8605,34 +5582,18 @@ export class TechnicalCommitteeProposedEvent {
 	get asV42(): productionEvents.TechnicalCommitteeProposedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.TechnicalCommitteeProposedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalCommitteeProposedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.TechnicalCommitteeProposedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TechnicalCommitteeProposedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.TechnicalCommitteeProposedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalCommitteeProposedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TechnicalCommitteeVotedEvent {
 	private readonly production: productionEvents.TechnicalCommitteeVotedEvent
 	private readonly stage: stageEvents.TechnicalCommitteeVotedEvent
+	private readonly test: testEvents.TechnicalCommitteeVotedEvent
 	private readonly dev: devEvents.TechnicalCommitteeVotedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TechnicalCommitteeVotedEvent(ctx, event)
 		this.stage = new stageEvents.TechnicalCommitteeVotedEvent(ctx, event)
+		this.test = new testEvents.TechnicalCommitteeVotedEvent(ctx, event)
 		this.dev = new devEvents.TechnicalCommitteeVotedEvent(ctx, event)
 	}
 
@@ -8648,34 +5609,18 @@ export class TechnicalCommitteeVotedEvent {
 	get asV42(): productionEvents.TechnicalCommitteeVotedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.TechnicalCommitteeVotedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalCommitteeVotedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.TechnicalCommitteeVotedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TechnicalCommitteeVotedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.TechnicalCommitteeVotedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalCommitteeVotedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TechnicalMembershipDummyEvent {
 	private readonly production: productionEvents.TechnicalMembershipDummyEvent
 	private readonly stage: stageEvents.TechnicalMembershipDummyEvent
+	private readonly test: testEvents.TechnicalMembershipDummyEvent
 	private readonly dev: devEvents.TechnicalMembershipDummyEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TechnicalMembershipDummyEvent(ctx, event)
 		this.stage = new stageEvents.TechnicalMembershipDummyEvent(ctx, event)
+		this.test = new testEvents.TechnicalMembershipDummyEvent(ctx, event)
 		this.dev = new devEvents.TechnicalMembershipDummyEvent(ctx, event)
 	}
 
@@ -8685,28 +5630,18 @@ export class TechnicalMembershipDummyEvent {
 	get asV1(): productionEvents.TechnicalMembershipDummyEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.TechnicalMembershipDummyEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalMembershipDummyEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.TechnicalMembershipDummyEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalMembershipDummyEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TechnicalMembershipKeyChangedEvent {
 	private readonly production: productionEvents.TechnicalMembershipKeyChangedEvent
 	private readonly stage: stageEvents.TechnicalMembershipKeyChangedEvent
+	private readonly test: testEvents.TechnicalMembershipKeyChangedEvent
 	private readonly dev: devEvents.TechnicalMembershipKeyChangedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TechnicalMembershipKeyChangedEvent(ctx, event)
 		this.stage = new stageEvents.TechnicalMembershipKeyChangedEvent(ctx, event)
+		this.test = new testEvents.TechnicalMembershipKeyChangedEvent(ctx, event)
 		this.dev = new devEvents.TechnicalMembershipKeyChangedEvent(ctx, event)
 	}
 
@@ -8716,28 +5651,18 @@ export class TechnicalMembershipKeyChangedEvent {
 	get asV1(): productionEvents.TechnicalMembershipKeyChangedEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.TechnicalMembershipKeyChangedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalMembershipKeyChangedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.TechnicalMembershipKeyChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalMembershipKeyChangedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TechnicalMembershipMemberAddedEvent {
 	private readonly production: productionEvents.TechnicalMembershipMemberAddedEvent
 	private readonly stage: stageEvents.TechnicalMembershipMemberAddedEvent
+	private readonly test: testEvents.TechnicalMembershipMemberAddedEvent
 	private readonly dev: devEvents.TechnicalMembershipMemberAddedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TechnicalMembershipMemberAddedEvent(ctx, event)
 		this.stage = new stageEvents.TechnicalMembershipMemberAddedEvent(ctx, event)
+		this.test = new testEvents.TechnicalMembershipMemberAddedEvent(ctx, event)
 		this.dev = new devEvents.TechnicalMembershipMemberAddedEvent(ctx, event)
 	}
 
@@ -8747,28 +5672,18 @@ export class TechnicalMembershipMemberAddedEvent {
 	get asV1(): productionEvents.TechnicalMembershipMemberAddedEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.TechnicalMembershipMemberAddedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalMembershipMemberAddedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.TechnicalMembershipMemberAddedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalMembershipMemberAddedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TechnicalMembershipMemberRemovedEvent {
 	private readonly production: productionEvents.TechnicalMembershipMemberRemovedEvent
 	private readonly stage: stageEvents.TechnicalMembershipMemberRemovedEvent
+	private readonly test: testEvents.TechnicalMembershipMemberRemovedEvent
 	private readonly dev: devEvents.TechnicalMembershipMemberRemovedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TechnicalMembershipMemberRemovedEvent(ctx, event)
 		this.stage = new stageEvents.TechnicalMembershipMemberRemovedEvent(ctx, event)
+		this.test = new testEvents.TechnicalMembershipMemberRemovedEvent(ctx, event)
 		this.dev = new devEvents.TechnicalMembershipMemberRemovedEvent(ctx, event)
 	}
 
@@ -8778,28 +5693,18 @@ export class TechnicalMembershipMemberRemovedEvent {
 	get asV1(): productionEvents.TechnicalMembershipMemberRemovedEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.TechnicalMembershipMemberRemovedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalMembershipMemberRemovedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.TechnicalMembershipMemberRemovedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalMembershipMemberRemovedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TechnicalMembershipMembersResetEvent {
 	private readonly production: productionEvents.TechnicalMembershipMembersResetEvent
 	private readonly stage: stageEvents.TechnicalMembershipMembersResetEvent
+	private readonly test: testEvents.TechnicalMembershipMembersResetEvent
 	private readonly dev: devEvents.TechnicalMembershipMembersResetEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TechnicalMembershipMembersResetEvent(ctx, event)
 		this.stage = new stageEvents.TechnicalMembershipMembersResetEvent(ctx, event)
+		this.test = new testEvents.TechnicalMembershipMembersResetEvent(ctx, event)
 		this.dev = new devEvents.TechnicalMembershipMembersResetEvent(ctx, event)
 	}
 
@@ -8809,28 +5714,18 @@ export class TechnicalMembershipMembersResetEvent {
 	get asV1(): productionEvents.TechnicalMembershipMembersResetEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.TechnicalMembershipMembersResetEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalMembershipMembersResetEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.TechnicalMembershipMembersResetEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalMembershipMembersResetEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TechnicalMembershipMembersSwappedEvent {
 	private readonly production: productionEvents.TechnicalMembershipMembersSwappedEvent
 	private readonly stage: stageEvents.TechnicalMembershipMembersSwappedEvent
+	private readonly test: testEvents.TechnicalMembershipMembersSwappedEvent
 	private readonly dev: devEvents.TechnicalMembershipMembersSwappedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TechnicalMembershipMembersSwappedEvent(ctx, event)
 		this.stage = new stageEvents.TechnicalMembershipMembersSwappedEvent(ctx, event)
+		this.test = new testEvents.TechnicalMembershipMembersSwappedEvent(ctx, event)
 		this.dev = new devEvents.TechnicalMembershipMembersSwappedEvent(ctx, event)
 	}
 
@@ -8840,28 +5735,18 @@ export class TechnicalMembershipMembersSwappedEvent {
 	get asV1(): productionEvents.TechnicalMembershipMembersSwappedEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.TechnicalMembershipMembersSwappedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TechnicalMembershipMembersSwappedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.TechnicalMembershipMembersSwappedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TechnicalMembershipMembersSwappedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TokensBalanceSetEvent {
 	private readonly production: productionEvents.TokensBalanceSetEvent
 	private readonly stage: stageEvents.TokensBalanceSetEvent
+	private readonly test: testEvents.TokensBalanceSetEvent
 	private readonly dev: devEvents.TokensBalanceSetEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TokensBalanceSetEvent(ctx, event)
 		this.stage = new stageEvents.TokensBalanceSetEvent(ctx, event)
+		this.test = new testEvents.TokensBalanceSetEvent(ctx, event)
 		this.dev = new devEvents.TokensBalanceSetEvent(ctx, event)
 	}
 
@@ -8871,28 +5756,18 @@ export class TokensBalanceSetEvent {
 	get asV42(): productionEvents.TokensBalanceSetEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.TokensBalanceSetEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TokensBalanceSetEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.TokensBalanceSetEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TokensBalanceSetEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TokensDepositedEvent {
 	private readonly production: productionEvents.TokensDepositedEvent
 	private readonly stage: stageEvents.TokensDepositedEvent
+	private readonly test: testEvents.TokensDepositedEvent
 	private readonly dev: devEvents.TokensDepositedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TokensDepositedEvent(ctx, event)
 		this.stage = new stageEvents.TokensDepositedEvent(ctx, event)
+		this.test = new testEvents.TokensDepositedEvent(ctx, event)
 		this.dev = new devEvents.TokensDepositedEvent(ctx, event)
 	}
 
@@ -8902,28 +5777,18 @@ export class TokensDepositedEvent {
 	get asV42(): productionEvents.TokensDepositedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.TokensDepositedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TokensDepositedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.TokensDepositedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TokensDepositedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TokensDustLostEvent {
 	private readonly production: productionEvents.TokensDustLostEvent
 	private readonly stage: stageEvents.TokensDustLostEvent
+	private readonly test: testEvents.TokensDustLostEvent
 	private readonly dev: devEvents.TokensDustLostEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TokensDustLostEvent(ctx, event)
 		this.stage = new stageEvents.TokensDustLostEvent(ctx, event)
+		this.test = new testEvents.TokensDustLostEvent(ctx, event)
 		this.dev = new devEvents.TokensDustLostEvent(ctx, event)
 	}
 
@@ -8939,34 +5804,18 @@ export class TokensDustLostEvent {
 	get asV42(): productionEvents.TokensDustLostEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.TokensDustLostEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TokensDustLostEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.TokensDustLostEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TokensDustLostEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.TokensDustLostEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TokensDustLostEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TokensEndowedEvent {
 	private readonly production: productionEvents.TokensEndowedEvent
 	private readonly stage: stageEvents.TokensEndowedEvent
+	private readonly test: testEvents.TokensEndowedEvent
 	private readonly dev: devEvents.TokensEndowedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TokensEndowedEvent(ctx, event)
 		this.stage = new stageEvents.TokensEndowedEvent(ctx, event)
+		this.test = new testEvents.TokensEndowedEvent(ctx, event)
 		this.dev = new devEvents.TokensEndowedEvent(ctx, event)
 	}
 
@@ -8976,28 +5825,18 @@ export class TokensEndowedEvent {
 	get asV42(): productionEvents.TokensEndowedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.TokensEndowedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TokensEndowedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.TokensEndowedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TokensEndowedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TokensLockRemovedEvent {
 	private readonly production: productionEvents.TokensLockRemovedEvent
 	private readonly stage: stageEvents.TokensLockRemovedEvent
+	private readonly test: testEvents.TokensLockRemovedEvent
 	private readonly dev: devEvents.TokensLockRemovedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TokensLockRemovedEvent(ctx, event)
 		this.stage = new stageEvents.TokensLockRemovedEvent(ctx, event)
+		this.test = new testEvents.TokensLockRemovedEvent(ctx, event)
 		this.dev = new devEvents.TokensLockRemovedEvent(ctx, event)
 	}
 
@@ -9007,28 +5846,18 @@ export class TokensLockRemovedEvent {
 	get asV42(): productionEvents.TokensLockRemovedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.TokensLockRemovedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TokensLockRemovedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.TokensLockRemovedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TokensLockRemovedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TokensLockSetEvent {
 	private readonly production: productionEvents.TokensLockSetEvent
 	private readonly stage: stageEvents.TokensLockSetEvent
+	private readonly test: testEvents.TokensLockSetEvent
 	private readonly dev: devEvents.TokensLockSetEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TokensLockSetEvent(ctx, event)
 		this.stage = new stageEvents.TokensLockSetEvent(ctx, event)
+		this.test = new testEvents.TokensLockSetEvent(ctx, event)
 		this.dev = new devEvents.TokensLockSetEvent(ctx, event)
 	}
 
@@ -9037,18 +5866,6 @@ export class TokensLockSetEvent {
 	}
 	get asV42(): productionEvents.TokensLockSetEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV42Stage(): stageEvents.TokensLockSetEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TokensLockSetEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.TokensLockSetEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TokensLockSetEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -9069,28 +5886,18 @@ export class TokensLockedEvent {
 	get asV53(): productionEvents.TokensLockedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV52Stage(): stageEvents.TokensLockedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.TokensLockedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.TokensLockedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TokensLockedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TokensReserveRepatriatedEvent {
 	private readonly production: productionEvents.TokensReserveRepatriatedEvent
 	private readonly stage: stageEvents.TokensReserveRepatriatedEvent
+	private readonly test: testEvents.TokensReserveRepatriatedEvent
 	private readonly dev: devEvents.TokensReserveRepatriatedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TokensReserveRepatriatedEvent(ctx, event)
 		this.stage = new stageEvents.TokensReserveRepatriatedEvent(ctx, event)
+		this.test = new testEvents.TokensReserveRepatriatedEvent(ctx, event)
 		this.dev = new devEvents.TokensReserveRepatriatedEvent(ctx, event)
 	}
 
@@ -9100,28 +5907,18 @@ export class TokensReserveRepatriatedEvent {
 	get asV42(): productionEvents.TokensReserveRepatriatedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.TokensReserveRepatriatedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TokensReserveRepatriatedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.TokensReserveRepatriatedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TokensReserveRepatriatedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TokensReservedEvent {
 	private readonly production: productionEvents.TokensReservedEvent
 	private readonly stage: stageEvents.TokensReservedEvent
+	private readonly test: testEvents.TokensReservedEvent
 	private readonly dev: devEvents.TokensReservedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TokensReservedEvent(ctx, event)
 		this.stage = new stageEvents.TokensReservedEvent(ctx, event)
+		this.test = new testEvents.TokensReservedEvent(ctx, event)
 		this.dev = new devEvents.TokensReservedEvent(ctx, event)
 	}
 
@@ -9131,28 +5928,18 @@ export class TokensReservedEvent {
 	get asV42(): productionEvents.TokensReservedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.TokensReservedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TokensReservedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.TokensReservedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TokensReservedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TokensSlashedEvent {
 	private readonly production: productionEvents.TokensSlashedEvent
 	private readonly stage: stageEvents.TokensSlashedEvent
+	private readonly test: testEvents.TokensSlashedEvent
 	private readonly dev: devEvents.TokensSlashedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TokensSlashedEvent(ctx, event)
 		this.stage = new stageEvents.TokensSlashedEvent(ctx, event)
+		this.test = new testEvents.TokensSlashedEvent(ctx, event)
 		this.dev = new devEvents.TokensSlashedEvent(ctx, event)
 	}
 
@@ -9162,28 +5949,18 @@ export class TokensSlashedEvent {
 	get asV42(): productionEvents.TokensSlashedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.TokensSlashedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TokensSlashedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.TokensSlashedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TokensSlashedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TokensTotalIssuanceSetEvent {
 	private readonly production: productionEvents.TokensTotalIssuanceSetEvent
 	private readonly stage: stageEvents.TokensTotalIssuanceSetEvent
+	private readonly test: testEvents.TokensTotalIssuanceSetEvent
 	private readonly dev: devEvents.TokensTotalIssuanceSetEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TokensTotalIssuanceSetEvent(ctx, event)
 		this.stage = new stageEvents.TokensTotalIssuanceSetEvent(ctx, event)
+		this.test = new testEvents.TokensTotalIssuanceSetEvent(ctx, event)
 		this.dev = new devEvents.TokensTotalIssuanceSetEvent(ctx, event)
 	}
 
@@ -9193,28 +5970,18 @@ export class TokensTotalIssuanceSetEvent {
 	get asV42(): productionEvents.TokensTotalIssuanceSetEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.TokensTotalIssuanceSetEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TokensTotalIssuanceSetEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.TokensTotalIssuanceSetEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TokensTotalIssuanceSetEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TokensTransferEvent {
 	private readonly production: productionEvents.TokensTransferEvent
 	private readonly stage: stageEvents.TokensTransferEvent
+	private readonly test: testEvents.TokensTransferEvent
 	private readonly dev: devEvents.TokensTransferEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TokensTransferEvent(ctx, event)
 		this.stage = new stageEvents.TokensTransferEvent(ctx, event)
+		this.test = new testEvents.TokensTransferEvent(ctx, event)
 		this.dev = new devEvents.TokensTransferEvent(ctx, event)
 	}
 
@@ -9224,27 +5991,17 @@ export class TokensTransferEvent {
 	get asV42(): productionEvents.TokensTransferEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.TokensTransferEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TokensTransferEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.TokensTransferEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TokensTransferEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TokensTransferredEvent {
 	private readonly production: productionEvents.TokensTransferredEvent
 	private readonly stage: stageEvents.TokensTransferredEvent
+	private readonly test: testEvents.TokensTransferredEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TokensTransferredEvent(ctx, event)
 		this.stage = new stageEvents.TokensTransferredEvent(ctx, event)
+		this.test = new testEvents.TokensTransferredEvent(ctx, event)
 	}
 
 	get isV1(): productionEvents.TokensTransferredEvent['isV1'] {
@@ -9252,12 +6009,6 @@ export class TokensTransferredEvent {
 	}
 	get asV1(): productionEvents.TokensTransferredEvent['asV1'] {
 		return this.production.asV1
-	}
-	get isV33Stage(): stageEvents.TokensTransferredEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TokensTransferredEvent['asV33'] {
-		return this.stage.asV33
 	}
 }
 
@@ -9278,28 +6029,18 @@ export class TokensUnlockedEvent {
 	get asV53(): productionEvents.TokensUnlockedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV52Stage(): stageEvents.TokensUnlockedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.TokensUnlockedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.TokensUnlockedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TokensUnlockedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TokensUnreservedEvent {
 	private readonly production: productionEvents.TokensUnreservedEvent
 	private readonly stage: stageEvents.TokensUnreservedEvent
+	private readonly test: testEvents.TokensUnreservedEvent
 	private readonly dev: devEvents.TokensUnreservedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TokensUnreservedEvent(ctx, event)
 		this.stage = new stageEvents.TokensUnreservedEvent(ctx, event)
+		this.test = new testEvents.TokensUnreservedEvent(ctx, event)
 		this.dev = new devEvents.TokensUnreservedEvent(ctx, event)
 	}
 
@@ -9309,28 +6050,18 @@ export class TokensUnreservedEvent {
 	get asV42(): productionEvents.TokensUnreservedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.TokensUnreservedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TokensUnreservedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.TokensUnreservedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TokensUnreservedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TokensWithdrawnEvent {
 	private readonly production: productionEvents.TokensWithdrawnEvent
 	private readonly stage: stageEvents.TokensWithdrawnEvent
+	private readonly test: testEvents.TokensWithdrawnEvent
 	private readonly dev: devEvents.TokensWithdrawnEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TokensWithdrawnEvent(ctx, event)
 		this.stage = new stageEvents.TokensWithdrawnEvent(ctx, event)
+		this.test = new testEvents.TokensWithdrawnEvent(ctx, event)
 		this.dev = new devEvents.TokensWithdrawnEvent(ctx, event)
 	}
 
@@ -9340,28 +6071,18 @@ export class TokensWithdrawnEvent {
 	get asV42(): productionEvents.TokensWithdrawnEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.TokensWithdrawnEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TokensWithdrawnEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.TokensWithdrawnEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TokensWithdrawnEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class TradingPairTradingPairStoredEvent {
 	private readonly production: productionEvents.TradingPairTradingPairStoredEvent
 	private readonly stage: stageEvents.TradingPairTradingPairStoredEvent
+	private readonly test: testEvents.TradingPairTradingPairStoredEvent
 	private readonly dev: devEvents.TradingPairTradingPairStoredEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TradingPairTradingPairStoredEvent(ctx, event)
 		this.stage = new stageEvents.TradingPairTradingPairStoredEvent(ctx, event)
+		this.test = new testEvents.TradingPairTradingPairStoredEvent(ctx, event)
 		this.dev = new devEvents.TradingPairTradingPairStoredEvent(ctx, event)
 	}
 
@@ -9376,24 +6097,6 @@ export class TradingPairTradingPairStoredEvent {
 	}
 	get asV42(): productionEvents.TradingPairTradingPairStoredEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV33Stage(): stageEvents.TradingPairTradingPairStoredEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.TradingPairTradingPairStoredEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.TradingPairTradingPairStoredEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.TradingPairTradingPairStoredEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.TradingPairTradingPairStoredEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TradingPairTradingPairStoredEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -9414,28 +6117,18 @@ export class TransactionPaymentTransactionFeePaidEvent {
 	get asV53(): productionEvents.TransactionPaymentTransactionFeePaidEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV52Stage(): stageEvents.TransactionPaymentTransactionFeePaidEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.TransactionPaymentTransactionFeePaidEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.TransactionPaymentTransactionFeePaidEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.TransactionPaymentTransactionFeePaidEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class UtilityBatchCompletedEvent {
 	private readonly production: productionEvents.UtilityBatchCompletedEvent
 	private readonly stage: stageEvents.UtilityBatchCompletedEvent
+	private readonly test: testEvents.UtilityBatchCompletedEvent
 	private readonly dev: devEvents.UtilityBatchCompletedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.UtilityBatchCompletedEvent(ctx, event)
 		this.stage = new stageEvents.UtilityBatchCompletedEvent(ctx, event)
+		this.test = new testEvents.UtilityBatchCompletedEvent(ctx, event)
 		this.dev = new devEvents.UtilityBatchCompletedEvent(ctx, event)
 	}
 
@@ -9445,28 +6138,18 @@ export class UtilityBatchCompletedEvent {
 	get asV1(): productionEvents.UtilityBatchCompletedEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.UtilityBatchCompletedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.UtilityBatchCompletedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.UtilityBatchCompletedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.UtilityBatchCompletedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class UtilityBatchCompletedWithErrorsEvent {
 	private readonly production: productionEvents.UtilityBatchCompletedWithErrorsEvent
 	private readonly stage: stageEvents.UtilityBatchCompletedWithErrorsEvent
+	private readonly test: testEvents.UtilityBatchCompletedWithErrorsEvent
 	private readonly dev: devEvents.UtilityBatchCompletedWithErrorsEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.UtilityBatchCompletedWithErrorsEvent(ctx, event)
 		this.stage = new stageEvents.UtilityBatchCompletedWithErrorsEvent(ctx, event)
+		this.test = new testEvents.UtilityBatchCompletedWithErrorsEvent(ctx, event)
 		this.dev = new devEvents.UtilityBatchCompletedWithErrorsEvent(ctx, event)
 	}
 
@@ -9476,28 +6159,18 @@ export class UtilityBatchCompletedWithErrorsEvent {
 	get asV42(): productionEvents.UtilityBatchCompletedWithErrorsEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.UtilityBatchCompletedWithErrorsEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.UtilityBatchCompletedWithErrorsEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.UtilityBatchCompletedWithErrorsEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.UtilityBatchCompletedWithErrorsEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class UtilityBatchInterruptedEvent {
 	private readonly production: productionEvents.UtilityBatchInterruptedEvent
 	private readonly stage: stageEvents.UtilityBatchInterruptedEvent
+	private readonly test: testEvents.UtilityBatchInterruptedEvent
 	private readonly dev: devEvents.UtilityBatchInterruptedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.UtilityBatchInterruptedEvent(ctx, event)
 		this.stage = new stageEvents.UtilityBatchInterruptedEvent(ctx, event)
+		this.test = new testEvents.UtilityBatchInterruptedEvent(ctx, event)
 		this.dev = new devEvents.UtilityBatchInterruptedEvent(ctx, event)
 	}
 
@@ -9519,40 +6192,18 @@ export class UtilityBatchInterruptedEvent {
 	get asV53(): productionEvents.UtilityBatchInterruptedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV33Stage(): stageEvents.UtilityBatchInterruptedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.UtilityBatchInterruptedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.UtilityBatchInterruptedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.UtilityBatchInterruptedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.UtilityBatchInterruptedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.UtilityBatchInterruptedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.UtilityBatchInterruptedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.UtilityBatchInterruptedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class UtilityDispatchedAsEvent {
 	private readonly production: productionEvents.UtilityDispatchedAsEvent
 	private readonly stage: stageEvents.UtilityDispatchedAsEvent
+	private readonly test: testEvents.UtilityDispatchedAsEvent
 	private readonly dev: devEvents.UtilityDispatchedAsEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.UtilityDispatchedAsEvent(ctx, event)
 		this.stage = new stageEvents.UtilityDispatchedAsEvent(ctx, event)
+		this.test = new testEvents.UtilityDispatchedAsEvent(ctx, event)
 		this.dev = new devEvents.UtilityDispatchedAsEvent(ctx, event)
 	}
 
@@ -9568,34 +6219,18 @@ export class UtilityDispatchedAsEvent {
 	get asV53(): productionEvents.UtilityDispatchedAsEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV42Stage(): stageEvents.UtilityDispatchedAsEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.UtilityDispatchedAsEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.UtilityDispatchedAsEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.UtilityDispatchedAsEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.UtilityDispatchedAsEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.UtilityDispatchedAsEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class UtilityItemCompletedEvent {
 	private readonly production: productionEvents.UtilityItemCompletedEvent
 	private readonly stage: stageEvents.UtilityItemCompletedEvent
+	private readonly test: testEvents.UtilityItemCompletedEvent
 	private readonly dev: devEvents.UtilityItemCompletedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.UtilityItemCompletedEvent(ctx, event)
 		this.stage = new stageEvents.UtilityItemCompletedEvent(ctx, event)
+		this.test = new testEvents.UtilityItemCompletedEvent(ctx, event)
 		this.dev = new devEvents.UtilityItemCompletedEvent(ctx, event)
 	}
 
@@ -9605,28 +6240,18 @@ export class UtilityItemCompletedEvent {
 	get asV42(): productionEvents.UtilityItemCompletedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV42Stage(): stageEvents.UtilityItemCompletedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.UtilityItemCompletedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.UtilityItemCompletedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.UtilityItemCompletedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class UtilityItemFailedEvent {
 	private readonly production: productionEvents.UtilityItemFailedEvent
 	private readonly stage: stageEvents.UtilityItemFailedEvent
+	private readonly test: testEvents.UtilityItemFailedEvent
 	private readonly dev: devEvents.UtilityItemFailedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.UtilityItemFailedEvent(ctx, event)
 		this.stage = new stageEvents.UtilityItemFailedEvent(ctx, event)
+		this.test = new testEvents.UtilityItemFailedEvent(ctx, event)
 		this.dev = new devEvents.UtilityItemFailedEvent(ctx, event)
 	}
 
@@ -9642,34 +6267,18 @@ export class UtilityItemFailedEvent {
 	get asV53(): productionEvents.UtilityItemFailedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV42Stage(): stageEvents.UtilityItemFailedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.UtilityItemFailedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV52Stage(): stageEvents.UtilityItemFailedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.UtilityItemFailedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.UtilityItemFailedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.UtilityItemFailedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class VestedRewardsActualDoesntMatchAvailableEvent {
 	private readonly production: productionEvents.VestedRewardsActualDoesntMatchAvailableEvent
 	private readonly stage: stageEvents.VestedRewardsActualDoesntMatchAvailableEvent
+	private readonly test: testEvents.VestedRewardsActualDoesntMatchAvailableEvent
 	private readonly dev: devEvents.VestedRewardsActualDoesntMatchAvailableEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.VestedRewardsActualDoesntMatchAvailableEvent(ctx, event)
 		this.stage = new stageEvents.VestedRewardsActualDoesntMatchAvailableEvent(ctx, event)
+		this.test = new testEvents.VestedRewardsActualDoesntMatchAvailableEvent(ctx, event)
 		this.dev = new devEvents.VestedRewardsActualDoesntMatchAvailableEvent(ctx, event)
 	}
 
@@ -9691,39 +6300,17 @@ export class VestedRewardsActualDoesntMatchAvailableEvent {
 	get asV45(): productionEvents.VestedRewardsActualDoesntMatchAvailableEvent['asV45'] {
 		return this.production.asV45
 	}
-	get isV33Stage(): stageEvents.VestedRewardsActualDoesntMatchAvailableEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.VestedRewardsActualDoesntMatchAvailableEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.VestedRewardsActualDoesntMatchAvailableEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.VestedRewardsActualDoesntMatchAvailableEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV44Stage(): stageEvents.VestedRewardsActualDoesntMatchAvailableEvent['isV44'] {
-		return this.stage.isV44
-	}
-	get asV44Stage(): stageEvents.VestedRewardsActualDoesntMatchAvailableEvent['asV44'] {
-		return this.stage.asV44
-	}
-	get isV60Dev(): devEvents.VestedRewardsActualDoesntMatchAvailableEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.VestedRewardsActualDoesntMatchAvailableEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class VestedRewardsAddingZeroMarketMakerRewardEvent {
 	private readonly production: productionEvents.VestedRewardsAddingZeroMarketMakerRewardEvent
 	private readonly stage: stageEvents.VestedRewardsAddingZeroMarketMakerRewardEvent
+	private readonly test: testEvents.VestedRewardsAddingZeroMarketMakerRewardEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.VestedRewardsAddingZeroMarketMakerRewardEvent(ctx, event)
 		this.stage = new stageEvents.VestedRewardsAddingZeroMarketMakerRewardEvent(ctx, event)
+		this.test = new testEvents.VestedRewardsAddingZeroMarketMakerRewardEvent(ctx, event)
 	}
 
 	get isV7(): productionEvents.VestedRewardsAddingZeroMarketMakerRewardEvent['isV7'] {
@@ -9731,12 +6318,6 @@ export class VestedRewardsAddingZeroMarketMakerRewardEvent {
 	}
 	get asV7(): productionEvents.VestedRewardsAddingZeroMarketMakerRewardEvent['asV7'] {
 		return this.production.asV7
-	}
-	get isV33Stage(): stageEvents.VestedRewardsAddingZeroMarketMakerRewardEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.VestedRewardsAddingZeroMarketMakerRewardEvent['asV33'] {
-		return this.stage.asV33
 	}
 }
 
@@ -9757,28 +6338,18 @@ export class VestedRewardsCrowdloanClaimedEvent {
 	get asV53(): productionEvents.VestedRewardsCrowdloanClaimedEvent['asV53'] {
 		return this.production.asV53
 	}
-	get isV52Stage(): stageEvents.VestedRewardsCrowdloanClaimedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.VestedRewardsCrowdloanClaimedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.VestedRewardsCrowdloanClaimedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.VestedRewardsCrowdloanClaimedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class VestedRewardsFailedToSaveCalculatedRewardEvent {
 	private readonly production: productionEvents.VestedRewardsFailedToSaveCalculatedRewardEvent
 	private readonly stage: stageEvents.VestedRewardsFailedToSaveCalculatedRewardEvent
+	private readonly test: testEvents.VestedRewardsFailedToSaveCalculatedRewardEvent
 	private readonly dev: devEvents.VestedRewardsFailedToSaveCalculatedRewardEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.VestedRewardsFailedToSaveCalculatedRewardEvent(ctx, event)
 		this.stage = new stageEvents.VestedRewardsFailedToSaveCalculatedRewardEvent(ctx, event)
+		this.test = new testEvents.VestedRewardsFailedToSaveCalculatedRewardEvent(ctx, event)
 		this.dev = new devEvents.VestedRewardsFailedToSaveCalculatedRewardEvent(ctx, event)
 	}
 
@@ -9788,27 +6359,17 @@ export class VestedRewardsFailedToSaveCalculatedRewardEvent {
 	get asV7(): productionEvents.VestedRewardsFailedToSaveCalculatedRewardEvent['asV7'] {
 		return this.production.asV7
 	}
-	get isV33Stage(): stageEvents.VestedRewardsFailedToSaveCalculatedRewardEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.VestedRewardsFailedToSaveCalculatedRewardEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.VestedRewardsFailedToSaveCalculatedRewardEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.VestedRewardsFailedToSaveCalculatedRewardEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class VestedRewardsNoEligibleMarketMakersEvent {
 	private readonly production: productionEvents.VestedRewardsNoEligibleMarketMakersEvent
 	private readonly stage: stageEvents.VestedRewardsNoEligibleMarketMakersEvent
+	private readonly test: testEvents.VestedRewardsNoEligibleMarketMakersEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.VestedRewardsNoEligibleMarketMakersEvent(ctx, event)
 		this.stage = new stageEvents.VestedRewardsNoEligibleMarketMakersEvent(ctx, event)
+		this.test = new testEvents.VestedRewardsNoEligibleMarketMakersEvent(ctx, event)
 	}
 
 	get isV7(): productionEvents.VestedRewardsNoEligibleMarketMakersEvent['isV7'] {
@@ -9817,22 +6378,18 @@ export class VestedRewardsNoEligibleMarketMakersEvent {
 	get asV7(): productionEvents.VestedRewardsNoEligibleMarketMakersEvent['asV7'] {
 		return this.production.asV7
 	}
-	get isV33Stage(): stageEvents.VestedRewardsNoEligibleMarketMakersEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.VestedRewardsNoEligibleMarketMakersEvent['asV33'] {
-		return this.stage.asV33
-	}
 }
 
 export class VestedRewardsRewardsVestedEvent {
 	private readonly production: productionEvents.VestedRewardsRewardsVestedEvent
 	private readonly stage: stageEvents.VestedRewardsRewardsVestedEvent
+	private readonly test: testEvents.VestedRewardsRewardsVestedEvent
 	private readonly dev: devEvents.VestedRewardsRewardsVestedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.VestedRewardsRewardsVestedEvent(ctx, event)
 		this.stage = new stageEvents.VestedRewardsRewardsVestedEvent(ctx, event)
+		this.test = new testEvents.VestedRewardsRewardsVestedEvent(ctx, event)
 		this.dev = new devEvents.VestedRewardsRewardsVestedEvent(ctx, event)
 	}
 
@@ -9842,27 +6399,17 @@ export class VestedRewardsRewardsVestedEvent {
 	get asV1(): productionEvents.VestedRewardsRewardsVestedEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.VestedRewardsRewardsVestedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.VestedRewardsRewardsVestedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.VestedRewardsRewardsVestedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.VestedRewardsRewardsVestedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class XstPoolPoolInitializedEvent {
 	private readonly production: productionEvents.XstPoolPoolInitializedEvent
 	private readonly stage: stageEvents.XstPoolPoolInitializedEvent
+	private readonly test: testEvents.XstPoolPoolInitializedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.XstPoolPoolInitializedEvent(ctx, event)
 		this.stage = new stageEvents.XstPoolPoolInitializedEvent(ctx, event)
+		this.test = new testEvents.XstPoolPoolInitializedEvent(ctx, event)
 	}
 
 	get isV19(): productionEvents.XstPoolPoolInitializedEvent['isV19'] {
@@ -9877,28 +6424,18 @@ export class XstPoolPoolInitializedEvent {
 	get asV42(): productionEvents.XstPoolPoolInitializedEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV33Stage(): stageEvents.XstPoolPoolInitializedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.XstPoolPoolInitializedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.XstPoolPoolInitializedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.XstPoolPoolInitializedEvent['asV42'] {
-		return this.stage.asV42
-	}
 }
 
 export class XstPoolReferenceAssetChangedEvent {
 	private readonly production: productionEvents.XstPoolReferenceAssetChangedEvent
 	private readonly stage: stageEvents.XstPoolReferenceAssetChangedEvent
+	private readonly test: testEvents.XstPoolReferenceAssetChangedEvent
 	private readonly dev: devEvents.XstPoolReferenceAssetChangedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.XstPoolReferenceAssetChangedEvent(ctx, event)
 		this.stage = new stageEvents.XstPoolReferenceAssetChangedEvent(ctx, event)
+		this.test = new testEvents.XstPoolReferenceAssetChangedEvent(ctx, event)
 		this.dev = new devEvents.XstPoolReferenceAssetChangedEvent(ctx, event)
 	}
 
@@ -9913,24 +6450,6 @@ export class XstPoolReferenceAssetChangedEvent {
 	}
 	get asV42(): productionEvents.XstPoolReferenceAssetChangedEvent['asV42'] {
 		return this.production.asV42
-	}
-	get isV33Stage(): stageEvents.XstPoolReferenceAssetChangedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.XstPoolReferenceAssetChangedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV42Stage(): stageEvents.XstPoolReferenceAssetChangedEvent['isV42'] {
-		return this.stage.isV42
-	}
-	get asV42Stage(): stageEvents.XstPoolReferenceAssetChangedEvent['asV42'] {
-		return this.stage.asV42
-	}
-	get isV60Dev(): devEvents.XstPoolReferenceAssetChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.XstPoolReferenceAssetChangedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -9951,28 +6470,18 @@ export class XstPoolSyntheticAssetDisabledEvent {
 	get asV57(): productionEvents.XstPoolSyntheticAssetDisabledEvent['asV57'] {
 		return this.production.asV57
 	}
-	get isV54Stage(): stageEvents.XstPoolSyntheticAssetDisabledEvent['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageEvents.XstPoolSyntheticAssetDisabledEvent['asV54'] {
-		return this.stage.asV54
-	}
-	get isV60Dev(): devEvents.XstPoolSyntheticAssetDisabledEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.XstPoolSyntheticAssetDisabledEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class XstPoolSyntheticAssetEnabledEvent {
 	private readonly production: productionEvents.XstPoolSyntheticAssetEnabledEvent
 	private readonly stage: stageEvents.XstPoolSyntheticAssetEnabledEvent
+	private readonly test: testEvents.XstPoolSyntheticAssetEnabledEvent
 	private readonly dev: devEvents.XstPoolSyntheticAssetEnabledEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.XstPoolSyntheticAssetEnabledEvent(ctx, event)
 		this.stage = new stageEvents.XstPoolSyntheticAssetEnabledEvent(ctx, event)
+		this.test = new testEvents.XstPoolSyntheticAssetEnabledEvent(ctx, event)
 		this.dev = new devEvents.XstPoolSyntheticAssetEnabledEvent(ctx, event)
 	}
 
@@ -9987,24 +6496,6 @@ export class XstPoolSyntheticAssetEnabledEvent {
 	}
 	get asV57(): productionEvents.XstPoolSyntheticAssetEnabledEvent['asV57'] {
 		return this.production.asV57
-	}
-	get isV44Stage(): stageEvents.XstPoolSyntheticAssetEnabledEvent['isV44'] {
-		return this.stage.isV44
-	}
-	get asV44Stage(): stageEvents.XstPoolSyntheticAssetEnabledEvent['asV44'] {
-		return this.stage.asV44
-	}
-	get isV54Stage(): stageEvents.XstPoolSyntheticAssetEnabledEvent['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageEvents.XstPoolSyntheticAssetEnabledEvent['asV54'] {
-		return this.stage.asV54
-	}
-	get isV60Dev(): devEvents.XstPoolSyntheticAssetEnabledEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.XstPoolSyntheticAssetEnabledEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -10025,18 +6516,6 @@ export class XstPoolSyntheticAssetFeeChangedEvent {
 	get asV57(): productionEvents.XstPoolSyntheticAssetFeeChangedEvent['asV57'] {
 		return this.production.asV57
 	}
-	get isV54Stage(): stageEvents.XstPoolSyntheticAssetFeeChangedEvent['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageEvents.XstPoolSyntheticAssetFeeChangedEvent['asV54'] {
-		return this.stage.asV54
-	}
-	get isV60Dev(): devEvents.XstPoolSyntheticAssetFeeChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.XstPoolSyntheticAssetFeeChangedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class XstPoolSyntheticAssetRemovedEvent {
@@ -10056,28 +6535,18 @@ export class XstPoolSyntheticAssetRemovedEvent {
 	get asV60(): productionEvents.XstPoolSyntheticAssetRemovedEvent['asV60'] {
 		return this.production.asV60
 	}
-	get isV60Stage(): stageEvents.XstPoolSyntheticAssetRemovedEvent['isV60'] {
-		return this.stage.isV60
-	}
-	get asV60Stage(): stageEvents.XstPoolSyntheticAssetRemovedEvent['asV60'] {
-		return this.stage.asV60
-	}
-	get isV60Dev(): devEvents.XstPoolSyntheticAssetRemovedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.XstPoolSyntheticAssetRemovedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class XstPoolSyntheticBaseAssetFloorPriceChangedEvent {
 	private readonly production: productionEvents.XstPoolSyntheticBaseAssetFloorPriceChangedEvent
 	private readonly stage: stageEvents.XstPoolSyntheticBaseAssetFloorPriceChangedEvent
+	private readonly test: testEvents.XstPoolSyntheticBaseAssetFloorPriceChangedEvent
 	private readonly dev: devEvents.XstPoolSyntheticBaseAssetFloorPriceChangedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.XstPoolSyntheticBaseAssetFloorPriceChangedEvent(ctx, event)
 		this.stage = new stageEvents.XstPoolSyntheticBaseAssetFloorPriceChangedEvent(ctx, event)
+		this.test = new testEvents.XstPoolSyntheticBaseAssetFloorPriceChangedEvent(ctx, event)
 		this.dev = new devEvents.XstPoolSyntheticBaseAssetFloorPriceChangedEvent(ctx, event)
 	}
 
@@ -10087,28 +6556,18 @@ export class XstPoolSyntheticBaseAssetFloorPriceChangedEvent {
 	get asV45(): productionEvents.XstPoolSyntheticBaseAssetFloorPriceChangedEvent['asV45'] {
 		return this.production.asV45
 	}
-	get isV44Stage(): stageEvents.XstPoolSyntheticBaseAssetFloorPriceChangedEvent['isV44'] {
-		return this.stage.isV44
-	}
-	get asV44Stage(): stageEvents.XstPoolSyntheticBaseAssetFloorPriceChangedEvent['asV44'] {
-		return this.stage.asV44
-	}
-	get isV60Dev(): devEvents.XstPoolSyntheticBaseAssetFloorPriceChangedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.XstPoolSyntheticBaseAssetFloorPriceChangedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class XorFeeFeeWithdrawnEvent {
 	private readonly production: productionEvents.XorFeeFeeWithdrawnEvent
 	private readonly stage: stageEvents.XorFeeFeeWithdrawnEvent
+	private readonly test: testEvents.XorFeeFeeWithdrawnEvent
 	private readonly dev: devEvents.XorFeeFeeWithdrawnEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.XorFeeFeeWithdrawnEvent(ctx, event)
 		this.stage = new stageEvents.XorFeeFeeWithdrawnEvent(ctx, event)
+		this.test = new testEvents.XorFeeFeeWithdrawnEvent(ctx, event)
 		this.dev = new devEvents.XorFeeFeeWithdrawnEvent(ctx, event)
 	}
 
@@ -10118,28 +6577,18 @@ export class XorFeeFeeWithdrawnEvent {
 	get asV1(): productionEvents.XorFeeFeeWithdrawnEvent['asV1'] {
 		return this.production.asV1
 	}
-	get isV33Stage(): stageEvents.XorFeeFeeWithdrawnEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.XorFeeFeeWithdrawnEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.XorFeeFeeWithdrawnEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.XorFeeFeeWithdrawnEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class XorFeeReferrerRewardedEvent {
 	private readonly production: productionEvents.XorFeeReferrerRewardedEvent
 	private readonly stage: stageEvents.XorFeeReferrerRewardedEvent
+	private readonly test: testEvents.XorFeeReferrerRewardedEvent
 	private readonly dev: devEvents.XorFeeReferrerRewardedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.XorFeeReferrerRewardedEvent(ctx, event)
 		this.stage = new stageEvents.XorFeeReferrerRewardedEvent(ctx, event)
+		this.test = new testEvents.XorFeeReferrerRewardedEvent(ctx, event)
 		this.dev = new devEvents.XorFeeReferrerRewardedEvent(ctx, event)
 	}
 
@@ -10149,28 +6598,18 @@ export class XorFeeReferrerRewardedEvent {
 	get asV22(): productionEvents.XorFeeReferrerRewardedEvent['asV22'] {
 		return this.production.asV22
 	}
-	get isV33Stage(): stageEvents.XorFeeReferrerRewardedEvent['isV33'] {
-		return this.stage.isV33
-	}
-	get asV33Stage(): stageEvents.XorFeeReferrerRewardedEvent['asV33'] {
-		return this.stage.asV33
-	}
-	get isV60Dev(): devEvents.XorFeeReferrerRewardedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.XorFeeReferrerRewardedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class XorFeeWeightToFeeMultiplierUpdatedEvent {
 	private readonly production: productionEvents.XorFeeWeightToFeeMultiplierUpdatedEvent
 	private readonly stage: stageEvents.XorFeeWeightToFeeMultiplierUpdatedEvent
+	private readonly test: testEvents.XorFeeWeightToFeeMultiplierUpdatedEvent
 	private readonly dev: devEvents.XorFeeWeightToFeeMultiplierUpdatedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.XorFeeWeightToFeeMultiplierUpdatedEvent(ctx, event)
 		this.stage = new stageEvents.XorFeeWeightToFeeMultiplierUpdatedEvent(ctx, event)
+		this.test = new testEvents.XorFeeWeightToFeeMultiplierUpdatedEvent(ctx, event)
 		this.dev = new devEvents.XorFeeWeightToFeeMultiplierUpdatedEvent(ctx, event)
 	}
 
@@ -10179,18 +6618,6 @@ export class XorFeeWeightToFeeMultiplierUpdatedEvent {
 	}
 	get asV37(): productionEvents.XorFeeWeightToFeeMultiplierUpdatedEvent['asV37'] {
 		return this.production.asV37
-	}
-	get isV37Stage(): stageEvents.XorFeeWeightToFeeMultiplierUpdatedEvent['isV37'] {
-		return this.stage.isV37
-	}
-	get asV37Stage(): stageEvents.XorFeeWeightToFeeMultiplierUpdatedEvent['asV37'] {
-		return this.stage.asV37
-	}
-	get isV60Dev(): devEvents.XorFeeWeightToFeeMultiplierUpdatedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.XorFeeWeightToFeeMultiplierUpdatedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -10209,12 +6636,6 @@ export class BeefyLightClientNewMmrRootEvent {
 	get asV52Stage(): stageEvents.BeefyLightClientNewMmrRootEvent['asV52'] {
 		return this.stage.asV52
 	}
-	get isV60Dev(): devEvents.BeefyLightClientNewMmrRootEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BeefyLightClientNewMmrRootEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BeefyLightClientValidatorRegistryUpdatedEvent {
@@ -10231,12 +6652,6 @@ export class BeefyLightClientValidatorRegistryUpdatedEvent {
 	}
 	get asV52Stage(): stageEvents.BeefyLightClientValidatorRegistryUpdatedEvent['asV52'] {
 		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.BeefyLightClientValidatorRegistryUpdatedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BeefyLightClientValidatorRegistryUpdatedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -10255,12 +6670,6 @@ export class BeefyLightClientVerificationSuccessfulEvent {
 	get asV52Stage(): stageEvents.BeefyLightClientVerificationSuccessfulEvent['asV52'] {
 		return this.stage.asV52
 	}
-	get isV60Dev(): devEvents.BeefyLightClientVerificationSuccessfulEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BeefyLightClientVerificationSuccessfulEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BridgeDataSignerAddedPeerEvent {
@@ -10277,12 +6686,6 @@ export class BridgeDataSignerAddedPeerEvent {
 	}
 	get asV54Stage(): stageEvents.BridgeDataSignerAddedPeerEvent['asV54'] {
 		return this.stage.asV54
-	}
-	get isV60Dev(): devEvents.BridgeDataSignerAddedPeerEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BridgeDataSignerAddedPeerEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -10301,12 +6704,6 @@ export class BridgeDataSignerApprovalAcceptedEvent {
 	get asV54Stage(): stageEvents.BridgeDataSignerApprovalAcceptedEvent['asV54'] {
 		return this.stage.asV54
 	}
-	get isV60Dev(): devEvents.BridgeDataSignerApprovalAcceptedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BridgeDataSignerApprovalAcceptedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BridgeDataSignerApprovedEvent {
@@ -10323,12 +6720,6 @@ export class BridgeDataSignerApprovedEvent {
 	}
 	get asV54Stage(): stageEvents.BridgeDataSignerApprovedEvent['asV54'] {
 		return this.stage.asV54
-	}
-	get isV60Dev(): devEvents.BridgeDataSignerApprovedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BridgeDataSignerApprovedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -10347,12 +6738,6 @@ export class BridgeDataSignerInitializedEvent {
 	get asV54Stage(): stageEvents.BridgeDataSignerInitializedEvent['asV54'] {
 		return this.stage.asV54
 	}
-	get isV60Dev(): devEvents.BridgeDataSignerInitializedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BridgeDataSignerInitializedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BridgeDataSignerRemovedPeerEvent {
@@ -10369,12 +6754,6 @@ export class BridgeDataSignerRemovedPeerEvent {
 	}
 	get asV54Stage(): stageEvents.BridgeDataSignerRemovedPeerEvent['asV54'] {
 		return this.stage.asV54
-	}
-	get isV60Dev(): devEvents.BridgeDataSignerRemovedPeerEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BridgeDataSignerRemovedPeerEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -10399,12 +6778,6 @@ export class BridgeOutboundChannelMessageAcceptedEvent {
 	get asV55Stage(): stageEvents.BridgeOutboundChannelMessageAcceptedEvent['asV55'] {
 		return this.stage.asV55
 	}
-	get isV60Dev(): devEvents.BridgeOutboundChannelMessageAcceptedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BridgeOutboundChannelMessageAcceptedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BridgeProxyRefundFailedEvent {
@@ -10422,12 +6795,6 @@ export class BridgeProxyRefundFailedEvent {
 	get asV54Stage(): stageEvents.BridgeProxyRefundFailedEvent['asV54'] {
 		return this.stage.asV54
 	}
-	get isV60Dev(): devEvents.BridgeProxyRefundFailedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BridgeProxyRefundFailedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class BridgeProxyRequestStatusUpdateEvent {
@@ -10444,12 +6811,6 @@ export class BridgeProxyRequestStatusUpdateEvent {
 	}
 	get asV54Stage(): stageEvents.BridgeProxyRequestStatusUpdateEvent['asV54'] {
 		return this.stage.asV54
-	}
-	get isV60Dev(): devEvents.BridgeProxyRequestStatusUpdateEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.BridgeProxyRequestStatusUpdateEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -10480,12 +6841,6 @@ export class DispatchMessageDecodeFailedEvent {
 	get asV59Stage(): stageEvents.DispatchMessageDecodeFailedEvent['asV59'] {
 		return this.stage.asV59
 	}
-	get isV60Dev(): devEvents.DispatchMessageDecodeFailedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DispatchMessageDecodeFailedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class DispatchMessageDispatchedEvent {
@@ -10514,12 +6869,6 @@ export class DispatchMessageDispatchedEvent {
 	}
 	get asV59Stage(): stageEvents.DispatchMessageDispatchedEvent['asV59'] {
 		return this.stage.asV59
-	}
-	get isV60Dev(): devEvents.DispatchMessageDispatchedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DispatchMessageDispatchedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -10550,12 +6899,6 @@ export class DispatchMessageRejectedEvent {
 	get asV59Stage(): stageEvents.DispatchMessageRejectedEvent['asV59'] {
 		return this.stage.asV59
 	}
-	get isV60Dev(): devEvents.DispatchMessageRejectedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.DispatchMessageRejectedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class Erc20AppBurnedEvent {
@@ -10572,12 +6915,6 @@ export class Erc20AppBurnedEvent {
 	}
 	get asV52Stage(): stageEvents.Erc20AppBurnedEvent['asV52'] {
 		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.Erc20AppBurnedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.Erc20AppBurnedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -10596,12 +6933,6 @@ export class Erc20AppMintedEvent {
 	get asV52Stage(): stageEvents.Erc20AppMintedEvent['asV52'] {
 		return this.stage.asV52
 	}
-	get isV60Dev(): devEvents.Erc20AppMintedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.Erc20AppMintedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class Erc20AppRefundedEvent {
@@ -10618,12 +6949,6 @@ export class Erc20AppRefundedEvent {
 	}
 	get asV52Stage(): stageEvents.Erc20AppRefundedEvent['asV52'] {
 		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.Erc20AppRefundedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.Erc20AppRefundedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -10642,12 +6967,6 @@ export class EthAppBurnedEvent {
 	get asV52Stage(): stageEvents.EthAppBurnedEvent['asV52'] {
 		return this.stage.asV52
 	}
-	get isV60Dev(): devEvents.EthAppBurnedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.EthAppBurnedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class EthAppMintedEvent {
@@ -10664,12 +6983,6 @@ export class EthAppMintedEvent {
 	}
 	get asV52Stage(): stageEvents.EthAppMintedEvent['asV52'] {
 		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.EthAppMintedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.EthAppMintedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -10688,12 +7001,6 @@ export class EthAppRefundedEvent {
 	get asV52Stage(): stageEvents.EthAppRefundedEvent['asV52'] {
 		return this.stage.asV52
 	}
-	get isV60Dev(): devEvents.EthAppRefundedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.EthAppRefundedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class EthereumLightClientFinalizedEvent {
@@ -10710,12 +7017,6 @@ export class EthereumLightClientFinalizedEvent {
 	}
 	get asV52Stage(): stageEvents.EthereumLightClientFinalizedEvent['asV52'] {
 		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.EthereumLightClientFinalizedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.EthereumLightClientFinalizedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -10751,10 +7052,12 @@ export class EvmBridgeProxyRequestStatusUpdateEvent {
 
 export class FaucetLimitUpdatedEvent {
 	private readonly stage: stageEvents.FaucetLimitUpdatedEvent
+	private readonly test: testEvents.FaucetLimitUpdatedEvent
 	private readonly dev: devEvents.FaucetLimitUpdatedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.FaucetLimitUpdatedEvent(ctx, event)
+		this.test = new testEvents.FaucetLimitUpdatedEvent(ctx, event)
 		this.dev = new devEvents.FaucetLimitUpdatedEvent(ctx, event)
 	}
 
@@ -10763,12 +7066,6 @@ export class FaucetLimitUpdatedEvent {
 	}
 	get asV37Stage(): stageEvents.FaucetLimitUpdatedEvent['asV37'] {
 		return this.stage.asV37
-	}
-	get isV60Dev(): devEvents.FaucetLimitUpdatedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.FaucetLimitUpdatedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -10787,12 +7084,6 @@ export class MigrationAppErc20MigratedEvent {
 	get asV52Stage(): stageEvents.MigrationAppErc20MigratedEvent['asV52'] {
 		return this.stage.asV52
 	}
-	get isV60Dev(): devEvents.MigrationAppErc20MigratedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.MigrationAppErc20MigratedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class MigrationAppEthMigratedEvent {
@@ -10809,12 +7100,6 @@ export class MigrationAppEthMigratedEvent {
 	}
 	get asV52Stage(): stageEvents.MigrationAppEthMigratedEvent['asV52'] {
 		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.MigrationAppEthMigratedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.MigrationAppEthMigratedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -10833,12 +7118,6 @@ export class MigrationAppSidechainMigratedEvent {
 	get asV52Stage(): stageEvents.MigrationAppSidechainMigratedEvent['asV52'] {
 		return this.stage.asV52
 	}
-	get isV60Dev(): devEvents.MigrationAppSidechainMigratedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.MigrationAppSidechainMigratedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class MultisigVerifierNetworkInitializedEvent {
@@ -10855,12 +7134,6 @@ export class MultisigVerifierNetworkInitializedEvent {
 	}
 	get asV54Stage(): stageEvents.MultisigVerifierNetworkInitializedEvent['asV54'] {
 		return this.stage.asV54
-	}
-	get isV60Dev(): devEvents.MultisigVerifierNetworkInitializedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.MultisigVerifierNetworkInitializedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -10879,12 +7152,6 @@ export class MultisigVerifierPeerAddedEvent {
 	get asV54Stage(): stageEvents.MultisigVerifierPeerAddedEvent['asV54'] {
 		return this.stage.asV54
 	}
-	get isV60Dev(): devEvents.MultisigVerifierPeerAddedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.MultisigVerifierPeerAddedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class MultisigVerifierPeerRemovedEvent {
@@ -10901,12 +7168,6 @@ export class MultisigVerifierPeerRemovedEvent {
 	}
 	get asV54Stage(): stageEvents.MultisigVerifierPeerRemovedEvent['asV54'] {
 		return this.stage.asV54
-	}
-	get isV60Dev(): devEvents.MultisigVerifierPeerRemovedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.MultisigVerifierPeerRemovedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -10925,12 +7186,6 @@ export class MultisigVerifierVerificationSuccessfulEvent {
 	get asV54Stage(): stageEvents.MultisigVerifierVerificationSuccessfulEvent['asV54'] {
 		return this.stage.asV54
 	}
-	get isV60Dev(): devEvents.MultisigVerifierVerificationSuccessfulEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.MultisigVerifierVerificationSuccessfulEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class SubstrateBridgeAppBurnedEvent {
@@ -10948,12 +7203,6 @@ export class SubstrateBridgeAppBurnedEvent {
 	get asV52Stage(): stageEvents.SubstrateBridgeAppBurnedEvent['asV52'] {
 		return this.stage.asV52
 	}
-	get isV60Dev(): devEvents.SubstrateBridgeAppBurnedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SubstrateBridgeAppBurnedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class SubstrateBridgeAppMintedEvent {
@@ -10970,12 +7219,6 @@ export class SubstrateBridgeAppMintedEvent {
 	}
 	get asV52Stage(): stageEvents.SubstrateBridgeAppMintedEvent['asV52'] {
 		return this.stage.asV52
-	}
-	get isV60Dev(): devEvents.SubstrateBridgeAppMintedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SubstrateBridgeAppMintedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -10999,12 +7242,6 @@ export class SubstrateBridgeOutboundChannelMessageAcceptedEvent {
 	}
 	get asV57Stage(): stageEvents.SubstrateBridgeOutboundChannelMessageAcceptedEvent['asV57'] {
 		return this.stage.asV57
-	}
-	get isV60Dev(): devEvents.SubstrateBridgeOutboundChannelMessageAcceptedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SubstrateBridgeOutboundChannelMessageAcceptedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 
@@ -11035,12 +7272,6 @@ export class SubstrateDispatchMessageDecodeFailedEvent {
 	get asV59Stage(): stageEvents.SubstrateDispatchMessageDecodeFailedEvent['asV59'] {
 		return this.stage.asV59
 	}
-	get isV60Dev(): devEvents.SubstrateDispatchMessageDecodeFailedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SubstrateDispatchMessageDecodeFailedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class SubstrateDispatchMessageDispatchedEvent {
@@ -11070,12 +7301,6 @@ export class SubstrateDispatchMessageDispatchedEvent {
 	get asV59Stage(): stageEvents.SubstrateDispatchMessageDispatchedEvent['asV59'] {
 		return this.stage.asV59
 	}
-	get isV60Dev(): devEvents.SubstrateDispatchMessageDispatchedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SubstrateDispatchMessageDispatchedEvent['asV60'] {
-		return this.dev.asV60
-	}
 }
 
 export class SubstrateDispatchMessageRejectedEvent {
@@ -11104,12 +7329,6 @@ export class SubstrateDispatchMessageRejectedEvent {
 	}
 	get asV59Stage(): stageEvents.SubstrateDispatchMessageRejectedEvent['asV59'] {
 		return this.stage.asV59
-	}
-	get isV60Dev(): devEvents.SubstrateDispatchMessageRejectedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.SubstrateDispatchMessageRejectedEvent['asV60'] {
-		return this.dev.asV60
 	}
 }
 

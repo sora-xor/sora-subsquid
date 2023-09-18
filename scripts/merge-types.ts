@@ -1,10 +1,8 @@
 import fs from 'fs'
-import ts from 'typescript'
 import path from 'path'
 
 type ClassName = string
-type ClassPath = string
-type ClassInfo = { path: ClassPath, versions: Set<number> }
+type ClassInfo = { environment: Environment, versions: { hash: string, version: number }[] }
 type ClassList = Record<ClassName, ClassInfo[]>
 
 import { Environment } from '../src/environments'
@@ -16,36 +14,30 @@ import { Environment } from '../src/environments'
 
 	const classes: ClassList = {}
 
-	Object.values(Environment).forEach(environment => {
+	const environments = [Environment.PRODUCTION, ...Object.values(Environment).filter(environment => environment !== Environment.PRODUCTION)]
+	environments.forEach(environment => {
 		const filePath = `src/types/generated/${environment}/${entityType}.ts`
 		const content = fs.readFileSync(filePath, 'utf-8')
-	const sourceFile = ts.createSourceFile(
-		'temp.ts',
-		content,
-		ts.ScriptTarget.Latest,
-		/*setParentNodes*/ true,
-		ts.ScriptKind.TS
-	)
-
-	sourceFile.forEachChild((node) => {	
-		if (ts.isClassDeclaration(node) && node.name) {
-		const className = node.name!.getText()
-		if (!classes[className]) {
-			classes[className] = []
-		}
-		const classInfo: ClassInfo = { path: filePath, versions: new Set() }
-		node.members.forEach(member => {
-			if (ts.isPropertyDeclaration(member) || ts.isMethodDeclaration(member) || ts.isGetAccessorDeclaration(member)) {
-			const name = member.name?.getText(sourceFile)
-			const version = name?.match(/V(\d+)/)?.[1]
-			if (version) {
-				classInfo.versions.add(Number(version))
+		const classCodeList = content.split(/(?=export class)/g)
+    
+		classCodeList.forEach(classCode => {
+			const versionCodeList = classCode.split(/(?=get isV)/g)
+			const className = classCode.match(/(?<=export class )(\w+)/)?.[0]
+			if (!className) return
+			if (!classes[className]) {
+				classes[className] = []
 			}
-			}
+			const classInfo: ClassInfo = { environment, versions: [] }
+			versionCodeList.forEach(versionCode => {
+				const match = versionCode.match(/get isV(\d+)\(\): \w* {\n[ \w.()']*=== '(\w*)'/)
+				const version = match?.[1]
+				const hash = match?.[2]
+				if (hash && version) {
+					classInfo.versions.push({ hash, version: parseInt(version) })
+				}
+			})
+			classes[className].push(classInfo)
 		})
-		classes[className].push(classInfo)
-		}
-	})
 	})
 
 	const outputPath = path.resolve(__dirname, `../src/types/generated/${entityType}.ts`)
@@ -66,6 +58,15 @@ import { Environment } from '../src/environments'
 	outputData.push('\n')
 
 	Object.entries(classes).forEach(([className, classInfoArray]) => {
+		const versions: { environment: Environment, version: number, hash: string }[] = []
+
+		classInfoArray.forEach(classInfo => {
+			classInfo.versions.forEach(version => {
+				if (versions.some(v => v.hash === version.hash)) return
+				versions.push({ environment: classInfo.environment, version: version.version, hash: version.hash })
+			})
+		})
+
 		if (entityType === 'storage') {
 			outputData.push(`export class ${className} {`)
 		} else {
@@ -73,10 +74,7 @@ import { Environment } from '../src/environments'
 		}
 
 		const environments = new Set(Object.values(Environment).filter(environment => {
-			return classInfoArray.some(classInfo => {
-				const match = classInfo.path.match(/\/(\w+)\/\w+.ts$/)
-				return match ? match[1] === environment : false
-			})
+			return classInfoArray.some(classInfo => classInfo.environment === environment)
 		}))
 
 		environments.forEach(environment => {
@@ -101,19 +99,15 @@ import { Environment } from '../src/environments'
 			outputData.push(``)
 		}
 
-		classInfoArray.forEach(classInfo => {
-			const match = classInfo.path.match(/\/(\w+)\/\w+.ts$/)
-			const environment = match![1]
+		versions.forEach(v => {
+			const { environment, version } = v
 			const prefix = environment === Environment.PRODUCTION ? '' : environment.charAt(0).toUpperCase() + environment.slice(1)
-
-			classInfo.versions.forEach(version => {
-				outputData.push(`\tget isV${version}${prefix}(): ${environment}${entityTypeCapital}.${className}['isV${version}'] {`)
-				outputData.push(`\t\treturn this.${environment}.isV${version}`)
-				outputData.push('\t}')
-				outputData.push(`\tget asV${version}${prefix}(): ${environment}${entityTypeCapital}.${className}['asV${version}'] {`)
-				outputData.push(`\t\treturn this.${environment}.asV${version}`)
-				outputData.push('\t}')
-			})
+			outputData.push(`\tget isV${version}${prefix}(): ${environment}${entityTypeCapital}.${className}['isV${version}'] {`)
+			outputData.push(`\t\treturn this.${environment}.isV${version}`)
+			outputData.push('\t}')
+			outputData.push(`\tget asV${version}${prefix}(): ${environment}${entityTypeCapital}.${className}['asV${version}'] {`)
+			outputData.push(`\t\treturn this.${environment}.asV${version}`)
+			outputData.push('\t}')
 		})
 
 		outputData.push('}\n')
