@@ -23,7 +23,7 @@ export const environments: Environments = {
 		archive: 'https://sora-testnet.archive.subsquid.io/graphql'
 	},
 	[Environment.DEV]: {
-		chain: 'wss://ws.framenode-1.r0.dev.sora2.soramitsu.co.jp"',
+		chain: 'wss://ws.framenode-2.r0.dev.sora2.soramitsu.co.jp"',
 		archive: 'https://subsquid.sq1.dev.sora2.soramitsu.co.jp/graphql'
 	},
 }
