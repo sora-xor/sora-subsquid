@@ -1,15 +1,15 @@
 manifestVersion: subsquid.io/v0.1
-name: sora-staking
-version: 11
-description: 'Sora squid'
+name: sora-test
+version: 1
+description: 'Sora test squid'
 build: 
 deploy:
   addons:
     postgres:
   processor:
     env:
-      INDEXER_ENVIRONMENT: production
-      INDEXER_START_BLOCK: 12,100,000
+      INDEXER_ENVIRONMENT: test
+      INDEXER_START_BLOCK: 0
       SQD_DEBUG: sqd:processor:mapping
     cmd:
       - node
@@ -31,8 +31,8 @@ scale:
   dedicated: true
   addons:
      postgres:
-         profile: large
+         profile: small
   processor:
-     profile: large
+     profile: small
   api:
-     profile: large
+     profile: small
