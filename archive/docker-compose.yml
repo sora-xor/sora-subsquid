@@ -7,9 +7,9 @@ services:
     volumes:
       - ./db:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: ${DATABASE_USERNAME}
-      POSTGRES_PASSWORD: ${DATABASE_PASS}
-      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_NAME}
     ports:
       - "5432:5432"
 
@@ -23,7 +23,7 @@ services:
     command: [
        "-e", "${NODE_NAME}",
        "-c", "5",
-       "--out", "${DATABASE_URL}",
+       "--out", "${DB_URL}",
        "--types-bundle", "/configs/typesBundle.json",
        "--write-batch-size", "10"
     ]
@@ -35,7 +35,7 @@ services:
     environment:
       RUST_LOG: "substrate_gateway=info,actix_server=info"
     command: [
-       "--database-url", "${DATABASE_URL}",
+       "--database-url", "${DB_URL}",
        "--database-max-connections", "100",
        "--scan-start-value", "1",
        "--scan-max-value", "10000",
@@ -46,11 +46,11 @@ services:
   explorer:
     image: subsquid/substrate-explorer:firesquid
     environment:
-      DATABASE_TYPE: postgres
-      DATABASE_HOST: db
-      DATABASE_PORT: 5432
-      DATABASE_NAME: ${DATABASE_NAME}
-      DATABASE_USER: ${DATABASE_USERNAME}
-      DATABASE_PASS: ${DATABASE_PASS}
+      DB_TYPE: postgres
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USERNAME}
+      DB_PASS: ${DB_PASS}
     ports:
       - "3000:3000"
