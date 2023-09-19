@@ -62,11 +62,13 @@ export class AssetsAssetSetNonMintableEvent {
 export class AssetsAssetUpdatedEvent {
 	private readonly production: productionEvents.AssetsAssetUpdatedEvent
 	private readonly stage: stageEvents.AssetsAssetUpdatedEvent
+	private readonly test: testEvents.AssetsAssetUpdatedEvent
 	private readonly dev: devEvents.AssetsAssetUpdatedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.AssetsAssetUpdatedEvent(ctx, event)
 		this.stage = new stageEvents.AssetsAssetUpdatedEvent(ctx, event)
+		this.test = new testEvents.AssetsAssetUpdatedEvent(ctx, event)
 		this.dev = new devEvents.AssetsAssetUpdatedEvent(ctx, event)
 	}
 
@@ -2348,11 +2350,13 @@ export class DemocracyVotedEvent {
 export class ElectionProviderMultiPhaseElectionFailedEvent {
 	private readonly production: productionEvents.ElectionProviderMultiPhaseElectionFailedEvent
 	private readonly stage: stageEvents.ElectionProviderMultiPhaseElectionFailedEvent
+	private readonly test: testEvents.ElectionProviderMultiPhaseElectionFailedEvent
 	private readonly dev: devEvents.ElectionProviderMultiPhaseElectionFailedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.ElectionProviderMultiPhaseElectionFailedEvent(ctx, event)
 		this.stage = new stageEvents.ElectionProviderMultiPhaseElectionFailedEvent(ctx, event)
+		this.test = new testEvents.ElectionProviderMultiPhaseElectionFailedEvent(ctx, event)
 		this.dev = new devEvents.ElectionProviderMultiPhaseElectionFailedEvent(ctx, event)
 	}
 
@@ -2394,11 +2398,13 @@ export class ElectionProviderMultiPhaseElectionFinalizedEvent {
 export class ElectionProviderMultiPhasePhaseTransitionedEvent {
 	private readonly production: productionEvents.ElectionProviderMultiPhasePhaseTransitionedEvent
 	private readonly stage: stageEvents.ElectionProviderMultiPhasePhaseTransitionedEvent
+	private readonly test: testEvents.ElectionProviderMultiPhasePhaseTransitionedEvent
 	private readonly dev: devEvents.ElectionProviderMultiPhasePhaseTransitionedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.ElectionProviderMultiPhasePhaseTransitionedEvent(ctx, event)
 		this.stage = new stageEvents.ElectionProviderMultiPhasePhaseTransitionedEvent(ctx, event)
+		this.test = new testEvents.ElectionProviderMultiPhasePhaseTransitionedEvent(ctx, event)
 		this.dev = new devEvents.ElectionProviderMultiPhasePhaseTransitionedEvent(ctx, event)
 	}
 
@@ -2781,11 +2787,13 @@ export class EthBridgeIncomingRequestFinalizedEvent {
 export class EthBridgeRegisterRequestFailedEvent {
 	private readonly production: productionEvents.EthBridgeRegisterRequestFailedEvent
 	private readonly stage: stageEvents.EthBridgeRegisterRequestFailedEvent
+	private readonly test: testEvents.EthBridgeRegisterRequestFailedEvent
 	private readonly dev: devEvents.EthBridgeRegisterRequestFailedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.EthBridgeRegisterRequestFailedEvent(ctx, event)
 		this.stage = new stageEvents.EthBridgeRegisterRequestFailedEvent(ctx, event)
+		this.test = new testEvents.EthBridgeRegisterRequestFailedEvent(ctx, event)
 		this.dev = new devEvents.EthBridgeRegisterRequestFailedEvent(ctx, event)
 	}
 
@@ -3463,11 +3471,13 @@ export class IrohaMigrationMigratedEvent {
 export class LiquidityProxyBatchSwapExecutedEvent {
 	private readonly production: productionEvents.LiquidityProxyBatchSwapExecutedEvent
 	private readonly stage: stageEvents.LiquidityProxyBatchSwapExecutedEvent
+	private readonly test: testEvents.LiquidityProxyBatchSwapExecutedEvent
 	private readonly dev: devEvents.LiquidityProxyBatchSwapExecutedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.LiquidityProxyBatchSwapExecutedEvent(ctx, event)
 		this.stage = new stageEvents.LiquidityProxyBatchSwapExecutedEvent(ctx, event)
+		this.test = new testEvents.LiquidityProxyBatchSwapExecutedEvent(ctx, event)
 		this.dev = new devEvents.LiquidityProxyBatchSwapExecutedEvent(ctx, event)
 	}
 
@@ -3980,11 +3990,13 @@ export class PoolXykPoolIsInitializedEvent {
 export class PreimageClearedEvent {
 	private readonly production: productionEvents.PreimageClearedEvent
 	private readonly stage: stageEvents.PreimageClearedEvent
+	private readonly test: testEvents.PreimageClearedEvent
 	private readonly dev: devEvents.PreimageClearedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.PreimageClearedEvent(ctx, event)
 		this.stage = new stageEvents.PreimageClearedEvent(ctx, event)
+		this.test = new testEvents.PreimageClearedEvent(ctx, event)
 		this.dev = new devEvents.PreimageClearedEvent(ctx, event)
 	}
 
@@ -3999,11 +4011,13 @@ export class PreimageClearedEvent {
 export class PreimageNotedEvent {
 	private readonly production: productionEvents.PreimageNotedEvent
 	private readonly stage: stageEvents.PreimageNotedEvent
+	private readonly test: testEvents.PreimageNotedEvent
 	private readonly dev: devEvents.PreimageNotedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.PreimageNotedEvent(ctx, event)
 		this.stage = new stageEvents.PreimageNotedEvent(ctx, event)
+		this.test = new testEvents.PreimageNotedEvent(ctx, event)
 		this.dev = new devEvents.PreimageNotedEvent(ctx, event)
 	}
 
@@ -4018,11 +4032,13 @@ export class PreimageNotedEvent {
 export class PreimageRequestedEvent {
 	private readonly production: productionEvents.PreimageRequestedEvent
 	private readonly stage: stageEvents.PreimageRequestedEvent
+	private readonly test: testEvents.PreimageRequestedEvent
 	private readonly dev: devEvents.PreimageRequestedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.PreimageRequestedEvent(ctx, event)
 		this.stage = new stageEvents.PreimageRequestedEvent(ctx, event)
+		this.test = new testEvents.PreimageRequestedEvent(ctx, event)
 		this.dev = new devEvents.PreimageRequestedEvent(ctx, event)
 	}
 
@@ -4314,11 +4330,13 @@ export class SchedulerCallLookupFailedEvent {
 export class SchedulerCallUnavailableEvent {
 	private readonly production: productionEvents.SchedulerCallUnavailableEvent
 	private readonly stage: stageEvents.SchedulerCallUnavailableEvent
+	private readonly test: testEvents.SchedulerCallUnavailableEvent
 	private readonly dev: devEvents.SchedulerCallUnavailableEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.SchedulerCallUnavailableEvent(ctx, event)
 		this.stage = new stageEvents.SchedulerCallUnavailableEvent(ctx, event)
+		this.test = new testEvents.SchedulerCallUnavailableEvent(ctx, event)
 		this.dev = new devEvents.SchedulerCallUnavailableEvent(ctx, event)
 	}
 
@@ -4393,11 +4411,13 @@ export class SchedulerDispatchedEvent {
 export class SchedulerPeriodicFailedEvent {
 	private readonly production: productionEvents.SchedulerPeriodicFailedEvent
 	private readonly stage: stageEvents.SchedulerPeriodicFailedEvent
+	private readonly test: testEvents.SchedulerPeriodicFailedEvent
 	private readonly dev: devEvents.SchedulerPeriodicFailedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.SchedulerPeriodicFailedEvent(ctx, event)
 		this.stage = new stageEvents.SchedulerPeriodicFailedEvent(ctx, event)
+		this.test = new testEvents.SchedulerPeriodicFailedEvent(ctx, event)
 		this.dev = new devEvents.SchedulerPeriodicFailedEvent(ctx, event)
 	}
 
@@ -4412,11 +4432,13 @@ export class SchedulerPeriodicFailedEvent {
 export class SchedulerPermanentlyOverweightEvent {
 	private readonly production: productionEvents.SchedulerPermanentlyOverweightEvent
 	private readonly stage: stageEvents.SchedulerPermanentlyOverweightEvent
+	private readonly test: testEvents.SchedulerPermanentlyOverweightEvent
 	private readonly dev: devEvents.SchedulerPermanentlyOverweightEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.SchedulerPermanentlyOverweightEvent(ctx, event)
 		this.stage = new stageEvents.SchedulerPermanentlyOverweightEvent(ctx, event)
+		this.test = new testEvents.SchedulerPermanentlyOverweightEvent(ctx, event)
 		this.dev = new devEvents.SchedulerPermanentlyOverweightEvent(ctx, event)
 	}
 
@@ -4585,11 +4607,13 @@ export class StakingEraPayoutEvent {
 export class StakingForceEraEvent {
 	private readonly production: productionEvents.StakingForceEraEvent
 	private readonly stage: stageEvents.StakingForceEraEvent
+	private readonly test: testEvents.StakingForceEraEvent
 	private readonly dev: devEvents.StakingForceEraEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.StakingForceEraEvent(ctx, event)
 		this.stage = new stageEvents.StakingForceEraEvent(ctx, event)
+		this.test = new testEvents.StakingForceEraEvent(ctx, event)
 		this.dev = new devEvents.StakingForceEraEvent(ctx, event)
 	}
 
@@ -4750,11 +4774,13 @@ export class StakingSlashEvent {
 export class StakingSlashReportedEvent {
 	private readonly production: productionEvents.StakingSlashReportedEvent
 	private readonly stage: stageEvents.StakingSlashReportedEvent
+	private readonly test: testEvents.StakingSlashReportedEvent
 	private readonly dev: devEvents.StakingSlashReportedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.StakingSlashReportedEvent(ctx, event)
 		this.stage = new stageEvents.StakingSlashReportedEvent(ctx, event)
+		this.test = new testEvents.StakingSlashReportedEvent(ctx, event)
 		this.dev = new devEvents.StakingSlashReportedEvent(ctx, event)
 	}
 
@@ -5872,11 +5898,13 @@ export class TokensLockSetEvent {
 export class TokensLockedEvent {
 	private readonly production: productionEvents.TokensLockedEvent
 	private readonly stage: stageEvents.TokensLockedEvent
+	private readonly test: testEvents.TokensLockedEvent
 	private readonly dev: devEvents.TokensLockedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TokensLockedEvent(ctx, event)
 		this.stage = new stageEvents.TokensLockedEvent(ctx, event)
+		this.test = new testEvents.TokensLockedEvent(ctx, event)
 		this.dev = new devEvents.TokensLockedEvent(ctx, event)
 	}
 
@@ -6015,11 +6043,13 @@ export class TokensTransferredEvent {
 export class TokensUnlockedEvent {
 	private readonly production: productionEvents.TokensUnlockedEvent
 	private readonly stage: stageEvents.TokensUnlockedEvent
+	private readonly test: testEvents.TokensUnlockedEvent
 	private readonly dev: devEvents.TokensUnlockedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TokensUnlockedEvent(ctx, event)
 		this.stage = new stageEvents.TokensUnlockedEvent(ctx, event)
+		this.test = new testEvents.TokensUnlockedEvent(ctx, event)
 		this.dev = new devEvents.TokensUnlockedEvent(ctx, event)
 	}
 
@@ -6103,11 +6133,13 @@ export class TradingPairTradingPairStoredEvent {
 export class TransactionPaymentTransactionFeePaidEvent {
 	private readonly production: productionEvents.TransactionPaymentTransactionFeePaidEvent
 	private readonly stage: stageEvents.TransactionPaymentTransactionFeePaidEvent
+	private readonly test: testEvents.TransactionPaymentTransactionFeePaidEvent
 	private readonly dev: devEvents.TransactionPaymentTransactionFeePaidEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.TransactionPaymentTransactionFeePaidEvent(ctx, event)
 		this.stage = new stageEvents.TransactionPaymentTransactionFeePaidEvent(ctx, event)
+		this.test = new testEvents.TransactionPaymentTransactionFeePaidEvent(ctx, event)
 		this.dev = new devEvents.TransactionPaymentTransactionFeePaidEvent(ctx, event)
 	}
 
@@ -6324,11 +6356,13 @@ export class VestedRewardsAddingZeroMarketMakerRewardEvent {
 export class VestedRewardsCrowdloanClaimedEvent {
 	private readonly production: productionEvents.VestedRewardsCrowdloanClaimedEvent
 	private readonly stage: stageEvents.VestedRewardsCrowdloanClaimedEvent
+	private readonly test: testEvents.VestedRewardsCrowdloanClaimedEvent
 	private readonly dev: devEvents.VestedRewardsCrowdloanClaimedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.VestedRewardsCrowdloanClaimedEvent(ctx, event)
 		this.stage = new stageEvents.VestedRewardsCrowdloanClaimedEvent(ctx, event)
+		this.test = new testEvents.VestedRewardsCrowdloanClaimedEvent(ctx, event)
 		this.dev = new devEvents.VestedRewardsCrowdloanClaimedEvent(ctx, event)
 	}
 
@@ -6456,11 +6490,13 @@ export class XstPoolReferenceAssetChangedEvent {
 export class XstPoolSyntheticAssetDisabledEvent {
 	private readonly production: productionEvents.XstPoolSyntheticAssetDisabledEvent
 	private readonly stage: stageEvents.XstPoolSyntheticAssetDisabledEvent
+	private readonly test: testEvents.XstPoolSyntheticAssetDisabledEvent
 	private readonly dev: devEvents.XstPoolSyntheticAssetDisabledEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.XstPoolSyntheticAssetDisabledEvent(ctx, event)
 		this.stage = new stageEvents.XstPoolSyntheticAssetDisabledEvent(ctx, event)
+		this.test = new testEvents.XstPoolSyntheticAssetDisabledEvent(ctx, event)
 		this.dev = new devEvents.XstPoolSyntheticAssetDisabledEvent(ctx, event)
 	}
 
@@ -6502,11 +6538,13 @@ export class XstPoolSyntheticAssetEnabledEvent {
 export class XstPoolSyntheticAssetFeeChangedEvent {
 	private readonly production: productionEvents.XstPoolSyntheticAssetFeeChangedEvent
 	private readonly stage: stageEvents.XstPoolSyntheticAssetFeeChangedEvent
+	private readonly test: testEvents.XstPoolSyntheticAssetFeeChangedEvent
 	private readonly dev: devEvents.XstPoolSyntheticAssetFeeChangedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.XstPoolSyntheticAssetFeeChangedEvent(ctx, event)
 		this.stage = new stageEvents.XstPoolSyntheticAssetFeeChangedEvent(ctx, event)
+		this.test = new testEvents.XstPoolSyntheticAssetFeeChangedEvent(ctx, event)
 		this.dev = new devEvents.XstPoolSyntheticAssetFeeChangedEvent(ctx, event)
 	}
 
@@ -6521,11 +6559,13 @@ export class XstPoolSyntheticAssetFeeChangedEvent {
 export class XstPoolSyntheticAssetRemovedEvent {
 	private readonly production: productionEvents.XstPoolSyntheticAssetRemovedEvent
 	private readonly stage: stageEvents.XstPoolSyntheticAssetRemovedEvent
+	private readonly test: testEvents.XstPoolSyntheticAssetRemovedEvent
 	private readonly dev: devEvents.XstPoolSyntheticAssetRemovedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.production = new productionEvents.XstPoolSyntheticAssetRemovedEvent(ctx, event)
 		this.stage = new stageEvents.XstPoolSyntheticAssetRemovedEvent(ctx, event)
+		this.test = new testEvents.XstPoolSyntheticAssetRemovedEvent(ctx, event)
 		this.dev = new devEvents.XstPoolSyntheticAssetRemovedEvent(ctx, event)
 	}
 
@@ -6623,10 +6663,12 @@ export class XorFeeWeightToFeeMultiplierUpdatedEvent {
 
 export class BeefyLightClientNewMmrRootEvent {
 	private readonly stage: stageEvents.BeefyLightClientNewMmrRootEvent
+	private readonly test: testEvents.BeefyLightClientNewMmrRootEvent
 	private readonly dev: devEvents.BeefyLightClientNewMmrRootEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.BeefyLightClientNewMmrRootEvent(ctx, event)
+		this.test = new testEvents.BeefyLightClientNewMmrRootEvent(ctx, event)
 		this.dev = new devEvents.BeefyLightClientNewMmrRootEvent(ctx, event)
 	}
 
@@ -6640,10 +6682,12 @@ export class BeefyLightClientNewMmrRootEvent {
 
 export class BeefyLightClientValidatorRegistryUpdatedEvent {
 	private readonly stage: stageEvents.BeefyLightClientValidatorRegistryUpdatedEvent
+	private readonly test: testEvents.BeefyLightClientValidatorRegistryUpdatedEvent
 	private readonly dev: devEvents.BeefyLightClientValidatorRegistryUpdatedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.BeefyLightClientValidatorRegistryUpdatedEvent(ctx, event)
+		this.test = new testEvents.BeefyLightClientValidatorRegistryUpdatedEvent(ctx, event)
 		this.dev = new devEvents.BeefyLightClientValidatorRegistryUpdatedEvent(ctx, event)
 	}
 
@@ -6657,10 +6701,12 @@ export class BeefyLightClientValidatorRegistryUpdatedEvent {
 
 export class BeefyLightClientVerificationSuccessfulEvent {
 	private readonly stage: stageEvents.BeefyLightClientVerificationSuccessfulEvent
+	private readonly test: testEvents.BeefyLightClientVerificationSuccessfulEvent
 	private readonly dev: devEvents.BeefyLightClientVerificationSuccessfulEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.BeefyLightClientVerificationSuccessfulEvent(ctx, event)
+		this.test = new testEvents.BeefyLightClientVerificationSuccessfulEvent(ctx, event)
 		this.dev = new devEvents.BeefyLightClientVerificationSuccessfulEvent(ctx, event)
 	}
 
@@ -6674,10 +6720,12 @@ export class BeefyLightClientVerificationSuccessfulEvent {
 
 export class BridgeDataSignerAddedPeerEvent {
 	private readonly stage: stageEvents.BridgeDataSignerAddedPeerEvent
+	private readonly test: testEvents.BridgeDataSignerAddedPeerEvent
 	private readonly dev: devEvents.BridgeDataSignerAddedPeerEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.BridgeDataSignerAddedPeerEvent(ctx, event)
+		this.test = new testEvents.BridgeDataSignerAddedPeerEvent(ctx, event)
 		this.dev = new devEvents.BridgeDataSignerAddedPeerEvent(ctx, event)
 	}
 
@@ -6691,10 +6739,12 @@ export class BridgeDataSignerAddedPeerEvent {
 
 export class BridgeDataSignerApprovalAcceptedEvent {
 	private readonly stage: stageEvents.BridgeDataSignerApprovalAcceptedEvent
+	private readonly test: testEvents.BridgeDataSignerApprovalAcceptedEvent
 	private readonly dev: devEvents.BridgeDataSignerApprovalAcceptedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.BridgeDataSignerApprovalAcceptedEvent(ctx, event)
+		this.test = new testEvents.BridgeDataSignerApprovalAcceptedEvent(ctx, event)
 		this.dev = new devEvents.BridgeDataSignerApprovalAcceptedEvent(ctx, event)
 	}
 
@@ -6708,10 +6758,12 @@ export class BridgeDataSignerApprovalAcceptedEvent {
 
 export class BridgeDataSignerApprovedEvent {
 	private readonly stage: stageEvents.BridgeDataSignerApprovedEvent
+	private readonly test: testEvents.BridgeDataSignerApprovedEvent
 	private readonly dev: devEvents.BridgeDataSignerApprovedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.BridgeDataSignerApprovedEvent(ctx, event)
+		this.test = new testEvents.BridgeDataSignerApprovedEvent(ctx, event)
 		this.dev = new devEvents.BridgeDataSignerApprovedEvent(ctx, event)
 	}
 
@@ -6725,10 +6777,12 @@ export class BridgeDataSignerApprovedEvent {
 
 export class BridgeDataSignerInitializedEvent {
 	private readonly stage: stageEvents.BridgeDataSignerInitializedEvent
+	private readonly test: testEvents.BridgeDataSignerInitializedEvent
 	private readonly dev: devEvents.BridgeDataSignerInitializedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.BridgeDataSignerInitializedEvent(ctx, event)
+		this.test = new testEvents.BridgeDataSignerInitializedEvent(ctx, event)
 		this.dev = new devEvents.BridgeDataSignerInitializedEvent(ctx, event)
 	}
 
@@ -6742,10 +6796,12 @@ export class BridgeDataSignerInitializedEvent {
 
 export class BridgeDataSignerRemovedPeerEvent {
 	private readonly stage: stageEvents.BridgeDataSignerRemovedPeerEvent
+	private readonly test: testEvents.BridgeDataSignerRemovedPeerEvent
 	private readonly dev: devEvents.BridgeDataSignerRemovedPeerEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.BridgeDataSignerRemovedPeerEvent(ctx, event)
+		this.test = new testEvents.BridgeDataSignerRemovedPeerEvent(ctx, event)
 		this.dev = new devEvents.BridgeDataSignerRemovedPeerEvent(ctx, event)
 	}
 
@@ -6759,10 +6815,12 @@ export class BridgeDataSignerRemovedPeerEvent {
 
 export class BridgeOutboundChannelMessageAcceptedEvent {
 	private readonly stage: stageEvents.BridgeOutboundChannelMessageAcceptedEvent
+	private readonly test: testEvents.BridgeOutboundChannelMessageAcceptedEvent
 	private readonly dev: devEvents.BridgeOutboundChannelMessageAcceptedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.BridgeOutboundChannelMessageAcceptedEvent(ctx, event)
+		this.test = new testEvents.BridgeOutboundChannelMessageAcceptedEvent(ctx, event)
 		this.dev = new devEvents.BridgeOutboundChannelMessageAcceptedEvent(ctx, event)
 	}
 
@@ -6782,10 +6840,12 @@ export class BridgeOutboundChannelMessageAcceptedEvent {
 
 export class BridgeProxyRefundFailedEvent {
 	private readonly stage: stageEvents.BridgeProxyRefundFailedEvent
+	private readonly test: testEvents.BridgeProxyRefundFailedEvent
 	private readonly dev: devEvents.BridgeProxyRefundFailedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.BridgeProxyRefundFailedEvent(ctx, event)
+		this.test = new testEvents.BridgeProxyRefundFailedEvent(ctx, event)
 		this.dev = new devEvents.BridgeProxyRefundFailedEvent(ctx, event)
 	}
 
@@ -6799,10 +6859,12 @@ export class BridgeProxyRefundFailedEvent {
 
 export class BridgeProxyRequestStatusUpdateEvent {
 	private readonly stage: stageEvents.BridgeProxyRequestStatusUpdateEvent
+	private readonly test: testEvents.BridgeProxyRequestStatusUpdateEvent
 	private readonly dev: devEvents.BridgeProxyRequestStatusUpdateEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.BridgeProxyRequestStatusUpdateEvent(ctx, event)
+		this.test = new testEvents.BridgeProxyRequestStatusUpdateEvent(ctx, event)
 		this.dev = new devEvents.BridgeProxyRequestStatusUpdateEvent(ctx, event)
 	}
 
@@ -6816,10 +6878,12 @@ export class BridgeProxyRequestStatusUpdateEvent {
 
 export class DispatchMessageDecodeFailedEvent {
 	private readonly stage: stageEvents.DispatchMessageDecodeFailedEvent
+	private readonly test: testEvents.DispatchMessageDecodeFailedEvent
 	private readonly dev: devEvents.DispatchMessageDecodeFailedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.DispatchMessageDecodeFailedEvent(ctx, event)
+		this.test = new testEvents.DispatchMessageDecodeFailedEvent(ctx, event)
 		this.dev = new devEvents.DispatchMessageDecodeFailedEvent(ctx, event)
 	}
 
@@ -6845,10 +6909,12 @@ export class DispatchMessageDecodeFailedEvent {
 
 export class DispatchMessageDispatchedEvent {
 	private readonly stage: stageEvents.DispatchMessageDispatchedEvent
+	private readonly test: testEvents.DispatchMessageDispatchedEvent
 	private readonly dev: devEvents.DispatchMessageDispatchedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.DispatchMessageDispatchedEvent(ctx, event)
+		this.test = new testEvents.DispatchMessageDispatchedEvent(ctx, event)
 		this.dev = new devEvents.DispatchMessageDispatchedEvent(ctx, event)
 	}
 
@@ -6874,10 +6940,12 @@ export class DispatchMessageDispatchedEvent {
 
 export class DispatchMessageRejectedEvent {
 	private readonly stage: stageEvents.DispatchMessageRejectedEvent
+	private readonly test: testEvents.DispatchMessageRejectedEvent
 	private readonly dev: devEvents.DispatchMessageRejectedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.DispatchMessageRejectedEvent(ctx, event)
+		this.test = new testEvents.DispatchMessageRejectedEvent(ctx, event)
 		this.dev = new devEvents.DispatchMessageRejectedEvent(ctx, event)
 	}
 
@@ -6903,10 +6971,12 @@ export class DispatchMessageRejectedEvent {
 
 export class Erc20AppBurnedEvent {
 	private readonly stage: stageEvents.Erc20AppBurnedEvent
+	private readonly test: testEvents.Erc20AppBurnedEvent
 	private readonly dev: devEvents.Erc20AppBurnedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.Erc20AppBurnedEvent(ctx, event)
+		this.test = new testEvents.Erc20AppBurnedEvent(ctx, event)
 		this.dev = new devEvents.Erc20AppBurnedEvent(ctx, event)
 	}
 
@@ -6920,10 +6990,12 @@ export class Erc20AppBurnedEvent {
 
 export class Erc20AppMintedEvent {
 	private readonly stage: stageEvents.Erc20AppMintedEvent
+	private readonly test: testEvents.Erc20AppMintedEvent
 	private readonly dev: devEvents.Erc20AppMintedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.Erc20AppMintedEvent(ctx, event)
+		this.test = new testEvents.Erc20AppMintedEvent(ctx, event)
 		this.dev = new devEvents.Erc20AppMintedEvent(ctx, event)
 	}
 
@@ -6937,10 +7009,12 @@ export class Erc20AppMintedEvent {
 
 export class Erc20AppRefundedEvent {
 	private readonly stage: stageEvents.Erc20AppRefundedEvent
+	private readonly test: testEvents.Erc20AppRefundedEvent
 	private readonly dev: devEvents.Erc20AppRefundedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.Erc20AppRefundedEvent(ctx, event)
+		this.test = new testEvents.Erc20AppRefundedEvent(ctx, event)
 		this.dev = new devEvents.Erc20AppRefundedEvent(ctx, event)
 	}
 
@@ -6954,10 +7028,12 @@ export class Erc20AppRefundedEvent {
 
 export class EthAppBurnedEvent {
 	private readonly stage: stageEvents.EthAppBurnedEvent
+	private readonly test: testEvents.EthAppBurnedEvent
 	private readonly dev: devEvents.EthAppBurnedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.EthAppBurnedEvent(ctx, event)
+		this.test = new testEvents.EthAppBurnedEvent(ctx, event)
 		this.dev = new devEvents.EthAppBurnedEvent(ctx, event)
 	}
 
@@ -6971,10 +7047,12 @@ export class EthAppBurnedEvent {
 
 export class EthAppMintedEvent {
 	private readonly stage: stageEvents.EthAppMintedEvent
+	private readonly test: testEvents.EthAppMintedEvent
 	private readonly dev: devEvents.EthAppMintedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.EthAppMintedEvent(ctx, event)
+		this.test = new testEvents.EthAppMintedEvent(ctx, event)
 		this.dev = new devEvents.EthAppMintedEvent(ctx, event)
 	}
 
@@ -6988,10 +7066,12 @@ export class EthAppMintedEvent {
 
 export class EthAppRefundedEvent {
 	private readonly stage: stageEvents.EthAppRefundedEvent
+	private readonly test: testEvents.EthAppRefundedEvent
 	private readonly dev: devEvents.EthAppRefundedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.EthAppRefundedEvent(ctx, event)
+		this.test = new testEvents.EthAppRefundedEvent(ctx, event)
 		this.dev = new devEvents.EthAppRefundedEvent(ctx, event)
 	}
 
@@ -7005,10 +7085,12 @@ export class EthAppRefundedEvent {
 
 export class EthereumLightClientFinalizedEvent {
 	private readonly stage: stageEvents.EthereumLightClientFinalizedEvent
+	private readonly test: testEvents.EthereumLightClientFinalizedEvent
 	private readonly dev: devEvents.EthereumLightClientFinalizedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.EthereumLightClientFinalizedEvent(ctx, event)
+		this.test = new testEvents.EthereumLightClientFinalizedEvent(ctx, event)
 		this.dev = new devEvents.EthereumLightClientFinalizedEvent(ctx, event)
 	}
 
@@ -7022,9 +7104,11 @@ export class EthereumLightClientFinalizedEvent {
 
 export class EvmBridgeProxyRefundFailedEvent {
 	private readonly stage: stageEvents.EvmBridgeProxyRefundFailedEvent
+	private readonly test: testEvents.EvmBridgeProxyRefundFailedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.EvmBridgeProxyRefundFailedEvent(ctx, event)
+		this.test = new testEvents.EvmBridgeProxyRefundFailedEvent(ctx, event)
 	}
 
 	get isV52Stage(): stageEvents.EvmBridgeProxyRefundFailedEvent['isV52'] {
@@ -7037,9 +7121,11 @@ export class EvmBridgeProxyRefundFailedEvent {
 
 export class EvmBridgeProxyRequestStatusUpdateEvent {
 	private readonly stage: stageEvents.EvmBridgeProxyRequestStatusUpdateEvent
+	private readonly test: testEvents.EvmBridgeProxyRequestStatusUpdateEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.EvmBridgeProxyRequestStatusUpdateEvent(ctx, event)
+		this.test = new testEvents.EvmBridgeProxyRequestStatusUpdateEvent(ctx, event)
 	}
 
 	get isV52Stage(): stageEvents.EvmBridgeProxyRequestStatusUpdateEvent['isV52'] {
@@ -7071,10 +7157,12 @@ export class FaucetLimitUpdatedEvent {
 
 export class MigrationAppErc20MigratedEvent {
 	private readonly stage: stageEvents.MigrationAppErc20MigratedEvent
+	private readonly test: testEvents.MigrationAppErc20MigratedEvent
 	private readonly dev: devEvents.MigrationAppErc20MigratedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.MigrationAppErc20MigratedEvent(ctx, event)
+		this.test = new testEvents.MigrationAppErc20MigratedEvent(ctx, event)
 		this.dev = new devEvents.MigrationAppErc20MigratedEvent(ctx, event)
 	}
 
@@ -7088,10 +7176,12 @@ export class MigrationAppErc20MigratedEvent {
 
 export class MigrationAppEthMigratedEvent {
 	private readonly stage: stageEvents.MigrationAppEthMigratedEvent
+	private readonly test: testEvents.MigrationAppEthMigratedEvent
 	private readonly dev: devEvents.MigrationAppEthMigratedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.MigrationAppEthMigratedEvent(ctx, event)
+		this.test = new testEvents.MigrationAppEthMigratedEvent(ctx, event)
 		this.dev = new devEvents.MigrationAppEthMigratedEvent(ctx, event)
 	}
 
@@ -7105,10 +7195,12 @@ export class MigrationAppEthMigratedEvent {
 
 export class MigrationAppSidechainMigratedEvent {
 	private readonly stage: stageEvents.MigrationAppSidechainMigratedEvent
+	private readonly test: testEvents.MigrationAppSidechainMigratedEvent
 	private readonly dev: devEvents.MigrationAppSidechainMigratedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.MigrationAppSidechainMigratedEvent(ctx, event)
+		this.test = new testEvents.MigrationAppSidechainMigratedEvent(ctx, event)
 		this.dev = new devEvents.MigrationAppSidechainMigratedEvent(ctx, event)
 	}
 
@@ -7122,10 +7214,12 @@ export class MigrationAppSidechainMigratedEvent {
 
 export class MultisigVerifierNetworkInitializedEvent {
 	private readonly stage: stageEvents.MultisigVerifierNetworkInitializedEvent
+	private readonly test: testEvents.MultisigVerifierNetworkInitializedEvent
 	private readonly dev: devEvents.MultisigVerifierNetworkInitializedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.MultisigVerifierNetworkInitializedEvent(ctx, event)
+		this.test = new testEvents.MultisigVerifierNetworkInitializedEvent(ctx, event)
 		this.dev = new devEvents.MultisigVerifierNetworkInitializedEvent(ctx, event)
 	}
 
@@ -7139,10 +7233,12 @@ export class MultisigVerifierNetworkInitializedEvent {
 
 export class MultisigVerifierPeerAddedEvent {
 	private readonly stage: stageEvents.MultisigVerifierPeerAddedEvent
+	private readonly test: testEvents.MultisigVerifierPeerAddedEvent
 	private readonly dev: devEvents.MultisigVerifierPeerAddedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.MultisigVerifierPeerAddedEvent(ctx, event)
+		this.test = new testEvents.MultisigVerifierPeerAddedEvent(ctx, event)
 		this.dev = new devEvents.MultisigVerifierPeerAddedEvent(ctx, event)
 	}
 
@@ -7156,10 +7252,12 @@ export class MultisigVerifierPeerAddedEvent {
 
 export class MultisigVerifierPeerRemovedEvent {
 	private readonly stage: stageEvents.MultisigVerifierPeerRemovedEvent
+	private readonly test: testEvents.MultisigVerifierPeerRemovedEvent
 	private readonly dev: devEvents.MultisigVerifierPeerRemovedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.MultisigVerifierPeerRemovedEvent(ctx, event)
+		this.test = new testEvents.MultisigVerifierPeerRemovedEvent(ctx, event)
 		this.dev = new devEvents.MultisigVerifierPeerRemovedEvent(ctx, event)
 	}
 
@@ -7173,10 +7271,12 @@ export class MultisigVerifierPeerRemovedEvent {
 
 export class MultisigVerifierVerificationSuccessfulEvent {
 	private readonly stage: stageEvents.MultisigVerifierVerificationSuccessfulEvent
+	private readonly test: testEvents.MultisigVerifierVerificationSuccessfulEvent
 	private readonly dev: devEvents.MultisigVerifierVerificationSuccessfulEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.MultisigVerifierVerificationSuccessfulEvent(ctx, event)
+		this.test = new testEvents.MultisigVerifierVerificationSuccessfulEvent(ctx, event)
 		this.dev = new devEvents.MultisigVerifierVerificationSuccessfulEvent(ctx, event)
 	}
 
@@ -7190,10 +7290,12 @@ export class MultisigVerifierVerificationSuccessfulEvent {
 
 export class SubstrateBridgeAppBurnedEvent {
 	private readonly stage: stageEvents.SubstrateBridgeAppBurnedEvent
+	private readonly test: testEvents.SubstrateBridgeAppBurnedEvent
 	private readonly dev: devEvents.SubstrateBridgeAppBurnedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.SubstrateBridgeAppBurnedEvent(ctx, event)
+		this.test = new testEvents.SubstrateBridgeAppBurnedEvent(ctx, event)
 		this.dev = new devEvents.SubstrateBridgeAppBurnedEvent(ctx, event)
 	}
 
@@ -7207,10 +7309,12 @@ export class SubstrateBridgeAppBurnedEvent {
 
 export class SubstrateBridgeAppMintedEvent {
 	private readonly stage: stageEvents.SubstrateBridgeAppMintedEvent
+	private readonly test: testEvents.SubstrateBridgeAppMintedEvent
 	private readonly dev: devEvents.SubstrateBridgeAppMintedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.SubstrateBridgeAppMintedEvent(ctx, event)
+		this.test = new testEvents.SubstrateBridgeAppMintedEvent(ctx, event)
 		this.dev = new devEvents.SubstrateBridgeAppMintedEvent(ctx, event)
 	}
 
@@ -7224,10 +7328,12 @@ export class SubstrateBridgeAppMintedEvent {
 
 export class SubstrateBridgeOutboundChannelMessageAcceptedEvent {
 	private readonly stage: stageEvents.SubstrateBridgeOutboundChannelMessageAcceptedEvent
+	private readonly test: testEvents.SubstrateBridgeOutboundChannelMessageAcceptedEvent
 	private readonly dev: devEvents.SubstrateBridgeOutboundChannelMessageAcceptedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.SubstrateBridgeOutboundChannelMessageAcceptedEvent(ctx, event)
+		this.test = new testEvents.SubstrateBridgeOutboundChannelMessageAcceptedEvent(ctx, event)
 		this.dev = new devEvents.SubstrateBridgeOutboundChannelMessageAcceptedEvent(ctx, event)
 	}
 
@@ -7247,10 +7353,12 @@ export class SubstrateBridgeOutboundChannelMessageAcceptedEvent {
 
 export class SubstrateDispatchMessageDecodeFailedEvent {
 	private readonly stage: stageEvents.SubstrateDispatchMessageDecodeFailedEvent
+	private readonly test: testEvents.SubstrateDispatchMessageDecodeFailedEvent
 	private readonly dev: devEvents.SubstrateDispatchMessageDecodeFailedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.SubstrateDispatchMessageDecodeFailedEvent(ctx, event)
+		this.test = new testEvents.SubstrateDispatchMessageDecodeFailedEvent(ctx, event)
 		this.dev = new devEvents.SubstrateDispatchMessageDecodeFailedEvent(ctx, event)
 	}
 
@@ -7276,10 +7384,12 @@ export class SubstrateDispatchMessageDecodeFailedEvent {
 
 export class SubstrateDispatchMessageDispatchedEvent {
 	private readonly stage: stageEvents.SubstrateDispatchMessageDispatchedEvent
+	private readonly test: testEvents.SubstrateDispatchMessageDispatchedEvent
 	private readonly dev: devEvents.SubstrateDispatchMessageDispatchedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.SubstrateDispatchMessageDispatchedEvent(ctx, event)
+		this.test = new testEvents.SubstrateDispatchMessageDispatchedEvent(ctx, event)
 		this.dev = new devEvents.SubstrateDispatchMessageDispatchedEvent(ctx, event)
 	}
 
@@ -7305,10 +7415,12 @@ export class SubstrateDispatchMessageDispatchedEvent {
 
 export class SubstrateDispatchMessageRejectedEvent {
 	private readonly stage: stageEvents.SubstrateDispatchMessageRejectedEvent
+	private readonly test: testEvents.SubstrateDispatchMessageRejectedEvent
 	private readonly dev: devEvents.SubstrateDispatchMessageRejectedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.SubstrateDispatchMessageRejectedEvent(ctx, event)
+		this.test = new testEvents.SubstrateDispatchMessageRejectedEvent(ctx, event)
 		this.dev = new devEvents.SubstrateDispatchMessageRejectedEvent(ctx, event)
 	}
 
@@ -7329,6 +7441,105 @@ export class SubstrateDispatchMessageRejectedEvent {
 	}
 	get asV59Stage(): stageEvents.SubstrateDispatchMessageRejectedEvent['asV59'] {
 		return this.stage.asV59
+	}
+}
+
+export class OrderBookOrderBookCreatedEvent {
+	private readonly test: testEvents.OrderBookOrderBookCreatedEvent
+	private readonly dev: devEvents.OrderBookOrderBookCreatedEvent
+
+	constructor(ctx: ChainContext, event: Event) {
+		this.test = new testEvents.OrderBookOrderBookCreatedEvent(ctx, event)
+		this.dev = new devEvents.OrderBookOrderBookCreatedEvent(ctx, event)
+	}
+
+	get isV52Test(): testEvents.OrderBookOrderBookCreatedEvent['isV52'] {
+		return this.test.isV52
+	}
+	get asV52Test(): testEvents.OrderBookOrderBookCreatedEvent['asV52'] {
+		return this.test.asV52
+	}
+	get isV60Dev(): devEvents.OrderBookOrderBookCreatedEvent['isV60'] {
+		return this.dev.isV60
+	}
+	get asV60Dev(): devEvents.OrderBookOrderBookCreatedEvent['asV60'] {
+		return this.dev.asV60
+	}
+}
+
+export class OrderBookOrderBookDeletedEvent {
+	private readonly test: testEvents.OrderBookOrderBookDeletedEvent
+	private readonly dev: devEvents.OrderBookOrderBookDeletedEvent
+
+	constructor(ctx: ChainContext, event: Event) {
+		this.test = new testEvents.OrderBookOrderBookDeletedEvent(ctx, event)
+		this.dev = new devEvents.OrderBookOrderBookDeletedEvent(ctx, event)
+	}
+
+	get isV52Test(): testEvents.OrderBookOrderBookDeletedEvent['isV52'] {
+		return this.test.isV52
+	}
+	get asV52Test(): testEvents.OrderBookOrderBookDeletedEvent['asV52'] {
+		return this.test.asV52
+	}
+	get isV60Dev(): devEvents.OrderBookOrderBookDeletedEvent['isV60'] {
+		return this.dev.isV60
+	}
+	get asV60Dev(): devEvents.OrderBookOrderBookDeletedEvent['asV60'] {
+		return this.dev.asV60
+	}
+}
+
+export class OrderBookOrderBookUpdatedEvent {
+	private readonly test: testEvents.OrderBookOrderBookUpdatedEvent
+	private readonly dev: devEvents.OrderBookOrderBookUpdatedEvent
+
+	constructor(ctx: ChainContext, event: Event) {
+		this.test = new testEvents.OrderBookOrderBookUpdatedEvent(ctx, event)
+		this.dev = new devEvents.OrderBookOrderBookUpdatedEvent(ctx, event)
+	}
+
+	get isV52Test(): testEvents.OrderBookOrderBookUpdatedEvent['isV52'] {
+		return this.test.isV52
+	}
+	get asV52Test(): testEvents.OrderBookOrderBookUpdatedEvent['asV52'] {
+		return this.test.asV52
+	}
+	get isV60Dev(): devEvents.OrderBookOrderBookUpdatedEvent['isV60'] {
+		return this.dev.isV60
+	}
+	get asV60Dev(): devEvents.OrderBookOrderBookUpdatedEvent['asV60'] {
+		return this.dev.asV60
+	}
+}
+
+export class OrderBookOrderCanceledEvent {
+	private readonly test: testEvents.OrderBookOrderCanceledEvent
+
+	constructor(ctx: ChainContext, event: Event) {
+		this.test = new testEvents.OrderBookOrderCanceledEvent(ctx, event)
+	}
+
+	get isV52Test(): testEvents.OrderBookOrderCanceledEvent['isV52'] {
+		return this.test.isV52
+	}
+	get asV52Test(): testEvents.OrderBookOrderCanceledEvent['asV52'] {
+		return this.test.asV52
+	}
+}
+
+export class OrderBookOrderPlacedEvent {
+	private readonly test: testEvents.OrderBookOrderPlacedEvent
+
+	constructor(ctx: ChainContext, event: Event) {
+		this.test = new testEvents.OrderBookOrderPlacedEvent(ctx, event)
+	}
+
+	get isV52Test(): testEvents.OrderBookOrderPlacedEvent['isV52'] {
+		return this.test.isV52
+	}
+	get asV52Test(): testEvents.OrderBookOrderPlacedEvent['asV52'] {
+		return this.test.asV52
 	}
 }
 
@@ -7467,36 +7678,6 @@ export class OrderBookMarketOrderExecutedEvent {
 	}
 }
 
-export class OrderBookOrderBookCreatedEvent {
-	private readonly dev: devEvents.OrderBookOrderBookCreatedEvent
-
-	constructor(ctx: ChainContext, event: Event) {
-		this.dev = new devEvents.OrderBookOrderBookCreatedEvent(ctx, event)
-	}
-
-	get isV60Dev(): devEvents.OrderBookOrderBookCreatedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.OrderBookOrderBookCreatedEvent['asV60'] {
-		return this.dev.asV60
-	}
-}
-
-export class OrderBookOrderBookDeletedEvent {
-	private readonly dev: devEvents.OrderBookOrderBookDeletedEvent
-
-	constructor(ctx: ChainContext, event: Event) {
-		this.dev = new devEvents.OrderBookOrderBookDeletedEvent(ctx, event)
-	}
-
-	get isV60Dev(): devEvents.OrderBookOrderBookDeletedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.OrderBookOrderBookDeletedEvent['asV60'] {
-		return this.dev.asV60
-	}
-}
-
 export class OrderBookOrderBookStatusChangedEvent {
 	private readonly dev: devEvents.OrderBookOrderBookStatusChangedEvent
 
@@ -7508,21 +7689,6 @@ export class OrderBookOrderBookStatusChangedEvent {
 		return this.dev.isV60
 	}
 	get asV60Dev(): devEvents.OrderBookOrderBookStatusChangedEvent['asV60'] {
-		return this.dev.asV60
-	}
-}
-
-export class OrderBookOrderBookUpdatedEvent {
-	private readonly dev: devEvents.OrderBookOrderBookUpdatedEvent
-
-	constructor(ctx: ChainContext, event: Event) {
-		this.dev = new devEvents.OrderBookOrderBookUpdatedEvent(ctx, event)
-	}
-
-	get isV60Dev(): devEvents.OrderBookOrderBookUpdatedEvent['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devEvents.OrderBookOrderBookUpdatedEvent['asV60'] {
 		return this.dev.asV60
 	}
 }
