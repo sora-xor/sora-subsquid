@@ -7,6 +7,15 @@ import * as v44 from './v44'
 import * as v45 from './v45'
 import * as v46 from './v46'
 import * as v48 from './v48'
+import * as v51 from './v51'
+import * as v52 from './v52'
+import * as v53 from './v53'
+import * as v54 from './v54'
+import * as v55 from './v55'
+import * as v58 from './v58'
+import * as v59 from './v59'
+import * as v60 from './v60'
+import * as v61 from './v61'
 
 export class AssetsAssetInfosStorage extends StorageBase {
     protected getPrefix() {
@@ -1186,6 +1195,38 @@ export interface BalancesAccountStorageV41 {
     getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v41.AccountData][]>
 }
 
+export class BalancesInactiveIssuanceStorage extends StorageBase {
+    protected getPrefix() {
+        return 'Balances'
+    }
+
+    protected getName() {
+        return 'InactiveIssuance'
+    }
+
+    /**
+     *  The total units of outstanding deactivated balance in the system.
+     */
+    get isV51(): boolean {
+        return this.getTypeHash() === 'f8ebe28eb30158172c0ccf672f7747c46a244f892d08ef2ebcbaadde34a26bc0'
+    }
+
+    /**
+     *  The total units of outstanding deactivated balance in the system.
+     */
+    get asV51(): BalancesInactiveIssuanceStorageV51 {
+        assert(this.isV51)
+        return this as any
+    }
+}
+
+/**
+ *  The total units of outstanding deactivated balance in the system.
+ */
+export interface BalancesInactiveIssuanceStorageV51 {
+    get(): Promise<bigint>
+}
+
 export class BalancesLocksStorage extends StorageBase {
     protected getPrefix() {
         return 'Balances'
@@ -1371,6 +1412,66 @@ export interface BalancesTotalIssuanceStorageV41 {
     get(): Promise<bigint>
 }
 
+export class BandDynamicFeeParametersStorage extends StorageBase {
+    protected getPrefix() {
+        return 'Band'
+    }
+
+    protected getName() {
+        return 'DynamicFeeParameters'
+    }
+
+    get isV59(): boolean {
+        return this.getTypeHash() === 'f2c645c74fe40b8672d790a8004247c4a6854632b56b65312583cb5baa894b59'
+    }
+
+    get asV59(): BandDynamicFeeParametersStorageV59 {
+        assert(this.isV59)
+        return this as any
+    }
+}
+
+export interface BandDynamicFeeParametersStorageV59 {
+    get(): Promise<v59.FeeCalculationParameters>
+}
+
+export class BandSymbolCheckBlockStorage extends StorageBase {
+    protected getPrefix() {
+        return 'Band'
+    }
+
+    protected getName() {
+        return 'SymbolCheckBlock'
+    }
+
+    get isV60(): boolean {
+        return this.getTypeHash() === 'a8ff51b1d52588d671233c876f9a64b48aa4e693d1fea92dcbde4d663f72a959'
+    }
+
+    get asV60(): BandSymbolCheckBlockStorageV60 {
+        assert(this.isV60)
+        return this as any
+    }
+}
+
+export interface BandSymbolCheckBlockStorageV60 {
+    get(key1: number, key2: Uint8Array): Promise<boolean>
+    getAll(): Promise<boolean[]>
+    getMany(keys: [number, Uint8Array][]): Promise<boolean[]>
+    getKeys(): Promise<[number, Uint8Array][]>
+    getKeys(key1: number): Promise<[number, Uint8Array][]>
+    getKeys(key1: number, key2: Uint8Array): Promise<[number, Uint8Array][]>
+    getKeysPaged(pageSize: number): AsyncIterable<[number, Uint8Array][]>
+    getKeysPaged(pageSize: number, key1: number): AsyncIterable<[number, Uint8Array][]>
+    getKeysPaged(pageSize: number, key1: number, key2: Uint8Array): AsyncIterable<[number, Uint8Array][]>
+    getPairs(): Promise<[k: [number, Uint8Array], v: boolean][]>
+    getPairs(key1: number): Promise<[k: [number, Uint8Array], v: boolean][]>
+    getPairs(key1: number, key2: Uint8Array): Promise<[k: [number, Uint8Array], v: boolean][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: [number, Uint8Array], v: boolean][]>
+    getPairsPaged(pageSize: number, key1: number): AsyncIterable<[k: [number, Uint8Array], v: boolean][]>
+    getPairsPaged(pageSize: number, key1: number, key2: Uint8Array): AsyncIterable<[k: [number, Uint8Array], v: boolean][]>
+}
+
 export class BandSymbolRatesStorage extends StorageBase {
     protected getPrefix() {
         return 'Band'
@@ -1395,6 +1496,24 @@ export class BandSymbolRatesStorage extends StorageBase {
 
     get asV45(): BandSymbolRatesStorageV45 {
         assert(this.isV45)
+        return this as any
+    }
+
+    get isV59(): boolean {
+        return this.getTypeHash() === '569c8d0c399c0dd805f6a3ab4bb74f85070b17a9d8a34342afd6dd034dad4bf9'
+    }
+
+    get asV59(): BandSymbolRatesStorageV59 {
+        assert(this.isV59)
+        return this as any
+    }
+
+    get isV60(): boolean {
+        return this.getTypeHash() === '1463cb9392939423c1cd0fbfd71ec390f4dc66703aca420fdc0a53769675a3b3'
+    }
+
+    get asV60(): BandSymbolRatesStorageV60 {
+        assert(this.isV60)
         return this as any
     }
 }
@@ -1425,6 +1544,34 @@ export interface BandSymbolRatesStorageV45 {
     getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: (v45.BandRate | undefined)][]>
     getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: (v45.BandRate | undefined)][]>
     getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: (v45.BandRate | undefined)][]>
+}
+
+export interface BandSymbolRatesStorageV59 {
+    get(key: Uint8Array): Promise<(v59.BandRate | undefined)>
+    getAll(): Promise<(v59.BandRate | undefined)[]>
+    getMany(keys: Uint8Array[]): Promise<(v59.BandRate | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: (v59.BandRate | undefined)][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: (v59.BandRate | undefined)][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: (v59.BandRate | undefined)][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: (v59.BandRate | undefined)][]>
+}
+
+export interface BandSymbolRatesStorageV60 {
+    get(key: Uint8Array): Promise<(v60.BandRate | undefined)>
+    getAll(): Promise<(v60.BandRate | undefined)[]>
+    getMany(keys: Uint8Array[]): Promise<(v60.BandRate | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: (v60.BandRate | undefined)][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: (v60.BandRate | undefined)][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: (v60.BandRate | undefined)][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: (v60.BandRate | undefined)][]>
 }
 
 export class BandTrustedRelayersStorage extends StorageBase {
@@ -1544,6 +1691,497 @@ export class BeefyValidatorSetIdStorage extends StorageBase {
  */
 export interface BeefyValidatorSetIdStorageV42 {
     get(): Promise<bigint>
+}
+
+export class BeefyLightClientCurrentValidatorSetStorage extends StorageBase {
+    protected getPrefix() {
+        return 'BeefyLightClient'
+    }
+
+    protected getName() {
+        return 'CurrentValidatorSet'
+    }
+
+    get isV52(): boolean {
+        return this.getTypeHash() === 'c8b1a6c37912477c80925ae870a649673d9e03afd501d50d273ae6b70040eb31'
+    }
+
+    get asV52(): BeefyLightClientCurrentValidatorSetStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+export interface BeefyLightClientCurrentValidatorSetStorageV52 {
+    get(key: v52.SubNetworkId): Promise<(v52.BeefyAuthoritySet | undefined)>
+    getAll(): Promise<v52.BeefyAuthoritySet[]>
+    getMany(keys: v52.SubNetworkId[]): Promise<(v52.BeefyAuthoritySet | undefined)[]>
+    getKeys(): Promise<v52.SubNetworkId[]>
+    getKeys(key: v52.SubNetworkId): Promise<v52.SubNetworkId[]>
+    getKeysPaged(pageSize: number): AsyncIterable<v52.SubNetworkId[]>
+    getKeysPaged(pageSize: number, key: v52.SubNetworkId): AsyncIterable<v52.SubNetworkId[]>
+    getPairs(): Promise<[k: v52.SubNetworkId, v: v52.BeefyAuthoritySet][]>
+    getPairs(key: v52.SubNetworkId): Promise<[k: v52.SubNetworkId, v: v52.BeefyAuthoritySet][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: v52.SubNetworkId, v: v52.BeefyAuthoritySet][]>
+    getPairsPaged(pageSize: number, key: v52.SubNetworkId): AsyncIterable<[k: v52.SubNetworkId, v: v52.BeefyAuthoritySet][]>
+}
+
+export class BeefyLightClientLatestBeefyBlockStorage extends StorageBase {
+    protected getPrefix() {
+        return 'BeefyLightClient'
+    }
+
+    protected getName() {
+        return 'LatestBeefyBlock'
+    }
+
+    get isV52(): boolean {
+        return this.getTypeHash() === '81557a11b27f627729a12f57f72a2d0fab91e8fef67bbddef95ee874e43d7d46'
+    }
+
+    get asV52(): BeefyLightClientLatestBeefyBlockStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+export interface BeefyLightClientLatestBeefyBlockStorageV52 {
+    get(key: v52.SubNetworkId): Promise<bigint>
+    getAll(): Promise<bigint[]>
+    getMany(keys: v52.SubNetworkId[]): Promise<bigint[]>
+    getKeys(): Promise<v52.SubNetworkId[]>
+    getKeys(key: v52.SubNetworkId): Promise<v52.SubNetworkId[]>
+    getKeysPaged(pageSize: number): AsyncIterable<v52.SubNetworkId[]>
+    getKeysPaged(pageSize: number, key: v52.SubNetworkId): AsyncIterable<v52.SubNetworkId[]>
+    getPairs(): Promise<[k: v52.SubNetworkId, v: bigint][]>
+    getPairs(key: v52.SubNetworkId): Promise<[k: v52.SubNetworkId, v: bigint][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: v52.SubNetworkId, v: bigint][]>
+    getPairsPaged(pageSize: number, key: v52.SubNetworkId): AsyncIterable<[k: v52.SubNetworkId, v: bigint][]>
+}
+
+export class BeefyLightClientLatestMMRRootsStorage extends StorageBase {
+    protected getPrefix() {
+        return 'BeefyLightClient'
+    }
+
+    protected getName() {
+        return 'LatestMMRRoots'
+    }
+
+    get isV52(): boolean {
+        return this.getTypeHash() === '76aad9b2f69624cc0ac9edade0a395aae72489d2c38a9c8a53b515fa48d04b0b'
+    }
+
+    get asV52(): BeefyLightClientLatestMMRRootsStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+export interface BeefyLightClientLatestMMRRootsStorageV52 {
+    get(key: v52.SubNetworkId): Promise<Uint8Array[]>
+    getAll(): Promise<Uint8Array[][]>
+    getMany(keys: v52.SubNetworkId[]): Promise<Uint8Array[][]>
+    getKeys(): Promise<v52.SubNetworkId[]>
+    getKeys(key: v52.SubNetworkId): Promise<v52.SubNetworkId[]>
+    getKeysPaged(pageSize: number): AsyncIterable<v52.SubNetworkId[]>
+    getKeysPaged(pageSize: number, key: v52.SubNetworkId): AsyncIterable<v52.SubNetworkId[]>
+    getPairs(): Promise<[k: v52.SubNetworkId, v: Uint8Array[]][]>
+    getPairs(key: v52.SubNetworkId): Promise<[k: v52.SubNetworkId, v: Uint8Array[]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: v52.SubNetworkId, v: Uint8Array[]][]>
+    getPairsPaged(pageSize: number, key: v52.SubNetworkId): AsyncIterable<[k: v52.SubNetworkId, v: Uint8Array[]][]>
+}
+
+export class BeefyLightClientLatestRandomSeedStorage extends StorageBase {
+    protected getPrefix() {
+        return 'BeefyLightClient'
+    }
+
+    protected getName() {
+        return 'LatestRandomSeed'
+    }
+
+    get isV52(): boolean {
+        return this.getTypeHash() === '71e0decea676f8576efdb835fd40eaa20cee34c08589ca24818aa93fc545680e'
+    }
+
+    get asV52(): BeefyLightClientLatestRandomSeedStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+export interface BeefyLightClientLatestRandomSeedStorageV52 {
+    get(key: v52.SubNetworkId): Promise<[Uint8Array, number]>
+    getAll(): Promise<[Uint8Array, number][]>
+    getMany(keys: v52.SubNetworkId[]): Promise<[Uint8Array, number][]>
+    getKeys(): Promise<v52.SubNetworkId[]>
+    getKeys(key: v52.SubNetworkId): Promise<v52.SubNetworkId[]>
+    getKeysPaged(pageSize: number): AsyncIterable<v52.SubNetworkId[]>
+    getKeysPaged(pageSize: number, key: v52.SubNetworkId): AsyncIterable<v52.SubNetworkId[]>
+    getPairs(): Promise<[k: v52.SubNetworkId, v: [Uint8Array, number]][]>
+    getPairs(key: v52.SubNetworkId): Promise<[k: v52.SubNetworkId, v: [Uint8Array, number]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: v52.SubNetworkId, v: [Uint8Array, number]][]>
+    getPairsPaged(pageSize: number, key: v52.SubNetworkId): AsyncIterable<[k: v52.SubNetworkId, v: [Uint8Array, number]][]>
+}
+
+export class BeefyLightClientNextValidatorSetStorage extends StorageBase {
+    protected getPrefix() {
+        return 'BeefyLightClient'
+    }
+
+    protected getName() {
+        return 'NextValidatorSet'
+    }
+
+    get isV52(): boolean {
+        return this.getTypeHash() === 'c8b1a6c37912477c80925ae870a649673d9e03afd501d50d273ae6b70040eb31'
+    }
+
+    get asV52(): BeefyLightClientNextValidatorSetStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+export interface BeefyLightClientNextValidatorSetStorageV52 {
+    get(key: v52.SubNetworkId): Promise<(v52.BeefyAuthoritySet | undefined)>
+    getAll(): Promise<v52.BeefyAuthoritySet[]>
+    getMany(keys: v52.SubNetworkId[]): Promise<(v52.BeefyAuthoritySet | undefined)[]>
+    getKeys(): Promise<v52.SubNetworkId[]>
+    getKeys(key: v52.SubNetworkId): Promise<v52.SubNetworkId[]>
+    getKeysPaged(pageSize: number): AsyncIterable<v52.SubNetworkId[]>
+    getKeysPaged(pageSize: number, key: v52.SubNetworkId): AsyncIterable<v52.SubNetworkId[]>
+    getPairs(): Promise<[k: v52.SubNetworkId, v: v52.BeefyAuthoritySet][]>
+    getPairs(key: v52.SubNetworkId): Promise<[k: v52.SubNetworkId, v: v52.BeefyAuthoritySet][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: v52.SubNetworkId, v: v52.BeefyAuthoritySet][]>
+    getPairsPaged(pageSize: number, key: v52.SubNetworkId): AsyncIterable<[k: v52.SubNetworkId, v: v52.BeefyAuthoritySet][]>
+}
+
+export class BeefyLightClientThisNetworkIdStorage extends StorageBase {
+    protected getPrefix() {
+        return 'BeefyLightClient'
+    }
+
+    protected getName() {
+        return 'ThisNetworkId'
+    }
+
+    get isV52(): boolean {
+        return this.getTypeHash() === 'e98f7bd664e2ea3524489905648b217400e58d4063ec1a8e53bba73266a424b2'
+    }
+
+    get asV52(): BeefyLightClientThisNetworkIdStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+export interface BeefyLightClientThisNetworkIdStorageV52 {
+    get(): Promise<v52.SubNetworkId>
+}
+
+export class BridgeDataSignerApprovalsStorage extends StorageBase {
+    protected getPrefix() {
+        return 'BridgeDataSigner'
+    }
+
+    protected getName() {
+        return 'Approvals'
+    }
+
+    /**
+     *  Approvals
+     */
+    get isV54(): boolean {
+        return this.getTypeHash() === '0018725b380dd161f91c8218f80f948a5cdba579e99333e2bc5f8ae6d5334e72'
+    }
+
+    /**
+     *  Approvals
+     */
+    get asV54(): BridgeDataSignerApprovalsStorageV54 {
+        assert(this.isV54)
+        return this as any
+    }
+}
+
+/**
+ *  Approvals
+ */
+export interface BridgeDataSignerApprovalsStorageV54 {
+    get(key1: v54.GenericNetworkId, key2: Uint8Array): Promise<[Uint8Array, Uint8Array][]>
+    getAll(): Promise<[Uint8Array, Uint8Array][][]>
+    getMany(keys: [v54.GenericNetworkId, Uint8Array][]): Promise<[Uint8Array, Uint8Array][][]>
+    getKeys(): Promise<[v54.GenericNetworkId, Uint8Array][]>
+    getKeys(key1: v54.GenericNetworkId): Promise<[v54.GenericNetworkId, Uint8Array][]>
+    getKeys(key1: v54.GenericNetworkId, key2: Uint8Array): Promise<[v54.GenericNetworkId, Uint8Array][]>
+    getKeysPaged(pageSize: number): AsyncIterable<[v54.GenericNetworkId, Uint8Array][]>
+    getKeysPaged(pageSize: number, key1: v54.GenericNetworkId): AsyncIterable<[v54.GenericNetworkId, Uint8Array][]>
+    getKeysPaged(pageSize: number, key1: v54.GenericNetworkId, key2: Uint8Array): AsyncIterable<[v54.GenericNetworkId, Uint8Array][]>
+    getPairs(): Promise<[k: [v54.GenericNetworkId, Uint8Array], v: [Uint8Array, Uint8Array][]][]>
+    getPairs(key1: v54.GenericNetworkId): Promise<[k: [v54.GenericNetworkId, Uint8Array], v: [Uint8Array, Uint8Array][]][]>
+    getPairs(key1: v54.GenericNetworkId, key2: Uint8Array): Promise<[k: [v54.GenericNetworkId, Uint8Array], v: [Uint8Array, Uint8Array][]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: [v54.GenericNetworkId, Uint8Array], v: [Uint8Array, Uint8Array][]][]>
+    getPairsPaged(pageSize: number, key1: v54.GenericNetworkId): AsyncIterable<[k: [v54.GenericNetworkId, Uint8Array], v: [Uint8Array, Uint8Array][]][]>
+    getPairsPaged(pageSize: number, key1: v54.GenericNetworkId, key2: Uint8Array): AsyncIterable<[k: [v54.GenericNetworkId, Uint8Array], v: [Uint8Array, Uint8Array][]][]>
+}
+
+export class BridgeDataSignerPeersStorage extends StorageBase {
+    protected getPrefix() {
+        return 'BridgeDataSigner'
+    }
+
+    protected getName() {
+        return 'Peers'
+    }
+
+    /**
+     *  Peers
+     */
+    get isV54(): boolean {
+        return this.getTypeHash() === 'f5f244fe3426ad4fb05bf161397f7f52ec3a5cbf4f51418cd2f5605097b2e6c4'
+    }
+
+    /**
+     *  Peers
+     */
+    get asV54(): BridgeDataSignerPeersStorageV54 {
+        assert(this.isV54)
+        return this as any
+    }
+}
+
+/**
+ *  Peers
+ */
+export interface BridgeDataSignerPeersStorageV54 {
+    get(key: v54.GenericNetworkId): Promise<(Uint8Array[] | undefined)>
+    getAll(): Promise<Uint8Array[][]>
+    getMany(keys: v54.GenericNetworkId[]): Promise<(Uint8Array[] | undefined)[]>
+    getKeys(): Promise<v54.GenericNetworkId[]>
+    getKeys(key: v54.GenericNetworkId): Promise<v54.GenericNetworkId[]>
+    getKeysPaged(pageSize: number): AsyncIterable<v54.GenericNetworkId[]>
+    getKeysPaged(pageSize: number, key: v54.GenericNetworkId): AsyncIterable<v54.GenericNetworkId[]>
+    getPairs(): Promise<[k: v54.GenericNetworkId, v: Uint8Array[]][]>
+    getPairs(key: v54.GenericNetworkId): Promise<[k: v54.GenericNetworkId, v: Uint8Array[]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: v54.GenericNetworkId, v: Uint8Array[]][]>
+    getPairsPaged(pageSize: number, key: v54.GenericNetworkId): AsyncIterable<[k: v54.GenericNetworkId, v: Uint8Array[]][]>
+}
+
+export class BridgeDataSignerPendingPeerUpdateStorage extends StorageBase {
+    protected getPrefix() {
+        return 'BridgeDataSigner'
+    }
+
+    protected getName() {
+        return 'PendingPeerUpdate'
+    }
+
+    /**
+     *  Pending peers
+     */
+    get isV54(): boolean {
+        return this.getTypeHash() === '2259adffe846960292971baa4d957900e8c68078a50aff9ad4f50897d0102227'
+    }
+
+    /**
+     *  Pending peers
+     */
+    get asV54(): BridgeDataSignerPendingPeerUpdateStorageV54 {
+        assert(this.isV54)
+        return this as any
+    }
+}
+
+/**
+ *  Pending peers
+ */
+export interface BridgeDataSignerPendingPeerUpdateStorageV54 {
+    get(key: v54.GenericNetworkId): Promise<boolean>
+    getAll(): Promise<boolean[]>
+    getMany(keys: v54.GenericNetworkId[]): Promise<boolean[]>
+    getKeys(): Promise<v54.GenericNetworkId[]>
+    getKeys(key: v54.GenericNetworkId): Promise<v54.GenericNetworkId[]>
+    getKeysPaged(pageSize: number): AsyncIterable<v54.GenericNetworkId[]>
+    getKeysPaged(pageSize: number, key: v54.GenericNetworkId): AsyncIterable<v54.GenericNetworkId[]>
+    getPairs(): Promise<[k: v54.GenericNetworkId, v: boolean][]>
+    getPairs(key: v54.GenericNetworkId): Promise<[k: v54.GenericNetworkId, v: boolean][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: v54.GenericNetworkId, v: boolean][]>
+    getPairsPaged(pageSize: number, key: v54.GenericNetworkId): AsyncIterable<[k: v54.GenericNetworkId, v: boolean][]>
+}
+
+export class BridgeInboundChannelChannelAddressesStorage extends StorageBase {
+    protected getPrefix() {
+        return 'BridgeInboundChannel'
+    }
+
+    protected getName() {
+        return 'ChannelAddresses'
+    }
+
+    /**
+     *  Source channel (OutboundChannel contract) on the ethereum side
+     */
+    get isV52(): boolean {
+        return this.getTypeHash() === '3b2b84bd882e55420f90073a16b9916f4f6fcc8bc594cbefc4727a08113e64f6'
+    }
+
+    /**
+     *  Source channel (OutboundChannel contract) on the ethereum side
+     */
+    get asV52(): BridgeInboundChannelChannelAddressesStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+/**
+ *  Source channel (OutboundChannel contract) on the ethereum side
+ */
+export interface BridgeInboundChannelChannelAddressesStorageV52 {
+    get(key: bigint): Promise<(Uint8Array | undefined)>
+    getAll(): Promise<Uint8Array[]>
+    getMany(keys: bigint[]): Promise<(Uint8Array | undefined)[]>
+    getKeys(): Promise<bigint[]>
+    getKeys(key: bigint): Promise<bigint[]>
+    getKeysPaged(pageSize: number): AsyncIterable<bigint[]>
+    getKeysPaged(pageSize: number, key: bigint): AsyncIterable<bigint[]>
+    getPairs(): Promise<[k: bigint, v: Uint8Array][]>
+    getPairs(key: bigint): Promise<[k: bigint, v: Uint8Array][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: bigint, v: Uint8Array][]>
+    getPairsPaged(pageSize: number, key: bigint): AsyncIterable<[k: bigint, v: Uint8Array][]>
+}
+
+export class BridgeInboundChannelChannelNoncesStorage extends StorageBase {
+    protected getPrefix() {
+        return 'BridgeInboundChannel'
+    }
+
+    protected getName() {
+        return 'ChannelNonces'
+    }
+
+    get isV52(): boolean {
+        return this.getTypeHash() === '534845d707414d74e73b66208cdd4214c5ba2f4ef9877a030a675597bc275623'
+    }
+
+    get asV52(): BridgeInboundChannelChannelNoncesStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+export interface BridgeInboundChannelChannelNoncesStorageV52 {
+    get(key: bigint): Promise<bigint>
+    getAll(): Promise<bigint[]>
+    getMany(keys: bigint[]): Promise<bigint[]>
+    getKeys(): Promise<bigint[]>
+    getKeys(key: bigint): Promise<bigint[]>
+    getKeysPaged(pageSize: number): AsyncIterable<bigint[]>
+    getKeysPaged(pageSize: number, key: bigint): AsyncIterable<bigint[]>
+    getPairs(): Promise<[k: bigint, v: bigint][]>
+    getPairs(key: bigint): Promise<[k: bigint, v: bigint][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: bigint, v: bigint][]>
+    getPairsPaged(pageSize: number, key: bigint): AsyncIterable<[k: bigint, v: bigint][]>
+}
+
+export class BridgeInboundChannelInboundChannelAddressesStorage extends StorageBase {
+    protected getPrefix() {
+        return 'BridgeInboundChannel'
+    }
+
+    protected getName() {
+        return 'InboundChannelAddresses'
+    }
+
+    /**
+     *  InboundChannel contract address on the ethereum side
+     */
+    get isV52(): boolean {
+        return this.getTypeHash() === '3b2b84bd882e55420f90073a16b9916f4f6fcc8bc594cbefc4727a08113e64f6'
+    }
+
+    /**
+     *  InboundChannel contract address on the ethereum side
+     */
+    get asV52(): BridgeInboundChannelInboundChannelAddressesStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+/**
+ *  InboundChannel contract address on the ethereum side
+ */
+export interface BridgeInboundChannelInboundChannelAddressesStorageV52 {
+    get(key: bigint): Promise<(Uint8Array | undefined)>
+    getAll(): Promise<Uint8Array[]>
+    getMany(keys: bigint[]): Promise<(Uint8Array | undefined)[]>
+    getKeys(): Promise<bigint[]>
+    getKeys(key: bigint): Promise<bigint[]>
+    getKeysPaged(pageSize: number): AsyncIterable<bigint[]>
+    getKeysPaged(pageSize: number, key: bigint): AsyncIterable<bigint[]>
+    getPairs(): Promise<[k: bigint, v: Uint8Array][]>
+    getPairs(key: bigint): Promise<[k: bigint, v: Uint8Array][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: bigint, v: Uint8Array][]>
+    getPairsPaged(pageSize: number, key: bigint): AsyncIterable<[k: bigint, v: Uint8Array][]>
+}
+
+export class BridgeInboundChannelInboundChannelNoncesStorage extends StorageBase {
+    protected getPrefix() {
+        return 'BridgeInboundChannel'
+    }
+
+    protected getName() {
+        return 'InboundChannelNonces'
+    }
+
+    get isV52(): boolean {
+        return this.getTypeHash() === '534845d707414d74e73b66208cdd4214c5ba2f4ef9877a030a675597bc275623'
+    }
+
+    get asV52(): BridgeInboundChannelInboundChannelNoncesStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+export interface BridgeInboundChannelInboundChannelNoncesStorageV52 {
+    get(key: bigint): Promise<bigint>
+    getAll(): Promise<bigint[]>
+    getMany(keys: bigint[]): Promise<bigint[]>
+    getKeys(): Promise<bigint[]>
+    getKeys(key: bigint): Promise<bigint[]>
+    getKeysPaged(pageSize: number): AsyncIterable<bigint[]>
+    getKeysPaged(pageSize: number, key: bigint): AsyncIterable<bigint[]>
+    getPairs(): Promise<[k: bigint, v: bigint][]>
+    getPairs(key: bigint): Promise<[k: bigint, v: bigint][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: bigint, v: bigint][]>
+    getPairsPaged(pageSize: number, key: bigint): AsyncIterable<[k: bigint, v: bigint][]>
+}
+
+export class BridgeInboundChannelRewardFractionStorage extends StorageBase {
+    protected getPrefix() {
+        return 'BridgeInboundChannel'
+    }
+
+    protected getName() {
+        return 'RewardFraction'
+    }
+
+    get isV52(): boolean {
+        return this.getTypeHash() === '81bbbe8e62451cbcc227306706c919527aa2538970bd6d67a9969dd52c257d02'
+    }
+
+    get asV52(): BridgeInboundChannelRewardFractionStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+export interface BridgeInboundChannelRewardFractionStorageV52 {
+    get(): Promise<number>
 }
 
 export class BridgeMultisigAccountsStorage extends StorageBase {
@@ -1738,6 +2376,565 @@ export interface BridgeMultisigMultisigsStorageV42 {
     getPairsPaged(pageSize: number): AsyncIterable<[k: [Uint8Array, Uint8Array], v: v42.Multisig][]>
     getPairsPaged(pageSize: number, key1: Uint8Array): AsyncIterable<[k: [Uint8Array, Uint8Array], v: v42.Multisig][]>
     getPairsPaged(pageSize: number, key1: Uint8Array, key2: Uint8Array): AsyncIterable<[k: [Uint8Array, Uint8Array], v: v42.Multisig][]>
+}
+
+export class BridgeOutboundChannelChannelNoncesStorage extends StorageBase {
+    protected getPrefix() {
+        return 'BridgeOutboundChannel'
+    }
+
+    protected getName() {
+        return 'ChannelNonces'
+    }
+
+    get isV52(): boolean {
+        return this.getTypeHash() === '534845d707414d74e73b66208cdd4214c5ba2f4ef9877a030a675597bc275623'
+    }
+
+    get asV52(): BridgeOutboundChannelChannelNoncesStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+export interface BridgeOutboundChannelChannelNoncesStorageV52 {
+    get(key: bigint): Promise<bigint>
+    getAll(): Promise<bigint[]>
+    getMany(keys: bigint[]): Promise<bigint[]>
+    getKeys(): Promise<bigint[]>
+    getKeys(key: bigint): Promise<bigint[]>
+    getKeysPaged(pageSize: number): AsyncIterable<bigint[]>
+    getKeysPaged(pageSize: number, key: bigint): AsyncIterable<bigint[]>
+    getPairs(): Promise<[k: bigint, v: bigint][]>
+    getPairs(key: bigint): Promise<[k: bigint, v: bigint][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: bigint, v: bigint][]>
+    getPairsPaged(pageSize: number, key: bigint): AsyncIterable<[k: bigint, v: bigint][]>
+}
+
+export class BridgeOutboundChannelFeeStorage extends StorageBase {
+    protected getPrefix() {
+        return 'BridgeOutboundChannel'
+    }
+
+    protected getName() {
+        return 'Fee'
+    }
+
+    get isV52(): boolean {
+        return this.getTypeHash() === 'f8ebe28eb30158172c0ccf672f7747c46a244f892d08ef2ebcbaadde34a26bc0'
+    }
+
+    get asV52(): BridgeOutboundChannelFeeStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+export interface BridgeOutboundChannelFeeStorageV52 {
+    get(): Promise<bigint>
+}
+
+export class BridgeOutboundChannelIntervalStorage extends StorageBase {
+    protected getPrefix() {
+        return 'BridgeOutboundChannel'
+    }
+
+    protected getName() {
+        return 'Interval'
+    }
+
+    /**
+     *  Interval between committing messages.
+     */
+    get isV52(): boolean {
+        return this.getTypeHash() === '81bbbe8e62451cbcc227306706c919527aa2538970bd6d67a9969dd52c257d02'
+    }
+
+    /**
+     *  Interval between committing messages.
+     */
+    get asV52(): BridgeOutboundChannelIntervalStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+/**
+ *  Interval between committing messages.
+ */
+export interface BridgeOutboundChannelIntervalStorageV52 {
+    get(): Promise<number>
+}
+
+export class BridgeOutboundChannelMessageQueuesStorage extends StorageBase {
+    protected getPrefix() {
+        return 'BridgeOutboundChannel'
+    }
+
+    protected getName() {
+        return 'MessageQueues'
+    }
+
+    /**
+     *  Messages waiting to be committed. To update the queue, use `append_message_queue` and `take_message_queue` methods
+     *  (to keep correct value in [QueuesTotalGas]).
+     */
+    get isV52(): boolean {
+        return this.getTypeHash() === 'a8cf0f0dcc1db463e820f4fc6368b6b0b2e42c337acc1fb05df9c2d54ede7953'
+    }
+
+    /**
+     *  Messages waiting to be committed. To update the queue, use `append_message_queue` and `take_message_queue` methods
+     *  (to keep correct value in [QueuesTotalGas]).
+     */
+    get asV52(): BridgeOutboundChannelMessageQueuesStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+
+    /**
+     *  Messages waiting to be committed. To update the queue, use `append_message_queue` and `take_message_queue` methods
+     *  (to keep correct value in [QueuesTotalGas]).
+     */
+    get isV55(): boolean {
+        return this.getTypeHash() === 'e8ea6721473935d7f5f9bb6c49e2f10cd97eba1ae042ba553118fa8c077721c9'
+    }
+
+    /**
+     *  Messages waiting to be committed. To update the queue, use `append_message_queue` and `take_message_queue` methods
+     *  (to keep correct value in [QueuesTotalGas]).
+     */
+    get asV55(): BridgeOutboundChannelMessageQueuesStorageV55 {
+        assert(this.isV55)
+        return this as any
+    }
+
+    /**
+     *  Messages waiting to be committed. To update the queue, use `append_message_queue` and `take_message_queue` methods
+     *  (to keep correct value in [QueuesTotalGas]).
+     */
+    get isV58(): boolean {
+        return this.getTypeHash() === 'becbc7253dd748b1e180dc34a7ee1e2b33615439bf5e1213a0e496f21e134a4d'
+    }
+
+    /**
+     *  Messages waiting to be committed. To update the queue, use `append_message_queue` and `take_message_queue` methods
+     *  (to keep correct value in [QueuesTotalGas]).
+     */
+    get asV58(): BridgeOutboundChannelMessageQueuesStorageV58 {
+        assert(this.isV58)
+        return this as any
+    }
+}
+
+/**
+ *  Messages waiting to be committed. To update the queue, use `append_message_queue` and `take_message_queue` methods
+ *  (to keep correct value in [QueuesTotalGas]).
+ */
+export interface BridgeOutboundChannelMessageQueuesStorageV52 {
+    get(key: bigint): Promise<v52.Type_815[]>
+    getAll(): Promise<v52.Type_815[][]>
+    getMany(keys: bigint[]): Promise<v52.Type_815[][]>
+    getKeys(): Promise<bigint[]>
+    getKeys(key: bigint): Promise<bigint[]>
+    getKeysPaged(pageSize: number): AsyncIterable<bigint[]>
+    getKeysPaged(pageSize: number, key: bigint): AsyncIterable<bigint[]>
+    getPairs(): Promise<[k: bigint, v: v52.Type_815[]][]>
+    getPairs(key: bigint): Promise<[k: bigint, v: v52.Type_815[]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: bigint, v: v52.Type_815[]][]>
+    getPairsPaged(pageSize: number, key: bigint): AsyncIterable<[k: bigint, v: v52.Type_815[]][]>
+}
+
+/**
+ *  Messages waiting to be committed. To update the queue, use `append_message_queue` and `take_message_queue` methods
+ *  (to keep correct value in [QueuesTotalGas]).
+ */
+export interface BridgeOutboundChannelMessageQueuesStorageV55 {
+    get(key: bigint): Promise<v55.Message[]>
+    getAll(): Promise<v55.Message[][]>
+    getMany(keys: bigint[]): Promise<v55.Message[][]>
+    getKeys(): Promise<bigint[]>
+    getKeys(key: bigint): Promise<bigint[]>
+    getKeysPaged(pageSize: number): AsyncIterable<bigint[]>
+    getKeysPaged(pageSize: number, key: bigint): AsyncIterable<bigint[]>
+    getPairs(): Promise<[k: bigint, v: v55.Message[]][]>
+    getPairs(key: bigint): Promise<[k: bigint, v: v55.Message[]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: bigint, v: v55.Message[]][]>
+    getPairsPaged(pageSize: number, key: bigint): AsyncIterable<[k: bigint, v: v55.Message[]][]>
+}
+
+/**
+ *  Messages waiting to be committed. To update the queue, use `append_message_queue` and `take_message_queue` methods
+ *  (to keep correct value in [QueuesTotalGas]).
+ */
+export interface BridgeOutboundChannelMessageQueuesStorageV58 {
+    get(key: bigint): Promise<v58.Message[]>
+    getAll(): Promise<v58.Message[][]>
+    getMany(keys: bigint[]): Promise<v58.Message[][]>
+    getKeys(): Promise<bigint[]>
+    getKeys(key: bigint): Promise<bigint[]>
+    getKeysPaged(pageSize: number): AsyncIterable<bigint[]>
+    getKeysPaged(pageSize: number, key: bigint): AsyncIterable<bigint[]>
+    getPairs(): Promise<[k: bigint, v: v58.Message[]][]>
+    getPairs(key: bigint): Promise<[k: bigint, v: v58.Message[]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: bigint, v: v58.Message[]][]>
+    getPairsPaged(pageSize: number, key: bigint): AsyncIterable<[k: bigint, v: v58.Message[]][]>
+}
+
+export class BridgeOutboundChannelQueuesTotalGasStorage extends StorageBase {
+    protected getPrefix() {
+        return 'BridgeOutboundChannel'
+    }
+
+    protected getName() {
+        return 'QueuesTotalGas'
+    }
+
+    /**
+     *  Total gas for each queue. Updated by mutating the queues with methods `append_message_queue` and `take_message_queue`.
+     */
+    get isV52(): boolean {
+        return this.getTypeHash() === '562642e80114763badea02d1e1f1ca3ec06ced33d0cb004f035c6617dcb1cbfc'
+    }
+
+    /**
+     *  Total gas for each queue. Updated by mutating the queues with methods `append_message_queue` and `take_message_queue`.
+     */
+    get asV52(): BridgeOutboundChannelQueuesTotalGasStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+/**
+ *  Total gas for each queue. Updated by mutating the queues with methods `append_message_queue` and `take_message_queue`.
+ */
+export interface BridgeOutboundChannelQueuesTotalGasStorageV52 {
+    get(key: bigint): Promise<bigint>
+    getAll(): Promise<bigint[]>
+    getMany(keys: bigint[]): Promise<bigint[]>
+    getKeys(): Promise<bigint[]>
+    getKeys(key: bigint): Promise<bigint[]>
+    getKeysPaged(pageSize: number): AsyncIterable<bigint[]>
+    getKeysPaged(pageSize: number, key: bigint): AsyncIterable<bigint[]>
+    getPairs(): Promise<[k: bigint, v: bigint][]>
+    getPairs(key: bigint): Promise<[k: bigint, v: bigint][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: bigint, v: bigint][]>
+    getPairsPaged(pageSize: number, key: bigint): AsyncIterable<[k: bigint, v: bigint][]>
+}
+
+export class BridgeProxyConsumedTransferLimitStorage extends StorageBase {
+    protected getPrefix() {
+        return 'BridgeProxy'
+    }
+
+    protected getName() {
+        return 'ConsumedTransferLimit'
+    }
+
+    /**
+     *  Consumed transfer limit.
+     */
+    get isV61(): boolean {
+        return this.getTypeHash() === 'f8ebe28eb30158172c0ccf672f7747c46a244f892d08ef2ebcbaadde34a26bc0'
+    }
+
+    /**
+     *  Consumed transfer limit.
+     */
+    get asV61(): BridgeProxyConsumedTransferLimitStorageV61 {
+        assert(this.isV61)
+        return this as any
+    }
+}
+
+/**
+ *  Consumed transfer limit.
+ */
+export interface BridgeProxyConsumedTransferLimitStorageV61 {
+    get(): Promise<bigint>
+}
+
+export class BridgeProxyLimitedAssetsStorage extends StorageBase {
+    protected getPrefix() {
+        return 'BridgeProxy'
+    }
+
+    protected getName() {
+        return 'LimitedAssets'
+    }
+
+    /**
+     *  Assets with transfer limitation.
+     */
+    get isV61(): boolean {
+        return this.getTypeHash() === 'c174344dfddcf1721ee1639e2dd3674a34e0feb5b0b7408e99c10363afb45d50'
+    }
+
+    /**
+     *  Assets with transfer limitation.
+     */
+    get asV61(): BridgeProxyLimitedAssetsStorageV61 {
+        assert(this.isV61)
+        return this as any
+    }
+}
+
+/**
+ *  Assets with transfer limitation.
+ */
+export interface BridgeProxyLimitedAssetsStorageV61 {
+    get(key: v61.AssetId32): Promise<boolean>
+    getAll(): Promise<boolean[]>
+    getMany(keys: v61.AssetId32[]): Promise<boolean[]>
+    getKeys(): Promise<v61.AssetId32[]>
+    getKeys(key: v61.AssetId32): Promise<v61.AssetId32[]>
+    getKeysPaged(pageSize: number): AsyncIterable<v61.AssetId32[]>
+    getKeysPaged(pageSize: number, key: v61.AssetId32): AsyncIterable<v61.AssetId32[]>
+    getPairs(): Promise<[k: v61.AssetId32, v: boolean][]>
+    getPairs(key: v61.AssetId32): Promise<[k: v61.AssetId32, v: boolean][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: v61.AssetId32, v: boolean][]>
+    getPairsPaged(pageSize: number, key: v61.AssetId32): AsyncIterable<[k: v61.AssetId32, v: boolean][]>
+}
+
+export class BridgeProxyLockedAssetsStorage extends StorageBase {
+    protected getPrefix() {
+        return 'BridgeProxy'
+    }
+
+    protected getName() {
+        return 'LockedAssets'
+    }
+
+    /**
+     *  Amount of assets locked by bridge for specific network. Map ((Network ID, Asset ID) => Locked amount).
+     */
+    get isV58(): boolean {
+        return this.getTypeHash() === '72028d2a273ff5bf4de7b2dc6214e6136859bf8e40d4fcf347ddccc0c260386f'
+    }
+
+    /**
+     *  Amount of assets locked by bridge for specific network. Map ((Network ID, Asset ID) => Locked amount).
+     */
+    get asV58(): BridgeProxyLockedAssetsStorageV58 {
+        assert(this.isV58)
+        return this as any
+    }
+}
+
+/**
+ *  Amount of assets locked by bridge for specific network. Map ((Network ID, Asset ID) => Locked amount).
+ */
+export interface BridgeProxyLockedAssetsStorageV58 {
+    get(key1: v58.GenericNetworkId, key2: v58.AssetId32): Promise<bigint>
+    getAll(): Promise<bigint[]>
+    getMany(keys: [v58.GenericNetworkId, v58.AssetId32][]): Promise<bigint[]>
+    getKeys(): Promise<[v58.GenericNetworkId, v58.AssetId32][]>
+    getKeys(key1: v58.GenericNetworkId): Promise<[v58.GenericNetworkId, v58.AssetId32][]>
+    getKeys(key1: v58.GenericNetworkId, key2: v58.AssetId32): Promise<[v58.GenericNetworkId, v58.AssetId32][]>
+    getKeysPaged(pageSize: number): AsyncIterable<[v58.GenericNetworkId, v58.AssetId32][]>
+    getKeysPaged(pageSize: number, key1: v58.GenericNetworkId): AsyncIterable<[v58.GenericNetworkId, v58.AssetId32][]>
+    getKeysPaged(pageSize: number, key1: v58.GenericNetworkId, key2: v58.AssetId32): AsyncIterable<[v58.GenericNetworkId, v58.AssetId32][]>
+    getPairs(): Promise<[k: [v58.GenericNetworkId, v58.AssetId32], v: bigint][]>
+    getPairs(key1: v58.GenericNetworkId): Promise<[k: [v58.GenericNetworkId, v58.AssetId32], v: bigint][]>
+    getPairs(key1: v58.GenericNetworkId, key2: v58.AssetId32): Promise<[k: [v58.GenericNetworkId, v58.AssetId32], v: bigint][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: [v58.GenericNetworkId, v58.AssetId32], v: bigint][]>
+    getPairsPaged(pageSize: number, key1: v58.GenericNetworkId): AsyncIterable<[k: [v58.GenericNetworkId, v58.AssetId32], v: bigint][]>
+    getPairsPaged(pageSize: number, key1: v58.GenericNetworkId, key2: v58.AssetId32): AsyncIterable<[k: [v58.GenericNetworkId, v58.AssetId32], v: bigint][]>
+}
+
+export class BridgeProxySendersStorage extends StorageBase {
+    protected getPrefix() {
+        return 'BridgeProxy'
+    }
+
+    protected getName() {
+        return 'Senders'
+    }
+
+    get isV54(): boolean {
+        return this.getTypeHash() === 'c009c4f18cbf05b12a1f843bbfda19189457fea80027cf7b19a8798618cbce2e'
+    }
+
+    get asV54(): BridgeProxySendersStorageV54 {
+        assert(this.isV54)
+        return this as any
+    }
+}
+
+export interface BridgeProxySendersStorageV54 {
+    get(key1: v54.GenericNetworkId, key2: Uint8Array): Promise<(Uint8Array | undefined)>
+    getAll(): Promise<Uint8Array[]>
+    getMany(keys: [v54.GenericNetworkId, Uint8Array][]): Promise<(Uint8Array | undefined)[]>
+    getKeys(): Promise<[v54.GenericNetworkId, Uint8Array][]>
+    getKeys(key1: v54.GenericNetworkId): Promise<[v54.GenericNetworkId, Uint8Array][]>
+    getKeys(key1: v54.GenericNetworkId, key2: Uint8Array): Promise<[v54.GenericNetworkId, Uint8Array][]>
+    getKeysPaged(pageSize: number): AsyncIterable<[v54.GenericNetworkId, Uint8Array][]>
+    getKeysPaged(pageSize: number, key1: v54.GenericNetworkId): AsyncIterable<[v54.GenericNetworkId, Uint8Array][]>
+    getKeysPaged(pageSize: number, key1: v54.GenericNetworkId, key2: Uint8Array): AsyncIterable<[v54.GenericNetworkId, Uint8Array][]>
+    getPairs(): Promise<[k: [v54.GenericNetworkId, Uint8Array], v: Uint8Array][]>
+    getPairs(key1: v54.GenericNetworkId): Promise<[k: [v54.GenericNetworkId, Uint8Array], v: Uint8Array][]>
+    getPairs(key1: v54.GenericNetworkId, key2: Uint8Array): Promise<[k: [v54.GenericNetworkId, Uint8Array], v: Uint8Array][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: [v54.GenericNetworkId, Uint8Array], v: Uint8Array][]>
+    getPairsPaged(pageSize: number, key1: v54.GenericNetworkId): AsyncIterable<[k: [v54.GenericNetworkId, Uint8Array], v: Uint8Array][]>
+    getPairsPaged(pageSize: number, key1: v54.GenericNetworkId, key2: Uint8Array): AsyncIterable<[k: [v54.GenericNetworkId, Uint8Array], v: Uint8Array][]>
+}
+
+export class BridgeProxySidechainFeePaidStorage extends StorageBase {
+    protected getPrefix() {
+        return 'BridgeProxy'
+    }
+
+    protected getName() {
+        return 'SidechainFeePaid'
+    }
+
+    /**
+     *  Fee paid for relayed tx on sidechain. Map ((Network ID, Address) => Cumulative Fee Paid).
+     */
+    get isV55(): boolean {
+        return this.getTypeHash() === '18105a375da97c8d25485c70df3cd51a33320e2a6ba4fc63196540378cd0d239'
+    }
+
+    /**
+     *  Fee paid for relayed tx on sidechain. Map ((Network ID, Address) => Cumulative Fee Paid).
+     */
+    get asV55(): BridgeProxySidechainFeePaidStorageV55 {
+        assert(this.isV55)
+        return this as any
+    }
+}
+
+/**
+ *  Fee paid for relayed tx on sidechain. Map ((Network ID, Address) => Cumulative Fee Paid).
+ */
+export interface BridgeProxySidechainFeePaidStorageV55 {
+    get(key1: v55.GenericNetworkId, key2: Uint8Array): Promise<(bigint | undefined)>
+    getAll(): Promise<bigint[]>
+    getMany(keys: [v55.GenericNetworkId, Uint8Array][]): Promise<(bigint | undefined)[]>
+    getKeys(): Promise<[v55.GenericNetworkId, Uint8Array][]>
+    getKeys(key1: v55.GenericNetworkId): Promise<[v55.GenericNetworkId, Uint8Array][]>
+    getKeys(key1: v55.GenericNetworkId, key2: Uint8Array): Promise<[v55.GenericNetworkId, Uint8Array][]>
+    getKeysPaged(pageSize: number): AsyncIterable<[v55.GenericNetworkId, Uint8Array][]>
+    getKeysPaged(pageSize: number, key1: v55.GenericNetworkId): AsyncIterable<[v55.GenericNetworkId, Uint8Array][]>
+    getKeysPaged(pageSize: number, key1: v55.GenericNetworkId, key2: Uint8Array): AsyncIterable<[v55.GenericNetworkId, Uint8Array][]>
+    getPairs(): Promise<[k: [v55.GenericNetworkId, Uint8Array], v: bigint][]>
+    getPairs(key1: v55.GenericNetworkId): Promise<[k: [v55.GenericNetworkId, Uint8Array], v: bigint][]>
+    getPairs(key1: v55.GenericNetworkId, key2: Uint8Array): Promise<[k: [v55.GenericNetworkId, Uint8Array], v: bigint][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: [v55.GenericNetworkId, Uint8Array], v: bigint][]>
+    getPairsPaged(pageSize: number, key1: v55.GenericNetworkId): AsyncIterable<[k: [v55.GenericNetworkId, Uint8Array], v: bigint][]>
+    getPairsPaged(pageSize: number, key1: v55.GenericNetworkId, key2: Uint8Array): AsyncIterable<[k: [v55.GenericNetworkId, Uint8Array], v: bigint][]>
+}
+
+export class BridgeProxyTransactionsStorage extends StorageBase {
+    protected getPrefix() {
+        return 'BridgeProxy'
+    }
+
+    protected getName() {
+        return 'Transactions'
+    }
+
+    get isV54(): boolean {
+        return this.getTypeHash() === '529c3a4707b15a768a1be2b7f8c99840e4aabfe3e516de73c085d8329a9ad46d'
+    }
+
+    get asV54(): BridgeProxyTransactionsStorageV54 {
+        assert(this.isV54)
+        return this as any
+    }
+}
+
+export interface BridgeProxyTransactionsStorageV54 {
+    get(key1: [v54.GenericNetworkId, Uint8Array], key2: Uint8Array): Promise<(v54.BridgeRequest | undefined)>
+    getAll(): Promise<v54.BridgeRequest[]>
+    getMany(keys: [[v54.GenericNetworkId, Uint8Array], Uint8Array][]): Promise<(v54.BridgeRequest | undefined)[]>
+    getKeys(): Promise<[[v54.GenericNetworkId, Uint8Array], Uint8Array][]>
+    getKeys(key1: [v54.GenericNetworkId, Uint8Array]): Promise<[[v54.GenericNetworkId, Uint8Array], Uint8Array][]>
+    getKeys(key1: [v54.GenericNetworkId, Uint8Array], key2: Uint8Array): Promise<[[v54.GenericNetworkId, Uint8Array], Uint8Array][]>
+    getKeysPaged(pageSize: number): AsyncIterable<[[v54.GenericNetworkId, Uint8Array], Uint8Array][]>
+    getKeysPaged(pageSize: number, key1: [v54.GenericNetworkId, Uint8Array]): AsyncIterable<[[v54.GenericNetworkId, Uint8Array], Uint8Array][]>
+    getKeysPaged(pageSize: number, key1: [v54.GenericNetworkId, Uint8Array], key2: Uint8Array): AsyncIterable<[[v54.GenericNetworkId, Uint8Array], Uint8Array][]>
+    getPairs(): Promise<[k: [[v54.GenericNetworkId, Uint8Array], Uint8Array], v: v54.BridgeRequest][]>
+    getPairs(key1: [v54.GenericNetworkId, Uint8Array]): Promise<[k: [[v54.GenericNetworkId, Uint8Array], Uint8Array], v: v54.BridgeRequest][]>
+    getPairs(key1: [v54.GenericNetworkId, Uint8Array], key2: Uint8Array): Promise<[k: [[v54.GenericNetworkId, Uint8Array], Uint8Array], v: v54.BridgeRequest][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: [[v54.GenericNetworkId, Uint8Array], Uint8Array], v: v54.BridgeRequest][]>
+    getPairsPaged(pageSize: number, key1: [v54.GenericNetworkId, Uint8Array]): AsyncIterable<[k: [[v54.GenericNetworkId, Uint8Array], Uint8Array], v: v54.BridgeRequest][]>
+    getPairsPaged(pageSize: number, key1: [v54.GenericNetworkId, Uint8Array], key2: Uint8Array): AsyncIterable<[k: [[v54.GenericNetworkId, Uint8Array], Uint8Array], v: v54.BridgeRequest][]>
+}
+
+export class BridgeProxyTransferLimitStorage extends StorageBase {
+    protected getPrefix() {
+        return 'BridgeProxy'
+    }
+
+    protected getName() {
+        return 'TransferLimit'
+    }
+
+    /**
+     *  Maximum amount of assets that can be withdrawn during period of time.
+     */
+    get isV61(): boolean {
+        return this.getTypeHash() === '528249b1b19c80ce4829cb789f6272e9b2eac8a898ffda956ff359869f83a090'
+    }
+
+    /**
+     *  Maximum amount of assets that can be withdrawn during period of time.
+     */
+    get asV61(): BridgeProxyTransferLimitStorageV61 {
+        assert(this.isV61)
+        return this as any
+    }
+}
+
+/**
+ *  Maximum amount of assets that can be withdrawn during period of time.
+ */
+export interface BridgeProxyTransferLimitStorageV61 {
+    get(): Promise<v61.TransferLimitSettings>
+}
+
+export class BridgeProxyTransferLimitUnlockScheduleStorage extends StorageBase {
+    protected getPrefix() {
+        return 'BridgeProxy'
+    }
+
+    protected getName() {
+        return 'TransferLimitUnlockSchedule'
+    }
+
+    /**
+     *  Schedule for consumed transfer limit reduce.
+     */
+    get isV61(): boolean {
+        return this.getTypeHash() === 'd4b0e776f9f1d19233fe32cd062ab41a912af3d15ceb9d02d9ebc8fbe7b1cda4'
+    }
+
+    /**
+     *  Schedule for consumed transfer limit reduce.
+     */
+    get asV61(): BridgeProxyTransferLimitUnlockScheduleStorageV61 {
+        assert(this.isV61)
+        return this as any
+    }
+}
+
+/**
+ *  Schedule for consumed transfer limit reduce.
+ */
+export interface BridgeProxyTransferLimitUnlockScheduleStorageV61 {
+    get(key: number): Promise<bigint>
+    getAll(): Promise<bigint[]>
+    getMany(keys: number[]): Promise<bigint[]>
+    getKeys(): Promise<number[]>
+    getKeys(key: number): Promise<number[]>
+    getKeysPaged(pageSize: number): AsyncIterable<number[]>
+    getKeysPaged(pageSize: number, key: number): AsyncIterable<number[]>
+    getPairs(): Promise<[k: number, v: bigint][]>
+    getPairs(key: number): Promise<[k: number, v: bigint][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: number, v: bigint][]>
+    getPairsPaged(pageSize: number, key: number): AsyncIterable<[k: number, v: bigint][]>
 }
 
 export class CeresGovernancePlatformPalletStorageVersionStorage extends StorageBase {
@@ -2998,6 +4195,141 @@ export class CouncilProposalOfStorage extends StorageBase {
         assert(this.isV48)
         return this as any
     }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get isV51(): boolean {
+        return this.getTypeHash() === 'a4b626546d4d0d1112d203fa7a2365854a59e2028eb14d6259b7546fb20ae9b4'
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get asV51(): CouncilProposalOfStorageV51 {
+        assert(this.isV51)
+        return this as any
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get isV52(): boolean {
+        return this.getTypeHash() === '6585fd47bb5dbcb69a14fb75e8522bfd33b45e480e63ce4cca4c0e26268cfc97'
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get asV52(): CouncilProposalOfStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get isV53(): boolean {
+        return this.getTypeHash() === 'e9fee133103f48e362be1673a1f1e6befcacdc21728be32bdb9f1056cf69a8c3'
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get asV53(): CouncilProposalOfStorageV53 {
+        assert(this.isV53)
+        return this as any
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get isV54(): boolean {
+        return this.getTypeHash() === 'e83fa34aee882b3a7a34aaf36d12956639d73687b11a52fc2d2df76269c72b34'
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get asV54(): CouncilProposalOfStorageV54 {
+        assert(this.isV54)
+        return this as any
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get isV55(): boolean {
+        return this.getTypeHash() === 'ae76bb548bb8894c0b01933dc399eb347fb7037bcaea41abce58c945053e3e7a'
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get asV55(): CouncilProposalOfStorageV55 {
+        assert(this.isV55)
+        return this as any
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get isV58(): boolean {
+        return this.getTypeHash() === 'c6c9c9c485bb5c023c6334c8835593788947093efd662b2389d8aae0911fec55'
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get asV58(): CouncilProposalOfStorageV58 {
+        assert(this.isV58)
+        return this as any
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get isV59(): boolean {
+        return this.getTypeHash() === '064292047c328a72a074ffd63a1098280eb0d4101ded37a1f7d52aea2e259abd'
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get asV59(): CouncilProposalOfStorageV59 {
+        assert(this.isV59)
+        return this as any
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get isV60(): boolean {
+        return this.getTypeHash() === '24ccc6bad5e9f5ee926b0bccf8d73b7ebf18a466e356c17d0a2ca03b53be627f'
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get asV60(): CouncilProposalOfStorageV60 {
+        assert(this.isV60)
+        return this as any
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get isV61(): boolean {
+        return this.getTypeHash() === 'df61816865d9330415d02528eee6a7e6fd3980a5d00993a32ff0e6fddaefe46e'
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get asV61(): CouncilProposalOfStorageV61 {
+        assert(this.isV61)
+        return this as any
+    }
 }
 
 /**
@@ -3100,6 +4432,159 @@ export interface CouncilProposalOfStorageV48 {
     getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v48.Call][]>
     getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v48.Call][]>
     getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v48.Call][]>
+}
+
+/**
+ *  Actual proposal for a given hash, if it's current.
+ */
+export interface CouncilProposalOfStorageV51 {
+    get(key: Uint8Array): Promise<(v51.Call | undefined)>
+    getAll(): Promise<v51.Call[]>
+    getMany(keys: Uint8Array[]): Promise<(v51.Call | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v51.Call][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v51.Call][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v51.Call][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v51.Call][]>
+}
+
+/**
+ *  Actual proposal for a given hash, if it's current.
+ */
+export interface CouncilProposalOfStorageV52 {
+    get(key: Uint8Array): Promise<(v52.Call | undefined)>
+    getAll(): Promise<v52.Call[]>
+    getMany(keys: Uint8Array[]): Promise<(v52.Call | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v52.Call][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v52.Call][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v52.Call][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v52.Call][]>
+}
+
+/**
+ *  Actual proposal for a given hash, if it's current.
+ */
+export interface CouncilProposalOfStorageV53 {
+    get(key: Uint8Array): Promise<(v53.Call | undefined)>
+    getAll(): Promise<v53.Call[]>
+    getMany(keys: Uint8Array[]): Promise<(v53.Call | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v53.Call][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v53.Call][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v53.Call][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v53.Call][]>
+}
+
+/**
+ *  Actual proposal for a given hash, if it's current.
+ */
+export interface CouncilProposalOfStorageV54 {
+    get(key: Uint8Array): Promise<(v54.Call | undefined)>
+    getAll(): Promise<v54.Call[]>
+    getMany(keys: Uint8Array[]): Promise<(v54.Call | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v54.Call][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v54.Call][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v54.Call][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v54.Call][]>
+}
+
+/**
+ *  Actual proposal for a given hash, if it's current.
+ */
+export interface CouncilProposalOfStorageV55 {
+    get(key: Uint8Array): Promise<(v55.Call | undefined)>
+    getAll(): Promise<v55.Call[]>
+    getMany(keys: Uint8Array[]): Promise<(v55.Call | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v55.Call][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v55.Call][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v55.Call][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v55.Call][]>
+}
+
+/**
+ *  Actual proposal for a given hash, if it's current.
+ */
+export interface CouncilProposalOfStorageV58 {
+    get(key: Uint8Array): Promise<(v58.Call | undefined)>
+    getAll(): Promise<v58.Call[]>
+    getMany(keys: Uint8Array[]): Promise<(v58.Call | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v58.Call][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v58.Call][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v58.Call][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v58.Call][]>
+}
+
+/**
+ *  Actual proposal for a given hash, if it's current.
+ */
+export interface CouncilProposalOfStorageV59 {
+    get(key: Uint8Array): Promise<(v59.Call | undefined)>
+    getAll(): Promise<v59.Call[]>
+    getMany(keys: Uint8Array[]): Promise<(v59.Call | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v59.Call][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v59.Call][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v59.Call][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v59.Call][]>
+}
+
+/**
+ *  Actual proposal for a given hash, if it's current.
+ */
+export interface CouncilProposalOfStorageV60 {
+    get(key: Uint8Array): Promise<(v60.Call | undefined)>
+    getAll(): Promise<v60.Call[]>
+    getMany(keys: Uint8Array[]): Promise<(v60.Call | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v60.Call][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v60.Call][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v60.Call][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v60.Call][]>
+}
+
+/**
+ *  Actual proposal for a given hash, if it's current.
+ */
+export interface CouncilProposalOfStorageV61 {
+    get(key: Uint8Array): Promise<(v61.Call | undefined)>
+    getAll(): Promise<v61.Call[]>
+    getMany(keys: Uint8Array[]): Promise<(v61.Call | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v61.Call][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v61.Call][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v61.Call][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v61.Call][]>
 }
 
 export class CouncilProposalsStorage extends StorageBase {
@@ -3889,6 +5374,27 @@ export class DemocracyNextExternalStorage extends StorageBase {
         assert(this.isV41)
         return this as any
     }
+
+    /**
+     *  The referendum to be tabled whenever it would be valid to table an external proposal.
+     *  This happens when a referendum needs to be tabled and one of two conditions are met:
+     *  - `LastTabledWasExternal` is `false`; or
+     *  - `PublicProps` is empty.
+     */
+    get isV51(): boolean {
+        return this.getTypeHash() === '5ae273b3f6176aae8ebabb6d92e749499c9e5de5bc8e85ade788f86e508314ea'
+    }
+
+    /**
+     *  The referendum to be tabled whenever it would be valid to table an external proposal.
+     *  This happens when a referendum needs to be tabled and one of two conditions are met:
+     *  - `LastTabledWasExternal` is `false`; or
+     *  - `PublicProps` is empty.
+     */
+    get asV51(): DemocracyNextExternalStorageV51 {
+        assert(this.isV51)
+        return this as any
+    }
 }
 
 /**
@@ -3899,6 +5405,16 @@ export class DemocracyNextExternalStorage extends StorageBase {
  */
 export interface DemocracyNextExternalStorageV41 {
     get(): Promise<([Uint8Array, v41.VoteThreshold] | undefined)>
+}
+
+/**
+ *  The referendum to be tabled whenever it would be valid to table an external proposal.
+ *  This happens when a referendum needs to be tabled and one of two conditions are met:
+ *  - `LastTabledWasExternal` is `false`; or
+ *  - `PublicProps` is empty.
+ */
+export interface DemocracyNextExternalStorageV51 {
+    get(): Promise<([v51.Bounded, v51.VoteThreshold] | undefined)>
 }
 
 export class DemocracyPreimagesStorage extends StorageBase {
@@ -4036,6 +5552,21 @@ export class DemocracyPublicPropsStorage extends StorageBase {
         assert(this.isV41)
         return this as any
     }
+
+    /**
+     *  The public proposals. Unsorted. The second item is the proposal.
+     */
+    get isV51(): boolean {
+        return this.getTypeHash() === '3472d1c9441381a2b9709395dfc47ee60b049d41fbd71ce557eb1a61ef656bec'
+    }
+
+    /**
+     *  The public proposals. Unsorted. The second item is the proposal.
+     */
+    get asV51(): DemocracyPublicPropsStorageV51 {
+        assert(this.isV51)
+        return this as any
+    }
 }
 
 /**
@@ -4043,6 +5574,13 @@ export class DemocracyPublicPropsStorage extends StorageBase {
  */
 export interface DemocracyPublicPropsStorageV41 {
     get(): Promise<[number, Uint8Array, Uint8Array][]>
+}
+
+/**
+ *  The public proposals. Unsorted. The second item is the proposal.
+ */
+export interface DemocracyPublicPropsStorageV51 {
+    get(): Promise<[number, v51.Bounded, Uint8Array][]>
 }
 
 export class DemocracyReferendumCountStorage extends StorageBase {
@@ -4123,6 +5661,25 @@ export class DemocracyReferendumInfoOfStorage extends StorageBase {
         assert(this.isV42)
         return this as any
     }
+
+    /**
+     *  Information concerning any given referendum.
+     * 
+     *  TWOX-NOTE: SAFE as indexes are not under an attacker’s control.
+     */
+    get isV51(): boolean {
+        return this.getTypeHash() === 'ba926738202889ee118b1f40d70a1edbd71f0893c703c708a73330af6ca468e1'
+    }
+
+    /**
+     *  Information concerning any given referendum.
+     * 
+     *  TWOX-NOTE: SAFE as indexes are not under an attacker’s control.
+     */
+    get asV51(): DemocracyReferendumInfoOfStorageV51 {
+        assert(this.isV51)
+        return this as any
+    }
 }
 
 /**
@@ -4161,6 +5718,25 @@ export interface DemocracyReferendumInfoOfStorageV42 {
     getPairs(key: number): Promise<[k: number, v: v42.ReferendumInfo][]>
     getPairsPaged(pageSize: number): AsyncIterable<[k: number, v: v42.ReferendumInfo][]>
     getPairsPaged(pageSize: number, key: number): AsyncIterable<[k: number, v: v42.ReferendumInfo][]>
+}
+
+/**
+ *  Information concerning any given referendum.
+ * 
+ *  TWOX-NOTE: SAFE as indexes are not under an attacker’s control.
+ */
+export interface DemocracyReferendumInfoOfStorageV51 {
+    get(key: number): Promise<(v51.ReferendumInfo | undefined)>
+    getAll(): Promise<v51.ReferendumInfo[]>
+    getMany(keys: number[]): Promise<(v51.ReferendumInfo | undefined)[]>
+    getKeys(): Promise<number[]>
+    getKeys(key: number): Promise<number[]>
+    getKeysPaged(pageSize: number): AsyncIterable<number[]>
+    getKeysPaged(pageSize: number, key: number): AsyncIterable<number[]>
+    getPairs(): Promise<[k: number, v: v51.ReferendumInfo][]>
+    getPairs(key: number): Promise<[k: number, v: v51.ReferendumInfo][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: number, v: v51.ReferendumInfo][]>
+    getPairsPaged(pageSize: number, key: number): AsyncIterable<[k: number, v: v51.ReferendumInfo][]>
 }
 
 export class DemocracyStorageVersionStorage extends StorageBase {
@@ -4319,6 +5895,191 @@ export interface DemocracyVotingOfStorageV42 {
     getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v42.Voting][]>
     getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v42.Voting][]>
     getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v42.Voting][]>
+}
+
+export class ERC20AppAppAddressesStorage extends StorageBase {
+    protected getPrefix() {
+        return 'ERC20App'
+    }
+
+    protected getName() {
+        return 'AppAddresses'
+    }
+
+    get isV52(): boolean {
+        return this.getTypeHash() === '94b675ea41072b9359087e5adccacf527ed4a9ed9a99f11dba5e13ac035ddf1d'
+    }
+
+    get asV52(): ERC20AppAppAddressesStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+export interface ERC20AppAppAddressesStorageV52 {
+    get(key1: bigint, key2: v52.Type_572): Promise<(Uint8Array | undefined)>
+    getAll(): Promise<Uint8Array[]>
+    getMany(keys: [bigint, v52.Type_572][]): Promise<(Uint8Array | undefined)[]>
+    getKeys(): Promise<[bigint, v52.Type_572][]>
+    getKeys(key1: bigint): Promise<[bigint, v52.Type_572][]>
+    getKeys(key1: bigint, key2: v52.Type_572): Promise<[bigint, v52.Type_572][]>
+    getKeysPaged(pageSize: number): AsyncIterable<[bigint, v52.Type_572][]>
+    getKeysPaged(pageSize: number, key1: bigint): AsyncIterable<[bigint, v52.Type_572][]>
+    getKeysPaged(pageSize: number, key1: bigint, key2: v52.Type_572): AsyncIterable<[bigint, v52.Type_572][]>
+    getPairs(): Promise<[k: [bigint, v52.Type_572], v: Uint8Array][]>
+    getPairs(key1: bigint): Promise<[k: [bigint, v52.Type_572], v: Uint8Array][]>
+    getPairs(key1: bigint, key2: v52.Type_572): Promise<[k: [bigint, v52.Type_572], v: Uint8Array][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: [bigint, v52.Type_572], v: Uint8Array][]>
+    getPairsPaged(pageSize: number, key1: bigint): AsyncIterable<[k: [bigint, v52.Type_572], v: Uint8Array][]>
+    getPairsPaged(pageSize: number, key1: bigint, key2: v52.Type_572): AsyncIterable<[k: [bigint, v52.Type_572], v: Uint8Array][]>
+}
+
+export class ERC20AppAssetKindsStorage extends StorageBase {
+    protected getPrefix() {
+        return 'ERC20App'
+    }
+
+    protected getName() {
+        return 'AssetKinds'
+    }
+
+    get isV52(): boolean {
+        return this.getTypeHash() === '4653381b9f9b80b4e96c703f717cbad4e2b31422802d799e5521d5229ef6b117'
+    }
+
+    get asV52(): ERC20AppAssetKindsStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+export interface ERC20AppAssetKindsStorageV52 {
+    get(key1: bigint, key2: v52.AssetId32): Promise<(v52.Type_572 | undefined)>
+    getAll(): Promise<v52.Type_572[]>
+    getMany(keys: [bigint, v52.AssetId32][]): Promise<(v52.Type_572 | undefined)[]>
+    getKeys(): Promise<[bigint, v52.AssetId32][]>
+    getKeys(key1: bigint): Promise<[bigint, v52.AssetId32][]>
+    getKeys(key1: bigint, key2: v52.AssetId32): Promise<[bigint, v52.AssetId32][]>
+    getKeysPaged(pageSize: number): AsyncIterable<[bigint, v52.AssetId32][]>
+    getKeysPaged(pageSize: number, key1: bigint): AsyncIterable<[bigint, v52.AssetId32][]>
+    getKeysPaged(pageSize: number, key1: bigint, key2: v52.AssetId32): AsyncIterable<[bigint, v52.AssetId32][]>
+    getPairs(): Promise<[k: [bigint, v52.AssetId32], v: v52.Type_572][]>
+    getPairs(key1: bigint): Promise<[k: [bigint, v52.AssetId32], v: v52.Type_572][]>
+    getPairs(key1: bigint, key2: v52.AssetId32): Promise<[k: [bigint, v52.AssetId32], v: v52.Type_572][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: [bigint, v52.AssetId32], v: v52.Type_572][]>
+    getPairsPaged(pageSize: number, key1: bigint): AsyncIterable<[k: [bigint, v52.AssetId32], v: v52.Type_572][]>
+    getPairsPaged(pageSize: number, key1: bigint, key2: v52.AssetId32): AsyncIterable<[k: [bigint, v52.AssetId32], v: v52.Type_572][]>
+}
+
+export class ERC20AppAssetsByAddressesStorage extends StorageBase {
+    protected getPrefix() {
+        return 'ERC20App'
+    }
+
+    protected getName() {
+        return 'AssetsByAddresses'
+    }
+
+    get isV52(): boolean {
+        return this.getTypeHash() === 'cabae4a11d1a8928d6ce6db2352af2e5e57d7d29bb64c87a7a383de8bcd7284e'
+    }
+
+    get asV52(): ERC20AppAssetsByAddressesStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+export interface ERC20AppAssetsByAddressesStorageV52 {
+    get(key1: bigint, key2: Uint8Array): Promise<(v52.AssetId32 | undefined)>
+    getAll(): Promise<v52.AssetId32[]>
+    getMany(keys: [bigint, Uint8Array][]): Promise<(v52.AssetId32 | undefined)[]>
+    getKeys(): Promise<[bigint, Uint8Array][]>
+    getKeys(key1: bigint): Promise<[bigint, Uint8Array][]>
+    getKeys(key1: bigint, key2: Uint8Array): Promise<[bigint, Uint8Array][]>
+    getKeysPaged(pageSize: number): AsyncIterable<[bigint, Uint8Array][]>
+    getKeysPaged(pageSize: number, key1: bigint): AsyncIterable<[bigint, Uint8Array][]>
+    getKeysPaged(pageSize: number, key1: bigint, key2: Uint8Array): AsyncIterable<[bigint, Uint8Array][]>
+    getPairs(): Promise<[k: [bigint, Uint8Array], v: v52.AssetId32][]>
+    getPairs(key1: bigint): Promise<[k: [bigint, Uint8Array], v: v52.AssetId32][]>
+    getPairs(key1: bigint, key2: Uint8Array): Promise<[k: [bigint, Uint8Array], v: v52.AssetId32][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: [bigint, Uint8Array], v: v52.AssetId32][]>
+    getPairsPaged(pageSize: number, key1: bigint): AsyncIterable<[k: [bigint, Uint8Array], v: v52.AssetId32][]>
+    getPairsPaged(pageSize: number, key1: bigint, key2: Uint8Array): AsyncIterable<[k: [bigint, Uint8Array], v: v52.AssetId32][]>
+}
+
+export class ERC20AppSidechainPrecisionStorage extends StorageBase {
+    protected getPrefix() {
+        return 'ERC20App'
+    }
+
+    protected getName() {
+        return 'SidechainPrecision'
+    }
+
+    get isV54(): boolean {
+        return this.getTypeHash() === '19021d933553128a4a3550a3cd26d6bfe7c74b0a22bc5ca6bc9099781e369dda'
+    }
+
+    get asV54(): ERC20AppSidechainPrecisionStorageV54 {
+        assert(this.isV54)
+        return this as any
+    }
+}
+
+export interface ERC20AppSidechainPrecisionStorageV54 {
+    get(key1: bigint, key2: v54.AssetId32): Promise<(number | undefined)>
+    getAll(): Promise<number[]>
+    getMany(keys: [bigint, v54.AssetId32][]): Promise<(number | undefined)[]>
+    getKeys(): Promise<[bigint, v54.AssetId32][]>
+    getKeys(key1: bigint): Promise<[bigint, v54.AssetId32][]>
+    getKeys(key1: bigint, key2: v54.AssetId32): Promise<[bigint, v54.AssetId32][]>
+    getKeysPaged(pageSize: number): AsyncIterable<[bigint, v54.AssetId32][]>
+    getKeysPaged(pageSize: number, key1: bigint): AsyncIterable<[bigint, v54.AssetId32][]>
+    getKeysPaged(pageSize: number, key1: bigint, key2: v54.AssetId32): AsyncIterable<[bigint, v54.AssetId32][]>
+    getPairs(): Promise<[k: [bigint, v54.AssetId32], v: number][]>
+    getPairs(key1: bigint): Promise<[k: [bigint, v54.AssetId32], v: number][]>
+    getPairs(key1: bigint, key2: v54.AssetId32): Promise<[k: [bigint, v54.AssetId32], v: number][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: [bigint, v54.AssetId32], v: number][]>
+    getPairsPaged(pageSize: number, key1: bigint): AsyncIterable<[k: [bigint, v54.AssetId32], v: number][]>
+    getPairsPaged(pageSize: number, key1: bigint, key2: v54.AssetId32): AsyncIterable<[k: [bigint, v54.AssetId32], v: number][]>
+}
+
+export class ERC20AppTokenAddressesStorage extends StorageBase {
+    protected getPrefix() {
+        return 'ERC20App'
+    }
+
+    protected getName() {
+        return 'TokenAddresses'
+    }
+
+    get isV52(): boolean {
+        return this.getTypeHash() === '9fef01747a54dcdcec1535e02949fcb28b01f8388694c4fc22fdc9be19173bc8'
+    }
+
+    get asV52(): ERC20AppTokenAddressesStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+export interface ERC20AppTokenAddressesStorageV52 {
+    get(key1: bigint, key2: v52.AssetId32): Promise<(Uint8Array | undefined)>
+    getAll(): Promise<Uint8Array[]>
+    getMany(keys: [bigint, v52.AssetId32][]): Promise<(Uint8Array | undefined)[]>
+    getKeys(): Promise<[bigint, v52.AssetId32][]>
+    getKeys(key1: bigint): Promise<[bigint, v52.AssetId32][]>
+    getKeys(key1: bigint, key2: v52.AssetId32): Promise<[bigint, v52.AssetId32][]>
+    getKeysPaged(pageSize: number): AsyncIterable<[bigint, v52.AssetId32][]>
+    getKeysPaged(pageSize: number, key1: bigint): AsyncIterable<[bigint, v52.AssetId32][]>
+    getKeysPaged(pageSize: number, key1: bigint, key2: v52.AssetId32): AsyncIterable<[bigint, v52.AssetId32][]>
+    getPairs(): Promise<[k: [bigint, v52.AssetId32], v: Uint8Array][]>
+    getPairs(key1: bigint): Promise<[k: [bigint, v52.AssetId32], v: Uint8Array][]>
+    getPairs(key1: bigint, key2: v52.AssetId32): Promise<[k: [bigint, v52.AssetId32], v: Uint8Array][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: [bigint, v52.AssetId32], v: Uint8Array][]>
+    getPairsPaged(pageSize: number, key1: bigint): AsyncIterable<[k: [bigint, v52.AssetId32], v: Uint8Array][]>
+    getPairsPaged(pageSize: number, key1: bigint, key2: v52.AssetId32): AsyncIterable<[k: [bigint, v52.AssetId32], v: Uint8Array][]>
 }
 
 export class ElectionProviderMultiPhaseCurrentPhaseStorage extends StorageBase {
@@ -4544,6 +6305,31 @@ export class ElectionProviderMultiPhaseSignedSubmissionIndicesStorage extends St
         assert(this.isV42)
         return this as any
     }
+
+    /**
+     *  A sorted, bounded vector of `(score, block_number, index)`, where each `index` points to a
+     *  value in `SignedSubmissions`.
+     * 
+     *  We never need to process more than a single signed submission at a time. Signed submissions
+     *  can be quite large, so we're willing to pay the cost of multiple database accesses to access
+     *  them one at a time instead of reading and decoding all of them at once.
+     */
+    get isV51(): boolean {
+        return this.getTypeHash() === 'aecbdca3369396b8f7ae7da45a210e0b48c62258a15e0f7c1a7cb29c941f666c'
+    }
+
+    /**
+     *  A sorted, bounded vector of `(score, block_number, index)`, where each `index` points to a
+     *  value in `SignedSubmissions`.
+     * 
+     *  We never need to process more than a single signed submission at a time. Signed submissions
+     *  can be quite large, so we're willing to pay the cost of multiple database accesses to access
+     *  them one at a time instead of reading and decoding all of them at once.
+     */
+    get asV51(): ElectionProviderMultiPhaseSignedSubmissionIndicesStorageV51 {
+        assert(this.isV51)
+        return this as any
+    }
 }
 
 /**
@@ -4556,6 +6342,18 @@ export class ElectionProviderMultiPhaseSignedSubmissionIndicesStorage extends St
  */
 export interface ElectionProviderMultiPhaseSignedSubmissionIndicesStorageV42 {
     get(): Promise<[v42.ElectionScore, number][]>
+}
+
+/**
+ *  A sorted, bounded vector of `(score, block_number, index)`, where each `index` points to a
+ *  value in `SignedSubmissions`.
+ * 
+ *  We never need to process more than a single signed submission at a time. Signed submissions
+ *  can be quite large, so we're willing to pay the cost of multiple database accesses to access
+ *  them one at a time instead of reading and decoding all of them at once.
+ */
+export interface ElectionProviderMultiPhaseSignedSubmissionIndicesStorageV51 {
+    get(): Promise<[v51.ElectionScore, number, number][]>
 }
 
 export class ElectionProviderMultiPhaseSignedSubmissionNextIndexStorage extends StorageBase {
@@ -4954,6 +6752,62 @@ export interface ElectionsPhragmenVotingStorageV42 {
     getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v42.Voter][]>
     getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v42.Voter][]>
     getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v42.Voter][]>
+}
+
+export class EthAppAddressesStorage extends StorageBase {
+    protected getPrefix() {
+        return 'EthApp'
+    }
+
+    protected getName() {
+        return 'Addresses'
+    }
+
+    get isV52(): boolean {
+        return this.getTypeHash() === '63330d2834c125f81d8cec964f038879d62f4288c40e3c0470554f7c835da708'
+    }
+
+    get asV52(): EthAppAddressesStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+
+    get isV54(): boolean {
+        return this.getTypeHash() === 'f6e63f3fc6a0b70e43f7767d90e82b949b2eb97bf0c14069fb5b49d1210133e5'
+    }
+
+    get asV54(): EthAppAddressesStorageV54 {
+        assert(this.isV54)
+        return this as any
+    }
+}
+
+export interface EthAppAddressesStorageV52 {
+    get(key: bigint): Promise<([Uint8Array, v52.AssetId32] | undefined)>
+    getAll(): Promise<[Uint8Array, v52.AssetId32][]>
+    getMany(keys: bigint[]): Promise<([Uint8Array, v52.AssetId32] | undefined)[]>
+    getKeys(): Promise<bigint[]>
+    getKeys(key: bigint): Promise<bigint[]>
+    getKeysPaged(pageSize: number): AsyncIterable<bigint[]>
+    getKeysPaged(pageSize: number, key: bigint): AsyncIterable<bigint[]>
+    getPairs(): Promise<[k: bigint, v: [Uint8Array, v52.AssetId32]][]>
+    getPairs(key: bigint): Promise<[k: bigint, v: [Uint8Array, v52.AssetId32]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: bigint, v: [Uint8Array, v52.AssetId32]][]>
+    getPairsPaged(pageSize: number, key: bigint): AsyncIterable<[k: bigint, v: [Uint8Array, v52.AssetId32]][]>
+}
+
+export interface EthAppAddressesStorageV54 {
+    get(key: bigint): Promise<([Uint8Array, v54.AssetId32, number] | undefined)>
+    getAll(): Promise<[Uint8Array, v54.AssetId32, number][]>
+    getMany(keys: bigint[]): Promise<([Uint8Array, v54.AssetId32, number] | undefined)[]>
+    getKeys(): Promise<bigint[]>
+    getKeys(key: bigint): Promise<bigint[]>
+    getKeysPaged(pageSize: number): AsyncIterable<bigint[]>
+    getKeysPaged(pageSize: number, key: bigint): AsyncIterable<bigint[]>
+    getPairs(): Promise<[k: bigint, v: [Uint8Array, v54.AssetId32, number]][]>
+    getPairs(key: bigint): Promise<[k: bigint, v: [Uint8Array, v54.AssetId32, number]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: bigint, v: [Uint8Array, v54.AssetId32, number]][]>
+    getPairsPaged(pageSize: number, key: bigint): AsyncIterable<[k: bigint, v: [Uint8Array, v54.AssetId32, number]][]>
 }
 
 export class EthBridgeAccountRequestsStorage extends StorageBase {
@@ -5931,6 +7785,21 @@ export class EthBridgeRequestStatusesStorage extends StorageBase {
         assert(this.isV42)
         return this as any
     }
+
+    /**
+     *  Requests statuses.
+     */
+    get isV51(): boolean {
+        return this.getTypeHash() === '783467a44eeb9862d3371681e516ce5dcf85669490ea9de558a35bb294de220d'
+    }
+
+    /**
+     *  Requests statuses.
+     */
+    get asV51(): EthBridgeRequestStatusesStorageV51 {
+        assert(this.isV51)
+        return this as any
+    }
 }
 
 /**
@@ -5973,6 +7842,27 @@ export interface EthBridgeRequestStatusesStorageV42 {
     getPairsPaged(pageSize: number): AsyncIterable<[k: [number, Uint8Array], v: v42.RequestStatus][]>
     getPairsPaged(pageSize: number, key1: number): AsyncIterable<[k: [number, Uint8Array], v: v42.RequestStatus][]>
     getPairsPaged(pageSize: number, key1: number, key2: Uint8Array): AsyncIterable<[k: [number, Uint8Array], v: v42.RequestStatus][]>
+}
+
+/**
+ *  Requests statuses.
+ */
+export interface EthBridgeRequestStatusesStorageV51 {
+    get(key1: number, key2: Uint8Array): Promise<(v51.RequestStatus | undefined)>
+    getAll(): Promise<v51.RequestStatus[]>
+    getMany(keys: [number, Uint8Array][]): Promise<(v51.RequestStatus | undefined)[]>
+    getKeys(): Promise<[number, Uint8Array][]>
+    getKeys(key1: number): Promise<[number, Uint8Array][]>
+    getKeys(key1: number, key2: Uint8Array): Promise<[number, Uint8Array][]>
+    getKeysPaged(pageSize: number): AsyncIterable<[number, Uint8Array][]>
+    getKeysPaged(pageSize: number, key1: number): AsyncIterable<[number, Uint8Array][]>
+    getKeysPaged(pageSize: number, key1: number, key2: Uint8Array): AsyncIterable<[number, Uint8Array][]>
+    getPairs(): Promise<[k: [number, Uint8Array], v: v51.RequestStatus][]>
+    getPairs(key1: number): Promise<[k: [number, Uint8Array], v: v51.RequestStatus][]>
+    getPairs(key1: number, key2: Uint8Array): Promise<[k: [number, Uint8Array], v: v51.RequestStatus][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: [number, Uint8Array], v: v51.RequestStatus][]>
+    getPairsPaged(pageSize: number, key1: number): AsyncIterable<[k: [number, Uint8Array], v: v51.RequestStatus][]>
+    getPairsPaged(pageSize: number, key1: number, key2: Uint8Array): AsyncIterable<[k: [number, Uint8Array], v: v51.RequestStatus][]>
 }
 
 export class EthBridgeRequestSubmissionHeightStorage extends StorageBase {
@@ -6295,6 +8185,340 @@ export class EthBridgeXorMasterContractAddressStorage extends StorageBase {
  */
 export interface EthBridgeXorMasterContractAddressStorageV41 {
     get(): Promise<Uint8Array>
+}
+
+export class EthereumLightClientBestBlockStorage extends StorageBase {
+    protected getPrefix() {
+        return 'EthereumLightClient'
+    }
+
+    protected getName() {
+        return 'BestBlock'
+    }
+
+    /**
+     *  Best known block.
+     */
+    get isV52(): boolean {
+        return this.getTypeHash() === '71086e2f350a221b3d06b04566a2c978fda99a376c1ac5e6ac9daa10891c4856'
+    }
+
+    /**
+     *  Best known block.
+     */
+    get asV52(): EthereumLightClientBestBlockStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+/**
+ *  Best known block.
+ */
+export interface EthereumLightClientBestBlockStorageV52 {
+    get(key: bigint): Promise<([v52.HeaderId, bigint] | undefined)>
+    getAll(): Promise<[v52.HeaderId, bigint][]>
+    getMany(keys: bigint[]): Promise<([v52.HeaderId, bigint] | undefined)[]>
+    getKeys(): Promise<bigint[]>
+    getKeys(key: bigint): Promise<bigint[]>
+    getKeysPaged(pageSize: number): AsyncIterable<bigint[]>
+    getKeysPaged(pageSize: number, key: bigint): AsyncIterable<bigint[]>
+    getPairs(): Promise<[k: bigint, v: [v52.HeaderId, bigint]][]>
+    getPairs(key: bigint): Promise<[k: bigint, v: [v52.HeaderId, bigint]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: bigint, v: [v52.HeaderId, bigint]][]>
+    getPairsPaged(pageSize: number, key: bigint): AsyncIterable<[k: bigint, v: [v52.HeaderId, bigint]][]>
+}
+
+export class EthereumLightClientBlocksToPruneStorage extends StorageBase {
+    protected getPrefix() {
+        return 'EthereumLightClient'
+    }
+
+    protected getName() {
+        return 'BlocksToPrune'
+    }
+
+    /**
+     *  Range of blocks that we want to prune.
+     */
+    get isV52(): boolean {
+        return this.getTypeHash() === '4df06536a31d3a47e8cd804fe51684f73bf4009af886d2b85820fd39591caf09'
+    }
+
+    /**
+     *  Range of blocks that we want to prune.
+     */
+    get asV52(): EthereumLightClientBlocksToPruneStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+/**
+ *  Range of blocks that we want to prune.
+ */
+export interface EthereumLightClientBlocksToPruneStorageV52 {
+    get(key: bigint): Promise<(v52.PruningRange | undefined)>
+    getAll(): Promise<v52.PruningRange[]>
+    getMany(keys: bigint[]): Promise<(v52.PruningRange | undefined)[]>
+    getKeys(): Promise<bigint[]>
+    getKeys(key: bigint): Promise<bigint[]>
+    getKeysPaged(pageSize: number): AsyncIterable<bigint[]>
+    getKeysPaged(pageSize: number, key: bigint): AsyncIterable<bigint[]>
+    getPairs(): Promise<[k: bigint, v: v52.PruningRange][]>
+    getPairs(key: bigint): Promise<[k: bigint, v: v52.PruningRange][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: bigint, v: v52.PruningRange][]>
+    getPairsPaged(pageSize: number, key: bigint): AsyncIterable<[k: bigint, v: v52.PruningRange][]>
+}
+
+export class EthereumLightClientFinalizedBlockStorage extends StorageBase {
+    protected getPrefix() {
+        return 'EthereumLightClient'
+    }
+
+    protected getName() {
+        return 'FinalizedBlock'
+    }
+
+    /**
+     *  Best finalized block.
+     */
+    get isV52(): boolean {
+        return this.getTypeHash() === 'bb0dddb9c476c5caf5bbcebd3d6a7b796b3121332bb0c1b59b2a2bcac1d59c15'
+    }
+
+    /**
+     *  Best finalized block.
+     */
+    get asV52(): EthereumLightClientFinalizedBlockStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+/**
+ *  Best finalized block.
+ */
+export interface EthereumLightClientFinalizedBlockStorageV52 {
+    get(key: bigint): Promise<(v52.HeaderId | undefined)>
+    getAll(): Promise<v52.HeaderId[]>
+    getMany(keys: bigint[]): Promise<(v52.HeaderId | undefined)[]>
+    getKeys(): Promise<bigint[]>
+    getKeys(key: bigint): Promise<bigint[]>
+    getKeysPaged(pageSize: number): AsyncIterable<bigint[]>
+    getKeysPaged(pageSize: number, key: bigint): AsyncIterable<bigint[]>
+    getPairs(): Promise<[k: bigint, v: v52.HeaderId][]>
+    getPairs(key: bigint): Promise<[k: bigint, v: v52.HeaderId][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: bigint, v: v52.HeaderId][]>
+    getPairsPaged(pageSize: number, key: bigint): AsyncIterable<[k: bigint, v: v52.HeaderId][]>
+}
+
+export class EthereumLightClientHeadersStorage extends StorageBase {
+    protected getPrefix() {
+        return 'EthereumLightClient'
+    }
+
+    protected getName() {
+        return 'Headers'
+    }
+
+    /**
+     *  Map of imported headers by hash.
+     */
+    get isV52(): boolean {
+        return this.getTypeHash() === '13f0432c3bffd9dc7139ddb892692a3b755984ec4ca08e01d457f4db48113f52'
+    }
+
+    /**
+     *  Map of imported headers by hash.
+     */
+    get asV52(): EthereumLightClientHeadersStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+/**
+ *  Map of imported headers by hash.
+ */
+export interface EthereumLightClientHeadersStorageV52 {
+    get(key1: bigint, key2: Uint8Array): Promise<(v52.StoredHeader | undefined)>
+    getAll(): Promise<v52.StoredHeader[]>
+    getMany(keys: [bigint, Uint8Array][]): Promise<(v52.StoredHeader | undefined)[]>
+    getKeys(): Promise<[bigint, Uint8Array][]>
+    getKeys(key1: bigint): Promise<[bigint, Uint8Array][]>
+    getKeys(key1: bigint, key2: Uint8Array): Promise<[bigint, Uint8Array][]>
+    getKeysPaged(pageSize: number): AsyncIterable<[bigint, Uint8Array][]>
+    getKeysPaged(pageSize: number, key1: bigint): AsyncIterable<[bigint, Uint8Array][]>
+    getKeysPaged(pageSize: number, key1: bigint, key2: Uint8Array): AsyncIterable<[bigint, Uint8Array][]>
+    getPairs(): Promise<[k: [bigint, Uint8Array], v: v52.StoredHeader][]>
+    getPairs(key1: bigint): Promise<[k: [bigint, Uint8Array], v: v52.StoredHeader][]>
+    getPairs(key1: bigint, key2: Uint8Array): Promise<[k: [bigint, Uint8Array], v: v52.StoredHeader][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: [bigint, Uint8Array], v: v52.StoredHeader][]>
+    getPairsPaged(pageSize: number, key1: bigint): AsyncIterable<[k: [bigint, Uint8Array], v: v52.StoredHeader][]>
+    getPairsPaged(pageSize: number, key1: bigint, key2: Uint8Array): AsyncIterable<[k: [bigint, Uint8Array], v: v52.StoredHeader][]>
+}
+
+export class EthereumLightClientHeadersByNumberStorage extends StorageBase {
+    protected getPrefix() {
+        return 'EthereumLightClient'
+    }
+
+    protected getName() {
+        return 'HeadersByNumber'
+    }
+
+    /**
+     *  Map of imported header hashes by number.
+     */
+    get isV52(): boolean {
+        return this.getTypeHash() === '06ae4db4936a5d4ab8dda2a1e8aa81de5b77c1f6148a0d99d2884ca621108b27'
+    }
+
+    /**
+     *  Map of imported header hashes by number.
+     */
+    get asV52(): EthereumLightClientHeadersByNumberStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+/**
+ *  Map of imported header hashes by number.
+ */
+export interface EthereumLightClientHeadersByNumberStorageV52 {
+    get(key1: bigint, key2: bigint): Promise<(Uint8Array[] | undefined)>
+    getAll(): Promise<Uint8Array[][]>
+    getMany(keys: [bigint, bigint][]): Promise<(Uint8Array[] | undefined)[]>
+    getKeys(): Promise<[bigint, bigint][]>
+    getKeys(key1: bigint): Promise<[bigint, bigint][]>
+    getKeys(key1: bigint, key2: bigint): Promise<[bigint, bigint][]>
+    getKeysPaged(pageSize: number): AsyncIterable<[bigint, bigint][]>
+    getKeysPaged(pageSize: number, key1: bigint): AsyncIterable<[bigint, bigint][]>
+    getKeysPaged(pageSize: number, key1: bigint, key2: bigint): AsyncIterable<[bigint, bigint][]>
+    getPairs(): Promise<[k: [bigint, bigint], v: Uint8Array[]][]>
+    getPairs(key1: bigint): Promise<[k: [bigint, bigint], v: Uint8Array[]][]>
+    getPairs(key1: bigint, key2: bigint): Promise<[k: [bigint, bigint], v: Uint8Array[]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: [bigint, bigint], v: Uint8Array[]][]>
+    getPairsPaged(pageSize: number, key1: bigint): AsyncIterable<[k: [bigint, bigint], v: Uint8Array[]][]>
+    getPairsPaged(pageSize: number, key1: bigint, key2: bigint): AsyncIterable<[k: [bigint, bigint], v: Uint8Array[]][]>
+}
+
+export class EthereumLightClientNetworkConfigStorage extends StorageBase {
+    protected getPrefix() {
+        return 'EthereumLightClient'
+    }
+
+    protected getName() {
+        return 'NetworkConfig'
+    }
+
+    /**
+     *  Network config
+     */
+    get isV52(): boolean {
+        return this.getTypeHash() === 'de7f3bc1016bbc3db50e6e8f91c6d240565ef935a91fe5bcfa471d6c370fafec'
+    }
+
+    /**
+     *  Network config
+     */
+    get asV52(): EthereumLightClientNetworkConfigStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+/**
+ *  Network config
+ */
+export interface EthereumLightClientNetworkConfigStorageV52 {
+    get(key: bigint): Promise<(v52.NetworkConfig | undefined)>
+    getAll(): Promise<v52.NetworkConfig[]>
+    getMany(keys: bigint[]): Promise<(v52.NetworkConfig | undefined)[]>
+    getKeys(): Promise<bigint[]>
+    getKeys(key: bigint): Promise<bigint[]>
+    getKeysPaged(pageSize: number): AsyncIterable<bigint[]>
+    getKeysPaged(pageSize: number, key: bigint): AsyncIterable<bigint[]>
+    getPairs(): Promise<[k: bigint, v: v52.NetworkConfig][]>
+    getPairs(key: bigint): Promise<[k: bigint, v: v52.NetworkConfig][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: bigint, v: v52.NetworkConfig][]>
+    getPairsPaged(pageSize: number, key: bigint): AsyncIterable<[k: bigint, v: v52.NetworkConfig][]>
+}
+
+export class EvmBridgeProxySendersStorage extends StorageBase {
+    protected getPrefix() {
+        return 'EvmBridgeProxy'
+    }
+
+    protected getName() {
+        return 'Senders'
+    }
+
+    get isV52(): boolean {
+        return this.getTypeHash() === '30e39bce9d4f70086c4e4a34f283c6891a0ba35548c4fb2088199df3e23a13e8'
+    }
+
+    get asV52(): EvmBridgeProxySendersStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+export interface EvmBridgeProxySendersStorageV52 {
+    get(key1: v52.GenericNetworkId, key2: Uint8Array): Promise<(Uint8Array | undefined)>
+    getAll(): Promise<Uint8Array[]>
+    getMany(keys: [v52.GenericNetworkId, Uint8Array][]): Promise<(Uint8Array | undefined)[]>
+    getKeys(): Promise<[v52.GenericNetworkId, Uint8Array][]>
+    getKeys(key1: v52.GenericNetworkId): Promise<[v52.GenericNetworkId, Uint8Array][]>
+    getKeys(key1: v52.GenericNetworkId, key2: Uint8Array): Promise<[v52.GenericNetworkId, Uint8Array][]>
+    getKeysPaged(pageSize: number): AsyncIterable<[v52.GenericNetworkId, Uint8Array][]>
+    getKeysPaged(pageSize: number, key1: v52.GenericNetworkId): AsyncIterable<[v52.GenericNetworkId, Uint8Array][]>
+    getKeysPaged(pageSize: number, key1: v52.GenericNetworkId, key2: Uint8Array): AsyncIterable<[v52.GenericNetworkId, Uint8Array][]>
+    getPairs(): Promise<[k: [v52.GenericNetworkId, Uint8Array], v: Uint8Array][]>
+    getPairs(key1: v52.GenericNetworkId): Promise<[k: [v52.GenericNetworkId, Uint8Array], v: Uint8Array][]>
+    getPairs(key1: v52.GenericNetworkId, key2: Uint8Array): Promise<[k: [v52.GenericNetworkId, Uint8Array], v: Uint8Array][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: [v52.GenericNetworkId, Uint8Array], v: Uint8Array][]>
+    getPairsPaged(pageSize: number, key1: v52.GenericNetworkId): AsyncIterable<[k: [v52.GenericNetworkId, Uint8Array], v: Uint8Array][]>
+    getPairsPaged(pageSize: number, key1: v52.GenericNetworkId, key2: Uint8Array): AsyncIterable<[k: [v52.GenericNetworkId, Uint8Array], v: Uint8Array][]>
+}
+
+export class EvmBridgeProxyTransactionsStorage extends StorageBase {
+    protected getPrefix() {
+        return 'EvmBridgeProxy'
+    }
+
+    protected getName() {
+        return 'Transactions'
+    }
+
+    get isV52(): boolean {
+        return this.getTypeHash() === 'fd6bfbf0361290939f6fd95b01d60358c7563901df9b5f01f7bdc573ee42c1c9'
+    }
+
+    get asV52(): EvmBridgeProxyTransactionsStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+export interface EvmBridgeProxyTransactionsStorageV52 {
+    get(key1: Uint8Array, key2: [v52.GenericNetworkId, Uint8Array]): Promise<(v52.BridgeRequest | undefined)>
+    getAll(): Promise<v52.BridgeRequest[]>
+    getMany(keys: [Uint8Array, [v52.GenericNetworkId, Uint8Array]][]): Promise<(v52.BridgeRequest | undefined)[]>
+    getKeys(): Promise<[Uint8Array, [v52.GenericNetworkId, Uint8Array]][]>
+    getKeys(key1: Uint8Array): Promise<[Uint8Array, [v52.GenericNetworkId, Uint8Array]][]>
+    getKeys(key1: Uint8Array, key2: [v52.GenericNetworkId, Uint8Array]): Promise<[Uint8Array, [v52.GenericNetworkId, Uint8Array]][]>
+    getKeysPaged(pageSize: number): AsyncIterable<[Uint8Array, [v52.GenericNetworkId, Uint8Array]][]>
+    getKeysPaged(pageSize: number, key1: Uint8Array): AsyncIterable<[Uint8Array, [v52.GenericNetworkId, Uint8Array]][]>
+    getKeysPaged(pageSize: number, key1: Uint8Array, key2: [v52.GenericNetworkId, Uint8Array]): AsyncIterable<[Uint8Array, [v52.GenericNetworkId, Uint8Array]][]>
+    getPairs(): Promise<[k: [Uint8Array, [v52.GenericNetworkId, Uint8Array]], v: v52.BridgeRequest][]>
+    getPairs(key1: Uint8Array): Promise<[k: [Uint8Array, [v52.GenericNetworkId, Uint8Array]], v: v52.BridgeRequest][]>
+    getPairs(key1: Uint8Array, key2: [v52.GenericNetworkId, Uint8Array]): Promise<[k: [Uint8Array, [v52.GenericNetworkId, Uint8Array]], v: v52.BridgeRequest][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: [Uint8Array, [v52.GenericNetworkId, Uint8Array]], v: v52.BridgeRequest][]>
+    getPairsPaged(pageSize: number, key1: Uint8Array): AsyncIterable<[k: [Uint8Array, [v52.GenericNetworkId, Uint8Array]], v: v52.BridgeRequest][]>
+    getPairsPaged(pageSize: number, key1: Uint8Array, key2: [v52.GenericNetworkId, Uint8Array]): AsyncIterable<[k: [Uint8Array, [v52.GenericNetworkId, Uint8Array]], v: v52.BridgeRequest][]>
 }
 
 export class FarmingPoolFarmersStorage extends StorageBase {
@@ -6858,6 +9082,15 @@ export class HermesGovernancePlatformHermesPollDataStorage extends StorageBase {
         assert(this.isV48)
         return this as any
     }
+
+    get isV55(): boolean {
+        return this.getTypeHash() === '4a73927344032df6712a2911a1487647f31bc63f2577fc7d39388bfb0f0308ea'
+    }
+
+    get asV55(): HermesGovernancePlatformHermesPollDataStorageV55 {
+        assert(this.isV55)
+        return this as any
+    }
 }
 
 export interface HermesGovernancePlatformHermesPollDataStorageV48 {
@@ -6872,6 +9105,20 @@ export interface HermesGovernancePlatformHermesPollDataStorageV48 {
     getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v48.HermesPollInfo][]>
     getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v48.HermesPollInfo][]>
     getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v48.HermesPollInfo][]>
+}
+
+export interface HermesGovernancePlatformHermesPollDataStorageV55 {
+    get(key: Uint8Array): Promise<(v55.HermesPollInfo | undefined)>
+    getAll(): Promise<v55.HermesPollInfo[]>
+    getMany(keys: Uint8Array[]): Promise<(v55.HermesPollInfo | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v55.HermesPollInfo][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v55.HermesPollInfo][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v55.HermesPollInfo][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v55.HermesPollInfo][]>
 }
 
 export class HermesGovernancePlatformHermesVotingsStorage extends StorageBase {
@@ -6897,6 +9144,21 @@ export class HermesGovernancePlatformHermesVotingsStorage extends StorageBase {
         assert(this.isV48)
         return this as any
     }
+
+    /**
+     *  A vote of a particular user for a particular poll
+     */
+    get isV55(): boolean {
+        return this.getTypeHash() === 'e8c421f187831137f6701c59673332ca218f18607faf33b1a48848a34441556b'
+    }
+
+    /**
+     *  A vote of a particular user for a particular poll
+     */
+    get asV55(): HermesGovernancePlatformHermesVotingsStorageV55 {
+        assert(this.isV55)
+        return this as any
+    }
 }
 
 /**
@@ -6918,6 +9180,27 @@ export interface HermesGovernancePlatformHermesVotingsStorageV48 {
     getPairsPaged(pageSize: number): AsyncIterable<[k: [Uint8Array, Uint8Array], v: v48.HermesVotingInfo][]>
     getPairsPaged(pageSize: number, key1: Uint8Array): AsyncIterable<[k: [Uint8Array, Uint8Array], v: v48.HermesVotingInfo][]>
     getPairsPaged(pageSize: number, key1: Uint8Array, key2: Uint8Array): AsyncIterable<[k: [Uint8Array, Uint8Array], v: v48.HermesVotingInfo][]>
+}
+
+/**
+ *  A vote of a particular user for a particular poll
+ */
+export interface HermesGovernancePlatformHermesVotingsStorageV55 {
+    get(key1: Uint8Array, key2: Uint8Array): Promise<(v55.HermesVotingInfo | undefined)>
+    getAll(): Promise<v55.HermesVotingInfo[]>
+    getMany(keys: [Uint8Array, Uint8Array][]): Promise<(v55.HermesVotingInfo | undefined)[]>
+    getKeys(): Promise<[Uint8Array, Uint8Array][]>
+    getKeys(key1: Uint8Array): Promise<[Uint8Array, Uint8Array][]>
+    getKeys(key1: Uint8Array, key2: Uint8Array): Promise<[Uint8Array, Uint8Array][]>
+    getKeysPaged(pageSize: number): AsyncIterable<[Uint8Array, Uint8Array][]>
+    getKeysPaged(pageSize: number, key1: Uint8Array): AsyncIterable<[Uint8Array, Uint8Array][]>
+    getKeysPaged(pageSize: number, key1: Uint8Array, key2: Uint8Array): AsyncIterable<[Uint8Array, Uint8Array][]>
+    getPairs(): Promise<[k: [Uint8Array, Uint8Array], v: v55.HermesVotingInfo][]>
+    getPairs(key1: Uint8Array): Promise<[k: [Uint8Array, Uint8Array], v: v55.HermesVotingInfo][]>
+    getPairs(key1: Uint8Array, key2: Uint8Array): Promise<[k: [Uint8Array, Uint8Array], v: v55.HermesVotingInfo][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: [Uint8Array, Uint8Array], v: v55.HermesVotingInfo][]>
+    getPairsPaged(pageSize: number, key1: Uint8Array): AsyncIterable<[k: [Uint8Array, Uint8Array], v: v55.HermesVotingInfo][]>
+    getPairsPaged(pageSize: number, key1: Uint8Array, key2: Uint8Array): AsyncIterable<[k: [Uint8Array, Uint8Array], v: v55.HermesVotingInfo][]>
 }
 
 export class HermesGovernancePlatformMinimumHermesAmountForCreatingPollStorage extends StorageBase {
@@ -6964,6 +9247,38 @@ export class HermesGovernancePlatformMinimumHermesVotingAmountStorage extends St
 
 export interface HermesGovernancePlatformMinimumHermesVotingAmountStorageV48 {
     get(): Promise<bigint>
+}
+
+export class HermesGovernancePlatformPalletStorageVersionStorage extends StorageBase {
+    protected getPrefix() {
+        return 'HermesGovernancePlatform'
+    }
+
+    protected getName() {
+        return 'PalletStorageVersion'
+    }
+
+    /**
+     *  Pallet storage version
+     */
+    get isV55(): boolean {
+        return this.getTypeHash() === '72d0250d593d30b1f3add64f6929fbab3a893f86a141cd017b38d4d3bda0330d'
+    }
+
+    /**
+     *  Pallet storage version
+     */
+    get asV55(): HermesGovernancePlatformPalletStorageVersionStorageV55 {
+        assert(this.isV55)
+        return this as any
+    }
+}
+
+/**
+ *  Pallet storage version
+ */
+export interface HermesGovernancePlatformPalletStorageVersionStorageV55 {
+    get(): Promise<v55.StorageVersion>
 }
 
 export class IdentityIdentityOfStorage extends StorageBase {
@@ -8286,6 +10601,278 @@ export interface IrohaMigrationReferrersStorageV42 {
     getPairsPaged(pageSize: number, key: string): AsyncIterable<[k: string, v: string][]>
 }
 
+export class LeafProviderLatestDigestStorage extends StorageBase {
+    protected getPrefix() {
+        return 'LeafProvider'
+    }
+
+    protected getName() {
+        return 'LatestDigest'
+    }
+
+    /**
+     *  Latest digest
+     */
+    get isV52(): boolean {
+        return this.getTypeHash() === '06f5f65cbbdf8c9ab6b676d2ed1feb83b6f31c0cc43e66ae6a99e9c9c457e56e'
+    }
+
+    /**
+     *  Latest digest
+     */
+    get asV52(): LeafProviderLatestDigestStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+
+    /**
+     *  Latest digest
+     */
+    get isV54(): boolean {
+        return this.getTypeHash() === '8610f92d22951c30343ddf3b634b811adae7e0af568a2d6246b360799c08ac9d'
+    }
+
+    /**
+     *  Latest digest
+     */
+    get asV54(): LeafProviderLatestDigestStorageV54 {
+        assert(this.isV54)
+        return this as any
+    }
+}
+
+/**
+ *  Latest digest
+ */
+export interface LeafProviderLatestDigestStorageV52 {
+    get(): Promise<(v52.AuxiliaryDigestItem[] | undefined)>
+}
+
+/**
+ *  Latest digest
+ */
+export interface LeafProviderLatestDigestStorageV54 {
+    get(): Promise<(v54.AuxiliaryDigestItem[] | undefined)>
+}
+
+export class MigrationAppAddressesStorage extends StorageBase {
+    protected getPrefix() {
+        return 'MigrationApp'
+    }
+
+    protected getName() {
+        return 'Addresses'
+    }
+
+    get isV52(): boolean {
+        return this.getTypeHash() === '3b2b84bd882e55420f90073a16b9916f4f6fcc8bc594cbefc4727a08113e64f6'
+    }
+
+    get asV52(): MigrationAppAddressesStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+export interface MigrationAppAddressesStorageV52 {
+    get(key: bigint): Promise<(Uint8Array | undefined)>
+    getAll(): Promise<Uint8Array[]>
+    getMany(keys: bigint[]): Promise<(Uint8Array | undefined)[]>
+    getKeys(): Promise<bigint[]>
+    getKeys(key: bigint): Promise<bigint[]>
+    getKeysPaged(pageSize: number): AsyncIterable<bigint[]>
+    getKeysPaged(pageSize: number, key: bigint): AsyncIterable<bigint[]>
+    getPairs(): Promise<[k: bigint, v: Uint8Array][]>
+    getPairs(key: bigint): Promise<[k: bigint, v: Uint8Array][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: bigint, v: Uint8Array][]>
+    getPairsPaged(pageSize: number, key: bigint): AsyncIterable<[k: bigint, v: Uint8Array][]>
+}
+
+export class MmrNodesStorage extends StorageBase {
+    protected getPrefix() {
+        return 'Mmr'
+    }
+
+    protected getName() {
+        return 'Nodes'
+    }
+
+    /**
+     *  Hashes of the nodes in the MMR.
+     * 
+     *  Note this collection only contains MMR peaks, the inner nodes (and leaves)
+     *  are pruned and only stored in the Offchain DB.
+     */
+    get isV52(): boolean {
+        return this.getTypeHash() === 'ffc087e1323413e73a9729e444bf115bb89bc74cab9f4347c9dc890a14ae8d68'
+    }
+
+    /**
+     *  Hashes of the nodes in the MMR.
+     * 
+     *  Note this collection only contains MMR peaks, the inner nodes (and leaves)
+     *  are pruned and only stored in the Offchain DB.
+     */
+    get asV52(): MmrNodesStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+/**
+ *  Hashes of the nodes in the MMR.
+ * 
+ *  Note this collection only contains MMR peaks, the inner nodes (and leaves)
+ *  are pruned and only stored in the Offchain DB.
+ */
+export interface MmrNodesStorageV52 {
+    get(key: bigint): Promise<(Uint8Array | undefined)>
+    getAll(): Promise<Uint8Array[]>
+    getMany(keys: bigint[]): Promise<(Uint8Array | undefined)[]>
+    getKeys(): Promise<bigint[]>
+    getKeys(key: bigint): Promise<bigint[]>
+    getKeysPaged(pageSize: number): AsyncIterable<bigint[]>
+    getKeysPaged(pageSize: number, key: bigint): AsyncIterable<bigint[]>
+    getPairs(): Promise<[k: bigint, v: Uint8Array][]>
+    getPairs(key: bigint): Promise<[k: bigint, v: Uint8Array][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: bigint, v: Uint8Array][]>
+    getPairsPaged(pageSize: number, key: bigint): AsyncIterable<[k: bigint, v: Uint8Array][]>
+}
+
+export class MmrNumberOfLeavesStorage extends StorageBase {
+    protected getPrefix() {
+        return 'Mmr'
+    }
+
+    protected getName() {
+        return 'NumberOfLeaves'
+    }
+
+    /**
+     *  Current size of the MMR (number of leaves).
+     */
+    get isV52(): boolean {
+        return this.getTypeHash() === '95ff4f914f08e149ddbe1ae2dcb1743bbf9aaae69d04c486e1a398cacfcca06a'
+    }
+
+    /**
+     *  Current size of the MMR (number of leaves).
+     */
+    get asV52(): MmrNumberOfLeavesStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+/**
+ *  Current size of the MMR (number of leaves).
+ */
+export interface MmrNumberOfLeavesStorageV52 {
+    get(): Promise<bigint>
+}
+
+export class MmrRootHashStorage extends StorageBase {
+    protected getPrefix() {
+        return 'Mmr'
+    }
+
+    protected getName() {
+        return 'RootHash'
+    }
+
+    /**
+     *  Latest MMR Root hash.
+     */
+    get isV52(): boolean {
+        return this.getTypeHash() === '146c0d1dce070e2a43f497c479248a882f4ed48937203ea336e85dcf2fa0ec6c'
+    }
+
+    /**
+     *  Latest MMR Root hash.
+     */
+    get asV52(): MmrRootHashStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+/**
+ *  Latest MMR Root hash.
+ */
+export interface MmrRootHashStorageV52 {
+    get(): Promise<Uint8Array>
+}
+
+export class MmrLeafBeefyAuthoritiesStorage extends StorageBase {
+    protected getPrefix() {
+        return 'MmrLeaf'
+    }
+
+    protected getName() {
+        return 'BeefyAuthorities'
+    }
+
+    /**
+     *  Details of current BEEFY authority set.
+     */
+    get isV52(): boolean {
+        return this.getTypeHash() === '4e31661c602c61bd506a823ecb5a2ea8d54298e6ef7feee775bc254fd6075bcb'
+    }
+
+    /**
+     *  Details of current BEEFY authority set.
+     */
+    get asV52(): MmrLeafBeefyAuthoritiesStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+/**
+ *  Details of current BEEFY authority set.
+ */
+export interface MmrLeafBeefyAuthoritiesStorageV52 {
+    get(): Promise<v52.BeefyAuthoritySet>
+}
+
+export class MmrLeafBeefyNextAuthoritiesStorage extends StorageBase {
+    protected getPrefix() {
+        return 'MmrLeaf'
+    }
+
+    protected getName() {
+        return 'BeefyNextAuthorities'
+    }
+
+    /**
+     *  Details of next BEEFY authority set.
+     * 
+     *  This storage entry is used as cache for calls to `update_beefy_next_authority_set`.
+     */
+    get isV52(): boolean {
+        return this.getTypeHash() === '4e31661c602c61bd506a823ecb5a2ea8d54298e6ef7feee775bc254fd6075bcb'
+    }
+
+    /**
+     *  Details of next BEEFY authority set.
+     * 
+     *  This storage entry is used as cache for calls to `update_beefy_next_authority_set`.
+     */
+    get asV52(): MmrLeafBeefyNextAuthoritiesStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+/**
+ *  Details of next BEEFY authority set.
+ * 
+ *  This storage entry is used as cache for calls to `update_beefy_next_authority_set`.
+ */
+export interface MmrLeafBeefyNextAuthoritiesStorageV52 {
+    get(): Promise<v52.BeefyAuthoritySet>
+}
+
 export class MulticollateralBondingCurvePoolAlwaysDistributeCoefficientStorage extends StorageBase {
     protected getPrefix() {
         return 'MulticollateralBondingCurvePool'
@@ -8601,6 +11188,36 @@ export class MulticollateralBondingCurvePoolDistributionAccountsEntryStorage ext
         assert(this.isV46)
         return this as any
     }
+
+    /**
+     *  Accounts that receive 20% buy/sell margin according to predefined proportions
+     */
+    get isV51(): boolean {
+        return this.getTypeHash() === '7f74ccff0e7458037935219ffc9964bcf264d537f22c20893cb10a6eb021a4e1'
+    }
+
+    /**
+     *  Accounts that receive 20% buy/sell margin according to predefined proportions
+     */
+    get asV51(): MulticollateralBondingCurvePoolDistributionAccountsEntryStorageV51 {
+        assert(this.isV51)
+        return this as any
+    }
+
+    /**
+     *  Accounts that receive 20% buy/sell margin according to predefined proportions
+     */
+    get isV54(): boolean {
+        return this.getTypeHash() === '40f955200298848e4a22bd095789113e3c02166a0644d704e07d60362a3804e3'
+    }
+
+    /**
+     *  Accounts that receive 20% buy/sell margin according to predefined proportions
+     */
+    get asV54(): MulticollateralBondingCurvePoolDistributionAccountsEntryStorageV54 {
+        assert(this.isV54)
+        return this as any
+    }
 }
 
 /**
@@ -8622,6 +11239,20 @@ export interface MulticollateralBondingCurvePoolDistributionAccountsEntryStorage
  */
 export interface MulticollateralBondingCurvePoolDistributionAccountsEntryStorageV46 {
     get(): Promise<v46.DistributionAccounts>
+}
+
+/**
+ *  Accounts that receive 20% buy/sell margin according to predefined proportions
+ */
+export interface MulticollateralBondingCurvePoolDistributionAccountsEntryStorageV51 {
+    get(): Promise<v51.DistributionAccounts>
+}
+
+/**
+ *  Accounts that receive 20% buy/sell margin according to predefined proportions
+ */
+export interface MulticollateralBondingCurvePoolDistributionAccountsEntryStorageV54 {
+    get(): Promise<v54.DistributionAccounts>
 }
 
 export class MulticollateralBondingCurvePoolEnabledTargetsStorage extends StorageBase {
@@ -9122,6 +11753,21 @@ export class MulticollateralBondingCurvePoolReservesAccStorage extends StorageBa
         assert(this.isV46)
         return this as any
     }
+
+    /**
+     *  Technical account used to store collateral tokens.
+     */
+    get isV54(): boolean {
+        return this.getTypeHash() === 'e4f6281a7dab8ee982f1ecb211a6059f823a6c9e8bd9aa4205aa1c989df3a74a'
+    }
+
+    /**
+     *  Technical account used to store collateral tokens.
+     */
+    get asV54(): MulticollateralBondingCurvePoolReservesAccStorageV54 {
+        assert(this.isV54)
+        return this as any
+    }
 }
 
 /**
@@ -9143,6 +11789,13 @@ export interface MulticollateralBondingCurvePoolReservesAccStorageV42 {
  */
 export interface MulticollateralBondingCurvePoolReservesAccStorageV46 {
     get(): Promise<v46.TechAccountId>
+}
+
+/**
+ *  Technical account used to store collateral tokens.
+ */
+export interface MulticollateralBondingCurvePoolReservesAccStorageV54 {
+    get(): Promise<v54.TechAccountId>
 }
 
 export class MulticollateralBondingCurvePoolRewardsStorage extends StorageBase {
@@ -9350,6 +12003,62 @@ export interface MultisigMultisigsStorageV41 {
     getPairsPaged(pageSize: number): AsyncIterable<[k: [Uint8Array, Uint8Array], v: v41.Multisig][]>
     getPairsPaged(pageSize: number, key1: Uint8Array): AsyncIterable<[k: [Uint8Array, Uint8Array], v: v41.Multisig][]>
     getPairsPaged(pageSize: number, key1: Uint8Array, key2: Uint8Array): AsyncIterable<[k: [Uint8Array, Uint8Array], v: v41.Multisig][]>
+}
+
+export class MultisigVerifierPeerKeysStorage extends StorageBase {
+    protected getPrefix() {
+        return 'MultisigVerifier'
+    }
+
+    protected getName() {
+        return 'PeerKeys'
+    }
+
+    get isV54(): boolean {
+        return this.getTypeHash() === 'f5f244fe3426ad4fb05bf161397f7f52ec3a5cbf4f51418cd2f5605097b2e6c4'
+    }
+
+    get asV54(): MultisigVerifierPeerKeysStorageV54 {
+        assert(this.isV54)
+        return this as any
+    }
+}
+
+export interface MultisigVerifierPeerKeysStorageV54 {
+    get(key: v54.GenericNetworkId): Promise<(Uint8Array[] | undefined)>
+    getAll(): Promise<Uint8Array[][]>
+    getMany(keys: v54.GenericNetworkId[]): Promise<(Uint8Array[] | undefined)[]>
+    getKeys(): Promise<v54.GenericNetworkId[]>
+    getKeys(key: v54.GenericNetworkId): Promise<v54.GenericNetworkId[]>
+    getKeysPaged(pageSize: number): AsyncIterable<v54.GenericNetworkId[]>
+    getKeysPaged(pageSize: number, key: v54.GenericNetworkId): AsyncIterable<v54.GenericNetworkId[]>
+    getPairs(): Promise<[k: v54.GenericNetworkId, v: Uint8Array[]][]>
+    getPairs(key: v54.GenericNetworkId): Promise<[k: v54.GenericNetworkId, v: Uint8Array[]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: v54.GenericNetworkId, v: Uint8Array[]][]>
+    getPairsPaged(pageSize: number, key: v54.GenericNetworkId): AsyncIterable<[k: v54.GenericNetworkId, v: Uint8Array[]][]>
+}
+
+export class MultisigVerifierThisNetworkIdStorage extends StorageBase {
+    protected getPrefix() {
+        return 'MultisigVerifier'
+    }
+
+    protected getName() {
+        return 'ThisNetworkId'
+    }
+
+    get isV54(): boolean {
+        return this.getTypeHash() === '023bf7911eb6719a61550d0ecbc989af2e92400d2a595c04afa1f92d4f6bdca6'
+    }
+
+    get asV54(): MultisigVerifierThisNetworkIdStorageV54 {
+        assert(this.isV54)
+        return this as any
+    }
+}
+
+export interface MultisigVerifierThisNetworkIdStorageV54 {
+    get(): Promise<v54.GenericNetworkId>
 }
 
 export class OffencesConcurrentReportsIndexStorage extends StorageBase {
@@ -9586,6 +12295,253 @@ export interface OracleProxySymbolProvidersStorageV45 {
     getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v45.Oracle][]>
     getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v45.Oracle][]>
     getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v45.Oracle][]>
+}
+
+export class OrderBookAggregatedAsksStorage extends StorageBase {
+    protected getPrefix() {
+        return 'OrderBook'
+    }
+
+    protected getName() {
+        return 'AggregatedAsks'
+    }
+
+    get isV52(): boolean {
+        return this.getTypeHash() === '6d7653e0da03b3ce6d8a5a2181de74d3df5f4ff81a062057a3aa4f5d4603d017'
+    }
+
+    get asV52(): OrderBookAggregatedAsksStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+export interface OrderBookAggregatedAsksStorageV52 {
+    get(key: v52.TradingPair): Promise<[bigint, bigint][]>
+    getAll(): Promise<[bigint, bigint][][]>
+    getMany(keys: v52.TradingPair[]): Promise<[bigint, bigint][][]>
+    getKeys(): Promise<v52.TradingPair[]>
+    getKeys(key: v52.TradingPair): Promise<v52.TradingPair[]>
+    getKeysPaged(pageSize: number): AsyncIterable<v52.TradingPair[]>
+    getKeysPaged(pageSize: number, key: v52.TradingPair): AsyncIterable<v52.TradingPair[]>
+    getPairs(): Promise<[k: v52.TradingPair, v: [bigint, bigint][]][]>
+    getPairs(key: v52.TradingPair): Promise<[k: v52.TradingPair, v: [bigint, bigint][]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: v52.TradingPair, v: [bigint, bigint][]][]>
+    getPairsPaged(pageSize: number, key: v52.TradingPair): AsyncIterable<[k: v52.TradingPair, v: [bigint, bigint][]][]>
+}
+
+export class OrderBookAggregatedBidsStorage extends StorageBase {
+    protected getPrefix() {
+        return 'OrderBook'
+    }
+
+    protected getName() {
+        return 'AggregatedBids'
+    }
+
+    get isV52(): boolean {
+        return this.getTypeHash() === '6d7653e0da03b3ce6d8a5a2181de74d3df5f4ff81a062057a3aa4f5d4603d017'
+    }
+
+    get asV52(): OrderBookAggregatedBidsStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+export interface OrderBookAggregatedBidsStorageV52 {
+    get(key: v52.TradingPair): Promise<[bigint, bigint][]>
+    getAll(): Promise<[bigint, bigint][][]>
+    getMany(keys: v52.TradingPair[]): Promise<[bigint, bigint][][]>
+    getKeys(): Promise<v52.TradingPair[]>
+    getKeys(key: v52.TradingPair): Promise<v52.TradingPair[]>
+    getKeysPaged(pageSize: number): AsyncIterable<v52.TradingPair[]>
+    getKeysPaged(pageSize: number, key: v52.TradingPair): AsyncIterable<v52.TradingPair[]>
+    getPairs(): Promise<[k: v52.TradingPair, v: [bigint, bigint][]][]>
+    getPairs(key: v52.TradingPair): Promise<[k: v52.TradingPair, v: [bigint, bigint][]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: v52.TradingPair, v: [bigint, bigint][]][]>
+    getPairsPaged(pageSize: number, key: v52.TradingPair): AsyncIterable<[k: v52.TradingPair, v: [bigint, bigint][]][]>
+}
+
+export class OrderBookAsksStorage extends StorageBase {
+    protected getPrefix() {
+        return 'OrderBook'
+    }
+
+    protected getName() {
+        return 'Asks'
+    }
+
+    get isV52(): boolean {
+        return this.getTypeHash() === 'fdbb8b3c2f5faed36a08bc7c2e1c4acfc1a41dc91b35b9fba91525cceaeb8abb'
+    }
+
+    get asV52(): OrderBookAsksStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+export interface OrderBookAsksStorageV52 {
+    get(key1: v52.TradingPair, key2: bigint): Promise<(bigint[] | undefined)>
+    getAll(): Promise<bigint[][]>
+    getMany(keys: [v52.TradingPair, bigint][]): Promise<(bigint[] | undefined)[]>
+    getKeys(): Promise<[v52.TradingPair, bigint][]>
+    getKeys(key1: v52.TradingPair): Promise<[v52.TradingPair, bigint][]>
+    getKeys(key1: v52.TradingPair, key2: bigint): Promise<[v52.TradingPair, bigint][]>
+    getKeysPaged(pageSize: number): AsyncIterable<[v52.TradingPair, bigint][]>
+    getKeysPaged(pageSize: number, key1: v52.TradingPair): AsyncIterable<[v52.TradingPair, bigint][]>
+    getKeysPaged(pageSize: number, key1: v52.TradingPair, key2: bigint): AsyncIterable<[v52.TradingPair, bigint][]>
+    getPairs(): Promise<[k: [v52.TradingPair, bigint], v: bigint[]][]>
+    getPairs(key1: v52.TradingPair): Promise<[k: [v52.TradingPair, bigint], v: bigint[]][]>
+    getPairs(key1: v52.TradingPair, key2: bigint): Promise<[k: [v52.TradingPair, bigint], v: bigint[]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: [v52.TradingPair, bigint], v: bigint[]][]>
+    getPairsPaged(pageSize: number, key1: v52.TradingPair): AsyncIterable<[k: [v52.TradingPair, bigint], v: bigint[]][]>
+    getPairsPaged(pageSize: number, key1: v52.TradingPair, key2: bigint): AsyncIterable<[k: [v52.TradingPair, bigint], v: bigint[]][]>
+}
+
+export class OrderBookBidsStorage extends StorageBase {
+    protected getPrefix() {
+        return 'OrderBook'
+    }
+
+    protected getName() {
+        return 'Bids'
+    }
+
+    get isV52(): boolean {
+        return this.getTypeHash() === 'fdbb8b3c2f5faed36a08bc7c2e1c4acfc1a41dc91b35b9fba91525cceaeb8abb'
+    }
+
+    get asV52(): OrderBookBidsStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+export interface OrderBookBidsStorageV52 {
+    get(key1: v52.TradingPair, key2: bigint): Promise<(bigint[] | undefined)>
+    getAll(): Promise<bigint[][]>
+    getMany(keys: [v52.TradingPair, bigint][]): Promise<(bigint[] | undefined)[]>
+    getKeys(): Promise<[v52.TradingPair, bigint][]>
+    getKeys(key1: v52.TradingPair): Promise<[v52.TradingPair, bigint][]>
+    getKeys(key1: v52.TradingPair, key2: bigint): Promise<[v52.TradingPair, bigint][]>
+    getKeysPaged(pageSize: number): AsyncIterable<[v52.TradingPair, bigint][]>
+    getKeysPaged(pageSize: number, key1: v52.TradingPair): AsyncIterable<[v52.TradingPair, bigint][]>
+    getKeysPaged(pageSize: number, key1: v52.TradingPair, key2: bigint): AsyncIterable<[v52.TradingPair, bigint][]>
+    getPairs(): Promise<[k: [v52.TradingPair, bigint], v: bigint[]][]>
+    getPairs(key1: v52.TradingPair): Promise<[k: [v52.TradingPair, bigint], v: bigint[]][]>
+    getPairs(key1: v52.TradingPair, key2: bigint): Promise<[k: [v52.TradingPair, bigint], v: bigint[]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: [v52.TradingPair, bigint], v: bigint[]][]>
+    getPairsPaged(pageSize: number, key1: v52.TradingPair): AsyncIterable<[k: [v52.TradingPair, bigint], v: bigint[]][]>
+    getPairsPaged(pageSize: number, key1: v52.TradingPair, key2: bigint): AsyncIterable<[k: [v52.TradingPair, bigint], v: bigint[]][]>
+}
+
+export class OrderBookLimitOrdersStorage extends StorageBase {
+    protected getPrefix() {
+        return 'OrderBook'
+    }
+
+    protected getName() {
+        return 'LimitOrders'
+    }
+
+    get isV52(): boolean {
+        return this.getTypeHash() === '5238f2281326a1a939a24acffc59cfcbe5f7c49d3741c4b0b98fc0c833911a50'
+    }
+
+    get asV52(): OrderBookLimitOrdersStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+export interface OrderBookLimitOrdersStorageV52 {
+    get(key1: v52.TradingPair, key2: bigint): Promise<(v52.LimitOrder | undefined)>
+    getAll(): Promise<v52.LimitOrder[]>
+    getMany(keys: [v52.TradingPair, bigint][]): Promise<(v52.LimitOrder | undefined)[]>
+    getKeys(): Promise<[v52.TradingPair, bigint][]>
+    getKeys(key1: v52.TradingPair): Promise<[v52.TradingPair, bigint][]>
+    getKeys(key1: v52.TradingPair, key2: bigint): Promise<[v52.TradingPair, bigint][]>
+    getKeysPaged(pageSize: number): AsyncIterable<[v52.TradingPair, bigint][]>
+    getKeysPaged(pageSize: number, key1: v52.TradingPair): AsyncIterable<[v52.TradingPair, bigint][]>
+    getKeysPaged(pageSize: number, key1: v52.TradingPair, key2: bigint): AsyncIterable<[v52.TradingPair, bigint][]>
+    getPairs(): Promise<[k: [v52.TradingPair, bigint], v: v52.LimitOrder][]>
+    getPairs(key1: v52.TradingPair): Promise<[k: [v52.TradingPair, bigint], v: v52.LimitOrder][]>
+    getPairs(key1: v52.TradingPair, key2: bigint): Promise<[k: [v52.TradingPair, bigint], v: v52.LimitOrder][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: [v52.TradingPair, bigint], v: v52.LimitOrder][]>
+    getPairsPaged(pageSize: number, key1: v52.TradingPair): AsyncIterable<[k: [v52.TradingPair, bigint], v: v52.LimitOrder][]>
+    getPairsPaged(pageSize: number, key1: v52.TradingPair, key2: bigint): AsyncIterable<[k: [v52.TradingPair, bigint], v: v52.LimitOrder][]>
+}
+
+export class OrderBookOrderBooksStorage extends StorageBase {
+    protected getPrefix() {
+        return 'OrderBook'
+    }
+
+    protected getName() {
+        return 'OrderBooks'
+    }
+
+    get isV52(): boolean {
+        return this.getTypeHash() === '63d4561d8c500d6b7e145067f36374d28e5bf503d317a24307f8d3bdb5e8007d'
+    }
+
+    get asV52(): OrderBookOrderBooksStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+export interface OrderBookOrderBooksStorageV52 {
+    get(key: v52.TradingPair): Promise<(v52.OrderBook | undefined)>
+    getAll(): Promise<v52.OrderBook[]>
+    getMany(keys: v52.TradingPair[]): Promise<(v52.OrderBook | undefined)[]>
+    getKeys(): Promise<v52.TradingPair[]>
+    getKeys(key: v52.TradingPair): Promise<v52.TradingPair[]>
+    getKeysPaged(pageSize: number): AsyncIterable<v52.TradingPair[]>
+    getKeysPaged(pageSize: number, key: v52.TradingPair): AsyncIterable<v52.TradingPair[]>
+    getPairs(): Promise<[k: v52.TradingPair, v: v52.OrderBook][]>
+    getPairs(key: v52.TradingPair): Promise<[k: v52.TradingPair, v: v52.OrderBook][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: v52.TradingPair, v: v52.OrderBook][]>
+    getPairsPaged(pageSize: number, key: v52.TradingPair): AsyncIterable<[k: v52.TradingPair, v: v52.OrderBook][]>
+}
+
+export class OrderBookUserLimitOrdersStorage extends StorageBase {
+    protected getPrefix() {
+        return 'OrderBook'
+    }
+
+    protected getName() {
+        return 'UserLimitOrders'
+    }
+
+    get isV52(): boolean {
+        return this.getTypeHash() === '567477493a62053d034a7b4b0031edf1523b8886e075ba2a130ba05f364af723'
+    }
+
+    get asV52(): OrderBookUserLimitOrdersStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+export interface OrderBookUserLimitOrdersStorageV52 {
+    get(key1: Uint8Array, key2: v52.TradingPair): Promise<(bigint[] | undefined)>
+    getAll(): Promise<bigint[][]>
+    getMany(keys: [Uint8Array, v52.TradingPair][]): Promise<(bigint[] | undefined)[]>
+    getKeys(): Promise<[Uint8Array, v52.TradingPair][]>
+    getKeys(key1: Uint8Array): Promise<[Uint8Array, v52.TradingPair][]>
+    getKeys(key1: Uint8Array, key2: v52.TradingPair): Promise<[Uint8Array, v52.TradingPair][]>
+    getKeysPaged(pageSize: number): AsyncIterable<[Uint8Array, v52.TradingPair][]>
+    getKeysPaged(pageSize: number, key1: Uint8Array): AsyncIterable<[Uint8Array, v52.TradingPair][]>
+    getKeysPaged(pageSize: number, key1: Uint8Array, key2: v52.TradingPair): AsyncIterable<[Uint8Array, v52.TradingPair][]>
+    getPairs(): Promise<[k: [Uint8Array, v52.TradingPair], v: bigint[]][]>
+    getPairs(key1: Uint8Array): Promise<[k: [Uint8Array, v52.TradingPair], v: bigint[]][]>
+    getPairs(key1: Uint8Array, key2: v52.TradingPair): Promise<[k: [Uint8Array, v52.TradingPair], v: bigint[]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: [Uint8Array, v52.TradingPair], v: bigint[]][]>
+    getPairsPaged(pageSize: number, key1: Uint8Array): AsyncIterable<[k: [Uint8Array, v52.TradingPair], v: bigint[]][]>
+    getPairsPaged(pageSize: number, key1: Uint8Array, key2: v52.TradingPair): AsyncIterable<[k: [Uint8Array, v52.TradingPair], v: bigint[]][]>
 }
 
 export class PermissionsOwnersStorage extends StorageBase {
@@ -10216,6 +13172,81 @@ export interface PoolXYKTotalIssuancesStorageV41 {
     getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: bigint][]>
 }
 
+export class PreimagePreimageForStorage extends StorageBase {
+    protected getPrefix() {
+        return 'Preimage'
+    }
+
+    protected getName() {
+        return 'PreimageFor'
+    }
+
+    get isV51(): boolean {
+        return this.getTypeHash() === '55fa1a08a9fac4bcf15d53fce590e3fb5af7fbc408ac4b8e1ed28f5f8a242534'
+    }
+
+    get asV51(): PreimagePreimageForStorageV51 {
+        assert(this.isV51)
+        return this as any
+    }
+}
+
+export interface PreimagePreimageForStorageV51 {
+    get(key: [Uint8Array, number]): Promise<(Uint8Array | undefined)>
+    getAll(): Promise<Uint8Array[]>
+    getMany(keys: [Uint8Array, number][]): Promise<(Uint8Array | undefined)[]>
+    getKeys(): Promise<[Uint8Array, number][]>
+    getKeys(key: [Uint8Array, number]): Promise<[Uint8Array, number][]>
+    getKeysPaged(pageSize: number): AsyncIterable<[Uint8Array, number][]>
+    getKeysPaged(pageSize: number, key: [Uint8Array, number]): AsyncIterable<[Uint8Array, number][]>
+    getPairs(): Promise<[k: [Uint8Array, number], v: Uint8Array][]>
+    getPairs(key: [Uint8Array, number]): Promise<[k: [Uint8Array, number], v: Uint8Array][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: [Uint8Array, number], v: Uint8Array][]>
+    getPairsPaged(pageSize: number, key: [Uint8Array, number]): AsyncIterable<[k: [Uint8Array, number], v: Uint8Array][]>
+}
+
+export class PreimageStatusForStorage extends StorageBase {
+    protected getPrefix() {
+        return 'Preimage'
+    }
+
+    protected getName() {
+        return 'StatusFor'
+    }
+
+    /**
+     *  The request status of a given hash.
+     */
+    get isV51(): boolean {
+        return this.getTypeHash() === '16647d6a818ed8802ff108ffe98014d8de07d069008bb466b26b7367e684d574'
+    }
+
+    /**
+     *  The request status of a given hash.
+     */
+    get asV51(): PreimageStatusForStorageV51 {
+        assert(this.isV51)
+        return this as any
+    }
+}
+
+/**
+ *  The request status of a given hash.
+ */
+export interface PreimageStatusForStorageV51 {
+    get(key: Uint8Array): Promise<(v51.Type_687 | undefined)>
+    getAll(): Promise<v51.Type_687[]>
+    getMany(keys: Uint8Array[]): Promise<(v51.Type_687 | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v51.Type_687][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v51.Type_687][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v51.Type_687][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v51.Type_687][]>
+}
+
 export class PriceToolsPriceInfosStorage extends StorageBase {
     protected getPrefix() {
         return 'PriceTools'
@@ -10401,6 +13432,38 @@ export interface PswapDistributionBurnUpdateInfoStorageV41 {
  */
 export interface PswapDistributionBurnUpdateInfoStorageV42 {
     get(): Promise<[v42.FixedPoint, v42.FixedPoint]>
+}
+
+export class PswapDistributionBuyBackXSTFractionStorage extends StorageBase {
+    protected getPrefix() {
+        return 'PswapDistribution'
+    }
+
+    protected getName() {
+        return 'BuyBackXSTFraction'
+    }
+
+    /**
+     *  Fraction of PSWAP that could be buy backed to XST
+     */
+    get isV51(): boolean {
+        return this.getTypeHash() === 'e365f94b43a2babdffb536594311f62361cc55ba0f1a6f5f0b5fbd86711c99b1'
+    }
+
+    /**
+     *  Fraction of PSWAP that could be buy backed to XST
+     */
+    get asV51(): PswapDistributionBuyBackXSTFractionStorageV51 {
+        assert(this.isV51)
+        return this as any
+    }
+}
+
+/**
+ *  Fraction of PSWAP that could be buy backed to XST
+ */
+export interface PswapDistributionBuyBackXSTFractionStorageV51 {
+    get(): Promise<v51.FixedPoint>
 }
 
 export class PswapDistributionClaimableSharesStorage extends StorageBase {
@@ -10974,6 +14037,15 @@ export class RewardsReservesAccStorage extends StorageBase {
         assert(this.isV46)
         return this as any
     }
+
+    get isV54(): boolean {
+        return this.getTypeHash() === 'e4f6281a7dab8ee982f1ecb211a6059f823a6c9e8bd9aa4205aa1c989df3a74a'
+    }
+
+    get asV54(): RewardsReservesAccStorageV54 {
+        assert(this.isV54)
+        return this as any
+    }
 }
 
 export interface RewardsReservesAccStorageV41 {
@@ -10986,6 +14058,10 @@ export interface RewardsReservesAccStorageV42 {
 
 export interface RewardsReservesAccStorageV46 {
     get(): Promise<v46.TechAccountId>
+}
+
+export interface RewardsReservesAccStorageV54 {
+    get(): Promise<v54.TechAccountId>
 }
 
 export class RewardsTotalClaimableValStorage extends StorageBase {
@@ -11409,6 +14485,51 @@ export class SchedulerAgendaStorage extends StorageBase {
         assert(this.isV48)
         return this as any
     }
+
+    /**
+     *  Items to be executed, indexed by the block number that they should be executed on.
+     */
+    get isV51(): boolean {
+        return this.getTypeHash() === '63bcd14246ac86eb31686fde82dee685388f1ec42aef598a2b7047ace8ac3e47'
+    }
+
+    /**
+     *  Items to be executed, indexed by the block number that they should be executed on.
+     */
+    get asV51(): SchedulerAgendaStorageV51 {
+        assert(this.isV51)
+        return this as any
+    }
+
+    /**
+     *  Items to be executed, indexed by the block number that they should be executed on.
+     */
+    get isV52(): boolean {
+        return this.getTypeHash() === '2ff1f90bd59c443bd3651782d6bdd59e22459e4eaab9fd215f47925f3ec4ea86'
+    }
+
+    /**
+     *  Items to be executed, indexed by the block number that they should be executed on.
+     */
+    get asV52(): SchedulerAgendaStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+
+    /**
+     *  Items to be executed, indexed by the block number that they should be executed on.
+     */
+    get isV54(): boolean {
+        return this.getTypeHash() === '77c856184db4f799c9a20a12a5598ed25f97430da580aed6c66e0c02ba298685'
+    }
+
+    /**
+     *  Items to be executed, indexed by the block number that they should be executed on.
+     */
+    get asV54(): SchedulerAgendaStorageV54 {
+        assert(this.isV54)
+        return this as any
+    }
 }
 
 /**
@@ -11530,6 +14651,80 @@ export interface SchedulerAgendaStorageV48 {
     getPairsPaged(pageSize: number, key: number): AsyncIterable<[k: number, v: (v48.ScheduledV3 | undefined)[]][]>
 }
 
+/**
+ *  Items to be executed, indexed by the block number that they should be executed on.
+ */
+export interface SchedulerAgendaStorageV51 {
+    get(key: number): Promise<(v51.Scheduled | undefined)[]>
+    getAll(): Promise<(v51.Scheduled | undefined)[][]>
+    getMany(keys: number[]): Promise<(v51.Scheduled | undefined)[][]>
+    getKeys(): Promise<number[]>
+    getKeys(key: number): Promise<number[]>
+    getKeysPaged(pageSize: number): AsyncIterable<number[]>
+    getKeysPaged(pageSize: number, key: number): AsyncIterable<number[]>
+    getPairs(): Promise<[k: number, v: (v51.Scheduled | undefined)[]][]>
+    getPairs(key: number): Promise<[k: number, v: (v51.Scheduled | undefined)[]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: number, v: (v51.Scheduled | undefined)[]][]>
+    getPairsPaged(pageSize: number, key: number): AsyncIterable<[k: number, v: (v51.Scheduled | undefined)[]][]>
+}
+
+/**
+ *  Items to be executed, indexed by the block number that they should be executed on.
+ */
+export interface SchedulerAgendaStorageV52 {
+    get(key: number): Promise<(v52.Scheduled | undefined)[]>
+    getAll(): Promise<(v52.Scheduled | undefined)[][]>
+    getMany(keys: number[]): Promise<(v52.Scheduled | undefined)[][]>
+    getKeys(): Promise<number[]>
+    getKeys(key: number): Promise<number[]>
+    getKeysPaged(pageSize: number): AsyncIterable<number[]>
+    getKeysPaged(pageSize: number, key: number): AsyncIterable<number[]>
+    getPairs(): Promise<[k: number, v: (v52.Scheduled | undefined)[]][]>
+    getPairs(key: number): Promise<[k: number, v: (v52.Scheduled | undefined)[]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: number, v: (v52.Scheduled | undefined)[]][]>
+    getPairsPaged(pageSize: number, key: number): AsyncIterable<[k: number, v: (v52.Scheduled | undefined)[]][]>
+}
+
+/**
+ *  Items to be executed, indexed by the block number that they should be executed on.
+ */
+export interface SchedulerAgendaStorageV54 {
+    get(key: number): Promise<(v54.Scheduled | undefined)[]>
+    getAll(): Promise<(v54.Scheduled | undefined)[][]>
+    getMany(keys: number[]): Promise<(v54.Scheduled | undefined)[][]>
+    getKeys(): Promise<number[]>
+    getKeys(key: number): Promise<number[]>
+    getKeysPaged(pageSize: number): AsyncIterable<number[]>
+    getKeysPaged(pageSize: number, key: number): AsyncIterable<number[]>
+    getPairs(): Promise<[k: number, v: (v54.Scheduled | undefined)[]][]>
+    getPairs(key: number): Promise<[k: number, v: (v54.Scheduled | undefined)[]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: number, v: (v54.Scheduled | undefined)[]][]>
+    getPairsPaged(pageSize: number, key: number): AsyncIterable<[k: number, v: (v54.Scheduled | undefined)[]][]>
+}
+
+export class SchedulerIncompleteSinceStorage extends StorageBase {
+    protected getPrefix() {
+        return 'Scheduler'
+    }
+
+    protected getName() {
+        return 'IncompleteSince'
+    }
+
+    get isV51(): boolean {
+        return this.getTypeHash() === 'a926ad48d1a07d1162c5fdb99f3f6cef39c7c5a115a92ff9ccf0357bae4bf2ed'
+    }
+
+    get asV51(): SchedulerIncompleteSinceStorageV51 {
+        assert(this.isV51)
+        return this as any
+    }
+}
+
+export interface SchedulerIncompleteSinceStorageV51 {
+    get(): Promise<(number | undefined)>
+}
+
 export class SchedulerLookupStorage extends StorageBase {
     protected getPrefix() {
         return 'Scheduler'
@@ -11553,12 +14748,53 @@ export class SchedulerLookupStorage extends StorageBase {
         assert(this.isV41)
         return this as any
     }
+
+    /**
+     *  Lookup from a name to the block number and index of the task.
+     * 
+     *  For v3 -> v4 the previously unbounded identities are Blake2-256 hashed to form the v4
+     *  identities.
+     */
+    get isV51(): boolean {
+        return this.getTypeHash() === '2072b6dc95511eafaaa8d3c8e8abab0becedb083c12e24f0be979006686149cd'
+    }
+
+    /**
+     *  Lookup from a name to the block number and index of the task.
+     * 
+     *  For v3 -> v4 the previously unbounded identities are Blake2-256 hashed to form the v4
+     *  identities.
+     */
+    get asV51(): SchedulerLookupStorageV51 {
+        assert(this.isV51)
+        return this as any
+    }
 }
 
 /**
  *  Lookup from identity to the block number and index of the task.
  */
 export interface SchedulerLookupStorageV41 {
+    get(key: Uint8Array): Promise<([number, number] | undefined)>
+    getAll(): Promise<[number, number][]>
+    getMany(keys: Uint8Array[]): Promise<([number, number] | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: [number, number]][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: [number, number]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: [number, number]][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: [number, number]][]>
+}
+
+/**
+ *  Lookup from a name to the block number and index of the task.
+ * 
+ *  For v3 -> v4 the previously unbounded identities are Blake2-256 hashed to form the v4
+ *  identities.
+ */
+export interface SchedulerLookupStorageV51 {
     get(key: Uint8Array): Promise<([number, number] | undefined)>
     getAll(): Promise<[number, number][]>
     getMany(keys: Uint8Array[]): Promise<([number, number] | undefined)[]>
@@ -13153,6 +16389,38 @@ export interface StakingMinValidatorBondStorageV42 {
     get(): Promise<bigint>
 }
 
+export class StakingMinimumActiveStakeStorage extends StorageBase {
+    protected getPrefix() {
+        return 'Staking'
+    }
+
+    protected getName() {
+        return 'MinimumActiveStake'
+    }
+
+    /**
+     *  The minimum active nominator stake of the last successful election.
+     */
+    get isV51(): boolean {
+        return this.getTypeHash() === 'f8ebe28eb30158172c0ccf672f7747c46a244f892d08ef2ebcbaadde34a26bc0'
+    }
+
+    /**
+     *  The minimum active nominator stake of the last successful election.
+     */
+    get asV51(): StakingMinimumActiveStakeStorageV51 {
+        assert(this.isV51)
+        return this as any
+    }
+}
+
+/**
+ *  The minimum active nominator stake of the last successful election.
+ */
+export interface StakingMinimumActiveStakeStorageV51 {
+    get(): Promise<bigint>
+}
+
 export class StakingMinimumValidatorCountStorage extends StorageBase {
     protected getPrefix() {
         return 'Staking'
@@ -13927,6 +17195,432 @@ export interface StakingValidatorsStorageV41 {
     getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v41.ValidatorPrefs][]>
 }
 
+export class SubstrateBridgeAppAllowedParachainAssetsStorage extends StorageBase {
+    protected getPrefix() {
+        return 'SubstrateBridgeApp'
+    }
+
+    protected getName() {
+        return 'AllowedParachainAssets'
+    }
+
+    get isV58(): boolean {
+        return this.getTypeHash() === '86cd54395d6bbf8f2f19c821851b7346628829ff06f16e6474c5999c0027ecd1'
+    }
+
+    get asV58(): SubstrateBridgeAppAllowedParachainAssetsStorageV58 {
+        assert(this.isV58)
+        return this as any
+    }
+}
+
+export interface SubstrateBridgeAppAllowedParachainAssetsStorageV58 {
+    get(key1: v58.SubNetworkId, key2: number): Promise<v58.AssetId32[]>
+    getAll(): Promise<v58.AssetId32[][]>
+    getMany(keys: [v58.SubNetworkId, number][]): Promise<v58.AssetId32[][]>
+    getKeys(): Promise<[v58.SubNetworkId, number][]>
+    getKeys(key1: v58.SubNetworkId): Promise<[v58.SubNetworkId, number][]>
+    getKeys(key1: v58.SubNetworkId, key2: number): Promise<[v58.SubNetworkId, number][]>
+    getKeysPaged(pageSize: number): AsyncIterable<[v58.SubNetworkId, number][]>
+    getKeysPaged(pageSize: number, key1: v58.SubNetworkId): AsyncIterable<[v58.SubNetworkId, number][]>
+    getKeysPaged(pageSize: number, key1: v58.SubNetworkId, key2: number): AsyncIterable<[v58.SubNetworkId, number][]>
+    getPairs(): Promise<[k: [v58.SubNetworkId, number], v: v58.AssetId32[]][]>
+    getPairs(key1: v58.SubNetworkId): Promise<[k: [v58.SubNetworkId, number], v: v58.AssetId32[]][]>
+    getPairs(key1: v58.SubNetworkId, key2: number): Promise<[k: [v58.SubNetworkId, number], v: v58.AssetId32[]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: [v58.SubNetworkId, number], v: v58.AssetId32[]][]>
+    getPairsPaged(pageSize: number, key1: v58.SubNetworkId): AsyncIterable<[k: [v58.SubNetworkId, number], v: v58.AssetId32[]][]>
+    getPairsPaged(pageSize: number, key1: v58.SubNetworkId, key2: number): AsyncIterable<[k: [v58.SubNetworkId, number], v: v58.AssetId32[]][]>
+}
+
+export class SubstrateBridgeAppAssetKindsStorage extends StorageBase {
+    protected getPrefix() {
+        return 'SubstrateBridgeApp'
+    }
+
+    protected getName() {
+        return 'AssetKinds'
+    }
+
+    get isV52(): boolean {
+        return this.getTypeHash() === 'f3597faa3edb4e43a673224f23310dc97ef006d0ae47880b07e949cbdcc64152'
+    }
+
+    get asV52(): SubstrateBridgeAppAssetKindsStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+export interface SubstrateBridgeAppAssetKindsStorageV52 {
+    get(key1: v52.SubNetworkId, key2: v52.AssetId32): Promise<(v52.Type_572 | undefined)>
+    getAll(): Promise<v52.Type_572[]>
+    getMany(keys: [v52.SubNetworkId, v52.AssetId32][]): Promise<(v52.Type_572 | undefined)[]>
+    getKeys(): Promise<[v52.SubNetworkId, v52.AssetId32][]>
+    getKeys(key1: v52.SubNetworkId): Promise<[v52.SubNetworkId, v52.AssetId32][]>
+    getKeys(key1: v52.SubNetworkId, key2: v52.AssetId32): Promise<[v52.SubNetworkId, v52.AssetId32][]>
+    getKeysPaged(pageSize: number): AsyncIterable<[v52.SubNetworkId, v52.AssetId32][]>
+    getKeysPaged(pageSize: number, key1: v52.SubNetworkId): AsyncIterable<[v52.SubNetworkId, v52.AssetId32][]>
+    getKeysPaged(pageSize: number, key1: v52.SubNetworkId, key2: v52.AssetId32): AsyncIterable<[v52.SubNetworkId, v52.AssetId32][]>
+    getPairs(): Promise<[k: [v52.SubNetworkId, v52.AssetId32], v: v52.Type_572][]>
+    getPairs(key1: v52.SubNetworkId): Promise<[k: [v52.SubNetworkId, v52.AssetId32], v: v52.Type_572][]>
+    getPairs(key1: v52.SubNetworkId, key2: v52.AssetId32): Promise<[k: [v52.SubNetworkId, v52.AssetId32], v: v52.Type_572][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: [v52.SubNetworkId, v52.AssetId32], v: v52.Type_572][]>
+    getPairsPaged(pageSize: number, key1: v52.SubNetworkId): AsyncIterable<[k: [v52.SubNetworkId, v52.AssetId32], v: v52.Type_572][]>
+    getPairsPaged(pageSize: number, key1: v52.SubNetworkId, key2: v52.AssetId32): AsyncIterable<[k: [v52.SubNetworkId, v52.AssetId32], v: v52.Type_572][]>
+}
+
+export class SubstrateBridgeAppBridgeTransferLimitStorage extends StorageBase {
+    protected getPrefix() {
+        return 'SubstrateBridgeApp'
+    }
+
+    protected getName() {
+        return 'BridgeTransferLimit'
+    }
+
+    get isV58(): boolean {
+        return this.getTypeHash() === '8339208fdff8cc2cbfb9fe1daa9bd886d23b8951771ccf6b00d8cb68da55bcc5'
+    }
+
+    get asV58(): SubstrateBridgeAppBridgeTransferLimitStorageV58 {
+        assert(this.isV58)
+        return this as any
+    }
+}
+
+export interface SubstrateBridgeAppBridgeTransferLimitStorageV58 {
+    get(): Promise<(bigint | undefined)>
+}
+
+export class SubstrateBridgeAppRelaychainAssetStorage extends StorageBase {
+    protected getPrefix() {
+        return 'SubstrateBridgeApp'
+    }
+
+    protected getName() {
+        return 'RelaychainAsset'
+    }
+
+    get isV58(): boolean {
+        return this.getTypeHash() === '8f3cb4f654360e0179a243ccda3d99112ea56080d54141a2c21a6bca1ea515ed'
+    }
+
+    get asV58(): SubstrateBridgeAppRelaychainAssetStorageV58 {
+        assert(this.isV58)
+        return this as any
+    }
+}
+
+export interface SubstrateBridgeAppRelaychainAssetStorageV58 {
+    get(key: v58.SubNetworkId): Promise<(v58.AssetId32 | undefined)>
+    getAll(): Promise<v58.AssetId32[]>
+    getMany(keys: v58.SubNetworkId[]): Promise<(v58.AssetId32 | undefined)[]>
+    getKeys(): Promise<v58.SubNetworkId[]>
+    getKeys(key: v58.SubNetworkId): Promise<v58.SubNetworkId[]>
+    getKeysPaged(pageSize: number): AsyncIterable<v58.SubNetworkId[]>
+    getKeysPaged(pageSize: number, key: v58.SubNetworkId): AsyncIterable<v58.SubNetworkId[]>
+    getPairs(): Promise<[k: v58.SubNetworkId, v: v58.AssetId32][]>
+    getPairs(key: v58.SubNetworkId): Promise<[k: v58.SubNetworkId, v: v58.AssetId32][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: v58.SubNetworkId, v: v58.AssetId32][]>
+    getPairsPaged(pageSize: number, key: v58.SubNetworkId): AsyncIterable<[k: v58.SubNetworkId, v: v58.AssetId32][]>
+}
+
+export class SubstrateBridgeAppSidechainPrecisionStorage extends StorageBase {
+    protected getPrefix() {
+        return 'SubstrateBridgeApp'
+    }
+
+    protected getName() {
+        return 'SidechainPrecision'
+    }
+
+    get isV54(): boolean {
+        return this.getTypeHash() === '297ea364a7fc6eb3da3bc454ce86c79e1a7cfe088917276137b42e83b4137b72'
+    }
+
+    get asV54(): SubstrateBridgeAppSidechainPrecisionStorageV54 {
+        assert(this.isV54)
+        return this as any
+    }
+}
+
+export interface SubstrateBridgeAppSidechainPrecisionStorageV54 {
+    get(key1: v54.SubNetworkId, key2: v54.AssetId32): Promise<(number | undefined)>
+    getAll(): Promise<number[]>
+    getMany(keys: [v54.SubNetworkId, v54.AssetId32][]): Promise<(number | undefined)[]>
+    getKeys(): Promise<[v54.SubNetworkId, v54.AssetId32][]>
+    getKeys(key1: v54.SubNetworkId): Promise<[v54.SubNetworkId, v54.AssetId32][]>
+    getKeys(key1: v54.SubNetworkId, key2: v54.AssetId32): Promise<[v54.SubNetworkId, v54.AssetId32][]>
+    getKeysPaged(pageSize: number): AsyncIterable<[v54.SubNetworkId, v54.AssetId32][]>
+    getKeysPaged(pageSize: number, key1: v54.SubNetworkId): AsyncIterable<[v54.SubNetworkId, v54.AssetId32][]>
+    getKeysPaged(pageSize: number, key1: v54.SubNetworkId, key2: v54.AssetId32): AsyncIterable<[v54.SubNetworkId, v54.AssetId32][]>
+    getPairs(): Promise<[k: [v54.SubNetworkId, v54.AssetId32], v: number][]>
+    getPairs(key1: v54.SubNetworkId): Promise<[k: [v54.SubNetworkId, v54.AssetId32], v: number][]>
+    getPairs(key1: v54.SubNetworkId, key2: v54.AssetId32): Promise<[k: [v54.SubNetworkId, v54.AssetId32], v: number][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: [v54.SubNetworkId, v54.AssetId32], v: number][]>
+    getPairsPaged(pageSize: number, key1: v54.SubNetworkId): AsyncIterable<[k: [v54.SubNetworkId, v54.AssetId32], v: number][]>
+    getPairsPaged(pageSize: number, key1: v54.SubNetworkId, key2: v54.AssetId32): AsyncIterable<[k: [v54.SubNetworkId, v54.AssetId32], v: number][]>
+}
+
+export class SubstrateBridgeInboundChannelChannelNoncesStorage extends StorageBase {
+    protected getPrefix() {
+        return 'SubstrateBridgeInboundChannel'
+    }
+
+    protected getName() {
+        return 'ChannelNonces'
+    }
+
+    get isV52(): boolean {
+        return this.getTypeHash() === '81557a11b27f627729a12f57f72a2d0fab91e8fef67bbddef95ee874e43d7d46'
+    }
+
+    get asV52(): SubstrateBridgeInboundChannelChannelNoncesStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+export interface SubstrateBridgeInboundChannelChannelNoncesStorageV52 {
+    get(key: v52.SubNetworkId): Promise<bigint>
+    getAll(): Promise<bigint[]>
+    getMany(keys: v52.SubNetworkId[]): Promise<bigint[]>
+    getKeys(): Promise<v52.SubNetworkId[]>
+    getKeys(key: v52.SubNetworkId): Promise<v52.SubNetworkId[]>
+    getKeysPaged(pageSize: number): AsyncIterable<v52.SubNetworkId[]>
+    getKeysPaged(pageSize: number, key: v52.SubNetworkId): AsyncIterable<v52.SubNetworkId[]>
+    getPairs(): Promise<[k: v52.SubNetworkId, v: bigint][]>
+    getPairs(key: v52.SubNetworkId): Promise<[k: v52.SubNetworkId, v: bigint][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: v52.SubNetworkId, v: bigint][]>
+    getPairsPaged(pageSize: number, key: v52.SubNetworkId): AsyncIterable<[k: v52.SubNetworkId, v: bigint][]>
+}
+
+export class SubstrateBridgeInboundChannelRewardFractionStorage extends StorageBase {
+    protected getPrefix() {
+        return 'SubstrateBridgeInboundChannel'
+    }
+
+    protected getName() {
+        return 'RewardFraction'
+    }
+
+    get isV52(): boolean {
+        return this.getTypeHash() === '81bbbe8e62451cbcc227306706c919527aa2538970bd6d67a9969dd52c257d02'
+    }
+
+    get asV52(): SubstrateBridgeInboundChannelRewardFractionStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+export interface SubstrateBridgeInboundChannelRewardFractionStorageV52 {
+    get(): Promise<number>
+}
+
+export class SubstrateBridgeOutboundChannelChannelNoncesStorage extends StorageBase {
+    protected getPrefix() {
+        return 'SubstrateBridgeOutboundChannel'
+    }
+
+    protected getName() {
+        return 'ChannelNonces'
+    }
+
+    get isV52(): boolean {
+        return this.getTypeHash() === '81557a11b27f627729a12f57f72a2d0fab91e8fef67bbddef95ee874e43d7d46'
+    }
+
+    get asV52(): SubstrateBridgeOutboundChannelChannelNoncesStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+export interface SubstrateBridgeOutboundChannelChannelNoncesStorageV52 {
+    get(key: v52.SubNetworkId): Promise<bigint>
+    getAll(): Promise<bigint[]>
+    getMany(keys: v52.SubNetworkId[]): Promise<bigint[]>
+    getKeys(): Promise<v52.SubNetworkId[]>
+    getKeys(key: v52.SubNetworkId): Promise<v52.SubNetworkId[]>
+    getKeysPaged(pageSize: number): AsyncIterable<v52.SubNetworkId[]>
+    getKeysPaged(pageSize: number, key: v52.SubNetworkId): AsyncIterable<v52.SubNetworkId[]>
+    getPairs(): Promise<[k: v52.SubNetworkId, v: bigint][]>
+    getPairs(key: v52.SubNetworkId): Promise<[k: v52.SubNetworkId, v: bigint][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: v52.SubNetworkId, v: bigint][]>
+    getPairsPaged(pageSize: number, key: v52.SubNetworkId): AsyncIterable<[k: v52.SubNetworkId, v: bigint][]>
+}
+
+export class SubstrateBridgeOutboundChannelFeeStorage extends StorageBase {
+    protected getPrefix() {
+        return 'SubstrateBridgeOutboundChannel'
+    }
+
+    protected getName() {
+        return 'Fee'
+    }
+
+    get isV52(): boolean {
+        return this.getTypeHash() === 'f8ebe28eb30158172c0ccf672f7747c46a244f892d08ef2ebcbaadde34a26bc0'
+    }
+
+    get asV52(): SubstrateBridgeOutboundChannelFeeStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+export interface SubstrateBridgeOutboundChannelFeeStorageV52 {
+    get(): Promise<bigint>
+}
+
+export class SubstrateBridgeOutboundChannelIntervalStorage extends StorageBase {
+    protected getPrefix() {
+        return 'SubstrateBridgeOutboundChannel'
+    }
+
+    protected getName() {
+        return 'Interval'
+    }
+
+    /**
+     *  Interval between committing messages.
+     */
+    get isV52(): boolean {
+        return this.getTypeHash() === '81bbbe8e62451cbcc227306706c919527aa2538970bd6d67a9969dd52c257d02'
+    }
+
+    /**
+     *  Interval between committing messages.
+     */
+    get asV52(): SubstrateBridgeOutboundChannelIntervalStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+}
+
+/**
+ *  Interval between committing messages.
+ */
+export interface SubstrateBridgeOutboundChannelIntervalStorageV52 {
+    get(): Promise<number>
+}
+
+export class SubstrateBridgeOutboundChannelMessageQueuesStorage extends StorageBase {
+    protected getPrefix() {
+        return 'SubstrateBridgeOutboundChannel'
+    }
+
+    protected getName() {
+        return 'MessageQueues'
+    }
+
+    /**
+     *  Messages waiting to be committed. To update the queue, use `append_message_queue` and `take_message_queue` methods
+     *  (to keep correct value in [QueuesTotalGas]).
+     */
+    get isV52(): boolean {
+        return this.getTypeHash() === '77504812617d5f11786cf16b2763cc30ec3905bc9a8d3549b9c2bcbb9817b48d'
+    }
+
+    /**
+     *  Messages waiting to be committed. To update the queue, use `append_message_queue` and `take_message_queue` methods
+     *  (to keep correct value in [QueuesTotalGas]).
+     */
+    get asV52(): SubstrateBridgeOutboundChannelMessageQueuesStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+
+    /**
+     *  Messages waiting to be committed. To update the queue, use `append_message_queue` and `take_message_queue` methods
+     *  (to keep correct value in [QueuesTotalGas]).
+     */
+    get isV54(): boolean {
+        return this.getTypeHash() === '627c242aac91c29946caa4aebc617d4333277f5396196802cec4c85ec3753cb6'
+    }
+
+    /**
+     *  Messages waiting to be committed. To update the queue, use `append_message_queue` and `take_message_queue` methods
+     *  (to keep correct value in [QueuesTotalGas]).
+     */
+    get asV54(): SubstrateBridgeOutboundChannelMessageQueuesStorageV54 {
+        assert(this.isV54)
+        return this as any
+    }
+
+    /**
+     *  Messages waiting to be committed. To update the queue, use `append_message_queue` and `take_message_queue` methods
+     *  (to keep correct value in [QueuesTotalGas]).
+     */
+    get isV58(): boolean {
+        return this.getTypeHash() === '12598e9ed710edd17fbbc1e4bbd7c9c8d7c1b44920a082933852de96bb889e9c'
+    }
+
+    /**
+     *  Messages waiting to be committed. To update the queue, use `append_message_queue` and `take_message_queue` methods
+     *  (to keep correct value in [QueuesTotalGas]).
+     */
+    get asV58(): SubstrateBridgeOutboundChannelMessageQueuesStorageV58 {
+        assert(this.isV58)
+        return this as any
+    }
+}
+
+/**
+ *  Messages waiting to be committed. To update the queue, use `append_message_queue` and `take_message_queue` methods
+ *  (to keep correct value in [QueuesTotalGas]).
+ */
+export interface SubstrateBridgeOutboundChannelMessageQueuesStorageV52 {
+    get(key: v52.SubNetworkId): Promise<v52.ParachainMessage[]>
+    getAll(): Promise<v52.ParachainMessage[][]>
+    getMany(keys: v52.SubNetworkId[]): Promise<v52.ParachainMessage[][]>
+    getKeys(): Promise<v52.SubNetworkId[]>
+    getKeys(key: v52.SubNetworkId): Promise<v52.SubNetworkId[]>
+    getKeysPaged(pageSize: number): AsyncIterable<v52.SubNetworkId[]>
+    getKeysPaged(pageSize: number, key: v52.SubNetworkId): AsyncIterable<v52.SubNetworkId[]>
+    getPairs(): Promise<[k: v52.SubNetworkId, v: v52.ParachainMessage[]][]>
+    getPairs(key: v52.SubNetworkId): Promise<[k: v52.SubNetworkId, v: v52.ParachainMessage[]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: v52.SubNetworkId, v: v52.ParachainMessage[]][]>
+    getPairsPaged(pageSize: number, key: v52.SubNetworkId): AsyncIterable<[k: v52.SubNetworkId, v: v52.ParachainMessage[]][]>
+}
+
+/**
+ *  Messages waiting to be committed. To update the queue, use `append_message_queue` and `take_message_queue` methods
+ *  (to keep correct value in [QueuesTotalGas]).
+ */
+export interface SubstrateBridgeOutboundChannelMessageQueuesStorageV54 {
+    get(key: v54.SubNetworkId): Promise<v54.BridgeMessage[]>
+    getAll(): Promise<v54.BridgeMessage[][]>
+    getMany(keys: v54.SubNetworkId[]): Promise<v54.BridgeMessage[][]>
+    getKeys(): Promise<v54.SubNetworkId[]>
+    getKeys(key: v54.SubNetworkId): Promise<v54.SubNetworkId[]>
+    getKeysPaged(pageSize: number): AsyncIterable<v54.SubNetworkId[]>
+    getKeysPaged(pageSize: number, key: v54.SubNetworkId): AsyncIterable<v54.SubNetworkId[]>
+    getPairs(): Promise<[k: v54.SubNetworkId, v: v54.BridgeMessage[]][]>
+    getPairs(key: v54.SubNetworkId): Promise<[k: v54.SubNetworkId, v: v54.BridgeMessage[]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: v54.SubNetworkId, v: v54.BridgeMessage[]][]>
+    getPairsPaged(pageSize: number, key: v54.SubNetworkId): AsyncIterable<[k: v54.SubNetworkId, v: v54.BridgeMessage[]][]>
+}
+
+/**
+ *  Messages waiting to be committed. To update the queue, use `append_message_queue` and `take_message_queue` methods
+ *  (to keep correct value in [QueuesTotalGas]).
+ */
+export interface SubstrateBridgeOutboundChannelMessageQueuesStorageV58 {
+    get(key: v58.SubNetworkId): Promise<v58.BridgeMessage[]>
+    getAll(): Promise<v58.BridgeMessage[][]>
+    getMany(keys: v58.SubNetworkId[]): Promise<v58.BridgeMessage[][]>
+    getKeys(): Promise<v58.SubNetworkId[]>
+    getKeys(key: v58.SubNetworkId): Promise<v58.SubNetworkId[]>
+    getKeysPaged(pageSize: number): AsyncIterable<v58.SubNetworkId[]>
+    getKeysPaged(pageSize: number, key: v58.SubNetworkId): AsyncIterable<v58.SubNetworkId[]>
+    getPairs(): Promise<[k: v58.SubNetworkId, v: v58.BridgeMessage[]][]>
+    getPairs(key: v58.SubNetworkId): Promise<[k: v58.SubNetworkId, v: v58.BridgeMessage[]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: v58.SubNetworkId, v: v58.BridgeMessage[]][]>
+    getPairsPaged(pageSize: number, key: v58.SubNetworkId): AsyncIterable<[k: v58.SubNetworkId, v: v58.BridgeMessage[]][]>
+}
+
 export class SudoKeyStorage extends StorageBase {
     protected getPrefix() {
         return 'Sudo'
@@ -14152,6 +17846,21 @@ export class SystemBlockWeightStorage extends StorageBase {
         assert(this.isV41)
         return this as any
     }
+
+    /**
+     *  The current weight for the block.
+     */
+    get isV51(): boolean {
+        return this.getTypeHash() === '1b5ecb31f1f780ce8b20535384ce7b3159da495c9f1cbf13a2f253ccb02ae175'
+    }
+
+    /**
+     *  The current weight for the block.
+     */
+    get asV51(): SystemBlockWeightStorageV51 {
+        assert(this.isV51)
+        return this as any
+    }
 }
 
 /**
@@ -14159,6 +17868,13 @@ export class SystemBlockWeightStorage extends StorageBase {
  */
 export interface SystemBlockWeightStorageV41 {
     get(): Promise<v41.ConsumedWeight>
+}
+
+/**
+ *  The current weight for the block.
+ */
+export interface SystemBlockWeightStorageV51 {
+    get(): Promise<v51.PerDispatchClass>
 }
 
 export class SystemDigestStorage extends StorageBase {
@@ -14501,6 +18217,222 @@ export class SystemEventsStorage extends StorageBase {
         assert(this.isV48)
         return this as any
     }
+
+    /**
+     *  Events deposited for the current block.
+     * 
+     *  NOTE: The item is unbound and should therefore never be read on chain.
+     *  It could otherwise inflate the PoV size of a block.
+     * 
+     *  Events have a large in-memory size. Box the events to not go out-of-memory
+     *  just in case someone still reads them from within the runtime.
+     */
+    get isV51(): boolean {
+        return this.getTypeHash() === '8bc5fb778678f17cece4f32690e57903b40c5233a2287d2b494cb01f06df8e25'
+    }
+
+    /**
+     *  Events deposited for the current block.
+     * 
+     *  NOTE: The item is unbound and should therefore never be read on chain.
+     *  It could otherwise inflate the PoV size of a block.
+     * 
+     *  Events have a large in-memory size. Box the events to not go out-of-memory
+     *  just in case someone still reads them from within the runtime.
+     */
+    get asV51(): SystemEventsStorageV51 {
+        assert(this.isV51)
+        return this as any
+    }
+
+    /**
+     *  Events deposited for the current block.
+     * 
+     *  NOTE: The item is unbound and should therefore never be read on chain.
+     *  It could otherwise inflate the PoV size of a block.
+     * 
+     *  Events have a large in-memory size. Box the events to not go out-of-memory
+     *  just in case someone still reads them from within the runtime.
+     */
+    get isV52(): boolean {
+        return this.getTypeHash() === '0ed3ccf061ed39029a3aee1cb02c52affbfa4a494744d5301e6bdba8d462229e'
+    }
+
+    /**
+     *  Events deposited for the current block.
+     * 
+     *  NOTE: The item is unbound and should therefore never be read on chain.
+     *  It could otherwise inflate the PoV size of a block.
+     * 
+     *  Events have a large in-memory size. Box the events to not go out-of-memory
+     *  just in case someone still reads them from within the runtime.
+     */
+    get asV52(): SystemEventsStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+
+    /**
+     *  Events deposited for the current block.
+     * 
+     *  NOTE: The item is unbound and should therefore never be read on chain.
+     *  It could otherwise inflate the PoV size of a block.
+     * 
+     *  Events have a large in-memory size. Box the events to not go out-of-memory
+     *  just in case someone still reads them from within the runtime.
+     */
+    get isV53(): boolean {
+        return this.getTypeHash() === '44fb73c68a2c137046dcb0049e8b4f9dcae7fa0174ae993fdd58aa2ea67f6e41'
+    }
+
+    /**
+     *  Events deposited for the current block.
+     * 
+     *  NOTE: The item is unbound and should therefore never be read on chain.
+     *  It could otherwise inflate the PoV size of a block.
+     * 
+     *  Events have a large in-memory size. Box the events to not go out-of-memory
+     *  just in case someone still reads them from within the runtime.
+     */
+    get asV53(): SystemEventsStorageV53 {
+        assert(this.isV53)
+        return this as any
+    }
+
+    /**
+     *  Events deposited for the current block.
+     * 
+     *  NOTE: The item is unbound and should therefore never be read on chain.
+     *  It could otherwise inflate the PoV size of a block.
+     * 
+     *  Events have a large in-memory size. Box the events to not go out-of-memory
+     *  just in case someone still reads them from within the runtime.
+     */
+    get isV54(): boolean {
+        return this.getTypeHash() === '5d947763c616f72aef64395b46240ffc52ea10aacfb6828873f42c9b516c44f9'
+    }
+
+    /**
+     *  Events deposited for the current block.
+     * 
+     *  NOTE: The item is unbound and should therefore never be read on chain.
+     *  It could otherwise inflate the PoV size of a block.
+     * 
+     *  Events have a large in-memory size. Box the events to not go out-of-memory
+     *  just in case someone still reads them from within the runtime.
+     */
+    get asV54(): SystemEventsStorageV54 {
+        assert(this.isV54)
+        return this as any
+    }
+
+    /**
+     *  Events deposited for the current block.
+     * 
+     *  NOTE: The item is unbound and should therefore never be read on chain.
+     *  It could otherwise inflate the PoV size of a block.
+     * 
+     *  Events have a large in-memory size. Box the events to not go out-of-memory
+     *  just in case someone still reads them from within the runtime.
+     */
+    get isV55(): boolean {
+        return this.getTypeHash() === '1bdbd31295d1996f487dffed73a4488415524edc2e331337c612d0a6f580520e'
+    }
+
+    /**
+     *  Events deposited for the current block.
+     * 
+     *  NOTE: The item is unbound and should therefore never be read on chain.
+     *  It could otherwise inflate the PoV size of a block.
+     * 
+     *  Events have a large in-memory size. Box the events to not go out-of-memory
+     *  just in case someone still reads them from within the runtime.
+     */
+    get asV55(): SystemEventsStorageV55 {
+        assert(this.isV55)
+        return this as any
+    }
+
+    /**
+     *  Events deposited for the current block.
+     * 
+     *  NOTE: The item is unbound and should therefore never be read on chain.
+     *  It could otherwise inflate the PoV size of a block.
+     * 
+     *  Events have a large in-memory size. Box the events to not go out-of-memory
+     *  just in case someone still reads them from within the runtime.
+     */
+    get isV58(): boolean {
+        return this.getTypeHash() === '35acaae70faa1f2e1407fe358b92ac4cc70dd01a91ef395c4d8e6ca117044640'
+    }
+
+    /**
+     *  Events deposited for the current block.
+     * 
+     *  NOTE: The item is unbound and should therefore never be read on chain.
+     *  It could otherwise inflate the PoV size of a block.
+     * 
+     *  Events have a large in-memory size. Box the events to not go out-of-memory
+     *  just in case someone still reads them from within the runtime.
+     */
+    get asV58(): SystemEventsStorageV58 {
+        assert(this.isV58)
+        return this as any
+    }
+
+    /**
+     *  Events deposited for the current block.
+     * 
+     *  NOTE: The item is unbound and should therefore never be read on chain.
+     *  It could otherwise inflate the PoV size of a block.
+     * 
+     *  Events have a large in-memory size. Box the events to not go out-of-memory
+     *  just in case someone still reads them from within the runtime.
+     */
+    get isV59(): boolean {
+        return this.getTypeHash() === '1ede6e3d699220d3977a587c1e87ac73a926d02aa71586015f5929bfd5ea0a07'
+    }
+
+    /**
+     *  Events deposited for the current block.
+     * 
+     *  NOTE: The item is unbound and should therefore never be read on chain.
+     *  It could otherwise inflate the PoV size of a block.
+     * 
+     *  Events have a large in-memory size. Box the events to not go out-of-memory
+     *  just in case someone still reads them from within the runtime.
+     */
+    get asV59(): SystemEventsStorageV59 {
+        assert(this.isV59)
+        return this as any
+    }
+
+    /**
+     *  Events deposited for the current block.
+     * 
+     *  NOTE: The item is unbound and should therefore never be read on chain.
+     *  It could otherwise inflate the PoV size of a block.
+     * 
+     *  Events have a large in-memory size. Box the events to not go out-of-memory
+     *  just in case someone still reads them from within the runtime.
+     */
+    get isV60(): boolean {
+        return this.getTypeHash() === '3c38af8aff486fd0754c7361a495f55de3333266e818ce59a39017dc83a67c56'
+    }
+
+    /**
+     *  Events deposited for the current block.
+     * 
+     *  NOTE: The item is unbound and should therefore never be read on chain.
+     *  It could otherwise inflate the PoV size of a block.
+     * 
+     *  Events have a large in-memory size. Box the events to not go out-of-memory
+     *  just in case someone still reads them from within the runtime.
+     */
+    get asV60(): SystemEventsStorageV60 {
+        assert(this.isV60)
+        return this as any
+    }
 }
 
 /**
@@ -14586,6 +18518,110 @@ export interface SystemEventsStorageV46 {
  */
 export interface SystemEventsStorageV48 {
     get(): Promise<v48.EventRecord[]>
+}
+
+/**
+ *  Events deposited for the current block.
+ * 
+ *  NOTE: The item is unbound and should therefore never be read on chain.
+ *  It could otherwise inflate the PoV size of a block.
+ * 
+ *  Events have a large in-memory size. Box the events to not go out-of-memory
+ *  just in case someone still reads them from within the runtime.
+ */
+export interface SystemEventsStorageV51 {
+    get(): Promise<v51.EventRecord[]>
+}
+
+/**
+ *  Events deposited for the current block.
+ * 
+ *  NOTE: The item is unbound and should therefore never be read on chain.
+ *  It could otherwise inflate the PoV size of a block.
+ * 
+ *  Events have a large in-memory size. Box the events to not go out-of-memory
+ *  just in case someone still reads them from within the runtime.
+ */
+export interface SystemEventsStorageV52 {
+    get(): Promise<v52.EventRecord[]>
+}
+
+/**
+ *  Events deposited for the current block.
+ * 
+ *  NOTE: The item is unbound and should therefore never be read on chain.
+ *  It could otherwise inflate the PoV size of a block.
+ * 
+ *  Events have a large in-memory size. Box the events to not go out-of-memory
+ *  just in case someone still reads them from within the runtime.
+ */
+export interface SystemEventsStorageV53 {
+    get(): Promise<v53.EventRecord[]>
+}
+
+/**
+ *  Events deposited for the current block.
+ * 
+ *  NOTE: The item is unbound and should therefore never be read on chain.
+ *  It could otherwise inflate the PoV size of a block.
+ * 
+ *  Events have a large in-memory size. Box the events to not go out-of-memory
+ *  just in case someone still reads them from within the runtime.
+ */
+export interface SystemEventsStorageV54 {
+    get(): Promise<v54.EventRecord[]>
+}
+
+/**
+ *  Events deposited for the current block.
+ * 
+ *  NOTE: The item is unbound and should therefore never be read on chain.
+ *  It could otherwise inflate the PoV size of a block.
+ * 
+ *  Events have a large in-memory size. Box the events to not go out-of-memory
+ *  just in case someone still reads them from within the runtime.
+ */
+export interface SystemEventsStorageV55 {
+    get(): Promise<v55.EventRecord[]>
+}
+
+/**
+ *  Events deposited for the current block.
+ * 
+ *  NOTE: The item is unbound and should therefore never be read on chain.
+ *  It could otherwise inflate the PoV size of a block.
+ * 
+ *  Events have a large in-memory size. Box the events to not go out-of-memory
+ *  just in case someone still reads them from within the runtime.
+ */
+export interface SystemEventsStorageV58 {
+    get(): Promise<v58.EventRecord[]>
+}
+
+/**
+ *  Events deposited for the current block.
+ * 
+ *  NOTE: The item is unbound and should therefore never be read on chain.
+ *  It could otherwise inflate the PoV size of a block.
+ * 
+ *  Events have a large in-memory size. Box the events to not go out-of-memory
+ *  just in case someone still reads them from within the runtime.
+ */
+export interface SystemEventsStorageV59 {
+    get(): Promise<v59.EventRecord[]>
+}
+
+/**
+ *  Events deposited for the current block.
+ * 
+ *  NOTE: The item is unbound and should therefore never be read on chain.
+ *  It could otherwise inflate the PoV size of a block.
+ * 
+ *  Events have a large in-memory size. Box the events to not go out-of-memory
+ *  just in case someone still reads them from within the runtime.
+ */
+export interface SystemEventsStorageV60 {
+    get(): Promise<v60.EventRecord[]>
 }
 
 export class SystemExecutionPhaseStorage extends StorageBase {
@@ -14952,6 +18988,21 @@ export class TechnicalTechAccountsStorage extends StorageBase {
         assert(this.isV46)
         return this as any
     }
+
+    /**
+     *  Registered technical account identifiers. Map from repr `AccountId` into pure `TechAccountId`.
+     */
+    get isV54(): boolean {
+        return this.getTypeHash() === 'c878da98ba9c031d571b432ade6370b723cbbc8f237ef1939ac0c4c6ecfa87da'
+    }
+
+    /**
+     *  Registered technical account identifiers. Map from repr `AccountId` into pure `TechAccountId`.
+     */
+    get asV54(): TechnicalTechAccountsStorageV54 {
+        assert(this.isV54)
+        return this as any
+    }
 }
 
 /**
@@ -14986,6 +19037,23 @@ export interface TechnicalTechAccountsStorageV46 {
     getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v46.TechAccountId][]>
     getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v46.TechAccountId][]>
     getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v46.TechAccountId][]>
+}
+
+/**
+ *  Registered technical account identifiers. Map from repr `AccountId` into pure `TechAccountId`.
+ */
+export interface TechnicalTechAccountsStorageV54 {
+    get(key: Uint8Array): Promise<(v54.TechAccountId | undefined)>
+    getAll(): Promise<v54.TechAccountId[]>
+    getMany(keys: Uint8Array[]): Promise<(v54.TechAccountId | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v54.TechAccountId][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v54.TechAccountId][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v54.TechAccountId][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v54.TechAccountId][]>
 }
 
 export class TechnicalCommitteeMembersStorage extends StorageBase {
@@ -15182,6 +19250,141 @@ export class TechnicalCommitteeProposalOfStorage extends StorageBase {
         assert(this.isV48)
         return this as any
     }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get isV51(): boolean {
+        return this.getTypeHash() === 'a4b626546d4d0d1112d203fa7a2365854a59e2028eb14d6259b7546fb20ae9b4'
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get asV51(): TechnicalCommitteeProposalOfStorageV51 {
+        assert(this.isV51)
+        return this as any
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get isV52(): boolean {
+        return this.getTypeHash() === '6585fd47bb5dbcb69a14fb75e8522bfd33b45e480e63ce4cca4c0e26268cfc97'
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get asV52(): TechnicalCommitteeProposalOfStorageV52 {
+        assert(this.isV52)
+        return this as any
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get isV53(): boolean {
+        return this.getTypeHash() === 'e9fee133103f48e362be1673a1f1e6befcacdc21728be32bdb9f1056cf69a8c3'
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get asV53(): TechnicalCommitteeProposalOfStorageV53 {
+        assert(this.isV53)
+        return this as any
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get isV54(): boolean {
+        return this.getTypeHash() === 'e83fa34aee882b3a7a34aaf36d12956639d73687b11a52fc2d2df76269c72b34'
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get asV54(): TechnicalCommitteeProposalOfStorageV54 {
+        assert(this.isV54)
+        return this as any
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get isV55(): boolean {
+        return this.getTypeHash() === 'ae76bb548bb8894c0b01933dc399eb347fb7037bcaea41abce58c945053e3e7a'
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get asV55(): TechnicalCommitteeProposalOfStorageV55 {
+        assert(this.isV55)
+        return this as any
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get isV58(): boolean {
+        return this.getTypeHash() === 'c6c9c9c485bb5c023c6334c8835593788947093efd662b2389d8aae0911fec55'
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get asV58(): TechnicalCommitteeProposalOfStorageV58 {
+        assert(this.isV58)
+        return this as any
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get isV59(): boolean {
+        return this.getTypeHash() === '064292047c328a72a074ffd63a1098280eb0d4101ded37a1f7d52aea2e259abd'
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get asV59(): TechnicalCommitteeProposalOfStorageV59 {
+        assert(this.isV59)
+        return this as any
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get isV60(): boolean {
+        return this.getTypeHash() === '24ccc6bad5e9f5ee926b0bccf8d73b7ebf18a466e356c17d0a2ca03b53be627f'
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get asV60(): TechnicalCommitteeProposalOfStorageV60 {
+        assert(this.isV60)
+        return this as any
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get isV61(): boolean {
+        return this.getTypeHash() === 'df61816865d9330415d02528eee6a7e6fd3980a5d00993a32ff0e6fddaefe46e'
+    }
+
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    get asV61(): TechnicalCommitteeProposalOfStorageV61 {
+        assert(this.isV61)
+        return this as any
+    }
 }
 
 /**
@@ -15284,6 +19487,159 @@ export interface TechnicalCommitteeProposalOfStorageV48 {
     getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v48.Call][]>
     getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v48.Call][]>
     getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v48.Call][]>
+}
+
+/**
+ *  Actual proposal for a given hash, if it's current.
+ */
+export interface TechnicalCommitteeProposalOfStorageV51 {
+    get(key: Uint8Array): Promise<(v51.Call | undefined)>
+    getAll(): Promise<v51.Call[]>
+    getMany(keys: Uint8Array[]): Promise<(v51.Call | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v51.Call][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v51.Call][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v51.Call][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v51.Call][]>
+}
+
+/**
+ *  Actual proposal for a given hash, if it's current.
+ */
+export interface TechnicalCommitteeProposalOfStorageV52 {
+    get(key: Uint8Array): Promise<(v52.Call | undefined)>
+    getAll(): Promise<v52.Call[]>
+    getMany(keys: Uint8Array[]): Promise<(v52.Call | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v52.Call][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v52.Call][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v52.Call][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v52.Call][]>
+}
+
+/**
+ *  Actual proposal for a given hash, if it's current.
+ */
+export interface TechnicalCommitteeProposalOfStorageV53 {
+    get(key: Uint8Array): Promise<(v53.Call | undefined)>
+    getAll(): Promise<v53.Call[]>
+    getMany(keys: Uint8Array[]): Promise<(v53.Call | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v53.Call][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v53.Call][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v53.Call][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v53.Call][]>
+}
+
+/**
+ *  Actual proposal for a given hash, if it's current.
+ */
+export interface TechnicalCommitteeProposalOfStorageV54 {
+    get(key: Uint8Array): Promise<(v54.Call | undefined)>
+    getAll(): Promise<v54.Call[]>
+    getMany(keys: Uint8Array[]): Promise<(v54.Call | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v54.Call][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v54.Call][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v54.Call][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v54.Call][]>
+}
+
+/**
+ *  Actual proposal for a given hash, if it's current.
+ */
+export interface TechnicalCommitteeProposalOfStorageV55 {
+    get(key: Uint8Array): Promise<(v55.Call | undefined)>
+    getAll(): Promise<v55.Call[]>
+    getMany(keys: Uint8Array[]): Promise<(v55.Call | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v55.Call][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v55.Call][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v55.Call][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v55.Call][]>
+}
+
+/**
+ *  Actual proposal for a given hash, if it's current.
+ */
+export interface TechnicalCommitteeProposalOfStorageV58 {
+    get(key: Uint8Array): Promise<(v58.Call | undefined)>
+    getAll(): Promise<v58.Call[]>
+    getMany(keys: Uint8Array[]): Promise<(v58.Call | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v58.Call][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v58.Call][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v58.Call][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v58.Call][]>
+}
+
+/**
+ *  Actual proposal for a given hash, if it's current.
+ */
+export interface TechnicalCommitteeProposalOfStorageV59 {
+    get(key: Uint8Array): Promise<(v59.Call | undefined)>
+    getAll(): Promise<v59.Call[]>
+    getMany(keys: Uint8Array[]): Promise<(v59.Call | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v59.Call][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v59.Call][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v59.Call][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v59.Call][]>
+}
+
+/**
+ *  Actual proposal for a given hash, if it's current.
+ */
+export interface TechnicalCommitteeProposalOfStorageV60 {
+    get(key: Uint8Array): Promise<(v60.Call | undefined)>
+    getAll(): Promise<v60.Call[]>
+    getMany(keys: Uint8Array[]): Promise<(v60.Call | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v60.Call][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v60.Call][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v60.Call][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v60.Call][]>
+}
+
+/**
+ *  Actual proposal for a given hash, if it's current.
+ */
+export interface TechnicalCommitteeProposalOfStorageV61 {
+    get(key: Uint8Array): Promise<(v61.Call | undefined)>
+    getAll(): Promise<v61.Call[]>
+    getMany(keys: Uint8Array[]): Promise<(v61.Call | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v61.Call][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v61.Call][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v61.Call][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v61.Call][]>
 }
 
 export class TechnicalCommitteeProposalsStorage extends StorageBase {
@@ -16068,6 +20424,48 @@ export interface VestedRewardsCrowdloanClaimHistoryStorageV42 {
     getPairsPaged(pageSize: number, key1: Uint8Array, key2: v42.AssetId32): AsyncIterable<[k: [Uint8Array, v42.AssetId32], v: number][]>
 }
 
+export class VestedRewardsCrowdloanInfosStorage extends StorageBase {
+    protected getPrefix() {
+        return 'VestedRewards'
+    }
+
+    protected getName() {
+        return 'CrowdloanInfos'
+    }
+
+    /**
+     *  Information about crowdloan
+     */
+    get isV51(): boolean {
+        return this.getTypeHash() === '4b5d49e82b760937552ae22f16177bfa396b3c8f32469fac40efaf42738bbf8e'
+    }
+
+    /**
+     *  Information about crowdloan
+     */
+    get asV51(): VestedRewardsCrowdloanInfosStorageV51 {
+        assert(this.isV51)
+        return this as any
+    }
+}
+
+/**
+ *  Information about crowdloan
+ */
+export interface VestedRewardsCrowdloanInfosStorageV51 {
+    get(key: Uint8Array): Promise<(v51.CrowdloanInfo | undefined)>
+    getAll(): Promise<v51.CrowdloanInfo[]>
+    getMany(keys: Uint8Array[]): Promise<(v51.CrowdloanInfo | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v51.CrowdloanInfo][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v51.CrowdloanInfo][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v51.CrowdloanInfo][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v51.CrowdloanInfo][]>
+}
+
 export class VestedRewardsCrowdloanRewardsStorage extends StorageBase {
     protected getPrefix() {
         return 'VestedRewards'
@@ -16140,6 +20538,52 @@ export interface VestedRewardsCrowdloanRewardsStorageV42 {
     getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v42.CrowdloanReward][]>
     getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v42.CrowdloanReward][]>
     getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v42.CrowdloanReward][]>
+}
+
+export class VestedRewardsCrowdloanUserInfosStorage extends StorageBase {
+    protected getPrefix() {
+        return 'VestedRewards'
+    }
+
+    protected getName() {
+        return 'CrowdloanUserInfos'
+    }
+
+    /**
+     *  Information about crowdloan rewards claimed by user
+     */
+    get isV51(): boolean {
+        return this.getTypeHash() === '9ba63c4324aab6be9eb9243aeb76282adc876a75a16f7647d197b8f0a224d3bc'
+    }
+
+    /**
+     *  Information about crowdloan rewards claimed by user
+     */
+    get asV51(): VestedRewardsCrowdloanUserInfosStorageV51 {
+        assert(this.isV51)
+        return this as any
+    }
+}
+
+/**
+ *  Information about crowdloan rewards claimed by user
+ */
+export interface VestedRewardsCrowdloanUserInfosStorageV51 {
+    get(key1: Uint8Array, key2: Uint8Array): Promise<(v51.CrowdloanUserInfo | undefined)>
+    getAll(): Promise<v51.CrowdloanUserInfo[]>
+    getMany(keys: [Uint8Array, Uint8Array][]): Promise<(v51.CrowdloanUserInfo | undefined)[]>
+    getKeys(): Promise<[Uint8Array, Uint8Array][]>
+    getKeys(key1: Uint8Array): Promise<[Uint8Array, Uint8Array][]>
+    getKeys(key1: Uint8Array, key2: Uint8Array): Promise<[Uint8Array, Uint8Array][]>
+    getKeysPaged(pageSize: number): AsyncIterable<[Uint8Array, Uint8Array][]>
+    getKeysPaged(pageSize: number, key1: Uint8Array): AsyncIterable<[Uint8Array, Uint8Array][]>
+    getKeysPaged(pageSize: number, key1: Uint8Array, key2: Uint8Array): AsyncIterable<[Uint8Array, Uint8Array][]>
+    getPairs(): Promise<[k: [Uint8Array, Uint8Array], v: v51.CrowdloanUserInfo][]>
+    getPairs(key1: Uint8Array): Promise<[k: [Uint8Array, Uint8Array], v: v51.CrowdloanUserInfo][]>
+    getPairs(key1: Uint8Array, key2: Uint8Array): Promise<[k: [Uint8Array, Uint8Array], v: v51.CrowdloanUserInfo][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: [Uint8Array, Uint8Array], v: v51.CrowdloanUserInfo][]>
+    getPairsPaged(pageSize: number, key1: Uint8Array): AsyncIterable<[k: [Uint8Array, Uint8Array], v: v51.CrowdloanUserInfo][]>
+    getPairsPaged(pageSize: number, key1: Uint8Array, key2: Uint8Array): AsyncIterable<[k: [Uint8Array, Uint8Array], v: v51.CrowdloanUserInfo][]>
 }
 
 export class VestedRewardsMarketMakersRegistryStorage extends StorageBase {
@@ -16544,6 +20988,54 @@ export interface XSTPoolCollateralReservesStorageV42 {
     getPairsPaged(pageSize: number, key: v42.AssetId32): AsyncIterable<[k: v42.AssetId32, v: bigint][]>
 }
 
+export class XSTPoolEnabledSymbolsStorage extends StorageBase {
+    protected getPrefix() {
+        return 'XSTPool'
+    }
+
+    protected getName() {
+        return 'EnabledSymbols'
+    }
+
+    /**
+     *  Reference symbols and their synthetic assets.
+     * 
+     *  It's a programmer responsibility to keep this collection consistent with [`EnabledSynthetics`].
+     */
+    get isV54(): boolean {
+        return this.getTypeHash() === 'ae88fbc2f24db5dbf123749f07478fa3632354ae3d71f37fc65cfa26fb149933'
+    }
+
+    /**
+     *  Reference symbols and their synthetic assets.
+     * 
+     *  It's a programmer responsibility to keep this collection consistent with [`EnabledSynthetics`].
+     */
+    get asV54(): XSTPoolEnabledSymbolsStorageV54 {
+        assert(this.isV54)
+        return this as any
+    }
+}
+
+/**
+ *  Reference symbols and their synthetic assets.
+ * 
+ *  It's a programmer responsibility to keep this collection consistent with [`EnabledSynthetics`].
+ */
+export interface XSTPoolEnabledSymbolsStorageV54 {
+    get(key: Uint8Array): Promise<(v54.AssetId32 | undefined)>
+    getAll(): Promise<v54.AssetId32[]>
+    getMany(keys: Uint8Array[]): Promise<(v54.AssetId32 | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v54.AssetId32][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v54.AssetId32][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v54.AssetId32][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v54.AssetId32][]>
+}
+
 export class XSTPoolEnabledSyntheticsStorage extends StorageBase {
     protected getPrefix() {
         return 'XSTPool'
@@ -16582,6 +21074,25 @@ export class XSTPoolEnabledSyntheticsStorage extends StorageBase {
         assert(this.isV42)
         return this as any
     }
+
+    /**
+     *  Synthetic assets and their reference symbols.
+     * 
+     *  It's a programmer responsibility to keep this collection consistent with [`EnabledSymbols`].
+     */
+    get isV54(): boolean {
+        return this.getTypeHash() === '11652b8a4e128438a7255df00af9e544ec8cbae4470f9218265bb68bb0777c99'
+    }
+
+    /**
+     *  Synthetic assets and their reference symbols.
+     * 
+     *  It's a programmer responsibility to keep this collection consistent with [`EnabledSymbols`].
+     */
+    get asV54(): XSTPoolEnabledSyntheticsStorageV54 {
+        assert(this.isV54)
+        return this as any
+    }
 }
 
 /**
@@ -16596,6 +21107,25 @@ export interface XSTPoolEnabledSyntheticsStorageV41 {
  */
 export interface XSTPoolEnabledSyntheticsStorageV42 {
     get(): Promise<v42.AssetId32[]>
+}
+
+/**
+ *  Synthetic assets and their reference symbols.
+ * 
+ *  It's a programmer responsibility to keep this collection consistent with [`EnabledSymbols`].
+ */
+export interface XSTPoolEnabledSyntheticsStorageV54 {
+    get(key: v54.AssetId32): Promise<(v54.SyntheticInfo | undefined)>
+    getAll(): Promise<v54.SyntheticInfo[]>
+    getMany(keys: v54.AssetId32[]): Promise<(v54.SyntheticInfo | undefined)[]>
+    getKeys(): Promise<v54.AssetId32[]>
+    getKeys(key: v54.AssetId32): Promise<v54.AssetId32[]>
+    getKeysPaged(pageSize: number): AsyncIterable<v54.AssetId32[]>
+    getKeysPaged(pageSize: number, key: v54.AssetId32): AsyncIterable<v54.AssetId32[]>
+    getPairs(): Promise<[k: v54.AssetId32, v: v54.SyntheticInfo][]>
+    getPairs(key: v54.AssetId32): Promise<[k: v54.AssetId32, v: v54.SyntheticInfo][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: v54.AssetId32, v: v54.SyntheticInfo][]>
+    getPairsPaged(pageSize: number, key: v54.AssetId32): AsyncIterable<[k: v54.AssetId32, v: v54.SyntheticInfo][]>
 }
 
 export class XSTPoolPermissionedTechAccountStorage extends StorageBase {

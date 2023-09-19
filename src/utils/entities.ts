@@ -96,9 +96,9 @@ export function getEntityData<T extends VersionedObject, V extends readonly stri
     if (!specVersion) ctx.log.error('No spec version found')
 	const unsupportedSpecError = new UnsupportedSpecError(ctx, block, entityItem)
 	if (entityItem.kind === 'call') {
-		data = entityItem.call.args as any
+		data = ctx._chain.decodeCall(entityItem.call) as any
 	} else if (entityItem.kind === 'event') {
-		data = entityItem.event.args as any
+		data = ctx._chain.decodeEvent(entityItem.event) as any
 	} else {
 		throw unsupportedSpecError
 	}
