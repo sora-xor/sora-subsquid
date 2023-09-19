@@ -12,7 +12,6 @@ def jobParams  = [
 
 def pipeline = new org.subqd.AppPipeline(
     steps: this,
-    jobParams: jobParams,
-    upstreamJobList: '../sora2-dev'
+    jobParams: jobParams
 )
 pipeline.runPipeline()
