@@ -14,11 +14,11 @@ export async function stakingRewardedEventHandler(ctx: Context, block: Block, ev
 
 	const activeEraStorage = new StakingActiveEraStorage(ctx, block.header)
 
-	const currentEra = await activeEraStorage.asV1.get()
+	const activeEra = await activeEraStorage.asV1.get()
 
-	if (!currentEra) throw new Error(`Active era not found`)
+	if (!activeEra) throw new Error(`Active era not found`)
 
-	const id = `${currentEra}-${toAddress(stash)}`
+	const id = `${activeEra}-${toAddress(stash)}`
 
 	let stakingReward = await ctx.store.get(StakingReward, id)
 
