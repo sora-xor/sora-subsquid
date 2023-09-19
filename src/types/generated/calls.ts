@@ -191,11 +191,13 @@ export class AssetsUpdateBalanceCall {
 export class AssetsUpdateInfoCall {
 	private readonly production: productionCalls.AssetsUpdateInfoCall
 	private readonly stage: stageCalls.AssetsUpdateInfoCall
+	private readonly test: testCalls.AssetsUpdateInfoCall
 	private readonly dev: devCalls.AssetsUpdateInfoCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.AssetsUpdateInfoCall(ctx, call)
 		this.stage = new stageCalls.AssetsUpdateInfoCall(ctx, call)
+		this.test = new testCalls.AssetsUpdateInfoCall(ctx, call)
 		this.dev = new devCalls.AssetsUpdateInfoCall(ctx, call)
 	}
 
@@ -562,11 +564,13 @@ export class BandRemoveRelayersCall {
 export class BandSetDynamicFeeParametersCall {
 	private readonly production: productionCalls.BandSetDynamicFeeParametersCall
 	private readonly stage: stageCalls.BandSetDynamicFeeParametersCall
+	private readonly test: testCalls.BandSetDynamicFeeParametersCall
 	private readonly dev: devCalls.BandSetDynamicFeeParametersCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.BandSetDynamicFeeParametersCall(ctx, call)
 		this.stage = new stageCalls.BandSetDynamicFeeParametersCall(ctx, call)
+		this.test = new testCalls.BandSetDynamicFeeParametersCall(ctx, call)
 		this.dev = new devCalls.BandSetDynamicFeeParametersCall(ctx, call)
 	}
 
@@ -905,6 +909,18 @@ export class BridgeMultisigAsMultiThreshold1Call {
 	}
 	get asV62Stage(): stageCalls.BridgeMultisigAsMultiThreshold1Call['asV62'] {
 		return this.stage.asV62
+	}
+	get isV51Test(): testCalls.BridgeMultisigAsMultiThreshold1Call['isV51'] {
+		return this.test.isV51
+	}
+	get asV51Test(): testCalls.BridgeMultisigAsMultiThreshold1Call['asV51'] {
+		return this.test.asV51
+	}
+	get isV52Test(): testCalls.BridgeMultisigAsMultiThreshold1Call['isV52'] {
+		return this.test.isV52
+	}
+	get asV52Test(): testCalls.BridgeMultisigAsMultiThreshold1Call['asV52'] {
+		return this.test.asV52
 	}
 	get isV60Dev(): devCalls.BridgeMultisigAsMultiThreshold1Call['isV60'] {
 		return this.dev.isV60
@@ -1634,11 +1650,13 @@ export class CouncilCloseCall {
 export class CouncilCloseOldWeightCall {
 	private readonly production: productionCalls.CouncilCloseOldWeightCall
 	private readonly stage: stageCalls.CouncilCloseOldWeightCall
+	private readonly test: testCalls.CouncilCloseOldWeightCall
 	private readonly dev: devCalls.CouncilCloseOldWeightCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.CouncilCloseOldWeightCall(ctx, call)
 		this.stage = new stageCalls.CouncilCloseOldWeightCall(ctx, call)
+		this.test = new testCalls.CouncilCloseOldWeightCall(ctx, call)
 		this.dev = new devCalls.CouncilCloseOldWeightCall(ctx, call)
 	}
 
@@ -1924,6 +1942,18 @@ export class CouncilExecuteCall {
 	get asV62Stage(): stageCalls.CouncilExecuteCall['asV62'] {
 		return this.stage.asV62
 	}
+	get isV51Test(): testCalls.CouncilExecuteCall['isV51'] {
+		return this.test.isV51
+	}
+	get asV51Test(): testCalls.CouncilExecuteCall['asV51'] {
+		return this.test.asV51
+	}
+	get isV52Test(): testCalls.CouncilExecuteCall['isV52'] {
+		return this.test.isV52
+	}
+	get asV52Test(): testCalls.CouncilExecuteCall['asV52'] {
+		return this.test.asV52
+	}
 	get isV60Dev(): devCalls.CouncilExecuteCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -2184,6 +2214,18 @@ export class CouncilProposeCall {
 	}
 	get asV62Stage(): stageCalls.CouncilProposeCall['asV62'] {
 		return this.stage.asV62
+	}
+	get isV51Test(): testCalls.CouncilProposeCall['isV51'] {
+		return this.test.isV51
+	}
+	get asV51Test(): testCalls.CouncilProposeCall['asV51'] {
+		return this.test.asV51
+	}
+	get isV52Test(): testCalls.CouncilProposeCall['isV52'] {
+		return this.test.isV52
+	}
+	get asV52Test(): testCalls.CouncilProposeCall['asV52'] {
+		return this.test.asV52
 	}
 	get isV60Dev(): devCalls.CouncilProposeCall['isV60'] {
 		return this.dev.isV60
@@ -4602,11 +4644,13 @@ export class LiquidityProxyEnableLiquiditySourceCall {
 export class LiquidityProxySetAdarCommissionRatioCall {
 	private readonly production: productionCalls.LiquidityProxySetAdarCommissionRatioCall
 	private readonly stage: stageCalls.LiquidityProxySetAdarCommissionRatioCall
+	private readonly test: testCalls.LiquidityProxySetAdarCommissionRatioCall
 	private readonly dev: devCalls.LiquidityProxySetAdarCommissionRatioCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.LiquidityProxySetAdarCommissionRatioCall(ctx, call)
 		this.stage = new stageCalls.LiquidityProxySetAdarCommissionRatioCall(ctx, call)
+		this.test = new testCalls.LiquidityProxySetAdarCommissionRatioCall(ctx, call)
 		this.dev = new devCalls.LiquidityProxySetAdarCommissionRatioCall(ctx, call)
 	}
 
@@ -4979,6 +5023,18 @@ export class MultisigAsMultiCall {
 	get asV62Stage(): stageCalls.MultisigAsMultiCall['asV62'] {
 		return this.stage.asV62
 	}
+	get isV51Test(): testCalls.MultisigAsMultiCall['isV51'] {
+		return this.test.isV51
+	}
+	get asV51Test(): testCalls.MultisigAsMultiCall['asV51'] {
+		return this.test.asV51
+	}
+	get isV52Test(): testCalls.MultisigAsMultiCall['isV52'] {
+		return this.test.isV52
+	}
+	get asV52Test(): testCalls.MultisigAsMultiCall['asV52'] {
+		return this.test.asV52
+	}
 	get isV60Dev(): devCalls.MultisigAsMultiCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -5240,6 +5296,18 @@ export class MultisigAsMultiThreshold1Call {
 	get asV62Stage(): stageCalls.MultisigAsMultiThreshold1Call['asV62'] {
 		return this.stage.asV62
 	}
+	get isV51Test(): testCalls.MultisigAsMultiThreshold1Call['isV51'] {
+		return this.test.isV51
+	}
+	get asV51Test(): testCalls.MultisigAsMultiThreshold1Call['asV51'] {
+		return this.test.asV51
+	}
+	get isV52Test(): testCalls.MultisigAsMultiThreshold1Call['isV52'] {
+		return this.test.isV52
+	}
+	get asV52Test(): testCalls.MultisigAsMultiThreshold1Call['asV52'] {
+		return this.test.asV52
+	}
 	get isV60Dev(): devCalls.MultisigAsMultiThreshold1Call['isV60'] {
 		return this.dev.isV60
 	}
@@ -5410,11 +5478,13 @@ export class PoolXykWithdrawLiquidityCall {
 export class PreimageNotePreimageCall {
 	private readonly production: productionCalls.PreimageNotePreimageCall
 	private readonly stage: stageCalls.PreimageNotePreimageCall
+	private readonly test: testCalls.PreimageNotePreimageCall
 	private readonly dev: devCalls.PreimageNotePreimageCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.PreimageNotePreimageCall(ctx, call)
 		this.stage = new stageCalls.PreimageNotePreimageCall(ctx, call)
+		this.test = new testCalls.PreimageNotePreimageCall(ctx, call)
 		this.dev = new devCalls.PreimageNotePreimageCall(ctx, call)
 	}
 
@@ -5429,11 +5499,13 @@ export class PreimageNotePreimageCall {
 export class PreimageRequestPreimageCall {
 	private readonly production: productionCalls.PreimageRequestPreimageCall
 	private readonly stage: stageCalls.PreimageRequestPreimageCall
+	private readonly test: testCalls.PreimageRequestPreimageCall
 	private readonly dev: devCalls.PreimageRequestPreimageCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.PreimageRequestPreimageCall(ctx, call)
 		this.stage = new stageCalls.PreimageRequestPreimageCall(ctx, call)
+		this.test = new testCalls.PreimageRequestPreimageCall(ctx, call)
 		this.dev = new devCalls.PreimageRequestPreimageCall(ctx, call)
 	}
 
@@ -5448,11 +5520,13 @@ export class PreimageRequestPreimageCall {
 export class PreimageUnnotePreimageCall {
 	private readonly production: productionCalls.PreimageUnnotePreimageCall
 	private readonly stage: stageCalls.PreimageUnnotePreimageCall
+	private readonly test: testCalls.PreimageUnnotePreimageCall
 	private readonly dev: devCalls.PreimageUnnotePreimageCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.PreimageUnnotePreimageCall(ctx, call)
 		this.stage = new stageCalls.PreimageUnnotePreimageCall(ctx, call)
+		this.test = new testCalls.PreimageUnnotePreimageCall(ctx, call)
 		this.dev = new devCalls.PreimageUnnotePreimageCall(ctx, call)
 	}
 
@@ -5467,11 +5541,13 @@ export class PreimageUnnotePreimageCall {
 export class PreimageUnrequestPreimageCall {
 	private readonly production: productionCalls.PreimageUnrequestPreimageCall
 	private readonly stage: stageCalls.PreimageUnrequestPreimageCall
+	private readonly test: testCalls.PreimageUnrequestPreimageCall
 	private readonly dev: devCalls.PreimageUnrequestPreimageCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.PreimageUnrequestPreimageCall(ctx, call)
 		this.stage = new stageCalls.PreimageUnrequestPreimageCall(ctx, call)
+		this.test = new testCalls.PreimageUnrequestPreimageCall(ctx, call)
 		this.dev = new devCalls.PreimageUnrequestPreimageCall(ctx, call)
 	}
 
@@ -5929,6 +6005,18 @@ export class SchedulerScheduleCall {
 	get asV62Stage(): stageCalls.SchedulerScheduleCall['asV62'] {
 		return this.stage.asV62
 	}
+	get isV51Test(): testCalls.SchedulerScheduleCall['isV51'] {
+		return this.test.isV51
+	}
+	get asV51Test(): testCalls.SchedulerScheduleCall['asV51'] {
+		return this.test.asV51
+	}
+	get isV52Test(): testCalls.SchedulerScheduleCall['isV52'] {
+		return this.test.isV52
+	}
+	get asV52Test(): testCalls.SchedulerScheduleCall['asV52'] {
+		return this.test.asV52
+	}
 	get isV60Dev(): devCalls.SchedulerScheduleCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -6189,6 +6277,18 @@ export class SchedulerScheduleAfterCall {
 	}
 	get asV62Stage(): stageCalls.SchedulerScheduleAfterCall['asV62'] {
 		return this.stage.asV62
+	}
+	get isV51Test(): testCalls.SchedulerScheduleAfterCall['isV51'] {
+		return this.test.isV51
+	}
+	get asV51Test(): testCalls.SchedulerScheduleAfterCall['asV51'] {
+		return this.test.asV51
+	}
+	get isV52Test(): testCalls.SchedulerScheduleAfterCall['isV52'] {
+		return this.test.isV52
+	}
+	get asV52Test(): testCalls.SchedulerScheduleAfterCall['asV52'] {
+		return this.test.asV52
 	}
 	get isV60Dev(): devCalls.SchedulerScheduleAfterCall['isV60'] {
 		return this.dev.isV60
@@ -6451,6 +6551,18 @@ export class SchedulerScheduleNamedCall {
 	get asV62Stage(): stageCalls.SchedulerScheduleNamedCall['asV62'] {
 		return this.stage.asV62
 	}
+	get isV51Test(): testCalls.SchedulerScheduleNamedCall['isV51'] {
+		return this.test.isV51
+	}
+	get asV51Test(): testCalls.SchedulerScheduleNamedCall['asV51'] {
+		return this.test.asV51
+	}
+	get isV52Test(): testCalls.SchedulerScheduleNamedCall['isV52'] {
+		return this.test.isV52
+	}
+	get asV52Test(): testCalls.SchedulerScheduleNamedCall['asV52'] {
+		return this.test.asV52
+	}
 	get isV60Dev(): devCalls.SchedulerScheduleNamedCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -6711,6 +6823,18 @@ export class SchedulerScheduleNamedAfterCall {
 	}
 	get asV62Stage(): stageCalls.SchedulerScheduleNamedAfterCall['asV62'] {
 		return this.stage.asV62
+	}
+	get isV51Test(): testCalls.SchedulerScheduleNamedAfterCall['isV51'] {
+		return this.test.isV51
+	}
+	get asV51Test(): testCalls.SchedulerScheduleNamedAfterCall['asV51'] {
+		return this.test.asV51
+	}
+	get isV52Test(): testCalls.SchedulerScheduleNamedAfterCall['isV52'] {
+		return this.test.isV52
+	}
+	get asV52Test(): testCalls.SchedulerScheduleNamedAfterCall['asV52'] {
+		return this.test.asV52
 	}
 	get isV60Dev(): devCalls.SchedulerScheduleNamedAfterCall['isV60'] {
 		return this.dev.isV60
@@ -7189,11 +7313,13 @@ export class StakingSetInvulnerablesCall {
 export class StakingSetMinCommissionCall {
 	private readonly production: productionCalls.StakingSetMinCommissionCall
 	private readonly stage: stageCalls.StakingSetMinCommissionCall
+	private readonly test: testCalls.StakingSetMinCommissionCall
 	private readonly dev: devCalls.StakingSetMinCommissionCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.StakingSetMinCommissionCall(ctx, call)
 		this.stage = new stageCalls.StakingSetMinCommissionCall(ctx, call)
+		this.test = new testCalls.StakingSetMinCommissionCall(ctx, call)
 		this.dev = new devCalls.StakingSetMinCommissionCall(ctx, call)
 	}
 
@@ -7517,6 +7643,18 @@ export class SudoSudoCall {
 	get asV62Stage(): stageCalls.SudoSudoCall['asV62'] {
 		return this.stage.asV62
 	}
+	get isV51Test(): testCalls.SudoSudoCall['isV51'] {
+		return this.test.isV51
+	}
+	get asV51Test(): testCalls.SudoSudoCall['asV51'] {
+		return this.test.asV51
+	}
+	get isV52Test(): testCalls.SudoSudoCall['isV52'] {
+		return this.test.isV52
+	}
+	get asV52Test(): testCalls.SudoSudoCall['asV52'] {
+		return this.test.asV52
+	}
 	get isV60Dev(): devCalls.SudoSudoCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -7652,6 +7790,18 @@ export class SudoSudoAsCall {
 	get asV62Stage(): stageCalls.SudoSudoAsCall['asV62'] {
 		return this.stage.asV62
 	}
+	get isV51Test(): testCalls.SudoSudoAsCall['isV51'] {
+		return this.test.isV51
+	}
+	get asV51Test(): testCalls.SudoSudoAsCall['asV51'] {
+		return this.test.asV51
+	}
+	get isV52Test(): testCalls.SudoSudoAsCall['isV52'] {
+		return this.test.isV52
+	}
+	get asV52Test(): testCalls.SudoSudoAsCall['asV52'] {
+		return this.test.asV52
+	}
 	get isV60Dev(): devCalls.SudoSudoAsCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -7786,6 +7936,18 @@ export class SudoSudoUncheckedWeightCall {
 	}
 	get asV62Stage(): stageCalls.SudoSudoUncheckedWeightCall['asV62'] {
 		return this.stage.asV62
+	}
+	get isV51Test(): testCalls.SudoSudoUncheckedWeightCall['isV51'] {
+		return this.test.isV51
+	}
+	get asV51Test(): testCalls.SudoSudoUncheckedWeightCall['asV51'] {
+		return this.test.asV51
+	}
+	get isV52Test(): testCalls.SudoSudoUncheckedWeightCall['isV52'] {
+		return this.test.isV52
+	}
+	get asV52Test(): testCalls.SudoSudoUncheckedWeightCall['asV52'] {
+		return this.test.asV52
 	}
 	get isV60Dev(): devCalls.SudoSudoUncheckedWeightCall['isV60'] {
 		return this.dev.isV60
@@ -8031,11 +8193,13 @@ export class TechnicalCommitteeCloseCall {
 export class TechnicalCommitteeCloseOldWeightCall {
 	private readonly production: productionCalls.TechnicalCommitteeCloseOldWeightCall
 	private readonly stage: stageCalls.TechnicalCommitteeCloseOldWeightCall
+	private readonly test: testCalls.TechnicalCommitteeCloseOldWeightCall
 	private readonly dev: devCalls.TechnicalCommitteeCloseOldWeightCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.TechnicalCommitteeCloseOldWeightCall(ctx, call)
 		this.stage = new stageCalls.TechnicalCommitteeCloseOldWeightCall(ctx, call)
+		this.test = new testCalls.TechnicalCommitteeCloseOldWeightCall(ctx, call)
 		this.dev = new devCalls.TechnicalCommitteeCloseOldWeightCall(ctx, call)
 	}
 
@@ -8321,6 +8485,18 @@ export class TechnicalCommitteeExecuteCall {
 	get asV62Stage(): stageCalls.TechnicalCommitteeExecuteCall['asV62'] {
 		return this.stage.asV62
 	}
+	get isV51Test(): testCalls.TechnicalCommitteeExecuteCall['isV51'] {
+		return this.test.isV51
+	}
+	get asV51Test(): testCalls.TechnicalCommitteeExecuteCall['asV51'] {
+		return this.test.asV51
+	}
+	get isV52Test(): testCalls.TechnicalCommitteeExecuteCall['isV52'] {
+		return this.test.isV52
+	}
+	get asV52Test(): testCalls.TechnicalCommitteeExecuteCall['asV52'] {
+		return this.test.asV52
+	}
 	get isV60Dev(): devCalls.TechnicalCommitteeExecuteCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -8581,6 +8757,18 @@ export class TechnicalCommitteeProposeCall {
 	}
 	get asV62Stage(): stageCalls.TechnicalCommitteeProposeCall['asV62'] {
 		return this.stage.asV62
+	}
+	get isV51Test(): testCalls.TechnicalCommitteeProposeCall['isV51'] {
+		return this.test.isV51
+	}
+	get asV51Test(): testCalls.TechnicalCommitteeProposeCall['asV51'] {
+		return this.test.asV51
+	}
+	get isV52Test(): testCalls.TechnicalCommitteeProposeCall['isV52'] {
+		return this.test.isV52
+	}
+	get asV52Test(): testCalls.TechnicalCommitteeProposeCall['asV52'] {
+		return this.test.asV52
 	}
 	get isV60Dev(): devCalls.TechnicalCommitteeProposeCall['isV60'] {
 		return this.dev.isV60
@@ -9080,6 +9268,18 @@ export class UtilityAsDerivativeCall {
 	get asV62Stage(): stageCalls.UtilityAsDerivativeCall['asV62'] {
 		return this.stage.asV62
 	}
+	get isV51Test(): testCalls.UtilityAsDerivativeCall['isV51'] {
+		return this.test.isV51
+	}
+	get asV51Test(): testCalls.UtilityAsDerivativeCall['asV51'] {
+		return this.test.asV51
+	}
+	get isV52Test(): testCalls.UtilityAsDerivativeCall['isV52'] {
+		return this.test.isV52
+	}
+	get asV52Test(): testCalls.UtilityAsDerivativeCall['asV52'] {
+		return this.test.asV52
+	}
 	get isV60Dev(): devCalls.UtilityAsDerivativeCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -9340,6 +9540,18 @@ export class UtilityBatchCall {
 	}
 	get asV62Stage(): stageCalls.UtilityBatchCall['asV62'] {
 		return this.stage.asV62
+	}
+	get isV51Test(): testCalls.UtilityBatchCall['isV51'] {
+		return this.test.isV51
+	}
+	get asV51Test(): testCalls.UtilityBatchCall['asV51'] {
+		return this.test.asV51
+	}
+	get isV52Test(): testCalls.UtilityBatchCall['isV52'] {
+		return this.test.isV52
+	}
+	get asV52Test(): testCalls.UtilityBatchCall['asV52'] {
+		return this.test.asV52
 	}
 	get isV60Dev(): devCalls.UtilityBatchCall['isV60'] {
 		return this.dev.isV60
@@ -9602,6 +9814,18 @@ export class UtilityBatchAllCall {
 	get asV62Stage(): stageCalls.UtilityBatchAllCall['asV62'] {
 		return this.stage.asV62
 	}
+	get isV51Test(): testCalls.UtilityBatchAllCall['isV51'] {
+		return this.test.isV51
+	}
+	get asV51Test(): testCalls.UtilityBatchAllCall['asV51'] {
+		return this.test.asV51
+	}
+	get isV52Test(): testCalls.UtilityBatchAllCall['isV52'] {
+		return this.test.isV52
+	}
+	get asV52Test(): testCalls.UtilityBatchAllCall['asV52'] {
+		return this.test.asV52
+	}
 	get isV60Dev(): devCalls.UtilityBatchAllCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -9766,6 +9990,18 @@ export class UtilityDispatchAsCall {
 	}
 	get asV62Stage(): stageCalls.UtilityDispatchAsCall['asV62'] {
 		return this.stage.asV62
+	}
+	get isV51Test(): testCalls.UtilityDispatchAsCall['isV51'] {
+		return this.test.isV51
+	}
+	get asV51Test(): testCalls.UtilityDispatchAsCall['asV51'] {
+		return this.test.asV51
+	}
+	get isV52Test(): testCalls.UtilityDispatchAsCall['isV52'] {
+		return this.test.isV52
+	}
+	get asV52Test(): testCalls.UtilityDispatchAsCall['asV52'] {
+		return this.test.asV52
 	}
 	get isV60Dev(): devCalls.UtilityDispatchAsCall['isV60'] {
 		return this.dev.isV60
@@ -9932,6 +10168,18 @@ export class UtilityForceBatchCall {
 	get asV62Stage(): stageCalls.UtilityForceBatchCall['asV62'] {
 		return this.stage.asV62
 	}
+	get isV51Test(): testCalls.UtilityForceBatchCall['isV51'] {
+		return this.test.isV51
+	}
+	get asV51Test(): testCalls.UtilityForceBatchCall['asV51'] {
+		return this.test.asV51
+	}
+	get isV52Test(): testCalls.UtilityForceBatchCall['isV52'] {
+		return this.test.isV52
+	}
+	get asV52Test(): testCalls.UtilityForceBatchCall['asV52'] {
+		return this.test.asV52
+	}
 	get isV60Dev(): devCalls.UtilityForceBatchCall['isV60'] {
 		return this.dev.isV60
 	}
@@ -9943,11 +10191,13 @@ export class UtilityForceBatchCall {
 export class UtilityWithWeightCall {
 	private readonly production: productionCalls.UtilityWithWeightCall
 	private readonly stage: stageCalls.UtilityWithWeightCall
+	private readonly test: testCalls.UtilityWithWeightCall
 	private readonly dev: devCalls.UtilityWithWeightCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.UtilityWithWeightCall(ctx, call)
 		this.stage = new stageCalls.UtilityWithWeightCall(ctx, call)
+		this.test = new testCalls.UtilityWithWeightCall(ctx, call)
 		this.dev = new devCalls.UtilityWithWeightCall(ctx, call)
 	}
 
@@ -10016,6 +10266,18 @@ export class UtilityWithWeightCall {
 	}
 	get asV62Stage(): stageCalls.UtilityWithWeightCall['asV62'] {
 		return this.stage.asV62
+	}
+	get isV51Test(): testCalls.UtilityWithWeightCall['isV51'] {
+		return this.test.isV51
+	}
+	get asV51Test(): testCalls.UtilityWithWeightCall['asV51'] {
+		return this.test.asV51
+	}
+	get isV52Test(): testCalls.UtilityWithWeightCall['isV52'] {
+		return this.test.isV52
+	}
+	get asV52Test(): testCalls.UtilityWithWeightCall['asV52'] {
+		return this.test.asV52
 	}
 	get isV60Dev(): devCalls.UtilityWithWeightCall['isV60'] {
 		return this.dev.isV60
@@ -10101,11 +10363,13 @@ export class VestedRewardsInjectMarketMakersCall {
 export class VestedRewardsRegisterCrowdloanCall {
 	private readonly production: productionCalls.VestedRewardsRegisterCrowdloanCall
 	private readonly stage: stageCalls.VestedRewardsRegisterCrowdloanCall
+	private readonly test: testCalls.VestedRewardsRegisterCrowdloanCall
 	private readonly dev: devCalls.VestedRewardsRegisterCrowdloanCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.VestedRewardsRegisterCrowdloanCall(ctx, call)
 		this.stage = new stageCalls.VestedRewardsRegisterCrowdloanCall(ctx, call)
+		this.test = new testCalls.VestedRewardsRegisterCrowdloanCall(ctx, call)
 		this.dev = new devCalls.VestedRewardsRegisterCrowdloanCall(ctx, call)
 	}
 
@@ -10166,11 +10430,13 @@ export class VestedRewardsUpdateRewardsCall {
 export class XstPoolDisableSyntheticAssetCall {
 	private readonly production: productionCalls.XstPoolDisableSyntheticAssetCall
 	private readonly stage: stageCalls.XstPoolDisableSyntheticAssetCall
+	private readonly test: testCalls.XstPoolDisableSyntheticAssetCall
 	private readonly dev: devCalls.XstPoolDisableSyntheticAssetCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.XstPoolDisableSyntheticAssetCall(ctx, call)
 		this.stage = new stageCalls.XstPoolDisableSyntheticAssetCall(ctx, call)
+		this.test = new testCalls.XstPoolDisableSyntheticAssetCall(ctx, call)
 		this.dev = new devCalls.XstPoolDisableSyntheticAssetCall(ctx, call)
 	}
 
@@ -10243,11 +10509,13 @@ export class XstPoolInitializePoolCall {
 export class XstPoolRegisterSyntheticAssetCall {
 	private readonly production: productionCalls.XstPoolRegisterSyntheticAssetCall
 	private readonly stage: stageCalls.XstPoolRegisterSyntheticAssetCall
+	private readonly test: testCalls.XstPoolRegisterSyntheticAssetCall
 	private readonly dev: devCalls.XstPoolRegisterSyntheticAssetCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.XstPoolRegisterSyntheticAssetCall(ctx, call)
 		this.stage = new stageCalls.XstPoolRegisterSyntheticAssetCall(ctx, call)
+		this.test = new testCalls.XstPoolRegisterSyntheticAssetCall(ctx, call)
 		this.dev = new devCalls.XstPoolRegisterSyntheticAssetCall(ctx, call)
 	}
 
@@ -10262,11 +10530,13 @@ export class XstPoolRegisterSyntheticAssetCall {
 export class XstPoolRemoveSyntheticAssetCall {
 	private readonly production: productionCalls.XstPoolRemoveSyntheticAssetCall
 	private readonly stage: stageCalls.XstPoolRemoveSyntheticAssetCall
+	private readonly test: testCalls.XstPoolRemoveSyntheticAssetCall
 	private readonly dev: devCalls.XstPoolRemoveSyntheticAssetCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.XstPoolRemoveSyntheticAssetCall(ctx, call)
 		this.stage = new stageCalls.XstPoolRemoveSyntheticAssetCall(ctx, call)
+		this.test = new testCalls.XstPoolRemoveSyntheticAssetCall(ctx, call)
 		this.dev = new devCalls.XstPoolRemoveSyntheticAssetCall(ctx, call)
 	}
 
@@ -10308,11 +10578,13 @@ export class XstPoolSetReferenceAssetCall {
 export class XstPoolSetSyntheticAssetFeeCall {
 	private readonly production: productionCalls.XstPoolSetSyntheticAssetFeeCall
 	private readonly stage: stageCalls.XstPoolSetSyntheticAssetFeeCall
+	private readonly test: testCalls.XstPoolSetSyntheticAssetFeeCall
 	private readonly dev: devCalls.XstPoolSetSyntheticAssetFeeCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.production = new productionCalls.XstPoolSetSyntheticAssetFeeCall(ctx, call)
 		this.stage = new stageCalls.XstPoolSetSyntheticAssetFeeCall(ctx, call)
+		this.test = new testCalls.XstPoolSetSyntheticAssetFeeCall(ctx, call)
 		this.dev = new devCalls.XstPoolSetSyntheticAssetFeeCall(ctx, call)
 	}
 
@@ -10368,10 +10640,12 @@ export class XorFeeUpdateMultiplierCall {
 
 export class BeefyLightClientInitializeCall {
 	private readonly stage: stageCalls.BeefyLightClientInitializeCall
+	private readonly test: testCalls.BeefyLightClientInitializeCall
 	private readonly dev: devCalls.BeefyLightClientInitializeCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.BeefyLightClientInitializeCall(ctx, call)
+		this.test = new testCalls.BeefyLightClientInitializeCall(ctx, call)
 		this.dev = new devCalls.BeefyLightClientInitializeCall(ctx, call)
 	}
 
@@ -10385,10 +10659,12 @@ export class BeefyLightClientInitializeCall {
 
 export class BeefyLightClientSubmitSignatureCommitmentCall {
 	private readonly stage: stageCalls.BeefyLightClientSubmitSignatureCommitmentCall
+	private readonly test: testCalls.BeefyLightClientSubmitSignatureCommitmentCall
 	private readonly dev: devCalls.BeefyLightClientSubmitSignatureCommitmentCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.BeefyLightClientSubmitSignatureCommitmentCall(ctx, call)
+		this.test = new testCalls.BeefyLightClientSubmitSignatureCommitmentCall(ctx, call)
 		this.dev = new devCalls.BeefyLightClientSubmitSignatureCommitmentCall(ctx, call)
 	}
 
@@ -10402,10 +10678,12 @@ export class BeefyLightClientSubmitSignatureCommitmentCall {
 
 export class BridgeDataSignerAddPeerCall {
 	private readonly stage: stageCalls.BridgeDataSignerAddPeerCall
+	private readonly test: testCalls.BridgeDataSignerAddPeerCall
 	private readonly dev: devCalls.BridgeDataSignerAddPeerCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.BridgeDataSignerAddPeerCall(ctx, call)
+		this.test = new testCalls.BridgeDataSignerAddPeerCall(ctx, call)
 		this.dev = new devCalls.BridgeDataSignerAddPeerCall(ctx, call)
 	}
 
@@ -10419,10 +10697,12 @@ export class BridgeDataSignerAddPeerCall {
 
 export class BridgeDataSignerApproveCall {
 	private readonly stage: stageCalls.BridgeDataSignerApproveCall
+	private readonly test: testCalls.BridgeDataSignerApproveCall
 	private readonly dev: devCalls.BridgeDataSignerApproveCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.BridgeDataSignerApproveCall(ctx, call)
+		this.test = new testCalls.BridgeDataSignerApproveCall(ctx, call)
 		this.dev = new devCalls.BridgeDataSignerApproveCall(ctx, call)
 	}
 
@@ -10436,10 +10716,12 @@ export class BridgeDataSignerApproveCall {
 
 export class BridgeDataSignerFinishAddPeerCall {
 	private readonly stage: stageCalls.BridgeDataSignerFinishAddPeerCall
+	private readonly test: testCalls.BridgeDataSignerFinishAddPeerCall
 	private readonly dev: devCalls.BridgeDataSignerFinishAddPeerCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.BridgeDataSignerFinishAddPeerCall(ctx, call)
+		this.test = new testCalls.BridgeDataSignerFinishAddPeerCall(ctx, call)
 		this.dev = new devCalls.BridgeDataSignerFinishAddPeerCall(ctx, call)
 	}
 
@@ -10453,10 +10735,12 @@ export class BridgeDataSignerFinishAddPeerCall {
 
 export class BridgeDataSignerFinishRemovePeerCall {
 	private readonly stage: stageCalls.BridgeDataSignerFinishRemovePeerCall
+	private readonly test: testCalls.BridgeDataSignerFinishRemovePeerCall
 	private readonly dev: devCalls.BridgeDataSignerFinishRemovePeerCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.BridgeDataSignerFinishRemovePeerCall(ctx, call)
+		this.test = new testCalls.BridgeDataSignerFinishRemovePeerCall(ctx, call)
 		this.dev = new devCalls.BridgeDataSignerFinishRemovePeerCall(ctx, call)
 	}
 
@@ -10470,10 +10754,12 @@ export class BridgeDataSignerFinishRemovePeerCall {
 
 export class BridgeDataSignerRegisterNetworkCall {
 	private readonly stage: stageCalls.BridgeDataSignerRegisterNetworkCall
+	private readonly test: testCalls.BridgeDataSignerRegisterNetworkCall
 	private readonly dev: devCalls.BridgeDataSignerRegisterNetworkCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.BridgeDataSignerRegisterNetworkCall(ctx, call)
+		this.test = new testCalls.BridgeDataSignerRegisterNetworkCall(ctx, call)
 		this.dev = new devCalls.BridgeDataSignerRegisterNetworkCall(ctx, call)
 	}
 
@@ -10487,10 +10773,12 @@ export class BridgeDataSignerRegisterNetworkCall {
 
 export class BridgeDataSignerRemovePeerCall {
 	private readonly stage: stageCalls.BridgeDataSignerRemovePeerCall
+	private readonly test: testCalls.BridgeDataSignerRemovePeerCall
 	private readonly dev: devCalls.BridgeDataSignerRemovePeerCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.BridgeDataSignerRemovePeerCall(ctx, call)
+		this.test = new testCalls.BridgeDataSignerRemovePeerCall(ctx, call)
 		this.dev = new devCalls.BridgeDataSignerRemovePeerCall(ctx, call)
 	}
 
@@ -10504,10 +10792,12 @@ export class BridgeDataSignerRemovePeerCall {
 
 export class BridgeInboundChannelBatchDispatchedCall {
 	private readonly stage: stageCalls.BridgeInboundChannelBatchDispatchedCall
+	private readonly test: testCalls.BridgeInboundChannelBatchDispatchedCall
 	private readonly dev: devCalls.BridgeInboundChannelBatchDispatchedCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.BridgeInboundChannelBatchDispatchedCall(ctx, call)
+		this.test = new testCalls.BridgeInboundChannelBatchDispatchedCall(ctx, call)
 		this.dev = new devCalls.BridgeInboundChannelBatchDispatchedCall(ctx, call)
 	}
 
@@ -10521,9 +10811,11 @@ export class BridgeInboundChannelBatchDispatchedCall {
 
 export class BridgeInboundChannelMessageDispatchedCall {
 	private readonly stage: stageCalls.BridgeInboundChannelMessageDispatchedCall
+	private readonly test: testCalls.BridgeInboundChannelMessageDispatchedCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.BridgeInboundChannelMessageDispatchedCall(ctx, call)
+		this.test = new testCalls.BridgeInboundChannelMessageDispatchedCall(ctx, call)
 	}
 
 	get isV52Stage(): stageCalls.BridgeInboundChannelMessageDispatchedCall['isV52'] {
@@ -10542,10 +10834,12 @@ export class BridgeInboundChannelMessageDispatchedCall {
 
 export class BridgeInboundChannelRegisterChannelCall {
 	private readonly stage: stageCalls.BridgeInboundChannelRegisterChannelCall
+	private readonly test: testCalls.BridgeInboundChannelRegisterChannelCall
 	private readonly dev: devCalls.BridgeInboundChannelRegisterChannelCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.BridgeInboundChannelRegisterChannelCall(ctx, call)
+		this.test = new testCalls.BridgeInboundChannelRegisterChannelCall(ctx, call)
 		this.dev = new devCalls.BridgeInboundChannelRegisterChannelCall(ctx, call)
 	}
 
@@ -10559,10 +10853,12 @@ export class BridgeInboundChannelRegisterChannelCall {
 
 export class BridgeInboundChannelSetRewardFractionCall {
 	private readonly stage: stageCalls.BridgeInboundChannelSetRewardFractionCall
+	private readonly test: testCalls.BridgeInboundChannelSetRewardFractionCall
 	private readonly dev: devCalls.BridgeInboundChannelSetRewardFractionCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.BridgeInboundChannelSetRewardFractionCall(ctx, call)
+		this.test = new testCalls.BridgeInboundChannelSetRewardFractionCall(ctx, call)
 		this.dev = new devCalls.BridgeInboundChannelSetRewardFractionCall(ctx, call)
 	}
 
@@ -10576,10 +10872,12 @@ export class BridgeInboundChannelSetRewardFractionCall {
 
 export class BridgeInboundChannelSubmitCall {
 	private readonly stage: stageCalls.BridgeInboundChannelSubmitCall
+	private readonly test: testCalls.BridgeInboundChannelSubmitCall
 	private readonly dev: devCalls.BridgeInboundChannelSubmitCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.BridgeInboundChannelSubmitCall(ctx, call)
+		this.test = new testCalls.BridgeInboundChannelSubmitCall(ctx, call)
 		this.dev = new devCalls.BridgeInboundChannelSubmitCall(ctx, call)
 	}
 
@@ -10599,10 +10897,12 @@ export class BridgeInboundChannelSubmitCall {
 
 export class BridgeProxyAddLimitedAssetCall {
 	private readonly stage: stageCalls.BridgeProxyAddLimitedAssetCall
+	private readonly test: testCalls.BridgeProxyAddLimitedAssetCall
 	private readonly dev: devCalls.BridgeProxyAddLimitedAssetCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.BridgeProxyAddLimitedAssetCall(ctx, call)
+		this.test = new testCalls.BridgeProxyAddLimitedAssetCall(ctx, call)
 		this.dev = new devCalls.BridgeProxyAddLimitedAssetCall(ctx, call)
 	}
 
@@ -10616,10 +10916,12 @@ export class BridgeProxyAddLimitedAssetCall {
 
 export class BridgeProxyBurnCall {
 	private readonly stage: stageCalls.BridgeProxyBurnCall
+	private readonly test: testCalls.BridgeProxyBurnCall
 	private readonly dev: devCalls.BridgeProxyBurnCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.BridgeProxyBurnCall(ctx, call)
+		this.test = new testCalls.BridgeProxyBurnCall(ctx, call)
 		this.dev = new devCalls.BridgeProxyBurnCall(ctx, call)
 	}
 
@@ -10633,10 +10935,12 @@ export class BridgeProxyBurnCall {
 
 export class BridgeProxyRemoveLimitedAssetCall {
 	private readonly stage: stageCalls.BridgeProxyRemoveLimitedAssetCall
+	private readonly test: testCalls.BridgeProxyRemoveLimitedAssetCall
 	private readonly dev: devCalls.BridgeProxyRemoveLimitedAssetCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.BridgeProxyRemoveLimitedAssetCall(ctx, call)
+		this.test = new testCalls.BridgeProxyRemoveLimitedAssetCall(ctx, call)
 		this.dev = new devCalls.BridgeProxyRemoveLimitedAssetCall(ctx, call)
 	}
 
@@ -10650,10 +10954,12 @@ export class BridgeProxyRemoveLimitedAssetCall {
 
 export class BridgeProxyUpdateTransferLimitCall {
 	private readonly stage: stageCalls.BridgeProxyUpdateTransferLimitCall
+	private readonly test: testCalls.BridgeProxyUpdateTransferLimitCall
 	private readonly dev: devCalls.BridgeProxyUpdateTransferLimitCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.BridgeProxyUpdateTransferLimitCall(ctx, call)
+		this.test = new testCalls.BridgeProxyUpdateTransferLimitCall(ctx, call)
 		this.dev = new devCalls.BridgeProxyUpdateTransferLimitCall(ctx, call)
 	}
 
@@ -10667,10 +10973,12 @@ export class BridgeProxyUpdateTransferLimitCall {
 
 export class Erc20AppBurnCall {
 	private readonly stage: stageCalls.Erc20AppBurnCall
+	private readonly test: testCalls.Erc20AppBurnCall
 	private readonly dev: devCalls.Erc20AppBurnCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.Erc20AppBurnCall(ctx, call)
+		this.test = new testCalls.Erc20AppBurnCall(ctx, call)
 		this.dev = new devCalls.Erc20AppBurnCall(ctx, call)
 	}
 
@@ -10684,10 +10992,12 @@ export class Erc20AppBurnCall {
 
 export class Erc20AppMintCall {
 	private readonly stage: stageCalls.Erc20AppMintCall
+	private readonly test: testCalls.Erc20AppMintCall
 	private readonly dev: devCalls.Erc20AppMintCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.Erc20AppMintCall(ctx, call)
+		this.test = new testCalls.Erc20AppMintCall(ctx, call)
 		this.dev = new devCalls.Erc20AppMintCall(ctx, call)
 	}
 
@@ -10701,10 +11011,12 @@ export class Erc20AppMintCall {
 
 export class Erc20AppRegisterAssetInternalCall {
 	private readonly stage: stageCalls.Erc20AppRegisterAssetInternalCall
+	private readonly test: testCalls.Erc20AppRegisterAssetInternalCall
 	private readonly dev: devCalls.Erc20AppRegisterAssetInternalCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.Erc20AppRegisterAssetInternalCall(ctx, call)
+		this.test = new testCalls.Erc20AppRegisterAssetInternalCall(ctx, call)
 		this.dev = new devCalls.Erc20AppRegisterAssetInternalCall(ctx, call)
 	}
 
@@ -10718,10 +11030,12 @@ export class Erc20AppRegisterAssetInternalCall {
 
 export class Erc20AppRegisterErc20AppCall {
 	private readonly stage: stageCalls.Erc20AppRegisterErc20AppCall
+	private readonly test: testCalls.Erc20AppRegisterErc20AppCall
 	private readonly dev: devCalls.Erc20AppRegisterErc20AppCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.Erc20AppRegisterErc20AppCall(ctx, call)
+		this.test = new testCalls.Erc20AppRegisterErc20AppCall(ctx, call)
 		this.dev = new devCalls.Erc20AppRegisterErc20AppCall(ctx, call)
 	}
 
@@ -10735,10 +11049,12 @@ export class Erc20AppRegisterErc20AppCall {
 
 export class Erc20AppRegisterErc20AssetCall {
 	private readonly stage: stageCalls.Erc20AppRegisterErc20AssetCall
+	private readonly test: testCalls.Erc20AppRegisterErc20AssetCall
 	private readonly dev: devCalls.Erc20AppRegisterErc20AssetCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.Erc20AppRegisterErc20AssetCall(ctx, call)
+		this.test = new testCalls.Erc20AppRegisterErc20AssetCall(ctx, call)
 		this.dev = new devCalls.Erc20AppRegisterErc20AssetCall(ctx, call)
 	}
 
@@ -10752,10 +11068,12 @@ export class Erc20AppRegisterErc20AssetCall {
 
 export class Erc20AppRegisterExistingErc20AssetCall {
 	private readonly stage: stageCalls.Erc20AppRegisterExistingErc20AssetCall
+	private readonly test: testCalls.Erc20AppRegisterExistingErc20AssetCall
 	private readonly dev: devCalls.Erc20AppRegisterExistingErc20AssetCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.Erc20AppRegisterExistingErc20AssetCall(ctx, call)
+		this.test = new testCalls.Erc20AppRegisterExistingErc20AssetCall(ctx, call)
 		this.dev = new devCalls.Erc20AppRegisterExistingErc20AssetCall(ctx, call)
 	}
 
@@ -10775,10 +11093,12 @@ export class Erc20AppRegisterExistingErc20AssetCall {
 
 export class Erc20AppRegisterNativeAppCall {
 	private readonly stage: stageCalls.Erc20AppRegisterNativeAppCall
+	private readonly test: testCalls.Erc20AppRegisterNativeAppCall
 	private readonly dev: devCalls.Erc20AppRegisterNativeAppCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.Erc20AppRegisterNativeAppCall(ctx, call)
+		this.test = new testCalls.Erc20AppRegisterNativeAppCall(ctx, call)
 		this.dev = new devCalls.Erc20AppRegisterNativeAppCall(ctx, call)
 	}
 
@@ -10792,10 +11112,12 @@ export class Erc20AppRegisterNativeAppCall {
 
 export class Erc20AppRegisterNativeAssetCall {
 	private readonly stage: stageCalls.Erc20AppRegisterNativeAssetCall
+	private readonly test: testCalls.Erc20AppRegisterNativeAssetCall
 	private readonly dev: devCalls.Erc20AppRegisterNativeAssetCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.Erc20AppRegisterNativeAssetCall(ctx, call)
+		this.test = new testCalls.Erc20AppRegisterNativeAssetCall(ctx, call)
 		this.dev = new devCalls.Erc20AppRegisterNativeAssetCall(ctx, call)
 	}
 
@@ -10809,10 +11131,12 @@ export class Erc20AppRegisterNativeAssetCall {
 
 export class EthAppBurnCall {
 	private readonly stage: stageCalls.EthAppBurnCall
+	private readonly test: testCalls.EthAppBurnCall
 	private readonly dev: devCalls.EthAppBurnCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.EthAppBurnCall(ctx, call)
+		this.test = new testCalls.EthAppBurnCall(ctx, call)
 		this.dev = new devCalls.EthAppBurnCall(ctx, call)
 	}
 
@@ -10826,10 +11150,12 @@ export class EthAppBurnCall {
 
 export class EthAppMintCall {
 	private readonly stage: stageCalls.EthAppMintCall
+	private readonly test: testCalls.EthAppMintCall
 	private readonly dev: devCalls.EthAppMintCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.EthAppMintCall(ctx, call)
+		this.test = new testCalls.EthAppMintCall(ctx, call)
 		this.dev = new devCalls.EthAppMintCall(ctx, call)
 	}
 
@@ -10843,10 +11169,12 @@ export class EthAppMintCall {
 
 export class EthAppRegisterNetworkCall {
 	private readonly stage: stageCalls.EthAppRegisterNetworkCall
+	private readonly test: testCalls.EthAppRegisterNetworkCall
 	private readonly dev: devCalls.EthAppRegisterNetworkCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.EthAppRegisterNetworkCall(ctx, call)
+		this.test = new testCalls.EthAppRegisterNetworkCall(ctx, call)
 		this.dev = new devCalls.EthAppRegisterNetworkCall(ctx, call)
 	}
 
@@ -10866,10 +11194,12 @@ export class EthAppRegisterNetworkCall {
 
 export class EthAppRegisterNetworkWithExistingAssetCall {
 	private readonly stage: stageCalls.EthAppRegisterNetworkWithExistingAssetCall
+	private readonly test: testCalls.EthAppRegisterNetworkWithExistingAssetCall
 	private readonly dev: devCalls.EthAppRegisterNetworkWithExistingAssetCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.EthAppRegisterNetworkWithExistingAssetCall(ctx, call)
+		this.test = new testCalls.EthAppRegisterNetworkWithExistingAssetCall(ctx, call)
 		this.dev = new devCalls.EthAppRegisterNetworkWithExistingAssetCall(ctx, call)
 	}
 
@@ -10889,10 +11219,12 @@ export class EthAppRegisterNetworkWithExistingAssetCall {
 
 export class EthereumLightClientImportHeaderCall {
 	private readonly stage: stageCalls.EthereumLightClientImportHeaderCall
+	private readonly test: testCalls.EthereumLightClientImportHeaderCall
 	private readonly dev: devCalls.EthereumLightClientImportHeaderCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.EthereumLightClientImportHeaderCall(ctx, call)
+		this.test = new testCalls.EthereumLightClientImportHeaderCall(ctx, call)
 		this.dev = new devCalls.EthereumLightClientImportHeaderCall(ctx, call)
 	}
 
@@ -10906,10 +11238,12 @@ export class EthereumLightClientImportHeaderCall {
 
 export class EthereumLightClientRegisterNetworkCall {
 	private readonly stage: stageCalls.EthereumLightClientRegisterNetworkCall
+	private readonly test: testCalls.EthereumLightClientRegisterNetworkCall
 	private readonly dev: devCalls.EthereumLightClientRegisterNetworkCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.EthereumLightClientRegisterNetworkCall(ctx, call)
+		this.test = new testCalls.EthereumLightClientRegisterNetworkCall(ctx, call)
 		this.dev = new devCalls.EthereumLightClientRegisterNetworkCall(ctx, call)
 	}
 
@@ -10923,10 +11257,12 @@ export class EthereumLightClientRegisterNetworkCall {
 
 export class EthereumLightClientUpdateDifficultyConfigCall {
 	private readonly stage: stageCalls.EthereumLightClientUpdateDifficultyConfigCall
+	private readonly test: testCalls.EthereumLightClientUpdateDifficultyConfigCall
 	private readonly dev: devCalls.EthereumLightClientUpdateDifficultyConfigCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.EthereumLightClientUpdateDifficultyConfigCall(ctx, call)
+		this.test = new testCalls.EthereumLightClientUpdateDifficultyConfigCall(ctx, call)
 		this.dev = new devCalls.EthereumLightClientUpdateDifficultyConfigCall(ctx, call)
 	}
 
@@ -10940,9 +11276,11 @@ export class EthereumLightClientUpdateDifficultyConfigCall {
 
 export class EvmBridgeProxyBurnCall {
 	private readonly stage: stageCalls.EvmBridgeProxyBurnCall
+	private readonly test: testCalls.EvmBridgeProxyBurnCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.EvmBridgeProxyBurnCall(ctx, call)
+		this.test = new testCalls.EvmBridgeProxyBurnCall(ctx, call)
 	}
 
 	get isV52Stage(): stageCalls.EvmBridgeProxyBurnCall['isV52'] {
@@ -10974,10 +11312,12 @@ export class FaucetUpdateLimitCall {
 
 export class MigrationAppMigrateErc20Call {
 	private readonly stage: stageCalls.MigrationAppMigrateErc20Call
+	private readonly test: testCalls.MigrationAppMigrateErc20Call
 	private readonly dev: devCalls.MigrationAppMigrateErc20Call
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.MigrationAppMigrateErc20Call(ctx, call)
+		this.test = new testCalls.MigrationAppMigrateErc20Call(ctx, call)
 		this.dev = new devCalls.MigrationAppMigrateErc20Call(ctx, call)
 	}
 
@@ -10997,10 +11337,12 @@ export class MigrationAppMigrateErc20Call {
 
 export class MigrationAppMigrateEthCall {
 	private readonly stage: stageCalls.MigrationAppMigrateEthCall
+	private readonly test: testCalls.MigrationAppMigrateEthCall
 	private readonly dev: devCalls.MigrationAppMigrateEthCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.MigrationAppMigrateEthCall(ctx, call)
+		this.test = new testCalls.MigrationAppMigrateEthCall(ctx, call)
 		this.dev = new devCalls.MigrationAppMigrateEthCall(ctx, call)
 	}
 
@@ -11014,10 +11356,12 @@ export class MigrationAppMigrateEthCall {
 
 export class MigrationAppMigrateSidechainCall {
 	private readonly stage: stageCalls.MigrationAppMigrateSidechainCall
+	private readonly test: testCalls.MigrationAppMigrateSidechainCall
 	private readonly dev: devCalls.MigrationAppMigrateSidechainCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.MigrationAppMigrateSidechainCall(ctx, call)
+		this.test = new testCalls.MigrationAppMigrateSidechainCall(ctx, call)
 		this.dev = new devCalls.MigrationAppMigrateSidechainCall(ctx, call)
 	}
 
@@ -11037,10 +11381,12 @@ export class MigrationAppMigrateSidechainCall {
 
 export class MigrationAppRegisterNetworkCall {
 	private readonly stage: stageCalls.MigrationAppRegisterNetworkCall
+	private readonly test: testCalls.MigrationAppRegisterNetworkCall
 	private readonly dev: devCalls.MigrationAppRegisterNetworkCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.MigrationAppRegisterNetworkCall(ctx, call)
+		this.test = new testCalls.MigrationAppRegisterNetworkCall(ctx, call)
 		this.dev = new devCalls.MigrationAppRegisterNetworkCall(ctx, call)
 	}
 
@@ -11054,10 +11400,12 @@ export class MigrationAppRegisterNetworkCall {
 
 export class MultisigVerifierAddPeerCall {
 	private readonly stage: stageCalls.MultisigVerifierAddPeerCall
+	private readonly test: testCalls.MultisigVerifierAddPeerCall
 	private readonly dev: devCalls.MultisigVerifierAddPeerCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.MultisigVerifierAddPeerCall(ctx, call)
+		this.test = new testCalls.MultisigVerifierAddPeerCall(ctx, call)
 		this.dev = new devCalls.MultisigVerifierAddPeerCall(ctx, call)
 	}
 
@@ -11071,10 +11419,12 @@ export class MultisigVerifierAddPeerCall {
 
 export class MultisigVerifierInitializeCall {
 	private readonly stage: stageCalls.MultisigVerifierInitializeCall
+	private readonly test: testCalls.MultisigVerifierInitializeCall
 	private readonly dev: devCalls.MultisigVerifierInitializeCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.MultisigVerifierInitializeCall(ctx, call)
+		this.test = new testCalls.MultisigVerifierInitializeCall(ctx, call)
 		this.dev = new devCalls.MultisigVerifierInitializeCall(ctx, call)
 	}
 
@@ -11088,10 +11438,12 @@ export class MultisigVerifierInitializeCall {
 
 export class MultisigVerifierRemovePeerCall {
 	private readonly stage: stageCalls.MultisigVerifierRemovePeerCall
+	private readonly test: testCalls.MultisigVerifierRemovePeerCall
 	private readonly dev: devCalls.MultisigVerifierRemovePeerCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.MultisigVerifierRemovePeerCall(ctx, call)
+		this.test = new testCalls.MultisigVerifierRemovePeerCall(ctx, call)
 		this.dev = new devCalls.MultisigVerifierRemovePeerCall(ctx, call)
 	}
 
@@ -11105,10 +11457,12 @@ export class MultisigVerifierRemovePeerCall {
 
 export class SubstrateBridgeAppAddAssetidParaidCall {
 	private readonly stage: stageCalls.SubstrateBridgeAppAddAssetidParaidCall
+	private readonly test: testCalls.SubstrateBridgeAppAddAssetidParaidCall
 	private readonly dev: devCalls.SubstrateBridgeAppAddAssetidParaidCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.SubstrateBridgeAppAddAssetidParaidCall(ctx, call)
+		this.test = new testCalls.SubstrateBridgeAppAddAssetidParaidCall(ctx, call)
 		this.dev = new devCalls.SubstrateBridgeAppAddAssetidParaidCall(ctx, call)
 	}
 
@@ -11122,10 +11476,12 @@ export class SubstrateBridgeAppAddAssetidParaidCall {
 
 export class SubstrateBridgeAppBurnCall {
 	private readonly stage: stageCalls.SubstrateBridgeAppBurnCall
+	private readonly test: testCalls.SubstrateBridgeAppBurnCall
 	private readonly dev: devCalls.SubstrateBridgeAppBurnCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.SubstrateBridgeAppBurnCall(ctx, call)
+		this.test = new testCalls.SubstrateBridgeAppBurnCall(ctx, call)
 		this.dev = new devCalls.SubstrateBridgeAppBurnCall(ctx, call)
 	}
 
@@ -11139,10 +11495,12 @@ export class SubstrateBridgeAppBurnCall {
 
 export class SubstrateBridgeAppFinalizeAssetRegistrationCall {
 	private readonly stage: stageCalls.SubstrateBridgeAppFinalizeAssetRegistrationCall
+	private readonly test: testCalls.SubstrateBridgeAppFinalizeAssetRegistrationCall
 	private readonly dev: devCalls.SubstrateBridgeAppFinalizeAssetRegistrationCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.SubstrateBridgeAppFinalizeAssetRegistrationCall(ctx, call)
+		this.test = new testCalls.SubstrateBridgeAppFinalizeAssetRegistrationCall(ctx, call)
 		this.dev = new devCalls.SubstrateBridgeAppFinalizeAssetRegistrationCall(ctx, call)
 	}
 
@@ -11156,10 +11514,12 @@ export class SubstrateBridgeAppFinalizeAssetRegistrationCall {
 
 export class SubstrateBridgeAppMintCall {
 	private readonly stage: stageCalls.SubstrateBridgeAppMintCall
+	private readonly test: testCalls.SubstrateBridgeAppMintCall
 	private readonly dev: devCalls.SubstrateBridgeAppMintCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.SubstrateBridgeAppMintCall(ctx, call)
+		this.test = new testCalls.SubstrateBridgeAppMintCall(ctx, call)
 		this.dev = new devCalls.SubstrateBridgeAppMintCall(ctx, call)
 	}
 
@@ -11173,10 +11533,12 @@ export class SubstrateBridgeAppMintCall {
 
 export class SubstrateBridgeAppRegisterSidechainAssetCall {
 	private readonly stage: stageCalls.SubstrateBridgeAppRegisterSidechainAssetCall
+	private readonly test: testCalls.SubstrateBridgeAppRegisterSidechainAssetCall
 	private readonly dev: devCalls.SubstrateBridgeAppRegisterSidechainAssetCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.SubstrateBridgeAppRegisterSidechainAssetCall(ctx, call)
+		this.test = new testCalls.SubstrateBridgeAppRegisterSidechainAssetCall(ctx, call)
 		this.dev = new devCalls.SubstrateBridgeAppRegisterSidechainAssetCall(ctx, call)
 	}
 
@@ -11202,10 +11564,12 @@ export class SubstrateBridgeAppRegisterSidechainAssetCall {
 
 export class SubstrateBridgeAppRegisterThischainAssetCall {
 	private readonly stage: stageCalls.SubstrateBridgeAppRegisterThischainAssetCall
+	private readonly test: testCalls.SubstrateBridgeAppRegisterThischainAssetCall
 	private readonly dev: devCalls.SubstrateBridgeAppRegisterThischainAssetCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.SubstrateBridgeAppRegisterThischainAssetCall(ctx, call)
+		this.test = new testCalls.SubstrateBridgeAppRegisterThischainAssetCall(ctx, call)
 		this.dev = new devCalls.SubstrateBridgeAppRegisterThischainAssetCall(ctx, call)
 	}
 
@@ -11231,10 +11595,12 @@ export class SubstrateBridgeAppRegisterThischainAssetCall {
 
 export class SubstrateBridgeAppRemoveAssetidParaidCall {
 	private readonly stage: stageCalls.SubstrateBridgeAppRemoveAssetidParaidCall
+	private readonly test: testCalls.SubstrateBridgeAppRemoveAssetidParaidCall
 	private readonly dev: devCalls.SubstrateBridgeAppRemoveAssetidParaidCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.SubstrateBridgeAppRemoveAssetidParaidCall(ctx, call)
+		this.test = new testCalls.SubstrateBridgeAppRemoveAssetidParaidCall(ctx, call)
 		this.dev = new devCalls.SubstrateBridgeAppRemoveAssetidParaidCall(ctx, call)
 	}
 
@@ -11248,10 +11614,12 @@ export class SubstrateBridgeAppRemoveAssetidParaidCall {
 
 export class SubstrateBridgeAppSetMinimumXcmIncomingAssetCountCall {
 	private readonly stage: stageCalls.SubstrateBridgeAppSetMinimumXcmIncomingAssetCountCall
+	private readonly test: testCalls.SubstrateBridgeAppSetMinimumXcmIncomingAssetCountCall
 	private readonly dev: devCalls.SubstrateBridgeAppSetMinimumXcmIncomingAssetCountCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.SubstrateBridgeAppSetMinimumXcmIncomingAssetCountCall(ctx, call)
+		this.test = new testCalls.SubstrateBridgeAppSetMinimumXcmIncomingAssetCountCall(ctx, call)
 		this.dev = new devCalls.SubstrateBridgeAppSetMinimumXcmIncomingAssetCountCall(ctx, call)
 	}
 
@@ -11265,10 +11633,12 @@ export class SubstrateBridgeAppSetMinimumXcmIncomingAssetCountCall {
 
 export class SubstrateBridgeAppSetTransferLimitCall {
 	private readonly stage: stageCalls.SubstrateBridgeAppSetTransferLimitCall
+	private readonly test: testCalls.SubstrateBridgeAppSetTransferLimitCall
 	private readonly dev: devCalls.SubstrateBridgeAppSetTransferLimitCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.SubstrateBridgeAppSetTransferLimitCall(ctx, call)
+		this.test = new testCalls.SubstrateBridgeAppSetTransferLimitCall(ctx, call)
 		this.dev = new devCalls.SubstrateBridgeAppSetTransferLimitCall(ctx, call)
 	}
 
@@ -11282,10 +11652,12 @@ export class SubstrateBridgeAppSetTransferLimitCall {
 
 export class SubstrateBridgeAppUpdateTransactionStatusCall {
 	private readonly stage: stageCalls.SubstrateBridgeAppUpdateTransactionStatusCall
+	private readonly test: testCalls.SubstrateBridgeAppUpdateTransactionStatusCall
 	private readonly dev: devCalls.SubstrateBridgeAppUpdateTransactionStatusCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.SubstrateBridgeAppUpdateTransactionStatusCall(ctx, call)
+		this.test = new testCalls.SubstrateBridgeAppUpdateTransactionStatusCall(ctx, call)
 		this.dev = new devCalls.SubstrateBridgeAppUpdateTransactionStatusCall(ctx, call)
 	}
 
@@ -11299,9 +11671,11 @@ export class SubstrateBridgeAppUpdateTransactionStatusCall {
 
 export class SubstrateBridgeInboundChannelSetRewardFractionCall {
 	private readonly stage: stageCalls.SubstrateBridgeInboundChannelSetRewardFractionCall
+	private readonly test: testCalls.SubstrateBridgeInboundChannelSetRewardFractionCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.SubstrateBridgeInboundChannelSetRewardFractionCall(ctx, call)
+		this.test = new testCalls.SubstrateBridgeInboundChannelSetRewardFractionCall(ctx, call)
 	}
 
 	get isV52Stage(): stageCalls.SubstrateBridgeInboundChannelSetRewardFractionCall['isV52'] {
@@ -11314,10 +11688,12 @@ export class SubstrateBridgeInboundChannelSetRewardFractionCall {
 
 export class SubstrateBridgeInboundChannelSubmitCall {
 	private readonly stage: stageCalls.SubstrateBridgeInboundChannelSubmitCall
+	private readonly test: testCalls.SubstrateBridgeInboundChannelSubmitCall
 	private readonly dev: devCalls.SubstrateBridgeInboundChannelSubmitCall
 
 	constructor(ctx: ChainContext, call: Call) {
 		this.stage = new stageCalls.SubstrateBridgeInboundChannelSubmitCall(ctx, call)
+		this.test = new testCalls.SubstrateBridgeInboundChannelSubmitCall(ctx, call)
 		this.dev = new devCalls.SubstrateBridgeInboundChannelSubmitCall(ctx, call)
 	}
 
@@ -11342,16 +11718,139 @@ export class SubstrateBridgeInboundChannelSubmitCall {
 }
 
 export class OrderBookCancelLimitOrderCall {
+	private readonly test: testCalls.OrderBookCancelLimitOrderCall
 	private readonly dev: devCalls.OrderBookCancelLimitOrderCall
 
 	constructor(ctx: ChainContext, call: Call) {
+		this.test = new testCalls.OrderBookCancelLimitOrderCall(ctx, call)
 		this.dev = new devCalls.OrderBookCancelLimitOrderCall(ctx, call)
 	}
 
+	get isV52Test(): testCalls.OrderBookCancelLimitOrderCall['isV52'] {
+		return this.test.isV52
+	}
+	get asV52Test(): testCalls.OrderBookCancelLimitOrderCall['asV52'] {
+		return this.test.asV52
+	}
 	get isV60Dev(): devCalls.OrderBookCancelLimitOrderCall['isV60'] {
 		return this.dev.isV60
 	}
 	get asV60Dev(): devCalls.OrderBookCancelLimitOrderCall['asV60'] {
+		return this.dev.asV60
+	}
+}
+
+export class OrderBookChangeOrderbookStatusCall {
+	private readonly test: testCalls.OrderBookChangeOrderbookStatusCall
+	private readonly dev: devCalls.OrderBookChangeOrderbookStatusCall
+
+	constructor(ctx: ChainContext, call: Call) {
+		this.test = new testCalls.OrderBookChangeOrderbookStatusCall(ctx, call)
+		this.dev = new devCalls.OrderBookChangeOrderbookStatusCall(ctx, call)
+	}
+
+	get isV52Test(): testCalls.OrderBookChangeOrderbookStatusCall['isV52'] {
+		return this.test.isV52
+	}
+	get asV52Test(): testCalls.OrderBookChangeOrderbookStatusCall['asV52'] {
+		return this.test.asV52
+	}
+	get isV60Dev(): devCalls.OrderBookChangeOrderbookStatusCall['isV60'] {
+		return this.dev.isV60
+	}
+	get asV60Dev(): devCalls.OrderBookChangeOrderbookStatusCall['asV60'] {
+		return this.dev.asV60
+	}
+}
+
+export class OrderBookCreateOrderbookCall {
+	private readonly test: testCalls.OrderBookCreateOrderbookCall
+	private readonly dev: devCalls.OrderBookCreateOrderbookCall
+
+	constructor(ctx: ChainContext, call: Call) {
+		this.test = new testCalls.OrderBookCreateOrderbookCall(ctx, call)
+		this.dev = new devCalls.OrderBookCreateOrderbookCall(ctx, call)
+	}
+
+	get isV52Test(): testCalls.OrderBookCreateOrderbookCall['isV52'] {
+		return this.test.isV52
+	}
+	get asV52Test(): testCalls.OrderBookCreateOrderbookCall['asV52'] {
+		return this.test.asV52
+	}
+	get isV60Dev(): devCalls.OrderBookCreateOrderbookCall['isV60'] {
+		return this.dev.isV60
+	}
+	get asV60Dev(): devCalls.OrderBookCreateOrderbookCall['asV60'] {
+		return this.dev.asV60
+	}
+}
+
+export class OrderBookDeleteOrderbookCall {
+	private readonly test: testCalls.OrderBookDeleteOrderbookCall
+	private readonly dev: devCalls.OrderBookDeleteOrderbookCall
+
+	constructor(ctx: ChainContext, call: Call) {
+		this.test = new testCalls.OrderBookDeleteOrderbookCall(ctx, call)
+		this.dev = new devCalls.OrderBookDeleteOrderbookCall(ctx, call)
+	}
+
+	get isV52Test(): testCalls.OrderBookDeleteOrderbookCall['isV52'] {
+		return this.test.isV52
+	}
+	get asV52Test(): testCalls.OrderBookDeleteOrderbookCall['asV52'] {
+		return this.test.asV52
+	}
+	get isV60Dev(): devCalls.OrderBookDeleteOrderbookCall['isV60'] {
+		return this.dev.isV60
+	}
+	get asV60Dev(): devCalls.OrderBookDeleteOrderbookCall['asV60'] {
+		return this.dev.asV60
+	}
+}
+
+export class OrderBookPlaceLimitOrderCall {
+	private readonly test: testCalls.OrderBookPlaceLimitOrderCall
+	private readonly dev: devCalls.OrderBookPlaceLimitOrderCall
+
+	constructor(ctx: ChainContext, call: Call) {
+		this.test = new testCalls.OrderBookPlaceLimitOrderCall(ctx, call)
+		this.dev = new devCalls.OrderBookPlaceLimitOrderCall(ctx, call)
+	}
+
+	get isV52Test(): testCalls.OrderBookPlaceLimitOrderCall['isV52'] {
+		return this.test.isV52
+	}
+	get asV52Test(): testCalls.OrderBookPlaceLimitOrderCall['asV52'] {
+		return this.test.asV52
+	}
+	get isV60Dev(): devCalls.OrderBookPlaceLimitOrderCall['isV60'] {
+		return this.dev.isV60
+	}
+	get asV60Dev(): devCalls.OrderBookPlaceLimitOrderCall['asV60'] {
+		return this.dev.asV60
+	}
+}
+
+export class OrderBookUpdateOrderbookCall {
+	private readonly test: testCalls.OrderBookUpdateOrderbookCall
+	private readonly dev: devCalls.OrderBookUpdateOrderbookCall
+
+	constructor(ctx: ChainContext, call: Call) {
+		this.test = new testCalls.OrderBookUpdateOrderbookCall(ctx, call)
+		this.dev = new devCalls.OrderBookUpdateOrderbookCall(ctx, call)
+	}
+
+	get isV52Test(): testCalls.OrderBookUpdateOrderbookCall['isV52'] {
+		return this.test.isV52
+	}
+	get asV52Test(): testCalls.OrderBookUpdateOrderbookCall['asV52'] {
+		return this.test.asV52
+	}
+	get isV60Dev(): devCalls.OrderBookUpdateOrderbookCall['isV60'] {
+		return this.dev.isV60
+	}
+	get asV60Dev(): devCalls.OrderBookUpdateOrderbookCall['asV60'] {
 		return this.dev.asV60
 	}
 }
@@ -11371,51 +11870,6 @@ export class OrderBookCancelLimitOrdersBatchCall {
 	}
 }
 
-export class OrderBookChangeOrderbookStatusCall {
-	private readonly dev: devCalls.OrderBookChangeOrderbookStatusCall
-
-	constructor(ctx: ChainContext, call: Call) {
-		this.dev = new devCalls.OrderBookChangeOrderbookStatusCall(ctx, call)
-	}
-
-	get isV60Dev(): devCalls.OrderBookChangeOrderbookStatusCall['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devCalls.OrderBookChangeOrderbookStatusCall['asV60'] {
-		return this.dev.asV60
-	}
-}
-
-export class OrderBookCreateOrderbookCall {
-	private readonly dev: devCalls.OrderBookCreateOrderbookCall
-
-	constructor(ctx: ChainContext, call: Call) {
-		this.dev = new devCalls.OrderBookCreateOrderbookCall(ctx, call)
-	}
-
-	get isV60Dev(): devCalls.OrderBookCreateOrderbookCall['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devCalls.OrderBookCreateOrderbookCall['asV60'] {
-		return this.dev.asV60
-	}
-}
-
-export class OrderBookDeleteOrderbookCall {
-	private readonly dev: devCalls.OrderBookDeleteOrderbookCall
-
-	constructor(ctx: ChainContext, call: Call) {
-		this.dev = new devCalls.OrderBookDeleteOrderbookCall(ctx, call)
-	}
-
-	get isV60Dev(): devCalls.OrderBookDeleteOrderbookCall['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devCalls.OrderBookDeleteOrderbookCall['asV60'] {
-		return this.dev.asV60
-	}
-}
-
 export class OrderBookExecuteMarketOrderCall {
 	private readonly dev: devCalls.OrderBookExecuteMarketOrderCall
 
@@ -11427,36 +11881,6 @@ export class OrderBookExecuteMarketOrderCall {
 		return this.dev.isV60
 	}
 	get asV60Dev(): devCalls.OrderBookExecuteMarketOrderCall['asV60'] {
-		return this.dev.asV60
-	}
-}
-
-export class OrderBookPlaceLimitOrderCall {
-	private readonly dev: devCalls.OrderBookPlaceLimitOrderCall
-
-	constructor(ctx: ChainContext, call: Call) {
-		this.dev = new devCalls.OrderBookPlaceLimitOrderCall(ctx, call)
-	}
-
-	get isV60Dev(): devCalls.OrderBookPlaceLimitOrderCall['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devCalls.OrderBookPlaceLimitOrderCall['asV60'] {
-		return this.dev.asV60
-	}
-}
-
-export class OrderBookUpdateOrderbookCall {
-	private readonly dev: devCalls.OrderBookUpdateOrderbookCall
-
-	constructor(ctx: ChainContext, call: Call) {
-		this.dev = new devCalls.OrderBookUpdateOrderbookCall(ctx, call)
-	}
-
-	get isV60Dev(): devCalls.OrderBookUpdateOrderbookCall['isV60'] {
-		return this.dev.isV60
-	}
-	get asV60Dev(): devCalls.OrderBookUpdateOrderbookCall['asV60'] {
 		return this.dev.asV60
 	}
 }
@@ -11521,4 +11945,4 @@ export class QaToolsRemoveFromWhitelistCall {
 	}
 }
 
-export const utilityBatchAllCallVersions = ['1', '3', '7', '19', '22', '23', '26', '32', '33', '35', '37', '38', '42', '43', '45', '46', '47', '50', '53', '57', '59', '60', '33Stage', '35Stage', '37Stage', '38Stage', '42Stage', '43Stage', '44Stage', '45Stage', '46Stage', '47Stage', '48Stage', '52Stage', '54Stage', '55Stage', '57Stage', '59Stage', '60Stage', '62Stage', '60Dev'] as const
+export const utilityBatchAllCallVersions = ['1', '3', '7', '19', '22', '23', '26', '32', '33', '35', '37', '38', '42', '43', '45', '46', '47', '50', '53', '57', '59', '60', '33Stage', '35Stage', '37Stage', '38Stage', '42Stage', '43Stage', '44Stage', '45Stage', '46Stage', '47Stage', '48Stage', '52Stage', '54Stage', '55Stage', '57Stage', '59Stage', '60Stage', '62Stage', '51Test', '52Test', '60Dev'] as const

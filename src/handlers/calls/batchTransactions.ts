@@ -111,7 +111,7 @@ function mapCallsForAllVersions(ctx: Context, block: Block, callItem: CallItem<'
 		calls = mapCalls(
 			{
 				version: 'unknown' as any,
-				calls: callItem.call.args.calls
+				calls: ctx._chain.decodeCall(callItem.call).calls
 			} as BatchCalls,
 			historyElement,
 			block
