@@ -21,7 +21,7 @@ export const environments: Environments = {
 	},
 	[Environment.STAGE]: {
 		chain: 'wss://ws.framenode-7.s4.stg1.sora2.soramitsu.co.jp',
-		archive: 'https://sora-testnet.archive.subsquid.io/graphql'
+        archive: 'https://subsquid.sq1.stg1.sora2.soramitsu.co.jp/graphql'
 	},
 	[Environment.TEST]: {
 		chain: 'wss://ws.framenode-1.v1.tst.sora2.soramitsu.co.jp',
