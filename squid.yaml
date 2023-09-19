@@ -1,14 +1,14 @@
 manifestVersion: subsquid.io/v0.1
-name: sora-test
+name: sora-dev
 version: 1
-description: 'Sora test squid'
+description: 'Sora dev squid'
 build: 
 deploy:
   addons:
     postgres:
   processor:
     env:
-      INDEXER_ENVIRONMENT: test
+      INDEXER_ENVIRONMENT: dev
       INDEXER_START_BLOCK: 0
       SQD_DEBUG: sqd:processor:mapping
     cmd:
