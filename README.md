@@ -1,22 +1,4 @@
-# Squid template project
-
-A starter [Squid](https://subsquid.io) project to demonstrate its structure and conventions.
-It accumulates [kusama](https://kusama.network) account transfers and serves them via GraphQL API.
-
-## Summary
-
-- [Quickstart](#quickly-running-the-sample)
-- [Migrate to FireSquid](#migrate-to-firesquid)
-- [Public archives for Parachains](#public-archives-for-parachains)
-- [Self-hosted archive](#self-hosted-archive)
-- [Development flow](#dev-flow)
-  - [Database Schema](#1-define-database-schema)
-  - [Entity classes](#2-generate-typeorm-classes)
-  - [DB migrations](#3-generate-database-migration)
-  - [Typegen for Events, Extrinsics and Storage Calls](#4-generate-typescript-definitions-for-substrate-events-calls-and-storage)
-- [Deploy the Squid](#deploy-the-squid)
-- [Conventions](#project-conventions)
-- [Type Bundles](#types-bundle)
+# Sora subsquid indexer
 
 ## Prerequisites
 

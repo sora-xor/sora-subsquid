@@ -1,24 +1,31 @@
+version: '2.4'
 services:
   db:
-    image: postgres:15  # CockroachDB cluster might be a better fit for production deployment
+    image: postgres:15
     restart: always
+    # command: start-single-node --insecure
     volumes:
-      - /var/lib/postgresql/data
+      - ./db:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: squid-archive
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5432:5432"
 
   ingest:
     depends_on:
       - db
     restart: on-failure
     image: subsquid/substrate-ingest:firesquid
+    volumes:
+      - "../../src/typesBundle.json:/configs/typesBundle.json"
     command: [
-       "-e", "wss://kusama-rpc.polkadot.io",
-       "-c", "5", # allow up to 20 pending requests for the above endpoint (default is 5)
-       #  "--start-block", "1000000", # uncomment to specify a non-zero start block
-       "--out", "postgres://postgres:postgres@db:5432/squid-archive"
+       "-e", "${NODE_NAME}",
+       "-c", "5",
+       "--out", "${DB_URL}",
+       "--types-bundle", "/configs/typesBundle.json",
+       "--write-batch-size", "10"
     ]
 
   gateway:
@@ -28,25 +35,22 @@ services:
     environment:
       RUST_LOG: "substrate_gateway=info,actix_server=info"
     command: [
-       "--database-url", "postgres://postgres:postgres@db:5432/squid-archive",
-       "--database-max-connections", "3", # max number of concurrent database connections
-       # "--evm-support" # uncomment for chains with Frontier EVM pallet
-                         # (e.g. Moonbeam/Moonriver or Astar/Shiden)
+       "--database-url", "${DB_URL}",
+       "--database-max-connections", "100",
+       "--scan-start-value", "1",
+       "--scan-max-value", "10000",
     ]
     ports:
-      - "8888:8000"
+      - "8000:8000"
 
-  # Explorer service is optional.
-  # It provides rich GraphQL API for querying archived data.
-  # Many developers find it very useful for exploration and debugging.
   explorer:
     image: subsquid/substrate-explorer:firesquid
     environment:
-      DB_TYPE: postgres # set to `cockroach` for Cockroach DB
+      DB_TYPE: postgres
       DB_HOST: db
-      DB_PORT: "5432"
-      DB_NAME: "squid-archive"
-      DB_USER: "postgres"
-      DB_PASS: "postgres"
+      DB_PORT: 5432
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USERNAME}
+      DB_PASS: ${DB_PASS}
     ports:
-      - "4444:3000"
+      - "3000:3000"

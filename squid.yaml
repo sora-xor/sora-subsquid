@@ -1,14 +1,38 @@
 manifestVersion: subsquid.io/v0.1
-name: substrate-template
+name: sora-dev
 version: 1
-description: |-
-  The very first squid from manifest  
-build:
-
+description: 'Sora dev squid'
+build: 
 deploy:
   addons:
     postgres:
   processor:
-    cmd: [ "node", "lib/processor" ]
+    env:
+      INDEXER_ENVIRONMENT: dev
+      INDEXER_START_BLOCK: 0
+      SQD_DEBUG: sqd:processor:mapping
+    cmd:
+      - node
+      - lib/processor
   api:
-    cmd: [ "npx", "squid-graphql-server", "--dumb-cache", "in-memory", "--dumb-cache-ttl", "1000", "--dumb-cache-size", "100", "--dumb-cache-max-age", "1000" ]
+    cmd:
+      - npx
+      - squid-graphql-server
+      - '--subscriptions'
+      - '--dumb-cache'
+      - in-memory
+      - '--dumb-cache-ttl'
+      - '1000'
+      - '--dumb-cache-size'
+      - '100'
+      - '--dumb-cache-max-age'
+      - '1000'
+scale:
+  dedicated: true
+  addons:
+     postgres:
+         profile: small
+  processor:
+     profile: small
+  api:
+     profile: small
