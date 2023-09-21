@@ -1,7 +1,7 @@
 @Library('jenkins-library@feature/dops-2538/subq-subsquid-lib')
 
 def jobParams  = [
-    booleanParam(defaultValue: false, name: 'fullClean'),
+    booleanParam(defaultValue: true, name: 'fullClean'),
     booleanParam(defaultValue: false, name: 'deploy'),
     booleanParam(defaultValue: false, name: 'restart'),
     booleanParam(defaultValue: false, name: 'hardReset'),
