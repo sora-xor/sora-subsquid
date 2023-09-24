@@ -1,6 +1,6 @@
 manifestVersion: subsquid.io/v0.1
 name: sora-dev
-version: 1
+version: 2
 description: 'Sora dev squid'
 build: 
 deploy:
