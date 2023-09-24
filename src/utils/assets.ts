@@ -37,7 +37,7 @@ class AssetStorage {
 
 	async sync(ctx: Context, block: Block): Promise<void> {
 		const blockHeight = block.header.height
-		ctx.log.debug(`[${blockHeight}] [AssetStorage] ${this.storage.size} entities sync`)
+		ctx.log.debug(`[${blockHeight}][AssetStorage] ${this.storage.size} entities sync`)
 		ctx.store.save([...this.storage.values()])
 	}
 
@@ -59,7 +59,7 @@ class AssetStorage {
 
 			await ctx.store.save(asset)
 
-			ctx.log.debug(`[AssetStorage] Created Asset ${id}`)
+			ctx.log.debug(`[${block.header.height}][AssetStorage] Created Asset ${id}`)
 		}
 
 		this.storage.set(asset.id, asset)
@@ -97,7 +97,8 @@ class AssetSnapshotsStorage {
 	}
 
 	private async syncSnapshots(ctx: Context, block: Block): Promise<void> {
-		ctx.log.debug(`[AssetSnapshotsStorage] ${this.storage.size} snapshots sync`)
+		const blockHeight = block.header.height
+		ctx.log.debug(`[${blockHeight}][AssetSnapshotsStorage] ${this.storage.size} snapshots sync`)
 
 		await ctx.store.save([...this.storage.values()])
 
@@ -113,7 +114,7 @@ class AssetSnapshotsStorage {
 			}
 		}
 
-		ctx.log.debug(`[AssetSnapshotsStorage] ${this.storage.size} snaphots in storage after sync`)
+		ctx.log.debug(`[${blockHeight}][AssetSnapshotsStorage] ${this.storage.size} snapshots in storage after sync`)
 	}
 
 	async getOrCreateSnapshot(ctx: Context, block: Block, assetId: AssetId, type: SnapshotType): Promise<AssetSnapshot> {
@@ -178,7 +179,8 @@ class AssetSnapshotsStorage {
 				  snapshot.priceUSD.open = price;
 				}
 			} else {
-				throw new Error(`${snapshot.id} snapshot doesn't have priceUSD`)
+				const blockHeight = block.header.height
+				throw new Error(`[${blockHeight}] ${snapshot.id} snapshot doesn't have priceUSD`)
 			}
 		}
 
@@ -203,7 +205,7 @@ class AssetSnapshotsStorage {
 				snapshot.volume.amountUSD = new BigNumber(snapshot.volume!.amountUSD).plus(volumeUSD.toString()).toFixed(2)
 				snapshot.updatedAtBlock = block.header.height
 			} else {
-				throw new Error(`${snapshot.id} snapshot doesn't have volume`)
+				throw new Error(`[${block.header.height}] ${snapshot.id} snapshot doesn't have volume`)
 			}
 		}
 

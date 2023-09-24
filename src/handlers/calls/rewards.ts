@@ -12,7 +12,7 @@ export async function rewardsCallHandler(
 		| CallItem<'VestedRewards.claim_crowdloan_rewards'>
 	)
 ): Promise<void> {
-    ctx.log.debug('Caught rewards claim extrinsic')
+    ctx.log.debug(`[${block.header.height}] Caught rewards claim extrinsic`)
 
     const extrinsicHash = callItem.extrinsic.hash
     const historyElement = await createHistoryElement(ctx, block, callItem)
@@ -36,5 +36,5 @@ export async function rewardsCallHandler(
 
     await updateHistoryElementStats(ctx, block,historyElement)
 
-    ctx.log.debug(`===== Saved reward claim extrinsic with ${extrinsicHash} txid =====`)
+    ctx.log.debug(`[${block.header.height}] ===== Saved reward claim extrinsic with ${extrinsicHash} txid =====`)
 }

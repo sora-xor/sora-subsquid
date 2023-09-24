@@ -17,7 +17,7 @@ export async function transferEventHandler(
 	if (poolAccounts.has(from)) {
 		const pool = await poolsStorage.getPoolById(ctx, block, from)
 
-		if (!pool) throw new Error('Cannot get pool ' + from)
+		if (!pool) throw new Error(`[${block.header.height}] Cannot get pool ` + from)
 
 		if (pool.baseAsset.id === assetId) {
 			pool.baseAssetReserves = pool.baseAssetReserves - amount
@@ -32,7 +32,7 @@ export async function transferEventHandler(
 	if (poolAccounts.has(to)) {
 		const pool = await poolsStorage.getPoolById(ctx, block, to)
 
-		if (!pool) throw new Error('Cannot get pool ' + to)
+		if (!pool) throw new Error(`[${block.header.height}] Cannot get pool ` + to)
 
 		if (pool.baseAsset.id === assetId) {
 			pool.baseAssetReserves = pool.baseAssetReserves + amount

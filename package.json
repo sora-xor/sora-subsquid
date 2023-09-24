@@ -18,7 +18,8 @@
 		"merge-types": "ts-node ./scripts/merge-types.ts",
 		"generate-types": "npm run generate-types:production && npm run generate-types:stage && npm run generate-types:test && npm run generate-types:dev && npm run merge-types && npm run generate-additional-types",
 		"deploy": "sqd deploy ./",
-		"process": "sqd down && sqd up && sqd process"
+		"process": "sqd process",
+		"clean-process": "sqd down && sqd up && sqd process"
 	},
 	"dependencies": {
 		"@polkadot/api": "^10.0.1",

@@ -356,6 +356,18 @@ export interface OrderBookStatus_Stop {
     __kind: 'Stop'
 }
 
+export type VersionedMultiLocation = VersionedMultiLocation_V2 | VersionedMultiLocation_V3
+
+export interface VersionedMultiLocation_V2 {
+    __kind: 'V2'
+    value: V2MultiLocation
+}
+
+export interface VersionedMultiLocation_V3 {
+    __kind: 'V3'
+    value: V3MultiLocation
+}
+
 export type Forcing = Forcing_NotForcing | Forcing_ForceNew | Forcing_ForceNone | Forcing_ForceAlways
 
 export interface Forcing_NotForcing {
@@ -377,18 +389,6 @@ export interface Forcing_ForceAlways {
 export interface ValidatorPrefs {
     commission: number
     blocked: boolean
-}
-
-export type VersionedMultiLocation = VersionedMultiLocation_V2 | VersionedMultiLocation_V3
-
-export interface VersionedMultiLocation_V2 {
-    __kind: 'V2'
-    value: V2MultiLocation
-}
-
-export interface VersionedMultiLocation_V3 {
-    __kind: 'V3'
-    value: V3MultiLocation
 }
 
 export interface DispatchInfo {
@@ -538,7 +538,7 @@ export interface Weight {
     proofSize: bigint
 }
 
-export type Call = Call_System | Call_Babe | Call_Timestamp | Call_Permissions | Call_Referrals | Call_Rewards | Call_XorFee | Call_BridgeMultisig | Call_Utility | Call_Staking | Call_Session | Call_Grandpa | Call_ImOnline | Call_TradingPair | Call_Assets | Call_MulticollateralBondingCurvePool | Call_Technical | Call_PoolXYK | Call_LiquidityProxy | Call_Council | Call_TechnicalCommittee | Call_Democracy | Call_DEXAPI | Call_EthBridge | Call_PswapDistribution | Call_Multisig | Call_Scheduler | Call_IrohaMigration | Call_TechnicalMembership | Call_ElectionsPhragmen | Call_VestedRewards | Call_Identity | Call_XSTPool | Call_CeresStaking | Call_CeresLiquidityLocker | Call_CeresTokenLocker | Call_CeresGovernancePlatform | Call_CeresLaunchpad | Call_DemeterFarmingPlatform | Call_BagsList | Call_ElectionProviderMultiPhase | Call_Band | Call_OracleProxy | Call_HermesGovernancePlatform | Call_Preimage | Call_OrderBook | Call_BridgeProxy | Call_EthereumLightClient | Call_BridgeInboundChannel | Call_EthApp | Call_ERC20App | Call_MigrationApp | Call_BeefyLightClient | Call_SubstrateBridgeInboundChannel | Call_SubstrateBridgeApp | Call_BridgeDataSigner | Call_MultisigVerifier | Call_Sudo | Call_Faucet | Call_QATools
+export type Call = Call_System | Call_Babe | Call_Timestamp | Call_Permissions | Call_Referrals | Call_Rewards | Call_XorFee | Call_BridgeMultisig | Call_Utility | Call_Staking | Call_Session | Call_Grandpa | Call_ImOnline | Call_TradingPair | Call_Assets | Call_MulticollateralBondingCurvePool | Call_Technical | Call_PoolXYK | Call_LiquidityProxy | Call_Council | Call_TechnicalCommittee | Call_Democracy | Call_DEXAPI | Call_EthBridge | Call_PswapDistribution | Call_Multisig | Call_Scheduler | Call_IrohaMigration | Call_TechnicalMembership | Call_ElectionsPhragmen | Call_VestedRewards | Call_Identity | Call_XSTPool | Call_CeresStaking | Call_CeresLiquidityLocker | Call_CeresTokenLocker | Call_CeresGovernancePlatform | Call_CeresLaunchpad | Call_DemeterFarmingPlatform | Call_BagsList | Call_ElectionProviderMultiPhase | Call_Band | Call_OracleProxy | Call_HermesGovernancePlatform | Call_Preimage | Call_OrderBook | Call_BridgeProxy | Call_EthereumLightClient | Call_BridgeInboundChannel | Call_EthApp | Call_ERC20App | Call_MigrationApp | Call_BeefyLightClient | Call_SubstrateBridgeInboundChannel | Call_ParachainBridgeApp | Call_BridgeDataSigner | Call_MultisigVerifier | Call_Sudo | Call_Faucet | Call_QATools
 
 export interface Call_System {
     __kind: 'System'
@@ -810,9 +810,9 @@ export interface Call_SubstrateBridgeInboundChannel {
     value: SubstrateBridgeInboundChannelCall
 }
 
-export interface Call_SubstrateBridgeApp {
-    __kind: 'SubstrateBridgeApp'
-    value: SubstrateBridgeAppCall
+export interface Call_ParachainBridgeApp {
+    __kind: 'ParachainBridgeApp'
+    value: ParachainBridgeAppCall
 }
 
 export interface Call_BridgeDataSigner {
@@ -1393,6 +1393,38 @@ export interface SwapBatchInfo {
     receivers: BatchReceiverInfo[]
 }
 
+export type Type_605 = Type_605_Thischain | Type_605_Sidechain
+
+export interface Type_605_Thischain {
+    __kind: 'Thischain'
+}
+
+export interface Type_605_Sidechain {
+    __kind: 'Sidechain'
+}
+
+export type V3AssetId = V3AssetId_Concrete | V3AssetId_Abstract
+
+export interface V3AssetId_Concrete {
+    __kind: 'Concrete'
+    value: V3MultiLocation
+}
+
+export interface V3AssetId_Abstract {
+    __kind: 'Abstract'
+    value: Uint8Array
+}
+
+export type XCMAppTransferStatus = XCMAppTransferStatus_Success | XCMAppTransferStatus_XCMTransferError
+
+export interface XCMAppTransferStatus_Success {
+    __kind: 'Success'
+}
+
+export interface XCMAppTransferStatus_XCMTransferError {
+    __kind: 'XCMTransferError'
+}
+
 export interface OrderBookFillSettings {
     bestBidPrice: BalanceUnit
     bestAskPrice: BalanceUnit
@@ -1487,38 +1519,6 @@ export interface Type_297_Set {
 
 export interface Type_297_Remove {
     __kind: 'Remove'
-}
-
-export type Type_605 = Type_605_Thischain | Type_605_Sidechain
-
-export interface Type_605_Thischain {
-    __kind: 'Thischain'
-}
-
-export interface Type_605_Sidechain {
-    __kind: 'Sidechain'
-}
-
-export type V3AssetId = V3AssetId_Concrete | V3AssetId_Abstract
-
-export interface V3AssetId_Concrete {
-    __kind: 'Concrete'
-    value: V3MultiLocation
-}
-
-export interface V3AssetId_Abstract {
-    __kind: 'Abstract'
-    value: Uint8Array
-}
-
-export type XCMAppTransferStatus = XCMAppTransferStatus_Success | XCMAppTransferStatus_XCMTransferError
-
-export interface XCMAppTransferStatus_Success {
-    __kind: 'Success'
-}
-
-export interface XCMAppTransferStatus_XCMTransferError {
-    __kind: 'XCMTransferError'
 }
 
 export type GenericCommitment = GenericCommitment_Sub | GenericCommitment_EVM
@@ -2074,7 +2074,7 @@ export interface DistributionAccounts {
     projects: DistributionAccountData
 }
 
-export interface Type_731 {
+export interface Type_730 {
     when: Timepoint
     deposit: bigint
     depositor: Uint8Array
@@ -2119,15 +2119,15 @@ export interface Scope_Unlimited {
     __kind: 'Unlimited'
 }
 
-export type Type_828 = Type_828_Unrequested | Type_828_Requested
+export type Type_827 = Type_827_Unrequested | Type_827_Requested
 
-export interface Type_828_Unrequested {
+export interface Type_827_Unrequested {
     __kind: 'Unrequested'
     deposit: [Uint8Array, bigint]
     len: number
 }
 
-export interface Type_828_Requested {
+export interface Type_827_Requested {
     __kind: 'Requested'
     deposit: ([Uint8Array, bigint] | undefined)
     count: number
@@ -2250,13 +2250,13 @@ export interface LastRuntimeUpgradeInfo {
     specName: string
 }
 
-export interface Type_666 {
+export interface Type_665 {
     free: bigint
     reserved: bigint
     frozen: bigint
 }
 
-export interface Type_664 {
+export interface Type_663 {
     id: Uint8Array
     amount: bigint
 }
@@ -2284,7 +2284,7 @@ export interface CrowdloanUserInfo {
     rewarded: [AssetId32, bigint][]
 }
 
-export interface Type_749 {
+export interface Type_748 {
     limit: bigint
     totalAvailable: bigint
     rewards: [RewardReason, bigint][]
@@ -7098,9 +7098,9 @@ export interface SubstrateBridgeInboundChannelCall_submit {
 /**
  * Contains one variant per dispatchable that can be called by an extrinsic.
  */
-export type SubstrateBridgeAppCall = SubstrateBridgeAppCall_mint | SubstrateBridgeAppCall_finalize_asset_registration | SubstrateBridgeAppCall_burn | SubstrateBridgeAppCall_register_thischain_asset | SubstrateBridgeAppCall_register_sidechain_asset | SubstrateBridgeAppCall_set_transfer_limit | SubstrateBridgeAppCall_add_assetid_paraid | SubstrateBridgeAppCall_remove_assetid_paraid | SubstrateBridgeAppCall_update_transaction_status | SubstrateBridgeAppCall_set_minimum_xcm_incoming_asset_count
+export type ParachainBridgeAppCall = ParachainBridgeAppCall_mint | ParachainBridgeAppCall_finalize_asset_registration | ParachainBridgeAppCall_burn | ParachainBridgeAppCall_register_thischain_asset | ParachainBridgeAppCall_register_sidechain_asset | ParachainBridgeAppCall_add_assetid_paraid | ParachainBridgeAppCall_remove_assetid_paraid | ParachainBridgeAppCall_update_transaction_status | ParachainBridgeAppCall_set_minimum_xcm_incoming_asset_count
 
-export interface SubstrateBridgeAppCall_mint {
+export interface ParachainBridgeAppCall_mint {
     __kind: 'mint'
     assetId: AssetId32
     sender: (VersionedMultiLocation | undefined)
@@ -7108,13 +7108,13 @@ export interface SubstrateBridgeAppCall_mint {
     amount: bigint
 }
 
-export interface SubstrateBridgeAppCall_finalize_asset_registration {
+export interface ParachainBridgeAppCall_finalize_asset_registration {
     __kind: 'finalize_asset_registration'
     assetId: AssetId32
     assetKind: Type_605
 }
 
-export interface SubstrateBridgeAppCall_burn {
+export interface ParachainBridgeAppCall_burn {
     __kind: 'burn'
     networkId: SubNetworkId
     assetId: AssetId32
@@ -7122,7 +7122,7 @@ export interface SubstrateBridgeAppCall_burn {
     amount: bigint
 }
 
-export interface SubstrateBridgeAppCall_register_thischain_asset {
+export interface ParachainBridgeAppCall_register_thischain_asset {
     __kind: 'register_thischain_asset'
     networkId: SubNetworkId
     assetId: AssetId32
@@ -7131,7 +7131,7 @@ export interface SubstrateBridgeAppCall_register_thischain_asset {
     minimalXcmAmount: bigint
 }
 
-export interface SubstrateBridgeAppCall_register_sidechain_asset {
+export interface ParachainBridgeAppCall_register_sidechain_asset {
     __kind: 'register_sidechain_asset'
     networkId: SubNetworkId
     sidechainAsset: V3AssetId
@@ -7142,35 +7142,27 @@ export interface SubstrateBridgeAppCall_register_sidechain_asset {
     minimalXcmAmount: bigint
 }
 
-/**
- * Limits amount of tokens to transfer with limit precision
- */
-export interface SubstrateBridgeAppCall_set_transfer_limit {
-    __kind: 'set_transfer_limit'
-    limitCount: (bigint | undefined)
-}
-
-export interface SubstrateBridgeAppCall_add_assetid_paraid {
+export interface ParachainBridgeAppCall_add_assetid_paraid {
     __kind: 'add_assetid_paraid'
     networkId: SubNetworkId
     paraId: number
     assetId: AssetId32
 }
 
-export interface SubstrateBridgeAppCall_remove_assetid_paraid {
+export interface ParachainBridgeAppCall_remove_assetid_paraid {
     __kind: 'remove_assetid_paraid'
     networkId: SubNetworkId
     paraId: number
     assetId: AssetId32
 }
 
-export interface SubstrateBridgeAppCall_update_transaction_status {
+export interface ParachainBridgeAppCall_update_transaction_status {
     __kind: 'update_transaction_status'
     messageId: Uint8Array
     transferStatus: XCMAppTransferStatus
 }
 
-export interface SubstrateBridgeAppCall_set_minimum_xcm_incoming_asset_count {
+export interface ParachainBridgeAppCall_set_minimum_xcm_incoming_asset_count {
     __kind: 'set_minimum_xcm_incoming_asset_count'
     networkId: SubNetworkId
     assetId: AssetId32
@@ -7932,7 +7924,7 @@ export interface DigestItem_RuntimeEnvironmentUpdated {
     __kind: 'RuntimeEnvironmentUpdated'
 }
 
-export type Event = Event_System | Event_Balances | Event_TransactionPayment | Event_Permissions | Event_Rewards | Event_XorFee | Event_BridgeMultisig | Event_Utility | Event_Staking | Event_Offences | Event_Session | Event_Grandpa | Event_ImOnline | Event_Tokens | Event_TradingPair | Event_Assets | Event_MulticollateralBondingCurvePool | Event_Technical | Event_PoolXYK | Event_LiquidityProxy | Event_Council | Event_TechnicalCommittee | Event_Democracy | Event_EthBridge | Event_PswapDistribution | Event_Multisig | Event_Scheduler | Event_IrohaMigration | Event_TechnicalMembership | Event_ElectionsPhragmen | Event_VestedRewards | Event_Identity | Event_XSTPool | Event_PriceTools | Event_CeresStaking | Event_CeresLiquidityLocker | Event_CeresTokenLocker | Event_CeresGovernancePlatform | Event_CeresLaunchpad | Event_DemeterFarmingPlatform | Event_BagsList | Event_ElectionProviderMultiPhase | Event_Band | Event_OracleProxy | Event_HermesGovernancePlatform | Event_Preimage | Event_OrderBook | Event_LeafProvider | Event_BridgeProxy | Event_EthereumLightClient | Event_BridgeInboundChannel | Event_BridgeOutboundChannel | Event_Dispatch | Event_EthApp | Event_ERC20App | Event_MigrationApp | Event_BeefyLightClient | Event_SubstrateBridgeInboundChannel | Event_SubstrateBridgeOutboundChannel | Event_SubstrateDispatch | Event_SubstrateBridgeApp | Event_BridgeDataSigner | Event_MultisigVerifier | Event_Sudo | Event_Faucet
+export type Event = Event_System | Event_Balances | Event_TransactionPayment | Event_Permissions | Event_Rewards | Event_XorFee | Event_BridgeMultisig | Event_Utility | Event_Staking | Event_Offences | Event_Session | Event_Grandpa | Event_ImOnline | Event_Tokens | Event_TradingPair | Event_Assets | Event_MulticollateralBondingCurvePool | Event_Technical | Event_PoolXYK | Event_LiquidityProxy | Event_Council | Event_TechnicalCommittee | Event_Democracy | Event_EthBridge | Event_PswapDistribution | Event_Multisig | Event_Scheduler | Event_IrohaMigration | Event_TechnicalMembership | Event_ElectionsPhragmen | Event_VestedRewards | Event_Identity | Event_XSTPool | Event_PriceTools | Event_CeresStaking | Event_CeresLiquidityLocker | Event_CeresTokenLocker | Event_CeresGovernancePlatform | Event_CeresLaunchpad | Event_DemeterFarmingPlatform | Event_BagsList | Event_ElectionProviderMultiPhase | Event_Band | Event_OracleProxy | Event_HermesGovernancePlatform | Event_Preimage | Event_OrderBook | Event_LeafProvider | Event_BridgeProxy | Event_EthereumLightClient | Event_BridgeInboundChannel | Event_BridgeOutboundChannel | Event_Dispatch | Event_EthApp | Event_ERC20App | Event_MigrationApp | Event_BeefyLightClient | Event_SubstrateBridgeInboundChannel | Event_SubstrateBridgeOutboundChannel | Event_SubstrateDispatch | Event_ParachainBridgeApp | Event_BridgeDataSigner | Event_MultisigVerifier | Event_Sudo | Event_Faucet
 
 export interface Event_System {
     __kind: 'System'
@@ -8234,9 +8226,9 @@ export interface Event_SubstrateDispatch {
     value: SubstrateDispatchEvent
 }
 
-export interface Event_SubstrateBridgeApp {
-    __kind: 'SubstrateBridgeApp'
-    value: SubstrateBridgeAppEvent
+export interface Event_ParachainBridgeApp {
+    __kind: 'ParachainBridgeApp'
+    value: ParachainBridgeAppEvent
 }
 
 export interface Event_BridgeDataSigner {
@@ -11362,12 +11354,12 @@ export interface SubstrateDispatchEvent_MessageDecodeFailed {
 			by this pallet.
 			
  */
-export type SubstrateBridgeAppEvent = SubstrateBridgeAppEvent_Burned | SubstrateBridgeAppEvent_Minted
+export type ParachainBridgeAppEvent = ParachainBridgeAppEvent_Burned | ParachainBridgeAppEvent_Minted
 
 /**
  * [network_id, asset_id, sender, recepient, amount]
  */
-export interface SubstrateBridgeAppEvent_Burned {
+export interface ParachainBridgeAppEvent_Burned {
     __kind: 'Burned'
     value: [SubNetworkId, AssetId32, Uint8Array, VersionedMultiLocation, bigint]
 }
@@ -11375,7 +11367,7 @@ export interface SubstrateBridgeAppEvent_Burned {
 /**
  * [network_id, asset_id, sender, recepient, amount]
  */
-export interface SubstrateBridgeAppEvent_Minted {
+export interface ParachainBridgeAppEvent_Minted {
     __kind: 'Minted'
     value: [SubNetworkId, AssetId32, (VersionedMultiLocation | undefined), Uint8Array, bigint]
 }

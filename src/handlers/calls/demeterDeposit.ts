@@ -8,7 +8,7 @@ import { DemeterFarmingPlatformDepositCall } from '../../types/generated/calls'
 import { getEntityData } from '../../utils/entities'
 
 export async function demeterDepositCallHandler(ctx: Context, block: Block, callItem: CallItem<'DemeterFarmingPlatform.deposit'>): Promise<void> {
-	ctx.log.debug('Caught demeterFarmingPlatform deposit extrinsic')
+	ctx.log.debug(`[${block.header.height}] Caught demeterFarmingPlatform deposit extrinsic`)
 
 	const extrinsicHash = callItem.extrinsic.hash
 
@@ -51,5 +51,5 @@ export async function demeterDepositCallHandler(ctx: Context, block: Block, call
 	await addDataToHistoryElement(ctx, block, historyElement, details)
 	await updateHistoryElementStats(ctx, block, historyElement)
 
-	ctx.log.debug(`===== Saved demeterFarmingPlatform deposit with ${extrinsicHash} txid =====`)
+	ctx.log.debug(`[${block.header.height}] ===== Saved demeterFarmingPlatform deposit with ${extrinsicHash} txid =====`)
 }
