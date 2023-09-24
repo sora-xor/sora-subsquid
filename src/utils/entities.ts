@@ -22,9 +22,9 @@ function isVersionedObject(obj: any): obj is VersionedObject {
 	return keys.some(key => key.startsWith('isV')) && keys.some(key => key.startsWith('asV'))
 }
 
-function getDataFromVersionedObject<T extends VersionedObject>(obj: T): Exclude<T[keyof T], boolean> | null {
+function getDataFromVersionedObject<T extends VersionedObject>(ctx: Context, block: Block, obj: T): Exclude<T[keyof T], boolean> | null {
 	if (!isVersionedObject(obj)) {
-		throw new Error('Object does not conform to VersionedObject pattern')
+		throw new Error(`[${block.header.height}] Object does not conform to VersionedObject pattern`)
 	}
 	
 	for (const key of getVersionedObjectKeys(obj)) {
@@ -85,7 +85,7 @@ export function getEntityData<T extends VersionedObject, V extends readonly stri
 	: allVersions as V
 
   const narrowedObject = narrowVersionedObject(entity, versions)
-  let data = getDataFromVersionedObject(narrowedObject)
+  let data = getDataFromVersionedObject(ctx, block, narrowedObject)
 
   if (data === null) {
 	console.log({
@@ -93,19 +93,21 @@ export function getEntityData<T extends VersionedObject, V extends readonly stri
 		entityItem
 	})
     const specVersion = findCurrentSpecVersion(narrowedObject)
-    if (!specVersion) ctx.log.error('No spec version found')
+    if (!specVersion) {
+		ctx.log.error(`[${block.header.height}] No spec version found`)
+	}
 	const unsupportedSpecError = new UnsupportedSpecError(ctx, block, entityItem)
 	if (entityItem.kind === 'call') {
-		data = entityItem.call.args as any
+		data = ctx._chain.decodeCall(entityItem.call) as any
 	} else if (entityItem.kind === 'event') {
-		data = entityItem.event.args as any
+		data = ctx._chain.decodeEvent(entityItem.event) as any
 	} else {
 		throw unsupportedSpecError
 	}
 	ctx.log.error(unsupportedSpecError.message)
   }
   if (data === null) {
-	throw new Error('Entity data is null')
+	throw new Error(`[${block.header.height}] Entity data is null`)
   }
 
   return data

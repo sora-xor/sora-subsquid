@@ -17,7 +17,7 @@ export async function ethSoraTransferEventHandler(
 	)
 ): Promise<void> {
     if (!eventItem.event.extrinsic) {
-		throw new Error('There is no extrinsic in the event')
+		throw new Error(`[${block.header.height}] There is no extrinsic in the event`)
 	}
 
     ctx.log.debug('Caught ETH->SORA transfer extrinsic')
@@ -64,5 +64,5 @@ export async function ethSoraTransferEventHandler(
 	await updateHistoryElementStats(ctx, block,historyElement)
 	await networkSnapshotsStorage.updateBridgeIncomingTransactionsStats(ctx, block)
 
-    ctx.log.debug(`===== Saved ETH->SORA transfer extrinsic with ${extrinsicHash} txid =====`)
+    ctx.log.debug(`[${block.header.height}] ===== Saved ETH->SORA transfer extrinsic with ${extrinsicHash} txid =====`)
 }

@@ -13,3 +13,6 @@
 /archive/dev/cockroach-data
 
 typegen.json
+
+.env
+squid.yaml
