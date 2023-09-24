@@ -5,7 +5,7 @@ import { XOR, DOUBLE_PRICE_POOL } from './consts'
 import { decodeAssetId, toAddress } from '.'
 import { AssetId, Address } from '../types'
 import { getEntityData } from './entities'
-import { getAssetId } from './assets'
+import { assetStorage, getAssetId } from './assets'
 
 // getters & setter for flag, should we sync poolXYK reserves
 // and then calc asset prices
@@ -237,8 +237,8 @@ class PoolsStorage {
 
 		if (!pool) {
 			const [baseAsset, targetAsset] = await Promise.all([
-				ctx.store.get(Asset, baseAssetId),
-				ctx.store.get(Asset, targetAssetId)
+				assetStorage.getOrCreateAsset(ctx, block, baseAssetId),
+				assetStorage.getOrCreateAsset(ctx, block, targetAssetId)
 			])
 			if (!baseAsset) throw new Error(`[${blockHeight}] Cannot find base asset: ${baseAssetId}`)
 			if (!targetAsset) throw new Error(`[${blockHeight}] Cannot find target asset: ${targetAssetId}`)
