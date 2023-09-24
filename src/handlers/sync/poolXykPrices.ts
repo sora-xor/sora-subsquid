@@ -14,7 +14,7 @@ export async function syncPoolXykPrices(ctx: Context, block: Block): Promise<voi
 
     const blockHeight = block.header.height
 
-    ctx.log.debug(`[${blockHeight}]: Update prices in PoolXYK entities`)
+    ctx.log.debug(`[${blockHeight}] Update prices in PoolXYK entities`)
 
     const assetsLockedInPools = new Map<AssetId, bigint>()
 
@@ -37,7 +37,7 @@ export async function syncPoolXykPrices(ctx: Context, block: Block): Promise<voi
         let baseAssetWithDoublePools = new BigNumber(0)
         let baseAssetPriceInDAI = new BigNumber(0)
 
-        ctx.log.debug(`[${blockHeight}]: Update ${poolsMap.size} ${baseAssetId} based pools`)
+        ctx.log.debug(`[${blockHeight}] Update ${poolsMap.size} ${baseAssetId} based pools`)
 
         for (const poolId of poolsMap.values()) {
             const pool = await poolsStorage.getPoolById(ctx, block, poolId)
@@ -147,7 +147,7 @@ export async function syncPoolXykPrices(ctx: Context, block: Block): Promise<voi
     // update total liquidity in USD
     await networkSnapshotsStorage.updateLiquidityStats(ctx, block, liquiditiesUSD)
 
-    ctx.log.debug(`[${blockHeight}]: PoolXYK prices updated`)
+    ctx.log.debug(`[${blockHeight}] PoolXYK prices updated`)
 
     PoolsPrices.set(false)
 }

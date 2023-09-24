@@ -6,6 +6,7 @@ import { Address, AssetAmount, AssetId } from '../types'
 import { toAddress } from '.'
 import { getEntityData } from './entities'
 import { getAssetId } from './assets'
+import { CannotFindEventError } from './errors'
 
 type SpecificEventItem<T extends EventItemName> = EventItem<T>;
 
@@ -39,11 +40,19 @@ export function findEventsByExtrinsicHash<T extends EventItemName[]>(
 	return events as unknown as { [K in T[number]]: SpecificEventItem<K> }[T[number]][];
 }
 
-export function findEventByExtrinsicHash<T extends EventItemName[]>(
+export function findEventByExtrinsicHash<T extends EventItemName[], F extends boolean>(
 	block: Block,
 	extrinsicHash: SubstrateExtrinsic['hash'],
 	eventNames?: T,
-): { [K in T[number]]: SpecificEventItem<K> }[T[number]] | null {
+	throwError?: F,
+): F extends true ? { [K in T[number]]: SpecificEventItem<K> }[T[number]] : ({ [K in T[number]]: SpecificEventItem<K> }[T[number]] | null) {
+	if (throwError as boolean) {
+		const events = findEventsByExtrinsicHash(block, extrinsicHash, eventNames)
+		if (events.length === 0) {
+			throw new CannotFindEventError(block, extrinsicHash, eventNames ?? '')
+		}
+		return events[0]
+	}
 	return findEventsByExtrinsicHash(block, extrinsicHash, eventNames)[0] ?? null;
 }
 

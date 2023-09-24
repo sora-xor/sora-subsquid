@@ -5,7 +5,7 @@ import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStat
 import { getEntityData } from '../../utils/entities'
 
 export async function setReferralCallHandler(ctx: Context, block: Block, callItem: CallItem<'Referrals.set_referrer'>): Promise<void> {
-	ctx.log.debug('Caught set referral extrinsic')
+	ctx.log.debug(`[${block.header.height}] Caught set referral extrinsic`)
 
     const historyElement = await createHistoryElement(ctx, block, callItem)
     
@@ -25,6 +25,6 @@ export async function setReferralCallHandler(ctx: Context, block: Block, callIte
     await addDataToHistoryElement(ctx, block, historyElement, details)
     await updateHistoryElementStats(ctx, block,historyElement)
 
-    ctx.log.debug(`===== Saved set referral with ${callItem.extrinsic.hash} txid =====`)
+    ctx.log.debug(`[${block.header.height}] ===== Saved set referral with ${callItem.extrinsic.hash} txid =====`)
 
 }

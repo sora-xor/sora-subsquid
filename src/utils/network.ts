@@ -64,7 +64,7 @@ class NetworkSnapshotsStorage {
   }
 
   private async syncSnapshots(ctx: Context, block: Block): Promise<void> {
-    ctx.log.debug(`[NetworkSnapshotsStorage] ${this.storage.size} snapshots sync`)
+    ctx.log.debug(`[${block.header.height}][NetworkSnapshotsStorage] ${this.storage.size} snapshots sync`)
 
     await ctx.store.save([...this.storage.values()])
 
@@ -80,7 +80,7 @@ class NetworkSnapshotsStorage {
       }
     }
 
-    ctx.log.debug(`[NetworkSnapshotsStorage] ${this.storage.size} snaphots in storage after sync`)
+    ctx.log.debug(`[${block.header.height}][NetworkSnapshotsStorage] ${this.storage.size} snaphots in storage after sync`)
   }
 
   private getId(type: SnapshotType, index: number): string {
