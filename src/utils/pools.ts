@@ -5,7 +5,7 @@ import { XOR, DOUBLE_PRICE_POOL } from './consts'
 import { decodeAssetId, toAddress } from '.'
 import { AssetId, Address } from '../types'
 import { getEntityData } from './entities'
-import { getAssetId } from './assets'
+import { assetStorage, getAssetId } from './assets'
 
 // getters & setter for flag, should we sync poolXYK reserves
 // and then calc asset prices
@@ -69,8 +69,6 @@ export const getAllProperties = async (ctx: Context, block: Block, baseAssetId: 
 			: await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKPropertiesStorage.name }, ['1', '7'] as const)
 				.getPairs({ code: decodeAssetId(baseAssetId) })
 
-		const data2 = getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKPropertiesStorage.name })
-
 		const properties = data.map(pair => {
 			const [[, targetAssetId], [reservesAccountId, feesAccountId]] = pair
 			return {
@@ -94,7 +92,7 @@ export const getPoolProperties = async (ctx: Context, block: Block, baseAssetId:
 	const blockHeight = block.header.height
 
 	try {
-		ctx.log.debug(`[${baseAssetId}${targetAssetId}] Pool properties request...`)
+		ctx.log.debug(`[${baseAssetId}:${targetAssetId}] Pool properties request...`)
 		const storage = new PoolXYKPropertiesStorage(ctx, block.header)
 		const data = (
 			storage.isV1 ||
@@ -239,8 +237,8 @@ class PoolsStorage {
 
 		if (!pool) {
 			const [baseAsset, targetAsset] = await Promise.all([
-				ctx.store.get(Asset, baseAssetId),
-				ctx.store.get(Asset, targetAssetId)
+				assetStorage.getOrCreateAsset(ctx, block, baseAssetId),
+				assetStorage.getOrCreateAsset(ctx, block, targetAssetId)
 			])
 			if (!baseAsset) throw new Error(`[${blockHeight}] Cannot find base asset: ${baseAssetId}`)
 			if (!targetAsset) throw new Error(`[${blockHeight}] Cannot find target asset: ${targetAssetId}`)

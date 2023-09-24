@@ -44,8 +44,8 @@ export const getSyntheticAssets = async (ctx: Context, block: Block) => {
 
 		const storage = new XSTPoolEnabledSyntheticsStorage(ctx, block.header)
 		if (!storage.isExists) return null
-		const data = getEntityData(ctx, block, storage, { kind: 'storage', name: XSTPoolEnabledSyntheticsStorage.name })
-		if (!('getPairs' in data)) return null
+		if (storage.isV19 || storage.isV42) return null
+		const data = getEntityData(ctx, block, storage, { kind: 'storage', name: XSTPoolEnabledSyntheticsStorage.name }, ['19', '42'] as const)
 		const pairs = await data.getPairs()
 
 		const syntheticAssets = pairs.map((pair) => {
