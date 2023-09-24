@@ -11,7 +11,7 @@ export async function initializePools(ctx: Context, block: Block): Promise<void>
 
     const blockHeight = block.header.height
 
-    ctx.log.debug(`[${blockHeight}]: Initialize Pool XYK entities`)
+    ctx.log.debug(`[${blockHeight}] Initialize Pool XYK entities`)
 
     const poolsBuffer = new Map<string, {
 		id: Address
@@ -37,8 +37,8 @@ export async function initializePools(ctx: Context, block: Block): Promise<void>
 				ctx.store.get(Asset, baseAssetId),
 				ctx.store.get(Asset, targetAssetId)
 			])
-			if (!baseAsset) throw new Error('Cannot find base asset')
-			if (!targetAsset) throw new Error('Cannot find target asset')
+			if (!baseAsset) throw new Error(`[${block.header.height}] Cannot find base asset`)
+			if (!targetAsset) throw new Error(`[${block.header.height}] Cannot find target asset`)
 
 			poolsBuffer.set(poolAccountId, {
 				id: poolAccountId,
@@ -73,9 +73,9 @@ export async function initializePools(ctx: Context, block: Block): Promise<void>
     if (entities.length) {
         await ctx.store.save(entities)
         await Promise.all(entities.map(entity => poolsStorage.getPoolById(ctx, block, entity.id as Address)))
-        ctx.log.debug(`[${blockHeight}]: ${entities.length} Pool XYKs initialized!`)
+        ctx.log.debug(`[${blockHeight}] ${entities.length} Pool XYKs initialized!`)
     } else {
-        ctx.log.debug(`[${blockHeight}]: No Pool XYKs to initialize!`)
+        ctx.log.debug(`[${blockHeight}] No Pool XYKs to initialize!`)
     }
 
     isFirstBlockIndexed = true

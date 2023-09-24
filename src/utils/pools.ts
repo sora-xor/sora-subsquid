@@ -23,7 +23,7 @@ export const getAllReserves = async (ctx: Context, block: Block, baseAssetId: As
 	const blockHeight = block.header.height
 
 	try {
-		ctx.log.debug(`[${blockHeight}] [${baseAssetId}] Pools XYK Reserves request...`)
+		ctx.log.debug(`[${blockHeight}][${baseAssetId}] Pools XYK Reserves request...`)
 		const storage = new PoolXYKReservesStorage(ctx, block.header)
 		const data = (
 			storage.isV1
@@ -44,7 +44,7 @@ export const getAllReserves = async (ctx: Context, block: Block, baseAssetId: As
 			}
 		})
 
-		ctx.log.debug(`[${blockHeight}] [${baseAssetId}] Pools XYK Reserves request completed.`)
+		ctx.log.debug(`[${blockHeight}][${baseAssetId}] Pools XYK Reserves request completed.`)
 
 		return reserves
 	} catch (e: any) {
@@ -58,7 +58,7 @@ export const getAllProperties = async (ctx: Context, block: Block, baseAssetId: 
 	const blockHeight = block.header.height
 
 	try {
-		ctx.log.debug(`[${blockHeight}] [${baseAssetId}] Pools XYK Properties request...`)
+		ctx.log.debug(`[${blockHeight}][${baseAssetId}] Pools XYK Properties request...`)
 		const storage = new PoolXYKPropertiesStorage(ctx, block.header)
 		const data = (
 			storage.isV1 ||
@@ -81,7 +81,7 @@ export const getAllProperties = async (ctx: Context, block: Block, baseAssetId: 
 			}
 		})
 
-		ctx.log.debug(`[${blockHeight}] [${baseAssetId}] Pools XYK Properties request completed`)
+		ctx.log.debug(`[${blockHeight}][${baseAssetId}] Pools XYK Properties request completed`)
 		return properties
 	} catch (e: any) {
 		ctx.log.error(`[${blockHeight}] Error getting Properties`)
@@ -117,7 +117,7 @@ export const getPoolProperties = async (ctx: Context, block: Block, baseAssetId:
 			}
 		})
 		
-		ctx.log.debug(`[${blockHeight}] [${baseAssetId}:${targetAssetId}] Pool properties request completed`)
+		ctx.log.debug(`[${blockHeight}][${baseAssetId}:${targetAssetId}] Pool properties request completed`)
 
 		return {
 			baseAssetId,
@@ -209,7 +209,7 @@ class PoolsStorage {
 
 	async sync(ctx: Context, block: Block): Promise<void> {
 		const blockHeight = block.header.height
-		ctx.log.debug(`[${blockHeight}] [PoolsStorage] ${this.storage.size} entities sync`)
+		ctx.log.debug(`[${blockHeight}][PoolsStorage] ${this.storage.size} entities sync`)
 		await ctx.store.save([...this.storage.values()])
 	}
 
@@ -259,7 +259,7 @@ class PoolsStorage {
 
 			await ctx.store.save(pool)
 
-			ctx.log.debug(`[${blockHeight}] [${poolId}] Created Pool XYK`)
+			ctx.log.debug(`[${blockHeight}][${poolId}] Created Pool XYK`)
 		}
 
 		this.storage.set(poolId, pool)

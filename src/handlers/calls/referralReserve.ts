@@ -8,7 +8,7 @@ import { getEntityData } from '../../utils/entities'
 import { CannotFindEventError } from '../../utils/errors'
 
 export async function referralReserveCallHandler(ctx: Context, block: Block, callItem: CallItem<'Referrals.reserve'>): Promise<void> {
-    ctx.log.debug('Caught referral reserve extrinsic')
+    ctx.log.debug(`[${block.header.height}] Caught referral reserve extrinsic`)
 
     const extrinsicHash = callItem.extrinsic.hash
     const historyElement = await createHistoryElement(ctx, block, callItem)
@@ -21,7 +21,7 @@ export async function referralReserveCallHandler(ctx: Context, block: Block, cal
 
     if (historyElement.execution.success) {
 		const balancesTransferEventName = 'Balances.Transfer'
-        const balancesTransferEventItem = findEventByExtrinsicHash(block, extrinsicHash, [balancesTransferEventName])
+        const balancesTransferEventItem = findEventByExtrinsicHash(block, extrinsicHash, [balancesTransferEventName], false)
 
         if (balancesTransferEventItem) {
             const { from, to, amount } = getAssetsTransferEventData(ctx, block, balancesTransferEventItem)
@@ -49,5 +49,5 @@ export async function referralReserveCallHandler(ctx: Context, block: Block, cal
 	if (details) await addDataToHistoryElement(ctx, block, historyElement, details)
     await updateHistoryElementStats(ctx, block, historyElement)
 
-    ctx.log.debug(`===== Saved referral reserve with ${extrinsicHash} txid =====`)
+    ctx.log.debug(`[${block.header.height}] ===== Saved referral reserve with ${extrinsicHash} txid =====`)
 }

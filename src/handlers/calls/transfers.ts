@@ -7,11 +7,10 @@ import { AssetsTransferCall } from '../../types/generated/calls'
 import { Address, AssetId } from '../../types'
 import { toAddress } from '../../utils'
 import { getEntityData } from '../../utils/entities'
-import { CannotFindEventError } from '../../utils/errors'
 import { toJSON } from '@subsquid/util-internal-json'
 
 export async function transfersCallHandler(ctx: Context, block: Block, callItem: CallItem<'Assets.transfer'>): Promise<void> {
-    ctx.log.debug('Caught transfer extrinsic')
+    ctx.log.debug(`[${block.header.height}] Caught transfer extrinsic`)
 
 	const blockHeight = block.header.height
 	const extrinsicHash = callItem.extrinsic.hash
@@ -28,12 +27,7 @@ export async function transfersCallHandler(ctx: Context, block: Block, callItem:
 
     if (historyElement.execution.success) {
 		const eventName = 'Assets.Transfer'
-		const eventItem = findEventByExtrinsicHash(block, extrinsicHash, [eventName])
-
-        if (!eventItem) {
-			throw new CannotFindEventError(block, extrinsicHash, eventName)
-		}
-		
+		const eventItem = findEventByExtrinsicHash(block, extrinsicHash, [eventName], true)
 		const event = new AssetsTransferEvent(ctx, eventItem.event)
 		const data = getEntityData(ctx, block, event, eventItem)
 
@@ -60,7 +54,7 @@ export async function transfersCallHandler(ctx: Context, block: Block, callItem:
 
 		const extrinsicSigner: Address | null = callItem.call.origin ? toAddress(callItem.call.origin.value.value) : null
 		if (!extrinsicSigner) {
-			ctx.log.error(`[${blockHeight}]: Cannot get extrinsic signer`)
+			ctx.log.error(`[${blockHeight}] Cannot get extrinsic signer`)
 			console.log(toJSON(callItem))
 		}
 
@@ -75,6 +69,6 @@ export async function transfersCallHandler(ctx: Context, block: Block, callItem:
     await addDataToHistoryElement(ctx, block, historyElement, details)
     await updateHistoryElementStats(ctx, block,historyElement)
 
-    ctx.log.debug(`===== Saved transfer with ${extrinsicHash} txid =====`)
+    ctx.log.debug(`[${block.header.height}] ===== Saved transfer with ${extrinsicHash} txid =====`)
 
 }

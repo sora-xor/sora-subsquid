@@ -8,7 +8,7 @@ import { getEntityData } from '../../utils/entities'
 
 
 export async function liquidityDepositCallHandler(ctx: Context, block: Block, callItem: CallItem<'PoolXYK.deposit_liquidity'>): Promise<void> {
-    ctx.log.debug('Caught liquidity adding extrinsic')
+    ctx.log.debug(`[${block.header.height}] Caught liquidity adding extrinsic`)
 
     const extrinsicHash = callItem.extrinsic.hash
     const historyElement = await createHistoryElement(ctx, block, callItem)
@@ -47,7 +47,7 @@ export async function liquidityDepositCallHandler(ctx: Context, block: Block, ca
 
     await addDataToHistoryElement(ctx, block, historyElement, details)
 
-    ctx.log.debug(`===== Saved liquidity deposit with ${extrinsicHash} txid =====`)
+    ctx.log.debug(`[${block.header.height}] ===== Saved liquidity deposit with ${extrinsicHash} txid =====`)
 
     await poolsStorage.getOrCreatePool(ctx, block, baseAssetId, targetAssetId)
     await updateHistoryElementStats(ctx, block,historyElement)

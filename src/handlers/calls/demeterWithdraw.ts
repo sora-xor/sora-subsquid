@@ -8,7 +8,7 @@ import { XOR } from '../../utils/consts'
 import { getEntityData } from '../../utils/entities'
 
 export async function demeterWithdrawCallHandler(ctx: Context, block: Block, callItem: CallItem<'DemeterFarmingPlatform.withdraw'>): Promise<void> {
-  ctx.log.debug('Caught demeterFarmingPlatform withdraw extrinsic')
+  ctx.log.debug(`[${block.header.height}] Caught demeterFarmingPlatform withdraw extrinsic`)
 
   const extrinsicHash = callItem.extrinsic.hash
 
@@ -52,5 +52,5 @@ export async function demeterWithdrawCallHandler(ctx: Context, block: Block, cal
   await addDataToHistoryElement(ctx, block, historyElement, details)
   await updateHistoryElementStats(ctx, block,historyElement)
 
-  ctx.log.debug(`===== Saved demeterFarmingPlatform withdraw with ${extrinsicHash} txid =====`)
+  ctx.log.debug(`[${block.header.height}] ===== Saved demeterFarmingPlatform withdraw with ${extrinsicHash} txid =====`)
 }
