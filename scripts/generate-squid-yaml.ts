@@ -1,5 +1,6 @@
 import { writeFileSync } from 'fs'
-import YAML from 'js-yaml'
+import * as path from 'path'
+import * as YAML from 'js-yaml'
 import dotenv from 'dotenv'
 
 import { Environment, environments } from '../src/environments'
@@ -9,7 +10,7 @@ dotenv.config()
 // Obtain environment from npm parameters if provided
 let environment: Environment = (process.argv[2] as Environment || process.env.INDEXER_ENVIRONMENT as Environment) || Environment.DEV 
 
-// if provided environment does not match with know environments, default to DEV
+// if provided environment does not match with known environments, default to DEV
 if (!Object.values(Environment).includes(environment)) {
     environment = Environment.DEV;
 }
@@ -17,13 +18,11 @@ if (!Object.values(Environment).includes(environment)) {
 // Obtain environment details
 const details = environments[environment]
 
-const version = process.env.npm_package_version
-
 // Create yaml configuration
 const configuration = {
 	manifestVersion: 'subsquid.io/v0.1',
 	name: details.name,
-	version,
+	version: 2,
 	description: details.description,
 	deploy: {
 		addons: {
@@ -72,5 +71,13 @@ const configuration = {
 // Translate JSON to YAML
 const yamlConfig = YAML.dump(configuration)
 
+// Define the file name
+const fileName = 'squid.yaml';
+
 // Write the configuration to a yaml file
-writeFileSync('squid.yaml', yamlConfig)
+writeFileSync(fileName, yamlConfig)
+
+// Get the full path of the file
+const fullPath = path.resolve(fileName);
+
+console.log(`The squid.yaml file for the ${environment} environment has been created at: ${fullPath}`);
