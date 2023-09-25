@@ -12,7 +12,7 @@ import { AssetsTransferEvent, LiquidityProxyBatchSwapExecutedEvent, LiquidityPro
 function getLiquidityProxyBatchSwapExecutedEventData (ctx: Context, block: Block, extrinsicHash: string) {
 	const name = 'LiquidityProxy.BatchSwapExecuted'
 	const eventItem = findEventByExtrinsicHash(block, extrinsicHash, [name])
-	if (eventItem === null) throw new Error(`Event ${name} not found for extrinsic ${extrinsicHash}`)
+	if (eventItem === null) throw new Error(`[${block.header.height}] Event ${name} not found for extrinsic ${extrinsicHash}`)
 	const event = new LiquidityProxyBatchSwapExecutedEvent(ctx, eventItem.event)
 	return getEntityData(ctx, block, event, eventItem)
 }
@@ -20,7 +20,7 @@ function getLiquidityProxyBatchSwapExecutedEventData (ctx: Context, block: Block
 function getXorFeeFeeWithdrawnEventData (ctx: Context, block: Block, extrinsicHash: string) {
 	const name = 'XorFee.FeeWithdrawn'
 	const eventItem = findEventByExtrinsicHash(block, extrinsicHash, [name])
-	if (eventItem === null) throw new Error(`Event ${name} not found for extrinsic ${extrinsicHash}`)
+	if (eventItem === null) throw new Error(`[${block.header.height}] Event ${name} not found for extrinsic ${extrinsicHash}`)
 	const event = new XorFeeFeeWithdrawnEvent(ctx, eventItem.event)
 	return getEntityData(ctx, block, event, eventItem)
 }
@@ -28,7 +28,7 @@ function getXorFeeFeeWithdrawnEventData (ctx: Context, block: Block, extrinsicHa
 function getTransactionPaymentTransactionFeePaidEventData (ctx: Context, block: Block, extrinsicHash: string) {
 	const name = 'TransactionPayment.TransactionFeePaid'
 	const eventItem = findEventByExtrinsicHash(block, extrinsicHash, [name])
-	if (eventItem === null) throw new Error(`Event ${name} not found for extrinsic ${extrinsicHash}`)
+	if (eventItem === null) throw new Error(`[${block.header.height}] Event ${name} not found for extrinsic ${extrinsicHash}`)
 	const event = new TransactionPaymentTransactionFeePaidEvent(ctx, eventItem.event)
 	return getEntityData(ctx, block, event, eventItem)
 }
@@ -107,9 +107,9 @@ const handleAndSaveExtrinsic = async (ctx: Context, block: Block, callItem: Call
 }
 
 export async function swapTransferBatchHandler(ctx: Context, block: Block, callItem: CallItem<'LiquidityProxy.swap_transfer_batch'>): Promise <void> {
-    ctx.log.debug('Caught swap transfer batch extrinsic')
+    ctx.log.debug(`[${block.header.height}] Caught swap transfer batch extrinsic`)
 
     await handleAndSaveExtrinsic(ctx, block, callItem)
 
-    ctx.log.debug(`===== Saved swap transfer batch with ${callItem.extrinsic.hash} txid =====`)
+    ctx.log.debug(`[${block.header.height}] ===== Saved swap transfer batch with ${callItem.extrinsic.hash} txid =====`)
 }

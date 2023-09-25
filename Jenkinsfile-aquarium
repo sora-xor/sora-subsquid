@@ -1,4 +1,4 @@
-@Library('jenkins-library')
+@Library('jenkins-library@feature/dops-2755')
 
 def jobParams  = [
     booleanParam(defaultValue: false, name: 'fullClean'),
@@ -12,7 +12,6 @@ def jobParams  = [
 
 def pipeline = new org.subqd.AppPipeline(
     steps: this,
-    jobParams: jobParams,
-    upstreamJobList: '../sora2-stage1'
+    jobParams: jobParams
 )
 pipeline.runPipeline()

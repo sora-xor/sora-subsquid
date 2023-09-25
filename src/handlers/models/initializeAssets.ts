@@ -32,7 +32,7 @@ export const getAssetInfos = async (ctx: Context, block: Block) => {
 		
 		return infos
     } catch (e: any) {
-		ctx.log.error('Error getting Asset infos')
+		ctx.log.error(`[${block.header.height}] Error getting Asset infos`)
 		ctx.log.error(e)
 		return null
     }
@@ -44,8 +44,8 @@ export const getSyntheticAssets = async (ctx: Context, block: Block) => {
 
 		const storage = new XSTPoolEnabledSyntheticsStorage(ctx, block.header)
 		if (!storage.isExists) return null
-		const data = getEntityData(ctx, block, storage, { kind: 'storage', name: XSTPoolEnabledSyntheticsStorage.name })
-		if (!('getPairs' in data)) return null
+		if (storage.isV19 || storage.isV42) return null
+		const data = getEntityData(ctx, block, storage, { kind: 'storage', name: XSTPoolEnabledSyntheticsStorage.name }, ['19', '42'] as const)
 		const pairs = await data.getPairs()
 
 		const syntheticAssets = pairs.map((pair) => {
@@ -64,7 +64,7 @@ export const getSyntheticAssets = async (ctx: Context, block: Block) => {
 
 		return syntheticAssets
     } catch (e) {
-		ctx.log.error('Error getting Synthetic assets')
+		ctx.log.error(`[${block.header.height}] Error getting Synthetic assets`)
 		ctx.log.error(e as string)
 
       	return null
@@ -92,7 +92,7 @@ export const getBandRates = async (ctx: Context, block: Block) => {
 		
 		return rates
     } catch (e) {
-		ctx.log.error('Error getting Band rates')
+		ctx.log.error(`[${block.header.height}] Error getting Band rates`)
 		ctx.log.error(e as string)
 
 		return null
@@ -117,7 +117,7 @@ export const getTokensIssuances = async (ctx: Context, block: Block) => {
 		ctx.log.debug(`Tokens issuances request completed.`)
 		return issuances
     } catch (e: any) {
-		ctx.log.error('Error getting Tokens issuances')
+		ctx.log.error(`[${block.header.height}] Error getting Tokens issuances`)
 		ctx.log.error(e)
 		return null
     }
@@ -132,7 +132,7 @@ export const getXorIssuance = async (ctx: Context, block: Block) => {
 		ctx.log.debug(`XOR issuance request completed.`)
 		return issuance
     } catch (e: any) {
-		ctx.log.error('Error getting XOR issuance')
+		ctx.log.error(`[${block.header.height}] Error getting XOR issuance`)
 		ctx.log.error(e)
 		return null
     }
@@ -143,7 +143,7 @@ export async function initializeAssets(ctx: Context, block: Block): Promise<void
 
     const blockHeight = block.header.height
 
-    ctx.log.debug(`[${blockHeight}]: Initialize Asset entities`)
+    ctx.log.debug(`[${blockHeight}] Initialize Asset entities`)
 
     const [
         assetInfos,
@@ -196,7 +196,7 @@ export async function initializeAssets(ctx: Context, block: Block): Promise<void
             tickerSyntheticAssetId.set(referenceSymbol, assetId)
 
 			const blockHeight = block.header.height
-            ctx.log.debug(`[${blockHeight}]: ${referenceSymbol} ticker and synthetic asset ${assetId} added`)
+            ctx.log.debug(`[${blockHeight}] ${referenceSymbol} ticker and synthetic asset ${assetId} added`)
 
             getOrCreate(assetId)
         }
@@ -215,7 +215,7 @@ export async function initializeAssets(ctx: Context, block: Block): Promise<void
             const price = rate.value
             const priceUSD = formatU128ToBalance(price, assetId)
 
-            ctx.log.debug(`[${blockHeight}]: ${referenceSymbol} ticker price: ${priceUSD}`)
+            ctx.log.debug(`[${blockHeight}] ${referenceSymbol} ticker price: ${priceUSD}`)
 
 			const asset = assets.get(assetId)
 			if (asset) {
@@ -246,9 +246,9 @@ export async function initializeAssets(ctx: Context, block: Block): Promise<void
     if (entities.length) {
         await ctx.store.save(entities)
         await Promise.all(entities.map(entity => assetStorage.getOrCreateAsset(ctx, block, entity.id as AssetId)))
-        ctx.log.debug(`[${blockHeight}]: ${entities.length} Assets initialized!`)
+        ctx.log.debug(`[${blockHeight}] ${entities.length} Assets initialized!`)
     } else {
-        ctx.log.debug(`[${blockHeight}]: No Assets to initialize!`)
+        ctx.log.debug(`[${blockHeight}] No Assets to initialize!`)
     }
 
     isFirstBlockIndexed = true

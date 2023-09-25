@@ -7,7 +7,7 @@ import { DemeterFarmingPlatformGetRewardsCall } from '../../types/generated/call
 import { getEntityData } from '../../utils/entities'
 
 export async function demeterGetRewardsCallHandler(ctx: Context, block: Block, callItem: CallItem<'DemeterFarmingPlatform.get_rewards'>): Promise<void> {
-	ctx.log.debug('Caught demeterFarmingPlatform getRewards extrinsic')
+	ctx.log.debug(`[${block.header.height}] Caught demeterFarmingPlatform getRewards extrinsic`)
 
   const extrinsicHash = callItem.extrinsic.hash
 
@@ -45,5 +45,5 @@ export async function demeterGetRewardsCallHandler(ctx: Context, block: Block, c
   await addDataToHistoryElement(ctx, block, historyElement, details)
   await updateHistoryElementStats(ctx, block,historyElement)
 
-  ctx.log.debug(`===== Saved demeterFarmingPlatform getRewards with ${extrinsicHash} txid =====`)
+  ctx.log.debug(`[${block.header.height}] ===== Saved demeterFarmingPlatform getRewards with ${extrinsicHash} txid =====`)
 }

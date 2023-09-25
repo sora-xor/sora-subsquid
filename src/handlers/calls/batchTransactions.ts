@@ -15,7 +15,7 @@ type AsVersion = { [V in Version]: `asV${V}` }[Version]
 type BatchCall = { [V in Version]: { version: V, call: UtilityBatchAllCall[`asV${V}`]['calls'][number] } }[Version]
 type BatchCalls = { [V in Version]: { version: V, calls: UtilityBatchAllCall[`asV${V}`]['calls'] } }[Version]
 
-function formatSpecificCall(call: BatchCall) {
+function formatSpecificCall(call: BatchCall): any {
 	switch (call.call.__kind) {
 		case 'PoolXYK': {
 			switch (call.call.value.__kind) {
@@ -111,7 +111,7 @@ function mapCallsForAllVersions(ctx: Context, block: Block, callItem: CallItem<'
 		calls = mapCalls(
 			{
 				version: 'unknown' as any,
-				calls: callItem.call.args.calls
+				calls: ctx._chain.decodeCall(callItem.call).calls
 			} as BatchCalls,
 			historyElement,
 			block
@@ -121,7 +121,7 @@ function mapCallsForAllVersions(ctx: Context, block: Block, callItem: CallItem<'
 }
 
 export async function batchTransactionsCallHandler(ctx: Context, block: Block, callItem: CallItem<'Utility.batch_all'>): Promise<void> {
-    ctx.log.debug('Caught batch transaction extrinsic')
+    ctx.log.debug(`[${block.header.height}] Caught batch transaction extrinsic`)
 
     const historyElement = await createHistoryElement(ctx, block, callItem)
 
@@ -130,7 +130,7 @@ export async function batchTransactionsCallHandler(ctx: Context, block: Block, c
 	await addCallsToHistoryElement(ctx, block, historyElement, historyElementCalls)
     await updateHistoryElementStats(ctx, block, historyElement)
 
-    ctx.log.debug(`===== Saved batch extrinsic with ${historyElement.id.toString()} txid =====`)
+    ctx.log.debug(`[${block.header.height}] ===== Saved batch extrinsic with ${historyElement.id.toString()} txid =====`)
 
     if (historyElement.execution.success) {
         // If initialize pool call exists, create new Pool

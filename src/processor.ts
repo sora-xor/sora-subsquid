@@ -60,10 +60,14 @@ processor.run(new TypeormDatabase(), async (ctx) => {
 
         for (let item of block.items) {
             if (item.name === '*') {
-				throw new Error('Unknown item: ' + JSON.stringify(item))
+				throw new Error(`[${block.header.height}] Unknown item: ${JSON.stringify(item)}`)
 			}
 
-            if (item.kind === 'call') {
+			if (item.kind === 'call' && item.name !== item.extrinsic.call.name) {
+				ctx.log.debug(`[${block.header.height}] Call name isn't equal to extrinsic's call name (call name: ${item.name}, extrinsic's call name: ${item.extrinsic.call.name})`)
+			}
+
+            if (item.kind === 'call' && item.name === item.extrinsic.call.name) {
 				if (item.name === 'Assets.register') await assetRegistrationCallHandler(context, block, item)
 				if (item.name === 'Assets.transfer') await transfersCallHandler(context, block, item)
 				if (
