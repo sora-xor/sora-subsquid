@@ -146,11 +146,11 @@ export class AssetsAssetRecordAssetIdStorage {
 	get asV42(): productionStorage.AssetsAssetRecordAssetIdStorage['asV42'] {
 		return this.production.asV42
 	}
-	get isV60Dev(): devStorage.AssetsAssetRecordAssetIdStorage['isV60'] {
-		return this.dev.isV60
+	get isV63Dev(): devStorage.AssetsAssetRecordAssetIdStorage['isV63'] {
+		return this.dev.isV63
 	}
-	get asV60Dev(): devStorage.AssetsAssetRecordAssetIdStorage['asV60'] {
-		return this.dev.asV60
+	get asV63Dev(): devStorage.AssetsAssetRecordAssetIdStorage['asV63'] {
+		return this.dev.asV63
 	}
 }
 
@@ -2178,11 +2178,11 @@ export class CouncilProposalOfStorage {
 	get asV52Test(): testStorage.CouncilProposalOfStorage['asV52'] {
 		return this.test.asV52
 	}
-	get isV60Dev(): devStorage.CouncilProposalOfStorage['isV60'] {
-		return this.dev.isV60
+	get isV63Dev(): devStorage.CouncilProposalOfStorage['isV63'] {
+		return this.dev.isV63
 	}
-	get asV60Dev(): devStorage.CouncilProposalOfStorage['asV60'] {
-		return this.dev.asV60
+	get asV63Dev(): devStorage.CouncilProposalOfStorage['asV63'] {
+		return this.dev.asV63
 	}
 }
 
@@ -9574,11 +9574,11 @@ export class SystemEventsStorage {
 	get asV52Test(): testStorage.SystemEventsStorage['asV52'] {
 		return this.test.asV52
 	}
-	get isV60Dev(): devStorage.SystemEventsStorage['isV60'] {
-		return this.dev.isV60
+	get isV63Dev(): devStorage.SystemEventsStorage['isV63'] {
+		return this.dev.isV63
 	}
-	get asV60Dev(): devStorage.SystemEventsStorage['asV60'] {
-		return this.dev.asV60
+	get asV63Dev(): devStorage.SystemEventsStorage['asV63'] {
+		return this.dev.asV63
 	}
 }
 
@@ -10096,11 +10096,11 @@ export class TechnicalCommitteeProposalOfStorage {
 	get asV52Test(): testStorage.TechnicalCommitteeProposalOfStorage['asV52'] {
 		return this.test.asV52
 	}
-	get isV60Dev(): devStorage.TechnicalCommitteeProposalOfStorage['isV60'] {
-		return this.dev.isV60
+	get isV63Dev(): devStorage.TechnicalCommitteeProposalOfStorage['isV63'] {
+		return this.dev.isV63
 	}
-	get asV60Dev(): devStorage.TechnicalCommitteeProposalOfStorage['asV60'] {
-		return this.dev.asV60
+	get asV63Dev(): devStorage.TechnicalCommitteeProposalOfStorage['asV63'] {
+		return this.dev.asV63
 	}
 }
 
@@ -10407,11 +10407,11 @@ export class TradingPairEnabledSourcesStorage {
 	get asV42(): productionStorage.TradingPairEnabledSourcesStorage['asV42'] {
 		return this.production.asV42
 	}
-	get isV60Dev(): devStorage.TradingPairEnabledSourcesStorage['isV60'] {
-		return this.dev.isV60
+	get isV63Dev(): devStorage.TradingPairEnabledSourcesStorage['isV63'] {
+		return this.dev.isV63
 	}
-	get asV60Dev(): devStorage.TradingPairEnabledSourcesStorage['asV60'] {
-		return this.dev.asV60
+	get asV63Dev(): devStorage.TradingPairEnabledSourcesStorage['asV63'] {
+		return this.dev.asV63
 	}
 }
 
@@ -12172,16 +12172,14 @@ export class MultisigVerifierThisNetworkIdStorage {
 export class SubstrateBridgeAppAllowedParachainAssetsStorage {
 	private readonly stage: stageStorage.SubstrateBridgeAppAllowedParachainAssetsStorage
 	private readonly test: testStorage.SubstrateBridgeAppAllowedParachainAssetsStorage
-	private readonly dev: devStorage.SubstrateBridgeAppAllowedParachainAssetsStorage
 
 	constructor(ctx: ChainContext, storage: Block) {
 		this.stage = new stageStorage.SubstrateBridgeAppAllowedParachainAssetsStorage(ctx, storage)
 		this.test = new testStorage.SubstrateBridgeAppAllowedParachainAssetsStorage(ctx, storage)
-		this.dev = new devStorage.SubstrateBridgeAppAllowedParachainAssetsStorage(ctx, storage)
 	}
 
 	get isExists(): boolean {
-		return this.stage.isExists || this.test.isExists || this.dev.isExists
+		return this.stage.isExists || this.test.isExists
 	}
 
 	get isV57Stage(): stageStorage.SubstrateBridgeAppAllowedParachainAssetsStorage['isV57'] {
@@ -12195,16 +12193,14 @@ export class SubstrateBridgeAppAllowedParachainAssetsStorage {
 export class SubstrateBridgeAppAssetKindsStorage {
 	private readonly stage: stageStorage.SubstrateBridgeAppAssetKindsStorage
 	private readonly test: testStorage.SubstrateBridgeAppAssetKindsStorage
-	private readonly dev: devStorage.SubstrateBridgeAppAssetKindsStorage
 
 	constructor(ctx: ChainContext, storage: Block) {
 		this.stage = new stageStorage.SubstrateBridgeAppAssetKindsStorage(ctx, storage)
 		this.test = new testStorage.SubstrateBridgeAppAssetKindsStorage(ctx, storage)
-		this.dev = new devStorage.SubstrateBridgeAppAssetKindsStorage(ctx, storage)
 	}
 
 	get isExists(): boolean {
-		return this.stage.isExists || this.test.isExists || this.dev.isExists
+		return this.stage.isExists || this.test.isExists
 	}
 
 	get isV52Stage(): stageStorage.SubstrateBridgeAppAssetKindsStorage['isV52'] {
@@ -12218,16 +12214,14 @@ export class SubstrateBridgeAppAssetKindsStorage {
 export class SubstrateBridgeAppBridgeTransferLimitStorage {
 	private readonly stage: stageStorage.SubstrateBridgeAppBridgeTransferLimitStorage
 	private readonly test: testStorage.SubstrateBridgeAppBridgeTransferLimitStorage
-	private readonly dev: devStorage.SubstrateBridgeAppBridgeTransferLimitStorage
 
 	constructor(ctx: ChainContext, storage: Block) {
 		this.stage = new stageStorage.SubstrateBridgeAppBridgeTransferLimitStorage(ctx, storage)
 		this.test = new testStorage.SubstrateBridgeAppBridgeTransferLimitStorage(ctx, storage)
-		this.dev = new devStorage.SubstrateBridgeAppBridgeTransferLimitStorage(ctx, storage)
 	}
 
 	get isExists(): boolean {
-		return this.stage.isExists || this.test.isExists || this.dev.isExists
+		return this.stage.isExists || this.test.isExists
 	}
 
 	get isV57Stage(): stageStorage.SubstrateBridgeAppBridgeTransferLimitStorage['isV57'] {
@@ -12241,16 +12235,14 @@ export class SubstrateBridgeAppBridgeTransferLimitStorage {
 export class SubstrateBridgeAppRelaychainAssetStorage {
 	private readonly stage: stageStorage.SubstrateBridgeAppRelaychainAssetStorage
 	private readonly test: testStorage.SubstrateBridgeAppRelaychainAssetStorage
-	private readonly dev: devStorage.SubstrateBridgeAppRelaychainAssetStorage
 
 	constructor(ctx: ChainContext, storage: Block) {
 		this.stage = new stageStorage.SubstrateBridgeAppRelaychainAssetStorage(ctx, storage)
 		this.test = new testStorage.SubstrateBridgeAppRelaychainAssetStorage(ctx, storage)
-		this.dev = new devStorage.SubstrateBridgeAppRelaychainAssetStorage(ctx, storage)
 	}
 
 	get isExists(): boolean {
-		return this.stage.isExists || this.test.isExists || this.dev.isExists
+		return this.stage.isExists || this.test.isExists
 	}
 
 	get isV57Stage(): stageStorage.SubstrateBridgeAppRelaychainAssetStorage['isV57'] {
@@ -12264,16 +12256,14 @@ export class SubstrateBridgeAppRelaychainAssetStorage {
 export class SubstrateBridgeAppSidechainPrecisionStorage {
 	private readonly stage: stageStorage.SubstrateBridgeAppSidechainPrecisionStorage
 	private readonly test: testStorage.SubstrateBridgeAppSidechainPrecisionStorage
-	private readonly dev: devStorage.SubstrateBridgeAppSidechainPrecisionStorage
 
 	constructor(ctx: ChainContext, storage: Block) {
 		this.stage = new stageStorage.SubstrateBridgeAppSidechainPrecisionStorage(ctx, storage)
 		this.test = new testStorage.SubstrateBridgeAppSidechainPrecisionStorage(ctx, storage)
-		this.dev = new devStorage.SubstrateBridgeAppSidechainPrecisionStorage(ctx, storage)
 	}
 
 	get isExists(): boolean {
-		return this.stage.isExists || this.test.isExists || this.dev.isExists
+		return this.stage.isExists || this.test.isExists
 	}
 
 	get isV54Stage(): stageStorage.SubstrateBridgeAppSidechainPrecisionStorage['isV54'] {
@@ -12449,11 +12439,11 @@ export class OrderBookAggregatedAsksStorage {
 	get asV52Test(): testStorage.OrderBookAggregatedAsksStorage['asV52'] {
 		return this.test.asV52
 	}
-	get isV60Dev(): devStorage.OrderBookAggregatedAsksStorage['isV60'] {
-		return this.dev.isV60
+	get isV63Dev(): devStorage.OrderBookAggregatedAsksStorage['isV63'] {
+		return this.dev.isV63
 	}
-	get asV60Dev(): devStorage.OrderBookAggregatedAsksStorage['asV60'] {
-		return this.dev.asV60
+	get asV63Dev(): devStorage.OrderBookAggregatedAsksStorage['asV63'] {
+		return this.dev.asV63
 	}
 }
 
@@ -12476,11 +12466,11 @@ export class OrderBookAggregatedBidsStorage {
 	get asV52Test(): testStorage.OrderBookAggregatedBidsStorage['asV52'] {
 		return this.test.asV52
 	}
-	get isV60Dev(): devStorage.OrderBookAggregatedBidsStorage['isV60'] {
-		return this.dev.isV60
+	get isV63Dev(): devStorage.OrderBookAggregatedBidsStorage['isV63'] {
+		return this.dev.isV63
 	}
-	get asV60Dev(): devStorage.OrderBookAggregatedBidsStorage['asV60'] {
-		return this.dev.asV60
+	get asV63Dev(): devStorage.OrderBookAggregatedBidsStorage['asV63'] {
+		return this.dev.asV63
 	}
 }
 
@@ -12503,11 +12493,11 @@ export class OrderBookAsksStorage {
 	get asV52Test(): testStorage.OrderBookAsksStorage['asV52'] {
 		return this.test.asV52
 	}
-	get isV60Dev(): devStorage.OrderBookAsksStorage['isV60'] {
-		return this.dev.isV60
+	get isV63Dev(): devStorage.OrderBookAsksStorage['isV63'] {
+		return this.dev.isV63
 	}
-	get asV60Dev(): devStorage.OrderBookAsksStorage['asV60'] {
-		return this.dev.asV60
+	get asV63Dev(): devStorage.OrderBookAsksStorage['asV63'] {
+		return this.dev.asV63
 	}
 }
 
@@ -12530,11 +12520,11 @@ export class OrderBookBidsStorage {
 	get asV52Test(): testStorage.OrderBookBidsStorage['asV52'] {
 		return this.test.asV52
 	}
-	get isV60Dev(): devStorage.OrderBookBidsStorage['isV60'] {
-		return this.dev.isV60
+	get isV63Dev(): devStorage.OrderBookBidsStorage['isV63'] {
+		return this.dev.isV63
 	}
-	get asV60Dev(): devStorage.OrderBookBidsStorage['asV60'] {
-		return this.dev.asV60
+	get asV63Dev(): devStorage.OrderBookBidsStorage['asV63'] {
+		return this.dev.asV63
 	}
 }
 
@@ -12557,11 +12547,11 @@ export class OrderBookLimitOrdersStorage {
 	get asV52Test(): testStorage.OrderBookLimitOrdersStorage['asV52'] {
 		return this.test.asV52
 	}
-	get isV60Dev(): devStorage.OrderBookLimitOrdersStorage['isV60'] {
-		return this.dev.isV60
+	get isV63Dev(): devStorage.OrderBookLimitOrdersStorage['isV63'] {
+		return this.dev.isV63
 	}
-	get asV60Dev(): devStorage.OrderBookLimitOrdersStorage['asV60'] {
-		return this.dev.asV60
+	get asV63Dev(): devStorage.OrderBookLimitOrdersStorage['asV63'] {
+		return this.dev.asV63
 	}
 }
 
@@ -12584,11 +12574,11 @@ export class OrderBookOrderBooksStorage {
 	get asV52Test(): testStorage.OrderBookOrderBooksStorage['asV52'] {
 		return this.test.asV52
 	}
-	get isV60Dev(): devStorage.OrderBookOrderBooksStorage['isV60'] {
-		return this.dev.isV60
+	get isV63Dev(): devStorage.OrderBookOrderBooksStorage['isV63'] {
+		return this.dev.isV63
 	}
-	get asV60Dev(): devStorage.OrderBookOrderBooksStorage['asV60'] {
-		return this.dev.asV60
+	get asV63Dev(): devStorage.OrderBookOrderBooksStorage['asV63'] {
+		return this.dev.asV63
 	}
 }
 
@@ -12611,11 +12601,11 @@ export class OrderBookUserLimitOrdersStorage {
 	get asV52Test(): testStorage.OrderBookUserLimitOrdersStorage['asV52'] {
 		return this.test.asV52
 	}
-	get isV60Dev(): devStorage.OrderBookUserLimitOrdersStorage['isV60'] {
-		return this.dev.isV60
+	get isV63Dev(): devStorage.OrderBookUserLimitOrdersStorage['isV63'] {
+		return this.dev.isV63
 	}
-	get asV60Dev(): devStorage.OrderBookUserLimitOrdersStorage['asV60'] {
-		return this.dev.asV60
+	get asV63Dev(): devStorage.OrderBookUserLimitOrdersStorage['asV63'] {
+		return this.dev.asV63
 	}
 }
 
@@ -12630,11 +12620,11 @@ export class OrderBookExpirationsAgendaStorage {
 		return this.dev.isExists
 	}
 
-	get isV60Dev(): devStorage.OrderBookExpirationsAgendaStorage['isV60'] {
-		return this.dev.isV60
+	get isV63Dev(): devStorage.OrderBookExpirationsAgendaStorage['isV63'] {
+		return this.dev.isV63
 	}
-	get asV60Dev(): devStorage.OrderBookExpirationsAgendaStorage['asV60'] {
-		return this.dev.asV60
+	get asV63Dev(): devStorage.OrderBookExpirationsAgendaStorage['asV63'] {
+		return this.dev.asV63
 	}
 }
 
@@ -12649,10 +12639,86 @@ export class OrderBookIncompleteExpirationsSinceStorage {
 		return this.dev.isExists
 	}
 
-	get isV60Dev(): devStorage.OrderBookIncompleteExpirationsSinceStorage['isV60'] {
-		return this.dev.isV60
+	get isV63Dev(): devStorage.OrderBookIncompleteExpirationsSinceStorage['isV63'] {
+		return this.dev.isV63
 	}
-	get asV60Dev(): devStorage.OrderBookIncompleteExpirationsSinceStorage['asV60'] {
-		return this.dev.asV60
+	get asV63Dev(): devStorage.OrderBookIncompleteExpirationsSinceStorage['asV63'] {
+		return this.dev.asV63
+	}
+}
+
+export class ParachainBridgeAppAllowedParachainAssetsStorage {
+	private readonly dev: devStorage.ParachainBridgeAppAllowedParachainAssetsStorage
+
+	constructor(ctx: ChainContext, storage: Block) {
+		this.dev = new devStorage.ParachainBridgeAppAllowedParachainAssetsStorage(ctx, storage)
+	}
+
+	get isExists(): boolean {
+		return this.dev.isExists
+	}
+
+	get isV63Dev(): devStorage.ParachainBridgeAppAllowedParachainAssetsStorage['isV63'] {
+		return this.dev.isV63
+	}
+	get asV63Dev(): devStorage.ParachainBridgeAppAllowedParachainAssetsStorage['asV63'] {
+		return this.dev.asV63
+	}
+}
+
+export class ParachainBridgeAppAssetKindsStorage {
+	private readonly dev: devStorage.ParachainBridgeAppAssetKindsStorage
+
+	constructor(ctx: ChainContext, storage: Block) {
+		this.dev = new devStorage.ParachainBridgeAppAssetKindsStorage(ctx, storage)
+	}
+
+	get isExists(): boolean {
+		return this.dev.isExists
+	}
+
+	get isV63Dev(): devStorage.ParachainBridgeAppAssetKindsStorage['isV63'] {
+		return this.dev.isV63
+	}
+	get asV63Dev(): devStorage.ParachainBridgeAppAssetKindsStorage['asV63'] {
+		return this.dev.asV63
+	}
+}
+
+export class ParachainBridgeAppRelaychainAssetStorage {
+	private readonly dev: devStorage.ParachainBridgeAppRelaychainAssetStorage
+
+	constructor(ctx: ChainContext, storage: Block) {
+		this.dev = new devStorage.ParachainBridgeAppRelaychainAssetStorage(ctx, storage)
+	}
+
+	get isExists(): boolean {
+		return this.dev.isExists
+	}
+
+	get isV63Dev(): devStorage.ParachainBridgeAppRelaychainAssetStorage['isV63'] {
+		return this.dev.isV63
+	}
+	get asV63Dev(): devStorage.ParachainBridgeAppRelaychainAssetStorage['asV63'] {
+		return this.dev.asV63
+	}
+}
+
+export class ParachainBridgeAppSidechainPrecisionStorage {
+	private readonly dev: devStorage.ParachainBridgeAppSidechainPrecisionStorage
+
+	constructor(ctx: ChainContext, storage: Block) {
+		this.dev = new devStorage.ParachainBridgeAppSidechainPrecisionStorage(ctx, storage)
+	}
+
+	get isExists(): boolean {
+		return this.dev.isExists
+	}
+
+	get isV63Dev(): devStorage.ParachainBridgeAppSidechainPrecisionStorage['isV63'] {
+		return this.dev.isV63
+	}
+	get asV63Dev(): devStorage.ParachainBridgeAppSidechainPrecisionStorage['asV63'] {
+		return this.dev.asV63
 	}
 }
