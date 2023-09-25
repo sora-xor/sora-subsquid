@@ -18,13 +18,11 @@ if (!Object.values(Environment).includes(environment)) {
 // Obtain environment details
 const details = environments[environment]
 
-const version = process.env.npm_package_version
-
 // Create yaml configuration
 const configuration = {
 	manifestVersion: 'subsquid.io/v0.1',
 	name: details.name,
-	version,
+	version: details.version,
 	description: details.description,
 	deploy: {
 		addons: {
