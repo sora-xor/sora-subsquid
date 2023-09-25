@@ -3514,11 +3514,11 @@ export class LiquidityProxyExchangeEvent {
 	get asV42(): productionEvents.LiquidityProxyExchangeEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV60Dev(): devEvents.LiquidityProxyExchangeEvent['isV60'] {
-		return this.dev.isV60
+	get isV63Dev(): devEvents.LiquidityProxyExchangeEvent['isV63'] {
+		return this.dev.isV63
 	}
-	get asV60Dev(): devEvents.LiquidityProxyExchangeEvent['asV60'] {
-		return this.dev.asV60
+	get asV63Dev(): devEvents.LiquidityProxyExchangeEvent['asV63'] {
+		return this.dev.asV63
 	}
 }
 
@@ -7291,12 +7291,10 @@ export class MultisigVerifierVerificationSuccessfulEvent {
 export class SubstrateBridgeAppBurnedEvent {
 	private readonly stage: stageEvents.SubstrateBridgeAppBurnedEvent
 	private readonly test: testEvents.SubstrateBridgeAppBurnedEvent
-	private readonly dev: devEvents.SubstrateBridgeAppBurnedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.SubstrateBridgeAppBurnedEvent(ctx, event)
 		this.test = new testEvents.SubstrateBridgeAppBurnedEvent(ctx, event)
-		this.dev = new devEvents.SubstrateBridgeAppBurnedEvent(ctx, event)
 	}
 
 	get isV52Stage(): stageEvents.SubstrateBridgeAppBurnedEvent['isV52'] {
@@ -7310,12 +7308,10 @@ export class SubstrateBridgeAppBurnedEvent {
 export class SubstrateBridgeAppMintedEvent {
 	private readonly stage: stageEvents.SubstrateBridgeAppMintedEvent
 	private readonly test: testEvents.SubstrateBridgeAppMintedEvent
-	private readonly dev: devEvents.SubstrateBridgeAppMintedEvent
 
 	constructor(ctx: ChainContext, event: Event) {
 		this.stage = new stageEvents.SubstrateBridgeAppMintedEvent(ctx, event)
 		this.test = new testEvents.SubstrateBridgeAppMintedEvent(ctx, event)
-		this.dev = new devEvents.SubstrateBridgeAppMintedEvent(ctx, event)
 	}
 
 	get isV52Stage(): stageEvents.SubstrateBridgeAppMintedEvent['isV52'] {
@@ -7459,11 +7455,11 @@ export class OrderBookOrderBookCreatedEvent {
 	get asV52Test(): testEvents.OrderBookOrderBookCreatedEvent['asV52'] {
 		return this.test.asV52
 	}
-	get isV60Dev(): devEvents.OrderBookOrderBookCreatedEvent['isV60'] {
-		return this.dev.isV60
+	get isV63Dev(): devEvents.OrderBookOrderBookCreatedEvent['isV63'] {
+		return this.dev.isV63
 	}
-	get asV60Dev(): devEvents.OrderBookOrderBookCreatedEvent['asV60'] {
-		return this.dev.asV60
+	get asV63Dev(): devEvents.OrderBookOrderBookCreatedEvent['asV63'] {
+		return this.dev.asV63
 	}
 }
 
@@ -7482,11 +7478,11 @@ export class OrderBookOrderBookDeletedEvent {
 	get asV52Test(): testEvents.OrderBookOrderBookDeletedEvent['asV52'] {
 		return this.test.asV52
 	}
-	get isV60Dev(): devEvents.OrderBookOrderBookDeletedEvent['isV60'] {
-		return this.dev.isV60
+	get isV63Dev(): devEvents.OrderBookOrderBookDeletedEvent['isV63'] {
+		return this.dev.isV63
 	}
-	get asV60Dev(): devEvents.OrderBookOrderBookDeletedEvent['asV60'] {
-		return this.dev.asV60
+	get asV63Dev(): devEvents.OrderBookOrderBookDeletedEvent['asV63'] {
+		return this.dev.asV63
 	}
 }
 
@@ -7505,11 +7501,11 @@ export class OrderBookOrderBookUpdatedEvent {
 	get asV52Test(): testEvents.OrderBookOrderBookUpdatedEvent['asV52'] {
 		return this.test.asV52
 	}
-	get isV60Dev(): devEvents.OrderBookOrderBookUpdatedEvent['isV60'] {
-		return this.dev.isV60
+	get isV63Dev(): devEvents.OrderBookOrderBookUpdatedEvent['isV63'] {
+		return this.dev.isV63
 	}
-	get asV60Dev(): devEvents.OrderBookOrderBookUpdatedEvent['asV60'] {
-		return this.dev.asV60
+	get asV63Dev(): devEvents.OrderBookOrderBookUpdatedEvent['asV63'] {
+		return this.dev.asV63
 	}
 }
 
@@ -7550,11 +7546,11 @@ export class OrderBookExpirationFailureEvent {
 		this.dev = new devEvents.OrderBookExpirationFailureEvent(ctx, event)
 	}
 
-	get isV60Dev(): devEvents.OrderBookExpirationFailureEvent['isV60'] {
-		return this.dev.isV60
+	get isV63Dev(): devEvents.OrderBookExpirationFailureEvent['isV63'] {
+		return this.dev.isV63
 	}
-	get asV60Dev(): devEvents.OrderBookExpirationFailureEvent['asV60'] {
-		return this.dev.asV60
+	get asV63Dev(): devEvents.OrderBookExpirationFailureEvent['asV63'] {
+		return this.dev.asV63
 	}
 }
 
@@ -7565,11 +7561,11 @@ export class OrderBookLimitOrderCanceledEvent {
 		this.dev = new devEvents.OrderBookLimitOrderCanceledEvent(ctx, event)
 	}
 
-	get isV60Dev(): devEvents.OrderBookLimitOrderCanceledEvent['isV60'] {
-		return this.dev.isV60
+	get isV63Dev(): devEvents.OrderBookLimitOrderCanceledEvent['isV63'] {
+		return this.dev.isV63
 	}
-	get asV60Dev(): devEvents.OrderBookLimitOrderCanceledEvent['asV60'] {
-		return this.dev.asV60
+	get asV63Dev(): devEvents.OrderBookLimitOrderCanceledEvent['asV63'] {
+		return this.dev.asV63
 	}
 }
 
@@ -7580,11 +7576,11 @@ export class OrderBookLimitOrderConvertedToMarketOrderEvent {
 		this.dev = new devEvents.OrderBookLimitOrderConvertedToMarketOrderEvent(ctx, event)
 	}
 
-	get isV60Dev(): devEvents.OrderBookLimitOrderConvertedToMarketOrderEvent['isV60'] {
-		return this.dev.isV60
+	get isV63Dev(): devEvents.OrderBookLimitOrderConvertedToMarketOrderEvent['isV63'] {
+		return this.dev.isV63
 	}
-	get asV60Dev(): devEvents.OrderBookLimitOrderConvertedToMarketOrderEvent['asV60'] {
-		return this.dev.asV60
+	get asV63Dev(): devEvents.OrderBookLimitOrderConvertedToMarketOrderEvent['asV63'] {
+		return this.dev.asV63
 	}
 }
 
@@ -7595,11 +7591,11 @@ export class OrderBookLimitOrderExecutedEvent {
 		this.dev = new devEvents.OrderBookLimitOrderExecutedEvent(ctx, event)
 	}
 
-	get isV60Dev(): devEvents.OrderBookLimitOrderExecutedEvent['isV60'] {
-		return this.dev.isV60
+	get isV63Dev(): devEvents.OrderBookLimitOrderExecutedEvent['isV63'] {
+		return this.dev.isV63
 	}
-	get asV60Dev(): devEvents.OrderBookLimitOrderExecutedEvent['asV60'] {
-		return this.dev.asV60
+	get asV63Dev(): devEvents.OrderBookLimitOrderExecutedEvent['asV63'] {
+		return this.dev.asV63
 	}
 }
 
@@ -7610,11 +7606,11 @@ export class OrderBookLimitOrderExpiredEvent {
 		this.dev = new devEvents.OrderBookLimitOrderExpiredEvent(ctx, event)
 	}
 
-	get isV60Dev(): devEvents.OrderBookLimitOrderExpiredEvent['isV60'] {
-		return this.dev.isV60
+	get isV63Dev(): devEvents.OrderBookLimitOrderExpiredEvent['isV63'] {
+		return this.dev.isV63
 	}
-	get asV60Dev(): devEvents.OrderBookLimitOrderExpiredEvent['asV60'] {
-		return this.dev.asV60
+	get asV63Dev(): devEvents.OrderBookLimitOrderExpiredEvent['asV63'] {
+		return this.dev.asV63
 	}
 }
 
@@ -7625,11 +7621,11 @@ export class OrderBookLimitOrderIsSplitIntoMarketOrderAndLimitOrderEvent {
 		this.dev = new devEvents.OrderBookLimitOrderIsSplitIntoMarketOrderAndLimitOrderEvent(ctx, event)
 	}
 
-	get isV60Dev(): devEvents.OrderBookLimitOrderIsSplitIntoMarketOrderAndLimitOrderEvent['isV60'] {
-		return this.dev.isV60
+	get isV63Dev(): devEvents.OrderBookLimitOrderIsSplitIntoMarketOrderAndLimitOrderEvent['isV63'] {
+		return this.dev.isV63
 	}
-	get asV60Dev(): devEvents.OrderBookLimitOrderIsSplitIntoMarketOrderAndLimitOrderEvent['asV60'] {
-		return this.dev.asV60
+	get asV63Dev(): devEvents.OrderBookLimitOrderIsSplitIntoMarketOrderAndLimitOrderEvent['asV63'] {
+		return this.dev.asV63
 	}
 }
 
@@ -7640,11 +7636,11 @@ export class OrderBookLimitOrderPlacedEvent {
 		this.dev = new devEvents.OrderBookLimitOrderPlacedEvent(ctx, event)
 	}
 
-	get isV60Dev(): devEvents.OrderBookLimitOrderPlacedEvent['isV60'] {
-		return this.dev.isV60
+	get isV63Dev(): devEvents.OrderBookLimitOrderPlacedEvent['isV63'] {
+		return this.dev.isV63
 	}
-	get asV60Dev(): devEvents.OrderBookLimitOrderPlacedEvent['asV60'] {
-		return this.dev.asV60
+	get asV63Dev(): devEvents.OrderBookLimitOrderPlacedEvent['asV63'] {
+		return this.dev.asV63
 	}
 }
 
@@ -7655,11 +7651,11 @@ export class OrderBookLimitOrderUpdatedEvent {
 		this.dev = new devEvents.OrderBookLimitOrderUpdatedEvent(ctx, event)
 	}
 
-	get isV60Dev(): devEvents.OrderBookLimitOrderUpdatedEvent['isV60'] {
-		return this.dev.isV60
+	get isV63Dev(): devEvents.OrderBookLimitOrderUpdatedEvent['isV63'] {
+		return this.dev.isV63
 	}
-	get asV60Dev(): devEvents.OrderBookLimitOrderUpdatedEvent['asV60'] {
-		return this.dev.asV60
+	get asV63Dev(): devEvents.OrderBookLimitOrderUpdatedEvent['asV63'] {
+		return this.dev.asV63
 	}
 }
 
@@ -7670,11 +7666,11 @@ export class OrderBookMarketOrderExecutedEvent {
 		this.dev = new devEvents.OrderBookMarketOrderExecutedEvent(ctx, event)
 	}
 
-	get isV60Dev(): devEvents.OrderBookMarketOrderExecutedEvent['isV60'] {
-		return this.dev.isV60
+	get isV63Dev(): devEvents.OrderBookMarketOrderExecutedEvent['isV63'] {
+		return this.dev.isV63
 	}
-	get asV60Dev(): devEvents.OrderBookMarketOrderExecutedEvent['asV60'] {
-		return this.dev.asV60
+	get asV63Dev(): devEvents.OrderBookMarketOrderExecutedEvent['asV63'] {
+		return this.dev.asV63
 	}
 }
 
@@ -7685,10 +7681,40 @@ export class OrderBookOrderBookStatusChangedEvent {
 		this.dev = new devEvents.OrderBookOrderBookStatusChangedEvent(ctx, event)
 	}
 
-	get isV60Dev(): devEvents.OrderBookOrderBookStatusChangedEvent['isV60'] {
-		return this.dev.isV60
+	get isV63Dev(): devEvents.OrderBookOrderBookStatusChangedEvent['isV63'] {
+		return this.dev.isV63
 	}
-	get asV60Dev(): devEvents.OrderBookOrderBookStatusChangedEvent['asV60'] {
-		return this.dev.asV60
+	get asV63Dev(): devEvents.OrderBookOrderBookStatusChangedEvent['asV63'] {
+		return this.dev.asV63
+	}
+}
+
+export class ParachainBridgeAppBurnedEvent {
+	private readonly dev: devEvents.ParachainBridgeAppBurnedEvent
+
+	constructor(ctx: ChainContext, event: Event) {
+		this.dev = new devEvents.ParachainBridgeAppBurnedEvent(ctx, event)
+	}
+
+	get isV63Dev(): devEvents.ParachainBridgeAppBurnedEvent['isV63'] {
+		return this.dev.isV63
+	}
+	get asV63Dev(): devEvents.ParachainBridgeAppBurnedEvent['asV63'] {
+		return this.dev.asV63
+	}
+}
+
+export class ParachainBridgeAppMintedEvent {
+	private readonly dev: devEvents.ParachainBridgeAppMintedEvent
+
+	constructor(ctx: ChainContext, event: Event) {
+		this.dev = new devEvents.ParachainBridgeAppMintedEvent(ctx, event)
+	}
+
+	get isV63Dev(): devEvents.ParachainBridgeAppMintedEvent['isV63'] {
+		return this.dev.isV63
+	}
+	get asV63Dev(): devEvents.ParachainBridgeAppMintedEvent['asV63'] {
+		return this.dev.asV63
 	}
 }

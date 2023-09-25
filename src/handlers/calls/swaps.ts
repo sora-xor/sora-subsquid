@@ -9,13 +9,11 @@ import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStat
 import BigNumber from 'bignumber.js'
 import { XOR } from '../../utils/consts'
 import { toAddress } from '../../utils'
-import { CannotFindEventError } from '../../utils/errors'
 
 export async function swapsCallHandler(ctx: Context, block: Block, callItem: CallItem<'LiquidityProxy.swap'> | CallItem<'LiquidityProxy.swap_transfer'>): Promise<void> {
-    ctx.log.debug('Caught swap extrinsic')
+    ctx.log.debug(`[${block.header.height}] Caught swap extrinsic`)
 
     const extrinsicHash = callItem.extrinsic.hash
-	const blockHeight = block.header.height
     const historyElement = await createHistoryElement(ctx, block, callItem)
 
 	const call = callItem.name === 'LiquidityProxy.swap'
@@ -57,14 +55,7 @@ export async function swapsCallHandler(ctx: Context, block: Block, callItem: Cal
     }
 
     if (historyElement.execution.success) {
-		const liquidityProxyExchangeEventName = 'LiquidityProxy.Exchange'
-		const liquidityProxyExchangeEventItem = findEventByExtrinsicHash(block, extrinsicHash, [liquidityProxyExchangeEventName])
-        if (!liquidityProxyExchangeEventItem) {
-			ctx.log.error(new CannotFindEventError(block, extrinsicHash, liquidityProxyExchangeEventName))
-			return
-		} else {
-			// ctx.log.info(`Found event on block ${blockHeight}: LiquidityProxy.Exchange`)
-		}
+		const liquidityProxyExchangeEventItem = findEventByExtrinsicHash(block, extrinsicHash, ['LiquidityProxy.Exchange'], true)
 		const liquidityProxyExchangeEvent = new LiquidityProxyExchangeEvent(ctx, liquidityProxyExchangeEventItem.event)
 		const liquidityProxyExchangeEventData = getEntityData(ctx, block, liquidityProxyExchangeEvent, liquidityProxyExchangeEventItem)
 
@@ -88,5 +79,5 @@ export async function swapsCallHandler(ctx: Context, block: Block, callItem: Cal
         await assetSnapshotsStorage.updateVolume(ctx, block, outputAssetId, BigNumber(details.targetAssetAmount))
     }
 
-    ctx.log.debug(`===== Saved swap with ${callItem.extrinsic.hash} txid =====`)
+    ctx.log.debug(`[${block.header.height}] ===== Saved swap with ${callItem.extrinsic.hash} txid =====`)
 }

@@ -6,7 +6,7 @@ import { CurrenciesDepositedEvent, CurrenciesTransferredEvent } from '../../type
 import { getEntityData } from '../../utils/entities'
 
 export async function irohaMigrationCallHandler(ctx: Context, block: Block, callItem: CallItem<'IrohaMigration.migrate'>): Promise<void> {
-    ctx.log.debug('Caught iroha migration extrinsic')
+    ctx.log.debug(`[${block.header.height}] Caught iroha migration extrinsic`)
 
     const historyElement = await createHistoryElement(ctx, block, callItem)
     const extrinsicHash = callItem.extrinsic.hash
@@ -49,7 +49,7 @@ export async function irohaMigrationCallHandler(ctx: Context, block: Block, call
         if (details) await addDataToHistoryElement(ctx, block, historyElement, details)
         await updateHistoryElementStats(ctx, block,historyElement)
 
-        ctx.log.debug(`===== Saved iroha migration with ${extrinsicHash} txid =====`)
+        ctx.log.debug(`[${block.header.height}] ===== Saved iroha migration with ${extrinsicHash} txid =====`)
     }
 
 }
