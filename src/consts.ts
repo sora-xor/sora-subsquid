@@ -45,6 +45,7 @@ export const calls = [
     'Staking.set_min_commission',
     'Staking.set_staking_configs',
     'Staking.set_validator_count',
+	'Staking.set_payee',
     'Staking.submit_election_solution',
     'Staking.submit_election_solution_unsigned',
     'Staking.unbond',
