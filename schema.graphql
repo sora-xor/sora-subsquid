@@ -178,7 +178,7 @@ type StakingEraValidator @entity {
 type StakingEra @entity {
 	index: Int! @index
 	startBlock: BigInt!
-	endBlock: BigInt!
+	endBlock: BigInt
     validators: [StakingEraValidator!]! @derivedFrom(field: "era")
 	nominators: [StakingEraNominator!]! @derivedFrom(field: "era")
     nominations: [StakingEraNomination!]! @derivedFrom(field: "era")

@@ -20,8 +20,8 @@ export class StakingEra {
     @Column_("numeric", {transformer: marshal.bigintTransformer, nullable: false})
     startBlock!: bigint
 
-    @Column_("numeric", {transformer: marshal.bigintTransformer, nullable: false})
-    endBlock!: bigint
+    @Column_("numeric", {transformer: marshal.bigintTransformer, nullable: true})
+    endBlock!: bigint | undefined | null
 
     @OneToMany_(() => StakingEraValidator, e => e.era)
     validators!: StakingEraValidator[]

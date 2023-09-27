@@ -81,5 +81,6 @@ export const events = [
 	'XstPool.SyntheticAssetEnabled',
 	'Band.SymbolsRelayed',
 	'Staking.Rewarded',
-	'Staking.StakersElected'
+	'Staking.StakersElected',
+	'Staking.PayoutStarted'
 ] as const

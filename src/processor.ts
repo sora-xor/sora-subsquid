@@ -63,6 +63,7 @@ import {
 	stakingValidateCallHandler,
 	stakingWithdrawUnbondedCallHandler
 } from './handlers/calls/staking'
+import { stakingStakersElectedEventHandler } from './handlers/events/nominations'
 
 const processor = new SubstrateBatchProcessor()
     .setDataSource({
@@ -170,6 +171,7 @@ processor.run(new TypeormDatabase(), async (ctx) => {
 				if (item.name === 'XstPool.SyntheticAssetEnabled') await syntheticAssetEnabledEventHandler(context, block, item)
 				if (item.name === 'Band.SymbolsRelayed') await bandRateUpdateHandler(context, block, item)
 				if (item.name === 'Staking.Rewarded') await stakingRewardedEventHandler(context, block, item)
+				if (item.name === 'Staking.StakersElected') await stakingStakersElectedEventHandler(context, block, item)
             }
         }
 

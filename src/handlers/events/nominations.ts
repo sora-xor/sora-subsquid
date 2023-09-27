@@ -18,6 +18,7 @@ export async function stakingStakersElectedEventHandler(ctx: Context, block: Blo
 		throw new Error(`Active era not found`)
 	}
 	const stakingEra = new StakingEra()
+	stakingEra.id = activeEra.index.toString()
 	stakingEra.index = activeEra.index
 	if (activeEra.start) {
 		stakingEra.startBlock = activeEra.start
@@ -34,19 +35,19 @@ export async function stakingStakersElectedEventHandler(ctx: Context, block: Blo
 	exposures.forEach(async ([[era, validator], exposure]) => {
 		let stakingValidator = await ctx.store.get(StakingValidator, toAddress(validator))
 		if (!stakingValidator) {
-			stakingValidator = new StakingValidator({ id: toAddress(validator) })
-			await ctx.store.save(stakingValidator)
+			stakingValidator = new StakingValidator()
+			stakingValidator.id = toAddress(validator)
 		}
 
 		let stakingStaker = await ctx.store.get(StakingStaker, toAddress(validator))
 		if (!stakingStaker) {
 			stakingStaker = new StakingStaker({ id: toAddress(validator) })
-			await ctx.store.save(stakingStaker)
 		}
 
-		let stakingEraValidator = await ctx.store.get(StakingEraValidator, { where: { era: stakingEra, staker: stakingStaker } })
+		let stakingEraValidator = await ctx.store.get(StakingEraValidator, { where: { era: { id: stakingEra.id }, staker: { id: stakingStaker.id } } })
 		if (!stakingEraValidator) {
 			stakingEraValidator = new StakingEraValidator()
+			stakingEraValidator.id = `${stakingEra.id}-${stakingStaker.id}`
 			stakingEraValidator.era = stakingEra
 			stakingEraValidator.validator = stakingValidator
 			stakingEraValidator.ownBond = 0n
@@ -56,6 +57,9 @@ export async function stakingStakersElectedEventHandler(ctx: Context, block: Blo
 		}
 		stakingEraValidator.ownBond = exposure.own
 		stakingEraValidator.totalBond = exposure.total
+		stakingValidator.bond = exposure.total
+		await ctx.store.save(stakingValidator)
+		await ctx.store.save(stakingStaker)
 		await ctx.store.save(stakingEraValidator)
 
 		exposure.others.forEach(async (nomination) => {
@@ -65,9 +69,10 @@ export async function stakingStakersElectedEventHandler(ctx: Context, block: Blo
 				await ctx.store.save(stakingStaker)
 			}
 			
-			let stakingEraNominator = await ctx.store.get(StakingEraNominator, { where: { era: stakingEra, staker: stakingStaker } })
+			let stakingEraNominator = await ctx.store.get(StakingEraNominator, { where: { era: { id: stakingEra.id }, staker: { id: stakingStaker.id } } })
 			if (!stakingEraNominator) {
 				stakingEraNominator = new StakingEraNominator()
+				stakingEraNominator.id = `${stakingEra.id}-${stakingStaker.id}`
 				stakingEraNominator.era = stakingEra
 				stakingEraNominator.bond = 0n
 				stakingEraNominator.staker = stakingStaker
@@ -76,6 +81,9 @@ export async function stakingStakersElectedEventHandler(ctx: Context, block: Blo
 			await ctx.store.save(stakingEraNominator)
 
 			let stakingEraNomination = new StakingEraNomination()
+			if (stakingValidator) {
+				stakingEraNomination.id = `${stakingEra.id}-${stakingStaker.id}-${stakingValidator.id}`
+			}
 			stakingEraNomination.era = stakingEra
 			stakingEraNomination.amount = nomination.value
 			if (stakingEraValidator) {
