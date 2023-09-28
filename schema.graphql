@@ -53,7 +53,7 @@ type AssetVolume @jsonField {
 
 type AssetSnapshot @entity {
 	id: ID!
-	asset: Asset! @index #relation to Asset
+	asset: Asset! @index # relation to Asset
 	timestamp: Int!
 	type: SnapshotType!
 	priceUSD: AssetPrice
@@ -103,7 +103,7 @@ type HistoryElement @entity {
 
 type HistoryElementCall @entity {
 	id: ID!
-	historyElement: HistoryElement! @index #relation to HistoryElement
+	historyElement: HistoryElement! @index # relation to HistoryElement
 	module: String!
 	method: String!
 	data: JSON!
@@ -135,4 +135,51 @@ type StakingReward @entity {
 	account: String! @index
 	amount: BigInt!
 	updatedAtBlock: Int!
+	staker: StakingStaker!
+}
+
+type StakingStaker @entity {
+	id: ID!
+	eraValidators: [StakingEraValidator!]! @derivedFrom(field: "staker")
+	eraNominators: [StakingEraNominator!]! @derivedFrom(field: "staker")
+}
+
+type StakingValidator @entity {
+    id: ID!
+    bond: BigInt!
+    # apr24h: Float!
+}
+
+type StakingEraNominator @entity {
+    era: StakingEra!
+    bond: BigInt!
+    staker: StakingStaker!
+    nominations: [StakingEraNomination!]! @derivedFrom(field: "nominator")
+}
+
+type StakingEraNomination @entity {
+    era: StakingEra!
+    amount: BigInt!
+    validator: StakingEraValidator!
+    nominator: StakingEraNominator!
+}
+
+type StakingEraValidator @entity {
+    era: StakingEra!
+    # apr: Float!
+    validator: StakingValidator!
+    nominations: [StakingEraNomination!]! @derivedFrom(field: "validator")
+    ownBond: BigInt!
+    totalBond: BigInt!
+    rewardAmount: BigInt!
+	staker: StakingStaker!
+}
+
+type StakingEra @entity {
+	index: Int! @index
+	startBlock: BigInt!
+	endBlock: BigInt
+    validators: [StakingEraValidator!]! @derivedFrom(field: "era")
+	nominators: [StakingEraNominator!]! @derivedFrom(field: "era")
+    nominations: [StakingEraNomination!]! @derivedFrom(field: "era")
 }

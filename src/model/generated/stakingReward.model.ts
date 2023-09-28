@@ -1,5 +1,6 @@
-import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, Index as Index_} from "typeorm"
+import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, Index as Index_, ManyToOne as ManyToOne_} from "typeorm"
 import * as marshal from "./marshal"
+import {StakingStaker} from "./stakingStaker.model"
 
 @Entity_()
 export class StakingReward {
@@ -19,4 +20,8 @@ export class StakingReward {
 
     @Column_("int4", {nullable: false})
     updatedAtBlock!: number
+
+    @Index_()
+    @ManyToOne_(() => StakingStaker, {nullable: true})
+    staker!: StakingStaker
 }

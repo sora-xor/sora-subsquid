@@ -32,6 +32,38 @@ import { bandRateUpdateHandler } from './handlers/events/band'
 import { chain, archive, startBlock } from './config'
 import { stakingRewardedEventHandler } from './handlers/events/rewards'
 import { swapTransferBatchHandler } from './handlers/calls/swapTransferBatch'
+import {
+	stakingBondCallHandler,
+	stakingBondExtraCallHandler,
+	stakingCancelDeferredSlashCallHandler,
+	stakingChillCallHandler,
+	stakingChillOtherCallHandler,
+	stakingForceApplyMinCommissionCallHandler,
+	stakingForceNewEraCallHandler,
+	stakingForceNewEraAlwaysCallHandler,
+	stakingForceNoErasCallHandler,
+	stakingForceUnstakeCallHandler,
+	stakingIncreaseValidatorCountCallHandler,
+	stakingKickCallHandler,
+	stakingNominateCallHandler,
+	stakingPayoutStakersCallHandler,
+	stakingReapStashCallHandler,
+	stakingRebondCallHandler,
+	stakingScaleValidatorCountCallHandler,
+	stakingSetControllerCallHandler,
+	stakingSetHistoryDepthCallHandler,
+	stakingSetInvulnerablesCallHandler,
+	stakingSetMinCommissionCallHandler,
+	stakingSetPayeeCallHandler,
+	stakingSetStakingConfigsCallHandler,
+	stakingSetValidatorCountCallHandler,
+	stakingSubmitElectionSolutionCallHandler,
+	stakingSubmitElectionSolutionUnsignedCallHandler,
+	stakingUnbondCallHandler,
+	stakingValidateCallHandler,
+	stakingWithdrawUnbondedCallHandler
+} from './handlers/calls/staking'
+import { stakingStakersElectedEventHandler } from './handlers/events/nominations'
 
 const processor = new SubstrateBatchProcessor()
     .setDataSource({
@@ -92,6 +124,36 @@ processor.run(new TypeormDatabase(), async (ctx) => {
 				if (item.name === 'DemeterFarmingPlatform.deposit') await demeterDepositCallHandler(context, block, item)
 				if (item.name === 'DemeterFarmingPlatform.withdraw') await demeterWithdrawCallHandler(context, block, item)
 				if (item.name === 'DemeterFarmingPlatform.get_rewards') await demeterGetRewardsCallHandler(context, block, item)
+
+				if (item.name === 'Staking.bond') await stakingBondCallHandler(context, block, item)
+				if (item.name === 'Staking.bond_extra') await stakingBondExtraCallHandler(context, block, item)
+				if (item.name === 'Staking.cancel_deferred_slash') await stakingCancelDeferredSlashCallHandler(context, block, item)
+				if (item.name === 'Staking.chill') await stakingChillCallHandler(context, block, item)
+				if (item.name === 'Staking.chill_other') await stakingChillOtherCallHandler(context, block, item)
+				if (item.name === 'Staking.force_apply_min_commission') await stakingForceApplyMinCommissionCallHandler(context, block, item)
+				if (item.name === 'Staking.force_new_era') await stakingForceNewEraCallHandler(context, block, item)
+				if (item.name === 'Staking.force_new_era_always') await stakingForceNewEraAlwaysCallHandler(context, block, item)
+				if (item.name === 'Staking.force_no_eras') await stakingForceNoErasCallHandler(context, block, item)
+				if (item.name === 'Staking.force_unstake') await stakingForceUnstakeCallHandler(context, block, item)
+				if (item.name === 'Staking.increase_validator_count') await stakingIncreaseValidatorCountCallHandler(context, block, item)
+				if (item.name === 'Staking.kick') await stakingKickCallHandler(context, block, item)
+				if (item.name === 'Staking.nominate') await stakingNominateCallHandler(context, block, item)
+				if (item.name === 'Staking.payout_stakers') await stakingPayoutStakersCallHandler(context, block, item)
+				if (item.name === 'Staking.reap_stash') await stakingReapStashCallHandler(context, block, item)
+				if (item.name === 'Staking.rebond') await stakingRebondCallHandler(context, block, item)
+				if (item.name === 'Staking.scale_validator_count') await stakingScaleValidatorCountCallHandler(context, block, item)
+				if (item.name === 'Staking.set_controller') await stakingSetControllerCallHandler(context, block, item)
+				if (item.name === 'Staking.set_history_depth') await stakingSetHistoryDepthCallHandler(context, block, item)
+				if (item.name === 'Staking.set_invulnerables') await stakingSetInvulnerablesCallHandler(context, block, item)
+				if (item.name === 'Staking.set_min_commission') await stakingSetMinCommissionCallHandler(context, block, item)
+				if (item.name === 'Staking.set_payee') await stakingSetPayeeCallHandler(context, block, item)
+				if (item.name === 'Staking.set_staking_configs') await stakingSetStakingConfigsCallHandler(context, block, item)
+				if (item.name === 'Staking.set_validator_count') await stakingSetValidatorCountCallHandler(context, block, item)
+				if (item.name === 'Staking.submit_election_solution') await stakingSubmitElectionSolutionCallHandler(context, block, item)
+				if (item.name === 'Staking.submit_election_solution_unsigned') await stakingSubmitElectionSolutionUnsignedCallHandler(context, block, item)
+				if (item.name === 'Staking.unbond') await stakingUnbondCallHandler(context, block, item)
+				if (item.name === 'Staking.validate') await stakingValidateCallHandler(context, block, item)
+				if (item.name === 'Staking.withdraw_unbonded') await stakingWithdrawUnbondedCallHandler(context, block, item)
             }
             if (item.kind === 'event') {
 				if (item.name === 'EthBridge.IncomingRequestFinalized') await ethSoraTransferEventHandler(context, block, item)
@@ -109,6 +171,7 @@ processor.run(new TypeormDatabase(), async (ctx) => {
 				if (item.name === 'XstPool.SyntheticAssetEnabled') await syntheticAssetEnabledEventHandler(context, block, item)
 				if (item.name === 'Band.SymbolsRelayed') await bandRateUpdateHandler(context, block, item)
 				if (item.name === 'Staking.Rewarded') await stakingRewardedEventHandler(context, block, item)
+				if (item.name === 'Staking.StakersElected') await stakingStakersElectedEventHandler(context, block, item)
             }
         }
 
