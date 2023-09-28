@@ -4,9 +4,10 @@
 	"Mintable",
 	"Multicollateral",
 	"pswap",
+	"staker",
 	"subquery",
 	"subsquid",
 	"txid"
 ],
-  "editor.detectIndentation": false
+"editor.detectIndentation": false
 }
