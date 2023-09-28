@@ -22,7 +22,7 @@ const details = environments[environment]
 const configuration = {
 	manifestVersion: 'subsquid.io/v0.1',
 	name: details.name,
-	version: 2,
+	version: details.version,
 	description: details.description,
 	deploy: {
 		addons: {
