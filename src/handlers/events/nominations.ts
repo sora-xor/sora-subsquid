@@ -32,7 +32,7 @@ export async function stakingStakersElectedEventHandler(ctx: Context, block: Blo
 
 	const exposures = await getEntityData(ctx, block, erasStakersStorage, { kind: 'storage', name: StakingErasStakersStorage.name }).getPairs(activeEra.index)
 
-	exposures.forEach(async ([[era, validator], exposure]) => {
+	await Promise.all(exposures.map(async ([[era, validator], exposure]) => {
 		let stakingValidator = await ctx.store.get(StakingValidator, toAddress(validator))
 		if (!stakingValidator) {
 			stakingValidator = new StakingValidator()
@@ -62,7 +62,7 @@ export async function stakingStakersElectedEventHandler(ctx: Context, block: Blo
 		await ctx.store.save(stakingStaker)
 		await ctx.store.save(stakingEraValidator)
 
-		exposure.others.forEach(async (nomination) => {
+		await Promise.all(exposure.others.map(async (nomination) => {
 			let stakingStaker = await ctx.store.get(StakingStaker, toAddress(nomination.who))
 			if (!stakingStaker) {
 				stakingStaker = new StakingStaker({ id: toAddress(nomination.who) })
@@ -91,6 +91,6 @@ export async function stakingStakersElectedEventHandler(ctx: Context, block: Blo
 			}
 			stakingEraNomination.nominator = stakingEraNominator
 			await ctx.store.save(stakingEraNomination)
-		})
-	})
+		}))
+	}))
 }
