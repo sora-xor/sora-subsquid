@@ -40,7 +40,7 @@ export const environments: Environments = {
 		scaleProfiles: {
 			postgres: ScaleProfile.SMALL,
 			processor: ScaleProfile.LARGE,
-			api: ScaleProfile.SMALL,
+			api: ScaleProfile.LARGE,
 		}
 	},
 	[Environment.STAGE]: {
