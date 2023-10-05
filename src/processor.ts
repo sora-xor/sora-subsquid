@@ -63,7 +63,7 @@ import {
 	stakingValidateCallHandler,
 	stakingWithdrawUnbondedCallHandler
 } from './handlers/calls/staking'
-import { stakingStakersElectedEventHandler } from './handlers/events/nominations'
+import { stakingStakersElectedEventHandler } from './handlers/events/staking'
 
 const processor = new SubstrateBatchProcessor()
     .setDataSource({
