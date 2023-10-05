@@ -38,7 +38,7 @@ export const environments: Environments = {
 		chain: 'wss://mof2.sora.org',
 		archive: 'https://sora.archive.subsquid.io/graphql',
 		scaleProfiles: {
-			postgres: ScaleProfile.SMALL,
+			postgres: ScaleProfile.LARGE,
 			processor: ScaleProfile.LARGE,
 			api: ScaleProfile.LARGE,
 		}
