@@ -5,10 +5,11 @@ import { findEventsByExtrinsicHash, getAssetsTransferEventData } from '../../uti
 import { AssetAmount, Block, CallItem, Context } from '../../types'
 import { PoolXykDepositLiquidityCall } from '../../types/generated/calls'
 import { getEntityData } from '../../utils/entities'
+import { logCallHandler } from '../../utils/log'
 
 
 export async function liquidityDepositCallHandler(ctx: Context, block: Block, callItem: CallItem<'PoolXYK.deposit_liquidity'>): Promise<void> {
-    ctx.log.debug(`[${block.header.height}] Caught liquidity adding extrinsic`)
+	logCallHandler(ctx, block, callItem)
 
     const extrinsicHash = callItem.extrinsic.hash
     const historyElement = await createHistoryElement(ctx, block, callItem)

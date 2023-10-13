@@ -1,4 +1,4 @@
-import { Asset, PoolXYK } from '../model'
+import { PoolXYK } from '../model'
 import { AssetAmount, Block, Context } from '../types'
 import { PoolXYKReservesStorage, PoolXYKPropertiesStorage } from "../types/generated/storage"
 import { XOR, DOUBLE_PRICE_POOL } from './consts'

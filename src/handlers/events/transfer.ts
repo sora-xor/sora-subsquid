@@ -1,6 +1,7 @@
 import { Block, Context, EventItem } from '../../types'
 
 import { getAssetsTransferEventData } from '../../utils/events'
+import { logEventHandler } from '../../utils/log'
 import { poolAccounts, poolsStorage, PoolsPrices } from '../../utils/pools'
 
 export async function transferEventHandler(
@@ -11,7 +12,11 @@ export async function transferEventHandler(
 		| EventItem<'Balances.Transfer'>
 	)
 ): Promise<void> {
+	logEventHandler(ctx, block, eventItem)
+
 	const { assetId, from, to, amount } = getAssetsTransferEventData(ctx, block, eventItem)
+
+	const blockNumber = block.header.height
 
 	// withdraw token from pool
 	if (poolAccounts.has(from)) {
@@ -25,6 +30,7 @@ export async function transferEventHandler(
 			pool.targetAssetReserves = pool.targetAssetReserves - amount
 		}
 
+		ctx.log.debug(`[${blockNumber}] Update pool ${pool.id}`);
 		PoolsPrices.set(true)
 	}
 
@@ -40,6 +46,7 @@ export async function transferEventHandler(
 			pool.targetAssetReserves = pool.targetAssetReserves + amount
 		}
 
+		ctx.log.debug(`[${blockNumber}] Update pool ${pool.id}`);
 		PoolsPrices.set(true)
 	}
 }
