@@ -58,7 +58,7 @@ export const environments: Environments = {
 	[Environment.TEST]: {
 		name: 'sora-test',
 		description: 'Sora test squid',
-		version,
+		version: 1,
 		chain: 'wss://ws.framenode-1.v1.tst.sora2.soramitsu.co.jp',
 		archive: 'https://subsquid.sq1.tst.sora2.soramitsu.co.jp/graphql',
 		scaleProfiles: {
@@ -70,7 +70,7 @@ export const environments: Environments = {
 	[Environment.DEV]: {
 		name: 'sora-dev',
 		description: 'Sora dev squid',
-		version,
+		version: 1,
 		chain: 'wss://ws.framenode-2.r0.dev.sora2.soramitsu.co.jp',
 		archive: 'https://subsquid.sq1.dev.sora2.soramitsu.co.jp/graphql',
 		scaleProfiles: {
