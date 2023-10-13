@@ -8,6 +8,7 @@ import { getEntityData } from '../../utils/entities'
 import { toAddress } from '../../utils'
 import { findEventByExtrinsicHash, findEventsByExtrinsicHash } from '../../utils/events'
 import { AssetsTransferEvent, LiquidityProxyBatchSwapExecutedEvent, LiquidityProxyExchangeEvent, TransactionPaymentTransactionFeePaidEvent, XorFeeFeeWithdrawnEvent } from '../../types/generated/events'
+import { logCallHandler } from '../../utils/log'
 
 function getLiquidityProxyBatchSwapExecutedEventData (ctx: Context, block: Block, extrinsicHash: string) {
 	const name = 'LiquidityProxy.BatchSwapExecuted'
@@ -107,7 +108,7 @@ const handleAndSaveExtrinsic = async (ctx: Context, block: Block, callItem: Call
 }
 
 export async function swapTransferBatchHandler(ctx: Context, block: Block, callItem: CallItem<'LiquidityProxy.swap_transfer_batch'>): Promise <void> {
-    ctx.log.debug(`[${block.header.height}] Caught swap transfer batch extrinsic`)
+	logCallHandler(ctx, block, callItem)
 
     await handleAndSaveExtrinsic(ctx, block, callItem)
 

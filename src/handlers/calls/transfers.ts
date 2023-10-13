@@ -8,9 +8,10 @@ import { Address, AssetId } from '../../types'
 import { toAddress } from '../../utils'
 import { getEntityData } from '../../utils/entities'
 import { toJSON } from '@subsquid/util-internal-json'
+import { logCallHandler } from '../../utils/log'
 
 export async function transfersCallHandler(ctx: Context, block: Block, callItem: CallItem<'Assets.transfer'>): Promise<void> {
-    ctx.log.debug(`[${block.header.height}] Caught transfer extrinsic`)
+	logCallHandler(ctx, block, callItem)
 
 	const blockHeight = block.header.height
 	const extrinsicHash = callItem.extrinsic.hash
@@ -70,5 +71,4 @@ export async function transfersCallHandler(ctx: Context, block: Block, callItem:
     await updateHistoryElementStats(ctx, block,historyElement)
 
     ctx.log.debug(`[${block.header.height}] ===== Saved transfer with ${extrinsicHash} txid =====`)
-
 }

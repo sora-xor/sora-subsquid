@@ -3,9 +3,10 @@ import { Block, CallItem, Context } from '../../types'
 import { ReferralsSetReferrerCall } from '../../types/generated/calls'
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { getEntityData } from '../../utils/entities'
+import { logCallHandler } from '../../utils/log'
 
 export async function setReferralCallHandler(ctx: Context, block: Block, callItem: CallItem<'Referrals.set_referrer'>): Promise<void> {
-	ctx.log.debug(`[${block.header.height}] Caught set referral extrinsic`)
+	logCallHandler(ctx, block, callItem)
 
     const historyElement = await createHistoryElement(ctx, block, callItem)
     

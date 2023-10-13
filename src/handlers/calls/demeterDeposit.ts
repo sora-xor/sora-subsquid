@@ -6,9 +6,10 @@ import { findEventByExtrinsicHash } from '../../utils/events'
 import { DemeterFarmingPlatformDepositedEvent } from '../../types/generated/events'
 import { DemeterFarmingPlatformDepositCall } from '../../types/generated/calls'
 import { getEntityData } from '../../utils/entities'
+import { logCallHandler } from '../../utils/log'
 
 export async function demeterDepositCallHandler(ctx: Context, block: Block, callItem: CallItem<'DemeterFarmingPlatform.deposit'>): Promise<void> {
-	ctx.log.debug(`[${block.header.height}] Caught demeterFarmingPlatform deposit extrinsic`)
+	logCallHandler(ctx, block, callItem)
 
 	const extrinsicHash = callItem.extrinsic.hash
 

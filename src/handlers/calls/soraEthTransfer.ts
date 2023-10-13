@@ -9,9 +9,10 @@ import { toHex } from '@subsquid/substrate-processor'
 import { AddressEthereum, AssetAmount, AssetId } from '../../types'
 import { toAddressEthereum } from '../../utils'
 import { getEntityData } from '../../utils/entities'
+import { logCallHandler } from '../../utils/log'
 
 export async function soraEthTransferCallHandler(ctx: Context, block: Block, callItem: CallItem<'EthBridge.transfer_to_sidechain'>): Promise<void> {
-    ctx.log.debug('Caught SORA->ETH transfer extrinsic')
+	logCallHandler(ctx, block, callItem)
 
     const extrinsicHash = callItem.extrinsic.hash
     const historyElement = await createHistoryElement(ctx, block, callItem)

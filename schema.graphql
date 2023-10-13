@@ -134,8 +134,9 @@ type StakingReward @entity {
 	id: ID!
 	account: String! @index
 	amount: BigInt!
-	updatedAtBlock: Int!
 	staker: StakingStaker!
+	era: StakingEra!
+	timestamp: Int!
 }
 
 type StakingStaker @entity {
