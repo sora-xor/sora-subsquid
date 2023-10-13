@@ -6,15 +6,16 @@ import { DemeterFarmingPlatformWithdrawnEvent } from '../../types/generated/even
 import { DemeterFarmingPlatformWithdrawCall } from '../../types/generated/calls'
 import { XOR } from '../../utils/consts'
 import { getEntityData } from '../../utils/entities'
+import { logCallHandler } from '../../utils/log'
 
 export async function demeterWithdrawCallHandler(ctx: Context, block: Block, callItem: CallItem<'DemeterFarmingPlatform.withdraw'>): Promise<void> {
-  ctx.log.debug(`[${block.header.height}] Caught demeterFarmingPlatform withdraw extrinsic`)
+	logCallHandler(ctx, block, callItem)
 
-  const extrinsicHash = callItem.extrinsic.hash
+	const extrinsicHash = callItem.extrinsic.hash
 
-  const call = new DemeterFarmingPlatformWithdrawCall(ctx, callItem.call)
+	const call = new DemeterFarmingPlatformWithdrawCall(ctx, callItem.call)
 
-  const data = getEntityData(ctx, block, call, callItem)
+	const data = getEntityData(ctx, block, call, callItem)
 
 	const baseAssetId = 'baseAsset' in data ? getAssetId(data.baseAsset) : XOR
 	const assetId = getAssetId(data.poolAsset)
@@ -22,35 +23,35 @@ export async function demeterWithdrawCallHandler(ctx: Context, block: Block, cal
 	const isFarm = data.isFarm
 	const desiredAmount = data.pooledTokens as AssetAmount
 
-  let amount: string
+	let amount: string
 
-  const eventItem = findEventByExtrinsicHash(block, extrinsicHash, ['DemeterFarmingPlatform.Withdrawn'])
+	const eventItem = findEventByExtrinsicHash(block, extrinsicHash, ['DemeterFarmingPlatform.Withdrawn'])
 
-  if (eventItem) {
-    const event = new DemeterFarmingPlatformWithdrawnEvent(ctx, eventItem.event)
+	if (eventItem) {
+		const event = new DemeterFarmingPlatformWithdrawnEvent(ctx, eventItem.event)
 
-	const data = getEntityData(ctx, block, event, eventItem)
+		const data = getEntityData(ctx, block, event, eventItem)
 
-	const assetAmount = data[1] as AssetAmount
-    
-    // a little trick - we get decimals from pool asset, not lp token
-    amount = formatU128ToBalance(assetAmount, assetId)
-  } else {
-    amount = formatU128ToBalance(desiredAmount, assetId)
-  }
+		const assetAmount = data[1] as AssetAmount
+		
+		// a little trick - we get decimals from pool asset, not lp token
+		amount = formatU128ToBalance(assetAmount, assetId)
+	} else {
+		amount = formatU128ToBalance(desiredAmount, assetId)
+	}
 
-  let details = {
-    baseAssetId,
-    assetId,
-    rewardAssetId,
-    isFarm,
-    amount,
-  }
+	let details = {
+		baseAssetId,
+		assetId,
+		rewardAssetId,
+		isFarm,
+		amount,
+	}
 
-  const historyElement = await createHistoryElement(ctx, block, callItem)
-  if (!historyElement) return
-  await addDataToHistoryElement(ctx, block, historyElement, details)
-  await updateHistoryElementStats(ctx, block,historyElement)
+	const historyElement = await createHistoryElement(ctx, block, callItem)
+	if (!historyElement) return
+	await addDataToHistoryElement(ctx, block, historyElement, details)
+	await updateHistoryElementStats(ctx, block,historyElement)
 
-  ctx.log.debug(`[${block.header.height}] ===== Saved demeterFarmingPlatform withdraw with ${extrinsicHash} txid =====`)
+	ctx.log.debug(`[${block.header.height}] ===== Saved demeterFarmingPlatform withdraw with ${extrinsicHash} txid =====`)
 }

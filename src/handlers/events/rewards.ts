@@ -1,37 +1,32 @@
-import { StakingReward } from '../../model'
+import { StakingReward, StakingStaker } from '../../model'
 import { Block, Context, EventItem } from '../../types'
 import { StakingRewardedEvent } from '../../types/generated/events'
-import { StakingActiveEraStorage } from '../../types/generated/storage'
-import { toAddress } from '../../utils'
+import { formatDateTimestamp, toAddress } from '../../utils'
 import { getEntityData } from '../../utils/entities'
+import { logEventHandler } from '../../utils/log'
+import { getActiveStakingEra, getStakingStaker } from '../../utils/staking'
 
 export async function stakingRewardedEventHandler(ctx: Context, block: Block, eventItem: EventItem<'Staking.Rewarded'>): Promise<void> {
+	logEventHandler(ctx, block, eventItem)
+
 	const event = new StakingRewardedEvent(ctx, eventItem.event)
 
 	const data = getEntityData(ctx, block, event, eventItem)
 	const stash = Array.isArray(data) ? data[0] : data.stash
 	const amount = Array.isArray(data) ? data[1] : data.amount
 
-	const activeEraStorage = new StakingActiveEraStorage(ctx, block.header)
+	const stakingEra = await getActiveStakingEra(ctx, block)
 
-	const activeEra = await activeEraStorage.asV1.get()
+	const staker = await getStakingStaker(ctx, block, toAddress(stash))
+	
+	const stakingReward = new StakingReward()
 
-	if (!activeEra) throw new Error(`[${block.header.height}] Active era not found`)
-
-	const id = `${activeEra}-${toAddress(stash)}`
-
-	let stakingReward = await ctx.store.get(StakingReward, id)
-
-	if (!stakingReward) {
-		stakingReward = new StakingReward()
-		stakingReward.id = id
-		stakingReward.account = toAddress(stash)
-		stakingReward.amount = 0n
-	}
-
-	stakingReward.updatedAtBlock = block.header.height
-
-	stakingReward.amount = stakingReward.amount + amount
+	stakingReward.id = `${stakingEra.id}-${block.header.height}-${staker.id}`
+	stakingReward.account = toAddress(stash)
+	stakingReward.amount = amount
+	stakingReward.era = stakingEra
+	stakingReward.staker = staker
+	stakingReward.timestamp = formatDateTimestamp(new Date(block.header.timestamp))
 
 	await ctx.store.save(stakingReward)
 }
