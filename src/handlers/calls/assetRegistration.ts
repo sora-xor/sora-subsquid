@@ -6,9 +6,10 @@ import { AssetsRegisterCall } from '../../types/generated/calls'
 import { AssetId } from '../../types'
 import { getEntityData } from '../../utils/entities'
 import { getAssetId } from '../../utils/assets'
+import { logCallHandler } from '../../utils/log'
 
 export async function assetRegistrationCallHandler(ctx: Context, block: Block, callItem: CallItem<'Assets.register'>): Promise<void> {
-    ctx.log.debug(`[${block.header.height}] Caught asset registration extrinsic`)
+	logCallHandler(ctx, block, callItem)
 
     const extrinsicHash = callItem.extrinsic.hash
     const historyElement = await createHistoryElement(ctx, block, callItem)

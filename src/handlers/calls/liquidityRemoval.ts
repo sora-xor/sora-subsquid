@@ -5,9 +5,10 @@ import { poolsStorage } from '../../utils/pools'
 import { AssetAmount, Block, CallItem, Context } from '../../types'
 import { PoolXykWithdrawLiquidityCall } from '../../types/generated/calls'
 import { getEntityData } from '../../utils/entities'
+import { logCallHandler } from '../../utils/log'
 
 export async function liquidityRemovalCallHandler(ctx: Context, block: Block, callItem: CallItem<'PoolXYK.withdraw_liquidity'>): Promise<void> {
-    ctx.log.debug(`[${block.header.height}] Caught liquidity removal extrinsic`)
+	logCallHandler(ctx, block, callItem)
 
     const extrinsicHash = callItem.extrinsic.hash
     const historyElement = await createHistoryElement(ctx, block, callItem)

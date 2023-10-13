@@ -63,7 +63,7 @@ import {
 	stakingValidateCallHandler,
 	stakingWithdrawUnbondedCallHandler
 } from './handlers/calls/staking'
-import { stakingStakersElectedEventHandler } from './handlers/events/nominations'
+import { stakingStakersElectedEventHandler } from './handlers/events/staking'
 
 const processor = new SubstrateBatchProcessor()
     .setDataSource({
@@ -90,13 +90,14 @@ processor.run(new TypeormDatabase(), async (ctx) => {
         await initializeAssets(context, block)
         await initializePools(context, block)
 
+		await syncPoolXykPrices(context, block)
+		if (lastBlockInTheBatch) {
+			await syncModels(context, block)
+		}
+
         for (let item of block.items) {
             if (item.name === '*') {
 				throw new Error(`[${block.header.height}] Unknown item: ${JSON.stringify(item)}`)
-			}
-
-			if (item.kind === 'call' && item.name !== item.extrinsic.call.name) {
-				ctx.log.debug(`[${block.header.height}] Call name isn't equal to extrinsic's call name (call name: ${item.name}, extrinsic's call name: ${item.extrinsic.call.name})`)
 			}
 
             if (item.kind === 'call' && item.name === item.extrinsic.call.name) {
@@ -174,10 +175,5 @@ processor.run(new TypeormDatabase(), async (ctx) => {
 				if (item.name === 'Staking.StakersElected') await stakingStakersElectedEventHandler(context, block, item)
             }
         }
-
-		await syncPoolXykPrices(context, block)
-		if (lastBlockInTheBatch) {
-			await syncModels(context, block)
-		}
     }
 })

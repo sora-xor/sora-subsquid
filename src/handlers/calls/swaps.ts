@@ -9,9 +9,10 @@ import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStat
 import BigNumber from 'bignumber.js'
 import { XOR } from '../../utils/consts'
 import { toAddress } from '../../utils'
+import { logCallHandler } from '../../utils/log'
 
 export async function swapsCallHandler(ctx: Context, block: Block, callItem: CallItem<'LiquidityProxy.swap'> | CallItem<'LiquidityProxy.swap_transfer'>): Promise<void> {
-    ctx.log.debug(`[${block.header.height}] Caught swap extrinsic`)
+    logCallHandler(ctx, block, callItem)
 
     const extrinsicHash = callItem.extrinsic.hash
     const historyElement = await createHistoryElement(ctx, block, callItem)
