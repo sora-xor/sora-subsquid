@@ -4,8 +4,11 @@ import { AssetsAssetInfosStorage } from '../../types/generated/storage'
 import { decodeAssetId, toReferenceSymbol } from '../../utils'
 import { assetPrecisions, getAssetId, assetStorage, tickerSyntheticAssetId } from '../../utils/assets'
 import { getEntityData } from '../../utils/entities'
+import { logEventHandler } from '../../utils/log'
 
 export async function assetRegistrationEventHandler(ctx: Context, block: Block, eventItem: EventItem<'Assets.AssetRegistered'>): Promise<void> {
+	logEventHandler(ctx, block, eventItem)
+
 	const event = new AssetsAssetRegisteredEvent(ctx, eventItem.event)
 
 	const [asset] = getEntityData(ctx, block, event, eventItem)
@@ -26,6 +29,8 @@ export async function assetRegistrationEventHandler(ctx: Context, block: Block, 
 }
 
 export async function syntheticAssetEnabledEventHandler(ctx: Context, block: Block, eventItem: EventItem<'XstPool.SyntheticAssetEnabled'>): Promise<void> {
+	logEventHandler(ctx, block, eventItem)
+
 	const event = new XstPoolSyntheticAssetEnabledEvent(ctx, eventItem.event)
 	
 	const data = getEntityData(ctx, block, event, eventItem)

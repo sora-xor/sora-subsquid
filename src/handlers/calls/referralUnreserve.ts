@@ -5,9 +5,10 @@ import { AssetAmount, Block, CallItem, Context } from '../../types'
 import { findEventByExtrinsicHash, getAssetsTransferEventData } from '../../utils/events'
 import { ReferralsUnreserveCall } from '../../types/generated/calls'
 import { getEntityData } from '../../utils/entities'
+import { logCallHandler } from '../../utils/log'
 
 export async function referralUnreserveCallHandler(ctx: Context, block: Block, callItem: CallItem<'Referrals.unreserve'>): Promise<void> {
-    ctx.log.debug(`[${block.header.height}] Caught referral unreserve extrinsic`)
+	logCallHandler(ctx, block, callItem)
 
     const extrinsicHash = callItem.extrinsic.hash
     const historyElement = await createHistoryElement(ctx, block, callItem)

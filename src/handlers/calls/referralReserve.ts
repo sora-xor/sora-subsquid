@@ -6,9 +6,10 @@ import { ReferralsReserveCall } from '../../types/generated/calls'
 import { findEventByExtrinsicHash, getAssetsTransferEventData } from '../../utils/events'
 import { getEntityData } from '../../utils/entities'
 import { CannotFindEventError } from '../../utils/errors'
+import { logCallHandler } from '../../utils/log'
 
 export async function referralReserveCallHandler(ctx: Context, block: Block, callItem: CallItem<'Referrals.reserve'>): Promise<void> {
-    ctx.log.debug(`[${block.header.height}] Caught referral reserve extrinsic`)
+	logCallHandler(ctx, block, callItem)
 
     const extrinsicHash = callItem.extrinsic.hash
     const historyElement = await createHistoryElement(ctx, block, callItem)

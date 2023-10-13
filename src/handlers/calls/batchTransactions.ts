@@ -7,6 +7,7 @@ import { HistoryElement, HistoryElementCall } from '../../model'
 import { AssetId } from '../../types'
 import { toCamelCase } from '../../utils'
 import { toJSON } from '@subsquid/util-internal-json'
+import { logCallHandler } from '../../utils/log'
 
 type Version = typeof utilityBatchAllCallVersions[number]
 type IsVersion = { [V in Version]: `isV${V}` }[Version]
@@ -121,7 +122,7 @@ function mapCallsForAllVersions(ctx: Context, block: Block, callItem: CallItem<'
 }
 
 export async function batchTransactionsCallHandler(ctx: Context, block: Block, callItem: CallItem<'Utility.batch_all'>): Promise<void> {
-    ctx.log.debug(`[${block.header.height}] Caught batch transaction extrinsic`)
+	logCallHandler(ctx, block, callItem)
 
     const historyElement = await createHistoryElement(ctx, block, callItem)
 

@@ -3,13 +3,14 @@ import { Block, Context, EventItem } from '../../types'
 import { XorFeeReferrerRewardedEvent } from '../../types/generated/events'
 import { formatDateTimestamp, toAddress } from '../../utils'
 import { getEntityData } from '../../utils/entities'
+import { logEventHandler } from '../../utils/log'
 
 export async function referrerRewardEventHandler(ctx: Context, block: Block, eventItem: EventItem<'XorFee.ReferrerRewarded'>): Promise<void> {
+	logEventHandler(ctx, block, eventItem)
+
 	const event = new XorFeeReferrerRewardedEvent(ctx, eventItem.event)
 
 	const [referral, referrer, amount] = getEntityData(ctx, block, event, eventItem)
-
-	ctx.log.debug(`Caught referrer reward`)
 
 	const key = `${toAddress(referral)}-${toAddress(referrer)}`
 

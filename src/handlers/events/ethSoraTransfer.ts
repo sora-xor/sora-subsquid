@@ -7,6 +7,7 @@ import { findCallByExtrinsicHash } from '../../utils/calls'
 import { getEntityData } from '../../utils/entities'
 import { toHex } from '@subsquid/substrate-processor'
 import { CannotFindCallError } from '../../utils/errors'
+import { logEventHandler } from '../../utils/log'
 
 export async function ethSoraTransferEventHandler(
 	ctx: Context,
@@ -16,12 +17,11 @@ export async function ethSoraTransferEventHandler(
 		| EventItem<'EthBridge.IncomingRequestFinalizationFailed'>
 	)
 ): Promise<void> {
+	logEventHandler(ctx, block, eventItem)
+
     if (!eventItem.event.extrinsic) {
 		throw new Error(`[${block.header.height}] There is no extrinsic in the event`)
 	}
-
-    ctx.log.debug('Caught ETH->SORA transfer extrinsic')
-
     const extrinsicHash = eventItem.event.extrinsic.hash
 
     let registeredRequestEventItem = findEventByExtrinsicHash(block, extrinsicHash, ['EthBridge.RequestRegistered'])
