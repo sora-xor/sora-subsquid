@@ -2,13 +2,22 @@ import BigNumber from 'bignumber.js'
 
 import { PoolXYK } from '../../model'
 
-import { formatU128ToBalance, assetSnapshotsStorage } from '../../utils/assets'
+import { formatU128ToBalance, assetSnapshotsStorage, tickerSyntheticAssetId } from '../../utils/assets'
 import { networkSnapshotsStorage } from '../../utils/network'
 import { poolAccounts, PoolsPrices, poolsStorage } from '../../utils/pools'
-import { XOR, PSWAP, DAI, BASE_ASSETS } from '../../utils/consts'
+import { XOR, PSWAP, DAI, BASE_ASSETS, XSTUSD } from '../../utils/consts'
 import { BlockContext } from '../../types'
 import { AssetId } from '../../types'
 import { debug } from '../../utils/logs'
+
+const getAssetDexCap = (assetReserves: BigNumber, assetPrice: BigNumber, daiReserves: BigNumber) => {
+    // theoretical asset capitalization in DAI inside DEX
+    const assetDaiCap = assetPrice.multipliedBy(assetReserves)
+    // real asset capitalization is supported by DAI
+    const assetDexCap = assetDaiCap.isGreaterThan(daiReserves) ? daiReserves : assetDaiCap
+
+    return assetDexCap
+}
 
 export async function syncPoolXykPrices(ctx: BlockContext): Promise<void> {
     if (!PoolsPrices.get()) return
@@ -22,8 +31,10 @@ export async function syncPoolXykPrices(ctx: BlockContext): Promise<void> {
 
     let baseAssetWithDoublePoolsPrice = new BigNumber(0)
 
-    const pools: Record<string, PoolXYK[]> = {}
-	const assetsPrices: Record<AssetId, { reserves: bigint; price: string }> = {}
+    const pools: Record<AssetId, PoolXYK[]> = {}
+    const daiReserves: Record<AssetId, BigNumber> = {}
+    const assetsPrices: Record<AssetId, { dexCap: BigNumber; price: string; }> = {}
+    const syntheticAssetsIds = [...tickerSyntheticAssetId.values()].filter((id) => id !== XSTUSD)
 
     for (const baseAssetId of [...BASE_ASSETS].reverse()) {
         const poolsMap = poolAccounts.getMap(baseAssetId)
@@ -50,7 +61,10 @@ export async function syncPoolXykPrices(ctx: BlockContext): Promise<void> {
             baseAssetWithDoublePools = baseAssetWithDoublePools.plus(baseAssetReservesBN.multipliedBy(new BigNumber(pool.multiplier)))
 
             if (pool.targetAsset.id === DAI) {
-                baseAssetPriceInDAI = targetAssetReservesBN.div(baseAssetReservesBN)
+                baseAssetPriceInDAI = !baseAssetReservesBN.isZero()
+                    ? targetAssetReservesBN.dividedBy(baseAssetReservesBN)
+                    : new BigNumber(0)
+                daiReserves[baseAssetId] = targetAssetReservesBN
             }
 
             assetsLockedInPools.set(
@@ -74,9 +88,9 @@ export async function syncPoolXykPrices(ctx: BlockContext): Promise<void> {
             pools[baseAssetId].forEach(p => {
                 const baseAssetReserves = new BigNumber(p.baseAssetReserves.toString())
                 const targetAssetReserves = new BigNumber(p.targetAssetReserves.toString())
-                const daiPrice = baseAssetReserves
-                    .dividedBy(targetAssetReserves)
-                    .multipliedBy(baseAssetPriceInDAI)
+                const daiPrice = !targetAssetReserves.isZero()
+                    ? baseAssetReserves.dividedBy(targetAssetReserves).multipliedBy(baseAssetPriceInDAI)
+                    : new BigNumber(0)
 
                 p.priceUSD = daiPrice.toFixed(18)
 
@@ -97,20 +111,32 @@ export async function syncPoolXykPrices(ctx: BlockContext): Promise<void> {
         )
 
         // update price samples
+        assetsPrices[baseAssetId] = {
+            price: baseAssetPriceInDAI.toFixed(18),
+            dexCap: getAssetDexCap(
+                baseAssetInPools,
+                baseAssetPriceInDAI,
+                daiReserves[baseAssetId]
+            ),
+        }
+
+        // update price samples
 		for (const pool of pools[baseAssetId]) {
-            if (!assetsPrices[pool.targetAsset.id as AssetId] || assetsPrices[pool.targetAsset.id as AssetId].reserves < pool.targetAssetReserves) {
+			const assetDexCap = getAssetDexCap(
+                new BigNumber(pool.targetAssetReserves.toString()),
+                new BigNumber(pool.priceUSD!),
+                daiReserves[baseAssetId]
+            )
+
+            if (!assetsPrices[pool.targetAsset.id as AssetId] || assetsPrices[pool.targetAsset.id as AssetId].dexCap.isLessThan(assetDexCap)) {
 				if (pool.priceUSD) {
 					assetsPrices[pool.targetAsset.id as AssetId] = {
-						reserves: pool.targetAssetReserves,
+						dexCap: assetDexCap,
 						price: pool.priceUSD,
 					}
 				}
                
             }
-        }
-		assetsPrices[baseAssetId] = {
-            reserves: BigInt(0),
-            price: baseAssetPriceInDAI.toFixed(18),
         }
     }
 
@@ -135,7 +161,10 @@ export async function syncPoolXykPrices(ctx: BlockContext): Promise<void> {
 
     // update assets prices
     for (const [assetId, { price }] of Object.entries(assetsPrices)) {
-        await assetSnapshotsStorage.updatePrice(ctx, assetId as AssetId, price)
+        // do not update price from XYK pool for synthetic assets
+        if (!syntheticAssetsIds.includes(assetId as AssetId)) {
+            await assetSnapshotsStorage.updatePrice(ctx, assetId as AssetId, price)
+        }
     }
 
     // update locked liquidity for assets
