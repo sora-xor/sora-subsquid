@@ -1,21 +1,20 @@
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { formatU128ToBalance, getAssetId } from '../../utils/assets'
-import { AssetAmount, Block, CallItem, Context } from '../../types'
+import { BlockContext, AssetAmount, CallItem } from '../../types'
 import { AssetsTransferEvent } from '../../types/generated/events'
 import { findEventByExtrinsicHash } from '../../utils/events'
 import { AssetsTransferCall } from '../../types/generated/calls'
 import { Address, AssetId } from '../../types'
 import { toAddress } from '../../utils'
 import { getEntityData } from '../../utils/entities'
-import { toJSON } from '@subsquid/util-internal-json'
-import { logCallHandler } from '../../utils/log'
+import { debug, logCallHandler } from '../../utils/log'
 
-export async function transfersCallHandler(ctx: Context, block: Block, callItem: CallItem<'Assets.transfer'>): Promise<void> {
-	logCallHandler(ctx, block, callItem)
+export async function transfersCallHandler(ctx: BlockContext, callItem: CallItem<'Assets.transfer'>): Promise<void> {
+	logCallHandler(ctx, callItem)
 
-	const blockHeight = block.header.height
+	const blockHeight = ctx.block.header.height
 	const extrinsicHash = callItem.extrinsic.hash
-    const historyElement = await createHistoryElement(ctx, block, callItem)
+    const historyElement = await createHistoryElement(ctx, callItem)
 
     if (!historyElement) return
 
@@ -28,9 +27,9 @@ export async function transfersCallHandler(ctx: Context, block: Block, callItem:
 
     if (historyElement.execution.success) {
 		const eventName = 'Assets.Transfer'
-		const eventItem = findEventByExtrinsicHash(block, extrinsicHash, [eventName], true)
+		const eventItem = findEventByExtrinsicHash(ctx, extrinsicHash, [eventName], true)
 		const event = new AssetsTransferEvent(ctx, eventItem.event)
-		const data = getEntityData(ctx, block, event, eventItem)
+		const data = getEntityData(ctx, event, eventItem)
 
 		const from = toAddress(data[0])
 		const to = toAddress(data[1])
@@ -47,7 +46,7 @@ export async function transfersCallHandler(ctx: Context, block: Block, callItem:
 
     else {
 		const call = new AssetsTransferCall(ctx, callItem.call)
-		const data = getEntityData(ctx, block, call, callItem)
+		const data = getEntityData(ctx, call, callItem)
 
 		const to = toAddress(data.to)
 		const assetId = getAssetId(data.assetId)
@@ -55,8 +54,7 @@ export async function transfersCallHandler(ctx: Context, block: Block, callItem:
 
 		const extrinsicSigner: Address | null = callItem.call.origin ? toAddress(callItem.call.origin.value.value) : null
 		if (!extrinsicSigner) {
-			ctx.log.error(`[${blockHeight}] Cannot get extrinsic signer`)
-			console.log(toJSON(callItem))
+			ctx.log.error(`[${blockHeight}][CallHandler] Cannot get extrinsic signer`)
 		}
 
         details = {
@@ -67,8 +65,8 @@ export async function transfersCallHandler(ctx: Context, block: Block, callItem:
         }
     }
 
-    await addDataToHistoryElement(ctx, block, historyElement, details)
-    await updateHistoryElementStats(ctx, block,historyElement)
+    await addDataToHistoryElement(ctx, historyElement, details)
+    await updateHistoryElementStats(ctx,historyElement)
 
-    ctx.log.debug(`[${block.header.height}] ===== Saved transfer with ${extrinsicHash} txid =====`)
+    debug(ctx, 'CallHandler', `Saved transfer with '${extrinsicHash}' extrinsic hash`)
 }

@@ -27,6 +27,7 @@ export type AnyEntityItem = AnyEventItem | AnyCallItem
 export type Context = BatchContext<Store, EventObject | CallObject>
 export type BlockHeader = SubstrateBlock
 export type Block = { header: BlockHeader, items: (EventObject | CallObject)[] }
+export type BlockContext = Context & { block: Block }
 
 export type AssetId = Opaque<string, 'AssetId'>
 export type AssetAmount = Opaque<bigint, 'AssetAmount'>

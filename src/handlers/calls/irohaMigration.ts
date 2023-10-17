@@ -1,15 +1,15 @@
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { formatU128ToBalance, getAssetId } from '../../utils/assets'
-import { AssetAmount, Block, CallItem, Context } from '../../types'
+import { BlockContext, AssetAmount, CallItem } from '../../types'
 import { findEventByExtrinsicHash } from '../../utils/events'
 import { CurrenciesDepositedEvent, CurrenciesTransferredEvent } from '../../types/generated/events'
 import { getEntityData } from '../../utils/entities'
-import { logCallHandler } from '../../utils/log'
+import { debug, logCallHandler } from '../../utils/log'
 
-export async function irohaMigrationCallHandler(ctx: Context, block: Block, callItem: CallItem<'IrohaMigration.migrate'>): Promise<void> {
-	logCallHandler(ctx, block, callItem)
+export async function irohaMigrationCallHandler(ctx: BlockContext, callItem: CallItem<'IrohaMigration.migrate'>): Promise<void> {
+	logCallHandler(ctx, callItem)
 
-    const historyElement = await createHistoryElement(ctx, block, callItem)
+    const historyElement = await createHistoryElement(ctx, callItem)
     const extrinsicHash = callItem.extrinsic.hash
 
     let details: {
@@ -18,12 +18,12 @@ export async function irohaMigrationCallHandler(ctx: Context, block: Block, call
     } | null = null
 
     if (historyElement.execution.success) {
-		const currenciesDepositedEventItem = findEventByExtrinsicHash(block, extrinsicHash, ['Currencies.Deposited'])
-		const currenciesTransferredEventItem = findEventByExtrinsicHash(block, extrinsicHash, ['Currencies.Transferred'])
+		const currenciesDepositedEventItem = findEventByExtrinsicHash(ctx, extrinsicHash, ['Currencies.Deposited'])
+		const currenciesTransferredEventItem = findEventByExtrinsicHash(ctx, extrinsicHash, ['Currencies.Transferred'])
 			
 		if (currenciesDepositedEventItem) {
 			const event = new CurrenciesDepositedEvent(ctx, currenciesDepositedEventItem.event)
-			const data = getEntityData(ctx, block, event, currenciesDepositedEventItem)
+			const data = getEntityData(ctx, event, currenciesDepositedEventItem)
 
 			const assetId = getAssetId(data[0])
 			const assetAmount = data[2] as AssetAmount
@@ -35,7 +35,7 @@ export async function irohaMigrationCallHandler(ctx: Context, block: Block, call
 			}
 		} else if (currenciesTransferredEventItem) {
 			const event = new CurrenciesTransferredEvent(ctx, currenciesTransferredEventItem.event)
-			const data = getEntityData(ctx, block, event, currenciesTransferredEventItem)
+			const data = getEntityData(ctx, event, currenciesTransferredEventItem)
 
 			const assetId = getAssetId(data[0])
 			const assetAmount = data[3] as AssetAmount
@@ -47,10 +47,10 @@ export async function irohaMigrationCallHandler(ctx: Context, block: Block, call
 			}
 		}
 
-        if (details) await addDataToHistoryElement(ctx, block, historyElement, details)
-        await updateHistoryElementStats(ctx, block,historyElement)
+        if (details) await addDataToHistoryElement(ctx, historyElement, details)
+        await updateHistoryElementStats(ctx,historyElement)
 
-        ctx.log.debug(`[${block.header.height}] ===== Saved iroha migration with ${extrinsicHash} txid =====`)
+        debug(ctx, 'CallHandler', `Saved iroha migration with '${extrinsicHash}' extrinsic hash`)
     }
 
 }

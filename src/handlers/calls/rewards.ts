@@ -1,11 +1,10 @@
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
-import { Block, CallItem, Context } from '../../types'
+import { BlockContext, CallItem } from '../../types'
 import { findEventsByExtrinsicHash, getAssetsTransferEventData } from '../../utils/events'
-import { logCallHandler } from '../../utils/log'
+import { debug, logCallHandler } from '../../utils/log'
 
 export async function rewardsCallHandler(
-	ctx: Context,
-	block: Block,
+	ctx: BlockContext,
 	callItem: (
 		| CallItem<'PswapDistribution.claim_incentive'>
 		| CallItem<'Rewards.claim'>
@@ -13,18 +12,18 @@ export async function rewardsCallHandler(
 		| CallItem<'VestedRewards.claim_crowdloan_rewards'>
 	)
 ): Promise<void> {
-	logCallHandler(ctx, block, callItem)
+	logCallHandler(ctx, callItem)
 
     const extrinsicHash = callItem.extrinsic.hash
-    const historyElement = await createHistoryElement(ctx, block, callItem)
+    const historyElement = await createHistoryElement(ctx, callItem)
 
     if (historyElement.execution.success) {
         const rewards = findEventsByExtrinsicHash(
-            block,
+            ctx,
             extrinsicHash,
 			['Tokens.Transfer']
         ).reduce((buffer: { assetId: string, amount: string }[], eventItem) => {
-			const data = getAssetsTransferEventData(ctx, block, eventItem)
+			const data = getAssetsTransferEventData(ctx, eventItem)
             buffer.push({
 				assetId: data.assetId,
 				amount: data.amount.toString(),
@@ -32,10 +31,10 @@ export async function rewardsCallHandler(
             return buffer
         }, [])
 
-        await addDataToHistoryElement(ctx, block, historyElement, rewards)
+        await addDataToHistoryElement(ctx, historyElement, rewards)
     }
 
-    await updateHistoryElementStats(ctx, block,historyElement)
+    await updateHistoryElementStats(ctx,historyElement)
 
-    ctx.log.debug(`[${block.header.height}] ===== Saved reward claim extrinsic with ${extrinsicHash} txid =====`)
+    debug(ctx, 'CallHandler', `Saved reward claim extrinsic with '${extrinsicHash}' extrinsic hash`)
 }

@@ -1,5 +1,5 @@
 import { ExecutionResult, ExecutionError, HistoryElement, HistoryElementCall } from '../model'
-import { AnyCallItem, AssetAmount, Block, CallItem, CallItemName, Context } from '../types'
+import { AnyCallItem, AssetAmount, BlockContext, CallItem, CallItemName } from '../types'
 import { formatU128ToBalance } from './assets'
 import { getOrCreateAccountEntity } from './account'
 import { networkSnapshotsStorage } from './network'
@@ -13,34 +13,34 @@ import { getEntityData } from './entities'
 
 const INCOMING_TRANSFER_METHODS = ['transfer', 'swap_transfer']
 
-const getCallItemNetworkFee = (ctx: Context, block: Block, callItem: AnyCallItem): AssetAmount => {
-    const eventItem = findEventByExtrinsicHash(block, callItem.extrinsic.hash, ['XorFee.FeeWithdrawn'])
+const getCallItemNetworkFee = (ctx: BlockContext, callItem: AnyCallItem): AssetAmount => {
+    const eventItem = findEventByExtrinsicHash(ctx, callItem.extrinsic.hash, ['XorFee.FeeWithdrawn'])
 
     if (eventItem) {
         const event = new XorFeeFeeWithdrawnEvent(ctx, eventItem.event)
-		const eventData = getEntityData(ctx, block, event, eventItem)
+		const eventData = getEntityData(ctx, event, eventItem)
         
         return eventData[1] as AssetAmount
     }
     return 0n as AssetAmount
 }
 
-export const createHistoryElement = (ctx: Context, block: Block, callItem: CallItem<CallItemName>): HistoryElement => {
+export const createHistoryElement = (ctx: BlockContext, callItem: CallItem<CallItemName>): HistoryElement => {
     const historyElement = new HistoryElement()
 
-	if (!block.header.validator) {
+	if (!ctx.block.header.validator) {
 		throw Error('There is no block validator')
 	}
 
     historyElement.id = callItem.extrinsic.hash
-    historyElement.blockHeight = BigInt(block.header.height)
-    historyElement.blockHash = block.header.hash.toString()
+    historyElement.blockHeight = BigInt(ctx.block.header.height)
+    historyElement.blockHash = ctx.block.header.hash.toString()
     historyElement.module = toCamelCase(callItem.name.split('.')[0])
     historyElement.method = toCamelCase(callItem.name.split('.')[1])
     historyElement.address = toAddress(callItem.extrinsic.signature?.address)
-    historyElement.networkFee = formatU128ToBalance(getCallItemNetworkFee(ctx, block, callItem), XOR)
-    historyElement.timestamp = formatDateTimestamp(new Date(block.header.timestamp))
-	historyElement.updatedAtBlock = block.header.height
+    historyElement.networkFee = formatU128ToBalance(getCallItemNetworkFee(ctx, callItem), XOR)
+    historyElement.timestamp = formatDateTimestamp(new Date(ctx.block.header.timestamp))
+	historyElement.updatedAtBlock = ctx.block.header.height
 	historyElement.callNames = []
 
     const success = callItem.extrinsic.success
@@ -69,7 +69,7 @@ export const createHistoryElement = (ctx: Context, block: Block, callItem: CallI
     return historyElement
 }
 
-export const addDataToHistoryElement = async (ctx: Context, block: Block, historyElement: HistoryElement, data: {}) => {
+export const addDataToHistoryElement = async (ctx: BlockContext, historyElement: HistoryElement, data: {}) => {
 	historyElement.data = toJSON(data)
 	if ('to' in data && typeof data.to === 'string') {
 		historyElement.dataTo = data.to
@@ -77,20 +77,20 @@ export const addDataToHistoryElement = async (ctx: Context, block: Block, histor
 	if ('from' in data && typeof data.from === 'string') {
 		historyElement.dataFrom = data.from
 	}
-	historyElement.updatedAtBlock = block.header.height
+	historyElement.updatedAtBlock = ctx.block.header.height
 
     await ctx.store.save(historyElement)
 }
 
-export const addCallsToHistoryElement = async (ctx: Context, block: Block, historyElement: HistoryElement, calls: HistoryElementCall[]) => {
+export const addCallsToHistoryElement = async (ctx: BlockContext, historyElement: HistoryElement, calls: HistoryElementCall[]) => {
 	historyElement.callNames = calls.map(call => call.module + '.' + call.method)
-	historyElement.updatedAtBlock = block.header.height
+	historyElement.updatedAtBlock = ctx.block.header.height
 
     await ctx.store.save(historyElement)
     await ctx.store.save(calls)
 }
 
-export const updateHistoryElementStats = async (ctx: Context, block: Block, historyElement: HistoryElement) => {
+export const updateHistoryElementStats = async (ctx: BlockContext, historyElement: HistoryElement) => {
     const addresses = [historyElement.address.toString()]
 
     if (
@@ -103,11 +103,11 @@ export const updateHistoryElementStats = async (ctx: Context, block: Block, hist
 
     // update accounts data
     for (const address of addresses) {
-        const account = await getOrCreateAccountEntity(ctx, block, address)
+        const account = await getOrCreateAccountEntity(ctx, address)
         account.latestHistoryElement = historyElement
-		account.updatedAtBlock = block.header.height
+		account.updatedAtBlock = ctx.block.header.height
         ctx.store.save(account)
     }
 
-    await networkSnapshotsStorage.updateTransactionsStats(ctx, block)
+    await networkSnapshotsStorage.updateTransactionsStats(ctx)
 }

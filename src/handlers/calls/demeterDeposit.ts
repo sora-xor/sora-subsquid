@@ -1,21 +1,19 @@
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { formatU128ToBalance, getAssetId } from '../../utils/assets'
 import { XOR } from '../../utils/consts'
-import { AssetAmount, Block, CallItem, Context } from '../../types'
+import { AssetAmount, BlockContext, CallItem } from '../../types'
 import { findEventByExtrinsicHash } from '../../utils/events'
 import { DemeterFarmingPlatformDepositedEvent } from '../../types/generated/events'
 import { DemeterFarmingPlatformDepositCall } from '../../types/generated/calls'
 import { getEntityData } from '../../utils/entities'
-import { logCallHandler } from '../../utils/log'
+import { debug, logCallHandler } from '../../utils/log'
 
-export async function demeterDepositCallHandler(ctx: Context, block: Block, callItem: CallItem<'DemeterFarmingPlatform.deposit'>): Promise<void> {
-	logCallHandler(ctx, block, callItem)
-
-	const extrinsicHash = callItem.extrinsic.hash
+export async function demeterDepositCallHandler(ctx: BlockContext, callItem: CallItem<'DemeterFarmingPlatform.deposit'>): Promise<void> {
+	logCallHandler(ctx, callItem)
 
 	const call = new DemeterFarmingPlatformDepositCall(ctx, callItem.call)
 
-	const data = getEntityData(ctx, block, call, callItem)
+	const data = getEntityData(ctx, call, callItem)
 
 	const baseAssetId = 'baseAsset' in data ? getAssetId(data.baseAsset) : XOR
 	const assetId = getAssetId(data.poolAsset)
@@ -25,12 +23,12 @@ export async function demeterDepositCallHandler(ctx: Context, block: Block, call
 
 	let amount: string
 
-	const eventItem = findEventByExtrinsicHash(block, extrinsicHash, ['DemeterFarmingPlatform.Deposited'])
+	const eventItem = findEventByExtrinsicHash(ctx, callItem.extrinsic.hash, ['DemeterFarmingPlatform.Deposited'])
 
 	if (eventItem) {
 		const event = new DemeterFarmingPlatformDepositedEvent(ctx, eventItem.event)
 
-		const data = getEntityData(ctx, block, event, eventItem)
+		const data = getEntityData(ctx, event, eventItem)
 
 		const assetAmount = typeof data[4] === 'bigint' ? data[4] : data[5] as AssetAmount
 
@@ -48,9 +46,9 @@ export async function demeterDepositCallHandler(ctx: Context, block: Block, call
 		amount
 	}
 
-	const historyElement = await createHistoryElement(ctx, block, callItem)
-	await addDataToHistoryElement(ctx, block, historyElement, details)
-	await updateHistoryElementStats(ctx, block, historyElement)
+	const historyElement = await createHistoryElement(ctx, callItem)
+	await addDataToHistoryElement(ctx, historyElement, details)
+	await updateHistoryElementStats(ctx, historyElement)
 
-	ctx.log.debug(`[${block.header.height}] ===== Saved demeterFarmingPlatform deposit with ${extrinsicHash} txid =====`)
+	debug(ctx, 'CallHandler', `Saved demeterFarmingPlatform deposit with '${callItem.extrinsic.hash}' extrinsic hash`)
 }

@@ -1,6 +1,9 @@
 import * as ss58 from '@subsquid/ss58'
 import { AssetId, Address, AddressEthereum, ReferenceSymbol } from '../types'
+import { SnapshotSecondsMap } from './consts'
 import { toHex, decodeHex } from '@subsquid/substrate-processor'
+import { SnapshotType } from '../model'
+
 
 export const formatDateTimestamp = (date: Date): number => parseInt((date.getTime() * 0.001).toFixed(0))
 
@@ -77,4 +80,12 @@ export const toCamelCase = (s: string): string => {
   
 	// Step 8: Return the result
 	return finalString
+}
+
+export const getSnapshotIndex = (blockTimestamp: number, type: SnapshotType): { index: number, timestamp: number } => {
+	const seconds = SnapshotSecondsMap[type]
+	const index = Math.floor(blockTimestamp / seconds) // rounded snapshot index (from 0)
+	const timestamp = seconds * index // rounded snapshot timestamp
+  
+	return { index, timestamp }
 }

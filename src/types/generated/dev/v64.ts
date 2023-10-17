@@ -516,7 +516,7 @@ export interface MmrLeaf {
     leafExtra: LeafExtraData
 }
 
-export interface Type_586 {
+export interface Type_588 {
     order: bigint
     items: Uint8Array[]
 }
@@ -1035,7 +1035,7 @@ export interface IncomingRequestKind_Meta {
     value: IncomingMetaRequestKind
 }
 
-export interface Type_552 {
+export interface Type_554 {
     parentHash: Uint8Array
     timestamp: bigint
     number: bigint
@@ -1111,7 +1111,7 @@ export interface NetworkConfig_Custom {
     consensus: Consensus
 }
 
-export interface Type_302 {
+export interface Type_304 {
     setId: bigint
     equivocation: Equivocation
 }
@@ -1393,13 +1393,13 @@ export interface SwapBatchInfo {
     receivers: BatchReceiverInfo[]
 }
 
-export type Type_605 = Type_605_Thischain | Type_605_Sidechain
+export type Type_607 = Type_607_Thischain | Type_607_Sidechain
 
-export interface Type_605_Thischain {
+export interface Type_607_Thischain {
     __kind: 'Thischain'
 }
 
-export interface Type_605_Sidechain {
+export interface Type_607_Sidechain {
     __kind: 'Sidechain'
 }
 
@@ -1476,36 +1476,6 @@ export interface ConfigOp_Remove {
     __kind: 'Remove'
 }
 
-export type Type_295 = Type_295_Noop | Type_295_Set | Type_295_Remove
-
-export interface Type_295_Noop {
-    __kind: 'Noop'
-}
-
-export interface Type_295_Set {
-    __kind: 'Set'
-    value: number
-}
-
-export interface Type_295_Remove {
-    __kind: 'Remove'
-}
-
-export type Type_296 = Type_296_Noop | Type_296_Set | Type_296_Remove
-
-export interface Type_296_Noop {
-    __kind: 'Noop'
-}
-
-export interface Type_296_Set {
-    __kind: 'Set'
-    value: number
-}
-
-export interface Type_296_Remove {
-    __kind: 'Remove'
-}
-
 export type Type_297 = Type_297_Noop | Type_297_Set | Type_297_Remove
 
 export interface Type_297_Noop {
@@ -1521,16 +1491,46 @@ export interface Type_297_Remove {
     __kind: 'Remove'
 }
 
+export type Type_298 = Type_298_Noop | Type_298_Set | Type_298_Remove
+
+export interface Type_298_Noop {
+    __kind: 'Noop'
+}
+
+export interface Type_298_Set {
+    __kind: 'Set'
+    value: number
+}
+
+export interface Type_298_Remove {
+    __kind: 'Remove'
+}
+
+export type Type_299 = Type_299_Noop | Type_299_Set | Type_299_Remove
+
+export interface Type_299_Noop {
+    __kind: 'Noop'
+}
+
+export interface Type_299_Set {
+    __kind: 'Set'
+    value: number
+}
+
+export interface Type_299_Remove {
+    __kind: 'Remove'
+}
+
 export type GenericCommitment = GenericCommitment_Sub | GenericCommitment_EVM
 
 export interface GenericCommitment_Sub {
     __kind: 'Sub'
-    value: Type_589
+    value: Type_591
 }
 
 export interface GenericCommitment_EVM {
     __kind: 'EVM'
-    value: Type_594
+    value: Type_596
 }
 
 export type MultiProof = MultiProof_Beefy | MultiProof_Multisig
@@ -1542,7 +1542,7 @@ export interface MultiProof_Beefy {
 
 export interface MultiProof_Multisig {
     __kind: 'Multisig'
-    value: Type_603
+    value: Type_605
 }
 
 export type OriginCaller = OriginCaller_system | OriginCaller_Council | OriginCaller_TechnicalCommittee | OriginCaller_Dispatch | OriginCaller_SubstrateDispatch | OriginCaller_Void
@@ -1554,22 +1554,22 @@ export interface OriginCaller_system {
 
 export interface OriginCaller_Council {
     __kind: 'Council'
-    value: Type_283
+    value: Type_285
 }
 
 export interface OriginCaller_TechnicalCommittee {
     __kind: 'TechnicalCommittee'
-    value: Type_284
+    value: Type_286
 }
 
 export interface OriginCaller_Dispatch {
     __kind: 'Dispatch'
-    value: Type_285
+    value: Type_287
 }
 
 export interface OriginCaller_SubstrateDispatch {
     __kind: 'SubstrateDispatch'
-    value: Type_289
+    value: Type_291
 }
 
 export interface OriginCaller_Void {
@@ -1698,6 +1698,11 @@ export interface Multisig {
     deposit: bigint
     depositor: Uint8Array
     approvals: Uint8Array[]
+}
+
+export interface GenericCommitmentWithBlock {
+    blockNumber: number
+    commitment: GenericCommitment
 }
 
 export interface Message {
@@ -1980,7 +1985,7 @@ export interface PruningRange {
 
 export interface StoredHeader {
     submitter: (Uint8Array | undefined)
-    header: Type_552
+    header: Type_554
     totalDifficulty: bigint
     finalized: boolean
 }
@@ -2074,7 +2079,7 @@ export interface DistributionAccounts {
     projects: DistributionAccountData
 }
 
-export interface Type_730 {
+export interface Type_732 {
     when: Timepoint
     deposit: bigint
     depositor: Uint8Array
@@ -2119,15 +2124,15 @@ export interface Scope_Unlimited {
     __kind: 'Unlimited'
 }
 
-export type Type_827 = Type_827_Unrequested | Type_827_Requested
+export type Type_829 = Type_829_Unrequested | Type_829_Requested
 
-export interface Type_827_Unrequested {
+export interface Type_829_Unrequested {
     __kind: 'Unrequested'
     deposit: [Uint8Array, bigint]
     len: number
 }
 
-export interface Type_827_Requested {
+export interface Type_829_Requested {
     __kind: 'Requested'
     deposit: ([Uint8Array, bigint] | undefined)
     count: number
@@ -2225,23 +2230,23 @@ export interface Digest {
 }
 
 export interface EventRecord {
-    phase: Type_200
+    phase: Type_202
     event: Event
     topics: Uint8Array[]
 }
 
-export type Type_200 = Type_200_ApplyExtrinsic | Type_200_Finalization | Type_200_Initialization
+export type Type_202 = Type_202_ApplyExtrinsic | Type_202_Finalization | Type_202_Initialization
 
-export interface Type_200_ApplyExtrinsic {
+export interface Type_202_ApplyExtrinsic {
     __kind: 'ApplyExtrinsic'
     value: number
 }
 
-export interface Type_200_Finalization {
+export interface Type_202_Finalization {
     __kind: 'Finalization'
 }
 
-export interface Type_200_Initialization {
+export interface Type_202_Initialization {
     __kind: 'Initialization'
 }
 
@@ -2250,13 +2255,13 @@ export interface LastRuntimeUpgradeInfo {
     specName: string
 }
 
-export interface Type_665 {
+export interface Type_667 {
     free: bigint
     reserved: bigint
     frozen: bigint
 }
 
-export interface Type_663 {
+export interface Type_665 {
     id: Uint8Array
     amount: bigint
 }
@@ -2284,7 +2289,7 @@ export interface CrowdloanUserInfo {
     rewarded: [AssetId32, bigint][]
 }
 
-export interface Type_748 {
+export interface Type_750 {
     limit: bigint
     totalAvailable: bigint
     rewards: [RewardReason, bigint][]
@@ -3535,10 +3540,10 @@ export interface StakingCall_set_staking_configs {
     __kind: 'set_staking_configs'
     minNominatorBond: ConfigOp
     minValidatorBond: ConfigOp
-    maxNominatorCount: Type_295
-    maxValidatorCount: Type_295
-    chillThreshold: Type_296
-    minCommission: Type_297
+    maxNominatorCount: Type_297
+    maxValidatorCount: Type_297
+    chillThreshold: Type_298
+    minCommission: Type_299
 }
 
 /**
@@ -3657,7 +3662,7 @@ export type GrandpaCall = GrandpaCall_report_equivocation | GrandpaCall_report_e
  */
 export interface GrandpaCall_report_equivocation {
     __kind: 'report_equivocation'
-    equivocationProof: Type_302
+    equivocationProof: Type_304
     keyOwnerProof: MembershipProof
 }
 
@@ -3674,7 +3679,7 @@ export interface GrandpaCall_report_equivocation {
  */
 export interface GrandpaCall_report_equivocation_unsigned {
     __kind: 'report_equivocation_unsigned'
-    equivocationProof: Type_302
+    equivocationProof: Type_304
     keyOwnerProof: MembershipProof
 }
 
@@ -3960,7 +3965,7 @@ export interface PoolXYKCall_initialize_pool {
 /**
  * Contains one variant per dispatchable that can be called by an extrinsic.
  */
-export type LiquidityProxyCall = LiquidityProxyCall_swap | LiquidityProxyCall_swap_transfer | LiquidityProxyCall_swap_transfer_batch | LiquidityProxyCall_enable_liquidity_source | LiquidityProxyCall_disable_liquidity_source | LiquidityProxyCall_set_adar_commission_ratio
+export type LiquidityProxyCall = LiquidityProxyCall_swap | LiquidityProxyCall_swap_transfer | LiquidityProxyCall_swap_transfer_batch | LiquidityProxyCall_enable_liquidity_source | LiquidityProxyCall_disable_liquidity_source | LiquidityProxyCall_set_adar_commission_ratio | LiquidityProxyCall_xorless_transfer
 
 /**
  * Perform swap of tokens (input/output defined via SwapAmount direction).
@@ -4052,6 +4057,27 @@ export interface LiquidityProxyCall_disable_liquidity_source {
 export interface LiquidityProxyCall_set_adar_commission_ratio {
     __kind: 'set_adar_commission_ratio'
     commissionRatio: bigint
+}
+
+/**
+ * Extrinsic which is enable XORless transfers.
+ * Internally it's swaps `asset_id` to `desired_xor_amount` of `XOR` and transfers remaining amount of `asset_id` to `receiver`.
+ * Client apps should specify the XOR amount which should be paid as a fee in `desired_xor_amount` parameter.
+ * If sender will not have enough XOR to pay fees after execution, transaction will be rejected.
+ * This extrinsic is done as temporary solution for XORless transfers, in future it would be removed
+ * and logic for XORless extrinsics should be moved to xor-fee pallet.
+ */
+export interface LiquidityProxyCall_xorless_transfer {
+    __kind: 'xorless_transfer'
+    dexId: number
+    assetId: AssetId32
+    receiver: Uint8Array
+    amount: bigint
+    desiredXorAmount: bigint
+    maxAmountIn: bigint
+    selectedSourceTypes: LiquiditySourceType[]
+    filterMode: FilterMode
+    additionalData: (Uint8Array | undefined)
 }
 
 /**
@@ -6867,7 +6893,7 @@ export type EthereumLightClientCall = EthereumLightClientCall_register_network |
 export interface EthereumLightClientCall_register_network {
     __kind: 'register_network'
     networkConfig: NetworkConfig
-    header: Type_552
+    header: Type_554
     initialDifficulty: bigint
 }
 
@@ -6893,7 +6919,7 @@ export interface EthereumLightClientCall_update_difficulty_config {
 export interface EthereumLightClientCall_import_header {
     __kind: 'import_header'
     networkId: bigint
-    header: Type_552
+    header: Type_554
     proof: DoubleNodeWithMerkleProof[]
     mixNonce: Uint8Array
     submitter: Uint8Array
@@ -7080,7 +7106,7 @@ export interface BeefyLightClientCall_submit_signature_commitment {
     commitment: Commitment
     validatorProof: ValidatorProof
     latestMmrLeaf: MmrLeaf
-    proof: Type_586
+    proof: Type_588
 }
 
 /**
@@ -7111,7 +7137,7 @@ export interface ParachainBridgeAppCall_mint {
 export interface ParachainBridgeAppCall_finalize_asset_registration {
     __kind: 'finalize_asset_registration'
     assetId: AssetId32
-    assetKind: Type_605
+    assetKind: Type_607
 }
 
 export interface ParachainBridgeAppCall_burn {
@@ -7595,12 +7621,12 @@ export type Equivocation = Equivocation_Prevote | Equivocation_Precommit
 
 export interface Equivocation_Prevote {
     __kind: 'Prevote'
-    value: Type_304
+    value: Type_306
 }
 
 export interface Equivocation_Precommit {
     __kind: 'Precommit'
-    value: Type_309
+    value: Type_311
 }
 
 export interface OpaqueNetworkState {
@@ -7613,24 +7639,24 @@ export interface BatchReceiverInfo {
     targetAmount: bigint
 }
 
-export interface Type_589 {
+export interface Type_591 {
     messages: BridgeMessage[]
     nonce: bigint
 }
 
-export interface Type_594 {
+export interface Type_596 {
     nonce: bigint
     totalMaxGas: bigint
     messages: Message[]
 }
 
 export interface SubstrateBridgeMessageProof {
-    proof: Type_586
+    proof: Type_588
     leaf: MmrLeaf
     digest: AuxiliaryDigest
 }
 
-export interface Type_603 {
+export interface Type_605 {
     digest: AuxiliaryDigest
     proof: Uint8Array[]
 }
@@ -7650,44 +7676,44 @@ export interface RawOrigin_None {
     __kind: 'None'
 }
 
-export type Type_283 = Type_283_Members | Type_283_Member | Type_283__Phantom
+export type Type_285 = Type_285_Members | Type_285_Member | Type_285__Phantom
 
-export interface Type_283_Members {
+export interface Type_285_Members {
     __kind: 'Members'
     value: [number, number]
 }
 
-export interface Type_283_Member {
+export interface Type_285_Member {
     __kind: 'Member'
     value: Uint8Array
 }
 
-export interface Type_283__Phantom {
+export interface Type_285__Phantom {
     __kind: '_Phantom'
 }
 
-export type Type_284 = Type_284_Members | Type_284_Member | Type_284__Phantom
+export type Type_286 = Type_286_Members | Type_286_Member | Type_286__Phantom
 
-export interface Type_284_Members {
+export interface Type_286_Members {
     __kind: 'Members'
     value: [number, number]
 }
 
-export interface Type_284_Member {
+export interface Type_286_Member {
     __kind: 'Member'
     value: Uint8Array
 }
 
-export interface Type_284__Phantom {
+export interface Type_286__Phantom {
     __kind: '_Phantom'
 }
 
-export interface Type_285 {
+export interface Type_287 {
     origin: CallOriginOutput
 }
 
-export interface Type_289 {
-    origin: Type_290
+export interface Type_291 {
+    origin: Type_292
 }
 
 export type Void = never
@@ -8372,14 +8398,14 @@ export interface ClassicForkConfig {
     ecip1099Block: bigint
 }
 
-export interface Type_304 {
+export interface Type_306 {
     roundNumber: bigint
     identity: Uint8Array
     first: [Prevote, Uint8Array]
     second: [Prevote, Uint8Array]
 }
 
-export interface Type_309 {
+export interface Type_311 {
     roundNumber: bigint
     identity: Uint8Array
     first: [Precommit, Uint8Array]
@@ -8397,7 +8423,7 @@ export interface CallOriginOutput {
     additional: AdditionalEVMInboundData
 }
 
-export interface Type_290 {
+export interface Type_292 {
     networkId: SubNetworkId
     messageId: Uint8Array
     timepoint: GenericTimepoint
@@ -9490,7 +9516,7 @@ export interface PoolXYKEvent_PoolIsInitialized {
 			by this pallet.
 			
  */
-export type LiquidityProxyEvent = LiquidityProxyEvent_Exchange | LiquidityProxyEvent_LiquiditySourceEnabled | LiquidityProxyEvent_LiquiditySourceDisabled | LiquidityProxyEvent_BatchSwapExecuted
+export type LiquidityProxyEvent = LiquidityProxyEvent_Exchange | LiquidityProxyEvent_LiquiditySourceEnabled | LiquidityProxyEvent_LiquiditySourceDisabled | LiquidityProxyEvent_BatchSwapExecuted | LiquidityProxyEvent_XorlessTransfer
 
 /**
  * Exchange of tokens has been performed
@@ -9524,6 +9550,15 @@ export interface LiquidityProxyEvent_LiquiditySourceDisabled {
 export interface LiquidityProxyEvent_BatchSwapExecuted {
     __kind: 'BatchSwapExecuted'
     value: [bigint, bigint]
+}
+
+/**
+ * XORless transfer has been performed
+ * [Asset Id, Caller Account, Receiver Account, Amount, Additional Data]
+ */
+export interface LiquidityProxyEvent_XorlessTransfer {
+    __kind: 'XorlessTransfer'
+    value: [AssetId32, Uint8Array, Uint8Array, bigint, (Uint8Array | undefined)]
 }
 
 /**
@@ -10992,7 +11027,6 @@ export interface OrderBookEvent_OrderBookCreated {
 export interface OrderBookEvent_OrderBookDeleted {
     __kind: 'OrderBookDeleted'
     orderBookId: OrderBookId
-    countOfCanceledOrders: number
 }
 
 /**

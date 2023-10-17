@@ -1,14 +1,14 @@
 import { StakingEra, StakingStaker } from '../model'
-import { Address, Block, Context } from '../types'
+import { Address, BlockContext } from '../types'
 import { StakingActiveEraStorage } from '../types/generated/storage'
 import { getEntityData } from './entities'
 
-export const getActiveStakingEra = async (ctx: Context, block: Block): Promise<StakingEra> => {
-	const activeEraStorage = new StakingActiveEraStorage(ctx, block.header)
+export const getActiveStakingEra = async (ctx: BlockContext): Promise<StakingEra> => {
+	const activeEraStorage = new StakingActiveEraStorage(ctx, ctx.block.header)
 
-	const activeEra = await getEntityData(ctx, block, activeEraStorage, { kind: 'storage', name: StakingActiveEraStorage.name }).get()
+	const activeEra = await getEntityData(ctx, activeEraStorage, { kind: 'storage', name: StakingActiveEraStorage.name }).get()
 	if (!activeEra) {
-		throw new Error(`[${block.header.height}] Active era not found`)
+		throw new Error(`[${ctx.block.header.height}] Active era not found`)
 	}
 
 	let stakingEra = await ctx.store.get(StakingEra, activeEra.index.toString())
@@ -30,7 +30,7 @@ export const getActiveStakingEra = async (ctx: Context, block: Block): Promise<S
 	return stakingEra
 }
 
-export const getStakingStaker = async (ctx: Context, block: Block, address: Address): Promise<StakingStaker> => {
+export const getStakingStaker = async (ctx: BlockContext, address: Address): Promise<StakingStaker> => {
 	let stakingStaker = await ctx.store.get(StakingStaker, address)
 	if (!stakingStaker) {
 		stakingStaker = new StakingStaker({ id: address })

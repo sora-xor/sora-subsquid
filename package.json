@@ -28,9 +28,9 @@
 		"deploy:stage": "ts-node ./scripts/generate-squid-yaml.ts stage && sqd deploy ./",
 		"deploy:test": "ts-node ./scripts/generate-squid-yaml.ts test && sqd deploy ./",
 		"deploy:dev": "ts-node ./scripts/generate-squid-yaml.ts dev && sqd deploy ./",
+		"serve": "sqd serve",
 		"process": "sqd process",
-		"clean-process": "sqd down && sqd up && sqd process",
-		"serve": "sqd serve"
+		"clean-process": "sqd down && sqd up && sqd process"
 	},
 	"dependencies": {
 		"@polkadot/api": "^10.0.1",

@@ -78,7 +78,7 @@ export const events = [
     'DemeterFarmingPlatform.Deposited',
     'DemeterFarmingPlatform.RewardWithdrawn',
     'DemeterFarmingPlatform.Withdrawn',
-	'XstPool.SyntheticAssetEnabled',
+	'XSTPool.SyntheticAssetEnabled',
 	'Band.SymbolsRelayed',
 	'Staking.Rewarded',
 	'Staking.StakersElected',

@@ -1,18 +1,18 @@
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
-import { Block, CallItem, Context } from '../../types'
+import { BlockContext, CallItem } from '../../types'
 import { findEventByExtrinsicHash } from '../../utils/events'
 import { AssetsAssetRegisteredEvent } from '../../types/generated/events'
 import { AssetsRegisterCall } from '../../types/generated/calls'
 import { AssetId } from '../../types'
 import { getEntityData } from '../../utils/entities'
 import { getAssetId } from '../../utils/assets'
-import { logCallHandler } from '../../utils/log'
+import { debug, logCallHandler } from '../../utils/log'
 
-export async function assetRegistrationCallHandler(ctx: Context, block: Block, callItem: CallItem<'Assets.register'>): Promise<void> {
-	logCallHandler(ctx, block, callItem)
+export async function assetRegistrationCallHandler(ctx: BlockContext, callItem: CallItem<'Assets.register'>): Promise<void> {
+	logCallHandler(ctx, callItem)
 
     const extrinsicHash = callItem.extrinsic.hash
-    const historyElement = await createHistoryElement(ctx, block, callItem)
+    const historyElement = await createHistoryElement(ctx, callItem)
 
     if (!historyElement) return
 
@@ -21,9 +21,9 @@ export async function assetRegistrationCallHandler(ctx: Context, block: Block, c
 	}
 
     if (historyElement.execution.success) {
-        const assetRegistrationEventItem = findEventByExtrinsicHash(block, extrinsicHash, ['Assets.AssetRegistered'], true)
+        const assetRegistrationEventItem = findEventByExtrinsicHash(ctx, extrinsicHash, ['Assets.AssetRegistered'], true)
 		const assetRegistrationEvent = new AssetsAssetRegisteredEvent(ctx, assetRegistrationEventItem.event)
-		const assetRegistrationEventData = getEntityData(ctx, block, assetRegistrationEvent, assetRegistrationEventItem)
+		const assetRegistrationEventData = getEntityData(ctx, assetRegistrationEvent, assetRegistrationEventItem)
 
 		const assetId = getAssetId(assetRegistrationEventData[0])
 
@@ -34,7 +34,7 @@ export async function assetRegistrationCallHandler(ctx: Context, block: Block, c
 
     else {
         const call = new AssetsRegisterCall(ctx, callItem.call)
-		const data = getEntityData(ctx, block, call, callItem)
+		const data = getEntityData(ctx, call, callItem)
 	
 		const symbol = getAssetId(data.symbol)
 
@@ -43,9 +43,9 @@ export async function assetRegistrationCallHandler(ctx: Context, block: Block, c
         }
     }
 
-    await addDataToHistoryElement(ctx, block, historyElement, details)
-    await updateHistoryElementStats(ctx, block, historyElement)
+    await addDataToHistoryElement(ctx, historyElement, details)
+    await updateHistoryElementStats(ctx, historyElement)
 
-    ctx.log.debug(`[${block.header.height}] ===== Saved asset registration with ${extrinsicHash} txid =====`)
+    debug(ctx, 'CallHandler', `Saved asset registration with '${extrinsicHash}' extrinsic hash`)
 
 }
