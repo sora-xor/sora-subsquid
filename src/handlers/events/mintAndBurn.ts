@@ -4,7 +4,7 @@ import { BlockContext, EventItem } from '../../types'
 import { BalancesDepositEvent, BalancesWithdrawEvent, TokensDepositedEvent, TokensWithdrawnEvent } from '../../types/generated/events'
 import { AssetAmount } from '../../types'
 import { getEntityData } from '../../utils/entities'
-import { logEventHandler } from '../../utils/log'
+import { logEventHandler } from '../../utils/logs'
 
 export async function tokenBurnEventHandler(ctx: BlockContext, eventItem: EventItem<'Tokens.Withdrawn'>): Promise<void> {
 	logEventHandler(ctx, eventItem)

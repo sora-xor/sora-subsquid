@@ -6,7 +6,7 @@ import { ReferralsReserveCall } from '../../types/generated/calls'
 import { findEventByExtrinsicHash, getAssetsTransferEventData } from '../../utils/events'
 import { getEntityData } from '../../utils/entities'
 import { CannotFindEventError } from '../../utils/errors'
-import { debug, logCallHandler } from '../../utils/log'
+import { debug, logCallHandler } from '../../utils/logs'
 
 export async function referralReserveCallHandler(ctx: BlockContext, callItem: CallItem<'Referrals.reserve'>): Promise<void> {
 	logCallHandler(ctx, callItem)

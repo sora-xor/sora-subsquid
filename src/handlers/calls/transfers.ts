@@ -7,7 +7,7 @@ import { AssetsTransferCall } from '../../types/generated/calls'
 import { Address, AssetId } from '../../types'
 import { toAddress } from '../../utils'
 import { getEntityData } from '../../utils/entities'
-import { debug, logCallHandler } from '../../utils/log'
+import { debug, logCallHandler } from '../../utils/logs'
 
 export async function transfersCallHandler(ctx: BlockContext, callItem: CallItem<'Assets.transfer'>): Promise<void> {
 	logCallHandler(ctx, callItem)

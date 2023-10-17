@@ -5,7 +5,7 @@ import { BlockContext, AssetAmount, CallItem } from '../../types'
 import { findEventByExtrinsicHash, getAssetsTransferEventData } from '../../utils/events'
 import { ReferralsUnreserveCall } from '../../types/generated/calls'
 import { getEntityData } from '../../utils/entities'
-import { debug, logCallHandler } from '../../utils/log'
+import { debug, logCallHandler } from '../../utils/logs'
 
 export async function referralUnreserveCallHandler(ctx: BlockContext, callItem: CallItem<'Referrals.unreserve'>): Promise<void> {
 	logCallHandler(ctx, callItem)

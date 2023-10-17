@@ -7,7 +7,7 @@ import { findCallByExtrinsicHash } from '../../utils/calls'
 import { getEntityData } from '../../utils/entities'
 import { toHex } from '@subsquid/substrate-processor'
 import { CannotFindCallError } from '../../utils/errors'
-import { debug, logEventHandler } from '../../utils/log'
+import { debug, logEventHandler } from '../../utils/logs'
 
 export async function ethSoraTransferEventHandler(
 	ctx: BlockContext,

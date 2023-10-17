@@ -8,7 +8,7 @@ import { getEntityData } from '../../utils/entities'
 import { toAddress } from '../../utils'
 import { findEventByExtrinsicHash, findEventsByExtrinsicHash } from '../../utils/events'
 import { AssetsTransferEvent, LiquidityProxyBatchSwapExecutedEvent, LiquidityProxyExchangeEvent, TransactionPaymentTransactionFeePaidEvent, XorFeeFeeWithdrawnEvent } from '../../types/generated/events'
-import { debug, logCallHandler } from '../../utils/log'
+import { debug, logCallHandler } from '../../utils/logs'
 
 function getLiquidityProxyBatchSwapExecutedEventData (ctx: BlockContext, extrinsicHash: string) {
 	const name = 'LiquidityProxy.BatchSwapExecuted'

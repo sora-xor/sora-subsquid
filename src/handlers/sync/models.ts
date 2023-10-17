@@ -2,7 +2,7 @@ import { assetSnapshotsStorage, assetStorage } from '../../utils/assets'
 import { networkSnapshotsStorage } from '../../utils/network'
 import { poolsStorage } from '../../utils/pools'
 import { BlockContext } from '../../types'
-import { debug } from '../../utils/log'
+import { debug } from '../../utils/logs'
 
 export async function syncModels(ctx: BlockContext): Promise<void> {
 	debug(ctx, 'BlockHandler', `Sync models`)

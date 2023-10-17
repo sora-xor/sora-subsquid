@@ -4,12 +4,13 @@ import { receiveExtrinsicSwapAmounts, SwapAmount } from '../../utils/swaps'
 import { getEntityData } from '../../utils/entities'
 import { assetSnapshotsStorage, formatU128ToBalance, getAssetId } from '../../utils/assets'
 import { findEventByExtrinsicHash } from '../../utils/events'
+import { networkSnapshotsStorage } from '../../utils/network'
 import { LiquidityProxyExchangeEvent } from '../../types/generated/events'
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import BigNumber from 'bignumber.js'
 import { XOR } from '../../utils/consts'
 import { toAddress } from '../../utils'
-import { debug, logCallHandler } from '../../utils/log'
+import { debug, logCallHandler } from '../../utils/logs'
 
 export async function swapsCallHandler(ctx: BlockContext, callItem: CallItem<'LiquidityProxy.swap'> | CallItem<'LiquidityProxy.swap_transfer'>): Promise<void> {
     logCallHandler(ctx, callItem)
@@ -76,8 +77,12 @@ export async function swapsCallHandler(ctx: BlockContext, callItem: CallItem<'Li
 
     // update assets volume
     if (historyElement.execution.success) {
-        await assetSnapshotsStorage.updateVolume(ctx, inputAssetId, BigNumber(details.baseAssetAmount))
-        await assetSnapshotsStorage.updateVolume(ctx, outputAssetId, BigNumber(details.targetAssetAmount))
+        const aVolumeUSD = await assetSnapshotsStorage.updateVolume(ctx, inputAssetId, BigNumber(details.baseAssetAmount))
+        const bVolumeUSD = await assetSnapshotsStorage.updateVolume(ctx, outputAssetId, BigNumber(details.targetAssetAmount))
+        // get the minimal volume (sell\buy)
+        const volumeUSD = BigNumber.min(aVolumeUSD, bVolumeUSD)
+
+        await networkSnapshotsStorage.updateVolumeStats(ctx, volumeUSD)
     }
 
     debug(ctx, 'CallHandler', `Saved swap with ${callItem.extrinsic.hash} txid`)

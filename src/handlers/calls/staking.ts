@@ -3,7 +3,7 @@ import { BlockContext, CallItem } from '../../types'
 import { StakingBondCall, StakingBondExtraCall, StakingCancelDeferredSlashCall, StakingChillCall, StakingChillOtherCall, StakingForceApplyMinCommissionCall, StakingForceNewEraAlwaysCall, StakingForceNewEraCall, StakingForceNoErasCall, StakingForceUnstakeCall, StakingIncreaseValidatorCountCall, StakingKickCall, StakingNominateCall, StakingPayoutStakersCall, StakingReapStashCall, StakingRebondCall, StakingScaleValidatorCountCall, StakingSetControllerCall, StakingSetHistoryDepthCall, StakingSetInvulnerablesCall, StakingSetMinCommissionCall, StakingSetPayeeCall, StakingSetStakingConfigsCall, StakingSetValidatorCountCall, StakingSubmitElectionSolutionCall, StakingSubmitElectionSolutionUnsignedCall, StakingUnbondCall, StakingValidateCall, StakingWithdrawUnbondedCall } from '../../types/generated/calls'
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { getEntityData } from '../../utils/entities'
-import { logCallHandler } from '../../utils/log'
+import { logCallHandler } from '../../utils/logs'
 import { XOR } from '../../utils/consts'
 import { formatU128ToBalance } from '../../utils/assets'
 

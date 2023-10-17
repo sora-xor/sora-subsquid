@@ -3,7 +3,7 @@ import { BlockContext, EventItem } from '../../types'
 import { StakingRewardedEvent } from '../../types/generated/events'
 import { formatDateTimestamp, toAddress } from '../../utils'
 import { getEntityData } from '../../utils/entities'
-import { logEventHandler } from '../../utils/log'
+import { logEventHandler } from '../../utils/logs'
 import { getActiveStakingEra, getStakingStaker } from '../../utils/staking'
 
 export async function stakingRewardedEventHandler(ctx: BlockContext, eventItem: EventItem<'Staking.Rewarded'>): Promise<void> {

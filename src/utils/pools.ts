@@ -6,7 +6,7 @@ import { decodeAssetId, toAddress } from '.'
 import { AssetId, Address } from '../types'
 import { getEntityData } from './entities'
 import { assetStorage, getAssetId } from './assets'
-import { debug } from './log'
+import { debug } from './logs'
 
 // getters & setter for flag, should we sync poolXYK reserves
 // and then calc asset prices
@@ -172,7 +172,7 @@ class PoolAccountsStorage {
 		const poolAccountId = properties?.reservesAccountId ?? null
 
 		if (poolAccountId) {
-			poolAccounts.add(baseAssetId, targetAssetId, poolAccountId)
+			this.add(baseAssetId, targetAssetId, poolAccountId)
 		} else {
 			ctx.log.error(`[${blockHeight}] Cannot find pool id ${baseAssetId}:${targetAssetId}`)
 		}
@@ -235,8 +235,8 @@ class PoolsStorage {
 
 		if (!pool) {
 			const [baseAsset, targetAsset] = await Promise.all([
-				assetStorage.getOrCreateAsset(ctx, baseAssetId),
-				assetStorage.getOrCreateAsset(ctx, targetAssetId)
+				assetStorage.getAsset(ctx, baseAssetId),
+				assetStorage.getAsset(ctx, targetAssetId)
 			])
 			if (!baseAsset) throw new Error(`[${blockHeight}] Cannot find base asset: ${baseAssetId}`)
 			if (!targetAsset) throw new Error(`[${blockHeight}] Cannot find target asset: ${targetAssetId}`)

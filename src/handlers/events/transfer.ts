@@ -1,7 +1,7 @@
 import { BlockContext, EventItem } from '../../types'
 
 import { getAssetsTransferEventData } from '../../utils/events'
-import { debug, logEventHandler } from '../../utils/log'
+import { debug, logEventHandler } from '../../utils/logs'
 import { poolAccounts, poolsStorage, PoolsPrices } from '../../utils/pools'
 
 export async function transferEventHandler(

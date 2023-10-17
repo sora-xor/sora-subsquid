@@ -2,7 +2,7 @@ import { networkSnapshotsStorage } from '../../utils/network'
 import { AssetAmount, BlockContext, EventItem } from '../../types'
 import { XorFeeFeeWithdrawnEvent } from '../../types/generated/events'
 import { getEntityData } from '../../utils/entities'
-import { logEventHandler } from '../../utils/log'
+import { logEventHandler } from '../../utils/logs'
 
 export async function networkFeeEventHandler(ctx: BlockContext, eventItem: EventItem<'XorFee.FeeWithdrawn'>): Promise<void> {
 	logEventHandler(ctx, eventItem)

@@ -4,7 +4,7 @@ import { BlockContext, AssetAmount, CallItem } from '../../types'
 import { findEventByExtrinsicHash } from '../../utils/events'
 import { CurrenciesDepositedEvent, CurrenciesTransferredEvent } from '../../types/generated/events'
 import { getEntityData } from '../../utils/entities'
-import { debug, logCallHandler } from '../../utils/log'
+import { debug, logCallHandler } from '../../utils/logs'
 
 export async function irohaMigrationCallHandler(ctx: BlockContext, callItem: CallItem<'IrohaMigration.migrate'>): Promise<void> {
 	logCallHandler(ctx, callItem)

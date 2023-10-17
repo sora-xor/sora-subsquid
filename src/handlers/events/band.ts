@@ -3,7 +3,7 @@ import { BlockContext, EventItem } from "../../types"
 import { BandSymbolsRelayedEvent } from '../../types/generated/events'
 import { getEntityData } from '../../utils/entities'
 import { toReferenceSymbol } from '../../utils'
-import { debug, logEventHandler } from '../../utils/log'
+import { debug, logEventHandler } from '../../utils/logs'
 
 export async function bandRateUpdateEventHandler(ctx: BlockContext, eventItem: EventItem<'Band.SymbolsRelayed'>): Promise<void> {
 	logEventHandler(ctx, eventItem)

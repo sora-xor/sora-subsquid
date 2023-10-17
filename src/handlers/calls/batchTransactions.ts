@@ -7,7 +7,7 @@ import { HistoryElement, HistoryElementCall } from '../../model'
 import { AssetId } from '../../types'
 import { toCamelCase } from '../../utils'
 import { toJSON } from '@subsquid/util-internal-json'
-import { debug, logCallHandler } from '../../utils/log'
+import { debug, logCallHandler } from '../../utils/logs'
 
 type Version = typeof utilityBatchAllCallVersions[number]
 type IsVersion = { [V in Version]: `isV${V}` }[Version]

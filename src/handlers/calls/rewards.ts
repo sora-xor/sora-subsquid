@@ -1,7 +1,7 @@
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { BlockContext, CallItem } from '../../types'
 import { findEventsByExtrinsicHash, getAssetsTransferEventData } from '../../utils/events'
-import { debug, logCallHandler } from '../../utils/log'
+import { debug, logCallHandler } from '../../utils/logs'
 
 export async function rewardsCallHandler(
 	ctx: BlockContext,

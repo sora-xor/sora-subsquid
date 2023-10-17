@@ -7,13 +7,13 @@ import { XOR } from '../../utils/consts'
 import { toText, toReferenceSymbol } from '../../utils'
 import { AssetAmount, AssetId } from '../../types'
 import { getEntityData } from '../../utils/entities'
-import { debug } from '../../utils/log'
+import { debug } from '../../utils/logs'
 
 let isFirstBlockIndexed = false
 
 export const getAssetInfos = async (ctx: BlockContext) => {
     try {
-      	ctx.log.debug(`Asset infos request...`)
+      	debug(ctx, 'BlockHandler', `Asset infos request...`)
 
       	const storage = new AssetsAssetInfosStorage(ctx, ctx.block.header)
 		const data = await getEntityData(ctx, storage, { kind: 'storage', name: AssetsAssetInfosStorage.name }).getPairs()
@@ -29,7 +29,7 @@ export const getAssetInfos = async (ctx: BlockContext) => {
 			}
 		})
 
-		ctx.log.debug('Asset infos request completed.')
+		debug(ctx, 'BlockHandler', 'Asset infos request completed')
 		
 		return infos
     } catch (e: any) {
@@ -243,7 +243,7 @@ export async function initializeAssets(ctx: BlockContext): Promise<void> {
 
     if (entities.length) {
         await ctx.store.save(entities)
-        await Promise.all(entities.map(entity => assetStorage.getOrCreateAsset(ctx, entity.id as AssetId)))
+        await Promise.all(entities.map(entity => assetStorage.getAsset(ctx, entity.id as AssetId)))
         debug(ctx, 'BlockHandler', `${entities.length} Assets initialized!`)
     } else {
         debug(ctx, 'BlockHandler', `No Assets to initialize!`)

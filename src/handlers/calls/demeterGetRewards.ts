@@ -5,7 +5,7 @@ import { findEventByExtrinsicHash } from '../../utils/events'
 import { DemeterFarmingPlatformRewardWithdrawnEvent } from '../../types/generated/events'
 import { DemeterFarmingPlatformGetRewardsCall } from '../../types/generated/calls'
 import { getEntityData } from '../../utils/entities'
-import { debug, logCallHandler } from '../../utils/log'
+import { debug, logCallHandler } from '../../utils/logs'
 
 export async function demeterGetRewardsCallHandler(ctx: BlockContext, callItem: CallItem<'DemeterFarmingPlatform.get_rewards'>): Promise<void> {
 	logCallHandler(ctx, callItem)

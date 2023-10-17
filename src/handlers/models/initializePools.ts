@@ -3,7 +3,7 @@ import { BASE_ASSETS, XOR, DOUBLE_PRICE_POOL } from '../../utils/consts'
 import { BlockContext } from '../../types'
 import { Asset, PoolXYK } from '../../model'
 import { Address } from '../../types'
-import { debug } from '../../utils/log'
+import { debug } from '../../utils/logs'
 
 let isFirstBlockIndexed = false
 

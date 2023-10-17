@@ -8,7 +8,7 @@ import { poolAccounts, PoolsPrices, poolsStorage } from '../../utils/pools'
 import { XOR, PSWAP, DAI, BASE_ASSETS } from '../../utils/consts'
 import { BlockContext } from '../../types'
 import { AssetId } from '../../types'
-import { debug } from '../../utils/log'
+import { debug } from '../../utils/logs'
 
 export async function syncPoolXykPrices(ctx: BlockContext): Promise<void> {
     if (!PoolsPrices.get()) return

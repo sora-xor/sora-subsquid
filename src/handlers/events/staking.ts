@@ -6,7 +6,7 @@ import { BlockContext, EventItem } from '../../types'
 import { StakingErasStakersStorage } from '../../types/generated/storage'
 import { toAddress } from '../../utils'
 import { getEntityData } from '../../utils/entities'
-import { logEventHandler } from '../../utils/log'
+import { logEventHandler } from '../../utils/logs'
 import { getActiveStakingEra, getStakingStaker } from '../../utils/staking'
 
 export async function stakingStakersElectedEventHandler(ctx: BlockContext, eventItem: EventItem<'Staking.StakersElected'>): Promise<void> {
