@@ -9,10 +9,10 @@ import { toHex } from '@subsquid/substrate-processor'
 import { AddressEthereum, AssetAmount, AssetId } from '../../types'
 import { toAddressEthereum } from '../../utils'
 import { getEntityData } from '../../utils/entities'
-import { debug, logCallHandler } from '../../utils/logs'
+ import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 
 export async function soraEthTransferCallHandler(ctx: BlockContext, callItem: CallItem<'EthBridge.transfer_to_sidechain'>): Promise<void> {
-	logCallHandler(ctx, callItem)
+	logStartProcessingCall(ctx, callItem)
 
     const extrinsicHash = callItem.extrinsic.hash
     const historyElement = await createHistoryElement(ctx, callItem)
@@ -54,5 +54,5 @@ export async function soraEthTransferCallHandler(ctx: BlockContext, callItem: Ca
     await updateHistoryElementStats(ctx, historyElement)
     await networkSnapshotsStorage.updateBridgeOutgoingTransactionsStats(ctx)
 
-    debug(ctx, 'CallHandler', `Saved SORA->ETH transfer extrinsic with '${extrinsicHash}' extrinsic hash`)
+    getCallHandlerLog(ctx, callItem).debug(`Saved SORA->ETH transfer extrinsic`)
 }

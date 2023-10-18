@@ -3,7 +3,7 @@ import { BlockContext } from '../types'
 
 import { networkSnapshotsStorage } from './network'
 
-export const getOrCreateAccountEntity = async (ctx: BlockContext, accountAddress: string) => {
+export const getAccountEntity = async (ctx: BlockContext, accountAddress: string) => {
 	let account = await ctx.store.get(Account, accountAddress)
 
 	if (!account) {

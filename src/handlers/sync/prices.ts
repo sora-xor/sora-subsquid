@@ -8,7 +8,7 @@ import { poolAccounts, PoolsPrices, poolsStorage } from '../../utils/pools'
 import { XOR, PSWAP, DAI, BASE_ASSETS, XSTUSD } from '../../utils/consts'
 import { BlockContext } from '../../types'
 import { AssetId } from '../../types'
-import { debug } from '../../utils/logs'
+import { getSyncPricesLog } from '../../utils/logs'
 
 const getAssetDexCap = (assetReserves: BigNumber, assetPrice: BigNumber, daiReserves: BigNumber) => {
     // theoretical asset capitalization in DAI inside DEX
@@ -22,7 +22,7 @@ const getAssetDexCap = (assetReserves: BigNumber, assetPrice: BigNumber, daiRese
 export async function syncPoolXykPrices(ctx: BlockContext): Promise<void> {
     if (!PoolsPrices.get()) return
 
-    debug(ctx, 'BlockHandler', `Sync PoolXYK prices`)
+    getSyncPricesLog(ctx).debug('Sync PoolXYK prices')
 
     const assetsLockedInPools = new Map<AssetId, bigint>()
 
@@ -47,7 +47,7 @@ export async function syncPoolXykPrices(ctx: BlockContext): Promise<void> {
         let baseAssetWithDoublePools = new BigNumber(0)
         let baseAssetPriceInDAI = new BigNumber(0)
 
-        debug(ctx, 'BlockHandler', `Update ${poolsMap.size} pools based on the '${baseAssetId}' token`)
+		getSyncPricesLog(ctx).debug({ baseAssetId }, `Update ${poolsMap.size} pools`)
 
         for (const poolId of poolsMap.values()) {
             const pool = await poolsStorage.getPoolById(ctx, poolId)
@@ -175,7 +175,7 @@ export async function syncPoolXykPrices(ctx: BlockContext): Promise<void> {
     // update total liquidity in USD
     await networkSnapshotsStorage.updateLiquidityStats(ctx, liquiditiesUSD)
 
-    debug(ctx, 'BlockHandler', `PoolXYK prices updated`)
+    getSyncPricesLog(ctx).debug('PoolXYK prices updated')
 
     PoolsPrices.set(false)
 }

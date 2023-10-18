@@ -1,7 +1,7 @@
 import { ExecutionResult, ExecutionError, HistoryElement, HistoryElementCall } from '../model'
 import { AnyCallItem, AssetAmount, BlockContext, CallItem, CallItemName } from '../types'
 import { formatU128ToBalance } from './assets'
-import { getOrCreateAccountEntity } from './account'
+import { getAccountEntity } from './account'
 import { networkSnapshotsStorage } from './network'
 import { XOR } from './consts'
 import { formatDateTimestamp, toAddress, toCamelCase } from './index'
@@ -103,7 +103,7 @@ export const updateHistoryElementStats = async (ctx: BlockContext, historyElemen
 
     // update accounts data
     for (const address of addresses) {
-        const account = await getOrCreateAccountEntity(ctx, address)
+        const account = await getAccountEntity(ctx, address)
         account.latestHistoryElement = historyElement
 		account.updatedAtBlock = ctx.block.header.height
         ctx.store.save(account)

@@ -3,14 +3,14 @@ import { BASE_ASSETS, XOR, DOUBLE_PRICE_POOL } from '../../utils/consts'
 import { BlockContext } from '../../types'
 import { Asset, PoolXYK } from '../../model'
 import { Address } from '../../types'
-import { debug } from '../../utils/logs'
+import { getInitializePoolsLog } from '../../utils/logs'
 
 let isFirstBlockIndexed = false
 
 export async function initializePools(ctx: BlockContext): Promise<void> {
     if (isFirstBlockIndexed) return
 
-    debug(ctx, 'BlockHandler', `Initialize Pool XYK entities`)
+    getInitializePoolsLog(ctx).debug('Initialize Pool XYK entities')
 
     const poolsBuffer = new Map<string, {
 		id: Address
@@ -72,9 +72,9 @@ export async function initializePools(ctx: BlockContext): Promise<void> {
     if (entities.length) {
         await ctx.store.save(entities)
         await Promise.all(entities.map(entity => poolsStorage.getPoolById(ctx, entity.id as Address)))
-        debug(ctx, 'BlockHandler', `${entities.length} Pool XYKs initialized!`)
+        getInitializePoolsLog(ctx).debug(`${entities.length} Pool XYKs initialized!`)
     } else {
-        debug(ctx, 'BlockHandler', `No Pool XYKs to initialize!`)
+        getInitializePoolsLog(ctx).debug('No Pool XYKs to initialize!')
     }
 
     isFirstBlockIndexed = true

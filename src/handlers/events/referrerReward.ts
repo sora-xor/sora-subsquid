@@ -3,10 +3,10 @@ import { BlockContext, EventItem } from '../../types'
 import { XorFeeReferrerRewardedEvent } from '../../types/generated/events'
 import { formatDateTimestamp, toAddress } from '../../utils'
 import { getEntityData } from '../../utils/entities'
-import { logEventHandler } from '../../utils/logs'
+import { logStartProcessingEvent } from '../../utils/logs'
 
 export async function referrerRewardEventHandler(ctx: BlockContext, eventItem: EventItem<'XorFee.ReferrerRewarded'>): Promise<void> {
-	logEventHandler(ctx, eventItem)
+	logStartProcessingEvent(ctx, eventItem)
 
 	const event = new XorFeeReferrerRewardedEvent(ctx, eventItem.event)
 

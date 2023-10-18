@@ -4,10 +4,10 @@ import { BlockContext, AssetAmount, CallItem } from '../../types'
 import { findEventByExtrinsicHash } from '../../utils/events'
 import { CurrenciesDepositedEvent, CurrenciesTransferredEvent } from '../../types/generated/events'
 import { getEntityData } from '../../utils/entities'
-import { debug, logCallHandler } from '../../utils/logs'
+ import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 
 export async function irohaMigrationCallHandler(ctx: BlockContext, callItem: CallItem<'IrohaMigration.migrate'>): Promise<void> {
-	logCallHandler(ctx, callItem)
+	logStartProcessingCall(ctx, callItem)
 
     const historyElement = await createHistoryElement(ctx, callItem)
     const extrinsicHash = callItem.extrinsic.hash
@@ -50,7 +50,7 @@ export async function irohaMigrationCallHandler(ctx: BlockContext, callItem: Cal
         if (details) await addDataToHistoryElement(ctx, historyElement, details)
         await updateHistoryElementStats(ctx,historyElement)
 
-        debug(ctx, 'CallHandler', `Saved iroha migration with '${extrinsicHash}' extrinsic hash`)
+        getCallHandlerLog(ctx, callItem).debug(`Saved iroha migration`)
     }
 
 }

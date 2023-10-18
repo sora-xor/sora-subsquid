@@ -6,10 +6,10 @@ import { ReferralsReserveCall } from '../../types/generated/calls'
 import { findEventByExtrinsicHash, getAssetsTransferEventData } from '../../utils/events'
 import { getEntityData } from '../../utils/entities'
 import { CannotFindEventError } from '../../utils/errors'
-import { debug, logCallHandler } from '../../utils/logs'
+ import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 
 export async function referralReserveCallHandler(ctx: BlockContext, callItem: CallItem<'Referrals.reserve'>): Promise<void> {
-	logCallHandler(ctx, callItem)
+	logStartProcessingCall(ctx, callItem)
 
     const extrinsicHash = callItem.extrinsic.hash
     const historyElement = await createHistoryElement(ctx, callItem)
@@ -34,7 +34,7 @@ export async function referralReserveCallHandler(ctx: BlockContext, callItem: Ca
             }
         } else {
 			const error = new CannotFindEventError(ctx, extrinsicHash, balancesTransferEventName)
-			ctx.log.error(error.message)
+			getCallHandlerLog(ctx, callItem).error(error.message)
         }
     } else {
         const call = new ReferralsReserveCall(ctx, callItem.call)
@@ -50,5 +50,5 @@ export async function referralReserveCallHandler(ctx: BlockContext, callItem: Ca
 	if (details) await addDataToHistoryElement(ctx, historyElement, details)
     await updateHistoryElementStats(ctx, historyElement)
 
-    debug(ctx, 'CallHandler', `Saved referral reserve with '${extrinsicHash}' extrinsic hash`)
+    getCallHandlerLog(ctx, callItem).debug(`Saved referral reserve`)
 }

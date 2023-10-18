@@ -3,10 +3,10 @@ import { BlockContext, EventItem } from "../../types"
 import { BandSymbolsRelayedEvent } from '../../types/generated/events'
 import { getEntityData } from '../../utils/entities'
 import { toReferenceSymbol } from '../../utils'
-import { debug, logEventHandler } from '../../utils/logs'
+import { getEventHandlerLog, logStartProcessingEvent } from '../../utils/logs'
 
 export async function bandRateUpdateEventHandler(ctx: BlockContext, eventItem: EventItem<'Band.SymbolsRelayed'>): Promise<void> {
-	logEventHandler(ctx, eventItem)
+	logStartProcessingEvent(ctx, eventItem)
 
 	const event = new BandSymbolsRelayedEvent(ctx, eventItem.event)
 	const data = getEntityData(ctx, event, eventItem)
@@ -22,7 +22,7 @@ export async function bandRateUpdateEventHandler(ctx: BlockContext, eventItem: E
 		if (syntheticAssetId) {
 			const price = formatU128ToBalance(rate, syntheticAssetId)
 
-			debug(ctx, 'EventHandler', `Synthetic asset '${syntheticAssetId}' price update: ${price}`)
+			getEventHandlerLog(ctx, eventItem).debug({ syntheticAssetId, price }, 'Synthetic asset price update')
 
 			await assetSnapshotsStorage.updatePrice(ctx, syntheticAssetId, price)
 		}

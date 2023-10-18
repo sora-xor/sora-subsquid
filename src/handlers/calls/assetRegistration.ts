@@ -6,10 +6,10 @@ import { AssetsRegisterCall } from '../../types/generated/calls'
 import { AssetId } from '../../types'
 import { getEntityData } from '../../utils/entities'
 import { getAssetId } from '../../utils/assets'
-import { debug, logCallHandler } from '../../utils/logs'
+ import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 
 export async function assetRegistrationCallHandler(ctx: BlockContext, callItem: CallItem<'Assets.register'>): Promise<void> {
-	logCallHandler(ctx, callItem)
+	logStartProcessingCall(ctx, callItem)
 
     const extrinsicHash = callItem.extrinsic.hash
     const historyElement = await createHistoryElement(ctx, callItem)
@@ -46,6 +46,5 @@ export async function assetRegistrationCallHandler(ctx: BlockContext, callItem: 
     await addDataToHistoryElement(ctx, historyElement, details)
     await updateHistoryElementStats(ctx, historyElement)
 
-    debug(ctx, 'CallHandler', `Saved asset registration with '${extrinsicHash}' extrinsic hash`)
-
+    getCallHandlerLog(ctx, callItem).debug('Saved asset registration')
 }

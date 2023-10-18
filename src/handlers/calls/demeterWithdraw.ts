@@ -6,10 +6,10 @@ import { DemeterFarmingPlatformWithdrawnEvent } from '../../types/generated/even
 import { DemeterFarmingPlatformWithdrawCall } from '../../types/generated/calls'
 import { XOR } from '../../utils/consts'
 import { getEntityData } from '../../utils/entities'
-import { debug, logCallHandler } from '../../utils/logs'
+ import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 
 export async function demeterWithdrawCallHandler(ctx: BlockContext, callItem: CallItem<'DemeterFarmingPlatform.withdraw'>): Promise<void> {
-	logCallHandler(ctx, callItem)
+	logStartProcessingCall(ctx, callItem)
 
 	const extrinsicHash = callItem.extrinsic.hash
 
@@ -53,5 +53,5 @@ export async function demeterWithdrawCallHandler(ctx: BlockContext, callItem: Ca
 	await addDataToHistoryElement(ctx, historyElement, details)
 	await updateHistoryElementStats(ctx,historyElement)
 
-	debug(ctx, 'CallHandler', `Saved demeterFarmingPlatform withdraw with '${extrinsicHash}' extrinsic hash`)
+	getCallHandlerLog(ctx, callItem).debug('Saved demeterFarmingPlatform withdraw')
 }

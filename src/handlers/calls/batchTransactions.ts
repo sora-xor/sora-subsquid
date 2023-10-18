@@ -7,7 +7,7 @@ import { HistoryElement, HistoryElementCall } from '../../model'
 import { AssetId } from '../../types'
 import { toCamelCase } from '../../utils'
 import { toJSON } from '@subsquid/util-internal-json'
-import { debug, logCallHandler } from '../../utils/logs'
+ import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 
 type Version = typeof utilityBatchAllCallVersions[number]
 type IsVersion = { [V in Version]: `isV${V}` }[Version]
@@ -122,7 +122,7 @@ function mapCallsForAllVersions(ctx: BlockContext, callItem: CallItem<'Utility.b
 }
 
 export async function batchTransactionsCallHandler(ctx: BlockContext, callItem: CallItem<'Utility.batch_all'>): Promise<void> {
-	logCallHandler(ctx, callItem)
+	logStartProcessingCall(ctx, callItem)
 
     const historyElement = await createHistoryElement(ctx, callItem)
 
@@ -131,7 +131,7 @@ export async function batchTransactionsCallHandler(ctx: BlockContext, callItem: 
 	await addCallsToHistoryElement(ctx, historyElement, historyElementCalls)
     await updateHistoryElementStats(ctx, historyElement)
 
-    debug(ctx, 'CallHandler', `Saved batch extrinsic with ${historyElement.id.toString()} txid`)
+    getCallHandlerLog(ctx, callItem).debug('Saved batch extrinsic')
 
     if (historyElement.execution.success) {
         // If initialize pool call exists, create new Pool
@@ -144,7 +144,7 @@ export async function batchTransactionsCallHandler(ctx: BlockContext, callItem: 
 				assetA: AssetId
 				assetB: AssetId
 			} = initializePool.data as any
-            await poolsStorage.getOrCreatePool(ctx, data.assetA, data.assetB)
+            await poolsStorage.getPool(ctx, data.assetA, data.assetB)
         }
     }
 }

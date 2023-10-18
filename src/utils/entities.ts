@@ -1,5 +1,6 @@
 import { BlockContext, EntityItem } from '../types'
 import { UnsupportedSpecError } from './errors'
+import { getLog } from './logs'
 
 type VersionedObject = {
 	[key: string]: any
@@ -89,7 +90,7 @@ export function getEntityData<T extends VersionedObject, V extends readonly stri
   if (data === null) {
     const specVersion = findCurrentSpecVersion(narrowedObject)
     if (!specVersion) {
-		ctx.log.error(`[${ctx.block.header.height}] No spec version found`)
+		getLog(ctx).error('No spec version found')
 	}
 	const unsupportedSpecError = new UnsupportedSpecError(ctx, entityItem)
 	if (entityItem.kind === 'call') {
@@ -99,7 +100,7 @@ export function getEntityData<T extends VersionedObject, V extends readonly stri
 	} else {
 		throw unsupportedSpecError
 	}
-	ctx.log.error(unsupportedSpecError.message)
+	getLog(ctx).error(unsupportedSpecError.message)
   }
   if (data === null) {
 	throw new Error(`[${ctx.block.header.height}] Entity data is null`)

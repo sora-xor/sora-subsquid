@@ -2,10 +2,9 @@ import BigNumber from 'bignumber.js'
 import { SnapshotType, Asset, AssetSnapshot, AssetVolume, AssetPrice } from '../model'
 import { BlockContext, ReferenceSymbol } from '../types'
 import { DAI } from './consts'
-import { networkSnapshotsStorage } from '../utils/network'
 import { AssetId } from '../types'
 import { formatDateTimestamp, getSnapshotIndex, toAssetId } from '.'
-import { debug } from './logs'
+import { getAssetSnapshotsStorageLog, getAssetStorageLog } from './logs'
 
 const prevIndexesRow = (index: number, count: number): number[] => {
 	return new Array(count).fill(index).reduce((buffer, item, idx) => {
@@ -77,7 +76,7 @@ class AssetStorage {
 	}
 
 	async sync(ctx: BlockContext): Promise<void> {
-		debug(ctx, 'AssetStorage', `Sync ${this.storage.size} assets`)
+		getAssetStorageLog(ctx).debug(`Sync ${this.storage.size} assets`)
 		ctx.store.save([...this.storage.values()])
 	}
 
@@ -99,7 +98,7 @@ class AssetStorage {
 
 			await ctx.store.save(asset)
 
-			debug(ctx, 'AssetStorage', `Created Asset ${id}`)
+			getAssetStorageLog(ctx).debug({ assetId: id }, 'Created Asset')
 		}
 
 		this.storage.set(asset.id, asset)
@@ -161,7 +160,7 @@ class AssetStorage {
 	}
 
 	async updateDailyStats(ctx: BlockContext): Promise<void> {
-		debug(ctx, 'AssetStorage', `Assets Daily stats updating...`)
+		getAssetStorageLog(ctx).debug(`Assets Daily stats updating...`)
 		for (const asset of this.storage.values()) {
 			const blockTimestamp = formatDateTimestamp(new Date(ctx.block.header.timestamp))
 		  	const { priceChange, volumeUSD } = await this.calcAssetStats(ctx, asset, SnapshotType.HOUR, 24, blockTimestamp)
@@ -170,10 +169,10 @@ class AssetStorage {
 			asset.priceChangeDay = priceChange
 			asset.volumeDayUSD = volumeUSD
 		}
-		debug(ctx, 'AssetStorage', `Assets Daily stats updated!`)
+		getAssetStorageLog(ctx).debug(`Assets Daily stats updated!`)
 	}
 	async updateWeeklyStats(ctx: BlockContext): Promise<void> {
-		debug(ctx, 'AssetStorage', `Assets Weekly stats updating...`);
+		getAssetStorageLog(ctx).debug(`Assets Weekly stats updating...`);
 		for (const asset of this.storage.values()) {
 			const blockTimestamp = formatDateTimestamp(new Date(ctx.block.header.timestamp))
 			const { priceChange, volumeUSD, velocity } = await this.calcAssetStats(ctx, asset, SnapshotType.DAY, 7, blockTimestamp)
@@ -182,7 +181,7 @@ class AssetStorage {
 			asset.volumeWeekUSD = volumeUSD;
 			asset.velocity = velocity;
 	  	}
-	  	debug(ctx, 'AssetStorage', `Assets Weekly stats updated!`);
+	  	getAssetStorageLog(ctx).debug(`Assets Weekly stats updated!`);
 	}
 }
 
@@ -204,7 +203,7 @@ class AssetSnapshotsStorage {
 	}
 
 	private async syncSnapshots(ctx: BlockContext): Promise<void> {
-		debug(ctx, 'AssetSnapshotsStorage', `${this.storage.size} snapshots sync`)
+		getAssetSnapshotsStorageLog(ctx).debug(`${this.storage.size} snapshots sync`)
 
 		await ctx.store.save([...this.storage.values()])
 
@@ -218,7 +217,7 @@ class AssetSnapshotsStorage {
 			}
 		}
 
-		debug(ctx, 'AssetSnapshotsStorage', `${this.storage.size} snapshots in storage after sync`)
+		getAssetSnapshotsStorageLog(ctx).debug(`${this.storage.size} snapshots in storage after sync`)
 	}
 
 	async getSnapshot(ctx: BlockContext, assetId: AssetId, type: SnapshotType): Promise<AssetSnapshot> {

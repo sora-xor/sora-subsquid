@@ -7,13 +7,13 @@ import { XOR } from '../../utils/consts'
 import { toText, toReferenceSymbol } from '../../utils'
 import { AssetAmount, AssetId } from '../../types'
 import { getEntityData } from '../../utils/entities'
-import { debug } from '../../utils/logs'
+import { getInitializeAssetsLog } from '../../utils/logs'
 
 let isFirstBlockIndexed = false
 
 export const getAssetInfos = async (ctx: BlockContext) => {
     try {
-      	debug(ctx, 'BlockHandler', `Asset infos request...`)
+      	getInitializeAssetsLog(ctx).debug('Asset infos request...')
 
       	const storage = new AssetsAssetInfosStorage(ctx, ctx.block.header)
 		const data = await getEntityData(ctx, storage, { kind: 'storage', name: AssetsAssetInfosStorage.name }).getPairs()
@@ -29,19 +29,19 @@ export const getAssetInfos = async (ctx: BlockContext) => {
 			}
 		})
 
-		debug(ctx, 'BlockHandler', 'Asset infos request completed')
+		getInitializeAssetsLog(ctx).debug('Asset infos request completed')
 		
 		return infos
     } catch (e: any) {
-		ctx.log.error(`[${ctx.block.header.height}] Error getting Asset infos`)
-		ctx.log.error(e)
+		getInitializeAssetsLog(ctx).error('Error getting Asset infos')
+		getInitializeAssetsLog(ctx).error(e)
 		return null
     }
 }
 
 export const getSyntheticAssets = async (ctx: BlockContext) => {
     try {
-		ctx.log.debug('Synthetic assets request...')
+		getInitializeAssetsLog(ctx).debug('Synthetic assets request...')
 
 		const storage = new XSTPoolEnabledSyntheticsStorage(ctx, ctx.block.header)
 		if (!storage.isExists) return null
@@ -61,12 +61,12 @@ export const getSyntheticAssets = async (ctx: BlockContext) => {
 			}
 		})
 
-		ctx.log.debug('Synthetic assets request completed.')
+		getInitializeAssetsLog(ctx).debug('Synthetic assets request completed')
 
 		return syntheticAssets
     } catch (e) {
-		ctx.log.error(`[${ctx.block.header.height}] Error getting Synthetic assets`)
-		ctx.log.error(e as string)
+		getInitializeAssetsLog(ctx).error('Error getting Synthetic assets')
+		getInitializeAssetsLog(ctx).error(e as string)
 
       	return null
     }
@@ -74,7 +74,7 @@ export const getSyntheticAssets = async (ctx: BlockContext) => {
 
 export const getBandRates = async (ctx: BlockContext) => {
     try {
-		ctx.log.debug('Band rates request...')
+		getInitializeAssetsLog(ctx).debug('Band rates request...')
 
 		const storage = new BandSymbolRatesStorage(ctx, ctx.block.header)
 		if (!storage.isExists) return null
@@ -89,12 +89,12 @@ export const getBandRates = async (ctx: BlockContext) => {
 			}
 		})
 
-		ctx.log.debug('Band rates request completed.')
+		getInitializeAssetsLog(ctx).debug('Band rates request completed')
 		
 		return rates
     } catch (e) {
-		ctx.log.error(`[${ctx.block.header.height}] Error getting Band rates`)
-		ctx.log.error(e as string)
+		getInitializeAssetsLog(ctx).error('Error getting Band rates')
+		getInitializeAssetsLog(ctx).error(e as string)
 
 		return null
     }
@@ -102,7 +102,7 @@ export const getBandRates = async (ctx: BlockContext) => {
 
 export const getTokensIssuances = async (ctx: BlockContext) => {
     try {
-		ctx.log.debug(`Tokens issuances request...`)
+		getInitializeAssetsLog(ctx).debug('Tokens issuances request...')
 
 		const storage = new TokensTotalIssuanceStorage(ctx, ctx.block.header)
 		const data = await getEntityData(ctx, storage, { kind: 'storage', name: TokensTotalIssuanceStorage.name }).getPairs()
@@ -115,26 +115,26 @@ export const getTokensIssuances = async (ctx: BlockContext) => {
 			}
 		})
 
-		ctx.log.debug(`Tokens issuances request completed.`)
+		getInitializeAssetsLog(ctx).debug('Tokens issuances request completed')
 		return issuances
     } catch (e: any) {
-		ctx.log.error(`[${ctx.block.header.height}] Error getting Tokens issuances`)
-		ctx.log.error(e)
+		getInitializeAssetsLog(ctx).error('Error getting Tokens issuances')
+		getInitializeAssetsLog(ctx).error(e)
 		return null
     }
 }
 
 export const getXorIssuance = async (ctx: BlockContext) => {
     try {
-		ctx.log.debug(`XOR issuance request...`)
+		getInitializeAssetsLog(ctx).debug('XOR issuance request...')
 		const storage = new BalancesTotalIssuanceStorage(ctx, ctx.block.header)
 		const issuance = await getEntityData(ctx, storage, { kind: 'storage', name: BalancesTotalIssuanceStorage.name }).get() as AssetAmount
 
-		ctx.log.debug(`XOR issuance request completed.`)
+		getInitializeAssetsLog(ctx).debug('XOR issuance request completed')
 		return issuance
     } catch (e: any) {
-		ctx.log.error(`[${ctx.block.header.height}] Error getting XOR issuance`)
-		ctx.log.error(e)
+		getInitializeAssetsLog(ctx).error('Error getting XOR issuance')
+		getInitializeAssetsLog(ctx).error(e)
 		return null
     }
 }
@@ -142,7 +142,7 @@ export const getXorIssuance = async (ctx: BlockContext) => {
 export async function initializeAssets(ctx: BlockContext): Promise<void> {
     if (isFirstBlockIndexed) return
 
-    debug(ctx, 'BlockHandler', `Initialize Asset entities`)
+    getInitializeAssetsLog(ctx).debug('Initialize Asset entities')
 
     const [
         assetInfos,
@@ -165,7 +165,7 @@ export async function initializeAssets(ctx: BlockContext): Promise<void> {
 		supply: AssetAmount
 	}>()
 
-    const getOrCreate = (assetId: AssetId) => {
+    const get = (assetId: AssetId) => {
         let asset = assets.get(assetId)
         
         if (!asset) {
@@ -185,7 +185,7 @@ export async function initializeAssets(ctx: BlockContext): Promise<void> {
         for (const assetInfo of assetInfos) {
             assetPrecisions.set(assetInfo.assetId, assetInfo.precision)
 
-            getOrCreate(assetInfo.assetId)
+            get(assetInfo.assetId)
         }
     }
 
@@ -194,9 +194,9 @@ export async function initializeAssets(ctx: BlockContext): Promise<void> {
             assetPrecisions.set(assetId, 18)
             tickerSyntheticAssetId.set(referenceSymbol, assetId)
 
-            ctx.log.debug(`[${ctx.block.header.height}] ${referenceSymbol} ticker and synthetic asset ${assetId} added`)
+			getInitializeAssetsLog(ctx).debug(`'${referenceSymbol}' ticker and synthetic asset '${assetId}' added`)
 
-            getOrCreate(assetId)
+            get(assetId)
         }
     }
 
@@ -208,12 +208,12 @@ export async function initializeAssets(ctx: BlockContext): Promise<void> {
                 continue
             }
 
-            getOrCreate(assetId)
+            get(assetId)
 
             const price = rate.value
             const priceUSD = formatU128ToBalance(price, assetId)
 
-            ctx.log.debug(`[${ctx.block.header.height}] ${referenceSymbol} ticker price: ${priceUSD}`)
+            getInitializeAssetsLog(ctx).debug(`'${referenceSymbol}' ticker price: ${priceUSD}`)
 
 			const asset = assets.get(assetId)
 			if (asset) {
@@ -224,13 +224,13 @@ export async function initializeAssets(ctx: BlockContext): Promise<void> {
 
     if (tokensIssuances) {
         for (const tokenIssuances of tokensIssuances) {
-            const asset = getOrCreate(tokenIssuances.assetId)
+            const asset = get(tokenIssuances.assetId)
 
             asset.supply = tokenIssuances.issuances
         }
     }
 
-    const assetXOR = getOrCreate(XOR)
+    const assetXOR = get(XOR)
 
     if (xorIssuance) {
         assetXOR.supply = xorIssuance as AssetAmount
@@ -244,9 +244,9 @@ export async function initializeAssets(ctx: BlockContext): Promise<void> {
     if (entities.length) {
         await ctx.store.save(entities)
         await Promise.all(entities.map(entity => assetStorage.getAsset(ctx, entity.id as AssetId)))
-        debug(ctx, 'BlockHandler', `${entities.length} Assets initialized!`)
+        getInitializeAssetsLog(ctx).debug(`${entities.length} Assets initialized!`)
     } else {
-        debug(ctx, 'BlockHandler', `No Assets to initialize!`)
+        getInitializeAssetsLog(ctx).debug('No Assets to initialize!')
     }
 
     isFirstBlockIndexed = true

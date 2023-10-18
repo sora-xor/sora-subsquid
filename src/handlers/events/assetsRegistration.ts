@@ -4,10 +4,10 @@ import { AssetsAssetInfosStorage } from '../../types/generated/storage'
 import { decodeAssetId, toReferenceSymbol } from '../../utils'
 import { assetPrecisions, getAssetId, assetStorage, tickerSyntheticAssetId } from '../../utils/assets'
 import { getEntityData } from '../../utils/entities'
-import { debug, logEventHandler } from '../../utils/logs'
+import { getEventHandlerLog, logStartProcessingEvent } from '../../utils/logs'
 
 export async function assetRegistrationEventHandler(ctx: BlockContext, eventItem: EventItem<'Assets.AssetRegistered'>): Promise<void> {
-	logEventHandler(ctx, eventItem)
+	logStartProcessingEvent(ctx, eventItem)
 
 	const event = new AssetsAssetRegisteredEvent(ctx, eventItem.event)
 
@@ -29,7 +29,7 @@ export async function assetRegistrationEventHandler(ctx: BlockContext, eventItem
 }
 
 export async function syntheticAssetEnabledEventHandler(ctx: BlockContext, eventItem: EventItem<'XSTPool.SyntheticAssetEnabled'>): Promise<void> {
-	logEventHandler(ctx, eventItem)
+	logStartProcessingEvent(ctx, eventItem)
 
 	const event = new XstPoolSyntheticAssetEnabledEvent(ctx, eventItem.event)
 	
@@ -45,7 +45,7 @@ export async function syntheticAssetEnabledEventHandler(ctx: BlockContext, event
 	// synthetic assets always have 18 decimals
 	assetPrecisions.set(assetId, 18)
 
-	debug(ctx, 'EventHandler', `Synthetic asset '${assetId}' enabled, reference symbol '${referenceSymbol}'`)
+	getEventHandlerLog(ctx, eventItem).debug({ assetId, referenceSymbol }, 'Synthetic asset enabled')
 
 	await assetStorage.getAsset(ctx, assetId)
 }

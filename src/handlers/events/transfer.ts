@@ -1,7 +1,7 @@
 import { BlockContext, EventItem } from '../../types'
 
 import { getAssetsTransferEventData } from '../../utils/events'
-import { debug, logEventHandler } from '../../utils/logs'
+import { getEventHandlerLog, logStartProcessingEvent } from '../../utils/logs'
 import { poolAccounts, poolsStorage, PoolsPrices } from '../../utils/pools'
 
 export async function transferEventHandler(
@@ -11,7 +11,7 @@ export async function transferEventHandler(
 		| EventItem<'Balances.Transfer'>
 	)
 ): Promise<void> {
-	logEventHandler(ctx, eventItem)
+	logStartProcessingEvent(ctx, eventItem)
 
 	const { assetId, from, to, amount } = getAssetsTransferEventData(ctx, eventItem)
 
@@ -27,7 +27,7 @@ export async function transferEventHandler(
 			pool.targetAssetReserves = pool.targetAssetReserves - amount
 		}
 
-		debug(ctx, 'EventHandler', `Update pool '${pool.id}'`);
+		getEventHandlerLog(ctx, eventItem).debug({ poolId: pool.id }, 'Update pool')
 		PoolsPrices.set(true)
 	}
 
@@ -43,7 +43,7 @@ export async function transferEventHandler(
 			pool.targetAssetReserves = pool.targetAssetReserves + amount
 		}
 
-		debug(ctx, 'EventHandler', `Update pool '${pool.id}'`);
+		getEventHandlerLog(ctx, eventItem).debug({ poolId: pool.id }, 'Update pool')
 		PoolsPrices.set(true)
 	}
 }

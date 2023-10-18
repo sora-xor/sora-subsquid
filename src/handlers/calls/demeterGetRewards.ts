@@ -5,10 +5,10 @@ import { findEventByExtrinsicHash } from '../../utils/events'
 import { DemeterFarmingPlatformRewardWithdrawnEvent } from '../../types/generated/events'
 import { DemeterFarmingPlatformGetRewardsCall } from '../../types/generated/calls'
 import { getEntityData } from '../../utils/entities'
-import { debug, logCallHandler } from '../../utils/logs'
+ import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 
 export async function demeterGetRewardsCallHandler(ctx: BlockContext, callItem: CallItem<'DemeterFarmingPlatform.get_rewards'>): Promise<void> {
-	logCallHandler(ctx, callItem)
+	logStartProcessingCall(ctx, callItem)
 
 	const extrinsicHash = callItem.extrinsic.hash
 
@@ -46,5 +46,5 @@ export async function demeterGetRewardsCallHandler(ctx: BlockContext, callItem: 
 	await addDataToHistoryElement(ctx, historyElement, details)
 	await updateHistoryElementStats(ctx,historyElement)
 
-	debug(ctx, 'CallHandler', `Saved demeterFarmingPlatform getRewards with '${extrinsicHash}' extrinsic hash`)
+	getCallHandlerLog(ctx, callItem).debug(`Saved demeterFarmingPlatform getRewards`)
 }

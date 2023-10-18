@@ -4,10 +4,10 @@ import { BlockContext, EventItem } from '../../types'
 import { BalancesDepositEvent, BalancesWithdrawEvent, TokensDepositedEvent, TokensWithdrawnEvent } from '../../types/generated/events'
 import { AssetAmount } from '../../types'
 import { getEntityData } from '../../utils/entities'
-import { logEventHandler } from '../../utils/logs'
+import { logStartProcessingEvent } from '../../utils/logs'
 
 export async function tokenBurnEventHandler(ctx: BlockContext, eventItem: EventItem<'Tokens.Withdrawn'>): Promise<void> {
-	logEventHandler(ctx, eventItem)
+	logStartProcessingEvent(ctx, eventItem)
 
 	const event = new TokensWithdrawnEvent(ctx, eventItem.event)
 	const data = getEntityData(ctx, event, eventItem)
@@ -19,7 +19,7 @@ export async function tokenBurnEventHandler(ctx: BlockContext, eventItem: EventI
 }
 
 export async function xorBurnEventHandler(ctx: BlockContext, eventItem: EventItem<'Balances.Withdraw'>): Promise<void> {
-	logEventHandler(ctx, eventItem)
+	logStartProcessingEvent(ctx, eventItem)
 
 	const event = new BalancesWithdrawEvent(ctx, eventItem.event)
 	const data = getEntityData(ctx, event, eventItem)
@@ -31,7 +31,7 @@ export async function xorBurnEventHandler(ctx: BlockContext, eventItem: EventIte
 }
 
 export async function tokenMintEventHandler(ctx: BlockContext, eventItem: EventItem<'Tokens.Deposited'>): Promise<void> {
-	logEventHandler(ctx, eventItem)
+	logStartProcessingEvent(ctx, eventItem)
 
 	const event = new TokensDepositedEvent(ctx, eventItem.event)
 	const data = getEntityData(ctx, event, eventItem)
@@ -43,7 +43,7 @@ export async function tokenMintEventHandler(ctx: BlockContext, eventItem: EventI
 }
 
 export async function xorMintEventHandler(ctx: BlockContext, eventItem: EventItem<'Balances.Deposit'>): Promise<void> {
-	logEventHandler(ctx, eventItem)
+	logStartProcessingEvent(ctx, eventItem)
 
 	const event = new BalancesDepositEvent(ctx, eventItem.event)
 	const data = getEntityData(ctx, event, eventItem)

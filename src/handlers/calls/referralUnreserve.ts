@@ -5,10 +5,10 @@ import { BlockContext, AssetAmount, CallItem } from '../../types'
 import { findEventByExtrinsicHash, getAssetsTransferEventData } from '../../utils/events'
 import { ReferralsUnreserveCall } from '../../types/generated/calls'
 import { getEntityData } from '../../utils/entities'
-import { debug, logCallHandler } from '../../utils/logs'
+import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 
 export async function referralUnreserveCallHandler(ctx: BlockContext, callItem: CallItem<'Referrals.unreserve'>): Promise<void> {
-	logCallHandler(ctx, callItem)
+	logStartProcessingCall(ctx, callItem)
 
     const extrinsicHash = callItem.extrinsic.hash
     const historyElement = await createHistoryElement(ctx, callItem)
@@ -43,5 +43,5 @@ export async function referralUnreserveCallHandler(ctx: BlockContext, callItem: 
 	if (details) await addDataToHistoryElement(ctx, historyElement, details)
     await updateHistoryElementStats(ctx,historyElement)
 
-    debug(ctx, 'CallHandler', `Saved referral unreserve with '${extrinsicHash}' extrinsic hash`)
+    getCallHandlerLog(ctx, callItem).debug('Saved referral unreserve')
 }

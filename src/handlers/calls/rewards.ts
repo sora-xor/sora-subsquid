@@ -1,7 +1,7 @@
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { BlockContext, CallItem } from '../../types'
 import { findEventsByExtrinsicHash, getAssetsTransferEventData } from '../../utils/events'
-import { debug, logCallHandler } from '../../utils/logs'
+ import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 
 export async function rewardsCallHandler(
 	ctx: BlockContext,
@@ -12,7 +12,7 @@ export async function rewardsCallHandler(
 		| CallItem<'VestedRewards.claim_crowdloan_rewards'>
 	)
 ): Promise<void> {
-	logCallHandler(ctx, callItem)
+	logStartProcessingCall(ctx, callItem)
 
     const extrinsicHash = callItem.extrinsic.hash
     const historyElement = await createHistoryElement(ctx, callItem)
@@ -36,5 +36,5 @@ export async function rewardsCallHandler(
 
     await updateHistoryElementStats(ctx,historyElement)
 
-    debug(ctx, 'CallHandler', `Saved reward claim extrinsic with '${extrinsicHash}' extrinsic hash`)
+    getCallHandlerLog(ctx, callItem).debug(`Saved reward claim extrinsic`)
 }
