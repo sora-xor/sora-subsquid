@@ -5,8 +5,7 @@ import { BlockContext, AssetAmount, CallItem } from '../../types'
 import { ReferralsReserveCall } from '../../types/generated/calls'
 import { findEventByExtrinsicHash, getAssetsTransferEventData } from '../../utils/events'
 import { getEntityData } from '../../utils/entities'
-import { CannotFindEventError } from '../../utils/errors'
- import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
+import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 
 export async function referralReserveCallHandler(ctx: BlockContext, callItem: CallItem<'Referrals.reserve'>): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
@@ -22,20 +21,20 @@ export async function referralReserveCallHandler(ctx: BlockContext, callItem: Ca
 
     if (historyElement.execution.success) {
 		const balancesTransferEventName = 'Balances.Transfer'
-        const balancesTransferEventItem = findEventByExtrinsicHash(ctx, extrinsicHash, [balancesTransferEventName], false)
+        const balancesTransferEventItem = findEventByExtrinsicHash(ctx, extrinsicHash, [balancesTransferEventName], false) // TODO: Check if 'Currencies.Transferred' event is applicable here
 
-        if (balancesTransferEventItem) {
-            const { from, to, amount } = getAssetsTransferEventData(ctx, balancesTransferEventItem)
+		if (!balancesTransferEventItem) {
+			getCallHandlerLog(ctx, callItem).debug(`No '${balancesTransferEventName}' event is found`)
+            return
+		}
 
-            details = {
-                from,
-                to,
-                amount: formatU128ToBalance(amount, XOR),
-            }
-        } else {
-			const error = new CannotFindEventError(ctx, extrinsicHash, balancesTransferEventName)
-			getCallHandlerLog(ctx, callItem).error(error.message)
-        }
+        const { from, to, amount } = getAssetsTransferEventData(ctx, balancesTransferEventItem)
+
+		details = {
+			from,
+			to,
+			amount: formatU128ToBalance(amount, XOR),
+		}
     } else {
         const call = new ReferralsReserveCall(ctx, callItem.call)
 		const data = getEntityData(ctx, call, callItem)

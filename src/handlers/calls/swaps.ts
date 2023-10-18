@@ -85,5 +85,5 @@ export async function swapsCallHandler(ctx: BlockContext, callItem: CallItem<'Li
         await networkSnapshotsStorage.updateVolumeStats(ctx, volumeUSD)
     }
 
-    getCallHandlerLog(ctx, callItem).debug('Saved swap')
+    getCallHandlerLog(ctx, callItem).debug(callItem.name === 'LiquidityProxy.swap' ? 'Saved swap' : 'Saved swap transfer')
 }

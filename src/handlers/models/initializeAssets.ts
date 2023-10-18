@@ -144,19 +144,12 @@ export async function initializeAssets(ctx: BlockContext): Promise<void> {
 
     getInitializeAssetsLog(ctx).debug('Initialize Asset entities')
 
-    const [
-        assetInfos,
-        syntheticAssets,
-        bandRates,
-        tokensIssuances,
-        xorIssuance,
-    ] = await Promise.all([
-        getAssetInfos(ctx),
-        getSyntheticAssets(ctx),
-        getBandRates(ctx),
-        getTokensIssuances(ctx),
-        getXorIssuance(ctx)
-    ])
+	// We don't use Promise.all() here because we need consistent order of requests in the log
+	const assetInfos = await getAssetInfos(ctx)
+	const syntheticAssets = await getSyntheticAssets(ctx)
+	const bandRates = await getBandRates(ctx)
+	const tokensIssuances = await getTokensIssuances(ctx)
+	const xorIssuance = await getXorIssuance(ctx)
 
     const assets = new Map<string, {
 		id: AssetId,
