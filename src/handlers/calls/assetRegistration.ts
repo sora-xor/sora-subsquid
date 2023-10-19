@@ -6,45 +6,51 @@ import { AssetsRegisterCall } from '../../types/generated/calls'
 import { AssetId } from '../../types'
 import { getEntityData } from '../../utils/entities'
 import { getAssetId } from '../../utils/assets'
- import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
+import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 
-export async function assetRegistrationCallHandler(ctx: BlockContext, callItem: CallItem<'Assets.register'>): Promise<void> {
+export async function assetRegistrationCallHandler(
+	ctx: BlockContext,
+	callItem: CallItem<'Assets.register'>,
+): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
 
-    const extrinsicHash = callItem.extrinsic.hash
-    const historyElement = await createHistoryElement(ctx, callItem)
+	const extrinsicHash = callItem.extrinsic.hash
+	const historyElement = await createHistoryElement(ctx, callItem)
 
-    if (!historyElement) return
+	if (!historyElement) return
 
-    let details: {
+	let details: {
 		assetId: AssetId
 	}
 
-    if (historyElement.execution.success) {
-        const assetRegistrationEventItem = findEventByExtrinsicHash(ctx, extrinsicHash, ['Assets.AssetRegistered'], true)
+	if (historyElement.execution.success) {
+		const assetRegistrationEventItem = findEventByExtrinsicHash(
+			ctx,
+			extrinsicHash,
+			['Assets.AssetRegistered'],
+			true,
+		)
 		const assetRegistrationEvent = new AssetsAssetRegisteredEvent(ctx, assetRegistrationEventItem.event)
 		const assetRegistrationEventData = getEntityData(ctx, assetRegistrationEvent, assetRegistrationEventItem)
 
 		const assetId = getAssetId(assetRegistrationEventData[0])
 
 		details = {
-			assetId
+			assetId,
 		}
-    }
-
-    else {
-        const call = new AssetsRegisterCall(ctx, callItem.call)
+	} else {
+		const call = new AssetsRegisterCall(ctx, callItem.call)
 		const data = getEntityData(ctx, call, callItem)
-	
+
 		const symbol = getAssetId(data.symbol)
 
-        details = {
-            assetId: symbol
-        }
-    }
+		details = {
+			assetId: symbol,
+		}
+	}
 
-    await addDataToHistoryElement(ctx, historyElement, details)
-    await updateHistoryElementStats(ctx, historyElement)
+	await addDataToHistoryElement(ctx, historyElement, details)
+	await updateHistoryElementStats(ctx, historyElement)
 
-    getCallHandlerLog(ctx, callItem).debug('Saved asset registration')
+	getCallHandlerLog(ctx, callItem).debug('Saved asset registration')
 }

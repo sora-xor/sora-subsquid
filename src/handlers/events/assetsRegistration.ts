@@ -6,7 +6,10 @@ import { assetPrecisions, getAssetId, assetStorage, tickerSyntheticAssetId } fro
 import { getEntityData } from '../../utils/entities'
 import { getEventHandlerLog, logStartProcessingEvent } from '../../utils/logs'
 
-export async function assetRegistrationEventHandler(ctx: BlockContext, eventItem: EventItem<'Assets.AssetRegistered'>): Promise<void> {
+export async function assetRegistrationEventHandler(
+	ctx: BlockContext,
+	eventItem: EventItem<'Assets.AssetRegistered'>,
+): Promise<void> {
 	logStartProcessingEvent(ctx, eventItem)
 
 	const event = new AssetsAssetRegisteredEvent(ctx, eventItem.event)
@@ -16,23 +19,29 @@ export async function assetRegistrationEventHandler(ctx: BlockContext, eventItem
 
 	if (!assetPrecisions.has(assetId)) {
 		const storage = new AssetsAssetInfosStorage(ctx, ctx.block.header)
-		const [, , precision,] = (
-			storage.isV1   ||
-			storage.isV26
-		)
-			? await getEntityData(ctx, storage, { kind: 'storage', name: AssetsAssetInfosStorage.name }, ['42'] as const).get(decodeAssetId(assetId))
-			: await getEntityData(ctx, storage, { kind: 'storage', name: AssetsAssetInfosStorage.name }, ['1', '26'] as const).get({ code: decodeAssetId(assetId) })
+		const [, , precision] =
+			storage.isV1 || storage.isV26
+				? await getEntityData(ctx, storage, { kind: 'storage', name: AssetsAssetInfosStorage.name }, [
+						'42',
+				  ] as const).get(decodeAssetId(assetId))
+				: await getEntityData(ctx, storage, { kind: 'storage', name: AssetsAssetInfosStorage.name }, [
+						'1',
+						'26',
+				  ] as const).get({ code: decodeAssetId(assetId) })
 		assetPrecisions.set(assetId, precision)
 	}
 
 	await assetStorage.getAsset(ctx, assetId)
 }
 
-export async function syntheticAssetEnabledEventHandler(ctx: BlockContext, eventItem: EventItem<'XSTPool.SyntheticAssetEnabled'>): Promise<void> {
+export async function syntheticAssetEnabledEventHandler(
+	ctx: BlockContext,
+	eventItem: EventItem<'XSTPool.SyntheticAssetEnabled'>,
+): Promise<void> {
 	logStartProcessingEvent(ctx, eventItem)
 
 	const event = new XstPoolSyntheticAssetEnabledEvent(ctx, eventItem.event)
-	
+
 	const data = getEntityData(ctx, event, eventItem)
 
 	if (!Array.isArray(data)) return

@@ -16,13 +16,13 @@ export async function syncModels(ctx: BlockContext): Promise<void> {
 export async function updateAssetsDailyStats(ctx: BlockContext): Promise<void> {
 	getSyncModelsLog(ctx).debug('Update assets daily stats')
 
-  	await assetStorage.updateDailyStats(ctx)
-  	await assetStorage.sync(ctx)
+	await assetStorage.updateDailyStats(ctx)
+	await assetStorage.sync(ctx)
 }
 
 export async function updateAssetsWeeklyStats(ctx: BlockContext): Promise<void> {
 	getSyncModelsLog(ctx).debug('Update assets weekly stats')
 
-  	await assetStorage.updateWeeklyStats(ctx)
-  	await assetStorage.sync(ctx)
+	await assetStorage.updateWeeklyStats(ctx)
+	await assetStorage.sync(ctx)
 }

@@ -7,14 +7,24 @@ import { HistoryElement, HistoryElementCall } from '../../model'
 import { AssetId } from '../../types'
 import { toCamelCase } from '../../utils'
 import { toJSON } from '@subsquid/util-internal-json'
- import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
+import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 
-type Version = typeof utilityBatchAllCallVersions[number]
+type Version = (typeof utilityBatchAllCallVersions)[number]
 type IsVersion = { [V in Version]: `isV${V}` }[Version]
 type AsVersion = { [V in Version]: `asV${V}` }[Version]
 
-type BatchCall = { [V in Version]: { version: V, call: UtilityBatchAllCall[`asV${V}`]['calls'][number] } }[Version]
-type BatchCalls = { [V in Version]: { version: V, calls: UtilityBatchAllCall[`asV${V}`]['calls'] } }[Version]
+type BatchCall = {
+	[V in Version]: {
+		version: V
+		call: UtilityBatchAllCall[`asV${V}`]['calls'][number]
+	}
+}[Version]
+type BatchCalls = {
+	[V in Version]: {
+		version: V
+		calls: UtilityBatchAllCall[`asV${V}`]['calls']
+	}
+}[Version]
 
 function formatSpecificCall(call: BatchCall): any {
 	switch (call.call.__kind) {
@@ -22,17 +32,18 @@ function formatSpecificCall(call: BatchCall): any {
 			switch (call.call.value.__kind) {
 				case 'deposit_liquidity': {
 					const { __kind, ...value } = call.call.value
-					const { dexId, inputAssetA, inputAssetB, inputADesired, inputBDesired, inputAMin, inputBMin } = value
-		            // TODO: move args to common function here and in other cases
-		            return {
-		                dexId,
-		                inputAssetA: getAssetId(inputAssetA),
-		                inputAssetB: getAssetId(inputAssetB),
-		                inputAMin: formatU128ToBalance(inputAMin, getAssetId(inputAssetA)),
-		                inputBMin: formatU128ToBalance(inputBMin, getAssetId(inputAssetB)),
-		                inputADesired: formatU128ToBalance(inputADesired, getAssetId(inputAssetA)),
-		                inputBDesired: formatU128ToBalance(inputBDesired, getAssetId(inputAssetB))
-		            }
+					const { dexId, inputAssetA, inputAssetB, inputADesired, inputBDesired, inputAMin, inputBMin } =
+						value
+					// TODO: move args to common function here and in other cases
+					return {
+						dexId,
+						inputAssetA: getAssetId(inputAssetA),
+						inputAssetB: getAssetId(inputAssetB),
+						inputAMin: formatU128ToBalance(inputAMin, getAssetId(inputAssetA)),
+						inputBMin: formatU128ToBalance(inputBMin, getAssetId(inputAssetB)),
+						inputADesired: formatU128ToBalance(inputADesired, getAssetId(inputAssetA)),
+						inputBDesired: formatU128ToBalance(inputBDesired, getAssetId(inputAssetB)),
+					}
 				}
 				case 'initialize_pool': {
 					const { __kind, ...value } = call.call.value
@@ -40,7 +51,7 @@ function formatSpecificCall(call: BatchCall): any {
 					return {
 						dexId,
 						assetA: getAssetId(assetA),
-						assetB: getAssetId(assetB)
+						assetB: getAssetId(assetB),
 					}
 				}
 			}
@@ -51,7 +62,7 @@ function formatSpecificCall(call: BatchCall): any {
 				case 'register': {
 					const { __kind, ...value } = call.call.value
 					const { dexId, baseAssetId, targetAssetId } = value
-					return  {
+					return {
 						dexId,
 						baseAssetId: getAssetId(baseAssetId),
 						targetAssetId: getAssetId(targetAssetId),
@@ -69,28 +80,35 @@ function formatSpecificCall(call: BatchCall): any {
 
 function extractCall(
 	ctx: BlockContext,
-    call: BatchCall,
-    id: number,
-	historyElement: HistoryElement
+	call: BatchCall,
+	id: number,
+	historyElement: HistoryElement,
 ): HistoryElementCall {
-    return new HistoryElementCall({
-        id: `${historyElement.blockHeight}-${id}`,
+	return new HistoryElementCall({
+		id: `${historyElement.blockHeight}-${id}`,
 		historyElement,
-        module: toCamelCase(call.call.__kind),
-        method: toCamelCase(call.call.value.__kind),
+		module: toCamelCase(call.call.__kind),
+		method: toCamelCase(call.call.value.__kind),
 		// TODO: determine where to get call hash
-        // hash: call.hash,
-        data: toJSON(formatSpecificCall(call)),
-		updatedAtBlock: ctx.block.header.height
-    })
-
+		// hash: call.hash,
+		data: toJSON(formatSpecificCall(call)),
+		updatedAtBlock: ctx.block.header.height,
+	})
 }
 
-function mapCalls(ctx: BlockContext, { version, calls }: BatchCalls, historyElement: HistoryElement): HistoryElementCall[] {
+function mapCalls(
+	ctx: BlockContext,
+	{ version, calls }: BatchCalls,
+	historyElement: HistoryElement,
+): HistoryElementCall[] {
 	return calls.map((call, idx) => extractCall(ctx, { version, call } as BatchCall, idx, historyElement))
 }
 
-function mapCallsForAllVersions(ctx: BlockContext, callItem: CallItem<'Utility.batch_all'>, historyElement: HistoryElement): HistoryElementCall[] {
+function mapCallsForAllVersions(
+	ctx: BlockContext,
+	callItem: CallItem<'Utility.batch_all'>,
+	historyElement: HistoryElement,
+): HistoryElementCall[] {
 	const utilityBatchAllCall = new UtilityBatchAllCall(ctx, callItem.call)
 
 	let calls: HistoryElementCall[] | null = null
@@ -102,7 +120,7 @@ function mapCallsForAllVersions(ctx: BlockContext, callItem: CallItem<'Utility.b
 				ctx,
 				{
 					version,
-					calls: utilityBatchAllCall['asV' + version as AsVersion].calls
+					calls: utilityBatchAllCall[('asV' + version) as AsVersion].calls,
 				} as BatchCalls,
 				historyElement,
 			)
@@ -113,7 +131,7 @@ function mapCallsForAllVersions(ctx: BlockContext, callItem: CallItem<'Utility.b
 			ctx,
 			{
 				version: 'unknown' as any,
-				calls: ctx._chain.decodeCall(callItem.call).calls
+				calls: ctx._chain.decodeCall(callItem.call).calls,
 			} as BatchCalls,
 			historyElement,
 		)
@@ -121,30 +139,35 @@ function mapCallsForAllVersions(ctx: BlockContext, callItem: CallItem<'Utility.b
 	return calls
 }
 
-export async function batchTransactionsCallHandler(ctx: BlockContext, callItem: CallItem<'Utility.batch_all'>): Promise<void> {
+export async function batchTransactionsCallHandler(
+	ctx: BlockContext,
+	callItem: CallItem<'Utility.batch_all'>,
+): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
 
-    const historyElement = await createHistoryElement(ctx, callItem)
+	const historyElement = await createHistoryElement(ctx, callItem)
 
 	let historyElementCalls = mapCallsForAllVersions(ctx, callItem, historyElement)
 
 	await addCallsToHistoryElement(ctx, historyElement, historyElementCalls)
-    await updateHistoryElementStats(ctx, historyElement)
+	await updateHistoryElementStats(ctx, historyElement)
 
-    getCallHandlerLog(ctx, callItem).debug('Saved batch extrinsic')
+	getCallHandlerLog(ctx, callItem).debug('Saved batch extrinsic')
 
-    if (historyElement.execution.success) {
-        // If initialize pool call exists, create new Pool
-        const initializePool = historyElementCalls.find(call => call.method === 'initializePool' && call.module === 'poolXYK')
+	if (historyElement.execution.success) {
+		// If initialize pool call exists, create new Pool
+		const initializePool = historyElementCalls.find(
+			(call) => call.method === 'initializePool' && call.module === 'poolXYK',
+		)
 
-        if (initializePool) {
+		if (initializePool) {
 			//TODO: Determine wether or not typization is applicable here
 			const data: {
 				dexId: number
 				assetA: AssetId
 				assetB: AssetId
 			} = initializePool.data as any
-            await poolsStorage.getPool(ctx, data.assetA, data.assetB)
-        }
-    }
+			await poolsStorage.getPool(ctx, data.assetA, data.assetB)
+		}
+	}
 }

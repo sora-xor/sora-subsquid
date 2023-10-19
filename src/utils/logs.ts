@@ -1,20 +1,20 @@
 import { Block, BlockContext, CallItem, Context, EventItem } from '../types'
-import { getEventId } from './events';
+import { getEventId } from './events'
 
 function toPascalCase(str: string): string {
-    return str
-        .split('.')
-        .map(segment => {
-            return segment
-                .replace(/([a-z])([A-Z])/g, '$1 $2')  // Separate camelCase
-                .replace(/[_\W]+/g, ' ')  // Replace underscores and non-alphanumeric characters with spaces
-                .split(' ')
-                .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-                .join('');
-        })
-        .join('.')
-        .toLowerCase()  // Convert the whole string to lowercase
-        .replace(/(^|\.)\w/g, match => match.toUpperCase());  // Capitalize the first character of each segment
+	return str
+		.split('.')
+		.map((segment) => {
+			return segment
+				.replace(/([a-z])([A-Z])/g, '$1 $2') // Separate camelCase
+				.replace(/[_\W]+/g, ' ') // Replace underscores and non-alphanumeric characters with spaces
+				.split(' ')
+				.map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+				.join('')
+		})
+		.join('.')
+		.toLowerCase() // Convert the whole string to lowercase
+		.replace(/(^|\.)\w/g, (match) => match.toUpperCase()) // Capitalize the first character of each segment
 }
 
 export function getLog(ctx: Context & { block: Block }, module: string | null = null, attrs: Record<string, any> = {}) {
@@ -26,14 +26,24 @@ export function getLog(ctx: Context & { block: Block }, module: string | null = 
 	return ctx.log.child(attributes)
 }
 
-export function getCallHandlerLog(ctx: BlockContext, callItem: CallItem<any>, message: string = '', attrs: Record<string, any> = {}) {
+export function getCallHandlerLog(
+	ctx: BlockContext,
+	callItem: CallItem<any>,
+	message: string = '',
+	attrs: Record<string, any> = {},
+) {
 	const extrinsicHash = callItem.extrinsic.hash
 	const callName = toPascalCase(callItem.name)
 	const attributes = { extrinsicHash, callName, ...attrs }
 	return getLog(ctx, 'CallHandler', attributes)
 }
 
-export function getEventHandlerLog(ctx: BlockContext, eventItem: EventItem<any>, message: string = '', attrs: Record<string, any> = {}) {
+export function getEventHandlerLog(
+	ctx: BlockContext,
+	eventItem: EventItem<any>,
+	message: string = '',
+	attrs: Record<string, any> = {},
+) {
 	const extrinsicHash = eventItem.event.extrinsic?.hash ?? null
 	const eventName = toPascalCase(eventItem.name)
 	const eventId = getEventId(ctx, eventItem)

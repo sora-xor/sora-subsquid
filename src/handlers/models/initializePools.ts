@@ -8,21 +8,27 @@ import { getInitializePoolsLog } from '../../utils/logs'
 let isFirstBlockIndexed = false
 
 export async function initializePools(ctx: BlockContext): Promise<void> {
-    if (isFirstBlockIndexed) return
+	if (isFirstBlockIndexed) return
 
-    getInitializePoolsLog(ctx).debug('Initialize Pool XYK entities')
+	getInitializePoolsLog(ctx).debug('Initialize Pool XYK entities')
 
-    const poolsBuffer = new Map<string, {
-		id: Address
-		baseAsset: Asset
-		targetAsset: Asset
-		baseAssetReserves: bigint
-		targetAssetReserves: bigint
-		multiplier: number
-	}>()
+	const poolsBuffer = new Map<
+		string,
+		{
+			id: Address
+			baseAsset: Asset
+			targetAsset: Asset
+			baseAssetReserves: bigint
+			targetAssetReserves: bigint
+			multiplier: number
+		}
+	>()
 
-    for (const baseAssetId of BASE_ASSETS) {
-		const [properties, reserves] = await Promise.all([getAllProperties(ctx, baseAssetId), getAllReserves(ctx, baseAssetId)])
+	for (const baseAssetId of BASE_ASSETS) {
+		const [properties, reserves] = await Promise.all([
+			getAllProperties(ctx, baseAssetId),
+			getAllReserves(ctx, baseAssetId),
+		])
 
 		if (!properties || !reserves) continue
 
@@ -34,7 +40,7 @@ export async function initializePools(ctx: BlockContext): Promise<void> {
 
 			const [baseAsset, targetAsset] = await Promise.all([
 				ctx.store.get(Asset, baseAssetId),
-				ctx.store.get(Asset, targetAssetId)
+				ctx.store.get(Asset, targetAssetId),
 			])
 			if (!baseAsset) throw new Error(`[${ctx.block.header.height}] Cannot find base asset`)
 			if (!targetAsset) throw new Error(`[${ctx.block.header.height}] Cannot find target asset`)
@@ -49,7 +55,7 @@ export async function initializePools(ctx: BlockContext): Promise<void> {
 			})
 		}
 
-		reserves.forEach(item => {
+		reserves.forEach((item) => {
 			const { targetAssetId, baseBalance, targetBalance } = item
 			const poolAccountId = poolAccounts.get(baseAssetId, targetAssetId)
 
@@ -61,21 +67,24 @@ export async function initializePools(ctx: BlockContext): Promise<void> {
 				}
 			}
 		})
-    }
+	}
 
-    const entities = [...poolsBuffer.values()].map(pool => new PoolXYK({
-		...pool,
-		id: pool.id,
-		updatedAtBlock: ctx.block.header.height
-	}))
+	const entities = [...poolsBuffer.values()].map(
+		(pool) =>
+			new PoolXYK({
+				...pool,
+				id: pool.id,
+				updatedAtBlock: ctx.block.header.height,
+			}),
+	)
 
-    if (entities.length) {
-        await ctx.store.save(entities)
-        await Promise.all(entities.map(entity => poolsStorage.getPoolById(ctx, entity.id as Address)))
-        getInitializePoolsLog(ctx).debug(`${entities.length} Pool XYKs initialized!`)
-    } else {
-        getInitializePoolsLog(ctx).debug('No Pool XYKs to initialize!')
-    }
+	if (entities.length) {
+		await ctx.store.save(entities)
+		await Promise.all(entities.map((entity) => poolsStorage.getPoolById(ctx, entity.id as Address)))
+		getInitializePoolsLog(ctx).debug(`${entities.length} Pool XYKs initialized!`)
+	} else {
+		getInitializePoolsLog(ctx).debug('No Pool XYKs to initialize!')
+	}
 
-    isFirstBlockIndexed = true
+	isFirstBlockIndexed = true
 }

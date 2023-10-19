@@ -6,7 +6,10 @@ import { getEntityData } from './entities'
 export const getActiveStakingEra = async (ctx: BlockContext): Promise<StakingEra> => {
 	const activeEraStorage = new StakingActiveEraStorage(ctx, ctx.block.header)
 
-	const activeEra = await getEntityData(ctx, activeEraStorage, { kind: 'storage', name: StakingActiveEraStorage.name }).get()
+	const activeEra = await getEntityData(ctx, activeEraStorage, {
+		kind: 'storage',
+		name: StakingActiveEraStorage.name,
+	}).get()
 	if (!activeEra) {
 		throw new Error(`[${ctx.block.header.height}] Active era not found`)
 	}
@@ -18,7 +21,9 @@ export const getActiveStakingEra = async (ctx: BlockContext): Promise<StakingEra
 		stakingEra.index = activeEra.index
 		if (activeEra.start) {
 			stakingEra.startBlock = activeEra.start
-			const previousStakingEra = await ctx.store.get(StakingEra, { where: { index: activeEra.index - 1 } })
+			const previousStakingEra = await ctx.store.get(StakingEra, {
+				where: { index: activeEra.index - 1 },
+			})
 			if (previousStakingEra && !previousStakingEra.endBlock) {
 				previousStakingEra.endBlock = activeEra.start - 1n
 				await ctx.store.save(previousStakingEra)

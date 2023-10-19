@@ -6,7 +6,7 @@ import { getCallHandlerLog } from './logs'
 type SpecificCallItem<T extends CallItemName> = CallItem<T>
 
 export function getBlockCalls(ctx: BlockContext): CallItem<CallItemName>[] {
-	return ctx.block.items.filter(c => c.kind === 'call') as CallItem<CallItemName>[]
+	return ctx.block.items.filter((c) => c.kind === 'call') as CallItem<CallItemName>[]
 }
 
 export function findCallsByExtrinsicHash<T extends CallItemName[]>(
@@ -14,12 +14,13 @@ export function findCallsByExtrinsicHash<T extends CallItemName[]>(
 	extrinsicHash: SubstrateExtrinsic['hash'],
 	callNames?: T,
 ): { [K in T[number]]: SpecificCallItem<K> }[T[number]][] {
-	const calls = getBlockCalls(ctx).filter(c =>
-		(!callNames || callNames.includes(c.name))
-		&& c.extrinsic?.hash === extrinsicHash
+	const calls = getBlockCalls(ctx).filter(
+		(c) => (!callNames || callNames.includes(c.name)) && c.extrinsic?.hash === extrinsicHash,
 	)
 	// TODO: get rid of this unknown type
-	return calls as unknown as { [K in T[number]]: SpecificCallItem<K> }[T[number]][]
+	return calls as unknown as {
+		[K in T[number]]: SpecificCallItem<K>
+	}[T[number]][]
 }
 
 export function findCallByExtrinsicHash<T extends CallItemName[]>(

@@ -8,7 +8,10 @@ import { DemeterFarmingPlatformDepositCall } from '../../types/generated/calls'
 import { getEntityData } from '../../utils/entities'
 import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 
-export async function demeterDepositCallHandler(ctx: BlockContext, callItem: CallItem<'DemeterFarmingPlatform.deposit'>): Promise<void> {
+export async function demeterDepositCallHandler(
+	ctx: BlockContext,
+	callItem: CallItem<'DemeterFarmingPlatform.deposit'>,
+): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
 
 	const call = new DemeterFarmingPlatformDepositCall(ctx, callItem.call)
@@ -30,7 +33,7 @@ export async function demeterDepositCallHandler(ctx: BlockContext, callItem: Cal
 
 		const data = getEntityData(ctx, event, eventItem)
 
-		const assetAmount = typeof data[4] === 'bigint' ? data[4] : data[5] as AssetAmount
+		const assetAmount = typeof data[4] === 'bigint' ? data[4] : (data[5] as AssetAmount)
 
 		// a little trick - we get decimals from pool asset, not lp token
 		amount = formatU128ToBalance(assetAmount, assetId)
@@ -43,7 +46,7 @@ export async function demeterDepositCallHandler(ctx: BlockContext, callItem: Cal
 		assetId,
 		rewardAssetId,
 		isFarm,
-		amount
+		amount,
 	}
 
 	const historyElement = await createHistoryElement(ctx, callItem)

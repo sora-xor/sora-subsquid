@@ -6,9 +6,12 @@ import { DemeterFarmingPlatformWithdrawnEvent } from '../../types/generated/even
 import { DemeterFarmingPlatformWithdrawCall } from '../../types/generated/calls'
 import { XOR } from '../../utils/consts'
 import { getEntityData } from '../../utils/entities'
- import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
+import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 
-export async function demeterWithdrawCallHandler(ctx: BlockContext, callItem: CallItem<'DemeterFarmingPlatform.withdraw'>): Promise<void> {
+export async function demeterWithdrawCallHandler(
+	ctx: BlockContext,
+	callItem: CallItem<'DemeterFarmingPlatform.withdraw'>,
+): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
 
 	const extrinsicHash = callItem.extrinsic.hash
@@ -33,7 +36,7 @@ export async function demeterWithdrawCallHandler(ctx: BlockContext, callItem: Ca
 		const data = getEntityData(ctx, event, eventItem)
 
 		const assetAmount = data[1] as AssetAmount
-		
+
 		// a little trick - we get decimals from pool asset, not lp token
 		amount = formatU128ToBalance(assetAmount, assetId)
 	} else {
@@ -51,7 +54,7 @@ export async function demeterWithdrawCallHandler(ctx: BlockContext, callItem: Ca
 	const historyElement = await createHistoryElement(ctx, callItem)
 	if (!historyElement) return
 	await addDataToHistoryElement(ctx, historyElement, details)
-	await updateHistoryElementStats(ctx,historyElement)
+	await updateHistoryElementStats(ctx, historyElement)
 
 	getCallHandlerLog(ctx, callItem).debug('Saved demeterFarmingPlatform withdraw')
 }

@@ -2,7 +2,7 @@ export enum Environment {
 	PRODUCTION = 'production',
 	STAGE = 'stage',
 	TEST = 'test',
-	DEV = 'dev'
+	DEV = 'dev',
 }
 
 enum ScaleProfile {
@@ -41,7 +41,7 @@ export const environments: Environments = {
 			postgres: ScaleProfile.LARGE,
 			processor: ScaleProfile.LARGE,
 			api: ScaleProfile.LARGE,
-		}
+		},
 	},
 	[Environment.STAGE]: {
 		name: 'sora-stage',
@@ -53,7 +53,7 @@ export const environments: Environments = {
 			postgres: ScaleProfile.SMALL,
 			processor: ScaleProfile.SMALL,
 			api: ScaleProfile.SMALL,
-		}
+		},
 	},
 	[Environment.TEST]: {
 		name: 'sora-test',
@@ -65,7 +65,7 @@ export const environments: Environments = {
 			postgres: ScaleProfile.SMALL,
 			processor: ScaleProfile.SMALL,
 			api: ScaleProfile.SMALL,
-		}
+		},
 	},
 	[Environment.DEV]: {
 		name: 'sora-dev',
@@ -77,7 +77,7 @@ export const environments: Environments = {
 			postgres: ScaleProfile.SMALL,
 			processor: ScaleProfile.SMALL,
 			api: ScaleProfile.SMALL,
-		}
+		},
 	},
 }
 

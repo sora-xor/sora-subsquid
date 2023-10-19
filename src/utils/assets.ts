@@ -17,8 +17,8 @@ const prevIndexesRow = (index: number, count: number): number[] => {
 }
 
 const getSnapshotsByIds = async (ctx: BlockContext, ids: string[]): Promise<AssetSnapshot[]> => {
-    const snapshots = await Promise.all(ids.map(id => ctx.store.get(AssetSnapshot, id)))
-    return snapshots.filter((item): item is AssetSnapshot => item !== undefined)
+	const snapshots = await Promise.all(ids.map((id) => ctx.store.get(AssetSnapshot, id)))
+	return snapshots.filter((item): item is AssetSnapshot => item !== undefined)
 }
 
 const last = <T>(snapshots: T[]) => {
@@ -29,7 +29,7 @@ const last = <T>(snapshots: T[]) => {
 const toFloat = (value: BigNumber) => Number(value.toFixed(2))
 
 const calcVolumeUSD = (snapshots: AssetSnapshot[]): number => {
-  	const totalVolume = snapshots.reduce((buffer, snapshot) => {
+	const totalVolume = snapshots.reduce((buffer, snapshot) => {
 		const volumeUSD = new BigNumber(snapshot.volume?.amountUSD ?? 0)
 
 		return buffer.plus(volumeUSD)
@@ -119,39 +119,45 @@ class AssetStorage {
 		}
 	}
 
-	async updateLiquidity(ctx: BlockContext, id: AssetId, liquidity: bigint): Promise<void>  {
+	async updateLiquidity(ctx: BlockContext, id: AssetId, liquidity: bigint): Promise<void> {
 		const asset = await this.getAsset(ctx, id)
-	
+
 		asset.liquidity = liquidity
 		// update liqudiity usd with new liquidity
 		asset.updatedAtBlock = ctx.block.header.height
 		this.calcLiquidityUSD(asset)
 	}
-	
+
 	calcLiquidityUSD(asset: Asset): void {
 		const price = new BigNumber(asset.priceUSD)
 		const decimals = assetPrecisions.get(asset.id as AssetId) ?? 18
 		const liquidity = new BigNumber(asset.liquidity.toString()).dividedBy(Math.pow(10, decimals))
 
-    	asset.liquidityUSD = toFloat(price.multipliedBy(liquidity))
-  	}
+		asset.liquidityUSD = toFloat(price.multipliedBy(liquidity))
+	}
 
-	private async calcAssetStats(ctx: BlockContext, asset: Asset, type: SnapshotType, snapshotsCount: number, blockTimestamp: number) {
+	private async calcAssetStats(
+		ctx: BlockContext,
+		asset: Asset,
+		type: SnapshotType,
+		snapshotsCount: number,
+		blockTimestamp: number,
+	) {
 		const { id, priceUSD, liquidityUSD } = asset
 		const { index } = getSnapshotIndex(blockTimestamp, type)
 		const indexes = prevIndexesRow(index, snapshotsCount)
-	
+
 		const ids = indexes.map((idx) => AssetSnapshotsStorage.getId(id as AssetId, type, idx))
 		const snapshots = await getSnapshotsByIds(ctx, ids)
-	
+
 		const currentPriceUSD = new BigNumber(priceUSD)
 		const startPriceUSD = new BigNumber(last(snapshots)?.priceUSD?.open ?? '0')
 		const tvl = new BigNumber(liquidityUSD ?? 0)
-	
+
 		const priceChange = calcPriceChange(currentPriceUSD, startPriceUSD)
 		const volumeUSD = calcVolumeUSD(snapshots)
 		const velocity = tvl.isZero() ? 0 : toFloat(new BigNumber(volumeUSD).div(tvl))
-	
+
 		return {
 			priceChange,
 			volumeUSD,
@@ -163,26 +169,37 @@ class AssetStorage {
 		getAssetStorageLog(ctx).debug(`Assets Daily stats updating...`)
 		for (const asset of this.storage.values()) {
 			const blockTimestamp = formatDateTimestamp(new Date(ctx.block.header.timestamp))
-		  	const { priceChange, volumeUSD } = await this.calcAssetStats(ctx, asset, SnapshotType.HOUR, 24, blockTimestamp)
-
+			const { priceChange, volumeUSD } = await this.calcAssetStats(
+				ctx,
+				asset,
+				SnapshotType.HOUR,
+				24,
+				blockTimestamp,
+			)
 
 			asset.priceChangeDay = priceChange
 			asset.volumeDayUSD = volumeUSD
 		}
 		getAssetStorageLog(ctx).debug(`Assets Daily stats updated!`)
 	}
-    
+
 	async updateWeeklyStats(ctx: BlockContext): Promise<void> {
-		getAssetStorageLog(ctx).debug(`Assets Weekly stats updating...`);
+		getAssetStorageLog(ctx).debug(`Assets Weekly stats updating...`)
 		for (const asset of this.storage.values()) {
 			const blockTimestamp = formatDateTimestamp(new Date(ctx.block.header.timestamp))
-			const { priceChange, volumeUSD, velocity } = await this.calcAssetStats(ctx, asset, SnapshotType.DAY, 7, blockTimestamp)
+			const { priceChange, volumeUSD, velocity } = await this.calcAssetStats(
+				ctx,
+				asset,
+				SnapshotType.DAY,
+				7,
+				blockTimestamp,
+			)
 
-			asset.priceChangeWeek = priceChange;
-			asset.volumeWeekUSD = volumeUSD;
-			asset.velocity = velocity;
-	  	}
-	  	getAssetStorageLog(ctx).debug(`Assets Weekly stats updated!`);
+			asset.priceChangeWeek = priceChange
+			asset.volumeWeekUSD = volumeUSD
+			asset.velocity = velocity
+		}
+		getAssetStorageLog(ctx).debug(`Assets Weekly stats updated!`)
 	}
 }
 
@@ -225,7 +242,7 @@ class AssetSnapshotsStorage {
 		const blockTimestamp = formatDateTimestamp(new Date(ctx.block.header.timestamp))
 		const { index, timestamp } = getSnapshotIndex(blockTimestamp, type)
 		const id = AssetSnapshotsStorage.getId(assetId, type, index)
-		
+
 		let snapshot = this.storage.get(id)
 		if (snapshot) {
 			return snapshot
@@ -249,7 +266,7 @@ class AssetSnapshotsStorage {
 			snapshot.burn = 0n
 			snapshot.volume = new AssetVolume({
 				amount: '0',
-				amountUSD: '0'
+				amountUSD: '0',
 			})
 			// set current asset price on creation
 			snapshot.priceUSD = new AssetPrice({
@@ -279,7 +296,7 @@ class AssetSnapshotsStorage {
 
 				// set open price to current price at first update (after start or restart)
 				if (Number(snapshot.priceUSD.open) === 0) {
-				  snapshot.priceUSD.open = price
+					snapshot.priceUSD.open = price
 				}
 			} else {
 				const blockHeight = ctx.block.header.height
@@ -293,9 +310,7 @@ class AssetSnapshotsStorage {
 	async updateVolume(ctx: BlockContext, assetId: AssetId, volume: BigNumber): Promise<BigNumber> {
 		const asset = await this.assetStorage.getAsset(ctx, assetId)
 
-		const assetPrice = DAI === assetId
-			? BigNumber(1)
-			: BigNumber(asset?.priceUSD ?? 0)
+		const assetPrice = DAI === assetId ? BigNumber(1) : BigNumber(asset?.priceUSD ?? 0)
 
 		const volumeUSD = volume.multipliedBy(assetPrice)
 
@@ -304,7 +319,9 @@ class AssetSnapshotsStorage {
 
 			if (snapshot.volume) {
 				snapshot.volume.amount = new BigNumber(snapshot.volume.amount).plus(volume.toString()).toString()
-				snapshot.volume.amountUSD = new BigNumber(snapshot.volume.amountUSD).plus(volumeUSD.toString()).toFixed(2)
+				snapshot.volume.amountUSD = new BigNumber(snapshot.volume.amountUSD)
+					.plus(volumeUSD.toString())
+					.toFixed(2)
 				snapshot.updatedAtBlock = ctx.block.header.height
 			} else {
 				throw new Error(`[${ctx.block.header.height}] ${snapshot.id} snapshot doesn't have volume`)

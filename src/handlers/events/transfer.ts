@@ -6,10 +6,7 @@ import { poolAccounts, poolsStorage, PoolsPrices } from '../../utils/pools'
 
 export async function transferEventHandler(
 	ctx: BlockContext,
-	eventItem: (
-		| EventItem<'Tokens.Transfer'>
-		| EventItem<'Balances.Transfer'>
-	)
+	eventItem: EventItem<'Tokens.Transfer'> | EventItem<'Balances.Transfer'>,
 ): Promise<void> {
 	logStartProcessingEvent(ctx, eventItem)
 

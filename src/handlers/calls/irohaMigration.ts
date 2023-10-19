@@ -4,23 +4,26 @@ import { BlockContext, AssetAmount, CallItem } from '../../types'
 import { findEventByExtrinsicHash } from '../../utils/events'
 import { CurrenciesDepositedEvent, CurrenciesTransferredEvent } from '../../types/generated/events'
 import { getEntityData } from '../../utils/entities'
- import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
+import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 
-export async function irohaMigrationCallHandler(ctx: BlockContext, callItem: CallItem<'IrohaMigration.migrate'>): Promise<void> {
+export async function irohaMigrationCallHandler(
+	ctx: BlockContext,
+	callItem: CallItem<'IrohaMigration.migrate'>,
+): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
 
-    const historyElement = await createHistoryElement(ctx, callItem)
-    const extrinsicHash = callItem.extrinsic.hash
+	const historyElement = await createHistoryElement(ctx, callItem)
+	const extrinsicHash = callItem.extrinsic.hash
 
-    let details: {
-        assetId: string
-        amount: string
-    } | null = null
+	let details: {
+		assetId: string
+		amount: string
+	} | null = null
 
-    if (historyElement.execution.success) {
+	if (historyElement.execution.success) {
 		const currenciesDepositedEventItem = findEventByExtrinsicHash(ctx, extrinsicHash, ['Currencies.Deposited'])
 		const currenciesTransferredEventItem = findEventByExtrinsicHash(ctx, extrinsicHash, ['Currencies.Transferred'])
-			
+
 		if (currenciesDepositedEventItem) {
 			const event = new CurrenciesDepositedEvent(ctx, currenciesDepositedEventItem.event)
 			const data = getEntityData(ctx, event, currenciesDepositedEventItem)
@@ -47,10 +50,9 @@ export async function irohaMigrationCallHandler(ctx: BlockContext, callItem: Cal
 			}
 		}
 
-        if (details) await addDataToHistoryElement(ctx, historyElement, details)
-        await updateHistoryElementStats(ctx,historyElement)
+		if (details) await addDataToHistoryElement(ctx, historyElement, details)
+		await updateHistoryElementStats(ctx, historyElement)
 
-        getCallHandlerLog(ctx, callItem).debug(`Saved iroha migration`)
-    }
-
+		getCallHandlerLog(ctx, callItem).debug(`Saved iroha migration`)
+	}
 }

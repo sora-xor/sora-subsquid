@@ -1,8 +1,8 @@
 import { getTypegenConfig } from './utils/typegen'
 import { Environment } from '../src/environments'
 
-const args = process.argv.slice(2);
-	
+const args = process.argv.slice(2)
+
 const fs = require('fs')
 
 const typegenJsonPath = './typegen.json'

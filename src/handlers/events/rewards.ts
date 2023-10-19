@@ -9,7 +9,10 @@ import { getEventId } from '../../utils/events'
 import { getEventHandlerLog, logStartProcessingEvent } from '../../utils/logs'
 import { getActiveStakingEra, getStakingStaker } from '../../utils/staking'
 
-function getRewardData(ctx: BlockContext, eventItem: EventItem<'Staking.Rewarded'>): { stash: Address; amount: string } {
+function getRewardData(
+	ctx: BlockContext,
+	eventItem: EventItem<'Staking.Rewarded'>,
+): { stash: Address; amount: string } {
 	const event = new StakingRewardedEvent(ctx, eventItem.event)
 
 	const data = getEntityData(ctx, event, eventItem)
@@ -19,7 +22,10 @@ function getRewardData(ctx: BlockContext, eventItem: EventItem<'Staking.Rewarded
 	return { stash: toAddress(stash), amount: formatU128ToBalance(amount, VAL) }
 }
 
-export async function stakingRewardedEventHandler(ctx: BlockContext, eventItem: EventItem<'Staking.Rewarded'>): Promise<void> {
+export async function stakingRewardedEventHandler(
+	ctx: BlockContext,
+	eventItem: EventItem<'Staking.Rewarded'>,
+): Promise<void> {
 	logStartProcessingEvent(ctx, eventItem)
 
 	const { stash, amount } = getRewardData(ctx, eventItem)
@@ -27,7 +33,7 @@ export async function stakingRewardedEventHandler(ctx: BlockContext, eventItem: 
 	const stakingEra = await getActiveStakingEra(ctx)
 	const staker = await getStakingStaker(ctx, stash)
 	const payee = staker.payee
-	
+
 	const stakingReward = new StakingReward()
 	stakingReward.id = `${stakingEra.id}-${getEventId(ctx, eventItem)}-${staker.id}`
 	stakingReward.staker = staker

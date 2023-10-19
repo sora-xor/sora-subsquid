@@ -5,9 +5,12 @@ import { findEventByExtrinsicHash } from '../../utils/events'
 import { DemeterFarmingPlatformRewardWithdrawnEvent } from '../../types/generated/events'
 import { DemeterFarmingPlatformGetRewardsCall } from '../../types/generated/calls'
 import { getEntityData } from '../../utils/entities'
- import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
+import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 
-export async function demeterGetRewardsCallHandler(ctx: BlockContext, callItem: CallItem<'DemeterFarmingPlatform.get_rewards'>): Promise<void> {
+export async function demeterGetRewardsCallHandler(
+	ctx: BlockContext,
+	callItem: CallItem<'DemeterFarmingPlatform.get_rewards'>,
+): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
 
 	const extrinsicHash = callItem.extrinsic.hash
@@ -38,13 +41,13 @@ export async function demeterGetRewardsCallHandler(ctx: BlockContext, callItem: 
 	const details = {
 		assetId: assetId,
 		isFarm: isFarm,
-		amount
+		amount,
 	}
 
 	const historyElement = await createHistoryElement(ctx, callItem)
 	if (!historyElement) return
 	await addDataToHistoryElement(ctx, historyElement, details)
-	await updateHistoryElementStats(ctx,historyElement)
+	await updateHistoryElementStats(ctx, historyElement)
 
 	getCallHandlerLog(ctx, callItem).debug(`Saved demeterFarmingPlatform getRewards`)
 }

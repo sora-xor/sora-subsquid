@@ -4,19 +4,19 @@ import { Address, AssetId } from '../types'
 export type SwapAmount = SwapAmount_WithDesiredInput | SwapAmount_WithDesiredOutput
 
 export interface SwapAmount_WithDesiredInput {
-    kind: 'WithDesiredInput'
-    desiredAmountIn: bigint
-    minAmountOut: bigint
+	kind: 'WithDesiredInput'
+	desiredAmountIn: bigint
+	minAmountOut: bigint
 }
 
 export interface SwapAmount_WithDesiredOutput {
-    kind: 'WithDesiredOutput'
-    desiredAmountOut: bigint
-    maxAmountIn: bigint
+	kind: 'WithDesiredOutput'
+	desiredAmountOut: bigint
+	maxAmountIn: bigint
 }
 
-export type LiquiditySourceType = (
-	  'XYKPool'
+export type LiquiditySourceType =
+	| 'XYKPool'
 	| 'BondingCurvePool'
 	| 'MulticollateralBondingCurvePool'
 	| 'MockPool'
@@ -25,7 +25,6 @@ export type LiquiditySourceType = (
 	| 'MockPool4'
 	| 'XSTPool'
 	| 'OrderBook'
-)
 
 export type CallRec = {
 	inputAssetId: AssetId
@@ -39,12 +38,12 @@ export const receiveExtrinsicSwapAmounts = (swapAmount: SwapAmount, assetId: Ass
 	if (swapAmount.kind === 'WithDesiredOutput') {
 		return [
 			formatU128ToBalance(swapAmount.maxAmountIn, assetId),
-			formatU128ToBalance(swapAmount.desiredAmountOut, assetId)
+			formatU128ToBalance(swapAmount.desiredAmountOut, assetId),
 		]
 	} else {
 		return [
 			formatU128ToBalance(swapAmount.desiredAmountIn, assetId),
-			formatU128ToBalance(swapAmount.minAmountOut, assetId)
+			formatU128ToBalance(swapAmount.minAmountOut, assetId),
 		]
 	}
 }
