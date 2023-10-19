@@ -171,6 +171,7 @@ class AssetStorage {
 		}
 		getAssetStorageLog(ctx).debug(`Assets Daily stats updated!`)
 	}
+    
 	async updateWeeklyStats(ctx: BlockContext): Promise<void> {
 		getAssetStorageLog(ctx).debug(`Assets Weekly stats updating...`);
 		for (const asset of this.storage.values()) {

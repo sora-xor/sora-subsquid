@@ -50,5 +50,5 @@ export async function demeterDepositCallHandler(ctx: BlockContext, callItem: Cal
 	await addDataToHistoryElement(ctx, historyElement, details)
 	await updateHistoryElementStats(ctx, historyElement)
 
-	getCallHandlerLog(ctx, callItem).debug(`Saved demeterFarmingPlatform deposit with '${callItem.extrinsic.hash}' extrinsic hash`)
+	getCallHandlerLog(ctx, callItem).debug('Saved demeterFarmingPlatform deposit')
 }

@@ -9,7 +9,7 @@ import { toHex } from '@subsquid/substrate-processor'
 import { AddressEthereum, AssetAmount, AssetId } from '../../types'
 import { toAddressEthereum } from '../../utils'
 import { getEntityData } from '../../utils/entities'
- import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
+import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 
 export async function soraEthTransferCallHandler(ctx: BlockContext, callItem: CallItem<'EthBridge.transfer_to_sidechain'>): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
