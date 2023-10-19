@@ -28,7 +28,7 @@ type Environments = {
 	[environment in Environment]: EnvironmentAddresses
 }
 
-const version = 2
+const version = 3
 
 export const environments: Environments = {
 	[Environment.PRODUCTION]: {

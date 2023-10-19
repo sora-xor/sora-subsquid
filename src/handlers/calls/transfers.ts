@@ -8,11 +8,11 @@ import { Address, AssetId } from '../../types'
 import { toAddress } from '../../utils'
 import { getEntityData } from '../../utils/entities'
  import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
+import { getExtrinsicSigner } from '../../utils/calls'
 
 export async function transfersCallHandler(ctx: BlockContext, callItem: CallItem<'Assets.transfer'>): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
 
-	const blockHeight = ctx.block.header.height
 	const extrinsicHash = callItem.extrinsic.hash
     const historyElement = await createHistoryElement(ctx, callItem)
 
@@ -52,10 +52,7 @@ export async function transfersCallHandler(ctx: BlockContext, callItem: CallItem
 		const assetId = getAssetId(data.assetId)
 		const amount = data.amount
 
-		const extrinsicSigner: Address | null = callItem.call.origin ? toAddress(callItem.call.origin.value.value) : null
-		if (!extrinsicSigner) {
-			getCallHandlerLog(ctx, callItem).error('Cannot get extrinsic signer')
-		}
+		const extrinsicSigner: Address | null = getExtrinsicSigner(ctx, callItem)
 
         details = {
             from: extrinsicSigner,

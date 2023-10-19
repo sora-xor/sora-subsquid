@@ -2,13 +2,14 @@ import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStat
 import { getAssetId, formatU128ToBalance } from '../../utils/assets'
 import { XOR } from '../../utils/consts'
 
-import { BlockContext, Address, CallItem, Context } from '../../types'
+import { BlockContext, CallItem } from '../../types'
 import { LiquidityProxySwapTransferBatchCall } from '../../types/generated/calls'
 import { getEntityData } from '../../utils/entities'
 import { toAddress } from '../../utils'
 import { findEventByExtrinsicHash, findEventsByExtrinsicHash } from '../../utils/events'
 import { AssetsTransferEvent, LiquidityProxyBatchSwapExecutedEvent, LiquidityProxyExchangeEvent, TransactionPaymentTransactionFeePaidEvent, XorFeeFeeWithdrawnEvent } from '../../types/generated/events'
  import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
+import { getExtrinsicSigner } from '../../utils/calls'
 
 function getLiquidityProxyBatchSwapExecutedEventData (ctx: BlockContext, extrinsicHash: string) {
 	const name = 'LiquidityProxy.BatchSwapExecuted'
@@ -43,7 +44,7 @@ const handleAndSaveExtrinsic = async (ctx: BlockContext, callItem: CallItem<'Liq
 	const data = getEntityData(ctx, call, callItem)
 
     const inputAssetId = getAssetId(data.inputAssetId)
-	const extrinsicSigner: Address | null = callItem.call.origin ? toAddress(callItem.call.origin.value.value) : null
+	const extrinsicSigner = getExtrinsicSigner(ctx, callItem)
 
     const details: any = {}
 

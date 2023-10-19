@@ -3,9 +3,12 @@ import { BlockContext, CallItem } from '../../types'
 import { StakingBondCall, StakingBondExtraCall, StakingCancelDeferredSlashCall, StakingChillCall, StakingChillOtherCall, StakingForceApplyMinCommissionCall, StakingForceNewEraAlwaysCall, StakingForceNewEraCall, StakingForceNoErasCall, StakingForceUnstakeCall, StakingIncreaseValidatorCountCall, StakingKickCall, StakingNominateCall, StakingPayoutStakersCall, StakingReapStashCall, StakingRebondCall, StakingScaleValidatorCountCall, StakingSetControllerCall, StakingSetHistoryDepthCall, StakingSetInvulnerablesCall, StakingSetMinCommissionCall, StakingSetPayeeCall, StakingSetStakingConfigsCall, StakingSetValidatorCountCall, StakingSubmitElectionSolutionCall, StakingSubmitElectionSolutionUnsignedCall, StakingUnbondCall, StakingValidateCall, StakingWithdrawUnbondedCall } from '../../types/generated/calls'
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { getEntityData } from '../../utils/entities'
-import { logStartProcessingCall } from '../../utils/logs'
+import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 import { XOR } from '../../utils/consts'
 import { formatU128ToBalance } from '../../utils/assets'
+import { getExtrinsicSigner } from '../../utils/calls'
+import { PayeeType, StakingStaker } from '../../model'
+import { getStakingStaker } from '../../utils/staking'
 
 export async function stakingBondCallHandler(ctx: BlockContext, callItem: CallItem<'Staking.bond'>): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
@@ -286,8 +289,18 @@ export async function stakingSetControllerCallHandler(ctx: BlockContext, callIte
     const call = new StakingSetControllerCall(ctx, callItem.call)
 	const data = getEntityData(ctx, call, callItem)
 
+	const controller = toHex(data.controller)
+	const extrinsicSigner = getExtrinsicSigner(ctx, callItem)
+	const stakingStaker = await getStakingStaker(ctx, extrinsicSigner)
+	
+	if (stakingStaker.controller !== controller) {
+		stakingStaker.controller = controller
+		ctx.store.save(stakingStaker)
+		getCallHandlerLog(ctx, callItem).debug({ staker: stakingStaker.id, controller }, 'Staking staker controller updated')
+	}
+
     const details = {
-        controller: toHex(data.controller),
+        controller,
     }
 
     await addDataToHistoryElement(ctx, historyElement, details)
@@ -351,8 +364,21 @@ export async function stakingSetPayeeCallHandler(ctx: BlockContext, callItem: Ca
     const call = new StakingSetPayeeCall(ctx, callItem.call)
 	const data = getEntityData(ctx, call, callItem)
 
+	const extrinsicSigner = getExtrinsicSigner(ctx, callItem)
+	const stakingStaker = await getStakingStaker(ctx, extrinsicSigner)
+	const payeeType = data.payee.__kind.toUpperCase() as PayeeType
+	const payee = data.payee.__kind === 'Account' ? toHex(data.payee.value) : null
+
+	if (stakingStaker.payeeType !== payeeType || stakingStaker.payee !== payee) {
+		stakingStaker.payeeType = payeeType
+		stakingStaker.payee = payee
+		ctx.store.save(stakingStaker)
+		getCallHandlerLog(ctx, callItem).debug({ staker: stakingStaker.id, payee }, 'Staking staker payee updated')
+	}
+
     const details = {
-        payee: data.payee.__kind === 'Account' ? { kind: data.payee.__kind, value: toHex(data.payee.value) } : { kind: data.payee.__kind },
+        payeeType,
+		payee
     }
 
     await addDataToHistoryElement(ctx, historyElement, details)

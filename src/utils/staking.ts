@@ -1,4 +1,4 @@
-import { StakingEra, StakingStaker } from '../model'
+import { PayeeType, StakingEra, StakingStaker } from '../model'
 import { Address, BlockContext } from '../types'
 import { StakingActiveEraStorage } from '../types/generated/storage'
 import { getEntityData } from './entities'
@@ -34,6 +34,8 @@ export const getStakingStaker = async (ctx: BlockContext, address: Address): Pro
 	let stakingStaker = await ctx.store.get(StakingStaker, address)
 	if (!stakingStaker) {
 		stakingStaker = new StakingStaker({ id: address })
+		stakingStaker.payeeType = PayeeType.STASH
+		stakingStaker.payee = address
 		await ctx.store.save(stakingStaker)
 	}
 	return stakingStaker

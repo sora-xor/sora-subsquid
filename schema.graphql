@@ -5,6 +5,14 @@ enum SnapshotType {
 	MONTH
 }
 
+enum PayeeType {
+	STAKED
+	STASH
+	CONTROLLER,
+	ACCOUNT,
+	NONE
+}
+
 type NetworkStats @entity {
 	id: ID!
 	totalFees: BigInt!
@@ -139,9 +147,9 @@ type ReferrerReward @entity {
 
 type StakingReward @entity {
 	id: ID!
-	account: String! @index
-	amount: BigInt!
+	amount: String!
 	staker: StakingStaker!
+	payee: String @index
 	era: StakingEra!
 	timestamp: Int!
 }
@@ -150,6 +158,9 @@ type StakingStaker @entity {
 	id: ID!
 	eraValidators: [StakingEraValidator!]! @derivedFrom(field: "staker")
 	eraNominators: [StakingEraNominator!]! @derivedFrom(field: "staker")
+	payeeType: PayeeType!
+	payee: String
+	controller: String
 }
 
 type StakingValidator @entity {
