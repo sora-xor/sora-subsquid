@@ -33,7 +33,7 @@ export function getCallHandlerLog(ctx: BlockContext, callItem: CallItem<any>, me
 
 export function getEventHandlerLog(ctx: BlockContext, eventItem: EventItem<any>, message: string = '', attrs: Record<string, any> = {}) {
 	const extrinsicHash = eventItem.event.extrinsic?.hash ?? null
-	const attributes: any = { ...attrs, eventName: toPascalCase(eventItem.name) }
+	const attributes: any = { ...attrs, eventName: toPascalCase(eventItem.name), eventId: eventItem.event.id }
 	if (extrinsicHash) {
 		attributes['extrinsicHash'] = extrinsicHash
 	}
