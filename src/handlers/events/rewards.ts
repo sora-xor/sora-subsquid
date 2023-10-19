@@ -5,6 +5,7 @@ import { formatDateTimestamp, toAddress } from '../../utils'
 import { formatU128ToBalance } from '../../utils/assets'
 import { VAL } from '../../utils/consts'
 import { getEntityData } from '../../utils/entities'
+import { getEventId } from '../../utils/events'
 import { getEventHandlerLog, logStartProcessingEvent } from '../../utils/logs'
 import { getActiveStakingEra, getStakingStaker } from '../../utils/staking'
 
@@ -28,7 +29,7 @@ export async function stakingRewardedEventHandler(ctx: BlockContext, eventItem: 
 	const payee = staker.payee
 	
 	const stakingReward = new StakingReward()
-	stakingReward.id = `${stakingEra.id}-${ctx.block.header.height}-${staker.id}`
+	stakingReward.id = `${stakingEra.id}-${getEventId(ctx, eventItem)}-${staker.id}`
 	stakingReward.staker = staker
 	stakingReward.payee = payee
 	stakingReward.amount = amount

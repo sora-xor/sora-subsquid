@@ -1,4 +1,5 @@
 import { Block, BlockContext, CallItem, Context, EventItem } from '../types'
+import { getEventId } from './events';
 
 function toPascalCase(str: string): string {
     return str
@@ -35,7 +36,7 @@ export function getCallHandlerLog(ctx: BlockContext, callItem: CallItem<any>, me
 export function getEventHandlerLog(ctx: BlockContext, eventItem: EventItem<any>, message: string = '', attrs: Record<string, any> = {}) {
 	const extrinsicHash = eventItem.event.extrinsic?.hash ?? null
 	const eventName = toPascalCase(eventItem.name)
-	const eventId = `${ctx.block.header.height}-${eventItem.event.indexInBlock}`
+	const eventId = getEventId(ctx, eventItem)
 	const attributes: any = { ...attrs, eventName, eventId }
 	if (extrinsicHash) {
 		attributes['extrinsicHash'] = extrinsicHash

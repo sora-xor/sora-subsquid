@@ -142,7 +142,6 @@ export const getTokensDepositedEventData = (
 	}
 }
 	
-
 export const getAssetsDepositEventData = (
 	ctx: BlockContext,
 	eventItem: EventItem<'Balances.Deposited'> | EventItem<'Tokens.Deposited'>
@@ -152,4 +151,8 @@ export const getAssetsDepositEventData = (
 	} else {
 		return getTokensDepositedEventData(ctx, eventItem)
 	}
+}
+
+export const getEventId = (ctx: BlockContext, eventItem: EventItem<EventItemName>): string => {
+	return `${ctx.block.header.height}-${eventItem.event.indexInBlock}`
 }

@@ -87,7 +87,7 @@ processor.run(new TypeormDatabase(), async (ctx) => {
 
     for (let block of context.blocks) {
 		const blockContext = { ...context, block, log: getLog({ ...context, block }) }
-
+		
         await initializeAssets(blockContext)
         await initializePools(blockContext)
 
