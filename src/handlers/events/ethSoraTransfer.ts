@@ -13,7 +13,7 @@ import { findCallByExtrinsicHash } from '../../utils/calls'
 import { getEntityData } from '../../utils/entities'
 import { toHex } from '@subsquid/substrate-processor'
 import { CannotFindCallError } from '../../utils/errors'
-import { getEventHandlerLog, logStartProcessingEvent } from '../../utils/logs'
+import { logStartProcessingEvent } from '../../utils/logs'
 
 export async function ethSoraTransferEventHandler(
 	ctx: BlockContext,
@@ -69,10 +69,6 @@ export async function ethSoraTransferEventHandler(
 		])
 	}
 
-	const historyElement = await createHistoryElement(ctx, callItem)
-	await addDataToHistoryElement(ctx, historyElement, details)
-	await updateHistoryElementStats(ctx, historyElement)
+	await createHistoryElement(ctx, callItem, details)
 	await networkSnapshotsStorage.updateBridgeIncomingTransactionsStats(ctx)
-
-	getEventHandlerLog(ctx, eventItem).debug('Saved ETH->SORA transfer extrinsic')
 }

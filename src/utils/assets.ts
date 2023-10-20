@@ -5,6 +5,7 @@ import { DAI } from './consts'
 import { AssetId } from '../types'
 import { formatDateTimestamp, getSnapshotIndex, toAssetId } from '.'
 import { getAssetSnapshotsStorageLog, getAssetStorageLog } from './logs'
+import { testLogMode } from '../config'
 
 const prevIndexesRow = (index: number, count: number): number[] => {
 	return new Array(count).fill(index).reduce((buffer, item, idx) => {
@@ -77,7 +78,7 @@ class AssetStorage {
 
 	async sync(ctx: BlockContext): Promise<void> {
 		getAssetStorageLog(ctx).debug(`Sync ${this.storage.size} assets`)
-		ctx.store.save([...this.storage.values()])
+		await ctx.store.save([...this.storage.values()])
 	}
 
 	async getAsset(ctx: BlockContext, id: AssetId): Promise<Asset> {
@@ -97,12 +98,9 @@ class AssetStorage {
 			asset.updatedAtBlock = ctx.block.header.height
 
 			await ctx.store.save(asset)
-
-			getAssetStorageLog(ctx).debug({ assetId: id }, 'Created Asset')
+			getAssetStorageLog(ctx).debug({ assetId: id }, 'Asset created and saved')
 		}
-
 		this.storage.set(asset.id, asset)
-
 		return asset
 	}
 
@@ -116,6 +114,9 @@ class AssetStorage {
 			asset.updatedAtBlock = ctx.block.header.height
 			// to update asset price by ws subscription instantly
 			await ctx.store.save(asset)
+			if (testLogMode) {
+				getAssetStorageLog(ctx).debug({ assetId: id, newPrice: priceUSD }, 'Asset price updated')
+			}
 		}
 	}
 
@@ -126,6 +127,9 @@ class AssetStorage {
 		// update liqudiity usd with new liquidity
 		asset.updatedAtBlock = ctx.block.header.height
 		this.calcLiquidityUSD(asset)
+		if (testLogMode) {
+			getAssetStorageLog(ctx).debug({ assetId: id, newLiquidity: liquidity }, 'Asset liquidity updated')
+		}
 	}
 
 	calcLiquidityUSD(asset: Asset): void {
@@ -179,8 +183,13 @@ class AssetStorage {
 
 			asset.priceChangeDay = priceChange
 			asset.volumeDayUSD = volumeUSD
+			if (testLogMode) {
+				getAssetStorageLog(ctx).debug(
+					{ assetId: asset.id, priceChange, volumeUSD },
+					'Asset daily stats updated',
+				)
+			}
 		}
-		getAssetStorageLog(ctx).debug(`Assets Daily stats updated!`)
 	}
 
 	async updateWeeklyStats(ctx: BlockContext): Promise<void> {
@@ -198,8 +207,13 @@ class AssetStorage {
 			asset.priceChangeWeek = priceChange
 			asset.volumeWeekUSD = volumeUSD
 			asset.velocity = velocity
+			if (testLogMode) {
+				getAssetStorageLog(ctx).debug(
+					{ assetId: asset.id, priceChange, volumeUSD, velocity },
+					'Asset weekly stats updated',
+				)
+			}
 		}
-		getAssetStorageLog(ctx).debug(`Assets Weekly stats updated!`)
 	}
 }
 
@@ -276,6 +290,7 @@ class AssetSnapshotsStorage {
 				low: asset.priceUSD,
 			})
 			snapshot.updatedAtBlock = ctx.block.header.height
+			getAssetSnapshotsStorageLog(ctx).debug({ assetId: id }, 'Asset snapshot created and saved')
 		}
 
 		this.storage.set(snapshot.id, snapshot)
@@ -302,6 +317,12 @@ class AssetSnapshotsStorage {
 				const blockHeight = ctx.block.header.height
 				throw new Error(`[${blockHeight}] ${snapshot.id} snapshot doesn't have priceUSD`)
 			}
+			if (testLogMode) {
+				getAssetSnapshotsStorageLog(ctx).debug(
+					{ assetId: assetId, newPrice: price },
+					'Asset snapshot price updated',
+				)
+			}
 		}
 
 		await this.assetStorage.updatePrice(ctx, assetId, price)
@@ -326,6 +347,12 @@ class AssetSnapshotsStorage {
 			} else {
 				throw new Error(`[${ctx.block.header.height}] ${snapshot.id} snapshot doesn't have volume`)
 			}
+			if (testLogMode) {
+				getAssetSnapshotsStorageLog(ctx).debug(
+					{ assetId: assetId, newVolume: volume.toString() },
+					'Asset snapshot volume updated',
+				)
+			}
 		}
 
 		return volumeUSD
@@ -337,6 +364,13 @@ class AssetSnapshotsStorage {
 
 			snapshot.liquidity = liquidity
 			snapshot.updatedAtBlock = ctx.block.header.height
+			await ctx.store.save(snapshot)
+			if (testLogMode) {
+				getAssetSnapshotsStorageLog(ctx).debug(
+					{ assetId: assetId, newLiquidity: liquidity.toString() },
+					'Asset snapshot liquidity updated',
+				)
+			}
 		}
 
 		await this.assetStorage.updateLiquidity(ctx, assetId, liquidity)
@@ -348,12 +382,19 @@ class AssetSnapshotsStorage {
 
 			snapshot.mint = snapshot.mint + amount
 			snapshot.updatedAtBlock = ctx.block.header.height
+			if (testLogMode) {
+				getAssetSnapshotsStorageLog(ctx).debug(
+					{ assetId: assetId, newMinted: amount.toString() },
+					'Asset snapshot mint updated',
+				)
+			}
 		}
 
 		const asset = await this.assetStorage.getAsset(ctx, assetId)
 
 		asset.supply = asset.supply + amount
 		asset.updatedAtBlock = ctx.block.header.height
+		getAssetStorageLog(ctx).debug({ assetId: assetId, minted: amount.toString() }, 'Asset minted')
 	}
 
 	async updateBurned(ctx: BlockContext, assetId: AssetId, amount: bigint): Promise<void> {
@@ -362,12 +403,19 @@ class AssetSnapshotsStorage {
 
 			snapshot.burn = snapshot.burn + amount
 			snapshot.updatedAtBlock = ctx.block.header.height
+			if (testLogMode) {
+				getAssetSnapshotsStorageLog(ctx).debug(
+					{ assetId: assetId, newBurned: snapshot.burn.toString() },
+					'Asset snapshot burn updated',
+				)
+			}
 		}
 
 		const asset = await this.assetStorage.getAsset(ctx, assetId)
 
 		asset.supply = asset.supply - amount
 		asset.updatedAtBlock = ctx.block.header.height
+		getAssetStorageLog(ctx).debug({ assetId: assetId, supply: asset.supply.toString() }, 'Asset supply updated')
 	}
 }
 

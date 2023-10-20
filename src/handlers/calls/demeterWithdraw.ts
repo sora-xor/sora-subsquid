@@ -32,7 +32,6 @@ export async function demeterWithdrawCallHandler(
 
 	if (eventItem) {
 		const event = new DemeterFarmingPlatformWithdrawnEvent(ctx, eventItem.event)
-
 		const data = getEntityData(ctx, event, eventItem)
 
 		const assetAmount = data[1] as AssetAmount
@@ -55,6 +54,4 @@ export async function demeterWithdrawCallHandler(
 	if (!historyElement) return
 	await addDataToHistoryElement(ctx, historyElement, details)
 	await updateHistoryElementStats(ctx, historyElement)
-
-	getCallHandlerLog(ctx, callItem).debug('Saved demeterFarmingPlatform withdraw')
 }

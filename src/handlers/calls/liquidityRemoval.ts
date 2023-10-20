@@ -5,7 +5,7 @@ import { poolsStorage } from '../../utils/pools'
 import { BlockContext, AssetAmount, CallItem } from '../../types'
 import { PoolXykWithdrawLiquidityCall } from '../../types/generated/calls'
 import { getEntityData } from '../../utils/entities'
-import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
+import { logStartProcessingCall } from '../../utils/logs'
 
 export async function liquidityRemovalCallHandler(
 	ctx: BlockContext,
@@ -49,8 +49,6 @@ export async function liquidityRemovalCallHandler(
 	}
 
 	await addDataToHistoryElement(ctx, historyElement, details)
-
-	getCallHandlerLog(ctx, callItem).debug(`Saved liquidity removal`)
 
 	await poolsStorage.getPool(ctx, baseAssetId, targetAssetId)
 	await updateHistoryElementStats(ctx, historyElement)

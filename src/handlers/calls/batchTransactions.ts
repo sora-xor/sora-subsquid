@@ -1,7 +1,7 @@
 import { addCallsToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { formatU128ToBalance, getAssetId } from '../../utils/assets'
 import { poolsStorage } from '../../utils/pools'
-import { Block, BlockContext, CallItem } from '../../types'
+import { BlockContext, CallItem } from '../../types'
 import { UtilityBatchAllCall, utilityBatchAllCallVersions } from '../../types/generated/calls'
 import { HistoryElement, HistoryElementCall } from '../../model'
 import { AssetId } from '../../types'
@@ -152,8 +152,6 @@ export async function batchTransactionsCallHandler(
 	await addCallsToHistoryElement(ctx, historyElement, historyElementCalls)
 	await updateHistoryElementStats(ctx, historyElement)
 
-	getCallHandlerLog(ctx, callItem).debug('Saved batch extrinsic')
-
 	if (historyElement.execution.success) {
 		// If initialize pool call exists, create new Pool
 		const initializePool = historyElementCalls.find(
@@ -161,7 +159,7 @@ export async function batchTransactionsCallHandler(
 		)
 
 		if (initializePool) {
-			//TODO: Determine wether or not typization is applicable here
+			//TODO: Determine whether or not typization is applicable here
 			const data: {
 				dexId: number
 				assetA: AssetId

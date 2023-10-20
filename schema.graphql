@@ -13,6 +13,11 @@ enum PayeeType {
 	NONE
 }
 
+enum HistoryElementType {
+	CALL
+	EVENT
+}
+
 type NetworkStats @entity {
 	id: ID!
 	totalFees: BigInt!
@@ -100,12 +105,13 @@ type Account @entity {
 
 type HistoryElement @entity {
 	id: ID!
+	type: HistoryElementType!
 	blockHeight: BigInt!
 	blockHash: String! @index
 	module: String!
 	method: String!
 	address: String! @index
-	networkFee: String!
+	networkFee: String
 	execution: ExecutionResult!
 	timestamp: Int!
 	data: JSON
@@ -196,8 +202,7 @@ type StakingEraValidator @entity {
 
 type StakingEra @entity {
 	index: Int! @index
-	startBlock: BigInt!
-	endBlock: BigInt
+	start: BigInt! @index
     validators: [StakingEraValidator!]! @derivedFrom(field: "era")
 	nominators: [StakingEraNominator!]! @derivedFrom(field: "era")
     nominations: [StakingEraNomination!]! @derivedFrom(field: "era")

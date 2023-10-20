@@ -52,7 +52,5 @@ export async function irohaMigrationCallHandler(
 
 		if (details) await addDataToHistoryElement(ctx, historyElement, details)
 		await updateHistoryElementStats(ctx, historyElement)
-
-		getCallHandlerLog(ctx, callItem).debug(`Saved iroha migration`)
 	}
 }

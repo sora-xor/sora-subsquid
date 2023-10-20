@@ -2,6 +2,7 @@ import { PayeeType, StakingEra, StakingStaker } from '../model'
 import { Address, BlockContext } from '../types'
 import { StakingActiveEraStorage } from '../types/generated/storage'
 import { getEntityData } from './entities'
+import { getUtilsLog } from './logs'
 
 export const getActiveStakingEra = async (ctx: BlockContext): Promise<StakingEra> => {
 	const activeEraStorage = new StakingActiveEraStorage(ctx, ctx.block.header)
@@ -10,6 +11,7 @@ export const getActiveStakingEra = async (ctx: BlockContext): Promise<StakingEra
 		kind: 'storage',
 		name: StakingActiveEraStorage.name,
 	}).get()
+
 	if (!activeEra) {
 		throw new Error(`[${ctx.block.header.height}] Active era not found`)
 	}
@@ -20,16 +22,10 @@ export const getActiveStakingEra = async (ctx: BlockContext): Promise<StakingEra
 		stakingEra.id = activeEra.index.toString()
 		stakingEra.index = activeEra.index
 		if (activeEra.start) {
-			stakingEra.startBlock = activeEra.start
-			const previousStakingEra = await ctx.store.get(StakingEra, {
-				where: { index: activeEra.index - 1 },
-			})
-			if (previousStakingEra && !previousStakingEra.endBlock) {
-				previousStakingEra.endBlock = activeEra.start - 1n
-				await ctx.store.save(previousStakingEra)
-			}
+			stakingEra.start = activeEra.start
 		}
 		await ctx.store.save(stakingEra)
+		getUtilsLog(ctx).debug({ index: activeEra.index }, 'Staking era saved')
 	}
 
 	return stakingEra
@@ -42,6 +38,7 @@ export const getStakingStaker = async (ctx: BlockContext, address: Address): Pro
 		stakingStaker.payeeType = PayeeType.STASH
 		stakingStaker.payee = address
 		await ctx.store.save(stakingStaker)
+		getUtilsLog(ctx).debug({ id: address }, 'Staking staker saved')
 	}
 	return stakingStaker
 }

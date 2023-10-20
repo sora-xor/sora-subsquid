@@ -50,8 +50,6 @@ export async function liquidityDepositCallHandler(
 
 	await addDataToHistoryElement(ctx, historyElement, details)
 
-	getCallHandlerLog(ctx, callItem).debug(`Saved liquidity deposit`)
-
 	await poolsStorage.getPool(ctx, baseAssetId, targetAssetId)
 	await updateHistoryElementStats(ctx, historyElement)
 }

@@ -1,5 +1,5 @@
-import { ExecutionResult, ExecutionError, HistoryElement, HistoryElementCall } from '../model'
-import { AnyCallItem, AssetAmount, BlockContext, CallItem, CallItemName } from '../types'
+import { ExecutionResult, ExecutionError, HistoryElement, HistoryElementCall, HistoryElementType } from '../model'
+import { AnyCallItem, AssetAmount, BlockContext, EntityItem, EntityItemName } from '../types'
 import { formatU128ToBalance } from './assets'
 import { getAccountEntity } from './account'
 import { networkSnapshotsStorage } from './network'
@@ -7,9 +7,10 @@ import { XOR } from './consts'
 import { formatDateTimestamp, toAddress, toCamelCase } from './index'
 import { nToU8a } from '@polkadot/util'
 import { toJSON } from '@subsquid/util-internal-json'
-import { findEventByExtrinsicHash } from './events'
+import { findEventByExtrinsicHash, getEntityId, getEventId } from './events'
 import { XorFeeFeeWithdrawnEvent } from '../types/generated/events'
 import { getEntityData } from './entities'
+import { getUtilsLog } from './logs'
 
 const INCOMING_TRANSFER_METHODS = ['transfer', 'swap_transfer']
 
@@ -25,39 +26,62 @@ const getCallItemNetworkFee = (ctx: BlockContext, callItem: AnyCallItem): AssetA
 	return 0n as AssetAmount
 }
 
-export const createHistoryElement = (ctx: BlockContext, callItem: CallItem<CallItemName>): HistoryElement => {
+function filterDataProperties(obj: Record<string, any>) {
+	const filteredObj: Record<string, any> = {}
+	for (let key in obj) {
+		if (obj.hasOwnProperty(key)) {
+			const type = typeof obj[key]
+			if (type === 'number' || type === 'string' || type === 'bigint' || type === 'boolean') {
+				filteredObj[key] = obj[key]
+			}
+		}
+	}
+	return filteredObj
+}
+
+export const createHistoryElement = (
+	ctx: BlockContext,
+	entityItem: EntityItem<EntityItemName>,
+	data?: {},
+): HistoryElement => {
 	const historyElement = new HistoryElement()
 
 	if (!ctx.block.header.validator) {
 		throw Error('There is no block validator')
 	}
 
-	historyElement.id = callItem.extrinsic.hash
+	const extrinsic = entityItem.kind === 'call' ? entityItem.extrinsic : entityItem.event.extrinsic
+
+	historyElement.id = getEntityId(ctx, entityItem)
+	historyElement.type = entityItem.kind === 'call' ? HistoryElementType.CALL : HistoryElementType.EVENT
 	historyElement.blockHeight = BigInt(ctx.block.header.height)
 	historyElement.blockHash = ctx.block.header.hash.toString()
-	historyElement.module = toCamelCase(callItem.name.split('.')[0])
-	historyElement.method = toCamelCase(callItem.name.split('.')[1])
-	historyElement.address = toAddress(callItem.extrinsic.signature?.address)
-	historyElement.networkFee = formatU128ToBalance(getCallItemNetworkFee(ctx, callItem), XOR)
+	historyElement.module = toCamelCase(entityItem.name.split('.')[0])
+	historyElement.method = toCamelCase(entityItem.name.split('.')[1])
+	historyElement.address = toAddress(
+		(entityItem.kind === 'call' ? entityItem.extrinsic : entityItem.event.extrinsic)?.signature?.address,
+	)
+	historyElement.networkFee =
+		entityItem.kind === 'call' ? formatU128ToBalance(getCallItemNetworkFee(ctx, entityItem), XOR) : null
 	historyElement.timestamp = formatDateTimestamp(new Date(ctx.block.header.timestamp))
 	historyElement.updatedAtBlock = ctx.block.header.height
 	historyElement.callNames = []
 
-	const success = callItem.extrinsic.success
+	const success = extrinsic?.success
 
 	if (success) {
 		historyElement.execution = new ExecutionResult({
 			success,
 		})
-	} else {
+	} else if (extrinsic) {
 		const error =
-			callItem.extrinsic.error.__kind === 'Module'
+			extrinsic.error.__kind === 'Module'
 				? new ExecutionError({
-						moduleErrorId: nToU8a(callItem.extrinsic.error.value.error).at(-1),
-						moduleErrorIndex: callItem.extrinsic.error.value.index,
+						moduleErrorId: nToU8a(extrinsic.error.value.error).at(-1),
+						moduleErrorIndex: extrinsic.error.value.index,
 				  })
 				: new ExecutionError({
-						nonModuleErrorMessage: JSON.stringify(callItem.extrinsic.error),
+						nonModuleErrorMessage: JSON.stringify(extrinsic.error),
 				  })
 
 		historyElement.execution = new ExecutionResult({
@@ -67,6 +91,14 @@ export const createHistoryElement = (ctx: BlockContext, callItem: CallItem<CallI
 	}
 
 	ctx.store.save(historyElement)
+	const { callNames, ...logArguments } = historyElement
+	getUtilsLog(ctx).debug(logArguments, 'Created history element')
+
+	if (data) {
+		addDataToHistoryElement(ctx, historyElement, data)
+		updateHistoryElementStats(ctx, historyElement)
+	}
+
 	return historyElement
 }
 
@@ -81,6 +113,10 @@ export const addDataToHistoryElement = async (ctx: BlockContext, historyElement:
 	historyElement.updatedAtBlock = ctx.block.header.height
 
 	await ctx.store.save(historyElement)
+	getUtilsLog(ctx).debug(
+		{ historyElementId: historyElement.id, ...filterDataProperties(data) },
+		'Updated history element with data',
+	)
 }
 
 export const addCallsToHistoryElement = async (
@@ -115,4 +151,5 @@ export const updateHistoryElementStats = async (ctx: BlockContext, historyElemen
 	}
 
 	await networkSnapshotsStorage.updateTransactionsStats(ctx)
+	getUtilsLog(ctx).debug('Updated history element stats')
 }

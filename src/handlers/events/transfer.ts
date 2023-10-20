@@ -24,7 +24,7 @@ export async function transferEventHandler(
 			pool.targetAssetReserves = pool.targetAssetReserves - amount
 		}
 
-		getEventHandlerLog(ctx, eventItem).debug({ poolId: pool.id }, 'Update pool')
+		getEventHandlerLog(ctx, eventItem).debug({ poolId: pool.id }, 'Pool information saved after withdrawal')
 		PoolsPrices.set(true)
 	}
 
@@ -40,7 +40,7 @@ export async function transferEventHandler(
 			pool.targetAssetReserves = pool.targetAssetReserves + amount
 		}
 
-		getEventHandlerLog(ctx, eventItem).debug({ poolId: pool.id }, 'Update pool')
+		getEventHandlerLog(ctx, eventItem).debug({ poolId: pool.id }, 'Pool information saved after deposit')
 		PoolsPrices.set(true)
 	}
 }

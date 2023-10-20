@@ -51,6 +51,4 @@ export async function assetRegistrationCallHandler(
 
 	await addDataToHistoryElement(ctx, historyElement, details)
 	await updateHistoryElementStats(ctx, historyElement)
-
-	getCallHandlerLog(ctx, callItem).debug('Saved asset registration')
 }

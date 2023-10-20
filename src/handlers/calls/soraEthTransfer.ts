@@ -9,7 +9,7 @@ import { toHex } from '@subsquid/substrate-processor'
 import { AddressEthereum, AssetAmount, AssetId } from '../../types'
 import { toAddressEthereum } from '../../utils'
 import { getEntityData } from '../../utils/entities'
-import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
+import { logStartProcessingCall } from '../../utils/logs'
 
 export async function soraEthTransferCallHandler(
 	ctx: BlockContext,
@@ -61,6 +61,4 @@ export async function soraEthTransferCallHandler(
 	await addDataToHistoryElement(ctx, historyElement, details)
 	await updateHistoryElementStats(ctx, historyElement)
 	await networkSnapshotsStorage.updateBridgeOutgoingTransactionsStats(ctx)
-
-	getCallHandlerLog(ctx, callItem).debug(`Saved SORA->ETH transfer extrinsic`)
 }

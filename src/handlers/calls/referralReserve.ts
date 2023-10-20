@@ -32,7 +32,6 @@ export async function referralReserveCallHandler(
 		) // TODO: Check if 'Currencies.Transferred' event is applicable here
 
 		if (!balancesTransferEventItem) {
-			getCallHandlerLog(ctx, callItem).debug(`No '${balancesTransferEventName}' event is found`)
 			return
 		}
 

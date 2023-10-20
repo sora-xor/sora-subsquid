@@ -8,7 +8,7 @@ import { poolAccounts, PoolsPrices, poolsStorage } from '../../utils/pools'
 import { XOR, PSWAP, DAI, BASE_ASSETS, XSTUSD } from '../../utils/consts'
 import { BlockContext } from '../../types'
 import { AssetId } from '../../types'
-import { getSyncPricesLog } from '../../utils/logs'
+import { getPoolsStorageLog, getSyncPricesLog } from '../../utils/logs'
 
 const getAssetDexCap = (assetReserves: BigNumber, assetPrice: BigNumber, daiReserves: BigNumber) => {
 	// theoretical asset capitalization in DAI inside DEX
@@ -80,6 +80,7 @@ export async function syncPoolXykPrices(ctx: BlockContext): Promise<void> {
 			)
 
 			pools[baseAssetId].push(pool)
+			getPoolsStorageLog(ctx).debug({ poolId: pool.id }, 'Update pool')
 		}
 
 		baseAssetWithDoublePoolsPrice = baseAssetWithDoublePoolsPrice.plus(

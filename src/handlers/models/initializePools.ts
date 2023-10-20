@@ -80,8 +80,8 @@ export async function initializePools(ctx: BlockContext): Promise<void> {
 
 	if (entities.length) {
 		await ctx.store.save(entities)
-		await Promise.all(entities.map((entity) => poolsStorage.getPoolById(ctx, entity.id as Address)))
 		getInitializePoolsLog(ctx).debug(`${entities.length} Pool XYKs initialized!`)
+		await Promise.all(entities.map((entity) => poolsStorage.getPoolById(ctx, entity.id as Address)))
 	} else {
 		getInitializePoolsLog(ctx).debug('No Pool XYKs to initialize!')
 	}

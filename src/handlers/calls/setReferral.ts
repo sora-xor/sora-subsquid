@@ -1,5 +1,5 @@
 import { toHex } from '@subsquid/substrate-processor'
-import { BlockContext, CallItem, Context } from '../../types'
+import { BlockContext, CallItem } from '../../types'
 import { ReferralsSetReferrerCall } from '../../types/generated/calls'
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { getEntityData } from '../../utils/entities'

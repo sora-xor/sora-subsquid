@@ -6,7 +6,7 @@ import { findEventByExtrinsicHash } from '../../utils/events'
 import { DemeterFarmingPlatformDepositedEvent } from '../../types/generated/events'
 import { DemeterFarmingPlatformDepositCall } from '../../types/generated/calls'
 import { getEntityData } from '../../utils/entities'
-import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
+import { logStartProcessingCall } from '../../utils/logs'
 
 export async function demeterDepositCallHandler(
 	ctx: BlockContext,
@@ -52,6 +52,4 @@ export async function demeterDepositCallHandler(
 	const historyElement = await createHistoryElement(ctx, callItem)
 	await addDataToHistoryElement(ctx, historyElement, details)
 	await updateHistoryElementStats(ctx, historyElement)
-
-	getCallHandlerLog(ctx, callItem).debug('Saved demeterFarmingPlatform deposit')
 }

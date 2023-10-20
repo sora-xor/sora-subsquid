@@ -6,7 +6,7 @@ import { BlockContext, EventItem } from '../../types'
 import { StakingErasStakersStorage } from '../../types/generated/storage'
 import { toAddress } from '../../utils'
 import { getEntityData } from '../../utils/entities'
-import { logStartProcessingEvent } from '../../utils/logs'
+import { getEventHandlerLog, logStartProcessingEvent } from '../../utils/logs'
 import { getActiveStakingEra, getStakingStaker } from '../../utils/staking'
 
 export async function stakingStakersElectedEventHandler(
@@ -54,7 +54,19 @@ export async function stakingStakersElectedEventHandler(
 			stakingEraValidator.totalBond = exposure.total
 			stakingValidator.bond = exposure.total
 			await ctx.store.save(stakingValidator)
+			getEventHandlerLog(ctx, eventItem).debug(
+				{ id: stakingValidator.id, bond: stakingValidator.bond },
+				'Staking Validator saved',
+			)
 			await ctx.store.save(stakingEraValidator)
+			getEventHandlerLog(ctx, eventItem).debug(
+				{
+					id: stakingEraValidator.id,
+					ownBond: stakingEraValidator.ownBond,
+					totalBond: stakingEraValidator.totalBond,
+				},
+				'Staking Era Validator saved',
+			)
 
 			await Promise.all(
 				exposure.others.map(async (nomination) => {
@@ -75,6 +87,10 @@ export async function stakingStakersElectedEventHandler(
 					}
 					stakingEraNominator.bond += nomination.value
 					await ctx.store.save(stakingEraNominator)
+					getEventHandlerLog(ctx, eventItem).debug(
+						{ id: stakingEraNominator.id, bond: stakingEraNominator.bond },
+						'Staking Era Nominator saved',
+					)
 
 					let stakingEraNomination = new StakingEraNomination()
 					if (stakingValidator) {
@@ -87,6 +103,10 @@ export async function stakingStakersElectedEventHandler(
 					}
 					stakingEraNomination.nominator = stakingEraNominator
 					await ctx.store.save(stakingEraNomination)
+					getEventHandlerLog(ctx, eventItem).debug(
+						{ id: stakingEraNomination.id, amount: stakingEraNomination.amount },
+						'Staking Era Nomination saved',
+					)
 				}),
 			)
 		}),

@@ -28,7 +28,6 @@ export async function demeterGetRewardsCallHandler(
 
 	if (eventItem) {
 		const event = new DemeterFarmingPlatformRewardWithdrawnEvent(ctx, eventItem.event)
-
 		const data = getEntityData(ctx, event, eventItem)
 
 		const assetAmount = data[1] as AssetAmount

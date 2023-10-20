@@ -6,6 +6,7 @@ import { formatU128ToBalance } from '../../utils/assets'
 import { VAL } from '../../utils/consts'
 import { getEntityData } from '../../utils/entities'
 import { getEventId } from '../../utils/events'
+import { createHistoryElement } from '../../utils/history'
 import { getEventHandlerLog, logStartProcessingEvent } from '../../utils/logs'
 import { getActiveStakingEra, getStakingStaker } from '../../utils/staking'
 
@@ -33,9 +34,10 @@ export async function stakingRewardedEventHandler(
 	const stakingEra = await getActiveStakingEra(ctx)
 	const staker = await getStakingStaker(ctx, stash)
 	const payee = staker.payee
+	const id = `${stakingEra.id}-${getEventId(ctx, eventItem)}-${staker.id}`
 
 	const stakingReward = new StakingReward()
-	stakingReward.id = `${stakingEra.id}-${getEventId(ctx, eventItem)}-${staker.id}`
+	stakingReward.id = id
 	stakingReward.staker = staker
 	stakingReward.payee = payee
 	stakingReward.amount = amount
@@ -43,6 +45,7 @@ export async function stakingRewardedEventHandler(
 	stakingReward.timestamp = formatDateTimestamp(new Date(ctx.block.header.timestamp))
 
 	await ctx.store.save(stakingReward)
-
 	getEventHandlerLog(ctx, eventItem).debug({ stash, payee, amount, era: stakingEra.index }, 'Staking reward saved')
+
+	await createHistoryElement(ctx, eventItem, { stash, payee, amount, era: stakingEra.index })
 }

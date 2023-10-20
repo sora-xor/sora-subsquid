@@ -7,7 +7,7 @@ import { AssetsTransferCall } from '../../types/generated/calls'
 import { Address, AssetId } from '../../types'
 import { toAddress } from '../../utils'
 import { getEntityData } from '../../utils/entities'
-import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
+import { getCallHandlerLog, getEventHandlerLog, logStartProcessingCall } from '../../utils/logs'
 import { getExtrinsicSigner } from '../../utils/calls'
 
 export async function transfersCallHandler(ctx: BlockContext, callItem: CallItem<'Assets.transfer'>): Promise<void> {
@@ -42,6 +42,11 @@ export async function transfersCallHandler(ctx: BlockContext, callItem: CallItem
 			assetId,
 			amount: formatU128ToBalance(amount, assetId),
 		}
+
+		getEventHandlerLog(ctx, eventItem).debug(
+			{ from, to, assetId, amount: details.amount },
+			'Transfer executed successfully',
+		)
 	} else {
 		const call = new AssetsTransferCall(ctx, callItem.call)
 		const data = getEntityData(ctx, call, callItem)
@@ -58,6 +63,11 @@ export async function transfersCallHandler(ctx: BlockContext, callItem: CallItem
 			amount: formatU128ToBalance(amount, assetId),
 			assetId,
 		}
+
+		getCallHandlerLog(ctx, callItem).debug(
+			{ from: details.from, to, assetId, amount: details.amount },
+			'Transfer call failed',
+		)
 	}
 
 	await addDataToHistoryElement(ctx, historyElement, details)

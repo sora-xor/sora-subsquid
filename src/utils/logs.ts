@@ -17,11 +17,15 @@ function toPascalCase(str: string): string {
 		.replace(/(^|\.)\w/g, (match) => match.toUpperCase()) // Capitalize the first character of each segment
 }
 
-export function getLog(ctx: Context & { block: Block }, module: string | null = null, attrs: Record<string, any> = {}) {
+export function getLog(
+	ctx: Context & { block: Block },
+	logModule: string | null = null,
+	attrs: Record<string, any> = {},
+) {
 	const blockHeight = ctx.block.header.height
 	const attributes: any = { blockHeight, ...attrs }
-	if (module) {
-		attributes['module'] = module
+	if (logModule) {
+		attributes['logModule'] = logModule
 	}
 	return ctx.log.child(attributes)
 }
@@ -74,6 +78,10 @@ export function getNetworkSnapshotsStorageLog(ctx: BlockContext) {
 
 export function getPoolsStorageLog(ctx: BlockContext) {
 	return getLog(ctx, 'PoolsStorage')
+}
+
+export function getUtilsLog(ctx: BlockContext) {
+	return getLog(ctx, 'Utils')
 }
 
 export function logStartProcessingCall(ctx: BlockContext, callItem: CallItem<any>) {

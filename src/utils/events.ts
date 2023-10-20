@@ -1,4 +1,4 @@
-import { BlockContext, EventItem, EventItemName } from '../types'
+import { BlockContext, CallItem, CallItemName, EntityItem, EntityItemName, EventItem, EventItemName } from '../types'
 import { SubstrateExtrinsic } from '@subsquid/substrate-processor'
 import {
 	BalancesTransferEvent,
@@ -12,6 +12,7 @@ import { toAddress } from '.'
 import { getEntityData } from './entities'
 import { getAssetId } from './assets'
 import { CannotFindEventError } from './errors'
+import { getUtilsLog } from './logs'
 
 type SpecificEventItem<T extends EventItemName> = EventItem<T>
 
@@ -54,14 +55,20 @@ export function findEventByExtrinsicHash<T extends EventItemName[], F extends bo
 ): F extends true
 	? { [K in T[number]]: SpecificEventItem<K> }[T[number]]
 	: { [K in T[number]]: SpecificEventItem<K> }[T[number]] | null {
-	if (throwError as boolean) {
-		const events = findEventsByExtrinsicHash(ctx, extrinsicHash, eventNames)
-		if (events.length === 0) {
-			throw new CannotFindEventError(ctx, extrinsicHash, eventNames ?? '')
-		}
-		return events[0]
+	const event = findEventsByExtrinsicHash(ctx, extrinsicHash, eventNames)[0] ?? null
+	if (event) {
+		getUtilsLog(ctx).debug(`The '${event.name}' event found`)
+	} else {
+		getUtilsLog(ctx).debug(
+			eventNames?.length === 1
+				? `The '${eventNames[0]}' event not found`
+				: `Events not found: ${eventNames?.join(', ')}`,
+		)
 	}
-	return findEventsByExtrinsicHash(ctx, extrinsicHash, eventNames)[0] ?? null
+	if ((throwError as boolean) && event === null) {
+		throw new CannotFindEventError(ctx, extrinsicHash, eventNames ?? '')
+	}
+	return event
 }
 
 export const isXorTransferEvent = (e: EventItem<EventItemName>) => {
@@ -160,6 +167,14 @@ export const getAssetsDepositEventData = (
 	}
 }
 
+export const getCallId = (ctx: BlockContext, callItem: CallItem<CallItemName>): string => {
+	return callItem.extrinsic.hash
+}
+
 export const getEventId = (ctx: BlockContext, eventItem: EventItem<EventItemName>): string => {
 	return `${ctx.block.header.height}-${eventItem.event.indexInBlock}`
+}
+
+export const getEntityId = (ctx: BlockContext, entityItem: EntityItem<EntityItemName>): string => {
+	return entityItem.kind === 'call' ? getCallId(ctx, entityItem) : getEventId(ctx, entityItem)
 }
