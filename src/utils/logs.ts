@@ -26,28 +26,18 @@ export function getLog(ctx: Context & { block: Block }, module: string | null = 
 	return ctx.log.child(attributes)
 }
 
-export function getCallHandlerLog(
-	ctx: BlockContext,
-	callItem: CallItem<any>,
-	message: string = '',
-	attrs: Record<string, any> = {},
-) {
+export function getCallHandlerLog(ctx: BlockContext, callItem: CallItem<any>) {
 	const extrinsicHash = callItem.extrinsic.hash
 	const callName = toPascalCase(callItem.name)
-	const attributes = { extrinsicHash, callName, ...attrs }
+	const attributes = { extrinsicHash, callName }
 	return getLog(ctx, 'CallHandler', attributes)
 }
 
-export function getEventHandlerLog(
-	ctx: BlockContext,
-	eventItem: EventItem<any>,
-	message: string = '',
-	attrs: Record<string, any> = {},
-) {
+export function getEventHandlerLog(ctx: BlockContext, eventItem: EventItem<any>) {
 	const extrinsicHash = eventItem.event.extrinsic?.hash ?? null
 	const eventName = toPascalCase(eventItem.name)
 	const eventId = getEventId(ctx, eventItem)
-	const attributes: any = { ...attrs, eventName, eventId }
+	const attributes: any = { eventName, eventId }
 	if (extrinsicHash) {
 		attributes['extrinsicHash'] = extrinsicHash
 	}
