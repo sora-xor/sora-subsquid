@@ -6,7 +6,7 @@ import { AssetsRegisterCall } from '../../types/generated/calls'
 import { AssetId } from '../../types'
 import { getEntityData } from '../../utils/entities'
 import { getAssetId } from '../../utils/assets'
-import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
+import { logStartProcessingCall } from '../../utils/logs'
 
 export async function assetRegistrationCallHandler(ctx: BlockContext, callItem: CallItem<'Assets.register'>): Promise<void> {
 	logStartProcessingCall(ctx, callItem)

@@ -6,7 +6,7 @@ import { DemeterFarmingPlatformWithdrawnEvent } from '../../types/generated/even
 import { DemeterFarmingPlatformWithdrawCall } from '../../types/generated/calls'
 import { XOR } from '../../utils/consts'
 import { getEntityData } from '../../utils/entities'
-import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
+import { logStartProcessingCall } from '../../utils/logs'
 
 export async function demeterWithdrawCallHandler(ctx: BlockContext, callItem: CallItem<'DemeterFarmingPlatform.withdraw'>): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
