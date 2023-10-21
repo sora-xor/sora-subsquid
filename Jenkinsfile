@@ -6,7 +6,7 @@ def pipeline = new org.js.AppPipeline(
     secretScannerExclusion: '.*squid.yaml\$',
     dockerRegistryCred: 'bot-sora2-rw',
     dockerImageName:    'sora2/subsquid',
-    buildDockerImage:   'docker.soramitsu.co.jp/build-tools/node:19-cypress-corepack',
+    buildDockerImage:   'docker.soramitsu.co.jp/build-tools/node:20-alpine',
     sonarProjectName:   'sora-subsquid',
     sonarProjectKey:    'jp.co.soramitsu:sora-subsquid',
     preBuildCmds:       ['npm i -g sqd-cli', 'npm ci --include=dev'],
