@@ -15,7 +15,7 @@ import { rewardsCallHandler } from './handlers/calls/rewards'
 import { setReferralCallHandler } from './handlers/calls/setReferral'
 import { soraEthTransferCallHandler } from './handlers/calls/soraEthTransfer'
 import { swapsCallHandler } from './handlers/calls/swaps'
-import { assetTransferCallHandler } from './handlers/calls/transfers'
+import { assetTransferCallHandler, xorlessTransferHandler } from './handlers/calls/transfers'
 import { ethSoraTransferEventHandler } from './handlers/events/ethSoraTransfer'
 import {
 	tokenBurnEventHandler,
