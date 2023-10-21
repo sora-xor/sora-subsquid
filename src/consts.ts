@@ -2,6 +2,7 @@ export const calls = [
 	'*',
 	'Assets.register',
 	'Assets.transfer',
+	'LiquidityProxy.xorless_transfer',
 	'LiquidityProxy.swap',
 	'LiquidityProxy.swap_transfer',
 	'LiquidityProxy.swap_transfer_batch',

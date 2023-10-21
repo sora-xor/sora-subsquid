@@ -15,7 +15,7 @@ import { rewardsCallHandler } from './handlers/calls/rewards'
 import { setReferralCallHandler } from './handlers/calls/setReferral'
 import { soraEthTransferCallHandler } from './handlers/calls/soraEthTransfer'
 import { swapsCallHandler } from './handlers/calls/swaps'
-import { transfersCallHandler } from './handlers/calls/transfers'
+import { assetTransferCallHandler } from './handlers/calls/transfers'
 import { ethSoraTransferEventHandler } from './handlers/events/ethSoraTransfer'
 import {
 	tokenBurnEventHandler,
@@ -158,7 +158,8 @@ processor.run(new TypeormDatabase(), async (ctx) => {
 
 			if (item.kind === 'call' && item.name === item.extrinsic.call.name) {
 				if (item.name === 'Assets.register') await assetRegistrationCallHandler(blockContext, item)
-				if (item.name === 'Assets.transfer') await transfersCallHandler(blockContext, item)
+				if (item.name === 'Assets.transfer') await assetTransferCallHandler(blockContext, item)
+				if (item.name === 'LiquidityProxy.xorless_transfer') await xorlessTransferHandler(blockContext, item)
 				if (item.name === 'LiquidityProxy.swap' || item.name === 'LiquidityProxy.swap_transfer')
 					await swapsCallHandler(blockContext, item)
 				if (item.name === 'LiquidityProxy.swap_transfer_batch')

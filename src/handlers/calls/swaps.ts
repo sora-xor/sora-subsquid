@@ -70,20 +70,20 @@ export async function swapsCallHandler(
 	}
 
 	if (historyElement.execution.success) {
-		const liquidityProxyExchangeEventItem = findEventByExtrinsicHash(
+		const exchangeEventItemItem = findEventByExtrinsicHash(
 			ctx,
 			extrinsicHash,
 			['LiquidityProxy.Exchange'],
 			true,
 		)
-		const liquidityProxyExchangeEvent = new LiquidityProxyExchangeEvent(ctx, liquidityProxyExchangeEventItem.event)
-		const liquidityProxyExchangeEventData = getEntityData(
+		const exchangeEventItem = new LiquidityProxyExchangeEvent(ctx, exchangeEventItemItem.event)
+		const exchangeEventItemData = getEntityData(
 			ctx,
-			liquidityProxyExchangeEvent,
-			liquidityProxyExchangeEventItem,
+			exchangeEventItem,
+			exchangeEventItemItem,
 		)
 
-		const [, , , , baseAssetAmount, targetAssetAmount, liquidityProviderFee] = liquidityProxyExchangeEventData
+		const [, , , , baseAssetAmount, targetAssetAmount, liquidityProviderFee] = exchangeEventItemData
 
 		details.baseAssetAmount = formatU128ToBalance(baseAssetAmount, inputAssetId)
 		details.targetAssetAmount = formatU128ToBalance(targetAssetAmount, outputAssetId)
