@@ -20,10 +20,29 @@ function toPascalCase(str: string): string {
 export function getLog(ctx: Context & { block: Block }, logModule: string | null = null, attrs: Record<string, any> = {}) {
 	const blockHeight = ctx.block.header.height
 	const attributes: any = { blockHeight, ...attrs }
-	if (logModule) {
-		attributes['logModule'] = logModule
-	}
-	return ctx.log.child(attributes)
+
+	const log = (level: 'debug' | 'info' | 'warn' | 'error') => (arg1: Record<string, any> | string, arg2?: string) => {
+        let attrs: Record<string, any> = {};
+        let message: string;
+
+        if (typeof arg1 === 'string') {
+            message = arg1;
+        } else {
+            attrs = arg1;
+            message = arg2!;
+        }
+
+        attrs = { ...attributes, ...attrs };
+
+        ctx.log[level](attrs, `[${logModule}] ${message}`);
+    };
+
+    return {
+        debug: log('debug'),
+        info: log('info'),
+        warn: log('warn'),
+        error: log('error'),
+    };
 }
 
 export function getCallHandlerLog(ctx: BlockContext, callItem: CallItem<any>) {

@@ -39,7 +39,7 @@ function filterDataProperties(obj: Record<string, any>) {
 	return filteredObj
 }
 
-export const createHistoryElement = (ctx: BlockContext, entityItem: EntityItem<EntityItemName>, data?: {}): HistoryElement => {
+export const createHistoryElement = async (ctx: BlockContext, entityItem: EntityItem<EntityItemName>, data?: {}): HistoryElement => {
 	const historyElement = new HistoryElement()
 
 	if (!ctx.block.header.validator) {
@@ -84,12 +84,12 @@ export const createHistoryElement = (ctx: BlockContext, entityItem: EntityItem<E
 	}
 
 	ctx.store.save(historyElement)
-	const { callNames, ...logArguments } = historyElement
-	getUtilsLog(ctx).debug(logArguments, 'Created history element')
+	const { callNames, execution, ...logArguments } = historyElement
+	getUtilsLog(ctx).debug({ ...logArguments, execution: execution.success }, 'Created history element')
 
 	if (data) {
-		addDataToHistoryElement(ctx, historyElement, data)
-		updateHistoryElementStats(ctx, historyElement)
+		await addDataToHistoryElement(ctx, historyElement, data)
+		await updateHistoryElementStats(ctx, historyElement)
 	}
 
 	return historyElement

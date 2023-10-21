@@ -89,7 +89,6 @@ processor.run(new TypeormDatabase(), async (ctx) => {
 		const blockContext = {
 			...context,
 			block,
-			log: getLog({ ...context, block }),
 		}
 
 		await initializeAssets(blockContext)
