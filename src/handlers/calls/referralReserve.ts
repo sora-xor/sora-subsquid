@@ -7,10 +7,7 @@ import { findEventByExtrinsicHash, getAssetsTransferEventData } from '../../util
 import { getEntityData } from '../../utils/entities'
 import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 
-export async function referralReserveCallHandler(
-	ctx: BlockContext,
-	callItem: CallItem<'Referrals.reserve'>,
-): Promise<void> {
+export async function referralReserveCallHandler(ctx: BlockContext, callItem: CallItem<'Referrals.reserve'>): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
 
 	const extrinsicHash = callItem.extrinsic.hash
@@ -24,12 +21,7 @@ export async function referralReserveCallHandler(
 
 	if (historyElement.execution.success) {
 		const balancesTransferEventName = 'Balances.Transfer'
-		const balancesTransferEventItem = findEventByExtrinsicHash(
-			ctx,
-			extrinsicHash,
-			[balancesTransferEventName],
-			false,
-		) // TODO: Check if 'Currencies.Transferred' event is applicable here
+		const balancesTransferEventItem = findEventByExtrinsicHash(ctx, extrinsicHash, [balancesTransferEventName], false) // TODO: Check if 'Currencies.Transferred' event is applicable here
 
 		if (!balancesTransferEventItem) {
 			return

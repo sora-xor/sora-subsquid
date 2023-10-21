@@ -110,9 +110,7 @@ import { Environment } from '../src/environments'
 			outputData.push(`\tconstructor(ctx: ChainContext, ${entityTypeSingle}: ${entityTypeSingleCapital}) {`)
 		}
 		environments.forEach((environment) => {
-			outputData.push(
-				`\t\tthis.${environment} = new ${environment}${entityTypeCapital}.${className}(ctx, ${entityTypeSingle})`,
-			)
+			outputData.push(`\t\tthis.${environment} = new ${environment}${entityTypeCapital}.${className}(ctx, ${entityTypeSingle})`)
 		})
 		outputData.push(`\t}`)
 		outputData.push(``)
@@ -129,16 +127,11 @@ import { Environment } from '../src/environments'
 
 		versions.forEach((v) => {
 			const { environment, version } = v
-			const prefix =
-				environment === Environment.PRODUCTION ? '' : environment.charAt(0).toUpperCase() + environment.slice(1)
-			outputData.push(
-				`\tget isV${version}${prefix}(): ${environment}${entityTypeCapital}.${className}['isV${version}'] {`,
-			)
+			const prefix = environment === Environment.PRODUCTION ? '' : environment.charAt(0).toUpperCase() + environment.slice(1)
+			outputData.push(`\tget isV${version}${prefix}(): ${environment}${entityTypeCapital}.${className}['isV${version}'] {`)
 			outputData.push(`\t\treturn this.${environment}.isV${version}`)
 			outputData.push('\t}')
-			outputData.push(
-				`\tget asV${version}${prefix}(): ${environment}${entityTypeCapital}.${className}['asV${version}'] {`,
-			)
+			outputData.push(`\tget asV${version}${prefix}(): ${environment}${entityTypeCapital}.${className}['asV${version}'] {`)
 			outputData.push(`\t\treturn this.${environment}.asV${version}`)
 			outputData.push('\t}')
 		})

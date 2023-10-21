@@ -25,12 +25,12 @@ export const getAllReserves = async (ctx: BlockContext, baseAssetId: AssetId) =>
 		getInitializePoolsLog(ctx).debug({ baseAssetId }, 'Pools XYK Reserves request...')
 		const storage = new PoolXYKReservesStorage(ctx, ctx.block.header)
 		const data = storage.isV1
-			? await getEntityData(ctx, storage, { kind: 'storage', name: PoolXYKReservesStorage.name }, [
-					'42',
-			  ] as const).getPairs(decodeAssetId(baseAssetId))
-			: await getEntityData(ctx, storage, { kind: 'storage', name: PoolXYKReservesStorage.name }, [
-					'1',
-			  ] as const).getPairs({ code: decodeAssetId(baseAssetId) })
+			? await getEntityData(ctx, storage, { kind: 'storage', name: PoolXYKReservesStorage.name }, ['42'] as const).getPairs(
+					decodeAssetId(baseAssetId),
+			  )
+			: await getEntityData(ctx, storage, { kind: 'storage', name: PoolXYKReservesStorage.name }, ['1'] as const).getPairs({
+					code: decodeAssetId(baseAssetId),
+			  })
 
 		const reserves = data.map((pair) => {
 			const [[, targetAssetId], [baseBalance, targetBalance]] = pair

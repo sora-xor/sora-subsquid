@@ -6,10 +6,7 @@ import { CurrenciesDepositedEvent, CurrenciesTransferredEvent } from '../../type
 import { getEntityData } from '../../utils/entities'
 import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 
-export async function irohaMigrationCallHandler(
-	ctx: BlockContext,
-	callItem: CallItem<'IrohaMigration.migrate'>,
-): Promise<void> {
+export async function irohaMigrationCallHandler(ctx: BlockContext, callItem: CallItem<'IrohaMigration.migrate'>): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
 
 	const historyElement = await createHistoryElement(ctx, callItem)

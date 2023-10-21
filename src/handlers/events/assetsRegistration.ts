@@ -6,10 +6,7 @@ import { assetPrecisions, getAssetId, assetStorage, tickerSyntheticAssetId } fro
 import { getEntityData } from '../../utils/entities'
 import { getEventHandlerLog, logStartProcessingEvent } from '../../utils/logs'
 
-export async function assetRegistrationEventHandler(
-	ctx: BlockContext,
-	eventItem: EventItem<'Assets.AssetRegistered'>,
-): Promise<void> {
+export async function assetRegistrationEventHandler(ctx: BlockContext, eventItem: EventItem<'Assets.AssetRegistered'>): Promise<void> {
 	logStartProcessingEvent(ctx, eventItem)
 
 	const event = new AssetsAssetRegisteredEvent(ctx, eventItem.event)
@@ -21,13 +18,12 @@ export async function assetRegistrationEventHandler(
 		const storage = new AssetsAssetInfosStorage(ctx, ctx.block.header)
 		const [, , precision] =
 			storage.isV1 || storage.isV26
-				? await getEntityData(ctx, storage, { kind: 'storage', name: AssetsAssetInfosStorage.name }, [
-						'42',
-				  ] as const).get(decodeAssetId(assetId))
-				: await getEntityData(ctx, storage, { kind: 'storage', name: AssetsAssetInfosStorage.name }, [
-						'1',
-						'26',
-				  ] as const).get({ code: decodeAssetId(assetId) })
+				? await getEntityData(ctx, storage, { kind: 'storage', name: AssetsAssetInfosStorage.name }, ['42'] as const).get(
+						decodeAssetId(assetId),
+				  )
+				: await getEntityData(ctx, storage, { kind: 'storage', name: AssetsAssetInfosStorage.name }, ['1', '26'] as const).get({
+						code: decodeAssetId(assetId),
+				  })
 		assetPrecisions.set(assetId, precision)
 	}
 

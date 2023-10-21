@@ -8,8 +8,7 @@ import { Environment, environments } from '../src/environments'
 dotenv.config()
 
 // Obtain environment from npm parameters if provided
-let environment: Environment =
-	(process.argv[2] as Environment) || (process.env.INDEXER_ENVIRONMENT as Environment) || Environment.DEV
+let environment: Environment = (process.argv[2] as Environment) || (process.env.INDEXER_ENVIRONMENT as Environment) || Environment.DEV
 
 // if provided environment does not match with known environments, default to DEV
 if (!Object.values(Environment).includes(environment)) {

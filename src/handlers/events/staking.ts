@@ -9,10 +9,7 @@ import { getEntityData } from '../../utils/entities'
 import { getEventHandlerLog, logStartProcessingEvent } from '../../utils/logs'
 import { getActiveStakingEra, getStakingStaker } from '../../utils/staking'
 
-export async function stakingStakersElectedEventHandler(
-	ctx: BlockContext,
-	eventItem: EventItem<'Staking.StakersElected'>,
-): Promise<void> {
+export async function stakingStakersElectedEventHandler(ctx: BlockContext, eventItem: EventItem<'Staking.StakersElected'>): Promise<void> {
 	logStartProcessingEvent(ctx, eventItem)
 
 	const erasStakersStorage = new StakingErasStakersStorage(ctx, ctx.block.header)
@@ -54,10 +51,7 @@ export async function stakingStakersElectedEventHandler(
 			stakingEraValidator.totalBond = exposure.total
 			stakingValidator.bond = exposure.total
 			await ctx.store.save(stakingValidator)
-			getEventHandlerLog(ctx, eventItem).debug(
-				{ id: stakingValidator.id, bond: stakingValidator.bond },
-				'Staking Validator saved',
-			)
+			getEventHandlerLog(ctx, eventItem).debug({ id: stakingValidator.id, bond: stakingValidator.bond }, 'Staking Validator saved')
 			await ctx.store.save(stakingEraValidator)
 			getEventHandlerLog(ctx, eventItem).debug(
 				{

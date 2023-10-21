@@ -8,10 +8,7 @@ import { XOR } from '../../utils/consts'
 import { getEntityData } from '../../utils/entities'
 import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 
-export async function demeterWithdrawCallHandler(
-	ctx: BlockContext,
-	callItem: CallItem<'DemeterFarmingPlatform.withdraw'>,
-): Promise<void> {
+export async function demeterWithdrawCallHandler(ctx: BlockContext, callItem: CallItem<'DemeterFarmingPlatform.withdraw'>): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
 
 	const extrinsicHash = callItem.extrinsic.hash

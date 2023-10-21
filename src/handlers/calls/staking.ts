@@ -48,20 +48,14 @@ export async function stakingBondCallHandler(ctx: BlockContext, callItem: CallIt
 
 	const details = {
 		controller: toHex(data.controller),
-		payee:
-			data.payee.__kind === 'Account'
-				? { kind: data.payee.__kind, value: toHex(data.payee.value) }
-				: { kind: data.payee.__kind },
+		payee: data.payee.__kind === 'Account' ? { kind: data.payee.__kind, value: toHex(data.payee.value) } : { kind: data.payee.__kind },
 		value: formatU128ToBalance(data.value, XOR),
 	}
 
 	await createHistoryElement(ctx, callItem, details)
 }
 
-export async function stakingBondExtraCallHandler(
-	ctx: BlockContext,
-	callItem: CallItem<'Staking.bond_extra'>,
-): Promise<void> {
+export async function stakingBondExtraCallHandler(ctx: BlockContext, callItem: CallItem<'Staking.bond_extra'>): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
 
 	const call = new StakingBondExtraCall(ctx, callItem.call)
@@ -102,10 +96,7 @@ export async function stakingChillCallHandler(ctx: BlockContext, callItem: CallI
 	await createHistoryElement(ctx, callItem, details)
 }
 
-export async function stakingChillOtherCallHandler(
-	ctx: BlockContext,
-	callItem: CallItem<'Staking.chill_other'>,
-): Promise<void> {
+export async function stakingChillOtherCallHandler(ctx: BlockContext, callItem: CallItem<'Staking.chill_other'>): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
 
 	const call = new StakingChillOtherCall(ctx, callItem.call)
@@ -134,10 +125,7 @@ export async function stakingForceApplyMinCommissionCallHandler(
 	await createHistoryElement(ctx, callItem, details)
 }
 
-export async function stakingForceNewEraCallHandler(
-	ctx: BlockContext,
-	callItem: CallItem<'Staking.force_new_era'>,
-): Promise<void> {
+export async function stakingForceNewEraCallHandler(ctx: BlockContext, callItem: CallItem<'Staking.force_new_era'>): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
 
 	const call = new StakingForceNewEraCall(ctx, callItem.call)
@@ -162,10 +150,7 @@ export async function stakingForceNewEraAlwaysCallHandler(
 	await createHistoryElement(ctx, callItem, details)
 }
 
-export async function stakingForceNoErasCallHandler(
-	ctx: BlockContext,
-	callItem: CallItem<'Staking.force_no_eras'>,
-): Promise<void> {
+export async function stakingForceNoErasCallHandler(ctx: BlockContext, callItem: CallItem<'Staking.force_no_eras'>): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
 
 	const call = new StakingForceNoErasCall(ctx, callItem.call)
@@ -176,10 +161,7 @@ export async function stakingForceNoErasCallHandler(
 	await createHistoryElement(ctx, callItem, details)
 }
 
-export async function stakingForceUnstakeCallHandler(
-	ctx: BlockContext,
-	callItem: CallItem<'Staking.force_unstake'>,
-): Promise<void> {
+export async function stakingForceUnstakeCallHandler(ctx: BlockContext, callItem: CallItem<'Staking.force_unstake'>): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
 
 	const call = new StakingForceUnstakeCall(ctx, callItem.call)
@@ -221,10 +203,7 @@ export async function stakingKickCallHandler(ctx: BlockContext, callItem: CallIt
 	await createHistoryElement(ctx, callItem, details)
 }
 
-export async function stakingNominateCallHandler(
-	ctx: BlockContext,
-	callItem: CallItem<'Staking.nominate'>,
-): Promise<void> {
+export async function stakingNominateCallHandler(ctx: BlockContext, callItem: CallItem<'Staking.nominate'>): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
 
 	const call = new StakingNominateCall(ctx, callItem.call)
@@ -237,10 +216,7 @@ export async function stakingNominateCallHandler(
 	await createHistoryElement(ctx, callItem, details)
 }
 
-export async function stakingPayoutStakersCallHandler(
-	ctx: BlockContext,
-	callItem: CallItem<'Staking.payout_stakers'>,
-): Promise<void> {
+export async function stakingPayoutStakersCallHandler(ctx: BlockContext, callItem: CallItem<'Staking.payout_stakers'>): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
 
 	const call = new StakingPayoutStakersCall(ctx, callItem.call)
@@ -254,10 +230,7 @@ export async function stakingPayoutStakersCallHandler(
 	await createHistoryElement(ctx, callItem, details)
 }
 
-export async function stakingReapStashCallHandler(
-	ctx: BlockContext,
-	callItem: CallItem<'Staking.reap_stash'>,
-): Promise<void> {
+export async function stakingReapStashCallHandler(ctx: BlockContext, callItem: CallItem<'Staking.reap_stash'>): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
 
 	const call = new StakingReapStashCall(ctx, callItem.call)
@@ -298,10 +271,7 @@ export async function stakingScaleValidatorCountCallHandler(
 	await createHistoryElement(ctx, callItem, details)
 }
 
-export async function stakingSetControllerCallHandler(
-	ctx: BlockContext,
-	callItem: CallItem<'Staking.set_controller'>,
-): Promise<void> {
+export async function stakingSetControllerCallHandler(ctx: BlockContext, callItem: CallItem<'Staking.set_controller'>): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
 
 	const call = new StakingSetControllerCall(ctx, callItem.call)
@@ -314,10 +284,7 @@ export async function stakingSetControllerCallHandler(
 	if (stakingStaker.controller !== controller) {
 		stakingStaker.controller = controller
 		ctx.store.save(stakingStaker)
-		getCallHandlerLog(ctx, callItem).debug(
-			{ staker: stakingStaker.id, controller },
-			'Staking staker controller updated',
-		)
+		getCallHandlerLog(ctx, callItem).debug({ staker: stakingStaker.id, controller }, 'Staking staker controller updated')
 	}
 
 	const details = {
@@ -327,10 +294,7 @@ export async function stakingSetControllerCallHandler(
 	await createHistoryElement(ctx, callItem, details)
 }
 
-export async function stakingSetHistoryDepthCallHandler(
-	ctx: BlockContext,
-	callItem: CallItem<'Staking.set_history_depth'>,
-): Promise<void> {
+export async function stakingSetHistoryDepthCallHandler(ctx: BlockContext, callItem: CallItem<'Staking.set_history_depth'>): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
 
 	const call = new StakingSetHistoryDepthCall(ctx, callItem.call)
@@ -376,10 +340,7 @@ export async function stakingSetMinCommissionCallHandler(
 	await createHistoryElement(ctx, callItem, details)
 }
 
-export async function stakingSetPayeeCallHandler(
-	ctx: BlockContext,
-	callItem: CallItem<'Staking.set_payee'>,
-): Promise<void> {
+export async function stakingSetPayeeCallHandler(ctx: BlockContext, callItem: CallItem<'Staking.set_payee'>): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
 
 	const call = new StakingSetPayeeCall(ctx, callItem.call)
@@ -529,10 +490,7 @@ export async function stakingUnbondCallHandler(ctx: BlockContext, callItem: Call
 	await createHistoryElement(ctx, callItem, details)
 }
 
-export async function stakingValidateCallHandler(
-	ctx: BlockContext,
-	callItem: CallItem<'Staking.validate'>,
-): Promise<void> {
+export async function stakingValidateCallHandler(ctx: BlockContext, callItem: CallItem<'Staking.validate'>): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
 
 	const call = new StakingValidateCall(ctx, callItem.call)

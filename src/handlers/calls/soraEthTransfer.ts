@@ -11,10 +11,7 @@ import { toAddressEthereum } from '../../utils'
 import { getEntityData } from '../../utils/entities'
 import { logStartProcessingCall } from '../../utils/logs'
 
-export async function soraEthTransferCallHandler(
-	ctx: BlockContext,
-	callItem: CallItem<'EthBridge.transfer_to_sidechain'>,
-): Promise<void> {
+export async function soraEthTransferCallHandler(ctx: BlockContext, callItem: CallItem<'EthBridge.transfer_to_sidechain'>): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
 
 	const extrinsicHash = callItem.extrinsic.hash
@@ -35,12 +32,7 @@ export async function soraEthTransferCallHandler(
 	}
 
 	if (historyElement.execution.success) {
-		const soraEthTransferEventItem = findEventByExtrinsicHash(
-			ctx,
-			extrinsicHash,
-			['EthBridge.RequestRegistered'],
-			true,
-		)
+		const soraEthTransferEventItem = findEventByExtrinsicHash(ctx, extrinsicHash, ['EthBridge.RequestRegistered'], true)
 		const soraEthTransferEvent = new EthBridgeRequestRegisteredEvent(ctx, soraEthTransferEventItem.event)
 		const soraEthTransferEventData = getEntityData(ctx, soraEthTransferEvent, soraEthTransferEventItem)
 

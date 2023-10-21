@@ -7,10 +7,7 @@ import { ReferralsUnreserveCall } from '../../types/generated/calls'
 import { getEntityData } from '../../utils/entities'
 import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 
-export async function referralUnreserveCallHandler(
-	ctx: BlockContext,
-	callItem: CallItem<'Referrals.unreserve'>,
-): Promise<void> {
+export async function referralUnreserveCallHandler(ctx: BlockContext, callItem: CallItem<'Referrals.unreserve'>): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
 
 	const extrinsicHash = callItem.extrinsic.hash

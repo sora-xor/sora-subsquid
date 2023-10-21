@@ -8,13 +8,7 @@ import {
 	XSTPoolEnabledSyntheticsStorage,
 } from '../../types/generated/storage'
 
-import {
-	assetPrecisions,
-	assetStorage,
-	formatU128ToBalance,
-	getAssetId,
-	tickerSyntheticAssetId,
-} from '../../utils/assets'
+import { assetPrecisions, assetStorage, formatU128ToBalance, getAssetId, tickerSyntheticAssetId } from '../../utils/assets'
 import { XOR } from '../../utils/consts'
 import { toText, toReferenceSymbol } from '../../utils'
 import { AssetAmount, AssetId } from '../../types'
@@ -61,10 +55,7 @@ export const getSyntheticAssets = async (ctx: BlockContext) => {
 		const storage = new XSTPoolEnabledSyntheticsStorage(ctx, ctx.block.header)
 		if (!storage.isExists) return null
 		if (storage.isV19 || storage.isV42) return null
-		const data = getEntityData(ctx, storage, { kind: 'storage', name: XSTPoolEnabledSyntheticsStorage.name }, [
-			'19',
-			'42',
-		] as const)
+		const data = getEntityData(ctx, storage, { kind: 'storage', name: XSTPoolEnabledSyntheticsStorage.name }, ['19', '42'] as const)
 		const pairs = await data.getPairs()
 
 		const syntheticAssets = pairs.map((pair) => {

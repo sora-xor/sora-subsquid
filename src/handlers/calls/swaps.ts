@@ -34,21 +34,14 @@ export async function swapsCallHandler(
 		data.swapAmount.__kind === 'WithDesiredInput'
 			? {
 					kind: 'WithDesiredInput',
-					desiredAmountIn:
-						'value' in data.swapAmount
-							? data.swapAmount.value.desiredAmountIn
-							: data.swapAmount.desiredAmountIn,
-					minAmountOut:
-						'value' in data.swapAmount ? data.swapAmount.value.minAmountOut : data.swapAmount.minAmountOut,
+					desiredAmountIn: 'value' in data.swapAmount ? data.swapAmount.value.desiredAmountIn : data.swapAmount.desiredAmountIn,
+					minAmountOut: 'value' in data.swapAmount ? data.swapAmount.value.minAmountOut : data.swapAmount.minAmountOut,
 			  }
 			: {
 					kind: 'WithDesiredOutput',
 					desiredAmountOut:
-						'value' in data.swapAmount
-							? data.swapAmount.value.desiredAmountOut
-							: data.swapAmount.desiredAmountOut,
-					maxAmountIn:
-						'value' in data.swapAmount ? data.swapAmount.value.maxAmountIn : data.swapAmount.maxAmountIn,
+						'value' in data.swapAmount ? data.swapAmount.value.desiredAmountOut : data.swapAmount.desiredAmountOut,
+					maxAmountIn: 'value' in data.swapAmount ? data.swapAmount.value.maxAmountIn : data.swapAmount.maxAmountIn,
 			  }
 
 	const details: {
@@ -90,23 +83,13 @@ export async function swapsCallHandler(
 
 	// update assets volume
 	if (historyElement.execution.success) {
-		const aVolumeUSD = await assetSnapshotsStorage.updateVolume(
-			ctx,
-			inputAssetId,
-			BigNumber(details.baseAssetAmount),
-		)
-		const bVolumeUSD = await assetSnapshotsStorage.updateVolume(
-			ctx,
-			outputAssetId,
-			BigNumber(details.targetAssetAmount),
-		)
+		const aVolumeUSD = await assetSnapshotsStorage.updateVolume(ctx, inputAssetId, BigNumber(details.baseAssetAmount))
+		const bVolumeUSD = await assetSnapshotsStorage.updateVolume(ctx, outputAssetId, BigNumber(details.targetAssetAmount))
 		// get the minimal volume (sell\buy)
 		const volumeUSD = BigNumber.min(aVolumeUSD, bVolumeUSD)
 
 		await networkSnapshotsStorage.updateVolumeStats(ctx, volumeUSD)
 	}
 
-	getCallHandlerLog(ctx, callItem).debug(
-		callItem.name === 'LiquidityProxy.swap' ? 'Saved swap' : 'Saved swap transfer',
-	)
+	getCallHandlerLog(ctx, callItem).debug(callItem.name === 'LiquidityProxy.swap' ? 'Saved swap' : 'Saved swap transfer')
 }

@@ -8,10 +8,7 @@ import { getEntityData } from '../../utils/entities'
 import { getAssetId } from '../../utils/assets'
 import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 
-export async function assetRegistrationCallHandler(
-	ctx: BlockContext,
-	callItem: CallItem<'Assets.register'>,
-): Promise<void> {
+export async function assetRegistrationCallHandler(ctx: BlockContext, callItem: CallItem<'Assets.register'>): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
 
 	const extrinsicHash = callItem.extrinsic.hash
@@ -24,12 +21,7 @@ export async function assetRegistrationCallHandler(
 	}
 
 	if (historyElement.execution.success) {
-		const assetRegistrationEventItem = findEventByExtrinsicHash(
-			ctx,
-			extrinsicHash,
-			['Assets.AssetRegistered'],
-			true,
-		)
+		const assetRegistrationEventItem = findEventByExtrinsicHash(ctx, extrinsicHash, ['Assets.AssetRegistered'], true)
 		const assetRegistrationEvent = new AssetsAssetRegisteredEvent(ctx, assetRegistrationEventItem.event)
 		const assetRegistrationEventData = getEntityData(ctx, assetRegistrationEvent, assetRegistrationEventItem)
 

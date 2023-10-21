@@ -7,10 +7,7 @@ import { PoolXykDepositLiquidityCall } from '../../types/generated/calls'
 import { getEntityData } from '../../utils/entities'
 import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 
-export async function liquidityDepositCallHandler(
-	ctx: BlockContext,
-	callItem: CallItem<'PoolXYK.deposit_liquidity'>,
-): Promise<void> {
+export async function liquidityDepositCallHandler(ctx: BlockContext, callItem: CallItem<'PoolXYK.deposit_liquidity'>): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
 
 	const extrinsicHash = callItem.extrinsic.hash

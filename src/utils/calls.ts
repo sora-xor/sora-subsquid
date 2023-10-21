@@ -15,9 +15,7 @@ export function findCallsByExtrinsicHash<T extends CallItemName[]>(
 	extrinsicHash: SubstrateExtrinsic['hash'],
 	callNames?: T,
 ): { [K in T[number]]: SpecificCallItem<K> }[T[number]][] {
-	const calls = getBlockCalls(ctx).filter(
-		(c) => (!callNames || callNames.includes(c.name)) && c.extrinsic?.hash === extrinsicHash,
-	)
+	const calls = getBlockCalls(ctx).filter((c) => (!callNames || callNames.includes(c.name)) && c.extrinsic?.hash === extrinsicHash)
 	// TODO: get rid of this unknown type
 	return calls as unknown as {
 		[K in T[number]]: SpecificCallItem<K>
@@ -29,17 +27,13 @@ export function findCallByExtrinsicHash<T extends CallItemName[], F extends bool
 	extrinsicHash: SubstrateExtrinsic['hash'],
 	callNames?: T,
 	throwError?: F,
-): F extends true
-	? { [K in T[number]]: SpecificCallItem<K> }[T[number]]
-	: { [K in T[number]]: SpecificCallItem<K> }[T[number]] | null {
+): F extends true ? { [K in T[number]]: SpecificCallItem<K> }[T[number]] : { [K in T[number]]: SpecificCallItem<K> }[T[number]] | null {
 	const call = findCallsByExtrinsicHash(ctx, extrinsicHash, callNames)[0] ?? null
 	if (call) {
 		getUtilsLog(ctx).debug(`The '${call.name}' call found`)
 	} else {
 		getUtilsLog(ctx).debug(
-			callNames?.length === 1
-				? `The '${callNames[0]}' call not found`
-				: `Calls not found: ${callNames?.join(', ')}`,
+			callNames?.length === 1 ? `The '${callNames[0]}' call not found` : `Calls not found: ${callNames?.join(', ')}`,
 		)
 	}
 	if ((throwError as boolean) && call === null) {

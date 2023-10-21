@@ -11,10 +11,7 @@ import { LiquidityProxyExchangeEvent } from '../../types/generated/events'
 import { XOR } from '../../utils/consts'
 import BigNumber from 'bignumber.js'
 
-export async function assetTransferCallHandler(
-	ctx: BlockContext,
-	callItem: CallItem<'Assets.transfer'>,
-): Promise<void> {
+export async function assetTransferCallHandler(ctx: BlockContext, callItem: CallItem<'Assets.transfer'>): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
 
 	const call = new AssetsTransferCall(ctx, callItem.call)
@@ -36,10 +33,7 @@ export async function assetTransferCallHandler(
 	getCallHandlerLog(ctx, callItem).debug(`Saved transfer`)
 }
 
-export async function xorlessTransferHandler(
-	ctx: BlockContext,
-	callItem: CallItem<'LiquidityProxy.xorless_transfer'>,
-): Promise<void> {
+export async function xorlessTransferHandler(ctx: BlockContext, callItem: CallItem<'LiquidityProxy.xorless_transfer'>): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
 
 	const call = new LiquidityProxyXorlessTransferCall(ctx, callItem.call)

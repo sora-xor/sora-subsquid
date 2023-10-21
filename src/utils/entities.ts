@@ -36,10 +36,7 @@ function isVersionedObject(obj: any): obj is VersionedObject {
 	return keys.some((key) => key.startsWith('isV')) && keys.some((key) => key.startsWith('asV'))
 }
 
-function getDataFromVersionedObject<T extends VersionedObject>(
-	ctx: BlockContext,
-	obj: T,
-): Exclude<T[keyof T], boolean> | null {
+function getDataFromVersionedObject<T extends VersionedObject>(ctx: BlockContext, obj: T): Exclude<T[keyof T], boolean> | null {
 	if (!isVersionedObject(obj)) {
 		throw new Error(`[${ctx.block.header.height}] Object does not conform to VersionedObject pattern`)
 	}
@@ -54,10 +51,7 @@ function getDataFromVersionedObject<T extends VersionedObject>(
 }
 
 // Make sure to add "as const" after the versions array to properly narrow the entity object
-export function narrowVersionedObject<T extends VersionedObject, V extends readonly string[]>(
-	obj: T,
-	versions: V,
-): NarrowVersions<T, V> {
+export function narrowVersionedObject<T extends VersionedObject, V extends readonly string[]>(obj: T, versions: V): NarrowVersions<T, V> {
 	const narrowed: any = {}
 
 	versions.forEach((version) => {

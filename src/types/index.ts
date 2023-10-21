@@ -1,8 +1,5 @@
 import { BatchContext, SubstrateBlock } from '@subsquid/substrate-processor'
-import {
-	CallItem as SubsquidCallItem,
-	EventItem as SubsquidEventItem,
-} from '@subsquid/substrate-processor/lib/interfaces/dataSelection'
+import { CallItem as SubsquidCallItem, EventItem as SubsquidEventItem } from '@subsquid/substrate-processor/lib/interfaces/dataSelection'
 import { Store } from '@subsquid/typeorm-store'
 import { Opaque } from 'type-fest'
 import { calls, events } from '../consts'
@@ -21,11 +18,7 @@ export type CallItem<T extends CallItemName> = SubsquidCallItem<T, true>
 export type AnyCallItem = CallItem<CallItemName>
 
 export type EntityItemName = EventItemName | CallItemName
-export type EntityItem<T extends EntityItemName> = T extends EventItemName
-	? EventItem<T>
-	: T extends CallItemName
-	? CallItem<T>
-	: never
+export type EntityItem<T extends EntityItemName> = T extends EventItemName ? EventItem<T> : T extends CallItemName ? CallItem<T> : never
 export type AnyEntityItem = AnyEventItem | AnyCallItem
 
 export type Context = BatchContext<Store, EventObject | CallObject>

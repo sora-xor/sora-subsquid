@@ -140,13 +140,7 @@ class AssetStorage {
 		asset.liquidityUSD = toFloat(price.multipliedBy(liquidity))
 	}
 
-	private async calcAssetStats(
-		ctx: BlockContext,
-		asset: Asset,
-		type: SnapshotType,
-		snapshotsCount: number,
-		blockTimestamp: number,
-	) {
+	private async calcAssetStats(ctx: BlockContext, asset: Asset, type: SnapshotType, snapshotsCount: number, blockTimestamp: number) {
 		const { id, priceUSD, liquidityUSD } = asset
 		const { index } = getSnapshotIndex(blockTimestamp, type)
 		const indexes = prevIndexesRow(index, snapshotsCount)
@@ -173,21 +167,12 @@ class AssetStorage {
 		getAssetStorageLog(ctx).debug(`Assets Daily stats updating...`)
 		for (const asset of this.storage.values()) {
 			const blockTimestamp = formatDateTimestamp(new Date(ctx.block.header.timestamp))
-			const { priceChange, volumeUSD } = await this.calcAssetStats(
-				ctx,
-				asset,
-				SnapshotType.HOUR,
-				24,
-				blockTimestamp,
-			)
+			const { priceChange, volumeUSD } = await this.calcAssetStats(ctx, asset, SnapshotType.HOUR, 24, blockTimestamp)
 
 			asset.priceChangeDay = priceChange
 			asset.volumeDayUSD = volumeUSD
 			if (testLogMode) {
-				getAssetStorageLog(ctx).debug(
-					{ assetId: asset.id, priceChange, volumeUSD },
-					'Asset daily stats updated',
-				)
+				getAssetStorageLog(ctx).debug({ assetId: asset.id, priceChange, volumeUSD }, 'Asset daily stats updated')
 			}
 		}
 	}
@@ -196,22 +181,13 @@ class AssetStorage {
 		getAssetStorageLog(ctx).debug(`Assets Weekly stats updating...`)
 		for (const asset of this.storage.values()) {
 			const blockTimestamp = formatDateTimestamp(new Date(ctx.block.header.timestamp))
-			const { priceChange, volumeUSD, velocity } = await this.calcAssetStats(
-				ctx,
-				asset,
-				SnapshotType.DAY,
-				7,
-				blockTimestamp,
-			)
+			const { priceChange, volumeUSD, velocity } = await this.calcAssetStats(ctx, asset, SnapshotType.DAY, 7, blockTimestamp)
 
 			asset.priceChangeWeek = priceChange
 			asset.volumeWeekUSD = volumeUSD
 			asset.velocity = velocity
 			if (testLogMode) {
-				getAssetStorageLog(ctx).debug(
-					{ assetId: asset.id, priceChange, volumeUSD, velocity },
-					'Asset weekly stats updated',
-				)
+				getAssetStorageLog(ctx).debug({ assetId: asset.id, priceChange, volumeUSD, velocity }, 'Asset weekly stats updated')
 			}
 		}
 	}
@@ -318,10 +294,7 @@ class AssetSnapshotsStorage {
 				throw new Error(`[${blockHeight}] ${snapshot.id} snapshot doesn't have priceUSD`)
 			}
 			if (testLogMode) {
-				getAssetSnapshotsStorageLog(ctx).debug(
-					{ assetId: assetId, newPrice: price },
-					'Asset snapshot price updated',
-				)
+				getAssetSnapshotsStorageLog(ctx).debug({ assetId: assetId, newPrice: price }, 'Asset snapshot price updated')
 			}
 		}
 
@@ -340,18 +313,13 @@ class AssetSnapshotsStorage {
 
 			if (snapshot.volume) {
 				snapshot.volume.amount = new BigNumber(snapshot.volume.amount).plus(volume.toString()).toString()
-				snapshot.volume.amountUSD = new BigNumber(snapshot.volume.amountUSD)
-					.plus(volumeUSD.toString())
-					.toFixed(2)
+				snapshot.volume.amountUSD = new BigNumber(snapshot.volume.amountUSD).plus(volumeUSD.toString()).toFixed(2)
 				snapshot.updatedAtBlock = ctx.block.header.height
 			} else {
 				throw new Error(`[${ctx.block.header.height}] ${snapshot.id} snapshot doesn't have volume`)
 			}
 			if (testLogMode) {
-				getAssetSnapshotsStorageLog(ctx).debug(
-					{ assetId: assetId, newVolume: volume.toString() },
-					'Asset snapshot volume updated',
-				)
+				getAssetSnapshotsStorageLog(ctx).debug({ assetId: assetId, newVolume: volume.toString() }, 'Asset snapshot volume updated')
 			}
 		}
 
@@ -383,10 +351,7 @@ class AssetSnapshotsStorage {
 			snapshot.mint = snapshot.mint + amount
 			snapshot.updatedAtBlock = ctx.block.header.height
 			if (testLogMode) {
-				getAssetSnapshotsStorageLog(ctx).debug(
-					{ assetId: assetId, newMinted: amount.toString() },
-					'Asset snapshot mint updated',
-				)
+				getAssetSnapshotsStorageLog(ctx).debug({ assetId: assetId, newMinted: amount.toString() }, 'Asset snapshot mint updated')
 			}
 		}
 

@@ -17,12 +17,7 @@ import { soraEthTransferCallHandler } from './handlers/calls/soraEthTransfer'
 import { swapsCallHandler } from './handlers/calls/swaps'
 import { assetTransferCallHandler, xorlessTransferHandler } from './handlers/calls/transfers'
 import { ethSoraTransferEventHandler } from './handlers/events/ethSoraTransfer'
-import {
-	tokenBurnEventHandler,
-	tokenMintEventHandler,
-	xorBurnEventHandler,
-	xorMintEventHandler,
-} from './handlers/events/mintAndBurn'
+import { tokenBurnEventHandler, tokenMintEventHandler, xorBurnEventHandler, xorMintEventHandler } from './handlers/events/mintAndBurn'
 import { networkFeeEventHandler } from './handlers/events/networkFee'
 import { referrerRewardEventHandler } from './handlers/events/referrerReward'
 import { transferEventHandler } from './handlers/events/transfer'
@@ -162,14 +157,12 @@ processor.run(new TypeormDatabase(), async (ctx) => {
 				if (item.name === 'LiquidityProxy.xorless_transfer') await xorlessTransferHandler(blockContext, item)
 				if (item.name === 'LiquidityProxy.swap' || item.name === 'LiquidityProxy.swap_transfer')
 					await swapsCallHandler(blockContext, item)
-				if (item.name === 'LiquidityProxy.swap_transfer_batch')
-					await swapTransferBatchHandler(blockContext, item)
+				if (item.name === 'LiquidityProxy.swap_transfer_batch') await swapTransferBatchHandler(blockContext, item)
 				if (item.name === 'PoolXYK.deposit_liquidity') await liquidityDepositCallHandler(blockContext, item)
 				if (item.name === 'PoolXYK.withdraw_liquidity') await liquidityRemovalCallHandler(blockContext, item)
 				if (item.name === 'IrohaMigration.migrate') await irohaMigrationCallHandler(blockContext, item)
 				if (item.name === 'Utility.batch_all') await batchTransactionsCallHandler(blockContext, item)
-				if (item.name === 'EthBridge.transfer_to_sidechain')
-					await soraEthTransferCallHandler(blockContext, item)
+				if (item.name === 'EthBridge.transfer_to_sidechain') await soraEthTransferCallHandler(blockContext, item)
 				if (
 					item.name === 'PswapDistribution.claim_incentive' ||
 					item.name === 'Rewards.claim' ||
@@ -181,69 +174,52 @@ processor.run(new TypeormDatabase(), async (ctx) => {
 				if (item.name === 'Referrals.reserve') await referralReserveCallHandler(blockContext, item)
 				if (item.name === 'Referrals.unreserve') await referralUnreserveCallHandler(blockContext, item)
 				if (item.name === 'DemeterFarmingPlatform.deposit') await demeterDepositCallHandler(blockContext, item)
-				if (item.name === 'DemeterFarmingPlatform.withdraw')
-					await demeterWithdrawCallHandler(blockContext, item)
-				if (item.name === 'DemeterFarmingPlatform.get_rewards')
-					await demeterGetRewardsCallHandler(blockContext, item)
+				if (item.name === 'DemeterFarmingPlatform.withdraw') await demeterWithdrawCallHandler(blockContext, item)
+				if (item.name === 'DemeterFarmingPlatform.get_rewards') await demeterGetRewardsCallHandler(blockContext, item)
 
 				if (item.name === 'Staking.bond') await stakingBondCallHandler(blockContext, item)
 				if (item.name === 'Staking.bond_extra') await stakingBondExtraCallHandler(blockContext, item)
-				if (item.name === 'Staking.cancel_deferred_slash')
-					await stakingCancelDeferredSlashCallHandler(blockContext, item)
+				if (item.name === 'Staking.cancel_deferred_slash') await stakingCancelDeferredSlashCallHandler(blockContext, item)
 				if (item.name === 'Staking.chill') await stakingChillCallHandler(blockContext, item)
 				if (item.name === 'Staking.chill_other') await stakingChillOtherCallHandler(blockContext, item)
-				if (item.name === 'Staking.force_apply_min_commission')
-					await stakingForceApplyMinCommissionCallHandler(blockContext, item)
+				if (item.name === 'Staking.force_apply_min_commission') await stakingForceApplyMinCommissionCallHandler(blockContext, item)
 				if (item.name === 'Staking.force_new_era') await stakingForceNewEraCallHandler(blockContext, item)
-				if (item.name === 'Staking.force_new_era_always')
-					await stakingForceNewEraAlwaysCallHandler(blockContext, item)
+				if (item.name === 'Staking.force_new_era_always') await stakingForceNewEraAlwaysCallHandler(blockContext, item)
 				if (item.name === 'Staking.force_no_eras') await stakingForceNoErasCallHandler(blockContext, item)
 				if (item.name === 'Staking.force_unstake') await stakingForceUnstakeCallHandler(blockContext, item)
-				if (item.name === 'Staking.increase_validator_count')
-					await stakingIncreaseValidatorCountCallHandler(blockContext, item)
+				if (item.name === 'Staking.increase_validator_count') await stakingIncreaseValidatorCountCallHandler(blockContext, item)
 				if (item.name === 'Staking.kick') await stakingKickCallHandler(blockContext, item)
 				if (item.name === 'Staking.nominate') await stakingNominateCallHandler(blockContext, item)
 				if (item.name === 'Staking.payout_stakers') await stakingPayoutStakersCallHandler(blockContext, item)
 				if (item.name === 'Staking.reap_stash') await stakingReapStashCallHandler(blockContext, item)
 				if (item.name === 'Staking.rebond') await stakingRebondCallHandler(blockContext, item)
-				if (item.name === 'Staking.scale_validator_count')
-					await stakingScaleValidatorCountCallHandler(blockContext, item)
+				if (item.name === 'Staking.scale_validator_count') await stakingScaleValidatorCountCallHandler(blockContext, item)
 				if (item.name === 'Staking.set_controller') await stakingSetControllerCallHandler(blockContext, item)
-				if (item.name === 'Staking.set_history_depth')
-					await stakingSetHistoryDepthCallHandler(blockContext, item)
-				if (item.name === 'Staking.set_invulnerables')
-					await stakingSetInvulnerablesCallHandler(blockContext, item)
-				if (item.name === 'Staking.set_min_commission')
-					await stakingSetMinCommissionCallHandler(blockContext, item)
+				if (item.name === 'Staking.set_history_depth') await stakingSetHistoryDepthCallHandler(blockContext, item)
+				if (item.name === 'Staking.set_invulnerables') await stakingSetInvulnerablesCallHandler(blockContext, item)
+				if (item.name === 'Staking.set_min_commission') await stakingSetMinCommissionCallHandler(blockContext, item)
 				if (item.name === 'Staking.set_payee') await stakingSetPayeeCallHandler(blockContext, item)
-				if (item.name === 'Staking.set_staking_configs')
-					await stakingSetStakingConfigsCallHandler(blockContext, item)
-				if (item.name === 'Staking.set_validator_count')
-					await stakingSetValidatorCountCallHandler(blockContext, item)
-				if (item.name === 'Staking.submit_election_solution')
-					await stakingSubmitElectionSolutionCallHandler(blockContext, item)
+				if (item.name === 'Staking.set_staking_configs') await stakingSetStakingConfigsCallHandler(blockContext, item)
+				if (item.name === 'Staking.set_validator_count') await stakingSetValidatorCountCallHandler(blockContext, item)
+				if (item.name === 'Staking.submit_election_solution') await stakingSubmitElectionSolutionCallHandler(blockContext, item)
 				if (item.name === 'Staking.submit_election_solution_unsigned')
 					await stakingSubmitElectionSolutionUnsignedCallHandler(blockContext, item)
 				if (item.name === 'Staking.unbond') await stakingUnbondCallHandler(blockContext, item)
 				if (item.name === 'Staking.validate') await stakingValidateCallHandler(blockContext, item)
-				if (item.name === 'Staking.withdraw_unbonded')
-					await stakingWithdrawUnbondedCallHandler(blockContext, item)
+				if (item.name === 'Staking.withdraw_unbonded') await stakingWithdrawUnbondedCallHandler(blockContext, item)
 			}
 
 			if (item.kind === 'event') {
-				if (item.name === 'EthBridge.IncomingRequestFinalized')
-					await ethSoraTransferEventHandler(blockContext, item)
+				if (item.name === 'EthBridge.IncomingRequestFinalized') await ethSoraTransferEventHandler(blockContext, item)
 				if (item.name === 'Tokens.Withdrawn') await tokenBurnEventHandler(blockContext, item)
 				if (item.name === 'Balances.Withdraw') await xorBurnEventHandler(blockContext, item)
 				if (item.name === 'Tokens.Deposited') await tokenMintEventHandler(blockContext, item)
 				if (item.name === 'Balances.Deposit') await xorMintEventHandler(blockContext, item)
 				if (item.name === 'XorFee.FeeWithdrawn') await networkFeeEventHandler(blockContext, item)
 				if (item.name === 'XorFee.ReferrerRewarded') await referrerRewardEventHandler(blockContext, item)
-				if (item.name === 'Tokens.Transfer' || item.name === 'Balances.Transfer')
-					await transferEventHandler(blockContext, item)
+				if (item.name === 'Tokens.Transfer' || item.name === 'Balances.Transfer') await transferEventHandler(blockContext, item)
 				if (item.name === 'Assets.AssetRegistered') await assetRegistrationEventHandler(blockContext, item)
-				if (item.name === 'XSTPool.SyntheticAssetEnabled')
-					await syntheticAssetEnabledEventHandler(blockContext, item)
+				if (item.name === 'XSTPool.SyntheticAssetEnabled') await syntheticAssetEnabledEventHandler(blockContext, item)
 				if (item.name === 'Band.SymbolsRelayed') await bandRateUpdateEventHandler(blockContext, item)
 				if (item.name === 'Staking.Rewarded') await stakingRewardedEventHandler(blockContext, item)
 				if (item.name === 'Staking.StakersElected') await stakingStakersElectedEventHandler(blockContext, item)

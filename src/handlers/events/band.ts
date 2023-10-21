@@ -5,10 +5,7 @@ import { getEntityData } from '../../utils/entities'
 import { toReferenceSymbol } from '../../utils'
 import { getEventHandlerLog, logStartProcessingEvent } from '../../utils/logs'
 
-export async function bandRateUpdateEventHandler(
-	ctx: BlockContext,
-	eventItem: EventItem<'Band.SymbolsRelayed'>,
-): Promise<void> {
+export async function bandRateUpdateEventHandler(ctx: BlockContext, eventItem: EventItem<'Band.SymbolsRelayed'>): Promise<void> {
 	logStartProcessingEvent(ctx, eventItem)
 
 	const event = new BandSymbolsRelayedEvent(ctx, eventItem.event)

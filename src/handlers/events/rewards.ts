@@ -10,10 +10,7 @@ import { createHistoryElement } from '../../utils/history'
 import { getEventHandlerLog, logStartProcessingEvent } from '../../utils/logs'
 import { getActiveStakingEra, getStakingStaker } from '../../utils/staking'
 
-function getRewardData(
-	ctx: BlockContext,
-	eventItem: EventItem<'Staking.Rewarded'>,
-): { stash: Address; amount: string } {
+function getRewardData(ctx: BlockContext, eventItem: EventItem<'Staking.Rewarded'>): { stash: Address; amount: string } {
 	const event = new StakingRewardedEvent(ctx, eventItem.event)
 
 	const data = getEntityData(ctx, event, eventItem)
@@ -23,10 +20,7 @@ function getRewardData(
 	return { stash: toAddress(stash), amount: formatU128ToBalance(amount, VAL) }
 }
 
-export async function stakingRewardedEventHandler(
-	ctx: BlockContext,
-	eventItem: EventItem<'Staking.Rewarded'>,
-): Promise<void> {
+export async function stakingRewardedEventHandler(ctx: BlockContext, eventItem: EventItem<'Staking.Rewarded'>): Promise<void> {
 	logStartProcessingEvent(ctx, eventItem)
 
 	const { stash, amount } = getRewardData(ctx, eventItem)

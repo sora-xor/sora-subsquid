@@ -39,11 +39,7 @@ function filterDataProperties(obj: Record<string, any>) {
 	return filteredObj
 }
 
-export const createHistoryElement = (
-	ctx: BlockContext,
-	entityItem: EntityItem<EntityItemName>,
-	data?: {},
-): HistoryElement => {
+export const createHistoryElement = (ctx: BlockContext, entityItem: EntityItem<EntityItemName>, data?: {}): HistoryElement => {
 	const historyElement = new HistoryElement()
 
 	if (!ctx.block.header.validator) {
@@ -58,11 +54,8 @@ export const createHistoryElement = (
 	historyElement.blockHash = ctx.block.header.hash.toString()
 	historyElement.module = toCamelCase(entityItem.name.split('.')[0])
 	historyElement.method = toCamelCase(entityItem.name.split('.')[1])
-	historyElement.address = toAddress(
-		(entityItem.kind === 'call' ? entityItem.extrinsic : entityItem.event.extrinsic)?.signature?.address,
-	)
-	historyElement.networkFee =
-		entityItem.kind === 'call' ? formatU128ToBalance(getCallItemNetworkFee(ctx, entityItem), XOR) : null
+	historyElement.address = toAddress((entityItem.kind === 'call' ? entityItem.extrinsic : entityItem.event.extrinsic)?.signature?.address)
+	historyElement.networkFee = entityItem.kind === 'call' ? formatU128ToBalance(getCallItemNetworkFee(ctx, entityItem), XOR) : null
 	historyElement.timestamp = formatDateTimestamp(new Date(ctx.block.header.timestamp))
 	historyElement.updatedAtBlock = ctx.block.header.height
 	historyElement.callNames = []
@@ -113,17 +106,10 @@ export const addDataToHistoryElement = async (ctx: BlockContext, historyElement:
 	historyElement.updatedAtBlock = ctx.block.header.height
 
 	await ctx.store.save(historyElement)
-	getUtilsLog(ctx).debug(
-		{ historyElementId: historyElement.id, ...filterDataProperties(data) },
-		'Updated history element with data',
-	)
+	getUtilsLog(ctx).debug({ historyElementId: historyElement.id, ...filterDataProperties(data) }, 'Updated history element with data')
 }
 
-export const addCallsToHistoryElement = async (
-	ctx: BlockContext,
-	historyElement: HistoryElement,
-	calls: HistoryElementCall[],
-) => {
+export const addCallsToHistoryElement = async (ctx: BlockContext, historyElement: HistoryElement, calls: HistoryElementCall[]) => {
 	historyElement.callNames = calls.map((call) => call.module + '.' + call.method)
 	historyElement.updatedAtBlock = ctx.block.header.height
 
@@ -134,11 +120,7 @@ export const addCallsToHistoryElement = async (
 export const updateHistoryElementStats = async (ctx: BlockContext, historyElement: HistoryElement) => {
 	const addresses = [historyElement.address.toString()]
 
-	if (
-		INCOMING_TRANSFER_METHODS.includes(historyElement.method.toString()) &&
-		historyElement.data &&
-		(historyElement.data as any)['to']
-	) {
+	if (INCOMING_TRANSFER_METHODS.includes(historyElement.method.toString()) && historyElement.data && (historyElement.data as any)['to']) {
 		addresses.push(((historyElement.data as any)['to'] as string).toString())
 	}
 

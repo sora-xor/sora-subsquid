@@ -8,10 +8,7 @@ import { DemeterFarmingPlatformDepositCall } from '../../types/generated/calls'
 import { getEntityData } from '../../utils/entities'
 import { logStartProcessingCall } from '../../utils/logs'
 
-export async function demeterDepositCallHandler(
-	ctx: BlockContext,
-	callItem: CallItem<'DemeterFarmingPlatform.deposit'>,
-): Promise<void> {
+export async function demeterDepositCallHandler(ctx: BlockContext, callItem: CallItem<'DemeterFarmingPlatform.deposit'>): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
 
 	const call = new DemeterFarmingPlatformDepositCall(ctx, callItem.call)

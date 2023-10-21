@@ -5,10 +5,7 @@ import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStat
 import { getEntityData } from '../../utils/entities'
 import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 
-export async function setReferralCallHandler(
-	ctx: BlockContext,
-	callItem: CallItem<'Referrals.set_referrer'>,
-): Promise<void> {
+export async function setReferralCallHandler(ctx: BlockContext, callItem: CallItem<'Referrals.set_referrer'>): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
 
 	const historyElement = await createHistoryElement(ctx, callItem)

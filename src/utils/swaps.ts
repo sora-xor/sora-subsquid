@@ -36,14 +36,8 @@ export type CallRec = {
 
 export const receiveExtrinsicSwapAmounts = (swapAmount: SwapAmount, assetId: AssetId): string[] => {
 	if (swapAmount.kind === 'WithDesiredOutput') {
-		return [
-			formatU128ToBalance(swapAmount.maxAmountIn, assetId),
-			formatU128ToBalance(swapAmount.desiredAmountOut, assetId),
-		]
+		return [formatU128ToBalance(swapAmount.maxAmountIn, assetId), formatU128ToBalance(swapAmount.desiredAmountOut, assetId)]
 	} else {
-		return [
-			formatU128ToBalance(swapAmount.desiredAmountIn, assetId),
-			formatU128ToBalance(swapAmount.minAmountOut, assetId),
-		]
+		return [formatU128ToBalance(swapAmount.desiredAmountIn, assetId), formatU128ToBalance(swapAmount.minAmountOut, assetId)]
 	}
 }

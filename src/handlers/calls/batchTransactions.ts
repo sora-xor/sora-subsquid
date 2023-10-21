@@ -32,8 +32,7 @@ function formatSpecificCall(call: BatchCall): any {
 			switch (call.call.value.__kind) {
 				case 'deposit_liquidity': {
 					const { __kind, ...value } = call.call.value
-					const { dexId, inputAssetA, inputAssetB, inputADesired, inputBDesired, inputAMin, inputBMin } =
-						value
+					const { dexId, inputAssetA, inputAssetB, inputADesired, inputBDesired, inputAMin, inputBMin } = value
 					// TODO: move args to common function here and in other cases
 					return {
 						dexId,
@@ -78,12 +77,7 @@ function formatSpecificCall(call: BatchCall): any {
 	}
 }
 
-function extractCall(
-	ctx: BlockContext,
-	call: BatchCall,
-	id: number,
-	historyElement: HistoryElement,
-): HistoryElementCall {
+function extractCall(ctx: BlockContext, call: BatchCall, id: number, historyElement: HistoryElement): HistoryElementCall {
 	return new HistoryElementCall({
 		id: `${historyElement.blockHeight}-${id}`,
 		historyElement,
@@ -96,11 +90,7 @@ function extractCall(
 	})
 }
 
-function mapCalls(
-	ctx: BlockContext,
-	{ version, calls }: BatchCalls,
-	historyElement: HistoryElement,
-): HistoryElementCall[] {
+function mapCalls(ctx: BlockContext, { version, calls }: BatchCalls, historyElement: HistoryElement): HistoryElementCall[] {
 	return calls.map((call, idx) => extractCall(ctx, { version, call } as BatchCall, idx, historyElement))
 }
 
@@ -139,10 +129,7 @@ function mapCallsForAllVersions(
 	return calls
 }
 
-export async function batchTransactionsCallHandler(
-	ctx: BlockContext,
-	callItem: CallItem<'Utility.batch_all'>,
-): Promise<void> {
+export async function batchTransactionsCallHandler(ctx: BlockContext, callItem: CallItem<'Utility.batch_all'>): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
 
 	const historyElement = await createHistoryElement(ctx, callItem)
@@ -154,9 +141,7 @@ export async function batchTransactionsCallHandler(
 
 	if (historyElement.execution.success) {
 		// If initialize pool call exists, create new Pool
-		const initializePool = historyElementCalls.find(
-			(call) => call.method === 'initializePool' && call.module === 'poolXYK',
-		)
+		const initializePool = historyElementCalls.find((call) => call.method === 'initializePool' && call.module === 'poolXYK')
 
 		if (initializePool) {
 			//TODO: Determine whether or not typization is applicable here

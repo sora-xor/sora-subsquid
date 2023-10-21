@@ -58,9 +58,7 @@ export async function syncPoolXykPrices(ctx: BlockContext): Promise<void> {
 			const targetAssetReservesBN = new BigNumber(pool.targetAssetReserves.toString())
 
 			baseAssetInPools = baseAssetInPools.plus(baseAssetReservesBN)
-			baseAssetWithDoublePools = baseAssetWithDoublePools.plus(
-				baseAssetReservesBN.multipliedBy(new BigNumber(pool.multiplier)),
-			)
+			baseAssetWithDoublePools = baseAssetWithDoublePools.plus(baseAssetReservesBN.multipliedBy(new BigNumber(pool.multiplier)))
 
 			if (pool.targetAsset.id === DAI) {
 				baseAssetPriceInDAI = !baseAssetReservesBN.isZero()
@@ -83,9 +81,7 @@ export async function syncPoolXykPrices(ctx: BlockContext): Promise<void> {
 			getPoolsStorageLog(ctx).debug({ poolId: pool.id }, 'Update pool')
 		}
 
-		baseAssetWithDoublePoolsPrice = baseAssetWithDoublePoolsPrice.plus(
-			baseAssetWithDoublePools.multipliedBy(baseAssetPriceInDAI),
-		)
+		baseAssetWithDoublePoolsPrice = baseAssetWithDoublePoolsPrice.plus(baseAssetWithDoublePools.multipliedBy(baseAssetPriceInDAI))
 
 		// If base asset has price in DAI
 		if (!baseAssetPriceInDAI.isZero()) {

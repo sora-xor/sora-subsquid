@@ -25,10 +25,7 @@ export async function initializePools(ctx: BlockContext): Promise<void> {
 	>()
 
 	for (const baseAssetId of BASE_ASSETS) {
-		const [properties, reserves] = await Promise.all([
-			getAllProperties(ctx, baseAssetId),
-			getAllReserves(ctx, baseAssetId),
-		])
+		const [properties, reserves] = await Promise.all([getAllProperties(ctx, baseAssetId), getAllReserves(ctx, baseAssetId)])
 
 		if (!properties || !reserves) continue
 
@@ -38,10 +35,7 @@ export async function initializePools(ctx: BlockContext): Promise<void> {
 
 			poolAccounts.add(baseAssetId, targetAssetId, poolAccountId)
 
-			const [baseAsset, targetAsset] = await Promise.all([
-				ctx.store.get(Asset, baseAssetId),
-				ctx.store.get(Asset, targetAssetId),
-			])
+			const [baseAsset, targetAsset] = await Promise.all([ctx.store.get(Asset, baseAssetId), ctx.store.get(Asset, targetAssetId)])
 			if (!baseAsset) throw new Error(`[${ctx.block.header.height}] Cannot find base asset`)
 			if (!targetAsset) throw new Error(`[${ctx.block.header.height}] Cannot find target asset`)
 

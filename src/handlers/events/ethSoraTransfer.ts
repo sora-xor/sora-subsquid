@@ -17,9 +17,7 @@ import { logStartProcessingEvent } from '../../utils/logs'
 
 export async function ethSoraTransferEventHandler(
 	ctx: BlockContext,
-	eventItem:
-		| EventItem<'EthBridge.IncomingRequestFinalized'>
-		| EventItem<'EthBridge.IncomingRequestFinalizationFailed'>,
+	eventItem: EventItem<'EthBridge.IncomingRequestFinalized'> | EventItem<'EthBridge.IncomingRequestFinalizationFailed'>,
 ): Promise<void> {
 	logStartProcessingEvent(ctx, eventItem)
 
@@ -58,15 +56,9 @@ export async function ethSoraTransferEventHandler(
 		amount: eventData.amount.toString(),
 	}
 
-	const callItem = findCallByExtrinsicHash(ctx, extrinsicHash, [
-		'BridgeMultisig.as_multi',
-		'BridgeMultisig.as_multi_threshold_1',
-	])
+	const callItem = findCallByExtrinsicHash(ctx, extrinsicHash, ['BridgeMultisig.as_multi', 'BridgeMultisig.as_multi_threshold_1'])
 	if (!callItem) {
-		throw new CannotFindCallError(ctx, extrinsicHash, [
-			'BridgeMultisig.as_multi',
-			'BridgeMultisig.as_multi_threshold_1',
-		])
+		throw new CannotFindCallError(ctx, extrinsicHash, ['BridgeMultisig.as_multi', 'BridgeMultisig.as_multi_threshold_1'])
 	}
 
 	await createHistoryElement(ctx, callItem, details)

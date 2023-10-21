@@ -17,11 +17,7 @@ function toPascalCase(str: string): string {
 		.replace(/(^|\.)\w/g, (match) => match.toUpperCase()) // Capitalize the first character of each segment
 }
 
-export function getLog(
-	ctx: Context & { block: Block },
-	logModule: string | null = null,
-	attrs: Record<string, any> = {},
-) {
+export function getLog(ctx: Context & { block: Block }, logModule: string | null = null, attrs: Record<string, any> = {}) {
 	const blockHeight = ctx.block.header.height
 	const attributes: any = { blockHeight, ...attrs }
 	if (logModule) {
