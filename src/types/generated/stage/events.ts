@@ -13,6 +13,8 @@ import * as v54 from './v54'
 import * as v57 from './v57'
 import * as v59 from './v59'
 import * as v60 from './v60'
+import * as v64 from './v64'
+import * as v66 from './v66'
 
 export class AssetsAssetRegisteredEvent {
     private readonly _chain: Chain
@@ -6410,6 +6412,37 @@ export class LiquidityProxyLiquiditySourceEnabledEvent {
     }
 }
 
+export class LiquidityProxyXorlessTransferEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'LiquidityProxy.XorlessTransfer')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * XORless transfer has been performed
+     * [Asset Id, Caller Account, Receiver Account, Amount, Additional Data]
+     */
+    get isV66(): boolean {
+        return this._chain.getEventHash('LiquidityProxy.XorlessTransfer') === '8b9d54f982d31b7874159c16939999b8121a2dc6ee4f3654530f74f2874146a2'
+    }
+
+    /**
+     * XORless transfer has been performed
+     * [Asset Id, Caller Account, Receiver Account, Amount, Additional Data]
+     */
+    get asV66(): [v66.AssetId32, Uint8Array, Uint8Array, bigint, (Uint8Array | undefined)] {
+        assert(this.isV66)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
 export class MigrationAppErc20MigratedEvent {
     private readonly _chain: Chain
     private readonly event: Event
@@ -7062,6 +7095,64 @@ export class OracleProxyOracleEnabledEvent {
      */
     get asV45(): v45.Oracle {
         assert(this.isV45)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class ParachainBridgeAppBurnedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'ParachainBridgeApp.Burned')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * [network_id, asset_id, sender, recepient, amount]
+     */
+    get isV64(): boolean {
+        return this._chain.getEventHash('ParachainBridgeApp.Burned') === '00deab9aca8eeb87dea4902ae64a1aea2b76816ea67d21bdd8a8daefbffb811d'
+    }
+
+    /**
+     * [network_id, asset_id, sender, recepient, amount]
+     */
+    get asV64(): [v64.SubNetworkId, v64.AssetId32, Uint8Array, v64.VersionedMultiLocation, bigint] {
+        assert(this.isV64)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class ParachainBridgeAppMintedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'ParachainBridgeApp.Minted')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * [network_id, asset_id, sender, recepient, amount]
+     */
+    get isV64(): boolean {
+        return this._chain.getEventHash('ParachainBridgeApp.Minted') === 'e2e9c422011901e27a42b466b7bac40a216c045b42fad954b39f26344f85f536'
+    }
+
+    /**
+     * [network_id, asset_id, sender, recepient, amount]
+     */
+    get asV64(): [v64.SubNetworkId, v64.AssetId32, (v64.VersionedMultiLocation | undefined), Uint8Array, bigint] {
+        assert(this.isV64)
         return this._chain.decodeEvent(this.event)
     }
 }

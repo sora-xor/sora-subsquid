@@ -2,115 +2,122 @@ import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStat
 import { getAssetId, formatU128ToBalance } from '../../utils/assets'
 import { XOR } from '../../utils/consts'
 
-import { Address, Block, CallItem, Context } from '../../types'
+import { BlockContext, CallItem } from '../../types'
 import { LiquidityProxySwapTransferBatchCall } from '../../types/generated/calls'
 import { getEntityData } from '../../utils/entities'
 import { toAddress } from '../../utils'
 import { findEventByExtrinsicHash, findEventsByExtrinsicHash } from '../../utils/events'
-import { AssetsTransferEvent, LiquidityProxyBatchSwapExecutedEvent, LiquidityProxyExchangeEvent, TransactionPaymentTransactionFeePaidEvent, XorFeeFeeWithdrawnEvent } from '../../types/generated/events'
-import { logCallHandler } from '../../utils/log'
+import {
+	AssetsTransferEvent,
+	LiquidityProxyBatchSwapExecutedEvent,
+	LiquidityProxyExchangeEvent,
+	TransactionPaymentTransactionFeePaidEvent,
+	XorFeeFeeWithdrawnEvent,
+} from '../../types/generated/events'
+import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
+import { getExtrinsicSigner } from '../../utils/calls'
 
-function getLiquidityProxyBatchSwapExecutedEventData (ctx: Context, block: Block, extrinsicHash: string) {
+function getLiquidityProxyBatchSwapExecutedEventData(ctx: BlockContext, extrinsicHash: string) {
 	const name = 'LiquidityProxy.BatchSwapExecuted'
-	const eventItem = findEventByExtrinsicHash(block, extrinsicHash, [name])
-	if (eventItem === null) throw new Error(`[${block.header.height}] Event ${name} not found for extrinsic ${extrinsicHash}`)
+	const eventItem = findEventByExtrinsicHash(ctx, extrinsicHash, [name])
+	if (eventItem === null) throw new Error(`[${ctx.block.header.height}] Event ${name} not found for extrinsic ${extrinsicHash}`)
 	const event = new LiquidityProxyBatchSwapExecutedEvent(ctx, eventItem.event)
-	return getEntityData(ctx, block, event, eventItem)
+	return getEntityData(ctx, event, eventItem)
 }
 
-function getXorFeeFeeWithdrawnEventData (ctx: Context, block: Block, extrinsicHash: string) {
+function getXorFeeFeeWithdrawnEventData(ctx: BlockContext, extrinsicHash: string) {
 	const name = 'XorFee.FeeWithdrawn'
-	const eventItem = findEventByExtrinsicHash(block, extrinsicHash, [name])
-	if (eventItem === null) throw new Error(`[${block.header.height}] Event ${name} not found for extrinsic ${extrinsicHash}`)
+	const eventItem = findEventByExtrinsicHash(ctx, extrinsicHash, [name])
+	if (eventItem === null) throw new Error(`[${ctx.block.header.height}] Event ${name} not found for extrinsic ${extrinsicHash}`)
 	const event = new XorFeeFeeWithdrawnEvent(ctx, eventItem.event)
-	return getEntityData(ctx, block, event, eventItem)
+	return getEntityData(ctx, event, eventItem)
 }
 
-function getTransactionPaymentTransactionFeePaidEventData (ctx: Context, block: Block, extrinsicHash: string) {
+function getTransactionPaymentTransactionFeePaidEventData(ctx: BlockContext, extrinsicHash: string) {
 	const name = 'TransactionPayment.TransactionFeePaid'
-	const eventItem = findEventByExtrinsicHash(block, extrinsicHash, [name])
-	if (eventItem === null) throw new Error(`[${block.header.height}] Event ${name} not found for extrinsic ${extrinsicHash}`)
+	const eventItem = findEventByExtrinsicHash(ctx, extrinsicHash, [name])
+	if (eventItem === null) throw new Error(`[${ctx.block.header.height}] Event ${name} not found for extrinsic ${extrinsicHash}`)
 	const event = new TransactionPaymentTransactionFeePaidEvent(ctx, eventItem.event)
-	return getEntityData(ctx, block, event, eventItem)
+	return getEntityData(ctx, event, eventItem)
 }
 
-const handleAndSaveExtrinsic = async (ctx: Context, block: Block, callItem: CallItem<'LiquidityProxy.swap_transfer_batch'>): Promise <void> => {
-    const blockNumber = block.header.height
+const handleAndSaveExtrinsic = async (ctx: BlockContext, callItem: CallItem<'LiquidityProxy.swap_transfer_batch'>): Promise<void> => {
+	const blockNumber = ctx.block.header.height
 	const extrinsicHash = callItem.extrinsic.hash
-	const historyElement = await createHistoryElement(ctx, block, callItem)
+	const historyElement = await createHistoryElement(ctx, callItem)
 
 	const call = new LiquidityProxySwapTransferBatchCall(ctx, callItem.call)
-	const data = getEntityData(ctx, block, call, callItem)
+	const data = getEntityData(ctx, call, callItem)
 
-    const inputAssetId = getAssetId(data.inputAssetId)
-	const extrinsicSigner: Address | null = callItem.call.origin ? toAddress(callItem.call.origin.value.value) : null
+	const inputAssetId = getAssetId(data.inputAssetId)
+	const extrinsicSigner = getExtrinsicSigner(ctx, callItem)
 
-    const details: any = {}
+	const details: any = {}
 
-    details.inputAssetId = getAssetId(data.inputAssetId)
-    details.selectedMarket = data.selectedSourceTypes.map(lst => lst.toString()).toString()
-    details.maxInputAmount = data.maxInputAmount
-    details.blockNumber = blockNumber
-    details.from = extrinsicSigner
+	const receivers = 'receivers' in data ? data.receivers : data.swapBatches.map((batch) => batch.receivers).flat(1)
 
-	if ('receivers' in data) {
-		details.receivers = data.receivers
-	} else  if ('swapBatches' in data) {
-		details.swapBatches = data.swapBatches
-	}
-    
-    if (historyElement.execution.success) {
-        const [adarFee, inputAmount] = getLiquidityProxyBatchSwapExecutedEventData(ctx, block, extrinsicHash)
-        details.adarFee = formatU128ToBalance(adarFee, inputAssetId)
-        details.inputAmount = formatU128ToBalance(inputAmount, inputAssetId)
+	details.inputAssetId = getAssetId(data.inputAssetId)
+	details.selectedMarket = data.selectedSourceTypes.map((lst) => lst.toString()).toString()
+	details.maxInputAmount = data.maxInputAmount
+	details.blockNumber = blockNumber
+	details.from = extrinsicSigner
+	details.receivers = receivers.map((receiver) => ({
+		...receiver,
+		accountId: toAddress(receiver.accountId),
+	}))
 
-        const [, networkFee] = getXorFeeFeeWithdrawnEventData(ctx, block, extrinsicHash)
-        details.networkFee = formatU128ToBalance(networkFee, XOR)
+	if (historyElement.execution.success) {
+		const [adarFee, inputAmount] = getLiquidityProxyBatchSwapExecutedEventData(ctx, extrinsicHash)
+		details.adarFee = formatU128ToBalance(adarFee, inputAssetId)
+		details.inputAmount = formatU128ToBalance(inputAmount, inputAssetId)
 
-        const { actualFee } = getTransactionPaymentTransactionFeePaidEventData(ctx, block, extrinsicHash)
-        details.actualFee = formatU128ToBalance(actualFee, XOR)
+		const [, networkFee] = getXorFeeFeeWithdrawnEventData(ctx, extrinsicHash)
+		details.networkFee = formatU128ToBalance(networkFee, XOR)
 
-        const assetsTransfers = findEventsByExtrinsicHash(block, extrinsicHash, ['Assets.Transfer']).map(eventItem => {
+		const { actualFee } = getTransactionPaymentTransactionFeePaidEventData(ctx, extrinsicHash)
+		details.actualFee = formatU128ToBalance(actualFee, XOR)
+
+		const assetsTransfers = findEventsByExtrinsicHash(ctx, extrinsicHash, ['Assets.Transfer']).map((eventItem) => {
 			const event = new AssetsTransferEvent(ctx, eventItem.event)
-			const eventData = getEntityData(ctx, block, event, eventItem)
-            const [from, to, asset, amount] = eventData
-            return {
-                from: from.toString(),
-                to: to.toString(),
-                amount: formatU128ToBalance(amount, getAssetId(asset)),
-                assetId: getAssetId(asset)
-            }
-        })
-        details.transfers = assetsTransfers
+			const eventData = getEntityData(ctx, event, eventItem)
+			const [from, to, asset, amount] = eventData
+			return {
+				from: toAddress(from),
+				to: toAddress(to),
+				amount: formatU128ToBalance(amount, getAssetId(asset)),
+				assetId: getAssetId(asset),
+			}
+		})
+		details.transfers = assetsTransfers
 
-		const exchanges = findEventsByExtrinsicHash(block, extrinsicHash, ['LiquidityProxy.Exchange']).map(eventItem => {
+		const exchanges = findEventsByExtrinsicHash(ctx, extrinsicHash, ['LiquidityProxy.Exchange']).map((eventItem) => {
 			const event = new LiquidityProxyExchangeEvent(ctx, eventItem.event)
-			const eventData = getEntityData(ctx, block, event, eventItem)
-            const [senderAddress, dexId, inputAsset, outputAsset, inputAmount, outputAmount, feeAmount] = eventData
-            return {
-                senderAddress: senderAddress.toString(),
-                dexId: dexId.toString(),
-                inputAssetId: getAssetId(inputAsset),
-                outputAssetId: getAssetId(outputAsset),
-                inputAmount: formatU128ToBalance(inputAmount, getAssetId(inputAsset)),
-                outputAmount: formatU128ToBalance(outputAmount, getAssetId(outputAsset)),
-                feeAmount: formatU128ToBalance(feeAmount, getAssetId(inputAsset)),
-            }
-        })
-        details.exchanges = exchanges
-    } else {
-        details.exchanges = []
-        details.transfers = []
-    }
+			const eventData = getEntityData(ctx, event, eventItem)
+			const [senderAddress, dexId, inputAsset, outputAsset, inputAmount, outputAmount, feeAmount] = eventData
+			return {
+				senderAddress: toAddress(senderAddress),
+				dexId: dexId.toString(),
+				inputAssetId: getAssetId(inputAsset),
+				outputAssetId: getAssetId(outputAsset),
+				inputAmount: formatU128ToBalance(inputAmount, getAssetId(inputAsset)),
+				outputAmount: formatU128ToBalance(outputAmount, getAssetId(outputAsset)),
+				feeAmount: formatU128ToBalance(feeAmount, getAssetId(inputAsset)),
+			}
+		})
+		details.exchanges = exchanges
+	} else {
+		details.exchanges = []
+		details.transfers = []
+	}
 
-    await addDataToHistoryElement(ctx, block, historyElement, details)
-    await updateHistoryElementStats(ctx, block, historyElement)
+	await addDataToHistoryElement(ctx, historyElement, details)
+	await updateHistoryElementStats(ctx, historyElement)
 }
 
-export async function swapTransferBatchHandler(ctx: Context, block: Block, callItem: CallItem<'LiquidityProxy.swap_transfer_batch'>): Promise <void> {
-	logCallHandler(ctx, block, callItem)
+export async function swapTransferBatchHandler(ctx: BlockContext, callItem: CallItem<'LiquidityProxy.swap_transfer_batch'>): Promise<void> {
+	logStartProcessingCall(ctx, callItem)
 
-    await handleAndSaveExtrinsic(ctx, block, callItem)
+	await handleAndSaveExtrinsic(ctx, callItem)
 
-    ctx.log.debug(`[${block.header.height}] ===== Saved swap transfer batch with ${callItem.extrinsic.hash} txid =====`)
+	getCallHandlerLog(ctx, callItem).debug('Saved swap transfer batch')
 }

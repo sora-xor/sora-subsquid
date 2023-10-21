@@ -582,6 +582,132 @@ export class BandSetDynamicFeeParametersCall {
 	}
 }
 
+export class BridgeDataSignerAddPeerCall {
+	private readonly production: productionCalls.BridgeDataSignerAddPeerCall
+	private readonly stage: stageCalls.BridgeDataSignerAddPeerCall
+	private readonly test: testCalls.BridgeDataSignerAddPeerCall
+	private readonly dev: devCalls.BridgeDataSignerAddPeerCall
+
+	constructor(ctx: ChainContext, call: Call) {
+		this.production = new productionCalls.BridgeDataSignerAddPeerCall(ctx, call)
+		this.stage = new stageCalls.BridgeDataSignerAddPeerCall(ctx, call)
+		this.test = new testCalls.BridgeDataSignerAddPeerCall(ctx, call)
+		this.dev = new devCalls.BridgeDataSignerAddPeerCall(ctx, call)
+	}
+
+	get isV64(): productionCalls.BridgeDataSignerAddPeerCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.BridgeDataSignerAddPeerCall['asV64'] {
+		return this.production.asV64
+	}
+}
+
+export class BridgeDataSignerApproveCall {
+	private readonly production: productionCalls.BridgeDataSignerApproveCall
+	private readonly stage: stageCalls.BridgeDataSignerApproveCall
+	private readonly test: testCalls.BridgeDataSignerApproveCall
+	private readonly dev: devCalls.BridgeDataSignerApproveCall
+
+	constructor(ctx: ChainContext, call: Call) {
+		this.production = new productionCalls.BridgeDataSignerApproveCall(ctx, call)
+		this.stage = new stageCalls.BridgeDataSignerApproveCall(ctx, call)
+		this.test = new testCalls.BridgeDataSignerApproveCall(ctx, call)
+		this.dev = new devCalls.BridgeDataSignerApproveCall(ctx, call)
+	}
+
+	get isV64(): productionCalls.BridgeDataSignerApproveCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.BridgeDataSignerApproveCall['asV64'] {
+		return this.production.asV64
+	}
+}
+
+export class BridgeDataSignerFinishAddPeerCall {
+	private readonly production: productionCalls.BridgeDataSignerFinishAddPeerCall
+	private readonly stage: stageCalls.BridgeDataSignerFinishAddPeerCall
+	private readonly test: testCalls.BridgeDataSignerFinishAddPeerCall
+	private readonly dev: devCalls.BridgeDataSignerFinishAddPeerCall
+
+	constructor(ctx: ChainContext, call: Call) {
+		this.production = new productionCalls.BridgeDataSignerFinishAddPeerCall(ctx, call)
+		this.stage = new stageCalls.BridgeDataSignerFinishAddPeerCall(ctx, call)
+		this.test = new testCalls.BridgeDataSignerFinishAddPeerCall(ctx, call)
+		this.dev = new devCalls.BridgeDataSignerFinishAddPeerCall(ctx, call)
+	}
+
+	get isV64(): productionCalls.BridgeDataSignerFinishAddPeerCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.BridgeDataSignerFinishAddPeerCall['asV64'] {
+		return this.production.asV64
+	}
+}
+
+export class BridgeDataSignerFinishRemovePeerCall {
+	private readonly production: productionCalls.BridgeDataSignerFinishRemovePeerCall
+	private readonly stage: stageCalls.BridgeDataSignerFinishRemovePeerCall
+	private readonly test: testCalls.BridgeDataSignerFinishRemovePeerCall
+	private readonly dev: devCalls.BridgeDataSignerFinishRemovePeerCall
+
+	constructor(ctx: ChainContext, call: Call) {
+		this.production = new productionCalls.BridgeDataSignerFinishRemovePeerCall(ctx, call)
+		this.stage = new stageCalls.BridgeDataSignerFinishRemovePeerCall(ctx, call)
+		this.test = new testCalls.BridgeDataSignerFinishRemovePeerCall(ctx, call)
+		this.dev = new devCalls.BridgeDataSignerFinishRemovePeerCall(ctx, call)
+	}
+
+	get isV64(): productionCalls.BridgeDataSignerFinishRemovePeerCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.BridgeDataSignerFinishRemovePeerCall['asV64'] {
+		return this.production.asV64
+	}
+}
+
+export class BridgeDataSignerRegisterNetworkCall {
+	private readonly production: productionCalls.BridgeDataSignerRegisterNetworkCall
+	private readonly stage: stageCalls.BridgeDataSignerRegisterNetworkCall
+	private readonly test: testCalls.BridgeDataSignerRegisterNetworkCall
+	private readonly dev: devCalls.BridgeDataSignerRegisterNetworkCall
+
+	constructor(ctx: ChainContext, call: Call) {
+		this.production = new productionCalls.BridgeDataSignerRegisterNetworkCall(ctx, call)
+		this.stage = new stageCalls.BridgeDataSignerRegisterNetworkCall(ctx, call)
+		this.test = new testCalls.BridgeDataSignerRegisterNetworkCall(ctx, call)
+		this.dev = new devCalls.BridgeDataSignerRegisterNetworkCall(ctx, call)
+	}
+
+	get isV64(): productionCalls.BridgeDataSignerRegisterNetworkCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.BridgeDataSignerRegisterNetworkCall['asV64'] {
+		return this.production.asV64
+	}
+}
+
+export class BridgeDataSignerRemovePeerCall {
+	private readonly production: productionCalls.BridgeDataSignerRemovePeerCall
+	private readonly stage: stageCalls.BridgeDataSignerRemovePeerCall
+	private readonly test: testCalls.BridgeDataSignerRemovePeerCall
+	private readonly dev: devCalls.BridgeDataSignerRemovePeerCall
+
+	constructor(ctx: ChainContext, call: Call) {
+		this.production = new productionCalls.BridgeDataSignerRemovePeerCall(ctx, call)
+		this.stage = new stageCalls.BridgeDataSignerRemovePeerCall(ctx, call)
+		this.test = new testCalls.BridgeDataSignerRemovePeerCall(ctx, call)
+		this.dev = new devCalls.BridgeDataSignerRemovePeerCall(ctx, call)
+	}
+
+	get isV64(): productionCalls.BridgeDataSignerRemovePeerCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.BridgeDataSignerRemovePeerCall['asV64'] {
+		return this.production.asV64
+	}
+}
+
 export class BridgeMultisigAddSignatoryCall {
 	private readonly production: productionCalls.BridgeMultisigAddSignatoryCall
 	private readonly stage: stageCalls.BridgeMultisigAddSignatoryCall
@@ -802,6 +928,18 @@ export class BridgeMultisigAsMultiThreshold1Call {
 	get asV60(): productionCalls.BridgeMultisigAsMultiThreshold1Call['asV60'] {
 		return this.production.asV60
 	}
+	get isV63(): productionCalls.BridgeMultisigAsMultiThreshold1Call['isV63'] {
+		return this.production.isV63
+	}
+	get asV63(): productionCalls.BridgeMultisigAsMultiThreshold1Call['asV63'] {
+		return this.production.asV63
+	}
+	get isV64(): productionCalls.BridgeMultisigAsMultiThreshold1Call['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.BridgeMultisigAsMultiThreshold1Call['asV64'] {
+		return this.production.asV64
+	}
 	get isV33Stage(): stageCalls.BridgeMultisigAsMultiThreshold1Call['isV33'] {
 		return this.stage.isV33
 	}
@@ -910,6 +1048,18 @@ export class BridgeMultisigAsMultiThreshold1Call {
 	get asV62Stage(): stageCalls.BridgeMultisigAsMultiThreshold1Call['asV62'] {
 		return this.stage.asV62
 	}
+	get isV64Stage(): stageCalls.BridgeMultisigAsMultiThreshold1Call['isV64'] {
+		return this.stage.isV64
+	}
+	get asV64Stage(): stageCalls.BridgeMultisigAsMultiThreshold1Call['asV64'] {
+		return this.stage.asV64
+	}
+	get isV66Stage(): stageCalls.BridgeMultisigAsMultiThreshold1Call['isV66'] {
+		return this.stage.isV66
+	}
+	get asV66Stage(): stageCalls.BridgeMultisigAsMultiThreshold1Call['asV66'] {
+		return this.stage.asV66
+	}
 	get isV51Test(): testCalls.BridgeMultisigAsMultiThreshold1Call['isV51'] {
 		return this.test.isV51
 	}
@@ -922,11 +1072,11 @@ export class BridgeMultisigAsMultiThreshold1Call {
 	get asV52Test(): testCalls.BridgeMultisigAsMultiThreshold1Call['asV52'] {
 		return this.test.asV52
 	}
-	get isV63Dev(): devCalls.BridgeMultisigAsMultiThreshold1Call['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devCalls.BridgeMultisigAsMultiThreshold1Call['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devCalls.BridgeMultisigAsMultiThreshold1Call['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devCalls.BridgeMultisigAsMultiThreshold1Call['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -996,6 +1146,90 @@ export class BridgeMultisigRemoveSignatoryCall {
 	}
 	get asV1(): productionCalls.BridgeMultisigRemoveSignatoryCall['asV1'] {
 		return this.production.asV1
+	}
+}
+
+export class BridgeProxyAddLimitedAssetCall {
+	private readonly production: productionCalls.BridgeProxyAddLimitedAssetCall
+	private readonly stage: stageCalls.BridgeProxyAddLimitedAssetCall
+	private readonly test: testCalls.BridgeProxyAddLimitedAssetCall
+	private readonly dev: devCalls.BridgeProxyAddLimitedAssetCall
+
+	constructor(ctx: ChainContext, call: Call) {
+		this.production = new productionCalls.BridgeProxyAddLimitedAssetCall(ctx, call)
+		this.stage = new stageCalls.BridgeProxyAddLimitedAssetCall(ctx, call)
+		this.test = new testCalls.BridgeProxyAddLimitedAssetCall(ctx, call)
+		this.dev = new devCalls.BridgeProxyAddLimitedAssetCall(ctx, call)
+	}
+
+	get isV64(): productionCalls.BridgeProxyAddLimitedAssetCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.BridgeProxyAddLimitedAssetCall['asV64'] {
+		return this.production.asV64
+	}
+}
+
+export class BridgeProxyBurnCall {
+	private readonly production: productionCalls.BridgeProxyBurnCall
+	private readonly stage: stageCalls.BridgeProxyBurnCall
+	private readonly test: testCalls.BridgeProxyBurnCall
+	private readonly dev: devCalls.BridgeProxyBurnCall
+
+	constructor(ctx: ChainContext, call: Call) {
+		this.production = new productionCalls.BridgeProxyBurnCall(ctx, call)
+		this.stage = new stageCalls.BridgeProxyBurnCall(ctx, call)
+		this.test = new testCalls.BridgeProxyBurnCall(ctx, call)
+		this.dev = new devCalls.BridgeProxyBurnCall(ctx, call)
+	}
+
+	get isV64(): productionCalls.BridgeProxyBurnCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.BridgeProxyBurnCall['asV64'] {
+		return this.production.asV64
+	}
+}
+
+export class BridgeProxyRemoveLimitedAssetCall {
+	private readonly production: productionCalls.BridgeProxyRemoveLimitedAssetCall
+	private readonly stage: stageCalls.BridgeProxyRemoveLimitedAssetCall
+	private readonly test: testCalls.BridgeProxyRemoveLimitedAssetCall
+	private readonly dev: devCalls.BridgeProxyRemoveLimitedAssetCall
+
+	constructor(ctx: ChainContext, call: Call) {
+		this.production = new productionCalls.BridgeProxyRemoveLimitedAssetCall(ctx, call)
+		this.stage = new stageCalls.BridgeProxyRemoveLimitedAssetCall(ctx, call)
+		this.test = new testCalls.BridgeProxyRemoveLimitedAssetCall(ctx, call)
+		this.dev = new devCalls.BridgeProxyRemoveLimitedAssetCall(ctx, call)
+	}
+
+	get isV64(): productionCalls.BridgeProxyRemoveLimitedAssetCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.BridgeProxyRemoveLimitedAssetCall['asV64'] {
+		return this.production.asV64
+	}
+}
+
+export class BridgeProxyUpdateTransferLimitCall {
+	private readonly production: productionCalls.BridgeProxyUpdateTransferLimitCall
+	private readonly stage: stageCalls.BridgeProxyUpdateTransferLimitCall
+	private readonly test: testCalls.BridgeProxyUpdateTransferLimitCall
+	private readonly dev: devCalls.BridgeProxyUpdateTransferLimitCall
+
+	constructor(ctx: ChainContext, call: Call) {
+		this.production = new productionCalls.BridgeProxyUpdateTransferLimitCall(ctx, call)
+		this.stage = new stageCalls.BridgeProxyUpdateTransferLimitCall(ctx, call)
+		this.test = new testCalls.BridgeProxyUpdateTransferLimitCall(ctx, call)
+		this.dev = new devCalls.BridgeProxyUpdateTransferLimitCall(ctx, call)
+	}
+
+	get isV64(): productionCalls.BridgeProxyUpdateTransferLimitCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.BridgeProxyUpdateTransferLimitCall['asV64'] {
+		return this.production.asV64
 	}
 }
 
@@ -1834,6 +2068,18 @@ export class CouncilExecuteCall {
 	get asV60(): productionCalls.CouncilExecuteCall['asV60'] {
 		return this.production.asV60
 	}
+	get isV63(): productionCalls.CouncilExecuteCall['isV63'] {
+		return this.production.isV63
+	}
+	get asV63(): productionCalls.CouncilExecuteCall['asV63'] {
+		return this.production.asV63
+	}
+	get isV64(): productionCalls.CouncilExecuteCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.CouncilExecuteCall['asV64'] {
+		return this.production.asV64
+	}
 	get isV33Stage(): stageCalls.CouncilExecuteCall['isV33'] {
 		return this.stage.isV33
 	}
@@ -1942,6 +2188,18 @@ export class CouncilExecuteCall {
 	get asV62Stage(): stageCalls.CouncilExecuteCall['asV62'] {
 		return this.stage.asV62
 	}
+	get isV64Stage(): stageCalls.CouncilExecuteCall['isV64'] {
+		return this.stage.isV64
+	}
+	get asV64Stage(): stageCalls.CouncilExecuteCall['asV64'] {
+		return this.stage.asV64
+	}
+	get isV66Stage(): stageCalls.CouncilExecuteCall['isV66'] {
+		return this.stage.isV66
+	}
+	get asV66Stage(): stageCalls.CouncilExecuteCall['asV66'] {
+		return this.stage.asV66
+	}
 	get isV51Test(): testCalls.CouncilExecuteCall['isV51'] {
 		return this.test.isV51
 	}
@@ -1954,11 +2212,11 @@ export class CouncilExecuteCall {
 	get asV52Test(): testCalls.CouncilExecuteCall['asV52'] {
 		return this.test.asV52
 	}
-	get isV63Dev(): devCalls.CouncilExecuteCall['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devCalls.CouncilExecuteCall['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devCalls.CouncilExecuteCall['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devCalls.CouncilExecuteCall['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -2107,6 +2365,18 @@ export class CouncilProposeCall {
 	get asV60(): productionCalls.CouncilProposeCall['asV60'] {
 		return this.production.asV60
 	}
+	get isV63(): productionCalls.CouncilProposeCall['isV63'] {
+		return this.production.isV63
+	}
+	get asV63(): productionCalls.CouncilProposeCall['asV63'] {
+		return this.production.asV63
+	}
+	get isV64(): productionCalls.CouncilProposeCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.CouncilProposeCall['asV64'] {
+		return this.production.asV64
+	}
 	get isV33Stage(): stageCalls.CouncilProposeCall['isV33'] {
 		return this.stage.isV33
 	}
@@ -2215,6 +2485,18 @@ export class CouncilProposeCall {
 	get asV62Stage(): stageCalls.CouncilProposeCall['asV62'] {
 		return this.stage.asV62
 	}
+	get isV64Stage(): stageCalls.CouncilProposeCall['isV64'] {
+		return this.stage.isV64
+	}
+	get asV64Stage(): stageCalls.CouncilProposeCall['asV64'] {
+		return this.stage.asV64
+	}
+	get isV66Stage(): stageCalls.CouncilProposeCall['isV66'] {
+		return this.stage.isV66
+	}
+	get asV66Stage(): stageCalls.CouncilProposeCall['asV66'] {
+		return this.stage.asV66
+	}
 	get isV51Test(): testCalls.CouncilProposeCall['isV51'] {
 		return this.test.isV51
 	}
@@ -2227,11 +2509,11 @@ export class CouncilProposeCall {
 	get asV52Test(): testCalls.CouncilProposeCall['asV52'] {
 		return this.test.asV52
 	}
-	get isV63Dev(): devCalls.CouncilProposeCall['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devCalls.CouncilProposeCall['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devCalls.CouncilProposeCall['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devCalls.CouncilProposeCall['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -4693,11 +4975,11 @@ export class LiquidityProxySwapCall {
 	get asV42(): productionCalls.LiquidityProxySwapCall['asV42'] {
 		return this.production.asV42
 	}
-	get isV63Dev(): devCalls.LiquidityProxySwapCall['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devCalls.LiquidityProxySwapCall['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devCalls.LiquidityProxySwapCall['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devCalls.LiquidityProxySwapCall['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -4726,11 +5008,11 @@ export class LiquidityProxySwapTransferCall {
 	get asV42(): productionCalls.LiquidityProxySwapTransferCall['asV42'] {
 		return this.production.asV42
 	}
-	get isV63Dev(): devCalls.LiquidityProxySwapTransferCall['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devCalls.LiquidityProxySwapTransferCall['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devCalls.LiquidityProxySwapTransferCall['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devCalls.LiquidityProxySwapTransferCall['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -4759,17 +5041,17 @@ export class LiquidityProxySwapTransferBatchCall {
 	get asV50(): productionCalls.LiquidityProxySwapTransferBatchCall['asV50'] {
 		return this.production.asV50
 	}
-	get isV62Stage(): stageCalls.LiquidityProxySwapTransferBatchCall['isV62'] {
-		return this.stage.isV62
+	get isV63(): productionCalls.LiquidityProxySwapTransferBatchCall['isV63'] {
+		return this.production.isV63
 	}
-	get asV62Stage(): stageCalls.LiquidityProxySwapTransferBatchCall['asV62'] {
-		return this.stage.asV62
+	get asV63(): productionCalls.LiquidityProxySwapTransferBatchCall['asV63'] {
+		return this.production.asV63
 	}
-	get isV63Dev(): devCalls.LiquidityProxySwapTransferBatchCall['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devCalls.LiquidityProxySwapTransferBatchCall['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devCalls.LiquidityProxySwapTransferBatchCall['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devCalls.LiquidityProxySwapTransferBatchCall['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -4981,6 +5263,18 @@ export class MultisigAsMultiCall {
 	get asV60(): productionCalls.MultisigAsMultiCall['asV60'] {
 		return this.production.asV60
 	}
+	get isV63(): productionCalls.MultisigAsMultiCall['isV63'] {
+		return this.production.isV63
+	}
+	get asV63(): productionCalls.MultisigAsMultiCall['asV63'] {
+		return this.production.asV63
+	}
+	get isV64(): productionCalls.MultisigAsMultiCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.MultisigAsMultiCall['asV64'] {
+		return this.production.asV64
+	}
 	get isV52Stage(): stageCalls.MultisigAsMultiCall['isV52'] {
 		return this.stage.isV52
 	}
@@ -5023,6 +5317,18 @@ export class MultisigAsMultiCall {
 	get asV62Stage(): stageCalls.MultisigAsMultiCall['asV62'] {
 		return this.stage.asV62
 	}
+	get isV64Stage(): stageCalls.MultisigAsMultiCall['isV64'] {
+		return this.stage.isV64
+	}
+	get asV64Stage(): stageCalls.MultisigAsMultiCall['asV64'] {
+		return this.stage.asV64
+	}
+	get isV66Stage(): stageCalls.MultisigAsMultiCall['isV66'] {
+		return this.stage.isV66
+	}
+	get asV66Stage(): stageCalls.MultisigAsMultiCall['asV66'] {
+		return this.stage.asV66
+	}
 	get isV51Test(): testCalls.MultisigAsMultiCall['isV51'] {
 		return this.test.isV51
 	}
@@ -5035,11 +5341,11 @@ export class MultisigAsMultiCall {
 	get asV52Test(): testCalls.MultisigAsMultiCall['asV52'] {
 		return this.test.asV52
 	}
-	get isV63Dev(): devCalls.MultisigAsMultiCall['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devCalls.MultisigAsMultiCall['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devCalls.MultisigAsMultiCall['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devCalls.MultisigAsMultiCall['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -5188,6 +5494,18 @@ export class MultisigAsMultiThreshold1Call {
 	get asV60(): productionCalls.MultisigAsMultiThreshold1Call['asV60'] {
 		return this.production.asV60
 	}
+	get isV63(): productionCalls.MultisigAsMultiThreshold1Call['isV63'] {
+		return this.production.isV63
+	}
+	get asV63(): productionCalls.MultisigAsMultiThreshold1Call['asV63'] {
+		return this.production.asV63
+	}
+	get isV64(): productionCalls.MultisigAsMultiThreshold1Call['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.MultisigAsMultiThreshold1Call['asV64'] {
+		return this.production.asV64
+	}
 	get isV33Stage(): stageCalls.MultisigAsMultiThreshold1Call['isV33'] {
 		return this.stage.isV33
 	}
@@ -5296,6 +5614,18 @@ export class MultisigAsMultiThreshold1Call {
 	get asV62Stage(): stageCalls.MultisigAsMultiThreshold1Call['asV62'] {
 		return this.stage.asV62
 	}
+	get isV64Stage(): stageCalls.MultisigAsMultiThreshold1Call['isV64'] {
+		return this.stage.isV64
+	}
+	get asV64Stage(): stageCalls.MultisigAsMultiThreshold1Call['asV64'] {
+		return this.stage.asV64
+	}
+	get isV66Stage(): stageCalls.MultisigAsMultiThreshold1Call['isV66'] {
+		return this.stage.isV66
+	}
+	get asV66Stage(): stageCalls.MultisigAsMultiThreshold1Call['asV66'] {
+		return this.stage.asV66
+	}
 	get isV51Test(): testCalls.MultisigAsMultiThreshold1Call['isV51'] {
 		return this.test.isV51
 	}
@@ -5308,11 +5638,11 @@ export class MultisigAsMultiThreshold1Call {
 	get asV52Test(): testCalls.MultisigAsMultiThreshold1Call['asV52'] {
 		return this.test.asV52
 	}
-	get isV63Dev(): devCalls.MultisigAsMultiThreshold1Call['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devCalls.MultisigAsMultiThreshold1Call['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devCalls.MultisigAsMultiThreshold1Call['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devCalls.MultisigAsMultiThreshold1Call['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -5334,6 +5664,69 @@ export class MultisigCancelAsMultiCall {
 	}
 	get asV1(): productionCalls.MultisigCancelAsMultiCall['asV1'] {
 		return this.production.asV1
+	}
+}
+
+export class MultisigVerifierAddPeerCall {
+	private readonly production: productionCalls.MultisigVerifierAddPeerCall
+	private readonly stage: stageCalls.MultisigVerifierAddPeerCall
+	private readonly test: testCalls.MultisigVerifierAddPeerCall
+	private readonly dev: devCalls.MultisigVerifierAddPeerCall
+
+	constructor(ctx: ChainContext, call: Call) {
+		this.production = new productionCalls.MultisigVerifierAddPeerCall(ctx, call)
+		this.stage = new stageCalls.MultisigVerifierAddPeerCall(ctx, call)
+		this.test = new testCalls.MultisigVerifierAddPeerCall(ctx, call)
+		this.dev = new devCalls.MultisigVerifierAddPeerCall(ctx, call)
+	}
+
+	get isV64(): productionCalls.MultisigVerifierAddPeerCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.MultisigVerifierAddPeerCall['asV64'] {
+		return this.production.asV64
+	}
+}
+
+export class MultisigVerifierInitializeCall {
+	private readonly production: productionCalls.MultisigVerifierInitializeCall
+	private readonly stage: stageCalls.MultisigVerifierInitializeCall
+	private readonly test: testCalls.MultisigVerifierInitializeCall
+	private readonly dev: devCalls.MultisigVerifierInitializeCall
+
+	constructor(ctx: ChainContext, call: Call) {
+		this.production = new productionCalls.MultisigVerifierInitializeCall(ctx, call)
+		this.stage = new stageCalls.MultisigVerifierInitializeCall(ctx, call)
+		this.test = new testCalls.MultisigVerifierInitializeCall(ctx, call)
+		this.dev = new devCalls.MultisigVerifierInitializeCall(ctx, call)
+	}
+
+	get isV64(): productionCalls.MultisigVerifierInitializeCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.MultisigVerifierInitializeCall['asV64'] {
+		return this.production.asV64
+	}
+}
+
+export class MultisigVerifierRemovePeerCall {
+	private readonly production: productionCalls.MultisigVerifierRemovePeerCall
+	private readonly stage: stageCalls.MultisigVerifierRemovePeerCall
+	private readonly test: testCalls.MultisigVerifierRemovePeerCall
+	private readonly dev: devCalls.MultisigVerifierRemovePeerCall
+
+	constructor(ctx: ChainContext, call: Call) {
+		this.production = new productionCalls.MultisigVerifierRemovePeerCall(ctx, call)
+		this.stage = new stageCalls.MultisigVerifierRemovePeerCall(ctx, call)
+		this.test = new testCalls.MultisigVerifierRemovePeerCall(ctx, call)
+		this.dev = new devCalls.MultisigVerifierRemovePeerCall(ctx, call)
+	}
+
+	get isV64(): productionCalls.MultisigVerifierRemovePeerCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.MultisigVerifierRemovePeerCall['asV64'] {
+		return this.production.asV64
 	}
 }
 
@@ -5376,6 +5769,195 @@ export class OracleProxyEnableOracleCall {
 	}
 	get asV45(): productionCalls.OracleProxyEnableOracleCall['asV45'] {
 		return this.production.asV45
+	}
+}
+
+export class ParachainBridgeAppAddAssetidParaidCall {
+	private readonly production: productionCalls.ParachainBridgeAppAddAssetidParaidCall
+	private readonly stage: stageCalls.ParachainBridgeAppAddAssetidParaidCall
+	private readonly test: testCalls.ParachainBridgeAppAddAssetidParaidCall
+	private readonly dev: devCalls.ParachainBridgeAppAddAssetidParaidCall
+
+	constructor(ctx: ChainContext, call: Call) {
+		this.production = new productionCalls.ParachainBridgeAppAddAssetidParaidCall(ctx, call)
+		this.stage = new stageCalls.ParachainBridgeAppAddAssetidParaidCall(ctx, call)
+		this.test = new testCalls.ParachainBridgeAppAddAssetidParaidCall(ctx, call)
+		this.dev = new devCalls.ParachainBridgeAppAddAssetidParaidCall(ctx, call)
+	}
+
+	get isV64(): productionCalls.ParachainBridgeAppAddAssetidParaidCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.ParachainBridgeAppAddAssetidParaidCall['asV64'] {
+		return this.production.asV64
+	}
+}
+
+export class ParachainBridgeAppBurnCall {
+	private readonly production: productionCalls.ParachainBridgeAppBurnCall
+	private readonly stage: stageCalls.ParachainBridgeAppBurnCall
+	private readonly test: testCalls.ParachainBridgeAppBurnCall
+	private readonly dev: devCalls.ParachainBridgeAppBurnCall
+
+	constructor(ctx: ChainContext, call: Call) {
+		this.production = new productionCalls.ParachainBridgeAppBurnCall(ctx, call)
+		this.stage = new stageCalls.ParachainBridgeAppBurnCall(ctx, call)
+		this.test = new testCalls.ParachainBridgeAppBurnCall(ctx, call)
+		this.dev = new devCalls.ParachainBridgeAppBurnCall(ctx, call)
+	}
+
+	get isV64(): productionCalls.ParachainBridgeAppBurnCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.ParachainBridgeAppBurnCall['asV64'] {
+		return this.production.asV64
+	}
+}
+
+export class ParachainBridgeAppFinalizeAssetRegistrationCall {
+	private readonly production: productionCalls.ParachainBridgeAppFinalizeAssetRegistrationCall
+	private readonly stage: stageCalls.ParachainBridgeAppFinalizeAssetRegistrationCall
+	private readonly test: testCalls.ParachainBridgeAppFinalizeAssetRegistrationCall
+	private readonly dev: devCalls.ParachainBridgeAppFinalizeAssetRegistrationCall
+
+	constructor(ctx: ChainContext, call: Call) {
+		this.production = new productionCalls.ParachainBridgeAppFinalizeAssetRegistrationCall(ctx, call)
+		this.stage = new stageCalls.ParachainBridgeAppFinalizeAssetRegistrationCall(ctx, call)
+		this.test = new testCalls.ParachainBridgeAppFinalizeAssetRegistrationCall(ctx, call)
+		this.dev = new devCalls.ParachainBridgeAppFinalizeAssetRegistrationCall(ctx, call)
+	}
+
+	get isV64(): productionCalls.ParachainBridgeAppFinalizeAssetRegistrationCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.ParachainBridgeAppFinalizeAssetRegistrationCall['asV64'] {
+		return this.production.asV64
+	}
+}
+
+export class ParachainBridgeAppMintCall {
+	private readonly production: productionCalls.ParachainBridgeAppMintCall
+	private readonly stage: stageCalls.ParachainBridgeAppMintCall
+	private readonly test: testCalls.ParachainBridgeAppMintCall
+	private readonly dev: devCalls.ParachainBridgeAppMintCall
+
+	constructor(ctx: ChainContext, call: Call) {
+		this.production = new productionCalls.ParachainBridgeAppMintCall(ctx, call)
+		this.stage = new stageCalls.ParachainBridgeAppMintCall(ctx, call)
+		this.test = new testCalls.ParachainBridgeAppMintCall(ctx, call)
+		this.dev = new devCalls.ParachainBridgeAppMintCall(ctx, call)
+	}
+
+	get isV64(): productionCalls.ParachainBridgeAppMintCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.ParachainBridgeAppMintCall['asV64'] {
+		return this.production.asV64
+	}
+}
+
+export class ParachainBridgeAppRegisterSidechainAssetCall {
+	private readonly production: productionCalls.ParachainBridgeAppRegisterSidechainAssetCall
+	private readonly stage: stageCalls.ParachainBridgeAppRegisterSidechainAssetCall
+	private readonly test: testCalls.ParachainBridgeAppRegisterSidechainAssetCall
+	private readonly dev: devCalls.ParachainBridgeAppRegisterSidechainAssetCall
+
+	constructor(ctx: ChainContext, call: Call) {
+		this.production = new productionCalls.ParachainBridgeAppRegisterSidechainAssetCall(ctx, call)
+		this.stage = new stageCalls.ParachainBridgeAppRegisterSidechainAssetCall(ctx, call)
+		this.test = new testCalls.ParachainBridgeAppRegisterSidechainAssetCall(ctx, call)
+		this.dev = new devCalls.ParachainBridgeAppRegisterSidechainAssetCall(ctx, call)
+	}
+
+	get isV64(): productionCalls.ParachainBridgeAppRegisterSidechainAssetCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.ParachainBridgeAppRegisterSidechainAssetCall['asV64'] {
+		return this.production.asV64
+	}
+}
+
+export class ParachainBridgeAppRegisterThischainAssetCall {
+	private readonly production: productionCalls.ParachainBridgeAppRegisterThischainAssetCall
+	private readonly stage: stageCalls.ParachainBridgeAppRegisterThischainAssetCall
+	private readonly test: testCalls.ParachainBridgeAppRegisterThischainAssetCall
+	private readonly dev: devCalls.ParachainBridgeAppRegisterThischainAssetCall
+
+	constructor(ctx: ChainContext, call: Call) {
+		this.production = new productionCalls.ParachainBridgeAppRegisterThischainAssetCall(ctx, call)
+		this.stage = new stageCalls.ParachainBridgeAppRegisterThischainAssetCall(ctx, call)
+		this.test = new testCalls.ParachainBridgeAppRegisterThischainAssetCall(ctx, call)
+		this.dev = new devCalls.ParachainBridgeAppRegisterThischainAssetCall(ctx, call)
+	}
+
+	get isV64(): productionCalls.ParachainBridgeAppRegisterThischainAssetCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.ParachainBridgeAppRegisterThischainAssetCall['asV64'] {
+		return this.production.asV64
+	}
+}
+
+export class ParachainBridgeAppRemoveAssetidParaidCall {
+	private readonly production: productionCalls.ParachainBridgeAppRemoveAssetidParaidCall
+	private readonly stage: stageCalls.ParachainBridgeAppRemoveAssetidParaidCall
+	private readonly test: testCalls.ParachainBridgeAppRemoveAssetidParaidCall
+	private readonly dev: devCalls.ParachainBridgeAppRemoveAssetidParaidCall
+
+	constructor(ctx: ChainContext, call: Call) {
+		this.production = new productionCalls.ParachainBridgeAppRemoveAssetidParaidCall(ctx, call)
+		this.stage = new stageCalls.ParachainBridgeAppRemoveAssetidParaidCall(ctx, call)
+		this.test = new testCalls.ParachainBridgeAppRemoveAssetidParaidCall(ctx, call)
+		this.dev = new devCalls.ParachainBridgeAppRemoveAssetidParaidCall(ctx, call)
+	}
+
+	get isV64(): productionCalls.ParachainBridgeAppRemoveAssetidParaidCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.ParachainBridgeAppRemoveAssetidParaidCall['asV64'] {
+		return this.production.asV64
+	}
+}
+
+export class ParachainBridgeAppSetMinimumXcmIncomingAssetCountCall {
+	private readonly production: productionCalls.ParachainBridgeAppSetMinimumXcmIncomingAssetCountCall
+	private readonly stage: stageCalls.ParachainBridgeAppSetMinimumXcmIncomingAssetCountCall
+	private readonly test: testCalls.ParachainBridgeAppSetMinimumXcmIncomingAssetCountCall
+	private readonly dev: devCalls.ParachainBridgeAppSetMinimumXcmIncomingAssetCountCall
+
+	constructor(ctx: ChainContext, call: Call) {
+		this.production = new productionCalls.ParachainBridgeAppSetMinimumXcmIncomingAssetCountCall(ctx, call)
+		this.stage = new stageCalls.ParachainBridgeAppSetMinimumXcmIncomingAssetCountCall(ctx, call)
+		this.test = new testCalls.ParachainBridgeAppSetMinimumXcmIncomingAssetCountCall(ctx, call)
+		this.dev = new devCalls.ParachainBridgeAppSetMinimumXcmIncomingAssetCountCall(ctx, call)
+	}
+
+	get isV64(): productionCalls.ParachainBridgeAppSetMinimumXcmIncomingAssetCountCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.ParachainBridgeAppSetMinimumXcmIncomingAssetCountCall['asV64'] {
+		return this.production.asV64
+	}
+}
+
+export class ParachainBridgeAppUpdateTransactionStatusCall {
+	private readonly production: productionCalls.ParachainBridgeAppUpdateTransactionStatusCall
+	private readonly stage: stageCalls.ParachainBridgeAppUpdateTransactionStatusCall
+	private readonly test: testCalls.ParachainBridgeAppUpdateTransactionStatusCall
+	private readonly dev: devCalls.ParachainBridgeAppUpdateTransactionStatusCall
+
+	constructor(ctx: ChainContext, call: Call) {
+		this.production = new productionCalls.ParachainBridgeAppUpdateTransactionStatusCall(ctx, call)
+		this.stage = new stageCalls.ParachainBridgeAppUpdateTransactionStatusCall(ctx, call)
+		this.test = new testCalls.ParachainBridgeAppUpdateTransactionStatusCall(ctx, call)
+		this.dev = new devCalls.ParachainBridgeAppUpdateTransactionStatusCall(ctx, call)
+	}
+
+	get isV64(): productionCalls.ParachainBridgeAppUpdateTransactionStatusCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.ParachainBridgeAppUpdateTransactionStatusCall['asV64'] {
+		return this.production.asV64
 	}
 }
 
@@ -5897,6 +6479,18 @@ export class SchedulerScheduleCall {
 	get asV60(): productionCalls.SchedulerScheduleCall['asV60'] {
 		return this.production.asV60
 	}
+	get isV63(): productionCalls.SchedulerScheduleCall['isV63'] {
+		return this.production.isV63
+	}
+	get asV63(): productionCalls.SchedulerScheduleCall['asV63'] {
+		return this.production.asV63
+	}
+	get isV64(): productionCalls.SchedulerScheduleCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.SchedulerScheduleCall['asV64'] {
+		return this.production.asV64
+	}
 	get isV33Stage(): stageCalls.SchedulerScheduleCall['isV33'] {
 		return this.stage.isV33
 	}
@@ -6005,6 +6599,18 @@ export class SchedulerScheduleCall {
 	get asV62Stage(): stageCalls.SchedulerScheduleCall['asV62'] {
 		return this.stage.asV62
 	}
+	get isV64Stage(): stageCalls.SchedulerScheduleCall['isV64'] {
+		return this.stage.isV64
+	}
+	get asV64Stage(): stageCalls.SchedulerScheduleCall['asV64'] {
+		return this.stage.asV64
+	}
+	get isV66Stage(): stageCalls.SchedulerScheduleCall['isV66'] {
+		return this.stage.isV66
+	}
+	get asV66Stage(): stageCalls.SchedulerScheduleCall['asV66'] {
+		return this.stage.asV66
+	}
 	get isV51Test(): testCalls.SchedulerScheduleCall['isV51'] {
 		return this.test.isV51
 	}
@@ -6017,11 +6623,11 @@ export class SchedulerScheduleCall {
 	get asV52Test(): testCalls.SchedulerScheduleCall['asV52'] {
 		return this.test.asV52
 	}
-	get isV63Dev(): devCalls.SchedulerScheduleCall['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devCalls.SchedulerScheduleCall['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devCalls.SchedulerScheduleCall['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devCalls.SchedulerScheduleCall['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -6170,6 +6776,18 @@ export class SchedulerScheduleAfterCall {
 	get asV60(): productionCalls.SchedulerScheduleAfterCall['asV60'] {
 		return this.production.asV60
 	}
+	get isV63(): productionCalls.SchedulerScheduleAfterCall['isV63'] {
+		return this.production.isV63
+	}
+	get asV63(): productionCalls.SchedulerScheduleAfterCall['asV63'] {
+		return this.production.asV63
+	}
+	get isV64(): productionCalls.SchedulerScheduleAfterCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.SchedulerScheduleAfterCall['asV64'] {
+		return this.production.asV64
+	}
 	get isV33Stage(): stageCalls.SchedulerScheduleAfterCall['isV33'] {
 		return this.stage.isV33
 	}
@@ -6278,6 +6896,18 @@ export class SchedulerScheduleAfterCall {
 	get asV62Stage(): stageCalls.SchedulerScheduleAfterCall['asV62'] {
 		return this.stage.asV62
 	}
+	get isV64Stage(): stageCalls.SchedulerScheduleAfterCall['isV64'] {
+		return this.stage.isV64
+	}
+	get asV64Stage(): stageCalls.SchedulerScheduleAfterCall['asV64'] {
+		return this.stage.asV64
+	}
+	get isV66Stage(): stageCalls.SchedulerScheduleAfterCall['isV66'] {
+		return this.stage.isV66
+	}
+	get asV66Stage(): stageCalls.SchedulerScheduleAfterCall['asV66'] {
+		return this.stage.asV66
+	}
 	get isV51Test(): testCalls.SchedulerScheduleAfterCall['isV51'] {
 		return this.test.isV51
 	}
@@ -6290,11 +6920,11 @@ export class SchedulerScheduleAfterCall {
 	get asV52Test(): testCalls.SchedulerScheduleAfterCall['asV52'] {
 		return this.test.asV52
 	}
-	get isV63Dev(): devCalls.SchedulerScheduleAfterCall['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devCalls.SchedulerScheduleAfterCall['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devCalls.SchedulerScheduleAfterCall['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devCalls.SchedulerScheduleAfterCall['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -6443,6 +7073,18 @@ export class SchedulerScheduleNamedCall {
 	get asV60(): productionCalls.SchedulerScheduleNamedCall['asV60'] {
 		return this.production.asV60
 	}
+	get isV63(): productionCalls.SchedulerScheduleNamedCall['isV63'] {
+		return this.production.isV63
+	}
+	get asV63(): productionCalls.SchedulerScheduleNamedCall['asV63'] {
+		return this.production.asV63
+	}
+	get isV64(): productionCalls.SchedulerScheduleNamedCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.SchedulerScheduleNamedCall['asV64'] {
+		return this.production.asV64
+	}
 	get isV33Stage(): stageCalls.SchedulerScheduleNamedCall['isV33'] {
 		return this.stage.isV33
 	}
@@ -6551,6 +7193,18 @@ export class SchedulerScheduleNamedCall {
 	get asV62Stage(): stageCalls.SchedulerScheduleNamedCall['asV62'] {
 		return this.stage.asV62
 	}
+	get isV64Stage(): stageCalls.SchedulerScheduleNamedCall['isV64'] {
+		return this.stage.isV64
+	}
+	get asV64Stage(): stageCalls.SchedulerScheduleNamedCall['asV64'] {
+		return this.stage.asV64
+	}
+	get isV66Stage(): stageCalls.SchedulerScheduleNamedCall['isV66'] {
+		return this.stage.isV66
+	}
+	get asV66Stage(): stageCalls.SchedulerScheduleNamedCall['asV66'] {
+		return this.stage.asV66
+	}
 	get isV51Test(): testCalls.SchedulerScheduleNamedCall['isV51'] {
 		return this.test.isV51
 	}
@@ -6563,11 +7217,11 @@ export class SchedulerScheduleNamedCall {
 	get asV52Test(): testCalls.SchedulerScheduleNamedCall['asV52'] {
 		return this.test.asV52
 	}
-	get isV63Dev(): devCalls.SchedulerScheduleNamedCall['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devCalls.SchedulerScheduleNamedCall['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devCalls.SchedulerScheduleNamedCall['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devCalls.SchedulerScheduleNamedCall['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -6716,6 +7370,18 @@ export class SchedulerScheduleNamedAfterCall {
 	get asV60(): productionCalls.SchedulerScheduleNamedAfterCall['asV60'] {
 		return this.production.asV60
 	}
+	get isV63(): productionCalls.SchedulerScheduleNamedAfterCall['isV63'] {
+		return this.production.isV63
+	}
+	get asV63(): productionCalls.SchedulerScheduleNamedAfterCall['asV63'] {
+		return this.production.asV63
+	}
+	get isV64(): productionCalls.SchedulerScheduleNamedAfterCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.SchedulerScheduleNamedAfterCall['asV64'] {
+		return this.production.asV64
+	}
 	get isV33Stage(): stageCalls.SchedulerScheduleNamedAfterCall['isV33'] {
 		return this.stage.isV33
 	}
@@ -6824,6 +7490,18 @@ export class SchedulerScheduleNamedAfterCall {
 	get asV62Stage(): stageCalls.SchedulerScheduleNamedAfterCall['asV62'] {
 		return this.stage.asV62
 	}
+	get isV64Stage(): stageCalls.SchedulerScheduleNamedAfterCall['isV64'] {
+		return this.stage.isV64
+	}
+	get asV64Stage(): stageCalls.SchedulerScheduleNamedAfterCall['asV64'] {
+		return this.stage.asV64
+	}
+	get isV66Stage(): stageCalls.SchedulerScheduleNamedAfterCall['isV66'] {
+		return this.stage.isV66
+	}
+	get asV66Stage(): stageCalls.SchedulerScheduleNamedAfterCall['asV66'] {
+		return this.stage.asV66
+	}
 	get isV51Test(): testCalls.SchedulerScheduleNamedAfterCall['isV51'] {
 		return this.test.isV51
 	}
@@ -6836,11 +7514,11 @@ export class SchedulerScheduleNamedAfterCall {
 	get asV52Test(): testCalls.SchedulerScheduleNamedAfterCall['asV52'] {
 		return this.test.asV52
 	}
-	get isV63Dev(): devCalls.SchedulerScheduleNamedAfterCall['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devCalls.SchedulerScheduleNamedAfterCall['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devCalls.SchedulerScheduleNamedAfterCall['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devCalls.SchedulerScheduleNamedAfterCall['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -7495,6 +8173,45 @@ export class StakingWithdrawUnbondedCall {
 	}
 }
 
+export class SubstrateBridgeInboundChannelSubmitCall {
+	private readonly production: productionCalls.SubstrateBridgeInboundChannelSubmitCall
+	private readonly stage: stageCalls.SubstrateBridgeInboundChannelSubmitCall
+	private readonly test: testCalls.SubstrateBridgeInboundChannelSubmitCall
+	private readonly dev: devCalls.SubstrateBridgeInboundChannelSubmitCall
+
+	constructor(ctx: ChainContext, call: Call) {
+		this.production = new productionCalls.SubstrateBridgeInboundChannelSubmitCall(ctx, call)
+		this.stage = new stageCalls.SubstrateBridgeInboundChannelSubmitCall(ctx, call)
+		this.test = new testCalls.SubstrateBridgeInboundChannelSubmitCall(ctx, call)
+		this.dev = new devCalls.SubstrateBridgeInboundChannelSubmitCall(ctx, call)
+	}
+
+	get isV64(): productionCalls.SubstrateBridgeInboundChannelSubmitCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.SubstrateBridgeInboundChannelSubmitCall['asV64'] {
+		return this.production.asV64
+	}
+	get isV52Stage(): stageCalls.SubstrateBridgeInboundChannelSubmitCall['isV52'] {
+		return this.stage.isV52
+	}
+	get asV52Stage(): stageCalls.SubstrateBridgeInboundChannelSubmitCall['asV52'] {
+		return this.stage.asV52
+	}
+	get isV54Stage(): stageCalls.SubstrateBridgeInboundChannelSubmitCall['isV54'] {
+		return this.stage.isV54
+	}
+	get asV54Stage(): stageCalls.SubstrateBridgeInboundChannelSubmitCall['asV54'] {
+		return this.stage.asV54
+	}
+	get isV57Stage(): stageCalls.SubstrateBridgeInboundChannelSubmitCall['isV57'] {
+		return this.stage.isV57
+	}
+	get asV57Stage(): stageCalls.SubstrateBridgeInboundChannelSubmitCall['asV57'] {
+		return this.stage.asV57
+	}
+}
+
 export class SudoSetKeyCall {
 	private readonly production: productionCalls.SudoSetKeyCall
 	private readonly stage: stageCalls.SudoSetKeyCall
@@ -7643,6 +8360,18 @@ export class SudoSudoCall {
 	get asV62Stage(): stageCalls.SudoSudoCall['asV62'] {
 		return this.stage.asV62
 	}
+	get isV64Stage(): stageCalls.SudoSudoCall['isV64'] {
+		return this.stage.isV64
+	}
+	get asV64Stage(): stageCalls.SudoSudoCall['asV64'] {
+		return this.stage.asV64
+	}
+	get isV66Stage(): stageCalls.SudoSudoCall['isV66'] {
+		return this.stage.isV66
+	}
+	get asV66Stage(): stageCalls.SudoSudoCall['asV66'] {
+		return this.stage.asV66
+	}
 	get isV51Test(): testCalls.SudoSudoCall['isV51'] {
 		return this.test.isV51
 	}
@@ -7655,11 +8384,11 @@ export class SudoSudoCall {
 	get asV52Test(): testCalls.SudoSudoCall['asV52'] {
 		return this.test.asV52
 	}
-	get isV63Dev(): devCalls.SudoSudoCall['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devCalls.SudoSudoCall['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devCalls.SudoSudoCall['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devCalls.SudoSudoCall['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -7790,6 +8519,18 @@ export class SudoSudoAsCall {
 	get asV62Stage(): stageCalls.SudoSudoAsCall['asV62'] {
 		return this.stage.asV62
 	}
+	get isV64Stage(): stageCalls.SudoSudoAsCall['isV64'] {
+		return this.stage.isV64
+	}
+	get asV64Stage(): stageCalls.SudoSudoAsCall['asV64'] {
+		return this.stage.asV64
+	}
+	get isV66Stage(): stageCalls.SudoSudoAsCall['isV66'] {
+		return this.stage.isV66
+	}
+	get asV66Stage(): stageCalls.SudoSudoAsCall['asV66'] {
+		return this.stage.asV66
+	}
 	get isV51Test(): testCalls.SudoSudoAsCall['isV51'] {
 		return this.test.isV51
 	}
@@ -7802,11 +8543,11 @@ export class SudoSudoAsCall {
 	get asV52Test(): testCalls.SudoSudoAsCall['asV52'] {
 		return this.test.asV52
 	}
-	get isV63Dev(): devCalls.SudoSudoAsCall['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devCalls.SudoSudoAsCall['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devCalls.SudoSudoAsCall['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devCalls.SudoSudoAsCall['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -7937,6 +8678,18 @@ export class SudoSudoUncheckedWeightCall {
 	get asV62Stage(): stageCalls.SudoSudoUncheckedWeightCall['asV62'] {
 		return this.stage.asV62
 	}
+	get isV64Stage(): stageCalls.SudoSudoUncheckedWeightCall['isV64'] {
+		return this.stage.isV64
+	}
+	get asV64Stage(): stageCalls.SudoSudoUncheckedWeightCall['asV64'] {
+		return this.stage.asV64
+	}
+	get isV66Stage(): stageCalls.SudoSudoUncheckedWeightCall['isV66'] {
+		return this.stage.isV66
+	}
+	get asV66Stage(): stageCalls.SudoSudoUncheckedWeightCall['asV66'] {
+		return this.stage.asV66
+	}
 	get isV51Test(): testCalls.SudoSudoUncheckedWeightCall['isV51'] {
 		return this.test.isV51
 	}
@@ -7949,11 +8702,11 @@ export class SudoSudoUncheckedWeightCall {
 	get asV52Test(): testCalls.SudoSudoUncheckedWeightCall['asV52'] {
 		return this.test.asV52
 	}
-	get isV63Dev(): devCalls.SudoSudoUncheckedWeightCall['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devCalls.SudoSudoUncheckedWeightCall['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devCalls.SudoSudoUncheckedWeightCall['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devCalls.SudoSudoUncheckedWeightCall['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -8377,6 +9130,18 @@ export class TechnicalCommitteeExecuteCall {
 	get asV60(): productionCalls.TechnicalCommitteeExecuteCall['asV60'] {
 		return this.production.asV60
 	}
+	get isV63(): productionCalls.TechnicalCommitteeExecuteCall['isV63'] {
+		return this.production.isV63
+	}
+	get asV63(): productionCalls.TechnicalCommitteeExecuteCall['asV63'] {
+		return this.production.asV63
+	}
+	get isV64(): productionCalls.TechnicalCommitteeExecuteCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.TechnicalCommitteeExecuteCall['asV64'] {
+		return this.production.asV64
+	}
 	get isV33Stage(): stageCalls.TechnicalCommitteeExecuteCall['isV33'] {
 		return this.stage.isV33
 	}
@@ -8485,6 +9250,18 @@ export class TechnicalCommitteeExecuteCall {
 	get asV62Stage(): stageCalls.TechnicalCommitteeExecuteCall['asV62'] {
 		return this.stage.asV62
 	}
+	get isV64Stage(): stageCalls.TechnicalCommitteeExecuteCall['isV64'] {
+		return this.stage.isV64
+	}
+	get asV64Stage(): stageCalls.TechnicalCommitteeExecuteCall['asV64'] {
+		return this.stage.asV64
+	}
+	get isV66Stage(): stageCalls.TechnicalCommitteeExecuteCall['isV66'] {
+		return this.stage.isV66
+	}
+	get asV66Stage(): stageCalls.TechnicalCommitteeExecuteCall['asV66'] {
+		return this.stage.asV66
+	}
 	get isV51Test(): testCalls.TechnicalCommitteeExecuteCall['isV51'] {
 		return this.test.isV51
 	}
@@ -8497,11 +9274,11 @@ export class TechnicalCommitteeExecuteCall {
 	get asV52Test(): testCalls.TechnicalCommitteeExecuteCall['asV52'] {
 		return this.test.asV52
 	}
-	get isV63Dev(): devCalls.TechnicalCommitteeExecuteCall['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devCalls.TechnicalCommitteeExecuteCall['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devCalls.TechnicalCommitteeExecuteCall['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devCalls.TechnicalCommitteeExecuteCall['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -8650,6 +9427,18 @@ export class TechnicalCommitteeProposeCall {
 	get asV60(): productionCalls.TechnicalCommitteeProposeCall['asV60'] {
 		return this.production.asV60
 	}
+	get isV63(): productionCalls.TechnicalCommitteeProposeCall['isV63'] {
+		return this.production.isV63
+	}
+	get asV63(): productionCalls.TechnicalCommitteeProposeCall['asV63'] {
+		return this.production.asV63
+	}
+	get isV64(): productionCalls.TechnicalCommitteeProposeCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.TechnicalCommitteeProposeCall['asV64'] {
+		return this.production.asV64
+	}
 	get isV33Stage(): stageCalls.TechnicalCommitteeProposeCall['isV33'] {
 		return this.stage.isV33
 	}
@@ -8758,6 +9547,18 @@ export class TechnicalCommitteeProposeCall {
 	get asV62Stage(): stageCalls.TechnicalCommitteeProposeCall['asV62'] {
 		return this.stage.asV62
 	}
+	get isV64Stage(): stageCalls.TechnicalCommitteeProposeCall['isV64'] {
+		return this.stage.isV64
+	}
+	get asV64Stage(): stageCalls.TechnicalCommitteeProposeCall['asV64'] {
+		return this.stage.asV64
+	}
+	get isV66Stage(): stageCalls.TechnicalCommitteeProposeCall['isV66'] {
+		return this.stage.isV66
+	}
+	get asV66Stage(): stageCalls.TechnicalCommitteeProposeCall['asV66'] {
+		return this.stage.asV66
+	}
 	get isV51Test(): testCalls.TechnicalCommitteeProposeCall['isV51'] {
 		return this.test.isV51
 	}
@@ -8770,11 +9571,11 @@ export class TechnicalCommitteeProposeCall {
 	get asV52Test(): testCalls.TechnicalCommitteeProposeCall['asV52'] {
 		return this.test.asV52
 	}
-	get isV63Dev(): devCalls.TechnicalCommitteeProposeCall['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devCalls.TechnicalCommitteeProposeCall['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devCalls.TechnicalCommitteeProposeCall['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devCalls.TechnicalCommitteeProposeCall['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -9160,6 +9961,18 @@ export class UtilityAsDerivativeCall {
 	get asV60(): productionCalls.UtilityAsDerivativeCall['asV60'] {
 		return this.production.asV60
 	}
+	get isV63(): productionCalls.UtilityAsDerivativeCall['isV63'] {
+		return this.production.isV63
+	}
+	get asV63(): productionCalls.UtilityAsDerivativeCall['asV63'] {
+		return this.production.asV63
+	}
+	get isV64(): productionCalls.UtilityAsDerivativeCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.UtilityAsDerivativeCall['asV64'] {
+		return this.production.asV64
+	}
 	get isV33Stage(): stageCalls.UtilityAsDerivativeCall['isV33'] {
 		return this.stage.isV33
 	}
@@ -9268,6 +10081,18 @@ export class UtilityAsDerivativeCall {
 	get asV62Stage(): stageCalls.UtilityAsDerivativeCall['asV62'] {
 		return this.stage.asV62
 	}
+	get isV64Stage(): stageCalls.UtilityAsDerivativeCall['isV64'] {
+		return this.stage.isV64
+	}
+	get asV64Stage(): stageCalls.UtilityAsDerivativeCall['asV64'] {
+		return this.stage.asV64
+	}
+	get isV66Stage(): stageCalls.UtilityAsDerivativeCall['isV66'] {
+		return this.stage.isV66
+	}
+	get asV66Stage(): stageCalls.UtilityAsDerivativeCall['asV66'] {
+		return this.stage.asV66
+	}
 	get isV51Test(): testCalls.UtilityAsDerivativeCall['isV51'] {
 		return this.test.isV51
 	}
@@ -9280,11 +10105,11 @@ export class UtilityAsDerivativeCall {
 	get asV52Test(): testCalls.UtilityAsDerivativeCall['asV52'] {
 		return this.test.asV52
 	}
-	get isV63Dev(): devCalls.UtilityAsDerivativeCall['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devCalls.UtilityAsDerivativeCall['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devCalls.UtilityAsDerivativeCall['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devCalls.UtilityAsDerivativeCall['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -9433,6 +10258,18 @@ export class UtilityBatchCall {
 	get asV60(): productionCalls.UtilityBatchCall['asV60'] {
 		return this.production.asV60
 	}
+	get isV63(): productionCalls.UtilityBatchCall['isV63'] {
+		return this.production.isV63
+	}
+	get asV63(): productionCalls.UtilityBatchCall['asV63'] {
+		return this.production.asV63
+	}
+	get isV64(): productionCalls.UtilityBatchCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.UtilityBatchCall['asV64'] {
+		return this.production.asV64
+	}
 	get isV33Stage(): stageCalls.UtilityBatchCall['isV33'] {
 		return this.stage.isV33
 	}
@@ -9541,6 +10378,18 @@ export class UtilityBatchCall {
 	get asV62Stage(): stageCalls.UtilityBatchCall['asV62'] {
 		return this.stage.asV62
 	}
+	get isV64Stage(): stageCalls.UtilityBatchCall['isV64'] {
+		return this.stage.isV64
+	}
+	get asV64Stage(): stageCalls.UtilityBatchCall['asV64'] {
+		return this.stage.asV64
+	}
+	get isV66Stage(): stageCalls.UtilityBatchCall['isV66'] {
+		return this.stage.isV66
+	}
+	get asV66Stage(): stageCalls.UtilityBatchCall['asV66'] {
+		return this.stage.asV66
+	}
 	get isV51Test(): testCalls.UtilityBatchCall['isV51'] {
 		return this.test.isV51
 	}
@@ -9553,11 +10402,11 @@ export class UtilityBatchCall {
 	get asV52Test(): testCalls.UtilityBatchCall['asV52'] {
 		return this.test.asV52
 	}
-	get isV63Dev(): devCalls.UtilityBatchCall['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devCalls.UtilityBatchCall['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devCalls.UtilityBatchCall['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devCalls.UtilityBatchCall['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -9706,6 +10555,18 @@ export class UtilityBatchAllCall {
 	get asV60(): productionCalls.UtilityBatchAllCall['asV60'] {
 		return this.production.asV60
 	}
+	get isV63(): productionCalls.UtilityBatchAllCall['isV63'] {
+		return this.production.isV63
+	}
+	get asV63(): productionCalls.UtilityBatchAllCall['asV63'] {
+		return this.production.asV63
+	}
+	get isV64(): productionCalls.UtilityBatchAllCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.UtilityBatchAllCall['asV64'] {
+		return this.production.asV64
+	}
 	get isV33Stage(): stageCalls.UtilityBatchAllCall['isV33'] {
 		return this.stage.isV33
 	}
@@ -9814,6 +10675,18 @@ export class UtilityBatchAllCall {
 	get asV62Stage(): stageCalls.UtilityBatchAllCall['asV62'] {
 		return this.stage.asV62
 	}
+	get isV64Stage(): stageCalls.UtilityBatchAllCall['isV64'] {
+		return this.stage.isV64
+	}
+	get asV64Stage(): stageCalls.UtilityBatchAllCall['asV64'] {
+		return this.stage.asV64
+	}
+	get isV66Stage(): stageCalls.UtilityBatchAllCall['isV66'] {
+		return this.stage.isV66
+	}
+	get asV66Stage(): stageCalls.UtilityBatchAllCall['asV66'] {
+		return this.stage.asV66
+	}
 	get isV51Test(): testCalls.UtilityBatchAllCall['isV51'] {
 		return this.test.isV51
 	}
@@ -9826,11 +10699,11 @@ export class UtilityBatchAllCall {
 	get asV52Test(): testCalls.UtilityBatchAllCall['asV52'] {
 		return this.test.asV52
 	}
-	get isV63Dev(): devCalls.UtilityBatchAllCall['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devCalls.UtilityBatchAllCall['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devCalls.UtilityBatchAllCall['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devCalls.UtilityBatchAllCall['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -9906,6 +10779,18 @@ export class UtilityDispatchAsCall {
 	}
 	get asV60(): productionCalls.UtilityDispatchAsCall['asV60'] {
 		return this.production.asV60
+	}
+	get isV63(): productionCalls.UtilityDispatchAsCall['isV63'] {
+		return this.production.isV63
+	}
+	get asV63(): productionCalls.UtilityDispatchAsCall['asV63'] {
+		return this.production.asV63
+	}
+	get isV64(): productionCalls.UtilityDispatchAsCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.UtilityDispatchAsCall['asV64'] {
+		return this.production.asV64
 	}
 	get isV42Stage(): stageCalls.UtilityDispatchAsCall['isV42'] {
 		return this.stage.isV42
@@ -9991,6 +10876,18 @@ export class UtilityDispatchAsCall {
 	get asV62Stage(): stageCalls.UtilityDispatchAsCall['asV62'] {
 		return this.stage.asV62
 	}
+	get isV64Stage(): stageCalls.UtilityDispatchAsCall['isV64'] {
+		return this.stage.isV64
+	}
+	get asV64Stage(): stageCalls.UtilityDispatchAsCall['asV64'] {
+		return this.stage.asV64
+	}
+	get isV66Stage(): stageCalls.UtilityDispatchAsCall['isV66'] {
+		return this.stage.isV66
+	}
+	get asV66Stage(): stageCalls.UtilityDispatchAsCall['asV66'] {
+		return this.stage.asV66
+	}
 	get isV51Test(): testCalls.UtilityDispatchAsCall['isV51'] {
 		return this.test.isV51
 	}
@@ -10003,11 +10900,11 @@ export class UtilityDispatchAsCall {
 	get asV52Test(): testCalls.UtilityDispatchAsCall['asV52'] {
 		return this.test.asV52
 	}
-	get isV63Dev(): devCalls.UtilityDispatchAsCall['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devCalls.UtilityDispatchAsCall['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devCalls.UtilityDispatchAsCall['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devCalls.UtilityDispatchAsCall['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -10083,6 +10980,18 @@ export class UtilityForceBatchCall {
 	}
 	get asV60(): productionCalls.UtilityForceBatchCall['asV60'] {
 		return this.production.asV60
+	}
+	get isV63(): productionCalls.UtilityForceBatchCall['isV63'] {
+		return this.production.isV63
+	}
+	get asV63(): productionCalls.UtilityForceBatchCall['asV63'] {
+		return this.production.asV63
+	}
+	get isV64(): productionCalls.UtilityForceBatchCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.UtilityForceBatchCall['asV64'] {
+		return this.production.asV64
 	}
 	get isV42Stage(): stageCalls.UtilityForceBatchCall['isV42'] {
 		return this.stage.isV42
@@ -10168,6 +11077,18 @@ export class UtilityForceBatchCall {
 	get asV62Stage(): stageCalls.UtilityForceBatchCall['asV62'] {
 		return this.stage.asV62
 	}
+	get isV64Stage(): stageCalls.UtilityForceBatchCall['isV64'] {
+		return this.stage.isV64
+	}
+	get asV64Stage(): stageCalls.UtilityForceBatchCall['asV64'] {
+		return this.stage.asV64
+	}
+	get isV66Stage(): stageCalls.UtilityForceBatchCall['isV66'] {
+		return this.stage.isV66
+	}
+	get asV66Stage(): stageCalls.UtilityForceBatchCall['asV66'] {
+		return this.stage.asV66
+	}
 	get isV51Test(): testCalls.UtilityForceBatchCall['isV51'] {
 		return this.test.isV51
 	}
@@ -10180,11 +11101,11 @@ export class UtilityForceBatchCall {
 	get asV52Test(): testCalls.UtilityForceBatchCall['asV52'] {
 		return this.test.asV52
 	}
-	get isV63Dev(): devCalls.UtilityForceBatchCall['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devCalls.UtilityForceBatchCall['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devCalls.UtilityForceBatchCall['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devCalls.UtilityForceBatchCall['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -10224,6 +11145,18 @@ export class UtilityWithWeightCall {
 	}
 	get asV60(): productionCalls.UtilityWithWeightCall['asV60'] {
 		return this.production.asV60
+	}
+	get isV63(): productionCalls.UtilityWithWeightCall['isV63'] {
+		return this.production.isV63
+	}
+	get asV63(): productionCalls.UtilityWithWeightCall['asV63'] {
+		return this.production.asV63
+	}
+	get isV64(): productionCalls.UtilityWithWeightCall['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionCalls.UtilityWithWeightCall['asV64'] {
+		return this.production.asV64
 	}
 	get isV52Stage(): stageCalls.UtilityWithWeightCall['isV52'] {
 		return this.stage.isV52
@@ -10267,6 +11200,18 @@ export class UtilityWithWeightCall {
 	get asV62Stage(): stageCalls.UtilityWithWeightCall['asV62'] {
 		return this.stage.asV62
 	}
+	get isV64Stage(): stageCalls.UtilityWithWeightCall['isV64'] {
+		return this.stage.isV64
+	}
+	get asV64Stage(): stageCalls.UtilityWithWeightCall['asV64'] {
+		return this.stage.asV64
+	}
+	get isV66Stage(): stageCalls.UtilityWithWeightCall['isV66'] {
+		return this.stage.isV66
+	}
+	get asV66Stage(): stageCalls.UtilityWithWeightCall['asV66'] {
+		return this.stage.asV66
+	}
 	get isV51Test(): testCalls.UtilityWithWeightCall['isV51'] {
 		return this.test.isV51
 	}
@@ -10279,11 +11224,11 @@ export class UtilityWithWeightCall {
 	get asV52Test(): testCalls.UtilityWithWeightCall['asV52'] {
 		return this.test.asV52
 	}
-	get isV63Dev(): devCalls.UtilityWithWeightCall['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devCalls.UtilityWithWeightCall['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devCalls.UtilityWithWeightCall['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devCalls.UtilityWithWeightCall['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -10676,120 +11621,6 @@ export class BeefyLightClientSubmitSignatureCommitmentCall {
 	}
 }
 
-export class BridgeDataSignerAddPeerCall {
-	private readonly stage: stageCalls.BridgeDataSignerAddPeerCall
-	private readonly test: testCalls.BridgeDataSignerAddPeerCall
-	private readonly dev: devCalls.BridgeDataSignerAddPeerCall
-
-	constructor(ctx: ChainContext, call: Call) {
-		this.stage = new stageCalls.BridgeDataSignerAddPeerCall(ctx, call)
-		this.test = new testCalls.BridgeDataSignerAddPeerCall(ctx, call)
-		this.dev = new devCalls.BridgeDataSignerAddPeerCall(ctx, call)
-	}
-
-	get isV54Stage(): stageCalls.BridgeDataSignerAddPeerCall['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageCalls.BridgeDataSignerAddPeerCall['asV54'] {
-		return this.stage.asV54
-	}
-}
-
-export class BridgeDataSignerApproveCall {
-	private readonly stage: stageCalls.BridgeDataSignerApproveCall
-	private readonly test: testCalls.BridgeDataSignerApproveCall
-	private readonly dev: devCalls.BridgeDataSignerApproveCall
-
-	constructor(ctx: ChainContext, call: Call) {
-		this.stage = new stageCalls.BridgeDataSignerApproveCall(ctx, call)
-		this.test = new testCalls.BridgeDataSignerApproveCall(ctx, call)
-		this.dev = new devCalls.BridgeDataSignerApproveCall(ctx, call)
-	}
-
-	get isV54Stage(): stageCalls.BridgeDataSignerApproveCall['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageCalls.BridgeDataSignerApproveCall['asV54'] {
-		return this.stage.asV54
-	}
-}
-
-export class BridgeDataSignerFinishAddPeerCall {
-	private readonly stage: stageCalls.BridgeDataSignerFinishAddPeerCall
-	private readonly test: testCalls.BridgeDataSignerFinishAddPeerCall
-	private readonly dev: devCalls.BridgeDataSignerFinishAddPeerCall
-
-	constructor(ctx: ChainContext, call: Call) {
-		this.stage = new stageCalls.BridgeDataSignerFinishAddPeerCall(ctx, call)
-		this.test = new testCalls.BridgeDataSignerFinishAddPeerCall(ctx, call)
-		this.dev = new devCalls.BridgeDataSignerFinishAddPeerCall(ctx, call)
-	}
-
-	get isV54Stage(): stageCalls.BridgeDataSignerFinishAddPeerCall['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageCalls.BridgeDataSignerFinishAddPeerCall['asV54'] {
-		return this.stage.asV54
-	}
-}
-
-export class BridgeDataSignerFinishRemovePeerCall {
-	private readonly stage: stageCalls.BridgeDataSignerFinishRemovePeerCall
-	private readonly test: testCalls.BridgeDataSignerFinishRemovePeerCall
-	private readonly dev: devCalls.BridgeDataSignerFinishRemovePeerCall
-
-	constructor(ctx: ChainContext, call: Call) {
-		this.stage = new stageCalls.BridgeDataSignerFinishRemovePeerCall(ctx, call)
-		this.test = new testCalls.BridgeDataSignerFinishRemovePeerCall(ctx, call)
-		this.dev = new devCalls.BridgeDataSignerFinishRemovePeerCall(ctx, call)
-	}
-
-	get isV54Stage(): stageCalls.BridgeDataSignerFinishRemovePeerCall['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageCalls.BridgeDataSignerFinishRemovePeerCall['asV54'] {
-		return this.stage.asV54
-	}
-}
-
-export class BridgeDataSignerRegisterNetworkCall {
-	private readonly stage: stageCalls.BridgeDataSignerRegisterNetworkCall
-	private readonly test: testCalls.BridgeDataSignerRegisterNetworkCall
-	private readonly dev: devCalls.BridgeDataSignerRegisterNetworkCall
-
-	constructor(ctx: ChainContext, call: Call) {
-		this.stage = new stageCalls.BridgeDataSignerRegisterNetworkCall(ctx, call)
-		this.test = new testCalls.BridgeDataSignerRegisterNetworkCall(ctx, call)
-		this.dev = new devCalls.BridgeDataSignerRegisterNetworkCall(ctx, call)
-	}
-
-	get isV54Stage(): stageCalls.BridgeDataSignerRegisterNetworkCall['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageCalls.BridgeDataSignerRegisterNetworkCall['asV54'] {
-		return this.stage.asV54
-	}
-}
-
-export class BridgeDataSignerRemovePeerCall {
-	private readonly stage: stageCalls.BridgeDataSignerRemovePeerCall
-	private readonly test: testCalls.BridgeDataSignerRemovePeerCall
-	private readonly dev: devCalls.BridgeDataSignerRemovePeerCall
-
-	constructor(ctx: ChainContext, call: Call) {
-		this.stage = new stageCalls.BridgeDataSignerRemovePeerCall(ctx, call)
-		this.test = new testCalls.BridgeDataSignerRemovePeerCall(ctx, call)
-		this.dev = new devCalls.BridgeDataSignerRemovePeerCall(ctx, call)
-	}
-
-	get isV54Stage(): stageCalls.BridgeDataSignerRemovePeerCall['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageCalls.BridgeDataSignerRemovePeerCall['asV54'] {
-		return this.stage.asV54
-	}
-}
-
 export class BridgeInboundChannelBatchDispatchedCall {
 	private readonly stage: stageCalls.BridgeInboundChannelBatchDispatchedCall
 	private readonly test: testCalls.BridgeInboundChannelBatchDispatchedCall
@@ -10892,82 +11723,6 @@ export class BridgeInboundChannelSubmitCall {
 	}
 	get asV54Stage(): stageCalls.BridgeInboundChannelSubmitCall['asV54'] {
 		return this.stage.asV54
-	}
-}
-
-export class BridgeProxyAddLimitedAssetCall {
-	private readonly stage: stageCalls.BridgeProxyAddLimitedAssetCall
-	private readonly test: testCalls.BridgeProxyAddLimitedAssetCall
-	private readonly dev: devCalls.BridgeProxyAddLimitedAssetCall
-
-	constructor(ctx: ChainContext, call: Call) {
-		this.stage = new stageCalls.BridgeProxyAddLimitedAssetCall(ctx, call)
-		this.test = new testCalls.BridgeProxyAddLimitedAssetCall(ctx, call)
-		this.dev = new devCalls.BridgeProxyAddLimitedAssetCall(ctx, call)
-	}
-
-	get isV62Stage(): stageCalls.BridgeProxyAddLimitedAssetCall['isV62'] {
-		return this.stage.isV62
-	}
-	get asV62Stage(): stageCalls.BridgeProxyAddLimitedAssetCall['asV62'] {
-		return this.stage.asV62
-	}
-}
-
-export class BridgeProxyBurnCall {
-	private readonly stage: stageCalls.BridgeProxyBurnCall
-	private readonly test: testCalls.BridgeProxyBurnCall
-	private readonly dev: devCalls.BridgeProxyBurnCall
-
-	constructor(ctx: ChainContext, call: Call) {
-		this.stage = new stageCalls.BridgeProxyBurnCall(ctx, call)
-		this.test = new testCalls.BridgeProxyBurnCall(ctx, call)
-		this.dev = new devCalls.BridgeProxyBurnCall(ctx, call)
-	}
-
-	get isV54Stage(): stageCalls.BridgeProxyBurnCall['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageCalls.BridgeProxyBurnCall['asV54'] {
-		return this.stage.asV54
-	}
-}
-
-export class BridgeProxyRemoveLimitedAssetCall {
-	private readonly stage: stageCalls.BridgeProxyRemoveLimitedAssetCall
-	private readonly test: testCalls.BridgeProxyRemoveLimitedAssetCall
-	private readonly dev: devCalls.BridgeProxyRemoveLimitedAssetCall
-
-	constructor(ctx: ChainContext, call: Call) {
-		this.stage = new stageCalls.BridgeProxyRemoveLimitedAssetCall(ctx, call)
-		this.test = new testCalls.BridgeProxyRemoveLimitedAssetCall(ctx, call)
-		this.dev = new devCalls.BridgeProxyRemoveLimitedAssetCall(ctx, call)
-	}
-
-	get isV62Stage(): stageCalls.BridgeProxyRemoveLimitedAssetCall['isV62'] {
-		return this.stage.isV62
-	}
-	get asV62Stage(): stageCalls.BridgeProxyRemoveLimitedAssetCall['asV62'] {
-		return this.stage.asV62
-	}
-}
-
-export class BridgeProxyUpdateTransferLimitCall {
-	private readonly stage: stageCalls.BridgeProxyUpdateTransferLimitCall
-	private readonly test: testCalls.BridgeProxyUpdateTransferLimitCall
-	private readonly dev: devCalls.BridgeProxyUpdateTransferLimitCall
-
-	constructor(ctx: ChainContext, call: Call) {
-		this.stage = new stageCalls.BridgeProxyUpdateTransferLimitCall(ctx, call)
-		this.test = new testCalls.BridgeProxyUpdateTransferLimitCall(ctx, call)
-		this.dev = new devCalls.BridgeProxyUpdateTransferLimitCall(ctx, call)
-	}
-
-	get isV62Stage(): stageCalls.BridgeProxyUpdateTransferLimitCall['isV62'] {
-		return this.stage.isV62
-	}
-	get asV62Stage(): stageCalls.BridgeProxyUpdateTransferLimitCall['asV62'] {
-		return this.stage.asV62
 	}
 }
 
@@ -11310,6 +12065,31 @@ export class FaucetUpdateLimitCall {
 	}
 }
 
+export class LiquidityProxyXorlessTransferCall {
+	private readonly stage: stageCalls.LiquidityProxyXorlessTransferCall
+	private readonly test: testCalls.LiquidityProxyXorlessTransferCall
+	private readonly dev: devCalls.LiquidityProxyXorlessTransferCall
+
+	constructor(ctx: ChainContext, call: Call) {
+		this.stage = new stageCalls.LiquidityProxyXorlessTransferCall(ctx, call)
+		this.test = new testCalls.LiquidityProxyXorlessTransferCall(ctx, call)
+		this.dev = new devCalls.LiquidityProxyXorlessTransferCall(ctx, call)
+	}
+
+	get isV66Stage(): stageCalls.LiquidityProxyXorlessTransferCall['isV66'] {
+		return this.stage.isV66
+	}
+	get asV66Stage(): stageCalls.LiquidityProxyXorlessTransferCall['asV66'] {
+		return this.stage.asV66
+	}
+	get isV64Dev(): devCalls.LiquidityProxyXorlessTransferCall['isV64'] {
+		return this.dev.isV64
+	}
+	get asV64Dev(): devCalls.LiquidityProxyXorlessTransferCall['asV64'] {
+		return this.dev.asV64
+	}
+}
+
 export class MigrationAppMigrateErc20Call {
 	private readonly stage: stageCalls.MigrationAppMigrateErc20Call
 	private readonly test: testCalls.MigrationAppMigrateErc20Call
@@ -11395,63 +12175,6 @@ export class MigrationAppRegisterNetworkCall {
 	}
 	get asV52Stage(): stageCalls.MigrationAppRegisterNetworkCall['asV52'] {
 		return this.stage.asV52
-	}
-}
-
-export class MultisigVerifierAddPeerCall {
-	private readonly stage: stageCalls.MultisigVerifierAddPeerCall
-	private readonly test: testCalls.MultisigVerifierAddPeerCall
-	private readonly dev: devCalls.MultisigVerifierAddPeerCall
-
-	constructor(ctx: ChainContext, call: Call) {
-		this.stage = new stageCalls.MultisigVerifierAddPeerCall(ctx, call)
-		this.test = new testCalls.MultisigVerifierAddPeerCall(ctx, call)
-		this.dev = new devCalls.MultisigVerifierAddPeerCall(ctx, call)
-	}
-
-	get isV54Stage(): stageCalls.MultisigVerifierAddPeerCall['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageCalls.MultisigVerifierAddPeerCall['asV54'] {
-		return this.stage.asV54
-	}
-}
-
-export class MultisigVerifierInitializeCall {
-	private readonly stage: stageCalls.MultisigVerifierInitializeCall
-	private readonly test: testCalls.MultisigVerifierInitializeCall
-	private readonly dev: devCalls.MultisigVerifierInitializeCall
-
-	constructor(ctx: ChainContext, call: Call) {
-		this.stage = new stageCalls.MultisigVerifierInitializeCall(ctx, call)
-		this.test = new testCalls.MultisigVerifierInitializeCall(ctx, call)
-		this.dev = new devCalls.MultisigVerifierInitializeCall(ctx, call)
-	}
-
-	get isV54Stage(): stageCalls.MultisigVerifierInitializeCall['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageCalls.MultisigVerifierInitializeCall['asV54'] {
-		return this.stage.asV54
-	}
-}
-
-export class MultisigVerifierRemovePeerCall {
-	private readonly stage: stageCalls.MultisigVerifierRemovePeerCall
-	private readonly test: testCalls.MultisigVerifierRemovePeerCall
-	private readonly dev: devCalls.MultisigVerifierRemovePeerCall
-
-	constructor(ctx: ChainContext, call: Call) {
-		this.stage = new stageCalls.MultisigVerifierRemovePeerCall(ctx, call)
-		this.test = new testCalls.MultisigVerifierRemovePeerCall(ctx, call)
-		this.dev = new devCalls.MultisigVerifierRemovePeerCall(ctx, call)
-	}
-
-	get isV54Stage(): stageCalls.MultisigVerifierRemovePeerCall['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageCalls.MultisigVerifierRemovePeerCall['asV54'] {
-		return this.stage.asV54
 	}
 }
 
@@ -11666,37 +12389,6 @@ export class SubstrateBridgeInboundChannelSetRewardFractionCall {
 	}
 }
 
-export class SubstrateBridgeInboundChannelSubmitCall {
-	private readonly stage: stageCalls.SubstrateBridgeInboundChannelSubmitCall
-	private readonly test: testCalls.SubstrateBridgeInboundChannelSubmitCall
-	private readonly dev: devCalls.SubstrateBridgeInboundChannelSubmitCall
-
-	constructor(ctx: ChainContext, call: Call) {
-		this.stage = new stageCalls.SubstrateBridgeInboundChannelSubmitCall(ctx, call)
-		this.test = new testCalls.SubstrateBridgeInboundChannelSubmitCall(ctx, call)
-		this.dev = new devCalls.SubstrateBridgeInboundChannelSubmitCall(ctx, call)
-	}
-
-	get isV52Stage(): stageCalls.SubstrateBridgeInboundChannelSubmitCall['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageCalls.SubstrateBridgeInboundChannelSubmitCall['asV52'] {
-		return this.stage.asV52
-	}
-	get isV54Stage(): stageCalls.SubstrateBridgeInboundChannelSubmitCall['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageCalls.SubstrateBridgeInboundChannelSubmitCall['asV54'] {
-		return this.stage.asV54
-	}
-	get isV57Stage(): stageCalls.SubstrateBridgeInboundChannelSubmitCall['isV57'] {
-		return this.stage.isV57
-	}
-	get asV57Stage(): stageCalls.SubstrateBridgeInboundChannelSubmitCall['asV57'] {
-		return this.stage.asV57
-	}
-}
-
 export class OrderBookCancelLimitOrderCall {
 	private readonly test: testCalls.OrderBookCancelLimitOrderCall
 	private readonly dev: devCalls.OrderBookCancelLimitOrderCall
@@ -11712,11 +12404,11 @@ export class OrderBookCancelLimitOrderCall {
 	get asV52Test(): testCalls.OrderBookCancelLimitOrderCall['asV52'] {
 		return this.test.asV52
 	}
-	get isV63Dev(): devCalls.OrderBookCancelLimitOrderCall['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devCalls.OrderBookCancelLimitOrderCall['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devCalls.OrderBookCancelLimitOrderCall['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devCalls.OrderBookCancelLimitOrderCall['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -11735,11 +12427,11 @@ export class OrderBookChangeOrderbookStatusCall {
 	get asV52Test(): testCalls.OrderBookChangeOrderbookStatusCall['asV52'] {
 		return this.test.asV52
 	}
-	get isV63Dev(): devCalls.OrderBookChangeOrderbookStatusCall['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devCalls.OrderBookChangeOrderbookStatusCall['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devCalls.OrderBookChangeOrderbookStatusCall['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devCalls.OrderBookChangeOrderbookStatusCall['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -11758,11 +12450,11 @@ export class OrderBookCreateOrderbookCall {
 	get asV52Test(): testCalls.OrderBookCreateOrderbookCall['asV52'] {
 		return this.test.asV52
 	}
-	get isV63Dev(): devCalls.OrderBookCreateOrderbookCall['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devCalls.OrderBookCreateOrderbookCall['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devCalls.OrderBookCreateOrderbookCall['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devCalls.OrderBookCreateOrderbookCall['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -11781,11 +12473,11 @@ export class OrderBookDeleteOrderbookCall {
 	get asV52Test(): testCalls.OrderBookDeleteOrderbookCall['asV52'] {
 		return this.test.asV52
 	}
-	get isV63Dev(): devCalls.OrderBookDeleteOrderbookCall['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devCalls.OrderBookDeleteOrderbookCall['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devCalls.OrderBookDeleteOrderbookCall['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devCalls.OrderBookDeleteOrderbookCall['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -11804,11 +12496,11 @@ export class OrderBookPlaceLimitOrderCall {
 	get asV52Test(): testCalls.OrderBookPlaceLimitOrderCall['asV52'] {
 		return this.test.asV52
 	}
-	get isV63Dev(): devCalls.OrderBookPlaceLimitOrderCall['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devCalls.OrderBookPlaceLimitOrderCall['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devCalls.OrderBookPlaceLimitOrderCall['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devCalls.OrderBookPlaceLimitOrderCall['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -11827,11 +12519,11 @@ export class OrderBookUpdateOrderbookCall {
 	get asV52Test(): testCalls.OrderBookUpdateOrderbookCall['asV52'] {
 		return this.test.asV52
 	}
-	get isV63Dev(): devCalls.OrderBookUpdateOrderbookCall['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devCalls.OrderBookUpdateOrderbookCall['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devCalls.OrderBookUpdateOrderbookCall['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devCalls.OrderBookUpdateOrderbookCall['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -11842,11 +12534,11 @@ export class OrderBookCancelLimitOrdersBatchCall {
 		this.dev = new devCalls.OrderBookCancelLimitOrdersBatchCall(ctx, call)
 	}
 
-	get isV63Dev(): devCalls.OrderBookCancelLimitOrdersBatchCall['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devCalls.OrderBookCancelLimitOrdersBatchCall['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devCalls.OrderBookCancelLimitOrdersBatchCall['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devCalls.OrderBookCancelLimitOrdersBatchCall['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -11857,146 +12549,11 @@ export class OrderBookExecuteMarketOrderCall {
 		this.dev = new devCalls.OrderBookExecuteMarketOrderCall(ctx, call)
 	}
 
-	get isV63Dev(): devCalls.OrderBookExecuteMarketOrderCall['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devCalls.OrderBookExecuteMarketOrderCall['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devCalls.OrderBookExecuteMarketOrderCall['asV63'] {
-		return this.dev.asV63
-	}
-}
-
-export class ParachainBridgeAppAddAssetidParaidCall {
-	private readonly dev: devCalls.ParachainBridgeAppAddAssetidParaidCall
-
-	constructor(ctx: ChainContext, call: Call) {
-		this.dev = new devCalls.ParachainBridgeAppAddAssetidParaidCall(ctx, call)
-	}
-
-	get isV63Dev(): devCalls.ParachainBridgeAppAddAssetidParaidCall['isV63'] {
-		return this.dev.isV63
-	}
-	get asV63Dev(): devCalls.ParachainBridgeAppAddAssetidParaidCall['asV63'] {
-		return this.dev.asV63
-	}
-}
-
-export class ParachainBridgeAppBurnCall {
-	private readonly dev: devCalls.ParachainBridgeAppBurnCall
-
-	constructor(ctx: ChainContext, call: Call) {
-		this.dev = new devCalls.ParachainBridgeAppBurnCall(ctx, call)
-	}
-
-	get isV63Dev(): devCalls.ParachainBridgeAppBurnCall['isV63'] {
-		return this.dev.isV63
-	}
-	get asV63Dev(): devCalls.ParachainBridgeAppBurnCall['asV63'] {
-		return this.dev.asV63
-	}
-}
-
-export class ParachainBridgeAppFinalizeAssetRegistrationCall {
-	private readonly dev: devCalls.ParachainBridgeAppFinalizeAssetRegistrationCall
-
-	constructor(ctx: ChainContext, call: Call) {
-		this.dev = new devCalls.ParachainBridgeAppFinalizeAssetRegistrationCall(ctx, call)
-	}
-
-	get isV63Dev(): devCalls.ParachainBridgeAppFinalizeAssetRegistrationCall['isV63'] {
-		return this.dev.isV63
-	}
-	get asV63Dev(): devCalls.ParachainBridgeAppFinalizeAssetRegistrationCall['asV63'] {
-		return this.dev.asV63
-	}
-}
-
-export class ParachainBridgeAppMintCall {
-	private readonly dev: devCalls.ParachainBridgeAppMintCall
-
-	constructor(ctx: ChainContext, call: Call) {
-		this.dev = new devCalls.ParachainBridgeAppMintCall(ctx, call)
-	}
-
-	get isV63Dev(): devCalls.ParachainBridgeAppMintCall['isV63'] {
-		return this.dev.isV63
-	}
-	get asV63Dev(): devCalls.ParachainBridgeAppMintCall['asV63'] {
-		return this.dev.asV63
-	}
-}
-
-export class ParachainBridgeAppRegisterSidechainAssetCall {
-	private readonly dev: devCalls.ParachainBridgeAppRegisterSidechainAssetCall
-
-	constructor(ctx: ChainContext, call: Call) {
-		this.dev = new devCalls.ParachainBridgeAppRegisterSidechainAssetCall(ctx, call)
-	}
-
-	get isV63Dev(): devCalls.ParachainBridgeAppRegisterSidechainAssetCall['isV63'] {
-		return this.dev.isV63
-	}
-	get asV63Dev(): devCalls.ParachainBridgeAppRegisterSidechainAssetCall['asV63'] {
-		return this.dev.asV63
-	}
-}
-
-export class ParachainBridgeAppRegisterThischainAssetCall {
-	private readonly dev: devCalls.ParachainBridgeAppRegisterThischainAssetCall
-
-	constructor(ctx: ChainContext, call: Call) {
-		this.dev = new devCalls.ParachainBridgeAppRegisterThischainAssetCall(ctx, call)
-	}
-
-	get isV63Dev(): devCalls.ParachainBridgeAppRegisterThischainAssetCall['isV63'] {
-		return this.dev.isV63
-	}
-	get asV63Dev(): devCalls.ParachainBridgeAppRegisterThischainAssetCall['asV63'] {
-		return this.dev.asV63
-	}
-}
-
-export class ParachainBridgeAppRemoveAssetidParaidCall {
-	private readonly dev: devCalls.ParachainBridgeAppRemoveAssetidParaidCall
-
-	constructor(ctx: ChainContext, call: Call) {
-		this.dev = new devCalls.ParachainBridgeAppRemoveAssetidParaidCall(ctx, call)
-	}
-
-	get isV63Dev(): devCalls.ParachainBridgeAppRemoveAssetidParaidCall['isV63'] {
-		return this.dev.isV63
-	}
-	get asV63Dev(): devCalls.ParachainBridgeAppRemoveAssetidParaidCall['asV63'] {
-		return this.dev.asV63
-	}
-}
-
-export class ParachainBridgeAppSetMinimumXcmIncomingAssetCountCall {
-	private readonly dev: devCalls.ParachainBridgeAppSetMinimumXcmIncomingAssetCountCall
-
-	constructor(ctx: ChainContext, call: Call) {
-		this.dev = new devCalls.ParachainBridgeAppSetMinimumXcmIncomingAssetCountCall(ctx, call)
-	}
-
-	get isV63Dev(): devCalls.ParachainBridgeAppSetMinimumXcmIncomingAssetCountCall['isV63'] {
-		return this.dev.isV63
-	}
-	get asV63Dev(): devCalls.ParachainBridgeAppSetMinimumXcmIncomingAssetCountCall['asV63'] {
-		return this.dev.asV63
-	}
-}
-
-export class ParachainBridgeAppUpdateTransactionStatusCall {
-	private readonly dev: devCalls.ParachainBridgeAppUpdateTransactionStatusCall
-
-	constructor(ctx: ChainContext, call: Call) {
-		this.dev = new devCalls.ParachainBridgeAppUpdateTransactionStatusCall(ctx, call)
-	}
-
-	get isV63Dev(): devCalls.ParachainBridgeAppUpdateTransactionStatusCall['isV63'] {
-		return this.dev.isV63
-	}
-	get asV63Dev(): devCalls.ParachainBridgeAppUpdateTransactionStatusCall['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devCalls.OrderBookExecuteMarketOrderCall['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -12007,11 +12564,11 @@ export class QaToolsAddToWhitelistCall {
 		this.dev = new devCalls.QaToolsAddToWhitelistCall(ctx, call)
 	}
 
-	get isV63Dev(): devCalls.QaToolsAddToWhitelistCall['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devCalls.QaToolsAddToWhitelistCall['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devCalls.QaToolsAddToWhitelistCall['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devCalls.QaToolsAddToWhitelistCall['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -12022,11 +12579,11 @@ export class QaToolsOrderBookCreateAndFillBatchCall {
 		this.dev = new devCalls.QaToolsOrderBookCreateAndFillBatchCall(ctx, call)
 	}
 
-	get isV63Dev(): devCalls.QaToolsOrderBookCreateAndFillBatchCall['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devCalls.QaToolsOrderBookCreateAndFillBatchCall['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devCalls.QaToolsOrderBookCreateAndFillBatchCall['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devCalls.QaToolsOrderBookCreateAndFillBatchCall['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -12037,11 +12594,11 @@ export class QaToolsOrderBookCreateEmptyBatchCall {
 		this.dev = new devCalls.QaToolsOrderBookCreateEmptyBatchCall(ctx, call)
 	}
 
-	get isV63Dev(): devCalls.QaToolsOrderBookCreateEmptyBatchCall['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devCalls.QaToolsOrderBookCreateEmptyBatchCall['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devCalls.QaToolsOrderBookCreateEmptyBatchCall['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devCalls.QaToolsOrderBookCreateEmptyBatchCall['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -12052,12 +12609,12 @@ export class QaToolsRemoveFromWhitelistCall {
 		this.dev = new devCalls.QaToolsRemoveFromWhitelistCall(ctx, call)
 	}
 
-	get isV63Dev(): devCalls.QaToolsRemoveFromWhitelistCall['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devCalls.QaToolsRemoveFromWhitelistCall['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devCalls.QaToolsRemoveFromWhitelistCall['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devCalls.QaToolsRemoveFromWhitelistCall['asV64'] {
+		return this.dev.asV64
 	}
 }
 
-export const utilityBatchAllCallVersions = ['1', '3', '7', '19', '22', '23', '26', '32', '33', '35', '37', '38', '42', '43', '45', '46', '47', '50', '53', '57', '59', '60', '33Stage', '35Stage', '37Stage', '38Stage', '42Stage', '43Stage', '44Stage', '45Stage', '46Stage', '47Stage', '48Stage', '52Stage', '54Stage', '55Stage', '57Stage', '59Stage', '60Stage', '62Stage', '51Test', '52Test', '63Dev'] as const
+export const utilityBatchAllCallVersions = ['1', '3', '7', '19', '22', '23', '26', '32', '33', '35', '37', '38', '42', '43', '45', '46', '47', '50', '53', '57', '59', '60', '63', '64', '33Stage', '35Stage', '37Stage', '38Stage', '42Stage', '43Stage', '44Stage', '45Stage', '46Stage', '47Stage', '48Stage', '52Stage', '54Stage', '55Stage', '57Stage', '59Stage', '60Stage', '62Stage', '64Stage', '66Stage', '51Test', '52Test', '64Dev'] as const
