@@ -4,10 +4,10 @@ import { formatU128ToBalance } from './assets'
 import { getAccountEntity } from './account'
 import { networkSnapshotsStorage } from './network'
 import { XOR } from './consts'
-import { formatDateTimestamp, toAddress, toCamelCase } from './index'
+import { formatDateTimestamp, getEntityId, toAddress, toCamelCase } from './index'
 import { nToU8a } from '@polkadot/util'
 import { toJSON } from '@subsquid/util-internal-json'
-import { findEventByExtrinsicHash, getEntityId, getEventId } from './events'
+import { findEventByExtrinsicHash } from './events'
 import { XorFeeFeeWithdrawnEvent } from '../types/generated/events'
 import { getEntityData } from './entities'
 import { getUtilsLog } from './logs'
@@ -58,7 +58,7 @@ export const createHistoryElement = async (
 	historyElement.blockHash = ctx.block.header.hash.toString()
 	historyElement.module = toCamelCase(entityItem.name.split('.')[0])
 	historyElement.method = toCamelCase(entityItem.name.split('.')[1])
-	historyElement.address = toAddress((entityItem.kind === 'call' ? entityItem.extrinsic : entityItem.event.extrinsic)?.signature?.address)
+	historyElement.address = toAddress(extrinsic?.signature?.address)
 	historyElement.networkFee = entityItem.kind === 'call' ? formatU128ToBalance(getCallItemNetworkFee(ctx, entityItem), XOR) : null
 	historyElement.timestamp = formatDateTimestamp(new Date(ctx.block.header.timestamp))
 	historyElement.updatedAtBlock = ctx.block.header.height

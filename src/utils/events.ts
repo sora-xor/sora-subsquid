@@ -145,15 +145,3 @@ export const getAssetsDepositEventData = (
 		return getTokensDepositedEventData(ctx, eventItem)
 	}
 }
-
-export const getCallId = (ctx: BlockContext, callItem: CallItem<CallItemName>): string => {
-	return callItem.extrinsic.hash
-}
-
-export const getEventId = (ctx: BlockContext, eventItem: EventItem<EventItemName>): string => {
-	return `${ctx.block.header.height}-${eventItem.event.indexInBlock}`
-}
-
-export const getEntityId = (ctx: BlockContext, entityItem: EntityItem<EntityItemName>): string => {
-	return entityItem.kind === 'call' ? getCallId(ctx, entityItem) : getEventId(ctx, entityItem)
-}
