@@ -124,7 +124,7 @@ type HistoryElement @entity {
 
 type HistoryElementCall @entity {
 	id: ID!
-	historyElement: HistoryElement! @index # relation to HistoryElement
+	historyElement: HistoryElement! @index
 	module: String!
 	method: String!
 	data: JSON!

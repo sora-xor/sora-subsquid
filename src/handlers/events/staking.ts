@@ -12,10 +12,9 @@ import { getActiveStakingEra, getStakingStaker } from '../../utils/staking'
 export async function stakingStakersElectedEventHandler(ctx: BlockContext, eventItem: EventItem<'Staking.StakersElected'>): Promise<void> {
 	logStartProcessingEvent(ctx, eventItem)
 
-	const erasStakersStorage = new StakingErasStakersStorage(ctx, ctx.block.header)
-
 	const activeStakingEra = await getActiveStakingEra(ctx)
 
+	const erasStakersStorage = new StakingErasStakersStorage(ctx, ctx.block.header)
 	const exposures = await getEntityData(ctx, erasStakersStorage, {
 		kind: 'storage',
 		name: StakingErasStakersStorage.name,
