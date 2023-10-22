@@ -9,6 +9,7 @@ const environmentConfig = environments[environment as keyof typeof environments]
 if (!environmentConfig) {
 	throw new Error(`Environment ${environment} is not defined`)
 }
- 
+
 export const { chain, archive } = environmentConfig
 export const startBlock = process.env.INDEXER_START_BLOCK ? parseInt(process.env.INDEXER_START_BLOCK) : 0
+export const testLogMode = process.env.v ? process.env.INDEXER_TEST_LOG_MODE === 'true' : false

@@ -1,28 +1,22 @@
-import { Block, Context, EventItem } from '../../types'
+import { BlockContext, EventItem } from '../../types'
 
 import { getAssetsTransferEventData } from '../../utils/events'
-import { logEventHandler } from '../../utils/log'
+import { getEventHandlerLog, logStartProcessingEvent } from '../../utils/logs'
 import { poolAccounts, poolsStorage, PoolsPrices } from '../../utils/pools'
 
 export async function transferEventHandler(
-	ctx: Context,
-	block: Block,
-	eventItem: (
-		| EventItem<'Tokens.Transfer'>
-		| EventItem<'Balances.Transfer'>
-	)
+	ctx: BlockContext,
+	eventItem: EventItem<'Tokens.Transfer'> | EventItem<'Balances.Transfer'>,
 ): Promise<void> {
-	logEventHandler(ctx, block, eventItem)
+	logStartProcessingEvent(ctx, eventItem)
 
-	const { assetId, from, to, amount } = getAssetsTransferEventData(ctx, block, eventItem)
-
-	const blockNumber = block.header.height
+	const { assetId, from, to, amount } = getAssetsTransferEventData(ctx, eventItem)
 
 	// withdraw token from pool
 	if (poolAccounts.has(from)) {
-		const pool = await poolsStorage.getPoolById(ctx, block, from)
+		const pool = await poolsStorage.getPoolById(ctx, from)
 
-		if (!pool) throw new Error(`[${block.header.height}] Cannot get pool ` + from)
+		if (!pool) throw new Error(`[${ctx.block.header.height}][EventHandler] Cannot get pool '${from}'`)
 
 		if (pool.baseAsset.id === assetId) {
 			pool.baseAssetReserves = pool.baseAssetReserves - amount
@@ -30,15 +24,15 @@ export async function transferEventHandler(
 			pool.targetAssetReserves = pool.targetAssetReserves - amount
 		}
 
-		ctx.log.debug(`[${blockNumber}] Update pool ${pool.id}`);
+		getEventHandlerLog(ctx, eventItem).debug({ poolId: pool.id }, 'Pool information saved after withdrawal')
 		PoolsPrices.set(true)
 	}
 
 	// deposit token to pool
 	if (poolAccounts.has(to)) {
-		const pool = await poolsStorage.getPoolById(ctx, block, to)
+		const pool = await poolsStorage.getPoolById(ctx, to)
 
-		if (!pool) throw new Error(`[${block.header.height}] Cannot get pool ` + to)
+		if (!pool) throw new Error(`[${ctx.block.header.height}][EventHandler] Cannot get pool '${to}'`)
 
 		if (pool.baseAsset.id === assetId) {
 			pool.baseAssetReserves = pool.baseAssetReserves + amount
@@ -46,7 +40,7 @@ export async function transferEventHandler(
 			pool.targetAssetReserves = pool.targetAssetReserves + amount
 		}
 
-		ctx.log.debug(`[${blockNumber}] Update pool ${pool.id}`);
+		getEventHandlerLog(ctx, eventItem).debug({ poolId: pool.id }, 'Pool information saved after deposit')
 		PoolsPrices.set(true)
 	}
 }

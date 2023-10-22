@@ -1,29 +1,31 @@
 import { poolAccounts, getAllReserves, getAllProperties, poolsStorage } from '../../utils/pools'
 import { BASE_ASSETS, XOR, DOUBLE_PRICE_POOL } from '../../utils/consts'
-import { Block, Context } from '../../types'
+import { BlockContext } from '../../types'
 import { Asset, PoolXYK } from '../../model'
 import { Address } from '../../types'
+import { getInitializePoolsLog } from '../../utils/logs'
 
 let isFirstBlockIndexed = false
 
-export async function initializePools(ctx: Context, block: Block): Promise<void> {
-    if (isFirstBlockIndexed) return
+export async function initializePools(ctx: BlockContext): Promise<void> {
+	if (isFirstBlockIndexed) return
 
-    const blockHeight = block.header.height
+	getInitializePoolsLog(ctx).debug('Initialize Pool XYK entities')
 
-    ctx.log.debug(`[${blockHeight}] Initialize Pool XYK entities`)
+	const poolsBuffer = new Map<
+		string,
+		{
+			id: Address
+			baseAsset: Asset
+			targetAsset: Asset
+			baseAssetReserves: bigint
+			targetAssetReserves: bigint
+			multiplier: number
+		}
+	>()
 
-    const poolsBuffer = new Map<string, {
-		id: Address
-		baseAsset: Asset
-		targetAsset: Asset
-		baseAssetReserves: bigint
-		targetAssetReserves: bigint
-		multiplier: number
-	}>()
-
-    for (const baseAssetId of BASE_ASSETS) {
-		const [properties, reserves] = await Promise.all([getAllProperties(ctx, block, baseAssetId), getAllReserves(ctx, block, baseAssetId)])
+	for (const baseAssetId of BASE_ASSETS) {
+		const [properties, reserves] = await Promise.all([getAllProperties(ctx, baseAssetId), getAllReserves(ctx, baseAssetId)])
 
 		if (!properties || !reserves) continue
 
@@ -33,12 +35,9 @@ export async function initializePools(ctx: Context, block: Block): Promise<void>
 
 			poolAccounts.add(baseAssetId, targetAssetId, poolAccountId)
 
-			const [baseAsset, targetAsset] = await Promise.all([
-				ctx.store.get(Asset, baseAssetId),
-				ctx.store.get(Asset, targetAssetId)
-			])
-			if (!baseAsset) throw new Error(`[${block.header.height}] Cannot find base asset`)
-			if (!targetAsset) throw new Error(`[${block.header.height}] Cannot find target asset`)
+			const [baseAsset, targetAsset] = await Promise.all([ctx.store.get(Asset, baseAssetId), ctx.store.get(Asset, targetAssetId)])
+			if (!baseAsset) throw new Error(`[${ctx.block.header.height}] Cannot find base asset`)
+			if (!targetAsset) throw new Error(`[${ctx.block.header.height}] Cannot find target asset`)
 
 			poolsBuffer.set(poolAccountId, {
 				id: poolAccountId,
@@ -50,7 +49,7 @@ export async function initializePools(ctx: Context, block: Block): Promise<void>
 			})
 		}
 
-		reserves.forEach(item => {
+		reserves.forEach((item) => {
 			const { targetAssetId, baseBalance, targetBalance } = item
 			const poolAccountId = poolAccounts.get(baseAssetId, targetAssetId)
 
@@ -62,21 +61,24 @@ export async function initializePools(ctx: Context, block: Block): Promise<void>
 				}
 			}
 		})
-    }
+	}
 
-    const entities = [...poolsBuffer.values()].map(pool => new PoolXYK({
-		...pool,
-		id: pool.id,
-		updatedAtBlock: block.header.height
-	}))
+	const entities = [...poolsBuffer.values()].map(
+		(pool) =>
+			new PoolXYK({
+				...pool,
+				id: pool.id,
+				updatedAtBlock: ctx.block.header.height,
+			}),
+	)
 
-    if (entities.length) {
-        await ctx.store.save(entities)
-        await Promise.all(entities.map(entity => poolsStorage.getPoolById(ctx, block, entity.id as Address)))
-        ctx.log.debug(`[${blockHeight}] ${entities.length} Pool XYKs initialized!`)
-    } else {
-        ctx.log.debug(`[${blockHeight}] No Pool XYKs to initialize!`)
-    }
+	if (entities.length) {
+		await ctx.store.save(entities)
+		getInitializePoolsLog(ctx).debug(`${entities.length} Pool XYKs initialized!`)
+		await Promise.all(entities.map((entity) => poolsStorage.getPoolById(ctx, entity.id as Address)))
+	} else {
+		getInitializePoolsLog(ctx).debug('No Pool XYKs to initialize!')
+	}
 
-    isFirstBlockIndexed = true
+	isFirstBlockIndexed = true
 }

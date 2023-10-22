@@ -16,3 +16,5 @@ typegen.json
 
 .env
 squid.yaml
+.DS_Store
+log.txt

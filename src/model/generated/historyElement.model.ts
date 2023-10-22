@@ -1,5 +1,6 @@
 import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, Index as Index_, OneToMany as OneToMany_} from "typeorm"
 import * as marshal from "./marshal"
+import {HistoryElementType} from "./_historyElementType"
 import {ExecutionResult} from "./_executionResult"
 import {HistoryElementCall} from "./historyElementCall.model"
 
@@ -11,6 +12,9 @@ export class HistoryElement {
 
     @PrimaryColumn_()
     id!: string
+
+    @Column_("varchar", {length: 5, nullable: false})
+    type!: HistoryElementType
 
     @Column_("numeric", {transformer: marshal.bigintTransformer, nullable: false})
     blockHeight!: bigint
@@ -29,8 +33,8 @@ export class HistoryElement {
     @Column_("text", {nullable: false})
     address!: string
 
-    @Column_("text", {nullable: false})
-    networkFee!: string
+    @Column_("text", {nullable: true})
+    networkFee!: string | undefined | null
 
     @Column_("jsonb", {transformer: {to: obj => obj.toJSON(), from: obj => obj == null ? undefined : new ExecutionResult(undefined, obj)}, nullable: false})
     execution!: ExecutionResult
