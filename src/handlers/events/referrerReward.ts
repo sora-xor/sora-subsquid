@@ -1,16 +1,16 @@
 import { ReferrerReward } from '../../model'
-import { Block, Context, EventItem } from '../../types'
+import { BlockContext, EventItem } from '../../types'
 import { XorFeeReferrerRewardedEvent } from '../../types/generated/events'
 import { formatDateTimestamp, toAddress } from '../../utils'
 import { getEntityData } from '../../utils/entities'
-import { logEventHandler } from '../../utils/log'
+import { logStartProcessingEvent, getEventHandlerLog } from '../../utils/logs'
 
-export async function referrerRewardEventHandler(ctx: Context, block: Block, eventItem: EventItem<'XorFee.ReferrerRewarded'>): Promise<void> {
-	logEventHandler(ctx, block, eventItem)
+export async function referrerRewardEventHandler(ctx: BlockContext, eventItem: EventItem<'XorFee.ReferrerRewarded'>): Promise<void> {
+	logStartProcessingEvent(ctx, eventItem)
 
 	const event = new XorFeeReferrerRewardedEvent(ctx, eventItem.event)
 
-	const [referral, referrer, amount] = getEntityData(ctx, block, event, eventItem)
+	const [referral, referrer, amount] = getEntityData(ctx, event, eventItem)
 
 	const key = `${toAddress(referral)}-${toAddress(referrer)}`
 
@@ -24,10 +24,14 @@ export async function referrerRewardEventHandler(ctx: Context, block: Block, eve
 		referrerReward.amount = 0n
 	}
 
-	referrerReward.updated = formatDateTimestamp(new Date(block.header.timestamp))
-	referrerReward.updatedAtBlock = block.header.height
+	referrerReward.updated = formatDateTimestamp(new Date(ctx.block.header.timestamp))
+	referrerReward.updatedAtBlock = ctx.block.header.height
 
 	referrerReward.amount = referrerReward.amount + amount
 
 	await ctx.store.save(referrerReward)
+	getEventHandlerLog(ctx, eventItem).debug(
+		{ referral, referrer, amount, updated: referrerReward.updated, updatedAtBlock: referrerReward.updatedAtBlock },
+		'Referrer reward updated',
+	)
 }

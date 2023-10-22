@@ -27,6 +27,24 @@ export class Asset {
     @Column_("numeric", {transformer: marshal.bigintTransformer, nullable: false})
     liquidity!: bigint
 
+    @Column_("numeric", {transformer: marshal.floatTransformer, nullable: true})
+    liquidityUSD!: number | undefined | null
+
+    @Column_("numeric", {transformer: marshal.floatTransformer, nullable: true})
+    priceChangeDay!: number | undefined | null
+
+    @Column_("numeric", {transformer: marshal.floatTransformer, nullable: true})
+    priceChangeWeek!: number | undefined | null
+
+    @Column_("numeric", {transformer: marshal.floatTransformer, nullable: true})
+    volumeDayUSD!: number | undefined | null
+
+    @Column_("numeric", {transformer: marshal.floatTransformer, nullable: true})
+    volumeWeekUSD!: number | undefined | null
+
+    @Column_("numeric", {transformer: marshal.floatTransformer, nullable: true})
+    velocity!: number | undefined | null
+
     @Column_("int4", {nullable: false})
     updatedAtBlock!: number
 }

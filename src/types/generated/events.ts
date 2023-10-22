@@ -536,6 +536,111 @@ export class BandSymbolsRelayedEvent {
 	}
 }
 
+export class BridgeDataSignerAddedPeerEvent {
+	private readonly production: productionEvents.BridgeDataSignerAddedPeerEvent
+	private readonly stage: stageEvents.BridgeDataSignerAddedPeerEvent
+	private readonly test: testEvents.BridgeDataSignerAddedPeerEvent
+	private readonly dev: devEvents.BridgeDataSignerAddedPeerEvent
+
+	constructor(ctx: ChainContext, event: Event) {
+		this.production = new productionEvents.BridgeDataSignerAddedPeerEvent(ctx, event)
+		this.stage = new stageEvents.BridgeDataSignerAddedPeerEvent(ctx, event)
+		this.test = new testEvents.BridgeDataSignerAddedPeerEvent(ctx, event)
+		this.dev = new devEvents.BridgeDataSignerAddedPeerEvent(ctx, event)
+	}
+
+	get isV64(): productionEvents.BridgeDataSignerAddedPeerEvent['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionEvents.BridgeDataSignerAddedPeerEvent['asV64'] {
+		return this.production.asV64
+	}
+}
+
+export class BridgeDataSignerApprovalAcceptedEvent {
+	private readonly production: productionEvents.BridgeDataSignerApprovalAcceptedEvent
+	private readonly stage: stageEvents.BridgeDataSignerApprovalAcceptedEvent
+	private readonly test: testEvents.BridgeDataSignerApprovalAcceptedEvent
+	private readonly dev: devEvents.BridgeDataSignerApprovalAcceptedEvent
+
+	constructor(ctx: ChainContext, event: Event) {
+		this.production = new productionEvents.BridgeDataSignerApprovalAcceptedEvent(ctx, event)
+		this.stage = new stageEvents.BridgeDataSignerApprovalAcceptedEvent(ctx, event)
+		this.test = new testEvents.BridgeDataSignerApprovalAcceptedEvent(ctx, event)
+		this.dev = new devEvents.BridgeDataSignerApprovalAcceptedEvent(ctx, event)
+	}
+
+	get isV64(): productionEvents.BridgeDataSignerApprovalAcceptedEvent['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionEvents.BridgeDataSignerApprovalAcceptedEvent['asV64'] {
+		return this.production.asV64
+	}
+}
+
+export class BridgeDataSignerApprovedEvent {
+	private readonly production: productionEvents.BridgeDataSignerApprovedEvent
+	private readonly stage: stageEvents.BridgeDataSignerApprovedEvent
+	private readonly test: testEvents.BridgeDataSignerApprovedEvent
+	private readonly dev: devEvents.BridgeDataSignerApprovedEvent
+
+	constructor(ctx: ChainContext, event: Event) {
+		this.production = new productionEvents.BridgeDataSignerApprovedEvent(ctx, event)
+		this.stage = new stageEvents.BridgeDataSignerApprovedEvent(ctx, event)
+		this.test = new testEvents.BridgeDataSignerApprovedEvent(ctx, event)
+		this.dev = new devEvents.BridgeDataSignerApprovedEvent(ctx, event)
+	}
+
+	get isV64(): productionEvents.BridgeDataSignerApprovedEvent['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionEvents.BridgeDataSignerApprovedEvent['asV64'] {
+		return this.production.asV64
+	}
+}
+
+export class BridgeDataSignerInitializedEvent {
+	private readonly production: productionEvents.BridgeDataSignerInitializedEvent
+	private readonly stage: stageEvents.BridgeDataSignerInitializedEvent
+	private readonly test: testEvents.BridgeDataSignerInitializedEvent
+	private readonly dev: devEvents.BridgeDataSignerInitializedEvent
+
+	constructor(ctx: ChainContext, event: Event) {
+		this.production = new productionEvents.BridgeDataSignerInitializedEvent(ctx, event)
+		this.stage = new stageEvents.BridgeDataSignerInitializedEvent(ctx, event)
+		this.test = new testEvents.BridgeDataSignerInitializedEvent(ctx, event)
+		this.dev = new devEvents.BridgeDataSignerInitializedEvent(ctx, event)
+	}
+
+	get isV64(): productionEvents.BridgeDataSignerInitializedEvent['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionEvents.BridgeDataSignerInitializedEvent['asV64'] {
+		return this.production.asV64
+	}
+}
+
+export class BridgeDataSignerRemovedPeerEvent {
+	private readonly production: productionEvents.BridgeDataSignerRemovedPeerEvent
+	private readonly stage: stageEvents.BridgeDataSignerRemovedPeerEvent
+	private readonly test: testEvents.BridgeDataSignerRemovedPeerEvent
+	private readonly dev: devEvents.BridgeDataSignerRemovedPeerEvent
+
+	constructor(ctx: ChainContext, event: Event) {
+		this.production = new productionEvents.BridgeDataSignerRemovedPeerEvent(ctx, event)
+		this.stage = new stageEvents.BridgeDataSignerRemovedPeerEvent(ctx, event)
+		this.test = new testEvents.BridgeDataSignerRemovedPeerEvent(ctx, event)
+		this.dev = new devEvents.BridgeDataSignerRemovedPeerEvent(ctx, event)
+	}
+
+	get isV64(): productionEvents.BridgeDataSignerRemovedPeerEvent['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionEvents.BridgeDataSignerRemovedPeerEvent['asV64'] {
+		return this.production.asV64
+	}
+}
+
 export class BridgeMultisigMultisigAccountCreatedEvent {
 	private readonly production: productionEvents.BridgeMultisigMultisigAccountCreatedEvent
 	private readonly stage: stageEvents.BridgeMultisigMultisigAccountCreatedEvent
@@ -650,6 +755,48 @@ export class BridgeMultisigNewMultisigEvent {
 	}
 	get asV1(): productionEvents.BridgeMultisigNewMultisigEvent['asV1'] {
 		return this.production.asV1
+	}
+}
+
+export class BridgeProxyRefundFailedEvent {
+	private readonly production: productionEvents.BridgeProxyRefundFailedEvent
+	private readonly stage: stageEvents.BridgeProxyRefundFailedEvent
+	private readonly test: testEvents.BridgeProxyRefundFailedEvent
+	private readonly dev: devEvents.BridgeProxyRefundFailedEvent
+
+	constructor(ctx: ChainContext, event: Event) {
+		this.production = new productionEvents.BridgeProxyRefundFailedEvent(ctx, event)
+		this.stage = new stageEvents.BridgeProxyRefundFailedEvent(ctx, event)
+		this.test = new testEvents.BridgeProxyRefundFailedEvent(ctx, event)
+		this.dev = new devEvents.BridgeProxyRefundFailedEvent(ctx, event)
+	}
+
+	get isV64(): productionEvents.BridgeProxyRefundFailedEvent['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionEvents.BridgeProxyRefundFailedEvent['asV64'] {
+		return this.production.asV64
+	}
+}
+
+export class BridgeProxyRequestStatusUpdateEvent {
+	private readonly production: productionEvents.BridgeProxyRequestStatusUpdateEvent
+	private readonly stage: stageEvents.BridgeProxyRequestStatusUpdateEvent
+	private readonly test: testEvents.BridgeProxyRequestStatusUpdateEvent
+	private readonly dev: devEvents.BridgeProxyRequestStatusUpdateEvent
+
+	constructor(ctx: ChainContext, event: Event) {
+		this.production = new productionEvents.BridgeProxyRequestStatusUpdateEvent(ctx, event)
+		this.stage = new stageEvents.BridgeProxyRequestStatusUpdateEvent(ctx, event)
+		this.test = new testEvents.BridgeProxyRequestStatusUpdateEvent(ctx, event)
+		this.dev = new devEvents.BridgeProxyRequestStatusUpdateEvent(ctx, event)
+	}
+
+	get isV64(): productionEvents.BridgeProxyRequestStatusUpdateEvent['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionEvents.BridgeProxyRequestStatusUpdateEvent['asV64'] {
+		return this.production.asV64
 	}
 }
 
@@ -3514,11 +3661,11 @@ export class LiquidityProxyExchangeEvent {
 	get asV42(): productionEvents.LiquidityProxyExchangeEvent['asV42'] {
 		return this.production.asV42
 	}
-	get isV63Dev(): devEvents.LiquidityProxyExchangeEvent['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devEvents.LiquidityProxyExchangeEvent['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devEvents.LiquidityProxyExchangeEvent['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devEvents.LiquidityProxyExchangeEvent['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -3813,6 +3960,90 @@ export class MultisigNewMultisigEvent {
 	}
 }
 
+export class MultisigVerifierNetworkInitializedEvent {
+	private readonly production: productionEvents.MultisigVerifierNetworkInitializedEvent
+	private readonly stage: stageEvents.MultisigVerifierNetworkInitializedEvent
+	private readonly test: testEvents.MultisigVerifierNetworkInitializedEvent
+	private readonly dev: devEvents.MultisigVerifierNetworkInitializedEvent
+
+	constructor(ctx: ChainContext, event: Event) {
+		this.production = new productionEvents.MultisigVerifierNetworkInitializedEvent(ctx, event)
+		this.stage = new stageEvents.MultisigVerifierNetworkInitializedEvent(ctx, event)
+		this.test = new testEvents.MultisigVerifierNetworkInitializedEvent(ctx, event)
+		this.dev = new devEvents.MultisigVerifierNetworkInitializedEvent(ctx, event)
+	}
+
+	get isV64(): productionEvents.MultisigVerifierNetworkInitializedEvent['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionEvents.MultisigVerifierNetworkInitializedEvent['asV64'] {
+		return this.production.asV64
+	}
+}
+
+export class MultisigVerifierPeerAddedEvent {
+	private readonly production: productionEvents.MultisigVerifierPeerAddedEvent
+	private readonly stage: stageEvents.MultisigVerifierPeerAddedEvent
+	private readonly test: testEvents.MultisigVerifierPeerAddedEvent
+	private readonly dev: devEvents.MultisigVerifierPeerAddedEvent
+
+	constructor(ctx: ChainContext, event: Event) {
+		this.production = new productionEvents.MultisigVerifierPeerAddedEvent(ctx, event)
+		this.stage = new stageEvents.MultisigVerifierPeerAddedEvent(ctx, event)
+		this.test = new testEvents.MultisigVerifierPeerAddedEvent(ctx, event)
+		this.dev = new devEvents.MultisigVerifierPeerAddedEvent(ctx, event)
+	}
+
+	get isV64(): productionEvents.MultisigVerifierPeerAddedEvent['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionEvents.MultisigVerifierPeerAddedEvent['asV64'] {
+		return this.production.asV64
+	}
+}
+
+export class MultisigVerifierPeerRemovedEvent {
+	private readonly production: productionEvents.MultisigVerifierPeerRemovedEvent
+	private readonly stage: stageEvents.MultisigVerifierPeerRemovedEvent
+	private readonly test: testEvents.MultisigVerifierPeerRemovedEvent
+	private readonly dev: devEvents.MultisigVerifierPeerRemovedEvent
+
+	constructor(ctx: ChainContext, event: Event) {
+		this.production = new productionEvents.MultisigVerifierPeerRemovedEvent(ctx, event)
+		this.stage = new stageEvents.MultisigVerifierPeerRemovedEvent(ctx, event)
+		this.test = new testEvents.MultisigVerifierPeerRemovedEvent(ctx, event)
+		this.dev = new devEvents.MultisigVerifierPeerRemovedEvent(ctx, event)
+	}
+
+	get isV64(): productionEvents.MultisigVerifierPeerRemovedEvent['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionEvents.MultisigVerifierPeerRemovedEvent['asV64'] {
+		return this.production.asV64
+	}
+}
+
+export class MultisigVerifierVerificationSuccessfulEvent {
+	private readonly production: productionEvents.MultisigVerifierVerificationSuccessfulEvent
+	private readonly stage: stageEvents.MultisigVerifierVerificationSuccessfulEvent
+	private readonly test: testEvents.MultisigVerifierVerificationSuccessfulEvent
+	private readonly dev: devEvents.MultisigVerifierVerificationSuccessfulEvent
+
+	constructor(ctx: ChainContext, event: Event) {
+		this.production = new productionEvents.MultisigVerifierVerificationSuccessfulEvent(ctx, event)
+		this.stage = new stageEvents.MultisigVerifierVerificationSuccessfulEvent(ctx, event)
+		this.test = new testEvents.MultisigVerifierVerificationSuccessfulEvent(ctx, event)
+		this.dev = new devEvents.MultisigVerifierVerificationSuccessfulEvent(ctx, event)
+	}
+
+	get isV64(): productionEvents.MultisigVerifierVerificationSuccessfulEvent['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionEvents.MultisigVerifierVerificationSuccessfulEvent['asV64'] {
+		return this.production.asV64
+	}
+}
+
 export class OffencesOffenceEvent {
 	private readonly production: productionEvents.OffencesOffenceEvent
 	private readonly stage: stageEvents.OffencesOffenceEvent
@@ -3879,6 +4110,48 @@ export class OracleProxyOracleEnabledEvent {
 	}
 	get asV45(): productionEvents.OracleProxyOracleEnabledEvent['asV45'] {
 		return this.production.asV45
+	}
+}
+
+export class ParachainBridgeAppBurnedEvent {
+	private readonly production: productionEvents.ParachainBridgeAppBurnedEvent
+	private readonly stage: stageEvents.ParachainBridgeAppBurnedEvent
+	private readonly test: testEvents.ParachainBridgeAppBurnedEvent
+	private readonly dev: devEvents.ParachainBridgeAppBurnedEvent
+
+	constructor(ctx: ChainContext, event: Event) {
+		this.production = new productionEvents.ParachainBridgeAppBurnedEvent(ctx, event)
+		this.stage = new stageEvents.ParachainBridgeAppBurnedEvent(ctx, event)
+		this.test = new testEvents.ParachainBridgeAppBurnedEvent(ctx, event)
+		this.dev = new devEvents.ParachainBridgeAppBurnedEvent(ctx, event)
+	}
+
+	get isV64(): productionEvents.ParachainBridgeAppBurnedEvent['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionEvents.ParachainBridgeAppBurnedEvent['asV64'] {
+		return this.production.asV64
+	}
+}
+
+export class ParachainBridgeAppMintedEvent {
+	private readonly production: productionEvents.ParachainBridgeAppMintedEvent
+	private readonly stage: stageEvents.ParachainBridgeAppMintedEvent
+	private readonly test: testEvents.ParachainBridgeAppMintedEvent
+	private readonly dev: devEvents.ParachainBridgeAppMintedEvent
+
+	constructor(ctx: ChainContext, event: Event) {
+		this.production = new productionEvents.ParachainBridgeAppMintedEvent(ctx, event)
+		this.stage = new stageEvents.ParachainBridgeAppMintedEvent(ctx, event)
+		this.test = new testEvents.ParachainBridgeAppMintedEvent(ctx, event)
+		this.dev = new devEvents.ParachainBridgeAppMintedEvent(ctx, event)
+	}
+
+	get isV64(): productionEvents.ParachainBridgeAppMintedEvent['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionEvents.ParachainBridgeAppMintedEvent['asV64'] {
+		return this.production.asV64
 	}
 }
 
@@ -4977,6 +5250,132 @@ export class StakingWithdrawnEvent {
 	}
 	get asV53(): productionEvents.StakingWithdrawnEvent['asV53'] {
 		return this.production.asV53
+	}
+}
+
+export class SubstrateBridgeOutboundChannelMessageAcceptedEvent {
+	private readonly production: productionEvents.SubstrateBridgeOutboundChannelMessageAcceptedEvent
+	private readonly stage: stageEvents.SubstrateBridgeOutboundChannelMessageAcceptedEvent
+	private readonly test: testEvents.SubstrateBridgeOutboundChannelMessageAcceptedEvent
+	private readonly dev: devEvents.SubstrateBridgeOutboundChannelMessageAcceptedEvent
+
+	constructor(ctx: ChainContext, event: Event) {
+		this.production = new productionEvents.SubstrateBridgeOutboundChannelMessageAcceptedEvent(ctx, event)
+		this.stage = new stageEvents.SubstrateBridgeOutboundChannelMessageAcceptedEvent(ctx, event)
+		this.test = new testEvents.SubstrateBridgeOutboundChannelMessageAcceptedEvent(ctx, event)
+		this.dev = new devEvents.SubstrateBridgeOutboundChannelMessageAcceptedEvent(ctx, event)
+	}
+
+	get isV64(): productionEvents.SubstrateBridgeOutboundChannelMessageAcceptedEvent['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionEvents.SubstrateBridgeOutboundChannelMessageAcceptedEvent['asV64'] {
+		return this.production.asV64
+	}
+	get isV52Stage(): stageEvents.SubstrateBridgeOutboundChannelMessageAcceptedEvent['isV52'] {
+		return this.stage.isV52
+	}
+	get asV52Stage(): stageEvents.SubstrateBridgeOutboundChannelMessageAcceptedEvent['asV52'] {
+		return this.stage.asV52
+	}
+}
+
+export class SubstrateDispatchMessageDecodeFailedEvent {
+	private readonly production: productionEvents.SubstrateDispatchMessageDecodeFailedEvent
+	private readonly stage: stageEvents.SubstrateDispatchMessageDecodeFailedEvent
+	private readonly test: testEvents.SubstrateDispatchMessageDecodeFailedEvent
+	private readonly dev: devEvents.SubstrateDispatchMessageDecodeFailedEvent
+
+	constructor(ctx: ChainContext, event: Event) {
+		this.production = new productionEvents.SubstrateDispatchMessageDecodeFailedEvent(ctx, event)
+		this.stage = new stageEvents.SubstrateDispatchMessageDecodeFailedEvent(ctx, event)
+		this.test = new testEvents.SubstrateDispatchMessageDecodeFailedEvent(ctx, event)
+		this.dev = new devEvents.SubstrateDispatchMessageDecodeFailedEvent(ctx, event)
+	}
+
+	get isV64(): productionEvents.SubstrateDispatchMessageDecodeFailedEvent['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionEvents.SubstrateDispatchMessageDecodeFailedEvent['asV64'] {
+		return this.production.asV64
+	}
+	get isV52Stage(): stageEvents.SubstrateDispatchMessageDecodeFailedEvent['isV52'] {
+		return this.stage.isV52
+	}
+	get asV52Stage(): stageEvents.SubstrateDispatchMessageDecodeFailedEvent['asV52'] {
+		return this.stage.asV52
+	}
+	get isV54Stage(): stageEvents.SubstrateDispatchMessageDecodeFailedEvent['isV54'] {
+		return this.stage.isV54
+	}
+	get asV54Stage(): stageEvents.SubstrateDispatchMessageDecodeFailedEvent['asV54'] {
+		return this.stage.asV54
+	}
+}
+
+export class SubstrateDispatchMessageDispatchedEvent {
+	private readonly production: productionEvents.SubstrateDispatchMessageDispatchedEvent
+	private readonly stage: stageEvents.SubstrateDispatchMessageDispatchedEvent
+	private readonly test: testEvents.SubstrateDispatchMessageDispatchedEvent
+	private readonly dev: devEvents.SubstrateDispatchMessageDispatchedEvent
+
+	constructor(ctx: ChainContext, event: Event) {
+		this.production = new productionEvents.SubstrateDispatchMessageDispatchedEvent(ctx, event)
+		this.stage = new stageEvents.SubstrateDispatchMessageDispatchedEvent(ctx, event)
+		this.test = new testEvents.SubstrateDispatchMessageDispatchedEvent(ctx, event)
+		this.dev = new devEvents.SubstrateDispatchMessageDispatchedEvent(ctx, event)
+	}
+
+	get isV64(): productionEvents.SubstrateDispatchMessageDispatchedEvent['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionEvents.SubstrateDispatchMessageDispatchedEvent['asV64'] {
+		return this.production.asV64
+	}
+	get isV52Stage(): stageEvents.SubstrateDispatchMessageDispatchedEvent['isV52'] {
+		return this.stage.isV52
+	}
+	get asV52Stage(): stageEvents.SubstrateDispatchMessageDispatchedEvent['asV52'] {
+		return this.stage.asV52
+	}
+	get isV54Stage(): stageEvents.SubstrateDispatchMessageDispatchedEvent['isV54'] {
+		return this.stage.isV54
+	}
+	get asV54Stage(): stageEvents.SubstrateDispatchMessageDispatchedEvent['asV54'] {
+		return this.stage.asV54
+	}
+}
+
+export class SubstrateDispatchMessageRejectedEvent {
+	private readonly production: productionEvents.SubstrateDispatchMessageRejectedEvent
+	private readonly stage: stageEvents.SubstrateDispatchMessageRejectedEvent
+	private readonly test: testEvents.SubstrateDispatchMessageRejectedEvent
+	private readonly dev: devEvents.SubstrateDispatchMessageRejectedEvent
+
+	constructor(ctx: ChainContext, event: Event) {
+		this.production = new productionEvents.SubstrateDispatchMessageRejectedEvent(ctx, event)
+		this.stage = new stageEvents.SubstrateDispatchMessageRejectedEvent(ctx, event)
+		this.test = new testEvents.SubstrateDispatchMessageRejectedEvent(ctx, event)
+		this.dev = new devEvents.SubstrateDispatchMessageRejectedEvent(ctx, event)
+	}
+
+	get isV64(): productionEvents.SubstrateDispatchMessageRejectedEvent['isV64'] {
+		return this.production.isV64
+	}
+	get asV64(): productionEvents.SubstrateDispatchMessageRejectedEvent['asV64'] {
+		return this.production.asV64
+	}
+	get isV52Stage(): stageEvents.SubstrateDispatchMessageRejectedEvent['isV52'] {
+		return this.stage.isV52
+	}
+	get asV52Stage(): stageEvents.SubstrateDispatchMessageRejectedEvent['asV52'] {
+		return this.stage.asV52
+	}
+	get isV54Stage(): stageEvents.SubstrateDispatchMessageRejectedEvent['isV54'] {
+		return this.stage.isV54
+	}
+	get asV54Stage(): stageEvents.SubstrateDispatchMessageRejectedEvent['asV54'] {
+		return this.stage.asV54
 	}
 }
 
@@ -6718,101 +7117,6 @@ export class BeefyLightClientVerificationSuccessfulEvent {
 	}
 }
 
-export class BridgeDataSignerAddedPeerEvent {
-	private readonly stage: stageEvents.BridgeDataSignerAddedPeerEvent
-	private readonly test: testEvents.BridgeDataSignerAddedPeerEvent
-	private readonly dev: devEvents.BridgeDataSignerAddedPeerEvent
-
-	constructor(ctx: ChainContext, event: Event) {
-		this.stage = new stageEvents.BridgeDataSignerAddedPeerEvent(ctx, event)
-		this.test = new testEvents.BridgeDataSignerAddedPeerEvent(ctx, event)
-		this.dev = new devEvents.BridgeDataSignerAddedPeerEvent(ctx, event)
-	}
-
-	get isV54Stage(): stageEvents.BridgeDataSignerAddedPeerEvent['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageEvents.BridgeDataSignerAddedPeerEvent['asV54'] {
-		return this.stage.asV54
-	}
-}
-
-export class BridgeDataSignerApprovalAcceptedEvent {
-	private readonly stage: stageEvents.BridgeDataSignerApprovalAcceptedEvent
-	private readonly test: testEvents.BridgeDataSignerApprovalAcceptedEvent
-	private readonly dev: devEvents.BridgeDataSignerApprovalAcceptedEvent
-
-	constructor(ctx: ChainContext, event: Event) {
-		this.stage = new stageEvents.BridgeDataSignerApprovalAcceptedEvent(ctx, event)
-		this.test = new testEvents.BridgeDataSignerApprovalAcceptedEvent(ctx, event)
-		this.dev = new devEvents.BridgeDataSignerApprovalAcceptedEvent(ctx, event)
-	}
-
-	get isV54Stage(): stageEvents.BridgeDataSignerApprovalAcceptedEvent['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageEvents.BridgeDataSignerApprovalAcceptedEvent['asV54'] {
-		return this.stage.asV54
-	}
-}
-
-export class BridgeDataSignerApprovedEvent {
-	private readonly stage: stageEvents.BridgeDataSignerApprovedEvent
-	private readonly test: testEvents.BridgeDataSignerApprovedEvent
-	private readonly dev: devEvents.BridgeDataSignerApprovedEvent
-
-	constructor(ctx: ChainContext, event: Event) {
-		this.stage = new stageEvents.BridgeDataSignerApprovedEvent(ctx, event)
-		this.test = new testEvents.BridgeDataSignerApprovedEvent(ctx, event)
-		this.dev = new devEvents.BridgeDataSignerApprovedEvent(ctx, event)
-	}
-
-	get isV54Stage(): stageEvents.BridgeDataSignerApprovedEvent['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageEvents.BridgeDataSignerApprovedEvent['asV54'] {
-		return this.stage.asV54
-	}
-}
-
-export class BridgeDataSignerInitializedEvent {
-	private readonly stage: stageEvents.BridgeDataSignerInitializedEvent
-	private readonly test: testEvents.BridgeDataSignerInitializedEvent
-	private readonly dev: devEvents.BridgeDataSignerInitializedEvent
-
-	constructor(ctx: ChainContext, event: Event) {
-		this.stage = new stageEvents.BridgeDataSignerInitializedEvent(ctx, event)
-		this.test = new testEvents.BridgeDataSignerInitializedEvent(ctx, event)
-		this.dev = new devEvents.BridgeDataSignerInitializedEvent(ctx, event)
-	}
-
-	get isV54Stage(): stageEvents.BridgeDataSignerInitializedEvent['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageEvents.BridgeDataSignerInitializedEvent['asV54'] {
-		return this.stage.asV54
-	}
-}
-
-export class BridgeDataSignerRemovedPeerEvent {
-	private readonly stage: stageEvents.BridgeDataSignerRemovedPeerEvent
-	private readonly test: testEvents.BridgeDataSignerRemovedPeerEvent
-	private readonly dev: devEvents.BridgeDataSignerRemovedPeerEvent
-
-	constructor(ctx: ChainContext, event: Event) {
-		this.stage = new stageEvents.BridgeDataSignerRemovedPeerEvent(ctx, event)
-		this.test = new testEvents.BridgeDataSignerRemovedPeerEvent(ctx, event)
-		this.dev = new devEvents.BridgeDataSignerRemovedPeerEvent(ctx, event)
-	}
-
-	get isV54Stage(): stageEvents.BridgeDataSignerRemovedPeerEvent['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageEvents.BridgeDataSignerRemovedPeerEvent['asV54'] {
-		return this.stage.asV54
-	}
-}
-
 export class BridgeOutboundChannelMessageAcceptedEvent {
 	private readonly stage: stageEvents.BridgeOutboundChannelMessageAcceptedEvent
 	private readonly test: testEvents.BridgeOutboundChannelMessageAcceptedEvent
@@ -6835,44 +7139,6 @@ export class BridgeOutboundChannelMessageAcceptedEvent {
 	}
 	get asV55Stage(): stageEvents.BridgeOutboundChannelMessageAcceptedEvent['asV55'] {
 		return this.stage.asV55
-	}
-}
-
-export class BridgeProxyRefundFailedEvent {
-	private readonly stage: stageEvents.BridgeProxyRefundFailedEvent
-	private readonly test: testEvents.BridgeProxyRefundFailedEvent
-	private readonly dev: devEvents.BridgeProxyRefundFailedEvent
-
-	constructor(ctx: ChainContext, event: Event) {
-		this.stage = new stageEvents.BridgeProxyRefundFailedEvent(ctx, event)
-		this.test = new testEvents.BridgeProxyRefundFailedEvent(ctx, event)
-		this.dev = new devEvents.BridgeProxyRefundFailedEvent(ctx, event)
-	}
-
-	get isV54Stage(): stageEvents.BridgeProxyRefundFailedEvent['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageEvents.BridgeProxyRefundFailedEvent['asV54'] {
-		return this.stage.asV54
-	}
-}
-
-export class BridgeProxyRequestStatusUpdateEvent {
-	private readonly stage: stageEvents.BridgeProxyRequestStatusUpdateEvent
-	private readonly test: testEvents.BridgeProxyRequestStatusUpdateEvent
-	private readonly dev: devEvents.BridgeProxyRequestStatusUpdateEvent
-
-	constructor(ctx: ChainContext, event: Event) {
-		this.stage = new stageEvents.BridgeProxyRequestStatusUpdateEvent(ctx, event)
-		this.test = new testEvents.BridgeProxyRequestStatusUpdateEvent(ctx, event)
-		this.dev = new devEvents.BridgeProxyRequestStatusUpdateEvent(ctx, event)
-	}
-
-	get isV54Stage(): stageEvents.BridgeProxyRequestStatusUpdateEvent['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageEvents.BridgeProxyRequestStatusUpdateEvent['asV54'] {
-		return this.stage.asV54
 	}
 }
 
@@ -7155,6 +7421,25 @@ export class FaucetLimitUpdatedEvent {
 	}
 }
 
+export class LiquidityProxyXorlessTransferEvent {
+	private readonly stage: stageEvents.LiquidityProxyXorlessTransferEvent
+	private readonly test: testEvents.LiquidityProxyXorlessTransferEvent
+	private readonly dev: devEvents.LiquidityProxyXorlessTransferEvent
+
+	constructor(ctx: ChainContext, event: Event) {
+		this.stage = new stageEvents.LiquidityProxyXorlessTransferEvent(ctx, event)
+		this.test = new testEvents.LiquidityProxyXorlessTransferEvent(ctx, event)
+		this.dev = new devEvents.LiquidityProxyXorlessTransferEvent(ctx, event)
+	}
+
+	get isV66Stage(): stageEvents.LiquidityProxyXorlessTransferEvent['isV66'] {
+		return this.stage.isV66
+	}
+	get asV66Stage(): stageEvents.LiquidityProxyXorlessTransferEvent['asV66'] {
+		return this.stage.asV66
+	}
+}
+
 export class MigrationAppErc20MigratedEvent {
 	private readonly stage: stageEvents.MigrationAppErc20MigratedEvent
 	private readonly test: testEvents.MigrationAppErc20MigratedEvent
@@ -7212,82 +7497,6 @@ export class MigrationAppSidechainMigratedEvent {
 	}
 }
 
-export class MultisigVerifierNetworkInitializedEvent {
-	private readonly stage: stageEvents.MultisigVerifierNetworkInitializedEvent
-	private readonly test: testEvents.MultisigVerifierNetworkInitializedEvent
-	private readonly dev: devEvents.MultisigVerifierNetworkInitializedEvent
-
-	constructor(ctx: ChainContext, event: Event) {
-		this.stage = new stageEvents.MultisigVerifierNetworkInitializedEvent(ctx, event)
-		this.test = new testEvents.MultisigVerifierNetworkInitializedEvent(ctx, event)
-		this.dev = new devEvents.MultisigVerifierNetworkInitializedEvent(ctx, event)
-	}
-
-	get isV54Stage(): stageEvents.MultisigVerifierNetworkInitializedEvent['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageEvents.MultisigVerifierNetworkInitializedEvent['asV54'] {
-		return this.stage.asV54
-	}
-}
-
-export class MultisigVerifierPeerAddedEvent {
-	private readonly stage: stageEvents.MultisigVerifierPeerAddedEvent
-	private readonly test: testEvents.MultisigVerifierPeerAddedEvent
-	private readonly dev: devEvents.MultisigVerifierPeerAddedEvent
-
-	constructor(ctx: ChainContext, event: Event) {
-		this.stage = new stageEvents.MultisigVerifierPeerAddedEvent(ctx, event)
-		this.test = new testEvents.MultisigVerifierPeerAddedEvent(ctx, event)
-		this.dev = new devEvents.MultisigVerifierPeerAddedEvent(ctx, event)
-	}
-
-	get isV54Stage(): stageEvents.MultisigVerifierPeerAddedEvent['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageEvents.MultisigVerifierPeerAddedEvent['asV54'] {
-		return this.stage.asV54
-	}
-}
-
-export class MultisigVerifierPeerRemovedEvent {
-	private readonly stage: stageEvents.MultisigVerifierPeerRemovedEvent
-	private readonly test: testEvents.MultisigVerifierPeerRemovedEvent
-	private readonly dev: devEvents.MultisigVerifierPeerRemovedEvent
-
-	constructor(ctx: ChainContext, event: Event) {
-		this.stage = new stageEvents.MultisigVerifierPeerRemovedEvent(ctx, event)
-		this.test = new testEvents.MultisigVerifierPeerRemovedEvent(ctx, event)
-		this.dev = new devEvents.MultisigVerifierPeerRemovedEvent(ctx, event)
-	}
-
-	get isV54Stage(): stageEvents.MultisigVerifierPeerRemovedEvent['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageEvents.MultisigVerifierPeerRemovedEvent['asV54'] {
-		return this.stage.asV54
-	}
-}
-
-export class MultisigVerifierVerificationSuccessfulEvent {
-	private readonly stage: stageEvents.MultisigVerifierVerificationSuccessfulEvent
-	private readonly test: testEvents.MultisigVerifierVerificationSuccessfulEvent
-	private readonly dev: devEvents.MultisigVerifierVerificationSuccessfulEvent
-
-	constructor(ctx: ChainContext, event: Event) {
-		this.stage = new stageEvents.MultisigVerifierVerificationSuccessfulEvent(ctx, event)
-		this.test = new testEvents.MultisigVerifierVerificationSuccessfulEvent(ctx, event)
-		this.dev = new devEvents.MultisigVerifierVerificationSuccessfulEvent(ctx, event)
-	}
-
-	get isV54Stage(): stageEvents.MultisigVerifierVerificationSuccessfulEvent['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageEvents.MultisigVerifierVerificationSuccessfulEvent['asV54'] {
-		return this.stage.asV54
-	}
-}
-
 export class SubstrateBridgeAppBurnedEvent {
 	private readonly stage: stageEvents.SubstrateBridgeAppBurnedEvent
 	private readonly test: testEvents.SubstrateBridgeAppBurnedEvent
@@ -7322,124 +7531,6 @@ export class SubstrateBridgeAppMintedEvent {
 	}
 }
 
-export class SubstrateBridgeOutboundChannelMessageAcceptedEvent {
-	private readonly stage: stageEvents.SubstrateBridgeOutboundChannelMessageAcceptedEvent
-	private readonly test: testEvents.SubstrateBridgeOutboundChannelMessageAcceptedEvent
-	private readonly dev: devEvents.SubstrateBridgeOutboundChannelMessageAcceptedEvent
-
-	constructor(ctx: ChainContext, event: Event) {
-		this.stage = new stageEvents.SubstrateBridgeOutboundChannelMessageAcceptedEvent(ctx, event)
-		this.test = new testEvents.SubstrateBridgeOutboundChannelMessageAcceptedEvent(ctx, event)
-		this.dev = new devEvents.SubstrateBridgeOutboundChannelMessageAcceptedEvent(ctx, event)
-	}
-
-	get isV52Stage(): stageEvents.SubstrateBridgeOutboundChannelMessageAcceptedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.SubstrateBridgeOutboundChannelMessageAcceptedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV57Stage(): stageEvents.SubstrateBridgeOutboundChannelMessageAcceptedEvent['isV57'] {
-		return this.stage.isV57
-	}
-	get asV57Stage(): stageEvents.SubstrateBridgeOutboundChannelMessageAcceptedEvent['asV57'] {
-		return this.stage.asV57
-	}
-}
-
-export class SubstrateDispatchMessageDecodeFailedEvent {
-	private readonly stage: stageEvents.SubstrateDispatchMessageDecodeFailedEvent
-	private readonly test: testEvents.SubstrateDispatchMessageDecodeFailedEvent
-	private readonly dev: devEvents.SubstrateDispatchMessageDecodeFailedEvent
-
-	constructor(ctx: ChainContext, event: Event) {
-		this.stage = new stageEvents.SubstrateDispatchMessageDecodeFailedEvent(ctx, event)
-		this.test = new testEvents.SubstrateDispatchMessageDecodeFailedEvent(ctx, event)
-		this.dev = new devEvents.SubstrateDispatchMessageDecodeFailedEvent(ctx, event)
-	}
-
-	get isV52Stage(): stageEvents.SubstrateDispatchMessageDecodeFailedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.SubstrateDispatchMessageDecodeFailedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV54Stage(): stageEvents.SubstrateDispatchMessageDecodeFailedEvent['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageEvents.SubstrateDispatchMessageDecodeFailedEvent['asV54'] {
-		return this.stage.asV54
-	}
-	get isV59Stage(): stageEvents.SubstrateDispatchMessageDecodeFailedEvent['isV59'] {
-		return this.stage.isV59
-	}
-	get asV59Stage(): stageEvents.SubstrateDispatchMessageDecodeFailedEvent['asV59'] {
-		return this.stage.asV59
-	}
-}
-
-export class SubstrateDispatchMessageDispatchedEvent {
-	private readonly stage: stageEvents.SubstrateDispatchMessageDispatchedEvent
-	private readonly test: testEvents.SubstrateDispatchMessageDispatchedEvent
-	private readonly dev: devEvents.SubstrateDispatchMessageDispatchedEvent
-
-	constructor(ctx: ChainContext, event: Event) {
-		this.stage = new stageEvents.SubstrateDispatchMessageDispatchedEvent(ctx, event)
-		this.test = new testEvents.SubstrateDispatchMessageDispatchedEvent(ctx, event)
-		this.dev = new devEvents.SubstrateDispatchMessageDispatchedEvent(ctx, event)
-	}
-
-	get isV52Stage(): stageEvents.SubstrateDispatchMessageDispatchedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.SubstrateDispatchMessageDispatchedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV54Stage(): stageEvents.SubstrateDispatchMessageDispatchedEvent['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageEvents.SubstrateDispatchMessageDispatchedEvent['asV54'] {
-		return this.stage.asV54
-	}
-	get isV59Stage(): stageEvents.SubstrateDispatchMessageDispatchedEvent['isV59'] {
-		return this.stage.isV59
-	}
-	get asV59Stage(): stageEvents.SubstrateDispatchMessageDispatchedEvent['asV59'] {
-		return this.stage.asV59
-	}
-}
-
-export class SubstrateDispatchMessageRejectedEvent {
-	private readonly stage: stageEvents.SubstrateDispatchMessageRejectedEvent
-	private readonly test: testEvents.SubstrateDispatchMessageRejectedEvent
-	private readonly dev: devEvents.SubstrateDispatchMessageRejectedEvent
-
-	constructor(ctx: ChainContext, event: Event) {
-		this.stage = new stageEvents.SubstrateDispatchMessageRejectedEvent(ctx, event)
-		this.test = new testEvents.SubstrateDispatchMessageRejectedEvent(ctx, event)
-		this.dev = new devEvents.SubstrateDispatchMessageRejectedEvent(ctx, event)
-	}
-
-	get isV52Stage(): stageEvents.SubstrateDispatchMessageRejectedEvent['isV52'] {
-		return this.stage.isV52
-	}
-	get asV52Stage(): stageEvents.SubstrateDispatchMessageRejectedEvent['asV52'] {
-		return this.stage.asV52
-	}
-	get isV54Stage(): stageEvents.SubstrateDispatchMessageRejectedEvent['isV54'] {
-		return this.stage.isV54
-	}
-	get asV54Stage(): stageEvents.SubstrateDispatchMessageRejectedEvent['asV54'] {
-		return this.stage.asV54
-	}
-	get isV59Stage(): stageEvents.SubstrateDispatchMessageRejectedEvent['isV59'] {
-		return this.stage.isV59
-	}
-	get asV59Stage(): stageEvents.SubstrateDispatchMessageRejectedEvent['asV59'] {
-		return this.stage.asV59
-	}
-}
-
 export class OrderBookOrderBookCreatedEvent {
 	private readonly test: testEvents.OrderBookOrderBookCreatedEvent
 	private readonly dev: devEvents.OrderBookOrderBookCreatedEvent
@@ -7455,11 +7546,11 @@ export class OrderBookOrderBookCreatedEvent {
 	get asV52Test(): testEvents.OrderBookOrderBookCreatedEvent['asV52'] {
 		return this.test.asV52
 	}
-	get isV63Dev(): devEvents.OrderBookOrderBookCreatedEvent['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devEvents.OrderBookOrderBookCreatedEvent['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devEvents.OrderBookOrderBookCreatedEvent['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devEvents.OrderBookOrderBookCreatedEvent['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -7478,11 +7569,11 @@ export class OrderBookOrderBookDeletedEvent {
 	get asV52Test(): testEvents.OrderBookOrderBookDeletedEvent['asV52'] {
 		return this.test.asV52
 	}
-	get isV63Dev(): devEvents.OrderBookOrderBookDeletedEvent['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devEvents.OrderBookOrderBookDeletedEvent['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devEvents.OrderBookOrderBookDeletedEvent['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devEvents.OrderBookOrderBookDeletedEvent['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -7501,11 +7592,11 @@ export class OrderBookOrderBookUpdatedEvent {
 	get asV52Test(): testEvents.OrderBookOrderBookUpdatedEvent['asV52'] {
 		return this.test.asV52
 	}
-	get isV63Dev(): devEvents.OrderBookOrderBookUpdatedEvent['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devEvents.OrderBookOrderBookUpdatedEvent['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devEvents.OrderBookOrderBookUpdatedEvent['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devEvents.OrderBookOrderBookUpdatedEvent['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -7546,11 +7637,11 @@ export class OrderBookExpirationFailureEvent {
 		this.dev = new devEvents.OrderBookExpirationFailureEvent(ctx, event)
 	}
 
-	get isV63Dev(): devEvents.OrderBookExpirationFailureEvent['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devEvents.OrderBookExpirationFailureEvent['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devEvents.OrderBookExpirationFailureEvent['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devEvents.OrderBookExpirationFailureEvent['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -7561,11 +7652,11 @@ export class OrderBookLimitOrderCanceledEvent {
 		this.dev = new devEvents.OrderBookLimitOrderCanceledEvent(ctx, event)
 	}
 
-	get isV63Dev(): devEvents.OrderBookLimitOrderCanceledEvent['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devEvents.OrderBookLimitOrderCanceledEvent['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devEvents.OrderBookLimitOrderCanceledEvent['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devEvents.OrderBookLimitOrderCanceledEvent['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -7576,11 +7667,11 @@ export class OrderBookLimitOrderConvertedToMarketOrderEvent {
 		this.dev = new devEvents.OrderBookLimitOrderConvertedToMarketOrderEvent(ctx, event)
 	}
 
-	get isV63Dev(): devEvents.OrderBookLimitOrderConvertedToMarketOrderEvent['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devEvents.OrderBookLimitOrderConvertedToMarketOrderEvent['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devEvents.OrderBookLimitOrderConvertedToMarketOrderEvent['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devEvents.OrderBookLimitOrderConvertedToMarketOrderEvent['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -7591,11 +7682,11 @@ export class OrderBookLimitOrderExecutedEvent {
 		this.dev = new devEvents.OrderBookLimitOrderExecutedEvent(ctx, event)
 	}
 
-	get isV63Dev(): devEvents.OrderBookLimitOrderExecutedEvent['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devEvents.OrderBookLimitOrderExecutedEvent['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devEvents.OrderBookLimitOrderExecutedEvent['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devEvents.OrderBookLimitOrderExecutedEvent['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -7606,11 +7697,11 @@ export class OrderBookLimitOrderExpiredEvent {
 		this.dev = new devEvents.OrderBookLimitOrderExpiredEvent(ctx, event)
 	}
 
-	get isV63Dev(): devEvents.OrderBookLimitOrderExpiredEvent['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devEvents.OrderBookLimitOrderExpiredEvent['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devEvents.OrderBookLimitOrderExpiredEvent['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devEvents.OrderBookLimitOrderExpiredEvent['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -7621,11 +7712,11 @@ export class OrderBookLimitOrderIsSplitIntoMarketOrderAndLimitOrderEvent {
 		this.dev = new devEvents.OrderBookLimitOrderIsSplitIntoMarketOrderAndLimitOrderEvent(ctx, event)
 	}
 
-	get isV63Dev(): devEvents.OrderBookLimitOrderIsSplitIntoMarketOrderAndLimitOrderEvent['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devEvents.OrderBookLimitOrderIsSplitIntoMarketOrderAndLimitOrderEvent['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devEvents.OrderBookLimitOrderIsSplitIntoMarketOrderAndLimitOrderEvent['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devEvents.OrderBookLimitOrderIsSplitIntoMarketOrderAndLimitOrderEvent['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -7636,11 +7727,11 @@ export class OrderBookLimitOrderPlacedEvent {
 		this.dev = new devEvents.OrderBookLimitOrderPlacedEvent(ctx, event)
 	}
 
-	get isV63Dev(): devEvents.OrderBookLimitOrderPlacedEvent['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devEvents.OrderBookLimitOrderPlacedEvent['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devEvents.OrderBookLimitOrderPlacedEvent['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devEvents.OrderBookLimitOrderPlacedEvent['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -7651,11 +7742,11 @@ export class OrderBookLimitOrderUpdatedEvent {
 		this.dev = new devEvents.OrderBookLimitOrderUpdatedEvent(ctx, event)
 	}
 
-	get isV63Dev(): devEvents.OrderBookLimitOrderUpdatedEvent['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devEvents.OrderBookLimitOrderUpdatedEvent['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devEvents.OrderBookLimitOrderUpdatedEvent['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devEvents.OrderBookLimitOrderUpdatedEvent['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -7666,11 +7757,11 @@ export class OrderBookMarketOrderExecutedEvent {
 		this.dev = new devEvents.OrderBookMarketOrderExecutedEvent(ctx, event)
 	}
 
-	get isV63Dev(): devEvents.OrderBookMarketOrderExecutedEvent['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devEvents.OrderBookMarketOrderExecutedEvent['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devEvents.OrderBookMarketOrderExecutedEvent['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devEvents.OrderBookMarketOrderExecutedEvent['asV64'] {
+		return this.dev.asV64
 	}
 }
 
@@ -7681,40 +7772,10 @@ export class OrderBookOrderBookStatusChangedEvent {
 		this.dev = new devEvents.OrderBookOrderBookStatusChangedEvent(ctx, event)
 	}
 
-	get isV63Dev(): devEvents.OrderBookOrderBookStatusChangedEvent['isV63'] {
-		return this.dev.isV63
+	get isV64Dev(): devEvents.OrderBookOrderBookStatusChangedEvent['isV64'] {
+		return this.dev.isV64
 	}
-	get asV63Dev(): devEvents.OrderBookOrderBookStatusChangedEvent['asV63'] {
-		return this.dev.asV63
-	}
-}
-
-export class ParachainBridgeAppBurnedEvent {
-	private readonly dev: devEvents.ParachainBridgeAppBurnedEvent
-
-	constructor(ctx: ChainContext, event: Event) {
-		this.dev = new devEvents.ParachainBridgeAppBurnedEvent(ctx, event)
-	}
-
-	get isV63Dev(): devEvents.ParachainBridgeAppBurnedEvent['isV63'] {
-		return this.dev.isV63
-	}
-	get asV63Dev(): devEvents.ParachainBridgeAppBurnedEvent['asV63'] {
-		return this.dev.asV63
-	}
-}
-
-export class ParachainBridgeAppMintedEvent {
-	private readonly dev: devEvents.ParachainBridgeAppMintedEvent
-
-	constructor(ctx: ChainContext, event: Event) {
-		this.dev = new devEvents.ParachainBridgeAppMintedEvent(ctx, event)
-	}
-
-	get isV63Dev(): devEvents.ParachainBridgeAppMintedEvent['isV63'] {
-		return this.dev.isV63
-	}
-	get asV63Dev(): devEvents.ParachainBridgeAppMintedEvent['asV63'] {
-		return this.dev.asV63
+	get asV64Dev(): devEvents.OrderBookOrderBookStatusChangedEvent['asV64'] {
+		return this.dev.asV64
 	}
 }

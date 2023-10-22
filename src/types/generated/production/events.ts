@@ -13,6 +13,7 @@ import * as v47 from './v47'
 import * as v53 from './v53'
 import * as v57 from './v57'
 import * as v60 from './v60'
+import * as v64 from './v64'
 
 export class AssetsAssetRegisteredEvent {
     private readonly _chain: Chain
@@ -843,6 +844,121 @@ export class BandSymbolsRelayedEvent {
     }
 }
 
+export class BridgeDataSignerAddedPeerEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'BridgeDataSigner.AddedPeer')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    get isV64(): boolean {
+        return this._chain.getEventHash('BridgeDataSigner.AddedPeer') === 'b7d97951fb9d6cf37ef146ec14282a2865e1f96be8305e55309949f67c606782'
+    }
+
+    get asV64(): {networkId: v64.GenericNetworkId, peer: Uint8Array} {
+        assert(this.isV64)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class BridgeDataSignerApprovalAcceptedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'BridgeDataSigner.ApprovalAccepted')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    get isV64(): boolean {
+        return this._chain.getEventHash('BridgeDataSigner.ApprovalAccepted') === 'cc1e505fbb0fc7c1d9e0908d9427af24ffda18279e947e4e74e3e4cc738025ea'
+    }
+
+    get asV64(): {networkId: v64.GenericNetworkId, data: Uint8Array, signature: Uint8Array} {
+        assert(this.isV64)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class BridgeDataSignerApprovedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'BridgeDataSigner.Approved')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    get isV64(): boolean {
+        return this._chain.getEventHash('BridgeDataSigner.Approved') === '0a4c1ededbb9ab8ab03d7b07ad6523693cc25fcf8996d7e1f7391c61aa8040b9'
+    }
+
+    get asV64(): {networkId: v64.GenericNetworkId, data: Uint8Array, signatures: Uint8Array[]} {
+        assert(this.isV64)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class BridgeDataSignerInitializedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'BridgeDataSigner.Initialized')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    get isV64(): boolean {
+        return this._chain.getEventHash('BridgeDataSigner.Initialized') === 'be240b642cd00dc95a352881df96fece49765132d972374dc53694e55f68891f'
+    }
+
+    get asV64(): {networkId: v64.GenericNetworkId, peers: Uint8Array[]} {
+        assert(this.isV64)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class BridgeDataSignerRemovedPeerEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'BridgeDataSigner.RemovedPeer')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    get isV64(): boolean {
+        return this._chain.getEventHash('BridgeDataSigner.RemovedPeer') === 'b7d97951fb9d6cf37ef146ec14282a2865e1f96be8305e55309949f67c606782'
+    }
+
+    get asV64(): {networkId: v64.GenericNetworkId, peer: Uint8Array} {
+        assert(this.isV64)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
 export class BridgeMultisigMultisigAccountCreatedEvent {
     private readonly _chain: Chain
     private readonly event: Event
@@ -1014,6 +1130,52 @@ export class BridgeMultisigNewMultisigEvent {
      */
     get asV1(): [Uint8Array, Uint8Array, Uint8Array] {
         assert(this.isV1)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class BridgeProxyRefundFailedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'BridgeProxy.RefundFailed')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    get isV64(): boolean {
+        return this._chain.getEventHash('BridgeProxy.RefundFailed') === '21ea0c8f2488eafafdea1de92b54cd17d8b1caff525e37616abf0ff93f11531d'
+    }
+
+    get asV64(): Uint8Array {
+        assert(this.isV64)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class BridgeProxyRequestStatusUpdateEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'BridgeProxy.RequestStatusUpdate')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    get isV64(): boolean {
+        return this._chain.getEventHash('BridgeProxy.RequestStatusUpdate') === '69b4fdb4240fdb3fcceecc787163baa22979aed6ed678d9c3031dc061e0f55e7'
+    }
+
+    get asV64(): [Uint8Array, v64.MessageStatus] {
+        assert(this.isV64)
         return this._chain.decodeEvent(this.event)
     }
 }
@@ -6122,6 +6284,98 @@ export class MultisigNewMultisigEvent {
     }
 }
 
+export class MultisigVerifierNetworkInitializedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'MultisigVerifier.NetworkInitialized')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    get isV64(): boolean {
+        return this._chain.getEventHash('MultisigVerifier.NetworkInitialized') === 'db318f1e2593844561a049f1ca1c4cbf6c0f1575b0d8d7d116e9d8c487aebd51'
+    }
+
+    get asV64(): v64.GenericNetworkId {
+        assert(this.isV64)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class MultisigVerifierPeerAddedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'MultisigVerifier.PeerAdded')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    get isV64(): boolean {
+        return this._chain.getEventHash('MultisigVerifier.PeerAdded') === '67939ca16ec4a634df778bd422538344e9daf78811f2ac77b051ecb1c5f4ad33'
+    }
+
+    get asV64(): Uint8Array {
+        assert(this.isV64)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class MultisigVerifierPeerRemovedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'MultisigVerifier.PeerRemoved')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    get isV64(): boolean {
+        return this._chain.getEventHash('MultisigVerifier.PeerRemoved') === '67939ca16ec4a634df778bd422538344e9daf78811f2ac77b051ecb1c5f4ad33'
+    }
+
+    get asV64(): Uint8Array {
+        assert(this.isV64)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class MultisigVerifierVerificationSuccessfulEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'MultisigVerifier.VerificationSuccessful')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    get isV64(): boolean {
+        return this._chain.getEventHash('MultisigVerifier.VerificationSuccessful') === 'db318f1e2593844561a049f1ca1c4cbf6c0f1575b0d8d7d116e9d8c487aebd51'
+    }
+
+    get asV64(): v64.GenericNetworkId {
+        assert(this.isV64)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
 export class OffencesOffenceEvent {
     private readonly _chain: Chain
     private readonly event: Event
@@ -6230,6 +6484,64 @@ export class OracleProxyOracleEnabledEvent {
      */
     get asV45(): v45.Oracle {
         assert(this.isV45)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class ParachainBridgeAppBurnedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'ParachainBridgeApp.Burned')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * [network_id, asset_id, sender, recepient, amount]
+     */
+    get isV64(): boolean {
+        return this._chain.getEventHash('ParachainBridgeApp.Burned') === '00deab9aca8eeb87dea4902ae64a1aea2b76816ea67d21bdd8a8daefbffb811d'
+    }
+
+    /**
+     * [network_id, asset_id, sender, recepient, amount]
+     */
+    get asV64(): [v64.SubNetworkId, v64.AssetId32, Uint8Array, v64.VersionedMultiLocation, bigint] {
+        assert(this.isV64)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class ParachainBridgeAppMintedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'ParachainBridgeApp.Minted')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * [network_id, asset_id, sender, recepient, amount]
+     */
+    get isV64(): boolean {
+        return this._chain.getEventHash('ParachainBridgeApp.Minted') === 'e2e9c422011901e27a42b466b7bac40a216c045b42fad954b39f26344f85f536'
+    }
+
+    /**
+     * [network_id, asset_id, sender, recepient, amount]
+     */
+    get asV64(): [v64.SubNetworkId, v64.AssetId32, (v64.VersionedMultiLocation | undefined), Uint8Array, bigint] {
+        assert(this.isV64)
         return this._chain.decodeEvent(this.event)
     }
 }
@@ -8000,6 +8312,116 @@ export class StakingWithdrawnEvent {
      */
     get asV53(): {stash: Uint8Array, amount: bigint} {
         assert(this.isV53)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class SubstrateBridgeOutboundChannelMessageAcceptedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'SubstrateBridgeOutboundChannel.MessageAccepted')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    get isV64(): boolean {
+        return this._chain.getEventHash('SubstrateBridgeOutboundChannel.MessageAccepted') === '176599c1bdafa88b712125702951fbf9ec931f760929ca346efc1b59394d8cd0'
+    }
+
+    get asV64(): {networkId: v64.SubNetworkId, batchNonce: bigint, messageNonce: bigint} {
+        assert(this.isV64)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class SubstrateDispatchMessageDecodeFailedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'SubstrateDispatch.MessageDecodeFailed')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * We have failed to decode a Call from the message.
+     */
+    get isV64(): boolean {
+        return this._chain.getEventHash('SubstrateDispatch.MessageDecodeFailed') === '44debdb810dc577f1b75189c3d28fa915ee1dbb4865e9798a55960e448a62b7d'
+    }
+
+    /**
+     * We have failed to decode a Call from the message.
+     */
+    get asV64(): v64.MessageId {
+        assert(this.isV64)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class SubstrateDispatchMessageDispatchedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'SubstrateDispatch.MessageDispatched')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * Message has been dispatched with given result.
+     */
+    get isV64(): boolean {
+        return this._chain.getEventHash('SubstrateDispatch.MessageDispatched') === '2ab512d54f11e2bbaf07774584a613c509432734a556ee1433e96524967015da'
+    }
+
+    /**
+     * Message has been dispatched with given result.
+     */
+    get asV64(): [v64.MessageId, v64.Type_41] {
+        assert(this.isV64)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class SubstrateDispatchMessageRejectedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'SubstrateDispatch.MessageRejected')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * Message has been rejected
+     */
+    get isV64(): boolean {
+        return this._chain.getEventHash('SubstrateDispatch.MessageRejected') === '44debdb810dc577f1b75189c3d28fa915ee1dbb4865e9798a55960e448a62b7d'
+    }
+
+    /**
+     * Message has been rejected
+     */
+    get asV64(): v64.MessageId {
+        assert(this.isV64)
         return this._chain.decodeEvent(this.event)
     }
 }

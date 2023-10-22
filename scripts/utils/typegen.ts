@@ -7,6 +7,6 @@ export function getTypegenConfig(environment: Environment) {
 		typesBundle: 'src/typesBundle.json',
 		events: true,
 		calls: true,
-		storage: true
+		storage: true,
 	}
 }

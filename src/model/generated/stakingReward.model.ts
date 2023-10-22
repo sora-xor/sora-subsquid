@@ -1,5 +1,4 @@
-import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, Index as Index_, ManyToOne as ManyToOne_} from "typeorm"
-import * as marshal from "./marshal"
+import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, ManyToOne as ManyToOne_, Index as Index_} from "typeorm"
 import {StakingStaker} from "./stakingStaker.model"
 import {StakingEra} from "./stakingEra.model"
 
@@ -12,16 +11,16 @@ export class StakingReward {
     @PrimaryColumn_()
     id!: string
 
-    @Index_()
     @Column_("text", {nullable: false})
-    account!: string
-
-    @Column_("numeric", {transformer: marshal.bigintTransformer, nullable: false})
-    amount!: bigint
+    amount!: string
 
     @Index_()
     @ManyToOne_(() => StakingStaker, {nullable: true})
     staker!: StakingStaker
+
+    @Index_()
+    @Column_("text", {nullable: true})
+    payee!: string | undefined | null
 
     @Index_()
     @ManyToOne_(() => StakingEra, {nullable: true})
