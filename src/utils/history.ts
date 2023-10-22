@@ -39,7 +39,11 @@ function filterDataProperties(obj: Record<string, any>) {
 	return filteredObj
 }
 
-export const createHistoryElement = async (ctx: BlockContext, entityItem: EntityItem<EntityItemName>, data?: {}): Promise<HistoryElement> => {
+export const createHistoryElement = async (
+	ctx: BlockContext,
+	entityItem: EntityItem<EntityItemName>,
+	data?: {},
+): Promise<HistoryElement> => {
 	const historyElement = new HistoryElement()
 
 	if (!ctx.block.header.validator) {
