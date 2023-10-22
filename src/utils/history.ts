@@ -54,7 +54,7 @@ export const createHistoryElement = async (
 
 	historyElement.id = getEntityId(ctx, entityItem)
 	historyElement.type = entityItem.kind === 'call' ? HistoryElementType.CALL : HistoryElementType.EVENT
-	historyElement.blockHeight = BigInt(ctx.block.header.height)
+	historyElement.blockHeight = ctx.block.header.height
 	historyElement.blockHash = ctx.block.header.hash.toString()
 	historyElement.module = toCamelCase(entityItem.name.split('.')[0])
 	historyElement.method = toCamelCase(entityItem.name.split('.')[1])

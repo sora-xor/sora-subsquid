@@ -106,7 +106,7 @@ type Account @entity {
 type HistoryElement @entity {
 	id: ID!
 	type: HistoryElementType!
-	blockHeight: BigInt!
+	blockHeight: Int!
 	blockHash: String! @index
 	module: String!
 	method: String!
