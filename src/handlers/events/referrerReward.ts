@@ -31,7 +31,7 @@ export async function referrerRewardEventHandler(ctx: BlockContext, eventItem: E
 
 	await ctx.store.save(referrerReward)
 	getEventHandlerLog(ctx, eventItem).debug(
-		{ referral, referrer, amount, updated: referrerReward.updated, updatedAtBlock: referrerReward.updatedAtBlock },
+		{ referral, referrer, amount, updated: referrerReward.updated },
 		'Referrer reward updated',
 	)
 }
