@@ -1,8 +1,8 @@
-import { AnyEntityItem, Block, Context } from '../types'
+import { AnyEntityItem, BlockContext } from '../types'
 
 export class UnsupportedSpecError extends Error {
-    constructor(ctx: Context, block: Block, { kind, name }: { kind: 'call' | 'event' | 'storage', name: string }) {
-		const blockHeight = block.header.height
+	constructor(ctx: BlockContext, { kind, name }: { kind: 'call' | 'event' | 'storage'; name: string }) {
+		const blockHeight = ctx.block.header.height
 		let specHash: string | undefined
 		switch (kind) {
 			case 'call':
@@ -15,16 +15,21 @@ export class UnsupportedSpecError extends Error {
 				// TODO: check if this is correct
 				specHash = ctx._chain.getStorageItemTypeHash('', '')
 				break
-		}	
+		}
 
 		if (!specHash) super(`[${blockHeight}] There is no hash for ${name} ${kind}`)
 
-        super(`[${blockHeight}] Unsupported spec ${specHash} for ${name} ${kind}`)
-    }
+		super(`[${blockHeight}] Unsupported spec ${specHash} for ${name} ${kind}`)
+	}
 }
 
-const getCannotFindEntityErrorMessage = (block: Block, kind: AnyEntityItem['kind'], extrinsicHash: string, entityNames?: string | string[]): string => {
-	const blockHeight = block.header.height
+const getCannotFindEntityErrorMessage = (
+	ctx: BlockContext,
+	kind: AnyEntityItem['kind'],
+	extrinsicHash: string,
+	entityNames?: string | string[],
+): string => {
+	const blockHeight = ctx.block.header.height
 
 	if (!entityNames) {
 		return `[${blockHeight}] Cannot find any ${kind}s with extrinsic hash ${extrinsicHash}`
@@ -36,13 +41,13 @@ const getCannotFindEntityErrorMessage = (block: Block, kind: AnyEntityItem['kind
 }
 
 export class CannotFindCallError extends Error {
-	constructor(block: Block, extrinsicHash: string, callNames?: string | string[]) {
-		super(getCannotFindEntityErrorMessage(block, 'call', extrinsicHash, callNames))
+	constructor(ctx: BlockContext, extrinsicHash: string, callNames?: string | string[]) {
+		super(getCannotFindEntityErrorMessage(ctx, 'call', extrinsicHash, callNames))
 	}
 }
 
 export class CannotFindEventError extends Error {
-	constructor(block: Block, extrinsicHash: string, eventNames: string | string[]) {
-		super(getCannotFindEntityErrorMessage(block, 'event', extrinsicHash, eventNames))
+	constructor(ctx: BlockContext, extrinsicHash: string, eventNames: string | string[]) {
+		super(getCannotFindEntityErrorMessage(ctx, 'event', extrinsicHash, eventNames))
 	}
 }

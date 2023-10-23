@@ -1,20 +1,30 @@
 import { addCallsToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { formatU128ToBalance, getAssetId } from '../../utils/assets'
 import { poolsStorage } from '../../utils/pools'
-import { Block, CallItem, Context } from '../../types'
+import { BlockContext, CallItem } from '../../types'
 import { UtilityBatchAllCall, utilityBatchAllCallVersions } from '../../types/generated/calls'
 import { HistoryElement, HistoryElementCall } from '../../model'
 import { AssetId } from '../../types'
 import { toCamelCase } from '../../utils'
 import { toJSON } from '@subsquid/util-internal-json'
-import { logCallHandler } from '../../utils/log'
+import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 
-type Version = typeof utilityBatchAllCallVersions[number]
+type Version = (typeof utilityBatchAllCallVersions)[number]
 type IsVersion = { [V in Version]: `isV${V}` }[Version]
 type AsVersion = { [V in Version]: `asV${V}` }[Version]
 
-type BatchCall = { [V in Version]: { version: V, call: UtilityBatchAllCall[`asV${V}`]['calls'][number] } }[Version]
-type BatchCalls = { [V in Version]: { version: V, calls: UtilityBatchAllCall[`asV${V}`]['calls'] } }[Version]
+type BatchCall = {
+	[V in Version]: {
+		version: V
+		call: UtilityBatchAllCall[`asV${V}`]['calls'][number]
+	}
+}[Version]
+type BatchCalls = {
+	[V in Version]: {
+		version: V
+		calls: UtilityBatchAllCall[`asV${V}`]['calls']
+	}
+}[Version]
 
 function formatSpecificCall(call: BatchCall): any {
 	switch (call.call.__kind) {
@@ -23,16 +33,16 @@ function formatSpecificCall(call: BatchCall): any {
 				case 'deposit_liquidity': {
 					const { __kind, ...value } = call.call.value
 					const { dexId, inputAssetA, inputAssetB, inputADesired, inputBDesired, inputAMin, inputBMin } = value
-		            // TODO: move args to common function here and in other cases
-		            return {
-		                dexId,
-		                inputAssetA: getAssetId(inputAssetA),
-		                inputAssetB: getAssetId(inputAssetB),
-		                inputAMin: formatU128ToBalance(inputAMin, getAssetId(inputAssetA)),
-		                inputBMin: formatU128ToBalance(inputBMin, getAssetId(inputAssetB)),
-		                inputADesired: formatU128ToBalance(inputADesired, getAssetId(inputAssetA)),
-		                inputBDesired: formatU128ToBalance(inputBDesired, getAssetId(inputAssetB))
-		            }
+					// TODO: move args to common function here and in other cases
+					return {
+						dexId,
+						inputAssetA: getAssetId(inputAssetA),
+						inputAssetB: getAssetId(inputAssetB),
+						inputAMin: formatU128ToBalance(inputAMin, getAssetId(inputAssetA)),
+						inputBMin: formatU128ToBalance(inputBMin, getAssetId(inputAssetB)),
+						inputADesired: formatU128ToBalance(inputADesired, getAssetId(inputAssetA)),
+						inputBDesired: formatU128ToBalance(inputBDesired, getAssetId(inputAssetB)),
+					}
 				}
 				case 'initialize_pool': {
 					const { __kind, ...value } = call.call.value
@@ -40,7 +50,7 @@ function formatSpecificCall(call: BatchCall): any {
 					return {
 						dexId,
 						assetA: getAssetId(assetA),
-						assetB: getAssetId(assetB)
+						assetB: getAssetId(assetB),
 					}
 				}
 			}
@@ -51,7 +61,7 @@ function formatSpecificCall(call: BatchCall): any {
 				case 'register': {
 					const { __kind, ...value } = call.call.value
 					const { dexId, baseAssetId, targetAssetId } = value
-					return  {
+					return {
 						dexId,
 						baseAssetId: getAssetId(baseAssetId),
 						targetAssetId: getAssetId(targetAssetId),
@@ -67,30 +77,28 @@ function formatSpecificCall(call: BatchCall): any {
 	}
 }
 
-function extractCall(
-    call: BatchCall,
-    id: number,
-	historyElement: HistoryElement,
-	block: Block
-): HistoryElementCall {
-    return new HistoryElementCall({
-        id: `${historyElement.blockHeight}-${id}`,
+function extractCall(ctx: BlockContext, call: BatchCall, id: number, historyElement: HistoryElement): HistoryElementCall {
+	return new HistoryElementCall({
+		id: `${historyElement.blockHeight}-${id}`,
 		historyElement,
-        module: toCamelCase(call.call.__kind),
-        method: toCamelCase(call.call.value.__kind),
+		module: toCamelCase(call.call.__kind),
+		method: toCamelCase(call.call.value.__kind),
 		// TODO: determine where to get call hash
-        // hash: call.hash,
-        data: toJSON(formatSpecificCall(call)),
-		updatedAtBlock: block.header.height
-    })
-
+		// hash: call.hash,
+		data: toJSON(formatSpecificCall(call)),
+		updatedAtBlock: ctx.block.header.height,
+	})
 }
 
-function mapCalls({ version, calls }: BatchCalls, historyElement: HistoryElement, block: Block): HistoryElementCall[] {
-	return calls.map((call, idx) => extractCall({ version, call } as BatchCall, idx, historyElement, block))
+function mapCalls(ctx: BlockContext, { version, calls }: BatchCalls, historyElement: HistoryElement): HistoryElementCall[] {
+	return calls.map((call, idx) => extractCall(ctx, { version, call } as BatchCall, idx, historyElement))
 }
 
-function mapCallsForAllVersions(ctx: Context, block: Block, callItem: CallItem<'Utility.batch_all'>, historyElement: HistoryElement): HistoryElementCall[] {
+function mapCallsForAllVersions(
+	ctx: BlockContext,
+	callItem: CallItem<'Utility.batch_all'>,
+	historyElement: HistoryElement,
+): HistoryElementCall[] {
 	const utilityBatchAllCall = new UtilityBatchAllCall(ctx, callItem.call)
 
 	let calls: HistoryElementCall[] | null = null
@@ -99,52 +107,50 @@ function mapCallsForAllVersions(ctx: Context, block: Block, callItem: CallItem<'
 		if (isVersionKey.startsWith('isV') && utilityBatchAllCall[isVersionKey]) {
 			const version = isVersionKey.replace('isV', '') as Version
 			calls = mapCalls(
+				ctx,
 				{
 					version,
-					calls: utilityBatchAllCall['asV' + version as AsVersion].calls
+					calls: utilityBatchAllCall[('asV' + version) as AsVersion].calls,
 				} as BatchCalls,
 				historyElement,
-				block
 			)
 		}
 	})
 	if (calls === null) {
 		calls = mapCalls(
+			ctx,
 			{
 				version: 'unknown' as any,
-				calls: ctx._chain.decodeCall(callItem.call).calls
+				calls: ctx._chain.decodeCall(callItem.call).calls,
 			} as BatchCalls,
 			historyElement,
-			block
 		)
 	}
 	return calls
 }
 
-export async function batchTransactionsCallHandler(ctx: Context, block: Block, callItem: CallItem<'Utility.batch_all'>): Promise<void> {
-	logCallHandler(ctx, block, callItem)
+export async function batchTransactionsCallHandler(ctx: BlockContext, callItem: CallItem<'Utility.batch_all'>): Promise<void> {
+	logStartProcessingCall(ctx, callItem)
 
-    const historyElement = await createHistoryElement(ctx, block, callItem)
+	const historyElement = await createHistoryElement(ctx, callItem)
 
-	let historyElementCalls = mapCallsForAllVersions(ctx, block, callItem, historyElement)
+	let historyElementCalls = mapCallsForAllVersions(ctx, callItem, historyElement)
 
-	await addCallsToHistoryElement(ctx, block, historyElement, historyElementCalls)
-    await updateHistoryElementStats(ctx, block, historyElement)
+	await addCallsToHistoryElement(ctx, historyElement, historyElementCalls)
+	await updateHistoryElementStats(ctx, historyElement)
 
-    ctx.log.debug(`[${block.header.height}] ===== Saved batch extrinsic with ${historyElement.id.toString()} txid =====`)
+	if (historyElement.execution.success) {
+		// If initialize pool call exists, create new Pool
+		const initializePool = historyElementCalls.find((call) => call.method === 'initializePool' && call.module === 'poolXYK')
 
-    if (historyElement.execution.success) {
-        // If initialize pool call exists, create new Pool
-        const initializePool = historyElementCalls.find(call => call.method === 'initializePool' && call.module === 'poolXYK')
-
-        if (initializePool) {
-			//TODO: Determine wether or not typization is applicable here
+		if (initializePool) {
+			//TODO: Determine whether or not typization is applicable here
 			const data: {
 				dexId: number
 				assetA: AssetId
 				assetB: AssetId
 			} = initializePool.data as any
-            await poolsStorage.getOrCreatePool(ctx, block, data.assetA, data.assetB)
-        }
-    }
+			await poolsStorage.getPool(ctx, data.assetA, data.assetB)
+		}
+	}
 }

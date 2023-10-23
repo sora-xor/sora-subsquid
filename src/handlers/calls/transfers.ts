@@ -1,74 +1,77 @@
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { formatU128ToBalance, getAssetId } from '../../utils/assets'
-import { AssetAmount, Block, CallItem, Context } from '../../types'
-import { AssetsTransferEvent } from '../../types/generated/events'
-import { findEventByExtrinsicHash } from '../../utils/events'
-import { AssetsTransferCall } from '../../types/generated/calls'
-import { Address, AssetId } from '../../types'
-import { toAddress } from '../../utils'
+import { BlockContext, CallItem } from '../../types'
+import { AssetsTransferCall, LiquidityProxyXorlessTransferCall } from '../../types/generated/calls'
+import { toAddress, toText } from '../../utils'
 import { getEntityData } from '../../utils/entities'
-import { toJSON } from '@subsquid/util-internal-json'
-import { logCallHandler } from '../../utils/log'
+import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
+import { getExtrinsicSigner } from '../../utils/calls'
+import { findEventByExtrinsicHash } from '../../utils/events'
+import { LiquidityProxyExchangeEvent } from '../../types/generated/events'
+import { XOR } from '../../utils/consts'
+import BigNumber from 'bignumber.js'
 
-export async function transfersCallHandler(ctx: Context, block: Block, callItem: CallItem<'Assets.transfer'>): Promise<void> {
-	logCallHandler(ctx, block, callItem)
+export async function assetTransferCallHandler(ctx: BlockContext, callItem: CallItem<'Assets.transfer'>): Promise<void> {
+	logStartProcessingCall(ctx, callItem)
 
-	const blockHeight = block.header.height
-	const extrinsicHash = callItem.extrinsic.hash
-    const historyElement = await createHistoryElement(ctx, block, callItem)
+	const call = new AssetsTransferCall(ctx, callItem.call)
+	const data = getEntityData(ctx, call, callItem)
 
-    if (!historyElement) return
+	const to = toAddress(data.to)
+	const assetId = getAssetId(data.assetId)
+	const amount = data.amount
 
-    let details: {
-		from: Address | null
-		to: Address
-		assetId: AssetId
-		amount: string
+	const details: any = {
+		assetId,
+		amount: formatU128ToBalance(amount, assetId),
+		from: getExtrinsicSigner(ctx, callItem),
+		to,
 	}
 
-    if (historyElement.execution.success) {
-		const eventName = 'Assets.Transfer'
-		const eventItem = findEventByExtrinsicHash(block, extrinsicHash, [eventName], true)
-		const event = new AssetsTransferEvent(ctx, eventItem.event)
-		const data = getEntityData(ctx, block, event, eventItem)
+	await createHistoryElement(ctx, callItem, details)
 
-		const from = toAddress(data[0])
-		const to = toAddress(data[1])
-		const assetId = getAssetId(data[2])
-		const amount = data[3] as AssetAmount
+	getCallHandlerLog(ctx, callItem).debug(`Saved transfer`)
+}
 
-        details = {
-            from,
-            to,
-            assetId,
-            amount: formatU128ToBalance(amount, assetId)
-        }
-    }
+export async function xorlessTransferHandler(ctx: BlockContext, callItem: CallItem<'LiquidityProxy.xorless_transfer'>): Promise<void> {
+	logStartProcessingCall(ctx, callItem)
 
-    else {
-		const call = new AssetsTransferCall(ctx, callItem.call)
-		const data = getEntityData(ctx, block, call, callItem)
+	const call = new LiquidityProxyXorlessTransferCall(ctx, callItem.call)
+	const data = getEntityData(ctx, call, callItem)
 
-		const to = toAddress(data.to)
-		const assetId = getAssetId(data.assetId)
-		const amount = data.amount
+	const { receiver, amount, additionalData } = data
 
-		const extrinsicSigner: Address | null = callItem.call.origin ? toAddress(callItem.call.origin.value.value) : null
-		if (!extrinsicSigner) {
-			ctx.log.error(`[${blockHeight}] Cannot get extrinsic signer`)
-			console.log(toJSON(callItem))
+	const historyElement = await createHistoryElement(ctx, callItem)
+	const assetId = getAssetId(data.assetId)
+	const xorFee = historyElement.networkFee!
+
+	const details: any = {
+		assetId,
+		amount: formatU128ToBalance(amount, assetId),
+		from: getExtrinsicSigner(ctx, callItem),
+		to: toAddress(receiver),
+		comment: additionalData ? toText(additionalData) : null,
+		assetFee: '0', // fee paid in asset
+		xorFee, // fee paid in XOR (by default 100% of network fee)
+	}
+
+	if (historyElement.execution.success) {
+		const exchangeEventItem = findEventByExtrinsicHash(ctx, callItem.extrinsic.hash, ['LiquidityProxy.Exchange'])
+		if (exchangeEventItem) {
+			const exchangeEvent = new LiquidityProxyExchangeEvent(ctx, exchangeEventItem?.event)
+			const exchangeEventData = getEntityData(ctx, exchangeEvent, exchangeEventItem)
+
+			const [, , , , baseAssetAmount, targetAssetAmount] = exchangeEventData
+
+			const assetSpent = formatU128ToBalance(baseAssetAmount, assetId)
+			const xorReceived = formatU128ToBalance(targetAssetAmount, XOR)
+			const xorSpent = new BigNumber(xorFee).minus(new BigNumber(xorReceived)).toString()
+
+			details.assetFee = assetSpent
+			details.xorFee = xorSpent
 		}
+	}
 
-        details = {
-            from: extrinsicSigner,
-            to,
-            amount: formatU128ToBalance(amount, assetId),
-            assetId
-        }
-    }
-
-    await addDataToHistoryElement(ctx, block, historyElement, details)
-    await updateHistoryElementStats(ctx, block,historyElement)
-
-    ctx.log.debug(`[${block.header.height}] ===== Saved transfer with ${extrinsicHash} txid =====`)
+	await addDataToHistoryElement(ctx, historyElement, details)
+	await updateHistoryElementStats(ctx, historyElement)
 }

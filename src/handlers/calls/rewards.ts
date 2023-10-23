@@ -1,41 +1,38 @@
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
-import { Block, CallItem, Context } from '../../types'
+import { BlockContext, CallItem } from '../../types'
 import { findEventsByExtrinsicHash, getAssetsTransferEventData } from '../../utils/events'
-import { logCallHandler } from '../../utils/log'
+import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 
 export async function rewardsCallHandler(
-	ctx: Context,
-	block: Block,
-	callItem: (
+	ctx: BlockContext,
+	callItem:
 		| CallItem<'PswapDistribution.claim_incentive'>
 		| CallItem<'Rewards.claim'>
 		| CallItem<'VestedRewards.claim_rewards'>
-		| CallItem<'VestedRewards.claim_crowdloan_rewards'>
-	)
+		| CallItem<'VestedRewards.claim_crowdloan_rewards'>,
 ): Promise<void> {
-	logCallHandler(ctx, block, callItem)
+	logStartProcessingCall(ctx, callItem)
 
-    const extrinsicHash = callItem.extrinsic.hash
-    const historyElement = await createHistoryElement(ctx, block, callItem)
+	const extrinsicHash = callItem.extrinsic.hash
+	const historyElement = await createHistoryElement(ctx, callItem)
 
-    if (historyElement.execution.success) {
-        const rewards = findEventsByExtrinsicHash(
-            block,
-            extrinsicHash,
-			['Tokens.Transfer']
-        ).reduce((buffer: { assetId: string, amount: string }[], eventItem) => {
-			const data = getAssetsTransferEventData(ctx, block, eventItem)
-            buffer.push({
-				assetId: data.assetId,
-				amount: data.amount.toString(),
-			})
-            return buffer
-        }, [])
+	if (historyElement.execution.success) {
+		const rewards = findEventsByExtrinsicHash(ctx, extrinsicHash, ['Tokens.Transfer']).reduce(
+			(buffer: { assetId: string; amount: string }[], eventItem) => {
+				const data = getAssetsTransferEventData(ctx, eventItem)
+				buffer.push({
+					assetId: data.assetId,
+					amount: data.amount.toString(),
+				})
+				return buffer
+			},
+			[],
+		)
 
-        await addDataToHistoryElement(ctx, block, historyElement, rewards)
-    }
+		await addDataToHistoryElement(ctx, historyElement, rewards)
+	}
 
-    await updateHistoryElementStats(ctx, block,historyElement)
+	await updateHistoryElementStats(ctx, historyElement)
 
-    ctx.log.debug(`[${block.header.height}] ===== Saved reward claim extrinsic with ${extrinsicHash} txid =====`)
+	getCallHandlerLog(ctx, callItem).debug(`Saved reward claim extrinsic`)
 }

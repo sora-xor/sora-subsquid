@@ -1,40 +1,38 @@
 import { PoolXYK } from '../model'
-import { AssetAmount, Block, Context } from '../types'
-import { PoolXYKReservesStorage, PoolXYKPropertiesStorage } from "../types/generated/storage"
+import { AssetAmount, BlockContext } from '../types'
+import { PoolXYKReservesStorage, PoolXYKPropertiesStorage } from '../types/generated/storage'
 import { XOR, DOUBLE_PRICE_POOL } from './consts'
 import { decodeAssetId, toAddress } from '.'
 import { AssetId, Address } from '../types'
 import { getEntityData } from './entities'
 import { assetStorage, getAssetId } from './assets'
+import { getInitializePoolsLog, getPoolsStorageLog } from './logs'
 
 // getters & setter for flag, should we sync poolXYK reserves
 // and then calc asset prices
 export const PoolsPrices = {
-  flag: false,
-  get() {
-    return this.flag
-  },
-  set(flag: boolean) {
-    this.flag = flag
-  },
+	flag: false,
+	get() {
+		return this.flag
+	},
+	set(flag: boolean) {
+		this.flag = flag
+	},
 }
 
-export const getAllReserves = async (ctx: Context, block: Block, baseAssetId: AssetId) => {
-	const blockHeight = block.header.height
-
+export const getAllReserves = async (ctx: BlockContext, baseAssetId: AssetId) => {
 	try {
-		ctx.log.debug(`[${blockHeight}][${baseAssetId}] Pools XYK Reserves request...`)
-		const storage = new PoolXYKReservesStorage(ctx, block.header)
-		const data = (
-			storage.isV1
-		)
-			? await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKReservesStorage.name }, ['42'] as const)
-				.getPairs(decodeAssetId(baseAssetId))
-			: await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKReservesStorage.name }, ['1'] as const)
-				.getPairs({ code: decodeAssetId(baseAssetId) })
+		getInitializePoolsLog(ctx).debug({ baseAssetId }, 'Pools XYK Reserves request...')
+		const storage = new PoolXYKReservesStorage(ctx, ctx.block.header)
+		const data = storage.isV1
+			? await getEntityData(ctx, storage, { kind: 'storage', name: PoolXYKReservesStorage.name }, ['42'] as const).getPairs(
+					decodeAssetId(baseAssetId),
+			  )
+			: await getEntityData(ctx, storage, { kind: 'storage', name: PoolXYKReservesStorage.name }, ['1'] as const).getPairs({
+					code: decodeAssetId(baseAssetId),
+			  })
 
-
-		const reserves = data.map(pair => {
+		const reserves = data.map((pair) => {
 			const [[, targetAssetId], [baseBalance, targetBalance]] = pair
 			return {
 				baseAssetId,
@@ -44,88 +42,106 @@ export const getAllReserves = async (ctx: Context, block: Block, baseAssetId: As
 			}
 		})
 
-		ctx.log.debug(`[${blockHeight}][${baseAssetId}] Pools XYK Reserves request completed.`)
+		getInitializePoolsLog(ctx).debug({ baseAssetId }, 'Pools XYK Reserves request completed')
 
 		return reserves
 	} catch (e: any) {
-		ctx.log.error(`[${blockHeight}] Error getting Reserves`)
-		ctx.log.error(e)
+		getInitializePoolsLog(ctx).error('Error getting Reserves')
+		getInitializePoolsLog(ctx).error(e)
 		return null
 	}
 }
 
-export const getAllProperties = async (ctx: Context, block: Block, baseAssetId: AssetId) => {
-	const blockHeight = block.header.height
-
+export const getAllProperties = async (ctx: BlockContext, baseAssetId: AssetId) => {
 	try {
-		ctx.log.debug(`[${blockHeight}][${baseAssetId}] Pools XYK Properties request...`)
-		const storage = new PoolXYKPropertiesStorage(ctx, block.header)
-		const data = (
-			storage.isV1 ||
-			storage.isV7
-		)
-			? await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKPropertiesStorage.name }, ['42'] as const)
-				.getPairs(decodeAssetId(baseAssetId))
-			: await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKPropertiesStorage.name }, ['1', '7'] as const)
-				.getPairs({ code: decodeAssetId(baseAssetId) })
+		getInitializePoolsLog(ctx).debug({ baseAssetId }, 'Pools XYK Properties request...')
+		const storage = new PoolXYKPropertiesStorage(ctx, ctx.block.header)
+		const data =
+			storage.isV1 || storage.isV7
+				? await getEntityData(
+						ctx,
+						storage,
+						{
+							kind: 'storage',
+							name: PoolXYKPropertiesStorage.name,
+						},
+						['42'] as const,
+				  ).getPairs(decodeAssetId(baseAssetId))
+				: await getEntityData(
+						ctx,
+						storage,
+						{
+							kind: 'storage',
+							name: PoolXYKPropertiesStorage.name,
+						},
+						['1', '7'] as const,
+				  ).getPairs({ code: decodeAssetId(baseAssetId) })
 
-		const properties = data.map(pair => {
+		const properties = data.map((pair) => {
 			const [[, targetAssetId], [reservesAccountId, feesAccountId]] = pair
 			return {
 				baseAssetId,
 				targetAssetId: getAssetId(targetAssetId),
 				reservesAccountId: toAddress(reservesAccountId),
-				feesAccountId: toAddress(feesAccountId)
+				feesAccountId: toAddress(feesAccountId),
 			}
 		})
 
-		ctx.log.debug(`[${blockHeight}][${baseAssetId}] Pools XYK Properties request completed`)
+		getInitializePoolsLog(ctx).debug(`'${baseAssetId}' Pools XYK Properties request completed`)
 		return properties
 	} catch (e: any) {
-		ctx.log.error(`[${blockHeight}] Error getting Properties`)
-		ctx.log.error(e)
+		getInitializePoolsLog(ctx).error('Error getting Properties')
+		getInitializePoolsLog(ctx).error(e)
 		return null
 	}
 }
 
-export const getPoolProperties = async (ctx: Context, block: Block, baseAssetId: AssetId, targetAssetId: AssetId) => {
-	const blockHeight = block.header.height
+export const getPoolProperties = async (ctx: BlockContext, baseAssetId: AssetId, targetAssetId: AssetId) => {
+	const blockHeight = ctx.block.header.height
 
 	try {
-		ctx.log.debug(`[${baseAssetId}:${targetAssetId}] Pool properties request...`)
-		const storage = new PoolXYKPropertiesStorage(ctx, block.header)
-		const data = (
-			storage.isV1 ||
-			storage.isV7
-		)
-			? await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKPropertiesStorage.name }, ['42'] as const).getPairs(
-				decodeAssetId(baseAssetId),
-				decodeAssetId(targetAssetId)
-			)
-			: await getEntityData(ctx, block, storage, { kind: 'storage', name: PoolXYKPropertiesStorage.name }, ['1', '7'] as const).getPairs(
-				{ code: decodeAssetId(baseAssetId) },
-				{ code: decodeAssetId(targetAssetId) }
-			)
+		getInitializePoolsLog(ctx).debug({ baseAssetId, targetAssetId }, 'Pool properties request...')
+		const storage = new PoolXYKPropertiesStorage(ctx, ctx.block.header)
+		const data =
+			storage.isV1 || storage.isV7
+				? await getEntityData(
+						ctx,
+						storage,
+						{
+							kind: 'storage',
+							name: PoolXYKPropertiesStorage.name,
+						},
+						['42'] as const,
+				  ).getPairs(decodeAssetId(baseAssetId), decodeAssetId(targetAssetId))
+				: await getEntityData(
+						ctx,
+						storage,
+						{
+							kind: 'storage',
+							name: PoolXYKPropertiesStorage.name,
+						},
+						['1', '7'] as const,
+				  ).getPairs({ code: decodeAssetId(baseAssetId) }, { code: decodeAssetId(targetAssetId) })
 
-		const properties = data.map(pair => {
+		const properties = data.map((pair) => {
 			const [reservesAccountId, feesAccountId] = pair[1]
 			return {
 				reservesAccountId: toAddress(reservesAccountId),
 				feesAccountId: toAddress(feesAccountId),
 			}
 		})
-		
-		ctx.log.debug(`[${blockHeight}][${baseAssetId}:${targetAssetId}] Pool properties request completed`)
+
+		getInitializePoolsLog(ctx).debug({ baseAssetId, targetAssetId }, 'Pool properties request completed')
 
 		return {
 			baseAssetId,
 			targetAssetId,
 			reservesAccountId: properties[0].reservesAccountId,
-			feesAccountId: properties[0].feesAccountId
+			feesAccountId: properties[0].feesAccountId,
 		}
 	} catch (error: any) {
-		ctx.log.error(`[${blockHeight}] Error getting pool properties`)
-		ctx.log.error(error)
+		getInitializePoolsLog(ctx).error('Error getting pool properties')
+		getInitializePoolsLog(ctx).error(error)
 		return null
 	}
 }
@@ -163,19 +179,17 @@ class PoolAccountsStorage {
 		return this.accountIds.has(poolAccountId)
 	}
 
-	async getPoolAccountId (ctx: Context, block: Block, baseAssetId: AssetId, targetAssetId: AssetId): Promise<Address | null> {
-		const blockHeight = block.header.height
-
+	async getPoolAccountId(ctx: BlockContext, baseAssetId: AssetId, targetAssetId: AssetId): Promise<Address | null> {
 		const id = this.get(baseAssetId, targetAssetId)
 		if (id) return id
 
-		const properties = await getPoolProperties(ctx, block, baseAssetId, targetAssetId)
+		const properties = await getPoolProperties(ctx, baseAssetId, targetAssetId)
 		const poolAccountId = properties?.reservesAccountId ?? null
 
 		if (poolAccountId) {
-			poolAccounts.add(baseAssetId, targetAssetId, poolAccountId)
+			this.add(baseAssetId, targetAssetId, poolAccountId)
 		} else {
-			ctx.log.error(`[${blockHeight}] Cannot find pool id ${baseAssetId}:${targetAssetId}`)
+			getInitializePoolsLog(ctx).debug({ baseAssetId, targetAssetId }, 'Cannot find pool id')
 		}
 
 		return poolAccountId
@@ -189,7 +203,7 @@ class PoolsStorage {
 		this.storage = new Map()
 	}
 
-	async getPoolById(ctx: Context, block: Block, poolId: Address): Promise<PoolXYK | null> {
+	async getPoolById(ctx: BlockContext, poolId: Address): Promise<PoolXYK | null> {
 		let pool = this.storage.get(poolId)
 
 		if (pool) {
@@ -199,49 +213,49 @@ class PoolsStorage {
 		const assetIds = poolAccounts.getById(poolId)
 
 		if (assetIds) {
-			return await this.getOrCreatePool(ctx, block, ...assetIds)
+			return await this.getPool(ctx, ...assetIds)
 		}
 
 		return null
 	}
 
-	async sync(ctx: Context, block: Block): Promise<void> {
-		const blockHeight = block.header.height
-		ctx.log.debug(`[${blockHeight}][PoolsStorage] ${this.storage.size} entities sync`)
+	async sync(ctx: BlockContext): Promise<void> {
+		getPoolsStorageLog(ctx).debug(`Sync ${this.storage.size} pools`)
 		await ctx.store.save([...this.storage.values()])
 	}
 
-	async getOrCreatePool(ctx: Context, block: Block, baseAssetId: AssetId, targetAssetId: AssetId): Promise<PoolXYK | null> {
-		const blockHeight = block.header.height
+	async getPool(ctx: BlockContext, baseAssetId: AssetId, targetAssetId: AssetId): Promise<PoolXYK | null> {
+		const blockHeight = ctx.block.header.height
 
-		const poolId = await poolAccounts.getPoolAccountId(ctx, block, baseAssetId, targetAssetId)
+		const poolId = await poolAccounts.getPoolAccountId(ctx, baseAssetId, targetAssetId)
 
 		if (!poolId) return null
 
 		let pool = this.storage.get(poolId)
-	
+
 		if (pool) {
 			return pool
 		}
 
-		pool = (await ctx.store.find(PoolXYK, {
-			relations: {
-				baseAsset: true,
-				targetAsset: true
-			},
-			where: {
-				id: poolId
-			},
-		}))[0]
-		
+		pool = (
+			await ctx.store.find(PoolXYK, {
+				relations: {
+					baseAsset: true,
+					targetAsset: true,
+				},
+				where: {
+					id: poolId,
+				},
+			})
+		)[0]
 
 		if (!pool) {
 			const [baseAsset, targetAsset] = await Promise.all([
-				assetStorage.getOrCreateAsset(ctx, block, baseAssetId),
-				assetStorage.getOrCreateAsset(ctx, block, targetAssetId)
+				assetStorage.getAsset(ctx, baseAssetId),
+				assetStorage.getAsset(ctx, targetAssetId),
 			])
-			if (!baseAsset) throw new Error(`[${blockHeight}] Cannot find base asset: ${baseAssetId}`)
-			if (!targetAsset) throw new Error(`[${blockHeight}] Cannot find target asset: ${targetAssetId}`)
+			if (!baseAsset) throw new Error(`[${blockHeight}] Cannot find base asset: '${baseAssetId}'`)
+			if (!targetAsset) throw new Error(`[${blockHeight}] Cannot find target asset: '${targetAssetId}'`)
 
 			pool = new PoolXYK({
 				id: poolId,
@@ -252,12 +266,12 @@ class PoolsStorage {
 				multiplier: baseAssetId === XOR && DOUBLE_PRICE_POOL.includes(targetAssetId) ? 2 : 1,
 				priceUSD: '0',
 				strategicBonusApy: '0',
-				updatedAtBlock: block.header.height
+				updatedAtBlock: ctx.block.header.height,
 			})
 
 			await ctx.store.save(pool)
 
-			ctx.log.debug(`[${blockHeight}][${poolId}] Created Pool XYK`)
+			getPoolsStorageLog(ctx).debug({ poolId }, 'Created Pool XYK')
 		}
 
 		this.storage.set(poolId, pool)

@@ -1,54 +1,52 @@
 import { addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { formatU128ToBalance } from '../../utils/assets'
 import { XOR } from '../../utils/consts'
-import { AssetAmount, Block, CallItem, Context } from '../../types'
+import { BlockContext, AssetAmount, CallItem } from '../../types'
 import { ReferralsReserveCall } from '../../types/generated/calls'
 import { findEventByExtrinsicHash, getAssetsTransferEventData } from '../../utils/events'
 import { getEntityData } from '../../utils/entities'
-import { CannotFindEventError } from '../../utils/errors'
-import { logCallHandler } from '../../utils/log'
+import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 
-export async function referralReserveCallHandler(ctx: Context, block: Block, callItem: CallItem<'Referrals.reserve'>): Promise<void> {
-	logCallHandler(ctx, block, callItem)
+export async function referralReserveCallHandler(ctx: BlockContext, callItem: CallItem<'Referrals.reserve'>): Promise<void> {
+	logStartProcessingCall(ctx, callItem)
 
-    const extrinsicHash = callItem.extrinsic.hash
-    const historyElement = await createHistoryElement(ctx, block, callItem)
+	const extrinsicHash = callItem.extrinsic.hash
+	const historyElement = await createHistoryElement(ctx, callItem)
 
-    let details: {
-        from?: string
-        to?: string
-        amount: string
-    } | null = null
+	let details: {
+		from?: string
+		to?: string
+		amount: string
+	} | null = null
 
-    if (historyElement.execution.success) {
+	if (historyElement.execution.success) {
 		const balancesTransferEventName = 'Balances.Transfer'
-        const balancesTransferEventItem = findEventByExtrinsicHash(block, extrinsicHash, [balancesTransferEventName], false)
+		const balancesTransferEventItem = findEventByExtrinsicHash(ctx, extrinsicHash, [balancesTransferEventName], false) // TODO: Check if 'Currencies.Transferred' event is applicable here
 
-        if (balancesTransferEventItem) {
-            const { from, to, amount } = getAssetsTransferEventData(ctx, block, balancesTransferEventItem)
+		if (!balancesTransferEventItem) {
+			return
+		}
 
-            details = {
-                from,
-                to,
-                amount: formatU128ToBalance(amount, XOR),
-            }
-        } else {
-			const error = new CannotFindEventError(block, extrinsicHash, balancesTransferEventName)
-			ctx.log.error(error.message)
-        }
-    } else {
-        const call = new ReferralsReserveCall(ctx, callItem.call)
-		const data = getEntityData(ctx, block, call, callItem)
+		const { from, to, amount } = getAssetsTransferEventData(ctx, balancesTransferEventItem)
+
+		details = {
+			from,
+			to,
+			amount: formatU128ToBalance(amount, XOR),
+		}
+	} else {
+		const call = new ReferralsReserveCall(ctx, callItem.call)
+		const data = getEntityData(ctx, call, callItem)
 
 		const amount = formatU128ToBalance(data.balance as AssetAmount, XOR)
-        
-        details = {
+
+		details = {
 			amount,
 		}
-    }
+	}
 
-	if (details) await addDataToHistoryElement(ctx, block, historyElement, details)
-    await updateHistoryElementStats(ctx, block, historyElement)
+	if (details) await addDataToHistoryElement(ctx, historyElement, details)
+	await updateHistoryElementStats(ctx, historyElement)
 
-    ctx.log.debug(`[${block.header.height}] ===== Saved referral reserve with ${extrinsicHash} txid =====`)
+	getCallHandlerLog(ctx, callItem).debug(`Saved referral reserve`)
 }
