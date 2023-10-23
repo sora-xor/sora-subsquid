@@ -25,7 +25,9 @@ export async function initializePools(ctx: BlockContext): Promise<void> {
 	>()
 
 	for (const baseAssetId of BASE_ASSETS) {
-		const [properties, reserves] = await Promise.all([getAllProperties(ctx, baseAssetId), getAllReserves(ctx, baseAssetId)])
+		// We don't use Promise.all() here because we need consistent order of requests in the log
+		const properties = await getAllProperties(ctx, baseAssetId)
+		const reserves = await getAllReserves(ctx, baseAssetId)
 
 		if (!properties || !reserves) continue
 

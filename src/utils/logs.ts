@@ -1,5 +1,5 @@
+import { getEventId } from '.'
 import { Block, BlockContext, CallItem, Context, EventItem } from '../types'
-import { getEventId } from './events'
 
 function toPascalCase(str: string): string {
 	return str

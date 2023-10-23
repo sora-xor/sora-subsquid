@@ -290,8 +290,8 @@ class AssetSnapshotsStorage {
 					snapshot.priceUSD.open = price
 				}
 			} else {
-				const blockHeight = ctx.block.header.height
-				throw new Error(`[${blockHeight}] ${snapshot.id} snapshot doesn't have priceUSD`)
+				getAssetSnapshotsStorageLog(ctx).error(`${snapshot.id} snapshot doesn't have priceUSD`)
+				throw new Error(`${snapshot.id} snapshot doesn't have priceUSD`)
 			}
 			if (testLogMode) {
 				getAssetSnapshotsStorageLog(ctx).debug({ assetId: assetId, newPrice: price }, 'Asset snapshot price updated')
@@ -310,13 +310,17 @@ class AssetSnapshotsStorage {
 
 		for (const type of AssetSnapshots) {
 			const snapshot = await this.getSnapshot(ctx, assetId, type)
+			if (testLogMode) {
+				getAssetSnapshotsStorageLog(ctx).debug({ oldVolume: snapshot.volume?.amount }, 'Updating asset snapshot volume')
+			}
 
 			if (snapshot.volume) {
 				snapshot.volume.amount = new BigNumber(snapshot.volume.amount).plus(volume.toString()).toString()
 				snapshot.volume.amountUSD = new BigNumber(snapshot.volume.amountUSD).plus(volumeUSD.toString()).toFixed(2)
 				snapshot.updatedAtBlock = ctx.block.header.height
 			} else {
-				throw new Error(`[${ctx.block.header.height}] ${snapshot.id} snapshot doesn't have volume`)
+				getAssetSnapshotsStorageLog(ctx).debug({ assetId: assetId, newVolume: volume.toString() }, `${snapshot.id} snapshot doesn't have volume`)
+				throw new Error(`${snapshot.id} snapshot doesn't have volume`)
 			}
 			if (testLogMode) {
 				getAssetSnapshotsStorageLog(ctx).debug({ assetId: assetId, newVolume: volume.toString() }, 'Asset snapshot volume updated')
@@ -346,6 +350,7 @@ class AssetSnapshotsStorage {
 
 	async updateMinted(ctx: BlockContext, assetId: AssetId, amount: bigint): Promise<void> {
 		for (const type of AssetSnapshots) {
+			getAssetSnapshotsStorageLog(ctx).debug({ type }, 'Type')
 			const snapshot = await this.getSnapshot(ctx, assetId, type)
 
 			snapshot.mint = snapshot.mint + amount
@@ -359,7 +364,7 @@ class AssetSnapshotsStorage {
 
 		asset.supply = asset.supply + amount
 		asset.updatedAtBlock = ctx.block.header.height
-		getAssetStorageLog(ctx).debug({ assetId: assetId, minted: amount.toString() }, 'Asset minted')
+		getAssetSnapshotsStorageLog(ctx).debug({ assetId: assetId, minted: amount.toString() }, 'Asset minted')
 	}
 
 	async updateBurned(ctx: BlockContext, assetId: AssetId, amount: bigint): Promise<void> {
@@ -380,7 +385,7 @@ class AssetSnapshotsStorage {
 
 		asset.supply = asset.supply - amount
 		asset.updatedAtBlock = ctx.block.header.height
-		getAssetStorageLog(ctx).debug({ assetId: assetId, supply: asset.supply.toString() }, 'Asset supply updated')
+		getAssetSnapshotsStorageLog(ctx).debug({ assetId: assetId, supply: asset.supply.toString() }, 'Asset supply updated')
 	}
 }
 

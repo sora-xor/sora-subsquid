@@ -4,7 +4,7 @@ import { BlockContext, EventItem } from '../../types'
 import { BalancesDepositEvent, BalancesWithdrawEvent, TokensDepositedEvent, TokensWithdrawnEvent } from '../../types/generated/events'
 import { AssetAmount } from '../../types'
 import { getEntityData } from '../../utils/entities'
-import { logStartProcessingEvent } from '../../utils/logs'
+import { getCallHandlerLog, getEventHandlerLog, logStartProcessingEvent } from '../../utils/logs'
 
 export async function tokenBurnEventHandler(ctx: BlockContext, eventItem: EventItem<'Tokens.Withdrawn'>): Promise<void> {
 	logStartProcessingEvent(ctx, eventItem)
@@ -39,6 +39,7 @@ export async function tokenMintEventHandler(ctx: BlockContext, eventItem: EventI
 	const assetId = getAssetId(data.currencyId)
 	const amount = data.amount as AssetAmount
 
+	getEventHandlerLog(ctx, eventItem).debug(`1 Minting ${amount} of ${assetId}`)
 	await assetSnapshotsStorage.updateMinted(ctx, assetId, amount)
 }
 
@@ -51,5 +52,6 @@ export async function xorMintEventHandler(ctx: BlockContext, eventItem: EventIte
 	const assetId = XOR
 	const amount = ('amount' in data ? data.amount : data[1]) as AssetAmount
 
+	getEventHandlerLog(ctx, eventItem).debug(`2 Minting ${amount} of ${assetId}`)
 	await assetSnapshotsStorage.updateMinted(ctx, assetId, amount)
 }
