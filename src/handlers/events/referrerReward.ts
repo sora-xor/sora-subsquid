@@ -1,7 +1,7 @@
 import { ReferrerReward } from '../../model'
 import { BlockContext, EventItem } from '../../types'
 import { XorFeeReferrerRewardedEvent } from '../../types/generated/events'
-import { formatDateTimestamp, toAddress } from '../../utils'
+import { decodeAddress, formatDateTimestamp, toAddress, toText } from '../../utils'
 import { getEntityData } from '../../utils/entities'
 import { logStartProcessingEvent, getEventHandlerLog } from '../../utils/logs'
 

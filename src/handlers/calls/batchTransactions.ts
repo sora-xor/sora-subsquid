@@ -1,4 +1,4 @@
-import { addCallsToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
+import { addCallsToHistoryElement, addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { formatU128ToBalance, getAssetId } from '../../utils/assets'
 import { poolsStorage } from '../../utils/pools'
 import { BlockContext, CallItem } from '../../types'
@@ -137,6 +137,7 @@ export async function batchTransactionsCallHandler(ctx: BlockContext, callItem: 
 	let historyElementCalls = mapCallsForAllVersions(ctx, callItem, historyElement)
 
 	await addCallsToHistoryElement(ctx, historyElement, historyElementCalls)
+	await addDataToHistoryElement(ctx, historyElement, {})
 	await updateHistoryElementStats(ctx, historyElement)
 
 	if (historyElement.execution.success) {

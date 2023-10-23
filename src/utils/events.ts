@@ -49,13 +49,13 @@ export function findEventByExtrinsicHash<T extends EventItemName[], F extends bo
 	throwError?: F,
 ): F extends true ? { [K in T[number]]: SpecificEventItem<K> }[T[number]] : { [K in T[number]]: SpecificEventItem<K> }[T[number]] | null {
 	const event = findEventsByExtrinsicHash(ctx, extrinsicHash, eventNames)[0] ?? null
-	if (event) {
-		getUtilsLog(ctx).debug(`The '${event.name}' event found`)
-	} else {
-		getUtilsLog(ctx).debug(
-			eventNames?.length === 1 ? `The '${eventNames[0]}' event not found` : `Events not found: ${eventNames?.join(', ')}`,
-		)
-	}
+	// if (event) {
+	// 	getUtilsLog(ctx).debug(`The '${event.name}' event found`)
+	// } else {
+	// 	getUtilsLog(ctx).debug(
+	// 		eventNames?.length === 1 ? `The '${eventNames[0]}' event not found` : `Events not found: ${eventNames?.join(', ')}`,
+	// 	)
+	// }
 	if ((throwError as boolean) && event === null) {
 		throw new CannotFindEventError(ctx, extrinsicHash, eventNames ?? '')
 	}
