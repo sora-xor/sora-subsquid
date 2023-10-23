@@ -16,8 +16,8 @@ export class HistoryElement {
     @Column_("varchar", {length: 5, nullable: false})
     type!: HistoryElementType
 
-    @Column_("numeric", {transformer: marshal.bigintTransformer, nullable: false})
-    blockHeight!: bigint
+    @Column_("int4", {nullable: false})
+    blockHeight!: number
 
     @Index_()
     @Column_("text", {nullable: false})

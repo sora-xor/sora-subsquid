@@ -12,18 +12,16 @@ import { getActiveStakingEra, getStakingStaker } from '../../utils/staking'
 export async function stakingStakersElectedEventHandler(ctx: BlockContext, eventItem: EventItem<'Staking.StakersElected'>): Promise<void> {
 	logStartProcessingEvent(ctx, eventItem)
 
-	const erasStakersStorage = new StakingErasStakersStorage(ctx, ctx.block.header)
-
 	const activeStakingEra = await getActiveStakingEra(ctx)
 
+	const erasStakersStorage = new StakingErasStakersStorage(ctx, ctx.block.header)
 	const exposures = await getEntityData(ctx, erasStakersStorage, {
 		kind: 'storage',
 		name: StakingErasStakersStorage.name,
 	}).getPairs(activeStakingEra.index)
 
-	await Promise.all(
-		exposures.map(async ([[era, validator], exposure]) => {
-			let stakingValidator = await ctx.store.get(StakingValidator, toAddress(validator))
+	for (const [[era, validator], exposure] of exposures) {
+		let stakingValidator = await ctx.store.get(StakingValidator, toAddress(validator))
 			if (!stakingValidator) {
 				stakingValidator = new StakingValidator()
 				stakingValidator.id = toAddress(validator)
@@ -62,9 +60,8 @@ export async function stakingStakersElectedEventHandler(ctx: BlockContext, event
 				'Staking Era Validator saved',
 			)
 
-			await Promise.all(
-				exposure.others.map(async (nomination) => {
-					const stakingStaker = await getStakingStaker(ctx, toAddress(nomination.who))
+			for (let nomination of exposure.others) {
+				const stakingStaker = await getStakingStaker(ctx, toAddress(nomination.who))
 
 					let stakingEraNominator = await ctx.store.get(StakingEraNominator, {
 						where: {
@@ -101,8 +98,6 @@ export async function stakingStakersElectedEventHandler(ctx: BlockContext, event
 						{ id: stakingEraNomination.id, amount: stakingEraNomination.amount },
 						'Staking Era Nomination saved',
 					)
-				}),
-			)
-		}),
-	)
+			}
+	}
 }

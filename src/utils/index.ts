@@ -1,5 +1,5 @@
 import * as ss58 from '@subsquid/ss58'
-import { AssetId, Address, AddressEthereum, ReferenceSymbol } from '../types'
+import { AssetId, Address, AddressEthereum, ReferenceSymbol, BlockContext, CallItem, CallItemName, EventItem, EventItemName, EntityItem, EntityItemName } from '../types'
 import { SnapshotSecondsMap } from './consts'
 import { toHex, decodeHex } from '@subsquid/substrate-processor'
 import { SnapshotType } from '../model'
@@ -79,4 +79,16 @@ export const getSnapshotIndex = (blockTimestamp: number, type: SnapshotType): { 
 	const timestamp = seconds * index // rounded snapshot timestamp
 
 	return { index, timestamp }
+}
+
+export const getCallId = (ctx: BlockContext, callItem: CallItem<CallItemName>): string => {
+	return callItem.extrinsic.hash
+}
+
+export const getEventId = (ctx: BlockContext, eventItem: EventItem<EventItemName>): string => {
+	return `${ctx.block.header.height}-${eventItem.event.indexInBlock}`
+}
+
+export const getEntityId = (ctx: BlockContext, entityItem: EntityItem<EntityItemName>): string => {
+	return entityItem.kind === 'call' ? getCallId(ctx, entityItem) : getEventId(ctx, entityItem)
 }
