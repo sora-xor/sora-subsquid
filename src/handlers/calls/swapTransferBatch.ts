@@ -20,7 +20,8 @@ import { getExtrinsicSigner } from '../../utils/calls'
 function getLiquidityProxyBatchSwapExecutedEventData(ctx: BlockContext, extrinsicHash: string) {
 	const name = 'LiquidityProxy.BatchSwapExecuted'
 	const eventItem = findEventByExtrinsicHash(ctx, extrinsicHash, [name])
-	if (eventItem === null) throw new Error(`[${ctx.block.header.height}] Event ${name} not found for extrinsic ${extrinsicHash}`)
+	if (eventItem === null) return null
+	// if (eventItem === null) throw new Error(`[${ctx.block.header.height}] Event ${name} not found for extrinsic ${extrinsicHash}`)
 	const event = new LiquidityProxyBatchSwapExecutedEvent(ctx, eventItem.event)
 	return getEntityData(ctx, event, eventItem)
 }
@@ -28,7 +29,8 @@ function getLiquidityProxyBatchSwapExecutedEventData(ctx: BlockContext, extrinsi
 function getXorFeeFeeWithdrawnEventData(ctx: BlockContext, extrinsicHash: string) {
 	const name = 'XorFee.FeeWithdrawn'
 	const eventItem = findEventByExtrinsicHash(ctx, extrinsicHash, [name])
-	if (eventItem === null) throw new Error(`[${ctx.block.header.height}] Event ${name} not found for extrinsic ${extrinsicHash}`)
+	if (eventItem === null) return null
+	// if (eventItem === null) throw new Error(`[${ctx.block.header.height}] Event ${name} not found for extrinsic ${extrinsicHash}`)
 	const event = new XorFeeFeeWithdrawnEvent(ctx, eventItem.event)
 	return getEntityData(ctx, event, eventItem)
 }
@@ -36,7 +38,8 @@ function getXorFeeFeeWithdrawnEventData(ctx: BlockContext, extrinsicHash: string
 function getTransactionPaymentTransactionFeePaidEventData(ctx: BlockContext, extrinsicHash: string) {
 	const name = 'TransactionPayment.TransactionFeePaid'
 	const eventItem = findEventByExtrinsicHash(ctx, extrinsicHash, [name])
-	if (eventItem === null) throw new Error(`[${ctx.block.header.height}] Event ${name} not found for extrinsic ${extrinsicHash}`)
+	if (eventItem === null) return null
+	// if (eventItem === null) throw new Error(`[${ctx.block.header.height}] Event ${name} not found for extrinsic ${extrinsicHash}`)
 	const event = new TransactionPaymentTransactionFeePaidEvent(ctx, eventItem.event)
 	return getEntityData(ctx, event, eventItem)
 }
@@ -67,14 +70,20 @@ const handleAndSaveExtrinsic = async (ctx: BlockContext, callItem: CallItem<'Liq
 	}))
 
 	if (historyElement.execution.success) {
-		const [adarFee, inputAmount] = getLiquidityProxyBatchSwapExecutedEventData(ctx, extrinsicHash)
+		const liquidityProxyBatchSwapExecutedEventData = getLiquidityProxyBatchSwapExecutedEventData(ctx, extrinsicHash)
+		if (!liquidityProxyBatchSwapExecutedEventData) return
+		const [adarFee, inputAmount] = liquidityProxyBatchSwapExecutedEventData
 		details.adarFee = formatU128ToBalance(adarFee, inputAssetId)
 		details.inputAmount = formatU128ToBalance(inputAmount, inputAssetId)
 
-		const [, networkFee] = getXorFeeFeeWithdrawnEventData(ctx, extrinsicHash)
+		const xorFeeFeeWithdrawnEventData = getXorFeeFeeWithdrawnEventData(ctx, extrinsicHash)
+		if (!xorFeeFeeWithdrawnEventData) return
+		const [, networkFee] = xorFeeFeeWithdrawnEventData
 		details.networkFee = formatU128ToBalance(networkFee, XOR)
 
-		const { actualFee } = getTransactionPaymentTransactionFeePaidEventData(ctx, extrinsicHash)
+		const transactionPaymentTransactionFeePaidEventData = getTransactionPaymentTransactionFeePaidEventData(ctx, extrinsicHash)
+		if (!transactionPaymentTransactionFeePaidEventData) return
+		const { actualFee } = transactionPaymentTransactionFeePaidEventData
 		details.actualFee = formatU128ToBalance(actualFee, XOR)
 
 		const assetsTransfers = findEventsByExtrinsicHash(ctx, extrinsicHash, ['Assets.Transfer']).map((eventItem) => {

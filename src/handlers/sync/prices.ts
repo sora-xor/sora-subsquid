@@ -163,11 +163,13 @@ export async function syncPoolXykPrices(ctx: BlockContext): Promise<void> {
 			await assetSnapshotsStorage.updatePrice(ctx, assetId as AssetId, price)
 		}
 	}
+    getSyncPricesLog(ctx).debug(`${Object.entries(assetsPrices).length} asset snapshot prices updated`);
 
 	// update locked liquidity for assets
 	for (const [assetId, liquidity] of assetsLockedInPools.entries()) {
 		await assetSnapshotsStorage.updateLiquidity(ctx, assetId as AssetId, liquidity)
 	}
+    getSyncPricesLog(ctx).debug(`${Object.entries(assetsPrices).length} asset snapshot liquidities updated`);
 
 	// update total liquidity in USD
 	await networkSnapshotsStorage.updateLiquidityStats(ctx, liquiditiesUSD)

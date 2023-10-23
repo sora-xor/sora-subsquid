@@ -1,7 +1,7 @@
 import { ReferrerReward } from '../../model'
 import { BlockContext, EventItem } from '../../types'
 import { XorFeeReferrerRewardedEvent } from '../../types/generated/events'
-import { formatDateTimestamp, toAddress } from '../../utils'
+import { decodeAddress, formatDateTimestamp, toAddress, toText } from '../../utils'
 import { getEntityData } from '../../utils/entities'
 import { logStartProcessingEvent, getEventHandlerLog } from '../../utils/logs'
 
@@ -31,7 +31,7 @@ export async function referrerRewardEventHandler(ctx: BlockContext, eventItem: E
 
 	await ctx.store.save(referrerReward)
 	getEventHandlerLog(ctx, eventItem).debug(
-		{ referral, referrer, amount, updated: referrerReward.updated, updatedAtBlock: referrerReward.updatedAtBlock },
+		{ referral, referrer, amount, updated: referrerReward.updated },
 		'Referrer reward updated',
 	)
 }

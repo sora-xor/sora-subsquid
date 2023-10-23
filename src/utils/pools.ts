@@ -225,17 +225,13 @@ class PoolsStorage {
 	}
 
 	async getPool(ctx: BlockContext, baseAssetId: AssetId, targetAssetId: AssetId): Promise<PoolXYK | null> {
-		const blockHeight = ctx.block.header.height
-
 		const poolId = await poolAccounts.getPoolAccountId(ctx, baseAssetId, targetAssetId)
 
 		if (!poolId) return null
 
 		let pool = this.storage.get(poolId)
 
-		if (pool) {
-			return pool
-		}
+		if (pool) return pool
 
 		pool = (
 			await ctx.store.find(PoolXYK, {
@@ -250,12 +246,11 @@ class PoolsStorage {
 		)[0]
 
 		if (!pool) {
-			const [baseAsset, targetAsset] = await Promise.all([
-				assetStorage.getAsset(ctx, baseAssetId),
-				assetStorage.getAsset(ctx, targetAssetId),
-			])
-			if (!baseAsset) throw new Error(`[${blockHeight}] Cannot find base asset: '${baseAssetId}'`)
-			if (!targetAsset) throw new Error(`[${blockHeight}] Cannot find target asset: '${targetAssetId}'`)
+			const baseAsset = await assetStorage.getAsset(ctx, baseAssetId)
+			const targetAsset = await assetStorage.getAsset(ctx, targetAssetId)
+
+			if (!baseAsset) throw new Error(`Cannot find base asset: '${baseAssetId}'`)
+			if (!targetAsset) throw new Error(`Cannot find target asset: '${targetAssetId}'`)
 
 			pool = new PoolXYK({
 				id: poolId,

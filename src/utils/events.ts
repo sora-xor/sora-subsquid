@@ -49,13 +49,13 @@ export function findEventByExtrinsicHash<T extends EventItemName[], F extends bo
 	throwError?: F,
 ): F extends true ? { [K in T[number]]: SpecificEventItem<K> }[T[number]] : { [K in T[number]]: SpecificEventItem<K> }[T[number]] | null {
 	const event = findEventsByExtrinsicHash(ctx, extrinsicHash, eventNames)[0] ?? null
-	if (event) {
-		getUtilsLog(ctx).debug(`The '${event.name}' event found`)
-	} else {
-		getUtilsLog(ctx).debug(
-			eventNames?.length === 1 ? `The '${eventNames[0]}' event not found` : `Events not found: ${eventNames?.join(', ')}`,
-		)
-	}
+	// if (event) {
+	// 	getUtilsLog(ctx).debug(`The '${event.name}' event found`)
+	// } else {
+	// 	getUtilsLog(ctx).debug(
+	// 		eventNames?.length === 1 ? `The '${eventNames[0]}' event not found` : `Events not found: ${eventNames?.join(', ')}`,
+	// 	)
+	// }
 	if ((throwError as boolean) && event === null) {
 		throw new CannotFindEventError(ctx, extrinsicHash, eventNames ?? '')
 	}
@@ -144,16 +144,4 @@ export const getAssetsDepositEventData = (
 	} else {
 		return getTokensDepositedEventData(ctx, eventItem)
 	}
-}
-
-export const getCallId = (ctx: BlockContext, callItem: CallItem<CallItemName>): string => {
-	return callItem.extrinsic.hash
-}
-
-export const getEventId = (ctx: BlockContext, eventItem: EventItem<EventItemName>): string => {
-	return `${ctx.block.header.height}-${eventItem.event.indexInBlock}`
-}
-
-export const getEntityId = (ctx: BlockContext, entityItem: EntityItem<EntityItemName>): string => {
-	return entityItem.kind === 'call' ? getCallId(ctx, entityItem) : getEventId(ctx, entityItem)
 }
