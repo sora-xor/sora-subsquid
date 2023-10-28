@@ -1,5 +1,5 @@
 import { ExecutionResult, ExecutionError, HistoryElement, HistoryElementCall, HistoryElementType } from '../model'
-import { AnyCallItem, AssetAmount, BlockContext, EntityItem, EntityItemName } from '../types'
+import { Address, AnyCallItem, AssetAmount, BlockContext, EntityItem, EntityItemName } from '../types'
 import { getAccountEntity } from './account'
 import { networkSnapshotsStorage } from './network'
 import { formatDateTimestamp, getEntityId, toAddress, toCamelCase } from './index'
@@ -42,6 +42,7 @@ export const createHistoryElement = async (
 	ctx: BlockContext,
 	entityItem: EntityItem<EntityItemName>,
 	data?: {},
+	address?: Address,
 ): Promise<HistoryElement> => {
 	const historyElement = new HistoryElement()
 
@@ -57,7 +58,8 @@ export const createHistoryElement = async (
 	historyElement.blockHash = ctx.block.header.hash.toString()
 	historyElement.module = toCamelCase(entityItem.name.split('.')[0])
 	historyElement.method = toCamelCase(entityItem.name.split('.')[1])
-	historyElement.address = toAddress(extrinsic?.signature?.address)
+	historyElement.name = historyElement.module + '.' + historyElement.method
+	historyElement.address = address ? address : toAddress(extrinsic?.signature?.address)
 	historyElement.networkFee = entityItem.kind === 'call' ? getCallItemNetworkFee(ctx, entityItem).toString() : null
 	historyElement.timestamp = formatDateTimestamp(new Date(ctx.block.header.timestamp))
 	historyElement.updatedAtBlock = ctx.block.header.height
@@ -110,7 +112,7 @@ export const addDataToHistoryElement = async (ctx: BlockContext, historyElement:
 
 	await ctx.store.save(historyElement)
 	getUtilsLog(ctx).debug({ historyElementId: historyElement.id }, 'Updated history element with data')
-    // TODO: fix data in log
+	// TODO: fix data in log
 	// getUtilsLog(ctx).debug({ historyElementId: historyElement.id, data: filterDataProperties(data) }, 'Updated history element with data')
 }
 
@@ -129,7 +131,7 @@ export const updateHistoryElementStats = async (ctx: BlockContext, historyElemen
 		addresses.push(((historyElement.data as any)['to'] as string).toString())
 	}
 
-	getUtilsLog(ctx).debug({ addresses: addresses.join(', ') }, 'addresses');
+	getUtilsLog(ctx).debug({ addresses: addresses.join(', ') }, 'addresses')
 	// update accounts data
 	for (const address of addresses) {
 		const account = await getAccountEntity(ctx, address)
