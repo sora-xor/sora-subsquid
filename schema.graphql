@@ -108,6 +108,7 @@ type HistoryElement @entity {
 	type: HistoryElementType!
 	blockHeight: Int!
 	blockHash: String! @index
+	name: String!
 	module: String!
 	method: String!
 	address: String! @index
@@ -155,6 +156,7 @@ type StakingReward @entity {
 	id: ID!
 	amount: String!
 	staker: StakingStaker!
+	payeeType: PayeeType!
 	payee: String @index
 	era: StakingEra!
 	timestamp: Int!

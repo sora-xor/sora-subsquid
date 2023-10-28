@@ -1,5 +1,17 @@
 import * as ss58 from '@subsquid/ss58'
-import { AssetId, Address, AddressEthereum, ReferenceSymbol, BlockContext, CallItem, CallItemName, EventItem, EventItemName, EntityItem, EntityItemName } from '../types'
+import {
+	AssetId,
+	Address,
+	AddressEthereum,
+	ReferenceSymbol,
+	BlockContext,
+	CallItem,
+	CallItemName,
+	EventItem,
+	EventItemName,
+	EntityItem,
+	EntityItemName,
+} from '../types'
 import { SnapshotSecondsMap } from './consts'
 import { toHex, decodeHex } from '@subsquid/substrate-processor'
 import { SnapshotType } from '../model'
