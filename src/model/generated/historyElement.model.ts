@@ -24,6 +24,9 @@ export class HistoryElement {
     blockHash!: string
 
     @Column_("text", {nullable: false})
+    name!: string
+
+    @Column_("text", {nullable: false})
     module!: string
 
     @Column_("text", {nullable: false})

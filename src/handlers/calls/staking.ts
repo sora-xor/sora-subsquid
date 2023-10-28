@@ -39,6 +39,7 @@ import { formatU128ToBalance } from '../../utils/assets'
 import { getExtrinsicSigner } from '../../utils/calls'
 import { PayeeType } from '../../model'
 import { getStakingStaker } from '../../utils/staking'
+import { toAddress } from '../../utils'
 
 export async function stakingBondCallHandler(ctx: BlockContext, callItem: CallItem<'Staking.bond'>): Promise<void> {
 	logStartProcessingCall(ctx, callItem)
@@ -49,7 +50,7 @@ export async function stakingBondCallHandler(ctx: BlockContext, callItem: CallIt
 	const details = {
 		controller: toHex(data.controller),
 		payee: data.payee.__kind === 'Account' ? { kind: data.payee.__kind, value: toHex(data.payee.value) } : { kind: data.payee.__kind },
-		value: formatU128ToBalance(data.value, XOR),
+		amount: formatU128ToBalance(data.value, XOR),
 	}
 
 	await createHistoryElement(ctx, callItem, details)
@@ -62,7 +63,7 @@ export async function stakingBondExtraCallHandler(ctx: BlockContext, callItem: C
 	const data = getEntityData(ctx, call, callItem)
 
 	const details = {
-		maxAdditional: formatU128ToBalance(data.maxAdditional, XOR),
+		amount: formatU128ToBalance(data.maxAdditional, XOR),
 	}
 
 	await createHistoryElement(ctx, callItem, details)
@@ -103,7 +104,7 @@ export async function stakingChillOtherCallHandler(ctx: BlockContext, callItem: 
 	const data = getEntityData(ctx, call, callItem)
 
 	const details = {
-		controller: toHex(data.controller),
+		controller: toAddress(data.controller),
 	}
 
 	await createHistoryElement(ctx, callItem, details)
@@ -113,13 +114,11 @@ export async function stakingForceApplyMinCommissionCallHandler(
 	ctx: BlockContext,
 	callItem: CallItem<'Staking.force_apply_min_commission'>,
 ): Promise<void> {
-	const historyElement = await createHistoryElement(ctx, callItem)
-
 	const call = new StakingForceApplyMinCommissionCall(ctx, callItem.call)
 	const data = getEntityData(ctx, call, callItem)
 
 	const details = {
-		validatorStash: toHex(data.validatorStash),
+		validatorStash: toAddress(data.validatorStash),
 	}
 
 	await createHistoryElement(ctx, callItem, details)
@@ -167,7 +166,7 @@ export async function stakingForceUnstakeCallHandler(ctx: BlockContext, callItem
 	const call = new StakingForceUnstakeCall(ctx, callItem.call)
 	const data = call.asV1
 	const details = {
-		stash: toHex(data.stash),
+		stash: toAddress(data.stash),
 		numSlashingSpans: data.numSlashingSpans,
 	}
 
@@ -184,7 +183,7 @@ export async function stakingIncreaseValidatorCountCallHandler(
 	const data = getEntityData(ctx, call, callItem)
 
 	const details = {
-		additional: data.additional,
+		count: data.additional,
 	}
 
 	await createHistoryElement(ctx, callItem, details)
@@ -197,7 +196,7 @@ export async function stakingKickCallHandler(ctx: BlockContext, callItem: CallIt
 	const data = getEntityData(ctx, call, callItem)
 
 	const details = {
-		who: data.who.map((item) => toHex(item)),
+		address: data.who.map((item) => toAddress(item)),
 	}
 
 	await createHistoryElement(ctx, callItem, details)
@@ -210,7 +209,7 @@ export async function stakingNominateCallHandler(ctx: BlockContext, callItem: Ca
 	const data = getEntityData(ctx, call, callItem)
 
 	const details = {
-		targets: data.targets.map(toHex),
+		targets: data.targets.map(toAddress),
 	}
 
 	await createHistoryElement(ctx, callItem, details)
@@ -223,7 +222,7 @@ export async function stakingPayoutStakersCallHandler(ctx: BlockContext, callIte
 	const data = getEntityData(ctx, call, callItem)
 
 	const details = {
-		validatorStash: toHex(data.validatorStash),
+		validatorStash: toAddress(data.validatorStash),
 		era: data.era,
 	}
 
@@ -250,7 +249,7 @@ export async function stakingRebondCallHandler(ctx: BlockContext, callItem: Call
 	const call = new StakingRebondCall(ctx, callItem.call)
 	const data = getEntityData(ctx, call, callItem)
 
-	const details = { value: data.value }
+	const details = { amount: formatU128ToBalance(data.value, XOR) }
 
 	await createHistoryElement(ctx, callItem, details)
 }
@@ -277,7 +276,7 @@ export async function stakingSetControllerCallHandler(ctx: BlockContext, callIte
 	const call = new StakingSetControllerCall(ctx, callItem.call)
 	const data = getEntityData(ctx, call, callItem)
 
-	const controller = toHex(data.controller)
+	const controller = toAddress(data.controller)
 	const extrinsicSigner = getExtrinsicSigner(ctx, callItem)
 	const stakingStaker = await getStakingStaker(ctx, extrinsicSigner)
 
@@ -318,7 +317,7 @@ export async function stakingSetInvulnerablesCallHandler(
 	const data = getEntityData(ctx, call, callItem)
 
 	const details = {
-		invulnerables: data.invulnerables.map(toHex),
+		invulnerables: data.invulnerables.map(toAddress),
 	}
 
 	await createHistoryElement(ctx, callItem, details)
@@ -334,7 +333,7 @@ export async function stakingSetMinCommissionCallHandler(
 	const data = getEntityData(ctx, call, callItem)
 
 	const details = {
-		new: data.new,
+		commission: data.new,
 	}
 
 	await createHistoryElement(ctx, callItem, details)
@@ -349,7 +348,7 @@ export async function stakingSetPayeeCallHandler(ctx: BlockContext, callItem: Ca
 	const extrinsicSigner = getExtrinsicSigner(ctx, callItem)
 	const stakingStaker = await getStakingStaker(ctx, extrinsicSigner)
 	const payeeType = data.payee.__kind.toUpperCase() as PayeeType
-	const payee = data.payee.__kind === 'Account' ? toHex(data.payee.value) : null
+	const payee = data.payee.__kind === 'Account' ? toAddress(data.payee.value) : null
 
 	if (stakingStaker.payeeType !== payeeType || stakingStaker.payee !== payee) {
 		stakingStaker.payeeType = payeeType
@@ -375,49 +374,23 @@ export async function stakingSetStakingConfigsCallHandler(
 	const call = new StakingSetStakingConfigsCall(ctx, callItem.call)
 	const data = getEntityData(ctx, call, callItem)
 
+	const createDetailObject = (key: keyof typeof data) => {
+		const value = data[key]
+		return value.__kind === 'Set'
+			? {
+					kind: value.__kind,
+					value: typeof value.value === 'bigint' ? formatU128ToBalance(value.value, XOR) : value.value,
+			  }
+			: { kind: value.__kind }
+	}
+
 	const details = {
-		minNominatorBond:
-			data.minNominatorBond.__kind === 'Set'
-				? {
-						kind: data.minNominatorBond.__kind,
-						value: data.minNominatorBond.value,
-				  }
-				: { kind: data.minNominatorBond.__kind },
-		minValidatorBond:
-			data.minValidatorBond.__kind === 'Set'
-				? {
-						kind: data.minValidatorBond.__kind,
-						value: data.minValidatorBond.value,
-				  }
-				: { kind: data.minValidatorBond.__kind },
-		maxNominatorCount:
-			data.maxNominatorCount.__kind === 'Set'
-				? {
-						kind: data.maxNominatorCount.__kind,
-						value: data.maxNominatorCount.value,
-				  }
-				: { kind: data.maxNominatorCount.__kind },
-		maxValidatorCount:
-			data.maxValidatorCount.__kind === 'Set'
-				? {
-						kind: data.maxValidatorCount.__kind,
-						value: data.maxValidatorCount.value,
-				  }
-				: { kind: data.maxValidatorCount.__kind },
-		chillThreshold:
-			data.chillThreshold.__kind === 'Set'
-				? {
-						kind: data.chillThreshold.__kind,
-						value: data.chillThreshold.value,
-				  }
-				: { kind: data.chillThreshold.__kind },
-		minCommission:
-			data.minCommission.__kind === 'Set'
-				? {
-						kind: data.minCommission.__kind,
-						value: data.minCommission.value,
-				  }
-				: { kind: data.minCommission.__kind },
+		minNominatorBond: createDetailObject('minNominatorBond'),
+		minValidatorBond: createDetailObject('minValidatorBond'),
+		maxNominatorCount: createDetailObject('maxNominatorCount'),
+		maxValidatorCount: createDetailObject('maxValidatorCount'),
+		chillThreshold: createDetailObject('chillThreshold'),
+		minCommission: createDetailObject('minCommission'),
 	}
 
 	await createHistoryElement(ctx, callItem, details)
@@ -433,7 +406,7 @@ export async function stakingSetValidatorCountCallHandler(
 	const data = getEntityData(ctx, call, callItem)
 
 	const details = {
-		new: data.new,
+		count: data.new,
 	}
 
 	await createHistoryElement(ctx, callItem, details)
@@ -484,7 +457,7 @@ export async function stakingUnbondCallHandler(ctx: BlockContext, callItem: Call
 	const data = getEntityData(ctx, call, callItem)
 
 	const details = {
-		value: formatU128ToBalance(data.value, XOR),
+		amount: formatU128ToBalance(data.value, XOR),
 	}
 
 	await createHistoryElement(ctx, callItem, details)
