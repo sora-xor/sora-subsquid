@@ -29,8 +29,6 @@ export async function assetTransferCallHandler(ctx: BlockContext, callItem: Call
 	}
 
 	await createHistoryElement(ctx, callItem, details)
-
-	getCallHandlerLog(ctx, callItem).debug(`Saved transfer`)
 }
 
 export async function xorlessTransferHandler(ctx: BlockContext, callItem: CallItem<'LiquidityProxy.xorless_transfer'>): Promise<void> {

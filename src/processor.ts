@@ -64,7 +64,6 @@ import {
 	stakingWithdrawUnbondedCallHandler,
 } from './handlers/calls/staking'
 import { stakingStakersElectedEventHandler } from './handlers/events/staking'
-import { getLog } from './utils/logs'
 
 const processor = new SubstrateBatchProcessor()
 	.setDataSource({
@@ -89,6 +88,7 @@ processor.run(new TypeormDatabase(), async (ctx) => {
 		const blockContext = {
 			...context,
 			block,
+			now: performance.now(),
 		}
 
 		await initializeAssets(blockContext)

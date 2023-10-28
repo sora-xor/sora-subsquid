@@ -13,7 +13,8 @@ export const getActiveStakingEra = async (ctx: BlockContext): Promise<StakingEra
 	}).get()
 
 	if (!activeEra) {
-		throw new Error(`[${ctx.block.header.height}] Active era not found`)
+		getUtilsLog(ctx).debug('Active era not found')
+		throw new Error('Active era not found')
 	}
 
 	let stakingEra = await ctx.store.get(StakingEra, activeEra.index.toString())

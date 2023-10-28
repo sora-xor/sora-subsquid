@@ -19,6 +19,9 @@
 	"scripts": {
 		"build": "rm -rf lib && tsc",
 		"update": "npx npm-check-updates --filter /subsquid/ --upgrade && npm i -f",
+		"codegen": "sqd codegen",
+		"generate-migration": "npx squid-typeorm-migration generate",
+		"migrate": "npm run codegen && npm run build && npm run generate-migration && npm run db:migrate",
 		"format": "prettier --write \"**/*.ts\"",
 		"db:migrate": "npx squid-typeorm-migration apply",
 		"processor:start": "node lib/processor.js",

@@ -106,8 +106,9 @@ type Account @entity {
 type HistoryElement @entity {
 	id: ID!
 	type: HistoryElementType!
-	blockHeight: BigInt!
+	blockHeight: Int!
 	blockHash: String! @index
+	name: String!
 	module: String!
 	method: String!
 	address: String! @index
@@ -124,7 +125,7 @@ type HistoryElement @entity {
 
 type HistoryElementCall @entity {
 	id: ID!
-	historyElement: HistoryElement! @index # relation to HistoryElement
+	historyElement: HistoryElement! @index
 	module: String!
 	method: String!
 	data: JSON!
@@ -155,6 +156,7 @@ type StakingReward @entity {
 	id: ID!
 	amount: String!
 	staker: StakingStaker!
+	payeeType: PayeeType!
 	payee: String @index
 	era: StakingEra!
 	timestamp: Int!
@@ -172,10 +174,10 @@ type StakingStaker @entity {
 type StakingValidator @entity {
     id: ID!
     bond: BigInt!
-    # apr24h: Float!
 }
 
 type StakingEraNominator @entity {
+	id: ID!
     era: StakingEra!
     bond: BigInt!
     staker: StakingStaker!
@@ -183,6 +185,7 @@ type StakingEraNominator @entity {
 }
 
 type StakingEraNomination @entity {
+	id: ID!
     era: StakingEra!
     amount: BigInt!
     validator: StakingEraValidator!
@@ -190,8 +193,8 @@ type StakingEraNomination @entity {
 }
 
 type StakingEraValidator @entity {
+	id: ID!
     era: StakingEra!
-    # apr: Float!
     validator: StakingValidator!
     nominations: [StakingEraNomination!]! @derivedFrom(field: "validator")
     ownBond: BigInt!
@@ -201,6 +204,7 @@ type StakingEraValidator @entity {
 }
 
 type StakingEra @entity {
+	id: ID!
 	index: Int! @index
 	start: BigInt! @index
     validators: [StakingEraValidator!]! @derivedFrom(field: "era")

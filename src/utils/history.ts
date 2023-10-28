@@ -1,13 +1,11 @@
 import { ExecutionResult, ExecutionError, HistoryElement, HistoryElementCall, HistoryElementType } from '../model'
-import { AnyCallItem, AssetAmount, BlockContext, EntityItem, EntityItemName } from '../types'
-import { formatU128ToBalance } from './assets'
+import { Address, AnyCallItem, AssetAmount, BlockContext, EntityItem, EntityItemName } from '../types'
 import { getAccountEntity } from './account'
 import { networkSnapshotsStorage } from './network'
-import { XOR } from './consts'
-import { formatDateTimestamp, toAddress, toCamelCase } from './index'
+import { formatDateTimestamp, getEntityId, toAddress, toCamelCase } from './index'
 import { nToU8a } from '@polkadot/util'
 import { toJSON } from '@subsquid/util-internal-json'
-import { findEventByExtrinsicHash, getEntityId, getEventId } from './events'
+import { findEventByExtrinsicHash } from './events'
 import { XorFeeFeeWithdrawnEvent } from '../types/generated/events'
 import { getEntityData } from './entities'
 import { getUtilsLog } from './logs'
@@ -27,19 +25,25 @@ const getCallItemNetworkFee = (ctx: BlockContext, callItem: AnyCallItem): AssetA
 }
 
 function filterDataProperties(obj: Record<string, any>) {
-	const filteredObj: Record<string, any> = {}
+	const entries = []
 	for (let key in obj) {
 		if (obj.hasOwnProperty(key)) {
+			console.log('key: ', key)
 			const type = typeof obj[key]
 			if (type === 'number' || type === 'string' || type === 'bigint' || type === 'boolean') {
-				filteredObj[key] = obj[key]
+				entries.push(key + ': ' + obj[key])
 			}
 		}
 	}
-	return filteredObj
+	return entries.join(', ')
 }
 
-export const createHistoryElement = async (ctx: BlockContext, entityItem: EntityItem<EntityItemName>, data?: {}): Promise<HistoryElement> => {
+export const createHistoryElement = async (
+	ctx: BlockContext,
+	entityItem: EntityItem<EntityItemName>,
+	data?: {},
+	address?: Address,
+): Promise<HistoryElement> => {
 	const historyElement = new HistoryElement()
 
 	if (!ctx.block.header.validator) {
@@ -50,12 +54,13 @@ export const createHistoryElement = async (ctx: BlockContext, entityItem: Entity
 
 	historyElement.id = getEntityId(ctx, entityItem)
 	historyElement.type = entityItem.kind === 'call' ? HistoryElementType.CALL : HistoryElementType.EVENT
-	historyElement.blockHeight = BigInt(ctx.block.header.height)
+	historyElement.blockHeight = ctx.block.header.height
 	historyElement.blockHash = ctx.block.header.hash.toString()
 	historyElement.module = toCamelCase(entityItem.name.split('.')[0])
 	historyElement.method = toCamelCase(entityItem.name.split('.')[1])
-	historyElement.address = toAddress((entityItem.kind === 'call' ? entityItem.extrinsic : entityItem.event.extrinsic)?.signature?.address)
-	historyElement.networkFee = entityItem.kind === 'call' ? formatU128ToBalance(getCallItemNetworkFee(ctx, entityItem), XOR) : null
+	historyElement.name = historyElement.module + '.' + historyElement.method
+	historyElement.address = address ? address : toAddress(extrinsic?.signature?.address)
+	historyElement.networkFee = entityItem.kind === 'call' ? getCallItemNetworkFee(ctx, entityItem).toString() : null
 	historyElement.timestamp = formatDateTimestamp(new Date(ctx.block.header.timestamp))
 	historyElement.updatedAtBlock = ctx.block.header.height
 	historyElement.callNames = []
@@ -83,9 +88,9 @@ export const createHistoryElement = async (ctx: BlockContext, entityItem: Entity
 		})
 	}
 
-	ctx.store.save(historyElement)
-	const { callNames, execution, ...logArguments } = historyElement
-	getUtilsLog(ctx).debug({ ...logArguments, execution: execution.success }, 'Created history element')
+	await ctx.store.save(historyElement)
+	const { calls, callNames, execution, ...logArguments } = historyElement
+	getUtilsLog(ctx).debug({ ...logArguments, executionSuccess: execution.success + '' }, 'Created history element')
 
 	if (data) {
 		await addDataToHistoryElement(ctx, historyElement, data)
@@ -106,7 +111,9 @@ export const addDataToHistoryElement = async (ctx: BlockContext, historyElement:
 	historyElement.updatedAtBlock = ctx.block.header.height
 
 	await ctx.store.save(historyElement)
-	getUtilsLog(ctx).debug({ historyElementId: historyElement.id, ...filterDataProperties(data) }, 'Updated history element with data')
+	getUtilsLog(ctx).debug({ historyElementId: historyElement.id }, 'Updated history element with data')
+	// TODO: fix data in log
+	// getUtilsLog(ctx).debug({ historyElementId: historyElement.id, data: filterDataProperties(data) }, 'Updated history element with data')
 }
 
 export const addCallsToHistoryElement = async (ctx: BlockContext, historyElement: HistoryElement, calls: HistoryElementCall[]) => {
@@ -124,6 +131,7 @@ export const updateHistoryElementStats = async (ctx: BlockContext, historyElemen
 		addresses.push(((historyElement.data as any)['to'] as string).toString())
 	}
 
+	getUtilsLog(ctx).debug({ addresses: addresses.join(', ') }, 'addresses')
 	// update accounts data
 	for (const address of addresses) {
 		const account = await getAccountEntity(ctx, address)
