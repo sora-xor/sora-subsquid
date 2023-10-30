@@ -27,7 +27,7 @@ export async function stakingRewardedEventHandler(ctx: BlockContext, eventItem: 
 	const stakingEra = await getActiveStakingEra(ctx)
 	const staker = await getStakingStaker(ctx, stash)
 	const payeeType = staker.payeeType
-	const payee = staker.payee as Address
+	const payee = typeof staker.payee === 'string' ? staker.payee as Address : staker.payee
 	const id = `${stakingEra.id}-${getEventId(ctx, eventItem)}-${staker.id}`
 
 	const stakingReward = new StakingReward()
@@ -40,7 +40,7 @@ export async function stakingRewardedEventHandler(ctx: BlockContext, eventItem: 
 	stakingReward.timestamp = formatDateTimestamp(new Date(ctx.block.header.timestamp))
 
 	await ctx.store.save(stakingReward)
-	getEventHandlerLog(ctx, eventItem).debug({ stash, payee, amount, era: stakingEra.index }, 'Staking reward saved')
+	getEventHandlerLog(ctx, eventItem).debug({ stash, payeeType, payee, amount, era: stakingEra.index }, 'Staking reward saved')
 
-	await createHistoryElement(ctx, eventItem, { stash, payee, amount, era: stakingEra.index }, payee)
+	await createHistoryElement(ctx, eventItem, { stash, payee, amount, era: stakingEra.index }, payee ?? id)
 }

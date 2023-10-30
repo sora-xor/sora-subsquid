@@ -2,7 +2,7 @@ import { ExecutionResult, ExecutionError, HistoryElement, HistoryElementCall, Hi
 import { Address, AnyCallItem, AssetAmount, BlockContext, EntityItem, EntityItemName } from '../types'
 import { getAccountEntity } from './account'
 import { networkSnapshotsStorage } from './network'
-import { formatDateTimestamp, getEntityId, toAddress, toCamelCase } from './index'
+import { formatDateTimestamp, getEntityId, getEventId, toAddress, toCamelCase } from './index'
 import { nToU8a } from '@polkadot/util'
 import { toJSON } from '@subsquid/util-internal-json'
 import { findEventByExtrinsicHash } from './events'
@@ -42,7 +42,7 @@ export const createHistoryElement = async (
 	ctx: BlockContext,
 	entityItem: EntityItem<EntityItemName>,
 	data?: {},
-	address?: Address,
+	address?: string,
 ): Promise<HistoryElement> => {
 	const historyElement = new HistoryElement()
 
@@ -59,7 +59,7 @@ export const createHistoryElement = async (
 	historyElement.module = toCamelCase(entityItem.name.split('.')[0])
 	historyElement.method = toCamelCase(entityItem.name.split('.')[1])
 	historyElement.name = historyElement.module + '.' + historyElement.method
-	historyElement.address = address ? address : toAddress(extrinsic?.signature?.address)
+	historyElement.address = address ? address : (entityItem.kind === 'call' ? toAddress(extrinsic?.signature?.address) : getEventId(ctx, entityItem))
 	historyElement.networkFee = entityItem.kind === 'call' ? getCallItemNetworkFee(ctx, entityItem).toString() : null
 	historyElement.timestamp = formatDateTimestamp(new Date(ctx.block.header.timestamp))
 	historyElement.updatedAtBlock = ctx.block.header.height

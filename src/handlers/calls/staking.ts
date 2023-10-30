@@ -282,6 +282,9 @@ export async function stakingSetControllerCallHandler(ctx: BlockContext, callIte
 
 	if (stakingStaker.controller !== controller) {
 		stakingStaker.controller = controller
+		if (stakingStaker.payeeType === PayeeType.CONTROLLER) {
+			stakingStaker.payee = controller
+		}
 		ctx.store.save(stakingStaker)
 		getCallHandlerLog(ctx, callItem).debug({ staker: stakingStaker.id, controller }, 'Staking staker controller updated')
 	}
@@ -347,8 +350,16 @@ export async function stakingSetPayeeCallHandler(ctx: BlockContext, callItem: Ca
 
 	const extrinsicSigner = getExtrinsicSigner(ctx, callItem)
 	const stakingStaker = await getStakingStaker(ctx, extrinsicSigner)
-	const payeeType = data.payee.__kind.toUpperCase() as PayeeType
-	const payee = data.payee.__kind === 'Account' ? toAddress(data.payee.value) : null
+	const kind = data.payee.__kind.toUpperCase()
+	const payeeType = kind === 'STAKED' || kind === 'NONE' ? PayeeType.STASH : kind as PayeeType
+	let payee = null
+	if (data.payee.__kind === 'Account') {
+		payee = toAddress(data.payee.value)
+	} else if (payeeType === PayeeType.STASH) {
+		payee = stakingStaker.id
+	} else if (payeeType === PayeeType.CONTROLLER) {
+		payee = stakingStaker.controller
+	}
 
 	if (stakingStaker.payeeType !== payeeType || stakingStaker.payee !== payee) {
 		stakingStaker.payeeType = payeeType
