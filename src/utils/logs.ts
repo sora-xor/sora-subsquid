@@ -1,6 +1,6 @@
 import { getEventId } from '.'
 import { performanceLogMinTime, performanceLogMode, testLogMode } from '../config'
-import { BlockContext, CallItem, EventItem } from '../types'
+import { BlockContext, Call, Event } from '../types'
 
 let lastLogNow = performance.now()
 
@@ -60,17 +60,17 @@ export function getLog(ctx: BlockContext, logModule: string | null = null, attrs
 	}
 }
 
-export function getCallHandlerLog(ctx: BlockContext, callItem: CallItem<any>, testMode: boolean = false) {
-	const extrinsicHash = callItem.extrinsic.hash
-	const callName = toPascalCase(callItem.name)
+export function getCallHandlerLog(ctx: BlockContext, call: Call<any>, testMode: boolean = false) {
+	const extrinsicHash = call.extrinsic?.hash ?? null
+	const callName = toPascalCase(call.name)
 	const attributes = { extrinsicHash, callName }
 	return getLog(ctx, 'CallHandler', attributes, testMode)
 }
 
-export function getEventHandlerLog(ctx: BlockContext, eventItem: EventItem<any>, testMode: boolean = false) {
-	const extrinsicHash = eventItem.event.extrinsic?.hash ?? null
-	const eventName = toPascalCase(eventItem.name)
-	const eventId = getEventId(ctx, eventItem)
+export function getEventHandlerLog(ctx: BlockContext, event: Event<any>, testMode: boolean = false) {
+	const extrinsicHash = event.extrinsic?.hash ?? null
+	const eventName = toPascalCase(event.name)
+	const eventId = getEventId(ctx, event)
 	const attributes: any = { eventName, eventId }
 	if (extrinsicHash) {
 		attributes['extrinsicHash'] = extrinsicHash
@@ -84,6 +84,10 @@ export function getInitializeAssetsLog(ctx: BlockContext, testMode: boolean = fa
 
 export function getInitializePoolsLog(ctx: BlockContext, testMode: boolean = false) {
 	return getLog(ctx, 'InitializePools', {}, testMode)
+}
+
+export function getInitializeOrderBooksLog(ctx: BlockContext, testMode: boolean = false) {
+	return getLog(ctx, 'InitializeOrderBooks', {}, testMode)
 }
 
 export function getSyncModelsLog(ctx: BlockContext, testMode: boolean = false) {
@@ -106,18 +110,30 @@ export function getNetworkSnapshotsStorageLog(ctx: BlockContext, testMode: boole
 	return getLog(ctx, 'NetworkSnapshotsStorage', {}, testMode)
 }
 
+export function getOrderBooksSnapshotsStorageLog(ctx: BlockContext, testMode: boolean = false) {
+	return getLog(ctx, 'OrderBooksSnapshotsStorage', {}, testMode)
+}
+
 export function getPoolsStorageLog(ctx: BlockContext, testMode: boolean = false) {
 	return getLog(ctx, 'PoolsStorage', {}, testMode)
+}
+
+export function getOrderBooksStorageLog(ctx: BlockContext, testMode: boolean = false) {
+	return getLog(ctx, 'OrderBooksStorage', {}, testMode)
 }
 
 export function getUtilsLog(ctx: BlockContext, testMode: boolean = false) {
 	return getLog(ctx, 'Utils', {}, testMode)
 }
 
-export function logStartProcessingCall(ctx: BlockContext, callItem: CallItem<any>) {
+export function getStreamLog(ctx: BlockContext, testMode: boolean = false) {
+	return getLog(ctx, 'Stream', {}, testMode)
+}
+
+export function logStartProcessingCall(ctx: BlockContext, callItem: Call<any>) {
 	return getCallHandlerLog(ctx, callItem).debug('Start processing the call')
 }
 
-export function logStartProcessingEvent(ctx: BlockContext, eventItem: EventItem<any>) {
+export function logStartProcessingEvent(ctx: BlockContext, eventItem: Event<any>) {
 	return getEventHandlerLog(ctx, eventItem).debug('Start processing the event')
 }
