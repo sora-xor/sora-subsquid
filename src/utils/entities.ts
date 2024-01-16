@@ -182,7 +182,7 @@ export function getCallRepresentation<T extends VersionedObject, V extends reado
 ) {
 	return getEntityRepresentation<T, V, false>(ctx, types, { kind: 'call', entity: call }, excludeVersions)
 }
-export function decodeCall<R>(representation: R, call: Call<any>): any {
+export function decodeCall<R>(representation: R, call: Call<any>): ExtractCallType<R> {
 	return (representation as any).decode(call)
 }
 export function getCallData<T extends VersionedObject, V extends readonly string[] = []>(ctx: BlockContext, types: T, call: Call<any>, excludeVersions?: V) {
@@ -198,7 +198,7 @@ export function getEventRepresentation<T extends VersionedObject, V extends read
 ) {
 	return getEntityRepresentation<T, V, false>(ctx, types, { kind: 'event', entity: event }, excludeVersions)
 }
-export function decodeEvent<R>(representation: R, event: Event<any>): any {
+export function decodeEvent<R>(representation: R, event: Event<any>): ExtractEventType<R> {
 	return (representation as any).decode(event)
 }
 export function getEventData<T extends VersionedObject, V extends readonly string[] = []>(ctx: BlockContext, types: T, event: Event<any>, excludeVersions?: V) {
