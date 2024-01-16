@@ -4,7 +4,7 @@ import { logStartProcessingCall } from '../../utils/logs'
 import { BlockContext, Call, AssetId } from '../../types'
 import { findEventByExtrinsicHash, findEventsByExtrinsicHash } from '../../utils/events'
 import { assertDefined } from '../../utils'
-import { getCallRepresentation, getEventRepresentation } from '../../utils/entities'
+import { getCallData, getEventData } from '../../utils/entities'
 import { events, calls } from '../../types/generated/merged'
 
 export async function orderBookPlaceLimitOrderCallHandler(ctx: BlockContext, call: Call<'OrderBook.place_limit_order'>): Promise<void> {
@@ -12,7 +12,7 @@ export async function orderBookPlaceLimitOrderCallHandler(ctx: BlockContext, cal
 
 	const historyElement = await createCallHistoryElement(ctx, call)
 
-	const { orderBookId, price, amount, side, lifespan } = getCallRepresentation(ctx, calls.orderBook.placeLimitOrder, call).decode(call)
+	const { orderBookId, price, amount, side, lifespan } = getCallData(ctx, calls.orderBook.placeLimitOrder, call)
 
 	const baseAssetId = getAssetId(orderBookId.base)
 	const quoteAssetId = getAssetId(orderBookId.quote)
@@ -32,8 +32,7 @@ export async function orderBookPlaceLimitOrderCallHandler(ctx: BlockContext, cal
 	const limitOrderPlacedEvent = findEventByExtrinsicHash(ctx, call.extrinsic.hash, ['OrderBook.LimitOrderPlaced'])
 
 	if (limitOrderPlacedEvent) {
-		const representation = getEventRepresentation(ctx, events.orderBook.limitOrderPlaced, limitOrderPlacedEvent)
-		const { orderId } = representation.decode(limitOrderPlacedEvent)
+		const { orderId } = getEventData(ctx, events.orderBook.limitOrderPlaced, limitOrderPlacedEvent)
 		details.orderId = Number(orderId)
 	}
 
@@ -49,8 +48,7 @@ export async function orderBookCancelLimitOrderCallHandler(ctx: BlockContext, ca
   const cancelEvents = findEventsByExtrinsicHash(ctx, call.extrinsic.hash, ['OrderBook.LimitOrderCanceled'])
 
   const details = cancelEvents.reduce((buffer, cancelEvent) => {
-	const representation = getEventRepresentation(ctx, events.orderBook.limitOrderCanceled, cancelEvent)
-	const { orderBookId, orderId } = representation.decode(cancelEvent)
+	const { orderBookId, orderId } = getEventData(ctx, events.orderBook.limitOrderCanceled, cancelEvent)
 
     buffer.push({
       dexId: orderBookId.dexId,
