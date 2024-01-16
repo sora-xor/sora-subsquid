@@ -142,7 +142,7 @@ export async function orderBookLimitOrderExecutedEventHandler(ctx: BlockContext,
 export async function orderBookLimitOrderUpdatedEventHandler(ctx: BlockContext, event: Event<'OrderBook.LimitOrderUpdated'>): Promise<void> {
 	logStartProcessingEvent(ctx, event)
 
-	const { orderBookId, orderId, ownerId, newAmount } = getEventDataDiffer(ctx, getScheme(['stage', 'test', 'dev'], 'orderBook', 'limitOrderUpdated'), event)
+	const { orderBookId, orderId, newAmount } = getEventDataDiffer(ctx, getScheme(['stage', 'test', 'dev'], 'orderBook', 'limitOrderUpdated'), event)
 	const { id, baseAssetId } = getOrderData(orderBookId, orderId)
 
 	const limitOrder = await ctx.store.get(OrderBookOrder, id)

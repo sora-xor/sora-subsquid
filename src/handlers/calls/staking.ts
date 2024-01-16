@@ -254,7 +254,11 @@ export async function stakingSetHistoryDepthCallHandler(ctx: BlockContext, call:
 
 	const data = getCallDataDiffer(
 		ctx,
-		getScheme(['production', 'stage', 'test'], 'staking', 'setHistoryDepth'),
+		{
+			production: ['staking', 'setHistoryDepth'],
+			stage: ['staking', 'setHistoryDepth'],
+			test: ['staking', 'setHistoryDepth'],
+		},
 		call
 	)
 
