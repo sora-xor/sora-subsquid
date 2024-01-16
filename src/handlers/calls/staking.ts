@@ -13,11 +13,11 @@ import { calls } from '../../types/generated/production'
 export async function stakingBondCallHandler(ctx: BlockContext, call: Call<'Staking.bond'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	type Bond = typeof calls.staking.bond
-	type BondType = Bond[keyof Bond]
-	type BondData = ExtractCallType<BondType>
+	// type Bond = typeof calls.staking.bond
+	// type BondType = Bond[keyof Bond]
+	// type BondData = ExtractCallType<BondType>
 
-	const { controller, payee, value } = getCallData(ctx, calls.staking.bond, call) as BondData
+	const { controller, payee, value } = getCallData(ctx, calls.staking.bond, call)
 
 	const details = {
 		controller,
