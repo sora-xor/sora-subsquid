@@ -8,16 +8,20 @@ import { getExtrinsicSigner } from '../../utils/calls'
 import { PayeeType } from '../../model'
 import { getStakingStaker } from '../../utils/staking'
 import { toAddress } from '../../utils'
-import { calls } from '../../types/generated/production'
+import { calls as callsProduction } from '../../types/generated/production'
+import { calls as callsStage } from '../../types/generated/stage'
+import { calls as callsTest } from '../../types/generated/test'
+import { calls as callsDev } from '../../types/generated/dev'
 
 export async function stakingBondCallHandler(ctx: BlockContext, call: Call<'Staking.bond'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	// type Bond = typeof calls.staking.bond
-	// type BondType = Bond[keyof Bond]
-	// type BondData = ExtractCallType<BondType>
-
-	const { controller, payee, value } = getCallData(ctx, calls.staking.bond, call)
+	const dataProduction = getCallData(ctx, callsProduction.staking.bond, call)
+	const dataStage = getCallData(ctx, callsStage.staking.bond, call)
+	const dataTest = getCallData(ctx, callsTest.staking.bond, call)
+	const dataDev = getCallData(ctx, callsDev.staking.bond, call)
+	const data: typeof dataProduction | typeof dataStage | typeof dataTest | typeof dataDev = dataProduction || dataStage || dataTest || dataDev
+	const { controller, payee, value } = data
 
 	const details = {
 		controller,
