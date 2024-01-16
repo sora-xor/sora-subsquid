@@ -9,7 +9,7 @@ import { assetRegistrationStream } from '../../utils/stream'
 export async function assetRegistrationEventHandler(ctx: BlockContext, event: Event<'Assets.AssetRegistered'>): Promise<void> {
 	logStartProcessingEvent(ctx, event)
 
-	const [asset] = getEventData(ctx, events.assets.assetRegistered, event)
+	const [asset] = getEventData(ctx, 'assets', 'assetRegistered', event)
 	const assetId = getAssetId(asset)
 
 	const assetIdVersions = ['1', '26', '33Stage', '33Test'] as const
@@ -37,7 +37,7 @@ export async function syntheticAssetEnabledEventHandler(
 ): Promise<void> {
 	logStartProcessingEvent(ctx, event)
 
-	const data = getEventData(ctx, events.xstPool.syntheticAssetEnabled, event)
+	const data = getEventData(ctx, 'xstPool', 'syntheticAssetEnabled', event)
 
 	if (!Array.isArray(data)) return
 

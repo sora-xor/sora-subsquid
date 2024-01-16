@@ -9,7 +9,6 @@ import BigNumber from 'bignumber.js'
 import { XOR } from '../../utils/consts'
 import { assertDefined, toAddress } from '../../utils'
 import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
-import { calls, events } from '../../types/generated/merged'
 
 export async function swapsCallHandler(
 	ctx: BlockContext,
@@ -61,7 +60,7 @@ export async function swapsCallHandler(
 	if (historyElement.execution.success) {
 		assertDefined(call.extrinsic)
 		const exchangeEvent = findEventByExtrinsicHash(ctx, call.extrinsic.hash, ['LiquidityProxy.Exchange'], true)
-		const exchangeEventData = getEventData(ctx, events.liquidityProxy.exchange, exchangeEvent)
+		const exchangeEventData = getEventData(ctx, 'liquidityProxy', 'exchange', exchangeEvent)
 
 		const [, , , , baseAssetAmount, targetAssetAmount, liquidityProviderFee] = exchangeEventData
 

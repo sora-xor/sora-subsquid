@@ -1,6 +1,6 @@
 import { BlockContext, Call } from '../../types'
 import { createCallHistoryElement } from '../../utils/history'
-import { ExtractCallType, getCallData } from '../../utils/entities'
+import { getCallData, getCallDataDiffer, getScheme } from '../../utils/entities'
 import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 import { XOR } from '../../utils/consts'
 import { formatU128ToBalance } from '../../utils/assets'
@@ -8,10 +8,6 @@ import { getExtrinsicSigner } from '../../utils/calls'
 import { PayeeType } from '../../model'
 import { getStakingStaker } from '../../utils/staking'
 import { toAddress } from '../../utils'
-import { calls as callsProduction } from '../../types/generated/production'
-import { calls as callsStage } from '../../types/generated/stage'
-import { calls as callsTest } from '../../types/generated/test'
-import { calls as callsDev } from '../../types/generated/dev'
 
 export async function stakingBondCallHandler(ctx: BlockContext, call: Call<'Staking.bond'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
@@ -256,7 +252,11 @@ export async function stakingSetControllerCallHandler(ctx: BlockContext, call: C
 export async function stakingSetHistoryDepthCallHandler(ctx: BlockContext, call: Call<'Staking.set_history_depth'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, 'staking', 'setHistoryDepth', call)
+	const data = getCallDataDiffer(
+		ctx,
+		getScheme(['production', 'stage', 'test'], 'staking', 'setHistoryDepth'),
+		call
+	)
 
 	const details = {
 		newHistoryDepth: data.newHistoryDepth,
@@ -380,7 +380,11 @@ export async function stakingSubmitElectionSolutionCallHandler(
 ): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, 'staking', 'submitElectionSolution', call)
+	const data = getCallDataDiffer(
+		ctx,
+		getScheme(['production', 'stage', 'test'], 'staking', 'submitElectionSolution'),
+		call
+	)
 
 	const details = {
 		winners: data.winners,
@@ -397,7 +401,11 @@ export async function stakingSubmitElectionSolutionUnsignedCallHandler(
 ): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, 'staking', 'submitElectionSolutionUnsigned', call)
+	const data = getCallDataDiffer(
+		ctx,
+		getScheme(['production', 'stage', 'test'], 'staking', 'submitElectionSolutionUnsigned'),
+		call
+	)
 
 	const details = {
 		winners: data.winners,

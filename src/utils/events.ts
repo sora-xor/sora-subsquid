@@ -69,7 +69,7 @@ export const isAssetTransferEvent = (e: Event<EventName>): boolean => {
 }
 
 export const getBalancesTransferEventData = (ctx: BlockContext, event: Event<'Balances.Transfer'>): TransferEventData => {
-	const data = getEventData(ctx, events.balances.transfer, event)
+	const data = getEventData(ctx, 'balances', 'transfer', event)
 
 	return {
 		assetId: XOR,
@@ -80,7 +80,7 @@ export const getBalancesTransferEventData = (ctx: BlockContext, event: Event<'Ba
 }
 
 export const getTokensTransferEventData = (ctx: BlockContext, event: Event<'Tokens.Transfer'>): TransferEventData => {
-	const { currencyId, from, to, amount } = getEventData(ctx, events.tokens.transfer, event)
+	const { currencyId, from, to, amount } = getEventData(ctx, 'tokens', 'transfer', event)
 
 	return {
 		assetId: getAssetId(currencyId),
@@ -102,7 +102,7 @@ export const getAssetsTransferEventData = (
 }
 
 export const getBalancesDepositEventData = (ctx: BlockContext, event: Event<'Balances.Deposited'>): DepositEventData => {
-	const data = getEventData(ctx, events.balances.deposit, event)
+	const data = getEventData(ctx, 'balances', 'deposit', event)
 
 	return {
 		assetId: XOR,
@@ -112,7 +112,7 @@ export const getBalancesDepositEventData = (ctx: BlockContext, event: Event<'Bal
 }
 
 export const getTokensDepositedEventData = (ctx: BlockContext, event: Event<'Tokens.Deposited'>): DepositEventData => {
-	const { currencyId, who, amount } = getEventData(ctx, events.tokens.deposited, event)
+	const { currencyId, who, amount } = getEventData(ctx, 'tokens', 'deposited', event)
 
 	return {
 		assetId: getAssetId(currencyId),

@@ -5,7 +5,6 @@ import { AssetId } from '../../types'
 import { getCallData, getEventData } from '../../utils/entities'
 import { getAssetId } from '../../utils/assets'
 import { logStartProcessingCall } from '../../utils/logs'
-import { calls, events } from '../../types/generated/merged'
 
 export async function assetRegistrationCallHandler(ctx: BlockContext, call: Call<'Assets.register'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
@@ -21,7 +20,7 @@ export async function assetRegistrationCallHandler(ctx: BlockContext, call: Call
 
 	if (historyElement.execution.success) {
 		const assetRegistrationEvent = findEventByExtrinsicHash(ctx, extrinsicHash, ['Assets.AssetRegistered'], true)
-		const assetRegistrationEventData = getEventData(ctx, events.assets.assetRegistered, assetRegistrationEvent)
+		const assetRegistrationEventData = getEventData(ctx, 'assets', 'assetRegistered', assetRegistrationEvent)
 
 		const assetId = getAssetId(assetRegistrationEventData[0])
 

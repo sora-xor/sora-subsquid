@@ -8,7 +8,7 @@ import { events } from '../../types/generated/production'
 export async function referrerRewardEventHandler(ctx: BlockContext, event: Event<'XorFee.ReferrerRewarded'>): Promise<void> {
 	logStartProcessingEvent(ctx, event)
 
-	const [referral, referrer, amount] = getEventData(ctx, events.xorFee.referrerRewarded, event)
+	const [referral, referrer, amount] = getEventData(ctx, 'xorFee', 'referrerRewarded', event)
 
 	const key = `${toAddress(referral)}-${toAddress(referrer)}`
 

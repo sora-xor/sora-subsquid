@@ -8,7 +8,6 @@ import { getExtrinsicSigner } from '../../utils/calls'
 import { findEventByExtrinsicHash } from '../../utils/events'
 import { XOR } from '../../utils/consts'
 import BigNumber from 'bignumber.js'
-import { calls, events } from '../../types/generated/merged'
 
 export async function assetTransferCallHandler(ctx: BlockContext, call: Call<'Assets.transfer'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
@@ -54,7 +53,7 @@ export async function xorlessTransferHandler(ctx: BlockContext, call: Call<'Liqu
 		assertDefined(call.extrinsic)
 		const exchangeEvent = findEventByExtrinsicHash(ctx, call.extrinsic.hash, ['LiquidityProxy.Exchange'])
 		if (exchangeEvent) {
-			const exchangeEventData = getEventData(ctx, events.liquidityProxy.exchange, exchangeEvent)
+			const exchangeEventData = getEventData(ctx, 'liquidityProxy', 'exchange', exchangeEvent)
 
 			const [, , , , baseAssetAmount, targetAssetAmount] = exchangeEventData
 

@@ -4,7 +4,6 @@ import { BlockContext, AssetAmount, Call } from '../../types'
 import { findEventByExtrinsicHash } from '../../utils/events'
 import { getCallData, getEventData } from '../../utils/entities'
 import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
-import { calls, events } from '../../types/generated/merged'
 import { assertDefined } from '../../utils'
 
 export async function demeterGetRewardsCallHandler(
@@ -26,7 +25,7 @@ export async function demeterGetRewardsCallHandler(
 	const event = findEventByExtrinsicHash(ctx, extrinsicHash, ['DemeterFarmingPlatform.RewardWithdrawn'])
 
 	if (event) {
-		const data = getEventData(ctx, events.demeterFarmingPlatform.rewardWithdrawn, event)
+		const data = getEventData(ctx, 'demeterFarmingPlatform', 'rewardWithdrawn', event)
 
 		const assetAmount = data[1] as AssetAmount
 

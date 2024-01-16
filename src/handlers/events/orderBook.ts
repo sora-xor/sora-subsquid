@@ -7,8 +7,7 @@ import { OrderBooksStorage, orderBooksStorage, orderBooksSnapshotsStorage } from
 import { getEventHandlerLog, logStartProcessingEvent } from '../../utils/logs'
 import { BlockContext, Event } from '../../types'
 import { OrderBookOrder, OrderBookStatus, OrderStatus, OrderType } from '../../model'
-import { getEventData } from '../../utils/entities'
-import { events } from '../../types/generated/merged'
+import { getEventDataDiffer, getScheme } from '../../utils/entities'
 
 const getBookData = (orderBookCodec: any) => {
 	const dexId = orderBookCodec.dexId.toNumber()
@@ -53,7 +52,7 @@ const getOrderData = (orderBookCodec: any, orderId: bigint | string) => {
 export async function orderBookCreatedEventHandler(ctx: BlockContext, event: Event<'OrderBook.OrderBookCreated'>): Promise<void> {
 	logStartProcessingEvent(ctx, event)
 
-	const { orderBookId } = getEventData(ctx, events.orderBook.orderBookCreated, event)
+	const { orderBookId } = getEventDataDiffer(ctx, getScheme(['stage', 'test', 'dev'], 'orderBook', 'orderBookCreated'), event)
 	const { dexId, baseAssetId, quoteAssetId } = getBookData(orderBookId)
 	const { id } = await orderBooksStorage.getOrderBook(ctx, dexId, baseAssetId, quoteAssetId)
 
@@ -63,7 +62,7 @@ export async function orderBookCreatedEventHandler(ctx: BlockContext, event: Eve
 export async function orderBookStatusChangedEventHandler(ctx: BlockContext, event: Event<'OrderBook.OrderBookStatusChanged'>): Promise<void> {
 	logStartProcessingEvent(ctx, event)
 
-	const { orderBookId, newStatus } = getEventData(ctx, events.orderBook.orderBookStatusChanged, event)
+	const { orderBookId, newStatus } = getEventDataDiffer(ctx, getScheme(['stage', 'test', 'dev'], 'orderBook', 'orderBookStatusChanged'), event)
 	const { dexId, baseAssetId, quoteAssetId } = getBookData(orderBookId)
 	const orderBook = await orderBooksStorage.getOrderBook(ctx, dexId, baseAssetId, quoteAssetId)
 	const status = getBookStatus(newStatus.__kind)
@@ -78,7 +77,7 @@ export async function orderBookStatusChangedEventHandler(ctx: BlockContext, even
 export async function orderBookLimitOrderPlacedEventHandler(ctx: BlockContext, event: Event<'OrderBook.LimitOrderPlaced'>): Promise<void> {
 	logStartProcessingEvent(ctx, event)
 
-	const { orderBookId, orderId, ownerId, side, price, amount, lifetime } = getEventData(ctx, events.orderBook.limitOrderPlaced, event)
+	const { orderBookId, orderId, ownerId, side, price, amount, lifetime } = getEventDataDiffer(ctx, getScheme(['stage', 'test', 'dev'], 'orderBook', 'limitOrderPlaced'), event)
 
 	const blockHeight = ctx.block.header.height
 	const timestamp = getBlockTimestamp(ctx)
@@ -115,7 +114,7 @@ export async function orderBookLimitOrderPlacedEventHandler(ctx: BlockContext, e
 export async function orderBookLimitOrderExecutedEventHandler(ctx: BlockContext, event: Event<'OrderBook.LimitOrderExecuted'>): Promise<void> {
 	logStartProcessingEvent(ctx, event)
 
-	const { orderBookId, orderId, side, price, amount } = getEventData(ctx, events.orderBook.limitOrderExecuted, event)
+	const { orderBookId, orderId, side, price, amount } = getEventDataDiffer(ctx, getScheme(['stage', 'test', 'dev'], 'orderBook', 'limitOrderExecuted'), event)
 	const { id, dexId, baseAssetId, quoteAssetId } = getOrderData(orderBookId, orderId)
 
 	const newPrice = formatU128ToBalance(price.inner, quoteAssetId)
@@ -143,7 +142,7 @@ export async function orderBookLimitOrderExecutedEventHandler(ctx: BlockContext,
 export async function orderBookLimitOrderUpdatedEventHandler(ctx: BlockContext, event: Event<'OrderBook.LimitOrderUpdated'>): Promise<void> {
 	logStartProcessingEvent(ctx, event)
 
-	const { orderBookId, orderId, ownerId, newAmount } = getEventData(ctx, events.orderBook.limitOrderUpdated, event)
+	const { orderBookId, orderId, ownerId, newAmount } = getEventDataDiffer(ctx, getScheme(['stage', 'test', 'dev'], 'orderBook', 'limitOrderUpdated'), event)
 	const { id, baseAssetId } = getOrderData(orderBookId, orderId)
 
 	const limitOrder = await ctx.store.get(OrderBookOrder, id)
@@ -166,7 +165,7 @@ export async function orderBookLimitOrderUpdatedEventHandler(ctx: BlockContext, 
 export async function orderBookLimitOrderFilledEventHandler(ctx: BlockContext, event: Event<'OrderBook.LimitOrderFilled'>): Promise<void> {
 	logStartProcessingEvent(ctx, event)
 
-	const data = getEventData(ctx, events.orderBook.limitOrderFilled, event)
+	const data = getEventDataDiffer(ctx, getScheme(['stage', 'test', 'dev'], 'orderBook', 'limitOrderFilled'), event)
 	const { orderBookId, orderId } = data
 	const { id } = getOrderData(orderBookId, orderId)
 
@@ -188,7 +187,7 @@ export async function orderBookLimitOrderFilledEventHandler(ctx: BlockContext, e
 export async function orderBookLimitOrderCanceledEventHandler(ctx: BlockContext, event: Event<'OrderBook.LimitOrderCanceled'>): Promise<void> {
 	logStartProcessingEvent(ctx, event)
 
-	const { orderBookId, orderId, reason } = getEventData(ctx, events.orderBook.limitOrderCanceled, event)
+	const { orderBookId, orderId, reason } = getEventDataDiffer(ctx, getScheme(['stage', 'test', 'dev'], 'orderBook', 'limitOrderCanceled'), event)
 	const { id } = getOrderData(orderBookId, orderId)
 
 	const limitOrder = await ctx.store.get(OrderBookOrder, id)
@@ -212,7 +211,7 @@ export async function orderBookMarketOrderEventHandler(
 ): Promise<void> {
 	logStartProcessingEvent(ctx, event)
 
-	const { orderBookId, ownerId, direction, amount, averagePrice } = getEventData(ctx, events.orderBook.marketOrderExecuted, event)
+	const { orderBookId, ownerId, direction, amount, averagePrice } = getEventDataDiffer(ctx, getScheme(['stage', 'test', 'dev'], 'orderBook', 'marketOrderExecuted'), event)
 
 	const blockHeight = ctx.block.header.height
 	const timestamp = getBlockTimestamp(ctx)

@@ -1,18 +1,21 @@
-import { addDataToHistoryElement, createCallHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
+import { addDataToHistoryElement, createCallHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { getAssetId, formatU128ToBalance } from '../../utils/assets'
 import { logStartProcessingCall } from '../../utils/logs'
 import { BlockContext, Call, AssetId } from '../../types'
 import { findEventByExtrinsicHash, findEventsByExtrinsicHash } from '../../utils/events'
 import { assertDefined } from '../../utils'
-import { getCallData, getEventData } from '../../utils/entities'
-import { events, calls } from '../../types/generated/merged'
+import { getCallDataDiffer, getEventDataDiffer, getScheme } from '../../utils/entities'
 
 export async function orderBookPlaceLimitOrderCallHandler(ctx: BlockContext, call: Call<'OrderBook.place_limit_order'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
 	const historyElement = await createCallHistoryElement(ctx, call)
 
-	const { orderBookId, price, amount, side, lifespan } = getCallData(ctx, 'orderBook', 'placeLimitOrder', call)
+	const { orderBookId, price, amount, side, lifespan } = getCallDataDiffer(
+		ctx,
+		getScheme(['stage', 'test', 'dev'], 'orderBook', 'placeLimitOrder'),
+		call
+	)
 
 	const baseAssetId = getAssetId(orderBookId.base)
 	const quoteAssetId = getAssetId(orderBookId.quote)
@@ -32,7 +35,11 @@ export async function orderBookPlaceLimitOrderCallHandler(ctx: BlockContext, cal
 	const limitOrderPlacedEvent = findEventByExtrinsicHash(ctx, call.extrinsic.hash, ['OrderBook.LimitOrderPlaced'])
 
 	if (limitOrderPlacedEvent) {
-		const { orderId } = getEventData(ctx, events.orderBook.limitOrderPlaced, limitOrderPlacedEvent)
+		const { orderId } = getEventDataDiffer(
+			ctx,
+			getScheme(['stage', 'test', 'dev'], 'orderBook', 'limitOrderPlaced'),
+			limitOrderPlacedEvent
+		)
 		details.orderId = Number(orderId)
 	}
 
@@ -48,7 +55,11 @@ export async function orderBookCancelLimitOrderCallHandler(ctx: BlockContext, ca
   const cancelEvents = findEventsByExtrinsicHash(ctx, call.extrinsic.hash, ['OrderBook.LimitOrderCanceled'])
 
   const details = cancelEvents.reduce((buffer, cancelEvent) => {
-	const { orderBookId, orderId } = getEventData(ctx, events.orderBook.limitOrderCanceled, cancelEvent)
+	const { orderBookId, orderId } = getEventDataDiffer(
+		ctx,
+		getScheme(['stage', 'test', 'dev'], 'orderBook', 'limitOrderCanceled'),
+		cancelEvent
+	)
 
     buffer.push({
       dexId: orderBookId.dexId,

@@ -5,7 +5,6 @@ import { BlockContext, AssetAmount, Call } from '../../types'
 import { findEventByExtrinsicHash, getAssetsTransferEventData } from '../../utils/events'
 import { getCallData } from '../../utils/entities'
 import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
-import { calls } from '../../types/generated/merged'
 import { assertDefined } from '../../utils'
 
 export async function referralReserveCallHandler(ctx: BlockContext, call: Call<'Referrals.reserve'>): Promise<void> {

@@ -6,10 +6,11 @@ import { CallType as CallTypeDev, EventType as EventTypeDev } from '../types/gen
 import { UnsupportedSpecError } from './errors'
 import { getLog } from './logs'
 import * as sts from '@subsquid/substrate-runtime/lib/sts'
-import { calls as callsProduction } from '../types/generated/production'
-import { calls as callsStage } from '../types/generated/stage'
-import { calls as callsTest } from '../types/generated/test'
-import { calls as callsDev } from '../types/generated/dev'
+import { calls as callsProduction, events as eventsProduction } from '../types/generated/production'
+import { calls as callsStage, events as eventsStage } from '../types/generated/stage'
+import { calls as callsTest, events as eventsTest } from '../types/generated/test'
+import { calls as callsDev, events as eventsDev } from '../types/generated/dev'
+import { assertDefined } from '.'
 
 type VersionedObject = {
 	[key: string]: any
@@ -193,23 +194,15 @@ export function getEntityRepresentation<T extends VersionedObject, V extends rea
 	return data as any
 }
 
-export function getCallRepresentation<T extends VersionedObject, V extends readonly string[] = []>(
+export function getStorageRepresentation<T extends VersionedObject, V extends readonly string[] = []>(
 	ctx: BlockContext,
 	types: T,
-	call: Call<any>,
 	excludeVersions?: V,
 ) {
-	return getEntityRepresentation<T, V, false>(ctx, types, { kind: 'call', entity: call }, excludeVersions)
+	return getEntityRepresentation<T, V, true>(ctx, types, { kind: 'storage' }, excludeVersions, true)
 }
-export function decodeCall<R>(representation: R, call: Call<any>): ExtractCallType<R> {
-	return (representation as any).decode(call)
-}
-// export function getCallData<T extends VersionedObject, V extends readonly string[] = []>(ctx: BlockContext, types: T, call: Call<any>, excludeVersions?: V) {
-// 	const representation = getCallRepresentation<T, V>(ctx, types, call)
-// 	return decodeCall(representation, call)
-// }
 
-type CallsProduction = typeof callsProduction
+export type CallsProduction = typeof callsProduction
 export function getCallDataProduction<MO extends keyof CallsProduction, ME extends keyof CallsProduction[MO]>(ctx: BlockContext, module: MO, method: ME, call: Call<any>) {
 	const type = callsProduction[module][method]
 	type T = typeof type
@@ -217,7 +210,7 @@ export function getCallDataProduction<MO extends keyof CallsProduction, ME exten
 	return data
 }
 
-type CallsStage = typeof callsStage
+export type CallsStage = typeof callsStage
 export function getCallDataStage<MO extends keyof CallsStage, ME extends keyof CallsStage[MO]>(ctx: BlockContext, module: MO, method: ME, call: Call<any>) {
 	const type = callsStage[module][method]
 	type T = typeof type
@@ -225,7 +218,7 @@ export function getCallDataStage<MO extends keyof CallsStage, ME extends keyof C
 	return data
 }
 
-type CallsTest = typeof callsTest
+export type CallsTest = typeof callsTest
 export function getCallDataTest<MO extends keyof CallsTest, ME extends keyof CallsTest[MO]>(ctx: BlockContext, module: MO, method: ME, call: Call<any>) {
 	const type = callsTest[module][method]
 	type T = typeof type
@@ -233,7 +226,7 @@ export function getCallDataTest<MO extends keyof CallsTest, ME extends keyof Cal
 	return data
 }
 
-type CallsDev = typeof callsDev
+export type CallsDev = typeof callsDev
 export function getCallDataDev<MO extends keyof CallsDev, ME extends keyof CallsDev[MO]>(ctx: BlockContext, module: MO, method: ME, call: Call<any>) {
 	const type = callsDev[module][method]
 	type T = typeof type
@@ -242,7 +235,15 @@ export function getCallDataDev<MO extends keyof CallsDev, ME extends keyof Calls
 }
 
 type Calls = CallsProduction | CallsStage | CallsTest | CallsDev
-export function getCallData<MO extends keyof Calls, ME extends keyof Calls[MO]>(ctx: BlockContext, module: MO, method: ME, call: Call<any>) {
+export function getCallData<
+	MO extends keyof Calls,
+	ME extends keyof Calls[MO]
+>(
+	ctx: BlockContext,
+	module: MO,
+	method: ME,
+	call: Call<any>
+) {
 	const dataProduction = getCallDataProduction(ctx, module, method, call)
 	const dataStage = getCallDataStage(ctx, module, method, call)
 	const dataTest = getCallDataTest(ctx, module, method, call)
@@ -250,26 +251,134 @@ export function getCallData<MO extends keyof Calls, ME extends keyof Calls[MO]>(
 	return dataProduction || dataStage || dataTest || dataDev
 }
 
-export function getEventRepresentation<T extends VersionedObject, V extends readonly string[] = []>(
+export function getCallDataDiffer<
+	MOP extends keyof CallsProduction,
+	MEP extends keyof CallsProduction[MOP],
+	MOS extends keyof CallsStage,
+	MES extends keyof CallsStage[MOS],
+	MOT extends keyof CallsTest,
+	MET extends keyof CallsTest[MOT],
+	MOD extends keyof CallsDev,
+	MED extends keyof CallsDev[MOD],
+>(
 	ctx: BlockContext,
-	types: T,
-	event: Event<any>,
-	excludeVersions?: V,
+	section: {
+		production?: [MOP, MEP]
+		stage?: [MOS, MES]
+		test?: [MOT, MET]
+		dev?: [MOD, MED]
+	},
+	call: Call<any>
 ) {
-	return getEntityRepresentation<T, V, false>(ctx, types, { kind: 'event', entity: event }, excludeVersions)
-}
-export function decodeEvent<R>(representation: R, event: Event<any>): ExtractEventType<R> {
-	return (representation as any).decode(event)
-}
-export function getEventData<T extends VersionedObject, V extends readonly string[] = []>(ctx: BlockContext, types: T, event: Event<any>, excludeVersions?: V) {
-	const representation = getEventRepresentation<T, V>(ctx, types, event)
-	return decodeEvent(representation, event)
+	const dataProduction = section.production ? getCallDataProduction(ctx, section.production[0], section.production[1], call) : null
+	const dataStage = section.stage ? getCallDataStage(ctx, section.stage[0], section.stage[1], call) : null
+	const dataTest = section.test ? getCallDataTest(ctx, section.test[0], section.test[1], call) : null
+	const dataDev = section.dev ? getCallDataDev(ctx, section.dev[0], section.dev[1], call) : null
+	const data = dataProduction || dataStage || dataTest || dataDev
+	assertDefined(data)
+	return data
 }
 
-export function getStorageRepresentation<T extends VersionedObject, V extends readonly string[] = []>(
-	ctx: BlockContext,
-	types: T,
-	excludeVersions?: V,
-) {
-	return getEntityRepresentation<T, V, true>(ctx, types, { kind: 'storage' }, excludeVersions, true)
+export type EventsProduction = typeof eventsProduction
+export function getEventDataProduction<MO extends keyof EventsProduction, ME extends keyof EventsProduction[MO]>(ctx: BlockContext, module: MO, method: ME, event: Event<any>) {
+	const type = eventsProduction[module][method]
+	type T = typeof type
+	const data: ExtractEventType<Exclude<T[keyof T], string>> = event.block._runtime.decodeJsonEventRecordArguments(event)
+	return data
 }
+
+export type EventsStage = typeof eventsStage
+export function getEventDataStage<MO extends keyof EventsStage, ME extends keyof EventsStage[MO]>(ctx: BlockContext, module: MO, method: ME, event: Event<any>) {
+	const type = eventsStage[module][method]
+	type T = typeof type
+	const data: ExtractEventType<Exclude<T[keyof T], string>> = event.block._runtime.decodeJsonEventRecordArguments(event)
+	return data
+}
+
+export type EventsTest = typeof eventsTest
+export function getEventDataTest<MO extends keyof EventsTest, ME extends keyof EventsTest[MO]>(ctx: BlockContext, module: MO, method: ME, event: Event<any>) {
+	const type = eventsTest[module][method]
+	type T = typeof type
+	const data: ExtractEventType<Exclude<T[keyof T], string>> = event.block._runtime.decodeJsonEventRecordArguments(event)
+	return data
+}
+
+export type EventsDev = typeof eventsDev
+export function getEventDataDev<MO extends keyof EventsDev, ME extends keyof EventsDev[MO]>(ctx: BlockContext, module: MO, method: ME, event: Event<any>) {
+	const type = eventsDev[module][method]
+	type T = typeof type
+	const data: ExtractEventType<Exclude<T[keyof T], string>> = event.block._runtime.decodeJsonEventRecordArguments(event)
+	return data
+}
+
+type Events = EventsProduction | EventsStage | EventsTest | EventsDev
+export function getEventData<
+	MO extends keyof Events,
+	ME extends keyof Events[MO]
+>(
+	ctx: BlockContext,
+	module: MO,
+	method: ME,
+	event: Event<any>
+) {
+	const dataProduction = getEventDataProduction(ctx, module, method, event)
+	const dataStage = getEventDataStage(ctx, module, method, event)
+	const dataTest = getEventDataTest(ctx, module, method, event)
+	const dataDev = getEventDataDev(ctx, module, method, event)
+	return dataProduction || dataStage || dataTest || dataDev
+}
+
+export function getEventDataDiffer<
+	MOP extends keyof EventsProduction,
+	MEP extends keyof EventsProduction[MOP],
+	MOS extends keyof EventsStage,
+	MES extends keyof EventsStage[MOS],
+	MOT extends keyof EventsTest,
+	MET extends keyof EventsTest[MOT],
+	MOD extends keyof EventsDev,
+	MED extends keyof EventsDev[MOD],
+>(
+	ctx: BlockContext,
+	section: {
+		production?: [MOP, MEP]
+		stage?: [MOS, MES]
+		test?: [MOT, MET]
+		dev?: [MOD, MED]
+	},
+	event: Event<any>
+) {
+	const dataProduction = section.production ? getEventDataProduction(ctx, section.production[0], section.production[1], event) : null
+	const dataStage = section.stage ? getEventDataStage(ctx, section.stage[0], section.stage[1], event) : null
+	const dataTest = section.test ? getEventDataTest(ctx, section.test[0], section.test[1], event) : null
+	const dataDev = section.dev ? getEventDataDev(ctx, section.dev[0], section.dev[1], event) : null
+	const data = dataProduction || dataStage || dataTest || dataDev
+	assertDefined(data)
+	return data
+}
+
+
+
+
+type Environment = 'production' | 'stage' | 'test' | 'dev';
+
+// Use generic types to capture the environment and event types
+export function getScheme<E extends Environment, T, D>(
+  environments: E[],
+  module: T,
+  method: D
+): Record<E, [T, D]> {
+  const scheme: Record<E, [T, D]> = {} as Record<E, [T, D]>
+
+  environments.forEach(env => {
+    scheme[env] = [module, method]
+  })
+
+  return scheme
+}
+
+// Example usage
+const result1 = getScheme(['production', 'stage', 'test', 'dev'], 'orderBook', 'limitOrderPlaced')
+console.log(result1)
+
+const result2 = getScheme(['production', 'test', 'dev'], 'orderBook', 'limitOrderCanceled')
+console.log(result2)

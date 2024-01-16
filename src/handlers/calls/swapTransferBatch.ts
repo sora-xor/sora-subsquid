@@ -8,27 +8,26 @@ import { assertDefined, toAddress } from '../../utils'
 import { findEventByExtrinsicHash, findEventsByExtrinsicHash } from '../../utils/events'
 import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 import { getExtrinsicSigner } from '../../utils/calls'
-import { calls, events } from '../../types/generated/merged'
 
 function getLiquidityProxyBatchSwapExecutedEventData(ctx: BlockContext, extrinsicHash: string) {
 	const name = 'LiquidityProxy.BatchSwapExecuted'
 	const event = findEventByExtrinsicHash(ctx, extrinsicHash, [name])
 	if (event === null) return null
-	return getEventData(ctx, events.liquidityProxy.batchSwapExecuted, event)
+	return getEventData(ctx, 'liquidityProxy', 'batchSwapExecuted', event)
 }
 
 function getXorFeeFeeWithdrawnEventData(ctx: BlockContext, extrinsicHash: string) {
 	const name = 'XorFee.FeeWithdrawn'
 	const event = findEventByExtrinsicHash(ctx, extrinsicHash, [name])
 	if (event === null) return null
-	return getEventData(ctx, events.xorFee.feeWithdrawn, event)
+	return getEventData(ctx, 'xorFee', 'feeWithdrawn', event)
 }
 
 function getTransactionPaymentTransactionFeePaidEventData(ctx: BlockContext, extrinsicHash: string) {
 	const name = 'TransactionPayment.TransactionFeePaid'
 	const event = findEventByExtrinsicHash(ctx, extrinsicHash, [name])
 	if (event === null) return null
-	return getEventData(ctx, events.transactionPayment.transactionFeePaid, event)
+	return getEventData(ctx, 'transactionPayment', 'transactionFeePaid', event)
 }
 
 const handleAndSaveExtrinsic = async (ctx: BlockContext, call: Call<'LiquidityProxy.swap_transfer_batch'>): Promise<void> => {
@@ -76,7 +75,7 @@ const handleAndSaveExtrinsic = async (ctx: BlockContext, call: Call<'LiquidityPr
 		}
 
 		const assetsTransfers = findEventsByExtrinsicHash(ctx, call.extrinsic.hash, ['Assets.Transfer']).map((event) => {
-			const eventData = getEventData(ctx, events.assets.transfer, event)
+			const eventData = getEventData(ctx, 'assets', 'transfer', event)
 			const [from, to, asset, amount] = eventData
 			return {
 				from: toAddress(from),
@@ -88,7 +87,7 @@ const handleAndSaveExtrinsic = async (ctx: BlockContext, call: Call<'LiquidityPr
 		details.transfers = assetsTransfers
 
 		const exchanges = findEventsByExtrinsicHash(ctx, call.extrinsic.hash, ['LiquidityProxy.Exchange']).map((event) => {
-			const eventData = getEventData(ctx, events.liquidityProxy.exchange, event)
+			const eventData = getEventData(ctx, 'liquidityProxy', 'exchange', event)
 			const [senderAddress, dexId, inputAsset, outputAsset, inputAmount, outputAmount, feeAmount] = eventData
 			return {
 				senderAddress: toAddress(senderAddress),

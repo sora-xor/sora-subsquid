@@ -2,7 +2,6 @@ import { BlockContext, Call } from '../../types'
 import { addDataToHistoryElement, createCallHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { getCallData } from '../../utils/entities'
 import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
-import { calls } from '../../types/generated/merged'
 
 export async function setReferralCallHandler(ctx: BlockContext, call: Call<'Referrals.set_referrer'>): Promise<void> {
 	logStartProcessingCall(ctx, call)

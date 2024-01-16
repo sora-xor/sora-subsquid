@@ -26,7 +26,7 @@ const getCallNetworkFee = (ctx: BlockContext, call: Call<any>): AssetAmount => {
 	const event = findEventByExtrinsicHash(ctx, call.extrinsic.hash, ['XorFee.FeeWithdrawn'])
 
 	if (event) {
-		const eventData = getEventData(ctx, events.xorFee.feeWithdrawn, event)
+		const eventData = getEventData(ctx, 'xorFee', 'feeWithdrawn', event)
 
 		return eventData[1] as AssetAmount
 	}

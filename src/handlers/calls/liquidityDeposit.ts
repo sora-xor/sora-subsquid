@@ -5,7 +5,6 @@ import { findEventsByExtrinsicHash, getAssetsTransferEventData } from '../../uti
 import { BlockContext, AssetAmount, Call } from '../../types'
 import { getCallData } from '../../utils/entities'
 import { logStartProcessingCall } from '../../utils/logs'
-import { calls } from '../../types/generated/merged'
 import { assertDefined } from '../../utils'
 
 export async function liquidityDepositCallHandler(ctx: BlockContext, call: Call<'PoolXYK.deposit_liquidity'>): Promise<void> {

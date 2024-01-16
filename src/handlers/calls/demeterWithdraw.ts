@@ -5,7 +5,6 @@ import { findEventByExtrinsicHash } from '../../utils/events'
 import { XOR } from '../../utils/consts'
 import { getCallData, getEventData } from '../../utils/entities'
 import { logStartProcessingCall } from '../../utils/logs'
-import { calls, events } from '../../types/generated/merged'
 import { assertDefined } from '../../utils'
 
 export async function demeterWithdrawCallHandler(ctx: BlockContext, call: Call<'DemeterFarmingPlatform.withdraw'>): Promise<void> {
@@ -27,7 +26,7 @@ export async function demeterWithdrawCallHandler(ctx: BlockContext, call: Call<'
 	const event = findEventByExtrinsicHash(ctx, extrinsicHash, ['DemeterFarmingPlatform.Withdrawn'])
 
 	if (event) {
-		const data = getEventData(ctx, events.demeterFarmingPlatform.withdrawn, event)
+		const data = getEventData(ctx, 'demeterFarmingPlatform', 'withdrawn', event)
 
 		const assetAmount = data[1] as AssetAmount
 

@@ -3,7 +3,6 @@ import { toReferenceSymbol } from '../../utils'
 import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 import { BlockContext, Call } from '../../types'
 import { getCallData } from '../../utils/entities'
-import { calls } from '../../types/generated/merged'
 
 export async function handleBandRateUpdate(ctx: BlockContext, call: Call<'Band.relay'>): Promise<void> {
   logStartProcessingCall(ctx, call)
