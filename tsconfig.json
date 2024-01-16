@@ -12,7 +12,8 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
-	"noErrorTruncation": true
+	"noErrorTruncation": true,
+	"useUnknownInCatchVariables": false
   },
   "include": ["src", "src/config.ts"],
   "exclude": [
