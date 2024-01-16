@@ -1,6 +1,6 @@
 import { BlockContext, Call } from '../../types'
 import { createCallHistoryElement } from '../../utils/history'
-import { ExtractCallType, getCallData } from '../../utils/entities'
+import { ExtractCallType, getCallData, getCallData2 } from '../../utils/entities'
 import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 import { XOR } from '../../utils/consts'
 import { formatU128ToBalance } from '../../utils/assets'
@@ -8,19 +8,13 @@ import { getExtrinsicSigner } from '../../utils/calls'
 import { PayeeType } from '../../model'
 import { getStakingStaker } from '../../utils/staking'
 import { toAddress } from '../../utils'
-import { calls as callsProduction } from '../../types/generated/production'
-import { calls as callsStage } from '../../types/generated/stage'
-import { calls as callsTest } from '../../types/generated/test'
-import { calls as callsDev } from '../../types/generated/dev'
+import { calls } from '../../types/generated/merged'
 
 export async function stakingBondCallHandler(ctx: BlockContext, call: Call<'Staking.bond'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const dataProduction = getCallData(ctx, callsProduction.staking.bond, call)
-	const dataStage = getCallData(ctx, callsStage.staking.bond, call)
-	const dataTest = getCallData(ctx, callsTest.staking.bond, call)
-	const dataDev = getCallData(ctx, callsDev.staking.bond, call)
-	const data: typeof dataProduction | typeof dataStage | typeof dataTest | typeof dataDev = dataProduction || dataStage || dataTest || dataDev
+	const data = getCallData2(ctx, 'staking' as const, 'bond' as const, call)
+
 	const { controller, payee, value } = data
 
 	const details = {

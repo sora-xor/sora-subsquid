@@ -6,6 +6,10 @@ import { CallType as CallTypeDev, EventType as EventTypeDev } from '../types/gen
 import { UnsupportedSpecError } from './errors'
 import { getLog } from './logs'
 import * as sts from '@subsquid/substrate-runtime/lib/sts'
+import { calls as callsProduction } from '../types/generated/production'
+import { calls as callsStage } from '../types/generated/stage'
+import { calls as callsTest } from '../types/generated/test'
+import { calls as callsDev } from '../types/generated/dev'
 
 type VersionedObject = {
 	[key: string]: any
@@ -203,6 +207,29 @@ export function decodeCall<R>(representation: R, call: Call<any>): ExtractCallTy
 export function getCallData<T extends VersionedObject, V extends readonly string[] = []>(ctx: BlockContext, types: T, call: Call<any>, excludeVersions?: V) {
 	const representation = getCallRepresentation<T, V>(ctx, types, call)
 	return decodeCall(representation, call)
+}
+
+type HHH = typeof callsProduction | typeof callsStage | typeof callsTest | typeof callsDev
+export function getCallData2<MO extends keyof HHH, ME extends keyof HHH[MO], V extends readonly string[] = []>(ctx: BlockContext, module: MO, method: ME, call: Call<any>, excludeVersions?: V) {
+	// const dataProduction = getCallData(ctx, callsProduction[module][method], call)
+	// const dataStage = getCallData(ctx, callsStage[module][method], call)
+	// const dataTest = getCallData(ctx, callsTest[module][method], call)
+	// const dataDev = getCallData(ctx, callsDev[module][method], call)
+	// const data: typeof dataProduction | typeof dataStage | typeof dataTest | typeof dataDev = call.block._runtime.decodeJsonCallRecordArguments(call)
+	const typeProduction = callsProduction[module][method]
+	const typeStage = callsStage[module][method]
+	const typeTest = callsTest[module][method]
+	const typeDev = callsDev[module][method]
+	type TProduction = typeof typeProduction
+	type DProduction = ExtractCallType<Exclude<TProduction[keyof TProduction], string>>
+	type TStage = typeof typeStage
+	type DStage = ExtractCallType<Exclude<TStage[keyof TStage], string>>
+	type TTest = typeof typeTest
+	type DTest = ExtractCallType<Exclude<TTest[keyof TTest], string>>
+	type TDev = typeof typeDev
+	type DDev = ExtractCallType<Exclude<TDev[keyof TDev], string>>
+	const data: DProduction | DStage | DTest | DDev = call.block._runtime.decodeJsonCallRecordArguments(call)
+	return data
 }
 
 export function getEventRepresentation<T extends VersionedObject, V extends readonly string[] = []>(
