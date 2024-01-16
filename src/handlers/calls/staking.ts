@@ -8,7 +8,7 @@ import { getExtrinsicSigner } from '../../utils/calls'
 import { PayeeType } from '../../model'
 import { getStakingStaker } from '../../utils/staking'
 import { toAddress } from '../../utils'
-import { calls } from '../../types/generated/merged'
+import { calls } from '../../types/generated/production'
 
 export async function stakingBondCallHandler(ctx: BlockContext, call: Call<'Staking.bond'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
