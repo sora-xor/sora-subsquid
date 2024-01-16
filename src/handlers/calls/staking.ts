@@ -13,7 +13,7 @@ import { calls } from '../../types/generated/merged'
 export async function stakingBondCallHandler(ctx: BlockContext, call: Call<'Staking.bond'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const { controller, payee, value } = getCallData(ctx, calls.staking.bond, call)
+	const { controller, payee, value } = calls.staking.bond.v1.decode(call)
 
 	const details = {
 		controller,
