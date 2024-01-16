@@ -10,7 +10,6 @@ ADD package-lock.json .
 RUN npm ci
 ADD tsconfig.json .
 ADD src src
-ENV NODE_OPTIONS=--max_old_space_size=8192
 RUN npm run build
 
 FROM node-with-gyp AS deps
