@@ -1,6 +1,6 @@
 import { BlockContext, Call } from '../../types'
 import { createCallHistoryElement } from '../../utils/history'
-import { getCallData } from '../../utils/entities'
+import { ExtractCallType, getCallData } from '../../utils/entities'
 import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 import { XOR } from '../../utils/consts'
 import { formatU128ToBalance } from '../../utils/assets'
@@ -13,7 +13,11 @@ import { calls } from '../../types/generated/merged'
 export async function stakingBondCallHandler(ctx: BlockContext, call: Call<'Staking.bond'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const { controller, payee, value } = getCallData(ctx, calls.staking.bond, call)
+	type Bond = typeof calls.staking.bond
+	type BondType = Bond[keyof Bond]
+	type BondData = ExtractCallType<BondType>
+
+	const { controller, payee, value } = getCallData(ctx, calls.staking.bond, call) as BondData
 
 	const details = {
 		controller,
