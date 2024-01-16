@@ -152,10 +152,10 @@ export async function stakingIncreaseValidatorCountCallHandler(
 export async function stakingKickCallHandler(ctx: BlockContext, call: Call<'Staking.kick'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, 'staking', 'kick', call)
+	const { who } = getCallData(ctx, 'staking', 'kick', call)
 
 	const details = {
-		address: data.who.map((item) => toAddress(item)),
+		address: who.map((item) => toAddress(item)),
 	}
 
 	await createCallHistoryElement(ctx, call, details)
