@@ -35,7 +35,7 @@ const handleAndSaveExtrinsic = async (ctx: BlockContext, call: Call<'LiquidityPr
 	const blockNumber = ctx.block.header.height
 	const historyElement = await createCallHistoryElement(ctx, call)
 
-	const data = getCallData(ctx, calls.liquidityProxy.swapTransferBatch, call)
+	const data = getCallData(ctx, 'liquidityProxy', 'swapTransferBatch', call)
 
 	const inputAssetId = getAssetId(data.inputAssetId)
 	const extrinsicSigner = getExtrinsicSigner(ctx, call)

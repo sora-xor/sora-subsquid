@@ -14,7 +14,7 @@ export async function demeterWithdrawCallHandler(ctx: BlockContext, call: Call<'
 	assertDefined(call.extrinsic)
 	const extrinsicHash = call.extrinsic.hash
 
-	const data = getCallData(ctx, calls.demeterFarmingPlatform.withdraw, call)
+	const data = getCallData(ctx, 'demeterFarmingPlatform', 'withdraw', call)
 
 	const baseAssetId = 'baseAsset' in data ? getAssetId(data.baseAsset) : XOR
 	const assetId = getAssetId(data.poolAsset)

@@ -35,7 +35,7 @@ export async function referralReserveCallHandler(ctx: BlockContext, call: Call<'
 			amount: formatU128ToBalance(amount, XOR),
 		}
 	} else {
-		const data = getCallData(ctx, calls.referrals.reserve, call)
+		const data = getCallData(ctx, 'referrals', 'reserve', call)
 		const amount = formatU128ToBalance(data.balance as AssetAmount, XOR)
 		details = {
 			amount,

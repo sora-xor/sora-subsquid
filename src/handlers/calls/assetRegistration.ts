@@ -29,7 +29,7 @@ export async function assetRegistrationCallHandler(ctx: BlockContext, call: Call
 			assetId,
 		}
 	} else {
-		const data = getCallData(ctx, calls.assets.register, call)
+		const data = getCallData(ctx, 'assets', 'register', call)
 
 		const symbol = getAssetId(data.symbol)
 

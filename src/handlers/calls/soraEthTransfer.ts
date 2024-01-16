@@ -15,7 +15,7 @@ export async function soraEthTransferCallHandler(ctx: BlockContext, call: Call<'
 	const extrinsicHash = call.extrinsic?.hash ?? ''
 	const historyElement = await createCallHistoryElement(ctx, call)
 
-	const data = getCallData(ctx, calls.ethBridge.transferToSidechain, call)
+	const data = getCallData(ctx, 'ethBridge', 'transferToSidechain', call)
 
 	const assetId = getAssetId(data.assetId)
 	const sidechainAddress = toAddressEthereum(data.to)

@@ -1,6 +1,6 @@
 import { BlockContext, Call } from '../../types'
 import { createCallHistoryElement } from '../../utils/history'
-import { ExtractCallType, getCallData, getCallData2 } from '../../utils/entities'
+import { ExtractCallType, getCallData } from '../../utils/entities'
 import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 import { XOR } from '../../utils/consts'
 import { formatU128ToBalance } from '../../utils/assets'
@@ -8,12 +8,15 @@ import { getExtrinsicSigner } from '../../utils/calls'
 import { PayeeType } from '../../model'
 import { getStakingStaker } from '../../utils/staking'
 import { toAddress } from '../../utils'
-import { calls } from '../../types/generated/merged'
+import { calls as callsProduction } from '../../types/generated/production'
+import { calls as callsStage } from '../../types/generated/stage'
+import { calls as callsTest } from '../../types/generated/test'
+import { calls as callsDev } from '../../types/generated/dev'
 
 export async function stakingBondCallHandler(ctx: BlockContext, call: Call<'Staking.bond'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData2(ctx, 'staking' as const, 'bond' as const, call)
+	const data = getCallData(ctx, 'staking', 'bond', call)
 
 	const { controller, payee, value } = data
 
@@ -29,10 +32,10 @@ export async function stakingBondCallHandler(ctx: BlockContext, call: Call<'Stak
 export async function stakingBondExtraCallHandler(ctx: BlockContext, call: Call<'Staking.bond_extra'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, calls.staking.bondExtra, call)
+	const { maxAdditional } = getCallData(ctx, 'staking', 'bondExtra', call)
 
 	const details = {
-		amount: formatU128ToBalance(data.maxAdditional, XOR),
+		amount: formatU128ToBalance(maxAdditional, XOR),
 	}
 
 	await createCallHistoryElement(ctx, call, details)
@@ -44,7 +47,7 @@ export async function stakingCancelDeferredSlashCallHandler(
 ): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, calls.staking.cancelDeferredSlash, call)
+	const data = getCallData(ctx, 'staking', 'cancelDeferredSlash', call)
 
 	const details = {
 		era: data.era,
@@ -57,7 +60,7 @@ export async function stakingCancelDeferredSlashCallHandler(
 export async function stakingChillCallHandler(ctx: BlockContext, call: Call<'Staking.chill'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, calls.staking.chill, call)
+	const data = getCallData(ctx, 'staking', 'chill', call)
 
 	const details = {} // "Staking.chill" call doesn't have any parameters, so details will be empty in this case
 
@@ -67,7 +70,7 @@ export async function stakingChillCallHandler(ctx: BlockContext, call: Call<'Sta
 export async function stakingChillOtherCallHandler(ctx: BlockContext, call: Call<'Staking.chill_other'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, calls.staking.chillOther, call)
+	const data = getCallData(ctx, 'staking', 'chillOther', call)
 
 	const details = {
 		controller: toAddress(data.controller),
@@ -80,7 +83,7 @@ export async function stakingForceApplyMinCommissionCallHandler(
 	ctx: BlockContext,
 	call: Call<'Staking.force_apply_min_commission'>,
 ): Promise<void> {
-	const data = getCallData(ctx, calls.staking.forceApplyMinCommission, call)
+	const data = getCallData(ctx, 'staking', 'forceApplyMinCommission', call)
 
 	const details = {
 		validatorStash: toAddress(data.validatorStash),
@@ -92,7 +95,7 @@ export async function stakingForceApplyMinCommissionCallHandler(
 export async function stakingForceNewEraCallHandler(ctx: BlockContext, call: Call<'Staking.force_new_era'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, calls.staking.forceNewEra, call)
+	const data = getCallData(ctx, 'staking', 'forceNewEra', call)
 
 	const details = {} // "Staking.force_new_era" call doesn't have any parameters, so details will be empty in this case
 
@@ -105,7 +108,7 @@ export async function stakingForceNewEraAlwaysCallHandler(
 ): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, calls.staking.forceNewEraAlways, call)
+	const data = getCallData(ctx, 'staking', 'forceNewEraAlways', call)
 
 	const details = {} // "Staking.force_new_era_always" call doesn't have any parameters, so details will be empty in this case
 
@@ -115,7 +118,7 @@ export async function stakingForceNewEraAlwaysCallHandler(
 export async function stakingForceNoErasCallHandler(ctx: BlockContext, call: Call<'Staking.force_no_eras'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, calls.staking.forceNoEras, call)
+	const data = getCallData(ctx, 'staking', 'forceNoEras', call)
 
 	const details = {} // "Staking.force_no_eras" call doesn't have any parameters, so details will be empty in this case
 
@@ -125,7 +128,7 @@ export async function stakingForceNoErasCallHandler(ctx: BlockContext, call: Cal
 export async function stakingForceUnstakeCallHandler(ctx: BlockContext, call: Call<'Staking.force_unstake'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, calls.staking.forceUnstake, call)
+	const data = getCallData(ctx, 'staking', 'forceUnstake', call)
 
 	const details = {
 		stash: toAddress(data.stash),
@@ -141,7 +144,7 @@ export async function stakingIncreaseValidatorCountCallHandler(
 ): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, calls.staking.increaseValidatorCount, call)
+	const data = getCallData(ctx, 'staking', 'increaseValidatorCount', call)
 
 	const details = {
 		count: data.additional,
@@ -153,7 +156,7 @@ export async function stakingIncreaseValidatorCountCallHandler(
 export async function stakingKickCallHandler(ctx: BlockContext, call: Call<'Staking.kick'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, calls.staking.kick, call)
+	const data = getCallData(ctx, 'staking', 'kick', call)
 
 	const details = {
 		address: data.who.map((item) => toAddress(item)),
@@ -165,7 +168,7 @@ export async function stakingKickCallHandler(ctx: BlockContext, call: Call<'Stak
 export async function stakingNominateCallHandler(ctx: BlockContext, call: Call<'Staking.nominate'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, calls.staking.nominate, call)
+	const data = getCallData(ctx, 'staking', 'nominate', call)
 
 	const details = {
 		targets: data.targets.map(toAddress),
@@ -177,7 +180,7 @@ export async function stakingNominateCallHandler(ctx: BlockContext, call: Call<'
 export async function stakingPayoutStakersCallHandler(ctx: BlockContext, call: Call<'Staking.payout_stakers'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, calls.staking.payoutStakers, call)
+	const data = getCallData(ctx, 'staking', 'payoutStakers', call)
 
 	const details = {
 		validatorStash: toAddress(data.validatorStash),
@@ -190,7 +193,7 @@ export async function stakingPayoutStakersCallHandler(ctx: BlockContext, call: C
 export async function stakingReapStashCallHandler(ctx: BlockContext, call: Call<'Staking.reap_stash'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, calls.staking.reapStash, call)
+	const data = getCallData(ctx, 'staking', 'reapStash', call)
 
 	const details = {
 		stash: data.stash,
@@ -203,7 +206,7 @@ export async function stakingReapStashCallHandler(ctx: BlockContext, call: Call<
 export async function stakingRebondCallHandler(ctx: BlockContext, call: Call<'Staking.rebond'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, calls.staking.rebond, call)
+	const data = getCallData(ctx, 'staking', 'rebond', call)
 
 	const details = { amount: formatU128ToBalance(data.value, XOR) }
 
@@ -216,7 +219,7 @@ export async function stakingScaleValidatorCountCallHandler(
 ): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, calls.staking.scaleValidatorCount, call)
+	const data = getCallData(ctx, 'staking', 'scaleValidatorCount', call)
 
 	const details = {
 		factor: data.factor,
@@ -228,7 +231,7 @@ export async function stakingScaleValidatorCountCallHandler(
 export async function stakingSetControllerCallHandler(ctx: BlockContext, call: Call<'Staking.set_controller'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, calls.staking.setController, call)
+	const data = getCallData(ctx, 'staking', 'setController', call)
 
 	const controller = toAddress(data.controller)
 	const extrinsicSigner = getExtrinsicSigner(ctx, call)
@@ -253,7 +256,7 @@ export async function stakingSetControllerCallHandler(ctx: BlockContext, call: C
 export async function stakingSetHistoryDepthCallHandler(ctx: BlockContext, call: Call<'Staking.set_history_depth'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, calls.staking.setHistoryDepth, call)
+	const data = getCallData(ctx, 'staking', 'setHistoryDepth', call)
 
 	const details = {
 		newHistoryDepth: data.newHistoryDepth,
@@ -269,7 +272,7 @@ export async function stakingSetInvulnerablesCallHandler(
 ): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, calls.staking.setInvulnerables, call)
+	const data = getCallData(ctx, 'staking', 'setInvulnerables', call)
 
 	const details = {
 		invulnerables: data.invulnerables.map(toAddress),
@@ -284,7 +287,7 @@ export async function stakingSetMinCommissionCallHandler(
 ): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, calls.staking.setMinCommission, call)
+	const data = getCallData(ctx, 'staking', 'setMinCommission', call)
 
 	const details = {
 		commission: data.new,
@@ -296,7 +299,7 @@ export async function stakingSetMinCommissionCallHandler(
 export async function stakingSetPayeeCallHandler(ctx: BlockContext, call: Call<'Staking.set_payee'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, calls.staking.setPayee, call)
+	const data = getCallData(ctx, 'staking', 'setPayee', call)
 
 	const extrinsicSigner = getExtrinsicSigner(ctx, call)
 	const stakingStaker = await getStakingStaker(ctx, extrinsicSigner)
@@ -332,7 +335,7 @@ export async function stakingSetStakingConfigsCallHandler(
 ): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, calls.staking.setStakingConfigs, call)
+	const data = getCallData(ctx, 'staking', 'setStakingConfigs', call)
 
 	const createDetailObject = (key: keyof typeof data) => {
 		const value = data[key]
@@ -362,7 +365,7 @@ export async function stakingSetValidatorCountCallHandler(
 ): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, calls.staking.setValidatorCount, call)
+	const data = getCallData(ctx, 'staking', 'setValidatorCount', call)
 
 	const details = {
 		count: data.new,
@@ -377,7 +380,7 @@ export async function stakingSubmitElectionSolutionCallHandler(
 ): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, calls.staking.submitElectionSolution, call)
+	const data = getCallData(ctx, 'staking', 'submitElectionSolution', call)
 
 	const details = {
 		winners: data.winners,
@@ -394,7 +397,7 @@ export async function stakingSubmitElectionSolutionUnsignedCallHandler(
 ): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, calls.staking.submitElectionSolutionUnsigned, call)
+	const data = getCallData(ctx, 'staking', 'submitElectionSolutionUnsigned', call)
 
 	const details = {
 		winners: data.winners,
@@ -410,7 +413,7 @@ export async function stakingSubmitElectionSolutionUnsignedCallHandler(
 export async function stakingUnbondCallHandler(ctx: BlockContext, call: Call<'Staking.unbond'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, calls.staking.unbond, call)
+	const data = getCallData(ctx, 'staking', 'unbond', call)
 
 	const details = {
 		amount: formatU128ToBalance(data.value, XOR),
@@ -422,7 +425,7 @@ export async function stakingUnbondCallHandler(ctx: BlockContext, call: Call<'St
 export async function stakingValidateCallHandler(ctx: BlockContext, call: Call<'Staking.validate'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, calls.staking.validate, call)
+	const data = getCallData(ctx, 'staking', 'validate', call)
 
 	const details = {
 		commission: data.prefs.commission,
@@ -438,7 +441,7 @@ export async function stakingWithdrawUnbondedCallHandler(
 ): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, calls.staking.withdrawUnbonded, call)
+	const data = getCallData(ctx, 'staking', 'withdrawUnbonded', call)
 
 	const details = {
 		numSlashingSpans: data.numSlashingSpans,

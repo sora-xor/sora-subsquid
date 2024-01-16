@@ -12,7 +12,7 @@ export async function setReferralCallHandler(ctx: BlockContext, call: Call<'Refe
 	// TODO: add type for details
 	let details = new Object()
 
-	const data = getCallData(ctx, calls.referrals.setReferrer, call)
+	const data = getCallData(ctx, 'referrals', 'setReferrer', call)
 
 	const referrer = data.referrer
 

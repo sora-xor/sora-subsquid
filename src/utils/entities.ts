@@ -204,32 +204,50 @@ export function getCallRepresentation<T extends VersionedObject, V extends reado
 export function decodeCall<R>(representation: R, call: Call<any>): ExtractCallType<R> {
 	return (representation as any).decode(call)
 }
-export function getCallData<T extends VersionedObject, V extends readonly string[] = []>(ctx: BlockContext, types: T, call: Call<any>, excludeVersions?: V) {
-	const representation = getCallRepresentation<T, V>(ctx, types, call)
-	return decodeCall(representation, call)
+// export function getCallData<T extends VersionedObject, V extends readonly string[] = []>(ctx: BlockContext, types: T, call: Call<any>, excludeVersions?: V) {
+// 	const representation = getCallRepresentation<T, V>(ctx, types, call)
+// 	return decodeCall(representation, call)
+// }
+
+type CallsProduction = typeof callsProduction
+export function getCallDataProduction<MO extends keyof CallsProduction, ME extends keyof CallsProduction[MO]>(ctx: BlockContext, module: MO, method: ME, call: Call<any>) {
+	const type = callsProduction[module][method]
+	type T = typeof type
+	const data: ExtractCallType<Exclude<T[keyof T], string>> = call.block._runtime.decodeJsonCallRecordArguments(call)
+	return data
 }
 
-type HHH = typeof callsProduction | typeof callsStage | typeof callsTest | typeof callsDev
-export function getCallData2<MO extends keyof HHH, ME extends keyof HHH[MO], V extends readonly string[] = []>(ctx: BlockContext, module: MO, method: ME, call: Call<any>, excludeVersions?: V) {
-	// const dataProduction = getCallData(ctx, callsProduction[module][method], call)
-	// const dataStage = getCallData(ctx, callsStage[module][method], call)
-	// const dataTest = getCallData(ctx, callsTest[module][method], call)
-	// const dataDev = getCallData(ctx, callsDev[module][method], call)
-	// const data: typeof dataProduction | typeof dataStage | typeof dataTest | typeof dataDev = call.block._runtime.decodeJsonCallRecordArguments(call)
-	const typeProduction = callsProduction[module][method]
-	const typeStage = callsStage[module][method]
-	const typeTest = callsTest[module][method]
-	const typeDev = callsDev[module][method]
-	type TProduction = typeof typeProduction
-	type DProduction = ExtractCallType<Exclude<TProduction[keyof TProduction], string>>
-	type TStage = typeof typeStage
-	type DStage = ExtractCallType<Exclude<TStage[keyof TStage], string>>
-	type TTest = typeof typeTest
-	type DTest = ExtractCallType<Exclude<TTest[keyof TTest], string>>
-	type TDev = typeof typeDev
-	type DDev = ExtractCallType<Exclude<TDev[keyof TDev], string>>
-	const data: DProduction | DStage | DTest | DDev = call.block._runtime.decodeJsonCallRecordArguments(call)
+type CallsStage = typeof callsStage
+export function getCallDataStage<MO extends keyof CallsStage, ME extends keyof CallsStage[MO]>(ctx: BlockContext, module: MO, method: ME, call: Call<any>) {
+	const type = callsStage[module][method]
+	type T = typeof type
+	const data: ExtractCallType<Exclude<T[keyof T], string>> = call.block._runtime.decodeJsonCallRecordArguments(call)
 	return data
+}
+
+type CallsTest = typeof callsTest
+export function getCallDataTest<MO extends keyof CallsTest, ME extends keyof CallsTest[MO]>(ctx: BlockContext, module: MO, method: ME, call: Call<any>) {
+	const type = callsTest[module][method]
+	type T = typeof type
+	const data: ExtractCallType<Exclude<T[keyof T], string>> = call.block._runtime.decodeJsonCallRecordArguments(call)
+	return data
+}
+
+type CallsDev = typeof callsDev
+export function getCallDataDev<MO extends keyof CallsDev, ME extends keyof CallsDev[MO]>(ctx: BlockContext, module: MO, method: ME, call: Call<any>) {
+	const type = callsDev[module][method]
+	type T = typeof type
+	const data: ExtractCallType<Exclude<T[keyof T], string>> = call.block._runtime.decodeJsonCallRecordArguments(call)
+	return data
+}
+
+type Calls = CallsProduction | CallsStage | CallsTest | CallsDev
+export function getCallData<MO extends keyof Calls, ME extends keyof Calls[MO]>(ctx: BlockContext, module: MO, method: ME, call: Call<any>) {
+	const dataProduction = getCallDataProduction(ctx, module, method, call)
+	const dataStage = getCallDataStage(ctx, module, method, call)
+	const dataTest = getCallDataTest(ctx, module, method, call)
+	const dataDev = getCallDataDev(ctx, module, method, call)
+	return dataProduction || dataStage || dataTest || dataDev
 }
 
 export function getEventRepresentation<T extends VersionedObject, V extends readonly string[] = []>(

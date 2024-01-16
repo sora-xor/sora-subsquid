@@ -12,7 +12,7 @@ export async function orderBookPlaceLimitOrderCallHandler(ctx: BlockContext, cal
 
 	const historyElement = await createCallHistoryElement(ctx, call)
 
-	const { orderBookId, price, amount, side, lifespan } = getCallData(ctx, calls.orderBook.placeLimitOrder, call)
+	const { orderBookId, price, amount, side, lifespan } = getCallData(ctx, 'orderBook', 'placeLimitOrder', call)
 
 	const baseAssetId = getAssetId(orderBookId.base)
 	const quoteAssetId = getAssetId(orderBookId.quote)

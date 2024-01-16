@@ -8,7 +8,7 @@ import { calls } from '../../types/generated/merged'
 export async function handleBandRateUpdate(ctx: BlockContext, call: Call<'Band.relay'>): Promise<void> {
   logStartProcessingCall(ctx, call)
 
-  const { rates } = getCallData(ctx, calls.band.relay, call)
+  const { rates } = getCallData(ctx, 'band', 'relay', call)
 
   for (const [ticker, rate] of rates) {
     const referenceSymbol = toReferenceSymbol(ticker)

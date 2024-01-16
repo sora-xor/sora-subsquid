@@ -13,7 +13,7 @@ export async function liquidityRemovalCallHandler(ctx: BlockContext, call: Call<
 
 	const historyElement = await createCallHistoryElement(ctx, call)
 
-	const data = getCallData(ctx, calls.poolXyk.withdrawLiquidity, call)
+	const data = getCallData(ctx, 'poolXyk', 'withdrawLiquidity', call)
 
 	const baseAssetId = getAssetId(data.outputAssetA)
 	const targetAssetId = getAssetId(data.outputAssetB)

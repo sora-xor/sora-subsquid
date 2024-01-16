@@ -16,7 +16,7 @@ export async function demeterGetRewardsCallHandler(
 	assertDefined(call.extrinsic)
 	const extrinsicHash = call.extrinsic.hash
 
-	const data = getCallData(ctx, calls.demeterFarmingPlatform.getRewards, call)
+	const data = getCallData(ctx, 'demeterFarmingPlatform', 'getRewards', call)
 
 	const assetId = getAssetId(data.rewardAsset)
 	const isFarm = data.isFarm

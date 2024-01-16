@@ -13,7 +13,7 @@ import { calls, events } from '../../types/generated/merged'
 export async function assetTransferCallHandler(ctx: BlockContext, call: Call<'Assets.transfer'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, calls.assets.transfer, call)
+	const data = getCallData(ctx, 'assets', 'transfer', call)
 
 	const to = toAddress(data.to)
 	const assetId = getAssetId(data.assetId)
@@ -32,7 +32,7 @@ export async function assetTransferCallHandler(ctx: BlockContext, call: Call<'As
 export async function xorlessTransferHandler(ctx: BlockContext, call: Call<'LiquidityProxy.xorless_transfer'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, calls.liquidityProxy.xorlessTransfer, call)
+	const data = getCallData(ctx, 'liquidityProxy', 'xorlessTransfer', call)
 
 	const { receiver, amount, additionalData } = data
 

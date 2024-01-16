@@ -33,7 +33,7 @@ export async function referralUnreserveCallHandler(ctx: BlockContext, call: Call
 			amount: formatU128ToBalance(amount, XOR),
 		}
 	} else {
-		const data = getCallData(ctx, calls.referrals.unreserve, call)
+		const data = getCallData(ctx, 'referrals', 'unreserve', call)
 
 		details = {
 			amount: formatU128ToBalance(data.balance as AssetAmount, XOR),

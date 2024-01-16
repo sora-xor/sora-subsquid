@@ -20,8 +20,8 @@ export async function swapsCallHandler(
 	const historyElement = await createCallHistoryElement(ctx, call)
 
 	const data = call.name === 'LiquidityProxy.swap'
-		? getCallData(ctx, calls.liquidityProxy.swap, call)
-		: getCallData(ctx, calls.liquidityProxy.swapTransfer, call)
+		? getCallData(ctx, 'liquidityProxy', 'swap', call)
+		: getCallData(ctx, 'liquidityProxy', 'swapTransfer', call)
 
 	const inputAssetId = getAssetId(data.inputAssetId)
 	const outputAssetId = getAssetId(data.outputAssetId)

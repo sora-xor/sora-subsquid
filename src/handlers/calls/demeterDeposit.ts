@@ -11,7 +11,7 @@ import { assertDefined } from '../../utils'
 export async function demeterDepositCallHandler(ctx: BlockContext, call: Call<'DemeterFarmingPlatform.deposit'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, calls.demeterFarmingPlatform.deposit, call)
+	const data = getCallData(ctx, 'demeterFarmingPlatform', 'deposit', call)
 
 	const baseAssetId = 'baseAsset' in data ? getAssetId(data.baseAsset) : XOR
 	const assetId = getAssetId(data.poolAsset)
