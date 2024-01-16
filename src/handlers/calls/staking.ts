@@ -13,12 +13,12 @@ import { calls } from '../../types/generated/merged'
 export async function stakingBondCallHandler(ctx: BlockContext, call: Call<'Staking.bond'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, calls.staking.bond, call)
+	const { controller, payee, value } = getCallData(ctx, calls.staking.bond, call)
 
 	const details = {
-		controller: data.controller,
-		payee: data.payee.__kind === 'Account' ? { kind: data.payee.__kind, value: data.payee.value } : { kind: data.payee.__kind },
-		amount: formatU128ToBalance(data.value, XOR),
+		controller,
+		payee: payee.__kind === 'Account' ? { kind: payee.__kind, value: payee.value } : { kind: payee.__kind },
+		amount: formatU128ToBalance(value, XOR),
 	}
 
 	await createCallHistoryElement(ctx, call, details)
