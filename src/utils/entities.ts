@@ -201,7 +201,7 @@ export function decodeCall<R>(representation: R, call: Call<any>): ExtractCallTy
 	return (representation as any).decode(call)
 }
 export function getCallData<T extends VersionedObject, V extends readonly string[] = []>(ctx: BlockContext, types: T, call: Call<any>, excludeVersions?: V) {
-	const representation = getCallRepresentation<T, V>(ctx, types, call)
+	const representation = getCallRepresentation<T, V>(ctx, types, call, excludeVersions)
 	return decodeCall(representation, call)
 }
 
@@ -217,7 +217,7 @@ export function decodeEvent<R>(representation: R, event: Event<any>): ExtractEve
 	return (representation as any).decode(event)
 }
 export function getEventData<T extends VersionedObject, V extends readonly string[] = []>(ctx: BlockContext, types: T, event: Event<any>, excludeVersions?: V) {
-	const representation = getEventRepresentation<T, V>(ctx, types, event)
+	const representation = getEventRepresentation<T, V>(ctx, types, event, excludeVersions)
 	return decodeEvent(representation, event)
 }
 
