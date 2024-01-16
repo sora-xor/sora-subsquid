@@ -5,7 +5,7 @@ import { toAddress } from '.'
 import { getAssetId } from './assets'
 import { CannotFindEventError } from './errors'
 import { events } from '../types/generated/merged'
-import { getEventData } from './entities'
+import { decodeEvent, getEventRepresentation } from './entities'
 
 type SpecificEvent<T extends EventName> = Event<T>
 
@@ -69,7 +69,8 @@ export const isAssetTransferEvent = (e: Event<EventName>): boolean => {
 }
 
 export const getBalancesTransferEventData = (ctx: BlockContext, event: Event<'Balances.Transfer'>): TransferEventData => {
-	const data = getEventData(ctx, events.balances.transfer, event)
+	const representation = getEventRepresentation(ctx, events.balances.transfer, event)
+	const data = decodeEvent(representation, event)
 
 	return {
 		assetId: XOR,
@@ -80,7 +81,7 @@ export const getBalancesTransferEventData = (ctx: BlockContext, event: Event<'Ba
 }
 
 export const getTokensTransferEventData = (ctx: BlockContext, event: Event<'Tokens.Transfer'>): TransferEventData => {
-	const { currencyId, from, to, amount } = getEventData(ctx, events.tokens.transfer, event)
+	const { currencyId, from, to, amount } = getEventRepresentation(ctx, events.tokens.transfer, event).decode(event)
 
 	return {
 		assetId: getAssetId(currencyId),
@@ -102,7 +103,8 @@ export const getAssetsTransferEventData = (
 }
 
 export const getBalancesDepositEventData = (ctx: BlockContext, event: Event<'Balances.Deposited'>): DepositEventData => {
-	const data = getEventData(ctx, events.balances.deposit, event)
+	const representation = getEventRepresentation(ctx, events.balances.deposit, event)
+	const data = decodeEvent(representation, event)
 
 	return {
 		assetId: XOR,
@@ -112,7 +114,7 @@ export const getBalancesDepositEventData = (ctx: BlockContext, event: Event<'Bal
 }
 
 export const getTokensDepositedEventData = (ctx: BlockContext, event: Event<'Tokens.Deposited'>): DepositEventData => {
-	const { currencyId, who, amount } = getEventData(ctx, events.tokens.deposited, event)
+	const { currencyId, who, amount } = getEventRepresentation(ctx, events.tokens.deposited, event).decode(event)
 
 	return {
 		assetId: getAssetId(currencyId),

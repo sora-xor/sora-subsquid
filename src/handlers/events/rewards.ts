@@ -3,14 +3,15 @@ import { Address, BlockContext, Event } from '../../types'
 import { assertDefined, formatDateTimestamp, getBlockTimestamp, getEventId, toAddress } from '../../utils'
 import { formatU128ToBalance } from '../../utils/assets'
 import { VAL } from '../../utils/consts'
-import { getEventData } from '../../utils/entities'
+import { decodeEvent, getEventRepresentation } from '../../utils/entities'
 import { createEventHistoryElement } from '../../utils/history'
 import { getEventHandlerLog, logStartProcessingEvent } from '../../utils/logs'
 import { getActiveStakingEra, getStakingStaker } from '../../utils/staking'
 import { events } from '../../types/generated/merged'
 
 function getRewardData(ctx: BlockContext, event: Event<'Staking.Rewarded'>): { stash: Address; amount: string } {
-	const data = getEventData(ctx, events.staking.rewarded, event)
+	const representation = getEventRepresentation(ctx, events.staking.rewarded, event)
+	const data = decodeEvent(representation, event)
 	const stash = Array.isArray(data) ? data[0] : data.stash
 	const amount = Array.isArray(data) ? data[1] : data.amount
 

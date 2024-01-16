@@ -5,7 +5,7 @@ import { BlockContext, Call } from '../../types'
 import { findEventByExtrinsicHash } from '../../utils/events'
 import { AddressEthereum, AssetAmount, AssetId } from '../../types'
 import { toAddressEthereum } from '../../utils'
-import { getCallData, getEventData } from '../../utils/entities'
+import { decodeCall, decodeEvent, getCallRepresentation, getEventRepresentation } from '../../utils/entities'
 import { logStartProcessingCall } from '../../utils/logs'
 import { calls, events } from '../../types/generated/merged'
 
@@ -15,7 +15,8 @@ export async function soraEthTransferCallHandler(ctx: BlockContext, call: Call<'
 	const extrinsicHash = call.extrinsic?.hash ?? ''
 	const historyElement = await createCallHistoryElement(ctx, call)
 
-	const data = getCallData(ctx, calls.ethBridge.transferToSidechain, call)
+	const representation = getCallRepresentation(ctx, calls.ethBridge.transferToSidechain, call)
+	const data = decodeCall(representation, call)
 
 	const assetId = getAssetId(data.assetId)
 	const sidechainAddress = toAddressEthereum(data.to)
@@ -29,11 +30,12 @@ export async function soraEthTransferCallHandler(ctx: BlockContext, call: Call<'
 	}
 
 	if (historyElement.execution.success) {
-		const soraEthTransferEvent = findEventByExtrinsicHash(ctx, extrinsicHash, ['EthBridge.RequestRegistered'], true)
-		const soraEthTransferEventData = getEventData(ctx, events.ethBridge.requestRegistered, soraEthTransferEvent)
+		const event = findEventByExtrinsicHash(ctx, extrinsicHash, ['EthBridge.RequestRegistered'], true)
+		const representation = getEventRepresentation(ctx, events.ethBridge.requestRegistered, event)
+		const requestHash = decodeEvent(representation, event)
 
 		details = {
-			requestHash: soraEthTransferEventData,
+			requestHash,
 			assetId,
 			sidechainAddress,
 			amount: formatU128ToBalance(amount, assetId),

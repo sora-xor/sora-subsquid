@@ -9,7 +9,7 @@ import {
 } from '../../utils/events'
 import { BlockContext, Event } from '../../types'
 import { findCallByExtrinsicHash } from '../../utils/calls'
-import { getEventData } from '../../utils/entities'
+import { getEventRepresentation } from '../../utils/entities'
 import { CannotFindCallError } from '../../utils/errors'
 import { logStartProcessingEvent } from '../../utils/logs'
 import { events } from '../../types/generated/merged'
@@ -33,7 +33,7 @@ export async function ethSoraTransferEventHandler(
 
 	if (!registeredRequestEvent) return
 
-	const registeredRequestEventData = getEventData(ctx, events.ethBridge.requestRegistered, registeredRequestEvent)
+	const registeredRequestEventData = getEventRepresentation(ctx, events.ethBridge.requestRegistered, registeredRequestEvent)
 
 	const requestHash = registeredRequestEventData
 

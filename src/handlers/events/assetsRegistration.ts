@@ -1,7 +1,7 @@
 import { Event, BlockContext } from '../../types'
 import { assertDefined, toReferenceSymbol } from '../../utils'
 import { assetPrecisions, getAssetId, assetStorage, tickerSyntheticAssetId } from '../../utils/assets'
-import { getStorageRepresentation, getEventData, findCurrentSpecVersion } from '../../utils/entities'
+import { getStorageRepresentation, getEventRepresentation, findCurrentSpecVersion, decodeEvent } from '../../utils/entities'
 import { getEventHandlerLog, logStartProcessingEvent } from '../../utils/logs'
 import { events, storage } from '../../types/generated/merged'
 import { assetRegistrationStream } from '../../utils/stream'
@@ -9,7 +9,7 @@ import { assetRegistrationStream } from '../../utils/stream'
 export async function assetRegistrationEventHandler(ctx: BlockContext, event: Event<'Assets.AssetRegistered'>): Promise<void> {
 	logStartProcessingEvent(ctx, event)
 
-	const [asset] = getEventData(ctx, events.assets.assetRegistered, event)
+	const [asset] = getEventRepresentation(ctx, events.assets.assetRegistered, event).decode(event)
 	const assetId = getAssetId(asset)
 
 	const assetIdVersions = ['1', '26', '33Stage', '33Test'] as const
@@ -37,7 +37,8 @@ export async function syntheticAssetEnabledEventHandler(
 ): Promise<void> {
 	logStartProcessingEvent(ctx, event)
 
-	const data = getEventData(ctx, events.xstPool.syntheticAssetEnabled, event)
+	const representation = getEventRepresentation(ctx, events.xstPool.syntheticAssetEnabled, event)
+	const data = decodeEvent(representation, event)
 
 	if (!Array.isArray(data)) return
 

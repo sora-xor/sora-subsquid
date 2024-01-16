@@ -3,7 +3,7 @@ import { formatU128ToBalance, getAssetId } from '../../utils/assets'
 import { XOR } from '../../utils/consts'
 import { AssetAmount, BlockContext, Call } from '../../types'
 import { findEventByExtrinsicHash } from '../../utils/events'
-import { getCallData, getEventData } from '../../utils/entities'
+import { decodeCall, decodeEvent, getCallRepresentation, getEventRepresentation } from '../../utils/entities'
 import { logStartProcessingCall } from '../../utils/logs'
 import { calls, events } from '../../types/generated/merged'
 import { assertDefined } from '../../utils'
@@ -11,7 +11,8 @@ import { assertDefined } from '../../utils'
 export async function demeterDepositCallHandler(ctx: BlockContext, call: Call<'DemeterFarmingPlatform.deposit'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, calls.demeterFarmingPlatform.deposit, call)
+	const representation = getCallRepresentation(ctx, calls.demeterFarmingPlatform.deposit, call)
+	const data = decodeCall(representation, call)
 
 	const baseAssetId = 'baseAsset' in data ? getAssetId(data.baseAsset) : XOR
 	const assetId = getAssetId(data.poolAsset)
@@ -25,7 +26,8 @@ export async function demeterDepositCallHandler(ctx: BlockContext, call: Call<'D
 	const event = findEventByExtrinsicHash(ctx, call.extrinsic.hash, ['DemeterFarmingPlatform.Deposited'])
 
 	if (event) {
-		const data = getEventData(ctx, events.demeterFarmingPlatform.deposited, event)
+		const representation = getEventRepresentation(ctx, events.demeterFarmingPlatform.deposited, event)
+		const data = decodeEvent(representation, event)
 
 		const assetAmount = typeof data[4] === 'bigint' ? data[4] : (data[5] as AssetAmount)
 

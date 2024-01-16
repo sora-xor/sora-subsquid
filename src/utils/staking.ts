@@ -9,6 +9,8 @@ export const getActiveStakingEra = async (ctx: BlockContext): Promise<StakingEra
 	const activeEra = await getStorageRepresentation(ctx, storage.staking.activeEra)?.get(ctx.block.header)
 	assertDefined(activeEra)
 
+	storage.staking.canceledSlashPayout
+
 	let stakingEra = await ctx.store.get(StakingEra, activeEra.index.toString())
 	if (!stakingEra) {
 		stakingEra = new StakingEra()

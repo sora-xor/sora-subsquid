@@ -2,7 +2,7 @@ import { addDataToHistoryElement, createCallHistoryElement, updateHistoryElement
 import { formatU128ToBalance, getAssetId } from '../../utils/assets'
 import { BlockContext, AssetAmount, Call } from '../../types'
 import { findEventByExtrinsicHash } from '../../utils/events'
-import { getEventData } from '../../utils/entities'
+import { decodeEvent, getEventRepresentation } from '../../utils/entities'
 import { logStartProcessingCall } from '../../utils/logs'
 import { events } from '../../types/generated/merged'
 import { assertDefined } from '../../utils'
@@ -23,7 +23,8 @@ export async function irohaMigrationCallHandler(ctx: BlockContext, call: Call<'I
 		const currenciesTransferredEvent = findEventByExtrinsicHash(ctx, call.extrinsic.hash, ['Currencies.Transferred'])
 
 		if (currenciesDepositedEvent) {
-			const data = getEventData(ctx, events.currencies.deposited, currenciesDepositedEvent)
+			const representation = getEventRepresentation(ctx, events.currencies.deposited, currenciesDepositedEvent)
+			const data = decodeEvent(representation, currenciesDepositedEvent)
 
 			const assetId = getAssetId(data[0])
 			const assetAmount = data[2] as AssetAmount
@@ -34,7 +35,8 @@ export async function irohaMigrationCallHandler(ctx: BlockContext, call: Call<'I
 				amount,
 			}
 		} else if (currenciesTransferredEvent) {
-			const data = getEventData(ctx, events.currencies.transferred, currenciesTransferredEvent)
+			const representation = getEventRepresentation(ctx, events.currencies.transferred, currenciesTransferredEvent)
+			const data = decodeEvent(representation, currenciesTransferredEvent)
 
 			const assetId = getAssetId(data[0])
 			const assetAmount = data[3] as AssetAmount

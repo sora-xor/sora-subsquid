@@ -1,6 +1,6 @@
 import { BlockContext, Call } from '../../types'
 import { receiveExtrinsicSwapAmounts, SwapAmount } from '../../utils/swaps'
-import { getCallData, getEventData } from '../../utils/entities'
+import { decodeEvent, getCallRepresentation, getEventRepresentation } from '../../utils/entities'
 import { assetSnapshotsStorage, formatU128ToBalance, getAssetId } from '../../utils/assets'
 import { findEventByExtrinsicHash } from '../../utils/events'
 import { networkSnapshotsStorage } from '../../utils/network'
@@ -20,8 +20,8 @@ export async function swapsCallHandler(
 	const historyElement = await createCallHistoryElement(ctx, call)
 
 	const data = call.name === 'LiquidityProxy.swap'
-		? getCallData(ctx, calls.liquidityProxy.swap, call)
-		: getCallData(ctx, calls.liquidityProxy.swapTransfer, call)
+		? getCallRepresentation(ctx, calls.liquidityProxy.swap, call).decode(call)
+		: getCallRepresentation(ctx, calls.liquidityProxy.swapTransfer, call).decode(call)
 
 	const inputAssetId = getAssetId(data.inputAssetId)
 	const outputAssetId = getAssetId(data.outputAssetId)
@@ -60,10 +60,9 @@ export async function swapsCallHandler(
 
 	if (historyElement.execution.success) {
 		assertDefined(call.extrinsic)
-		const exchangeEvent = findEventByExtrinsicHash(ctx, call.extrinsic.hash, ['LiquidityProxy.Exchange'], true)
-		const exchangeEventData = getEventData(ctx, events.liquidityProxy.exchange, exchangeEvent)
-
-		const [, , , , baseAssetAmount, targetAssetAmount, liquidityProviderFee] = exchangeEventData
+		const event = findEventByExtrinsicHash(ctx, call.extrinsic.hash, ['LiquidityProxy.Exchange'], true)
+		const representation = getEventRepresentation(ctx, events.liquidityProxy.exchange, event)
+		const [, , , , baseAssetAmount, targetAssetAmount, liquidityProviderFee] = decodeEvent(representation, event)
 
 		details.baseAssetAmount = formatU128ToBalance(baseAssetAmount, inputAssetId)
 		details.targetAssetAmount = formatU128ToBalance(targetAssetAmount, outputAssetId)

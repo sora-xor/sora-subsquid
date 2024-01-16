@@ -1,14 +1,14 @@
 import { ReferrerReward } from '../../model'
 import { BlockContext, Event } from '../../types'
 import { getBlockTimestamp, toAddress } from '../../utils'
-import { getEventData } from '../../utils/entities'
+import { getEventRepresentation } from '../../utils/entities'
 import { logStartProcessingEvent, getEventHandlerLog } from '../../utils/logs'
 import { events } from '../../types/generated/production'
 
 export async function referrerRewardEventHandler(ctx: BlockContext, event: Event<'XorFee.ReferrerRewarded'>): Promise<void> {
 	logStartProcessingEvent(ctx, event)
 
-	const [referral, referrer, amount] = getEventData(ctx, events.xorFee.referrerRewarded, event)
+	const [referral, referrer, amount] = getEventRepresentation(ctx, events.xorFee.referrerRewarded, event).decode(event)
 
 	const key = `${toAddress(referral)}-${toAddress(referrer)}`
 

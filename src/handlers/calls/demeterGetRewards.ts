@@ -2,7 +2,7 @@ import { addDataToHistoryElement, createCallHistoryElement, updateHistoryElement
 import { formatU128ToBalance, getAssetId } from '../../utils/assets'
 import { BlockContext, AssetAmount, Call } from '../../types'
 import { findEventByExtrinsicHash } from '../../utils/events'
-import { getCallData, getEventData } from '../../utils/entities'
+import { decodeCall, decodeEvent, getCallRepresentation, getEventRepresentation } from '../../utils/entities'
 import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 import { calls, events } from '../../types/generated/merged'
 import { assertDefined } from '../../utils'
@@ -16,7 +16,8 @@ export async function demeterGetRewardsCallHandler(
 	assertDefined(call.extrinsic)
 	const extrinsicHash = call.extrinsic.hash
 
-	const data = getCallData(ctx, calls.demeterFarmingPlatform.getRewards, call)
+	const representation = getCallRepresentation(ctx, calls.demeterFarmingPlatform.getRewards, call)
+	const data = decodeCall(representation, call)
 
 	const assetId = getAssetId(data.rewardAsset)
 	const isFarm = data.isFarm
@@ -26,7 +27,8 @@ export async function demeterGetRewardsCallHandler(
 	const event = findEventByExtrinsicHash(ctx, extrinsicHash, ['DemeterFarmingPlatform.RewardWithdrawn'])
 
 	if (event) {
-		const data = getEventData(ctx, events.demeterFarmingPlatform.rewardWithdrawn, event)
+		const representation = getEventRepresentation(ctx, events.demeterFarmingPlatform.rewardWithdrawn, event)
+		const data = decodeEvent(representation, event)
 
 		const assetAmount = data[1] as AssetAmount
 

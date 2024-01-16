@@ -2,13 +2,14 @@ import { tickerSyntheticAssetId, assetSnapshotsStorage, formatU128ToBalance } fr
 import { toReferenceSymbol } from '../../utils'
 import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 import { BlockContext, Call } from '../../types'
-import { getCallData } from '../../utils/entities'
+import { decodeCall, getCallRepresentation } from '../../utils/entities'
 import { calls } from '../../types/generated/merged'
 
 export async function handleBandRateUpdate(ctx: BlockContext, call: Call<'Band.relay'>): Promise<void> {
   logStartProcessingCall(ctx, call)
 
-  const { rates } = getCallData(ctx, calls.band.relay, call)
+  const representation = getCallRepresentation(ctx, calls.band.relay, call)
+  const { rates } = decodeCall(representation, call)
 
   for (const [ticker, rate] of rates) {
     const referenceSymbol = toReferenceSymbol(ticker)

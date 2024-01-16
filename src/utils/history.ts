@@ -6,7 +6,7 @@ import { assertDefined, formatDateTimestamp, getBlockTimestamp, getCallId, getEv
 import { nToU8a } from '@polkadot/util'
 import { toJSON } from '@subsquid/util-internal-json'
 import { findEventByExtrinsicHash } from './events'
-import { getEventData } from './entities'
+import { getEventRepresentation } from './entities'
 import { getUtilsLog } from './logs'
 import { events } from '../types/generated/merged'
 
@@ -26,7 +26,7 @@ const getCallNetworkFee = (ctx: BlockContext, call: Call<any>): AssetAmount => {
 	const event = findEventByExtrinsicHash(ctx, call.extrinsic.hash, ['XorFee.FeeWithdrawn'])
 
 	if (event) {
-		const eventData = getEventData(ctx, events.xorFee.feeWithdrawn, event)
+		const eventData = getEventRepresentation(ctx, events.xorFee.feeWithdrawn, event).decode(event)
 
 		return eventData[1] as AssetAmount
 	}

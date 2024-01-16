@@ -7,13 +7,24 @@ import { OrderBooksStorage, orderBooksStorage, orderBooksSnapshotsStorage } from
 import { getEventHandlerLog, logStartProcessingEvent } from '../../utils/logs'
 import { BlockContext, Event } from '../../types'
 import { OrderBookOrder, OrderBookStatus, OrderStatus, OrderType } from '../../model'
-import { getEventRepresentation } from '../../utils/entities'
+import { decodeEvent, getEventRepresentation } from '../../utils/entities'
 import { events } from '../../types/generated/merged'
+import { Bytes } from '../../types/generated/production/support'
 
-const getBookData = (orderBookCodec: any) => {
-	const dexId = orderBookCodec.dexId.toNumber()
-	const baseAssetId = getAssetId(orderBookCodec.base)
-	const quoteAssetId = getAssetId(orderBookCodec.quote)
+interface AssetId32 {
+	code: Bytes
+}
+
+interface OrderBookId {
+    dexId: number
+    base: AssetId32
+    quote: AssetId32
+}
+
+const getBookData = (orderBook: OrderBookId) => {
+	const dexId = orderBook.dexId
+	const baseAssetId = getAssetId(orderBook.base)
+	const quoteAssetId = getAssetId(orderBook.quote)
 
 	return { dexId, baseAssetId, quoteAssetId }
 }
@@ -42,8 +53,8 @@ const getOrderStatus = (status: 'Manual' | 'Expired' | 'Aligned'): OrderStatus =
 	}
 }
 
-const getOrderData = (orderBookCodec: any, orderId: bigint | string) => {
-	const { dexId, baseAssetId, quoteAssetId } = getBookData(orderBookCodec)
+const getOrderData = (orderBook: OrderBookId, orderId: bigint | string) => {
+	const { dexId, baseAssetId, quoteAssetId } = getBookData(orderBook)
 	const orderBookId = OrderBooksStorage.getId(dexId, baseAssetId, quoteAssetId)
 	const id = OrderBooksStorage.getOrderId(orderBookId, orderId)
 
@@ -166,8 +177,8 @@ export async function orderBookLimitOrderUpdatedEventHandler(ctx: BlockContext, 
 export async function orderBookLimitOrderFilledEventHandler(ctx: BlockContext, event: Event<'OrderBook.LimitOrderFilled'>): Promise<void> {
 	logStartProcessingEvent(ctx, event)
 
-	const data = getEventRepresentation(ctx, events.orderBook.limitOrderFilled, event)
-	const { orderBookId, orderId } = data.decode(event)
+	const representation = getEventRepresentation(ctx, events.orderBook.limitOrderFilled, event)
+	const { orderBookId, orderId } =  decodeEvent(representation, event)
 	const { id } = getOrderData(orderBookId, orderId)
 
 	const limitOrder = await ctx.store.get(OrderBookOrder, id)

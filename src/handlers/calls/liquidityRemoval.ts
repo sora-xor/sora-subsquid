@@ -3,7 +3,7 @@ import { formatU128ToBalance, getAssetId } from '../../utils/assets'
 import { findEventsByExtrinsicHash, getAssetsTransferEventData } from '../../utils/events'
 import { poolsStorage } from '../../utils/pools'
 import { BlockContext, AssetAmount, Call } from '../../types'
-import { getCallData } from '../../utils/entities'
+import { decodeCall, getCallRepresentation } from '../../utils/entities'
 import { logStartProcessingCall } from '../../utils/logs'
 import { calls } from '../../types/generated/merged'
 import { assertDefined } from '../../utils'
@@ -13,7 +13,8 @@ export async function liquidityRemovalCallHandler(ctx: BlockContext, call: Call<
 
 	const historyElement = await createCallHistoryElement(ctx, call)
 
-	const data = getCallData(ctx, calls.poolXyk.withdrawLiquidity, call)
+	const representation = getCallRepresentation(ctx, calls.poolXyk.withdrawLiquidity, call)
+	const data = decodeCall(representation, call)
 
 	const baseAssetId = getAssetId(data.outputAssetA)
 	const targetAssetId = getAssetId(data.outputAssetB)

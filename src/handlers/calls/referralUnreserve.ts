@@ -3,7 +3,7 @@ import { formatU128ToBalance } from '../../utils/assets'
 import { XOR } from '../../utils/consts'
 import { BlockContext, AssetAmount, Call } from '../../types'
 import { findEventByExtrinsicHash, getAssetsTransferEventData } from '../../utils/events'
-import { getCallData } from '../../utils/entities'
+import { decodeCall, getCallRepresentation } from '../../utils/entities'
 import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
 import { calls } from '../../types/generated/merged'
 import { assertDefined } from '../../utils'
@@ -33,7 +33,8 @@ export async function referralUnreserveCallHandler(ctx: BlockContext, call: Call
 			amount: formatU128ToBalance(amount, XOR),
 		}
 	} else {
-		const data = getCallData(ctx, calls.referrals.unreserve, call)
+		const representation = getCallRepresentation(ctx, calls.referrals.unreserve, call)
+		const data = decodeCall(representation, call)
 
 		details = {
 			amount: formatU128ToBalance(data.balance as AssetAmount, XOR),

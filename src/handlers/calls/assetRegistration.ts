@@ -2,7 +2,7 @@ import { addDataToHistoryElement, createCallHistoryElement, updateHistoryElement
 import { BlockContext, Call } from '../../types'
 import { findEventByExtrinsicHash } from '../../utils/events'
 import { AssetId } from '../../types'
-import { getCallData, getEventData } from '../../utils/entities'
+import { decodeCall, decodeEvent, getCallRepresentation, getEventRepresentation } from '../../utils/entities'
 import { getAssetId } from '../../utils/assets'
 import { logStartProcessingCall } from '../../utils/logs'
 import { calls, events } from '../../types/generated/merged'
@@ -20,21 +20,21 @@ export async function assetRegistrationCallHandler(ctx: BlockContext, call: Call
 	}
 
 	if (historyElement.execution.success) {
-		const assetRegistrationEvent = findEventByExtrinsicHash(ctx, extrinsicHash, ['Assets.AssetRegistered'], true)
-		const assetRegistrationEventData = getEventData(ctx, events.assets.assetRegistered, assetRegistrationEvent)
+		const event = findEventByExtrinsicHash(ctx, extrinsicHash, ['Assets.AssetRegistered'], true)
+		const eventRepresentation = getEventRepresentation(ctx, events.assets.assetRegistered, event)
+		const [asset] = decodeEvent(eventRepresentation, event)
 
-		const assetId = getAssetId(assetRegistrationEventData[0])
+		const assetId = getAssetId(asset)
 
 		details = {
 			assetId,
 		}
 	} else {
-		const data = getCallData(ctx, calls.assets.register, call)
-
-		const symbol = getAssetId(data.symbol)
+		const representation = getCallRepresentation(ctx, calls.assets.register, call)
+		const { symbol } = decodeCall(representation, call)
 
 		details = {
-			assetId: symbol,
+			assetId: getAssetId(symbol),
 		}
 	}
 

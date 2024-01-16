@@ -2,7 +2,7 @@ import { addDataToHistoryElement, createCallHistoryElement, updateHistoryElement
 import { formatU128ToBalance, getAssetId } from '../../utils/assets'
 import { BlockContext, Call } from '../../types'
 import { assertDefined, toAddress } from '../../utils'
-import { getCallData, getEventData } from '../../utils/entities'
+import { decodeCall, decodeEvent, getCallRepresentation, getEventRepresentation } from '../../utils/entities'
 import { logStartProcessingCall } from '../../utils/logs'
 import { getExtrinsicSigner } from '../../utils/calls'
 import { findEventByExtrinsicHash } from '../../utils/events'
@@ -13,7 +13,8 @@ import { calls, events } from '../../types/generated/merged'
 export async function assetTransferCallHandler(ctx: BlockContext, call: Call<'Assets.transfer'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, calls.assets.transfer, call)
+	const representation = getCallRepresentation(ctx, calls.assets.transfer, call)
+	const data = decodeCall(representation, call)
 
 	const to = toAddress(data.to)
 	const assetId = getAssetId(data.assetId)
@@ -32,7 +33,8 @@ export async function assetTransferCallHandler(ctx: BlockContext, call: Call<'As
 export async function xorlessTransferHandler(ctx: BlockContext, call: Call<'LiquidityProxy.xorless_transfer'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const data = getCallData(ctx, calls.liquidityProxy.xorlessTransfer, call)
+	const representation = getCallRepresentation(ctx, calls.liquidityProxy.xorlessTransfer, call)
+	const data = decodeCall(representation, call)
 
 	const { receiver, amount, additionalData } = data
 
@@ -52,11 +54,10 @@ export async function xorlessTransferHandler(ctx: BlockContext, call: Call<'Liqu
 
 	if (historyElement.execution.success) {
 		assertDefined(call.extrinsic)
-		const exchangeEvent = findEventByExtrinsicHash(ctx, call.extrinsic.hash, ['LiquidityProxy.Exchange'])
-		if (exchangeEvent) {
-			const exchangeEventData = getEventData(ctx, events.liquidityProxy.exchange, exchangeEvent)
-
-			const [, , , , baseAssetAmount, targetAssetAmount] = exchangeEventData
+		const event = findEventByExtrinsicHash(ctx, call.extrinsic.hash, ['LiquidityProxy.Exchange'])
+		if (event) {
+			const representation = getEventRepresentation(ctx, events.liquidityProxy.exchange, event)
+			const [, , , , baseAssetAmount, targetAssetAmount] = decodeEvent(representation, event)
 
 			const assetSpent = formatU128ToBalance(baseAssetAmount, assetId)
 			const xorReceived = formatU128ToBalance(targetAssetAmount, XOR)
