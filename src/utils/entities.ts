@@ -275,8 +275,7 @@ export function getCallDataDiffer<
 	const dataTest = section.test ? getCallDataTest(ctx, section.test[0], section.test[1], call) : null
 	const dataDev = section.dev ? getCallDataDev(ctx, section.dev[0], section.dev[1], call) : null
 	const data = dataProduction || dataStage || dataTest || dataDev
-	assertDefined(data)
-	return data
+	return data as Exclude<typeof data, null>
 }
 
 export type EventsProduction = typeof eventsProduction
@@ -352,8 +351,7 @@ export function getEventDataDiffer<
 	const dataTest = section.test ? getEventDataTest(ctx, section.test[0], section.test[1], event) : null
 	const dataDev = section.dev ? getEventDataDev(ctx, section.dev[0], section.dev[1], event) : null
 	const data = dataProduction || dataStage || dataTest || dataDev
-	assertDefined(data)
-	return data
+	return data as Exclude<typeof data, null>
 }
 
 
