@@ -17,7 +17,7 @@
 		]
 	},
 	"scripts": {
-		"build": "rm -rf lib && tsc",
+		"build": "rm -rf lib && tsc -v && tsc",
 		"update": "npx npm-check-updates --filter /subsquid/ --upgrade && npm i -f",
 		"codegen": "sqd codegen",
 		"generate-migration": "npx squid-typeorm-migration generate",
