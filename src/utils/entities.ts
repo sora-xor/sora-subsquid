@@ -1,5 +1,8 @@
 import { BlockContext, Call, Event } from '../types'
-import { CallType, EventType } from '../types/generated/production/support'
+import { CallType as CallTypeProduction, EventType as EventTypeProduction } from '../types/generated/production/support'
+import { CallType as CallTypeStage, EventType as EventTypeStage } from '../types/generated/stage/support'
+import { CallType as CallTypeTest, EventType as EventTypeTest } from '../types/generated/test/support'
+import { CallType as CallTypeDev, EventType as EventTypeDev } from '../types/generated/dev/support'
 import { UnsupportedSpecError } from './errors'
 import { getLog } from './logs'
 import * as sts from '@subsquid/substrate-runtime/lib/sts'
@@ -19,8 +22,20 @@ type EntityItem = {
 }
 
 type ExtractType<T> = T extends sts.Type<infer U> ? U : never;
-type ExtractCallType<T> = ExtractType<T extends CallType<infer U> ? U : never>
-type ExtractEventType<T> = ExtractType<T extends EventType<infer U> ? U : never>
+export type ExtractCallType<T> = ExtractType<
+	T extends CallTypeProduction<infer U> ? U
+	: T extends CallTypeStage<infer U> ? U
+	: T extends CallTypeTest<infer U> ? U
+	: T extends CallTypeDev<infer U> ? U
+	: never
+>
+export type ExtractEventType<T> = ExtractType<
+	T extends EventTypeProduction<infer U> ? U
+	: T extends EventTypeStage<infer U> ? U
+	: T extends EventTypeTest<infer U> ? U
+	: T extends EventTypeDev<infer U> ? U
+	: never
+>
 
 type NarrowVersions<T, V extends readonly string[]> = {
 	[K in Extract<keyof T, `v${string}`> as K extends `v${infer R}`
@@ -186,7 +201,7 @@ export function decodeCall<R>(representation: R, call: Call<any>): ExtractCallTy
 	return (representation as any).decode(call)
 }
 export function getCallData<T extends VersionedObject, V extends readonly string[] = []>(ctx: BlockContext, types: T, call: Call<any>, excludeVersions?: V) {
-	const representation = getCallRepresentation<T, V>(ctx, types, call)
+	const representation = getCallRepresentation<T, V>(ctx, types, call, excludeVersions)
 	return decodeCall(representation, call)
 }
 
@@ -202,7 +217,7 @@ export function decodeEvent<R>(representation: R, event: Event<any>): ExtractEve
 	return (representation as any).decode(event)
 }
 export function getEventData<T extends VersionedObject, V extends readonly string[] = []>(ctx: BlockContext, types: T, event: Event<any>, excludeVersions?: V) {
-	const representation = getEventRepresentation<T, V>(ctx, types, event)
+	const representation = getEventRepresentation<T, V>(ctx, types, event, excludeVersions)
 	return decodeEvent(representation, event)
 }
 

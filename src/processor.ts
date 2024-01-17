@@ -69,25 +69,25 @@ import { initializeOrderBooks } from './handlers/models/initializeOrderBooks'
 import {
 	orderBookCreatedEventHandler,
 	orderBookLimitOrderCanceledEventHandler,
+	orderBookLimitOrderConvertedToMarketOrderEventHandler,
 	orderBookLimitOrderExecutedEventHandler,
 	orderBookLimitOrderFilledEventHandler,
+	orderBookLimitOrderIsSplitIntoMarketOrderAndLimitOrderEventHandler,
 	orderBookLimitOrderPlacedEventHandler,
 	orderBookLimitOrderUpdatedEventHandler,
-	orderBookMarketOrderEventHandler,
+	orderBookMarketOrderExecutedEventHandler,
 	orderBookStatusChangedEventHandler
 } from './handlers/events/orderBook'
 import {
 	orderBookCancelLimitOrderCallHandler,
 	orderBookPlaceLimitOrderCallHandler
 } from './handlers/calls/orderBook'
+import { Call, Event } from './types'
 
 export const processor = new SubstrateBatchProcessor()
-	.setDataSource({
-		archive: archive ? lookupArchive(archive, { type: 'Substrate', release: 'ArrowSquid' }) : undefined,
-		chain: {
-			url: chain,
-			rateLimit: 10
-		}
+	.setRpcEndpoint({
+		url: chain,
+		rateLimit: 10
 	})
 	.setTypesBundle(typesBundle as any)
 	.setBlockRange({ from: startBlock })
@@ -102,6 +102,10 @@ export const processor = new SubstrateBatchProcessor()
 			timestamp: true,
 		}
 	})
+
+if (archive) {
+	processor.setGateway(lookupArchive(archive, { type: 'Substrate', release: 'ArrowSquid' }))
+}
  
 callNames.forEach((callName) => {
 	processor.addCall({ name: [callName], extrinsic: true })
@@ -141,41 +145,50 @@ processor.run(new TypeormDatabase({ supportHotBlocks: true }), async (ctx) => {
 			await updateAssetsWeeklyStats(blockContext)
 		}
 
-		// const sort = (items: Items): Items => {
-		// 	// Step 1: Split the array by groups with equal item.extrinsic.hash
-		// 	const groups: Item[][] = []
+		type CallItem = { kind: 'call'; call: Call<any> }
+		type EventItem = { kind: 'event'; event: Event<any> }
+		type Item = CallItem | EventItem
+		type Items = Item[]
+		const sort = (items: Items): Items => {
+			// Step 1: Split the array by groups with equal item.extrinsic.hash
+			const groups: Item[][] = []
 
-		// 	items.forEach((item: any) => {
-		// 		const hash = item.kind === 'call' ? item.extrinsic.hash : item.event.extrinsic?.hash
-		// 		const lastGroup = groups[groups.length - 1]
-		// 		const lastGroupExtrinsicHash =
-		// 			lastGroup?.[0].kind === 'call' ? lastGroup[0].extrinsic.hash : lastGroup?.[0].event.extrinsic?.hash
-		// 		if (lastGroup && lastGroupExtrinsicHash === hash) {
-		// 			lastGroup.push(item)
-		// 		} else {
-		// 			groups.push([item])
-		// 		}
-		// 	})
+			items.forEach((item: Item) => {
+				const hash = item.kind === 'call' ? item.call.extrinsic?.hash : item.event.extrinsic?.hash
+				const lastGroup = groups[groups.length - 1]
+				const lastGroupExtrinsicHash =
+					lastGroup?.[0].kind === 'call' ? lastGroup[0].call.extrinsic?.hash : lastGroup?.[0].event.extrinsic?.hash
+				if (lastGroup && lastGroupExtrinsicHash === hash) {
+					lastGroup.push(item)
+				} else {
+					groups.push([item])
+				}
+			})
 
-		// 	// Step 2: Sort items in each group
-		// 	groups.map((group) => {
-		// 		return group.sort((a, b) => {
-		// 			if (a.kind === 'call' && b.kind !== 'call') {
-		// 				return -1 // Prioritize 'call'
-		// 			} else if (a.kind !== 'call' && b.kind === 'call') {
-		// 				return 1 // Deprioritize other kinds
-		// 			} else {
-		// 				return 0 // Keep order for items with the same kind
-		// 			}
-		// 		})
-		// 	})
+			// Step 2: Sort items in each group
+			groups.map((group) => {
+				return group.sort((a, b) => {
+					if (a.kind === 'call' && b.kind !== 'call') {
+						return -1 // Prioritize 'call'
+					} else if (a.kind !== 'call' && b.kind === 'call') {
+						return 1 // Deprioritize other kinds
+					} else {
+						return 0 // Keep order for items with the same kind
+					}
+				})
+			})
 
-		// 	// Step 3: Join the groups in their original order
-		// 	return groups.flat(1)
-		// }
+			// Step 3: Join the groups in their original order
+			return groups.flat(1)
+		}
 
-		// Adjusting subsequent processing to use extendedItems instead of block.items
+		// const calls = sort(block.calls.map(call => ({ kind: 'call', call }) as CallItem)) as CallItem[]
+		// for (let call of calls.map(item => item.call)) {
 		for (let call of block.calls) {
+			if (call.name !== call.extrinsic?.call?.name) {
+				continue
+			}
+
 			blockContext = {
 				...context,
 				block: {
@@ -245,6 +258,8 @@ processor.run(new TypeormDatabase({ supportHotBlocks: true }), async (ctx) => {
 			if (call.name === 'OrderBook.cancel_limit_orders_batch') await orderBookCancelLimitOrderCallHandler(blockContext, call)
 		}
 
+		// const events = sort(block.events.map(event => ({ kind: 'event', event }) as EventItem)) as EventItem[]
+		// for (let event of events.map(item => item.event)) {
 		for (let event of block.events) {
 			blockContext = {
 				...context,
@@ -275,9 +290,9 @@ processor.run(new TypeormDatabase({ supportHotBlocks: true }), async (ctx) => {
 			if (event.name === 'OrderBook.LimitOrderUpdated') await orderBookLimitOrderUpdatedEventHandler(blockContext, event)
 			if (event.name === 'OrderBook.LimitOrderFilled') await orderBookLimitOrderFilledEventHandler(blockContext, event)
 			if (event.name === 'OrderBook.LimitOrderCanceled') await orderBookLimitOrderCanceledEventHandler(blockContext, event)
-			if (event.name === 'OrderBook.MarketOrderExecuted') await orderBookMarketOrderEventHandler(blockContext, event)
-			if (event.name === 'OrderBook.LimitOrderConvertedToMarketOrder') await orderBookMarketOrderEventHandler(blockContext, event)
-			if (event.name === 'OrderBook.LimitOrderIsSplitIntoMarketOrderAndLimitOrder') await orderBookMarketOrderEventHandler(blockContext, event)
+			if (event.name === 'OrderBook.MarketOrderExecuted') await orderBookMarketOrderExecutedEventHandler(blockContext, event)
+			if (event.name === 'OrderBook.LimitOrderConvertedToMarketOrder') await orderBookLimitOrderConvertedToMarketOrderEventHandler(blockContext, event)
+			if (event.name === 'OrderBook.LimitOrderIsSplitIntoMarketOrderAndLimitOrder') await orderBookLimitOrderIsSplitIntoMarketOrderAndLimitOrderEventHandler(blockContext, event)
 		}
 	}
 })

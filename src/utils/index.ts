@@ -89,10 +89,7 @@ export const decodeAddressEthereum = (data: AddressEthereum): Uint8Array => {
 }
 
 export const toAddress = (data: string): Address => {
-	return data as Address
-}
-export const decodeAddress = (data: Address): Uint8Array => {
-	return ss58.codec('sora').decode(data)
+	return ss58.codec('sora').encode(typeof data === 'string' ? decodeHex(data) : data) as Address
 }
 
 export const toCamelCase = (s: string): string => {
