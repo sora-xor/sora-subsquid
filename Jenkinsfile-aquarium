@@ -2,7 +2,7 @@
 
 def jobParams  = [
     booleanParam(defaultValue: false, name: 'fullClean'),
-    booleanParam(defaultValue: false, name: 'deploy'),
+    booleanParam(defaultValue: true, name: 'deploy'),
     booleanParam(defaultValue: false, name: 'restart'),
     booleanParam(defaultValue: false, name: 'hardReset'),
     booleanParam(defaultValue: false, name: 'dbincrease'),
@@ -12,6 +12,7 @@ def jobParams  = [
 
 def pipeline = new org.subqd.AppPipeline(
     steps: this,
-    jobParams: jobParams
+    jobParams: jobParams,
+    upstreamJobList: '../../subsquid/test'
 )
 pipeline.runPipeline()
