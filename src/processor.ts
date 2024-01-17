@@ -182,8 +182,13 @@ processor.run(new TypeormDatabase({ supportHotBlocks: true }), async (ctx) => {
 			return groups.flat(1)
 		}
 
-		const calls = sort(block.calls.map(call => ({ kind: 'call', call }) as CallItem)) as CallItem[]
-		for (let call of calls.map(item => item.call)) {
+		// const calls = sort(block.calls.map(call => ({ kind: 'call', call }) as CallItem)) as CallItem[]
+		// for (let call of calls.map(item => item.call)) {
+		for (let call of block.calls) {
+			if (call.name !== call.extrinsic?.call?.name) {
+				continue
+			}
+
 			blockContext = {
 				...context,
 				block: {
@@ -253,8 +258,9 @@ processor.run(new TypeormDatabase({ supportHotBlocks: true }), async (ctx) => {
 			if (call.name === 'OrderBook.cancel_limit_orders_batch') await orderBookCancelLimitOrderCallHandler(blockContext, call)
 		}
 
-		const events = sort(block.events.map(event => ({ kind: 'event', event }) as EventItem)) as EventItem[]
-		for (let event of events.map(item => item.event)) {
+		// const events = sort(block.events.map(event => ({ kind: 'event', event }) as EventItem)) as EventItem[]
+		// for (let event of events.map(item => item.event)) {
+		for (let event of block.events) {
 			blockContext = {
 				...context,
 				block: {
