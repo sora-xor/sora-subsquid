@@ -85,12 +85,9 @@ import {
 import { Call, Event } from './types'
 
 export const processor = new SubstrateBatchProcessor()
-	.setDataSource({
-		archive: archive ? lookupArchive(archive, { type: 'Substrate', release: 'ArrowSquid' }) : undefined,
-		chain: {
-			url: chain,
-			rateLimit: 10
-		}
+	.setRpcEndpoint({
+		url: chain,
+		rateLimit: 10
 	})
 	.setTypesBundle(typesBundle as any)
 	.setBlockRange({ from: startBlock })
@@ -105,6 +102,10 @@ export const processor = new SubstrateBatchProcessor()
 			timestamp: true,
 		}
 	})
+
+if (archive) {
+	processor.setGateway(lookupArchive(archive, { type: 'Substrate', release: 'ArrowSquid' }))
+}
  
 callNames.forEach((callName) => {
 	processor.addCall({ name: [callName], extrinsic: true })
