@@ -3,8 +3,6 @@ import { CallType as CallTypeProduction, EventType as EventTypeProduction } from
 import { CallType as CallTypeStage, EventType as EventTypeStage } from '../types/generated/stage/support'
 import { CallType as CallTypeTest, EventType as EventTypeTest } from '../types/generated/test/support'
 import { CallType as CallTypeDev, EventType as EventTypeDev } from '../types/generated/dev/support'
-import { UnsupportedSpecError } from './errors'
-import { getLog } from './logs'
 import * as sts from '@subsquid/substrate-runtime/lib/sts'
 
 type VersionedObject = {
@@ -75,6 +73,7 @@ function getDataFromVersionedObject<T extends VersionedObject>(ctx: BlockContext
 
 	for (const key of getVersionedObjectKeys(obj)) {
 		if (obj[key].is(entity)) {
+
 			return obj[key]
 		}
 	}
@@ -88,7 +87,10 @@ export function narrowVersionedObject<T extends VersionedObject, V extends reado
 
 	versions.forEach((version) => {
 		const vKey = `v${version}`
-		narrowed[vKey] = types[vKey as keyof T]
+		const versionType = types[vKey as keyof T]
+		if (versionType) {
+			narrowed[vKey] = versionType
+		}
 	})
 
 	return narrowed as NarrowVersions<T, V>
@@ -150,11 +152,6 @@ export function getEntityRepresentation<T extends VersionedObject, K extends Fil
 	let data = getDataFromVersionedObject(ctx, narrowedObject, entityItem)
 
 	if (data === null) {
-		const specVersion = findCurrentSpecVersion(ctx, narrowedObject, entityItem)
-		if (!specVersion) {
-			getLog(ctx).error('No spec version found')
-		}
-		const unsupportedSpecError = new UnsupportedSpecError(ctx, { kind: entityItem.kind, name: types.name })
 		if (entityItem.kind === 'call') {
 			data = {
 				decode(call: Call<any>) {
@@ -167,10 +164,7 @@ export function getEntityRepresentation<T extends VersionedObject, K extends Fil
 					return entityItem.entity.block._runtime.decodeJsonEventRecordArguments(event)
 				}
 			} as any
-		} else {
-			throw unsupportedSpecError
 		}
-		getLog(ctx).error(unsupportedSpecError.message)
 	}
 	if (data === null && !couldBeNull) {
 		throw new Error(`[${ctx.block.header.height}] Entity data is null`)
