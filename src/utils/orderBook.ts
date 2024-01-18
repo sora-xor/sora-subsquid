@@ -8,9 +8,10 @@ import { assetSnapshotsStorage, assetStorage, calcTvlUSD } from './assets'
 import { Address, AssetId, BlockContext } from "../types"
 import { XOR, predefinedAssets } from './consts'
 import { networkSnapshotsStorage } from './network'
-import { getStorageRepresentation } from './entities'
+import { getStorageRepresentation, isCurrentVersionIncluded } from './entities'
 import { storage } from '../types/generated/merged'
 import { TechAssetId } from '../types/generated/production/v57'
+import { versionsWithStringAssetId } from '../consts'
 
 const calcVolume = (snapshots: OrderBookSnapshot[]): BigNumber => {
   const totalVolume = snapshots.reduce((buffer, snapshot) => {
@@ -35,19 +36,35 @@ export const getAllOrderBooks = async (ctx: BlockContext) => {
   }
 }
 
+async function getTokensAccounts(ctx: BlockContext, accountId: Address, assetId: AssetId) {
+	const types = storage.tokens.accounts
+	const getString = getStorageRepresentation(ctx, types, { kind: 'include', versions: versionsWithStringAssetId })?.get
+	const getAsset32 = getStorageRepresentation(ctx, types, { kind: 'exclude', versions: versionsWithStringAssetId })?.get
+
+	let data = isCurrentVersionIncluded(ctx, types, { kind: 'storage' }, versionsWithStringAssetId)
+		? await getString?.(ctx.block.header, accountId, assetId)
+		: await getAsset32?.(ctx.block.header, accountId, { code: assetId })
+
+	return data
+}
+
 export const getOrderBookAssetBalance = async (ctx: BlockContext, accountId: Address, assetId: AssetId) => {
 	try {
-	  getOrderBooksStorageLog(ctx).debug({ accountId, assetId }, 'Get Order Book balance')
-  
-	  let data!: any
-  
-	  if (assetId === XOR) {
-		data = (await api.query.system.account(accountId) as any).data
-	  } else {
-		data = await api.query.tokens.accounts(accountId, assetId)
-	  }
-  
-	  return BigInt(data.free.toString())
+		getOrderBooksStorageLog(ctx).debug({ accountId, assetId }, 'Get Order Book balance')
+		
+		let free: bigint
+
+		if (assetId === XOR) {
+			const data = await getStorageRepresentation(ctx, storage.system.account)?.get(ctx.block.header, accountId)
+			assertDefined(data)
+			free = data.data.free
+		} else {
+			const data = await getTokensAccounts(ctx, accountId, assetId)
+			assertDefined(data)
+			free = data.free
+		}
+	
+		return free
 	} catch (e: any) {
 	  getOrderBooksStorageLog(ctx).error('Error getting Order Book balance')
 	  getOrderBooksStorageLog(ctx).error(e)
@@ -274,6 +291,7 @@ export class OrderBooksStorage {
 
 	private async calcStats(ctx: BlockContext, orderBook: OrderBook, type: SnapshotType, snapshotsCount: number) {
 		const { id, price } = orderBook
+		getOrderBooksStorageLog(ctx).debug({ price }, `Something with price`)
 		const blockTimestamp = getBlockTimestamp(ctx)
 		const { index } = getSnapshotIndex(blockTimestamp, type)
 		const indexes = prevSnapshotsIndexesRow(index, snapshotsCount)
@@ -281,8 +299,7 @@ export class OrderBooksStorage {
 		const ids = indexes.map((idx) => OrderBooksSnapshotsStorage.getId(id, type, idx))
 		const snapshots = await OrderBooksSnapshotsStorage.getSnapshotsByIds(ctx, ids)
 
-		assertDefined(price)
-		const currentPrice = new BigNumber(price)
+		const currentPrice = new BigNumber(price ?? 0)
 		const startPrice = new BigNumber(last(snapshots)?.price?.open ?? '0')
 
 		const priceChange = calcPriceChange(currentPrice, startPrice)
