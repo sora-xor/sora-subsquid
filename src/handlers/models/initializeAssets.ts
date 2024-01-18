@@ -47,6 +47,7 @@ export const getAssetInfos = async (ctx: BlockContext) => {
 	} catch (e: any) {
 		getInitializeAssetsLog(ctx).error('Error getting Asset infos')
 		getInitializeAssetsLog(ctx).error(e)
+		console.error(e)
 		return null
 	}
 }
@@ -94,7 +95,7 @@ export const getBandRates = async (ctx: BlockContext) => {
 
 		const rates = pairs.map((pair) => {
 			const [ticker, rate] = pair
-			const referenceSymbol = typeof ticker === 'string' ? (ticker as ReferenceSymbol) : toReferenceSymbol(ticker)
+			const referenceSymbol = toReferenceSymbol(ticker)
 			return {
 				referenceSymbol,
 				rate,
@@ -133,6 +134,7 @@ export const getTokensIssuances = async (ctx: BlockContext) => {
 	} catch (e: any) {
 		getInitializeAssetsLog(ctx).error('Error getting Tokens issuances')
 		getInitializeAssetsLog(ctx).error(e)
+		console.error(e)
 		return null
 	}
 }
@@ -149,6 +151,7 @@ export const getXorIssuance = async (ctx: BlockContext) => {
 	} catch (e: any) {
 		getInitializeAssetsLog(ctx).error('Error getting XOR issuance')
 		getInitializeAssetsLog(ctx).error(e)
+		console.error(e)
 		return null
 	}
 }

@@ -9,12 +9,12 @@ import { versionsWithStringAssetId } from '../../consts'
 
 async function getAssetInfos(ctx: BlockContext, assetId: AssetId) {
 	const types = storage.assets.assetInfos
-	const getString = getStorageRepresentation(ctx, types, { kind: 'include', versions: versionsWithStringAssetId })?.get
-	const getAsset32 = getStorageRepresentation(ctx, types, { kind: 'exclude', versions: versionsWithStringAssetId })?.get
+	const representationString = getStorageRepresentation(ctx, types, { kind: 'include', versions: versionsWithStringAssetId })
+	const representationAsset32 = getStorageRepresentation(ctx, types, { kind: 'exclude', versions: versionsWithStringAssetId })
 
 	let data = isCurrentVersionIncluded(ctx, types, { kind: 'storage' }, versionsWithStringAssetId)
-		? await getString?.(ctx.block.header, assetId)
-		: await getAsset32?.(ctx.block.header, { code: assetId })
+		? await representationString?.get(ctx.block.header, assetId)
+		: await representationAsset32?.get(ctx.block.header, { code: assetId })
 
 	return data
 }
