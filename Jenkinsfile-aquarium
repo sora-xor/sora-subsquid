@@ -13,6 +13,6 @@ def jobParams  = [
 def pipeline = new org.subqd.AppPipeline(
     steps: this,
     jobParams: jobParams,
-    upstreamJobList: '../subsquid/subsquid-dev'
+    upstreamJobList: '../../subsquid/develop'
 )
 pipeline.runPipeline()
