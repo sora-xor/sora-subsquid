@@ -291,6 +291,7 @@ export class OrderBooksStorage {
 
 	private async calcStats(ctx: BlockContext, orderBook: OrderBook, type: SnapshotType, snapshotsCount: number) {
 		const { id, price } = orderBook
+		getOrderBooksStorageLog(ctx).debug({ price }, `Something with price`)
 		const blockTimestamp = getBlockTimestamp(ctx)
 		const { index } = getSnapshotIndex(blockTimestamp, type)
 		const indexes = prevSnapshotsIndexesRow(index, snapshotsCount)
@@ -298,8 +299,7 @@ export class OrderBooksStorage {
 		const ids = indexes.map((idx) => OrderBooksSnapshotsStorage.getId(id, type, idx))
 		const snapshots = await OrderBooksSnapshotsStorage.getSnapshotsByIds(ctx, ids)
 
-		assertDefined(price)
-		const currentPrice = new BigNumber(price)
+		const currentPrice = new BigNumber(price ?? 0)
 		const startPrice = new BigNumber(last(snapshots)?.price?.open ?? '0')
 
 		const priceChange = calcPriceChange(currentPrice, startPrice)
