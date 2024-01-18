@@ -26,9 +26,11 @@ export class HistoryElement {
     @Column_("text", {nullable: false})
     name!: string
 
+    @Index_()
     @Column_("text", {nullable: false})
     module!: string
 
+    @Index_()
     @Column_("text", {nullable: false})
     method!: string
 

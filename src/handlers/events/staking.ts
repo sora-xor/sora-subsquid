@@ -2,23 +2,20 @@ import { StakingEraNomination } from '../../model/generated/stakingEraNomination
 import { StakingEraNominator } from '../../model/generated/stakingEraNominator.model'
 import { StakingEraValidator } from '../../model/generated/stakingEraValidator.model'
 import { StakingValidator } from '../../model/generated/stakingValidator.model'
-import { BlockContext, EventItem } from '../../types'
-import { StakingErasStakersStorage } from '../../types/generated/storage'
-import { toAddress } from '../../utils'
-import { getEntityData } from '../../utils/entities'
+import { BlockContext, Event } from '../../types'
+import { assertDefined, toAddress } from '../../utils'
+import { getStorageRepresentation } from '../../utils/entities'
 import { getEventHandlerLog, logStartProcessingEvent } from '../../utils/logs'
 import { getActiveStakingEra, getStakingStaker } from '../../utils/staking'
+import { storage } from '../../types/generated/merged'
 
-export async function stakingStakersElectedEventHandler(ctx: BlockContext, eventItem: EventItem<'Staking.StakersElected'>): Promise<void> {
-	logStartProcessingEvent(ctx, eventItem)
+export async function stakingStakersElectedEventHandler(ctx: BlockContext, event: Event<'Staking.StakersElected'>): Promise<void> {
+	logStartProcessingEvent(ctx, event)
 
 	const activeStakingEra = await getActiveStakingEra(ctx)
 
-	const erasStakersStorage = new StakingErasStakersStorage(ctx, ctx.block.header)
-	const exposures = await getEntityData(ctx, erasStakersStorage, {
-		kind: 'storage',
-		name: StakingErasStakersStorage.name,
-	}).getPairs(activeStakingEra.index)
+	const exposures = await getStorageRepresentation(ctx, storage.staking.erasStakers)?.getPairs(ctx.block.header, activeStakingEra.index)
+	assertDefined(exposures)
 
 	for (const [[era, validator], exposure] of exposures) {
 		let stakingValidator = await ctx.store.get(StakingValidator, toAddress(validator))
@@ -45,13 +42,14 @@ export async function stakingStakersElectedEventHandler(ctx: BlockContext, event
 			stakingEraValidator.rewardAmount = 0n
 			stakingEraValidator.staker = stakingStaker
 		}
+		assertDefined(exposure)
 		stakingEraValidator.ownBond = exposure.own
 		stakingEraValidator.totalBond = exposure.total
 		stakingValidator.bond = exposure.total
 		await ctx.store.save(stakingValidator)
-		getEventHandlerLog(ctx, eventItem).debug({ id: stakingValidator.id, bond: stakingValidator.bond }, 'Staking Validator saved')
+		getEventHandlerLog(ctx, event).debug({ id: stakingValidator.id, bond: stakingValidator.bond }, 'Staking Validator saved')
 		await ctx.store.save(stakingEraValidator)
-		getEventHandlerLog(ctx, eventItem).debug(
+		getEventHandlerLog(ctx, event).debug(
 			{
 				id: stakingEraValidator.id,
 				ownBond: stakingEraValidator.ownBond,
@@ -78,7 +76,7 @@ export async function stakingStakersElectedEventHandler(ctx: BlockContext, event
 			}
 			stakingEraNominator.bond += nomination.value
 			await ctx.store.save(stakingEraNominator)
-			getEventHandlerLog(ctx, eventItem).debug(
+			getEventHandlerLog(ctx, event).debug(
 				{ id: stakingEraNominator.id, bond: stakingEraNominator.bond },
 				'Staking Era Nominator saved',
 			)
@@ -94,7 +92,7 @@ export async function stakingStakersElectedEventHandler(ctx: BlockContext, event
 			}
 			stakingEraNomination.nominator = stakingEraNominator
 			await ctx.store.save(stakingEraNomination)
-			getEventHandlerLog(ctx, eventItem).debug(
+			getEventHandlerLog(ctx, event).debug(
 				{ id: stakingEraNomination.id, amount: stakingEraNomination.amount },
 				'Staking Era Nomination saved',
 			)

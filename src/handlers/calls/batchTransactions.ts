@@ -1,28 +1,28 @@
-import { addCallsToHistoryElement, addDataToHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
+import { addCallsToHistoryElement, addDataToHistoryElement, createCallHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { formatU128ToBalance, getAssetId } from '../../utils/assets'
 import { poolsStorage } from '../../utils/pools'
-import { BlockContext, CallItem } from '../../types'
-import { UtilityBatchAllCall, utilityBatchAllCallVersions } from '../../types/generated/calls'
+import { BlockContext, Call } from '../../types'
+import { calls as generatedCalls } from '../../types/generated/merged'
 import { HistoryElement, HistoryElementCall } from '../../model'
 import { AssetId } from '../../types'
 import { toCamelCase } from '../../utils'
+import { getCallData } from '../../utils/entities'
 import { toJSON } from '@subsquid/util-internal-json'
-import { getCallHandlerLog, logStartProcessingCall } from '../../utils/logs'
+import { logStartProcessingCall } from '../../utils/logs'
 
-type Version = (typeof utilityBatchAllCallVersions)[number]
-type IsVersion = { [V in Version]: `isV${V}` }[Version]
-type AsVersion = { [V in Version]: `asV${V}` }[Version]
+type Version = Exclude<keyof typeof generatedCalls.utility.batchAll, 'name'>
+type Calls = ReturnType<typeof getCallData<typeof generatedCalls.utility.batchAll, 'exclude', []>>['calls']
 
 type BatchCall = {
 	[V in Version]: {
 		version: V
-		call: UtilityBatchAllCall[`asV${V}`]['calls'][number]
+		call: Calls[number]
 	}
 }[Version]
 type BatchCalls = {
 	[V in Version]: {
 		version: V
-		calls: UtilityBatchAllCall[`asV${V}`]['calls']
+		calls: Calls
 	}
 }[Version]
 
@@ -77,15 +77,15 @@ function formatSpecificCall(call: BatchCall): any {
 	}
 }
 
-function extractCall(ctx: BlockContext, call: BatchCall, id: number, historyElement: HistoryElement): HistoryElementCall {
+function extractCall(ctx: BlockContext, batchCall: BatchCall, id: number, historyElement: HistoryElement): HistoryElementCall {
 	return new HistoryElementCall({
 		id: `${historyElement.blockHeight}-${id}`,
 		historyElement,
-		module: toCamelCase(call.call.__kind),
-		method: toCamelCase(call.call.value.__kind),
-		// TODO: determine where to get call hash
-		// hash: call.hash,
-		data: toJSON(formatSpecificCall(call)),
+		module: toCamelCase(batchCall.call.__kind),
+		method: toCamelCase(batchCall.call.value.__kind),
+		// TODO: determine whether or not hash is needed here
+		// hash: 'hash' in batchCall.call ? batchCall.call.hash as string : undefined,
+		data: toJSON(formatSpecificCall(batchCall)),
 		updatedAtBlock: ctx.block.header.height,
 	})
 }
@@ -96,21 +96,18 @@ function mapCalls(ctx: BlockContext, { version, calls }: BatchCalls, historyElem
 
 function mapCallsForAllVersions(
 	ctx: BlockContext,
-	callItem: CallItem<'Utility.batch_all'>,
+	call: Call<'Utility.batch_all'>,
 	historyElement: HistoryElement,
 ): HistoryElementCall[] {
-	const utilityBatchAllCall = new UtilityBatchAllCall(ctx, callItem.call)
-
 	let calls: HistoryElementCall[] | null = null
-	utilityBatchAllCallVersions.forEach((version) => {
-		const isVersionKey = ('isV' + version) as IsVersion
-		if (isVersionKey.startsWith('isV') && utilityBatchAllCall[isVersionKey]) {
-			const version = isVersionKey.replace('isV', '') as Version
+	const versions = Object.keys(generatedCalls.utility.batchAll).filter(v => v !== 'name') as Version[]
+	versions.forEach((version: Version) => {
+		if (generatedCalls.utility.batchAll[version].is(call)) {
 			calls = mapCalls(
 				ctx,
 				{
 					version,
-					calls: utilityBatchAllCall[('asV' + version) as AsVersion].calls,
+					calls: generatedCalls.utility.batchAll[version].decode(call).calls,
 				} as BatchCalls,
 				historyElement,
 			)
@@ -121,7 +118,7 @@ function mapCallsForAllVersions(
 			ctx,
 			{
 				version: 'unknown' as any,
-				calls: ctx._chain.decodeCall(callItem.call).calls,
+				calls: call.block._runtime.decodeJsonCallRecordArguments(call).calls,
 			} as BatchCalls,
 			historyElement,
 		)
@@ -129,12 +126,12 @@ function mapCallsForAllVersions(
 	return calls
 }
 
-export async function batchTransactionsCallHandler(ctx: BlockContext, callItem: CallItem<'Utility.batch_all'>): Promise<void> {
-	logStartProcessingCall(ctx, callItem)
+export async function batchTransactionsCallHandler(ctx: BlockContext, call: Call<'Utility.batch_all'>): Promise<void> {
+	logStartProcessingCall(ctx, call)
 
-	const historyElement = await createHistoryElement(ctx, callItem)
+	const historyElement = await createCallHistoryElement(ctx, call)
 
-	let historyElementCalls = mapCallsForAllVersions(ctx, callItem, historyElement)
+	let historyElementCalls = mapCallsForAllVersions(ctx, call, historyElement)
 
 	await addCallsToHistoryElement(ctx, historyElement, historyElementCalls)
 	await addDataToHistoryElement(ctx, historyElement, {})
