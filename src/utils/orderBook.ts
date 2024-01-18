@@ -38,12 +38,12 @@ export const getAllOrderBooks = async (ctx: BlockContext) => {
 
 async function getTokensAccounts(ctx: BlockContext, accountId: Address, assetId: AssetId) {
 	const types = storage.tokens.accounts
-	const getString = getStorageRepresentation(ctx, types, { kind: 'include', versions: versionsWithStringAssetId })?.get
-	const getAsset32 = getStorageRepresentation(ctx, types, { kind: 'exclude', versions: versionsWithStringAssetId })?.get
+	const representationString = getStorageRepresentation(ctx, types, { kind: 'include', versions: versionsWithStringAssetId })
+	const representationAsset32 = getStorageRepresentation(ctx, types, { kind: 'exclude', versions: versionsWithStringAssetId })
 
 	let data = isCurrentVersionIncluded(ctx, types, { kind: 'storage' }, versionsWithStringAssetId)
-		? await getString?.(ctx.block.header, accountId, assetId)
-		: await getAsset32?.(ctx.block.header, accountId, { code: assetId })
+		? await representationString?.get(ctx.block.header, accountId, assetId)
+		: await representationAsset32?.get(ctx.block.header, accountId, { code: assetId })
 
 	return data
 }
@@ -68,6 +68,7 @@ export const getOrderBookAssetBalance = async (ctx: BlockContext, accountId: Add
 	} catch (e: any) {
 	  getOrderBooksStorageLog(ctx).error('Error getting Order Book balance')
 	  getOrderBooksStorageLog(ctx).error(e)
+	  console.error(e)
 	  return BigInt(0)
 	}
 }
@@ -81,6 +82,7 @@ export const getTechnicalAccounts = async (ctx: BlockContext) => {
 	} catch (e: any) {
 		getOrderBooksStorageLog(ctx).error('Error getting Order Books account ids')
 		getOrderBooksStorageLog(ctx).error(e)
+		console.error(e)
 		return null
 	}
 }
