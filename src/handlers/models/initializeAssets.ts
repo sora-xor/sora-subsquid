@@ -5,12 +5,21 @@ import { assetPrecisions, assetStorage, formatU128ToBalance, getAssetId, tickerS
 import { XOR } from '../../utils/consts'
 import { assertDefined, toReferenceSymbol } from '../../utils'
 import { AssetAmount, AssetId } from '../../types'
-import { getStorageRepresentation } from '../../utils/entities'
+import { getStorageRepresentation, isCurrentVersionIncluded } from '../../utils/entities'
 import { getInitializeAssetsLog } from '../../utils/logs'
 
 import { storage } from '../../types/generated/merged'
 
 let isFirstBlockIndexed = false
+
+async function getXstPoolEnabledSynthetics(ctx: BlockContext) {
+	const types = storage.xstPool.enabledSynthetics
+	const versions = ['19', '33Stage', '33Test', '42', '42Stage', '42Test'] as const
+	if (isCurrentVersionIncluded(ctx, types, { kind: 'storage' }, versions)) {
+		return null
+	}
+	return getStorageRepresentation(ctx, storage.xstPool.enabledSynthetics, { kind: 'exclude', versions })?.getPairs(ctx.block.header)
+}
 
 export const getAssetInfos = async (ctx: BlockContext) => {
 	try {
@@ -46,9 +55,10 @@ export const getSyntheticAssets = async (ctx: BlockContext) => {
 	try {
 		getInitializeAssetsLog(ctx).debug('Synthetic assets request...')
 
-		const data = getStorageRepresentation(ctx, storage.xstPool.enabledSynthetics, ['19', '33Stage', '33Test', '42', '42Stage', '42Test'] as const)
-		if (!data) return null
-		const pairs = await data.getPairs(ctx.block.header)
+		const pairs = await getXstPoolEnabledSynthetics(ctx)
+		if (!pairs) {
+			return null
+		}
 
 		const syntheticAssets = pairs.map((pair) => {
 			const [asset, syntheticInfo] = pair
@@ -247,10 +257,10 @@ export async function initializeAssets(ctx: BlockContext): Promise<void> {
 	if (entities.length) {
 		// get or create entities in DB & memory
 		// We don't use Promise.all here because we need consistent order of requests in the log
-		const created = [];
+		const created: Asset[] = []
         for (const entity of entities) {
-            const asset = await assetStorage.getAsset(ctx, entity.id as AssetId);
-            created.push(asset);
+            const asset = await assetStorage.getAsset(ctx, entity.id as AssetId)
+            created.push(asset)
         }
 		// update data in memory storage
 		created.forEach((entity) => {
