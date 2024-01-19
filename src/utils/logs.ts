@@ -62,18 +62,23 @@ export function getLog(ctx: BlockContext, logModule: string | null = null, attrs
 
 export function getCallHandlerLog(ctx: BlockContext, call: Call<any>, testMode: boolean = false) {
 	const extrinsicHash = call.extrinsic?.hash ?? null
+	const extrinsicIndex = call.extrinsic?.index ?? null
 	const callName = toPascalCase(call.name)
-	const attributes = { extrinsicHash, callName }
+	const attributes = { extrinsicHash, extrinsicIndex, callName }
 	return getLog(ctx, 'CallHandler', attributes, testMode)
 }
 
 export function getEventHandlerLog(ctx: BlockContext, event: Event<any>, testMode: boolean = false) {
 	const extrinsicHash = event.extrinsic?.hash ?? null
+	const extrinsicIndex = event.extrinsic?.index ?? null
 	const eventName = toPascalCase(event.name)
 	const eventId = getEventId(ctx, event)
 	const attributes: any = { eventName, eventId }
 	if (extrinsicHash) {
 		attributes['extrinsicHash'] = extrinsicHash
+	}
+	if (extrinsicIndex) {
+		attributes['extrinsicIndex'] = extrinsicIndex
 	}
 	return getLog(ctx, 'EventHandler', attributes, testMode)
 }
