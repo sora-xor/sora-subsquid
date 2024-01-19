@@ -25,11 +25,13 @@ export function findCallByExtrinsicHash<T extends CallName[], F extends boolean>
 ): F extends true ? { [K in T[number]]: SpecificCall<K> }[T[number]] : { [K in T[number]]: SpecificCall<K> }[T[number]] | null {
 	const call = findCallsByExtrinsicHash(ctx, extrinsicHash, callNames)[0] ?? null
 	if (call) {
-		getUtilsLog(ctx).debug(`The '${call.name}' call found`)
+		// TODO: return this log when will the 'findCallByExtrinsicHash' method be added to the subquery
+		// getUtilsLog(ctx).debug(`The '${call.name}' call found`)
 	} else {
-		getUtilsLog(ctx).debug(
-			callNames?.length === 1 ? `The '${callNames[0]}' call not found` : `Calls not found: ${callNames?.join(', ')}`,
-		)
+		// TODO: return this log when will the 'findCallByExtrinsicHash' method be added to the subquery
+		// getUtilsLog(ctx).debug(
+		// 	callNames?.length === 1 ? `The '${callNames[0]}' call not found` : `Calls not found: ${callNames?.join(', ')}`,
+		// )
 	}
 	if ((throwError as boolean) && call === null) {
 		throw new CannotFindCallError(ctx, extrinsicHash, callNames ?? '')

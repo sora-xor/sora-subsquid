@@ -92,7 +92,7 @@ export async function orderBookLimitOrderPlacedEventHandler(ctx: BlockContext, e
 	limitOrder.amountFilled = '0'
 	limitOrder.status = OrderStatus.Active
 	limitOrder.updatedAtBlock = blockHeight
-
+	limitOrder.orderId = Number(orderId)
 
 	await ctx.store.save(limitOrder)
 
