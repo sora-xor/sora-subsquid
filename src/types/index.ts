@@ -1,4 +1,4 @@
-import { Block, Call as CallType, Event as EventType, DataHandlerContext, SubstrateBatchProcessor } from '@subsquid/substrate-processor'
+import { Block as BlockType, Call as CallType, Event as EventType, DataHandlerContext, SubstrateBatchProcessor } from '@subsquid/substrate-processor'
 import { Store } from '@subsquid/typeorm-store'
 import { Opaque } from 'type-fest'
 import { callNames, eventNames } from '../consts'
@@ -19,7 +19,8 @@ export type Entity<T extends CallName | EventName> = T extends CallName ? Call<T
 export type EntityKind = 'call' | 'event' | 'storage'
 
 export type Context = DataHandlerContext<Store, {}>
-export type BlockContext = Context & { block: Block<Fields>; now: number }
+export type Block = BlockType<Fields>
+export type BlockContext = Context & { block: BlockType<Fields>; now: number }
 
 export type AssetId = Opaque<string, 'AssetId'>
 export type AssetAmount = Opaque<bigint, 'AssetAmount'>

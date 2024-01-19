@@ -10,7 +10,6 @@ import { XOR, PSWAP, DAI, BASE_ASSETS, XSTUSD } from '../../utils/consts'
 import { BlockContext } from '../../types'
 import { AssetId } from '../../types'
 import { getPoolsStorageLog, getSyncPricesLog } from '../../utils/logs'
-import { toAddress } from '../../utils'
 
 const getAssetDexCap = (assetReserves: BigNumber, assetPrice: BigNumber, daiReserves: BigNumber) => {
 	// theoretical asset capitalization in DAI inside DEX
