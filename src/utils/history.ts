@@ -138,6 +138,9 @@ export const addDataToHistoryElement = async (ctx: BlockContext, historyElement:
 	if ('from' in data && typeof data.from === 'string') {
 		historyElement.dataFrom = data.from
 	}
+	if ('receivers' in data && Array.isArray(data.receivers)) {
+		historyElement.dataReceivers = data.receivers.map(receiver => receiver.accountId)
+	}
 	historyElement.updatedAtBlock = ctx.block.header.height
 
 	await ctx.store.save(historyElement)
