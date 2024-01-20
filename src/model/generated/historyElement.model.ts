@@ -47,6 +47,7 @@ export class HistoryElement {
     @Column_("int4", {nullable: false})
     timestamp!: number
 
+    @Index_()
     @Column_("jsonb", {nullable: true})
     data!: unknown | undefined | null
 
@@ -57,6 +58,9 @@ export class HistoryElement {
     @Index_()
     @Column_("text", {nullable: true})
     dataFrom!: string | undefined | null
+
+    @Column_("text", {array: true, nullable: false})
+    dataReceivers!: (string | undefined | null)[]
 
     @OneToMany_(() => HistoryElementCall, e => e.historyElement)
     calls!: HistoryElementCall[]

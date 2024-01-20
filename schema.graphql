@@ -120,9 +120,10 @@ type HistoryElement @entity {
 	networkFee: String
 	execution: ExecutionResult!
 	timestamp: Int!
-	data: JSON
+	data: JSON @index
 	dataTo: String @index
 	dataFrom: String @index
+	dataReceivers: [String]!
 	calls: [HistoryElementCall!]! @derivedFrom(field: "historyElement")
 	callNames: [String]!
 	updatedAtBlock: Int!
