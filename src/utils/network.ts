@@ -21,7 +21,7 @@ class NetworkStatsStorage {
 	async sync(ctx: BlockContext): Promise<void> {
 		if (this.storage) {
 			getNetworkSnapshotsStorageLog(ctx).debug('Network stats sync')
-			ctx.store.save(this.storage)
+			await ctx.store.save(this.storage)
 		}
 	}
 
