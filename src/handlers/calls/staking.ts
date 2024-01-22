@@ -9,6 +9,7 @@ import { PayeeType } from '../../model'
 import { getStakingStaker } from '../../utils/staking'
 import { toAddress } from '../../utils'
 import { calls } from '../../types/generated/merged'
+import { Address } from '../../types/generated/production/v1'
 
 export async function stakingBondCallHandler(ctx: BlockContext, call: Call<'Staking.bond'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
@@ -237,7 +238,7 @@ export async function stakingSetControllerCallHandler(ctx: BlockContext, call: C
 		if (stakingStaker.payeeType === PayeeType.CONTROLLER) {
 			stakingStaker.payee = controller
 		}
-		ctx.store.save(stakingStaker)
+		await ctx.store.save(stakingStaker)
 		getCallHandlerLog(ctx, call).debug({ staker: stakingStaker.id, controller }, 'Staking staker controller updated')
 	}
 
@@ -300,19 +301,19 @@ export async function stakingSetPayeeCallHandler(ctx: BlockContext, call: Call<'
 	const stakingStaker = await getStakingStaker(ctx, extrinsicSigner)
 	const kind = data.payee.__kind.toUpperCase()
 	const payeeType = kind === 'STAKED' || kind === 'NONE' ? PayeeType.STASH : kind as PayeeType
-	let payee = null
+	let payee: Address | null = null
 	if (data.payee.__kind === 'Account') {
 		payee = toAddress(data.payee.value)
 	} else if (payeeType === PayeeType.STASH) {
 		payee = stakingStaker.id
 	} else if (payeeType === PayeeType.CONTROLLER) {
-		payee = stakingStaker.controller
+		payee = stakingStaker.controller ?? null
 	}
 
 	if (stakingStaker.payeeType !== payeeType || stakingStaker.payee !== payee) {
 		stakingStaker.payeeType = payeeType
 		stakingStaker.payee = payee
-		ctx.store.save(stakingStaker)
+		await ctx.store.save(stakingStaker)
 		getCallHandlerLog(ctx, call).debug({ staker: stakingStaker.id, payee }, 'Staking staker payee updated')
 	}
 
