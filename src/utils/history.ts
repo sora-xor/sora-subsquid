@@ -2,7 +2,7 @@ import { ExecutionResult, ExecutionError, HistoryElement, HistoryElementCall, Hi
 import { AssetAmount, BlockContext, Call, Event } from '../types'
 import { getAccountEntity } from './account'
 import { networkSnapshotsStorage } from './network'
-import { assertDefined, formatDateTimestamp, getBlockTimestamp, getCallId, getEventId, toAddress, toCamelCase } from './index'
+import { assertDefined, getBlockTimestamp, getCallId, getEventId, toAddress, toCamelCase } from './index'
 import { nToU8a } from '@polkadot/util'
 import { toJSON } from '@subsquid/util-internal-json'
 import { findEventByExtrinsicHash } from './events'
@@ -31,19 +31,6 @@ const getCallNetworkFee = (ctx: BlockContext, call: Call<any>): AssetAmount => {
 		return eventData[1] as AssetAmount
 	}
 	return 0n as AssetAmount
-}
-
-function filterDataProperties(obj: Record<string, any>) {
-	const entries = []
-	for (let key in obj) {
-		if (obj.hasOwnProperty(key)) {
-			const type = typeof obj[key]
-			if (type === 'number' || type === 'string' || type === 'bigint' || type === 'boolean') {
-				entries.push(key + ': ' + obj[key])
-			}
-		}
-	}
-	return entries.join(', ')
 }
 
 export const createHistoryElement = async (
@@ -88,12 +75,12 @@ export const createHistoryElement = async (
 		const error =
 			extrinsicError.__kind === 'Module'
 				? new ExecutionError({
-						moduleErrorId: nToU8a(extrinsicError.value.error).at(-1),
-						moduleErrorIndex: extrinsicError.value.index,
-				  })
+					moduleErrorId: nToU8a(extrinsicError.value.error).at(-1),
+					moduleErrorIndex: extrinsicError.value.index,
+				})
 				: new ExecutionError({
-						nonModuleErrorMessage: JSON.stringify(extrinsicError),
-				  })
+					nonModuleErrorMessage: JSON.stringify(extrinsicError),
+				})
 		historyElement.execution = new ExecutionResult({
 			success,
 			error,

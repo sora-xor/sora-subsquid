@@ -42,7 +42,9 @@ const handleAndSaveExtrinsic = async (ctx: BlockContext, call: Call<'LiquidityPr
 
 	const details: any = {}
 
-	const receivers = 'receivers' in data ? data.receivers : data.swapBatches.map((batch) => batch.receivers).flat(1)
+	const receivers = 'receivers' in data
+		? data.receivers
+		: data.swapBatches.map((batch: typeof data.swapBatches[number]) => batch.receivers).flat(1)
 
 	details.inputAssetId = getAssetId(data.inputAssetId)
 	details.selectedMarket = data.selectedSourceTypes.map((lst) => lst.toString()).toString()
@@ -108,6 +110,12 @@ const handleAndSaveExtrinsic = async (ctx: BlockContext, call: Call<'LiquidityPr
 
 	await addDataToHistoryElement(ctx, historyElement, details)
 	await updateHistoryElementStats(ctx, historyElement)
+
+	for (const receiver of receivers) {
+		details.to = receiver.accountId
+		const historyElement = await createCallHistoryElement(ctx, call, details)
+		await updateHistoryElementStats(ctx, historyElement)
+	}
 }
 
 export async function swapTransferBatchHandler(ctx: BlockContext, call: Call<'LiquidityProxy.swap_transfer_batch'>): Promise<void> {
