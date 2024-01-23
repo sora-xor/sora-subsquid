@@ -79,9 +79,9 @@ export const environments: Environments = {
 		archive: null,
 		storage: '10G',
 		scaleProfiles: {
-			postgres: ScaleProfile.SMALL,
-			processor: ScaleProfile.SMALL,
-			api: ScaleProfile.SMALL,
+			postgres: ScaleProfile.LARGE,
+			processor: ScaleProfile.LARGE,
+			api: ScaleProfile.LARGE,
 		},
 	},
 }
