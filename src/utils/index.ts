@@ -10,7 +10,7 @@ import {
 	Event,
 } from '../types'
 import { SnapshotSecondsMap, SnapshotTimeDepthMap } from './consts'
-import { decodeHex } from '@subsquid/substrate-processor'
+import { decodeHex, toHex } from '@subsquid/substrate-processor'
 import { SnapshotType } from '../model'
 import { Bytes } from '../types/generated/production/support'
 
@@ -90,6 +90,10 @@ export const decodeAddressEthereum = (data: AddressEthereum): Uint8Array => {
 
 export const toAddress = (data: string): Address => {
 	return ss58.codec('sora').encode(typeof data === 'string' ? decodeHex(data) : data) as Address
+}
+
+export const decodeAddress = (data: Address): string => {
+	return ss58.codec('sora').decode(data)
 }
 
 export const toCamelCase = (s: string): string => {

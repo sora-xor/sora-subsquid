@@ -134,7 +134,6 @@ export async function batchTransactionsCallHandler(ctx: BlockContext, call: Call
 	let historyElementCalls = mapCallsForAllVersions(ctx, call, historyElement)
 
 	await addCallsToHistoryElement(ctx, historyElement, historyElementCalls)
-	await addDataToHistoryElement(ctx, historyElement, {})
 	await updateHistoryElementStats(ctx, historyElement)
 
 	if (historyElement.execution.success) {

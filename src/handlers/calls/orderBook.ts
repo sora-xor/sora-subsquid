@@ -1,4 +1,4 @@
-import { addDataToHistoryElement, createCallHistoryElement, createHistoryElement, updateHistoryElementStats } from '../../utils/history'
+import { addDataToHistoryElement, createCallHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { getAssetId, formatU128ToBalance } from '../../utils/assets'
 import { logStartProcessingCall } from '../../utils/logs'
 import { BlockContext, Call, AssetId } from '../../types'
@@ -24,7 +24,7 @@ export async function orderBookPlaceLimitOrderCallHandler(ctx: BlockContext, cal
 		orderId: null as number | null,
 		price: formatU128ToBalance(price, quoteAssetId),
 		amount: formatU128ToBalance(amount, baseAssetId),
-		side: side,
+		side: side.__kind,
 		lifetime: lifespan ? Number(lifespan) / 1000 : null,
 	}
 
