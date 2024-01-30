@@ -10,7 +10,7 @@ import { getEventData } from './entities'
 import { getUtilsLog } from './logs'
 import { events } from '../types/generated/merged'
 
-const INCOMING_TRANSFER_METHODS = ['transfer', 'swap_transfer']
+const INCOMING_TRANSFER_METHODS = ['transfer', 'xorlessTransfer', 'swapTransfer', 'swapTransferBatch']
 
 type EntityItem = {
 	kind: 'call',
@@ -36,7 +36,7 @@ export const createHistoryElement = async (
 	ctx: BlockContext,
 	{ kind, entity }: EntityItem,
 	data?: {},
-	address?: string,
+	address?: Address,
 ): Promise<HistoryElement> => {
 	const historyElement = new HistoryElement()
 
@@ -110,7 +110,7 @@ export const createCallHistoryElement = async (
 export const createEventHistoryElement = async (
 	ctx: BlockContext,
 	event: Event<any>,
-	address: string,
+	address: Address,
 	data?: {}
 ) => {
 	return createHistoryElement(ctx, { kind: 'event', entity: event }, data, address)
@@ -132,7 +132,11 @@ export const addDataToHistoryElement = async (ctx: BlockContext, historyElement:
 	await ctx.store.save(historyElement)
 	getUtilsLog(ctx).debug({
 		historyElementId: historyElement.id,
-		data: JSON.stringify(data).replaceAll('"', '')
+		data: JSON.stringify(data, (key, value) =>
+			typeof value === 'bigint'
+				? value.toString()
+				: value
+		).replaceAll('"', '')
 	}, 'Updated history element with data')
 }
 

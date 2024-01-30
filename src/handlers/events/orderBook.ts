@@ -175,14 +175,16 @@ export async function orderBookLimitOrderFilledEventHandler(ctx: BlockContext, e
 export async function orderBookLimitOrderCanceledEventHandler(ctx: BlockContext, event: Event<'OrderBook.LimitOrderCanceled'>): Promise<void> {
 	logStartProcessingEvent(ctx, event)
 
-	const { orderBookId, orderId, reason } = getEventData(ctx, events.orderBook.limitOrderCanceled, event)
+	const data = getEventData(ctx, events.orderBook.limitOrderCanceled, event)
+	const { orderBookId, orderId } = data
 	const { id } = getOrderData(orderBookId, orderId)
+	const reason = data.reason.__kind
 
 	const limitOrder = await ctx.store.get(OrderBookOrder, id)
 
 	if (limitOrder) {
 		const blockHeight = ctx.block.header.height
-		limitOrder.status = getOrderStatus(reason.__kind)
+		limitOrder.status = getOrderStatus(reason)
 		limitOrder.updatedAtBlock = blockHeight
 
 		await ctx.store.save(limitOrder)
