@@ -27,5 +27,6 @@ export type AssetAmount = Opaque<bigint, 'AssetAmount'>
 
 export type ReferenceSymbol = Opaque<string, 'ReferenceSymbol'>
 
+// { readonly brand: unique symbol }
 export type Address = Opaque<string, 'Address'>
 export type AddressEthereum = Opaque<string, 'AddressEthereum'>

@@ -1,8 +1,8 @@
-import { addDataToHistoryElement, createCallHistoryElement, updateHistoryElementStats } from '../../utils/history'
+import { addDataToHistoryElement, createCallHistoryElement, createEventHistoryElement, updateHistoryElementStats } from '../../utils/history'
 import { getAssetId, formatU128ToBalance } from '../../utils/assets'
 import { XOR } from '../../utils/consts'
 
-import { BlockContext, Call } from '../../types'
+import { Address, AssetId, BlockContext, Call } from '../../types'
 import { getCallData, getEventData } from '../../utils/entities'
 import { assertDefined, toAddress } from '../../utils'
 import { findEventByExtrinsicHash, findEventsByExtrinsicHash } from '../../utils/events'
@@ -15,13 +15,6 @@ function getLiquidityProxyBatchSwapExecutedEventData(ctx: BlockContext, extrinsi
 	const event = findEventByExtrinsicHash(ctx, extrinsicHash, [name])
 	if (event === null) return null
 	return getEventData(ctx, events.liquidityProxy.batchSwapExecuted, event)
-}
-
-function getXorFeeFeeWithdrawnEventData(ctx: BlockContext, extrinsicHash: string) {
-	const name = 'XorFee.FeeWithdrawn'
-	const event = findEventByExtrinsicHash(ctx, extrinsicHash, [name])
-	if (event === null) return null
-	return getEventData(ctx, events.xorFee.feeWithdrawn, event)
 }
 
 function getTransactionPaymentTransactionFeePaidEventData(ctx: BlockContext, extrinsicHash: string) {
@@ -42,17 +35,39 @@ const handleAndSaveExtrinsic = async (ctx: BlockContext, call: Call<'LiquidityPr
 
 	const details: any = {}
 
-	const receivers = 'receivers' in data ? data.receivers : data.swapBatches.map((batch) => batch.receivers).flat(1)
-
-	details.inputAssetId = getAssetId(data.inputAssetId)
+	details.assetId = getAssetId(data.inputAssetId)
 	details.selectedMarket = data.selectedSourceTypes.map((lst) => lst.toString()).toString()
 	details.maxInputAmount = data.maxInputAmount
 	details.blockNumber = blockNumber
 	details.from = extrinsicSigner
-	details.receivers = receivers.map((receiver) => ({
-		...receiver,
-		accountId: toAddress(receiver.accountId),
-	}))
+
+	let receivers: { accountId: Address; assetId: AssetId; amount: string }[] = []
+
+	if ('swapBatches' in data) {
+		// fill receivers with assetId and amount
+		for (const swapBatchInfo of data.swapBatches) {
+			const assetId = getAssetId(swapBatchInfo.outcomeAssetId)
+
+			for (const receiverInfo of swapBatchInfo.receivers) {
+				receivers.push({
+					accountId: toAddress(receiverInfo.accountId),
+					assetId,
+					amount: formatU128ToBalance(receiverInfo.targetAmount, assetId)
+				})
+			}
+		}
+	} else {
+		// TODO: decide what to do with this
+		// receivers = data.receivers.map((receiver) => {
+		// 	return {
+		// 		accountId: receiver.accountId,
+		// 		assetId: getAssetId(receiver.assetId),
+		// 		amount: formatU128ToBalance(receiver.tar, getAssetId(receiver.assetId))
+		// 	}
+		// })
+	}
+
+	details.receivers = receivers
 
 	if (historyElement.execution.success) {
 		assertDefined(call.extrinsic)
@@ -63,19 +78,13 @@ const handleAndSaveExtrinsic = async (ctx: BlockContext, call: Call<'LiquidityPr
 			details.inputAmount = formatU128ToBalance(inputAmount, inputAssetId)
         }
 
-		const feeWithdrawnEvent = getXorFeeFeeWithdrawnEventData(ctx, call.extrinsic.hash)
-		if (feeWithdrawnEvent) {
-			const [, networkFee] = feeWithdrawnEvent
-			details.networkFee = formatU128ToBalance(networkFee, XOR)
-		}
-
 		const transactionFeePaidEvent = getTransactionPaymentTransactionFeePaidEventData(ctx, call.extrinsic.hash)
 		if (transactionFeePaidEvent) {
 			const { actualFee } = transactionFeePaidEvent
 			details.actualFee = formatU128ToBalance(actualFee, XOR)
 		}
 
-		const assetsTransfers = findEventsByExtrinsicHash(ctx, call.extrinsic.hash, ['Assets.Transfer']).map((event) => {
+		const assetTransferEvents = findEventsByExtrinsicHash(ctx, call.extrinsic.hash, ['Assets.Transfer']).map((event) => {
 			const eventData = getEventData(ctx, events.assets.transfer, event)
 			const [from, to, asset, amount] = eventData
 			return {
@@ -83,27 +92,28 @@ const handleAndSaveExtrinsic = async (ctx: BlockContext, call: Call<'LiquidityPr
 				to: toAddress(to),
 				amount: formatU128ToBalance(amount, getAssetId(asset)),
 				assetId: getAssetId(asset),
+				event
 			}
 		})
-		details.transfers = assetsTransfers
+		const receiverIds = receivers.map((receiver) => receiver.accountId)
 
-		const exchanges = findEventsByExtrinsicHash(ctx, call.extrinsic.hash, ['LiquidityProxy.Exchange']).map((event) => {
-			const eventData = getEventData(ctx, events.liquidityProxy.exchange, event)
-			const [senderAddress, dexId, inputAsset, outputAsset, inputAmount, outputAmount, feeAmount] = eventData
-			return {
-				senderAddress: toAddress(senderAddress),
-				dexId: dexId.toString(),
-				inputAssetId: getAssetId(inputAsset),
-				outputAssetId: getAssetId(outputAsset),
-				inputAmount: formatU128ToBalance(inputAmount, getAssetId(inputAsset)),
-				outputAmount: formatU128ToBalance(outputAmount, getAssetId(outputAsset)),
-				feeAmount: formatU128ToBalance(feeAmount, getAssetId(inputAsset)),
-			}
-		})
-		details.exchanges = exchanges
-	} else {
-		details.exchanges = []
-		details.transfers = []
+        for (const assetTransferEvent of assetTransferEvents) {
+			const { from, to, assetId, amount, event } = assetTransferEvent
+            const sender = from
+            const receiver = to
+            // if technical transfer, skip
+            if (!(sender === extrinsicSigner && receiverIds.includes(receiver))) continue
+
+            const transfer = {
+                assetId,
+                amount,
+                from: sender,
+                to: receiver,
+            }
+
+            // create history element for receiver
+            await createEventHistoryElement(ctx, event, to, transfer)
+        }
 	}
 
 	await addDataToHistoryElement(ctx, historyElement, details)
