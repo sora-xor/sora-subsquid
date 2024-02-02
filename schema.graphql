@@ -80,7 +80,7 @@ type AssetSnapshot @entity {
 	id: ID!
 	assetId: String! @index
 	asset: Asset! @index # relation to Asset
-	timestamp: Int!
+	timestamp: Int! @index
 	type: SnapshotType!
 	priceUSD: AssetPrice
 	volume: AssetVolume
@@ -111,7 +111,7 @@ type Account @entity {
 type HistoryElement @entity {
 	id: ID!
 	type: HistoryElementType!
-	blockHeight: Int!
+	blockHeight: Int! @index
 	blockHash: String! @index
 	name: String!
 	module: String! @index
@@ -119,14 +119,14 @@ type HistoryElement @entity {
 	address: String! @index
 	networkFee: String
 	execution: ExecutionResult!
-	timestamp: Int!
+	timestamp: Int! @index
 	data: JSON @index
 	dataTo: String @index
 	dataFrom: String @index
 	dataReceivers: [String]!
 	calls: [HistoryElementCall!]! @derivedFrom(field: "historyElement")
 	callNames: [String]!
-	updatedAtBlock: Int!
+	updatedAtBlock: Int! @index
 }
 
 type HistoryElementCall @entity {
@@ -135,7 +135,7 @@ type HistoryElementCall @entity {
 	module: String!
 	method: String!
 	data: JSON!
-	updatedAtBlock: Int!
+	updatedAtBlock: Int! @index
 }
 
 type ExecutionResult @jsonField {

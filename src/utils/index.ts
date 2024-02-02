@@ -68,28 +68,32 @@ export const decodeText = (data: string): Uint8Array => {
 }
 
 export const toReferenceSymbol = (data: string): ReferenceSymbol => {
-	return decodeHex(data).toString() as ReferenceSymbol
+	return decodeHex(data).toString() as unknown as ReferenceSymbol
 }
 export const decodeReferenceSymbol = (data: ReferenceSymbol): Uint8Array => {
-	return decodeText(data)
+	return decodeText(data as unknown as string)
 }
 
 export const toAssetId = (data: Bytes): AssetId => {
-	return data.toString() as AssetId
+	return data.toString() as unknown as AssetId
 }
 export const decodeAssetId = (data: AssetId): Uint8Array => {
-	return decodeHex(data)
+	return decodeHex(data as unknown as string)
 }
 
 export const toAddressEthereum = (data: string): AddressEthereum => {
-	return data as AddressEthereum
+	return data as unknown as AddressEthereum
 }
 export const decodeAddressEthereum = (data: AddressEthereum): Uint8Array => {
-	return decodeHex(data)
+	return decodeHex(data as unknown as string)
 }
 
 export const toAddress = (data: string): Address => {
-	return ss58.codec('sora').encode(typeof data === 'string' ? decodeHex(data) : data) as Address
+	return ss58.codec('sora').encode(typeof data === 'string' ? decodeHex(data) : data) as unknown as Address
+}
+
+export const decodeAddress = (data: Address): string => {
+	return ss58.codec('sora').decode(data as unknown as string)
 }
 
 export const toCamelCase = (s: string): string => {
