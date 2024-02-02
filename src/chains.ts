@@ -1,4 +1,4 @@
-export enum Environment {
+export enum Chain {
 	PRODUCTION = 'production',
 	STAGE = 'stage',
 	TEST = 'test',
@@ -11,7 +11,7 @@ enum ScaleProfile {
 	LARGE = 'large',
 }
 
-interface EnvironmentAddresses {
+interface ChainAddresses {
 	name: string
 	description: string
 	version: number
@@ -25,14 +25,14 @@ interface EnvironmentAddresses {
 	}
 }
 
-type Environments = {
-	[environment in Environment]: EnvironmentAddresses
+type Chains = {
+	[chain in Chain]: ChainAddresses
 }
 
 const version = 4
 
-export const environments: Environments = {
-	[Environment.PRODUCTION]: {
+export const chains: Chains = {
+	[Chain.PRODUCTION]: {
 		name: 'sora',
 		description: 'Sora squid',
 		version,
@@ -45,11 +45,11 @@ export const environments: Environments = {
 			api: ScaleProfile.LARGE,
 		},
 	},
-	[Environment.STAGE]: {
+	[Chain.STAGE]: {
 		name: 'sora-stage',
 		description: 'Sora stage squid',
 		version,
-		chain: 'wss://ws.framenode-7.s4.stg1.sora2.soramitsu.co.jp',
+		chain: 'wss://ws.framenode-8.s5.stg1.sora2.soramitsu.co.jp',
 		archive: null,
 		storage: '100G',
 		scaleProfiles: {
@@ -58,11 +58,11 @@ export const environments: Environments = {
 			api: ScaleProfile.SMALL,
 		},
 	},
-	[Environment.TEST]: {
+	[Chain.TEST]: {
 		name: 'sora-test',
 		description: 'Sora test squid',
 		version: 1,
-		chain: 'wss://ws.framenode-3.r0.tst.sora2.soramitsu.co.jp',
+		chain: 'wss://ws.framenode-1.r0.tst.sora2.soramitsu.co.jp',
 		archive: null,
 		storage: '100G',
 		scaleProfiles: {
@@ -71,7 +71,7 @@ export const environments: Environments = {
 			api: ScaleProfile.SMALL,
 		},
 	},
-	[Environment.DEV]: {
+	[Chain.DEV]: {
 		name: 'sora-dev',
 		description: 'Sora dev squid',
 		version: 1,
@@ -86,4 +86,4 @@ export const environments: Environments = {
 	},
 }
 
-export default environments
+export default chains
