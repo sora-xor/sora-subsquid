@@ -12,7 +12,10 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
-	"noErrorTruncation": true
+	"noErrorTruncation": true,
+	"lib": [
+		"ES2021.String"
+	]
   },
   "include": ["src", "src/config.ts"],
   "exclude": [
