@@ -3,20 +3,20 @@ import * as path from 'path'
 import * as YAML from 'js-yaml'
 import dotenv from 'dotenv'
 
-import { Environment, environments } from '../src/environments'
+import { Chain, chains } from '../src/chains'
 
 dotenv.config()
 
-// Obtain environment from npm parameters if provided
-let environment: Environment = (process.argv[2] as Environment) || (process.env.INDEXER_ENVIRONMENT as Environment) || Environment.DEV
+// Obtain chain from npm parameters if provided
+let chain: Chain = (process.argv[2] as Chain) || (process.env.INDEXER_ENVIRONMENT as Chain) || Chain.DEV
 
-// if provided environment does not match with known environments, default to DEV
-if (!Object.values(Environment).includes(environment)) {
-	environment = Environment.DEV
+// if provided chain does not match with known chains, default to DEV
+if (!Object.values(Chain).includes(chain)) {
+	chain = Chain.DEV
 }
 
-// Obtain environment details
-const details = environments[environment]
+// Obtain chain details
+const details = chains[chain]
 
 // Create yaml configuration
 const configuration = {
@@ -30,7 +30,7 @@ const configuration = {
 		},
 		processor: {
 			env: {
-				INDEXER_ENVIRONMENT: environment,
+				INDEXER_ENVIRONMENT: chain,
 				INDEXER_START_BLOCK: 0,
 				SQD_DEBUG: 'sqd:processor:mapping',
 			},
@@ -81,4 +81,4 @@ writeFileSync(fileName, yamlConfig)
 // Get the full path of the file
 const fullPath = path.resolve(fileName)
 
-console.log(`The squid.yaml file for the ${environment} environment has been created at: ${fullPath}`)
+console.log(`The squid.yaml file for the ${chain} chain has been created at: ${fullPath}`)
