@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js'
 
-import { getBlockTimestamp } from '../../utils'
+import { getBlockTimestamp, toAddress } from '../../utils'
 import { getAccountEntity } from '../../utils/account'
 import { getAssetId, formatU128ToBalance } from '../../utils/assets'
 import { OrderBooksStorage, orderBooksStorage, orderBooksSnapshotsStorage, getOrderStatus, getBookStatus } from '../../utils/orderBook'
@@ -74,7 +74,7 @@ export async function orderBookLimitOrderPlacedEventHandler(ctx: BlockContext, e
 	const { dexId, baseAssetId, quoteAssetId, id } = getOrderData(orderBookId, orderId)
 
 	const book = await orderBooksStorage.getOrderBook(ctx, dexId, baseAssetId, quoteAssetId)
-	const account = await getAccountEntity(ctx, ownerId)
+	const account = await getAccountEntity(ctx, toAddress(ownerId))
 	const isBuy = side.__kind === 'Buy'
 
 	const limitOrder = new OrderBookOrder()
@@ -175,14 +175,16 @@ export async function orderBookLimitOrderFilledEventHandler(ctx: BlockContext, e
 export async function orderBookLimitOrderCanceledEventHandler(ctx: BlockContext, event: Event<'OrderBook.LimitOrderCanceled'>): Promise<void> {
 	logStartProcessingEvent(ctx, event)
 
-	const { orderBookId, orderId, reason } = getEventData(ctx, events.orderBook.limitOrderCanceled, event)
+	const data = getEventData(ctx, events.orderBook.limitOrderCanceled, event)
+	const { orderBookId, orderId } = data
 	const { id } = getOrderData(orderBookId, orderId)
+	const reason = data.reason.__kind
 
 	const limitOrder = await ctx.store.get(OrderBookOrder, id)
 
 	if (limitOrder) {
 		const blockHeight = ctx.block.header.height
-		limitOrder.status = getOrderStatus(reason.__kind)
+		limitOrder.status = getOrderStatus(reason)
 		limitOrder.updatedAtBlock = blockHeight
 
 		await ctx.store.save(limitOrder)
@@ -199,8 +201,7 @@ export async function orderBookMarketOrderExecutedEventHandler(
 ): Promise<void> {
 	logStartProcessingEvent(ctx, event)
 
-	const data = getEventData(ctx, events.orderBook.marketOrderExecuted, event)
-	const { orderBookId, ownerId, direction, amount, averagePrice } = data
+	const { orderBookId, ownerId, direction, amount, averagePrice } = getEventData(ctx, events.orderBook.marketOrderExecuted, event)
 
 	const blockHeight = ctx.block.header.height
 	const timestamp = getBlockTimestamp(ctx)
@@ -211,7 +212,7 @@ export async function orderBookMarketOrderExecutedEventHandler(
 	const { id, dexId, baseAssetId, quoteAssetId } = getOrderData(orderBookId, orderId)
 
 	const book = await orderBooksStorage.getOrderBook(ctx, dexId, baseAssetId, quoteAssetId)
-	const account = await getAccountEntity(ctx, ownerId.toString())
+	const account = await getAccountEntity(ctx, toAddress(ownerId))
 
 	const marketOrder = new OrderBookOrder()
 	marketOrder.id = id
@@ -252,7 +253,7 @@ export async function orderBookLimitOrderConvertedToMarketOrderEventHandler(
 	const { id, dexId, baseAssetId, quoteAssetId } = getOrderData(orderBookId, orderId)
 
 	const book = await orderBooksStorage.getOrderBook(ctx, dexId, baseAssetId, quoteAssetId)
-	const account = await getAccountEntity(ctx, ownerId.toString())
+	const account = await getAccountEntity(ctx, toAddress(ownerId))
 
 	const marketOrder = new OrderBookOrder()
 	marketOrder.id = id
@@ -293,7 +294,7 @@ export async function orderBookLimitOrderIsSplitIntoMarketOrderAndLimitOrderEven
 	const { id, dexId, baseAssetId, quoteAssetId } = getOrderData(orderBookId, orderId)
 
 	const book = await orderBooksStorage.getOrderBook(ctx, dexId, baseAssetId, quoteAssetId)
-	const account = await getAccountEntity(ctx, ownerId.toString())
+	const account = await getAccountEntity(ctx, toAddress(ownerId))
 
 	const marketOrder = new OrderBookOrder()
 	marketOrder.id = id
