@@ -89,9 +89,9 @@ export const getBandRates = async (ctx: BlockContext) => {
 	try {
 		getInitializeAssetsLog(ctx).debug('Band rates request...')
 
-		const data = getStorageRepresentation(ctx, storage.band.symbolRates)
-		if (!data) return null
-		const pairs = await data.getPairs(ctx.block.header)
+		const representation = getStorageRepresentation(ctx, storage.band.symbolRates)
+		assertDefined(representation)
+		const pairs = await representation.getPairs(ctx.block.header)
 
 		const rates = pairs.map((pair) => {
 			const [ticker, rate] = pair

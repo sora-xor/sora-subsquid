@@ -3,7 +3,7 @@ import BigNumber from 'bignumber.js'
 import { OrderBook, OrderBookStatus, SnapshotType, OrderBookSnapshot, OrderBookDeal, AssetPrice, OrderStatus } from '../model'
 
 import { getOrderBooksStorageLog, getOrderBooksSnapshotsStorageLog } from './logs'
-import { getSnapshotIndex, prevSnapshotsIndexesRow, last, calcPriceChange, shouldUpdate, assertDefined, getBlockTimestamp, getSnapshotTypes, toAssetId, toAddress } from './index'
+import { getSnapshotIndex, prevSnapshotsIndexesRow, last, calcPriceChange, shouldUpdate, assertDefined, getBlockTimestamp, getSnapshotTypes, toAssetId, toAddress, decodeAddress } from './index'
 import { assetSnapshotsStorage, assetStorage, calcTvlUSD } from './assets'
 import { Address, AssetId, BlockContext } from "../types"
 import { XOR, predefinedAssets } from './consts'
@@ -42,8 +42,8 @@ async function getTokensAccounts(ctx: BlockContext, accountId: Address, assetId:
 	const representationAsset32 = getStorageRepresentation(ctx, types, { kind: 'exclude', versions: versionsWithStringAssetId })
 
 	let data = isCurrentVersionIncluded(ctx, types, { kind: 'storage' }, versionsWithStringAssetId)
-		? await representationString?.get(ctx.block.header, accountId, assetId)
-		: await representationAsset32?.get(ctx.block.header, accountId, { code: assetId })
+		? await representationString?.get(ctx.block.header, decodeAddress(accountId), assetId)
+		: await representationAsset32?.get(ctx.block.header, decodeAddress(accountId), { code: assetId })
 
 	return data
 }
@@ -55,14 +55,15 @@ export const getOrderBookAssetBalance = async (ctx: BlockContext, accountId: Add
 		let free: bigint
 
 		if (assetId === XOR) {
-			const data = await getStorageRepresentation(ctx, storage.system.account)?.get(ctx.block.header, accountId)
+			const data = await getStorageRepresentation(ctx, storage.system.account)?.get(ctx.block.header, decodeAddress(accountId))
 			assertDefined(data)
 			free = data.data.free
 		} else {
 			const data = await getTokensAccounts(ctx, accountId, assetId)
-			assertDefined(data)
-			free = data.free
+			free = data?.free ?? 0n
 		}
+
+		getOrderBooksStorageLog(ctx).debug({ accountId, assetId, balance: free }, 'Found Order Book balance')
 	
 		return free
 	} catch (e: any) {
@@ -486,7 +487,7 @@ export class OrderBooksSnapshotsStorage {
 			snapshot.price.low = BigNumber.min(new BigNumber(snapshot.price.low), quotePrice).toString()
 
 			getOrderBooksSnapshotsStorageLog(ctx, true).debug(
-				{ dexId, baseAssetId, quoteAssetId, price, amount, isBuy, baseAssetVolume, quoteAssetVolume, volumeUSD, quoteAssetPriceUSD },
+				{ dexId, baseAssetId, quoteAssetId, price, amount, isBuy: isBuy.toString(), baseAssetVolume, quoteAssetVolume, volumeUSD, quoteAssetPriceUSD },
 				'Order Book snapshot price and volume updated',
 			)
 		}
