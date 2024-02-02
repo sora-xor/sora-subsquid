@@ -29,7 +29,7 @@ type Chains = {
 	[chain in Chain]: ChainAddresses
 }
 
-const version = 4
+const version = 5
 
 export const chains: Chains = {
 	[Chain.PRODUCTION]: {
