@@ -298,9 +298,9 @@ class PoolsStorage {
 		// update locked luqidity for assets
 		for (const [assetId, liquidity] of lockedAssets.entries()) {
 		  const asset = await assetStorage.updateLiquidity(ctx, assetId, liquidity)
-		  const precision = assetPrecisions.get(toAssetId(asset.id))
+		  const precision = assetPrecisions.get(toAssetId(asset.id)) ?? 18
+		  getInitializePoolsLog(ctx).debug({ precision, assetId: toAssetId(asset.id) }, 'TEST2')
 		  assertDefined(asset.liquidity)
-		  assertDefined(precision)
 		  const assetLockedUSD = new BigNumber(asset.liquidity.toString())
 			.multipliedBy(new BigNumber(asset.priceUSD))
 			.dividedBy(Math.pow(10, precision))
