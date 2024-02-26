@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/preimage/storage'
 
 
 export const statusFor = {
-	name: '',
+	name: 'Preimage.StatusFor',
 	v53: productionStorage.statusFor['v53'],
 	v52Stage: stageStorage.statusFor['v52'],
 	v52Test: testStorage.statusFor['v52'],
@@ -13,7 +13,7 @@ export const statusFor = {
 }
 
 export const preimageFor = {
-	name: '',
+	name: 'Preimage.PreimageFor',
 	v53: productionStorage.preimageFor['v53'],
 	v52Stage: stageStorage.preimageFor['v52'],
 	v52Test: testStorage.preimageFor['v52'],

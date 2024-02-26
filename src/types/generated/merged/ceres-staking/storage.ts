@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/ceres-staking/storage'
 
 
 export const stakers = {
-	name: '',
+	name: 'CeresStaking.Stakers',
 	v19: productionStorage.stakers['v19'],
 	v33Stage: stageStorage.stakers['v33'],
 	v33Test: testStorage.stakers['v33'],
@@ -13,7 +13,7 @@ export const stakers = {
 }
 
 export const totalDeposited = {
-	name: '',
+	name: 'CeresStaking.TotalDeposited',
 	v19: productionStorage.totalDeposited['v19'],
 	v33Stage: stageStorage.totalDeposited['v33'],
 	v33Test: testStorage.totalDeposited['v33'],
@@ -21,7 +21,7 @@ export const totalDeposited = {
 }
 
 export const rewardsRemaining = {
-	name: '',
+	name: 'CeresStaking.RewardsRemaining',
 	v19: productionStorage.rewardsRemaining['v19'],
 	v33Stage: stageStorage.rewardsRemaining['v33'],
 	v33Test: testStorage.rewardsRemaining['v33'],
@@ -29,7 +29,7 @@ export const rewardsRemaining = {
 }
 
 export const authorityAccount = {
-	name: '',
+	name: 'CeresStaking.AuthorityAccount',
 	v26: productionStorage.authorityAccount['v26'],
 	v33Stage: stageStorage.authorityAccount['v33'],
 	v33Test: testStorage.authorityAccount['v33'],

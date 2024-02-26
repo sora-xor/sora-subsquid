@@ -4,7 +4,7 @@ import * as devStorage from '../../dev/eth-app/storage'
 
 
 export const addresses = {
-	name: '',
+	name: 'EthApp.Addresses',
 	v52Stage: stageStorage.addresses['v52'],
 	v54Stage: stageStorage.addresses['v54'],
 	v52Test: testStorage.addresses['v52'],

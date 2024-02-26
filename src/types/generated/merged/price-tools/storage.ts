@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/price-tools/storage'
 
 
 export const priceInfos = {
-	name: '',
+	name: 'PriceTools.PriceInfos',
 	v7: productionStorage.priceInfos['v7'],
 	v42: productionStorage.priceInfos['v42'],
 	v45: productionStorage.priceInfos['v45'],

@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/leaf-provider/storage'
 
 
 export const latestDigest = {
-	name: '',
+	name: 'LeafProvider.LatestDigest',
 	v64: productionStorage.latestDigest['v64'],
 	v70: productionStorage.latestDigest['v70'],
 	v52Stage: stageStorage.latestDigest['v52'],

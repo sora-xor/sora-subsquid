@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/assets/storage'
 
 
 export const assetOwners = {
-	name: '',
+	name: 'Assets.AssetOwners',
 	v1: productionStorage.assetOwners['v1'],
 	v7: productionStorage.assetOwners['v7'],
 	v42: productionStorage.assetOwners['v42'],
@@ -17,7 +17,7 @@ export const assetOwners = {
 }
 
 export const assetInfos = {
-	name: '',
+	name: 'Assets.AssetInfos',
 	v1: productionStorage.assetInfos['v1'],
 	v26: productionStorage.assetInfos['v26'],
 	v42: productionStorage.assetInfos['v42'],
@@ -29,7 +29,7 @@ export const assetInfos = {
 }
 
 export const assetRecordAssetId = {
-	name: '',
+	name: 'Assets.AssetRecordAssetId',
 	v1: productionStorage.assetRecordAssetId['v1'],
 	v42: productionStorage.assetRecordAssetId['v42'],
 	v33Stage: stageStorage.assetRecordAssetId['v33'],
@@ -42,11 +42,11 @@ export const assetRecordAssetId = {
 }
 
 export const assetContentSource = {
-	name: '',
+	name: 'Assets.AssetContentSource',
 	v22: productionStorage.assetContentSource['v22'],
 }
 
 export const assetDescription = {
-	name: '',
+	name: 'Assets.AssetDescription',
 	v22: productionStorage.assetDescription['v22'],
 }
