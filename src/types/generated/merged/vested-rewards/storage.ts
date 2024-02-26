@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/vested-rewards/storage'
 
 
 export const rewards = {
-	name: '',
+	name: 'VestedRewards.Rewards',
 	v1: productionStorage.rewards['v1'],
 	v42: productionStorage.rewards['v42'],
 	v45: productionStorage.rewards['v45'],
@@ -19,7 +19,7 @@ export const rewards = {
 }
 
 export const totalRewards = {
-	name: '',
+	name: 'VestedRewards.TotalRewards',
 	v1: productionStorage.totalRewards['v1'],
 	v33Stage: stageStorage.totalRewards['v33'],
 	v33Test: testStorage.totalRewards['v33'],
@@ -27,14 +27,14 @@ export const totalRewards = {
 }
 
 export const marketMakersRegistry = {
-	name: '',
+	name: 'VestedRewards.MarketMakersRegistry',
 	v1: productionStorage.marketMakersRegistry['v1'],
 	v33Stage: stageStorage.marketMakersRegistry['v33'],
 	v33Test: testStorage.marketMakersRegistry['v33'],
 }
 
 export const marketMakingPairs = {
-	name: '',
+	name: 'VestedRewards.MarketMakingPairs',
 	v22: productionStorage.marketMakingPairs['v22'],
 	v42: productionStorage.marketMakingPairs['v42'],
 	v33Stage: stageStorage.marketMakingPairs['v33'],
@@ -44,7 +44,7 @@ export const marketMakingPairs = {
 }
 
 export const crowdloanRewards = {
-	name: '',
+	name: 'VestedRewards.CrowdloanRewards',
 	v33: productionStorage.crowdloanRewards['v33'],
 	v42: productionStorage.crowdloanRewards['v42'],
 	v33Stage: stageStorage.crowdloanRewards['v33'],
@@ -54,7 +54,7 @@ export const crowdloanRewards = {
 }
 
 export const crowdloanClaimHistory = {
-	name: '',
+	name: 'VestedRewards.CrowdloanClaimHistory',
 	v33: productionStorage.crowdloanClaimHistory['v33'],
 	v42: productionStorage.crowdloanClaimHistory['v42'],
 	v33Stage: stageStorage.crowdloanClaimHistory['v33'],
@@ -64,7 +64,7 @@ export const crowdloanClaimHistory = {
 }
 
 export const crowdloanInfos = {
-	name: '',
+	name: 'VestedRewards.CrowdloanInfos',
 	v53: productionStorage.crowdloanInfos['v53'],
 	v52Stage: stageStorage.crowdloanInfos['v52'],
 	v52Test: testStorage.crowdloanInfos['v52'],
@@ -72,7 +72,7 @@ export const crowdloanInfos = {
 }
 
 export const crowdloanUserInfos = {
-	name: '',
+	name: 'VestedRewards.CrowdloanUserInfos',
 	v53: productionStorage.crowdloanUserInfos['v53'],
 	v52Stage: stageStorage.crowdloanUserInfos['v52'],
 	v52Test: testStorage.crowdloanUserInfos['v52'],

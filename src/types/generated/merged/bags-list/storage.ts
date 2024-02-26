@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/bags-list/storage'
 
 
 export const listNodes = {
-	name: '',
+	name: 'BagsList.ListNodes',
 	v42: productionStorage.listNodes['v42'],
 	v42Stage: stageStorage.listNodes['v42'],
 	v42Test: testStorage.listNodes['v42'],
@@ -13,7 +13,7 @@ export const listNodes = {
 }
 
 export const counterForListNodes = {
-	name: '',
+	name: 'BagsList.CounterForListNodes',
 	v42: productionStorage.counterForListNodes['v42'],
 	v42Stage: stageStorage.counterForListNodes['v42'],
 	v42Test: testStorage.counterForListNodes['v42'],
@@ -21,7 +21,7 @@ export const counterForListNodes = {
 }
 
 export const listBags = {
-	name: '',
+	name: 'BagsList.ListBags',
 	v42: productionStorage.listBags['v42'],
 	v42Stage: stageStorage.listBags['v42'],
 	v42Test: testStorage.listBags['v42'],

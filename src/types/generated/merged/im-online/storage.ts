@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/im-online/storage'
 
 
 export const heartbeatAfter = {
-	name: '',
+	name: 'ImOnline.HeartbeatAfter',
 	v1: productionStorage.heartbeatAfter['v1'],
 	v33Stage: stageStorage.heartbeatAfter['v33'],
 	v33Test: testStorage.heartbeatAfter['v33'],
@@ -13,7 +13,7 @@ export const heartbeatAfter = {
 }
 
 export const keys = {
-	name: '',
+	name: 'ImOnline.Keys',
 	v1: productionStorage.keys['v1'],
 	v33Stage: stageStorage.keys['v33'],
 	v33Test: testStorage.keys['v33'],
@@ -21,7 +21,7 @@ export const keys = {
 }
 
 export const receivedHeartbeats = {
-	name: '',
+	name: 'ImOnline.ReceivedHeartbeats',
 	v1: productionStorage.receivedHeartbeats['v1'],
 	v42: productionStorage.receivedHeartbeats['v42'],
 	v33Stage: stageStorage.receivedHeartbeats['v33'],
@@ -32,7 +32,7 @@ export const receivedHeartbeats = {
 }
 
 export const authoredBlocks = {
-	name: '',
+	name: 'ImOnline.AuthoredBlocks',
 	v1: productionStorage.authoredBlocks['v1'],
 	v33Stage: stageStorage.authoredBlocks['v33'],
 	v33Test: testStorage.authoredBlocks['v33'],

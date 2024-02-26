@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/multicollateral-bonding-curve-pool/storag
 
 
 export const reservesAcc = {
-	name: '',
+	name: 'MulticollateralBondingCurvePool.ReservesAcc',
 	v1: productionStorage.reservesAcc['v1'],
 	v42: productionStorage.reservesAcc['v42'],
 	v46: productionStorage.reservesAcc['v46'],
@@ -22,7 +22,7 @@ export const reservesAcc = {
 }
 
 export const freeReservesAccountId = {
-	name: '',
+	name: 'MulticollateralBondingCurvePool.FreeReservesAccountId',
 	v1: productionStorage.freeReservesAccountId['v1'],
 	v42: productionStorage.freeReservesAccountId['v42'],
 	v33Stage: stageStorage.freeReservesAccountId['v33'],
@@ -33,7 +33,7 @@ export const freeReservesAccountId = {
 }
 
 export const pendingFreeReserves = {
-	name: '',
+	name: 'MulticollateralBondingCurvePool.PendingFreeReserves',
 	v1: productionStorage.pendingFreeReserves['v1'],
 	v42: productionStorage.pendingFreeReserves['v42'],
 	v33Stage: stageStorage.pendingFreeReserves['v33'],
@@ -44,7 +44,7 @@ export const pendingFreeReserves = {
 }
 
 export const initialPrice = {
-	name: '',
+	name: 'MulticollateralBondingCurvePool.InitialPrice',
 	v1: productionStorage.initialPrice['v1'],
 	v42: productionStorage.initialPrice['v42'],
 	v33Stage: stageStorage.initialPrice['v33'],
@@ -55,7 +55,7 @@ export const initialPrice = {
 }
 
 export const priceChangeStep = {
-	name: '',
+	name: 'MulticollateralBondingCurvePool.PriceChangeStep',
 	v1: productionStorage.priceChangeStep['v1'],
 	v42: productionStorage.priceChangeStep['v42'],
 	v33Stage: stageStorage.priceChangeStep['v33'],
@@ -66,7 +66,7 @@ export const priceChangeStep = {
 }
 
 export const priceChangeRate = {
-	name: '',
+	name: 'MulticollateralBondingCurvePool.PriceChangeRate',
 	v1: productionStorage.priceChangeRate['v1'],
 	v42: productionStorage.priceChangeRate['v42'],
 	v33Stage: stageStorage.priceChangeRate['v33'],
@@ -77,7 +77,7 @@ export const priceChangeRate = {
 }
 
 export const sellPriceCoefficient = {
-	name: '',
+	name: 'MulticollateralBondingCurvePool.SellPriceCoefficient',
 	v1: productionStorage.sellPriceCoefficient['v1'],
 	v42: productionStorage.sellPriceCoefficient['v42'],
 	v33Stage: stageStorage.sellPriceCoefficient['v33'],
@@ -88,7 +88,7 @@ export const sellPriceCoefficient = {
 }
 
 export const alwaysDistributeCoefficient = {
-	name: '',
+	name: 'MulticollateralBondingCurvePool.AlwaysDistributeCoefficient',
 	v1: productionStorage.alwaysDistributeCoefficient['v1'],
 	v42: productionStorage.alwaysDistributeCoefficient['v42'],
 	v33Stage: stageStorage.alwaysDistributeCoefficient['v33'],
@@ -99,7 +99,7 @@ export const alwaysDistributeCoefficient = {
 }
 
 export const baseFee = {
-	name: '',
+	name: 'MulticollateralBondingCurvePool.BaseFee',
 	v1: productionStorage.baseFee['v1'],
 	v42: productionStorage.baseFee['v42'],
 	v33Stage: stageStorage.baseFee['v33'],
@@ -110,7 +110,7 @@ export const baseFee = {
 }
 
 export const distributionAccountsEntry = {
-	name: '',
+	name: 'MulticollateralBondingCurvePool.DistributionAccountsEntry',
 	v1: productionStorage.distributionAccountsEntry['v1'],
 	v42: productionStorage.distributionAccountsEntry['v42'],
 	v46: productionStorage.distributionAccountsEntry['v46'],
@@ -130,7 +130,7 @@ export const distributionAccountsEntry = {
 }
 
 export const enabledTargets = {
-	name: '',
+	name: 'MulticollateralBondingCurvePool.EnabledTargets',
 	v1: productionStorage.enabledTargets['v1'],
 	v42: productionStorage.enabledTargets['v42'],
 	v33Stage: stageStorage.enabledTargets['v33'],
@@ -141,7 +141,7 @@ export const enabledTargets = {
 }
 
 export const referenceAssetId = {
-	name: '',
+	name: 'MulticollateralBondingCurvePool.ReferenceAssetId',
 	v1: productionStorage.referenceAssetId['v1'],
 	v42: productionStorage.referenceAssetId['v42'],
 	v33Stage: stageStorage.referenceAssetId['v33'],
@@ -152,7 +152,7 @@ export const referenceAssetId = {
 }
 
 export const rewards = {
-	name: '',
+	name: 'MulticollateralBondingCurvePool.Rewards',
 	v1: productionStorage.rewards['v1'],
 	v33Stage: stageStorage.rewards['v33'],
 	v33Test: testStorage.rewards['v33'],
@@ -160,7 +160,7 @@ export const rewards = {
 }
 
 export const totalRewards = {
-	name: '',
+	name: 'MulticollateralBondingCurvePool.TotalRewards',
 	v1: productionStorage.totalRewards['v1'],
 	v33Stage: stageStorage.totalRewards['v33'],
 	v33Test: testStorage.totalRewards['v33'],
@@ -168,7 +168,7 @@ export const totalRewards = {
 }
 
 export const incentivisedCurrenciesNum = {
-	name: '',
+	name: 'MulticollateralBondingCurvePool.IncentivisedCurrenciesNum',
 	v1: productionStorage.incentivisedCurrenciesNum['v1'],
 	v33Stage: stageStorage.incentivisedCurrenciesNum['v33'],
 	v33Test: testStorage.incentivisedCurrenciesNum['v33'],
@@ -176,7 +176,7 @@ export const incentivisedCurrenciesNum = {
 }
 
 export const incentivesAccountId = {
-	name: '',
+	name: 'MulticollateralBondingCurvePool.IncentivesAccountId',
 	v1: productionStorage.incentivesAccountId['v1'],
 	v42: productionStorage.incentivesAccountId['v42'],
 	v33Stage: stageStorage.incentivesAccountId['v33'],
@@ -187,7 +187,7 @@ export const incentivesAccountId = {
 }
 
 export const assetsWithOptionalRewardMultiplier = {
-	name: '',
+	name: 'MulticollateralBondingCurvePool.AssetsWithOptionalRewardMultiplier',
 	v1: productionStorage.assetsWithOptionalRewardMultiplier['v1'],
 	v42: productionStorage.assetsWithOptionalRewardMultiplier['v42'],
 	v33Stage: stageStorage.assetsWithOptionalRewardMultiplier['v33'],
@@ -198,7 +198,7 @@ export const assetsWithOptionalRewardMultiplier = {
 }
 
 export const initialPswapRewardsSupply = {
-	name: '',
+	name: 'MulticollateralBondingCurvePool.InitialPswapRewardsSupply',
 	v1: productionStorage.initialPswapRewardsSupply['v1'],
 	v33Stage: stageStorage.initialPswapRewardsSupply['v33'],
 	v33Test: testStorage.initialPswapRewardsSupply['v33'],
@@ -206,7 +206,7 @@ export const initialPswapRewardsSupply = {
 }
 
 export const collateralReserves = {
-	name: '',
+	name: 'MulticollateralBondingCurvePool.CollateralReserves',
 	v1: productionStorage.collateralReserves['v1'],
 	v42: productionStorage.collateralReserves['v42'],
 	v33Stage: stageStorage.collateralReserves['v33'],

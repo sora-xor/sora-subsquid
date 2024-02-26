@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/multisig/storage'
 
 
 export const multisigs = {
-	name: '',
+	name: 'Multisig.Multisigs',
 	v1: productionStorage.multisigs['v1'],
 	v33Stage: stageStorage.multisigs['v33'],
 	v33Test: testStorage.multisigs['v33'],
@@ -13,7 +13,7 @@ export const multisigs = {
 }
 
 export const calls = {
-	name: '',
+	name: 'Multisig.Calls',
 	v1: productionStorage.calls['v1'],
 	v33Stage: stageStorage.calls['v33'],
 	v33Test: testStorage.calls['v33'],

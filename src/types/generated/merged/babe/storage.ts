@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/babe/storage'
 
 
 export const epochIndex = {
-	name: '',
+	name: 'Babe.EpochIndex',
 	v1: productionStorage.epochIndex['v1'],
 	v33Stage: stageStorage.epochIndex['v33'],
 	v33Test: testStorage.epochIndex['v33'],
@@ -13,7 +13,7 @@ export const epochIndex = {
 }
 
 export const authorities = {
-	name: '',
+	name: 'Babe.Authorities',
 	v1: productionStorage.authorities['v1'],
 	v33Stage: stageStorage.authorities['v33'],
 	v33Test: testStorage.authorities['v33'],
@@ -21,7 +21,7 @@ export const authorities = {
 }
 
 export const genesisSlot = {
-	name: '',
+	name: 'Babe.GenesisSlot',
 	v1: productionStorage.genesisSlot['v1'],
 	v33Stage: stageStorage.genesisSlot['v33'],
 	v33Test: testStorage.genesisSlot['v33'],
@@ -29,7 +29,7 @@ export const genesisSlot = {
 }
 
 export const currentSlot = {
-	name: '',
+	name: 'Babe.CurrentSlot',
 	v1: productionStorage.currentSlot['v1'],
 	v33Stage: stageStorage.currentSlot['v33'],
 	v33Test: testStorage.currentSlot['v33'],
@@ -37,7 +37,7 @@ export const currentSlot = {
 }
 
 export const randomness = {
-	name: '',
+	name: 'Babe.Randomness',
 	v1: productionStorage.randomness['v1'],
 	v33Stage: stageStorage.randomness['v33'],
 	v33Test: testStorage.randomness['v33'],
@@ -45,7 +45,7 @@ export const randomness = {
 }
 
 export const nextEpochConfig = {
-	name: '',
+	name: 'Babe.NextEpochConfig',
 	v1: productionStorage.nextEpochConfig['v1'],
 	v42: productionStorage.nextEpochConfig['v42'],
 	v33Stage: stageStorage.nextEpochConfig['v33'],
@@ -56,7 +56,7 @@ export const nextEpochConfig = {
 }
 
 export const nextRandomness = {
-	name: '',
+	name: 'Babe.NextRandomness',
 	v1: productionStorage.nextRandomness['v1'],
 	v33Stage: stageStorage.nextRandomness['v33'],
 	v33Test: testStorage.nextRandomness['v33'],
@@ -64,7 +64,7 @@ export const nextRandomness = {
 }
 
 export const nextAuthorities = {
-	name: '',
+	name: 'Babe.NextAuthorities',
 	v1: productionStorage.nextAuthorities['v1'],
 	v33Stage: stageStorage.nextAuthorities['v33'],
 	v33Test: testStorage.nextAuthorities['v33'],
@@ -72,7 +72,7 @@ export const nextAuthorities = {
 }
 
 export const segmentIndex = {
-	name: '',
+	name: 'Babe.SegmentIndex',
 	v1: productionStorage.segmentIndex['v1'],
 	v33Stage: stageStorage.segmentIndex['v33'],
 	v33Test: testStorage.segmentIndex['v33'],
@@ -80,7 +80,7 @@ export const segmentIndex = {
 }
 
 export const underConstruction = {
-	name: '',
+	name: 'Babe.UnderConstruction',
 	v1: productionStorage.underConstruction['v1'],
 	v33Stage: stageStorage.underConstruction['v33'],
 	v33Test: testStorage.underConstruction['v33'],
@@ -88,7 +88,7 @@ export const underConstruction = {
 }
 
 export const initialized = {
-	name: '',
+	name: 'Babe.Initialized',
 	v1: productionStorage.initialized['v1'],
 	v42: productionStorage.initialized['v42'],
 	v33Stage: stageStorage.initialized['v33'],
@@ -99,7 +99,7 @@ export const initialized = {
 }
 
 export const authorVrfRandomness = {
-	name: '',
+	name: 'Babe.AuthorVrfRandomness',
 	v1: productionStorage.authorVrfRandomness['v1'],
 	v33Stage: stageStorage.authorVrfRandomness['v33'],
 	v33Test: testStorage.authorVrfRandomness['v33'],
@@ -107,7 +107,7 @@ export const authorVrfRandomness = {
 }
 
 export const lateness = {
-	name: '',
+	name: 'Babe.Lateness',
 	v1: productionStorage.lateness['v1'],
 	v33Stage: stageStorage.lateness['v33'],
 	v33Test: testStorage.lateness['v33'],
@@ -115,7 +115,7 @@ export const lateness = {
 }
 
 export const pendingEpochConfigChange = {
-	name: '',
+	name: 'Babe.PendingEpochConfigChange',
 	v42: productionStorage.pendingEpochConfigChange['v42'],
 	v42Stage: stageStorage.pendingEpochConfigChange['v42'],
 	v42Test: testStorage.pendingEpochConfigChange['v42'],
@@ -123,7 +123,7 @@ export const pendingEpochConfigChange = {
 }
 
 export const epochStart = {
-	name: '',
+	name: 'Babe.EpochStart',
 	v42: productionStorage.epochStart['v42'],
 	v42Stage: stageStorage.epochStart['v42'],
 	v42Test: testStorage.epochStart['v42'],
@@ -131,7 +131,7 @@ export const epochStart = {
 }
 
 export const epochConfig = {
-	name: '',
+	name: 'Babe.EpochConfig',
 	v42: productionStorage.epochConfig['v42'],
 	v42Stage: stageStorage.epochConfig['v42'],
 	v42Test: testStorage.epochConfig['v42'],

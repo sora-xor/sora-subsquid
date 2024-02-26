@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/ceres-liquidity-locker/storage'
 
 
 export const feesOptionOneAccount = {
-	name: '',
+	name: 'CeresLiquidityLocker.FeesOptionOneAccount',
 	v22: productionStorage.feesOptionOneAccount['v22'],
 	v33Stage: stageStorage.feesOptionOneAccount['v33'],
 	v33Test: testStorage.feesOptionOneAccount['v33'],
@@ -13,7 +13,7 @@ export const feesOptionOneAccount = {
 }
 
 export const feesOptionTwoAccount = {
-	name: '',
+	name: 'CeresLiquidityLocker.FeesOptionTwoAccount',
 	v22: productionStorage.feesOptionTwoAccount['v22'],
 	v33Stage: stageStorage.feesOptionTwoAccount['v33'],
 	v33Test: testStorage.feesOptionTwoAccount['v33'],
@@ -21,7 +21,7 @@ export const feesOptionTwoAccount = {
 }
 
 export const feesOptionTwoCeresAmount = {
-	name: '',
+	name: 'CeresLiquidityLocker.FeesOptionTwoCeresAmount',
 	v22: productionStorage.feesOptionTwoCeresAmount['v22'],
 	v33Stage: stageStorage.feesOptionTwoCeresAmount['v33'],
 	v33Test: testStorage.feesOptionTwoCeresAmount['v33'],
@@ -29,7 +29,7 @@ export const feesOptionTwoCeresAmount = {
 }
 
 export const authorityAccount = {
-	name: '',
+	name: 'CeresLiquidityLocker.AuthorityAccount',
 	v22: productionStorage.authorityAccount['v22'],
 	v33Stage: stageStorage.authorityAccount['v33'],
 	v33Test: testStorage.authorityAccount['v33'],
@@ -37,7 +37,7 @@ export const authorityAccount = {
 }
 
 export const lockerData = {
-	name: '',
+	name: 'CeresLiquidityLocker.LockerData',
 	v22: productionStorage.lockerData['v22'],
 	v37: productionStorage.lockerData['v37'],
 	v42: productionStorage.lockerData['v42'],
@@ -51,7 +51,7 @@ export const lockerData = {
 }
 
 export const palletStorageVersion = {
-	name: '',
+	name: 'CeresLiquidityLocker.PalletStorageVersion',
 	v37: productionStorage.palletStorageVersion['v37'],
 	v42: productionStorage.palletStorageVersion['v42'],
 	v37Stage: stageStorage.palletStorageVersion['v37'],

@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/sudo/storage'
 
 
 export const key = {
-	name: '',
+	name: 'Sudo.Key',
 	v22: productionStorage.key['v22'],
 	v33Stage: stageStorage.key['v33'],
 	v42Stage: stageStorage.key['v42'],
