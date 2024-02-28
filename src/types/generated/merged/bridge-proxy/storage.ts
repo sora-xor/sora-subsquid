@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/bridge-proxy/storage'
 
 
 export const transactions = {
-	name: '',
+	name: 'BridgeProxy.Transactions',
 	v64: productionStorage.transactions['v64'],
 	v70: productionStorage.transactions['v70'],
 	v54Stage: stageStorage.transactions['v54'],
@@ -16,7 +16,7 @@ export const transactions = {
 }
 
 export const senders = {
-	name: '',
+	name: 'BridgeProxy.Senders',
 	v64: productionStorage.senders['v64'],
 	v70: productionStorage.senders['v70'],
 	v54Stage: stageStorage.senders['v54'],
@@ -27,7 +27,7 @@ export const senders = {
 }
 
 export const sidechainFeePaid = {
-	name: '',
+	name: 'BridgeProxy.SidechainFeePaid',
 	v64: productionStorage.sidechainFeePaid['v64'],
 	v70: productionStorage.sidechainFeePaid['v70'],
 	v55Stage: stageStorage.sidechainFeePaid['v55'],
@@ -38,7 +38,7 @@ export const sidechainFeePaid = {
 }
 
 export const lockedAssets = {
-	name: '',
+	name: 'BridgeProxy.LockedAssets',
 	v64: productionStorage.lockedAssets['v64'],
 	v70: productionStorage.lockedAssets['v70'],
 	v57Stage: stageStorage.lockedAssets['v57'],
@@ -49,7 +49,7 @@ export const lockedAssets = {
 }
 
 export const transferLimit = {
-	name: '',
+	name: 'BridgeProxy.TransferLimit',
 	v64: productionStorage.transferLimit['v64'],
 	v62Stage: stageStorage.transferLimit['v62'],
 	v62Test: testStorage.transferLimit['v62'],
@@ -57,7 +57,7 @@ export const transferLimit = {
 }
 
 export const consumedTransferLimit = {
-	name: '',
+	name: 'BridgeProxy.ConsumedTransferLimit',
 	v64: productionStorage.consumedTransferLimit['v64'],
 	v62Stage: stageStorage.consumedTransferLimit['v62'],
 	v62Test: testStorage.consumedTransferLimit['v62'],
@@ -65,7 +65,7 @@ export const consumedTransferLimit = {
 }
 
 export const transferLimitUnlockSchedule = {
-	name: '',
+	name: 'BridgeProxy.TransferLimitUnlockSchedule',
 	v64: productionStorage.transferLimitUnlockSchedule['v64'],
 	v62Stage: stageStorage.transferLimitUnlockSchedule['v62'],
 	v62Test: testStorage.transferLimitUnlockSchedule['v62'],
@@ -73,7 +73,7 @@ export const transferLimitUnlockSchedule = {
 }
 
 export const limitedAssets = {
-	name: '',
+	name: 'BridgeProxy.LimitedAssets',
 	v64: productionStorage.limitedAssets['v64'],
 	v62Stage: stageStorage.limitedAssets['v62'],
 	v62Test: testStorage.limitedAssets['v62'],

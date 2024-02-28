@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 
 import { Chain } from '../src/chains'
+import { assertDefined } from '../src/utils'
 
 type ObjectName = string
 type ObjectInfo = {
@@ -11,7 +12,7 @@ type ObjectInfo = {
 }
 type ObjectList = Record<ObjectName, ObjectInfo[]>
 
-export const toCamelCase = (s: string): string => {
+const toCamelCase = (s: string): string => {
 	// Step 1: Trim the string
 	const trimmedString = s.trim()
 
@@ -43,6 +44,11 @@ export const toCamelCase = (s: string): string => {
 	return finalString
 }
 
+const toPascalCase = (s: string): string => {
+	const camelCase = toCamelCase(s)
+	return camelCase.charAt(0).toUpperCase() + camelCase.slice(1)
+}
+
 try {
 	fs.rmSync('src/types/generated/merged', { recursive: true })
 } catch {}
@@ -68,27 +74,20 @@ chains.forEach((chain) => {
 	})
 })
 
-entityTypes.forEach((entityType) => {
-	const imports = Array.from(allModules).map((module) => {
-		return `export * as ${toCamelCase(module)} from './${module}/${entityType}'`
-	})
-	fs.writeFileSync(`src/types/generated/merged/${entityType}.ts`, imports.join('\n'))
-})
-
 let maxProductionVersion = 0
 
-const modules = Array.from(allModules).map((module) => {
-	if (module) {
-		fs.mkdirSync(`src/types/generated/merged/${module}`, { recursive: true })
+const modules = Array.from(allModules).map((moduleName) => {
+	if (moduleName) {
+		fs.mkdirSync(`src/types/generated/merged/${moduleName}`, { recursive: true })
 	}
 
 	return {
-		module,
+		module: moduleName,
 		data: entityTypes.map((entityType) => {
 			const objects: ObjectList = {}
 		
 			chains.forEach((chain) => {
-				const filePath = `src/types/generated/${chain}/${module}/${entityType}.ts`
+				const filePath = `src/types/generated/${chain}/${moduleName}/${entityType}.ts`
 	
 				let content = ''
 				try {
@@ -102,8 +101,8 @@ const modules = Array.from(allModules).map((module) => {
 				objectCodeList.forEach((objectCode) => {
 					const versionCodeList = objectCode.split(/(?=v\d+: new)/g)
 					const objectName = objectCode.match(/(?<=export const )(\w+)/)?.[0]
-					const name = objectCode.match(/(?<=name: ')([\w\.]+)/)?.[0] ?? ''
 					if (!objectName) return
+					const name = objectCode.match(/(?<=name: ')([\w\.]+)/)?.[0] ?? toPascalCase(moduleName) + '.' + toPascalCase(objectName)
 					if (entityType !== 'storage' && !name) return
 					if (!objects[objectName]) {
 						objects[objectName] = []
@@ -132,24 +131,22 @@ const modules = Array.from(allModules).map((module) => {
 	}
 })
 
-modules.forEach((module) => {
-	module.data.forEach((data) => {
+modules.forEach((moduleInfo) => {
+	moduleInfo.data.forEach((data) => {
 		const { entityType, objects } = data
 
 		if (Object.values(objects).length === 0) return
 
-		const entityTypeSingle = entityType.replace(/s$/, '')
 		const entityTypeCapital = entityType.charAt(0).toUpperCase() + entityType.slice(1)
-		const entityTypeSingleCapital = entityTypeSingle.charAt(0).toUpperCase() + entityTypeSingle.slice(1)
 
-		const outputPath = path.resolve(__dirname, `../src/types/generated/merged/${module.module}/${entityType}.ts`)
+		const outputPath = path.resolve(__dirname, `../src/types/generated/merged/${moduleInfo.module}/${entityType}.ts`)
 		const outputImports: string[] = []
 		const outputData: string[] = []
 	
 		Object.values(Chain).forEach((chain) => {
 			if (Object.values(objects).some((data) => data.some((object) => object.chain === chain))) {
 				outputImports.push(
-					`import * as ${chain}${entityTypeCapital} from '../../${chain}/${module.module}/${entityType}'`,
+					`import * as ${chain}${entityTypeCapital} from '../../${chain}/${moduleInfo.module}/${entityType}'`,
 				)
 			}
 		})
@@ -188,4 +185,14 @@ modules.forEach((module) => {
 	
 		fs.writeFileSync(outputPath, [...outputImports, ...outputData].join('\n'))
 	})
+})
+
+entityTypes.forEach((entityType) => {
+	const imports = modules.map((moduleInfo) => {
+		if (Object.values(moduleInfo.data.filter(entity => entity.entityType === entityType)[0].objects).length > 0) {
+			console.log(moduleInfo.module, entityType, moduleInfo.data.filter(entity => entity.entityType === entityType))
+			return `export * as ${toCamelCase(moduleInfo.module)} from './${moduleInfo.module}/${entityType}'`
+		}
+	}).filter(item => item !== undefined) as string[]
+	fs.writeFileSync(`src/types/generated/merged/${entityType}.ts`, imports.join('\n'))
 })

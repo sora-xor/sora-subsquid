@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/xst-pool/storage'
 
 
 export const permissionedTechAccount = {
-	name: '',
+	name: 'XstPool.PermissionedTechAccount',
 	v19: productionStorage.permissionedTechAccount['v19'],
 	v42: productionStorage.permissionedTechAccount['v42'],
 	v46: productionStorage.permissionedTechAccount['v46'],
@@ -18,7 +18,7 @@ export const permissionedTechAccount = {
 }
 
 export const baseFee = {
-	name: '',
+	name: 'XstPool.BaseFee',
 	v19: productionStorage.baseFee['v19'],
 	v42: productionStorage.baseFee['v42'],
 	v33Stage: stageStorage.baseFee['v33'],
@@ -28,7 +28,7 @@ export const baseFee = {
 }
 
 export const enabledSynthetics = {
-	name: '',
+	name: 'XstPool.EnabledSynthetics',
 	v19: productionStorage.enabledSynthetics['v19'],
 	v42: productionStorage.enabledSynthetics['v42'],
 	v57: productionStorage.enabledSynthetics['v57'],
@@ -42,7 +42,7 @@ export const enabledSynthetics = {
 }
 
 export const referenceAssetId = {
-	name: '',
+	name: 'XstPool.ReferenceAssetId',
 	v19: productionStorage.referenceAssetId['v19'],
 	v42: productionStorage.referenceAssetId['v42'],
 	v33Stage: stageStorage.referenceAssetId['v33'],
@@ -53,7 +53,7 @@ export const referenceAssetId = {
 }
 
 export const collateralReserves = {
-	name: '',
+	name: 'XstPool.CollateralReserves',
 	v19: productionStorage.collateralReserves['v19'],
 	v42: productionStorage.collateralReserves['v42'],
 	v33Stage: stageStorage.collateralReserves['v33'],
@@ -64,7 +64,7 @@ export const collateralReserves = {
 }
 
 export const syntheticBaseAssetFloorPrice = {
-	name: '',
+	name: 'XstPool.SyntheticBaseAssetFloorPrice',
 	v45: productionStorage.syntheticBaseAssetFloorPrice['v45'],
 	v44Stage: stageStorage.syntheticBaseAssetFloorPrice['v44'],
 	v44Test: testStorage.syntheticBaseAssetFloorPrice['v44'],
@@ -72,7 +72,7 @@ export const syntheticBaseAssetFloorPrice = {
 }
 
 export const enabledSymbols = {
-	name: '',
+	name: 'XstPool.EnabledSymbols',
 	v57: productionStorage.enabledSymbols['v57'],
 	v54Stage: stageStorage.enabledSymbols['v54'],
 	v54Test: testStorage.enabledSymbols['v54'],

@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/election-provider-multi-phase/storage'
 
 
 export const round = {
-	name: '',
+	name: 'ElectionProviderMultiPhase.Round',
 	v42: productionStorage.round['v42'],
 	v42Stage: stageStorage.round['v42'],
 	v42Test: testStorage.round['v42'],
@@ -13,7 +13,7 @@ export const round = {
 }
 
 export const currentPhase = {
-	name: '',
+	name: 'ElectionProviderMultiPhase.CurrentPhase',
 	v42: productionStorage.currentPhase['v42'],
 	v42Stage: stageStorage.currentPhase['v42'],
 	v42Test: testStorage.currentPhase['v42'],
@@ -21,7 +21,7 @@ export const currentPhase = {
 }
 
 export const queuedSolution = {
-	name: '',
+	name: 'ElectionProviderMultiPhase.QueuedSolution',
 	v42: productionStorage.queuedSolution['v42'],
 	v42Stage: stageStorage.queuedSolution['v42'],
 	v42Test: testStorage.queuedSolution['v42'],
@@ -29,7 +29,7 @@ export const queuedSolution = {
 }
 
 export const snapshot = {
-	name: '',
+	name: 'ElectionProviderMultiPhase.Snapshot',
 	v42: productionStorage.snapshot['v42'],
 	v42Stage: stageStorage.snapshot['v42'],
 	v42Test: testStorage.snapshot['v42'],
@@ -37,7 +37,7 @@ export const snapshot = {
 }
 
 export const desiredTargets = {
-	name: '',
+	name: 'ElectionProviderMultiPhase.DesiredTargets',
 	v42: productionStorage.desiredTargets['v42'],
 	v42Stage: stageStorage.desiredTargets['v42'],
 	v42Test: testStorage.desiredTargets['v42'],
@@ -45,7 +45,7 @@ export const desiredTargets = {
 }
 
 export const snapshotMetadata = {
-	name: '',
+	name: 'ElectionProviderMultiPhase.SnapshotMetadata',
 	v42: productionStorage.snapshotMetadata['v42'],
 	v42Stage: stageStorage.snapshotMetadata['v42'],
 	v42Test: testStorage.snapshotMetadata['v42'],
@@ -53,7 +53,7 @@ export const snapshotMetadata = {
 }
 
 export const signedSubmissionNextIndex = {
-	name: '',
+	name: 'ElectionProviderMultiPhase.SignedSubmissionNextIndex',
 	v42: productionStorage.signedSubmissionNextIndex['v42'],
 	v42Stage: stageStorage.signedSubmissionNextIndex['v42'],
 	v42Test: testStorage.signedSubmissionNextIndex['v42'],
@@ -61,7 +61,7 @@ export const signedSubmissionNextIndex = {
 }
 
 export const signedSubmissionIndices = {
-	name: '',
+	name: 'ElectionProviderMultiPhase.SignedSubmissionIndices',
 	v42: productionStorage.signedSubmissionIndices['v42'],
 	v53: productionStorage.signedSubmissionIndices['v53'],
 	v42Stage: stageStorage.signedSubmissionIndices['v42'],
@@ -72,7 +72,7 @@ export const signedSubmissionIndices = {
 }
 
 export const signedSubmissionsMap = {
-	name: '',
+	name: 'ElectionProviderMultiPhase.SignedSubmissionsMap',
 	v42: productionStorage.signedSubmissionsMap['v42'],
 	v42Stage: stageStorage.signedSubmissionsMap['v42'],
 	v42Test: testStorage.signedSubmissionsMap['v42'],
@@ -80,7 +80,7 @@ export const signedSubmissionsMap = {
 }
 
 export const minimumUntrustedScore = {
-	name: '',
+	name: 'ElectionProviderMultiPhase.MinimumUntrustedScore',
 	v42: productionStorage.minimumUntrustedScore['v42'],
 	v42Stage: stageStorage.minimumUntrustedScore['v42'],
 	v42Test: testStorage.minimumUntrustedScore['v42'],

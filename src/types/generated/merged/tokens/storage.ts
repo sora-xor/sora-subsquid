@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/tokens/storage'
 
 
 export const totalIssuance = {
-	name: '',
+	name: 'Tokens.TotalIssuance',
 	v1: productionStorage.totalIssuance['v1'],
 	v42: productionStorage.totalIssuance['v42'],
 	v33Stage: stageStorage.totalIssuance['v33'],
@@ -16,7 +16,7 @@ export const totalIssuance = {
 }
 
 export const locks = {
-	name: '',
+	name: 'Tokens.Locks',
 	v1: productionStorage.locks['v1'],
 	v42: productionStorage.locks['v42'],
 	v33Stage: stageStorage.locks['v33'],
@@ -27,7 +27,7 @@ export const locks = {
 }
 
 export const accounts = {
-	name: '',
+	name: 'Tokens.Accounts',
 	v1: productionStorage.accounts['v1'],
 	v42: productionStorage.accounts['v42'],
 	v33Stage: stageStorage.accounts['v33'],
@@ -38,7 +38,7 @@ export const accounts = {
 }
 
 export const reserves = {
-	name: '',
+	name: 'Tokens.Reserves',
 	v42: productionStorage.reserves['v42'],
 	v42Stage: stageStorage.reserves['v42'],
 	v42Test: testStorage.reserves['v42'],

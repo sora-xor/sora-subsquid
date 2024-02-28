@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/session/storage'
 
 
 export const validators = {
-	name: '',
+	name: 'Session.Validators',
 	v1: productionStorage.validators['v1'],
 	v33Stage: stageStorage.validators['v33'],
 	v33Test: testStorage.validators['v33'],
@@ -13,7 +13,7 @@ export const validators = {
 }
 
 export const currentIndex = {
-	name: '',
+	name: 'Session.CurrentIndex',
 	v1: productionStorage.currentIndex['v1'],
 	v33Stage: stageStorage.currentIndex['v33'],
 	v33Test: testStorage.currentIndex['v33'],
@@ -21,7 +21,7 @@ export const currentIndex = {
 }
 
 export const queuedChanged = {
-	name: '',
+	name: 'Session.QueuedChanged',
 	v1: productionStorage.queuedChanged['v1'],
 	v33Stage: stageStorage.queuedChanged['v33'],
 	v33Test: testStorage.queuedChanged['v33'],
@@ -29,7 +29,7 @@ export const queuedChanged = {
 }
 
 export const queuedKeys = {
-	name: '',
+	name: 'Session.QueuedKeys',
 	v1: productionStorage.queuedKeys['v1'],
 	v42: productionStorage.queuedKeys['v42'],
 	v33Stage: stageStorage.queuedKeys['v33'],
@@ -40,7 +40,7 @@ export const queuedKeys = {
 }
 
 export const disabledValidators = {
-	name: '',
+	name: 'Session.DisabledValidators',
 	v1: productionStorage.disabledValidators['v1'],
 	v33Stage: stageStorage.disabledValidators['v33'],
 	v33Test: testStorage.disabledValidators['v33'],
@@ -48,7 +48,7 @@ export const disabledValidators = {
 }
 
 export const nextKeys = {
-	name: '',
+	name: 'Session.NextKeys',
 	v1: productionStorage.nextKeys['v1'],
 	v42: productionStorage.nextKeys['v42'],
 	v33Stage: stageStorage.nextKeys['v33'],
@@ -59,7 +59,7 @@ export const nextKeys = {
 }
 
 export const keyOwner = {
-	name: '',
+	name: 'Session.KeyOwner',
 	v1: productionStorage.keyOwner['v1'],
 	v42: productionStorage.keyOwner['v42'],
 	v33Stage: stageStorage.keyOwner['v33'],

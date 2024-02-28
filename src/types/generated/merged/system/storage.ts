@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/system/storage'
 
 
 export const account = {
-	name: '',
+	name: 'System.Account',
 	v1: productionStorage.account['v1'],
 	v42: productionStorage.account['v42'],
 	v33Stage: stageStorage.account['v33'],
@@ -16,7 +16,7 @@ export const account = {
 }
 
 export const extrinsicCount = {
-	name: '',
+	name: 'System.ExtrinsicCount',
 	v1: productionStorage.extrinsicCount['v1'],
 	v33Stage: stageStorage.extrinsicCount['v33'],
 	v33Test: testStorage.extrinsicCount['v33'],
@@ -24,7 +24,7 @@ export const extrinsicCount = {
 }
 
 export const blockWeight = {
-	name: '',
+	name: 'System.BlockWeight',
 	v1: productionStorage.blockWeight['v1'],
 	v53: productionStorage.blockWeight['v53'],
 	v33Stage: stageStorage.blockWeight['v33'],
@@ -35,7 +35,7 @@ export const blockWeight = {
 }
 
 export const allExtrinsicsLen = {
-	name: '',
+	name: 'System.AllExtrinsicsLen',
 	v1: productionStorage.allExtrinsicsLen['v1'],
 	v33Stage: stageStorage.allExtrinsicsLen['v33'],
 	v33Test: testStorage.allExtrinsicsLen['v33'],
@@ -43,7 +43,7 @@ export const allExtrinsicsLen = {
 }
 
 export const blockHash = {
-	name: '',
+	name: 'System.BlockHash',
 	v1: productionStorage.blockHash['v1'],
 	v33Stage: stageStorage.blockHash['v33'],
 	v33Test: testStorage.blockHash['v33'],
@@ -51,7 +51,7 @@ export const blockHash = {
 }
 
 export const extrinsicData = {
-	name: '',
+	name: 'System.ExtrinsicData',
 	v1: productionStorage.extrinsicData['v1'],
 	v33Stage: stageStorage.extrinsicData['v33'],
 	v33Test: testStorage.extrinsicData['v33'],
@@ -59,7 +59,7 @@ export const extrinsicData = {
 }
 
 export const number = {
-	name: '',
+	name: 'System.Number',
 	v1: productionStorage.number['v1'],
 	v33Stage: stageStorage.number['v33'],
 	v33Test: testStorage.number['v33'],
@@ -67,7 +67,7 @@ export const number = {
 }
 
 export const parentHash = {
-	name: '',
+	name: 'System.ParentHash',
 	v1: productionStorage.parentHash['v1'],
 	v33Stage: stageStorage.parentHash['v33'],
 	v33Test: testStorage.parentHash['v33'],
@@ -75,7 +75,7 @@ export const parentHash = {
 }
 
 export const digest = {
-	name: '',
+	name: 'System.Digest',
 	v1: productionStorage.digest['v1'],
 	v42: productionStorage.digest['v42'],
 	v33Stage: stageStorage.digest['v33'],
@@ -86,7 +86,7 @@ export const digest = {
 }
 
 export const events = {
-	name: '',
+	name: 'System.Events',
 	v1: productionStorage.events['v1'],
 	v3: productionStorage.events['v3'],
 	v7: productionStorage.events['v7'],
@@ -157,7 +157,7 @@ export const events = {
 }
 
 export const eventCount = {
-	name: '',
+	name: 'System.EventCount',
 	v1: productionStorage.eventCount['v1'],
 	v33Stage: stageStorage.eventCount['v33'],
 	v33Test: testStorage.eventCount['v33'],
@@ -165,7 +165,7 @@ export const eventCount = {
 }
 
 export const eventTopics = {
-	name: '',
+	name: 'System.EventTopics',
 	v1: productionStorage.eventTopics['v1'],
 	v33Stage: stageStorage.eventTopics['v33'],
 	v33Test: testStorage.eventTopics['v33'],
@@ -173,7 +173,7 @@ export const eventTopics = {
 }
 
 export const lastRuntimeUpgrade = {
-	name: '',
+	name: 'System.LastRuntimeUpgrade',
 	v1: productionStorage.lastRuntimeUpgrade['v1'],
 	v42: productionStorage.lastRuntimeUpgrade['v42'],
 	v33Stage: stageStorage.lastRuntimeUpgrade['v33'],
@@ -184,7 +184,7 @@ export const lastRuntimeUpgrade = {
 }
 
 export const upgradedToU32RefCount = {
-	name: '',
+	name: 'System.UpgradedToU32RefCount',
 	v1: productionStorage.upgradedToU32RefCount['v1'],
 	v33Stage: stageStorage.upgradedToU32RefCount['v33'],
 	v33Test: testStorage.upgradedToU32RefCount['v33'],
@@ -192,14 +192,14 @@ export const upgradedToU32RefCount = {
 }
 
 export const upgradedToDualRefCount = {
-	name: '',
+	name: 'System.UpgradedToDualRefCount',
 	v1: productionStorage.upgradedToDualRefCount['v1'],
 	v33Stage: stageStorage.upgradedToDualRefCount['v33'],
 	v33Test: testStorage.upgradedToDualRefCount['v33'],
 }
 
 export const executionPhase = {
-	name: '',
+	name: 'System.ExecutionPhase',
 	v1: productionStorage.executionPhase['v1'],
 	v33Stage: stageStorage.executionPhase['v33'],
 	v33Test: testStorage.executionPhase['v33'],
@@ -207,7 +207,7 @@ export const executionPhase = {
 }
 
 export const upgradedToTripleRefCount = {
-	name: '',
+	name: 'System.UpgradedToTripleRefCount',
 	v42: productionStorage.upgradedToTripleRefCount['v42'],
 	v42Stage: stageStorage.upgradedToTripleRefCount['v42'],
 	v42Test: testStorage.upgradedToTripleRefCount['v42'],

@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/rewards/storage'
 
 
 export const reservesAcc = {
-	name: '',
+	name: 'Rewards.ReservesAcc',
 	v1: productionStorage.reservesAcc['v1'],
 	v42: productionStorage.reservesAcc['v42'],
 	v46: productionStorage.reservesAcc['v46'],
@@ -22,7 +22,7 @@ export const reservesAcc = {
 }
 
 export const valOwners = {
-	name: '',
+	name: 'Rewards.ValOwners',
 	v1: productionStorage.valOwners['v1'],
 	v19: productionStorage.valOwners['v19'],
 	v42: productionStorage.valOwners['v42'],
@@ -34,7 +34,7 @@ export const valOwners = {
 }
 
 export const pswapFarmOwners = {
-	name: '',
+	name: 'Rewards.PswapFarmOwners',
 	v1: productionStorage.pswapFarmOwners['v1'],
 	v33Stage: stageStorage.pswapFarmOwners['v33'],
 	v33Test: testStorage.pswapFarmOwners['v33'],
@@ -42,7 +42,7 @@ export const pswapFarmOwners = {
 }
 
 export const pswapWaifuOwners = {
-	name: '',
+	name: 'Rewards.PswapWaifuOwners',
 	v1: productionStorage.pswapWaifuOwners['v1'],
 	v33Stage: stageStorage.pswapWaifuOwners['v33'],
 	v33Test: testStorage.pswapWaifuOwners['v33'],
@@ -50,7 +50,7 @@ export const pswapWaifuOwners = {
 }
 
 export const valBurnedSinceLastVesting = {
-	name: '',
+	name: 'Rewards.ValBurnedSinceLastVesting',
 	v19: productionStorage.valBurnedSinceLastVesting['v19'],
 	v33Stage: stageStorage.valBurnedSinceLastVesting['v33'],
 	v33Test: testStorage.valBurnedSinceLastVesting['v33'],
@@ -58,7 +58,7 @@ export const valBurnedSinceLastVesting = {
 }
 
 export const currentClaimableVal = {
-	name: '',
+	name: 'Rewards.CurrentClaimableVal',
 	v19: productionStorage.currentClaimableVal['v19'],
 	v33Stage: stageStorage.currentClaimableVal['v33'],
 	v33Test: testStorage.currentClaimableVal['v33'],
@@ -66,7 +66,7 @@ export const currentClaimableVal = {
 }
 
 export const ethAddresses = {
-	name: '',
+	name: 'Rewards.EthAddresses',
 	v19: productionStorage.ethAddresses['v19'],
 	v33Stage: stageStorage.ethAddresses['v33'],
 	v33Test: testStorage.ethAddresses['v33'],
@@ -74,7 +74,7 @@ export const ethAddresses = {
 }
 
 export const totalValRewards = {
-	name: '',
+	name: 'Rewards.TotalValRewards',
 	v19: productionStorage.totalValRewards['v19'],
 	v33Stage: stageStorage.totalValRewards['v33'],
 	v33Test: testStorage.totalValRewards['v33'],
@@ -82,7 +82,7 @@ export const totalValRewards = {
 }
 
 export const totalClaimableVal = {
-	name: '',
+	name: 'Rewards.TotalClaimableVal',
 	v19: productionStorage.totalClaimableVal['v19'],
 	v33Stage: stageStorage.totalClaimableVal['v33'],
 	v33Test: testStorage.totalClaimableVal['v33'],
@@ -90,7 +90,7 @@ export const totalClaimableVal = {
 }
 
 export const migrationPending = {
-	name: '',
+	name: 'Rewards.MigrationPending',
 	v19: productionStorage.migrationPending['v19'],
 	v33Stage: stageStorage.migrationPending['v33'],
 	v33Test: testStorage.migrationPending['v33'],
@@ -98,7 +98,7 @@ export const migrationPending = {
 }
 
 export const umiNftReceivers = {
-	name: '',
+	name: 'Rewards.UmiNftReceivers',
 	v33: productionStorage.umiNftReceivers['v33'],
 	v33Stage: stageStorage.umiNftReceivers['v33'],
 	v33Test: testStorage.umiNftReceivers['v33'],
@@ -106,7 +106,7 @@ export const umiNftReceivers = {
 }
 
 export const umiNfts = {
-	name: '',
+	name: 'Rewards.UmiNfts',
 	v33: productionStorage.umiNfts['v33'],
 	v42: productionStorage.umiNfts['v42'],
 	v33Stage: stageStorage.umiNfts['v33'],
@@ -117,7 +117,7 @@ export const umiNfts = {
 }
 
 export const umiNftClaimed = {
-	name: '',
+	name: 'Rewards.UmiNftClaimed',
 	v33: productionStorage.umiNftClaimed['v33'],
 	v33Stage: stageStorage.umiNftClaimed['v33'],
 	v33Test: testStorage.umiNftClaimed['v33'],

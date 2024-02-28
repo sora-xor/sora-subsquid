@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/pool-xyk/storage'
 
 
 export const reserves = {
-	name: '',
+	name: 'PoolXyk.Reserves',
 	v1: productionStorage.reserves['v1'],
 	v42: productionStorage.reserves['v42'],
 	v33Stage: stageStorage.reserves['v33'],
@@ -16,12 +16,12 @@ export const reserves = {
 }
 
 export const markerTokensIndex = {
-	name: '',
+	name: 'PoolXyk.MarkerTokensIndex',
 	v1: productionStorage.markerTokensIndex['v1'],
 }
 
 export const properties = {
-	name: '',
+	name: 'PoolXyk.Properties',
 	v1: productionStorage.properties['v1'],
 	v7: productionStorage.properties['v7'],
 	v42: productionStorage.properties['v42'],
@@ -33,7 +33,7 @@ export const properties = {
 }
 
 export const poolProviders = {
-	name: '',
+	name: 'PoolXyk.PoolProviders',
 	v7: productionStorage.poolProviders['v7'],
 	v33Stage: stageStorage.poolProviders['v33'],
 	v33Test: testStorage.poolProviders['v33'],
@@ -41,7 +41,7 @@ export const poolProviders = {
 }
 
 export const totalIssuances = {
-	name: '',
+	name: 'PoolXyk.TotalIssuances',
 	v7: productionStorage.totalIssuances['v7'],
 	v33Stage: stageStorage.totalIssuances['v33'],
 	v33Test: testStorage.totalIssuances['v33'],
@@ -49,7 +49,7 @@ export const totalIssuances = {
 }
 
 export const accountPools = {
-	name: '',
+	name: 'PoolXyk.AccountPools',
 	v19: productionStorage.accountPools['v19'],
 	v42: productionStorage.accountPools['v42'],
 	v33Stage: stageStorage.accountPools['v33'],

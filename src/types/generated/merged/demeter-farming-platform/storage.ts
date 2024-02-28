@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/demeter-farming-platform/storage'
 
 
 export const tokenInfos = {
-	name: '',
+	name: 'DemeterFarmingPlatform.TokenInfos',
 	v33: productionStorage.tokenInfos['v33'],
 	v42: productionStorage.tokenInfos['v42'],
 	v33Stage: stageStorage.tokenInfos['v33'],
@@ -16,7 +16,7 @@ export const tokenInfos = {
 }
 
 export const userInfos = {
-	name: '',
+	name: 'DemeterFarmingPlatform.UserInfos',
 	v33: productionStorage.userInfos['v33'],
 	v42: productionStorage.userInfos['v42'],
 	v43: productionStorage.userInfos['v43'],
@@ -30,7 +30,7 @@ export const userInfos = {
 }
 
 export const pools = {
-	name: '',
+	name: 'DemeterFarmingPlatform.Pools',
 	v33: productionStorage.pools['v33'],
 	v42: productionStorage.pools['v42'],
 	v43: productionStorage.pools['v43'],
@@ -44,7 +44,7 @@ export const pools = {
 }
 
 export const authorityAccount = {
-	name: '',
+	name: 'DemeterFarmingPlatform.AuthorityAccount',
 	v33: productionStorage.authorityAccount['v33'],
 	v33Stage: stageStorage.authorityAccount['v33'],
 	v33Test: testStorage.authorityAccount['v33'],
@@ -52,7 +52,7 @@ export const authorityAccount = {
 }
 
 export const feeAccount = {
-	name: '',
+	name: 'DemeterFarmingPlatform.FeeAccount',
 	v33: productionStorage.feeAccount['v33'],
 	v33Stage: stageStorage.feeAccount['v33'],
 	v33Test: testStorage.feeAccount['v33'],
@@ -60,7 +60,7 @@ export const feeAccount = {
 }
 
 export const palletStorageVersion = {
-	name: '',
+	name: 'DemeterFarmingPlatform.PalletStorageVersion',
 	v43: productionStorage.palletStorageVersion['v43'],
 	v43Stage: stageStorage.palletStorageVersion['v43'],
 	v43Test: testStorage.palletStorageVersion['v43'],

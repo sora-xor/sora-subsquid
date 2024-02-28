@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/transaction-payment/storage'
 
 
 export const nextFeeMultiplier = {
-	name: '',
+	name: 'TransactionPayment.NextFeeMultiplier',
 	v1: productionStorage.nextFeeMultiplier['v1'],
 	v33Stage: stageStorage.nextFeeMultiplier['v33'],
 	v33Test: testStorage.nextFeeMultiplier['v33'],
@@ -13,7 +13,7 @@ export const nextFeeMultiplier = {
 }
 
 export const storageVersion = {
-	name: '',
+	name: 'TransactionPayment.StorageVersion',
 	v1: productionStorage.storageVersion['v1'],
 	v42: productionStorage.storageVersion['v42'],
 	v33Stage: stageStorage.storageVersion['v33'],
