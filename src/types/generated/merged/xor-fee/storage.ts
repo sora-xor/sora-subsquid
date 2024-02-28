@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/xor-fee/storage'
 
 
 export const xorToVal = {
-	name: '',
+	name: 'XorFee.XorToVal',
 	v7: productionStorage.xorToVal['v7'],
 	v33Stage: stageStorage.xorToVal['v33'],
 	v33Test: testStorage.xorToVal['v33'],
@@ -13,7 +13,7 @@ export const xorToVal = {
 }
 
 export const multiplier = {
-	name: '',
+	name: 'XorFee.Multiplier',
 	v37: productionStorage.multiplier['v37'],
 	v37Stage: stageStorage.multiplier['v37'],
 	v37Test: testStorage.multiplier['v37'],

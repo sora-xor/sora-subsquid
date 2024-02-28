@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/democracy/storage'
 
 
 export const publicPropCount = {
-	name: '',
+	name: 'Democracy.PublicPropCount',
 	v1: productionStorage.publicPropCount['v1'],
 	v33Stage: stageStorage.publicPropCount['v33'],
 	v33Test: testStorage.publicPropCount['v33'],
@@ -13,7 +13,7 @@ export const publicPropCount = {
 }
 
 export const publicProps = {
-	name: '',
+	name: 'Democracy.PublicProps',
 	v1: productionStorage.publicProps['v1'],
 	v53: productionStorage.publicProps['v53'],
 	v33Stage: stageStorage.publicProps['v33'],
@@ -24,7 +24,7 @@ export const publicProps = {
 }
 
 export const depositOf = {
-	name: '',
+	name: 'Democracy.DepositOf',
 	v1: productionStorage.depositOf['v1'],
 	v33Stage: stageStorage.depositOf['v33'],
 	v33Test: testStorage.depositOf['v33'],
@@ -32,7 +32,7 @@ export const depositOf = {
 }
 
 export const preimages = {
-	name: '',
+	name: 'Democracy.Preimages',
 	v1: productionStorage.preimages['v1'],
 	v42: productionStorage.preimages['v42'],
 	v33Stage: stageStorage.preimages['v33'],
@@ -42,7 +42,7 @@ export const preimages = {
 }
 
 export const referendumCount = {
-	name: '',
+	name: 'Democracy.ReferendumCount',
 	v1: productionStorage.referendumCount['v1'],
 	v33Stage: stageStorage.referendumCount['v33'],
 	v33Test: testStorage.referendumCount['v33'],
@@ -50,7 +50,7 @@ export const referendumCount = {
 }
 
 export const lowestUnbaked = {
-	name: '',
+	name: 'Democracy.LowestUnbaked',
 	v1: productionStorage.lowestUnbaked['v1'],
 	v33Stage: stageStorage.lowestUnbaked['v33'],
 	v33Test: testStorage.lowestUnbaked['v33'],
@@ -58,7 +58,7 @@ export const lowestUnbaked = {
 }
 
 export const referendumInfoOf = {
-	name: '',
+	name: 'Democracy.ReferendumInfoOf',
 	v1: productionStorage.referendumInfoOf['v1'],
 	v42: productionStorage.referendumInfoOf['v42'],
 	v53: productionStorage.referendumInfoOf['v53'],
@@ -72,7 +72,7 @@ export const referendumInfoOf = {
 }
 
 export const votingOf = {
-	name: '',
+	name: 'Democracy.VotingOf',
 	v1: productionStorage.votingOf['v1'],
 	v42: productionStorage.votingOf['v42'],
 	v33Stage: stageStorage.votingOf['v33'],
@@ -83,14 +83,14 @@ export const votingOf = {
 }
 
 export const locks = {
-	name: '',
+	name: 'Democracy.Locks',
 	v1: productionStorage.locks['v1'],
 	v33Stage: stageStorage.locks['v33'],
 	v33Test: testStorage.locks['v33'],
 }
 
 export const lastTabledWasExternal = {
-	name: '',
+	name: 'Democracy.LastTabledWasExternal',
 	v1: productionStorage.lastTabledWasExternal['v1'],
 	v33Stage: stageStorage.lastTabledWasExternal['v33'],
 	v33Test: testStorage.lastTabledWasExternal['v33'],
@@ -98,7 +98,7 @@ export const lastTabledWasExternal = {
 }
 
 export const nextExternal = {
-	name: '',
+	name: 'Democracy.NextExternal',
 	v1: productionStorage.nextExternal['v1'],
 	v53: productionStorage.nextExternal['v53'],
 	v33Stage: stageStorage.nextExternal['v33'],
@@ -109,7 +109,7 @@ export const nextExternal = {
 }
 
 export const blacklist = {
-	name: '',
+	name: 'Democracy.Blacklist',
 	v1: productionStorage.blacklist['v1'],
 	v33Stage: stageStorage.blacklist['v33'],
 	v33Test: testStorage.blacklist['v33'],
@@ -117,7 +117,7 @@ export const blacklist = {
 }
 
 export const cancellations = {
-	name: '',
+	name: 'Democracy.Cancellations',
 	v1: productionStorage.cancellations['v1'],
 	v33Stage: stageStorage.cancellations['v33'],
 	v33Test: testStorage.cancellations['v33'],
@@ -125,7 +125,7 @@ export const cancellations = {
 }
 
 export const storageVersion = {
-	name: '',
+	name: 'Democracy.StorageVersion',
 	v1: productionStorage.storageVersion['v1'],
 	v42: productionStorage.storageVersion['v42'],
 	v33Stage: stageStorage.storageVersion['v33'],

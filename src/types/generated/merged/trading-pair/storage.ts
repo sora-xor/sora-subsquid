@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/trading-pair/storage'
 
 
 export const enabledSources = {
-	name: '',
+	name: 'TradingPair.EnabledSources',
 	v1: productionStorage.enabledSources['v1'],
 	v42: productionStorage.enabledSources['v42'],
 	v33Stage: stageStorage.enabledSources['v33'],
@@ -18,7 +18,7 @@ export const enabledSources = {
 }
 
 export const lockedLiquiditySources = {
-	name: '',
+	name: 'TradingPair.LockedLiquiditySources',
 	v38: productionStorage.lockedLiquiditySources['v38'],
 	v38Stage: stageStorage.lockedLiquiditySources['v38'],
 	v69Stage: stageStorage.lockedLiquiditySources['v69'],

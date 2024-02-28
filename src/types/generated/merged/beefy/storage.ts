@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/beefy/storage'
 
 
 export const authorities = {
-	name: '',
+	name: 'Beefy.Authorities',
 	v42: productionStorage.authorities['v42'],
 	v42Stage: stageStorage.authorities['v42'],
 	v42Test: testStorage.authorities['v42'],
@@ -13,7 +13,7 @@ export const authorities = {
 }
 
 export const validatorSetId = {
-	name: '',
+	name: 'Beefy.ValidatorSetId',
 	v42: productionStorage.validatorSetId['v42'],
 	v42Stage: stageStorage.validatorSetId['v42'],
 	v42Test: testStorage.validatorSetId['v42'],
@@ -21,7 +21,7 @@ export const validatorSetId = {
 }
 
 export const nextAuthorities = {
-	name: '',
+	name: 'Beefy.NextAuthorities',
 	v42: productionStorage.nextAuthorities['v42'],
 	v42Stage: stageStorage.nextAuthorities['v42'],
 	v42Test: testStorage.nextAuthorities['v42'],

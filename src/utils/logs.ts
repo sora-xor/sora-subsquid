@@ -4,6 +4,8 @@ import { BlockContext, Call, Event } from '../types'
 
 let lastLogNow = performance.now()
 
+let logCounter = 1
+
 function toPascalCase(str: string): string {
 	return str
 		.split('.')
@@ -47,7 +49,8 @@ export function getLog(ctx: BlockContext, logModule: string | null = null, attrs
 
 		attrs = { ...attributes, ...attrs }
 
-		ctx.log[level](attrs, `[${logModule}] ${message}`)
+		ctx.log[level](attrs, `[${logCounter}][${logModule}] ${message}`)
+		logCounter++
 	}
 
 	const sendMessages = testMode ? testLogMode : true

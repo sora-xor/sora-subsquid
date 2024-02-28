@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/farming/storage'
 
 
 export const pools = {
-	name: '',
+	name: 'Farming.Pools',
 	v7: productionStorage.pools['v7'],
 	v33Stage: stageStorage.pools['v33'],
 	v33Test: testStorage.pools['v33'],
@@ -13,7 +13,7 @@ export const pools = {
 }
 
 export const poolFarmers = {
-	name: '',
+	name: 'Farming.PoolFarmers',
 	v7: productionStorage.poolFarmers['v7'],
 	v33Stage: stageStorage.poolFarmers['v33'],
 	v33Test: testStorage.poolFarmers['v33'],
@@ -21,6 +21,6 @@ export const poolFarmers = {
 }
 
 export const savedValues = {
-	name: '',
+	name: 'Farming.SavedValues',
 	v7: productionStorage.savedValues['v7'],
 }

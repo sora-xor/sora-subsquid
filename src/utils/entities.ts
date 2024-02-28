@@ -1,9 +1,62 @@
-import { BlockContext, Call, Event } from '../types'
+import { Block, BlockContext, Call, Event } from '../types'
 import { CallType as CallTypeProduction, EventType as EventTypeProduction } from '../types/generated/production/support'
 import { CallType as CallTypeStage, EventType as EventTypeStage } from '../types/generated/stage/support'
 import { CallType as CallTypeTest, EventType as EventTypeTest } from '../types/generated/test/support'
 import { CallType as CallTypeDev, EventType as EventTypeDev } from '../types/generated/dev/support'
 import * as sts from '@subsquid/substrate-runtime/lib/sts'
+import { Bytes, QualifiedName, Runtime } from '@subsquid/substrate-runtime'
+import assert from 'assert'
+
+interface RuntimeCtx {
+    _runtime: Runtime
+}
+
+class StorageType {
+    constructor(
+        private name: QualifiedName,
+    ) {}
+
+    is(block: RuntimeCtx): boolean {
+        return true
+    }
+
+    async get(block: Block['header'], ...key: any[]): Promise<any> {
+        return block._runtime.getStorage(block.hash, this.name, ...key)
+    }
+
+    async getAll(block: Block['header']): Promise<any[]> {
+        return block._runtime.queryStorage(block.hash, this.name)
+    }
+
+    async getMany(block: Block['header'], keys: any[]): Promise<any[]> {
+        return block._runtime.queryStorage(block.hash, this.name, keys)
+    }
+
+    async getKeys(block: Block['header'], ...args: any[]): Promise<any[]> {
+        return block._runtime.getStorageKeys(block.hash, this.name, ...args)
+    }
+
+    async getRawKeys(block: Block['header'], ...args: any[]): Promise<Bytes[]> {
+        return block._runtime.getStorageRawKeys(block.hash, this.name, ...args)
+    }
+
+    getKeysPaged(pageSize: number, block: Block['header'], ...args: any[]): AsyncIterable<any[]> {
+        return block._runtime.getStorageKeysPaged(pageSize, block.hash, this.name, ...args)
+    }
+
+    async getPairs(block: Block['header'], ...args: any[]): Promise<[key: any, value: any][]> {
+        return block._runtime.getStoragePairs(block.hash, this.name, ...args)
+    }
+
+    getPairsPaged(pageSize: number, block: Block['header'], ...args: any[]): AsyncIterable<[key: any, value: any][]> {
+        return block._runtime.getStoragePairsPaged(pageSize, block.hash, this.name, ...args)
+    }
+
+    getDefault(block: Block['header']): any {
+        assert(this.is(block))
+        return block._runtime.getStorageFallback(this.name)
+    }
+}
 
 type VersionedObject = {
 	[key: string]: any
@@ -149,7 +202,7 @@ export function getEntityRepresentation<T extends VersionedObject, K extends Fil
 	}
 
 	const narrowedObject = narrowVersionedObject(types, versions)
-	let data = getDataFromVersionedObject(ctx, narrowedObject, entityItem)
+	let data: any = getDataFromVersionedObject(ctx, narrowedObject, entityItem)
 
 	if (data === null) {
 		if (entityItem.kind === 'call') {
@@ -164,13 +217,15 @@ export function getEntityRepresentation<T extends VersionedObject, K extends Fil
 					return entityItem.entity.block._runtime.decodeJsonEventRecordArguments(event)
 				}
 			} as any
+		} else if (entityItem.kind === 'storage') {
+			data = new StorageType(types.name)
 		}
 	}
 	if (data === null && !couldBeNull) {
 		throw new Error(`[${ctx.block.header.height}] Entity data is null`)
 	}
 
-	return data as any
+	return data
 }
 
 export function getCallRepresentation<
