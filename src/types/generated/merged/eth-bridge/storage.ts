@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/eth-bridge/storage'
 
 
 export const requestsQueue = {
-	name: '',
+	name: 'EthBridge.RequestsQueue',
 	v1: productionStorage.requestsQueue['v1'],
 	v33Stage: stageStorage.requestsQueue['v33'],
 	v33Test: testStorage.requestsQueue['v33'],
@@ -13,7 +13,7 @@ export const requestsQueue = {
 }
 
 export const requests = {
-	name: '',
+	name: 'EthBridge.Requests',
 	v1: productionStorage.requests['v1'],
 	v42: productionStorage.requests['v42'],
 	v33Stage: stageStorage.requests['v33'],
@@ -24,7 +24,7 @@ export const requests = {
 }
 
 export const loadToIncomingRequestHash = {
-	name: '',
+	name: 'EthBridge.LoadToIncomingRequestHash',
 	v1: productionStorage.loadToIncomingRequestHash['v1'],
 	v33Stage: stageStorage.loadToIncomingRequestHash['v33'],
 	v33Test: testStorage.loadToIncomingRequestHash['v33'],
@@ -32,7 +32,7 @@ export const loadToIncomingRequestHash = {
 }
 
 export const requestStatuses = {
-	name: '',
+	name: 'EthBridge.RequestStatuses',
 	v1: productionStorage.requestStatuses['v1'],
 	v42: productionStorage.requestStatuses['v42'],
 	v53: productionStorage.requestStatuses['v53'],
@@ -46,7 +46,7 @@ export const requestStatuses = {
 }
 
 export const requestSubmissionHeight = {
-	name: '',
+	name: 'EthBridge.RequestSubmissionHeight',
 	v1: productionStorage.requestSubmissionHeight['v1'],
 	v33Stage: stageStorage.requestSubmissionHeight['v33'],
 	v33Test: testStorage.requestSubmissionHeight['v33'],
@@ -54,7 +54,7 @@ export const requestSubmissionHeight = {
 }
 
 export const requestApprovals = {
-	name: '',
+	name: 'EthBridge.RequestApprovals',
 	v1: productionStorage.requestApprovals['v1'],
 	v33Stage: stageStorage.requestApprovals['v33'],
 	v33Test: testStorage.requestApprovals['v33'],
@@ -62,7 +62,7 @@ export const requestApprovals = {
 }
 
 export const accountRequests = {
-	name: '',
+	name: 'EthBridge.AccountRequests',
 	v1: productionStorage.accountRequests['v1'],
 	v33Stage: stageStorage.accountRequests['v33'],
 	v33Test: testStorage.accountRequests['v33'],
@@ -70,7 +70,7 @@ export const accountRequests = {
 }
 
 export const registeredAsset = {
-	name: '',
+	name: 'EthBridge.RegisteredAsset',
 	v1: productionStorage.registeredAsset['v1'],
 	v42: productionStorage.registeredAsset['v42'],
 	v33Stage: stageStorage.registeredAsset['v33'],
@@ -81,7 +81,7 @@ export const registeredAsset = {
 }
 
 export const sidechainAssetPrecision = {
-	name: '',
+	name: 'EthBridge.SidechainAssetPrecision',
 	v1: productionStorage.sidechainAssetPrecision['v1'],
 	v42: productionStorage.sidechainAssetPrecision['v42'],
 	v33Stage: stageStorage.sidechainAssetPrecision['v33'],
@@ -92,7 +92,7 @@ export const sidechainAssetPrecision = {
 }
 
 export const registeredSidechainAsset = {
-	name: '',
+	name: 'EthBridge.RegisteredSidechainAsset',
 	v1: productionStorage.registeredSidechainAsset['v1'],
 	v42: productionStorage.registeredSidechainAsset['v42'],
 	v33Stage: stageStorage.registeredSidechainAsset['v33'],
@@ -103,7 +103,7 @@ export const registeredSidechainAsset = {
 }
 
 export const registeredSidechainToken = {
-	name: '',
+	name: 'EthBridge.RegisteredSidechainToken',
 	v1: productionStorage.registeredSidechainToken['v1'],
 	v42: productionStorage.registeredSidechainToken['v42'],
 	v33Stage: stageStorage.registeredSidechainToken['v33'],
@@ -114,7 +114,7 @@ export const registeredSidechainToken = {
 }
 
 export const peers = {
-	name: '',
+	name: 'EthBridge.Peers',
 	v1: productionStorage.peers['v1'],
 	v33Stage: stageStorage.peers['v33'],
 	v33Test: testStorage.peers['v33'],
@@ -122,7 +122,7 @@ export const peers = {
 }
 
 export const pendingPeer = {
-	name: '',
+	name: 'EthBridge.PendingPeer',
 	v1: productionStorage.pendingPeer['v1'],
 	v33Stage: stageStorage.pendingPeer['v33'],
 	v33Test: testStorage.pendingPeer['v33'],
@@ -130,7 +130,7 @@ export const pendingPeer = {
 }
 
 export const pendingEthPeersSync = {
-	name: '',
+	name: 'EthBridge.PendingEthPeersSync',
 	v1: productionStorage.pendingEthPeersSync['v1'],
 	v33Stage: stageStorage.pendingEthPeersSync['v33'],
 	v33Test: testStorage.pendingEthPeersSync['v33'],
@@ -138,7 +138,7 @@ export const pendingEthPeersSync = {
 }
 
 export const peerAccountId = {
-	name: '',
+	name: 'EthBridge.PeerAccountId',
 	v1: productionStorage.peerAccountId['v1'],
 	v42: productionStorage.peerAccountId['v42'],
 	v33Stage: stageStorage.peerAccountId['v33'],
@@ -149,7 +149,7 @@ export const peerAccountId = {
 }
 
 export const peerAddress = {
-	name: '',
+	name: 'EthBridge.PeerAddress',
 	v1: productionStorage.peerAddress['v1'],
 	v33Stage: stageStorage.peerAddress['v33'],
 	v33Test: testStorage.peerAddress['v33'],
@@ -157,7 +157,7 @@ export const peerAddress = {
 }
 
 export const bridgeAccount = {
-	name: '',
+	name: 'EthBridge.BridgeAccount',
 	v1: productionStorage.bridgeAccount['v1'],
 	v33Stage: stageStorage.bridgeAccount['v33'],
 	v33Test: testStorage.bridgeAccount['v33'],
@@ -165,7 +165,7 @@ export const bridgeAccount = {
 }
 
 export const authorityAccount = {
-	name: '',
+	name: 'EthBridge.AuthorityAccount',
 	v1: productionStorage.authorityAccount['v1'],
 	v42: productionStorage.authorityAccount['v42'],
 	v33Stage: stageStorage.authorityAccount['v33'],
@@ -176,7 +176,7 @@ export const authorityAccount = {
 }
 
 export const bridgeStatuses = {
-	name: '',
+	name: 'EthBridge.BridgeStatuses',
 	v1: productionStorage.bridgeStatuses['v1'],
 	v33Stage: stageStorage.bridgeStatuses['v33'],
 	v33Test: testStorage.bridgeStatuses['v33'],
@@ -184,7 +184,7 @@ export const bridgeStatuses = {
 }
 
 export const bridgeContractAddress = {
-	name: '',
+	name: 'EthBridge.BridgeContractAddress',
 	v1: productionStorage.bridgeContractAddress['v1'],
 	v33Stage: stageStorage.bridgeContractAddress['v33'],
 	v33Test: testStorage.bridgeContractAddress['v33'],
@@ -192,7 +192,7 @@ export const bridgeContractAddress = {
 }
 
 export const xorMasterContractAddress = {
-	name: '',
+	name: 'EthBridge.XorMasterContractAddress',
 	v1: productionStorage.xorMasterContractAddress['v1'],
 	v33Stage: stageStorage.xorMasterContractAddress['v33'],
 	v33Test: testStorage.xorMasterContractAddress['v33'],
@@ -200,7 +200,7 @@ export const xorMasterContractAddress = {
 }
 
 export const valMasterContractAddress = {
-	name: '',
+	name: 'EthBridge.ValMasterContractAddress',
 	v1: productionStorage.valMasterContractAddress['v1'],
 	v33Stage: stageStorage.valMasterContractAddress['v33'],
 	v33Test: testStorage.valMasterContractAddress['v33'],
@@ -208,7 +208,7 @@ export const valMasterContractAddress = {
 }
 
 export const nextNetworkId = {
-	name: '',
+	name: 'EthBridge.NextNetworkId',
 	v1: productionStorage.nextNetworkId['v1'],
 	v33Stage: stageStorage.nextNetworkId['v33'],
 	v33Test: testStorage.nextNetworkId['v33'],
@@ -216,12 +216,12 @@ export const nextNetworkId = {
 }
 
 export const palletStorageVersion = {
-	name: '',
+	name: 'EthBridge.PalletStorageVersion',
 	v3: productionStorage.palletStorageVersion['v3'],
 }
 
 export const migratingRequests = {
-	name: '',
+	name: 'EthBridge.MigratingRequests',
 	v19: productionStorage.migratingRequests['v19'],
 	v33Stage: stageStorage.migratingRequests['v33'],
 	v33Test: testStorage.migratingRequests['v33'],
@@ -229,7 +229,7 @@ export const migratingRequests = {
 }
 
 export const bridgeSignatureVersions = {
-	name: '',
+	name: 'EthBridge.BridgeSignatureVersions',
 	v38: productionStorage.bridgeSignatureVersions['v38'],
 	v38Stage: stageStorage.bridgeSignatureVersions['v38'],
 	v38Test: testStorage.bridgeSignatureVersions['v38'],
@@ -237,7 +237,7 @@ export const bridgeSignatureVersions = {
 }
 
 export const pendingBridgeSignatureVersions = {
-	name: '',
+	name: 'EthBridge.PendingBridgeSignatureVersions',
 	v38: productionStorage.pendingBridgeSignatureVersions['v38'],
 	v38Stage: stageStorage.pendingBridgeSignatureVersions['v38'],
 	v38Test: testStorage.pendingBridgeSignatureVersions['v38'],

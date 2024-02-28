@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/authorship/storage'
 
 
 export const uncles = {
-	name: '',
+	name: 'Authorship.Uncles',
 	v1: productionStorage.uncles['v1'],
 	v42: productionStorage.uncles['v42'],
 	v33Stage: stageStorage.uncles['v33'],
@@ -15,7 +15,7 @@ export const uncles = {
 }
 
 export const author = {
-	name: '',
+	name: 'Authorship.Author',
 	v1: productionStorage.author['v1'],
 	v33Stage: stageStorage.author['v33'],
 	v33Test: testStorage.author['v33'],
@@ -23,7 +23,7 @@ export const author = {
 }
 
 export const didSetUncles = {
-	name: '',
+	name: 'Authorship.DidSetUncles',
 	v1: productionStorage.didSetUncles['v1'],
 	v33Stage: stageStorage.didSetUncles['v33'],
 	v33Test: testStorage.didSetUncles['v33'],

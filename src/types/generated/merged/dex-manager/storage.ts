@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/dex-manager/storage'
 
 
 export const dexInfos = {
-	name: '',
+	name: 'DexManager.DexInfos',
 	v1: productionStorage.dexInfos['v1'],
 	v42: productionStorage.dexInfos['v42'],
 	v45: productionStorage.dexInfos['v45'],

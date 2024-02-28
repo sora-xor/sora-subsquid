@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/referrals/storage'
 
 
 export const referrers = {
-	name: '',
+	name: 'Referrals.Referrers',
 	v22: productionStorage.referrers['v22'],
 	v33Stage: stageStorage.referrers['v33'],
 	v33Test: testStorage.referrers['v33'],
@@ -13,7 +13,7 @@ export const referrers = {
 }
 
 export const referrerBalances = {
-	name: '',
+	name: 'Referrals.ReferrerBalances',
 	v22: productionStorage.referrerBalances['v22'],
 	v33Stage: stageStorage.referrerBalances['v33'],
 	v33Test: testStorage.referrerBalances['v33'],
@@ -21,7 +21,7 @@ export const referrerBalances = {
 }
 
 export const referrals = {
-	name: '',
+	name: 'Referrals.Referrals',
 	v22: productionStorage.referrals['v22'],
 	v33Stage: stageStorage.referrals['v33'],
 	v33Test: testStorage.referrals['v33'],

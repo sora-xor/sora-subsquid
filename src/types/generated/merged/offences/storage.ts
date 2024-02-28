@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/offences/storage'
 
 
 export const reports = {
-	name: '',
+	name: 'Offences.Reports',
 	v1: productionStorage.reports['v1'],
 	v33Stage: stageStorage.reports['v33'],
 	v33Test: testStorage.reports['v33'],
@@ -13,14 +13,14 @@ export const reports = {
 }
 
 export const deferredOffences = {
-	name: '',
+	name: 'Offences.DeferredOffences',
 	v1: productionStorage.deferredOffences['v1'],
 	v33Stage: stageStorage.deferredOffences['v33'],
 	v33Test: testStorage.deferredOffences['v33'],
 }
 
 export const concurrentReportsIndex = {
-	name: '',
+	name: 'Offences.ConcurrentReportsIndex',
 	v1: productionStorage.concurrentReportsIndex['v1'],
 	v33Stage: stageStorage.concurrentReportsIndex['v33'],
 	v33Test: testStorage.concurrentReportsIndex['v33'],
@@ -28,7 +28,7 @@ export const concurrentReportsIndex = {
 }
 
 export const reportsByKindIndex = {
-	name: '',
+	name: 'Offences.ReportsByKindIndex',
 	v1: productionStorage.reportsByKindIndex['v1'],
 	v33Stage: stageStorage.reportsByKindIndex['v33'],
 	v33Test: testStorage.reportsByKindIndex['v33'],

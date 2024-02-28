@@ -155,7 +155,7 @@ export const updateHistoryElementStats = async (ctx: BlockContext, historyElemen
 		addresses.push(((historyElement.data as any)['to']).toString() as Address)
 	}
 
-	getUtilsLog(ctx).debug({ addresses: addresses.join(', ') }, 'addresses')
+    getUtilsLog(ctx).debug({ historyId: historyElement.id, addresses: addresses.join(', ') }, 'Get history element account addresses');
 	// update accounts data
 	for (const address of addresses) {
 		const account = await getAccountEntity(ctx, address)

@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/ceres-token-locker/storage'
 
 
 export const feesAccount = {
-	name: '',
+	name: 'CeresTokenLocker.FeesAccount',
 	v26: productionStorage.feesAccount['v26'],
 	v33Stage: stageStorage.feesAccount['v33'],
 	v33Test: testStorage.feesAccount['v33'],
@@ -13,7 +13,7 @@ export const feesAccount = {
 }
 
 export const authorityAccount = {
-	name: '',
+	name: 'CeresTokenLocker.AuthorityAccount',
 	v26: productionStorage.authorityAccount['v26'],
 	v33Stage: stageStorage.authorityAccount['v33'],
 	v33Test: testStorage.authorityAccount['v33'],
@@ -21,7 +21,7 @@ export const authorityAccount = {
 }
 
 export const feeAmount = {
-	name: '',
+	name: 'CeresTokenLocker.FeeAmount',
 	v26: productionStorage.feeAmount['v26'],
 	v33Stage: stageStorage.feeAmount['v33'],
 	v33Test: testStorage.feeAmount['v33'],
@@ -29,7 +29,7 @@ export const feeAmount = {
 }
 
 export const tokenLockerData = {
-	name: '',
+	name: 'CeresTokenLocker.TokenLockerData',
 	v26: productionStorage.tokenLockerData['v26'],
 	v37: productionStorage.tokenLockerData['v37'],
 	v42: productionStorage.tokenLockerData['v42'],
@@ -43,7 +43,7 @@ export const tokenLockerData = {
 }
 
 export const palletStorageVersion = {
-	name: '',
+	name: 'CeresTokenLocker.PalletStorageVersion',
 	v37: productionStorage.palletStorageVersion['v37'],
 	v42: productionStorage.palletStorageVersion['v42'],
 	v37Stage: stageStorage.palletStorageVersion['v37'],
