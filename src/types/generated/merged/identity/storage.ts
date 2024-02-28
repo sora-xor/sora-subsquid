@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/identity/storage'
 
 
 export const identityOf = {
-	name: '',
+	name: 'Identity.IdentityOf',
 	v3: productionStorage.identityOf['v3'],
 	v33Stage: stageStorage.identityOf['v33'],
 	v33Test: testStorage.identityOf['v33'],
@@ -13,7 +13,7 @@ export const identityOf = {
 }
 
 export const superOf = {
-	name: '',
+	name: 'Identity.SuperOf',
 	v3: productionStorage.superOf['v3'],
 	v33Stage: stageStorage.superOf['v33'],
 	v33Test: testStorage.superOf['v33'],
@@ -21,7 +21,7 @@ export const superOf = {
 }
 
 export const subsOf = {
-	name: '',
+	name: 'Identity.SubsOf',
 	v3: productionStorage.subsOf['v3'],
 	v33Stage: stageStorage.subsOf['v33'],
 	v33Test: testStorage.subsOf['v33'],
@@ -29,7 +29,7 @@ export const subsOf = {
 }
 
 export const registrars = {
-	name: '',
+	name: 'Identity.Registrars',
 	v3: productionStorage.registrars['v3'],
 	v33Stage: stageStorage.registrars['v33'],
 	v33Test: testStorage.registrars['v33'],

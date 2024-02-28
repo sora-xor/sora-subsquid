@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/technical/storage'
 
 
 export const techAccounts = {
-	name: '',
+	name: 'Technical.TechAccounts',
 	v45: productionStorage.techAccounts['v45'],
 	v46: productionStorage.techAccounts['v46'],
 	v57: productionStorage.techAccounts['v57'],

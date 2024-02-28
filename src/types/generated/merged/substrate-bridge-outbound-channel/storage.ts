@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/substrate-bridge-outbound-channel/storage
 
 
 export const interval = {
-	name: '',
+	name: 'SubstrateBridgeOutboundChannel.Interval',
 	v64: productionStorage.interval['v64'],
 	v52Stage: stageStorage.interval['v52'],
 	v52Test: testStorage.interval['v52'],
@@ -13,7 +13,7 @@ export const interval = {
 }
 
 export const messageQueues = {
-	name: '',
+	name: 'SubstrateBridgeOutboundChannel.MessageQueues',
 	v64: productionStorage.messageQueues['v64'],
 	v70: productionStorage.messageQueues['v70'],
 	v52Stage: stageStorage.messageQueues['v52'],
@@ -28,7 +28,7 @@ export const messageQueues = {
 }
 
 export const channelNonces = {
-	name: '',
+	name: 'SubstrateBridgeOutboundChannel.ChannelNonces',
 	v64: productionStorage.channelNonces['v64'],
 	v70: productionStorage.channelNonces['v70'],
 	v52Stage: stageStorage.channelNonces['v52'],
@@ -39,7 +39,7 @@ export const channelNonces = {
 }
 
 export const latestCommitment = {
-	name: '',
+	name: 'SubstrateBridgeOutboundChannel.LatestCommitment',
 	v65: productionStorage.latestCommitment['v65'],
 	v70: productionStorage.latestCommitment['v70'],
 	v65Stage: stageStorage.latestCommitment['v65'],
@@ -50,7 +50,7 @@ export const latestCommitment = {
 }
 
 export const fee = {
-	name: '',
+	name: 'SubstrateBridgeOutboundChannel.Fee',
 	v52Stage: stageStorage.fee['v52'],
 	v52Test: testStorage.fee['v52'],
 }

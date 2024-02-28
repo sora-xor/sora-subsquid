@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/balances/storage'
 
 
 export const totalIssuance = {
-	name: '',
+	name: 'Balances.TotalIssuance',
 	v1: productionStorage.totalIssuance['v1'],
 	v33Stage: stageStorage.totalIssuance['v33'],
 	v33Test: testStorage.totalIssuance['v33'],
@@ -13,7 +13,7 @@ export const totalIssuance = {
 }
 
 export const account = {
-	name: '',
+	name: 'Balances.Account',
 	v1: productionStorage.account['v1'],
 	v33Stage: stageStorage.account['v33'],
 	v33Test: testStorage.account['v33'],
@@ -21,7 +21,7 @@ export const account = {
 }
 
 export const locks = {
-	name: '',
+	name: 'Balances.Locks',
 	v1: productionStorage.locks['v1'],
 	v33Stage: stageStorage.locks['v33'],
 	v33Test: testStorage.locks['v33'],
@@ -29,7 +29,7 @@ export const locks = {
 }
 
 export const storageVersion = {
-	name: '',
+	name: 'Balances.StorageVersion',
 	v1: productionStorage.storageVersion['v1'],
 	v42: productionStorage.storageVersion['v42'],
 	v33Stage: stageStorage.storageVersion['v33'],
@@ -39,7 +39,7 @@ export const storageVersion = {
 }
 
 export const reserves = {
-	name: '',
+	name: 'Balances.Reserves',
 	v42: productionStorage.reserves['v42'],
 	v42Stage: stageStorage.reserves['v42'],
 	v42Test: testStorage.reserves['v42'],
@@ -47,7 +47,7 @@ export const reserves = {
 }
 
 export const inactiveIssuance = {
-	name: '',
+	name: 'Balances.InactiveIssuance',
 	v53: productionStorage.inactiveIssuance['v53'],
 	v52Stage: stageStorage.inactiveIssuance['v52'],
 	v52Test: testStorage.inactiveIssuance['v52'],

@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/bridge-multisig/storage'
 
 
 export const accounts = {
-	name: '',
+	name: 'BridgeMultisig.Accounts',
 	v1: productionStorage.accounts['v1'],
 	v33Stage: stageStorage.accounts['v33'],
 	v33Test: testStorage.accounts['v33'],
@@ -13,7 +13,7 @@ export const accounts = {
 }
 
 export const multisigs = {
-	name: '',
+	name: 'BridgeMultisig.Multisigs',
 	v1: productionStorage.multisigs['v1'],
 	v42: productionStorage.multisigs['v42'],
 	v33Stage: stageStorage.multisigs['v33'],
@@ -24,7 +24,7 @@ export const multisigs = {
 }
 
 export const calls = {
-	name: '',
+	name: 'BridgeMultisig.Calls',
 	v1: productionStorage.calls['v1'],
 	v33Stage: stageStorage.calls['v33'],
 	v33Test: testStorage.calls['v33'],
@@ -32,7 +32,7 @@ export const calls = {
 }
 
 export const dispatchedCalls = {
-	name: '',
+	name: 'BridgeMultisig.DispatchedCalls',
 	v1: productionStorage.dispatchedCalls['v1'],
 	v33Stage: stageStorage.dispatchedCalls['v33'],
 	v33Test: testStorage.dispatchedCalls['v33'],

@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/oracle-proxy/storage'
 
 
 export const enabledOracles = {
-	name: '',
+	name: 'OracleProxy.EnabledOracles',
 	v45: productionStorage.enabledOracles['v45'],
 	v45Stage: stageStorage.enabledOracles['v45'],
 	v45Test: testStorage.enabledOracles['v45'],
@@ -13,7 +13,7 @@ export const enabledOracles = {
 }
 
 export const symbolProviders = {
-	name: '',
+	name: 'OracleProxy.SymbolProviders',
 	v45: productionStorage.symbolProviders['v45'],
 	v45Stage: stageStorage.symbolProviders['v45'],
 	v45Test: testStorage.symbolProviders['v45'],

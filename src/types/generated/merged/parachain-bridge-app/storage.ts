@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/parachain-bridge-app/storage'
 
 
 export const assetKinds = {
-	name: '',
+	name: 'ParachainBridgeApp.AssetKinds',
 	v64: productionStorage.assetKinds['v64'],
 	v70: productionStorage.assetKinds['v70'],
 	v64Stage: stageStorage.assetKinds['v64'],
@@ -16,7 +16,7 @@ export const assetKinds = {
 }
 
 export const sidechainPrecision = {
-	name: '',
+	name: 'ParachainBridgeApp.SidechainPrecision',
 	v64: productionStorage.sidechainPrecision['v64'],
 	v70: productionStorage.sidechainPrecision['v70'],
 	v64Stage: stageStorage.sidechainPrecision['v64'],
@@ -27,7 +27,7 @@ export const sidechainPrecision = {
 }
 
 export const allowedParachainAssets = {
-	name: '',
+	name: 'ParachainBridgeApp.AllowedParachainAssets',
 	v64: productionStorage.allowedParachainAssets['v64'],
 	v70: productionStorage.allowedParachainAssets['v70'],
 	v64Stage: stageStorage.allowedParachainAssets['v64'],
@@ -38,7 +38,7 @@ export const allowedParachainAssets = {
 }
 
 export const relaychainAsset = {
-	name: '',
+	name: 'ParachainBridgeApp.RelaychainAsset',
 	v64: productionStorage.relaychainAsset['v64'],
 	v70: productionStorage.relaychainAsset['v70'],
 	v64Stage: stageStorage.relaychainAsset['v64'],

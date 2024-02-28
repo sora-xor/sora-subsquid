@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/permissions/storage'
 
 
 export const owners = {
-	name: '',
+	name: 'Permissions.Owners',
 	v1: productionStorage.owners['v1'],
 	v33Stage: stageStorage.owners['v33'],
 	v33Test: testStorage.owners['v33'],
@@ -13,12 +13,12 @@ export const owners = {
 }
 
 export const modes = {
-	name: '',
+	name: 'Permissions.Modes',
 	v1: productionStorage.modes['v1'],
 }
 
 export const permissions = {
-	name: '',
+	name: 'Permissions.Permissions',
 	v1: productionStorage.permissions['v1'],
 	v33Stage: stageStorage.permissions['v33'],
 	v33Test: testStorage.permissions['v33'],

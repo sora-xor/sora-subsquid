@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/elections-phragmen/storage'
 
 
 export const members = {
-	name: '',
+	name: 'ElectionsPhragmen.Members',
 	v1: productionStorage.members['v1'],
 	v33Stage: stageStorage.members['v33'],
 	v33Test: testStorage.members['v33'],
@@ -13,7 +13,7 @@ export const members = {
 }
 
 export const runnersUp = {
-	name: '',
+	name: 'ElectionsPhragmen.RunnersUp',
 	v1: productionStorage.runnersUp['v1'],
 	v33Stage: stageStorage.runnersUp['v33'],
 	v33Test: testStorage.runnersUp['v33'],
@@ -21,7 +21,7 @@ export const runnersUp = {
 }
 
 export const candidates = {
-	name: '',
+	name: 'ElectionsPhragmen.Candidates',
 	v1: productionStorage.candidates['v1'],
 	v33Stage: stageStorage.candidates['v33'],
 	v33Test: testStorage.candidates['v33'],
@@ -29,7 +29,7 @@ export const candidates = {
 }
 
 export const electionRounds = {
-	name: '',
+	name: 'ElectionsPhragmen.ElectionRounds',
 	v1: productionStorage.electionRounds['v1'],
 	v33Stage: stageStorage.electionRounds['v33'],
 	v33Test: testStorage.electionRounds['v33'],
@@ -37,7 +37,7 @@ export const electionRounds = {
 }
 
 export const voting = {
-	name: '',
+	name: 'ElectionsPhragmen.Voting',
 	v1: productionStorage.voting['v1'],
 	v33Stage: stageStorage.voting['v33'],
 	v33Test: testStorage.voting['v33'],
