@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/band/storage'
 
 
 export const trustedRelayers = {
-	name: '',
+	name: 'Band.TrustedRelayers',
 	v45: productionStorage.trustedRelayers['v45'],
 	v44Stage: stageStorage.trustedRelayers['v44'],
 	v44Test: testStorage.trustedRelayers['v44'],
@@ -13,7 +13,7 @@ export const trustedRelayers = {
 }
 
 export const symbolRates = {
-	name: '',
+	name: 'Band.SymbolRates',
 	v45: productionStorage.symbolRates['v45'],
 	v59: productionStorage.symbolRates['v59'],
 	v60: productionStorage.symbolRates['v60'],
@@ -29,7 +29,7 @@ export const symbolRates = {
 }
 
 export const dynamicFeeParameters = {
-	name: '',
+	name: 'Band.DynamicFeeParameters',
 	v59: productionStorage.dynamicFeeParameters['v59'],
 	v59Stage: stageStorage.dynamicFeeParameters['v59'],
 	v59Test: testStorage.dynamicFeeParameters['v59'],
@@ -37,7 +37,7 @@ export const dynamicFeeParameters = {
 }
 
 export const symbolCheckBlock = {
-	name: '',
+	name: 'Band.SymbolCheckBlock',
 	v60: productionStorage.symbolCheckBlock['v60'],
 	v60Stage: stageStorage.symbolCheckBlock['v60'],
 	v60Test: testStorage.symbolCheckBlock['v60'],

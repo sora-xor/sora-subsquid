@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/technical-membership/storage'
 
 
 export const members = {
-	name: '',
+	name: 'TechnicalMembership.Members',
 	v1: productionStorage.members['v1'],
 	v33Stage: stageStorage.members['v33'],
 	v33Test: testStorage.members['v33'],
@@ -13,7 +13,7 @@ export const members = {
 }
 
 export const prime = {
-	name: '',
+	name: 'TechnicalMembership.Prime',
 	v1: productionStorage.prime['v1'],
 	v33Stage: stageStorage.prime['v33'],
 	v33Test: testStorage.prime['v33'],

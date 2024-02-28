@@ -11,8 +11,6 @@ import { assertDefined } from '../../utils'
 export async function liquidityDepositCallHandler(ctx: BlockContext, call: Call<'PoolXYK.deposit_liquidity'>): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-	const historyElement = await createCallHistoryElement(ctx, call)
-
 	const data = getCallData(ctx, calls.poolXyk.depositLiquidity, call)
 
 	const baseAssetId = getAssetId(data.inputAssetA)
@@ -45,8 +43,7 @@ export async function liquidityDepositCallHandler(ctx: BlockContext, call: Call<
 		details.targetAssetAmount = formatU128ToBalance(amountB, targetAssetId)
 	}
 
-	await addDataToHistoryElement(ctx, historyElement, details)
-
 	await poolsStorage.getPool(ctx, baseAssetId, targetAssetId)
-	await updateHistoryElementStats(ctx, historyElement)
+
+	await createCallHistoryElement(ctx, call, details)
 }

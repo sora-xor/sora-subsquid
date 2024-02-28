@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/grandpa/storage'
 
 
 export const state = {
-	name: '',
+	name: 'Grandpa.State',
 	v1: productionStorage.state['v1'],
 	v42: productionStorage.state['v42'],
 	v33Stage: stageStorage.state['v33'],
@@ -16,7 +16,7 @@ export const state = {
 }
 
 export const pendingChange = {
-	name: '',
+	name: 'Grandpa.PendingChange',
 	v1: productionStorage.pendingChange['v1'],
 	v42: productionStorage.pendingChange['v42'],
 	v33Stage: stageStorage.pendingChange['v33'],
@@ -27,7 +27,7 @@ export const pendingChange = {
 }
 
 export const nextForced = {
-	name: '',
+	name: 'Grandpa.NextForced',
 	v1: productionStorage.nextForced['v1'],
 	v33Stage: stageStorage.nextForced['v33'],
 	v33Test: testStorage.nextForced['v33'],
@@ -35,7 +35,7 @@ export const nextForced = {
 }
 
 export const stalled = {
-	name: '',
+	name: 'Grandpa.Stalled',
 	v1: productionStorage.stalled['v1'],
 	v33Stage: stageStorage.stalled['v33'],
 	v33Test: testStorage.stalled['v33'],
@@ -43,7 +43,7 @@ export const stalled = {
 }
 
 export const currentSetId = {
-	name: '',
+	name: 'Grandpa.CurrentSetId',
 	v1: productionStorage.currentSetId['v1'],
 	v33Stage: stageStorage.currentSetId['v33'],
 	v33Test: testStorage.currentSetId['v33'],
@@ -51,7 +51,7 @@ export const currentSetId = {
 }
 
 export const setIdSession = {
-	name: '',
+	name: 'Grandpa.SetIdSession',
 	v1: productionStorage.setIdSession['v1'],
 	v33Stage: stageStorage.setIdSession['v33'],
 	v33Test: testStorage.setIdSession['v33'],

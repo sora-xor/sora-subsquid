@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/bridge-data-signer/storage'
 
 
 export const peers = {
-	name: '',
+	name: 'BridgeDataSigner.Peers',
 	v64: productionStorage.peers['v64'],
 	v70: productionStorage.peers['v70'],
 	v54Stage: stageStorage.peers['v54'],
@@ -16,7 +16,7 @@ export const peers = {
 }
 
 export const pendingPeerUpdate = {
-	name: '',
+	name: 'BridgeDataSigner.PendingPeerUpdate',
 	v64: productionStorage.pendingPeerUpdate['v64'],
 	v70: productionStorage.pendingPeerUpdate['v70'],
 	v54Stage: stageStorage.pendingPeerUpdate['v54'],
@@ -27,7 +27,7 @@ export const pendingPeerUpdate = {
 }
 
 export const approvals = {
-	name: '',
+	name: 'BridgeDataSigner.Approvals',
 	v64: productionStorage.approvals['v64'],
 	v70: productionStorage.approvals['v70'],
 	v54Stage: stageStorage.approvals['v54'],

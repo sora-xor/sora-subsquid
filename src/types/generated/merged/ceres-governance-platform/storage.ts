@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/ceres-governance-platform/storage'
 
 
 export const voting = {
-	name: '',
+	name: 'CeresGovernancePlatform.Voting',
 	v26: productionStorage.voting['v26'],
 	v70: productionStorage.voting['v70'],
 	v33Stage: stageStorage.voting['v33'],
@@ -16,7 +16,7 @@ export const voting = {
 }
 
 export const pollData = {
-	name: '',
+	name: 'CeresGovernancePlatform.PollData',
 	v26: productionStorage.pollData['v26'],
 	v37: productionStorage.pollData['v37'],
 	v70: productionStorage.pollData['v70'],
@@ -30,7 +30,7 @@ export const pollData = {
 }
 
 export const palletStorageVersion = {
-	name: '',
+	name: 'CeresGovernancePlatform.PalletStorageVersion',
 	v37: productionStorage.palletStorageVersion['v37'],
 	v42: productionStorage.palletStorageVersion['v42'],
 	v70: productionStorage.palletStorageVersion['v70'],
@@ -44,7 +44,7 @@ export const palletStorageVersion = {
 }
 
 export const authorityAccount = {
-	name: '',
+	name: 'CeresGovernancePlatform.AuthorityAccount',
 	v70: productionStorage.authorityAccount['v70'],
 	v69Stage: stageStorage.authorityAccount['v69'],
 	v69Test: testStorage.authorityAccount['v69'],

@@ -27,7 +27,7 @@ export const getAllOrderBooks = async (ctx: BlockContext) => {
   try {
     getOrderBooksStorageLog(ctx).debug('Order Books entities request...')
 	const entities = await getStorageRepresentation(ctx, storage.orderBook.orderBooks)?.getPairs(ctx.block.header)
-    getOrderBooksStorageLog(ctx).debug('Order Books entities request completed')
+    getOrderBooksStorageLog(ctx).debug({ amount: entities?.length }, 'Order Books entities request completed')
     return entities
   } catch (error: any) {
     getOrderBooksStorageLog(ctx).error('Error getting Order Books entities')
@@ -78,7 +78,7 @@ export const getTechnicalAccounts = async (ctx: BlockContext) => {
 	try {
 		getOrderBooksStorageLog(ctx).debug('Order Books account ids request...')
 		const entities = await getStorageRepresentation(ctx, storage.technical.techAccounts)?.getPairs(ctx.block.header)
-		getOrderBooksStorageLog(ctx).debug('Order Books account ids request completed')
+		getOrderBooksStorageLog(ctx).debug({ amount: `${entities?.length}` }, 'Order Books account ids request completed')
 		return entities
 	} catch (e: any) {
 		getOrderBooksStorageLog(ctx).error('Error getting Order Books account ids')
@@ -163,6 +163,8 @@ export class OrderBooksStorage {
 					const quoteAsset = getAssetIdFromTech(baseAssetId)
 					const baseAsset = getAssetIdFromTech(targetAssetId)
 					const orderBookId = OrderBooksStorage.getId(dexId, baseAsset, quoteAsset)
+
+					getOrderBooksStorageLog(ctx, true).debug({ id: orderBookId }, 'Order Book account id added')
 		
 					this.accountIds.set(toAddress(accountId), orderBookId)
 				}
