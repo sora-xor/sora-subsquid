@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/technical-committee/storage'
 
 
 export const proposals = {
-	name: '',
+	name: 'TechnicalCommittee.Proposals',
 	v1: productionStorage.proposals['v1'],
 	v33Stage: stageStorage.proposals['v33'],
 	v33Test: testStorage.proposals['v33'],
@@ -13,7 +13,7 @@ export const proposals = {
 }
 
 export const proposalOf = {
-	name: '',
+	name: 'TechnicalCommittee.ProposalOf',
 	v1: productionStorage.proposalOf['v1'],
 	v3: productionStorage.proposalOf['v3'],
 	v7: productionStorage.proposalOf['v7'],
@@ -90,7 +90,7 @@ export const proposalOf = {
 }
 
 export const voting = {
-	name: '',
+	name: 'TechnicalCommittee.Voting',
 	v1: productionStorage.voting['v1'],
 	v33Stage: stageStorage.voting['v33'],
 	v33Test: testStorage.voting['v33'],
@@ -98,7 +98,7 @@ export const voting = {
 }
 
 export const proposalCount = {
-	name: '',
+	name: 'TechnicalCommittee.ProposalCount',
 	v1: productionStorage.proposalCount['v1'],
 	v33Stage: stageStorage.proposalCount['v33'],
 	v33Test: testStorage.proposalCount['v33'],
@@ -106,7 +106,7 @@ export const proposalCount = {
 }
 
 export const members = {
-	name: '',
+	name: 'TechnicalCommittee.Members',
 	v1: productionStorage.members['v1'],
 	v33Stage: stageStorage.members['v33'],
 	v33Test: testStorage.members['v33'],
@@ -114,7 +114,7 @@ export const members = {
 }
 
 export const prime = {
-	name: '',
+	name: 'TechnicalCommittee.Prime',
 	v1: productionStorage.prime['v1'],
 	v33Stage: stageStorage.prime['v33'],
 	v33Test: testStorage.prime['v33'],

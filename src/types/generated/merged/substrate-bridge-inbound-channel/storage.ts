@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/substrate-bridge-inbound-channel/storage'
 
 
 export const channelNonces = {
-	name: '',
+	name: 'SubstrateBridgeInboundChannel.ChannelNonces',
 	v64: productionStorage.channelNonces['v64'],
 	v70: productionStorage.channelNonces['v70'],
 	v52Stage: stageStorage.channelNonces['v52'],
@@ -16,7 +16,7 @@ export const channelNonces = {
 }
 
 export const rewardFraction = {
-	name: '',
+	name: 'SubstrateBridgeInboundChannel.RewardFraction',
 	v52Stage: stageStorage.rewardFraction['v52'],
 	v52Test: testStorage.rewardFraction['v52'],
 }

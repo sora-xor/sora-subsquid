@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/iroha-migration/storage'
 
 
 export const balances = {
-	name: '',
+	name: 'IrohaMigration.Balances',
 	v1: productionStorage.balances['v1'],
 	v42: productionStorage.balances['v42'],
 	v33Stage: stageStorage.balances['v33'],
@@ -16,7 +16,7 @@ export const balances = {
 }
 
 export const referrers = {
-	name: '',
+	name: 'IrohaMigration.Referrers',
 	v1: productionStorage.referrers['v1'],
 	v42: productionStorage.referrers['v42'],
 	v33Stage: stageStorage.referrers['v33'],
@@ -27,7 +27,7 @@ export const referrers = {
 }
 
 export const publicKeys = {
-	name: '',
+	name: 'IrohaMigration.PublicKeys',
 	v1: productionStorage.publicKeys['v1'],
 	v42: productionStorage.publicKeys['v42'],
 	v33Stage: stageStorage.publicKeys['v33'],
@@ -38,7 +38,7 @@ export const publicKeys = {
 }
 
 export const quorums = {
-	name: '',
+	name: 'IrohaMigration.Quorums',
 	v1: productionStorage.quorums['v1'],
 	v42: productionStorage.quorums['v42'],
 	v33Stage: stageStorage.quorums['v33'],
@@ -49,7 +49,7 @@ export const quorums = {
 }
 
 export const account = {
-	name: '',
+	name: 'IrohaMigration.Account',
 	v1: productionStorage.account['v1'],
 	v42: productionStorage.account['v42'],
 	v33Stage: stageStorage.account['v33'],
@@ -60,7 +60,7 @@ export const account = {
 }
 
 export const migratedAccounts = {
-	name: '',
+	name: 'IrohaMigration.MigratedAccounts',
 	v1: productionStorage.migratedAccounts['v1'],
 	v42: productionStorage.migratedAccounts['v42'],
 	v33Stage: stageStorage.migratedAccounts['v33'],
@@ -71,7 +71,7 @@ export const migratedAccounts = {
 }
 
 export const pendingMultiSigAccounts = {
-	name: '',
+	name: 'IrohaMigration.PendingMultiSigAccounts',
 	v1: productionStorage.pendingMultiSigAccounts['v1'],
 	v42: productionStorage.pendingMultiSigAccounts['v42'],
 	v33Stage: stageStorage.pendingMultiSigAccounts['v33'],
@@ -82,7 +82,7 @@ export const pendingMultiSigAccounts = {
 }
 
 export const pendingReferrals = {
-	name: '',
+	name: 'IrohaMigration.PendingReferrals',
 	v1: productionStorage.pendingReferrals['v1'],
 	v42: productionStorage.pendingReferrals['v42'],
 	v33Stage: stageStorage.pendingReferrals['v33'],

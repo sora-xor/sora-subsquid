@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/multisig-verifier/storage'
 
 
 export const peerKeys = {
-	name: '',
+	name: 'MultisigVerifier.PeerKeys',
 	v64: productionStorage.peerKeys['v64'],
 	v70: productionStorage.peerKeys['v70'],
 	v54Stage: stageStorage.peerKeys['v54'],
@@ -16,7 +16,7 @@ export const peerKeys = {
 }
 
 export const thisNetworkId = {
-	name: '',
+	name: 'MultisigVerifier.ThisNetworkId',
 	v64: productionStorage.thisNetworkId['v64'],
 	v54Stage: stageStorage.thisNetworkId['v54'],
 	v54Test: testStorage.thisNetworkId['v54'],

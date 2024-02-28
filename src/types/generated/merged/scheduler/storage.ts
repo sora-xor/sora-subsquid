@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/scheduler/storage'
 
 
 export const agenda = {
-	name: '',
+	name: 'Scheduler.Agenda',
 	v1: productionStorage.agenda['v1'],
 	v3: productionStorage.agenda['v3'],
 	v7: productionStorage.agenda['v7'],
@@ -61,7 +61,7 @@ export const agenda = {
 }
 
 export const lookup = {
-	name: '',
+	name: 'Scheduler.Lookup',
 	v1: productionStorage.lookup['v1'],
 	v33Stage: stageStorage.lookup['v33'],
 	v33Test: testStorage.lookup['v33'],
@@ -69,14 +69,14 @@ export const lookup = {
 }
 
 export const storageVersion = {
-	name: '',
+	name: 'Scheduler.StorageVersion',
 	v1: productionStorage.storageVersion['v1'],
 	v33Stage: stageStorage.storageVersion['v33'],
 	v33Test: testStorage.storageVersion['v33'],
 }
 
 export const incompleteSince = {
-	name: '',
+	name: 'Scheduler.IncompleteSince',
 	v53: productionStorage.incompleteSince['v53'],
 	v52Stage: stageStorage.incompleteSince['v52'],
 	v52Test: testStorage.incompleteSince['v52'],

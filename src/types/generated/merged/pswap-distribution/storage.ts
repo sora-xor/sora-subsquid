@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/pswap-distribution/storage'
 
 
 export const subscribedAccounts = {
-	name: '',
+	name: 'PswapDistribution.SubscribedAccounts',
 	v1: productionStorage.subscribedAccounts['v1'],
 	v33Stage: stageStorage.subscribedAccounts['v33'],
 	v33Test: testStorage.subscribedAccounts['v33'],
@@ -13,7 +13,7 @@ export const subscribedAccounts = {
 }
 
 export const burnRate = {
-	name: '',
+	name: 'PswapDistribution.BurnRate',
 	v1: productionStorage.burnRate['v1'],
 	v42: productionStorage.burnRate['v42'],
 	v33Stage: stageStorage.burnRate['v33'],
@@ -24,7 +24,7 @@ export const burnRate = {
 }
 
 export const burnUpdateInfo = {
-	name: '',
+	name: 'PswapDistribution.BurnUpdateInfo',
 	v1: productionStorage.burnUpdateInfo['v1'],
 	v42: productionStorage.burnUpdateInfo['v42'],
 	v33Stage: stageStorage.burnUpdateInfo['v33'],
@@ -35,7 +35,7 @@ export const burnUpdateInfo = {
 }
 
 export const shareholderAccounts = {
-	name: '',
+	name: 'PswapDistribution.ShareholderAccounts',
 	v1: productionStorage.shareholderAccounts['v1'],
 	v42: productionStorage.shareholderAccounts['v42'],
 	v33Stage: stageStorage.shareholderAccounts['v33'],
@@ -46,7 +46,7 @@ export const shareholderAccounts = {
 }
 
 export const claimableShares = {
-	name: '',
+	name: 'PswapDistribution.ClaimableShares',
 	v1: productionStorage.claimableShares['v1'],
 	v42: productionStorage.claimableShares['v42'],
 	v33Stage: stageStorage.claimableShares['v33'],
@@ -57,7 +57,7 @@ export const claimableShares = {
 }
 
 export const parliamentPswapFraction = {
-	name: '',
+	name: 'PswapDistribution.ParliamentPswapFraction',
 	v1: productionStorage.parliamentPswapFraction['v1'],
 	v42: productionStorage.parliamentPswapFraction['v42'],
 	v33Stage: stageStorage.parliamentPswapFraction['v33'],
@@ -67,14 +67,14 @@ export const parliamentPswapFraction = {
 }
 
 export const buyBackXstFraction = {
-	name: '',
+	name: 'PswapDistribution.BuyBackXstFraction',
 	v53: productionStorage.buyBackXstFraction['v53'],
 	v52Stage: stageStorage.buyBackXstFraction['v52'],
 	v52Test: testStorage.buyBackXstFraction['v52'],
 }
 
 export const buyBackTbcdFraction = {
-	name: '',
+	name: 'PswapDistribution.BuyBackTbcdFraction',
 	v68: productionStorage.buyBackTbcdFraction['v68'],
 	v67Stage: stageStorage.buyBackTbcdFraction['v67'],
 	v67Test: testStorage.buyBackTbcdFraction['v67'],

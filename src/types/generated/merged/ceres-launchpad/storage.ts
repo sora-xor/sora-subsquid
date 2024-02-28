@@ -5,7 +5,7 @@ import * as devStorage from '../../dev/ceres-launchpad/storage'
 
 
 export const penaltiesAccount = {
-	name: '',
+	name: 'CeresLaunchpad.PenaltiesAccount',
 	v26: productionStorage.penaltiesAccount['v26'],
 	v33Stage: stageStorage.penaltiesAccount['v33'],
 	v33Test: testStorage.penaltiesAccount['v33'],
@@ -13,7 +13,7 @@ export const penaltiesAccount = {
 }
 
 export const ceresBurnFeeAmount = {
-	name: '',
+	name: 'CeresLaunchpad.CeresBurnFeeAmount',
 	v26: productionStorage.ceresBurnFeeAmount['v26'],
 	v33Stage: stageStorage.ceresBurnFeeAmount['v33'],
 	v33Test: testStorage.ceresBurnFeeAmount['v33'],
@@ -21,7 +21,7 @@ export const ceresBurnFeeAmount = {
 }
 
 export const ceresForContributionInIlo = {
-	name: '',
+	name: 'CeresLaunchpad.CeresForContributionInIlo',
 	v26: productionStorage.ceresForContributionInIlo['v26'],
 	v33Stage: stageStorage.ceresForContributionInIlo['v33'],
 	v33Test: testStorage.ceresForContributionInIlo['v33'],
@@ -29,7 +29,7 @@ export const ceresForContributionInIlo = {
 }
 
 export const authorityAccount = {
-	name: '',
+	name: 'CeresLaunchpad.AuthorityAccount',
 	v26: productionStorage.authorityAccount['v26'],
 	v33Stage: stageStorage.authorityAccount['v33'],
 	v33Test: testStorage.authorityAccount['v33'],
@@ -37,7 +37,7 @@ export const authorityAccount = {
 }
 
 export const ilOs = {
-	name: '',
+	name: 'CeresLaunchpad.IlOs',
 	v26: productionStorage.ilOs['v26'],
 	v33: productionStorage.ilOs['v33'],
 	v37: productionStorage.ilOs['v37'],
@@ -55,7 +55,7 @@ export const ilOs = {
 }
 
 export const contributions = {
-	name: '',
+	name: 'CeresLaunchpad.Contributions',
 	v26: productionStorage.contributions['v26'],
 	v42: productionStorage.contributions['v42'],
 	v33Stage: stageStorage.contributions['v33'],
@@ -66,7 +66,7 @@ export const contributions = {
 }
 
 export const whitelistedContributors = {
-	name: '',
+	name: 'CeresLaunchpad.WhitelistedContributors',
 	v33: productionStorage.whitelistedContributors['v33'],
 	v33Stage: stageStorage.whitelistedContributors['v33'],
 	v33Test: testStorage.whitelistedContributors['v33'],
@@ -74,7 +74,7 @@ export const whitelistedContributors = {
 }
 
 export const whitelistedIloOrganizers = {
-	name: '',
+	name: 'CeresLaunchpad.WhitelistedIloOrganizers',
 	v33: productionStorage.whitelistedIloOrganizers['v33'],
 	v33Stage: stageStorage.whitelistedIloOrganizers['v33'],
 	v33Test: testStorage.whitelistedIloOrganizers['v33'],
@@ -82,7 +82,7 @@ export const whitelistedIloOrganizers = {
 }
 
 export const feePercentOnRaisedFunds = {
-	name: '',
+	name: 'CeresLaunchpad.FeePercentOnRaisedFunds',
 	v47: productionStorage.feePercentOnRaisedFunds['v47'],
 	v47Stage: stageStorage.feePercentOnRaisedFunds['v47'],
 	v47Test: testStorage.feePercentOnRaisedFunds['v47'],
