@@ -1,0 +1,22 @@
+{
+	// See https://go.microsoft.com/fwlink/?LinkId=733558
+	// for the documentation about the tasks.json format
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Release test",
+			"type": "shell",
+			"command": "git checkout develop && git fetch -p origin && git branch -D test-release || true && git push origin :test-release || true && git checkout test && git pull && git checkout -b test-release && git checkout develop && git pull && git checkout test-release && git merge develop && git push --set-upstream origin test-release && gh pr create --base test --head test-release --title \"Test Release\" --body \"Merging develop into test\""
+		},
+		{
+			"label": "Release stage",
+			"type": "shell",
+			"command": "git checkout develop && git fetch -p origin && git branch -D stage-release || true && git push origin :stage-release || true && git checkout stage && git pull && git checkout -b stage-release && git checkout develop && git pull && git checkout stage-release && git merge develop && git push --set-upstream origin stage-release && gh pr create --base stage --head stage-release --title \"Stage Release\" --body \"Merging develop into stage\""
+		},
+		{
+			"label": "Release master",
+			"type": "shell",
+			"command": "git checkout develop && git fetch -p origin && git branch -D master-release || true && git push origin :master-release || true && git checkout master && git pull && git checkout -b master-release && git checkout develop && git pull && git checkout master-release && git merge develop && git push --set-upstream origin master-release && gh pr create --base master --head master-release --title \"Master Release\" --body \"Merging develop into master\""
+		}
+	]
+}
