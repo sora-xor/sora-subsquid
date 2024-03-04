@@ -61,7 +61,7 @@ class NetworkSnapshotsStorage {
 	}
 
 	private async syncStats(ctx: BlockContext): Promise<void> {
-		this.networkStatsStorage.sync(ctx)
+		await this.networkStatsStorage.sync(ctx)
 	}
 
 	private async syncSnapshots(ctx: BlockContext): Promise<void> {
