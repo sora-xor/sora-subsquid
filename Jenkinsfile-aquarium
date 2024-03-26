@@ -1,4 +1,4 @@
-@Library('jenkins-library')
+@Library('jenkins-library@duty-26-03/fix/telegram-push-noti')
 
 def jobParams  = [
     booleanParam(defaultValue: true, name: 'fullClean'),
