@@ -29,9 +29,9 @@ export const getAllOrderBooks = async (ctx: BlockContext) => {
 	const entities = await getStorageRepresentation(ctx, storage.orderBook.orderBooks)?.getPairs(ctx.block.header)
     getOrderBooksStorageLog(ctx).debug({ amount: entities?.length }, 'Order Books entities request completed')
     return entities
-  } catch (error: any) {
-    getOrderBooksStorageLog(ctx).error('Error getting Order Books entities')
-	getOrderBooksStorageLog(ctx).error(error)
+  } catch (e: any) {
+    getOrderBooksStorageLog(ctx).error({ errorMessage: e.message }, 'Error getting Order Books entities')
+
     return null
   }
 }
@@ -67,9 +67,8 @@ export const getOrderBookAssetBalance = async (ctx: BlockContext, accountId: Add
 	
 		return free
 	} catch (e: any) {
-	  getOrderBooksStorageLog(ctx).error('Error getting Order Book balance')
-	  getOrderBooksStorageLog(ctx).error(e)
-	  console.error(e)
+	  getOrderBooksStorageLog(ctx).error({ errorMessage: e.message }, 'Error getting Order Book balance')
+
 	  return BigInt(0)
 	}
 }
@@ -81,9 +80,8 @@ export const getTechnicalAccounts = async (ctx: BlockContext) => {
 		getOrderBooksStorageLog(ctx).debug({ amount: `${entities?.length}` }, 'Order Books account ids request completed')
 		return entities
 	} catch (e: any) {
-		getOrderBooksStorageLog(ctx).error('Error getting Order Books account ids')
-		getOrderBooksStorageLog(ctx).error(e)
-		console.error(e)
+		getOrderBooksStorageLog(ctx).error({ errorMessage: e.message }, 'Error getting Order Books account ids')
+
 		return null
 	}
 }
@@ -93,16 +91,6 @@ const getAssetIdFromTech = (techAsset: TechAssetId): AssetId => {
 		if (!(techAsset.value.__kind in predefinedAssets)) {
 			throw new Error(`${techAsset.value} not exists in predefined assets!`)
 		}
-		if (techAsset.value.__kind === 'DOT') {
-			throw new Error(`There is not DOT in predefinedAssets`)
-		}
-		if (techAsset.value.__kind === 'KSM') {
-			throw new Error(`There is not KSM in predefinedAssets`)
-		}
-		if (techAsset.value.__kind === 'USDT') {
-			throw new Error(`There is not USDT in predefinedAssets`)
-		}
-		// TODO: check why no DOT, KSM and USDT in predefinedAssets
 		return predefinedAssets[techAsset.value.__kind]
 	} else {
 		return toAssetId(techAsset.value)
@@ -464,6 +452,9 @@ export class OrderBooksSnapshotsStorage {
 
 		const quoteAsset = await assetStorage.getAsset(ctx, quoteAssetId)
 		const quoteAssetPriceUSD = quoteAsset.priceUSD ?? '0'
+		if (BigNumber(quoteAssetPriceUSD).isNegative()) {
+			throw new Error(`Price can't be negative: ${quoteAssetPriceUSD}`)
+		}
 		const quoteVolumeUSD = new BigNumber(quoteAssetPriceUSD).multipliedBy(quoteAmount)
 
 		const snapshotTypes = getSnapshotTypes(ctx, OrderBooksSnapshots)

@@ -90,14 +90,29 @@ export const getTokensTransferEventData = (ctx: BlockContext, event: Event<'Toke
 	}
 }
 
+export const getCurrenciesTransferredEventData = (ctx: BlockContext, event: Event<'Currencies.Transferred'>): TransferEventData => {
+	const [ currencyId, from, to, amount ] = getEventData(ctx, events.currencies.transferred, event)
+
+	// TODO: check if currencyId exists
+
+	return {
+		assetId: getAssetId(currencyId),
+		from: toAddress(from),
+		to: toAddress(to),
+		amount: amount as AssetAmount,
+	}
+}
+
 export const getAssetsTransferEventData = (
 	ctx: BlockContext,
-	event: Event<'Balances.Transfer'> | Event<'Tokens.Transfer'>,
+	event: Event<'Balances.Transfer'> | Event<'Tokens.Transfer'> | Event<'Currencies.Transferred'>,
 ): TransferEventData => {
 	if (event.name === 'Balances.Transfer') {
 		return getBalancesTransferEventData(ctx, event)
-	} else {
+	} else if (event.name === 'Tokens.Transfer') {
 		return getTokensTransferEventData(ctx, event)
+	} else {
+		return getCurrenciesTransferredEventData(ctx, event)
 	}
 }
 

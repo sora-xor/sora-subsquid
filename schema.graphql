@@ -25,7 +25,6 @@ type NetworkStats @entity {
 	totalTransactions: Int!
 	totalBridgeIncomingTransactions: Int!
 	totalBridgeOutgoingTransactions: Int!
-	updatedAtBlock: Int!
 }
 
 type NetworkSnapshot @entity {
@@ -39,13 +38,12 @@ type NetworkSnapshot @entity {
 	volumeUSD: String!
 	bridgeIncomingTransactions: Int!
 	bridgeOutgoingTransactions: Int!
-	updatedAtBlock: Int!
 }
 
 type UpdatesStream @entity {
-  id: ID!
-  block: Int!
-  data: String! # stringified JSON
+	id: ID!
+	block: Int!
+	data: String! # stringified JSON
 }
 
 type Asset @entity {
@@ -61,7 +59,6 @@ type Asset @entity {
 	volumeDayUSD: Float
 	volumeWeekUSD: Float
 	velocity: Float # calculated in week
-	updatedAtBlock: Int!
 }
 
 type AssetPrice @jsonField {
@@ -87,7 +84,6 @@ type AssetSnapshot @entity {
 	supply: BigInt!
 	mint: BigInt!
 	burn: BigInt!
-	updatedAtBlock: Int!
 }
 
 type PoolXYK @entity {
@@ -99,13 +95,11 @@ type PoolXYK @entity {
 	multiplier: Int!
 	priceUSD: String
 	strategicBonusApy: String
-	updatedAtBlock: Int!
 }
 
 type Account @entity {
 	id: ID!
 	latestHistoryElement: HistoryElement
-	updatedAtBlock: Int!
 }
 
 type HistoryElement @entity {
@@ -123,7 +117,6 @@ type HistoryElement @entity {
 	data: JSON @index
 	dataTo: String @index
 	dataFrom: String @index
-	dataReceivers: [String]!
 	calls: [HistoryElementCall!]! @derivedFrom(field: "historyElement")
 	callNames: [String]!
 	updatedAtBlock: Int! @index
@@ -155,7 +148,6 @@ type ReferrerReward @entity {
 	referrer: String!
 	updated: Int!
 	amount: BigInt!
-	updatedAtBlock: Int!
 }
 
 type StakingReward @entity {

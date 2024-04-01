@@ -10,55 +10,54 @@ import {
 import { BlockContext, Event } from '../../types'
 import { findCallByExtrinsicHash } from '../../utils/calls'
 import { getEventData } from '../../utils/entities'
-import { CannotFindCallError } from '../../utils/errors'
 import { logStartProcessingEvent } from '../../utils/logs'
 import { events } from '../../types/generated/merged'
+import { assertDefined } from '../../utils'
+import { formatU128ToBalance } from '../../utils/assets'
 
 export async function ethSoraTransferEventHandler(
 	ctx: BlockContext,
 	event: Event<'EthBridge.IncomingRequestFinalized'> | Event<'EthBridge.IncomingRequestFinalizationFailed'>,
 ): Promise<void> {
-	logStartProcessingEvent(ctx, event)
+    logStartProcessingEvent(ctx, event)
 
-	if (!event.extrinsic) {
-		throw new Error(`[${ctx.block.header.height}][EventHandler] There is no extrinsic in the event`)
-	}
+    assertDefined(event.extrinsic)
 	const extrinsicHash = event.extrinsic.hash
 
-	let registeredRequestEvent = findEventByExtrinsicHash(ctx, extrinsicHash, ['EthBridge.RequestRegistered'])
-	let tokensTransferEvent = findEventByExtrinsicHash(ctx, extrinsicHash, ['Tokens.Transfer'])
-	let balancesTransferEvent = findEventByExtrinsicHash(ctx, extrinsicHash, ['Balances.Transfer'])
-	let tokensDepositedEvent = findEventByExtrinsicHash(ctx, extrinsicHash, ['Tokens.Deposited'])
-	let BalancesDepositEvent = findEventByExtrinsicHash(ctx, extrinsicHash, ['Balances.Deposited'])
+	const registeredRequestEvent = findEventByExtrinsicHash(ctx, extrinsicHash, ['EthBridge.RequestRegistered'])
 
-	if (!registeredRequestEvent) return
-
-	const registeredRequestEventData = getEventData(ctx, events.ethBridge.requestRegistered, registeredRequestEvent)
-
-	const requestHash = registeredRequestEventData
+	const balancesDepositedEvent = findEventByExtrinsicHash(ctx, extrinsicHash, ['Balances.Deposited'])
+	const tokensDepositedEvent = findEventByExtrinsicHash(ctx, extrinsicHash, ['Tokens.Deposited'])
+	const balancesTransferEvent = findEventByExtrinsicHash(ctx, extrinsicHash, ['Balances.Transfer'])
+	const tokensTransferEvent = findEventByExtrinsicHash(ctx, extrinsicHash, ['Tokens.Transfer'])
 
 	const assetsTransferEvent = tokensTransferEvent || balancesTransferEvent
-	const assetsDepositedEvent = tokensDepositedEvent || BalancesDepositEvent
+	const assetsDepositedEvent = tokensDepositedEvent || balancesDepositedEvent
+    const currenciesEvent = assetsTransferEvent || assetsDepositedEvent
+
+    if (!registeredRequestEvent || !currenciesEvent) return;
+
+	const requestHash = getEventData(ctx, events.ethBridge.requestRegistered, registeredRequestEvent)
 
 	let eventData: TransferEventData | DepositEventData
 	if (assetsTransferEvent) {
 		eventData = getAssetsTransferEventData(ctx, assetsTransferEvent)
-	} else if (assetsDepositedEvent) {
+	} else {
+		assertDefined(assetsDepositedEvent)
 		eventData = getAssetsDepositEventData(ctx, assetsDepositedEvent)
-	} else return
-
-	const details = {
-		requestHash,
-		assetId: eventData.assetId,
-		to: eventData.to,
-		amount: eventData.amount.toString(),
 	}
+
+    const details: any = {
+        requestHash: requestHash,
+        assetId: eventData.assetId,
+        amount: formatU128ToBalance(eventData.amount, eventData.assetId),
+        to: eventData.to,
+    };
+
+    await networkSnapshotsStorage.updateBridgeIncomingTransactionsStats(ctx)
 
 	const call = findCallByExtrinsicHash(ctx, extrinsicHash, ['BridgeMultisig.as_multi', 'BridgeMultisig.as_multi_threshold_1'])
-	if (!call) {
-		throw new CannotFindCallError(ctx, extrinsicHash, ['BridgeMultisig.as_multi', 'BridgeMultisig.as_multi_threshold_1'])
-	}
+	assertDefined(call)
 
 	await createCallHistoryElement(ctx, call, details)
-	await networkSnapshotsStorage.updateBridgeIncomingTransactionsStats(ctx)
 }

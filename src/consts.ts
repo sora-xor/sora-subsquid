@@ -2,6 +2,8 @@ import { FieldSelection } from "@subsquid/substrate-processor"
 
 export const callNames = [
 	'Assets.register',
+	'Assets.burn',
+	'Assets.mint',
 	'Assets.transfer',
 	'LiquidityProxy.xorless_transfer',
 	'LiquidityProxy.swap',
@@ -10,6 +12,7 @@ export const callNames = [
 	'PoolXYK.deposit_liquidity',
 	'PoolXYK.withdraw_liquidity',
 	'IrohaMigration.migrate',
+	'Utility.batch',
 	'Utility.batch_all',
 	'EthBridge.transfer_to_sidechain',
 	'PswapDistribution.claim_incentive',

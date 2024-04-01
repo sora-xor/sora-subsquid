@@ -3,8 +3,6 @@ import BigNumber from 'bignumber.js'
 import { PoolXYK } from '../../model'
 
 import { assetSnapshotsStorage, tickerSyntheticAssetId } from '../../utils/assets'
-import { networkSnapshotsStorage } from '../../utils/network'
-import { orderBooksStorage } from '../../utils/orderBook'
 import { poolAccounts, PoolsPrices, poolsStorage } from '../../utils/pools'
 import { XOR, PSWAP, DAI, BASE_ASSETS, XSTUSD } from '../../utils/consts'
 import { BlockContext } from '../../types'
@@ -82,6 +80,9 @@ export async function syncPoolXykPrices(ctx: BlockContext): Promise<void> {
 					: new BigNumber(0)
 
 				p.priceUSD = daiPrice.toFixed(18)
+				if (daiPrice.isNegative()) {
+					throw new Error(`Price can't be negative: ${p.priceUSD}`)
+				}
 
 				// update PSWAP price (price from pair with XOR)
 				if (p.targetAsset.id === PSWAP && p.baseAsset.id === XOR) {
@@ -145,14 +146,6 @@ export async function syncPoolXykPrices(ctx: BlockContext): Promise<void> {
 			await assetSnapshotsStorage.updatePrice(ctx, assetId as AssetId, price)
 		}
 	}
-	getSyncPricesLog(ctx).debug(`${Object.entries(assetsPrices).length} asset snapshot prices updated`)
-
-	const poolsLockedUSD = await poolsStorage.getLockedLiquidityUSD(ctx)
-    const booksLockedUSD = await orderBooksStorage.getLockedLiquidityUSD(ctx)
-    const liquiditiesUSD = poolsLockedUSD.plus(booksLockedUSD)
-
-	// update total liquidity in USD
-	await networkSnapshotsStorage.updateLiquidityStats(ctx, liquiditiesUSD)
 
 	getSyncPricesLog(ctx).debug('PoolXYK prices updated')
 

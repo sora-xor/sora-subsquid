@@ -1,4 +1,4 @@
-import { Block, BlockContext, Call, Event } from '../types'
+import { Block, Call, Event } from '../types'
 
 type CallItem = { kind: 'call'; call: Call<any> }
 type EventItem = { kind: 'event'; event: Event<any> }
@@ -51,6 +51,21 @@ export const getSortedItems = (block: Block): Item[] => {
 		})
 	})
 
-	// Step 3: Join the groups in their original order
-	return groups.flat(1)
+	const sortedItems = groups.flat(1)
+
+	// Step 4: Prioritize ImOnline.AllGood and Session.NewSession
+	sortedItems.sort((a, b) => {
+		const priorityOrder: Record<string, number> = {
+		  'ImOnline.AllGood': 1,
+		  'Session.NewSession': 2,
+		}
+	
+		const aPriority = priorityOrder['call' in a ? a.call.name : a.event.name] || 3
+		const bPriority = priorityOrder['call' in b ? b.call.name : b.event.name] || 3
+	
+		return aPriority - bPriority;
+	})
+	
+	
+	return sortedItems
 }

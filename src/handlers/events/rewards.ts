@@ -1,11 +1,10 @@
-import { StakingReward } from '../../model'
 import { Address, BlockContext, Event } from '../../types'
-import { assertDefined, formatDateTimestamp, getBlockTimestamp, getEventId, toAddress } from '../../utils'
+import { assertDefined, toAddress } from '../../utils'
 import { formatU128ToBalance } from '../../utils/assets'
 import { VAL } from '../../utils/consts'
 import { getEventData } from '../../utils/entities'
 import { createEventHistoryElement } from '../../utils/history'
-import { getEventHandlerLog, logStartProcessingEvent } from '../../utils/logs'
+import { logStartProcessingEvent } from '../../utils/logs'
 import { getActiveStakingEra, getStakingStaker } from '../../utils/staking'
 import { events } from '../../types/generated/merged'
 
@@ -24,21 +23,15 @@ export async function stakingRewardedEventHandler(ctx: BlockContext, event: Even
 
 	const stakingEra = await getActiveStakingEra(ctx)
 	const staker = await getStakingStaker(ctx, stash)
-	const payeeType = staker.payeeType
 	const payee = typeof staker.payee === 'string' ? staker.payee as Address : staker.payee
-	const id = `${stakingEra.id}-${getEventId(ctx, event)}-${staker.id}`
+	assertDefined(payee)
 
-	const stakingReward = new StakingReward()
-	stakingReward.id = id
-	stakingReward.staker = staker
-	stakingReward.payeeType = payeeType
-	stakingReward.payee = payee
-	stakingReward.amount = amount
-	stakingReward.era = stakingEra
-	stakingReward.timestamp = getBlockTimestamp(ctx)
+	const details: any = {
+		stash,
+		payee,
+		amount,
+		era: stakingEra.index
+	};
 
-	await ctx.store.save(stakingReward)
-	getEventHandlerLog(ctx, event).debug({ stash, payeeType, payee, amount, era: stakingEra.index }, 'Staking reward saved')
-
-	await createEventHistoryElement(ctx, event, payee ?? (id as Address), { stash, payee, amount, era: stakingEra.index })
+	await createEventHistoryElement(ctx, event, payee, details)
 }

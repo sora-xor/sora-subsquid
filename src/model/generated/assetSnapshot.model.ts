@@ -22,6 +22,7 @@ export class AssetSnapshot {
     @ManyToOne_(() => Asset, {nullable: true})
     asset!: Asset
 
+    @Index_()
     @Column_("int4", {nullable: false})
     timestamp!: number
 
@@ -42,7 +43,4 @@ export class AssetSnapshot {
 
     @Column_("numeric", {transformer: marshal.bigintTransformer, nullable: false})
     burn!: bigint
-
-    @Column_("int4", {nullable: false})
-    updatedAtBlock!: number
 }

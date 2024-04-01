@@ -5,6 +5,7 @@ import { BlockContext, Call, Event } from '../types'
 let lastLogNow = performance.now()
 
 let logCounter = 1
+let logHandlerCounter = 1
 
 function toPascalCase(str: string): string {
 	return str
@@ -20,6 +21,11 @@ function toPascalCase(str: string): string {
 		.join('.')
 		.toLowerCase() // Convert the whole string to lowercase
 		.replace(/(^|\.)\w/g, (match) => match.toUpperCase()) // Capitalize the first character of each segment
+}
+
+export function incrementLogCounter(): number {
+	logHandlerCounter = 1
+	return logCounter++
 }
 
 export function getLog(ctx: BlockContext, logModule: string | null = null, attrs: Record<string, any> = {}, testMode: boolean = false) {
@@ -49,8 +55,8 @@ export function getLog(ctx: BlockContext, logModule: string | null = null, attrs
 
 		attrs = { ...attributes, ...attrs }
 
-		ctx.log[level](attrs, `[${logCounter}][${logModule}] ${message}`)
-		logCounter++
+		ctx.log[level](attrs, `[${logCounter}:${logHandlerCounter}][${logModule}] ${message}`)
+		logHandlerCounter++
 	}
 
 	const sendMessages = testMode ? testLogMode : true

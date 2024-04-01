@@ -44,7 +44,4 @@ export class Asset {
 
     @Column_("numeric", {transformer: marshal.floatTransformer, nullable: true})
     velocity!: number | undefined | null
-
-    @Column_("int4", {nullable: false})
-    updatedAtBlock!: number
 }
