@@ -12,7 +12,6 @@ export const getAccountEntity = async (ctx: BlockContext, accountAddress: Addres
 	} else {
 		account = new Account()
 		account.id = accountAddress
-		account.updatedAtBlock = ctx.block.header.height
 		await ctx.store.save(account)
 		getUtilsLog(ctx).debug({ address: accountAddress }, 'Account created')
 		await networkSnapshotsStorage.updateAccountsStats(ctx)

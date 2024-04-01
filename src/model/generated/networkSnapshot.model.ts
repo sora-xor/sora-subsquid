@@ -37,7 +37,4 @@ export class NetworkSnapshot {
 
     @Column_("int4", {nullable: false})
     bridgeOutgoingTransactions!: number
-
-    @Column_("int4", {nullable: false})
-    updatedAtBlock!: number
 }

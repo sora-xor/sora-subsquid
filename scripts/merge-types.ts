@@ -2,7 +2,6 @@ import fs from 'fs'
 import path from 'path'
 
 import { Chain } from '../src/chains'
-import { assertDefined } from '../src/utils'
 
 type ObjectName = string
 type ObjectInfo = {

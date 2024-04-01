@@ -1,21 +1,23 @@
 import { SubstrateBatchProcessor } from '@subsquid/substrate-processor'
 import typesBundle from './typesBundle.json'
 import { TypeormDatabase } from '@subsquid/typeorm-store'
-import { assetRegistrationCallHandler } from './handlers/calls/assetRegistration'
-import { batchTransactionsCallHandler } from './handlers/calls/batchTransactions'
-import { demeterDepositCallHandler } from './handlers/calls/demeterDeposit'
-import { demeterGetRewardsCallHandler } from './handlers/calls/demeterGetRewards'
-import { demeterWithdrawCallHandler } from './handlers/calls/demeterWithdraw'
-import { irohaMigrationCallHandler } from './handlers/calls/irohaMigration'
-import { liquidityDepositCallHandler } from './handlers/calls/liquidityDeposit'
-import { liquidityRemovalCallHandler } from './handlers/calls/liquidityRemoval'
-import { referralReserveCallHandler } from './handlers/calls/referralReserve'
-import { referralUnreserveCallHandler } from './handlers/calls/referralUnreserve'
+import { assetsBurnCallHandler } from './handlers/calls/assets/burn'
+import { assetsRegisterCallHandler } from './handlers/calls/assets/register'
+import { assetsMintCallHandler } from './handlers/calls/assets/mint'
+import { utilityBatchCallHandler } from './handlers/calls/utility/batch'
+import { demeterFarmingPlatformDepositCallHandler } from './handlers/calls/demeterFarmingPlatform/deposit'
+import { demeterFarmingPlatformGetRewardsCallHandler } from './handlers/calls/demeterFarmingPlatform/getRewards'
+import { demeterFarmingPlatformWithdrawCallHandler } from './handlers/calls/demeterFarmingPlatform/withdraw'
+import { irohaMigrationMigrateCallHandler } from './handlers/calls/irohaMigration/migrate'
+import { poolXykDepositLiquidityCallHandler } from './handlers/calls/poolXYK/depositLiquidity'
+import { poolXykWithdrawLiquidityCallHandler } from './handlers/calls/poolXYK/withdrawLiquidity'
+import { referralsReserveCallHandler } from './handlers/calls/referrals/reserve'
+import { referralsUnreserveCallHandler } from './handlers/calls/referrals/unreserve'
 import { rewardsCallHandler } from './handlers/calls/rewards'
-import { setReferralCallHandler } from './handlers/calls/setReferral'
-import { soraEthTransferCallHandler } from './handlers/calls/soraEthTransfer'
-import { swapsCallHandler } from './handlers/calls/swaps'
-import { assetTransferCallHandler, xorlessTransferHandler } from './handlers/calls/transfers'
+import { referralsSetReferrerCallHandler } from './handlers/calls/referrals/setReferrer'
+import { ethBridgeTransferToSidechainCallHandler } from './handlers/calls/ethBridge/transferToSidechain'
+import { swapsCallHandler } from './handlers/calls/liquidityProxy/swaps'
+import { assetTransferCallHandler } from './handlers/calls/assets/transfer'
 import { ethSoraTransferEventHandler } from './handlers/events/ethSoraTransfer'
 import { tokenBurnEventHandler, tokenMintEventHandler, xorBurnEventHandler, xorMintEventHandler } from './handlers/events/mintAndBurn'
 import { networkFeeEventHandler } from './handlers/events/networkFee'
@@ -23,44 +25,12 @@ import { referrerRewardEventHandler } from './handlers/events/referrerReward'
 import { transferEventHandler } from './handlers/events/transfer'
 import { initializeAssets } from './handlers/models/initializeAssets'
 import { initializePools } from './handlers/models/initializePools'
-import { syncModels, updateDailyStats, updateAssetsWeeklyStats } from './handlers/sync/models'
+import { syncModels, updateDailyStats, updateAssetsWeeklyStats, updateNetworkStats } from './handlers/sync/models'
 import { syncPoolXykPrices } from './handlers/sync/prices'
-import { callNames, eventNames } from './consts'
 import { assetRegistrationEventHandler, syntheticAssetEnabledEventHandler } from './handlers/events/assetsRegistration'
 import { chain, archive, startBlock } from './config'
 import { stakingRewardedEventHandler } from './handlers/events/rewards'
-import { swapTransferBatchHandler } from './handlers/calls/swapTransferBatch'
-import {
-	stakingBondCallHandler,
-	stakingBondExtraCallHandler,
-	stakingCancelDeferredSlashCallHandler,
-	stakingChillCallHandler,
-	stakingChillOtherCallHandler,
-	stakingForceApplyMinCommissionCallHandler,
-	stakingForceNewEraCallHandler,
-	stakingForceNewEraAlwaysCallHandler,
-	stakingForceNoErasCallHandler,
-	stakingForceUnstakeCallHandler,
-	stakingIncreaseValidatorCountCallHandler,
-	stakingKickCallHandler,
-	stakingNominateCallHandler,
-	stakingPayoutStakersCallHandler,
-	stakingReapStashCallHandler,
-	stakingRebondCallHandler,
-	stakingScaleValidatorCountCallHandler,
-	stakingSetControllerCallHandler,
-	stakingSetHistoryDepthCallHandler,
-	stakingSetInvulnerablesCallHandler,
-	stakingSetMinCommissionCallHandler,
-	stakingSetPayeeCallHandler,
-	stakingSetStakingConfigsCallHandler,
-	stakingSetValidatorCountCallHandler,
-	stakingSubmitElectionSolutionCallHandler,
-	stakingSubmitElectionSolutionUnsignedCallHandler,
-	stakingUnbondCallHandler,
-	stakingValidateCallHandler,
-	stakingWithdrawUnbondedCallHandler,
-} from './handlers/calls/staking'
+import { liquidityProxySwapTransferBatchCallHandler } from './handlers/calls/liquidityProxy/swapTransferBatch'
 import { stakingStakersElectedEventHandler } from './handlers/events/staking'
 import { lookupArchive } from '@subsquid/archive-registry'
 import { syncStreams } from './handlers/sync/streams'
@@ -77,12 +47,43 @@ import {
 	orderBookMarketOrderExecutedEventHandler,
 	orderBookStatusChangedEventHandler
 } from './handlers/events/orderBook'
-import {
-	orderBookCancelLimitOrderCallHandler,
-	orderBookPlaceLimitOrderCallHandler
-} from './handlers/calls/orderBook'
+import { orderBookCancelLimitOrderCallHandler } from './handlers/calls/orderBook/cancelLimitOrder'
 import { getSortedItems } from './utils/processor'
-import { handleBandRateUpdate } from './handlers/calls/band'
+import { bandRelayCallHandler } from './handlers/calls/band/relay'
+import { anyCallHandler } from './handlers/calls'
+import { anyEventHandler } from './handlers/events'
+import { stakingBondCallHandler } from './handlers/calls/staking/bond'
+import { stakingBondExtraCallHandler } from './handlers/calls/staking/bondExtra'
+import { stakingCancelDeferredSlashCallHandler } from './handlers/calls/staking/cancelDeferredSlash'
+import { stakingChillCallHandler } from './handlers/calls/staking/chill'
+import { stakingChillOtherCallHandler } from './handlers/calls/staking/chillOther'
+import { stakingForceApplyMinCommissionCallHandler } from './handlers/calls/staking/forceApplyMinCommission'
+import { stakingForceNewEraCallHandler } from './handlers/calls/staking/forceNewEra'
+import { stakingForceNewEraAlwaysCallHandler } from './handlers/calls/staking/forceNewEraAlways'
+import { stakingForceNoErasCallHandler } from './handlers/calls/staking/forceNoEras'
+import { stakingForceUnstakeCallHandler } from './handlers/calls/staking/forceUnstake'
+import { stakingIncreaseValidatorCountCallHandler } from './handlers/calls/staking/increaseValidatorCount'
+import { stakingKickCallHandler } from './handlers/calls/staking/kick'
+import { stakingNominateCallHandler } from './handlers/calls/staking/nominate'
+import { stakingPayoutStakersCallHandler } from './handlers/calls/staking/payoutStakers'
+import { stakingReapStashCallHandler } from './handlers/calls/staking/reapStash'
+import { stakingRebondCallHandler } from './handlers/calls/staking/rebond'
+import { stakingScaleValidatorCountCallHandler } from './handlers/calls/staking/scaleValidatorCount'
+import { stakingSetControllerCallHandler } from './handlers/calls/staking/setController'
+import { stakingSetHistoryDepthCallHandler } from './handlers/calls/staking/setHistoryDepth'
+import { stakingSetInvulnerablesCallHandler } from './handlers/calls/staking/setInvulnerables'
+import { stakingSetMinCommissionCallHandler } from './handlers/calls/staking/setMinCommission'
+import { stakingSetPayeeCallHandler } from './handlers/calls/staking/setPayee'
+import { stakingSetStakingConfigsCallHandler } from './handlers/calls/staking/setStakingConfigs'
+import { stakingSetValidatorCountCallHandler } from './handlers/calls/staking/setValidatorCount'
+import { stakingSubmitElectionSolutionCallHandler } from './handlers/calls/staking/submitElectionSolution'
+import { stakingSubmitElectionSolutionUnsignedCallHandler } from './handlers/calls/staking/submitElectionSolutionUsigned'
+import { stakingUnbondCallHandler } from './handlers/calls/staking/unbond'
+import { stakingValidateCallHandler } from './handlers/calls/staking/validate'
+import { stakingWithdrawUnbondedCallHandler } from './handlers/calls/staking/withdrawUnbonded'
+import { liquidityProxyXorlessTransferCallHandler } from './handlers/calls/liquidityProxy/xorlessTransfer'
+import { orderBookPlaceLimitOrderCallHandler } from './handlers/calls/orderBook/placeLimitOrder'
+import { utilityBatchAllCallHandler } from './handlers/calls/utility/batchAll'
 
 export const processor = new SubstrateBatchProcessor()
 	.setRpcEndpoint({
@@ -107,13 +108,9 @@ if (archive) {
 	processor.setGateway(lookupArchive(archive, { type: 'Substrate', release: 'ArrowSquid' }))
 }
  
-callNames.forEach((callName) => {
-	processor.addCall({ name: [callName], extrinsic: true })
-})
+processor.addCall({ extrinsic: true })
 
-eventNames.forEach((eventName) => {
-	processor.addEvent({ name: [eventName], extrinsic: true })
-})
+processor.addEvent({ extrinsic: true })
 
 let lastSyncedBlock = -1
 
@@ -135,9 +132,9 @@ processor.run(new TypeormDatabase({ supportHotBlocks: true }), async (ctx) => {
 		if (lastSyncedBlock !== block.header.height) {
 			await syncPoolXykPrices(blockContext)
 			await syncStreams(blockContext)
-			// Once in 5 minutes
-			if (block.header.height % 50 === 0) {
-				await syncModels(blockContext)
+			// Once in 1 hour
+			if (block.header.height % 600 === 0) {
+				await updateNetworkStats(blockContext)
 			}
 			// Once in 1 hour
 			if (block.header.height % 600 === 0) {
@@ -147,28 +144,37 @@ processor.run(new TypeormDatabase({ supportHotBlocks: true }), async (ctx) => {
 			if (block.header.height % 2_400 === 0) {
 				await updateAssetsWeeklyStats(blockContext)
 			}
+			// Once in 5 minutes
+			if (block.header.height % 50 === 0) {
+				await syncModels(blockContext)
+			}
 			lastSyncedBlock = block.header.height
 		}
 
 		for (let item of getSortedItems(block)) {
+			
 			if (item.kind === 'call') {
 				const { call } = item
 
 				if (call.name !== call.extrinsic?.call?.name) {
 					continue
 				}
+
+				await anyCallHandler(blockContext, call)
 	
-				if (call.name === 'Assets.register') await assetRegistrationCallHandler(blockContext, call)
+				if (call.name === 'Assets.register') await assetsRegisterCallHandler(blockContext, call)
+				if (call.name === 'Assets.burn') await assetsBurnCallHandler(blockContext, call)
+				if (call.name === 'Assets.mint') await assetsMintCallHandler(blockContext, call)
 				if (call.name === 'Assets.transfer') await assetTransferCallHandler(blockContext, call)
-				if (call.name === 'LiquidityProxy.xorless_transfer') await xorlessTransferHandler(blockContext, call)
-				if (call.name === 'LiquidityProxy.swap' || call.name === 'LiquidityProxy.swap_transfer')
-					await swapsCallHandler(blockContext, call)
-				if (call.name === 'LiquidityProxy.swap_transfer_batch') await swapTransferBatchHandler(blockContext, call)
-				if (call.name === 'PoolXYK.deposit_liquidity') await liquidityDepositCallHandler(blockContext, call)
-				if (call.name === 'PoolXYK.withdraw_liquidity') await liquidityRemovalCallHandler(blockContext, call)
-				if (call.name === 'IrohaMigration.migrate') await irohaMigrationCallHandler(blockContext, call)
-				if (call.name === 'Utility.batch_all') await batchTransactionsCallHandler(blockContext, call)
-				if (call.name === 'EthBridge.transfer_to_sidechain') await soraEthTransferCallHandler(blockContext, call)
+				if (call.name === 'LiquidityProxy.xorless_transfer') await liquidityProxyXorlessTransferCallHandler(blockContext, call)
+				if (call.name === 'LiquidityProxy.swap' || call.name === 'LiquidityProxy.swap_transfer') 																																																					await swapsCallHandler(blockContext, call)
+				if (call.name === 'LiquidityProxy.swap_transfer_batch') await liquidityProxySwapTransferBatchCallHandler(blockContext, call)
+				if (call.name === 'PoolXYK.deposit_liquidity') await poolXykDepositLiquidityCallHandler(blockContext, call)
+				if (call.name === 'PoolXYK.withdraw_liquidity') await poolXykWithdrawLiquidityCallHandler(blockContext, call)
+				if (call.name === 'IrohaMigration.migrate') await irohaMigrationMigrateCallHandler(blockContext, call)
+				if (call.name === 'Utility.batch') await utilityBatchCallHandler(blockContext, call)
+				if (call.name === 'Utility.batch_all') await utilityBatchAllCallHandler(blockContext, call)
+				if (call.name === 'EthBridge.transfer_to_sidechain') await ethBridgeTransferToSidechainCallHandler(blockContext, call)
 				if (
 					call.name === 'PswapDistribution.claim_incentive' ||
 					call.name === 'Rewards.claim' ||
@@ -176,13 +182,13 @@ processor.run(new TypeormDatabase({ supportHotBlocks: true }), async (ctx) => {
 					call.name === 'VestedRewards.claim_crowdloan_rewards'
 				)
 					await rewardsCallHandler(blockContext, call)
-				if (call.name === 'Referrals.set_referrer') await setReferralCallHandler(blockContext, call)
-				if (call.name === 'Referrals.reserve') await referralReserveCallHandler(blockContext, call)
-				if (call.name === 'Referrals.unreserve') await referralUnreserveCallHandler(blockContext, call)
-				if (call.name === 'DemeterFarmingPlatform.deposit') await demeterDepositCallHandler(blockContext, call)
-				if (call.name === 'DemeterFarmingPlatform.withdraw') await demeterWithdrawCallHandler(blockContext, call)
-				if (call.name === 'DemeterFarmingPlatform.get_rewards') await demeterGetRewardsCallHandler(blockContext, call)
-				if (call.name === 'Band.relay') await handleBandRateUpdate(blockContext, call)
+				if (call.name === 'Referrals.set_referrer') await referralsSetReferrerCallHandler(blockContext, call)
+				if (call.name === 'Referrals.reserve') await referralsReserveCallHandler(blockContext, call)
+				if (call.name === 'Referrals.unreserve') await referralsUnreserveCallHandler(blockContext, call)
+				if (call.name === 'DemeterFarmingPlatform.deposit') await demeterFarmingPlatformDepositCallHandler(blockContext, call)
+				if (call.name === 'DemeterFarmingPlatform.withdraw') await demeterFarmingPlatformWithdrawCallHandler(blockContext, call)
+				if (call.name === 'DemeterFarmingPlatform.get_rewards') await demeterFarmingPlatformGetRewardsCallHandler(blockContext, call)
+				if (call.name === 'Band.relay') await bandRelayCallHandler(blockContext, call)
 	
 				if (call.name === 'Staking.bond') await stakingBondCallHandler(blockContext, call)
 				if (call.name === 'Staking.bond_extra') await stakingBondExtraCallHandler(blockContext, call)
@@ -209,8 +215,7 @@ processor.run(new TypeormDatabase({ supportHotBlocks: true }), async (ctx) => {
 				if (call.name === 'Staking.set_staking_configs') await stakingSetStakingConfigsCallHandler(blockContext, call)
 				if (call.name === 'Staking.set_validator_count') await stakingSetValidatorCountCallHandler(blockContext, call)
 				if (call.name === 'Staking.submit_election_solution') await stakingSubmitElectionSolutionCallHandler(blockContext, call)
-				if (call.name === 'Staking.submit_election_solution_unsigned')
-					await stakingSubmitElectionSolutionUnsignedCallHandler(blockContext, call)
+				if (call.name === 'Staking.submit_election_solution_unsigned') await stakingSubmitElectionSolutionUnsignedCallHandler(blockContext, call)
 				if (call.name === 'Staking.unbond') await stakingUnbondCallHandler(blockContext, call)
 				if (call.name === 'Staking.validate') await stakingValidateCallHandler(blockContext, call)
 				if (call.name === 'Staking.withdraw_unbonded') await stakingWithdrawUnbondedCallHandler(blockContext, call)
@@ -222,6 +227,8 @@ processor.run(new TypeormDatabase({ supportHotBlocks: true }), async (ctx) => {
 			if (item.kind === 'event') {
 				const { event } = item
 
+				await anyEventHandler(blockContext, event)
+
 				if (event.name === 'EthBridge.IncomingRequestFinalized') await ethSoraTransferEventHandler(blockContext, event)
 				if (event.name === 'Tokens.Withdrawn') await tokenBurnEventHandler(blockContext, event)
 				if (event.name === 'Balances.Withdraw') await xorBurnEventHandler(blockContext, event)
@@ -229,7 +236,7 @@ processor.run(new TypeormDatabase({ supportHotBlocks: true }), async (ctx) => {
 				if (event.name === 'Balances.Deposit') await xorMintEventHandler(blockContext, event)
 				if (event.name === 'XorFee.FeeWithdrawn') await networkFeeEventHandler(blockContext, event)
 				if (event.name === 'XorFee.ReferrerRewarded') await referrerRewardEventHandler(blockContext, event)
-				if (event.name === 'Tokens.Transfer' || event.name === 'Balances.Transfer') await transferEventHandler(blockContext, event)
+				if (event.name === 'Tokens.Transfer' || event.name === 'Balances.Transfer' || event.name === 'Currencies.Transferred') await transferEventHandler(blockContext, event)
 				if (event.name === 'Assets.AssetRegistered') await assetRegistrationEventHandler(blockContext, event)
 				if (event.name === 'XSTPool.SyntheticAssetEnabled') await syntheticAssetEnabledEventHandler(blockContext, event)
 				if (event.name === 'Staking.Rewarded') await stakingRewardedEventHandler(blockContext, event)

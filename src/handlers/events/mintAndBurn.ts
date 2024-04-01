@@ -5,9 +5,14 @@ import { AssetAmount } from '../../types'
 import { getEventData } from '../../utils/entities'
 import { getEventHandlerLog, logStartProcessingEvent } from '../../utils/logs'
 import { events } from '../../types/generated/merged'
+import { initializedAtBlock } from '../models/initializePools'
 
 export async function tokenBurnEventHandler(ctx: BlockContext, event: Event<'Tokens.Withdrawn'>): Promise<void> {
 	logStartProcessingEvent(ctx, event)
+
+	if (initializedAtBlock === ctx.block.header.height) {
+		return
+	}
 
 	const data = getEventData(ctx, events.tokens.withdrawn, event)
 
@@ -20,6 +25,10 @@ export async function tokenBurnEventHandler(ctx: BlockContext, event: Event<'Tok
 export async function xorBurnEventHandler(ctx: BlockContext, event: Event<'Balances.Withdraw'>): Promise<void> {
 	logStartProcessingEvent(ctx, event)
 
+	if (initializedAtBlock === ctx.block.header.height) {
+		return
+	}
+
 	const data = getEventData(ctx, events.balances.withdraw, event)
 
 	const amount = data.amount as AssetAmount
@@ -30,6 +39,10 @@ export async function xorBurnEventHandler(ctx: BlockContext, event: Event<'Balan
 
 export async function tokenMintEventHandler(ctx: BlockContext, event: Event<'Tokens.Deposited'>): Promise<void> {
 	logStartProcessingEvent(ctx, event)
+
+	if (initializedAtBlock === ctx.block.header.height) {
+		return
+	}
 
 	const data = getEventData(ctx, events.tokens.deposited, event)
 
@@ -42,6 +55,10 @@ export async function tokenMintEventHandler(ctx: BlockContext, event: Event<'Tok
 
 export async function xorMintEventHandler(ctx: BlockContext, event: Event<'Balances.Deposit'>): Promise<void> {
 	logStartProcessingEvent(ctx, event)
+
+	if (initializedAtBlock === ctx.block.header.height) {
+		return
+	}
 
 	const data = getEventData(ctx, events.balances.deposit, event)
 

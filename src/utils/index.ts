@@ -128,6 +128,11 @@ export const toCamelCase = (s: string): string => {
 	return finalString
 }
 
+export const toPascalCase = (s: string): string => {
+	const camelCase = toCamelCase(s)
+	return camelCase.charAt(0).toUpperCase() + camelCase.slice(1)
+}
+
 export const getSnapshotTypes = (ctx: BlockContext, types: SnapshotType[]) => {
 	return types.filter((type) => {
 		const diff = SnapshotTimeDepthMap[type]

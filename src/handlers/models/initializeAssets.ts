@@ -9,6 +9,7 @@ import { getStorageRepresentation, isCurrentVersionIncluded } from '../../utils/
 import { getInitializeAssetsLog } from '../../utils/logs'
 
 import { storage } from '../../types/generated/merged'
+import BigNumber from 'bignumber.js'
 
 let isFirstBlockIndexed = false
 
@@ -45,9 +46,8 @@ export const getAssetInfos = async (ctx: BlockContext) => {
 
 		return infos
 	} catch (e: any) {
-		getInitializeAssetsLog(ctx).error('Error getting Asset infos')
-		getInitializeAssetsLog(ctx).error(e)
-		console.error(e)
+		getInitializeAssetsLog(ctx).error({ errorMessage: e.message }, 'Error getting Asset infos')
+
 		return null
 	}
 }
@@ -57,9 +57,7 @@ export const getSyntheticAssets = async (ctx: BlockContext) => {
 		getInitializeAssetsLog(ctx).debug('Synthetic assets request...')
 
 		const pairs = await getXstPoolEnabledSynthetics(ctx)
-		if (!pairs) {
-			return null
-		}
+		assertDefined(pairs)
 
 		const syntheticAssets = pairs.map((pair) => {
 			const [asset, syntheticInfo] = pair
@@ -77,9 +75,8 @@ export const getSyntheticAssets = async (ctx: BlockContext) => {
 		getInitializeAssetsLog(ctx).debug('Synthetic assets request completed')
 
 		return syntheticAssets
-	} catch (e) {
-		getInitializeAssetsLog(ctx).error('Error getting Synthetic assets')
-		getInitializeAssetsLog(ctx).error(e as string)
+	} catch (e: any) {
+		getInitializeAssetsLog(ctx).error({ errorMessage: e.message }, 'Error getting Synthetic assets')
 
 		return null
 	}
@@ -105,9 +102,8 @@ export const getBandRates = async (ctx: BlockContext) => {
 		getInitializeAssetsLog(ctx).debug('Band rates request completed')
 
 		return rates
-	} catch (e) {
-		getInitializeAssetsLog(ctx).error('Error getting Band rates')
-		getInitializeAssetsLog(ctx).error(e as string)
+	} catch (e: any) {
+		getInitializeAssetsLog(ctx).error({ errorMessage: e.message }, 'Error getting Band rates')
 
 		return null
 	}
@@ -132,9 +128,8 @@ export const getTokensIssuances = async (ctx: BlockContext) => {
 		getInitializeAssetsLog(ctx).debug('Tokens issuances request completed')
 		return issuances
 	} catch (e: any) {
-		getInitializeAssetsLog(ctx).error('Error getting Tokens issuances')
-		getInitializeAssetsLog(ctx).error(e)
-		console.error(e)
+		getInitializeAssetsLog(ctx).error({ errorMessage: e.message }, 'Error getting Tokens issuances')
+
 		return null
 	}
 }
@@ -149,9 +144,8 @@ export const getXorIssuance = async (ctx: BlockContext) => {
 		getInitializeAssetsLog(ctx).debug('XOR issuance request completed')
 		return issuance
 	} catch (e: any) {
-		getInitializeAssetsLog(ctx).error('Error getting XOR issuance')
-		getInitializeAssetsLog(ctx).error(e)
-		console.error(e)
+		getInitializeAssetsLog(ctx).error({ errorMessage: e.message }, 'Error getting XOR issuance')
+		
 		return null
 	}
 }
@@ -225,6 +219,9 @@ export async function initializeAssets(ctx: BlockContext): Promise<void> {
 
 			const price = rate.value
 			const priceUSD = formatU128ToBalance(price, assetId)
+			if (BigNumber(priceUSD).isNegative()) {
+				throw new Error(`Price can't be negative: ${priceUSD}`)
+			}
 
 			getInitializeAssetsLog(ctx).debug(`'${referenceSymbol}' ticker price: ${priceUSD}`)
 
@@ -253,7 +250,6 @@ export async function initializeAssets(ctx: BlockContext): Promise<void> {
 		(asset) =>
 			new Asset({
 				...asset,
-				updatedAtBlock: ctx.block.header.height,
 			}),
 	)
 
