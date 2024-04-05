@@ -12,7 +12,7 @@ export async function xcmPalletAttemptedHandler(
     ctx.log.info('start indexing XcmPallet.Attempted')
 	await logStartProcessingEvent(ctx, event)
 
-  // const type = events.xcmPallet.attempted
+  	// const type = events.xcmPallet.attempted
 	// const data = getEventData(ctx, type, event)
 }
 
@@ -49,25 +49,25 @@ export async function systemExtrinsicFailedHandler(
   const type = events.system.extrinsicFailed
 	const data = getEventData(ctx, type, event)
 
-  const dispatchError = 'dispatchError' in data ? data.dispatchError : data[0]
-  const dispatchInfo = 'dispatchInfo' in data ? data.dispatchInfo : data[1]
+	const dispatchError = 'dispatchError' in data ? data.dispatchError : data[0]
+	const dispatchInfo = 'dispatchInfo' in data ? data.dispatchInfo : data[1]
 
-  const classInfo = dispatchInfo?.class
-  const paysFee = dispatchInfo?.paysFee
-  const weight = dispatchInfo?.weight
+	const classInfo = dispatchInfo?.class
+	const paysFee = dispatchInfo?.paysFee
+	const weight = dispatchInfo?.weight
 
-  const proofSize = typeof weight === 'object' ? weight.proofSize.toString() : null
-  const refTime = typeof weight === 'object' ? weight.refTime.toString() : null
+	const proofSize = typeof weight === 'object' ? weight.proofSize.toString() : null
+	const refTime = typeof weight === 'object' ? weight.refTime.toString() : null
 
-	const historyData: Record<string, any> = {
-    dispatchError,
-    classInfo,
-    paysFee,
-    proofSize,
-    refTime
-  }
+		const historyData: Record<string, any> = {
+		dispatchError,
+		classInfo,
+		paysFee,
+		proofSize,
+		refTime
+	}
 
-  if (typeof weight !== 'object') historyData.weight = weight.toString()
+	if (typeof weight !== 'object') historyData.weight = weight.toString()
 
     await createEventHistoryElement(ctx, event, undefined, historyData)
 }
@@ -138,7 +138,7 @@ export async function requestStatusUpdateHandler(
 ): Promise<void> {
 	logStartProcessingEvent(ctx, event)
 
-  // const type = events.bridgeProxy.requestStatusUpdate
+  	// const type = events.bridgeProxy.requestStatusUpdate
 	// const data = getEventData(ctx, type, event)
 }
 
@@ -148,7 +148,7 @@ export async function mintedHandler(
 ): Promise<void> {
 	await logStartProcessingEvent(ctx, event)
 
-  // const type = events.parachainBridgeApp.minted
+  	// const type = events.parachainBridgeApp.minted
 	// const data = getEventData(ctx, type, event)
 }
 
@@ -158,6 +158,6 @@ export async function burnedHandler(
 ): Promise<void> {
 	await logStartProcessingEvent(ctx, event)
 
-  // const type = events.parachainBridgeApp.burned
+  	// const type = events.parachainBridgeApp.burned
 	// const data = getEventData(ctx, type, event)
 }
