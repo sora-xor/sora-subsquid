@@ -172,6 +172,10 @@ export const createHistoryElement = async (
 			success,
 			error,
 		})
+	} else {
+		historyElement.execution = new ExecutionResult({
+			success: true,
+		})
 	}
 
 	if (data) {
