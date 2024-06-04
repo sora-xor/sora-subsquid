@@ -7,6 +7,7 @@ import * as devStorage from '../../dev/dexapi/storage'
 export const enabledSourceTypes = {
 	name: 'Dexapi.EnabledSourceTypes',
 	v1: productionStorage.enabledSourceTypes['v1'],
+	v71: productionStorage.enabledSourceTypes['v71'],
 	v33Stage: stageStorage.enabledSourceTypes['v33'],
 	v69Stage: stageStorage.enabledSourceTypes['v69'],
 	v33Test: testStorage.enabledSourceTypes['v33'],

@@ -9,3 +9,8 @@ export const migrateTo11 = {
 	v33Stage: stageCalls.migrateTo11['v33'],
 	v33Test: testCalls.migrateTo11['v33'],
 }
+
+export const setLpMinXorForBonusReward = {
+	name: 'Farming.set_lp_min_xor_for_bonus_reward',
+	v77: productionCalls.setLpMinXorForBonusReward['v77'],
+}

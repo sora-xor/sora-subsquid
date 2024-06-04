@@ -114,7 +114,7 @@ processor.addEvent({ extrinsic: true })
 
 let lastSyncedBlock = -1
 
-processor.run(new TypeormDatabase({ supportHotBlocks: true }), async (ctx) => {
+processor.run(new TypeormDatabase({ supportHotBlocks: false }), async (ctx) => {
 	ctx._chain
 	const context = ctx
 	

@@ -12,6 +12,7 @@ export const directExchange = {
 export const liquiditySourceEnabled = {
 	name: 'DEXAPI.LiquiditySourceEnabled',
 	v70: productionEvents.liquiditySourceEnabled['v70'],
+	v71: productionEvents.liquiditySourceEnabled['v71'],
 	v69Stage: stageEvents.liquiditySourceEnabled['v69'],
 	v69Test: testEvents.liquiditySourceEnabled['v69'],
 	v70Dev: devEvents.liquiditySourceEnabled['v70'],
@@ -20,6 +21,7 @@ export const liquiditySourceEnabled = {
 export const liquiditySourceDisabled = {
 	name: 'DEXAPI.LiquiditySourceDisabled',
 	v70: productionEvents.liquiditySourceDisabled['v70'],
+	v71: productionEvents.liquiditySourceDisabled['v71'],
 	v69Stage: stageEvents.liquiditySourceDisabled['v69'],
 	v69Test: testEvents.liquiditySourceDisabled['v69'],
 	v70Dev: devEvents.liquiditySourceDisabled['v70'],

@@ -8,6 +8,7 @@ export const burn = {
 	name: 'BridgeProxy.burn',
 	v64: productionCalls.burn['v64'],
 	v70: productionCalls.burn['v70'],
+	v74: productionCalls.burn['v74'],
 	v54Stage: stageCalls.burn['v54'],
 	v70Stage: stageCalls.burn['v70'],
 	v54Test: testCalls.burn['v54'],

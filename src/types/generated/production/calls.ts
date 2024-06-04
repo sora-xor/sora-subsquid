@@ -52,3 +52,6 @@ export * as substrateBridgeInboundChannel from './substrate-bridge-inbound-chann
 export * as parachainBridgeApp from './parachain-bridge-app/calls'
 export * as bridgeDataSigner from './bridge-data-signer/calls'
 export * as multisigVerifier from './multisig-verifier/calls'
+export * as orderBook from './order-book/calls'
+export * as substrateBridgeOutboundChannel from './substrate-bridge-outbound-channel/calls'
+export * as substrateBridgeApp from './substrate-bridge-app/calls'

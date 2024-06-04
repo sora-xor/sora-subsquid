@@ -9,6 +9,8 @@ export const techAccounts = {
 	v45: productionStorage.techAccounts['v45'],
 	v46: productionStorage.techAccounts['v46'],
 	v57: productionStorage.techAccounts['v57'],
+	v72: productionStorage.techAccounts['v72'],
+	v74: productionStorage.techAccounts['v74'],
 	v44Stage: stageStorage.techAccounts['v44'],
 	v46Stage: stageStorage.techAccounts['v46'],
 	v54Stage: stageStorage.techAccounts['v54'],

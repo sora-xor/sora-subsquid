@@ -90,6 +90,7 @@ export const eventNames = [
 	'Staking.Rewarded',
 	'Staking.StakersElected',
 	'Staking.PayoutStarted',
+	'Staking.Withdrawn',
 	'OrderBook.OrderBookCreated',
 	'OrderBook.OrderBookStatusChanged',
 	'OrderBook.LimitOrderPlaced',

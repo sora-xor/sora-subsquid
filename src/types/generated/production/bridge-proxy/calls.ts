@@ -1,6 +1,7 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
 import * as v64 from '../v64'
 import * as v70 from '../v70'
+import * as v74 from '../v74'
 
 export const burn =  {
     name: 'BridgeProxy.burn',
@@ -19,6 +20,15 @@ export const burn =  {
             networkId: v70.GenericNetworkId,
             assetId: v70.AssetId32,
             recipient: v70.GenericAccount,
+            amount: sts.bigint(),
+        })
+    ),
+    v74: new CallType(
+        'BridgeProxy.burn',
+        sts.struct({
+            networkId: v74.GenericNetworkId,
+            assetId: v74.AssetId32,
+            recipient: v74.GenericAccount,
             amount: sts.bigint(),
         })
     ),

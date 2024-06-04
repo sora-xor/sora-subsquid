@@ -4,6 +4,7 @@ import * as v7 from '../v7'
 import * as v22 from '../v22'
 import * as v26 from '../v26'
 import * as v42 from '../v42'
+import * as v71 from '../v71'
 
 export const assetOwners =  {
     /**
@@ -150,6 +151,10 @@ export const assetRecordAssetId =  {
      *  Asset Id -> AssetRecord<T>
      */
     v42: new StorageType('Assets.AssetRecordAssetId', 'Optional', [v42.AssetId32], v42.AssetRecord) as AssetRecordAssetIdV42,
+    /**
+     *  Asset Id -> AssetRecord<T>
+     */
+    v71: new StorageType('Assets.AssetRecordAssetId', 'Optional', [v71.AssetId32], v71.AssetRecord) as AssetRecordAssetIdV71,
 }
 
 /**
@@ -184,6 +189,23 @@ export interface AssetRecordAssetIdV42  {
     getPairs(block: Block, key: v42.AssetId32): Promise<[k: v42.AssetId32, v: (v42.AssetRecord | undefined)][]>
     getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v42.AssetId32, v: (v42.AssetRecord | undefined)][]>
     getPairsPaged(pageSize: number, block: Block, key: v42.AssetId32): AsyncIterable<[k: v42.AssetId32, v: (v42.AssetRecord | undefined)][]>
+}
+
+/**
+ *  Asset Id -> AssetRecord<T>
+ */
+export interface AssetRecordAssetIdV71  {
+    is(block: RuntimeCtx): boolean
+    get(block: Block, key: v71.AssetId32): Promise<(v71.AssetRecord | undefined)>
+    getMany(block: Block, keys: v71.AssetId32[]): Promise<(v71.AssetRecord | undefined)[]>
+    getKeys(block: Block): Promise<v71.AssetId32[]>
+    getKeys(block: Block, key: v71.AssetId32): Promise<v71.AssetId32[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v71.AssetId32[]>
+    getKeysPaged(pageSize: number, block: Block, key: v71.AssetId32): AsyncIterable<v71.AssetId32[]>
+    getPairs(block: Block): Promise<[k: v71.AssetId32, v: (v71.AssetRecord | undefined)][]>
+    getPairs(block: Block, key: v71.AssetId32): Promise<[k: v71.AssetId32, v: (v71.AssetRecord | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v71.AssetId32, v: (v71.AssetRecord | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v71.AssetId32): AsyncIterable<[k: v71.AssetId32, v: (v71.AssetRecord | undefined)][]>
 }
 
 export const assetContentSource =  {

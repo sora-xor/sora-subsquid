@@ -8,6 +8,7 @@ export const transactions = {
 	name: 'BridgeProxy.Transactions',
 	v64: productionStorage.transactions['v64'],
 	v70: productionStorage.transactions['v70'],
+	v74: productionStorage.transactions['v74'],
 	v54Stage: stageStorage.transactions['v54'],
 	v70Stage: stageStorage.transactions['v70'],
 	v54Test: testStorage.transactions['v54'],

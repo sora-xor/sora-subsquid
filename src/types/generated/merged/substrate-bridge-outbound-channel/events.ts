@@ -16,3 +16,8 @@ export const messageAccepted = {
 	v70Test: testEvents.messageAccepted['v70'],
 	v70Dev: devEvents.messageAccepted['v70'],
 }
+
+export const intervalUpdated = {
+	name: 'SubstrateBridgeOutboundChannel.IntervalUpdated',
+	v72: productionEvents.intervalUpdated['v72'],
+}

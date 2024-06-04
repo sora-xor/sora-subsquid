@@ -24,3 +24,8 @@ export const savedValues = {
 	name: 'Farming.SavedValues',
 	v7: productionStorage.savedValues['v7'],
 }
+
+export const lpMinXorForBonusReward = {
+	name: 'Farming.LpMinXorForBonusReward',
+	v77: productionStorage.lpMinXorForBonusReward['v77'],
+}

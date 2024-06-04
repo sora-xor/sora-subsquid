@@ -8,6 +8,8 @@ export const exchange = {
 	name: 'LiquidityProxy.Exchange',
 	v1: productionEvents.exchange['v1'],
 	v42: productionEvents.exchange['v42'],
+	v71: productionEvents.exchange['v71'],
+	v74: productionEvents.exchange['v74'],
 	v33Stage: stageEvents.exchange['v33'],
 	v42Stage: stageEvents.exchange['v42'],
 	v69Stage: stageEvents.exchange['v69'],
@@ -20,6 +22,7 @@ export const exchange = {
 export const liquiditySourceEnabled = {
 	name: 'LiquidityProxy.LiquiditySourceEnabled',
 	v38: productionEvents.liquiditySourceEnabled['v38'],
+	v71: productionEvents.liquiditySourceEnabled['v71'],
 	v38Stage: stageEvents.liquiditySourceEnabled['v38'],
 	v69Stage: stageEvents.liquiditySourceEnabled['v69'],
 	v38Test: testEvents.liquiditySourceEnabled['v38'],
@@ -30,6 +33,7 @@ export const liquiditySourceEnabled = {
 export const liquiditySourceDisabled = {
 	name: 'LiquidityProxy.LiquiditySourceDisabled',
 	v38: productionEvents.liquiditySourceDisabled['v38'],
+	v71: productionEvents.liquiditySourceDisabled['v71'],
 	v38Stage: stageEvents.liquiditySourceDisabled['v38'],
 	v69Stage: stageEvents.liquiditySourceDisabled['v69'],
 	v38Test: testEvents.liquiditySourceDisabled['v38'],
@@ -40,6 +44,7 @@ export const liquiditySourceDisabled = {
 export const batchSwapExecuted = {
 	name: 'LiquidityProxy.BatchSwapExecuted',
 	v57: productionEvents.batchSwapExecuted['v57'],
+	v74: productionEvents.batchSwapExecuted['v74'],
 	v55Stage: stageEvents.batchSwapExecuted['v55'],
 	v55Test: testEvents.batchSwapExecuted['v55'],
 	v70Dev: devEvents.batchSwapExecuted['v70'],

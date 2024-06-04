@@ -12,6 +12,7 @@ export const swap = {
 export const enableLiquiditySource = {
 	name: 'DEXAPI.enable_liquidity_source',
 	v70: productionCalls.enableLiquiditySource['v70'],
+	v71: productionCalls.enableLiquiditySource['v71'],
 	v69Stage: stageCalls.enableLiquiditySource['v69'],
 	v69Test: testCalls.enableLiquiditySource['v69'],
 	v70Dev: devCalls.enableLiquiditySource['v70'],
@@ -20,6 +21,7 @@ export const enableLiquiditySource = {
 export const disableLiquiditySource = {
 	name: 'DEXAPI.disable_liquidity_source',
 	v70: productionCalls.disableLiquiditySource['v70'],
+	v71: productionCalls.disableLiquiditySource['v71'],
 	v69Stage: stageCalls.disableLiquiditySource['v69'],
 	v69Test: testCalls.disableLiquiditySource['v69'],
 	v70Dev: devCalls.disableLiquiditySource['v70'],

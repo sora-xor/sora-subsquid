@@ -10,6 +10,8 @@ export const reservesAcc = {
 	v42: productionStorage.reservesAcc['v42'],
 	v46: productionStorage.reservesAcc['v46'],
 	v57: productionStorage.reservesAcc['v57'],
+	v72: productionStorage.reservesAcc['v72'],
+	v74: productionStorage.reservesAcc['v74'],
 	v33Stage: stageStorage.reservesAcc['v33'],
 	v42Stage: stageStorage.reservesAcc['v42'],
 	v46Stage: stageStorage.reservesAcc['v46'],

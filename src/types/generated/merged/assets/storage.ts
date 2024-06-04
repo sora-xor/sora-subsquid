@@ -32,6 +32,7 @@ export const assetRecordAssetId = {
 	name: 'Assets.AssetRecordAssetId',
 	v1: productionStorage.assetRecordAssetId['v1'],
 	v42: productionStorage.assetRecordAssetId['v42'],
+	v71: productionStorage.assetRecordAssetId['v71'],
 	v33Stage: stageStorage.assetRecordAssetId['v33'],
 	v42Stage: stageStorage.assetRecordAssetId['v42'],
 	v69Stage: stageStorage.assetRecordAssetId['v69'],
