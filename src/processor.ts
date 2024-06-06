@@ -272,7 +272,7 @@ processor.run(new TypeormDatabase({ supportHotBlocks: false }), async (ctx) => {
 				if (event.name === 'Kensetsu.DebtPayment') await vaultDebtPaymentEvent(blockContext, event)
 				if (event.name === 'Kensetsu.Liquidated') await vaultLiquidatedEvent(blockContext, event)
 				if (event.name === 'Kensetsu.CDPClosed') await vaultClosedEvent(blockContext, event)
-        if (event.name === 'XcmPallet.Attempted') await xcmPalletAttemptedHandler(blockContext, event)
+        		if (event.name === 'XcmPallet.Attempted') await xcmPalletAttemptedHandler(blockContext, event)
 				if (event.name === 'SubstrateBridgeOutboundChannel.MessageAccepted') await messageAcceptedHandler(blockContext, event)
 				if (event.name === 'SubstrateDispatch.MessageDispatched') await messageDispatchedHandler(blockContext, event)
 				if (event.name === 'BridgeProxy.RequestStatusUpdate') await requestStatusUpdateHandler(blockContext, event)
