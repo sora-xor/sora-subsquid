@@ -59,7 +59,6 @@ async function handleEventType(
 		}
 		case VaultEventType.DebtIncreased: {
 			const data = getEventData(ctx, events.kensetsu.debtIncreased, event)
-			console.log(data);
 			vaultId = data.cdpId.toString()
 			owner = data.owner
 			assetId = getAssetId(data.debtAssetId)
