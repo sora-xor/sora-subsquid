@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, StorageType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
 
 export const members =  {
     /**
@@ -7,7 +7,7 @@ export const members =  {
      * 
      *  Invariant: Always sorted based on account id.
      */
-    v33: new StorageType('PhragmenElection.Members', 'Default', [], sts.array(() => v33.SeatHolder)) as MembersV33,
+    v1: new StorageType('PhragmenElection.Members', 'Default', [], sts.array(() => v1.SeatHolder)) as MembersV1,
 }
 
 /**
@@ -15,10 +15,10 @@ export const members =  {
  * 
  *  Invariant: Always sorted based on account id.
  */
-export interface MembersV33  {
+export interface MembersV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.SeatHolder[]
-    get(block: Block): Promise<(v33.SeatHolder[] | undefined)>
+    getDefault(block: Block): v1.SeatHolder[]
+    get(block: Block): Promise<(v1.SeatHolder[] | undefined)>
 }
 
 export const runnersUp =  {
@@ -28,7 +28,7 @@ export const runnersUp =  {
      *  Invariant: Always sorted based on rank (worse to best). Upon removal of a member, the
      *  last (i.e. _best_) runner-up will be replaced.
      */
-    v33: new StorageType('PhragmenElection.RunnersUp', 'Default', [], sts.array(() => v33.SeatHolder)) as RunnersUpV33,
+    v1: new StorageType('PhragmenElection.RunnersUp', 'Default', [], sts.array(() => v1.SeatHolder)) as RunnersUpV1,
 }
 
 /**
@@ -37,10 +37,10 @@ export const runnersUp =  {
  *  Invariant: Always sorted based on rank (worse to best). Upon removal of a member, the
  *  last (i.e. _best_) runner-up will be replaced.
  */
-export interface RunnersUpV33  {
+export interface RunnersUpV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.SeatHolder[]
-    get(block: Block): Promise<(v33.SeatHolder[] | undefined)>
+    getDefault(block: Block): v1.SeatHolder[]
+    get(block: Block): Promise<(v1.SeatHolder[] | undefined)>
 }
 
 export const candidates =  {
@@ -52,7 +52,7 @@ export const candidates =  {
      * 
      *  Invariant: Always sorted based on account id.
      */
-    v33: new StorageType('PhragmenElection.Candidates', 'Default', [], sts.array(() => sts.tuple(() => [v33.AccountId, v33.BalanceOf]))) as CandidatesV33,
+    v1: new StorageType('PhragmenElection.Candidates', 'Default', [], sts.array(() => sts.tuple(() => [v1.AccountId, v1.BalanceOf]))) as CandidatesV1,
 }
 
 /**
@@ -63,23 +63,23 @@ export const candidates =  {
  * 
  *  Invariant: Always sorted based on account id.
  */
-export interface CandidatesV33  {
+export interface CandidatesV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): [v33.AccountId, v33.BalanceOf][]
-    get(block: Block): Promise<([v33.AccountId, v33.BalanceOf][] | undefined)>
+    getDefault(block: Block): [v1.AccountId, v1.BalanceOf][]
+    get(block: Block): Promise<([v1.AccountId, v1.BalanceOf][] | undefined)>
 }
 
 export const electionRounds =  {
     /**
      *  The total number of vote rounds that have happened, excluding the upcoming one.
      */
-    v33: new StorageType('PhragmenElection.ElectionRounds', 'Default', [], sts.number()) as ElectionRoundsV33,
+    v1: new StorageType('PhragmenElection.ElectionRounds', 'Default', [], sts.number()) as ElectionRoundsV1,
 }
 
 /**
  *  The total number of vote rounds that have happened, excluding the upcoming one.
  */
-export interface ElectionRoundsV33  {
+export interface ElectionRoundsV1  {
     is(block: RuntimeCtx): boolean
     getDefault(block: Block): number
     get(block: Block): Promise<(number | undefined)>
@@ -91,7 +91,7 @@ export const voting =  {
      * 
      *  TWOX-NOTE: SAFE as `AccountId` is a crypto hash.
      */
-    v33: new StorageType('PhragmenElection.Voting', 'Default', [v33.AccountId], v33.Voter) as VotingV33,
+    v1: new StorageType('PhragmenElection.Voting', 'Default', [v1.AccountId], v1.Voter) as VotingV1,
 }
 
 /**
@@ -99,17 +99,17 @@ export const voting =  {
  * 
  *  TWOX-NOTE: SAFE as `AccountId` is a crypto hash.
  */
-export interface VotingV33  {
+export interface VotingV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.Voter
-    get(block: Block, key: v33.AccountId): Promise<(v33.Voter | undefined)>
-    getMany(block: Block, keys: v33.AccountId[]): Promise<(v33.Voter | undefined)[]>
-    getKeys(block: Block): Promise<v33.AccountId[]>
-    getKeys(block: Block, key: v33.AccountId): Promise<v33.AccountId[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.AccountId[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.AccountId): AsyncIterable<v33.AccountId[]>
-    getPairs(block: Block): Promise<[k: v33.AccountId, v: (v33.Voter | undefined)][]>
-    getPairs(block: Block, key: v33.AccountId): Promise<[k: v33.AccountId, v: (v33.Voter | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.AccountId, v: (v33.Voter | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.AccountId): AsyncIterable<[k: v33.AccountId, v: (v33.Voter | undefined)][]>
+    getDefault(block: Block): v1.Voter
+    get(block: Block, key: v1.AccountId): Promise<(v1.Voter | undefined)>
+    getMany(block: Block, keys: v1.AccountId[]): Promise<(v1.Voter | undefined)[]>
+    getKeys(block: Block): Promise<v1.AccountId[]>
+    getKeys(block: Block, key: v1.AccountId): Promise<v1.AccountId[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.AccountId[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.AccountId): AsyncIterable<v1.AccountId[]>
+    getPairs(block: Block): Promise<[k: v1.AccountId, v: (v1.Voter | undefined)][]>
+    getPairs(block: Block, key: v1.AccountId): Promise<[k: v1.AccountId, v: (v1.Voter | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.AccountId, v: (v1.Voter | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.AccountId): AsyncIterable<[k: v1.AccountId, v: (v1.Voter | undefined)][]>
 }

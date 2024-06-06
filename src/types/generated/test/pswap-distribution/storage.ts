@@ -1,40 +1,40 @@
 import {sts, Block, Bytes, Option, Result, StorageType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
 import * as v42 from '../v42'
-import * as v52 from '../v52'
-import * as v67 from '../v67'
+import * as v53 from '../v53'
+import * as v68 from '../v68'
 
 export const subscribedAccounts =  {
     /**
      *  Store for information about accounts containing fees, that participate in incentive distribution mechanism.
      *  Fees Account Id -> (DEX Id, Pool Marker Asset Id, Distribution Frequency, Block Offset) Frequency MUST be non-zero.
      */
-    v33: new StorageType('PswapDistribution.SubscribedAccounts', 'Optional', [v33.AccountId], sts.tuple(() => [v33.DEXId, v33.AccountIdOf, v33.BlockNumber, v33.BlockNumber])) as SubscribedAccountsV33,
+    v1: new StorageType('PswapDistribution.SubscribedAccounts', 'Optional', [v1.AccountId], sts.tuple(() => [v1.DEXId, v1.AssetId, v1.BlockNumber, v1.BlockNumber])) as SubscribedAccountsV1,
 }
 
 /**
  *  Store for information about accounts containing fees, that participate in incentive distribution mechanism.
  *  Fees Account Id -> (DEX Id, Pool Marker Asset Id, Distribution Frequency, Block Offset) Frequency MUST be non-zero.
  */
-export interface SubscribedAccountsV33  {
+export interface SubscribedAccountsV1  {
     is(block: RuntimeCtx): boolean
-    get(block: Block, key: v33.AccountId): Promise<([v33.DEXId, v33.AccountIdOf, v33.BlockNumber, v33.BlockNumber] | undefined)>
-    getMany(block: Block, keys: v33.AccountId[]): Promise<([v33.DEXId, v33.AccountIdOf, v33.BlockNumber, v33.BlockNumber] | undefined)[]>
-    getKeys(block: Block): Promise<v33.AccountId[]>
-    getKeys(block: Block, key: v33.AccountId): Promise<v33.AccountId[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.AccountId[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.AccountId): AsyncIterable<v33.AccountId[]>
-    getPairs(block: Block): Promise<[k: v33.AccountId, v: ([v33.DEXId, v33.AccountIdOf, v33.BlockNumber, v33.BlockNumber] | undefined)][]>
-    getPairs(block: Block, key: v33.AccountId): Promise<[k: v33.AccountId, v: ([v33.DEXId, v33.AccountIdOf, v33.BlockNumber, v33.BlockNumber] | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.AccountId, v: ([v33.DEXId, v33.AccountIdOf, v33.BlockNumber, v33.BlockNumber] | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.AccountId): AsyncIterable<[k: v33.AccountId, v: ([v33.DEXId, v33.AccountIdOf, v33.BlockNumber, v33.BlockNumber] | undefined)][]>
+    get(block: Block, key: v1.AccountId): Promise<([v1.DEXId, v1.AssetId, v1.BlockNumber, v1.BlockNumber] | undefined)>
+    getMany(block: Block, keys: v1.AccountId[]): Promise<([v1.DEXId, v1.AssetId, v1.BlockNumber, v1.BlockNumber] | undefined)[]>
+    getKeys(block: Block): Promise<v1.AccountId[]>
+    getKeys(block: Block, key: v1.AccountId): Promise<v1.AccountId[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.AccountId[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.AccountId): AsyncIterable<v1.AccountId[]>
+    getPairs(block: Block): Promise<[k: v1.AccountId, v: ([v1.DEXId, v1.AssetId, v1.BlockNumber, v1.BlockNumber] | undefined)][]>
+    getPairs(block: Block, key: v1.AccountId): Promise<[k: v1.AccountId, v: ([v1.DEXId, v1.AssetId, v1.BlockNumber, v1.BlockNumber] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.AccountId, v: ([v1.DEXId, v1.AssetId, v1.BlockNumber, v1.BlockNumber] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.AccountId): AsyncIterable<[k: v1.AccountId, v: ([v1.DEXId, v1.AssetId, v1.BlockNumber, v1.BlockNumber] | undefined)][]>
 }
 
 export const burnRate =  {
     /**
      *  Amount of incentive tokens to be burned on each distribution.
      */
-    v33: new StorageType('PswapDistribution.BurnRate', 'Default', [], v33.Fixed) as BurnRateV33,
+    v1: new StorageType('PswapDistribution.BurnRate', 'Default', [], v1.Fixed) as BurnRateV1,
     /**
      *  Amount of incentive tokens to be burned on each distribution.
      */
@@ -44,10 +44,10 @@ export const burnRate =  {
 /**
  *  Amount of incentive tokens to be burned on each distribution.
  */
-export interface BurnRateV33  {
+export interface BurnRateV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.Fixed
-    get(block: Block): Promise<(v33.Fixed | undefined)>
+    getDefault(block: Block): v1.Fixed
+    get(block: Block): Promise<(v1.Fixed | undefined)>
 }
 
 /**
@@ -63,7 +63,7 @@ export const burnUpdateInfo =  {
     /**
      *  (Burn Rate Increase Delta, Burn Rate Max)
      */
-    v33: new StorageType('PswapDistribution.BurnUpdateInfo', 'Default', [], sts.tuple(() => [v33.Fixed, v33.Fixed])) as BurnUpdateInfoV33,
+    v1: new StorageType('PswapDistribution.BurnUpdateInfo', 'Default', [], sts.tuple(() => [v1.Fixed, v1.Fixed])) as BurnUpdateInfoV1,
     /**
      *  (Burn Rate Increase Delta, Burn Rate Max)
      */
@@ -73,10 +73,10 @@ export const burnUpdateInfo =  {
 /**
  *  (Burn Rate Increase Delta, Burn Rate Max)
  */
-export interface BurnUpdateInfoV33  {
+export interface BurnUpdateInfoV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): [v33.Fixed, v33.Fixed]
-    get(block: Block): Promise<([v33.Fixed, v33.Fixed] | undefined)>
+    getDefault(block: Block): [v1.Fixed, v1.Fixed]
+    get(block: Block): Promise<([v1.Fixed, v1.Fixed] | undefined)>
 }
 
 /**
@@ -92,7 +92,7 @@ export const shareholderAccounts =  {
     /**
      *  Information about owned portion of stored incentive tokens. Shareholder -> Owned Fraction
      */
-    v33: new StorageType('PswapDistribution.ShareholderAccounts', 'Default', [v33.AccountId], v33.Fixed) as ShareholderAccountsV33,
+    v1: new StorageType('PswapDistribution.ShareholderAccounts', 'Default', [v1.AccountId], v1.Fixed) as ShareholderAccountsV1,
     /**
      *  Information about owned portion of stored incentive tokens. Shareholder -> Owned Fraction
      */
@@ -102,19 +102,19 @@ export const shareholderAccounts =  {
 /**
  *  Information about owned portion of stored incentive tokens. Shareholder -> Owned Fraction
  */
-export interface ShareholderAccountsV33  {
+export interface ShareholderAccountsV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.Fixed
-    get(block: Block, key: v33.AccountId): Promise<(v33.Fixed | undefined)>
-    getMany(block: Block, keys: v33.AccountId[]): Promise<(v33.Fixed | undefined)[]>
-    getKeys(block: Block): Promise<v33.AccountId[]>
-    getKeys(block: Block, key: v33.AccountId): Promise<v33.AccountId[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.AccountId[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.AccountId): AsyncIterable<v33.AccountId[]>
-    getPairs(block: Block): Promise<[k: v33.AccountId, v: (v33.Fixed | undefined)][]>
-    getPairs(block: Block, key: v33.AccountId): Promise<[k: v33.AccountId, v: (v33.Fixed | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.AccountId, v: (v33.Fixed | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.AccountId): AsyncIterable<[k: v33.AccountId, v: (v33.Fixed | undefined)][]>
+    getDefault(block: Block): v1.Fixed
+    get(block: Block, key: v1.AccountId): Promise<(v1.Fixed | undefined)>
+    getMany(block: Block, keys: v1.AccountId[]): Promise<(v1.Fixed | undefined)[]>
+    getKeys(block: Block): Promise<v1.AccountId[]>
+    getKeys(block: Block, key: v1.AccountId): Promise<v1.AccountId[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.AccountId[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.AccountId): AsyncIterable<v1.AccountId[]>
+    getPairs(block: Block): Promise<[k: v1.AccountId, v: (v1.Fixed | undefined)][]>
+    getPairs(block: Block, key: v1.AccountId): Promise<[k: v1.AccountId, v: (v1.Fixed | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.AccountId, v: (v1.Fixed | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.AccountId): AsyncIterable<[k: v1.AccountId, v: (v1.Fixed | undefined)][]>
 }
 
 /**
@@ -139,7 +139,7 @@ export const claimableShares =  {
     /**
      *  Sum of all shares of incentive token owners.
      */
-    v33: new StorageType('PswapDistribution.ClaimableShares', 'Default', [], v33.Fixed) as ClaimableSharesV33,
+    v1: new StorageType('PswapDistribution.ClaimableShares', 'Default', [], v1.Fixed) as ClaimableSharesV1,
     /**
      *  Sum of all shares of incentive token owners.
      */
@@ -149,10 +149,10 @@ export const claimableShares =  {
 /**
  *  Sum of all shares of incentive token owners.
  */
-export interface ClaimableSharesV33  {
+export interface ClaimableSharesV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.Fixed
-    get(block: Block): Promise<(v33.Fixed | undefined)>
+    getDefault(block: Block): v1.Fixed
+    get(block: Block): Promise<(v1.Fixed | undefined)>
 }
 
 /**
@@ -168,7 +168,7 @@ export const parliamentPswapFraction =  {
     /**
      *  Fraction of PSWAP that could be reminted for parliament.
      */
-    v33: new StorageType('PswapDistribution.ParliamentPswapFraction', 'Default', [], v33.Fixed) as ParliamentPswapFractionV33,
+    v1: new StorageType('PswapDistribution.ParliamentPswapFraction', 'Default', [], v1.Fixed) as ParliamentPswapFractionV1,
     /**
      *  Fraction of PSWAP that could be reminted for parliament.
      */
@@ -178,10 +178,10 @@ export const parliamentPswapFraction =  {
 /**
  *  Fraction of PSWAP that could be reminted for parliament.
  */
-export interface ParliamentPswapFractionV33  {
+export interface ParliamentPswapFractionV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.Fixed
-    get(block: Block): Promise<(v33.Fixed | undefined)>
+    getDefault(block: Block): v1.Fixed
+    get(block: Block): Promise<(v1.Fixed | undefined)>
 }
 
 /**
@@ -197,30 +197,30 @@ export const buyBackXstFraction =  {
     /**
      *  Fraction of PSWAP that could be buy backed to XST
      */
-    v52: new StorageType('PswapDistribution.BuyBackXSTFraction', 'Default', [], v52.FixedPoint) as BuyBackXstFractionV52,
+    v53: new StorageType('PswapDistribution.BuyBackXSTFraction', 'Default', [], v53.FixedPoint) as BuyBackXstFractionV53,
 }
 
 /**
  *  Fraction of PSWAP that could be buy backed to XST
  */
-export interface BuyBackXstFractionV52  {
+export interface BuyBackXstFractionV53  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v52.FixedPoint
-    get(block: Block): Promise<(v52.FixedPoint | undefined)>
+    getDefault(block: Block): v53.FixedPoint
+    get(block: Block): Promise<(v53.FixedPoint | undefined)>
 }
 
 export const buyBackTbcdFraction =  {
     /**
      *  Fraction of PSWAP that could be buy backed to TBCD
      */
-    v67: new StorageType('PswapDistribution.BuyBackTBCDFraction', 'Default', [], v67.FixedPoint) as BuyBackTbcdFractionV67,
+    v68: new StorageType('PswapDistribution.BuyBackTBCDFraction', 'Default', [], v68.FixedPoint) as BuyBackTbcdFractionV68,
 }
 
 /**
  *  Fraction of PSWAP that could be buy backed to TBCD
  */
-export interface BuyBackTbcdFractionV67  {
+export interface BuyBackTbcdFractionV68  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v67.FixedPoint
-    get(block: Block): Promise<(v67.FixedPoint | undefined)>
+    getDefault(block: Block): v68.FixedPoint
+    get(block: Block): Promise<(v68.FixedPoint | undefined)>
 }

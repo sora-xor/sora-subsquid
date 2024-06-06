@@ -8,9 +8,9 @@ export const locked = {
 	name: 'CeresLiquidityLocker.Locked',
 	v22: productionEvents.locked['v22'],
 	v37: productionEvents.locked['v37'],
-	v33Stage: stageEvents.locked['v33'],
+	v22Stage: stageEvents.locked['v22'],
 	v37Stage: stageEvents.locked['v37'],
-	v33Test: testEvents.locked['v33'],
+	v22Test: testEvents.locked['v22'],
 	v37Test: testEvents.locked['v37'],
-	v70Dev: devEvents.locked['v70'],
+	v85Dev: devEvents.locked['v85'],
 }

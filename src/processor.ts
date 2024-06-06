@@ -84,6 +84,8 @@ import { stakingWithdrawUnbondedCallHandler } from './handlers/calls/staking/wit
 import { liquidityProxyXorlessTransferCallHandler } from './handlers/calls/liquidityProxy/xorlessTransfer'
 import { orderBookPlaceLimitOrderCallHandler } from './handlers/calls/orderBook/placeLimitOrder'
 import { utilityBatchAllCallHandler } from './handlers/calls/utility/batchAll'
+import { vaultCloseCallHandler, vaultCreateCallHandler, vaultDecreaseDebtCallHandler, vaultDepositCollateralCallHandler, vaultIncreaseDeptCallHandler } from './handlers/calls/kensetsu'
+import { vaultClosedEvent, vaultCollateralDepositEvent, vaultCreatedEvent, vaultDebtIncreasedEvent, vaultDebtPaymentEvent, vaultLiquidatedEvent } from './handlers/events/kensetsu'
 
 export const processor = new SubstrateBatchProcessor()
 	.setRpcEndpoint({
@@ -222,6 +224,11 @@ processor.run(new TypeormDatabase({ supportHotBlocks: false }), async (ctx) => {
 				if (call.name === 'OrderBook.place_limit_order') await orderBookPlaceLimitOrderCallHandler(blockContext, call)
 				if (call.name === 'OrderBook.cancel_limit_order') await orderBookCancelLimitOrderCallHandler(blockContext, call)
 				if (call.name === 'OrderBook.cancel_limit_orders_batch') await orderBookCancelLimitOrderCallHandler(blockContext, call)
+				if (call.name === 'Kensetsu.createCdp') await vaultCreateCallHandler(blockContext, call)
+				if (call.name === 'Kensetsu.depositCollateral') await vaultDepositCollateralCallHandler(blockContext, call)
+				if (call.name === 'Kensetsu.repayDebt') await vaultDecreaseDebtCallHandler(blockContext, call)
+				if (call.name === 'Kensetsu.borrow') await vaultIncreaseDeptCallHandler(blockContext, call)
+				if (call.name === 'Kensetsu.closeCdp') await vaultCloseCallHandler(blockContext, call)
 			}
 
 			if (item.kind === 'event') {
@@ -251,6 +258,12 @@ processor.run(new TypeormDatabase({ supportHotBlocks: false }), async (ctx) => {
 				if (event.name === 'OrderBook.MarketOrderExecuted') await orderBookMarketOrderExecutedEventHandler(blockContext, event)
 				if (event.name === 'OrderBook.LimitOrderConvertedToMarketOrder') await orderBookLimitOrderConvertedToMarketOrderEventHandler(blockContext, event)
 				if (event.name === 'OrderBook.LimitOrderIsSplitIntoMarketOrderAndLimitOrder') await orderBookLimitOrderIsSplitIntoMarketOrderAndLimitOrderEventHandler(blockContext, event)
+				if (event.name === 'Kensetsu.CDPCreated') await vaultCreatedEvent(blockContext, event)
+				if (event.name === 'Kensetsu.CollateralDeposit') await vaultCollateralDepositEvent(blockContext, event)
+				if (event.name === 'Kensetsu.DebtIncreased') await vaultDebtIncreasedEvent(blockContext, event)
+				if (event.name === 'Kensetsu.DebtPayment') await vaultDebtPaymentEvent(blockContext, event)
+				if (event.name === 'Kensetsu.Liquidated') await vaultLiquidatedEvent(blockContext, event)
+				if (event.name === 'Kensetsu.CDPClosed') await vaultClosedEvent(blockContext, event)
 			}
 		}
 	}

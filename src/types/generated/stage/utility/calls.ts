@@ -1,27 +1,35 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
+import * as v1 from '../v1'
+import * as v3 from '../v3'
+import * as v7 from '../v7'
+import * as v19 from '../v19'
+import * as v22 from '../v22'
+import * as v23 from '../v23'
+import * as v26 from '../v26'
+import * as v32 from '../v32'
 import * as v33 from '../v33'
 import * as v35 from '../v35'
 import * as v37 from '../v37'
 import * as v38 from '../v38'
 import * as v42 from '../v42'
 import * as v43 from '../v43'
-import * as v44 from '../v44'
 import * as v45 from '../v45'
 import * as v46 from '../v46'
 import * as v47 from '../v47'
-import * as v48 from '../v48'
-import * as v52 from '../v52'
-import * as v54 from '../v54'
-import * as v55 from '../v55'
+import * as v50 from '../v50'
+import * as v53 from '../v53'
 import * as v57 from '../v57'
 import * as v59 from '../v59'
 import * as v60 from '../v60'
-import * as v62 from '../v62'
+import * as v63 from '../v63'
 import * as v64 from '../v64'
 import * as v66 from '../v66'
-import * as v69 from '../v69'
 import * as v70 from '../v70'
 import * as v71 from '../v71'
+import * as v72 from '../v72'
+import * as v74 from '../v74'
+import * as v77 from '../v77'
+import * as v84 from '../v84'
 
 export const batch =  {
     name: 'Utility.batch',
@@ -45,10 +53,218 @@ export const batch =  {
      *  and the error of the failed call. If all were successful, then the `BatchCompleted`
      *  event is deposited.
      */
+    v1: new CallType(
+        'Utility.batch',
+        sts.struct({
+            calls: sts.array(() => v1.Type_50),
+        })
+    ),
+    /**
+     *  Send a batch of dispatch calls.
+     * 
+     *  May be called from any origin.
+     * 
+     *  - `calls`: The calls to be dispatched from the same origin.
+     * 
+     *  If origin is root then call are dispatch without checking origin filter. (This includes
+     *  bypassing `frame_system::Config::BaseCallFilter`).
+     * 
+     *  # <weight>
+     *  - Complexity: O(C) where C is the number of calls to be batched.
+     *  # </weight>
+     * 
+     *  This will return `Ok` in all circumstances. To determine the success of the batch, an
+     *  event is deposited. If a call failed and the batch was interrupted, then the
+     *  `BatchInterrupted` event is deposited, along with the number of successful calls made
+     *  and the error of the failed call. If all were successful, then the `BatchCompleted`
+     *  event is deposited.
+     */
+    v3: new CallType(
+        'Utility.batch',
+        sts.struct({
+            calls: sts.array(() => v3.Type_49),
+        })
+    ),
+    /**
+     *  Send a batch of dispatch calls.
+     * 
+     *  May be called from any origin.
+     * 
+     *  - `calls`: The calls to be dispatched from the same origin.
+     * 
+     *  If origin is root then call are dispatch without checking origin filter. (This includes
+     *  bypassing `frame_system::Config::BaseCallFilter`).
+     * 
+     *  # <weight>
+     *  - Complexity: O(C) where C is the number of calls to be batched.
+     *  # </weight>
+     * 
+     *  This will return `Ok` in all circumstances. To determine the success of the batch, an
+     *  event is deposited. If a call failed and the batch was interrupted, then the
+     *  `BatchInterrupted` event is deposited, along with the number of successful calls made
+     *  and the error of the failed call. If all were successful, then the `BatchCompleted`
+     *  event is deposited.
+     */
+    v7: new CallType(
+        'Utility.batch',
+        sts.struct({
+            calls: sts.array(() => v7.Type_49),
+        })
+    ),
+    /**
+     *  Send a batch of dispatch calls.
+     * 
+     *  May be called from any origin.
+     * 
+     *  - `calls`: The calls to be dispatched from the same origin.
+     * 
+     *  If origin is root then call are dispatch without checking origin filter. (This includes
+     *  bypassing `frame_system::Config::BaseCallFilter`).
+     * 
+     *  # <weight>
+     *  - Complexity: O(C) where C is the number of calls to be batched.
+     *  # </weight>
+     * 
+     *  This will return `Ok` in all circumstances. To determine the success of the batch, an
+     *  event is deposited. If a call failed and the batch was interrupted, then the
+     *  `BatchInterrupted` event is deposited, along with the number of successful calls made
+     *  and the error of the failed call. If all were successful, then the `BatchCompleted`
+     *  event is deposited.
+     */
+    v19: new CallType(
+        'Utility.batch',
+        sts.struct({
+            calls: sts.array(() => v19.Type_54),
+        })
+    ),
+    /**
+     *  Send a batch of dispatch calls.
+     * 
+     *  May be called from any origin.
+     * 
+     *  - `calls`: The calls to be dispatched from the same origin.
+     * 
+     *  If origin is root then call are dispatch without checking origin filter. (This includes
+     *  bypassing `frame_system::Config::BaseCallFilter`).
+     * 
+     *  # <weight>
+     *  - Complexity: O(C) where C is the number of calls to be batched.
+     *  # </weight>
+     * 
+     *  This will return `Ok` in all circumstances. To determine the success of the batch, an
+     *  event is deposited. If a call failed and the batch was interrupted, then the
+     *  `BatchInterrupted` event is deposited, along with the number of successful calls made
+     *  and the error of the failed call. If all were successful, then the `BatchCompleted`
+     *  event is deposited.
+     */
+    v22: new CallType(
+        'Utility.batch',
+        sts.struct({
+            calls: sts.array(() => v22.Type_43),
+        })
+    ),
+    /**
+     *  Send a batch of dispatch calls.
+     * 
+     *  May be called from any origin.
+     * 
+     *  - `calls`: The calls to be dispatched from the same origin.
+     * 
+     *  If origin is root then call are dispatch without checking origin filter. (This includes
+     *  bypassing `frame_system::Config::BaseCallFilter`).
+     * 
+     *  # <weight>
+     *  - Complexity: O(C) where C is the number of calls to be batched.
+     *  # </weight>
+     * 
+     *  This will return `Ok` in all circumstances. To determine the success of the batch, an
+     *  event is deposited. If a call failed and the batch was interrupted, then the
+     *  `BatchInterrupted` event is deposited, along with the number of successful calls made
+     *  and the error of the failed call. If all were successful, then the `BatchCompleted`
+     *  event is deposited.
+     */
+    v23: new CallType(
+        'Utility.batch',
+        sts.struct({
+            calls: sts.array(() => v23.Type_54),
+        })
+    ),
+    /**
+     *  Send a batch of dispatch calls.
+     * 
+     *  May be called from any origin.
+     * 
+     *  - `calls`: The calls to be dispatched from the same origin.
+     * 
+     *  If origin is root then call are dispatch without checking origin filter. (This includes
+     *  bypassing `frame_system::Config::BaseCallFilter`).
+     * 
+     *  # <weight>
+     *  - Complexity: O(C) where C is the number of calls to be batched.
+     *  # </weight>
+     * 
+     *  This will return `Ok` in all circumstances. To determine the success of the batch, an
+     *  event is deposited. If a call failed and the batch was interrupted, then the
+     *  `BatchInterrupted` event is deposited, along with the number of successful calls made
+     *  and the error of the failed call. If all were successful, then the `BatchCompleted`
+     *  event is deposited.
+     */
+    v26: new CallType(
+        'Utility.batch',
+        sts.struct({
+            calls: sts.array(() => v26.Type_54),
+        })
+    ),
+    /**
+     *  Send a batch of dispatch calls.
+     * 
+     *  May be called from any origin.
+     * 
+     *  - `calls`: The calls to be dispatched from the same origin.
+     * 
+     *  If origin is root then call are dispatch without checking origin filter. (This includes
+     *  bypassing `frame_system::Config::BaseCallFilter`).
+     * 
+     *  # <weight>
+     *  - Complexity: O(C) where C is the number of calls to be batched.
+     *  # </weight>
+     * 
+     *  This will return `Ok` in all circumstances. To determine the success of the batch, an
+     *  event is deposited. If a call failed and the batch was interrupted, then the
+     *  `BatchInterrupted` event is deposited, along with the number of successful calls made
+     *  and the error of the failed call. If all were successful, then the `BatchCompleted`
+     *  event is deposited.
+     */
+    v32: new CallType(
+        'Utility.batch',
+        sts.struct({
+            calls: sts.array(() => v32.Type_54),
+        })
+    ),
+    /**
+     *  Send a batch of dispatch calls.
+     * 
+     *  May be called from any origin.
+     * 
+     *  - `calls`: The calls to be dispatched from the same origin.
+     * 
+     *  If origin is root then call are dispatch without checking origin filter. (This includes
+     *  bypassing `frame_system::Config::BaseCallFilter`).
+     * 
+     *  # <weight>
+     *  - Complexity: O(C) where C is the number of calls to be batched.
+     *  # </weight>
+     * 
+     *  This will return `Ok` in all circumstances. To determine the success of the batch, an
+     *  event is deposited. If a call failed and the batch was interrupted, then the
+     *  `BatchInterrupted` event is deposited, along with the number of successful calls made
+     *  and the error of the failed call. If all were successful, then the `BatchCompleted`
+     *  event is deposited.
+     */
     v33: new CallType(
         'Utility.batch',
         sts.struct({
-            calls: sts.array(() => v33.Type_43),
+            calls: sts.array(() => v33.Type_55),
         })
     ),
     /**
@@ -74,7 +290,7 @@ export const batch =  {
     v35: new CallType(
         'Utility.batch',
         sts.struct({
-            calls: sts.array(() => v35.Type_43),
+            calls: sts.array(() => v35.Type_55),
         })
     ),
     /**
@@ -100,7 +316,7 @@ export const batch =  {
     v37: new CallType(
         'Utility.batch',
         sts.struct({
-            calls: sts.array(() => v37.Type_43),
+            calls: sts.array(() => v37.Type_56),
         })
     ),
     /**
@@ -126,7 +342,7 @@ export const batch =  {
     v38: new CallType(
         'Utility.batch',
         sts.struct({
-            calls: sts.array(() => v38.Type_43),
+            calls: sts.array(() => v38.Type_56),
         })
     ),
     /**
@@ -181,33 +397,6 @@ export const batch =  {
         'Utility.batch',
         sts.struct({
             calls: sts.array(() => v43.Call),
-        })
-    ),
-    /**
-     * Send a batch of dispatch calls.
-     * 
-     * May be called from any origin.
-     * 
-     * - `calls`: The calls to be dispatched from the same origin. The number of call must not
-     *   exceed the constant: `batched_calls_limit` (available in constant metadata).
-     * 
-     * If origin is root then call are dispatch without checking origin filter. (This includes
-     * bypassing `frame_system::Config::BaseCallFilter`).
-     * 
-     * # <weight>
-     * - Complexity: O(C) where C is the number of calls to be batched.
-     * # </weight>
-     * 
-     * This will return `Ok` in all circumstances. To determine the success of the batch, an
-     * event is deposited. If a call failed and the batch was interrupted, then the
-     * `BatchInterrupted` event is deposited, along with the number of successful calls made
-     * and the error of the failed call. If all were successful, then the `BatchCompleted`
-     * event is deposited.
-     */
-    v44: new CallType(
-        'Utility.batch',
-        sts.struct({
-            calls: sts.array(() => v44.Call),
         })
     ),
     /**
@@ -312,10 +501,10 @@ export const batch =  {
      * and the error of the failed call. If all were successful, then the `BatchCompleted`
      * event is deposited.
      */
-    v48: new CallType(
+    v50: new CallType(
         'Utility.batch',
         sts.struct({
-            calls: sts.array(() => v48.Call),
+            calls: sts.array(() => v50.Call),
         })
     ),
     /**
@@ -339,64 +528,10 @@ export const batch =  {
      * and the error of the failed call. If all were successful, then the `BatchCompleted`
      * event is deposited.
      */
-    v52: new CallType(
+    v53: new CallType(
         'Utility.batch',
         sts.struct({
-            calls: sts.array(() => v52.Call),
-        })
-    ),
-    /**
-     * Send a batch of dispatch calls.
-     * 
-     * May be called from any origin except `None`.
-     * 
-     * - `calls`: The calls to be dispatched from the same origin. The number of call must not
-     *   exceed the constant: `batched_calls_limit` (available in constant metadata).
-     * 
-     * If origin is root then the calls are dispatched without checking origin filter. (This
-     * includes bypassing `frame_system::Config::BaseCallFilter`).
-     * 
-     * # <weight>
-     * - Complexity: O(C) where C is the number of calls to be batched.
-     * # </weight>
-     * 
-     * This will return `Ok` in all circumstances. To determine the success of the batch, an
-     * event is deposited. If a call failed and the batch was interrupted, then the
-     * `BatchInterrupted` event is deposited, along with the number of successful calls made
-     * and the error of the failed call. If all were successful, then the `BatchCompleted`
-     * event is deposited.
-     */
-    v54: new CallType(
-        'Utility.batch',
-        sts.struct({
-            calls: sts.array(() => v54.Call),
-        })
-    ),
-    /**
-     * Send a batch of dispatch calls.
-     * 
-     * May be called from any origin except `None`.
-     * 
-     * - `calls`: The calls to be dispatched from the same origin. The number of call must not
-     *   exceed the constant: `batched_calls_limit` (available in constant metadata).
-     * 
-     * If origin is root then the calls are dispatched without checking origin filter. (This
-     * includes bypassing `frame_system::Config::BaseCallFilter`).
-     * 
-     * # <weight>
-     * - Complexity: O(C) where C is the number of calls to be batched.
-     * # </weight>
-     * 
-     * This will return `Ok` in all circumstances. To determine the success of the batch, an
-     * event is deposited. If a call failed and the batch was interrupted, then the
-     * `BatchInterrupted` event is deposited, along with the number of successful calls made
-     * and the error of the failed call. If all were successful, then the `BatchCompleted`
-     * event is deposited.
-     */
-    v55: new CallType(
-        'Utility.batch',
-        sts.struct({
-            calls: sts.array(() => v55.Call),
+            calls: sts.array(() => v53.Call),
         })
     ),
     /**
@@ -501,10 +636,10 @@ export const batch =  {
      * and the error of the failed call. If all were successful, then the `BatchCompleted`
      * event is deposited.
      */
-    v62: new CallType(
+    v63: new CallType(
         'Utility.batch',
         sts.struct({
-            calls: sts.array(() => v62.Call),
+            calls: sts.array(() => v63.Call),
         })
     ),
     /**
@@ -582,33 +717,6 @@ export const batch =  {
      * and the error of the failed call. If all were successful, then the `BatchCompleted`
      * event is deposited.
      */
-    v69: new CallType(
-        'Utility.batch',
-        sts.struct({
-            calls: sts.array(() => v69.Call),
-        })
-    ),
-    /**
-     * Send a batch of dispatch calls.
-     * 
-     * May be called from any origin except `None`.
-     * 
-     * - `calls`: The calls to be dispatched from the same origin. The number of call must not
-     *   exceed the constant: `batched_calls_limit` (available in constant metadata).
-     * 
-     * If origin is root then the calls are dispatched without checking origin filter. (This
-     * includes bypassing `frame_system::Config::BaseCallFilter`).
-     * 
-     * # <weight>
-     * - Complexity: O(C) where C is the number of calls to be batched.
-     * # </weight>
-     * 
-     * This will return `Ok` in all circumstances. To determine the success of the batch, an
-     * event is deposited. If a call failed and the batch was interrupted, then the
-     * `BatchInterrupted` event is deposited, along with the number of successful calls made
-     * and the error of the failed call. If all were successful, then the `BatchCompleted`
-     * event is deposited.
-     */
     v70: new CallType(
         'Utility.batch',
         sts.struct({
@@ -642,6 +750,114 @@ export const batch =  {
             calls: sts.array(() => v71.Call),
         })
     ),
+    /**
+     * Send a batch of dispatch calls.
+     * 
+     * May be called from any origin except `None`.
+     * 
+     * - `calls`: The calls to be dispatched from the same origin. The number of call must not
+     *   exceed the constant: `batched_calls_limit` (available in constant metadata).
+     * 
+     * If origin is root then the calls are dispatched without checking origin filter. (This
+     * includes bypassing `frame_system::Config::BaseCallFilter`).
+     * 
+     * # <weight>
+     * - Complexity: O(C) where C is the number of calls to be batched.
+     * # </weight>
+     * 
+     * This will return `Ok` in all circumstances. To determine the success of the batch, an
+     * event is deposited. If a call failed and the batch was interrupted, then the
+     * `BatchInterrupted` event is deposited, along with the number of successful calls made
+     * and the error of the failed call. If all were successful, then the `BatchCompleted`
+     * event is deposited.
+     */
+    v72: new CallType(
+        'Utility.batch',
+        sts.struct({
+            calls: sts.array(() => v72.Call),
+        })
+    ),
+    /**
+     * Send a batch of dispatch calls.
+     * 
+     * May be called from any origin except `None`.
+     * 
+     * - `calls`: The calls to be dispatched from the same origin. The number of call must not
+     *   exceed the constant: `batched_calls_limit` (available in constant metadata).
+     * 
+     * If origin is root then the calls are dispatched without checking origin filter. (This
+     * includes bypassing `frame_system::Config::BaseCallFilter`).
+     * 
+     * # <weight>
+     * - Complexity: O(C) where C is the number of calls to be batched.
+     * # </weight>
+     * 
+     * This will return `Ok` in all circumstances. To determine the success of the batch, an
+     * event is deposited. If a call failed and the batch was interrupted, then the
+     * `BatchInterrupted` event is deposited, along with the number of successful calls made
+     * and the error of the failed call. If all were successful, then the `BatchCompleted`
+     * event is deposited.
+     */
+    v74: new CallType(
+        'Utility.batch',
+        sts.struct({
+            calls: sts.array(() => v74.Call),
+        })
+    ),
+    /**
+     * Send a batch of dispatch calls.
+     * 
+     * May be called from any origin except `None`.
+     * 
+     * - `calls`: The calls to be dispatched from the same origin. The number of call must not
+     *   exceed the constant: `batched_calls_limit` (available in constant metadata).
+     * 
+     * If origin is root then the calls are dispatched without checking origin filter. (This
+     * includes bypassing `frame_system::Config::BaseCallFilter`).
+     * 
+     * # <weight>
+     * - Complexity: O(C) where C is the number of calls to be batched.
+     * # </weight>
+     * 
+     * This will return `Ok` in all circumstances. To determine the success of the batch, an
+     * event is deposited. If a call failed and the batch was interrupted, then the
+     * `BatchInterrupted` event is deposited, along with the number of successful calls made
+     * and the error of the failed call. If all were successful, then the `BatchCompleted`
+     * event is deposited.
+     */
+    v77: new CallType(
+        'Utility.batch',
+        sts.struct({
+            calls: sts.array(() => v77.Call),
+        })
+    ),
+    /**
+     * Send a batch of dispatch calls.
+     * 
+     * May be called from any origin except `None`.
+     * 
+     * - `calls`: The calls to be dispatched from the same origin. The number of call must not
+     *   exceed the constant: `batched_calls_limit` (available in constant metadata).
+     * 
+     * If origin is root then the calls are dispatched without checking origin filter. (This
+     * includes bypassing `frame_system::Config::BaseCallFilter`).
+     * 
+     * # <weight>
+     * - Complexity: O(C) where C is the number of calls to be batched.
+     * # </weight>
+     * 
+     * This will return `Ok` in all circumstances. To determine the success of the batch, an
+     * event is deposited. If a call failed and the batch was interrupted, then the
+     * `BatchInterrupted` event is deposited, along with the number of successful calls made
+     * and the error of the failed call. If all were successful, then the `BatchCompleted`
+     * event is deposited.
+     */
+    v84: new CallType(
+        'Utility.batch',
+        sts.struct({
+            calls: sts.array(() => v84.Call),
+        })
+    ),
 }
 
 export const asDerivative =  {
@@ -661,11 +877,187 @@ export const asDerivative =  {
      * 
      *  The dispatch origin for this call must be _Signed_.
      */
+    v1: new CallType(
+        'Utility.as_derivative',
+        sts.struct({
+            index: sts.number(),
+            call: v1.Type_50,
+        })
+    ),
+    /**
+     *  Send a call through an indexed pseudonym of the sender.
+     * 
+     *  Filter from origin are passed along. The call will be dispatched with an origin which
+     *  use the same filter as the origin of this call.
+     * 
+     *  NOTE: If you need to ensure that any account-based filtering is not honored (i.e.
+     *  because you expect `proxy` to have been used prior in the call stack and you do not want
+     *  the call restrictions to apply to any sub-accounts), then use `as_multi_threshold_1`
+     *  in the Multisig pallet instead.
+     * 
+     *  NOTE: Prior to version *12, this was called `as_limited_sub`.
+     * 
+     *  The dispatch origin for this call must be _Signed_.
+     */
+    v3: new CallType(
+        'Utility.as_derivative',
+        sts.struct({
+            index: sts.number(),
+            call: v3.Type_49,
+        })
+    ),
+    /**
+     *  Send a call through an indexed pseudonym of the sender.
+     * 
+     *  Filter from origin are passed along. The call will be dispatched with an origin which
+     *  use the same filter as the origin of this call.
+     * 
+     *  NOTE: If you need to ensure that any account-based filtering is not honored (i.e.
+     *  because you expect `proxy` to have been used prior in the call stack and you do not want
+     *  the call restrictions to apply to any sub-accounts), then use `as_multi_threshold_1`
+     *  in the Multisig pallet instead.
+     * 
+     *  NOTE: Prior to version *12, this was called `as_limited_sub`.
+     * 
+     *  The dispatch origin for this call must be _Signed_.
+     */
+    v7: new CallType(
+        'Utility.as_derivative',
+        sts.struct({
+            index: sts.number(),
+            call: v7.Type_49,
+        })
+    ),
+    /**
+     *  Send a call through an indexed pseudonym of the sender.
+     * 
+     *  Filter from origin are passed along. The call will be dispatched with an origin which
+     *  use the same filter as the origin of this call.
+     * 
+     *  NOTE: If you need to ensure that any account-based filtering is not honored (i.e.
+     *  because you expect `proxy` to have been used prior in the call stack and you do not want
+     *  the call restrictions to apply to any sub-accounts), then use `as_multi_threshold_1`
+     *  in the Multisig pallet instead.
+     * 
+     *  NOTE: Prior to version *12, this was called `as_limited_sub`.
+     * 
+     *  The dispatch origin for this call must be _Signed_.
+     */
+    v19: new CallType(
+        'Utility.as_derivative',
+        sts.struct({
+            index: sts.number(),
+            call: v19.Type_54,
+        })
+    ),
+    /**
+     *  Send a call through an indexed pseudonym of the sender.
+     * 
+     *  Filter from origin are passed along. The call will be dispatched with an origin which
+     *  use the same filter as the origin of this call.
+     * 
+     *  NOTE: If you need to ensure that any account-based filtering is not honored (i.e.
+     *  because you expect `proxy` to have been used prior in the call stack and you do not want
+     *  the call restrictions to apply to any sub-accounts), then use `as_multi_threshold_1`
+     *  in the Multisig pallet instead.
+     * 
+     *  NOTE: Prior to version *12, this was called `as_limited_sub`.
+     * 
+     *  The dispatch origin for this call must be _Signed_.
+     */
+    v22: new CallType(
+        'Utility.as_derivative',
+        sts.struct({
+            index: sts.number(),
+            call: v22.Type_43,
+        })
+    ),
+    /**
+     *  Send a call through an indexed pseudonym of the sender.
+     * 
+     *  Filter from origin are passed along. The call will be dispatched with an origin which
+     *  use the same filter as the origin of this call.
+     * 
+     *  NOTE: If you need to ensure that any account-based filtering is not honored (i.e.
+     *  because you expect `proxy` to have been used prior in the call stack and you do not want
+     *  the call restrictions to apply to any sub-accounts), then use `as_multi_threshold_1`
+     *  in the Multisig pallet instead.
+     * 
+     *  NOTE: Prior to version *12, this was called `as_limited_sub`.
+     * 
+     *  The dispatch origin for this call must be _Signed_.
+     */
+    v23: new CallType(
+        'Utility.as_derivative',
+        sts.struct({
+            index: sts.number(),
+            call: v23.Type_54,
+        })
+    ),
+    /**
+     *  Send a call through an indexed pseudonym of the sender.
+     * 
+     *  Filter from origin are passed along. The call will be dispatched with an origin which
+     *  use the same filter as the origin of this call.
+     * 
+     *  NOTE: If you need to ensure that any account-based filtering is not honored (i.e.
+     *  because you expect `proxy` to have been used prior in the call stack and you do not want
+     *  the call restrictions to apply to any sub-accounts), then use `as_multi_threshold_1`
+     *  in the Multisig pallet instead.
+     * 
+     *  NOTE: Prior to version *12, this was called `as_limited_sub`.
+     * 
+     *  The dispatch origin for this call must be _Signed_.
+     */
+    v26: new CallType(
+        'Utility.as_derivative',
+        sts.struct({
+            index: sts.number(),
+            call: v26.Type_54,
+        })
+    ),
+    /**
+     *  Send a call through an indexed pseudonym of the sender.
+     * 
+     *  Filter from origin are passed along. The call will be dispatched with an origin which
+     *  use the same filter as the origin of this call.
+     * 
+     *  NOTE: If you need to ensure that any account-based filtering is not honored (i.e.
+     *  because you expect `proxy` to have been used prior in the call stack and you do not want
+     *  the call restrictions to apply to any sub-accounts), then use `as_multi_threshold_1`
+     *  in the Multisig pallet instead.
+     * 
+     *  NOTE: Prior to version *12, this was called `as_limited_sub`.
+     * 
+     *  The dispatch origin for this call must be _Signed_.
+     */
+    v32: new CallType(
+        'Utility.as_derivative',
+        sts.struct({
+            index: sts.number(),
+            call: v32.Type_54,
+        })
+    ),
+    /**
+     *  Send a call through an indexed pseudonym of the sender.
+     * 
+     *  Filter from origin are passed along. The call will be dispatched with an origin which
+     *  use the same filter as the origin of this call.
+     * 
+     *  NOTE: If you need to ensure that any account-based filtering is not honored (i.e.
+     *  because you expect `proxy` to have been used prior in the call stack and you do not want
+     *  the call restrictions to apply to any sub-accounts), then use `as_multi_threshold_1`
+     *  in the Multisig pallet instead.
+     * 
+     *  NOTE: Prior to version *12, this was called `as_limited_sub`.
+     * 
+     *  The dispatch origin for this call must be _Signed_.
+     */
     v33: new CallType(
         'Utility.as_derivative',
         sts.struct({
             index: sts.number(),
-            call: v33.Type_43,
+            call: v33.Type_55,
         })
     ),
     /**
@@ -687,7 +1079,7 @@ export const asDerivative =  {
         'Utility.as_derivative',
         sts.struct({
             index: sts.number(),
-            call: v35.Type_43,
+            call: v35.Type_55,
         })
     ),
     /**
@@ -709,7 +1101,7 @@ export const asDerivative =  {
         'Utility.as_derivative',
         sts.struct({
             index: sts.number(),
-            call: v37.Type_43,
+            call: v37.Type_56,
         })
     ),
     /**
@@ -731,7 +1123,7 @@ export const asDerivative =  {
         'Utility.as_derivative',
         sts.struct({
             index: sts.number(),
-            call: v38.Type_43,
+            call: v38.Type_56,
         })
     ),
     /**
@@ -776,28 +1168,6 @@ export const asDerivative =  {
         sts.struct({
             index: sts.number(),
             call: v43.Call,
-        })
-    ),
-    /**
-     * Send a call through an indexed pseudonym of the sender.
-     * 
-     * Filter from origin are passed along. The call will be dispatched with an origin which
-     * use the same filter as the origin of this call.
-     * 
-     * NOTE: If you need to ensure that any account-based filtering is not honored (i.e.
-     * because you expect `proxy` to have been used prior in the call stack and you do not want
-     * the call restrictions to apply to any sub-accounts), then use `as_multi_threshold_1`
-     * in the Multisig pallet instead.
-     * 
-     * NOTE: Prior to version *12, this was called `as_limited_sub`.
-     * 
-     * The dispatch origin for this call must be _Signed_.
-     */
-    v44: new CallType(
-        'Utility.as_derivative',
-        sts.struct({
-            index: sts.number(),
-            call: v44.Call,
         })
     ),
     /**
@@ -881,11 +1251,11 @@ export const asDerivative =  {
      * 
      * The dispatch origin for this call must be _Signed_.
      */
-    v48: new CallType(
+    v50: new CallType(
         'Utility.as_derivative',
         sts.struct({
             index: sts.number(),
-            call: v48.Call,
+            call: v50.Call,
         })
     ),
     /**
@@ -903,55 +1273,11 @@ export const asDerivative =  {
      * 
      * The dispatch origin for this call must be _Signed_.
      */
-    v52: new CallType(
+    v53: new CallType(
         'Utility.as_derivative',
         sts.struct({
             index: sts.number(),
-            call: v52.Call,
-        })
-    ),
-    /**
-     * Send a call through an indexed pseudonym of the sender.
-     * 
-     * Filter from origin are passed along. The call will be dispatched with an origin which
-     * use the same filter as the origin of this call.
-     * 
-     * NOTE: If you need to ensure that any account-based filtering is not honored (i.e.
-     * because you expect `proxy` to have been used prior in the call stack and you do not want
-     * the call restrictions to apply to any sub-accounts), then use `as_multi_threshold_1`
-     * in the Multisig pallet instead.
-     * 
-     * NOTE: Prior to version *12, this was called `as_limited_sub`.
-     * 
-     * The dispatch origin for this call must be _Signed_.
-     */
-    v54: new CallType(
-        'Utility.as_derivative',
-        sts.struct({
-            index: sts.number(),
-            call: v54.Call,
-        })
-    ),
-    /**
-     * Send a call through an indexed pseudonym of the sender.
-     * 
-     * Filter from origin are passed along. The call will be dispatched with an origin which
-     * use the same filter as the origin of this call.
-     * 
-     * NOTE: If you need to ensure that any account-based filtering is not honored (i.e.
-     * because you expect `proxy` to have been used prior in the call stack and you do not want
-     * the call restrictions to apply to any sub-accounts), then use `as_multi_threshold_1`
-     * in the Multisig pallet instead.
-     * 
-     * NOTE: Prior to version *12, this was called `as_limited_sub`.
-     * 
-     * The dispatch origin for this call must be _Signed_.
-     */
-    v55: new CallType(
-        'Utility.as_derivative',
-        sts.struct({
-            index: sts.number(),
-            call: v55.Call,
+            call: v53.Call,
         })
     ),
     /**
@@ -1035,11 +1361,11 @@ export const asDerivative =  {
      * 
      * The dispatch origin for this call must be _Signed_.
      */
-    v62: new CallType(
+    v63: new CallType(
         'Utility.as_derivative',
         sts.struct({
             index: sts.number(),
-            call: v62.Call,
+            call: v63.Call,
         })
     ),
     /**
@@ -1101,28 +1427,6 @@ export const asDerivative =  {
      * 
      * The dispatch origin for this call must be _Signed_.
      */
-    v69: new CallType(
-        'Utility.as_derivative',
-        sts.struct({
-            index: sts.number(),
-            call: v69.Call,
-        })
-    ),
-    /**
-     * Send a call through an indexed pseudonym of the sender.
-     * 
-     * Filter from origin are passed along. The call will be dispatched with an origin which
-     * use the same filter as the origin of this call.
-     * 
-     * NOTE: If you need to ensure that any account-based filtering is not honored (i.e.
-     * because you expect `proxy` to have been used prior in the call stack and you do not want
-     * the call restrictions to apply to any sub-accounts), then use `as_multi_threshold_1`
-     * in the Multisig pallet instead.
-     * 
-     * NOTE: Prior to version *12, this was called `as_limited_sub`.
-     * 
-     * The dispatch origin for this call must be _Signed_.
-     */
     v70: new CallType(
         'Utility.as_derivative',
         sts.struct({
@@ -1152,6 +1456,94 @@ export const asDerivative =  {
             call: v71.Call,
         })
     ),
+    /**
+     * Send a call through an indexed pseudonym of the sender.
+     * 
+     * Filter from origin are passed along. The call will be dispatched with an origin which
+     * use the same filter as the origin of this call.
+     * 
+     * NOTE: If you need to ensure that any account-based filtering is not honored (i.e.
+     * because you expect `proxy` to have been used prior in the call stack and you do not want
+     * the call restrictions to apply to any sub-accounts), then use `as_multi_threshold_1`
+     * in the Multisig pallet instead.
+     * 
+     * NOTE: Prior to version *12, this was called `as_limited_sub`.
+     * 
+     * The dispatch origin for this call must be _Signed_.
+     */
+    v72: new CallType(
+        'Utility.as_derivative',
+        sts.struct({
+            index: sts.number(),
+            call: v72.Call,
+        })
+    ),
+    /**
+     * Send a call through an indexed pseudonym of the sender.
+     * 
+     * Filter from origin are passed along. The call will be dispatched with an origin which
+     * use the same filter as the origin of this call.
+     * 
+     * NOTE: If you need to ensure that any account-based filtering is not honored (i.e.
+     * because you expect `proxy` to have been used prior in the call stack and you do not want
+     * the call restrictions to apply to any sub-accounts), then use `as_multi_threshold_1`
+     * in the Multisig pallet instead.
+     * 
+     * NOTE: Prior to version *12, this was called `as_limited_sub`.
+     * 
+     * The dispatch origin for this call must be _Signed_.
+     */
+    v74: new CallType(
+        'Utility.as_derivative',
+        sts.struct({
+            index: sts.number(),
+            call: v74.Call,
+        })
+    ),
+    /**
+     * Send a call through an indexed pseudonym of the sender.
+     * 
+     * Filter from origin are passed along. The call will be dispatched with an origin which
+     * use the same filter as the origin of this call.
+     * 
+     * NOTE: If you need to ensure that any account-based filtering is not honored (i.e.
+     * because you expect `proxy` to have been used prior in the call stack and you do not want
+     * the call restrictions to apply to any sub-accounts), then use `as_multi_threshold_1`
+     * in the Multisig pallet instead.
+     * 
+     * NOTE: Prior to version *12, this was called `as_limited_sub`.
+     * 
+     * The dispatch origin for this call must be _Signed_.
+     */
+    v77: new CallType(
+        'Utility.as_derivative',
+        sts.struct({
+            index: sts.number(),
+            call: v77.Call,
+        })
+    ),
+    /**
+     * Send a call through an indexed pseudonym of the sender.
+     * 
+     * Filter from origin are passed along. The call will be dispatched with an origin which
+     * use the same filter as the origin of this call.
+     * 
+     * NOTE: If you need to ensure that any account-based filtering is not honored (i.e.
+     * because you expect `proxy` to have been used prior in the call stack and you do not want
+     * the call restrictions to apply to any sub-accounts), then use `as_multi_threshold_1`
+     * in the Multisig pallet instead.
+     * 
+     * NOTE: Prior to version *12, this was called `as_limited_sub`.
+     * 
+     * The dispatch origin for this call must be _Signed_.
+     */
+    v84: new CallType(
+        'Utility.as_derivative',
+        sts.struct({
+            index: sts.number(),
+            call: v84.Call,
+        })
+    ),
 }
 
 export const batchAll =  {
@@ -1171,10 +1563,178 @@ export const batchAll =  {
      *  - Complexity: O(C) where C is the number of calls to be batched.
      *  # </weight>
      */
+    v1: new CallType(
+        'Utility.batch_all',
+        sts.struct({
+            calls: sts.array(() => v1.Type_50),
+        })
+    ),
+    /**
+     *  Send a batch of dispatch calls and atomically execute them.
+     *  The whole transaction will rollback and fail if any of the calls failed.
+     * 
+     *  May be called from any origin.
+     * 
+     *  - `calls`: The calls to be dispatched from the same origin.
+     * 
+     *  If origin is root then call are dispatch without checking origin filter. (This includes
+     *  bypassing `frame_system::Config::BaseCallFilter`).
+     * 
+     *  # <weight>
+     *  - Complexity: O(C) where C is the number of calls to be batched.
+     *  # </weight>
+     */
+    v3: new CallType(
+        'Utility.batch_all',
+        sts.struct({
+            calls: sts.array(() => v3.Type_49),
+        })
+    ),
+    /**
+     *  Send a batch of dispatch calls and atomically execute them.
+     *  The whole transaction will rollback and fail if any of the calls failed.
+     * 
+     *  May be called from any origin.
+     * 
+     *  - `calls`: The calls to be dispatched from the same origin.
+     * 
+     *  If origin is root then call are dispatch without checking origin filter. (This includes
+     *  bypassing `frame_system::Config::BaseCallFilter`).
+     * 
+     *  # <weight>
+     *  - Complexity: O(C) where C is the number of calls to be batched.
+     *  # </weight>
+     */
+    v7: new CallType(
+        'Utility.batch_all',
+        sts.struct({
+            calls: sts.array(() => v7.Type_49),
+        })
+    ),
+    /**
+     *  Send a batch of dispatch calls and atomically execute them.
+     *  The whole transaction will rollback and fail if any of the calls failed.
+     * 
+     *  May be called from any origin.
+     * 
+     *  - `calls`: The calls to be dispatched from the same origin.
+     * 
+     *  If origin is root then call are dispatch without checking origin filter. (This includes
+     *  bypassing `frame_system::Config::BaseCallFilter`).
+     * 
+     *  # <weight>
+     *  - Complexity: O(C) where C is the number of calls to be batched.
+     *  # </weight>
+     */
+    v19: new CallType(
+        'Utility.batch_all',
+        sts.struct({
+            calls: sts.array(() => v19.Type_54),
+        })
+    ),
+    /**
+     *  Send a batch of dispatch calls and atomically execute them.
+     *  The whole transaction will rollback and fail if any of the calls failed.
+     * 
+     *  May be called from any origin.
+     * 
+     *  - `calls`: The calls to be dispatched from the same origin.
+     * 
+     *  If origin is root then call are dispatch without checking origin filter. (This includes
+     *  bypassing `frame_system::Config::BaseCallFilter`).
+     * 
+     *  # <weight>
+     *  - Complexity: O(C) where C is the number of calls to be batched.
+     *  # </weight>
+     */
+    v22: new CallType(
+        'Utility.batch_all',
+        sts.struct({
+            calls: sts.array(() => v22.Type_43),
+        })
+    ),
+    /**
+     *  Send a batch of dispatch calls and atomically execute them.
+     *  The whole transaction will rollback and fail if any of the calls failed.
+     * 
+     *  May be called from any origin.
+     * 
+     *  - `calls`: The calls to be dispatched from the same origin.
+     * 
+     *  If origin is root then call are dispatch without checking origin filter. (This includes
+     *  bypassing `frame_system::Config::BaseCallFilter`).
+     * 
+     *  # <weight>
+     *  - Complexity: O(C) where C is the number of calls to be batched.
+     *  # </weight>
+     */
+    v23: new CallType(
+        'Utility.batch_all',
+        sts.struct({
+            calls: sts.array(() => v23.Type_54),
+        })
+    ),
+    /**
+     *  Send a batch of dispatch calls and atomically execute them.
+     *  The whole transaction will rollback and fail if any of the calls failed.
+     * 
+     *  May be called from any origin.
+     * 
+     *  - `calls`: The calls to be dispatched from the same origin.
+     * 
+     *  If origin is root then call are dispatch without checking origin filter. (This includes
+     *  bypassing `frame_system::Config::BaseCallFilter`).
+     * 
+     *  # <weight>
+     *  - Complexity: O(C) where C is the number of calls to be batched.
+     *  # </weight>
+     */
+    v26: new CallType(
+        'Utility.batch_all',
+        sts.struct({
+            calls: sts.array(() => v26.Type_54),
+        })
+    ),
+    /**
+     *  Send a batch of dispatch calls and atomically execute them.
+     *  The whole transaction will rollback and fail if any of the calls failed.
+     * 
+     *  May be called from any origin.
+     * 
+     *  - `calls`: The calls to be dispatched from the same origin.
+     * 
+     *  If origin is root then call are dispatch without checking origin filter. (This includes
+     *  bypassing `frame_system::Config::BaseCallFilter`).
+     * 
+     *  # <weight>
+     *  - Complexity: O(C) where C is the number of calls to be batched.
+     *  # </weight>
+     */
+    v32: new CallType(
+        'Utility.batch_all',
+        sts.struct({
+            calls: sts.array(() => v32.Type_54),
+        })
+    ),
+    /**
+     *  Send a batch of dispatch calls and atomically execute them.
+     *  The whole transaction will rollback and fail if any of the calls failed.
+     * 
+     *  May be called from any origin.
+     * 
+     *  - `calls`: The calls to be dispatched from the same origin.
+     * 
+     *  If origin is root then call are dispatch without checking origin filter. (This includes
+     *  bypassing `frame_system::Config::BaseCallFilter`).
+     * 
+     *  # <weight>
+     *  - Complexity: O(C) where C is the number of calls to be batched.
+     *  # </weight>
+     */
     v33: new CallType(
         'Utility.batch_all',
         sts.struct({
-            calls: sts.array(() => v33.Type_43),
+            calls: sts.array(() => v33.Type_55),
         })
     ),
     /**
@@ -1195,7 +1755,7 @@ export const batchAll =  {
     v35: new CallType(
         'Utility.batch_all',
         sts.struct({
-            calls: sts.array(() => v35.Type_43),
+            calls: sts.array(() => v35.Type_55),
         })
     ),
     /**
@@ -1216,7 +1776,7 @@ export const batchAll =  {
     v37: new CallType(
         'Utility.batch_all',
         sts.struct({
-            calls: sts.array(() => v37.Type_43),
+            calls: sts.array(() => v37.Type_56),
         })
     ),
     /**
@@ -1237,7 +1797,7 @@ export const batchAll =  {
     v38: new CallType(
         'Utility.batch_all',
         sts.struct({
-            calls: sts.array(() => v38.Type_43),
+            calls: sts.array(() => v38.Type_56),
         })
     ),
     /**
@@ -1282,28 +1842,6 @@ export const batchAll =  {
         'Utility.batch_all',
         sts.struct({
             calls: sts.array(() => v43.Call),
-        })
-    ),
-    /**
-     * Send a batch of dispatch calls and atomically execute them.
-     * The whole transaction will rollback and fail if any of the calls failed.
-     * 
-     * May be called from any origin.
-     * 
-     * - `calls`: The calls to be dispatched from the same origin. The number of call must not
-     *   exceed the constant: `batched_calls_limit` (available in constant metadata).
-     * 
-     * If origin is root then call are dispatch without checking origin filter. (This includes
-     * bypassing `frame_system::Config::BaseCallFilter`).
-     * 
-     * # <weight>
-     * - Complexity: O(C) where C is the number of calls to be batched.
-     * # </weight>
-     */
-    v44: new CallType(
-        'Utility.batch_all',
-        sts.struct({
-            calls: sts.array(() => v44.Call),
         })
     ),
     /**
@@ -1388,10 +1926,10 @@ export const batchAll =  {
      * - Complexity: O(C) where C is the number of calls to be batched.
      * # </weight>
      */
-    v48: new CallType(
+    v50: new CallType(
         'Utility.batch_all',
         sts.struct({
-            calls: sts.array(() => v48.Call),
+            calls: sts.array(() => v50.Call),
         })
     ),
     /**
@@ -1410,54 +1948,10 @@ export const batchAll =  {
      * - Complexity: O(C) where C is the number of calls to be batched.
      * # </weight>
      */
-    v52: new CallType(
+    v53: new CallType(
         'Utility.batch_all',
         sts.struct({
-            calls: sts.array(() => v52.Call),
-        })
-    ),
-    /**
-     * Send a batch of dispatch calls and atomically execute them.
-     * The whole transaction will rollback and fail if any of the calls failed.
-     * 
-     * May be called from any origin except `None`.
-     * 
-     * - `calls`: The calls to be dispatched from the same origin. The number of call must not
-     *   exceed the constant: `batched_calls_limit` (available in constant metadata).
-     * 
-     * If origin is root then the calls are dispatched without checking origin filter. (This
-     * includes bypassing `frame_system::Config::BaseCallFilter`).
-     * 
-     * # <weight>
-     * - Complexity: O(C) where C is the number of calls to be batched.
-     * # </weight>
-     */
-    v54: new CallType(
-        'Utility.batch_all',
-        sts.struct({
-            calls: sts.array(() => v54.Call),
-        })
-    ),
-    /**
-     * Send a batch of dispatch calls and atomically execute them.
-     * The whole transaction will rollback and fail if any of the calls failed.
-     * 
-     * May be called from any origin except `None`.
-     * 
-     * - `calls`: The calls to be dispatched from the same origin. The number of call must not
-     *   exceed the constant: `batched_calls_limit` (available in constant metadata).
-     * 
-     * If origin is root then the calls are dispatched without checking origin filter. (This
-     * includes bypassing `frame_system::Config::BaseCallFilter`).
-     * 
-     * # <weight>
-     * - Complexity: O(C) where C is the number of calls to be batched.
-     * # </weight>
-     */
-    v55: new CallType(
-        'Utility.batch_all',
-        sts.struct({
-            calls: sts.array(() => v55.Call),
+            calls: sts.array(() => v53.Call),
         })
     ),
     /**
@@ -1542,10 +2036,10 @@ export const batchAll =  {
      * - Complexity: O(C) where C is the number of calls to be batched.
      * # </weight>
      */
-    v62: new CallType(
+    v63: new CallType(
         'Utility.batch_all',
         sts.struct({
-            calls: sts.array(() => v62.Call),
+            calls: sts.array(() => v63.Call),
         })
     ),
     /**
@@ -1608,28 +2102,6 @@ export const batchAll =  {
      * - Complexity: O(C) where C is the number of calls to be batched.
      * # </weight>
      */
-    v69: new CallType(
-        'Utility.batch_all',
-        sts.struct({
-            calls: sts.array(() => v69.Call),
-        })
-    ),
-    /**
-     * Send a batch of dispatch calls and atomically execute them.
-     * The whole transaction will rollback and fail if any of the calls failed.
-     * 
-     * May be called from any origin except `None`.
-     * 
-     * - `calls`: The calls to be dispatched from the same origin. The number of call must not
-     *   exceed the constant: `batched_calls_limit` (available in constant metadata).
-     * 
-     * If origin is root then the calls are dispatched without checking origin filter. (This
-     * includes bypassing `frame_system::Config::BaseCallFilter`).
-     * 
-     * # <weight>
-     * - Complexity: O(C) where C is the number of calls to be batched.
-     * # </weight>
-     */
     v70: new CallType(
         'Utility.batch_all',
         sts.struct({
@@ -1656,6 +2128,94 @@ export const batchAll =  {
         'Utility.batch_all',
         sts.struct({
             calls: sts.array(() => v71.Call),
+        })
+    ),
+    /**
+     * Send a batch of dispatch calls and atomically execute them.
+     * The whole transaction will rollback and fail if any of the calls failed.
+     * 
+     * May be called from any origin except `None`.
+     * 
+     * - `calls`: The calls to be dispatched from the same origin. The number of call must not
+     *   exceed the constant: `batched_calls_limit` (available in constant metadata).
+     * 
+     * If origin is root then the calls are dispatched without checking origin filter. (This
+     * includes bypassing `frame_system::Config::BaseCallFilter`).
+     * 
+     * # <weight>
+     * - Complexity: O(C) where C is the number of calls to be batched.
+     * # </weight>
+     */
+    v72: new CallType(
+        'Utility.batch_all',
+        sts.struct({
+            calls: sts.array(() => v72.Call),
+        })
+    ),
+    /**
+     * Send a batch of dispatch calls and atomically execute them.
+     * The whole transaction will rollback and fail if any of the calls failed.
+     * 
+     * May be called from any origin except `None`.
+     * 
+     * - `calls`: The calls to be dispatched from the same origin. The number of call must not
+     *   exceed the constant: `batched_calls_limit` (available in constant metadata).
+     * 
+     * If origin is root then the calls are dispatched without checking origin filter. (This
+     * includes bypassing `frame_system::Config::BaseCallFilter`).
+     * 
+     * # <weight>
+     * - Complexity: O(C) where C is the number of calls to be batched.
+     * # </weight>
+     */
+    v74: new CallType(
+        'Utility.batch_all',
+        sts.struct({
+            calls: sts.array(() => v74.Call),
+        })
+    ),
+    /**
+     * Send a batch of dispatch calls and atomically execute them.
+     * The whole transaction will rollback and fail if any of the calls failed.
+     * 
+     * May be called from any origin except `None`.
+     * 
+     * - `calls`: The calls to be dispatched from the same origin. The number of call must not
+     *   exceed the constant: `batched_calls_limit` (available in constant metadata).
+     * 
+     * If origin is root then the calls are dispatched without checking origin filter. (This
+     * includes bypassing `frame_system::Config::BaseCallFilter`).
+     * 
+     * # <weight>
+     * - Complexity: O(C) where C is the number of calls to be batched.
+     * # </weight>
+     */
+    v77: new CallType(
+        'Utility.batch_all',
+        sts.struct({
+            calls: sts.array(() => v77.Call),
+        })
+    ),
+    /**
+     * Send a batch of dispatch calls and atomically execute them.
+     * The whole transaction will rollback and fail if any of the calls failed.
+     * 
+     * May be called from any origin except `None`.
+     * 
+     * - `calls`: The calls to be dispatched from the same origin. The number of call must not
+     *   exceed the constant: `batched_calls_limit` (available in constant metadata).
+     * 
+     * If origin is root then the calls are dispatched without checking origin filter. (This
+     * includes bypassing `frame_system::Config::BaseCallFilter`).
+     * 
+     * # <weight>
+     * - Complexity: O(C) where C is the number of calls to be batched.
+     * # </weight>
+     */
+    v84: new CallType(
+        'Utility.batch_all',
+        sts.struct({
+            calls: sts.array(() => v84.Call),
         })
     ),
 }
@@ -1698,25 +2258,6 @@ export const dispatchAs =  {
         sts.struct({
             asOrigin: v43.OriginCaller,
             call: v43.Call,
-        })
-    ),
-    /**
-     * Dispatches a function call with a provided origin.
-     * 
-     * The dispatch origin for this call must be _Root_.
-     * 
-     * # <weight>
-     * - O(1).
-     * - Limited storage reads.
-     * - One DB write (event).
-     * - Weight of derivative `call` execution + T::WeightInfo::dispatch_as().
-     * # </weight>
-     */
-    v44: new CallType(
-        'Utility.dispatch_as',
-        sts.struct({
-            asOrigin: v44.OriginCaller,
-            call: v44.Call,
         })
     ),
     /**
@@ -1788,11 +2329,11 @@ export const dispatchAs =  {
      * - Weight of derivative `call` execution + T::WeightInfo::dispatch_as().
      * # </weight>
      */
-    v48: new CallType(
+    v50: new CallType(
         'Utility.dispatch_as',
         sts.struct({
-            asOrigin: v48.OriginCaller,
-            call: v48.Call,
+            asOrigin: v50.OriginCaller,
+            call: v50.Call,
         })
     ),
     /**
@@ -1807,49 +2348,11 @@ export const dispatchAs =  {
      * - Weight of derivative `call` execution + T::WeightInfo::dispatch_as().
      * # </weight>
      */
-    v52: new CallType(
+    v53: new CallType(
         'Utility.dispatch_as',
         sts.struct({
-            asOrigin: v52.OriginCaller,
-            call: v52.Call,
-        })
-    ),
-    /**
-     * Dispatches a function call with a provided origin.
-     * 
-     * The dispatch origin for this call must be _Root_.
-     * 
-     * # <weight>
-     * - O(1).
-     * - Limited storage reads.
-     * - One DB write (event).
-     * - Weight of derivative `call` execution + T::WeightInfo::dispatch_as().
-     * # </weight>
-     */
-    v54: new CallType(
-        'Utility.dispatch_as',
-        sts.struct({
-            asOrigin: v54.OriginCaller,
-            call: v54.Call,
-        })
-    ),
-    /**
-     * Dispatches a function call with a provided origin.
-     * 
-     * The dispatch origin for this call must be _Root_.
-     * 
-     * # <weight>
-     * - O(1).
-     * - Limited storage reads.
-     * - One DB write (event).
-     * - Weight of derivative `call` execution + T::WeightInfo::dispatch_as().
-     * # </weight>
-     */
-    v55: new CallType(
-        'Utility.dispatch_as',
-        sts.struct({
-            asOrigin: v55.OriginCaller,
-            call: v55.Call,
+            asOrigin: v53.OriginCaller,
+            call: v53.Call,
         })
     ),
     /**
@@ -1921,11 +2424,11 @@ export const dispatchAs =  {
      * - Weight of derivative `call` execution + T::WeightInfo::dispatch_as().
      * # </weight>
      */
-    v62: new CallType(
+    v63: new CallType(
         'Utility.dispatch_as',
         sts.struct({
-            asOrigin: v62.OriginCaller,
-            call: v62.Call,
+            asOrigin: v63.OriginCaller,
+            call: v63.Call,
         })
     ),
     /**
@@ -1978,25 +2481,6 @@ export const dispatchAs =  {
      * - Weight of derivative `call` execution + T::WeightInfo::dispatch_as().
      * # </weight>
      */
-    v69: new CallType(
-        'Utility.dispatch_as',
-        sts.struct({
-            asOrigin: v69.OriginCaller,
-            call: v69.Call,
-        })
-    ),
-    /**
-     * Dispatches a function call with a provided origin.
-     * 
-     * The dispatch origin for this call must be _Root_.
-     * 
-     * # <weight>
-     * - O(1).
-     * - Limited storage reads.
-     * - One DB write (event).
-     * - Weight of derivative `call` execution + T::WeightInfo::dispatch_as().
-     * # </weight>
-     */
     v70: new CallType(
         'Utility.dispatch_as',
         sts.struct({
@@ -2021,6 +2505,82 @@ export const dispatchAs =  {
         sts.struct({
             asOrigin: v71.OriginCaller,
             call: v71.Call,
+        })
+    ),
+    /**
+     * Dispatches a function call with a provided origin.
+     * 
+     * The dispatch origin for this call must be _Root_.
+     * 
+     * # <weight>
+     * - O(1).
+     * - Limited storage reads.
+     * - One DB write (event).
+     * - Weight of derivative `call` execution + T::WeightInfo::dispatch_as().
+     * # </weight>
+     */
+    v72: new CallType(
+        'Utility.dispatch_as',
+        sts.struct({
+            asOrigin: v72.OriginCaller,
+            call: v72.Call,
+        })
+    ),
+    /**
+     * Dispatches a function call with a provided origin.
+     * 
+     * The dispatch origin for this call must be _Root_.
+     * 
+     * # <weight>
+     * - O(1).
+     * - Limited storage reads.
+     * - One DB write (event).
+     * - Weight of derivative `call` execution + T::WeightInfo::dispatch_as().
+     * # </weight>
+     */
+    v74: new CallType(
+        'Utility.dispatch_as',
+        sts.struct({
+            asOrigin: v74.OriginCaller,
+            call: v74.Call,
+        })
+    ),
+    /**
+     * Dispatches a function call with a provided origin.
+     * 
+     * The dispatch origin for this call must be _Root_.
+     * 
+     * # <weight>
+     * - O(1).
+     * - Limited storage reads.
+     * - One DB write (event).
+     * - Weight of derivative `call` execution + T::WeightInfo::dispatch_as().
+     * # </weight>
+     */
+    v77: new CallType(
+        'Utility.dispatch_as',
+        sts.struct({
+            asOrigin: v77.OriginCaller,
+            call: v77.Call,
+        })
+    ),
+    /**
+     * Dispatches a function call with a provided origin.
+     * 
+     * The dispatch origin for this call must be _Root_.
+     * 
+     * # <weight>
+     * - O(1).
+     * - Limited storage reads.
+     * - One DB write (event).
+     * - Weight of derivative `call` execution + T::WeightInfo::dispatch_as().
+     * # </weight>
+     */
+    v84: new CallType(
+        'Utility.dispatch_as',
+        sts.struct({
+            asOrigin: v84.OriginCaller,
+            call: v84.Call,
         })
     ),
 }
@@ -2069,28 +2629,6 @@ export const forceBatch =  {
         'Utility.force_batch',
         sts.struct({
             calls: sts.array(() => v43.Call),
-        })
-    ),
-    /**
-     * Send a batch of dispatch calls.
-     * Unlike `batch`, it allows errors and won't interrupt.
-     * 
-     * May be called from any origin.
-     * 
-     * - `calls`: The calls to be dispatched from the same origin. The number of call must not
-     *   exceed the constant: `batched_calls_limit` (available in constant metadata).
-     * 
-     * If origin is root then call are dispatch without checking origin filter. (This includes
-     * bypassing `frame_system::Config::BaseCallFilter`).
-     * 
-     * # <weight>
-     * - Complexity: O(C) where C is the number of calls to be batched.
-     * # </weight>
-     */
-    v44: new CallType(
-        'Utility.force_batch',
-        sts.struct({
-            calls: sts.array(() => v44.Call),
         })
     ),
     /**
@@ -2175,10 +2713,10 @@ export const forceBatch =  {
      * - Complexity: O(C) where C is the number of calls to be batched.
      * # </weight>
      */
-    v48: new CallType(
+    v50: new CallType(
         'Utility.force_batch',
         sts.struct({
-            calls: sts.array(() => v48.Call),
+            calls: sts.array(() => v50.Call),
         })
     ),
     /**
@@ -2197,54 +2735,10 @@ export const forceBatch =  {
      * - Complexity: O(C) where C is the number of calls to be batched.
      * # </weight>
      */
-    v52: new CallType(
+    v53: new CallType(
         'Utility.force_batch',
         sts.struct({
-            calls: sts.array(() => v52.Call),
-        })
-    ),
-    /**
-     * Send a batch of dispatch calls.
-     * Unlike `batch`, it allows errors and won't interrupt.
-     * 
-     * May be called from any origin except `None`.
-     * 
-     * - `calls`: The calls to be dispatched from the same origin. The number of call must not
-     *   exceed the constant: `batched_calls_limit` (available in constant metadata).
-     * 
-     * If origin is root then the calls are dispatch without checking origin filter. (This
-     * includes bypassing `frame_system::Config::BaseCallFilter`).
-     * 
-     * # <weight>
-     * - Complexity: O(C) where C is the number of calls to be batched.
-     * # </weight>
-     */
-    v54: new CallType(
-        'Utility.force_batch',
-        sts.struct({
-            calls: sts.array(() => v54.Call),
-        })
-    ),
-    /**
-     * Send a batch of dispatch calls.
-     * Unlike `batch`, it allows errors and won't interrupt.
-     * 
-     * May be called from any origin except `None`.
-     * 
-     * - `calls`: The calls to be dispatched from the same origin. The number of call must not
-     *   exceed the constant: `batched_calls_limit` (available in constant metadata).
-     * 
-     * If origin is root then the calls are dispatch without checking origin filter. (This
-     * includes bypassing `frame_system::Config::BaseCallFilter`).
-     * 
-     * # <weight>
-     * - Complexity: O(C) where C is the number of calls to be batched.
-     * # </weight>
-     */
-    v55: new CallType(
-        'Utility.force_batch',
-        sts.struct({
-            calls: sts.array(() => v55.Call),
+            calls: sts.array(() => v53.Call),
         })
     ),
     /**
@@ -2329,10 +2823,10 @@ export const forceBatch =  {
      * - Complexity: O(C) where C is the number of calls to be batched.
      * # </weight>
      */
-    v62: new CallType(
+    v63: new CallType(
         'Utility.force_batch',
         sts.struct({
-            calls: sts.array(() => v62.Call),
+            calls: sts.array(() => v63.Call),
         })
     ),
     /**
@@ -2395,28 +2889,6 @@ export const forceBatch =  {
      * - Complexity: O(C) where C is the number of calls to be batched.
      * # </weight>
      */
-    v69: new CallType(
-        'Utility.force_batch',
-        sts.struct({
-            calls: sts.array(() => v69.Call),
-        })
-    ),
-    /**
-     * Send a batch of dispatch calls.
-     * Unlike `batch`, it allows errors and won't interrupt.
-     * 
-     * May be called from any origin except `None`.
-     * 
-     * - `calls`: The calls to be dispatched from the same origin. The number of call must not
-     *   exceed the constant: `batched_calls_limit` (available in constant metadata).
-     * 
-     * If origin is root then the calls are dispatch without checking origin filter. (This
-     * includes bypassing `frame_system::Config::BaseCallFilter`).
-     * 
-     * # <weight>
-     * - Complexity: O(C) where C is the number of calls to be batched.
-     * # </weight>
-     */
     v70: new CallType(
         'Utility.force_batch',
         sts.struct({
@@ -2445,6 +2917,94 @@ export const forceBatch =  {
             calls: sts.array(() => v71.Call),
         })
     ),
+    /**
+     * Send a batch of dispatch calls.
+     * Unlike `batch`, it allows errors and won't interrupt.
+     * 
+     * May be called from any origin except `None`.
+     * 
+     * - `calls`: The calls to be dispatched from the same origin. The number of call must not
+     *   exceed the constant: `batched_calls_limit` (available in constant metadata).
+     * 
+     * If origin is root then the calls are dispatch without checking origin filter. (This
+     * includes bypassing `frame_system::Config::BaseCallFilter`).
+     * 
+     * # <weight>
+     * - Complexity: O(C) where C is the number of calls to be batched.
+     * # </weight>
+     */
+    v72: new CallType(
+        'Utility.force_batch',
+        sts.struct({
+            calls: sts.array(() => v72.Call),
+        })
+    ),
+    /**
+     * Send a batch of dispatch calls.
+     * Unlike `batch`, it allows errors and won't interrupt.
+     * 
+     * May be called from any origin except `None`.
+     * 
+     * - `calls`: The calls to be dispatched from the same origin. The number of call must not
+     *   exceed the constant: `batched_calls_limit` (available in constant metadata).
+     * 
+     * If origin is root then the calls are dispatch without checking origin filter. (This
+     * includes bypassing `frame_system::Config::BaseCallFilter`).
+     * 
+     * # <weight>
+     * - Complexity: O(C) where C is the number of calls to be batched.
+     * # </weight>
+     */
+    v74: new CallType(
+        'Utility.force_batch',
+        sts.struct({
+            calls: sts.array(() => v74.Call),
+        })
+    ),
+    /**
+     * Send a batch of dispatch calls.
+     * Unlike `batch`, it allows errors and won't interrupt.
+     * 
+     * May be called from any origin except `None`.
+     * 
+     * - `calls`: The calls to be dispatched from the same origin. The number of call must not
+     *   exceed the constant: `batched_calls_limit` (available in constant metadata).
+     * 
+     * If origin is root then the calls are dispatch without checking origin filter. (This
+     * includes bypassing `frame_system::Config::BaseCallFilter`).
+     * 
+     * # <weight>
+     * - Complexity: O(C) where C is the number of calls to be batched.
+     * # </weight>
+     */
+    v77: new CallType(
+        'Utility.force_batch',
+        sts.struct({
+            calls: sts.array(() => v77.Call),
+        })
+    ),
+    /**
+     * Send a batch of dispatch calls.
+     * Unlike `batch`, it allows errors and won't interrupt.
+     * 
+     * May be called from any origin except `None`.
+     * 
+     * - `calls`: The calls to be dispatched from the same origin. The number of call must not
+     *   exceed the constant: `batched_calls_limit` (available in constant metadata).
+     * 
+     * If origin is root then the calls are dispatch without checking origin filter. (This
+     * includes bypassing `frame_system::Config::BaseCallFilter`).
+     * 
+     * # <weight>
+     * - Complexity: O(C) where C is the number of calls to be batched.
+     * # </weight>
+     */
+    v84: new CallType(
+        'Utility.force_batch',
+        sts.struct({
+            calls: sts.array(() => v84.Call),
+        })
+    ),
 }
 
 export const withWeight =  {
@@ -2457,41 +3017,11 @@ export const withWeight =  {
      * 
      * The dispatch origin for this call must be _Root_.
      */
-    v52: new CallType(
+    v53: new CallType(
         'Utility.with_weight',
         sts.struct({
-            call: v52.Call,
-            weight: v52.Weight,
-        })
-    ),
-    /**
-     * Dispatch a function call with a specified weight.
-     * 
-     * This function does not check the weight of the call, and instead allows the
-     * Root origin to specify the weight of the call.
-     * 
-     * The dispatch origin for this call must be _Root_.
-     */
-    v54: new CallType(
-        'Utility.with_weight',
-        sts.struct({
-            call: v54.Call,
-            weight: v54.Weight,
-        })
-    ),
-    /**
-     * Dispatch a function call with a specified weight.
-     * 
-     * This function does not check the weight of the call, and instead allows the
-     * Root origin to specify the weight of the call.
-     * 
-     * The dispatch origin for this call must be _Root_.
-     */
-    v55: new CallType(
-        'Utility.with_weight',
-        sts.struct({
-            call: v55.Call,
-            weight: v55.Weight,
+            call: v53.Call,
+            weight: v53.Weight,
         })
     ),
     /**
@@ -2547,11 +3077,11 @@ export const withWeight =  {
      * 
      * The dispatch origin for this call must be _Root_.
      */
-    v62: new CallType(
+    v63: new CallType(
         'Utility.with_weight',
         sts.struct({
-            call: v62.Call,
-            weight: v62.Weight,
+            call: v63.Call,
+            weight: v63.Weight,
         })
     ),
     /**
@@ -2592,21 +3122,6 @@ export const withWeight =  {
      * 
      * The dispatch origin for this call must be _Root_.
      */
-    v69: new CallType(
-        'Utility.with_weight',
-        sts.struct({
-            call: v69.Call,
-            weight: v69.Weight,
-        })
-    ),
-    /**
-     * Dispatch a function call with a specified weight.
-     * 
-     * This function does not check the weight of the call, and instead allows the
-     * Root origin to specify the weight of the call.
-     * 
-     * The dispatch origin for this call must be _Root_.
-     */
     v70: new CallType(
         'Utility.with_weight',
         sts.struct({
@@ -2627,6 +3142,66 @@ export const withWeight =  {
         sts.struct({
             call: v71.Call,
             weight: v71.Weight,
+        })
+    ),
+    /**
+     * Dispatch a function call with a specified weight.
+     * 
+     * This function does not check the weight of the call, and instead allows the
+     * Root origin to specify the weight of the call.
+     * 
+     * The dispatch origin for this call must be _Root_.
+     */
+    v72: new CallType(
+        'Utility.with_weight',
+        sts.struct({
+            call: v72.Call,
+            weight: v72.Weight,
+        })
+    ),
+    /**
+     * Dispatch a function call with a specified weight.
+     * 
+     * This function does not check the weight of the call, and instead allows the
+     * Root origin to specify the weight of the call.
+     * 
+     * The dispatch origin for this call must be _Root_.
+     */
+    v74: new CallType(
+        'Utility.with_weight',
+        sts.struct({
+            call: v74.Call,
+            weight: v74.Weight,
+        })
+    ),
+    /**
+     * Dispatch a function call with a specified weight.
+     * 
+     * This function does not check the weight of the call, and instead allows the
+     * Root origin to specify the weight of the call.
+     * 
+     * The dispatch origin for this call must be _Root_.
+     */
+    v77: new CallType(
+        'Utility.with_weight',
+        sts.struct({
+            call: v77.Call,
+            weight: v77.Weight,
+        })
+    ),
+    /**
+     * Dispatch a function call with a specified weight.
+     * 
+     * This function does not check the weight of the call, and instead allows the
+     * Root origin to specify the weight of the call.
+     * 
+     * The dispatch origin for this call must be _Root_.
+     */
+    v84: new CallType(
+        'Utility.with_weight',
+        sts.struct({
+            call: v84.Call,
+            weight: v84.Weight,
         })
     ),
 }

@@ -29,6 +29,7 @@ import * as v71 from '../v71'
 import * as v72 from '../v72'
 import * as v74 from '../v74'
 import * as v77 from '../v77'
+import * as v84 from '../v84'
 
 export const proposals =  {
     /**
@@ -167,6 +168,10 @@ export const proposalOf =  {
      *  Actual proposal for a given hash, if it's current.
      */
     v77: new StorageType('Council.ProposalOf', 'Optional', [v77.H256], v77.Call) as ProposalOfV77,
+    /**
+     *  Actual proposal for a given hash, if it's current.
+     */
+    v84: new StorageType('Council.ProposalOf', 'Optional', [v84.H256], v84.Call) as ProposalOfV84,
 }
 
 /**
@@ -677,6 +682,23 @@ export interface ProposalOfV77  {
     getPairs(block: Block, key: v77.H256): Promise<[k: v77.H256, v: (v77.Call | undefined)][]>
     getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v77.H256, v: (v77.Call | undefined)][]>
     getPairsPaged(pageSize: number, block: Block, key: v77.H256): AsyncIterable<[k: v77.H256, v: (v77.Call | undefined)][]>
+}
+
+/**
+ *  Actual proposal for a given hash, if it's current.
+ */
+export interface ProposalOfV84  {
+    is(block: RuntimeCtx): boolean
+    get(block: Block, key: v84.H256): Promise<(v84.Call | undefined)>
+    getMany(block: Block, keys: v84.H256[]): Promise<(v84.Call | undefined)[]>
+    getKeys(block: Block): Promise<v84.H256[]>
+    getKeys(block: Block, key: v84.H256): Promise<v84.H256[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v84.H256[]>
+    getKeysPaged(pageSize: number, block: Block, key: v84.H256): AsyncIterable<v84.H256[]>
+    getPairs(block: Block): Promise<[k: v84.H256, v: (v84.Call | undefined)][]>
+    getPairs(block: Block, key: v84.H256): Promise<[k: v84.H256, v: (v84.Call | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v84.H256, v: (v84.Call | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v84.H256): AsyncIterable<[k: v84.H256, v: (v84.Call | undefined)][]>
 }
 
 export const voting =  {

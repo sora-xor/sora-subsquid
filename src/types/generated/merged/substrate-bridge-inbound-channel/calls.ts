@@ -8,21 +8,12 @@ export const submit = {
 	name: 'SubstrateBridgeInboundChannel.submit',
 	v64: productionCalls.submit['v64'],
 	v70: productionCalls.submit['v70'],
-	v52Stage: stageCalls.submit['v52'],
-	v54Stage: stageCalls.submit['v54'],
-	v57Stage: stageCalls.submit['v57'],
+	v84: productionCalls.submit['v84'],
 	v64Stage: stageCalls.submit['v64'],
 	v70Stage: stageCalls.submit['v70'],
-	v52Test: testCalls.submit['v52'],
-	v54Test: testCalls.submit['v54'],
-	v57Test: testCalls.submit['v57'],
+	v84Stage: stageCalls.submit['v84'],
 	v64Test: testCalls.submit['v64'],
 	v70Test: testCalls.submit['v70'],
-	v70Dev: devCalls.submit['v70'],
-}
-
-export const setRewardFraction = {
-	name: 'SubstrateBridgeInboundChannel.set_reward_fraction',
-	v52Stage: stageCalls.setRewardFraction['v52'],
-	v52Test: testCalls.setRewardFraction['v52'],
+	v84Test: testCalls.submit['v84'],
+	v85Dev: devCalls.submit['v85'],
 }

@@ -1,5 +1,6 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
 import * as v77 from '../v77'
+import * as v84 from '../v84'
 
 export const mint =  {
     name: 'SubstrateBridgeApp.mint',
@@ -15,6 +16,20 @@ export const mint =  {
             sender: v77.GenericAccount,
             recipient: v77.AccountId32,
             amount: v77.GenericBalance,
+        })
+    ),
+    /**
+     * Function used to mint or unlock tokens
+     * The Origin for this call is the Bridge Origin
+     * Only the relayer can call this function
+     */
+    v84: new CallType(
+        'SubstrateBridgeApp.mint',
+        sts.struct({
+            assetId: v84.AssetId32,
+            sender: v84.GenericAccount,
+            recipient: v84.AccountId32,
+            amount: v84.GenericBalance,
         })
     ),
 }

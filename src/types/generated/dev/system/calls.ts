@@ -9,7 +9,7 @@ export const remark =  {
      * - `O(1)`
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'System.remark',
         sts.struct({
             remark: sts.bytes(),
@@ -22,7 +22,7 @@ export const setHeapPages =  {
     /**
      * Set the number of pages in the WebAssembly environment's heap.
      */
-    v70: new CallType(
+    v85: new CallType(
         'System.set_heap_pages',
         sts.struct({
             pages: sts.bigint(),
@@ -46,7 +46,7 @@ export const setCode =  {
      * expensive. We will treat this as a full block.
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'System.set_code',
         sts.struct({
             code: sts.bytes(),
@@ -67,7 +67,7 @@ export const setCodeWithoutChecks =  {
      * The weight of this function is dependent on the runtime. We will treat this as a full
      * block. # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'System.set_code_without_checks',
         sts.struct({
             code: sts.bytes(),
@@ -80,7 +80,7 @@ export const setStorage =  {
     /**
      * Set some items of storage.
      */
-    v70: new CallType(
+    v85: new CallType(
         'System.set_storage',
         sts.struct({
             items: sts.array(() => sts.tuple(() => [sts.bytes(), sts.bytes()])),
@@ -93,7 +93,7 @@ export const killStorage =  {
     /**
      * Kill some items from storage.
      */
-    v70: new CallType(
+    v85: new CallType(
         'System.kill_storage',
         sts.struct({
             keys: sts.array(() => sts.bytes()),
@@ -109,7 +109,7 @@ export const killPrefix =  {
      * **NOTE:** We rely on the Root origin to provide us the number of subkeys under
      * the prefix we are removing to accurately calculate the weight of this function.
      */
-    v70: new CallType(
+    v85: new CallType(
         'System.kill_prefix',
         sts.struct({
             prefix: sts.bytes(),
@@ -123,7 +123,7 @@ export const remarkWithEvent =  {
     /**
      * Make some on-chain remark and emit event.
      */
-    v70: new CallType(
+    v85: new CallType(
         'System.remark_with_event',
         sts.struct({
             remark: sts.bytes(),

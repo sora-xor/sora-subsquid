@@ -7,7 +7,7 @@ import * as devEvents from '../../dev/transaction-payment/events'
 export const transactionFeePaid = {
 	name: 'TransactionPayment.TransactionFeePaid',
 	v53: productionEvents.transactionFeePaid['v53'],
-	v52Stage: stageEvents.transactionFeePaid['v52'],
-	v52Test: testEvents.transactionFeePaid['v52'],
-	v70Dev: devEvents.transactionFeePaid['v70'],
+	v53Stage: stageEvents.transactionFeePaid['v53'],
+	v53Test: testEvents.transactionFeePaid['v53'],
+	v85Dev: devEvents.transactionFeePaid['v85'],
 }

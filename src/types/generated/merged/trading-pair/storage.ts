@@ -9,13 +9,13 @@ export const enabledSources = {
 	v1: productionStorage.enabledSources['v1'],
 	v42: productionStorage.enabledSources['v42'],
 	v71: productionStorage.enabledSources['v71'],
-	v33Stage: stageStorage.enabledSources['v33'],
+	v1Stage: stageStorage.enabledSources['v1'],
 	v42Stage: stageStorage.enabledSources['v42'],
-	v69Stage: stageStorage.enabledSources['v69'],
-	v33Test: testStorage.enabledSources['v33'],
+	v71Stage: stageStorage.enabledSources['v71'],
+	v1Test: testStorage.enabledSources['v1'],
 	v42Test: testStorage.enabledSources['v42'],
-	v69Test: testStorage.enabledSources['v69'],
-	v70Dev: devStorage.enabledSources['v70'],
+	v71Test: testStorage.enabledSources['v71'],
+	v85Dev: devStorage.enabledSources['v85'],
 }
 
 export const lockedLiquiditySources = {
@@ -23,8 +23,8 @@ export const lockedLiquiditySources = {
 	v38: productionStorage.lockedLiquiditySources['v38'],
 	v71: productionStorage.lockedLiquiditySources['v71'],
 	v38Stage: stageStorage.lockedLiquiditySources['v38'],
-	v69Stage: stageStorage.lockedLiquiditySources['v69'],
+	v71Stage: stageStorage.lockedLiquiditySources['v71'],
 	v38Test: testStorage.lockedLiquiditySources['v38'],
-	v69Test: testStorage.lockedLiquiditySources['v69'],
-	v70Dev: devStorage.lockedLiquiditySources['v70'],
+	v71Test: testStorage.lockedLiquiditySources['v71'],
+	v85Dev: devStorage.lockedLiquiditySources['v85'],
 }

@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
 
 export const addMember =  {
     name: 'TechnicalMembership.add_member',
@@ -8,10 +8,10 @@ export const addMember =  {
      * 
      *  May only be called from `T::AddOrigin`.
      */
-    v33: new CallType(
+    v1: new CallType(
         'TechnicalMembership.add_member',
         sts.struct({
-            who: v33.AccountId,
+            who: v1.AccountId,
         })
     ),
 }
@@ -23,10 +23,10 @@ export const removeMember =  {
      * 
      *  May only be called from `T::RemoveOrigin`.
      */
-    v33: new CallType(
+    v1: new CallType(
         'TechnicalMembership.remove_member',
         sts.struct({
-            who: v33.AccountId,
+            who: v1.AccountId,
         })
     ),
 }
@@ -40,11 +40,11 @@ export const swapMember =  {
      * 
      *  Prime membership is *not* passed from `remove` to `add`, if extant.
      */
-    v33: new CallType(
+    v1: new CallType(
         'TechnicalMembership.swap_member',
         sts.struct({
-            remove: v33.AccountId,
-            add: v33.AccountId,
+            remove: v1.AccountId,
+            add: v1.AccountId,
         })
     ),
 }
@@ -57,10 +57,10 @@ export const resetMembers =  {
      * 
      *  May only be called from `T::ResetOrigin`.
      */
-    v33: new CallType(
+    v1: new CallType(
         'TechnicalMembership.reset_members',
         sts.struct({
-            members: sts.array(() => v33.AccountId),
+            members: sts.array(() => v1.AccountId),
         })
     ),
 }
@@ -74,10 +74,10 @@ export const changeKey =  {
      * 
      *  Prime membership is passed from the origin account to `new`, if extant.
      */
-    v33: new CallType(
+    v1: new CallType(
         'TechnicalMembership.change_key',
         sts.struct({
-            new: v33.AccountId,
+            new: v1.AccountId,
         })
     ),
 }
@@ -89,10 +89,10 @@ export const setPrime =  {
      * 
      *  May only be called from `T::PrimeOrigin`.
      */
-    v33: new CallType(
+    v1: new CallType(
         'TechnicalMembership.set_prime',
         sts.struct({
-            who: v33.AccountId,
+            who: v1.AccountId,
         })
     ),
 }
@@ -104,7 +104,7 @@ export const clearPrime =  {
      * 
      *  May only be called from `T::PrimeOrigin`.
      */
-    v33: new CallType(
+    v1: new CallType(
         'TechnicalMembership.clear_prime',
         sts.unit()
     ),

@@ -8,25 +8,25 @@ export const newAuthorities = {
 	name: 'Grandpa.NewAuthorities',
 	v1: productionEvents.newAuthorities['v1'],
 	v42: productionEvents.newAuthorities['v42'],
-	v33Stage: stageEvents.newAuthorities['v33'],
+	v1Stage: stageEvents.newAuthorities['v1'],
 	v42Stage: stageEvents.newAuthorities['v42'],
-	v33Test: testEvents.newAuthorities['v33'],
+	v1Test: testEvents.newAuthorities['v1'],
 	v42Test: testEvents.newAuthorities['v42'],
-	v70Dev: devEvents.newAuthorities['v70'],
+	v85Dev: devEvents.newAuthorities['v85'],
 }
 
 export const paused = {
 	name: 'Grandpa.Paused',
 	v1: productionEvents.paused['v1'],
-	v33Stage: stageEvents.paused['v33'],
-	v33Test: testEvents.paused['v33'],
-	v70Dev: devEvents.paused['v70'],
+	v1Stage: stageEvents.paused['v1'],
+	v1Test: testEvents.paused['v1'],
+	v85Dev: devEvents.paused['v85'],
 }
 
 export const resumed = {
 	name: 'Grandpa.Resumed',
 	v1: productionEvents.resumed['v1'],
-	v33Stage: stageEvents.resumed['v33'],
-	v33Test: testEvents.resumed['v33'],
-	v70Dev: devEvents.resumed['v70'],
+	v1Stage: stageEvents.resumed['v1'],
+	v1Test: testEvents.resumed['v1'],
+	v85Dev: devEvents.resumed['v85'],
 }

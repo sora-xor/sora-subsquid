@@ -29,6 +29,7 @@ import * as v71 from '../v71'
 import * as v72 from '../v72'
 import * as v74 from '../v74'
 import * as v77 from '../v77'
+import * as v84 from '../v84'
 
 export const schedule =  {
     name: 'Scheduler.schedule',
@@ -498,6 +499,18 @@ export const schedule =  {
             maybePeriodic: sts.option(() => sts.tuple(() => [sts.number(), sts.number()])),
             priority: sts.number(),
             call: v77.Call,
+        })
+    ),
+    /**
+     * Anonymously schedule a task.
+     */
+    v84: new CallType(
+        'Scheduler.schedule',
+        sts.struct({
+            when: sts.number(),
+            maybePeriodic: sts.option(() => sts.tuple(() => [sts.number(), sts.number()])),
+            priority: sts.number(),
+            call: v84.Call,
         })
     ),
 }
@@ -1025,6 +1038,19 @@ export const scheduleNamed =  {
             call: v77.Call,
         })
     ),
+    /**
+     * Schedule a named task.
+     */
+    v84: new CallType(
+        'Scheduler.schedule_named',
+        sts.struct({
+            id: sts.bytes(),
+            when: sts.number(),
+            maybePeriodic: sts.option(() => sts.tuple(() => [sts.number(), sts.number()])),
+            priority: sts.number(),
+            call: v84.Call,
+        })
+    ),
 }
 
 export const cancelNamed =  {
@@ -1529,6 +1555,22 @@ export const scheduleAfter =  {
             maybePeriodic: sts.option(() => sts.tuple(() => [sts.number(), sts.number()])),
             priority: sts.number(),
             call: v77.Call,
+        })
+    ),
+    /**
+     * Anonymously schedule a task after a delay.
+     * 
+     * # <weight>
+     * Same as [`schedule`].
+     * # </weight>
+     */
+    v84: new CallType(
+        'Scheduler.schedule_after',
+        sts.struct({
+            after: sts.number(),
+            maybePeriodic: sts.option(() => sts.tuple(() => [sts.number(), sts.number()])),
+            priority: sts.number(),
+            call: v84.Call,
         })
     ),
 }
@@ -2043,6 +2085,23 @@ export const scheduleNamedAfter =  {
             maybePeriodic: sts.option(() => sts.tuple(() => [sts.number(), sts.number()])),
             priority: sts.number(),
             call: v77.Call,
+        })
+    ),
+    /**
+     * Schedule a named task after a delay.
+     * 
+     * # <weight>
+     * Same as [`schedule_named`](Self::schedule_named).
+     * # </weight>
+     */
+    v84: new CallType(
+        'Scheduler.schedule_named_after',
+        sts.struct({
+            id: sts.bytes(),
+            after: sts.number(),
+            maybePeriodic: sts.option(() => sts.tuple(() => [sts.number(), sts.number()])),
+            priority: sts.number(),
+            call: v84.Call,
         })
     ),
 }

@@ -1,37 +1,37 @@
 import {sts, Block, Bytes, Option, Result, StorageType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
 import * as v42 from '../v42'
 
 export const validators =  {
     /**
      *  The current set of validators.
      */
-    v33: new StorageType('Session.Validators', 'Default', [], sts.array(() => v33.ValidatorId)) as ValidatorsV33,
+    v1: new StorageType('Session.Validators', 'Default', [], sts.array(() => v1.ValidatorId)) as ValidatorsV1,
 }
 
 /**
  *  The current set of validators.
  */
-export interface ValidatorsV33  {
+export interface ValidatorsV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.ValidatorId[]
-    get(block: Block): Promise<(v33.ValidatorId[] | undefined)>
+    getDefault(block: Block): v1.ValidatorId[]
+    get(block: Block): Promise<(v1.ValidatorId[] | undefined)>
 }
 
 export const currentIndex =  {
     /**
      *  Current index of the session.
      */
-    v33: new StorageType('Session.CurrentIndex', 'Default', [], v33.SessionIndex) as CurrentIndexV33,
+    v1: new StorageType('Session.CurrentIndex', 'Default', [], v1.SessionIndex) as CurrentIndexV1,
 }
 
 /**
  *  Current index of the session.
  */
-export interface CurrentIndexV33  {
+export interface CurrentIndexV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.SessionIndex
-    get(block: Block): Promise<(v33.SessionIndex | undefined)>
+    getDefault(block: Block): v1.SessionIndex
+    get(block: Block): Promise<(v1.SessionIndex | undefined)>
 }
 
 export const queuedChanged =  {
@@ -39,14 +39,14 @@ export const queuedChanged =  {
      *  True if the underlying economic identities or weighting behind the validators
      *  has changed in the queued validator set.
      */
-    v33: new StorageType('Session.QueuedChanged', 'Default', [], sts.boolean()) as QueuedChangedV33,
+    v1: new StorageType('Session.QueuedChanged', 'Default', [], sts.boolean()) as QueuedChangedV1,
 }
 
 /**
  *  True if the underlying economic identities or weighting behind the validators
  *  has changed in the queued validator set.
  */
-export interface QueuedChangedV33  {
+export interface QueuedChangedV1  {
     is(block: RuntimeCtx): boolean
     getDefault(block: Block): boolean
     get(block: Block): Promise<(boolean | undefined)>
@@ -57,7 +57,7 @@ export const queuedKeys =  {
      *  The queued keys for the next session. When the next session begins, these keys
      *  will be used to determine the validator's session keys.
      */
-    v33: new StorageType('Session.QueuedKeys', 'Default', [], sts.array(() => sts.tuple(() => [v33.ValidatorId, v33.Keys]))) as QueuedKeysV33,
+    v1: new StorageType('Session.QueuedKeys', 'Default', [], sts.array(() => sts.tuple(() => [v1.ValidatorId, v1.Keys]))) as QueuedKeysV1,
     /**
      *  The queued keys for the next session. When the next session begins, these keys
      *  will be used to determine the validator's session keys.
@@ -69,10 +69,10 @@ export const queuedKeys =  {
  *  The queued keys for the next session. When the next session begins, these keys
  *  will be used to determine the validator's session keys.
  */
-export interface QueuedKeysV33  {
+export interface QueuedKeysV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): [v33.ValidatorId, v33.Keys][]
-    get(block: Block): Promise<([v33.ValidatorId, v33.Keys][] | undefined)>
+    getDefault(block: Block): [v1.ValidatorId, v1.Keys][]
+    get(block: Block): Promise<([v1.ValidatorId, v1.Keys][] | undefined)>
 }
 
 /**
@@ -91,7 +91,7 @@ export const disabledValidators =  {
      * 
      *  The set is cleared when `on_session_ending` returns a new set of identities.
      */
-    v33: new StorageType('Session.DisabledValidators', 'Default', [], sts.array(() => sts.number())) as DisabledValidatorsV33,
+    v1: new StorageType('Session.DisabledValidators', 'Default', [], sts.array(() => sts.number())) as DisabledValidatorsV1,
 }
 
 /**
@@ -99,7 +99,7 @@ export const disabledValidators =  {
  * 
  *  The set is cleared when `on_session_ending` returns a new set of identities.
  */
-export interface DisabledValidatorsV33  {
+export interface DisabledValidatorsV1  {
     is(block: RuntimeCtx): boolean
     getDefault(block: Block): number[]
     get(block: Block): Promise<(number[] | undefined)>
@@ -109,7 +109,7 @@ export const nextKeys =  {
     /**
      *  The next session keys for a validator.
      */
-    v33: new StorageType('Session.NextKeys', 'Optional', [v33.ValidatorId], v33.Keys) as NextKeysV33,
+    v1: new StorageType('Session.NextKeys', 'Optional', [v1.ValidatorId], v1.Keys) as NextKeysV1,
     /**
      *  The next session keys for a validator.
      */
@@ -119,18 +119,18 @@ export const nextKeys =  {
 /**
  *  The next session keys for a validator.
  */
-export interface NextKeysV33  {
+export interface NextKeysV1  {
     is(block: RuntimeCtx): boolean
-    get(block: Block, key: v33.ValidatorId): Promise<(v33.Keys | undefined)>
-    getMany(block: Block, keys: v33.ValidatorId[]): Promise<(v33.Keys | undefined)[]>
-    getKeys(block: Block): Promise<v33.ValidatorId[]>
-    getKeys(block: Block, key: v33.ValidatorId): Promise<v33.ValidatorId[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.ValidatorId[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.ValidatorId): AsyncIterable<v33.ValidatorId[]>
-    getPairs(block: Block): Promise<[k: v33.ValidatorId, v: (v33.Keys | undefined)][]>
-    getPairs(block: Block, key: v33.ValidatorId): Promise<[k: v33.ValidatorId, v: (v33.Keys | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.ValidatorId, v: (v33.Keys | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.ValidatorId): AsyncIterable<[k: v33.ValidatorId, v: (v33.Keys | undefined)][]>
+    get(block: Block, key: v1.ValidatorId): Promise<(v1.Keys | undefined)>
+    getMany(block: Block, keys: v1.ValidatorId[]): Promise<(v1.Keys | undefined)[]>
+    getKeys(block: Block): Promise<v1.ValidatorId[]>
+    getKeys(block: Block, key: v1.ValidatorId): Promise<v1.ValidatorId[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.ValidatorId[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.ValidatorId): AsyncIterable<v1.ValidatorId[]>
+    getPairs(block: Block): Promise<[k: v1.ValidatorId, v: (v1.Keys | undefined)][]>
+    getPairs(block: Block, key: v1.ValidatorId): Promise<[k: v1.ValidatorId, v: (v1.Keys | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.ValidatorId, v: (v1.Keys | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.ValidatorId): AsyncIterable<[k: v1.ValidatorId, v: (v1.Keys | undefined)][]>
 }
 
 /**
@@ -154,7 +154,7 @@ export const keyOwner =  {
     /**
      *  The owner of a key. The key is the `KeyTypeId` + the encoded key.
      */
-    v33: new StorageType('Session.KeyOwner', 'Optional', [sts.tuple(() => [v33.KeyTypeId, sts.bytes()])], v33.ValidatorId) as KeyOwnerV33,
+    v1: new StorageType('Session.KeyOwner', 'Optional', [sts.tuple(() => [v1.KeyTypeId, sts.bytes()])], v1.ValidatorId) as KeyOwnerV1,
     /**
      *  The owner of a key. The key is the `KeyTypeId` + the encoded key.
      */
@@ -164,18 +164,18 @@ export const keyOwner =  {
 /**
  *  The owner of a key. The key is the `KeyTypeId` + the encoded key.
  */
-export interface KeyOwnerV33  {
+export interface KeyOwnerV1  {
     is(block: RuntimeCtx): boolean
-    get(block: Block, key: [v33.KeyTypeId, Bytes]): Promise<(v33.ValidatorId | undefined)>
-    getMany(block: Block, keys: [v33.KeyTypeId, Bytes][]): Promise<(v33.ValidatorId | undefined)[]>
-    getKeys(block: Block): Promise<[v33.KeyTypeId, Bytes][]>
-    getKeys(block: Block, key: [v33.KeyTypeId, Bytes]): Promise<[v33.KeyTypeId, Bytes][]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v33.KeyTypeId, Bytes][]>
-    getKeysPaged(pageSize: number, block: Block, key: [v33.KeyTypeId, Bytes]): AsyncIterable<[v33.KeyTypeId, Bytes][]>
-    getPairs(block: Block): Promise<[k: [v33.KeyTypeId, Bytes], v: (v33.ValidatorId | undefined)][]>
-    getPairs(block: Block, key: [v33.KeyTypeId, Bytes]): Promise<[k: [v33.KeyTypeId, Bytes], v: (v33.ValidatorId | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v33.KeyTypeId, Bytes], v: (v33.ValidatorId | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: [v33.KeyTypeId, Bytes]): AsyncIterable<[k: [v33.KeyTypeId, Bytes], v: (v33.ValidatorId | undefined)][]>
+    get(block: Block, key: [v1.KeyTypeId, Bytes]): Promise<(v1.ValidatorId | undefined)>
+    getMany(block: Block, keys: [v1.KeyTypeId, Bytes][]): Promise<(v1.ValidatorId | undefined)[]>
+    getKeys(block: Block): Promise<[v1.KeyTypeId, Bytes][]>
+    getKeys(block: Block, key: [v1.KeyTypeId, Bytes]): Promise<[v1.KeyTypeId, Bytes][]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v1.KeyTypeId, Bytes][]>
+    getKeysPaged(pageSize: number, block: Block, key: [v1.KeyTypeId, Bytes]): AsyncIterable<[v1.KeyTypeId, Bytes][]>
+    getPairs(block: Block): Promise<[k: [v1.KeyTypeId, Bytes], v: (v1.ValidatorId | undefined)][]>
+    getPairs(block: Block, key: [v1.KeyTypeId, Bytes]): Promise<[k: [v1.KeyTypeId, Bytes], v: (v1.ValidatorId | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v1.KeyTypeId, Bytes], v: (v1.ValidatorId | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: [v1.KeyTypeId, Bytes]): AsyncIterable<[k: [v1.KeyTypeId, Bytes], v: (v1.ValidatorId | undefined)][]>
 }
 
 /**

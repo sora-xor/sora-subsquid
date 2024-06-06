@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v52 from '../v52'
+import * as v53 from '../v53'
 
 export const notePreimage =  {
     name: 'Preimage.note_preimage',
@@ -9,7 +9,7 @@ export const notePreimage =  {
      * If the preimage was previously requested, no fees or deposits are taken for providing
      * the preimage. Otherwise, a deposit is taken proportional to the size of the preimage.
      */
-    v52: new CallType(
+    v53: new CallType(
         'Preimage.note_preimage',
         sts.struct({
             bytes: sts.bytes(),
@@ -27,10 +27,10 @@ export const unnotePreimage =  {
      * - `hash`: The hash of the preimage to be removed from the store.
      * - `len`: The length of the preimage of `hash`.
      */
-    v52: new CallType(
+    v53: new CallType(
         'Preimage.unnote_preimage',
         sts.struct({
-            hash: v52.H256,
+            hash: v53.H256,
         })
     ),
 }
@@ -43,10 +43,10 @@ export const requestPreimage =  {
      * If the preimage requests has already been provided on-chain, we unreserve any deposit
      * a user may have paid, and take the control of the preimage out of their hands.
      */
-    v52: new CallType(
+    v53: new CallType(
         'Preimage.request_preimage',
         sts.struct({
-            hash: v52.H256,
+            hash: v53.H256,
         })
     ),
 }
@@ -58,10 +58,10 @@ export const unrequestPreimage =  {
      * 
      * NOTE: THIS MUST NOT BE CALLED ON `hash` MORE TIMES THAN `request_preimage`.
      */
-    v52: new CallType(
+    v53: new CallType(
         'Preimage.unrequest_preimage',
         sts.struct({
-            hash: v52.H256,
+            hash: v53.H256,
         })
     ),
 }

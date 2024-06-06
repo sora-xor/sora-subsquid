@@ -6,6 +6,7 @@ import * as v53 from '../v53'
 import * as v57 from '../v57'
 import * as v72 from '../v72'
 import * as v74 from '../v74'
+import * as v85 from '../v85'
 
 export const reservesAcc =  {
     /**
@@ -107,6 +108,7 @@ export interface FreeReservesAccountIdV42  {
 export const pendingFreeReserves =  {
     v1: new StorageType('MulticollateralBondingCurvePool.PendingFreeReserves', 'Default', [], sts.array(() => sts.tuple(() => [v1.AssetId, v1.Balance]))) as PendingFreeReservesV1,
     v42: new StorageType('MulticollateralBondingCurvePool.PendingFreeReserves', 'Default', [], sts.array(() => sts.tuple(() => [v42.AssetId32, sts.bigint()]))) as PendingFreeReservesV42,
+    v85: new StorageType('MulticollateralBondingCurvePool.PendingFreeReserves', 'Default', [sts.number()], sts.array(() => sts.tuple(() => [v85.AssetId32, sts.bigint()]))) as PendingFreeReservesV85,
 }
 
 export interface PendingFreeReservesV1  {
@@ -119,6 +121,21 @@ export interface PendingFreeReservesV42  {
     is(block: RuntimeCtx): boolean
     getDefault(block: Block): [v42.AssetId32, bigint][]
     get(block: Block): Promise<([v42.AssetId32, bigint][] | undefined)>
+}
+
+export interface PendingFreeReservesV85  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): [v85.AssetId32, bigint][]
+    get(block: Block, key: number): Promise<([v85.AssetId32, bigint][] | undefined)>
+    getMany(block: Block, keys: number[]): Promise<([v85.AssetId32, bigint][] | undefined)[]>
+    getKeys(block: Block): Promise<number[]>
+    getKeys(block: Block, key: number): Promise<number[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<number[]>
+    getKeysPaged(pageSize: number, block: Block, key: number): AsyncIterable<number[]>
+    getPairs(block: Block): Promise<[k: number, v: ([v85.AssetId32, bigint][] | undefined)][]>
+    getPairs(block: Block, key: number): Promise<[k: number, v: ([v85.AssetId32, bigint][] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: number, v: ([v85.AssetId32, bigint][] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: number): AsyncIterable<[k: number, v: ([v85.AssetId32, bigint][] | undefined)][]>
 }
 
 export const initialPrice =  {

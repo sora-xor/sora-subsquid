@@ -9,13 +9,13 @@ export const swap = {
 	v1: productionCalls.swap['v1'],
 	v42: productionCalls.swap['v42'],
 	v71: productionCalls.swap['v71'],
-	v33Stage: stageCalls.swap['v33'],
+	v1Stage: stageCalls.swap['v1'],
 	v42Stage: stageCalls.swap['v42'],
-	v69Stage: stageCalls.swap['v69'],
-	v33Test: testCalls.swap['v33'],
+	v71Stage: stageCalls.swap['v71'],
+	v1Test: testCalls.swap['v1'],
 	v42Test: testCalls.swap['v42'],
-	v69Test: testCalls.swap['v69'],
-	v70Dev: devCalls.swap['v70'],
+	v71Test: testCalls.swap['v71'],
+	v85Dev: devCalls.swap['v85'],
 }
 
 export const swapTransfer = {
@@ -25,11 +25,11 @@ export const swapTransfer = {
 	v71: productionCalls.swapTransfer['v71'],
 	v33Stage: stageCalls.swapTransfer['v33'],
 	v42Stage: stageCalls.swapTransfer['v42'],
-	v69Stage: stageCalls.swapTransfer['v69'],
+	v71Stage: stageCalls.swapTransfer['v71'],
 	v33Test: testCalls.swapTransfer['v33'],
 	v42Test: testCalls.swapTransfer['v42'],
-	v69Test: testCalls.swapTransfer['v69'],
-	v70Dev: devCalls.swapTransfer['v70'],
+	v71Test: testCalls.swapTransfer['v71'],
+	v85Dev: devCalls.swapTransfer['v85'],
 }
 
 export const enableLiquiditySource = {
@@ -37,10 +37,10 @@ export const enableLiquiditySource = {
 	v38: productionCalls.enableLiquiditySource['v38'],
 	v71: productionCalls.enableLiquiditySource['v71'],
 	v38Stage: stageCalls.enableLiquiditySource['v38'],
-	v69Stage: stageCalls.enableLiquiditySource['v69'],
+	v71Stage: stageCalls.enableLiquiditySource['v71'],
 	v38Test: testCalls.enableLiquiditySource['v38'],
-	v69Test: testCalls.enableLiquiditySource['v69'],
-	v70Dev: devCalls.enableLiquiditySource['v70'],
+	v71Test: testCalls.enableLiquiditySource['v71'],
+	v85Dev: devCalls.enableLiquiditySource['v85'],
 }
 
 export const disableLiquiditySource = {
@@ -48,10 +48,10 @@ export const disableLiquiditySource = {
 	v38: productionCalls.disableLiquiditySource['v38'],
 	v71: productionCalls.disableLiquiditySource['v71'],
 	v38Stage: stageCalls.disableLiquiditySource['v38'],
-	v69Stage: stageCalls.disableLiquiditySource['v69'],
+	v71Stage: stageCalls.disableLiquiditySource['v71'],
 	v38Test: testCalls.disableLiquiditySource['v38'],
-	v69Test: testCalls.disableLiquiditySource['v69'],
-	v70Dev: devCalls.disableLiquiditySource['v70'],
+	v71Test: testCalls.disableLiquiditySource['v71'],
+	v85Dev: devCalls.disableLiquiditySource['v85'],
 }
 
 export const swapTransferBatch = {
@@ -61,23 +61,25 @@ export const swapTransferBatch = {
 	v63: productionCalls.swapTransferBatch['v63'],
 	v71: productionCalls.swapTransferBatch['v71'],
 	v74: productionCalls.swapTransferBatch['v74'],
-	v44Stage: stageCalls.swapTransferBatch['v44'],
-	v48Stage: stageCalls.swapTransferBatch['v48'],
-	v62Stage: stageCalls.swapTransferBatch['v62'],
-	v69Stage: stageCalls.swapTransferBatch['v69'],
-	v44Test: testCalls.swapTransferBatch['v44'],
-	v48Test: testCalls.swapTransferBatch['v48'],
-	v62Test: testCalls.swapTransferBatch['v62'],
-	v69Test: testCalls.swapTransferBatch['v69'],
-	v70Dev: devCalls.swapTransferBatch['v70'],
+	v45Stage: stageCalls.swapTransferBatch['v45'],
+	v50Stage: stageCalls.swapTransferBatch['v50'],
+	v63Stage: stageCalls.swapTransferBatch['v63'],
+	v71Stage: stageCalls.swapTransferBatch['v71'],
+	v74Stage: stageCalls.swapTransferBatch['v74'],
+	v45Test: testCalls.swapTransferBatch['v45'],
+	v50Test: testCalls.swapTransferBatch['v50'],
+	v63Test: testCalls.swapTransferBatch['v63'],
+	v71Test: testCalls.swapTransferBatch['v71'],
+	v74Test: testCalls.swapTransferBatch['v74'],
+	v85Dev: devCalls.swapTransferBatch['v85'],
 }
 
 export const setAdarCommissionRatio = {
 	name: 'LiquidityProxy.set_adar_commission_ratio',
 	v57: productionCalls.setAdarCommissionRatio['v57'],
-	v55Stage: stageCalls.setAdarCommissionRatio['v55'],
-	v55Test: testCalls.setAdarCommissionRatio['v55'],
-	v70Dev: devCalls.setAdarCommissionRatio['v70'],
+	v57Stage: stageCalls.setAdarCommissionRatio['v57'],
+	v57Test: testCalls.setAdarCommissionRatio['v57'],
+	v85Dev: devCalls.setAdarCommissionRatio['v85'],
 }
 
 export const xorlessTransfer = {
@@ -85,8 +87,8 @@ export const xorlessTransfer = {
 	v66: productionCalls.xorlessTransfer['v66'],
 	v71: productionCalls.xorlessTransfer['v71'],
 	v66Stage: stageCalls.xorlessTransfer['v66'],
-	v69Stage: stageCalls.xorlessTransfer['v69'],
+	v71Stage: stageCalls.xorlessTransfer['v71'],
 	v66Test: testCalls.xorlessTransfer['v66'],
-	v69Test: testCalls.xorlessTransfer['v69'],
-	v70Dev: devCalls.xorlessTransfer['v70'],
+	v71Test: testCalls.xorlessTransfer['v71'],
+	v85Dev: devCalls.xorlessTransfer['v85'],
 }

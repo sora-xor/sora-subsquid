@@ -1,15 +1,15 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
 
 export const fillBlock =  {
     name: 'System.fill_block',
     /**
      *  A dispatch that will fill the block weight up to the given ratio.
      */
-    v33: new CallType(
+    v1: new CallType(
         'System.fill_block',
         sts.struct({
-            ratio: v33.Perbill,
+            ratio: v1.Perbill,
         })
     ),
 }
@@ -25,7 +25,7 @@ export const remark =  {
      *  - No DB operations.
      *  # </weight>
      */
-    v33: new CallType(
+    v1: new CallType(
         'System.remark',
         sts.struct({
             remark: sts.bytes(),
@@ -45,7 +45,7 @@ export const setHeapPages =  {
      *  - 1 write to HEAP_PAGES
      *  # </weight>
      */
-    v33: new CallType(
+    v1: new CallType(
         'System.set_heap_pages',
         sts.struct({
             pages: sts.bigint(),
@@ -67,7 +67,7 @@ export const setCode =  {
      *  We will treat this as a full block.
      *  # </weight>
      */
-    v33: new CallType(
+    v1: new CallType(
         'System.set_code',
         sts.struct({
             code: sts.bytes(),
@@ -87,7 +87,7 @@ export const setCodeWithoutChecks =  {
      *  The weight of this function is dependent on the runtime. We will treat this as a full block.
      *  # </weight>
      */
-    v33: new CallType(
+    v1: new CallType(
         'System.set_code_without_checks',
         sts.struct({
             code: sts.bytes(),
@@ -109,10 +109,10 @@ export const setChangesTrieConfig =  {
      *      - Writes: Changes Trie, System Digest
      *  # </weight>
      */
-    v33: new CallType(
+    v1: new CallType(
         'System.set_changes_trie_config',
         sts.struct({
-            changesTrieConfig: sts.option(() => v33.ChangesTrieConfiguration),
+            changesTrieConfig: sts.option(() => v1.ChangesTrieConfiguration),
         })
     ),
 }
@@ -129,10 +129,10 @@ export const setStorage =  {
      *  - Writes: Number of items
      *  # </weight>
      */
-    v33: new CallType(
+    v1: new CallType(
         'System.set_storage',
         sts.struct({
-            items: sts.array(() => v33.KeyValue),
+            items: sts.array(() => v1.KeyValue),
         })
     ),
 }
@@ -149,10 +149,10 @@ export const killStorage =  {
      *  - Writes: Number of items
      *  # </weight>
      */
-    v33: new CallType(
+    v1: new CallType(
         'System.kill_storage',
         sts.struct({
-            keys: sts.array(() => v33.Key),
+            keys: sts.array(() => v1.Key),
         })
     ),
 }
@@ -172,10 +172,10 @@ export const killPrefix =  {
      *  - Writes: Number of subkeys + 1
      *  # </weight>
      */
-    v33: new CallType(
+    v1: new CallType(
         'System.kill_prefix',
         sts.struct({
-            prefix: v33.Key,
+            prefix: v1.Key,
             subkeys: sts.number(),
         })
     ),

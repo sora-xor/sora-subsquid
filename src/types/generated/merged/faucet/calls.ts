@@ -7,24 +7,20 @@ import * as devCalls from '../../dev/faucet/calls'
 export const transfer = {
 	name: 'Faucet.transfer',
 	v22: productionCalls.transfer['v22'],
-	v33Stage: stageCalls.transfer['v33'],
-	v42Stage: stageCalls.transfer['v42'],
-	v33Test: testCalls.transfer['v33'],
-	v42Test: testCalls.transfer['v42'],
-	v70Dev: devCalls.transfer['v70'],
+	v22Stage: stageCalls.transfer['v22'],
+	v22Test: testCalls.transfer['v22'],
+	v85Dev: devCalls.transfer['v85'],
 }
 
 export const resetRewards = {
 	name: 'Faucet.reset_rewards',
 	v22: productionCalls.resetRewards['v22'],
-	v33Stage: stageCalls.resetRewards['v33'],
-	v33Test: testCalls.resetRewards['v33'],
-	v70Dev: devCalls.resetRewards['v70'],
+	v22Stage: stageCalls.resetRewards['v22'],
+	v22Test: testCalls.resetRewards['v22'],
+	v85Dev: devCalls.resetRewards['v85'],
 }
 
 export const updateLimit = {
 	name: 'Faucet.update_limit',
-	v37Stage: stageCalls.updateLimit['v37'],
-	v37Test: testCalls.updateLimit['v37'],
-	v70Dev: devCalls.updateLimit['v70'],
+	v85Dev: devCalls.updateLimit['v85'],
 }

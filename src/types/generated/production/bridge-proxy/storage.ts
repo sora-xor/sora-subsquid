@@ -2,11 +2,13 @@ import {sts, Block, Bytes, Option, Result, StorageType, RuntimeCtx} from '../sup
 import * as v64 from '../v64'
 import * as v70 from '../v70'
 import * as v74 from '../v74'
+import * as v84 from '../v84'
 
 export const transactions =  {
     v64: new StorageType('BridgeProxy.Transactions', 'Optional', [sts.tuple(() => [v64.GenericNetworkId, v64.AccountId32]), v64.H256], v64.BridgeRequest) as TransactionsV64,
     v70: new StorageType('BridgeProxy.Transactions', 'Optional', [sts.tuple(() => [v70.GenericNetworkId, v70.AccountId32]), v70.H256], v70.BridgeRequest) as TransactionsV70,
     v74: new StorageType('BridgeProxy.Transactions', 'Optional', [sts.tuple(() => [v74.GenericNetworkId, v74.AccountId32]), v74.H256], v74.BridgeRequest) as TransactionsV74,
+    v84: new StorageType('BridgeProxy.Transactions', 'Optional', [sts.tuple(() => [v84.GenericNetworkId, v84.AccountId32]), v84.H256], v84.BridgeRequest) as TransactionsV84,
 }
 
 export interface TransactionsV64  {
@@ -63,9 +65,28 @@ export interface TransactionsV74  {
     getPairsPaged(pageSize: number, block: Block, key1: [v74.GenericNetworkId, v74.AccountId32], key2: v74.H256): AsyncIterable<[k: [[v74.GenericNetworkId, v74.AccountId32], v74.H256], v: (v74.BridgeRequest | undefined)][]>
 }
 
+export interface TransactionsV84  {
+    is(block: RuntimeCtx): boolean
+    get(block: Block, key1: [v84.GenericNetworkId, v84.AccountId32], key2: v84.H256): Promise<(v84.BridgeRequest | undefined)>
+    getMany(block: Block, keys: [[v84.GenericNetworkId, v84.AccountId32], v84.H256][]): Promise<(v84.BridgeRequest | undefined)[]>
+    getKeys(block: Block): Promise<[[v84.GenericNetworkId, v84.AccountId32], v84.H256][]>
+    getKeys(block: Block, key1: [v84.GenericNetworkId, v84.AccountId32]): Promise<[[v84.GenericNetworkId, v84.AccountId32], v84.H256][]>
+    getKeys(block: Block, key1: [v84.GenericNetworkId, v84.AccountId32], key2: v84.H256): Promise<[[v84.GenericNetworkId, v84.AccountId32], v84.H256][]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[[v84.GenericNetworkId, v84.AccountId32], v84.H256][]>
+    getKeysPaged(pageSize: number, block: Block, key1: [v84.GenericNetworkId, v84.AccountId32]): AsyncIterable<[[v84.GenericNetworkId, v84.AccountId32], v84.H256][]>
+    getKeysPaged(pageSize: number, block: Block, key1: [v84.GenericNetworkId, v84.AccountId32], key2: v84.H256): AsyncIterable<[[v84.GenericNetworkId, v84.AccountId32], v84.H256][]>
+    getPairs(block: Block): Promise<[k: [[v84.GenericNetworkId, v84.AccountId32], v84.H256], v: (v84.BridgeRequest | undefined)][]>
+    getPairs(block: Block, key1: [v84.GenericNetworkId, v84.AccountId32]): Promise<[k: [[v84.GenericNetworkId, v84.AccountId32], v84.H256], v: (v84.BridgeRequest | undefined)][]>
+    getPairs(block: Block, key1: [v84.GenericNetworkId, v84.AccountId32], key2: v84.H256): Promise<[k: [[v84.GenericNetworkId, v84.AccountId32], v84.H256], v: (v84.BridgeRequest | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [[v84.GenericNetworkId, v84.AccountId32], v84.H256], v: (v84.BridgeRequest | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: [v84.GenericNetworkId, v84.AccountId32]): AsyncIterable<[k: [[v84.GenericNetworkId, v84.AccountId32], v84.H256], v: (v84.BridgeRequest | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: [v84.GenericNetworkId, v84.AccountId32], key2: v84.H256): AsyncIterable<[k: [[v84.GenericNetworkId, v84.AccountId32], v84.H256], v: (v84.BridgeRequest | undefined)][]>
+}
+
 export const senders =  {
     v64: new StorageType('BridgeProxy.Senders', 'Optional', [v64.GenericNetworkId, v64.H256], v64.AccountId32) as SendersV64,
     v70: new StorageType('BridgeProxy.Senders', 'Optional', [v70.GenericNetworkId, v70.H256], v70.AccountId32) as SendersV70,
+    v84: new StorageType('BridgeProxy.Senders', 'Optional', [v84.GenericNetworkId, v84.H256], v84.AccountId32) as SendersV84,
 }
 
 export interface SendersV64  {
@@ -102,6 +123,24 @@ export interface SendersV70  {
     getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v70.GenericNetworkId, v70.H256], v: (v70.AccountId32 | undefined)][]>
     getPairsPaged(pageSize: number, block: Block, key1: v70.GenericNetworkId): AsyncIterable<[k: [v70.GenericNetworkId, v70.H256], v: (v70.AccountId32 | undefined)][]>
     getPairsPaged(pageSize: number, block: Block, key1: v70.GenericNetworkId, key2: v70.H256): AsyncIterable<[k: [v70.GenericNetworkId, v70.H256], v: (v70.AccountId32 | undefined)][]>
+}
+
+export interface SendersV84  {
+    is(block: RuntimeCtx): boolean
+    get(block: Block, key1: v84.GenericNetworkId, key2: v84.H256): Promise<(v84.AccountId32 | undefined)>
+    getMany(block: Block, keys: [v84.GenericNetworkId, v84.H256][]): Promise<(v84.AccountId32 | undefined)[]>
+    getKeys(block: Block): Promise<[v84.GenericNetworkId, v84.H256][]>
+    getKeys(block: Block, key1: v84.GenericNetworkId): Promise<[v84.GenericNetworkId, v84.H256][]>
+    getKeys(block: Block, key1: v84.GenericNetworkId, key2: v84.H256): Promise<[v84.GenericNetworkId, v84.H256][]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v84.GenericNetworkId, v84.H256][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v84.GenericNetworkId): AsyncIterable<[v84.GenericNetworkId, v84.H256][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v84.GenericNetworkId, key2: v84.H256): AsyncIterable<[v84.GenericNetworkId, v84.H256][]>
+    getPairs(block: Block): Promise<[k: [v84.GenericNetworkId, v84.H256], v: (v84.AccountId32 | undefined)][]>
+    getPairs(block: Block, key1: v84.GenericNetworkId): Promise<[k: [v84.GenericNetworkId, v84.H256], v: (v84.AccountId32 | undefined)][]>
+    getPairs(block: Block, key1: v84.GenericNetworkId, key2: v84.H256): Promise<[k: [v84.GenericNetworkId, v84.H256], v: (v84.AccountId32 | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v84.GenericNetworkId, v84.H256], v: (v84.AccountId32 | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v84.GenericNetworkId): AsyncIterable<[k: [v84.GenericNetworkId, v84.H256], v: (v84.AccountId32 | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v84.GenericNetworkId, key2: v84.H256): AsyncIterable<[k: [v84.GenericNetworkId, v84.H256], v: (v84.AccountId32 | undefined)][]>
 }
 
 export const sidechainFeePaid =  {
@@ -166,6 +205,10 @@ export const lockedAssets =  {
      *  Amount of assets locked by bridge for specific network. Map ((Network ID, Asset ID) => Locked amount).
      */
     v70: new StorageType('BridgeProxy.LockedAssets', 'Default', [v70.GenericNetworkId, v70.AssetId32], sts.bigint()) as LockedAssetsV70,
+    /**
+     *  Amount of assets locked by bridge for specific network. Map ((Network ID, Asset ID) => Locked amount).
+     */
+    v84: new StorageType('BridgeProxy.LockedAssets', 'Default', [v84.GenericNetworkId, v84.AssetId32], sts.bigint()) as LockedAssetsV84,
 }
 
 /**
@@ -210,6 +253,28 @@ export interface LockedAssetsV70  {
     getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v70.GenericNetworkId, v70.AssetId32], v: (bigint | undefined)][]>
     getPairsPaged(pageSize: number, block: Block, key1: v70.GenericNetworkId): AsyncIterable<[k: [v70.GenericNetworkId, v70.AssetId32], v: (bigint | undefined)][]>
     getPairsPaged(pageSize: number, block: Block, key1: v70.GenericNetworkId, key2: v70.AssetId32): AsyncIterable<[k: [v70.GenericNetworkId, v70.AssetId32], v: (bigint | undefined)][]>
+}
+
+/**
+ *  Amount of assets locked by bridge for specific network. Map ((Network ID, Asset ID) => Locked amount).
+ */
+export interface LockedAssetsV84  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): bigint
+    get(block: Block, key1: v84.GenericNetworkId, key2: v84.AssetId32): Promise<(bigint | undefined)>
+    getMany(block: Block, keys: [v84.GenericNetworkId, v84.AssetId32][]): Promise<(bigint | undefined)[]>
+    getKeys(block: Block): Promise<[v84.GenericNetworkId, v84.AssetId32][]>
+    getKeys(block: Block, key1: v84.GenericNetworkId): Promise<[v84.GenericNetworkId, v84.AssetId32][]>
+    getKeys(block: Block, key1: v84.GenericNetworkId, key2: v84.AssetId32): Promise<[v84.GenericNetworkId, v84.AssetId32][]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v84.GenericNetworkId, v84.AssetId32][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v84.GenericNetworkId): AsyncIterable<[v84.GenericNetworkId, v84.AssetId32][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v84.GenericNetworkId, key2: v84.AssetId32): AsyncIterable<[v84.GenericNetworkId, v84.AssetId32][]>
+    getPairs(block: Block): Promise<[k: [v84.GenericNetworkId, v84.AssetId32], v: (bigint | undefined)][]>
+    getPairs(block: Block, key1: v84.GenericNetworkId): Promise<[k: [v84.GenericNetworkId, v84.AssetId32], v: (bigint | undefined)][]>
+    getPairs(block: Block, key1: v84.GenericNetworkId, key2: v84.AssetId32): Promise<[k: [v84.GenericNetworkId, v84.AssetId32], v: (bigint | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v84.GenericNetworkId, v84.AssetId32], v: (bigint | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v84.GenericNetworkId): AsyncIterable<[k: [v84.GenericNetworkId, v84.AssetId32], v: (bigint | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v84.GenericNetworkId, key2: v84.AssetId32): AsyncIterable<[k: [v84.GenericNetworkId, v84.AssetId32], v: (bigint | undefined)][]>
 }
 
 export const transferLimit =  {

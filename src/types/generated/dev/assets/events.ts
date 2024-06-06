@@ -1,14 +1,14 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const assetRegistered =  {
     name: 'Assets.AssetRegistered',
     /**
      * New asset has been registered. [Asset Id, Asset Owner Account]
      */
-    v70: new EventType(
+    v85: new EventType(
         'Assets.AssetRegistered',
-        sts.tuple([v70.AssetId32, v70.AccountId32])
+        sts.tuple([v85.AssetId32, v85.AccountId32])
     ),
 }
 
@@ -17,9 +17,9 @@ export const transfer =  {
     /**
      * Asset amount has been transfered. [From Account, To Account, Tranferred Asset Id, Amount Transferred]
      */
-    v70: new EventType(
+    v85: new EventType(
         'Assets.Transfer',
-        sts.tuple([v70.AccountId32, v70.AccountId32, v70.AssetId32, sts.bigint()])
+        sts.tuple([v85.AccountId32, v85.AccountId32, v85.AssetId32, sts.bigint()])
     ),
 }
 
@@ -28,9 +28,9 @@ export const mint =  {
     /**
      * Asset amount has been minted. [Issuer Account, Target Account, Minted Asset Id, Amount Minted]
      */
-    v70: new EventType(
+    v85: new EventType(
         'Assets.Mint',
-        sts.tuple([v70.AccountId32, v70.AccountId32, v70.AssetId32, sts.bigint()])
+        sts.tuple([v85.AccountId32, v85.AccountId32, v85.AssetId32, sts.bigint()])
     ),
 }
 
@@ -39,9 +39,9 @@ export const burn =  {
     /**
      * Asset amount has been burned. [Issuer Account, Burned Asset Id, Amount Burned]
      */
-    v70: new EventType(
+    v85: new EventType(
         'Assets.Burn',
-        sts.tuple([v70.AccountId32, v70.AssetId32, sts.bigint()])
+        sts.tuple([v85.AccountId32, v85.AssetId32, sts.bigint()])
     ),
 }
 
@@ -50,9 +50,9 @@ export const assetSetNonMintable =  {
     /**
      * Asset is set as non-mintable. [Target Asset Id]
      */
-    v70: new EventType(
+    v85: new EventType(
         'Assets.AssetSetNonMintable',
-        v70.AssetId32
+        v85.AssetId32
     ),
 }
 
@@ -61,8 +61,8 @@ export const assetUpdated =  {
     /**
      * Asset info has been updated
      */
-    v70: new EventType(
+    v85: new EventType(
         'Assets.AssetUpdated',
-        sts.tuple([v70.AssetId32, sts.option(() => v70.AssetSymbol), sts.option(() => v70.AssetName)])
+        sts.tuple([v85.AssetId32, sts.option(() => v85.AssetSymbol), sts.option(() => v85.AssetName)])
     ),
 }

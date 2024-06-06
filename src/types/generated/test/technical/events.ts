@@ -1,8 +1,10 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
 import * as v42 from '../v42'
 import * as v46 from '../v46'
-import * as v54 from '../v54'
+import * as v57 from '../v57'
+import * as v72 from '../v72'
+import * as v74 from '../v74'
 
 export const minted =  {
     name: 'Technical.Minted',
@@ -11,9 +13,9 @@ export const minted =  {
      *  This is not only for pure TechAccountId.
      *  TechAccountId can be just wrapped AccountId.
      */
-    v33: new EventType(
+    v1: new EventType(
         'Technical.Minted',
-        sts.tuple([v33.TechAssetId, v33.TechAccountId, v33.Balance, v33.Balance])
+        sts.tuple([v1.TechAssetId, v1.TechAccountId, v1.Balance, v1.Balance])
     ),
     /**
      * Some pure technical assets were minted. [asset, owner, minted_amount, total_exist].
@@ -38,9 +40,27 @@ export const minted =  {
      * This is not only for pure TechAccountId.
      * TechAccountId can be just wrapped AccountId.
      */
-    v54: new EventType(
+    v57: new EventType(
         'Technical.Minted',
-        sts.tuple([v54.TechAssetId, v54.TechAccountId, sts.bigint(), sts.bigint()])
+        sts.tuple([v57.TechAssetId, v57.TechAccountId, sts.bigint(), sts.bigint()])
+    ),
+    /**
+     * Some pure technical assets were minted. [asset, owner, minted_amount, total_exist].
+     * This is not only for pure TechAccountId.
+     * TechAccountId can be just wrapped AccountId.
+     */
+    v72: new EventType(
+        'Technical.Minted',
+        sts.tuple([v72.TechAssetId, v72.TechAccountId, sts.bigint(), sts.bigint()])
+    ),
+    /**
+     * Some pure technical assets were minted. [asset, owner, minted_amount, total_exist].
+     * This is not only for pure TechAccountId.
+     * TechAccountId can be just wrapped AccountId.
+     */
+    v74: new EventType(
+        'Technical.Minted',
+        sts.tuple([v74.TechAssetId, v74.TechAccountId, sts.bigint(), sts.bigint()])
     ),
 }
 
@@ -50,9 +70,9 @@ export const burned =  {
      *  Some pure technical assets were burned. [asset, owner, burned_amount, total_exist].
      *  For full kind of accounts like in Minted.
      */
-    v33: new EventType(
+    v1: new EventType(
         'Technical.Burned',
-        sts.tuple([v33.TechAssetId, v33.TechAccountId, v33.Balance, v33.Balance])
+        sts.tuple([v1.TechAssetId, v1.TechAccountId, v1.Balance, v1.Balance])
     ),
     /**
      * Some pure technical assets were burned. [asset, owner, burned_amount, total_exist].
@@ -74,9 +94,25 @@ export const burned =  {
      * Some pure technical assets were burned. [asset, owner, burned_amount, total_exist].
      * For full kind of accounts like in Minted.
      */
-    v54: new EventType(
+    v57: new EventType(
         'Technical.Burned',
-        sts.tuple([v54.TechAssetId, v54.TechAccountId, sts.bigint(), sts.bigint()])
+        sts.tuple([v57.TechAssetId, v57.TechAccountId, sts.bigint(), sts.bigint()])
+    ),
+    /**
+     * Some pure technical assets were burned. [asset, owner, burned_amount, total_exist].
+     * For full kind of accounts like in Minted.
+     */
+    v72: new EventType(
+        'Technical.Burned',
+        sts.tuple([v72.TechAssetId, v72.TechAccountId, sts.bigint(), sts.bigint()])
+    ),
+    /**
+     * Some pure technical assets were burned. [asset, owner, burned_amount, total_exist].
+     * For full kind of accounts like in Minted.
+     */
+    v74: new EventType(
+        'Technical.Burned',
+        sts.tuple([v74.TechAssetId, v74.TechAccountId, sts.bigint(), sts.bigint()])
     ),
 }
 
@@ -86,9 +122,9 @@ export const outputTransferred =  {
      *  Some assets were transferred out. [asset, from, to, amount].
      *  TechAccountId is only pure TechAccountId.
      */
-    v33: new EventType(
+    v1: new EventType(
         'Technical.OutputTransferred',
-        sts.tuple([v33.TechAssetId, v33.TechAccountId, v33.AccountId, v33.Balance])
+        sts.tuple([v1.TechAssetId, v1.TechAccountId, v1.AccountId, v1.Balance])
     ),
     /**
      * Some assets were transferred out. [asset, from, to, amount].
@@ -110,9 +146,25 @@ export const outputTransferred =  {
      * Some assets were transferred out. [asset, from, to, amount].
      * TechAccountId is only pure TechAccountId.
      */
-    v54: new EventType(
+    v57: new EventType(
         'Technical.OutputTransferred',
-        sts.tuple([v54.TechAssetId, v54.TechAccountId, v54.AccountId32, sts.bigint()])
+        sts.tuple([v57.TechAssetId, v57.TechAccountId, v57.AccountId32, sts.bigint()])
+    ),
+    /**
+     * Some assets were transferred out. [asset, from, to, amount].
+     * TechAccountId is only pure TechAccountId.
+     */
+    v72: new EventType(
+        'Technical.OutputTransferred',
+        sts.tuple([v72.TechAssetId, v72.TechAccountId, v72.AccountId32, sts.bigint()])
+    ),
+    /**
+     * Some assets were transferred out. [asset, from, to, amount].
+     * TechAccountId is only pure TechAccountId.
+     */
+    v74: new EventType(
+        'Technical.OutputTransferred',
+        sts.tuple([v74.TechAssetId, v74.TechAccountId, v74.AccountId32, sts.bigint()])
     ),
 }
 
@@ -122,9 +174,9 @@ export const inputTransferred =  {
      *  Some assets were transferred in. [asset, from, to, amount].
      *  TechAccountId is only pure TechAccountId.
      */
-    v33: new EventType(
+    v1: new EventType(
         'Technical.InputTransferred',
-        sts.tuple([v33.TechAssetId, v33.AccountId, v33.TechAccountId, v33.Balance])
+        sts.tuple([v1.TechAssetId, v1.AccountId, v1.TechAccountId, v1.Balance])
     ),
     /**
      * Some assets were transferred in. [asset, from, to, amount].
@@ -146,9 +198,25 @@ export const inputTransferred =  {
      * Some assets were transferred in. [asset, from, to, amount].
      * TechAccountId is only pure TechAccountId.
      */
-    v54: new EventType(
+    v57: new EventType(
         'Technical.InputTransferred',
-        sts.tuple([v54.TechAssetId, v54.AccountId32, v54.TechAccountId, sts.bigint()])
+        sts.tuple([v57.TechAssetId, v57.AccountId32, v57.TechAccountId, sts.bigint()])
+    ),
+    /**
+     * Some assets were transferred in. [asset, from, to, amount].
+     * TechAccountId is only pure TechAccountId.
+     */
+    v72: new EventType(
+        'Technical.InputTransferred',
+        sts.tuple([v72.TechAssetId, v72.AccountId32, v72.TechAccountId, sts.bigint()])
+    ),
+    /**
+     * Some assets were transferred in. [asset, from, to, amount].
+     * TechAccountId is only pure TechAccountId.
+     */
+    v74: new EventType(
+        'Technical.InputTransferred',
+        sts.tuple([v74.TechAssetId, v74.AccountId32, v74.TechAccountId, sts.bigint()])
     ),
 }
 
@@ -158,8 +226,8 @@ export const swapSuccess =  {
      *  Swap operaction is finalised [initiator, finaliser].
      *  TechAccountId is only pure TechAccountId.
      */
-    v33: new EventType(
+    v1: new EventType(
         'Technical.SwapSuccess',
-        v33.AccountId
+        v1.AccountId
     ),
 }

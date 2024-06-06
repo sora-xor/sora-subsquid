@@ -9,37 +9,37 @@ export const rewards = {
 	v1: productionStorage.rewards['v1'],
 	v42: productionStorage.rewards['v42'],
 	v45: productionStorage.rewards['v45'],
-	v33Stage: stageStorage.rewards['v33'],
+	v1Stage: stageStorage.rewards['v1'],
 	v42Stage: stageStorage.rewards['v42'],
-	v44Stage: stageStorage.rewards['v44'],
-	v33Test: testStorage.rewards['v33'],
+	v45Stage: stageStorage.rewards['v45'],
+	v1Test: testStorage.rewards['v1'],
 	v42Test: testStorage.rewards['v42'],
-	v44Test: testStorage.rewards['v44'],
-	v70Dev: devStorage.rewards['v70'],
+	v45Test: testStorage.rewards['v45'],
+	v85Dev: devStorage.rewards['v85'],
 }
 
 export const totalRewards = {
 	name: 'VestedRewards.TotalRewards',
 	v1: productionStorage.totalRewards['v1'],
-	v33Stage: stageStorage.totalRewards['v33'],
-	v33Test: testStorage.totalRewards['v33'],
-	v70Dev: devStorage.totalRewards['v70'],
+	v1Stage: stageStorage.totalRewards['v1'],
+	v1Test: testStorage.totalRewards['v1'],
+	v85Dev: devStorage.totalRewards['v85'],
 }
 
 export const marketMakersRegistry = {
 	name: 'VestedRewards.MarketMakersRegistry',
 	v1: productionStorage.marketMakersRegistry['v1'],
-	v33Stage: stageStorage.marketMakersRegistry['v33'],
-	v33Test: testStorage.marketMakersRegistry['v33'],
+	v1Stage: stageStorage.marketMakersRegistry['v1'],
+	v1Test: testStorage.marketMakersRegistry['v1'],
 }
 
 export const marketMakingPairs = {
 	name: 'VestedRewards.MarketMakingPairs',
 	v22: productionStorage.marketMakingPairs['v22'],
 	v42: productionStorage.marketMakingPairs['v42'],
-	v33Stage: stageStorage.marketMakingPairs['v33'],
+	v22Stage: stageStorage.marketMakingPairs['v22'],
 	v42Stage: stageStorage.marketMakingPairs['v42'],
-	v33Test: testStorage.marketMakingPairs['v33'],
+	v22Test: testStorage.marketMakingPairs['v22'],
 	v42Test: testStorage.marketMakingPairs['v42'],
 }
 
@@ -66,15 +66,15 @@ export const crowdloanClaimHistory = {
 export const crowdloanInfos = {
 	name: 'VestedRewards.CrowdloanInfos',
 	v53: productionStorage.crowdloanInfos['v53'],
-	v52Stage: stageStorage.crowdloanInfos['v52'],
-	v52Test: testStorage.crowdloanInfos['v52'],
-	v70Dev: devStorage.crowdloanInfos['v70'],
+	v53Stage: stageStorage.crowdloanInfos['v53'],
+	v53Test: testStorage.crowdloanInfos['v53'],
+	v85Dev: devStorage.crowdloanInfos['v85'],
 }
 
 export const crowdloanUserInfos = {
 	name: 'VestedRewards.CrowdloanUserInfos',
 	v53: productionStorage.crowdloanUserInfos['v53'],
-	v52Stage: stageStorage.crowdloanUserInfos['v52'],
-	v52Test: testStorage.crowdloanUserInfos['v52'],
-	v70Dev: devStorage.crowdloanUserInfos['v70'],
+	v53Stage: stageStorage.crowdloanUserInfos['v53'],
+	v53Test: testStorage.crowdloanUserInfos['v53'],
+	v85Dev: devStorage.crowdloanUserInfos['v85'],
 }

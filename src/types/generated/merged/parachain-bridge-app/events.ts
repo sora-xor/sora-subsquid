@@ -12,7 +12,7 @@ export const burned = {
 	v70Stage: stageEvents.burned['v70'],
 	v64Test: testEvents.burned['v64'],
 	v70Test: testEvents.burned['v70'],
-	v70Dev: devEvents.burned['v70'],
+	v85Dev: devEvents.burned['v85'],
 }
 
 export const minted = {
@@ -23,5 +23,5 @@ export const minted = {
 	v70Stage: stageEvents.minted['v70'],
 	v64Test: testEvents.minted['v64'],
 	v70Test: testEvents.minted['v70'],
-	v70Dev: devEvents.minted['v70'],
+	v85Dev: devEvents.minted['v85'],
 }

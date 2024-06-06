@@ -7,25 +7,30 @@ import * as devStorage from '../../dev/farming/storage'
 export const pools = {
 	name: 'Farming.Pools',
 	v7: productionStorage.pools['v7'],
-	v33Stage: stageStorage.pools['v33'],
-	v33Test: testStorage.pools['v33'],
-	v70Dev: devStorage.pools['v70'],
+	v7Stage: stageStorage.pools['v7'],
+	v7Test: testStorage.pools['v7'],
+	v85Dev: devStorage.pools['v85'],
 }
 
 export const poolFarmers = {
 	name: 'Farming.PoolFarmers',
 	v7: productionStorage.poolFarmers['v7'],
-	v33Stage: stageStorage.poolFarmers['v33'],
-	v33Test: testStorage.poolFarmers['v33'],
-	v70Dev: devStorage.poolFarmers['v70'],
+	v7Stage: stageStorage.poolFarmers['v7'],
+	v7Test: testStorage.poolFarmers['v7'],
+	v85Dev: devStorage.poolFarmers['v85'],
 }
 
 export const savedValues = {
 	name: 'Farming.SavedValues',
 	v7: productionStorage.savedValues['v7'],
+	v7Stage: stageStorage.savedValues['v7'],
+	v7Test: testStorage.savedValues['v7'],
 }
 
 export const lpMinXorForBonusReward = {
 	name: 'Farming.LpMinXorForBonusReward',
 	v77: productionStorage.lpMinXorForBonusReward['v77'],
+	v77Stage: stageStorage.lpMinXorForBonusReward['v77'],
+	v77Test: testStorage.lpMinXorForBonusReward['v77'],
+	v85Dev: devStorage.lpMinXorForBonusReward['v85'],
 }
