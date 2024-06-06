@@ -14,7 +14,7 @@ async function handleEventType(
 ) {
 	logStartProcessingEvent(ctx, event)
 
-	let vault: Vault
+	let vault: Vault | undefined
 	let account: VaultAccount | null = null
 	let vaultId: string
 	let owner: string | null = null
@@ -96,7 +96,6 @@ async function handleEventType(
 		})
 	} else {
 		const vaultFromStore = await ctx.store.get(Vault, vaultId)
-		assertDefined(vaultFromStore)
 		vault = vaultFromStore
 	}
 
