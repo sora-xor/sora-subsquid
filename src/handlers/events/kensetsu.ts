@@ -50,26 +50,27 @@ async function handleEventType(
 			break
 		}
 		case VaultEventType.Closed: {
-			const data = getEventData(ctx, events.kensetsu.collateralDeposit, event)
+			const data = getEventData(ctx, events.kensetsu.cdpClosed, event)
 			vaultId = data.cdpId.toString()
 			owner = data.owner
 			assetId = getAssetId(data.collateralAssetId)
-			amount = formatU128ToBalance(data.amount, assetId)
+			amount = formatU128ToBalance(data.collateralAmount, assetId)
 			break
 		}
 		case VaultEventType.DebtIncreased: {
-			const data = getEventData(ctx, events.kensetsu.collateralDeposit, event)
+			const data = getEventData(ctx, events.kensetsu.debtIncreased, event)
+			console.log(data);
 			vaultId = data.cdpId.toString()
 			owner = data.owner
-			assetId = getAssetId(data.collateralAssetId)
+			assetId = getAssetId(data.debtAssetId)
 			amount = formatU128ToBalance(data.amount, assetId)
 			break
 		}
 		case VaultEventType.DebtPayment: {
-			const data = getEventData(ctx, events.kensetsu.collateralDeposit, event)
+			const data = getEventData(ctx, events.kensetsu.debtPayment, event)
 			vaultId = data.cdpId.toString()
 			owner = data.owner
-			assetId = getAssetId(data.collateralAssetId)
+			assetId = getAssetId(data.debtAssetId)
 			amount = formatU128ToBalance(data.amount, assetId)
 			break
 		}
