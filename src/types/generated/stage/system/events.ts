@@ -1,16 +1,16 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
 import * as v42 from '../v42'
-import * as v52 from '../v52'
+import * as v53 from '../v53'
 
 export const extrinsicSuccess =  {
     name: 'System.ExtrinsicSuccess',
     /**
      *  An extrinsic completed successfully. \[info\]
      */
-    v33: new EventType(
+    v1: new EventType(
         'System.ExtrinsicSuccess',
-        v33.DispatchInfo
+        v1.DispatchInfo
     ),
     /**
      * An extrinsic completed successfully.
@@ -24,10 +24,10 @@ export const extrinsicSuccess =  {
     /**
      * An extrinsic completed successfully.
      */
-    v52: new EventType(
+    v53: new EventType(
         'System.ExtrinsicSuccess',
         sts.struct({
-            dispatchInfo: v52.DispatchInfo,
+            dispatchInfo: v53.DispatchInfo,
         })
     ),
 }
@@ -37,9 +37,9 @@ export const extrinsicFailed =  {
     /**
      *  An extrinsic failed. \[error, info\]
      */
-    v33: new EventType(
+    v1: new EventType(
         'System.ExtrinsicFailed',
-        sts.tuple([v33.DispatchError, v33.DispatchInfo])
+        sts.tuple([v1.DispatchError, v1.DispatchInfo])
     ),
     /**
      * An extrinsic failed.
@@ -54,11 +54,11 @@ export const extrinsicFailed =  {
     /**
      * An extrinsic failed.
      */
-    v52: new EventType(
+    v53: new EventType(
         'System.ExtrinsicFailed',
         sts.struct({
-            dispatchError: v52.DispatchError,
-            dispatchInfo: v52.DispatchInfo,
+            dispatchError: v53.DispatchError,
+            dispatchInfo: v53.DispatchInfo,
         })
     ),
 }
@@ -68,7 +68,7 @@ export const codeUpdated =  {
     /**
      *  `:code` was updated.
      */
-    v33: new EventType(
+    v1: new EventType(
         'System.CodeUpdated',
         sts.unit()
     ),
@@ -79,9 +79,9 @@ export const newAccount =  {
     /**
      *  A new \[account\] was created.
      */
-    v33: new EventType(
+    v1: new EventType(
         'System.NewAccount',
-        v33.AccountId
+        v1.AccountId
     ),
     /**
      * A new account was created.
@@ -99,9 +99,9 @@ export const killedAccount =  {
     /**
      *  An \[account\] was reaped.
      */
-    v33: new EventType(
+    v1: new EventType(
         'System.KilledAccount',
-        v33.AccountId
+        v1.AccountId
     ),
     /**
      * An account was reaped.

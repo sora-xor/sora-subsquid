@@ -17,7 +17,7 @@
 		"ES2021.String"
 	]
   },
-  "include": ["src", "src/config.ts"],
+  "include": ["src", "src/config.ts", "src/handlers/calls/staking/.ts", "src/handlers/calls/staking/.ts"],
   "exclude": [
     "node_modules"
   ]

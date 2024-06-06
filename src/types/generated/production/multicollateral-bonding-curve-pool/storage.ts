@@ -4,6 +4,9 @@ import * as v42 from '../v42'
 import * as v46 from '../v46'
 import * as v53 from '../v53'
 import * as v57 from '../v57'
+import * as v72 from '../v72'
+import * as v74 from '../v74'
+import * as v85 from '../v85'
 
 export const reservesAcc =  {
     /**
@@ -22,6 +25,14 @@ export const reservesAcc =  {
      *  Technical account used to store collateral tokens.
      */
     v57: new StorageType('MulticollateralBondingCurvePool.ReservesAcc', 'Default', [], v57.TechAccountId) as ReservesAccV57,
+    /**
+     *  Technical account used to store collateral tokens.
+     */
+    v72: new StorageType('MulticollateralBondingCurvePool.ReservesAcc', 'Default', [], v72.TechAccountId) as ReservesAccV72,
+    /**
+     *  Technical account used to store collateral tokens.
+     */
+    v74: new StorageType('MulticollateralBondingCurvePool.ReservesAcc', 'Default', [], v74.TechAccountId) as ReservesAccV74,
 }
 
 /**
@@ -60,6 +71,24 @@ export interface ReservesAccV57  {
     get(block: Block): Promise<(v57.TechAccountId | undefined)>
 }
 
+/**
+ *  Technical account used to store collateral tokens.
+ */
+export interface ReservesAccV72  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): v72.TechAccountId
+    get(block: Block): Promise<(v72.TechAccountId | undefined)>
+}
+
+/**
+ *  Technical account used to store collateral tokens.
+ */
+export interface ReservesAccV74  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): v74.TechAccountId
+    get(block: Block): Promise<(v74.TechAccountId | undefined)>
+}
+
 export const freeReservesAccountId =  {
     v1: new StorageType('MulticollateralBondingCurvePool.FreeReservesAccountId', 'Default', [], v1.AccountId) as FreeReservesAccountIdV1,
     v42: new StorageType('MulticollateralBondingCurvePool.FreeReservesAccountId', 'Optional', [], v42.AccountId32) as FreeReservesAccountIdV42,
@@ -79,6 +108,7 @@ export interface FreeReservesAccountIdV42  {
 export const pendingFreeReserves =  {
     v1: new StorageType('MulticollateralBondingCurvePool.PendingFreeReserves', 'Default', [], sts.array(() => sts.tuple(() => [v1.AssetId, v1.Balance]))) as PendingFreeReservesV1,
     v42: new StorageType('MulticollateralBondingCurvePool.PendingFreeReserves', 'Default', [], sts.array(() => sts.tuple(() => [v42.AssetId32, sts.bigint()]))) as PendingFreeReservesV42,
+    v85: new StorageType('MulticollateralBondingCurvePool.PendingFreeReserves', 'Default', [sts.number()], sts.array(() => sts.tuple(() => [v85.AssetId32, sts.bigint()]))) as PendingFreeReservesV85,
 }
 
 export interface PendingFreeReservesV1  {
@@ -91,6 +121,21 @@ export interface PendingFreeReservesV42  {
     is(block: RuntimeCtx): boolean
     getDefault(block: Block): [v42.AssetId32, bigint][]
     get(block: Block): Promise<([v42.AssetId32, bigint][] | undefined)>
+}
+
+export interface PendingFreeReservesV85  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): [v85.AssetId32, bigint][]
+    get(block: Block, key: number): Promise<([v85.AssetId32, bigint][] | undefined)>
+    getMany(block: Block, keys: number[]): Promise<([v85.AssetId32, bigint][] | undefined)[]>
+    getKeys(block: Block): Promise<number[]>
+    getKeys(block: Block, key: number): Promise<number[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<number[]>
+    getKeysPaged(pageSize: number, block: Block, key: number): AsyncIterable<number[]>
+    getPairs(block: Block): Promise<[k: number, v: ([v85.AssetId32, bigint][] | undefined)][]>
+    getPairs(block: Block, key: number): Promise<[k: number, v: ([v85.AssetId32, bigint][] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: number, v: ([v85.AssetId32, bigint][] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: number): AsyncIterable<[k: number, v: ([v85.AssetId32, bigint][] | undefined)][]>
 }
 
 export const initialPrice =  {
@@ -280,6 +325,14 @@ export const distributionAccountsEntry =  {
      *  Accounts that receive 20% buy/sell margin according to predefined proportions
      */
     v57: new StorageType('MulticollateralBondingCurvePool.DistributionAccountsEntry', 'Default', [], v57.DistributionAccounts) as DistributionAccountsEntryV57,
+    /**
+     *  Accounts that receive 20% buy/sell margin according to predefined proportions
+     */
+    v72: new StorageType('MulticollateralBondingCurvePool.DistributionAccountsEntry', 'Default', [], v72.DistributionAccounts) as DistributionAccountsEntryV72,
+    /**
+     *  Accounts that receive 20% buy/sell margin according to predefined proportions
+     */
+    v74: new StorageType('MulticollateralBondingCurvePool.DistributionAccountsEntry', 'Default', [], v74.DistributionAccounts) as DistributionAccountsEntryV74,
 }
 
 /**
@@ -325,6 +378,24 @@ export interface DistributionAccountsEntryV57  {
     is(block: RuntimeCtx): boolean
     getDefault(block: Block): v57.DistributionAccounts
     get(block: Block): Promise<(v57.DistributionAccounts | undefined)>
+}
+
+/**
+ *  Accounts that receive 20% buy/sell margin according to predefined proportions
+ */
+export interface DistributionAccountsEntryV72  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): v72.DistributionAccounts
+    get(block: Block): Promise<(v72.DistributionAccounts | undefined)>
+}
+
+/**
+ *  Accounts that receive 20% buy/sell margin according to predefined proportions
+ */
+export interface DistributionAccountsEntryV74  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): v74.DistributionAccounts
+    get(block: Block): Promise<(v74.DistributionAccounts | undefined)>
 }
 
 export const enabledTargets =  {

@@ -6,10 +6,10 @@ import { Address } from '../../types'
 import { getInitializePoolsLog } from '../../utils/logs'
 import { assertDefined } from '../../utils'
 
-let isFirstBlockIndexed = false
+export let initializedAtBlock: number | null = null
 
 export async function initializePools(ctx: BlockContext): Promise<void> {
-	if (isFirstBlockIndexed) return
+	if (initializedAtBlock !== null) return
 
 	getInitializePoolsLog(ctx).debug('Initialize Pool XYK entities')
 
@@ -60,6 +60,9 @@ export async function initializePools(ctx: BlockContext): Promise<void> {
 				const pool = poolsBuffer.get(poolAccountId)
 				if (pool) {
 					pool.baseAssetReserves = baseBalance
+					if (baseBalance < 0) {
+						throw new Error(`Base asset reserves can't be negative: ${baseBalance}`)
+					}
 					pool.targetAssetReserves = targetBalance
 				}
 			}
@@ -71,7 +74,6 @@ export async function initializePools(ctx: BlockContext): Promise<void> {
 			new PoolXYK({
 				...pool,
 				id: pool.id,
-				updatedAtBlock: ctx.block.header.height,
 			}),
 	)
 
@@ -96,5 +98,5 @@ export async function initializePools(ctx: BlockContext): Promise<void> {
         getInitializePoolsLog(ctx).debug('No Pool XYKs to initialize!');
     }
 
-	isFirstBlockIndexed = true
+	initializedAtBlock = ctx.block.header.height
 }

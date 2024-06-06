@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const bond =  {
     name: 'Staking.bond',
@@ -22,12 +22,12 @@ export const bond =  {
      * ------------------
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'Staking.bond',
         sts.struct({
-            controller: v70.AccountId32,
+            controller: v85.AccountId32,
             value: sts.bigint(),
-            payee: v70.RewardDestination,
+            payee: v85.RewardDestination,
         })
     ),
 }
@@ -51,7 +51,7 @@ export const bondExtra =  {
      * - O(1).
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'Staking.bond_extra',
         sts.struct({
             maxAdditional: sts.bigint(),
@@ -82,7 +82,7 @@ export const unbond =  {
      * 
      * See also [`Call::withdraw_unbonded`].
      */
-    v70: new CallType(
+    v85: new CallType(
         'Staking.unbond',
         sts.struct({
             value: sts.bigint(),
@@ -109,7 +109,7 @@ export const withdrawUnbonded =  {
      * NOTE: Weight annotation is the kill scenario, we refund otherwise.
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'Staking.withdraw_unbonded',
         sts.struct({
             numSlashingSpans: sts.number(),
@@ -126,10 +126,10 @@ export const validate =  {
      * 
      * The dispatch origin for this call must be _Signed_ by the controller, not the stash.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Staking.validate',
         sts.struct({
-            prefs: v70.ValidatorPrefs,
+            prefs: v85.ValidatorPrefs,
         })
     ),
 }
@@ -149,10 +149,10 @@ export const nominate =  {
      * - Both the reads and writes follow a similar pattern.
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'Staking.nominate',
         sts.struct({
-            targets: sts.array(() => v70.AccountId32),
+            targets: sts.array(() => v85.AccountId32),
         })
     ),
 }
@@ -172,7 +172,7 @@ export const chill =  {
      * - Writes are limited to the `origin` account key.
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'Staking.chill',
         sts.unit()
     ),
@@ -198,10 +198,10 @@ export const setPayee =  {
      *     - Write: Payee
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'Staking.set_payee',
         sts.struct({
-            payee: v70.RewardDestination,
+            payee: v85.RewardDestination,
         })
     ),
 }
@@ -226,10 +226,10 @@ export const setController =  {
      * - Write: Bonded, Ledger New Controller, Ledger Old Controller
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'Staking.set_controller',
         sts.struct({
-            controller: v70.AccountId32,
+            controller: v85.AccountId32,
         })
     ),
 }
@@ -246,7 +246,7 @@ export const setValidatorCount =  {
      * Write: Validator Count
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'Staking.set_validator_count',
         sts.struct({
             new: sts.number(),
@@ -266,7 +266,7 @@ export const increaseValidatorCount =  {
      * Same as [`Self::set_validator_count`].
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'Staking.increase_validator_count',
         sts.struct({
             additional: sts.number(),
@@ -286,10 +286,10 @@ export const scaleValidatorCount =  {
      * Same as [`Self::set_validator_count`].
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'Staking.scale_validator_count',
         sts.struct({
-            factor: v70.Percent,
+            factor: v85.Percent,
         })
     ),
 }
@@ -313,7 +313,7 @@ export const forceNoEras =  {
      * - Write: ForceEra
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'Staking.force_no_eras',
         sts.unit()
     ),
@@ -339,7 +339,7 @@ export const forceNewEra =  {
      * - Write ForceEra
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'Staking.force_new_era',
         sts.unit()
     ),
@@ -352,10 +352,10 @@ export const setInvulnerables =  {
      * 
      * The dispatch origin must be Root.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Staking.set_invulnerables',
         sts.struct({
-            invulnerables: sts.array(() => v70.AccountId32),
+            invulnerables: sts.array(() => v85.AccountId32),
         })
     ),
 }
@@ -367,10 +367,10 @@ export const forceUnstake =  {
      * 
      * The dispatch origin must be Root.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Staking.force_unstake',
         sts.struct({
-            stash: v70.AccountId32,
+            stash: v85.AccountId32,
             numSlashingSpans: sts.number(),
         })
     ),
@@ -389,7 +389,7 @@ export const forceNewEraAlways =  {
      * If this is called just before a new era is triggered, the election process may not
      * have enough blocks to get a result.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Staking.force_new_era_always',
         sts.unit()
     ),
@@ -404,7 +404,7 @@ export const cancelDeferredSlash =  {
      * 
      * Parameters: era and indices of the slashes for that era to kill.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Staking.cancel_deferred_slash',
         sts.struct({
             era: sts.number(),
@@ -438,10 +438,10 @@ export const payoutStakers =  {
      *   Paying even a dead controller is cheaper weight-wise. We don't do any refunds here.
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'Staking.payout_stakers',
         sts.struct({
-            validatorStash: v70.AccountId32,
+            validatorStash: v85.AccountId32,
             era: sts.number(),
         })
     ),
@@ -460,7 +460,7 @@ export const rebond =  {
      * - Storage changes: Can't increase storage, only decrease it.
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'Staking.rebond',
         sts.struct({
             value: sts.bigint(),
@@ -484,10 +484,10 @@ export const reapStash =  {
      * 
      * Refunds the transaction fees upon successful execution.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Staking.reap_stash',
         sts.struct({
-            stash: v70.AccountId32,
+            stash: v85.AccountId32,
             numSlashingSpans: sts.number(),
         })
     ),
@@ -508,10 +508,10 @@ export const kick =  {
      * Note: Making this call only makes sense if you first set the validator preferences to
      * block any further nominations.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Staking.kick',
         sts.struct({
-            who: sts.array(() => v70.AccountId32),
+            who: sts.array(() => v85.AccountId32),
         })
     ),
 }
@@ -537,15 +537,15 @@ export const setStakingConfigs =  {
      * NOTE: Existing nominators and validators will not be affected by this update.
      * to kick people under the new limits, `chill_other` should be called.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Staking.set_staking_configs',
         sts.struct({
-            minNominatorBond: v70.ConfigOp,
-            minValidatorBond: v70.ConfigOp,
-            maxNominatorCount: v70.Type_299,
-            maxValidatorCount: v70.Type_299,
-            chillThreshold: v70.Type_300,
-            minCommission: v70.Type_301,
+            minNominatorBond: v85.ConfigOp,
+            minValidatorBond: v85.ConfigOp,
+            maxNominatorCount: v85.Type_318,
+            maxValidatorCount: v85.Type_318,
+            chillThreshold: v85.Type_319,
+            minCommission: v85.Type_320,
         })
     ),
 }
@@ -580,10 +580,10 @@ export const chillOther =  {
      * This can be helpful if bond requirements are updated, and we need to remove old users
      * who do not satisfy these requirements.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Staking.chill_other',
         sts.struct({
-            controller: v70.AccountId32,
+            controller: v85.AccountId32,
         })
     ),
 }
@@ -595,10 +595,10 @@ export const forceApplyMinCommission =  {
      * validator who already has a commission greater than or equal to the minimum. Any account
      * can call this.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Staking.force_apply_min_commission',
         sts.struct({
-            validatorStash: v70.AccountId32,
+            validatorStash: v85.AccountId32,
         })
     ),
 }
@@ -611,10 +611,10 @@ export const setMinCommission =  {
      * This call has lower privilege requirements than `set_staking_config` and can be called
      * by the `T::AdminOrigin`. Root can always call this.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Staking.set_min_commission',
         sts.struct({
-            new: v70.Perbill,
+            new: v85.Perbill,
         })
     ),
 }

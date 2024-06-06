@@ -16,6 +16,7 @@ export class HistoryElement {
     @Column_("varchar", {length: 5, nullable: false})
     type!: HistoryElementType
 
+    @Index_()
     @Column_("int4", {nullable: false})
     blockHeight!: number
 
@@ -44,10 +45,10 @@ export class HistoryElement {
     @Column_("jsonb", {transformer: {to: obj => obj.toJSON(), from: obj => obj == null ? undefined : new ExecutionResult(undefined, obj)}, nullable: false})
     execution!: ExecutionResult
 
+    @Index_()
     @Column_("int4", {nullable: false})
     timestamp!: number
 
-    @Index_()
     @Column_("jsonb", {nullable: true})
     data!: unknown | undefined | null
 
@@ -59,15 +60,13 @@ export class HistoryElement {
     @Column_("text", {nullable: true})
     dataFrom!: string | undefined | null
 
-    @Column_("text", {array: true, nullable: false})
-    dataReceivers!: (string | undefined | null)[]
-
     @OneToMany_(() => HistoryElementCall, e => e.historyElement)
     calls!: HistoryElementCall[]
 
     @Column_("text", {array: true, nullable: false})
     callNames!: (string | undefined | null)[]
 
+    @Index_()
     @Column_("int4", {nullable: false})
     updatedAtBlock!: number
 }

@@ -1,6 +1,6 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
 import * as v47 from '../v47'
-import * as v55 from '../v55'
+import * as v57 from '../v57'
 
 export const vote =  {
     name: 'HermesGovernancePlatform.vote',
@@ -17,11 +17,11 @@ export const vote =  {
     /**
      * Vote for some option
      */
-    v55: new CallType(
+    v57: new CallType(
         'HermesGovernancePlatform.vote',
         sts.struct({
-            pollId: v55.H256,
-            votingOption: v55.BoundedString,
+            pollId: v57.H256,
+            votingOption: v57.BoundedString,
         })
     ),
 }
@@ -43,14 +43,14 @@ export const createPoll =  {
     /**
      * Create poll
      */
-    v55: new CallType(
+    v57: new CallType(
         'HermesGovernancePlatform.create_poll',
         sts.struct({
             pollStartTimestamp: sts.bigint(),
             pollEndTimestamp: sts.bigint(),
-            title: v55.BoundedString,
-            description: v55.BoundedString,
-            options: sts.array(() => v55.BoundedString),
+            title: v57.BoundedString,
+            description: v57.BoundedString,
+            options: sts.array(() => v57.BoundedString),
         })
     ),
 }

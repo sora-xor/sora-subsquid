@@ -83,7 +83,6 @@ class AssetStorage {
 			asset.id = id
 			asset.priceUSD = '0'
 			asset.supply = 0n
-			asset.updatedAtBlock = ctx.block.header.height
 
 			await this.save(ctx, asset, true)
 		}
@@ -99,6 +98,9 @@ class AssetStorage {
 		if (asset.priceUSD === priceUSD) return
 
 		asset.priceUSD = priceUSD
+		if (BigNumber(priceUSD).isNegative()) {
+			throw new Error(`Price can't be negative: ${priceUSD}`)
+		}
 		// stream update
 		priceUpdatesStream.update(id, priceUSD)
 
@@ -191,6 +193,15 @@ class AssetSnapshotsStorage {
 		return [assetId, type, index].join('-')
 	}
 
+	private async save(ctx: BlockContext, snapshot: AssetSnapshot, force = false): Promise<void> {
+	  if (force || shouldUpdate(ctx, 60)) {
+		await ctx.store.remove(snapshot)
+		await ctx.store.insert(snapshot)
+  
+		getAssetSnapshotsStorageLog(ctx).debug({ id: snapshot.id }, 'Asset snapshot saved')
+	  }
+	}
+
 	async sync(ctx: BlockContext): Promise<void> {
 		await this.syncSnapshots(ctx)
 	}
@@ -198,7 +209,8 @@ class AssetSnapshotsStorage {
 	private async syncSnapshots(ctx: BlockContext): Promise<void> {
 		getAssetSnapshotsStorageLog(ctx).debug(`${this.storage.size} snapshots sync`)
 
-		await ctx.store.save([...this.storage.values()])
+		await ctx.store.remove([...this.storage.values()])
+		await ctx.store.insert([...this.storage.values()])
 
 		for (const snapshot of this.storage.values()) {
 			const { type, timestamp } = snapshot
@@ -249,7 +261,6 @@ class AssetSnapshotsStorage {
 				high: asset.priceUSD,
 				low: asset.priceUSD,
 			})
-			snapshot.updatedAtBlock = ctx.block.header.height
 			getAssetSnapshotsStorageLog(ctx, true).debug({ assetSnapshotId: id }, 'Asset snapshot created and saved')
 		}
 
@@ -282,8 +293,15 @@ class AssetSnapshotsStorage {
 			snapshot.priceUSD.close = price;
 			snapshot.priceUSD.high = BigNumber.max(new BigNumber(snapshot.priceUSD.high), bnPrice).toString()
 			snapshot.priceUSD.low = BigNumber.min(new BigNumber(snapshot.priceUSD.low), bnPrice).toString()
+
+
+			if (BigNumber(price).isNegative()) {
+				throw new Error(`Price can't be negative: ${price}`)
+			}
 		
 			getAssetSnapshotsStorageLog(ctx, true).debug({ assetId, newPrice: price }, 'Asset snapshot price updated')
+
+			await this.save(ctx, snapshot);
 		}
 		await this.assetStorage.updatePrice(ctx, assetId, price)
 	}
@@ -304,7 +322,6 @@ class AssetSnapshotsStorage {
 			if (snapshot.volume) {
 				snapshot.volume.amount = new BigNumber(snapshot.volume.amount).plus(volume.toString()).toString()
 				snapshot.volume.amountUSD = new BigNumber(snapshot.volume.amountUSD).plus(volumeUSD.toString()).toFixed(2)
-				snapshot.updatedAtBlock = ctx.block.header.height
 			} else {
 				getAssetSnapshotsStorageLog(ctx).debug(
 					{ assetId: assetId, newVolume: volume },
@@ -326,14 +343,12 @@ class AssetSnapshotsStorage {
 			const snapshot = await this.getSnapshot(ctx, assetId, type)
 
 			snapshot.mint = snapshot.mint + amount
-			snapshot.updatedAtBlock = ctx.block.header.height
 			getAssetSnapshotsStorageLog(ctx, true).debug({ assetId: assetId, newMinted: amount }, 'Asset snapshot mint updated')
 		}
 
 		const asset = await this.assetStorage.getAsset(ctx, assetId)
 
 		asset.supply = asset.supply + amount
-		asset.updatedAtBlock = ctx.block.header.height
 		getAssetSnapshotsStorageLog(ctx).debug({ assetId: assetId, minted: amount }, 'Asset minted')
 	}
 
@@ -344,14 +359,12 @@ class AssetSnapshotsStorage {
 			const snapshot = await this.getSnapshot(ctx, assetId, type)
 
 			snapshot.burn = snapshot.burn + amount
-			snapshot.updatedAtBlock = ctx.block.header.height
 			getAssetSnapshotsStorageLog(ctx, true).debug({ assetId: assetId, burned: snapshot.burn }, 'Asset snapshot burn updated')
 		}
 
 		const asset = await this.assetStorage.getAsset(ctx, assetId)
 
 		asset.supply = asset.supply - amount
-		asset.updatedAtBlock = ctx.block.header.height
 		getAssetSnapshotsStorageLog(ctx).debug({ assetId: assetId, supply: asset.supply }, 'Asset supply updated')
 	}
 }

@@ -4,6 +4,8 @@ import { SnapshotType, NetworkSnapshot, NetworkStats } from '../model'
 import { AssetAmount, BlockContext } from '../types'
 import { getBlockTimestamp, getSnapshotIndex, getSnapshotTypes } from './index'
 import { getNetworkSnapshotsStorageLog } from './logs'
+import { orderBooksStorage } from './orderBook';
+import { poolsStorage } from './pools';
 
 const NetworkSnapshots = [SnapshotType.HOUR, SnapshotType.DAY, SnapshotType.MONTH]
 
@@ -61,7 +63,7 @@ class NetworkSnapshotsStorage {
 	}
 
 	private async syncStats(ctx: BlockContext): Promise<void> {
-		this.networkStatsStorage.sync(ctx)
+		await this.networkStatsStorage.sync(ctx)
 	}
 
 	private async syncSnapshots(ctx: BlockContext): Promise<void> {
@@ -119,10 +121,10 @@ class NetworkSnapshotsStorage {
 
 	async updateAccountsStats(ctx: BlockContext): Promise<void> {
 		getNetworkSnapshotsStorageLog(ctx).debug('Update accounts stats in network snapshots')
+
 		const stats = await this.networkStatsStorage.getStats(ctx)
 
 		stats.totalAccounts = stats.totalAccounts + 1
-		stats.updatedAtBlock = ctx.block.header.height
 
 		const snapshotTypes = getSnapshotTypes(ctx, NetworkSnapshots)
 
@@ -130,16 +132,15 @@ class NetworkSnapshotsStorage {
 			const snapshot = await this.getSnapshot(ctx, type)
 
 			snapshot.accounts = snapshot.accounts + 1
-			snapshot.updatedAtBlock = ctx.block.header.height
 		}
 	}
 
 	async updateTransactionsStats(ctx: BlockContext): Promise<void> {
 		getNetworkSnapshotsStorageLog(ctx).debug('Update transactions stats in network snapshots')
+
 		const stats = await this.networkStatsStorage.getStats(ctx)
 
 		stats.totalTransactions = stats.totalTransactions + 1
-		stats.updatedAtBlock = ctx.block.header.height
 
 		const snapshotTypes = getSnapshotTypes(ctx, NetworkSnapshots)
 
@@ -147,16 +148,15 @@ class NetworkSnapshotsStorage {
 			const snapshot = await this.getSnapshot(ctx, type)
 
 			snapshot.transactions = snapshot.transactions + 1
-			snapshot.updatedAtBlock = ctx.block.header.height
 		}
 	}
 
 	async updateBridgeIncomingTransactionsStats(ctx: BlockContext): Promise<void> {
 		getNetworkSnapshotsStorageLog(ctx).debug('Update bridge incoming transactions stats in network snapshots')
+		
 		const stats = await this.networkStatsStorage.getStats(ctx)
 
 		stats.totalBridgeIncomingTransactions = stats.totalBridgeIncomingTransactions + 1
-		stats.updatedAtBlock = ctx.block.header.height
 
 		const snapshotTypes = getSnapshotTypes(ctx, NetworkSnapshots)
 
@@ -164,7 +164,6 @@ class NetworkSnapshotsStorage {
 			const snapshot = await this.getSnapshot(ctx, type)
 
 			snapshot.bridgeIncomingTransactions = snapshot.bridgeIncomingTransactions + 1
-			snapshot.updatedAtBlock = ctx.block.header.height
 		}
 	}
 
@@ -173,7 +172,6 @@ class NetworkSnapshotsStorage {
 		const stats = await this.networkStatsStorage.getStats(ctx)
 
 		stats.totalBridgeOutgoingTransactions = stats.totalBridgeOutgoingTransactions + 1
-		stats.updatedAtBlock = ctx.block.header.height
 
 		const snapshotTypes = getSnapshotTypes(ctx, NetworkSnapshots)
 
@@ -181,7 +179,6 @@ class NetworkSnapshotsStorage {
 			const snapshot = await this.getSnapshot(ctx, type)
 
 			snapshot.bridgeOutgoingTransactions = snapshot.bridgeOutgoingTransactions + 1
-			snapshot.updatedAtBlock = ctx.block.header.height
 		}
 	}
 
@@ -190,7 +187,6 @@ class NetworkSnapshotsStorage {
 		const stats = await this.networkStatsStorage.getStats(ctx)
 
 		stats.totalFees = stats.totalFees + fee
-		stats.updatedAtBlock = ctx.block.header.height
 
 		const snapshotTypes = getSnapshotTypes(ctx, NetworkSnapshots)
 
@@ -198,12 +194,15 @@ class NetworkSnapshotsStorage {
 			const snapshot = await this.getSnapshot(ctx, type)
 
 			snapshot.fees = snapshot.fees + fee
-			snapshot.updatedAtBlock = ctx.block.header.height
 		}
 	}
 
-	async updateLiquidityStats(ctx: BlockContext, liquiditiesUSD: BigNumber): Promise<void> {
-		getNetworkSnapshotsStorageLog(ctx).debug({ liquiditiesUSD }, 'Update liquidity stats in network snapshots')
+	async updateLiquidityStats(ctx: BlockContext): Promise<void> {
+		getNetworkSnapshotsStorageLog(ctx).debug('Update liquidity stats in network snapshots')
+
+		const poolsLockedUSD = await poolsStorage.getLockedLiquidityUSD(ctx);
+		const booksLockedUSD = await orderBooksStorage.getLockedLiquidityUSD(ctx);
+		const liquiditiesUSD = poolsLockedUSD.plus(booksLockedUSD);
 		
 		const snapshotTypes = getSnapshotTypes(ctx, NetworkSnapshots)
 
@@ -211,7 +210,6 @@ class NetworkSnapshotsStorage {
 			const snapshot = await this.getSnapshot(ctx, type)
 
 			snapshot.liquidityUSD = liquiditiesUSD.toFixed(2)
-			snapshot.updatedAtBlock = ctx.block.header.height
 		}
 	}
 
@@ -224,7 +222,6 @@ class NetworkSnapshotsStorage {
 			const snapshot = await this.getSnapshot(ctx, type)
 
 			snapshot.volumeUSD = new BigNumber(snapshot.volumeUSD).plus(volumeUSD).toFixed(2)
-			snapshot.updatedAtBlock = ctx.block.header.height
 		}
 	}
 }

@@ -2,6 +2,7 @@ import {sts, Block, Bytes, Option, Result, StorageType, RuntimeCtx} from '../sup
 import * as v64 from '../v64'
 import * as v65 from '../v65'
 import * as v70 from '../v70'
+import * as v84 from '../v84'
 
 export const interval =  {
     /**
@@ -108,6 +109,7 @@ export interface ChannelNoncesV70  {
 export const latestCommitment =  {
     v65: new StorageType('SubstrateBridgeOutboundChannel.LatestCommitment', 'Optional', [v65.SubNetworkId], v65.GenericCommitmentWithBlock) as LatestCommitmentV65,
     v70: new StorageType('SubstrateBridgeOutboundChannel.LatestCommitment', 'Optional', [v70.SubNetworkId], v70.GenericCommitmentWithBlock) as LatestCommitmentV70,
+    v84: new StorageType('SubstrateBridgeOutboundChannel.LatestCommitment', 'Optional', [v84.SubNetworkId], v84.GenericCommitmentWithBlock) as LatestCommitmentV84,
 }
 
 export interface LatestCommitmentV65  {
@@ -136,4 +138,18 @@ export interface LatestCommitmentV70  {
     getPairs(block: Block, key: v70.SubNetworkId): Promise<[k: v70.SubNetworkId, v: (v70.GenericCommitmentWithBlock | undefined)][]>
     getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v70.SubNetworkId, v: (v70.GenericCommitmentWithBlock | undefined)][]>
     getPairsPaged(pageSize: number, block: Block, key: v70.SubNetworkId): AsyncIterable<[k: v70.SubNetworkId, v: (v70.GenericCommitmentWithBlock | undefined)][]>
+}
+
+export interface LatestCommitmentV84  {
+    is(block: RuntimeCtx): boolean
+    get(block: Block, key: v84.SubNetworkId): Promise<(v84.GenericCommitmentWithBlock | undefined)>
+    getMany(block: Block, keys: v84.SubNetworkId[]): Promise<(v84.GenericCommitmentWithBlock | undefined)[]>
+    getKeys(block: Block): Promise<v84.SubNetworkId[]>
+    getKeys(block: Block, key: v84.SubNetworkId): Promise<v84.SubNetworkId[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v84.SubNetworkId[]>
+    getKeysPaged(pageSize: number, block: Block, key: v84.SubNetworkId): AsyncIterable<v84.SubNetworkId[]>
+    getPairs(block: Block): Promise<[k: v84.SubNetworkId, v: (v84.GenericCommitmentWithBlock | undefined)][]>
+    getPairs(block: Block, key: v84.SubNetworkId): Promise<[k: v84.SubNetworkId, v: (v84.GenericCommitmentWithBlock | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v84.SubNetworkId, v: (v84.GenericCommitmentWithBlock | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v84.SubNetworkId): AsyncIterable<[k: v84.SubNetworkId, v: (v84.GenericCommitmentWithBlock | undefined)][]>
 }

@@ -1,22 +1,22 @@
 import {sts, Block, Bytes, Option, Result, StorageType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const nextFeeMultiplier =  {
-    v70: new StorageType('TransactionPayment.NextFeeMultiplier', 'Default', [], v70.FixedU128) as NextFeeMultiplierV70,
+    v85: new StorageType('TransactionPayment.NextFeeMultiplier', 'Default', [], v85.FixedU128) as NextFeeMultiplierV85,
 }
 
-export interface NextFeeMultiplierV70  {
+export interface NextFeeMultiplierV85  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v70.FixedU128
-    get(block: Block): Promise<(v70.FixedU128 | undefined)>
+    getDefault(block: Block): v85.FixedU128
+    get(block: Block): Promise<(v85.FixedU128 | undefined)>
 }
 
 export const storageVersion =  {
-    v70: new StorageType('TransactionPayment.StorageVersion', 'Default', [], v70.Releases) as StorageVersionV70,
+    v85: new StorageType('TransactionPayment.StorageVersion', 'Default', [], v85.Releases) as StorageVersionV85,
 }
 
-export interface StorageVersionV70  {
+export interface StorageVersionV85  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v70.Releases
-    get(block: Block): Promise<(v70.Releases | undefined)>
+    getDefault(block: Block): v85.Releases
+    get(block: Block): Promise<(v85.Releases | undefined)>
 }

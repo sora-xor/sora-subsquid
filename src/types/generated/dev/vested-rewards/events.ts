@@ -1,12 +1,12 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const rewardsVested =  {
     name: 'VestedRewards.RewardsVested',
     /**
      * Rewards vested, limits were raised. [vested amount]
      */
-    v70: new EventType(
+    v85: new EventType(
         'VestedRewards.RewardsVested',
         sts.bigint()
     ),
@@ -17,9 +17,9 @@ export const actualDoesntMatchAvailable =  {
     /**
      * Attempted to claim reward, but actual claimed amount is less than expected. [reason for reward]
      */
-    v70: new EventType(
+    v85: new EventType(
         'VestedRewards.ActualDoesntMatchAvailable',
-        v70.RewardReason
+        v85.RewardReason
     ),
 }
 
@@ -28,9 +28,9 @@ export const failedToSaveCalculatedReward =  {
     /**
      * Saving reward for account has failed in a distribution series. [account]
      */
-    v70: new EventType(
+    v85: new EventType(
         'VestedRewards.FailedToSaveCalculatedReward',
-        v70.AccountId32
+        v85.AccountId32
     ),
 }
 
@@ -39,8 +39,8 @@ export const crowdloanClaimed =  {
     /**
      * Claimed crowdloan rewards
      */
-    v70: new EventType(
+    v85: new EventType(
         'VestedRewards.CrowdloanClaimed',
-        sts.tuple([v70.AccountId32, v70.AssetId32, sts.bigint()])
+        sts.tuple([v85.AccountId32, v85.AssetId32, sts.bigint()])
     ),
 }

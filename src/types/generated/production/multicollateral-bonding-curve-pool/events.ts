@@ -2,6 +2,7 @@ import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../suppo
 import * as v1 from '../v1'
 import * as v22 from '../v22'
 import * as v42 from '../v42'
+import * as v85 from '../v85'
 
 export const poolInitialized =  {
     name: 'MulticollateralBondingCurvePool.PoolInitialized',
@@ -76,5 +77,16 @@ export const priceChangeConfigChanged =  {
     v22: new EventType(
         'MulticollateralBondingCurvePool.PriceChangeConfigChanged',
         sts.tuple([v22.Balance, v22.Balance])
+    ),
+}
+
+export const failedToDistributeFreeReserves =  {
+    name: 'MulticollateralBondingCurvePool.FailedToDistributeFreeReserves',
+    /**
+     * Free reserves distribution routine failed. [Error]
+     */
+    v85: new EventType(
+        'MulticollateralBondingCurvePool.FailedToDistributeFreeReserves',
+        v85.DispatchError
     ),
 }

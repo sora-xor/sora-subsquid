@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const propose =  {
     name: 'Democracy.propose',
@@ -14,10 +14,10 @@ export const propose =  {
      * 
      * Emits `Proposed`.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Democracy.propose',
         sts.struct({
-            proposal: v70.Bounded,
+            proposal: v85.Bounded,
             value: sts.bigint(),
         })
     ),
@@ -33,7 +33,7 @@ export const second =  {
      * 
      * - `proposal`: The index of the proposal to second.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Democracy.second',
         sts.struct({
             proposal: sts.number(),
@@ -52,11 +52,11 @@ export const vote =  {
      * - `ref_index`: The index of the referendum to vote for.
      * - `vote`: The vote configuration.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Democracy.vote',
         sts.struct({
             refIndex: sts.number(),
-            vote: v70.AccountVote,
+            vote: v85.AccountVote,
         })
     ),
 }
@@ -73,7 +73,7 @@ export const emergencyCancel =  {
      * 
      * Weight: `O(1)`.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Democracy.emergency_cancel',
         sts.struct({
             refIndex: sts.number(),
@@ -91,10 +91,10 @@ export const externalPropose =  {
      * 
      * - `proposal_hash`: The preimage hash of the proposal.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Democracy.external_propose',
         sts.struct({
-            proposal: v70.Bounded,
+            proposal: v85.Bounded,
         })
     ),
 }
@@ -114,10 +114,10 @@ export const externalProposeMajority =  {
      * 
      * Weight: `O(1)`
      */
-    v70: new CallType(
+    v85: new CallType(
         'Democracy.external_propose_majority',
         sts.struct({
-            proposal: v70.Bounded,
+            proposal: v85.Bounded,
         })
     ),
 }
@@ -137,10 +137,10 @@ export const externalProposeDefault =  {
      * 
      * Weight: `O(1)`
      */
-    v70: new CallType(
+    v85: new CallType(
         'Democracy.external_propose_default',
         sts.struct({
-            proposal: v70.Bounded,
+            proposal: v85.Bounded,
         })
     ),
 }
@@ -165,10 +165,10 @@ export const fastTrack =  {
      * 
      * Weight: `O(1)`
      */
-    v70: new CallType(
+    v85: new CallType(
         'Democracy.fast_track',
         sts.struct({
-            proposalHash: v70.H256,
+            proposalHash: v85.H256,
             votingPeriod: sts.number(),
             delay: sts.number(),
         })
@@ -188,10 +188,10 @@ export const vetoExternal =  {
      * 
      * Weight: `O(V + log(V))` where V is number of `existing vetoers`
      */
-    v70: new CallType(
+    v85: new CallType(
         'Democracy.veto_external',
         sts.struct({
-            proposalHash: v70.H256,
+            proposalHash: v85.H256,
         })
     ),
 }
@@ -207,7 +207,7 @@ export const cancelReferendum =  {
      * 
      * # Weight: `O(1)`.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Democracy.cancel_referendum',
         sts.struct({
             refIndex: sts.number(),
@@ -239,11 +239,11 @@ export const delegate =  {
      * Weight: `O(R)` where R is the number of referendums the voter delegating to has
      *   voted on. Weight is charged as if maximum votes.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Democracy.delegate',
         sts.struct({
-            to: v70.AccountId32,
-            conviction: v70.Conviction,
+            to: v85.AccountId32,
+            conviction: v85.Conviction,
             balance: sts.bigint(),
         })
     ),
@@ -265,7 +265,7 @@ export const undelegate =  {
      * Weight: `O(R)` where R is the number of referendums the voter delegating to has
      *   voted on. Weight is charged as if maximum votes.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Democracy.undelegate',
         sts.unit()
     ),
@@ -280,7 +280,7 @@ export const clearPublicProposals =  {
      * 
      * Weight: `O(1)`.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Democracy.clear_public_proposals',
         sts.unit()
     ),
@@ -297,10 +297,10 @@ export const unlock =  {
      * 
      * Weight: `O(R)` with R number of vote of target.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Democracy.unlock',
         sts.struct({
-            target: v70.AccountId32,
+            target: v85.AccountId32,
         })
     ),
 }
@@ -336,7 +336,7 @@ export const removeVote =  {
      * Weight: `O(R + log R)` where R is the number of referenda that `target` has voted on.
      *   Weight is calculated for the maximum number of vote.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Democracy.remove_vote',
         sts.struct({
             index: sts.number(),
@@ -363,10 +363,10 @@ export const removeOtherVote =  {
      * Weight: `O(R + log R)` where R is the number of referenda that `target` has voted on.
      *   Weight is calculated for the maximum number of vote.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Democracy.remove_other_vote',
         sts.struct({
-            target: v70.AccountId32,
+            target: v85.AccountId32,
             index: sts.number(),
         })
     ),
@@ -391,10 +391,10 @@ export const blacklist =  {
      * Weight: `O(p)` (though as this is an high-privilege dispatch, we assume it has a
      *   reasonable value).
      */
-    v70: new CallType(
+    v85: new CallType(
         'Democracy.blacklist',
         sts.struct({
-            proposalHash: v70.H256,
+            proposalHash: v85.H256,
             maybeRefIndex: sts.option(() => sts.number()),
         })
     ),
@@ -411,7 +411,7 @@ export const cancelProposal =  {
      * 
      * Weight: `O(p)` where `p = PublicProps::<T>::decode_len()`
      */
-    v70: new CallType(
+    v85: new CallType(
         'Democracy.cancel_proposal',
         sts.struct({
             propIndex: sts.number(),

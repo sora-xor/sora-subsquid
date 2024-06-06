@@ -1,6 +1,7 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
 import * as v1 from '../v1'
 import * as v70 from '../v70'
+import * as v71 from '../v71'
 
 export const directExchange =  {
     name: 'DEXAPI.DirectExchange',
@@ -23,6 +24,13 @@ export const liquiditySourceEnabled =  {
         'DEXAPI.LiquiditySourceEnabled',
         v70.LiquiditySourceType
     ),
+    /**
+     * Liquidity source is enabled
+     */
+    v71: new EventType(
+        'DEXAPI.LiquiditySourceEnabled',
+        v71.LiquiditySourceType
+    ),
 }
 
 export const liquiditySourceDisabled =  {
@@ -33,5 +41,12 @@ export const liquiditySourceDisabled =  {
     v70: new EventType(
         'DEXAPI.LiquiditySourceDisabled',
         v70.LiquiditySourceType
+    ),
+    /**
+     * Liquidity source is disabled
+     */
+    v71: new EventType(
+        'DEXAPI.LiquiditySourceDisabled',
+        v71.LiquiditySourceType
     ),
 }

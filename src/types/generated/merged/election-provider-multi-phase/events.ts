@@ -9,10 +9,10 @@ export const solutionStored = {
 	v42: productionEvents.solutionStored['v42'],
 	v53: productionEvents.solutionStored['v53'],
 	v42Stage: stageEvents.solutionStored['v42'],
-	v52Stage: stageEvents.solutionStored['v52'],
+	v53Stage: stageEvents.solutionStored['v53'],
 	v42Test: testEvents.solutionStored['v42'],
-	v52Test: testEvents.solutionStored['v52'],
-	v70Dev: devEvents.solutionStored['v70'],
+	v53Test: testEvents.solutionStored['v53'],
+	v85Dev: devEvents.solutionStored['v85'],
 }
 
 export const electionFinalized = {
@@ -20,10 +20,10 @@ export const electionFinalized = {
 	v42: productionEvents.electionFinalized['v42'],
 	v53: productionEvents.electionFinalized['v53'],
 	v42Stage: stageEvents.electionFinalized['v42'],
-	v52Stage: stageEvents.electionFinalized['v52'],
+	v53Stage: stageEvents.electionFinalized['v53'],
 	v42Test: testEvents.electionFinalized['v42'],
-	v52Test: testEvents.electionFinalized['v52'],
-	v70Dev: devEvents.electionFinalized['v70'],
+	v53Test: testEvents.electionFinalized['v53'],
+	v85Dev: devEvents.electionFinalized['v85'],
 }
 
 export const rewarded = {
@@ -31,7 +31,7 @@ export const rewarded = {
 	v42: productionEvents.rewarded['v42'],
 	v42Stage: stageEvents.rewarded['v42'],
 	v42Test: testEvents.rewarded['v42'],
-	v70Dev: devEvents.rewarded['v70'],
+	v85Dev: devEvents.rewarded['v85'],
 }
 
 export const slashed = {
@@ -39,7 +39,7 @@ export const slashed = {
 	v42: productionEvents.slashed['v42'],
 	v42Stage: stageEvents.slashed['v42'],
 	v42Test: testEvents.slashed['v42'],
-	v70Dev: devEvents.slashed['v70'],
+	v85Dev: devEvents.slashed['v85'],
 }
 
 export const signedPhaseStarted = {
@@ -59,15 +59,15 @@ export const unsignedPhaseStarted = {
 export const electionFailed = {
 	name: 'ElectionProviderMultiPhase.ElectionFailed',
 	v53: productionEvents.electionFailed['v53'],
-	v52Stage: stageEvents.electionFailed['v52'],
-	v52Test: testEvents.electionFailed['v52'],
-	v70Dev: devEvents.electionFailed['v70'],
+	v53Stage: stageEvents.electionFailed['v53'],
+	v53Test: testEvents.electionFailed['v53'],
+	v85Dev: devEvents.electionFailed['v85'],
 }
 
 export const phaseTransitioned = {
 	name: 'ElectionProviderMultiPhase.PhaseTransitioned',
 	v53: productionEvents.phaseTransitioned['v53'],
-	v52Stage: stageEvents.phaseTransitioned['v52'],
-	v52Test: testEvents.phaseTransitioned['v52'],
-	v70Dev: devEvents.phaseTransitioned['v70'],
+	v53Stage: stageEvents.phaseTransitioned['v53'],
+	v53Test: testEvents.phaseTransitioned['v53'],
+	v85Dev: devEvents.phaseTransitioned['v85'],
 }

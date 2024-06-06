@@ -148,12 +148,14 @@ export const LockInfo: sts.Type<LockInfo> = sts.struct(() => {
 
 export const AccountIdOf = sts.bytes()
 
+export type FixedU128 = bigint
+
 export type BlockNumber = number
 
 export interface Scheduled {
     maybeId?: (Bytes | undefined)
     priority: SchedulePriority
-    call: Type_43
+    call: Type_56
     maybePeriodic?: (SchedulePeriod | undefined)
     origin: PalletsOrigin
 }
@@ -206,239 +208,229 @@ export type MemberCount = number
 
 export type SchedulePeriod = [BlockNumber, number]
 
-export type Type_43 = Type_43_Assets | Type_43_Authorship | Type_43_Babe | Type_43_Balances | Type_43_BridgeMultisig | Type_43_CeresGovernancePlatform | Type_43_CeresLaunchpad | Type_43_CeresLiquidityLocker | Type_43_CeresStaking | Type_43_CeresTokenLocker | Type_43_Council | Type_43_Currencies | Type_43_DEXAPI | Type_43_DemeterFarmingPlatform | Type_43_Democracy | Type_43_ElectionsPhragmen | Type_43_EthBridge | Type_43_Farming | Type_43_Faucet | Type_43_Grandpa | Type_43_Identity | Type_43_ImOnline | Type_43_IrohaMigration | Type_43_LiquidityProxy | Type_43_MulticollateralBondingCurvePool | Type_43_Multisig | Type_43_Offences | Type_43_Permissions | Type_43_PoolXYK | Type_43_PswapDistribution | Type_43_RandomnessCollectiveFlip | Type_43_Referrals | Type_43_Rewards | Type_43_Scheduler | Type_43_Session | Type_43_Staking | Type_43_Sudo | Type_43_System | Type_43_Technical | Type_43_TechnicalCommittee | Type_43_TechnicalMembership | Type_43_Timestamp | Type_43_TradingPair | Type_43_Utility | Type_43_VestedRewards | Type_43_XSTPool | Type_43_XorFee
+export type Type_56 = Type_56_Assets | Type_56_Authorship | Type_56_Babe | Type_56_Balances | Type_56_BridgeMultisig | Type_56_CeresGovernancePlatform | Type_56_CeresLaunchpad | Type_56_CeresLiquidityLocker | Type_56_CeresStaking | Type_56_CeresTokenLocker | Type_56_Council | Type_56_Currencies | Type_56_DEXAPI | Type_56_DemeterFarmingPlatform | Type_56_Democracy | Type_56_ElectionsPhragmen | Type_56_EthBridge | Type_56_Farming | Type_56_Grandpa | Type_56_Identity | Type_56_ImOnline | Type_56_IrohaMigration | Type_56_LiquidityProxy | Type_56_MulticollateralBondingCurvePool | Type_56_Multisig | Type_56_Offences | Type_56_Permissions | Type_56_PoolXYK | Type_56_PswapDistribution | Type_56_RandomnessCollectiveFlip | Type_56_Referrals | Type_56_Rewards | Type_56_Scheduler | Type_56_Session | Type_56_Staking | Type_56_System | Type_56_Technical | Type_56_TechnicalCommittee | Type_56_TechnicalMembership | Type_56_Timestamp | Type_56_TradingPair | Type_56_Utility | Type_56_VestedRewards | Type_56_XSTPool | Type_56_XorFee
 
-export interface Type_43_Assets {
+export interface Type_56_Assets {
     __kind: 'Assets'
     value: AssetsCall
 }
 
-export interface Type_43_Authorship {
+export interface Type_56_Authorship {
     __kind: 'Authorship'
     value: AuthorshipCall
 }
 
-export interface Type_43_Babe {
+export interface Type_56_Babe {
     __kind: 'Babe'
     value: BabeCall
 }
 
-export interface Type_43_Balances {
+export interface Type_56_Balances {
     __kind: 'Balances'
     value: BalancesCall
 }
 
-export interface Type_43_BridgeMultisig {
+export interface Type_56_BridgeMultisig {
     __kind: 'BridgeMultisig'
     value: BridgeMultisigCall
 }
 
-export interface Type_43_CeresGovernancePlatform {
+export interface Type_56_CeresGovernancePlatform {
     __kind: 'CeresGovernancePlatform'
     value: CeresGovernancePlatformCall
 }
 
-export interface Type_43_CeresLaunchpad {
+export interface Type_56_CeresLaunchpad {
     __kind: 'CeresLaunchpad'
     value: CeresLaunchpadCall
 }
 
-export interface Type_43_CeresLiquidityLocker {
+export interface Type_56_CeresLiquidityLocker {
     __kind: 'CeresLiquidityLocker'
     value: CeresLiquidityLockerCall
 }
 
-export interface Type_43_CeresStaking {
+export interface Type_56_CeresStaking {
     __kind: 'CeresStaking'
     value: CeresStakingCall
 }
 
-export interface Type_43_CeresTokenLocker {
+export interface Type_56_CeresTokenLocker {
     __kind: 'CeresTokenLocker'
     value: CeresTokenLockerCall
 }
 
-export interface Type_43_Council {
+export interface Type_56_Council {
     __kind: 'Council'
     value: CouncilCall
 }
 
-export interface Type_43_Currencies {
+export interface Type_56_Currencies {
     __kind: 'Currencies'
     value: CurrenciesCall
 }
 
-export interface Type_43_DEXAPI {
+export interface Type_56_DEXAPI {
     __kind: 'DEXAPI'
     value: DEXAPICall
 }
 
-export interface Type_43_DemeterFarmingPlatform {
+export interface Type_56_DemeterFarmingPlatform {
     __kind: 'DemeterFarmingPlatform'
     value: DemeterFarmingPlatformCall
 }
 
-export interface Type_43_Democracy {
+export interface Type_56_Democracy {
     __kind: 'Democracy'
     value: DemocracyCall
 }
 
-export interface Type_43_ElectionsPhragmen {
+export interface Type_56_ElectionsPhragmen {
     __kind: 'ElectionsPhragmen'
     value: ElectionsPhragmenCall
 }
 
-export interface Type_43_EthBridge {
+export interface Type_56_EthBridge {
     __kind: 'EthBridge'
     value: EthBridgeCall
 }
 
-export interface Type_43_Farming {
+export interface Type_56_Farming {
     __kind: 'Farming'
     value: FarmingCall
 }
 
-export interface Type_43_Faucet {
-    __kind: 'Faucet'
-    value: FaucetCall
-}
-
-export interface Type_43_Grandpa {
+export interface Type_56_Grandpa {
     __kind: 'Grandpa'
     value: GrandpaCall
 }
 
-export interface Type_43_Identity {
+export interface Type_56_Identity {
     __kind: 'Identity'
     value: IdentityCall
 }
 
-export interface Type_43_ImOnline {
+export interface Type_56_ImOnline {
     __kind: 'ImOnline'
     value: ImOnlineCall
 }
 
-export interface Type_43_IrohaMigration {
+export interface Type_56_IrohaMigration {
     __kind: 'IrohaMigration'
     value: IrohaMigrationCall
 }
 
-export interface Type_43_LiquidityProxy {
+export interface Type_56_LiquidityProxy {
     __kind: 'LiquidityProxy'
     value: LiquidityProxyCall
 }
 
-export interface Type_43_MulticollateralBondingCurvePool {
+export interface Type_56_MulticollateralBondingCurvePool {
     __kind: 'MulticollateralBondingCurvePool'
     value: MulticollateralBondingCurvePoolCall
 }
 
-export interface Type_43_Multisig {
+export interface Type_56_Multisig {
     __kind: 'Multisig'
     value: MultisigCall
 }
 
-export interface Type_43_Offences {
+export interface Type_56_Offences {
     __kind: 'Offences'
     value: OffencesCall
 }
 
-export interface Type_43_Permissions {
+export interface Type_56_Permissions {
     __kind: 'Permissions'
     value: PermissionsCall
 }
 
-export interface Type_43_PoolXYK {
+export interface Type_56_PoolXYK {
     __kind: 'PoolXYK'
     value: PoolXYKCall
 }
 
-export interface Type_43_PswapDistribution {
+export interface Type_56_PswapDistribution {
     __kind: 'PswapDistribution'
     value: PswapDistributionCall
 }
 
-export interface Type_43_RandomnessCollectiveFlip {
+export interface Type_56_RandomnessCollectiveFlip {
     __kind: 'RandomnessCollectiveFlip'
     value: RandomnessCollectiveFlipCall
 }
 
-export interface Type_43_Referrals {
+export interface Type_56_Referrals {
     __kind: 'Referrals'
     value: ReferralsCall
 }
 
-export interface Type_43_Rewards {
+export interface Type_56_Rewards {
     __kind: 'Rewards'
     value: RewardsCall
 }
 
-export interface Type_43_Scheduler {
+export interface Type_56_Scheduler {
     __kind: 'Scheduler'
     value: SchedulerCall
 }
 
-export interface Type_43_Session {
+export interface Type_56_Session {
     __kind: 'Session'
     value: SessionCall
 }
 
-export interface Type_43_Staking {
+export interface Type_56_Staking {
     __kind: 'Staking'
     value: StakingCall
 }
 
-export interface Type_43_Sudo {
-    __kind: 'Sudo'
-    value: SudoCall
-}
-
-export interface Type_43_System {
+export interface Type_56_System {
     __kind: 'System'
     value: SystemCall
 }
 
-export interface Type_43_Technical {
+export interface Type_56_Technical {
     __kind: 'Technical'
     value: TechnicalCall
 }
 
-export interface Type_43_TechnicalCommittee {
+export interface Type_56_TechnicalCommittee {
     __kind: 'TechnicalCommittee'
     value: TechnicalCommitteeCall
 }
 
-export interface Type_43_TechnicalMembership {
+export interface Type_56_TechnicalMembership {
     __kind: 'TechnicalMembership'
     value: TechnicalMembershipCall
 }
 
-export interface Type_43_Timestamp {
+export interface Type_56_Timestamp {
     __kind: 'Timestamp'
     value: TimestampCall
 }
 
-export interface Type_43_TradingPair {
+export interface Type_56_TradingPair {
     __kind: 'TradingPair'
     value: TradingPairCall
 }
 
-export interface Type_43_Utility {
+export interface Type_56_Utility {
     __kind: 'Utility'
     value: UtilityCall
 }
 
-export interface Type_43_VestedRewards {
+export interface Type_56_VestedRewards {
     __kind: 'VestedRewards'
     value: VestedRewardsCall
 }
 
-export interface Type_43_XSTPool {
+export interface Type_56_XSTPool {
     __kind: 'XSTPool'
     value: XSTPoolCall
 }
 
-export interface Type_43_XorFee {
+export interface Type_56_XorFee {
     __kind: 'XorFee'
     value: XorFeeCall
 }
@@ -528,7 +520,7 @@ export type UtilityCall = UtilityCall_as_derivative | UtilityCall_batch | Utilit
 export interface UtilityCall_as_derivative {
     __kind: 'as_derivative'
     index: number
-    call: Type_43
+    call: Type_56
 }
 
 /**
@@ -553,7 +545,7 @@ export interface UtilityCall_as_derivative {
  */
 export interface UtilityCall_batch {
     __kind: 'batch'
-    calls: Type_43[]
+    calls: Type_56[]
 }
 
 /**
@@ -573,7 +565,7 @@ export interface UtilityCall_batch {
  */
 export interface UtilityCall_batch_all {
     __kind: 'batch_all'
-    calls: Type_43[]
+    calls: Type_56[]
 }
 
 export type TradingPairCall = TradingPairCall_register
@@ -1021,82 +1013,6 @@ export interface ChangesTrieConfiguration {
 export type Key = Bytes
 
 export type Perbill = number
-
-export type SudoCall = SudoCall_set_key | SudoCall_sudo | SudoCall_sudo_as | SudoCall_sudo_unchecked_weight
-
-/**
- *  Authenticates the current sudo key and sets the given AccountId (`new`) as the new sudo key.
- * 
- *  The dispatch origin for this call must be _Signed_.
- * 
- *  # <weight>
- *  - O(1).
- *  - Limited storage reads.
- *  - One DB change.
- *  # </weight>
- */
-export interface SudoCall_set_key {
-    __kind: 'set_key'
-    new: LookupSource
-}
-
-/**
- *  Authenticates the sudo key and dispatches a function call with `Root` origin.
- * 
- *  The dispatch origin for this call must be _Signed_.
- * 
- *  # <weight>
- *  - O(1).
- *  - Limited storage reads.
- *  - One DB write (event).
- *  - Weight of derivative `call` execution + 10,000.
- *  # </weight>
- */
-export interface SudoCall_sudo {
-    __kind: 'sudo'
-    call: Type_43
-}
-
-/**
- *  Authenticates the sudo key and dispatches a function call with `Signed` origin from
- *  a given account.
- * 
- *  The dispatch origin for this call must be _Signed_.
- * 
- *  # <weight>
- *  - O(1).
- *  - Limited storage reads.
- *  - One DB write (event).
- *  - Weight of derivative `call` execution + 10,000.
- *  # </weight>
- */
-export interface SudoCall_sudo_as {
-    __kind: 'sudo_as'
-    who: LookupSource
-    call: Type_43
-}
-
-/**
- *  Authenticates the sudo key and dispatches a function call with `Root` origin.
- *  This function does not check the weight of the call, and instead allows the
- *  Sudo user to specify the weight of the call.
- * 
- *  The dispatch origin for this call must be _Signed_.
- * 
- *  # <weight>
- *  - O(1).
- *  - The weight of this call is defined by the caller.
- *  # </weight>
- */
-export interface SudoCall_sudo_unchecked_weight {
-    __kind: 'sudo_unchecked_weight'
-    call: Type_43
-    weight: Weight
-}
-
-export type Weight = bigint
-
-export type LookupSource = Bytes
 
 export type StakingCall = StakingCall_bond | StakingCall_bond_extra | StakingCall_cancel_deferred_slash | StakingCall_chill | StakingCall_force_new_era | StakingCall_force_new_era_always | StakingCall_force_no_eras | StakingCall_force_unstake | StakingCall_increase_validator_count | StakingCall_kick | StakingCall_nominate | StakingCall_payout_stakers | StakingCall_reap_stash | StakingCall_rebond | StakingCall_scale_validator_count | StakingCall_set_controller | StakingCall_set_history_depth | StakingCall_set_invulnerables | StakingCall_set_payee | StakingCall_set_validator_count | StakingCall_submit_election_solution | StakingCall_submit_election_solution_unsigned | StakingCall_unbond | StakingCall_validate | StakingCall_withdraw_unbonded
 
@@ -1774,6 +1690,8 @@ export interface RewardDestination_Stash {
     __kind: 'Stash'
 }
 
+export type LookupSource = Bytes
+
 export type SessionCall = SessionCall_purge_keys | SessionCall_set_keys
 
 /**
@@ -1874,7 +1792,7 @@ export interface SchedulerCall_schedule {
     when: BlockNumber
     maybePeriodic?: (Period | undefined)
     priority: Priority
-    call: Type_43
+    call: Type_56
 }
 
 /**
@@ -1889,7 +1807,7 @@ export interface SchedulerCall_schedule_after {
     after: BlockNumber
     maybePeriodic?: (Period | undefined)
     priority: Priority
-    call: Type_43
+    call: Type_56
 }
 
 /**
@@ -1910,7 +1828,7 @@ export interface SchedulerCall_schedule_named {
     when: BlockNumber
     maybePeriodic?: (Period | undefined)
     priority: Priority
-    call: Type_43
+    call: Type_56
 }
 
 /**
@@ -1926,7 +1844,7 @@ export interface SchedulerCall_schedule_named_after {
     after: BlockNumber
     maybePeriodic?: (Period | undefined)
     priority: Priority
-    call: Type_43
+    call: Type_56
 }
 
 export type Priority = number
@@ -2159,7 +2077,7 @@ export interface MultisigCall_as_multi {
 export interface MultisigCall_as_multi_threshold_1 {
     __kind: 'as_multi_threshold_1'
     otherSignatories: AccountId[]
-    call: Type_43
+    call: Type_56
 }
 
 /**
@@ -2199,6 +2117,8 @@ export interface MultisigCall_cancel_as_multi {
 }
 
 export type OpaqueCall = Bytes
+
+export type Weight = bigint
 
 export interface Timepoint {
     height: BlockNumber
@@ -3080,34 +3000,6 @@ export interface GrandpaPrevote {
 export type AuthorityId = Bytes
 
 export type SetId = bigint
-
-export type FaucetCall = FaucetCall_reset_rewards | FaucetCall_transfer | FaucetCall_update_limit
-
-export interface FaucetCall_reset_rewards {
-    __kind: 'reset_rewards'
-}
-
-/**
- *  Transfers the specified amount of asset to the specified account.
- *  The supported assets are: XOR, VAL, PSWAP.
- * 
- *  # Errors
- * 
- *  AssetNotSupported is returned if `asset_id` is something the function doesn't support.
- *  AmountAboveLimit is returned if `target` has already received their daily limit of `asset_id`.
- *  NotEnoughReserves is returned if `amount` is greater than the reserves
- */
-export interface FaucetCall_transfer {
-    __kind: 'transfer'
-    assetId: AssetId
-    target: AccountIdOf
-    amount: Balance
-}
-
-export interface FaucetCall_update_limit {
-    __kind: 'update_limit'
-    newLimit: Balance
-}
 
 export type FarmingCall = FarmingCall_migrate_to_1_1
 
@@ -5183,7 +5075,7 @@ export interface BridgeMultisigCall_as_multi {
 export interface BridgeMultisigCall_as_multi_threshold_1 {
     __kind: 'as_multi_threshold_1'
     id: AccountId
-    call: Type_43
+    call: Type_56
     timepoint: BridgeTimepoint
 }
 
@@ -5569,7 +5461,7 @@ export const Scheduled: sts.Type<Scheduled> = sts.struct(() => {
     return  {
         maybeId: sts.option(() => sts.bytes()),
         priority: SchedulePriority,
-        call: Type_43,
+        call: Type_56,
         maybePeriodic: sts.option(() => SchedulePeriod),
         origin: PalletsOrigin,
     }
@@ -5606,7 +5498,7 @@ export const SchedulePriority = sts.number()
 
 export type Hash = Bytes
 
-export type Proposal = Proposal_Assets | Proposal_Authorship | Proposal_Babe | Proposal_Balances | Proposal_BridgeMultisig | Proposal_CeresGovernancePlatform | Proposal_CeresLaunchpad | Proposal_CeresLiquidityLocker | Proposal_CeresStaking | Proposal_CeresTokenLocker | Proposal_Council | Proposal_Currencies | Proposal_DEXAPI | Proposal_DemeterFarmingPlatform | Proposal_Democracy | Proposal_ElectionsPhragmen | Proposal_EthBridge | Proposal_Farming | Proposal_Faucet | Proposal_Grandpa | Proposal_Identity | Proposal_ImOnline | Proposal_IrohaMigration | Proposal_LiquidityProxy | Proposal_MulticollateralBondingCurvePool | Proposal_Multisig | Proposal_Offences | Proposal_Permissions | Proposal_PoolXYK | Proposal_PswapDistribution | Proposal_RandomnessCollectiveFlip | Proposal_Referrals | Proposal_Rewards | Proposal_Scheduler | Proposal_Session | Proposal_Staking | Proposal_Sudo | Proposal_System | Proposal_Technical | Proposal_TechnicalCommittee | Proposal_TechnicalMembership | Proposal_Timestamp | Proposal_TradingPair | Proposal_Utility | Proposal_VestedRewards | Proposal_XSTPool | Proposal_XorFee
+export type Proposal = Proposal_Assets | Proposal_Authorship | Proposal_Babe | Proposal_Balances | Proposal_BridgeMultisig | Proposal_CeresGovernancePlatform | Proposal_CeresLaunchpad | Proposal_CeresLiquidityLocker | Proposal_CeresStaking | Proposal_CeresTokenLocker | Proposal_Council | Proposal_Currencies | Proposal_DEXAPI | Proposal_DemeterFarmingPlatform | Proposal_Democracy | Proposal_ElectionsPhragmen | Proposal_EthBridge | Proposal_Farming | Proposal_Grandpa | Proposal_Identity | Proposal_ImOnline | Proposal_IrohaMigration | Proposal_LiquidityProxy | Proposal_MulticollateralBondingCurvePool | Proposal_Multisig | Proposal_Offences | Proposal_Permissions | Proposal_PoolXYK | Proposal_PswapDistribution | Proposal_RandomnessCollectiveFlip | Proposal_Referrals | Proposal_Rewards | Proposal_Scheduler | Proposal_Session | Proposal_Staking | Proposal_System | Proposal_Technical | Proposal_TechnicalCommittee | Proposal_TechnicalMembership | Proposal_Timestamp | Proposal_TradingPair | Proposal_Utility | Proposal_VestedRewards | Proposal_XSTPool | Proposal_XorFee
 
 export interface Proposal_Assets {
     __kind: 'Assets'
@@ -5698,11 +5590,6 @@ export interface Proposal_Farming {
     value: FarmingCall
 }
 
-export interface Proposal_Faucet {
-    __kind: 'Faucet'
-    value: FaucetCall
-}
-
 export interface Proposal_Grandpa {
     __kind: 'Grandpa'
     value: GrandpaCall
@@ -5788,11 +5675,6 @@ export interface Proposal_Staking {
     value: StakingCall
 }
 
-export interface Proposal_Sudo {
-    __kind: 'Sudo'
-    value: SudoCall
-}
-
 export interface Proposal_System {
     __kind: 'System'
     value: SystemCall
@@ -5845,217 +5727,205 @@ export interface Proposal_XorFee {
 
 export const Hash = sts.bytes()
 
-export type FixedU128 = bigint
-
 export interface EventRecord {
     phase: Phase
-    event: Type_446
+    event: Type_442
     topics: Hash[]
 }
 
-export type Type_446 = Type_446_Assets | Type_446_Balances | Type_446_BridgeMultisig | Type_446_CeresGovernancePlatform | Type_446_CeresLaunchpad | Type_446_CeresLiquidityLocker | Type_446_CeresStaking | Type_446_CeresTokenLocker | Type_446_Council | Type_446_Currencies | Type_446_DemeterFarmingPlatform | Type_446_Democracy | Type_446_ElectionsPhragmen | Type_446_EthBridge | Type_446_Faucet | Type_446_Grandpa | Type_446_Identity | Type_446_ImOnline | Type_446_IrohaMigration | Type_446_LiquidityProxy | Type_446_MulticollateralBondingCurvePool | Type_446_Multisig | Type_446_Offences | Type_446_Permissions | Type_446_PoolXYK | Type_446_PswapDistribution | Type_446_Rewards | Type_446_Scheduler | Type_446_Session | Type_446_Staking | Type_446_Sudo | Type_446_System | Type_446_Technical | Type_446_TechnicalCommittee | Type_446_TechnicalMembership | Type_446_Tokens | Type_446_TradingPair | Type_446_Utility | Type_446_VestedRewards | Type_446_XSTPool | Type_446_XorFee
+export type Type_442 = Type_442_Assets | Type_442_Balances | Type_442_BridgeMultisig | Type_442_CeresGovernancePlatform | Type_442_CeresLaunchpad | Type_442_CeresLiquidityLocker | Type_442_CeresStaking | Type_442_CeresTokenLocker | Type_442_Council | Type_442_Currencies | Type_442_DemeterFarmingPlatform | Type_442_Democracy | Type_442_ElectionsPhragmen | Type_442_EthBridge | Type_442_Grandpa | Type_442_Identity | Type_442_ImOnline | Type_442_IrohaMigration | Type_442_LiquidityProxy | Type_442_MulticollateralBondingCurvePool | Type_442_Multisig | Type_442_Offences | Type_442_Permissions | Type_442_PoolXYK | Type_442_PswapDistribution | Type_442_Rewards | Type_442_Scheduler | Type_442_Session | Type_442_Staking | Type_442_System | Type_442_Technical | Type_442_TechnicalCommittee | Type_442_TechnicalMembership | Type_442_Tokens | Type_442_TradingPair | Type_442_Utility | Type_442_VestedRewards | Type_442_XSTPool | Type_442_XorFee
 
-export interface Type_446_Assets {
+export interface Type_442_Assets {
     __kind: 'Assets'
     value: AssetsEvent
 }
 
-export interface Type_446_Balances {
+export interface Type_442_Balances {
     __kind: 'Balances'
     value: BalancesEvent
 }
 
-export interface Type_446_BridgeMultisig {
+export interface Type_442_BridgeMultisig {
     __kind: 'BridgeMultisig'
     value: BridgeMultisigEvent
 }
 
-export interface Type_446_CeresGovernancePlatform {
+export interface Type_442_CeresGovernancePlatform {
     __kind: 'CeresGovernancePlatform'
     value: CeresGovernancePlatformEvent
 }
 
-export interface Type_446_CeresLaunchpad {
+export interface Type_442_CeresLaunchpad {
     __kind: 'CeresLaunchpad'
     value: CeresLaunchpadEvent
 }
 
-export interface Type_446_CeresLiquidityLocker {
+export interface Type_442_CeresLiquidityLocker {
     __kind: 'CeresLiquidityLocker'
     value: CeresLiquidityLockerEvent
 }
 
-export interface Type_446_CeresStaking {
+export interface Type_442_CeresStaking {
     __kind: 'CeresStaking'
     value: CeresStakingEvent
 }
 
-export interface Type_446_CeresTokenLocker {
+export interface Type_442_CeresTokenLocker {
     __kind: 'CeresTokenLocker'
     value: CeresTokenLockerEvent
 }
 
-export interface Type_446_Council {
+export interface Type_442_Council {
     __kind: 'Council'
     value: CouncilEvent
 }
 
-export interface Type_446_Currencies {
+export interface Type_442_Currencies {
     __kind: 'Currencies'
     value: CurrenciesEvent
 }
 
-export interface Type_446_DemeterFarmingPlatform {
+export interface Type_442_DemeterFarmingPlatform {
     __kind: 'DemeterFarmingPlatform'
     value: DemeterFarmingPlatformEvent
 }
 
-export interface Type_446_Democracy {
+export interface Type_442_Democracy {
     __kind: 'Democracy'
     value: DemocracyEvent
 }
 
-export interface Type_446_ElectionsPhragmen {
+export interface Type_442_ElectionsPhragmen {
     __kind: 'ElectionsPhragmen'
     value: ElectionsPhragmenEvent
 }
 
-export interface Type_446_EthBridge {
+export interface Type_442_EthBridge {
     __kind: 'EthBridge'
     value: EthBridgeEvent
 }
 
-export interface Type_446_Faucet {
-    __kind: 'Faucet'
-    value: FaucetEvent
-}
-
-export interface Type_446_Grandpa {
+export interface Type_442_Grandpa {
     __kind: 'Grandpa'
     value: GrandpaEvent
 }
 
-export interface Type_446_Identity {
+export interface Type_442_Identity {
     __kind: 'Identity'
     value: IdentityEvent
 }
 
-export interface Type_446_ImOnline {
+export interface Type_442_ImOnline {
     __kind: 'ImOnline'
     value: ImOnlineEvent
 }
 
-export interface Type_446_IrohaMigration {
+export interface Type_442_IrohaMigration {
     __kind: 'IrohaMigration'
     value: IrohaMigrationEvent
 }
 
-export interface Type_446_LiquidityProxy {
+export interface Type_442_LiquidityProxy {
     __kind: 'LiquidityProxy'
     value: LiquidityProxyEvent
 }
 
-export interface Type_446_MulticollateralBondingCurvePool {
+export interface Type_442_MulticollateralBondingCurvePool {
     __kind: 'MulticollateralBondingCurvePool'
     value: MulticollateralBondingCurvePoolEvent
 }
 
-export interface Type_446_Multisig {
+export interface Type_442_Multisig {
     __kind: 'Multisig'
     value: MultisigEvent
 }
 
-export interface Type_446_Offences {
+export interface Type_442_Offences {
     __kind: 'Offences'
     value: OffencesEvent
 }
 
-export interface Type_446_Permissions {
+export interface Type_442_Permissions {
     __kind: 'Permissions'
     value: PermissionsEvent
 }
 
-export interface Type_446_PoolXYK {
+export interface Type_442_PoolXYK {
     __kind: 'PoolXYK'
     value: PoolXYKEvent
 }
 
-export interface Type_446_PswapDistribution {
+export interface Type_442_PswapDistribution {
     __kind: 'PswapDistribution'
     value: PswapDistributionEvent
 }
 
-export interface Type_446_Rewards {
+export interface Type_442_Rewards {
     __kind: 'Rewards'
     value: RewardsEvent
 }
 
-export interface Type_446_Scheduler {
+export interface Type_442_Scheduler {
     __kind: 'Scheduler'
     value: SchedulerEvent
 }
 
-export interface Type_446_Session {
+export interface Type_442_Session {
     __kind: 'Session'
     value: SessionEvent
 }
 
-export interface Type_446_Staking {
+export interface Type_442_Staking {
     __kind: 'Staking'
     value: StakingEvent
 }
 
-export interface Type_446_Sudo {
-    __kind: 'Sudo'
-    value: SudoEvent
-}
-
-export interface Type_446_System {
+export interface Type_442_System {
     __kind: 'System'
     value: SystemEvent
 }
 
-export interface Type_446_Technical {
+export interface Type_442_Technical {
     __kind: 'Technical'
     value: TechnicalEvent
 }
 
-export interface Type_446_TechnicalCommittee {
+export interface Type_442_TechnicalCommittee {
     __kind: 'TechnicalCommittee'
     value: TechnicalCommitteeEvent
 }
 
-export interface Type_446_TechnicalMembership {
+export interface Type_442_TechnicalMembership {
     __kind: 'TechnicalMembership'
     value: TechnicalMembershipEvent
 }
 
-export interface Type_446_Tokens {
+export interface Type_442_Tokens {
     __kind: 'Tokens'
     value: TokensEvent
 }
 
-export interface Type_446_TradingPair {
+export interface Type_442_TradingPair {
     __kind: 'TradingPair'
     value: TradingPairEvent
 }
 
-export interface Type_446_Utility {
+export interface Type_442_Utility {
     __kind: 'Utility'
     value: UtilityEvent
 }
 
-export interface Type_446_VestedRewards {
+export interface Type_442_VestedRewards {
     __kind: 'VestedRewards'
     value: VestedRewardsEvent
 }
 
-export interface Type_446_XSTPool {
+export interface Type_442_XSTPool {
     __kind: 'XSTPool'
     value: XSTPoolEvent
 }
 
-export interface Type_446_XorFee {
+export interface Type_442_XorFee {
     __kind: 'XorFee'
     value: XorFeeEvent
 }
@@ -6549,32 +6419,6 @@ export interface DispatchClass_Normal {
 
 export interface DispatchClass_Operational {
     __kind: 'Operational'
-}
-
-export type SudoEvent = SudoEvent_KeyChanged | SudoEvent_Sudid | SudoEvent_SudoAsDone
-
-/**
- *  The \[sudoer\] just switched identity; the old key is supplied.
- */
-export interface SudoEvent_KeyChanged {
-    __kind: 'KeyChanged'
-    value: AccountId
-}
-
-/**
- *  A sudo just took place. \[result\]
- */
-export interface SudoEvent_Sudid {
-    __kind: 'Sudid'
-    value: DispatchResult
-}
-
-/**
- *  A sudo just took place. \[result\]
- */
-export interface SudoEvent_SudoAsDone {
-    __kind: 'SudoAsDone'
-    value: DispatchResult
 }
 
 export type StakingEvent = StakingEvent_Bonded | StakingEvent_EraPayout | StakingEvent_Kicked | StakingEvent_OldSlashingReportDiscarded | StakingEvent_Reward | StakingEvent_Slash | StakingEvent_SolutionStored | StakingEvent_StakingElection | StakingEvent_Unbonded | StakingEvent_Withdrawn
@@ -7124,18 +6968,6 @@ export interface GrandpaEvent_Resumed {
 export type NextAuthority = [AuthorityId, AuthorityWeight]
 
 export type AuthorityWeight = bigint
-
-export type FaucetEvent = FaucetEvent_LimitUpdated | FaucetEvent_Transferred
-
-export interface FaucetEvent_LimitUpdated {
-    __kind: 'LimitUpdated'
-    value: Balance
-}
-
-export interface FaucetEvent_Transferred {
-    __kind: 'Transferred'
-    value: [AccountId, Balance]
-}
 
 export type EthBridgeEvent = EthBridgeEvent_ApprovalsCollected | EthBridgeEvent_CancellationFailed | EthBridgeEvent_IncomingRequestFinalizationFailed | EthBridgeEvent_IncomingRequestFinalized | EthBridgeEvent_RequestAborted | EthBridgeEvent_RequestFinalizationFailed | EthBridgeEvent_RequestRegistered
 
@@ -7993,12 +7825,12 @@ export interface Phase_Initialization {
 export const EventRecord: sts.Type<EventRecord> = sts.struct(() => {
     return  {
         phase: Phase,
-        event: Type_446,
+        event: Type_442,
         topics: sts.array(() => Hash),
     }
 })
 
-export const Type_446: sts.Type<Type_446> = sts.closedEnum(() => {
+export const Type_442: sts.Type<Type_442> = sts.closedEnum(() => {
     return  {
         Assets: AssetsEvent,
         Balances: BalancesEvent,
@@ -8014,7 +7846,6 @@ export const Type_446: sts.Type<Type_446> = sts.closedEnum(() => {
         Democracy: DemocracyEvent,
         ElectionsPhragmen: ElectionsPhragmenEvent,
         EthBridge: EthBridgeEvent,
-        Faucet: FaucetEvent,
         Grandpa: GrandpaEvent,
         Identity: IdentityEvent,
         ImOnline: ImOnlineEvent,
@@ -8030,7 +7861,6 @@ export const Type_446: sts.Type<Type_446> = sts.closedEnum(() => {
         Scheduler: SchedulerEvent,
         Session: SessionEvent,
         Staking: StakingEvent,
-        Sudo: SudoEvent,
         System: SystemEvent,
         Technical: TechnicalEvent,
         TechnicalCommittee: TechnicalCommitteeEvent,
@@ -8266,13 +8096,7 @@ export const DispatchClass: sts.Type<DispatchClass> = sts.closedEnum(() => {
     }
 })
 
-export const SudoEvent: sts.Type<SudoEvent> = sts.closedEnum(() => {
-    return  {
-        KeyChanged: AccountId,
-        Sudid: DispatchResult,
-        SudoAsDone: DispatchResult,
-    }
-})
+export const Weight = sts.bigint()
 
 export const StakingEvent: sts.Type<StakingEvent> = sts.closedEnum(() => {
     return  {
@@ -8465,13 +8289,6 @@ export const GrandpaEvent: sts.Type<GrandpaEvent> = sts.closedEnum(() => {
 export const NextAuthority = sts.tuple(() => [AuthorityId, AuthorityWeight])
 
 export const AuthorityWeight = sts.bigint()
-
-export const FaucetEvent: sts.Type<FaucetEvent> = sts.closedEnum(() => {
-    return  {
-        LimitUpdated: Balance,
-        Transferred: sts.tuple(() => [AccountId, Balance]),
-    }
-})
 
 export const EthBridgeEvent: sts.Type<EthBridgeEvent> = sts.closedEnum(() => {
     return  {
@@ -8718,7 +8535,6 @@ export const Proposal: sts.Type<Proposal> = sts.closedEnum(() => {
         ElectionsPhragmen: ElectionsPhragmenCall,
         EthBridge: EthBridgeCall,
         Farming: FarmingCall,
-        Faucet: FaucetCall,
         Grandpa: GrandpaCall,
         Identity: IdentityCall,
         ImOnline: ImOnlineCall,
@@ -8736,7 +8552,6 @@ export const Proposal: sts.Type<Proposal> = sts.closedEnum(() => {
         Scheduler: SchedulerCall,
         Session: SessionCall,
         Staking: StakingCall,
-        Sudo: SudoCall,
         System: SystemCall,
         Technical: TechnicalCall,
         TechnicalCommittee: TechnicalCommitteeCall,
@@ -8793,13 +8608,13 @@ export const UtilityCall: sts.Type<UtilityCall> = sts.closedEnum(() => {
     return  {
         as_derivative: sts.enumStruct({
             index: sts.number(),
-            call: Type_43,
+            call: Type_56,
         }),
         batch: sts.enumStruct({
-            calls: sts.array(() => Type_43),
+            calls: sts.array(() => Type_56),
         }),
         batch_all: sts.enumStruct({
-            calls: sts.array(() => Type_43),
+            calls: sts.array(() => Type_56),
         }),
     }
 })
@@ -8934,25 +8749,6 @@ export const ChangesTrieConfiguration: sts.Type<ChangesTrieConfiguration> = sts.
 export const Key = sts.bytes()
 
 export const Perbill = sts.number()
-
-export const SudoCall: sts.Type<SudoCall> = sts.closedEnum(() => {
-    return  {
-        set_key: sts.enumStruct({
-            new: LookupSource,
-        }),
-        sudo: sts.enumStruct({
-            call: Type_43,
-        }),
-        sudo_as: sts.enumStruct({
-            who: LookupSource,
-            call: Type_43,
-        }),
-        sudo_unchecked_weight: sts.enumStruct({
-            call: Type_43,
-            weight: Weight,
-        }),
-    }
-})
 
 export const StakingCall: sts.Type<StakingCall> = sts.closedEnum(() => {
     return  {
@@ -9100,6 +8896,8 @@ export const RewardDestination: sts.Type<RewardDestination> = sts.closedEnum(() 
     }
 })
 
+export const LookupSource = sts.bytes()
+
 export const SessionCall: sts.Type<SessionCall> = sts.closedEnum(() => {
     return  {
         purge_keys: sts.unit(),
@@ -9127,27 +8925,27 @@ export const SchedulerCall: sts.Type<SchedulerCall> = sts.closedEnum(() => {
             when: BlockNumber,
             maybePeriodic: sts.option(() => Period),
             priority: Priority,
-            call: Type_43,
+            call: Type_56,
         }),
         schedule_after: sts.enumStruct({
             after: BlockNumber,
             maybePeriodic: sts.option(() => Period),
             priority: Priority,
-            call: Type_43,
+            call: Type_56,
         }),
         schedule_named: sts.enumStruct({
             id: sts.bytes(),
             when: BlockNumber,
             maybePeriodic: sts.option(() => Period),
             priority: Priority,
-            call: Type_43,
+            call: Type_56,
         }),
         schedule_named_after: sts.enumStruct({
             id: sts.bytes(),
             after: BlockNumber,
             maybePeriodic: sts.option(() => Period),
             priority: Priority,
-            call: Type_43,
+            call: Type_56,
         }),
     }
 })
@@ -9251,7 +9049,7 @@ export const MultisigCall: sts.Type<MultisigCall> = sts.closedEnum(() => {
         }),
         as_multi_threshold_1: sts.enumStruct({
             otherSignatories: sts.array(() => AccountId),
-            call: Type_43,
+            call: Type_56,
         }),
         cancel_as_multi: sts.enumStruct({
             threshold: sts.number(),
@@ -9581,20 +9379,6 @@ export const GrandpaPrevote: sts.Type<GrandpaPrevote> = sts.struct(() => {
 })
 
 export const SetId = sts.bigint()
-
-export const FaucetCall: sts.Type<FaucetCall> = sts.closedEnum(() => {
-    return  {
-        reset_rewards: sts.unit(),
-        transfer: sts.enumStruct({
-            assetId: AssetId,
-            target: AccountIdOf,
-            amount: Balance,
-        }),
-        update_limit: sts.enumStruct({
-            newLimit: Balance,
-        }),
-    }
-})
 
 export const FarmingCall: sts.Type<FarmingCall> = sts.closedEnum(() => {
     return  {
@@ -10396,7 +10180,7 @@ export const BridgeMultisigCall: sts.Type<BridgeMultisigCall> = sts.closedEnum((
         }),
         as_multi_threshold_1: sts.enumStruct({
             id: AccountId,
-            call: Type_43,
+            call: Type_56,
             timepoint: BridgeTimepoint,
         }),
         cancel_as_multi: sts.enumStruct({
@@ -10563,11 +10347,7 @@ export const MultiChainHeight: sts.Type<MultiChainHeight> = sts.closedEnum(() =>
     }
 })
 
-export const LookupSource = sts.bytes()
-
-export const Weight = sts.bigint()
-
-export const Type_43: sts.Type<Type_43> = sts.closedEnum(() => {
+export const Type_56: sts.Type<Type_56> = sts.closedEnum(() => {
     return  {
         Assets: AssetsCall,
         Authorship: AuthorshipCall,
@@ -10587,7 +10367,6 @@ export const Type_43: sts.Type<Type_43> = sts.closedEnum(() => {
         ElectionsPhragmen: ElectionsPhragmenCall,
         EthBridge: EthBridgeCall,
         Farming: FarmingCall,
-        Faucet: FaucetCall,
         Grandpa: GrandpaCall,
         Identity: IdentityCall,
         ImOnline: ImOnlineCall,
@@ -10605,7 +10384,6 @@ export const Type_43: sts.Type<Type_43> = sts.closedEnum(() => {
         Scheduler: SchedulerCall,
         Session: SessionCall,
         Staking: StakingCall,
-        Sudo: SudoCall,
         System: SystemCall,
         Technical: TechnicalCall,
         TechnicalCommittee: TechnicalCommitteeCall,

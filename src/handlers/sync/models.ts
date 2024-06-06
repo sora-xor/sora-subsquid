@@ -16,7 +16,13 @@ export async function syncModels(ctx: BlockContext): Promise<void> {
 	await assetStorage.sync(ctx)
 	await orderBooksSnapshotsStorage.sync(ctx)
 	await orderBooksStorage.sync(ctx)
-	await networkSnapshotsStorage.sync(ctx)
+}
+
+export async function updateNetworkStats(ctx: BlockContext): Promise<void> {
+  getSyncModelsLog(ctx).debug('Update network stats');
+
+  await networkSnapshotsStorage.updateLiquidityStats(ctx);
+  await networkSnapshotsStorage.sync(ctx);
 }
 
 export async function updateDailyStats(ctx: BlockContext): Promise<void> {
@@ -25,9 +31,7 @@ export async function updateDailyStats(ctx: BlockContext): Promise<void> {
 	getSyncModelsLog(ctx).debug('Update daily stats')
   
 	await assetStorage.updateDailyStats(ctx)
-	await assetStorage.sync(ctx)
 	await orderBooksStorage.updateDailyStats(ctx)
-	await orderBooksStorage.sync(ctx)
 }
 
 export async function updateAssetsWeeklyStats(ctx: BlockContext): Promise<void> {
@@ -36,5 +40,4 @@ export async function updateAssetsWeeklyStats(ctx: BlockContext): Promise<void> 
 	getSyncModelsLog(ctx).debug('Update assets weekly stats')
   
 	await assetStorage.updateWeeklyStats(ctx)
-	await assetStorage.sync(ctx)
 }

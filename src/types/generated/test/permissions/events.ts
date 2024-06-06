@@ -1,14 +1,14 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
 
 export const permissionGranted =  {
     name: 'Permissions.PermissionGranted',
     /**
      *  Permission was granted to a holder. [permission, who]
      */
-    v33: new EventType(
+    v1: new EventType(
         'Permissions.PermissionGranted',
-        sts.tuple([sts.number(), v33.AccountId])
+        sts.tuple([sts.number(), v1.AccountId])
     ),
 }
 
@@ -17,9 +17,9 @@ export const permissionTransfered =  {
     /**
      *  Permission was transfered to a new owner. [permission, who]
      */
-    v33: new EventType(
+    v1: new EventType(
         'Permissions.PermissionTransfered',
-        sts.tuple([sts.number(), v33.AccountId])
+        sts.tuple([sts.number(), v1.AccountId])
     ),
 }
 
@@ -28,9 +28,9 @@ export const permissionCreated =  {
     /**
      *  Permission was created with an owner. [permission, who]
      */
-    v33: new EventType(
+    v1: new EventType(
         'Permissions.PermissionCreated',
-        sts.tuple([sts.number(), v33.AccountId])
+        sts.tuple([sts.number(), v1.AccountId])
     ),
 }
 
@@ -39,8 +39,8 @@ export const permissionAssigned =  {
     /**
      *  Permission was assigned to the account in the scope. [permission, who]
      */
-    v33: new EventType(
+    v1: new EventType(
         'Permissions.PermissionAssigned',
-        sts.tuple([sts.number(), v33.AccountId])
+        sts.tuple([sts.number(), v1.AccountId])
     ),
 }

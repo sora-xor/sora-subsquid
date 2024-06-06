@@ -1,6 +1,7 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
 import * as v64 from '../v64'
 import * as v70 from '../v70'
+import * as v84 from '../v84'
 
 export const networkInitialized =  {
     name: 'MultisigVerifier.NetworkInitialized',
@@ -11,6 +12,10 @@ export const networkInitialized =  {
     v70: new EventType(
         'MultisigVerifier.NetworkInitialized',
         v70.GenericNetworkId
+    ),
+    v84: new EventType(
+        'MultisigVerifier.NetworkInitialized',
+        v84.GenericNetworkId
     ),
 }
 
@@ -23,6 +28,10 @@ export const verificationSuccessful =  {
     v70: new EventType(
         'MultisigVerifier.VerificationSuccessful',
         v70.GenericNetworkId
+    ),
+    v84: new EventType(
+        'MultisigVerifier.VerificationSuccessful',
+        v84.GenericNetworkId
     ),
 }
 

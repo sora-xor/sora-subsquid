@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
 import * as v42 from '../v42'
 
 export const reportEquivocation =  {
@@ -10,11 +10,11 @@ export const reportEquivocation =  {
      *  against the extracted offender. If both are valid, the offence will
      *  be reported.
      */
-    v33: new CallType(
+    v1: new CallType(
         'Babe.report_equivocation',
         sts.struct({
-            equivocationProof: v33.BabeEquivocationProof,
-            keyOwnerProof: v33.KeyOwnerProof,
+            equivocationProof: v1.BabeEquivocationProof,
+            keyOwnerProof: v1.KeyOwnerProof,
         })
     ),
     /**
@@ -44,11 +44,11 @@ export const reportEquivocationUnsigned =  {
      *  if the block author is defined it will be defined as the equivocation
      *  reporter.
      */
-    v33: new CallType(
+    v1: new CallType(
         'Babe.report_equivocation_unsigned',
         sts.struct({
-            equivocationProof: v33.BabeEquivocationProof,
-            keyOwnerProof: v33.KeyOwnerProof,
+            equivocationProof: v1.BabeEquivocationProof,
+            keyOwnerProof: v1.KeyOwnerProof,
         })
     ),
     /**

@@ -1,48 +1,48 @@
 import {sts, Block, Bytes, Option, Result, StorageType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const state =  {
     /**
      *  State of the current authority set.
      */
-    v70: new StorageType('Grandpa.State', 'Default', [], v70.StoredState) as StateV70,
+    v85: new StorageType('Grandpa.State', 'Default', [], v85.StoredState) as StateV85,
 }
 
 /**
  *  State of the current authority set.
  */
-export interface StateV70  {
+export interface StateV85  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v70.StoredState
-    get(block: Block): Promise<(v70.StoredState | undefined)>
+    getDefault(block: Block): v85.StoredState
+    get(block: Block): Promise<(v85.StoredState | undefined)>
 }
 
 export const pendingChange =  {
     /**
      *  Pending change: (signaled at, scheduled change).
      */
-    v70: new StorageType('Grandpa.PendingChange', 'Optional', [], v70.StoredPendingChange) as PendingChangeV70,
+    v85: new StorageType('Grandpa.PendingChange', 'Optional', [], v85.StoredPendingChange) as PendingChangeV85,
 }
 
 /**
  *  Pending change: (signaled at, scheduled change).
  */
-export interface PendingChangeV70  {
+export interface PendingChangeV85  {
     is(block: RuntimeCtx): boolean
-    get(block: Block): Promise<(v70.StoredPendingChange | undefined)>
+    get(block: Block): Promise<(v85.StoredPendingChange | undefined)>
 }
 
 export const nextForced =  {
     /**
      *  next block number where we can force a change.
      */
-    v70: new StorageType('Grandpa.NextForced', 'Optional', [], sts.number()) as NextForcedV70,
+    v85: new StorageType('Grandpa.NextForced', 'Optional', [], sts.number()) as NextForcedV85,
 }
 
 /**
  *  next block number where we can force a change.
  */
-export interface NextForcedV70  {
+export interface NextForcedV85  {
     is(block: RuntimeCtx): boolean
     get(block: Block): Promise<(number | undefined)>
 }
@@ -51,13 +51,13 @@ export const stalled =  {
     /**
      *  `true` if we are currently stalled.
      */
-    v70: new StorageType('Grandpa.Stalled', 'Optional', [], sts.tuple(() => [sts.number(), sts.number()])) as StalledV70,
+    v85: new StorageType('Grandpa.Stalled', 'Optional', [], sts.tuple(() => [sts.number(), sts.number()])) as StalledV85,
 }
 
 /**
  *  `true` if we are currently stalled.
  */
-export interface StalledV70  {
+export interface StalledV85  {
     is(block: RuntimeCtx): boolean
     get(block: Block): Promise<([number, number] | undefined)>
 }
@@ -67,14 +67,14 @@ export const currentSetId =  {
      *  The number of changes (both in terms of keys and underlying economic responsibilities)
      *  in the "set" of Grandpa validators from genesis.
      */
-    v70: new StorageType('Grandpa.CurrentSetId', 'Default', [], sts.bigint()) as CurrentSetIdV70,
+    v85: new StorageType('Grandpa.CurrentSetId', 'Default', [], sts.bigint()) as CurrentSetIdV85,
 }
 
 /**
  *  The number of changes (both in terms of keys and underlying economic responsibilities)
  *  in the "set" of Grandpa validators from genesis.
  */
-export interface CurrentSetIdV70  {
+export interface CurrentSetIdV85  {
     is(block: RuntimeCtx): boolean
     getDefault(block: Block): bigint
     get(block: Block): Promise<(bigint | undefined)>
@@ -93,7 +93,7 @@ export const setIdSession =  {
      * 
      *  TWOX-NOTE: `SetId` is not under user control.
      */
-    v70: new StorageType('Grandpa.SetIdSession', 'Optional', [sts.bigint()], sts.number()) as SetIdSessionV70,
+    v85: new StorageType('Grandpa.SetIdSession', 'Optional', [sts.bigint()], sts.number()) as SetIdSessionV85,
 }
 
 /**
@@ -108,7 +108,7 @@ export const setIdSession =  {
  * 
  *  TWOX-NOTE: `SetId` is not under user control.
  */
-export interface SetIdSessionV70  {
+export interface SetIdSessionV85  {
     is(block: RuntimeCtx): boolean
     get(block: Block, key: bigint): Promise<(number | undefined)>
     getMany(block: Block, keys: bigint[]): Promise<(number | undefined)[]>

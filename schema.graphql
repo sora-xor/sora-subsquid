@@ -8,8 +8,8 @@ enum SnapshotType {
 enum PayeeType {
 	STAKED
 	STASH
-	CONTROLLER,
-	ACCOUNT,
+	CONTROLLER
+	ACCOUNT
 	NONE
 }
 
@@ -25,7 +25,6 @@ type NetworkStats @entity {
 	totalTransactions: Int!
 	totalBridgeIncomingTransactions: Int!
 	totalBridgeOutgoingTransactions: Int!
-	updatedAtBlock: Int!
 }
 
 type NetworkSnapshot @entity {
@@ -39,13 +38,12 @@ type NetworkSnapshot @entity {
 	volumeUSD: String!
 	bridgeIncomingTransactions: Int!
 	bridgeOutgoingTransactions: Int!
-	updatedAtBlock: Int!
 }
 
 type UpdatesStream @entity {
-  id: ID!
-  block: Int!
-  data: String! # stringified JSON
+	id: ID!
+	block: Int!
+	data: String! # stringified JSON
 }
 
 type Asset @entity {
@@ -55,13 +53,12 @@ type Asset @entity {
 	priceUSD: String!
 	supply: BigInt!
 	liquidity: BigInt # locked in pools (in tokens)
-  	liquidityBooks: BigInt # locked in order books (in tokens)
+	liquidityBooks: BigInt # locked in order books (in tokens)
 	priceChangeDay: Float
 	priceChangeWeek: Float
 	volumeDayUSD: Float
 	volumeWeekUSD: Float
 	velocity: Float # calculated in week
-	updatedAtBlock: Int!
 }
 
 type AssetPrice @jsonField {
@@ -87,7 +84,6 @@ type AssetSnapshot @entity {
 	supply: BigInt!
 	mint: BigInt!
 	burn: BigInt!
-	updatedAtBlock: Int!
 }
 
 type PoolXYK @entity {
@@ -99,13 +95,11 @@ type PoolXYK @entity {
 	multiplier: Int!
 	priceUSD: String
 	strategicBonusApy: String
-	updatedAtBlock: Int!
 }
 
 type Account @entity {
 	id: ID!
 	latestHistoryElement: HistoryElement
-	updatedAtBlock: Int!
 }
 
 type HistoryElement @entity {
@@ -120,10 +114,9 @@ type HistoryElement @entity {
 	networkFee: String
 	execution: ExecutionResult!
 	timestamp: Int! @index
-	data: JSON @index
+	data: JSON
 	dataTo: String @index
 	dataFrom: String @index
-	dataReceivers: [String]!
 	calls: [HistoryElementCall!]! @derivedFrom(field: "historyElement")
 	callNames: [String]!
 	updatedAtBlock: Int! @index
@@ -155,7 +148,6 @@ type ReferrerReward @entity {
 	referrer: String!
 	updated: Int!
 	amount: BigInt!
-	updatedAtBlock: Int!
 }
 
 type StakingReward @entity {
@@ -178,34 +170,34 @@ type StakingStaker @entity {
 }
 
 type StakingValidator @entity {
-    id: ID!
-    bond: BigInt!
+	id: ID!
+	bond: BigInt!
 }
 
 type StakingEraNominator @entity {
 	id: ID!
-    era: StakingEra!
-    bond: BigInt!
-    staker: StakingStaker!
-    nominations: [StakingEraNomination!]! @derivedFrom(field: "nominator")
+	era: StakingEra!
+	bond: BigInt!
+	staker: StakingStaker!
+	nominations: [StakingEraNomination!]! @derivedFrom(field: "nominator")
 }
 
 type StakingEraNomination @entity {
 	id: ID!
-    era: StakingEra!
-    amount: BigInt!
-    validator: StakingEraValidator!
-    nominator: StakingEraNominator!
+	era: StakingEra!
+	amount: BigInt!
+	validator: StakingEraValidator!
+	nominator: StakingEraNominator!
 }
 
 type StakingEraValidator @entity {
 	id: ID!
-    era: StakingEra!
-    validator: StakingValidator!
-    nominations: [StakingEraNomination!]! @derivedFrom(field: "validator")
-    ownBond: BigInt!
-    totalBond: BigInt!
-    rewardAmount: BigInt!
+	era: StakingEra!
+	validator: StakingValidator!
+	nominations: [StakingEraNomination!]! @derivedFrom(field: "validator")
+	ownBond: BigInt!
+	totalBond: BigInt!
+	rewardAmount: BigInt!
 	staker: StakingStaker!
 }
 
@@ -213,9 +205,9 @@ type StakingEra @entity {
 	id: ID!
 	index: Int! @index
 	start: BigInt! @index
-    validators: [StakingEraValidator!]! @derivedFrom(field: "era")
+	validators: [StakingEraValidator!]! @derivedFrom(field: "era")
 	nominators: [StakingEraNominator!]! @derivedFrom(field: "era")
-    nominations: [StakingEraNomination!]! @derivedFrom(field: "era")
+	nominations: [StakingEraNomination!]! @derivedFrom(field: "era")
 }
 
 enum OrderBookStatus {
@@ -279,7 +271,7 @@ type OrderBookSnapshot @entity {
 	baseAssetVolume: String!
 	quoteAssetVolume: String!
 	volumeUSD: String!
-  	liquidityUSD: String!
+	liquidityUSD: String!
 }
 
 type OrderBookOrder implements IOrderBookDeal @entity {
@@ -298,4 +290,54 @@ type OrderBookOrder implements IOrderBookDeal @entity {
 	amountFilled: String!
 	status: OrderStatus!
 	updatedAtBlock: Int!
+}
+
+# CdpType
+enum VaultType {
+	# Pays stability fee in underlying collateral, cannot be liquidated.
+	Type1
+	# Pays stability fee in stable coins, can be liquidated. (by default ??)
+	Type2
+}
+
+enum VaultStatus {
+	Opened
+	Closed
+	Liquidated # returned collateral amount === 0
+}
+
+type VaultAccount @entity {
+	id: ID! # account address
+	lastLiquidation: VaultEvent # for subscription support
+}
+
+type Vault @entity {
+	id: ID!
+	type: VaultType!
+	status: VaultStatus!
+	owner: VaultAccount! @index
+	collateralAsset: Asset! @index
+	debtAsset: Asset! @index
+	collateralAmountReturned: String
+	createdAtBlock: Int!
+	updatedAtBlock: Int! # updated or closed
+	events: [VaultEvent!]! @derivedFrom(field: "vault")
+}
+
+enum VaultEventType {
+	Created
+	Closed
+	CollateralDeposit
+	DebtIncreased
+	DebtPayment
+	Liquidated
+}
+
+type VaultEvent @entity {
+	id: ID!
+	type: VaultEventType!
+	vault: Vault! @index # relation to Vault
+	timestamp: Int!
+	block: Int!
+	amount: String
 }

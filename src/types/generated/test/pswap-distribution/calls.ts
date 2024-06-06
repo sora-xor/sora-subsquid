@@ -2,7 +2,7 @@ import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../suppor
 
 export const claimIncentive =  {
     name: 'PswapDistribution.claim_incentive',
-    v33: new CallType(
+    v1: new CallType(
         'PswapDistribution.claim_incentive',
         sts.unit()
     ),

@@ -1,15 +1,16 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
-import * as v52 from '../v52'
+import * as v1 from '../v1'
+import * as v3 from '../v3'
+import * as v53 from '../v53'
 
 export const requestRegistered =  {
     name: 'EthBridge.RequestRegistered',
     /**
      *  New request has been registered. [Request Hash]
      */
-    v33: new EventType(
+    v1: new EventType(
         'EthBridge.RequestRegistered',
-        v33.H256
+        v1.H256
     ),
 }
 
@@ -18,9 +19,9 @@ export const approvalsCollected =  {
     /**
      *  The request's approvals have been collected. [Encoded Outgoing Request, Signatures]
      */
-    v33: new EventType(
+    v1: new EventType(
         'EthBridge.ApprovalsCollected',
-        v33.H256
+        v1.H256
     ),
 }
 
@@ -29,9 +30,9 @@ export const requestFinalizationFailed =  {
     /**
      *  The request finalization has been failed. [Request Hash]
      */
-    v33: new EventType(
+    v1: new EventType(
         'EthBridge.RequestFinalizationFailed',
-        v33.H256
+        v1.H256
     ),
 }
 
@@ -40,9 +41,9 @@ export const incomingRequestFinalizationFailed =  {
     /**
      *  The incoming request finalization has been failed. [Request Hash]
      */
-    v33: new EventType(
+    v1: new EventType(
         'EthBridge.IncomingRequestFinalizationFailed',
-        v33.H256
+        v1.H256
     ),
 }
 
@@ -51,9 +52,9 @@ export const incomingRequestFinalized =  {
     /**
      *  The incoming request has been finalized. [Request Hash]
      */
-    v33: new EventType(
+    v1: new EventType(
         'EthBridge.IncomingRequestFinalized',
-        v33.H256
+        v1.H256
     ),
 }
 
@@ -62,9 +63,9 @@ export const requestAborted =  {
     /**
      *  The request was aborted and cancelled. [Request Hash]
      */
-    v33: new EventType(
+    v1: new EventType(
         'EthBridge.RequestAborted',
-        v33.H256
+        v1.H256
     ),
 }
 
@@ -73,9 +74,9 @@ export const cancellationFailed =  {
     /**
      *  The request wasn't finalized nor cancelled. [Request Hash]
      */
-    v33: new EventType(
+    v3: new EventType(
         'EthBridge.CancellationFailed',
-        v33.H256
+        v3.H256
     ),
 }
 
@@ -84,8 +85,8 @@ export const registerRequestFailed =  {
     /**
      * The request registration has been failed. [Request Hash, Error]
      */
-    v52: new EventType(
+    v53: new EventType(
         'EthBridge.RegisterRequestFailed',
-        sts.tuple([v52.H256, v52.DispatchError])
+        sts.tuple([v53.H256, v53.DispatchError])
     ),
 }

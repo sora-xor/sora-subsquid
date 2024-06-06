@@ -1,31 +1,40 @@
 import {sts, Block, Bytes, Option, Result, StorageType, RuntimeCtx} from '../support'
+import * as v1 from '../v1'
+import * as v3 from '../v3'
+import * as v7 from '../v7'
+import * as v8 from '../v8'
+import * as v19 from '../v19'
+import * as v22 from '../v22'
+import * as v23 from '../v23'
+import * as v26 from '../v26'
 import * as v33 from '../v33'
 import * as v35 from '../v35'
 import * as v37 from '../v37'
 import * as v38 from '../v38'
 import * as v42 from '../v42'
 import * as v43 from '../v43'
-import * as v44 from '../v44'
 import * as v45 from '../v45'
 import * as v46 from '../v46'
 import * as v47 from '../v47'
-import * as v52 from '../v52'
-import * as v54 from '../v54'
-import * as v55 from '../v55'
+import * as v53 from '../v53'
 import * as v57 from '../v57'
-import * as v59 from '../v59'
 import * as v60 from '../v60'
 import * as v64 from '../v64'
 import * as v66 from '../v66'
-import * as v67 from '../v67'
-import * as v69 from '../v69'
+import * as v68 from '../v68'
 import * as v70 from '../v70'
+import * as v71 from '../v71'
+import * as v72 from '../v72'
+import * as v74 from '../v74'
+import * as v77 from '../v77'
+import * as v84 from '../v84'
+import * as v85 from '../v85'
 
 export const account =  {
     /**
      *  The full account information for a particular account ID.
      */
-    v33: new StorageType('System.Account', 'Default', [v33.AccountId], v33.AccountInfo) as AccountV33,
+    v1: new StorageType('System.Account', 'Default', [v1.AccountId], v1.AccountInfo) as AccountV1,
     /**
      *  The full account information for a particular account ID.
      */
@@ -35,19 +44,19 @@ export const account =  {
 /**
  *  The full account information for a particular account ID.
  */
-export interface AccountV33  {
+export interface AccountV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.AccountInfo
-    get(block: Block, key: v33.AccountId): Promise<(v33.AccountInfo | undefined)>
-    getMany(block: Block, keys: v33.AccountId[]): Promise<(v33.AccountInfo | undefined)[]>
-    getKeys(block: Block): Promise<v33.AccountId[]>
-    getKeys(block: Block, key: v33.AccountId): Promise<v33.AccountId[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.AccountId[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.AccountId): AsyncIterable<v33.AccountId[]>
-    getPairs(block: Block): Promise<[k: v33.AccountId, v: (v33.AccountInfo | undefined)][]>
-    getPairs(block: Block, key: v33.AccountId): Promise<[k: v33.AccountId, v: (v33.AccountInfo | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.AccountId, v: (v33.AccountInfo | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.AccountId): AsyncIterable<[k: v33.AccountId, v: (v33.AccountInfo | undefined)][]>
+    getDefault(block: Block): v1.AccountInfo
+    get(block: Block, key: v1.AccountId): Promise<(v1.AccountInfo | undefined)>
+    getMany(block: Block, keys: v1.AccountId[]): Promise<(v1.AccountInfo | undefined)[]>
+    getKeys(block: Block): Promise<v1.AccountId[]>
+    getKeys(block: Block, key: v1.AccountId): Promise<v1.AccountId[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.AccountId[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.AccountId): AsyncIterable<v1.AccountId[]>
+    getPairs(block: Block): Promise<[k: v1.AccountId, v: (v1.AccountInfo | undefined)][]>
+    getPairs(block: Block, key: v1.AccountId): Promise<[k: v1.AccountId, v: (v1.AccountInfo | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.AccountId, v: (v1.AccountInfo | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.AccountId): AsyncIterable<[k: v1.AccountId, v: (v1.AccountInfo | undefined)][]>
 }
 
 /**
@@ -72,13 +81,13 @@ export const extrinsicCount =  {
     /**
      *  Total extrinsics count for the current block.
      */
-    v33: new StorageType('System.ExtrinsicCount', 'Optional', [], sts.number()) as ExtrinsicCountV33,
+    v1: new StorageType('System.ExtrinsicCount', 'Optional', [], sts.number()) as ExtrinsicCountV1,
 }
 
 /**
  *  Total extrinsics count for the current block.
  */
-export interface ExtrinsicCountV33  {
+export interface ExtrinsicCountV1  {
     is(block: RuntimeCtx): boolean
     get(block: Block): Promise<(number | undefined)>
 }
@@ -87,42 +96,42 @@ export const blockWeight =  {
     /**
      *  The current weight for the block.
      */
-    v33: new StorageType('System.BlockWeight', 'Default', [], v33.ConsumedWeight) as BlockWeightV33,
+    v1: new StorageType('System.BlockWeight', 'Default', [], v1.ConsumedWeight) as BlockWeightV1,
     /**
      *  The current weight for the block.
      */
-    v52: new StorageType('System.BlockWeight', 'Default', [], v52.PerDispatchClass) as BlockWeightV52,
+    v53: new StorageType('System.BlockWeight', 'Default', [], v53.PerDispatchClass) as BlockWeightV53,
 }
 
 /**
  *  The current weight for the block.
  */
-export interface BlockWeightV33  {
+export interface BlockWeightV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.ConsumedWeight
-    get(block: Block): Promise<(v33.ConsumedWeight | undefined)>
+    getDefault(block: Block): v1.ConsumedWeight
+    get(block: Block): Promise<(v1.ConsumedWeight | undefined)>
 }
 
 /**
  *  The current weight for the block.
  */
-export interface BlockWeightV52  {
+export interface BlockWeightV53  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v52.PerDispatchClass
-    get(block: Block): Promise<(v52.PerDispatchClass | undefined)>
+    getDefault(block: Block): v53.PerDispatchClass
+    get(block: Block): Promise<(v53.PerDispatchClass | undefined)>
 }
 
 export const allExtrinsicsLen =  {
     /**
      *  Total length (in bytes) for all extrinsics put together, for the current block.
      */
-    v33: new StorageType('System.AllExtrinsicsLen', 'Optional', [], sts.number()) as AllExtrinsicsLenV33,
+    v1: new StorageType('System.AllExtrinsicsLen', 'Optional', [], sts.number()) as AllExtrinsicsLenV1,
 }
 
 /**
  *  Total length (in bytes) for all extrinsics put together, for the current block.
  */
-export interface AllExtrinsicsLenV33  {
+export interface AllExtrinsicsLenV1  {
     is(block: RuntimeCtx): boolean
     get(block: Block): Promise<(number | undefined)>
 }
@@ -131,38 +140,38 @@ export const blockHash =  {
     /**
      *  Map of block numbers to block hashes.
      */
-    v33: new StorageType('System.BlockHash', 'Default', [v33.BlockNumber], v33.Hash) as BlockHashV33,
+    v1: new StorageType('System.BlockHash', 'Default', [v1.BlockNumber], v1.Hash) as BlockHashV1,
 }
 
 /**
  *  Map of block numbers to block hashes.
  */
-export interface BlockHashV33  {
+export interface BlockHashV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.Hash
-    get(block: Block, key: v33.BlockNumber): Promise<(v33.Hash | undefined)>
-    getMany(block: Block, keys: v33.BlockNumber[]): Promise<(v33.Hash | undefined)[]>
-    getKeys(block: Block): Promise<v33.BlockNumber[]>
-    getKeys(block: Block, key: v33.BlockNumber): Promise<v33.BlockNumber[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.BlockNumber[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.BlockNumber): AsyncIterable<v33.BlockNumber[]>
-    getPairs(block: Block): Promise<[k: v33.BlockNumber, v: (v33.Hash | undefined)][]>
-    getPairs(block: Block, key: v33.BlockNumber): Promise<[k: v33.BlockNumber, v: (v33.Hash | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.BlockNumber, v: (v33.Hash | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.BlockNumber): AsyncIterable<[k: v33.BlockNumber, v: (v33.Hash | undefined)][]>
+    getDefault(block: Block): v1.Hash
+    get(block: Block, key: v1.BlockNumber): Promise<(v1.Hash | undefined)>
+    getMany(block: Block, keys: v1.BlockNumber[]): Promise<(v1.Hash | undefined)[]>
+    getKeys(block: Block): Promise<v1.BlockNumber[]>
+    getKeys(block: Block, key: v1.BlockNumber): Promise<v1.BlockNumber[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.BlockNumber[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.BlockNumber): AsyncIterable<v1.BlockNumber[]>
+    getPairs(block: Block): Promise<[k: v1.BlockNumber, v: (v1.Hash | undefined)][]>
+    getPairs(block: Block, key: v1.BlockNumber): Promise<[k: v1.BlockNumber, v: (v1.Hash | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.BlockNumber, v: (v1.Hash | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.BlockNumber): AsyncIterable<[k: v1.BlockNumber, v: (v1.Hash | undefined)][]>
 }
 
 export const extrinsicData =  {
     /**
      *  Extrinsics data for the current block (maps an extrinsic's index to its data).
      */
-    v33: new StorageType('System.ExtrinsicData', 'Default', [sts.number()], sts.bytes()) as ExtrinsicDataV33,
+    v1: new StorageType('System.ExtrinsicData', 'Default', [sts.number()], sts.bytes()) as ExtrinsicDataV1,
 }
 
 /**
  *  Extrinsics data for the current block (maps an extrinsic's index to its data).
  */
-export interface ExtrinsicDataV33  {
+export interface ExtrinsicDataV1  {
     is(block: RuntimeCtx): boolean
     getDefault(block: Block): Bytes
     get(block: Block, key: number): Promise<(Bytes | undefined)>
@@ -181,39 +190,39 @@ export const number =  {
     /**
      *  The current block number being processed. Set by `execute_block`.
      */
-    v33: new StorageType('System.Number', 'Default', [], v33.BlockNumber) as NumberV33,
+    v1: new StorageType('System.Number', 'Default', [], v1.BlockNumber) as NumberV1,
 }
 
 /**
  *  The current block number being processed. Set by `execute_block`.
  */
-export interface NumberV33  {
+export interface NumberV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.BlockNumber
-    get(block: Block): Promise<(v33.BlockNumber | undefined)>
+    getDefault(block: Block): v1.BlockNumber
+    get(block: Block): Promise<(v1.BlockNumber | undefined)>
 }
 
 export const parentHash =  {
     /**
      *  Hash of the previous block.
      */
-    v33: new StorageType('System.ParentHash', 'Default', [], v33.Hash) as ParentHashV33,
+    v1: new StorageType('System.ParentHash', 'Default', [], v1.Hash) as ParentHashV1,
 }
 
 /**
  *  Hash of the previous block.
  */
-export interface ParentHashV33  {
+export interface ParentHashV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.Hash
-    get(block: Block): Promise<(v33.Hash | undefined)>
+    getDefault(block: Block): v1.Hash
+    get(block: Block): Promise<(v1.Hash | undefined)>
 }
 
 export const digest =  {
     /**
      *  Digest of the current block, also part of the block header.
      */
-    v33: new StorageType('System.Digest', 'Default', [], v33.DigestOf) as DigestV33,
+    v1: new StorageType('System.Digest', 'Default', [], v1.DigestOf) as DigestV1,
     /**
      *  Digest of the current block, also part of the block header.
      */
@@ -223,10 +232,10 @@ export const digest =  {
 /**
  *  Digest of the current block, also part of the block header.
  */
-export interface DigestV33  {
+export interface DigestV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.DigestOf
-    get(block: Block): Promise<(v33.DigestOf | undefined)>
+    getDefault(block: Block): v1.DigestOf
+    get(block: Block): Promise<(v1.DigestOf | undefined)>
 }
 
 /**
@@ -239,6 +248,38 @@ export interface DigestV42  {
 }
 
 export const events =  {
+    /**
+     *  Events deposited for the current block.
+     */
+    v1: new StorageType('System.Events', 'Default', [], sts.array(() => v1.EventRecord)) as EventsV1,
+    /**
+     *  Events deposited for the current block.
+     */
+    v3: new StorageType('System.Events', 'Default', [], sts.array(() => v3.EventRecord)) as EventsV3,
+    /**
+     *  Events deposited for the current block.
+     */
+    v7: new StorageType('System.Events', 'Default', [], sts.array(() => v7.EventRecord)) as EventsV7,
+    /**
+     *  Events deposited for the current block.
+     */
+    v8: new StorageType('System.Events', 'Default', [], sts.array(() => v8.EventRecord)) as EventsV8,
+    /**
+     *  Events deposited for the current block.
+     */
+    v19: new StorageType('System.Events', 'Default', [], sts.array(() => v19.EventRecord)) as EventsV19,
+    /**
+     *  Events deposited for the current block.
+     */
+    v22: new StorageType('System.Events', 'Default', [], sts.array(() => v22.EventRecord)) as EventsV22,
+    /**
+     *  Events deposited for the current block.
+     */
+    v23: new StorageType('System.Events', 'Default', [], sts.array(() => v23.EventRecord)) as EventsV23,
+    /**
+     *  Events deposited for the current block.
+     */
+    v26: new StorageType('System.Events', 'Default', [], sts.array(() => v26.EventRecord)) as EventsV26,
     /**
      *  Events deposited for the current block.
      */
@@ -284,16 +325,6 @@ export const events =  {
      *  Events have a large in-memory size. Box the events to not go out-of-memory
      *  just in case someone still reads them from within the runtime.
      */
-    v44: new StorageType('System.Events', 'Default', [], sts.array(() => v44.EventRecord)) as EventsV44,
-    /**
-     *  Events deposited for the current block.
-     * 
-     *  NOTE: The item is unbound and should therefore never be read on chain.
-     *  It could otherwise inflate the PoV size of a block.
-     * 
-     *  Events have a large in-memory size. Box the events to not go out-of-memory
-     *  just in case someone still reads them from within the runtime.
-     */
     v45: new StorageType('System.Events', 'Default', [], sts.array(() => v45.EventRecord)) as EventsV45,
     /**
      *  Events deposited for the current block.
@@ -324,27 +355,7 @@ export const events =  {
      *  Events have a large in-memory size. Box the events to not go out-of-memory
      *  just in case someone still reads them from within the runtime.
      */
-    v52: new StorageType('System.Events', 'Default', [], sts.array(() => v52.EventRecord)) as EventsV52,
-    /**
-     *  Events deposited for the current block.
-     * 
-     *  NOTE: The item is unbound and should therefore never be read on chain.
-     *  It could otherwise inflate the PoV size of a block.
-     * 
-     *  Events have a large in-memory size. Box the events to not go out-of-memory
-     *  just in case someone still reads them from within the runtime.
-     */
-    v54: new StorageType('System.Events', 'Default', [], sts.array(() => v54.EventRecord)) as EventsV54,
-    /**
-     *  Events deposited for the current block.
-     * 
-     *  NOTE: The item is unbound and should therefore never be read on chain.
-     *  It could otherwise inflate the PoV size of a block.
-     * 
-     *  Events have a large in-memory size. Box the events to not go out-of-memory
-     *  just in case someone still reads them from within the runtime.
-     */
-    v55: new StorageType('System.Events', 'Default', [], sts.array(() => v55.EventRecord)) as EventsV55,
+    v53: new StorageType('System.Events', 'Default', [], sts.array(() => v53.EventRecord)) as EventsV53,
     /**
      *  Events deposited for the current block.
      * 
@@ -355,16 +366,6 @@ export const events =  {
      *  just in case someone still reads them from within the runtime.
      */
     v57: new StorageType('System.Events', 'Default', [], sts.array(() => v57.EventRecord)) as EventsV57,
-    /**
-     *  Events deposited for the current block.
-     * 
-     *  NOTE: The item is unbound and should therefore never be read on chain.
-     *  It could otherwise inflate the PoV size of a block.
-     * 
-     *  Events have a large in-memory size. Box the events to not go out-of-memory
-     *  just in case someone still reads them from within the runtime.
-     */
-    v59: new StorageType('System.Events', 'Default', [], sts.array(() => v59.EventRecord)) as EventsV59,
     /**
      *  Events deposited for the current block.
      * 
@@ -404,17 +405,7 @@ export const events =  {
      *  Events have a large in-memory size. Box the events to not go out-of-memory
      *  just in case someone still reads them from within the runtime.
      */
-    v67: new StorageType('System.Events', 'Default', [], sts.array(() => v67.EventRecord)) as EventsV67,
-    /**
-     *  Events deposited for the current block.
-     * 
-     *  NOTE: The item is unbound and should therefore never be read on chain.
-     *  It could otherwise inflate the PoV size of a block.
-     * 
-     *  Events have a large in-memory size. Box the events to not go out-of-memory
-     *  just in case someone still reads them from within the runtime.
-     */
-    v69: new StorageType('System.Events', 'Default', [], sts.array(() => v69.EventRecord)) as EventsV69,
+    v68: new StorageType('System.Events', 'Default', [], sts.array(() => v68.EventRecord)) as EventsV68,
     /**
      *  Events deposited for the current block.
      * 
@@ -425,6 +416,138 @@ export const events =  {
      *  just in case someone still reads them from within the runtime.
      */
     v70: new StorageType('System.Events', 'Default', [], sts.array(() => v70.EventRecord)) as EventsV70,
+    /**
+     *  Events deposited for the current block.
+     * 
+     *  NOTE: The item is unbound and should therefore never be read on chain.
+     *  It could otherwise inflate the PoV size of a block.
+     * 
+     *  Events have a large in-memory size. Box the events to not go out-of-memory
+     *  just in case someone still reads them from within the runtime.
+     */
+    v71: new StorageType('System.Events', 'Default', [], sts.array(() => v71.EventRecord)) as EventsV71,
+    /**
+     *  Events deposited for the current block.
+     * 
+     *  NOTE: The item is unbound and should therefore never be read on chain.
+     *  It could otherwise inflate the PoV size of a block.
+     * 
+     *  Events have a large in-memory size. Box the events to not go out-of-memory
+     *  just in case someone still reads them from within the runtime.
+     */
+    v72: new StorageType('System.Events', 'Default', [], sts.array(() => v72.EventRecord)) as EventsV72,
+    /**
+     *  Events deposited for the current block.
+     * 
+     *  NOTE: The item is unbound and should therefore never be read on chain.
+     *  It could otherwise inflate the PoV size of a block.
+     * 
+     *  Events have a large in-memory size. Box the events to not go out-of-memory
+     *  just in case someone still reads them from within the runtime.
+     */
+    v74: new StorageType('System.Events', 'Default', [], sts.array(() => v74.EventRecord)) as EventsV74,
+    /**
+     *  Events deposited for the current block.
+     * 
+     *  NOTE: The item is unbound and should therefore never be read on chain.
+     *  It could otherwise inflate the PoV size of a block.
+     * 
+     *  Events have a large in-memory size. Box the events to not go out-of-memory
+     *  just in case someone still reads them from within the runtime.
+     */
+    v77: new StorageType('System.Events', 'Default', [], sts.array(() => v77.EventRecord)) as EventsV77,
+    /**
+     *  Events deposited for the current block.
+     * 
+     *  NOTE: The item is unbound and should therefore never be read on chain.
+     *  It could otherwise inflate the PoV size of a block.
+     * 
+     *  Events have a large in-memory size. Box the events to not go out-of-memory
+     *  just in case someone still reads them from within the runtime.
+     */
+    v84: new StorageType('System.Events', 'Default', [], sts.array(() => v84.EventRecord)) as EventsV84,
+    /**
+     *  Events deposited for the current block.
+     * 
+     *  NOTE: The item is unbound and should therefore never be read on chain.
+     *  It could otherwise inflate the PoV size of a block.
+     * 
+     *  Events have a large in-memory size. Box the events to not go out-of-memory
+     *  just in case someone still reads them from within the runtime.
+     */
+    v85: new StorageType('System.Events', 'Default', [], sts.array(() => v85.EventRecord)) as EventsV85,
+}
+
+/**
+ *  Events deposited for the current block.
+ */
+export interface EventsV1  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): v1.EventRecord[]
+    get(block: Block): Promise<(v1.EventRecord[] | undefined)>
+}
+
+/**
+ *  Events deposited for the current block.
+ */
+export interface EventsV3  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): v3.EventRecord[]
+    get(block: Block): Promise<(v3.EventRecord[] | undefined)>
+}
+
+/**
+ *  Events deposited for the current block.
+ */
+export interface EventsV7  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): v7.EventRecord[]
+    get(block: Block): Promise<(v7.EventRecord[] | undefined)>
+}
+
+/**
+ *  Events deposited for the current block.
+ */
+export interface EventsV8  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): v8.EventRecord[]
+    get(block: Block): Promise<(v8.EventRecord[] | undefined)>
+}
+
+/**
+ *  Events deposited for the current block.
+ */
+export interface EventsV19  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): v19.EventRecord[]
+    get(block: Block): Promise<(v19.EventRecord[] | undefined)>
+}
+
+/**
+ *  Events deposited for the current block.
+ */
+export interface EventsV22  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): v22.EventRecord[]
+    get(block: Block): Promise<(v22.EventRecord[] | undefined)>
+}
+
+/**
+ *  Events deposited for the current block.
+ */
+export interface EventsV23  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): v23.EventRecord[]
+    get(block: Block): Promise<(v23.EventRecord[] | undefined)>
+}
+
+/**
+ *  Events deposited for the current block.
+ */
+export interface EventsV26  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): v26.EventRecord[]
+    get(block: Block): Promise<(v26.EventRecord[] | undefined)>
 }
 
 /**
@@ -502,21 +625,6 @@ export interface EventsV43  {
  *  Events have a large in-memory size. Box the events to not go out-of-memory
  *  just in case someone still reads them from within the runtime.
  */
-export interface EventsV44  {
-    is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v44.EventRecord[]
-    get(block: Block): Promise<(v44.EventRecord[] | undefined)>
-}
-
-/**
- *  Events deposited for the current block.
- * 
- *  NOTE: The item is unbound and should therefore never be read on chain.
- *  It could otherwise inflate the PoV size of a block.
- * 
- *  Events have a large in-memory size. Box the events to not go out-of-memory
- *  just in case someone still reads them from within the runtime.
- */
 export interface EventsV45  {
     is(block: RuntimeCtx): boolean
     getDefault(block: Block): v45.EventRecord[]
@@ -562,40 +670,10 @@ export interface EventsV47  {
  *  Events have a large in-memory size. Box the events to not go out-of-memory
  *  just in case someone still reads them from within the runtime.
  */
-export interface EventsV52  {
+export interface EventsV53  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v52.EventRecord[]
-    get(block: Block): Promise<(v52.EventRecord[] | undefined)>
-}
-
-/**
- *  Events deposited for the current block.
- * 
- *  NOTE: The item is unbound and should therefore never be read on chain.
- *  It could otherwise inflate the PoV size of a block.
- * 
- *  Events have a large in-memory size. Box the events to not go out-of-memory
- *  just in case someone still reads them from within the runtime.
- */
-export interface EventsV54  {
-    is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v54.EventRecord[]
-    get(block: Block): Promise<(v54.EventRecord[] | undefined)>
-}
-
-/**
- *  Events deposited for the current block.
- * 
- *  NOTE: The item is unbound and should therefore never be read on chain.
- *  It could otherwise inflate the PoV size of a block.
- * 
- *  Events have a large in-memory size. Box the events to not go out-of-memory
- *  just in case someone still reads them from within the runtime.
- */
-export interface EventsV55  {
-    is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v55.EventRecord[]
-    get(block: Block): Promise<(v55.EventRecord[] | undefined)>
+    getDefault(block: Block): v53.EventRecord[]
+    get(block: Block): Promise<(v53.EventRecord[] | undefined)>
 }
 
 /**
@@ -611,21 +689,6 @@ export interface EventsV57  {
     is(block: RuntimeCtx): boolean
     getDefault(block: Block): v57.EventRecord[]
     get(block: Block): Promise<(v57.EventRecord[] | undefined)>
-}
-
-/**
- *  Events deposited for the current block.
- * 
- *  NOTE: The item is unbound and should therefore never be read on chain.
- *  It could otherwise inflate the PoV size of a block.
- * 
- *  Events have a large in-memory size. Box the events to not go out-of-memory
- *  just in case someone still reads them from within the runtime.
- */
-export interface EventsV59  {
-    is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v59.EventRecord[]
-    get(block: Block): Promise<(v59.EventRecord[] | undefined)>
 }
 
 /**
@@ -682,25 +745,10 @@ export interface EventsV66  {
  *  Events have a large in-memory size. Box the events to not go out-of-memory
  *  just in case someone still reads them from within the runtime.
  */
-export interface EventsV67  {
+export interface EventsV68  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v67.EventRecord[]
-    get(block: Block): Promise<(v67.EventRecord[] | undefined)>
-}
-
-/**
- *  Events deposited for the current block.
- * 
- *  NOTE: The item is unbound and should therefore never be read on chain.
- *  It could otherwise inflate the PoV size of a block.
- * 
- *  Events have a large in-memory size. Box the events to not go out-of-memory
- *  just in case someone still reads them from within the runtime.
- */
-export interface EventsV69  {
-    is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v69.EventRecord[]
-    get(block: Block): Promise<(v69.EventRecord[] | undefined)>
+    getDefault(block: Block): v68.EventRecord[]
+    get(block: Block): Promise<(v68.EventRecord[] | undefined)>
 }
 
 /**
@@ -718,20 +766,110 @@ export interface EventsV70  {
     get(block: Block): Promise<(v70.EventRecord[] | undefined)>
 }
 
+/**
+ *  Events deposited for the current block.
+ * 
+ *  NOTE: The item is unbound and should therefore never be read on chain.
+ *  It could otherwise inflate the PoV size of a block.
+ * 
+ *  Events have a large in-memory size. Box the events to not go out-of-memory
+ *  just in case someone still reads them from within the runtime.
+ */
+export interface EventsV71  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): v71.EventRecord[]
+    get(block: Block): Promise<(v71.EventRecord[] | undefined)>
+}
+
+/**
+ *  Events deposited for the current block.
+ * 
+ *  NOTE: The item is unbound and should therefore never be read on chain.
+ *  It could otherwise inflate the PoV size of a block.
+ * 
+ *  Events have a large in-memory size. Box the events to not go out-of-memory
+ *  just in case someone still reads them from within the runtime.
+ */
+export interface EventsV72  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): v72.EventRecord[]
+    get(block: Block): Promise<(v72.EventRecord[] | undefined)>
+}
+
+/**
+ *  Events deposited for the current block.
+ * 
+ *  NOTE: The item is unbound and should therefore never be read on chain.
+ *  It could otherwise inflate the PoV size of a block.
+ * 
+ *  Events have a large in-memory size. Box the events to not go out-of-memory
+ *  just in case someone still reads them from within the runtime.
+ */
+export interface EventsV74  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): v74.EventRecord[]
+    get(block: Block): Promise<(v74.EventRecord[] | undefined)>
+}
+
+/**
+ *  Events deposited for the current block.
+ * 
+ *  NOTE: The item is unbound and should therefore never be read on chain.
+ *  It could otherwise inflate the PoV size of a block.
+ * 
+ *  Events have a large in-memory size. Box the events to not go out-of-memory
+ *  just in case someone still reads them from within the runtime.
+ */
+export interface EventsV77  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): v77.EventRecord[]
+    get(block: Block): Promise<(v77.EventRecord[] | undefined)>
+}
+
+/**
+ *  Events deposited for the current block.
+ * 
+ *  NOTE: The item is unbound and should therefore never be read on chain.
+ *  It could otherwise inflate the PoV size of a block.
+ * 
+ *  Events have a large in-memory size. Box the events to not go out-of-memory
+ *  just in case someone still reads them from within the runtime.
+ */
+export interface EventsV84  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): v84.EventRecord[]
+    get(block: Block): Promise<(v84.EventRecord[] | undefined)>
+}
+
+/**
+ *  Events deposited for the current block.
+ * 
+ *  NOTE: The item is unbound and should therefore never be read on chain.
+ *  It could otherwise inflate the PoV size of a block.
+ * 
+ *  Events have a large in-memory size. Box the events to not go out-of-memory
+ *  just in case someone still reads them from within the runtime.
+ */
+export interface EventsV85  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): v85.EventRecord[]
+    get(block: Block): Promise<(v85.EventRecord[] | undefined)>
+}
+
 export const eventCount =  {
     /**
      *  The number of events in the `Events<T>` list.
      */
-    v33: new StorageType('System.EventCount', 'Default', [], v33.EventIndex) as EventCountV33,
+    v1: new StorageType('System.EventCount', 'Default', [], v1.EventIndex) as EventCountV1,
 }
 
 /**
  *  The number of events in the `Events<T>` list.
  */
-export interface EventCountV33  {
+export interface EventCountV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.EventIndex
-    get(block: Block): Promise<(v33.EventIndex | undefined)>
+    getDefault(block: Block): v1.EventIndex
+    get(block: Block): Promise<(v1.EventIndex | undefined)>
 }
 
 export const eventTopics =  {
@@ -747,7 +885,7 @@ export const eventTopics =  {
      *  the `EventIndex` then in case if the topic has the same contents on the next block
      *  no notification will be triggered thus the event might be lost.
      */
-    v33: new StorageType('System.EventTopics', 'Default', [v33.Hash], sts.array(() => sts.tuple(() => [v33.BlockNumber, v33.EventIndex]))) as EventTopicsV33,
+    v1: new StorageType('System.EventTopics', 'Default', [v1.Hash], sts.array(() => sts.tuple(() => [v1.BlockNumber, v1.EventIndex]))) as EventTopicsV1,
 }
 
 /**
@@ -762,26 +900,26 @@ export const eventTopics =  {
  *  the `EventIndex` then in case if the topic has the same contents on the next block
  *  no notification will be triggered thus the event might be lost.
  */
-export interface EventTopicsV33  {
+export interface EventTopicsV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): [v33.BlockNumber, v33.EventIndex][]
-    get(block: Block, key: v33.Hash): Promise<([v33.BlockNumber, v33.EventIndex][] | undefined)>
-    getMany(block: Block, keys: v33.Hash[]): Promise<([v33.BlockNumber, v33.EventIndex][] | undefined)[]>
-    getKeys(block: Block): Promise<v33.Hash[]>
-    getKeys(block: Block, key: v33.Hash): Promise<v33.Hash[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.Hash[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.Hash): AsyncIterable<v33.Hash[]>
-    getPairs(block: Block): Promise<[k: v33.Hash, v: ([v33.BlockNumber, v33.EventIndex][] | undefined)][]>
-    getPairs(block: Block, key: v33.Hash): Promise<[k: v33.Hash, v: ([v33.BlockNumber, v33.EventIndex][] | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.Hash, v: ([v33.BlockNumber, v33.EventIndex][] | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.Hash): AsyncIterable<[k: v33.Hash, v: ([v33.BlockNumber, v33.EventIndex][] | undefined)][]>
+    getDefault(block: Block): [v1.BlockNumber, v1.EventIndex][]
+    get(block: Block, key: v1.Hash): Promise<([v1.BlockNumber, v1.EventIndex][] | undefined)>
+    getMany(block: Block, keys: v1.Hash[]): Promise<([v1.BlockNumber, v1.EventIndex][] | undefined)[]>
+    getKeys(block: Block): Promise<v1.Hash[]>
+    getKeys(block: Block, key: v1.Hash): Promise<v1.Hash[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.Hash[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.Hash): AsyncIterable<v1.Hash[]>
+    getPairs(block: Block): Promise<[k: v1.Hash, v: ([v1.BlockNumber, v1.EventIndex][] | undefined)][]>
+    getPairs(block: Block, key: v1.Hash): Promise<[k: v1.Hash, v: ([v1.BlockNumber, v1.EventIndex][] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.Hash, v: ([v1.BlockNumber, v1.EventIndex][] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.Hash): AsyncIterable<[k: v1.Hash, v: ([v1.BlockNumber, v1.EventIndex][] | undefined)][]>
 }
 
 export const lastRuntimeUpgrade =  {
     /**
      *  Stores the `spec_version` and `spec_name` of when the last runtime upgrade happened.
      */
-    v33: new StorageType('System.LastRuntimeUpgrade', 'Optional', [], v33.LastRuntimeUpgradeInfo) as LastRuntimeUpgradeV33,
+    v1: new StorageType('System.LastRuntimeUpgrade', 'Optional', [], v1.LastRuntimeUpgradeInfo) as LastRuntimeUpgradeV1,
     /**
      *  Stores the `spec_version` and `spec_name` of when the last runtime upgrade happened.
      */
@@ -791,9 +929,9 @@ export const lastRuntimeUpgrade =  {
 /**
  *  Stores the `spec_version` and `spec_name` of when the last runtime upgrade happened.
  */
-export interface LastRuntimeUpgradeV33  {
+export interface LastRuntimeUpgradeV1  {
     is(block: RuntimeCtx): boolean
-    get(block: Block): Promise<(v33.LastRuntimeUpgradeInfo | undefined)>
+    get(block: Block): Promise<(v1.LastRuntimeUpgradeInfo | undefined)>
 }
 
 /**
@@ -808,13 +946,13 @@ export const upgradedToU32RefCount =  {
     /**
      *  True if we have upgraded so that `type RefCount` is `u32`. False (default) if not.
      */
-    v33: new StorageType('System.UpgradedToU32RefCount', 'Default', [], sts.boolean()) as UpgradedToU32RefCountV33,
+    v1: new StorageType('System.UpgradedToU32RefCount', 'Default', [], sts.boolean()) as UpgradedToU32RefCountV1,
 }
 
 /**
  *  True if we have upgraded so that `type RefCount` is `u32`. False (default) if not.
  */
-export interface UpgradedToU32RefCountV33  {
+export interface UpgradedToU32RefCountV1  {
     is(block: RuntimeCtx): boolean
     getDefault(block: Block): boolean
     get(block: Block): Promise<(boolean | undefined)>
@@ -825,14 +963,14 @@ export const upgradedToDualRefCount =  {
      *  True if we have upgraded so that AccountInfo contains two types of `RefCount`. False
      *  (default) if not.
      */
-    v33: new StorageType('System.UpgradedToDualRefCount', 'Default', [], sts.boolean()) as UpgradedToDualRefCountV33,
+    v1: new StorageType('System.UpgradedToDualRefCount', 'Default', [], sts.boolean()) as UpgradedToDualRefCountV1,
 }
 
 /**
  *  True if we have upgraded so that AccountInfo contains two types of `RefCount`. False
  *  (default) if not.
  */
-export interface UpgradedToDualRefCountV33  {
+export interface UpgradedToDualRefCountV1  {
     is(block: RuntimeCtx): boolean
     getDefault(block: Block): boolean
     get(block: Block): Promise<(boolean | undefined)>
@@ -842,15 +980,15 @@ export const executionPhase =  {
     /**
      *  The execution phase of the block.
      */
-    v33: new StorageType('System.ExecutionPhase', 'Optional', [], v33.Phase) as ExecutionPhaseV33,
+    v1: new StorageType('System.ExecutionPhase', 'Optional', [], v1.Phase) as ExecutionPhaseV1,
 }
 
 /**
  *  The execution phase of the block.
  */
-export interface ExecutionPhaseV33  {
+export interface ExecutionPhaseV1  {
     is(block: RuntimeCtx): boolean
-    get(block: Block): Promise<(v33.Phase | undefined)>
+    get(block: Block): Promise<(v1.Phase | undefined)>
 }
 
 export const upgradedToTripleRefCount =  {

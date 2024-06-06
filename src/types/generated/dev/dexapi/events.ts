@@ -1,14 +1,14 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const liquiditySourceEnabled =  {
     name: 'DEXAPI.LiquiditySourceEnabled',
     /**
      * Liquidity source is enabled
      */
-    v70: new EventType(
+    v85: new EventType(
         'DEXAPI.LiquiditySourceEnabled',
-        v70.LiquiditySourceType
+        v85.LiquiditySourceType
     ),
 }
 
@@ -17,8 +17,8 @@ export const liquiditySourceDisabled =  {
     /**
      * Liquidity source is disabled
      */
-    v70: new EventType(
+    v85: new EventType(
         'DEXAPI.LiquiditySourceDisabled',
-        v70.LiquiditySourceType
+        v85.LiquiditySourceType
     ),
 }

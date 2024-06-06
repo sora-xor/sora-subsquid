@@ -33,7 +33,4 @@ export class PoolXYK {
 
     @Column_("text", {nullable: true})
     strategicBonusApy!: string | undefined | null
-
-    @Column_("int4", {nullable: false})
-    updatedAtBlock!: number
 }

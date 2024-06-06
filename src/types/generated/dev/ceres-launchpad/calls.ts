@@ -1,16 +1,16 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const createIlo =  {
     name: 'CeresLaunchpad.create_ilo',
     /**
      * Create ILO
      */
-    v70: new CallType(
+    v85: new CallType(
         'CeresLaunchpad.create_ilo',
         sts.struct({
-            baseAsset: v70.AssetId32,
-            assetId: v70.AssetId32,
+            baseAsset: v85.AssetId32,
+            assetId: v85.AssetId32,
             tokensForIlo: sts.bigint(),
             tokensForLiquidity: sts.bigint(),
             iloPrice: sts.bigint(),
@@ -40,10 +40,10 @@ export const contribute =  {
     /**
      * Contribute
      */
-    v70: new CallType(
+    v85: new CallType(
         'CeresLaunchpad.contribute',
         sts.struct({
-            assetId: v70.AssetId32,
+            assetId: v85.AssetId32,
             fundsToContribute: sts.bigint(),
         })
     ),
@@ -54,10 +54,10 @@ export const emergencyWithdraw =  {
     /**
      * Emergency withdraw
      */
-    v70: new CallType(
+    v85: new CallType(
         'CeresLaunchpad.emergency_withdraw',
         sts.struct({
-            assetId: v70.AssetId32,
+            assetId: v85.AssetId32,
         })
     ),
 }
@@ -67,10 +67,10 @@ export const finishIlo =  {
     /**
      * Finish ILO
      */
-    v70: new CallType(
+    v85: new CallType(
         'CeresLaunchpad.finish_ilo',
         sts.struct({
-            assetId: v70.AssetId32,
+            assetId: v85.AssetId32,
         })
     ),
 }
@@ -80,10 +80,10 @@ export const claimLpTokens =  {
     /**
      * Claim LP tokens
      */
-    v70: new CallType(
+    v85: new CallType(
         'CeresLaunchpad.claim_lp_tokens',
         sts.struct({
-            assetId: v70.AssetId32,
+            assetId: v85.AssetId32,
         })
     ),
 }
@@ -93,10 +93,10 @@ export const claim =  {
     /**
      * Claim tokens
      */
-    v70: new CallType(
+    v85: new CallType(
         'CeresLaunchpad.claim',
         sts.struct({
-            assetId: v70.AssetId32,
+            assetId: v85.AssetId32,
         })
     ),
 }
@@ -106,7 +106,7 @@ export const changeFeePercentForRaisedFunds =  {
     /**
      * Change fee percent on raised funds in successful ILO
      */
-    v70: new CallType(
+    v85: new CallType(
         'CeresLaunchpad.change_fee_percent_for_raised_funds',
         sts.struct({
             feePercent: sts.bigint(),
@@ -119,7 +119,7 @@ export const changeCeresBurnFee =  {
     /**
      * Change CERES burn fee
      */
-    v70: new CallType(
+    v85: new CallType(
         'CeresLaunchpad.change_ceres_burn_fee',
         sts.struct({
             ceresFee: sts.bigint(),
@@ -132,7 +132,7 @@ export const changeCeresContributionFee =  {
     /**
      * Change CERES contribution fee
      */
-    v70: new CallType(
+    v85: new CallType(
         'CeresLaunchpad.change_ceres_contribution_fee',
         sts.struct({
             ceresFee: sts.bigint(),
@@ -145,7 +145,7 @@ export const claimPswapRewards =  {
     /**
      * Claim PSWAP rewards
      */
-    v70: new CallType(
+    v85: new CallType(
         'CeresLaunchpad.claim_pswap_rewards',
         sts.unit()
     ),
@@ -156,10 +156,10 @@ export const addWhitelistedContributor =  {
     /**
      * Add whitelisted contributor
      */
-    v70: new CallType(
+    v85: new CallType(
         'CeresLaunchpad.add_whitelisted_contributor',
         sts.struct({
-            contributor: v70.AccountId32,
+            contributor: v85.AccountId32,
         })
     ),
 }
@@ -169,10 +169,10 @@ export const removeWhitelistedContributor =  {
     /**
      * Remove whitelisted contributor
      */
-    v70: new CallType(
+    v85: new CallType(
         'CeresLaunchpad.remove_whitelisted_contributor',
         sts.struct({
-            contributor: v70.AccountId32,
+            contributor: v85.AccountId32,
         })
     ),
 }
@@ -182,10 +182,10 @@ export const addWhitelistedIloOrganizer =  {
     /**
      * Add whitelisted ILO organizer
      */
-    v70: new CallType(
+    v85: new CallType(
         'CeresLaunchpad.add_whitelisted_ilo_organizer',
         sts.struct({
-            iloOrganizer: v70.AccountId32,
+            iloOrganizer: v85.AccountId32,
         })
     ),
 }
@@ -195,10 +195,10 @@ export const removeWhitelistedIloOrganizer =  {
     /**
      * Remove whitelisted ILO organizer
      */
-    v70: new CallType(
+    v85: new CallType(
         'CeresLaunchpad.remove_whitelisted_ilo_organizer',
         sts.struct({
-            iloOrganizer: v70.AccountId32,
+            iloOrganizer: v85.AccountId32,
         })
     ),
 }

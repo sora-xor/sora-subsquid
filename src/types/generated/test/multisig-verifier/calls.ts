@@ -1,13 +1,14 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v54 from '../v54'
+import * as v64 from '../v64'
 import * as v70 from '../v70'
+import * as v84 from '../v84'
 
 export const initialize =  {
     name: 'MultisigVerifier.initialize',
-    v54: new CallType(
+    v64: new CallType(
         'MultisigVerifier.initialize',
         sts.struct({
-            networkId: v54.GenericNetworkId,
+            networkId: v64.GenericNetworkId,
             peers: sts.array(() => sts.bytes()),
         })
     ),
@@ -18,11 +19,18 @@ export const initialize =  {
             peers: sts.array(() => sts.bytes()),
         })
     ),
+    v84: new CallType(
+        'MultisigVerifier.initialize',
+        sts.struct({
+            networkId: v84.GenericNetworkId,
+            peers: sts.array(() => sts.bytes()),
+        })
+    ),
 }
 
 export const addPeer =  {
     name: 'MultisigVerifier.add_peer',
-    v54: new CallType(
+    v64: new CallType(
         'MultisigVerifier.add_peer',
         sts.struct({
             peer: sts.bytes(),
@@ -32,7 +40,7 @@ export const addPeer =  {
 
 export const removePeer =  {
     name: 'MultisigVerifier.remove_peer',
-    v54: new CallType(
+    v64: new CallType(
         'MultisigVerifier.remove_peer',
         sts.struct({
             peer: sts.bytes(),

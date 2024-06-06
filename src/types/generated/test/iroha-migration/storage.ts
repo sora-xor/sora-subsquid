@@ -1,24 +1,24 @@
 import {sts, Block, Bytes, Option, Result, StorageType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
 import * as v42 from '../v42'
 
 export const balances =  {
-    v33: new StorageType('IrohaMigration.Balances', 'Optional', [v33.String], v33.Balance) as BalancesV33,
+    v1: new StorageType('IrohaMigration.Balances', 'Optional', [v1.String], v1.Balance) as BalancesV1,
     v42: new StorageType('IrohaMigration.Balances', 'Optional', [sts.string()], sts.bigint()) as BalancesV42,
 }
 
-export interface BalancesV33  {
+export interface BalancesV1  {
     is(block: RuntimeCtx): boolean
-    get(block: Block, key: v33.String): Promise<(v33.Balance | undefined)>
-    getMany(block: Block, keys: v33.String[]): Promise<(v33.Balance | undefined)[]>
-    getKeys(block: Block): Promise<v33.String[]>
-    getKeys(block: Block, key: v33.String): Promise<v33.String[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.String[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.String): AsyncIterable<v33.String[]>
-    getPairs(block: Block): Promise<[k: v33.String, v: (v33.Balance | undefined)][]>
-    getPairs(block: Block, key: v33.String): Promise<[k: v33.String, v: (v33.Balance | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.String, v: (v33.Balance | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.String): AsyncIterable<[k: v33.String, v: (v33.Balance | undefined)][]>
+    get(block: Block, key: v1.String): Promise<(v1.Balance | undefined)>
+    getMany(block: Block, keys: v1.String[]): Promise<(v1.Balance | undefined)[]>
+    getKeys(block: Block): Promise<v1.String[]>
+    getKeys(block: Block, key: v1.String): Promise<v1.String[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.String[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.String): AsyncIterable<v1.String[]>
+    getPairs(block: Block): Promise<[k: v1.String, v: (v1.Balance | undefined)][]>
+    getPairs(block: Block, key: v1.String): Promise<[k: v1.String, v: (v1.Balance | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.String, v: (v1.Balance | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.String): AsyncIterable<[k: v1.String, v: (v1.Balance | undefined)][]>
 }
 
 export interface BalancesV42  {
@@ -36,22 +36,22 @@ export interface BalancesV42  {
 }
 
 export const referrers =  {
-    v33: new StorageType('IrohaMigration.Referrers', 'Optional', [v33.String], v33.String) as ReferrersV33,
+    v1: new StorageType('IrohaMigration.Referrers', 'Optional', [v1.String], v1.String) as ReferrersV1,
     v42: new StorageType('IrohaMigration.Referrers', 'Optional', [sts.string()], sts.string()) as ReferrersV42,
 }
 
-export interface ReferrersV33  {
+export interface ReferrersV1  {
     is(block: RuntimeCtx): boolean
-    get(block: Block, key: v33.String): Promise<(v33.String | undefined)>
-    getMany(block: Block, keys: v33.String[]): Promise<(v33.String | undefined)[]>
-    getKeys(block: Block): Promise<v33.String[]>
-    getKeys(block: Block, key: v33.String): Promise<v33.String[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.String[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.String): AsyncIterable<v33.String[]>
-    getPairs(block: Block): Promise<[k: v33.String, v: (v33.String | undefined)][]>
-    getPairs(block: Block, key: v33.String): Promise<[k: v33.String, v: (v33.String | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.String, v: (v33.String | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.String): AsyncIterable<[k: v33.String, v: (v33.String | undefined)][]>
+    get(block: Block, key: v1.String): Promise<(v1.String | undefined)>
+    getMany(block: Block, keys: v1.String[]): Promise<(v1.String | undefined)[]>
+    getKeys(block: Block): Promise<v1.String[]>
+    getKeys(block: Block, key: v1.String): Promise<v1.String[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.String[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.String): AsyncIterable<v1.String[]>
+    getPairs(block: Block): Promise<[k: v1.String, v: (v1.String | undefined)][]>
+    getPairs(block: Block, key: v1.String): Promise<[k: v1.String, v: (v1.String | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.String, v: (v1.String | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.String): AsyncIterable<[k: v1.String, v: (v1.String | undefined)][]>
 }
 
 export interface ReferrersV42  {
@@ -69,23 +69,23 @@ export interface ReferrersV42  {
 }
 
 export const publicKeys =  {
-    v33: new StorageType('IrohaMigration.PublicKeys', 'Default', [v33.String], sts.array(() => sts.tuple(() => [sts.boolean(), v33.String]))) as PublicKeysV33,
+    v1: new StorageType('IrohaMigration.PublicKeys', 'Default', [v1.String], sts.array(() => sts.tuple(() => [sts.boolean(), v1.String]))) as PublicKeysV1,
     v42: new StorageType('IrohaMigration.PublicKeys', 'Default', [sts.string()], sts.array(() => sts.tuple(() => [sts.boolean(), sts.string()]))) as PublicKeysV42,
 }
 
-export interface PublicKeysV33  {
+export interface PublicKeysV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): [boolean, v33.String][]
-    get(block: Block, key: v33.String): Promise<([boolean, v33.String][] | undefined)>
-    getMany(block: Block, keys: v33.String[]): Promise<([boolean, v33.String][] | undefined)[]>
-    getKeys(block: Block): Promise<v33.String[]>
-    getKeys(block: Block, key: v33.String): Promise<v33.String[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.String[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.String): AsyncIterable<v33.String[]>
-    getPairs(block: Block): Promise<[k: v33.String, v: ([boolean, v33.String][] | undefined)][]>
-    getPairs(block: Block, key: v33.String): Promise<[k: v33.String, v: ([boolean, v33.String][] | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.String, v: ([boolean, v33.String][] | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.String): AsyncIterable<[k: v33.String, v: ([boolean, v33.String][] | undefined)][]>
+    getDefault(block: Block): [boolean, v1.String][]
+    get(block: Block, key: v1.String): Promise<([boolean, v1.String][] | undefined)>
+    getMany(block: Block, keys: v1.String[]): Promise<([boolean, v1.String][] | undefined)[]>
+    getKeys(block: Block): Promise<v1.String[]>
+    getKeys(block: Block, key: v1.String): Promise<v1.String[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.String[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.String): AsyncIterable<v1.String[]>
+    getPairs(block: Block): Promise<[k: v1.String, v: ([boolean, v1.String][] | undefined)][]>
+    getPairs(block: Block, key: v1.String): Promise<[k: v1.String, v: ([boolean, v1.String][] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.String, v: ([boolean, v1.String][] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.String): AsyncIterable<[k: v1.String, v: ([boolean, v1.String][] | undefined)][]>
 }
 
 export interface PublicKeysV42  {
@@ -104,23 +104,23 @@ export interface PublicKeysV42  {
 }
 
 export const quorums =  {
-    v33: new StorageType('IrohaMigration.Quorums', 'Default', [v33.String], sts.number()) as QuorumsV33,
+    v1: new StorageType('IrohaMigration.Quorums', 'Default', [v1.String], sts.number()) as QuorumsV1,
     v42: new StorageType('IrohaMigration.Quorums', 'Default', [sts.string()], sts.number()) as QuorumsV42,
 }
 
-export interface QuorumsV33  {
+export interface QuorumsV1  {
     is(block: RuntimeCtx): boolean
     getDefault(block: Block): number
-    get(block: Block, key: v33.String): Promise<(number | undefined)>
-    getMany(block: Block, keys: v33.String[]): Promise<(number | undefined)[]>
-    getKeys(block: Block): Promise<v33.String[]>
-    getKeys(block: Block, key: v33.String): Promise<v33.String[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.String[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.String): AsyncIterable<v33.String[]>
-    getPairs(block: Block): Promise<[k: v33.String, v: (number | undefined)][]>
-    getPairs(block: Block, key: v33.String): Promise<[k: v33.String, v: (number | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.String, v: (number | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.String): AsyncIterable<[k: v33.String, v: (number | undefined)][]>
+    get(block: Block, key: v1.String): Promise<(number | undefined)>
+    getMany(block: Block, keys: v1.String[]): Promise<(number | undefined)[]>
+    getKeys(block: Block): Promise<v1.String[]>
+    getKeys(block: Block, key: v1.String): Promise<v1.String[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.String[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.String): AsyncIterable<v1.String[]>
+    getPairs(block: Block): Promise<[k: v1.String, v: (number | undefined)][]>
+    getPairs(block: Block, key: v1.String): Promise<[k: v1.String, v: (number | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.String, v: (number | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.String): AsyncIterable<[k: v1.String, v: (number | undefined)][]>
 }
 
 export interface QuorumsV42  {
@@ -139,14 +139,14 @@ export interface QuorumsV42  {
 }
 
 export const account =  {
-    v33: new StorageType('IrohaMigration.Account', 'Default', [], v33.AccountId) as AccountV33,
+    v1: new StorageType('IrohaMigration.Account', 'Default', [], v1.AccountId) as AccountV1,
     v42: new StorageType('IrohaMigration.Account', 'Optional', [], v42.AccountId32) as AccountV42,
 }
 
-export interface AccountV33  {
+export interface AccountV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.AccountId
-    get(block: Block): Promise<(v33.AccountId | undefined)>
+    getDefault(block: Block): v1.AccountId
+    get(block: Block): Promise<(v1.AccountId | undefined)>
 }
 
 export interface AccountV42  {
@@ -155,22 +155,22 @@ export interface AccountV42  {
 }
 
 export const migratedAccounts =  {
-    v33: new StorageType('IrohaMigration.MigratedAccounts', 'Optional', [v33.String], v33.AccountId) as MigratedAccountsV33,
+    v1: new StorageType('IrohaMigration.MigratedAccounts', 'Optional', [v1.String], v1.AccountId) as MigratedAccountsV1,
     v42: new StorageType('IrohaMigration.MigratedAccounts', 'Optional', [sts.string()], v42.AccountId32) as MigratedAccountsV42,
 }
 
-export interface MigratedAccountsV33  {
+export interface MigratedAccountsV1  {
     is(block: RuntimeCtx): boolean
-    get(block: Block, key: v33.String): Promise<(v33.AccountId | undefined)>
-    getMany(block: Block, keys: v33.String[]): Promise<(v33.AccountId | undefined)[]>
-    getKeys(block: Block): Promise<v33.String[]>
-    getKeys(block: Block, key: v33.String): Promise<v33.String[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.String[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.String): AsyncIterable<v33.String[]>
-    getPairs(block: Block): Promise<[k: v33.String, v: (v33.AccountId | undefined)][]>
-    getPairs(block: Block, key: v33.String): Promise<[k: v33.String, v: (v33.AccountId | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.String, v: (v33.AccountId | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.String): AsyncIterable<[k: v33.String, v: (v33.AccountId | undefined)][]>
+    get(block: Block, key: v1.String): Promise<(v1.AccountId | undefined)>
+    getMany(block: Block, keys: v1.String[]): Promise<(v1.AccountId | undefined)[]>
+    getKeys(block: Block): Promise<v1.String[]>
+    getKeys(block: Block, key: v1.String): Promise<v1.String[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.String[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.String): AsyncIterable<v1.String[]>
+    getPairs(block: Block): Promise<[k: v1.String, v: (v1.AccountId | undefined)][]>
+    getPairs(block: Block, key: v1.String): Promise<[k: v1.String, v: (v1.AccountId | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.String, v: (v1.AccountId | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.String): AsyncIterable<[k: v1.String, v: (v1.AccountId | undefined)][]>
 }
 
 export interface MigratedAccountsV42  {
@@ -188,23 +188,23 @@ export interface MigratedAccountsV42  {
 }
 
 export const pendingMultiSigAccounts =  {
-    v33: new StorageType('IrohaMigration.PendingMultiSigAccounts', 'Default', [v33.String], v33.PendingMultisigAccount) as PendingMultiSigAccountsV33,
+    v1: new StorageType('IrohaMigration.PendingMultiSigAccounts', 'Default', [v1.String], v1.PendingMultisigAccount) as PendingMultiSigAccountsV1,
     v42: new StorageType('IrohaMigration.PendingMultiSigAccounts', 'Default', [sts.string()], v42.PendingMultisigAccount) as PendingMultiSigAccountsV42,
 }
 
-export interface PendingMultiSigAccountsV33  {
+export interface PendingMultiSigAccountsV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.PendingMultisigAccount
-    get(block: Block, key: v33.String): Promise<(v33.PendingMultisigAccount | undefined)>
-    getMany(block: Block, keys: v33.String[]): Promise<(v33.PendingMultisigAccount | undefined)[]>
-    getKeys(block: Block): Promise<v33.String[]>
-    getKeys(block: Block, key: v33.String): Promise<v33.String[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.String[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.String): AsyncIterable<v33.String[]>
-    getPairs(block: Block): Promise<[k: v33.String, v: (v33.PendingMultisigAccount | undefined)][]>
-    getPairs(block: Block, key: v33.String): Promise<[k: v33.String, v: (v33.PendingMultisigAccount | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.String, v: (v33.PendingMultisigAccount | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.String): AsyncIterable<[k: v33.String, v: (v33.PendingMultisigAccount | undefined)][]>
+    getDefault(block: Block): v1.PendingMultisigAccount
+    get(block: Block, key: v1.String): Promise<(v1.PendingMultisigAccount | undefined)>
+    getMany(block: Block, keys: v1.String[]): Promise<(v1.PendingMultisigAccount | undefined)[]>
+    getKeys(block: Block): Promise<v1.String[]>
+    getKeys(block: Block, key: v1.String): Promise<v1.String[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.String[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.String): AsyncIterable<v1.String[]>
+    getPairs(block: Block): Promise<[k: v1.String, v: (v1.PendingMultisigAccount | undefined)][]>
+    getPairs(block: Block, key: v1.String): Promise<[k: v1.String, v: (v1.PendingMultisigAccount | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.String, v: (v1.PendingMultisigAccount | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.String): AsyncIterable<[k: v1.String, v: (v1.PendingMultisigAccount | undefined)][]>
 }
 
 export interface PendingMultiSigAccountsV42  {
@@ -223,23 +223,23 @@ export interface PendingMultiSigAccountsV42  {
 }
 
 export const pendingReferrals =  {
-    v33: new StorageType('IrohaMigration.PendingReferrals', 'Default', [v33.String], sts.array(() => v33.AccountId)) as PendingReferralsV33,
+    v1: new StorageType('IrohaMigration.PendingReferrals', 'Default', [v1.String], sts.array(() => v1.AccountId)) as PendingReferralsV1,
     v42: new StorageType('IrohaMigration.PendingReferrals', 'Default', [sts.string()], sts.array(() => v42.AccountId32)) as PendingReferralsV42,
 }
 
-export interface PendingReferralsV33  {
+export interface PendingReferralsV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.AccountId[]
-    get(block: Block, key: v33.String): Promise<(v33.AccountId[] | undefined)>
-    getMany(block: Block, keys: v33.String[]): Promise<(v33.AccountId[] | undefined)[]>
-    getKeys(block: Block): Promise<v33.String[]>
-    getKeys(block: Block, key: v33.String): Promise<v33.String[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.String[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.String): AsyncIterable<v33.String[]>
-    getPairs(block: Block): Promise<[k: v33.String, v: (v33.AccountId[] | undefined)][]>
-    getPairs(block: Block, key: v33.String): Promise<[k: v33.String, v: (v33.AccountId[] | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.String, v: (v33.AccountId[] | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.String): AsyncIterable<[k: v33.String, v: (v33.AccountId[] | undefined)][]>
+    getDefault(block: Block): v1.AccountId[]
+    get(block: Block, key: v1.String): Promise<(v1.AccountId[] | undefined)>
+    getMany(block: Block, keys: v1.String[]): Promise<(v1.AccountId[] | undefined)[]>
+    getKeys(block: Block): Promise<v1.String[]>
+    getKeys(block: Block, key: v1.String): Promise<v1.String[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.String[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.String): AsyncIterable<v1.String[]>
+    getPairs(block: Block): Promise<[k: v1.String, v: (v1.AccountId[] | undefined)][]>
+    getPairs(block: Block, key: v1.String): Promise<[k: v1.String, v: (v1.AccountId[] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.String, v: (v1.AccountId[] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.String): AsyncIterable<[k: v1.String, v: (v1.AccountId[] | undefined)][]>
 }
 
 export interface PendingReferralsV42  {

@@ -1,12 +1,14 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
+import * as v1 from '../v1'
 import * as v33 from '../v33'
 import * as v38 from '../v38'
 import * as v42 from '../v42'
-import * as v44 from '../v44'
-import * as v48 from '../v48'
-import * as v62 from '../v62'
+import * as v45 from '../v45'
+import * as v50 from '../v50'
+import * as v63 from '../v63'
 import * as v66 from '../v66'
-import * as v69 from '../v69'
+import * as v71 from '../v71'
+import * as v74 from '../v74'
 
 export const swap =  {
     name: 'LiquidityProxy.swap',
@@ -21,15 +23,15 @@ export const swap =  {
      *  - `selected_source_types`: list of selected LiquiditySource types, selection effect is determined by filter_mode,
      *  - `filter_mode`: indicate either to allow or forbid selected types only, or disable filtering.
      */
-    v33: new CallType(
+    v1: new CallType(
         'LiquidityProxy.swap',
         sts.struct({
-            dexId: v33.DEXId,
-            inputAssetId: v33.AssetId,
-            outputAssetId: v33.AssetId,
-            swapAmount: v33.SwapAmount,
-            selectedSourceTypes: sts.array(() => v33.LiquiditySourceType),
-            filterMode: v33.FilterMode,
+            dexId: v1.DEXId,
+            inputAssetId: v1.AssetId,
+            outputAssetId: v1.AssetId,
+            swapAmount: v1.SwapAmount,
+            selectedSourceTypes: sts.array(() => v1.LiquiditySourceType),
+            filterMode: v1.FilterMode,
         })
     ),
     /**
@@ -65,15 +67,15 @@ export const swap =  {
      * - `selected_source_types`: list of selected LiquiditySource types, selection effect is determined by filter_mode,
      * - `filter_mode`: indicate either to allow or forbid selected types only, or disable filtering.
      */
-    v69: new CallType(
+    v71: new CallType(
         'LiquidityProxy.swap',
         sts.struct({
             dexId: sts.number(),
-            inputAssetId: v69.AssetId32,
-            outputAssetId: v69.AssetId32,
-            swapAmount: v69.SwapAmount,
-            selectedSourceTypes: sts.array(() => v69.LiquiditySourceType),
-            filterMode: v69.FilterMode,
+            inputAssetId: v71.AssetId32,
+            outputAssetId: v71.AssetId32,
+            swapAmount: v71.SwapAmount,
+            selectedSourceTypes: sts.array(() => v71.LiquiditySourceType),
+            filterMode: v71.FilterMode,
         })
     ),
 }
@@ -140,16 +142,16 @@ export const swapTransfer =  {
      * - `selected_source_types`: list of selected LiquiditySource types, selection effect is determined by filter_mode,
      * - `filter_mode`: indicate either to allow or forbid selected types only, or disable filtering.
      */
-    v69: new CallType(
+    v71: new CallType(
         'LiquidityProxy.swap_transfer',
         sts.struct({
-            receiver: v69.AccountId32,
+            receiver: v71.AccountId32,
             dexId: sts.number(),
-            inputAssetId: v69.AssetId32,
-            outputAssetId: v69.AssetId32,
-            swapAmount: v69.SwapAmount,
-            selectedSourceTypes: sts.array(() => v69.LiquiditySourceType),
-            filterMode: v69.FilterMode,
+            inputAssetId: v71.AssetId32,
+            outputAssetId: v71.AssetId32,
+            swapAmount: v71.SwapAmount,
+            selectedSourceTypes: sts.array(() => v71.LiquiditySourceType),
+            filterMode: v71.FilterMode,
         })
     ),
 }
@@ -172,10 +174,10 @@ export const enableLiquiditySource =  {
      * 
      * - `liquidity_source`: the liquidity source to be enabled.
      */
-    v69: new CallType(
+    v71: new CallType(
         'LiquidityProxy.enable_liquidity_source',
         sts.struct({
-            liquiditySource: v69.LiquiditySourceType,
+            liquiditySource: v71.LiquiditySourceType,
         })
     ),
 }
@@ -198,26 +200,26 @@ export const disableLiquiditySource =  {
      * 
      * - `liquidity_source`: the liquidity source to be disabled.
      */
-    v69: new CallType(
+    v71: new CallType(
         'LiquidityProxy.disable_liquidity_source',
         sts.struct({
-            liquiditySource: v69.LiquiditySourceType,
+            liquiditySource: v71.LiquiditySourceType,
         })
     ),
 }
 
 export const swapTransferBatch =  {
     name: 'LiquidityProxy.swap_transfer_batch',
-    v44: new CallType(
+    v45: new CallType(
         'LiquidityProxy.swap_transfer_batch',
         sts.struct({
-            receivers: sts.array(() => v44.BatchReceiverInfo),
+            receivers: sts.array(() => v45.BatchReceiverInfo),
             dexId: sts.number(),
-            inputAssetId: v44.AssetId32,
-            outputAssetId: v44.AssetId32,
+            inputAssetId: v45.AssetId32,
+            outputAssetId: v45.AssetId32,
             maxInputAmount: sts.bigint(),
-            selectedSourceTypes: sts.array(() => v44.LiquiditySourceType),
-            filterMode: v44.FilterMode,
+            selectedSourceTypes: sts.array(() => v45.LiquiditySourceType),
+            filterMode: v45.FilterMode,
         })
     ),
     /**
@@ -234,14 +236,14 @@ export const swapTransferBatch =  {
      *                            determined by filter_mode,
      * - `filter_mode`: indicate either to allow or forbid selected types only, or disable filtering.
      */
-    v48: new CallType(
+    v50: new CallType(
         'LiquidityProxy.swap_transfer_batch',
         sts.struct({
-            swapBatches: sts.array(() => v48.SwapBatchInfo),
-            inputAssetId: v48.AssetId32,
+            swapBatches: sts.array(() => v50.SwapBatchInfo),
+            inputAssetId: v50.AssetId32,
             maxInputAmount: sts.bigint(),
-            selectedSourceTypes: sts.array(() => v48.LiquiditySourceType),
-            filterMode: v48.FilterMode,
+            selectedSourceTypes: sts.array(() => v50.LiquiditySourceType),
+            filterMode: v50.FilterMode,
         })
     ),
     /**
@@ -258,14 +260,14 @@ export const swapTransferBatch =  {
      *                            determined by filter_mode,
      * - `filter_mode`: indicate either to allow or forbid selected types only, or disable filtering.
      */
-    v62: new CallType(
+    v63: new CallType(
         'LiquidityProxy.swap_transfer_batch',
         sts.struct({
-            swapBatches: sts.array(() => v62.SwapBatchInfo),
-            inputAssetId: v62.AssetId32,
+            swapBatches: sts.array(() => v63.SwapBatchInfo),
+            inputAssetId: v63.AssetId32,
             maxInputAmount: sts.bigint(),
-            selectedSourceTypes: sts.array(() => v62.LiquiditySourceType),
-            filterMode: v62.FilterMode,
+            selectedSourceTypes: sts.array(() => v63.LiquiditySourceType),
+            filterMode: v63.FilterMode,
         })
     ),
     /**
@@ -282,21 +284,47 @@ export const swapTransferBatch =  {
      *                            determined by filter_mode,
      * - `filter_mode`: indicate either to allow or forbid selected types only, or disable filtering.
      */
-    v69: new CallType(
+    v71: new CallType(
         'LiquidityProxy.swap_transfer_batch',
         sts.struct({
-            swapBatches: sts.array(() => v69.SwapBatchInfo),
-            inputAssetId: v69.AssetId32,
+            swapBatches: sts.array(() => v71.SwapBatchInfo),
+            inputAssetId: v71.AssetId32,
             maxInputAmount: sts.bigint(),
-            selectedSourceTypes: sts.array(() => v69.LiquiditySourceType),
-            filterMode: v69.FilterMode,
+            selectedSourceTypes: sts.array(() => v71.LiquiditySourceType),
+            filterMode: v71.FilterMode,
+        })
+    ),
+    /**
+     * Dispatches multiple swap & transfer operations. `swap_batches` contains vector of
+     * SwapBatchInfo structs, where each batch specifies which asset ID and DEX ID should
+     * be used for swapping, receiver accounts and their desired outcome amount in asset,
+     * specified for the current batch.
+     * 
+     * - `origin`: the account on whose behalf the transaction is being executed,
+     * - `swap_batches`: the vector containing the SwapBatchInfo structs,
+     * - `input_asset_id`: ID of the asset being sold,
+     * - `max_input_amount`: the maximum amount to be sold in input_asset_id,
+     * - `selected_source_types`: list of selected LiquiditySource types, selection effect is
+     *                            determined by filter_mode,
+     * - `filter_mode`: indicate either to allow or forbid selected types only, or disable filtering.
+     * - `additional_data`: data to include in swap success event.
+     */
+    v74: new CallType(
+        'LiquidityProxy.swap_transfer_batch',
+        sts.struct({
+            swapBatches: sts.array(() => v74.SwapBatchInfo),
+            inputAssetId: v74.AssetId32,
+            maxInputAmount: sts.bigint(),
+            selectedSourceTypes: sts.array(() => v74.LiquiditySourceType),
+            filterMode: v74.FilterMode,
+            additionalData: sts.option(() => v74.BoundedVec),
         })
     ),
 }
 
 export const setAdarCommissionRatio =  {
     name: 'LiquidityProxy.set_adar_commission_ratio',
-    v55: new CallType(
+    v57: new CallType(
         'LiquidityProxy.set_adar_commission_ratio',
         sts.struct({
             commissionRatio: sts.bigint(),
@@ -336,18 +364,18 @@ export const xorlessTransfer =  {
      * This extrinsic is done as temporary solution for XORless transfers, in future it would be removed
      * and logic for XORless extrinsics should be moved to xor-fee pallet.
      */
-    v69: new CallType(
+    v71: new CallType(
         'LiquidityProxy.xorless_transfer',
         sts.struct({
             dexId: sts.number(),
-            assetId: v69.AssetId32,
-            receiver: v69.AccountId32,
+            assetId: v71.AssetId32,
+            receiver: v71.AccountId32,
             amount: sts.bigint(),
             desiredXorAmount: sts.bigint(),
             maxAmountIn: sts.bigint(),
-            selectedSourceTypes: sts.array(() => v69.LiquiditySourceType),
-            filterMode: v69.FilterMode,
-            additionalData: sts.option(() => v69.BoundedVec),
+            selectedSourceTypes: sts.array(() => v71.LiquiditySourceType),
+            filterMode: v71.FilterMode,
+            additionalData: sts.option(() => v71.BoundedVec),
         })
     ),
 }

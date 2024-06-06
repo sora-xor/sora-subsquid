@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const setMembers =  {
     name: 'TechnicalCommittee.set_members',
@@ -37,11 +37,11 @@ export const setMembers =  {
      *   - 1 storage write (codec `O(1)`) for deleting the old `prime` and setting the new one
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'TechnicalCommittee.set_members',
         sts.struct({
-            newMembers: sts.array(() => v70.AccountId32),
-            prime: sts.option(() => v70.AccountId32),
+            newMembers: sts.array(() => v85.AccountId32),
+            prime: sts.option(() => v85.AccountId32),
             oldCount: sts.number(),
         })
     ),
@@ -62,10 +62,10 @@ export const execute =  {
      * - 1 event
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'TechnicalCommittee.execute',
         sts.struct({
-            proposal: v70.Call,
+            proposal: v85.Call,
             lengthBound: sts.number(),
         })
     ),
@@ -102,11 +102,11 @@ export const propose =  {
      *   - 1 event
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'TechnicalCommittee.propose',
         sts.struct({
             threshold: sts.number(),
-            proposal: v70.Call,
+            proposal: v85.Call,
             lengthBound: sts.number(),
         })
     ),
@@ -131,10 +131,10 @@ export const vote =  {
      * - 1 event
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'TechnicalCommittee.vote',
         sts.struct({
-            proposal: v70.H256,
+            proposal: v85.H256,
             index: sts.number(),
             approve: sts.boolean(),
         })
@@ -177,10 +177,10 @@ export const closeOldWeight =  {
      * - up to 3 events
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'TechnicalCommittee.close_old_weight',
         sts.struct({
-            proposalHash: v70.H256,
+            proposalHash: v85.H256,
             index: sts.number(),
             proposalWeightBound: sts.bigint(),
             lengthBound: sts.number(),
@@ -206,10 +206,10 @@ export const disapproveProposal =  {
      * * Writes: Voting, Proposals, ProposalOf
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'TechnicalCommittee.disapprove_proposal',
         sts.struct({
-            proposalHash: v70.H256,
+            proposalHash: v85.H256,
         })
     ),
 }
@@ -250,12 +250,12 @@ export const close =  {
      * - up to 3 events
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'TechnicalCommittee.close',
         sts.struct({
-            proposalHash: v70.H256,
+            proposalHash: v85.H256,
             index: sts.number(),
-            proposalWeightBound: v70.Weight,
+            proposalWeightBound: v85.Weight,
             lengthBound: sts.number(),
         })
     ),

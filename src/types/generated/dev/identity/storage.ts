@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, StorageType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const identityOf =  {
     /**
@@ -7,7 +7,7 @@ export const identityOf =  {
      * 
      *  TWOX-NOTE: OK ― `AccountId` is a secure hash.
      */
-    v70: new StorageType('Identity.IdentityOf', 'Optional', [v70.AccountId32], v70.Registration) as IdentityOfV70,
+    v85: new StorageType('Identity.IdentityOf', 'Optional', [v85.AccountId32], v85.Registration) as IdentityOfV85,
 }
 
 /**
@@ -15,18 +15,18 @@ export const identityOf =  {
  * 
  *  TWOX-NOTE: OK ― `AccountId` is a secure hash.
  */
-export interface IdentityOfV70  {
+export interface IdentityOfV85  {
     is(block: RuntimeCtx): boolean
-    get(block: Block, key: v70.AccountId32): Promise<(v70.Registration | undefined)>
-    getMany(block: Block, keys: v70.AccountId32[]): Promise<(v70.Registration | undefined)[]>
-    getKeys(block: Block): Promise<v70.AccountId32[]>
-    getKeys(block: Block, key: v70.AccountId32): Promise<v70.AccountId32[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v70.AccountId32[]>
-    getKeysPaged(pageSize: number, block: Block, key: v70.AccountId32): AsyncIterable<v70.AccountId32[]>
-    getPairs(block: Block): Promise<[k: v70.AccountId32, v: (v70.Registration | undefined)][]>
-    getPairs(block: Block, key: v70.AccountId32): Promise<[k: v70.AccountId32, v: (v70.Registration | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v70.AccountId32, v: (v70.Registration | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v70.AccountId32): AsyncIterable<[k: v70.AccountId32, v: (v70.Registration | undefined)][]>
+    get(block: Block, key: v85.AccountId32): Promise<(v85.Registration | undefined)>
+    getMany(block: Block, keys: v85.AccountId32[]): Promise<(v85.Registration | undefined)[]>
+    getKeys(block: Block): Promise<v85.AccountId32[]>
+    getKeys(block: Block, key: v85.AccountId32): Promise<v85.AccountId32[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v85.AccountId32[]>
+    getKeysPaged(pageSize: number, block: Block, key: v85.AccountId32): AsyncIterable<v85.AccountId32[]>
+    getPairs(block: Block): Promise<[k: v85.AccountId32, v: (v85.Registration | undefined)][]>
+    getPairs(block: Block, key: v85.AccountId32): Promise<[k: v85.AccountId32, v: (v85.Registration | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v85.AccountId32, v: (v85.Registration | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v85.AccountId32): AsyncIterable<[k: v85.AccountId32, v: (v85.Registration | undefined)][]>
 }
 
 export const superOf =  {
@@ -34,25 +34,25 @@ export const superOf =  {
      *  The super-identity of an alternative "sub" identity together with its name, within that
      *  context. If the account is not some other account's sub-identity, then just `None`.
      */
-    v70: new StorageType('Identity.SuperOf', 'Optional', [v70.AccountId32], sts.tuple(() => [v70.AccountId32, v70.Data])) as SuperOfV70,
+    v85: new StorageType('Identity.SuperOf', 'Optional', [v85.AccountId32], sts.tuple(() => [v85.AccountId32, v85.Data])) as SuperOfV85,
 }
 
 /**
  *  The super-identity of an alternative "sub" identity together with its name, within that
  *  context. If the account is not some other account's sub-identity, then just `None`.
  */
-export interface SuperOfV70  {
+export interface SuperOfV85  {
     is(block: RuntimeCtx): boolean
-    get(block: Block, key: v70.AccountId32): Promise<([v70.AccountId32, v70.Data] | undefined)>
-    getMany(block: Block, keys: v70.AccountId32[]): Promise<([v70.AccountId32, v70.Data] | undefined)[]>
-    getKeys(block: Block): Promise<v70.AccountId32[]>
-    getKeys(block: Block, key: v70.AccountId32): Promise<v70.AccountId32[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v70.AccountId32[]>
-    getKeysPaged(pageSize: number, block: Block, key: v70.AccountId32): AsyncIterable<v70.AccountId32[]>
-    getPairs(block: Block): Promise<[k: v70.AccountId32, v: ([v70.AccountId32, v70.Data] | undefined)][]>
-    getPairs(block: Block, key: v70.AccountId32): Promise<[k: v70.AccountId32, v: ([v70.AccountId32, v70.Data] | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v70.AccountId32, v: ([v70.AccountId32, v70.Data] | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v70.AccountId32): AsyncIterable<[k: v70.AccountId32, v: ([v70.AccountId32, v70.Data] | undefined)][]>
+    get(block: Block, key: v85.AccountId32): Promise<([v85.AccountId32, v85.Data] | undefined)>
+    getMany(block: Block, keys: v85.AccountId32[]): Promise<([v85.AccountId32, v85.Data] | undefined)[]>
+    getKeys(block: Block): Promise<v85.AccountId32[]>
+    getKeys(block: Block, key: v85.AccountId32): Promise<v85.AccountId32[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v85.AccountId32[]>
+    getKeysPaged(pageSize: number, block: Block, key: v85.AccountId32): AsyncIterable<v85.AccountId32[]>
+    getPairs(block: Block): Promise<[k: v85.AccountId32, v: ([v85.AccountId32, v85.Data] | undefined)][]>
+    getPairs(block: Block, key: v85.AccountId32): Promise<[k: v85.AccountId32, v: ([v85.AccountId32, v85.Data] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v85.AccountId32, v: ([v85.AccountId32, v85.Data] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v85.AccountId32): AsyncIterable<[k: v85.AccountId32, v: ([v85.AccountId32, v85.Data] | undefined)][]>
 }
 
 export const subsOf =  {
@@ -63,7 +63,7 @@ export const subsOf =  {
      * 
      *  TWOX-NOTE: OK ― `AccountId` is a secure hash.
      */
-    v70: new StorageType('Identity.SubsOf', 'Default', [v70.AccountId32], sts.tuple(() => [sts.bigint(), sts.array(() => v70.AccountId32)])) as SubsOfV70,
+    v85: new StorageType('Identity.SubsOf', 'Default', [v85.AccountId32], sts.tuple(() => [sts.bigint(), sts.array(() => v85.AccountId32)])) as SubsOfV85,
 }
 
 /**
@@ -73,19 +73,19 @@ export const subsOf =  {
  * 
  *  TWOX-NOTE: OK ― `AccountId` is a secure hash.
  */
-export interface SubsOfV70  {
+export interface SubsOfV85  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): [bigint, v70.AccountId32[]]
-    get(block: Block, key: v70.AccountId32): Promise<([bigint, v70.AccountId32[]] | undefined)>
-    getMany(block: Block, keys: v70.AccountId32[]): Promise<([bigint, v70.AccountId32[]] | undefined)[]>
-    getKeys(block: Block): Promise<v70.AccountId32[]>
-    getKeys(block: Block, key: v70.AccountId32): Promise<v70.AccountId32[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v70.AccountId32[]>
-    getKeysPaged(pageSize: number, block: Block, key: v70.AccountId32): AsyncIterable<v70.AccountId32[]>
-    getPairs(block: Block): Promise<[k: v70.AccountId32, v: ([bigint, v70.AccountId32[]] | undefined)][]>
-    getPairs(block: Block, key: v70.AccountId32): Promise<[k: v70.AccountId32, v: ([bigint, v70.AccountId32[]] | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v70.AccountId32, v: ([bigint, v70.AccountId32[]] | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v70.AccountId32): AsyncIterable<[k: v70.AccountId32, v: ([bigint, v70.AccountId32[]] | undefined)][]>
+    getDefault(block: Block): [bigint, v85.AccountId32[]]
+    get(block: Block, key: v85.AccountId32): Promise<([bigint, v85.AccountId32[]] | undefined)>
+    getMany(block: Block, keys: v85.AccountId32[]): Promise<([bigint, v85.AccountId32[]] | undefined)[]>
+    getKeys(block: Block): Promise<v85.AccountId32[]>
+    getKeys(block: Block, key: v85.AccountId32): Promise<v85.AccountId32[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v85.AccountId32[]>
+    getKeysPaged(pageSize: number, block: Block, key: v85.AccountId32): AsyncIterable<v85.AccountId32[]>
+    getPairs(block: Block): Promise<[k: v85.AccountId32, v: ([bigint, v85.AccountId32[]] | undefined)][]>
+    getPairs(block: Block, key: v85.AccountId32): Promise<[k: v85.AccountId32, v: ([bigint, v85.AccountId32[]] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v85.AccountId32, v: ([bigint, v85.AccountId32[]] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v85.AccountId32): AsyncIterable<[k: v85.AccountId32, v: ([bigint, v85.AccountId32[]] | undefined)][]>
 }
 
 export const registrars =  {
@@ -95,7 +95,7 @@ export const registrars =  {
      * 
      *  The index into this can be cast to `RegistrarIndex` to get a valid value.
      */
-    v70: new StorageType('Identity.Registrars', 'Default', [], sts.array(() => sts.option(() => v70.RegistrarInfo))) as RegistrarsV70,
+    v85: new StorageType('Identity.Registrars', 'Default', [], sts.array(() => sts.option(() => v85.RegistrarInfo))) as RegistrarsV85,
 }
 
 /**
@@ -104,8 +104,8 @@ export const registrars =  {
  * 
  *  The index into this can be cast to `RegistrarIndex` to get a valid value.
  */
-export interface RegistrarsV70  {
+export interface RegistrarsV85  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): (v70.RegistrarInfo | undefined)[]
-    get(block: Block): Promise<((v70.RegistrarInfo | undefined)[] | undefined)>
+    getDefault(block: Block): (v85.RegistrarInfo | undefined)[]
+    get(block: Block): Promise<((v85.RegistrarInfo | undefined)[] | undefined)>
 }

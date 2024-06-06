@@ -1,18 +1,18 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v54 from '../v54'
+import * as v64 from '../v64'
 
 export const requestStatusUpdate =  {
     name: 'BridgeProxy.RequestStatusUpdate',
-    v54: new EventType(
+    v64: new EventType(
         'BridgeProxy.RequestStatusUpdate',
-        sts.tuple([v54.H256, v54.MessageStatus])
+        sts.tuple([v64.H256, v64.MessageStatus])
     ),
 }
 
 export const refundFailed =  {
     name: 'BridgeProxy.RefundFailed',
-    v54: new EventType(
+    v64: new EventType(
         'BridgeProxy.RefundFailed',
-        v54.H256
+        v64.H256
     ),
 }

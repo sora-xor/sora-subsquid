@@ -82,9 +82,8 @@ export const getAllReserves = async (ctx: BlockContext, baseAssetId: AssetId) =>
 
 		return reserves
 	} catch (e: any) {
-		getInitializePoolsLog(ctx).error('Error getting Reserves')
-		getInitializePoolsLog(ctx).error(e)
-		console.error(e)
+		getInitializePoolsLog(ctx).error({ errorMessage: e.message }, 'Error getting Reserves')
+
 		return null
 	}
 }
@@ -111,9 +110,8 @@ export const getAllProperties = async (ctx: BlockContext, baseAssetId: AssetId) 
 		getInitializePoolsLog(ctx).debug(`'${baseAssetId}' Pools XYK Properties request completed`)
 		return properties
 	} catch (e: any) {
-		getInitializePoolsLog(ctx).error('Error getting Properties')
-		getInitializePoolsLog(ctx).error(e)
-		console.error(e)
+		getInitializePoolsLog(ctx).error({ errorMessage: e.message }, 'Error getting Properties')
+
 		return null
 	}
 }
@@ -145,9 +143,9 @@ export const getPoolProperties = async (ctx: BlockContext, baseAssetId: AssetId,
 			reservesAccountId: properties[0].reservesAccountId,
 			feesAccountId: properties[0].feesAccountId,
 		}
-	} catch (error: any) {
-		getInitializePoolsLog(ctx).error('Error getting pool properties')
-		getInitializePoolsLog(ctx).error(error)
+	} catch (e: any) {
+		getInitializePoolsLog(ctx).error({ errorMessage: e.message }, 'Error getting pool properties')
+
 		return null
 	}
 }
@@ -267,7 +265,6 @@ class PoolsStorage {
 				multiplier: baseAssetId === XOR && DOUBLE_PRICE_POOL.includes(targetAssetId) ? 2 : 1,
 				priceUSD: '0',
 				strategicBonusApy: '0',
-				updatedAtBlock: ctx.block.header.height,
 			})
 
 			await ctx.store.save(pool)
@@ -286,25 +283,25 @@ class PoolsStorage {
 		const lockedAssets = new Map<AssetId, bigint>()
 	
 		for (const { baseAsset, targetAsset, baseAssetReserves, targetAssetReserves } of this.storage.values()) {
-		  const a = lockedAssets.get(toAssetId(baseAsset.id))
-		  const b = lockedAssets.get(toAssetId(targetAsset.id))
-	
-		  lockedAssets.set(toAssetId(baseAsset.id), (a || BigInt(0)) + baseAssetReserves)
-		  lockedAssets.set(toAssetId(targetAsset.id), (b || BigInt(0)) + targetAssetReserves)
+			const a = lockedAssets.get(toAssetId(baseAsset.id))
+			const b = lockedAssets.get(toAssetId(targetAsset.id))
+		
+			lockedAssets.set(toAssetId(baseAsset.id), (a || BigInt(0)) + baseAssetReserves)
+			lockedAssets.set(toAssetId(targetAsset.id), (b || BigInt(0)) + targetAssetReserves)
 		}
 	
 		let lockedUSD = new BigNumber(0)
 	
-		// update locked luqidity for assets
+		// update locked liquidity for assets
 		for (const [assetId, liquidity] of lockedAssets.entries()) {
-		  const asset = await assetStorage.updateLiquidity(ctx, assetId, liquidity)
-		  const precision = assetPrecisions.get(toAssetId(asset.id)) ?? 18
-		  assertDefined(asset.liquidity)
-		  const assetLockedUSD = new BigNumber(asset.liquidity.toString())
-			.multipliedBy(new BigNumber(asset.priceUSD))
-			.dividedBy(Math.pow(10, precision))
-	
-		  lockedUSD = lockedUSD.plus(assetLockedUSD)
+			const asset = await assetStorage.updateLiquidity(ctx, assetId, liquidity)
+			const precision = assetPrecisions.get(toAssetId(asset.id)) ?? 18
+			assertDefined(asset.liquidity)
+			const assetLockedUSD = new BigNumber(asset.liquidity.toString())
+				.multipliedBy(new BigNumber(asset.priceUSD))
+				.dividedBy(Math.pow(10, precision))
+		
+			lockedUSD = lockedUSD.plus(assetLockedUSD)
 		}
 	
 		return lockedUSD
