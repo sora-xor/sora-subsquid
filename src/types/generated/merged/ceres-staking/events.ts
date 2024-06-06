@@ -7,23 +7,23 @@ import * as devEvents from '../../dev/ceres-staking/events'
 export const deposited = {
 	name: 'CeresStaking.Deposited',
 	v19: productionEvents.deposited['v19'],
-	v33Stage: stageEvents.deposited['v33'],
-	v33Test: testEvents.deposited['v33'],
-	v70Dev: devEvents.deposited['v70'],
+	v19Stage: stageEvents.deposited['v19'],
+	v19Test: testEvents.deposited['v19'],
+	v85Dev: devEvents.deposited['v85'],
 }
 
 export const withdrawn = {
 	name: 'CeresStaking.Withdrawn',
 	v19: productionEvents.withdrawn['v19'],
-	v33Stage: stageEvents.withdrawn['v33'],
-	v33Test: testEvents.withdrawn['v33'],
-	v70Dev: devEvents.withdrawn['v70'],
+	v19Stage: stageEvents.withdrawn['v19'],
+	v19Test: testEvents.withdrawn['v19'],
+	v85Dev: devEvents.withdrawn['v85'],
 }
 
 export const rewardsChanged = {
 	name: 'CeresStaking.RewardsChanged',
 	v26: productionEvents.rewardsChanged['v26'],
-	v33Stage: stageEvents.rewardsChanged['v33'],
-	v33Test: testEvents.rewardsChanged['v33'],
-	v70Dev: devEvents.rewardsChanged['v70'],
+	v26Stage: stageEvents.rewardsChanged['v26'],
+	v26Test: testEvents.rewardsChanged['v26'],
+	v85Dev: devEvents.rewardsChanged['v85'],
 }

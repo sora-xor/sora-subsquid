@@ -12,7 +12,7 @@ export const tokenRegistered = {
 	v42Stage: stageEvents.tokenRegistered['v42'],
 	v33Test: testEvents.tokenRegistered['v33'],
 	v42Test: testEvents.tokenRegistered['v42'],
-	v70Dev: devEvents.tokenRegistered['v70'],
+	v85Dev: devEvents.tokenRegistered['v85'],
 }
 
 export const poolAdded = {
@@ -26,7 +26,7 @@ export const poolAdded = {
 	v33Test: testEvents.poolAdded['v33'],
 	v42Test: testEvents.poolAdded['v42'],
 	v43Test: testEvents.poolAdded['v43'],
-	v70Dev: devEvents.poolAdded['v70'],
+	v85Dev: devEvents.poolAdded['v85'],
 }
 
 export const rewardWithdrawn = {
@@ -40,7 +40,7 @@ export const rewardWithdrawn = {
 	v33Test: testEvents.rewardWithdrawn['v33'],
 	v42Test: testEvents.rewardWithdrawn['v42'],
 	v43Test: testEvents.rewardWithdrawn['v43'],
-	v70Dev: devEvents.rewardWithdrawn['v70'],
+	v85Dev: devEvents.rewardWithdrawn['v85'],
 }
 
 export const withdrawn = {
@@ -54,7 +54,7 @@ export const withdrawn = {
 	v33Test: testEvents.withdrawn['v33'],
 	v42Test: testEvents.withdrawn['v42'],
 	v43Test: testEvents.withdrawn['v43'],
-	v70Dev: devEvents.withdrawn['v70'],
+	v85Dev: devEvents.withdrawn['v85'],
 }
 
 export const poolRemoved = {
@@ -68,7 +68,7 @@ export const poolRemoved = {
 	v33Test: testEvents.poolRemoved['v33'],
 	v42Test: testEvents.poolRemoved['v42'],
 	v43Test: testEvents.poolRemoved['v43'],
-	v70Dev: devEvents.poolRemoved['v70'],
+	v85Dev: devEvents.poolRemoved['v85'],
 }
 
 export const deposited = {
@@ -82,7 +82,7 @@ export const deposited = {
 	v33Test: testEvents.deposited['v33'],
 	v42Test: testEvents.deposited['v42'],
 	v43Test: testEvents.deposited['v43'],
-	v70Dev: devEvents.deposited['v70'],
+	v85Dev: devEvents.deposited['v85'],
 }
 
 export const multiplierChanged = {
@@ -96,7 +96,7 @@ export const multiplierChanged = {
 	v33Test: testEvents.multiplierChanged['v33'],
 	v42Test: testEvents.multiplierChanged['v42'],
 	v43Test: testEvents.multiplierChanged['v43'],
-	v70Dev: devEvents.multiplierChanged['v70'],
+	v85Dev: devEvents.multiplierChanged['v85'],
 }
 
 export const depositFeeChanged = {
@@ -110,7 +110,7 @@ export const depositFeeChanged = {
 	v33Test: testEvents.depositFeeChanged['v33'],
 	v42Test: testEvents.depositFeeChanged['v42'],
 	v43Test: testEvents.depositFeeChanged['v43'],
-	v70Dev: devEvents.depositFeeChanged['v70'],
+	v85Dev: devEvents.depositFeeChanged['v85'],
 }
 
 export const tokenInfoChanged = {
@@ -121,7 +121,7 @@ export const tokenInfoChanged = {
 	v42Stage: stageEvents.tokenInfoChanged['v42'],
 	v33Test: testEvents.tokenInfoChanged['v33'],
 	v42Test: testEvents.tokenInfoChanged['v42'],
-	v70Dev: devEvents.tokenInfoChanged['v70'],
+	v85Dev: devEvents.tokenInfoChanged['v85'],
 }
 
 export const totalTokensChanged = {
@@ -135,7 +135,7 @@ export const totalTokensChanged = {
 	v35Test: testEvents.totalTokensChanged['v35'],
 	v42Test: testEvents.totalTokensChanged['v42'],
 	v43Test: testEvents.totalTokensChanged['v43'],
-	v70Dev: devEvents.totalTokensChanged['v70'],
+	v85Dev: devEvents.totalTokensChanged['v85'],
 }
 
 export const infoChanged = {
@@ -149,5 +149,5 @@ export const infoChanged = {
 	v35Test: testEvents.infoChanged['v35'],
 	v42Test: testEvents.infoChanged['v42'],
 	v43Test: testEvents.infoChanged['v43'],
-	v70Dev: devEvents.infoChanged['v70'],
+	v85Dev: devEvents.infoChanged['v85'],
 }

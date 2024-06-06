@@ -5,7 +5,7 @@ export const memberAdded =  {
     /**
      *  The given member was added; see the transaction for who.
      */
-    v33: new EventType(
+    v1: new EventType(
         'TechnicalMembership.MemberAdded',
         sts.unit()
     ),
@@ -16,7 +16,7 @@ export const memberRemoved =  {
     /**
      *  The given member was removed; see the transaction for who.
      */
-    v33: new EventType(
+    v1: new EventType(
         'TechnicalMembership.MemberRemoved',
         sts.unit()
     ),
@@ -27,7 +27,7 @@ export const membersSwapped =  {
     /**
      *  Two members were swapped; see the transaction for who.
      */
-    v33: new EventType(
+    v1: new EventType(
         'TechnicalMembership.MembersSwapped',
         sts.unit()
     ),
@@ -38,7 +38,7 @@ export const membersReset =  {
     /**
      *  The membership was reset; see the transaction for who the new set is.
      */
-    v33: new EventType(
+    v1: new EventType(
         'TechnicalMembership.MembersReset',
         sts.unit()
     ),
@@ -49,7 +49,7 @@ export const keyChanged =  {
     /**
      *  One of the members' keys changed.
      */
-    v33: new EventType(
+    v1: new EventType(
         'TechnicalMembership.KeyChanged',
         sts.unit()
     ),
@@ -60,7 +60,7 @@ export const dummy =  {
     /**
      *  Phantom member, never used.
      */
-    v33: new EventType(
+    v1: new EventType(
         'TechnicalMembership.Dummy',
         sts.unit()
     ),

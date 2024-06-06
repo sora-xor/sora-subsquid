@@ -49,7 +49,6 @@ export class HistoryElement {
     @Column_("int4", {nullable: false})
     timestamp!: number
 
-    @Index_()
     @Column_("jsonb", {nullable: true})
     data!: unknown | undefined | null
 

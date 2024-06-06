@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, StorageType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
 import * as v42 from '../v42'
 
 export const heartbeatAfter =  {
@@ -11,7 +11,7 @@ export const heartbeatAfter =  {
      *  The idea is to first wait for the validators to produce a block
      *  in the current session, so that the heartbeat later on will not be necessary.
      */
-    v33: new StorageType('ImOnline.HeartbeatAfter', 'Default', [], v33.BlockNumber) as HeartbeatAfterV33,
+    v1: new StorageType('ImOnline.HeartbeatAfter', 'Default', [], v1.BlockNumber) as HeartbeatAfterV1,
 }
 
 /**
@@ -22,26 +22,26 @@ export const heartbeatAfter =  {
  *  The idea is to first wait for the validators to produce a block
  *  in the current session, so that the heartbeat later on will not be necessary.
  */
-export interface HeartbeatAfterV33  {
+export interface HeartbeatAfterV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.BlockNumber
-    get(block: Block): Promise<(v33.BlockNumber | undefined)>
+    getDefault(block: Block): v1.BlockNumber
+    get(block: Block): Promise<(v1.BlockNumber | undefined)>
 }
 
 export const keys =  {
     /**
      *  The current set of keys that may issue a heartbeat.
      */
-    v33: new StorageType('ImOnline.Keys', 'Default', [], sts.array(() => v33.AuthorityId)) as KeysV33,
+    v1: new StorageType('ImOnline.Keys', 'Default', [], sts.array(() => v1.AuthorityId)) as KeysV1,
 }
 
 /**
  *  The current set of keys that may issue a heartbeat.
  */
-export interface KeysV33  {
+export interface KeysV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.AuthorityId[]
-    get(block: Block): Promise<(v33.AuthorityId[] | undefined)>
+    getDefault(block: Block): v1.AuthorityId[]
+    get(block: Block): Promise<(v1.AuthorityId[] | undefined)>
 }
 
 export const receivedHeartbeats =  {
@@ -49,7 +49,7 @@ export const receivedHeartbeats =  {
      *  For each session index, we keep a mapping of `AuthIndex` to
      *  `offchain::OpaqueNetworkState`.
      */
-    v33: new StorageType('ImOnline.ReceivedHeartbeats', 'Optional', [v33.SessionIndex, v33.AuthIndex], sts.bytes()) as ReceivedHeartbeatsV33,
+    v1: new StorageType('ImOnline.ReceivedHeartbeats', 'Optional', [v1.SessionIndex, v1.AuthIndex], sts.bytes()) as ReceivedHeartbeatsV1,
     /**
      *  For each session index, we keep a mapping of `SessionIndex` and `AuthIndex` to
      *  `WrapperOpaque<BoundedOpaqueNetworkState>`.
@@ -61,22 +61,22 @@ export const receivedHeartbeats =  {
  *  For each session index, we keep a mapping of `AuthIndex` to
  *  `offchain::OpaqueNetworkState`.
  */
-export interface ReceivedHeartbeatsV33  {
+export interface ReceivedHeartbeatsV1  {
     is(block: RuntimeCtx): boolean
-    get(block: Block, key1: v33.SessionIndex, key2: v33.AuthIndex): Promise<(Bytes | undefined)>
-    getMany(block: Block, keys: [v33.SessionIndex, v33.AuthIndex][]): Promise<(Bytes | undefined)[]>
-    getKeys(block: Block): Promise<[v33.SessionIndex, v33.AuthIndex][]>
-    getKeys(block: Block, key1: v33.SessionIndex): Promise<[v33.SessionIndex, v33.AuthIndex][]>
-    getKeys(block: Block, key1: v33.SessionIndex, key2: v33.AuthIndex): Promise<[v33.SessionIndex, v33.AuthIndex][]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v33.SessionIndex, v33.AuthIndex][]>
-    getKeysPaged(pageSize: number, block: Block, key1: v33.SessionIndex): AsyncIterable<[v33.SessionIndex, v33.AuthIndex][]>
-    getKeysPaged(pageSize: number, block: Block, key1: v33.SessionIndex, key2: v33.AuthIndex): AsyncIterable<[v33.SessionIndex, v33.AuthIndex][]>
-    getPairs(block: Block): Promise<[k: [v33.SessionIndex, v33.AuthIndex], v: (Bytes | undefined)][]>
-    getPairs(block: Block, key1: v33.SessionIndex): Promise<[k: [v33.SessionIndex, v33.AuthIndex], v: (Bytes | undefined)][]>
-    getPairs(block: Block, key1: v33.SessionIndex, key2: v33.AuthIndex): Promise<[k: [v33.SessionIndex, v33.AuthIndex], v: (Bytes | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v33.SessionIndex, v33.AuthIndex], v: (Bytes | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key1: v33.SessionIndex): AsyncIterable<[k: [v33.SessionIndex, v33.AuthIndex], v: (Bytes | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key1: v33.SessionIndex, key2: v33.AuthIndex): AsyncIterable<[k: [v33.SessionIndex, v33.AuthIndex], v: (Bytes | undefined)][]>
+    get(block: Block, key1: v1.SessionIndex, key2: v1.AuthIndex): Promise<(Bytes | undefined)>
+    getMany(block: Block, keys: [v1.SessionIndex, v1.AuthIndex][]): Promise<(Bytes | undefined)[]>
+    getKeys(block: Block): Promise<[v1.SessionIndex, v1.AuthIndex][]>
+    getKeys(block: Block, key1: v1.SessionIndex): Promise<[v1.SessionIndex, v1.AuthIndex][]>
+    getKeys(block: Block, key1: v1.SessionIndex, key2: v1.AuthIndex): Promise<[v1.SessionIndex, v1.AuthIndex][]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v1.SessionIndex, v1.AuthIndex][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v1.SessionIndex): AsyncIterable<[v1.SessionIndex, v1.AuthIndex][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v1.SessionIndex, key2: v1.AuthIndex): AsyncIterable<[v1.SessionIndex, v1.AuthIndex][]>
+    getPairs(block: Block): Promise<[k: [v1.SessionIndex, v1.AuthIndex], v: (Bytes | undefined)][]>
+    getPairs(block: Block, key1: v1.SessionIndex): Promise<[k: [v1.SessionIndex, v1.AuthIndex], v: (Bytes | undefined)][]>
+    getPairs(block: Block, key1: v1.SessionIndex, key2: v1.AuthIndex): Promise<[k: [v1.SessionIndex, v1.AuthIndex], v: (Bytes | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v1.SessionIndex, v1.AuthIndex], v: (Bytes | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v1.SessionIndex): AsyncIterable<[k: [v1.SessionIndex, v1.AuthIndex], v: (Bytes | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v1.SessionIndex, key2: v1.AuthIndex): AsyncIterable<[k: [v1.SessionIndex, v1.AuthIndex], v: (Bytes | undefined)][]>
 }
 
 /**
@@ -106,28 +106,28 @@ export const authoredBlocks =  {
      *  For each session index, we keep a mapping of `ValidatorId<T>` to the
      *  number of blocks authored by the given authority.
      */
-    v33: new StorageType('ImOnline.AuthoredBlocks', 'Default', [v33.SessionIndex, v33.ValidatorId], sts.number()) as AuthoredBlocksV33,
+    v1: new StorageType('ImOnline.AuthoredBlocks', 'Default', [v1.SessionIndex, v1.ValidatorId], sts.number()) as AuthoredBlocksV1,
 }
 
 /**
  *  For each session index, we keep a mapping of `ValidatorId<T>` to the
  *  number of blocks authored by the given authority.
  */
-export interface AuthoredBlocksV33  {
+export interface AuthoredBlocksV1  {
     is(block: RuntimeCtx): boolean
     getDefault(block: Block): number
-    get(block: Block, key1: v33.SessionIndex, key2: v33.ValidatorId): Promise<(number | undefined)>
-    getMany(block: Block, keys: [v33.SessionIndex, v33.ValidatorId][]): Promise<(number | undefined)[]>
-    getKeys(block: Block): Promise<[v33.SessionIndex, v33.ValidatorId][]>
-    getKeys(block: Block, key1: v33.SessionIndex): Promise<[v33.SessionIndex, v33.ValidatorId][]>
-    getKeys(block: Block, key1: v33.SessionIndex, key2: v33.ValidatorId): Promise<[v33.SessionIndex, v33.ValidatorId][]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v33.SessionIndex, v33.ValidatorId][]>
-    getKeysPaged(pageSize: number, block: Block, key1: v33.SessionIndex): AsyncIterable<[v33.SessionIndex, v33.ValidatorId][]>
-    getKeysPaged(pageSize: number, block: Block, key1: v33.SessionIndex, key2: v33.ValidatorId): AsyncIterable<[v33.SessionIndex, v33.ValidatorId][]>
-    getPairs(block: Block): Promise<[k: [v33.SessionIndex, v33.ValidatorId], v: (number | undefined)][]>
-    getPairs(block: Block, key1: v33.SessionIndex): Promise<[k: [v33.SessionIndex, v33.ValidatorId], v: (number | undefined)][]>
-    getPairs(block: Block, key1: v33.SessionIndex, key2: v33.ValidatorId): Promise<[k: [v33.SessionIndex, v33.ValidatorId], v: (number | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v33.SessionIndex, v33.ValidatorId], v: (number | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key1: v33.SessionIndex): AsyncIterable<[k: [v33.SessionIndex, v33.ValidatorId], v: (number | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key1: v33.SessionIndex, key2: v33.ValidatorId): AsyncIterable<[k: [v33.SessionIndex, v33.ValidatorId], v: (number | undefined)][]>
+    get(block: Block, key1: v1.SessionIndex, key2: v1.ValidatorId): Promise<(number | undefined)>
+    getMany(block: Block, keys: [v1.SessionIndex, v1.ValidatorId][]): Promise<(number | undefined)[]>
+    getKeys(block: Block): Promise<[v1.SessionIndex, v1.ValidatorId][]>
+    getKeys(block: Block, key1: v1.SessionIndex): Promise<[v1.SessionIndex, v1.ValidatorId][]>
+    getKeys(block: Block, key1: v1.SessionIndex, key2: v1.ValidatorId): Promise<[v1.SessionIndex, v1.ValidatorId][]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v1.SessionIndex, v1.ValidatorId][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v1.SessionIndex): AsyncIterable<[v1.SessionIndex, v1.ValidatorId][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v1.SessionIndex, key2: v1.ValidatorId): AsyncIterable<[v1.SessionIndex, v1.ValidatorId][]>
+    getPairs(block: Block): Promise<[k: [v1.SessionIndex, v1.ValidatorId], v: (number | undefined)][]>
+    getPairs(block: Block, key1: v1.SessionIndex): Promise<[k: [v1.SessionIndex, v1.ValidatorId], v: (number | undefined)][]>
+    getPairs(block: Block, key1: v1.SessionIndex, key2: v1.ValidatorId): Promise<[k: [v1.SessionIndex, v1.ValidatorId], v: (number | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v1.SessionIndex, v1.ValidatorId], v: (number | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v1.SessionIndex): AsyncIterable<[k: [v1.SessionIndex, v1.ValidatorId], v: (number | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v1.SessionIndex, key2: v1.ValidatorId): AsyncIterable<[k: [v1.SessionIndex, v1.ValidatorId], v: (number | undefined)][]>
 }

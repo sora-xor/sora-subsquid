@@ -1,15 +1,15 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const identitySet =  {
     name: 'Identity.IdentitySet',
     /**
      * A name was set or reset (which will remove all judgements).
      */
-    v70: new EventType(
+    v85: new EventType(
         'Identity.IdentitySet',
         sts.struct({
-            who: v70.AccountId32,
+            who: v85.AccountId32,
         })
     ),
 }
@@ -19,10 +19,10 @@ export const identityCleared =  {
     /**
      * A name was cleared, and the given balance returned.
      */
-    v70: new EventType(
+    v85: new EventType(
         'Identity.IdentityCleared',
         sts.struct({
-            who: v70.AccountId32,
+            who: v85.AccountId32,
             deposit: sts.bigint(),
         })
     ),
@@ -33,10 +33,10 @@ export const identityKilled =  {
     /**
      * A name was removed and the given balance slashed.
      */
-    v70: new EventType(
+    v85: new EventType(
         'Identity.IdentityKilled',
         sts.struct({
-            who: v70.AccountId32,
+            who: v85.AccountId32,
             deposit: sts.bigint(),
         })
     ),
@@ -47,10 +47,10 @@ export const judgementRequested =  {
     /**
      * A judgement was asked from a registrar.
      */
-    v70: new EventType(
+    v85: new EventType(
         'Identity.JudgementRequested',
         sts.struct({
-            who: v70.AccountId32,
+            who: v85.AccountId32,
             registrarIndex: sts.number(),
         })
     ),
@@ -61,10 +61,10 @@ export const judgementUnrequested =  {
     /**
      * A judgement request was retracted.
      */
-    v70: new EventType(
+    v85: new EventType(
         'Identity.JudgementUnrequested',
         sts.struct({
-            who: v70.AccountId32,
+            who: v85.AccountId32,
             registrarIndex: sts.number(),
         })
     ),
@@ -75,10 +75,10 @@ export const judgementGiven =  {
     /**
      * A judgement was given by a registrar.
      */
-    v70: new EventType(
+    v85: new EventType(
         'Identity.JudgementGiven',
         sts.struct({
-            target: v70.AccountId32,
+            target: v85.AccountId32,
             registrarIndex: sts.number(),
         })
     ),
@@ -89,7 +89,7 @@ export const registrarAdded =  {
     /**
      * A registrar was added.
      */
-    v70: new EventType(
+    v85: new EventType(
         'Identity.RegistrarAdded',
         sts.struct({
             registrarIndex: sts.number(),
@@ -102,11 +102,11 @@ export const subIdentityAdded =  {
     /**
      * A sub-identity was added to an identity and the deposit paid.
      */
-    v70: new EventType(
+    v85: new EventType(
         'Identity.SubIdentityAdded',
         sts.struct({
-            sub: v70.AccountId32,
-            main: v70.AccountId32,
+            sub: v85.AccountId32,
+            main: v85.AccountId32,
             deposit: sts.bigint(),
         })
     ),
@@ -117,11 +117,11 @@ export const subIdentityRemoved =  {
     /**
      * A sub-identity was removed from an identity and the deposit freed.
      */
-    v70: new EventType(
+    v85: new EventType(
         'Identity.SubIdentityRemoved',
         sts.struct({
-            sub: v70.AccountId32,
-            main: v70.AccountId32,
+            sub: v85.AccountId32,
+            main: v85.AccountId32,
             deposit: sts.bigint(),
         })
     ),
@@ -133,11 +133,11 @@ export const subIdentityRevoked =  {
      * A sub-identity was cleared, and the given deposit repatriated from the
      * main identity account to the sub-identity account.
      */
-    v70: new EventType(
+    v85: new EventType(
         'Identity.SubIdentityRevoked',
         sts.struct({
-            sub: v70.AccountId32,
-            main: v70.AccountId32,
+            sub: v85.AccountId32,
+            main: v85.AccountId32,
             deposit: sts.bigint(),
         })
     ),

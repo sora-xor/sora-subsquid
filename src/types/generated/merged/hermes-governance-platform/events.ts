@@ -9,10 +9,10 @@ export const voted = {
 	v47: productionEvents.voted['v47'],
 	v57: productionEvents.voted['v57'],
 	v47Stage: stageEvents.voted['v47'],
-	v55Stage: stageEvents.voted['v55'],
+	v57Stage: stageEvents.voted['v57'],
 	v47Test: testEvents.voted['v47'],
-	v55Test: testEvents.voted['v55'],
-	v70Dev: devEvents.voted['v70'],
+	v57Test: testEvents.voted['v57'],
+	v85Dev: devEvents.voted['v85'],
 }
 
 export const created = {
@@ -20,10 +20,10 @@ export const created = {
 	v47: productionEvents.created['v47'],
 	v57: productionEvents.created['v57'],
 	v47Stage: stageEvents.created['v47'],
-	v55Stage: stageEvents.created['v55'],
+	v57Stage: stageEvents.created['v57'],
 	v47Test: testEvents.created['v47'],
-	v55Test: testEvents.created['v55'],
-	v70Dev: devEvents.created['v70'],
+	v57Test: testEvents.created['v57'],
+	v85Dev: devEvents.created['v85'],
 }
 
 export const voterFundsWithdrawn = {
@@ -31,7 +31,7 @@ export const voterFundsWithdrawn = {
 	v47: productionEvents.voterFundsWithdrawn['v47'],
 	v47Stage: stageEvents.voterFundsWithdrawn['v47'],
 	v47Test: testEvents.voterFundsWithdrawn['v47'],
-	v70Dev: devEvents.voterFundsWithdrawn['v70'],
+	v85Dev: devEvents.voterFundsWithdrawn['v85'],
 }
 
 export const creatorFundsWithdrawn = {
@@ -39,7 +39,7 @@ export const creatorFundsWithdrawn = {
 	v47: productionEvents.creatorFundsWithdrawn['v47'],
 	v47Stage: stageEvents.creatorFundsWithdrawn['v47'],
 	v47Test: testEvents.creatorFundsWithdrawn['v47'],
-	v70Dev: devEvents.creatorFundsWithdrawn['v70'],
+	v85Dev: devEvents.creatorFundsWithdrawn['v85'],
 }
 
 export const minimumHermesForVotingChanged = {
@@ -47,7 +47,7 @@ export const minimumHermesForVotingChanged = {
 	v47: productionEvents.minimumHermesForVotingChanged['v47'],
 	v47Stage: stageEvents.minimumHermesForVotingChanged['v47'],
 	v47Test: testEvents.minimumHermesForVotingChanged['v47'],
-	v70Dev: devEvents.minimumHermesForVotingChanged['v70'],
+	v85Dev: devEvents.minimumHermesForVotingChanged['v85'],
 }
 
 export const minimumHermesForCreatingPollChanged = {
@@ -55,5 +55,5 @@ export const minimumHermesForCreatingPollChanged = {
 	v47: productionEvents.minimumHermesForCreatingPollChanged['v47'],
 	v47Stage: stageEvents.minimumHermesForCreatingPollChanged['v47'],
 	v47Test: testEvents.minimumHermesForCreatingPollChanged['v47'],
-	v70Dev: devEvents.minimumHermesForCreatingPollChanged['v70'],
+	v85Dev: devEvents.minimumHermesForCreatingPollChanged['v85'],
 }

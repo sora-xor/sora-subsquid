@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const reportEquivocation =  {
     name: 'Babe.report_equivocation',
@@ -9,11 +9,11 @@ export const reportEquivocation =  {
      * against the extracted offender. If both are valid, the offence will
      * be reported.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Babe.report_equivocation',
         sts.struct({
-            equivocationProof: v70.EquivocationProof,
-            keyOwnerProof: v70.MembershipProof,
+            equivocationProof: v85.EquivocationProof,
+            keyOwnerProof: v85.MembershipProof,
         })
     ),
 }
@@ -30,11 +30,11 @@ export const reportEquivocationUnsigned =  {
      * if the block author is defined it will be defined as the equivocation
      * reporter.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Babe.report_equivocation_unsigned',
         sts.struct({
-            equivocationProof: v70.EquivocationProof,
-            keyOwnerProof: v70.MembershipProof,
+            equivocationProof: v85.EquivocationProof,
+            keyOwnerProof: v85.MembershipProof,
         })
     ),
 }
@@ -47,10 +47,10 @@ export const planConfigChange =  {
      * Multiple calls to this method will replace any existing planned config change that had
      * not been enacted yet.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Babe.plan_config_change',
         sts.struct({
-            config: v70.NextConfigDescriptor,
+            config: v85.NextConfigDescriptor,
         })
     ),
 }

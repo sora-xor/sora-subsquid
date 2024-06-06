@@ -9,7 +9,7 @@ export const mint = {
 	v64: productionCalls.mint['v64'],
 	v64Stage: stageCalls.mint['v64'],
 	v64Test: testCalls.mint['v64'],
-	v70Dev: devCalls.mint['v70'],
+	v85Dev: devCalls.mint['v85'],
 }
 
 export const finalizeAssetRegistration = {
@@ -17,7 +17,7 @@ export const finalizeAssetRegistration = {
 	v64: productionCalls.finalizeAssetRegistration['v64'],
 	v64Stage: stageCalls.finalizeAssetRegistration['v64'],
 	v64Test: testCalls.finalizeAssetRegistration['v64'],
-	v70Dev: devCalls.finalizeAssetRegistration['v70'],
+	v85Dev: devCalls.finalizeAssetRegistration['v85'],
 }
 
 export const burn = {
@@ -28,7 +28,7 @@ export const burn = {
 	v70Stage: stageCalls.burn['v70'],
 	v64Test: testCalls.burn['v64'],
 	v70Test: testCalls.burn['v70'],
-	v70Dev: devCalls.burn['v70'],
+	v85Dev: devCalls.burn['v85'],
 }
 
 export const registerThischainAsset = {
@@ -39,7 +39,7 @@ export const registerThischainAsset = {
 	v70Stage: stageCalls.registerThischainAsset['v70'],
 	v64Test: testCalls.registerThischainAsset['v64'],
 	v70Test: testCalls.registerThischainAsset['v70'],
-	v70Dev: devCalls.registerThischainAsset['v70'],
+	v85Dev: devCalls.registerThischainAsset['v85'],
 }
 
 export const registerSidechainAsset = {
@@ -50,7 +50,7 @@ export const registerSidechainAsset = {
 	v70Stage: stageCalls.registerSidechainAsset['v70'],
 	v64Test: testCalls.registerSidechainAsset['v64'],
 	v70Test: testCalls.registerSidechainAsset['v70'],
-	v70Dev: devCalls.registerSidechainAsset['v70'],
+	v85Dev: devCalls.registerSidechainAsset['v85'],
 }
 
 export const addAssetidParaid = {
@@ -61,7 +61,7 @@ export const addAssetidParaid = {
 	v70Stage: stageCalls.addAssetidParaid['v70'],
 	v64Test: testCalls.addAssetidParaid['v64'],
 	v70Test: testCalls.addAssetidParaid['v70'],
-	v70Dev: devCalls.addAssetidParaid['v70'],
+	v85Dev: devCalls.addAssetidParaid['v85'],
 }
 
 export const removeAssetidParaid = {
@@ -72,7 +72,7 @@ export const removeAssetidParaid = {
 	v70Stage: stageCalls.removeAssetidParaid['v70'],
 	v64Test: testCalls.removeAssetidParaid['v64'],
 	v70Test: testCalls.removeAssetidParaid['v70'],
-	v70Dev: devCalls.removeAssetidParaid['v70'],
+	v85Dev: devCalls.removeAssetidParaid['v85'],
 }
 
 export const updateTransactionStatus = {
@@ -80,7 +80,7 @@ export const updateTransactionStatus = {
 	v64: productionCalls.updateTransactionStatus['v64'],
 	v64Stage: stageCalls.updateTransactionStatus['v64'],
 	v64Test: testCalls.updateTransactionStatus['v64'],
-	v70Dev: devCalls.updateTransactionStatus['v70'],
+	v85Dev: devCalls.updateTransactionStatus['v85'],
 }
 
 export const setMinimumXcmIncomingAssetCount = {
@@ -91,5 +91,5 @@ export const setMinimumXcmIncomingAssetCount = {
 	v70Stage: stageCalls.setMinimumXcmIncomingAssetCount['v70'],
 	v64Test: testCalls.setMinimumXcmIncomingAssetCount['v64'],
 	v70Test: testCalls.setMinimumXcmIncomingAssetCount['v70'],
-	v70Dev: devCalls.setMinimumXcmIncomingAssetCount['v70'],
+	v85Dev: devCalls.setMinimumXcmIncomingAssetCount['v85'],
 }

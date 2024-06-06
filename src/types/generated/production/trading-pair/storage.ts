@@ -2,10 +2,12 @@ import {sts, Block, Bytes, Option, Result, StorageType, RuntimeCtx} from '../sup
 import * as v1 from '../v1'
 import * as v38 from '../v38'
 import * as v42 from '../v42'
+import * as v71 from '../v71'
 
 export const enabledSources =  {
     v1: new StorageType('TradingPair.EnabledSources', 'Optional', [v1.DEXId, v1.TradingPair], sts.array(() => v1.LiquiditySourceType)) as EnabledSourcesV1,
     v42: new StorageType('TradingPair.EnabledSources', 'Optional', [sts.number(), v42.TradingPair], sts.array(() => v42.LiquiditySourceType)) as EnabledSourcesV42,
+    v71: new StorageType('TradingPair.EnabledSources', 'Optional', [sts.number(), v71.TradingPair], sts.array(() => v71.LiquiditySourceType)) as EnabledSourcesV71,
 }
 
 export interface EnabledSourcesV1  {
@@ -44,12 +46,37 @@ export interface EnabledSourcesV42  {
     getPairsPaged(pageSize: number, block: Block, key1: number, key2: v42.TradingPair): AsyncIterable<[k: [number, v42.TradingPair], v: (v42.LiquiditySourceType[] | undefined)][]>
 }
 
+export interface EnabledSourcesV71  {
+    is(block: RuntimeCtx): boolean
+    get(block: Block, key1: number, key2: v71.TradingPair): Promise<(v71.LiquiditySourceType[] | undefined)>
+    getMany(block: Block, keys: [number, v71.TradingPair][]): Promise<(v71.LiquiditySourceType[] | undefined)[]>
+    getKeys(block: Block): Promise<[number, v71.TradingPair][]>
+    getKeys(block: Block, key1: number): Promise<[number, v71.TradingPair][]>
+    getKeys(block: Block, key1: number, key2: v71.TradingPair): Promise<[number, v71.TradingPair][]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[number, v71.TradingPair][]>
+    getKeysPaged(pageSize: number, block: Block, key1: number): AsyncIterable<[number, v71.TradingPair][]>
+    getKeysPaged(pageSize: number, block: Block, key1: number, key2: v71.TradingPair): AsyncIterable<[number, v71.TradingPair][]>
+    getPairs(block: Block): Promise<[k: [number, v71.TradingPair], v: (v71.LiquiditySourceType[] | undefined)][]>
+    getPairs(block: Block, key1: number): Promise<[k: [number, v71.TradingPair], v: (v71.LiquiditySourceType[] | undefined)][]>
+    getPairs(block: Block, key1: number, key2: v71.TradingPair): Promise<[k: [number, v71.TradingPair], v: (v71.LiquiditySourceType[] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [number, v71.TradingPair], v: (v71.LiquiditySourceType[] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: number): AsyncIterable<[k: [number, v71.TradingPair], v: (v71.LiquiditySourceType[] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: number, key2: v71.TradingPair): AsyncIterable<[k: [number, v71.TradingPair], v: (v71.LiquiditySourceType[] | undefined)][]>
+}
+
 export const lockedLiquiditySources =  {
     v38: new StorageType('TradingPair.LockedLiquiditySources', 'Default', [], sts.array(() => v38.LiquiditySourceType)) as LockedLiquiditySourcesV38,
+    v71: new StorageType('TradingPair.LockedLiquiditySources', 'Default', [], sts.array(() => v71.LiquiditySourceType)) as LockedLiquiditySourcesV71,
 }
 
 export interface LockedLiquiditySourcesV38  {
     is(block: RuntimeCtx): boolean
     getDefault(block: Block): v38.LiquiditySourceType[]
     get(block: Block): Promise<(v38.LiquiditySourceType[] | undefined)>
+}
+
+export interface LockedLiquiditySourcesV71  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): v71.LiquiditySourceType[]
+    get(block: Block): Promise<(v71.LiquiditySourceType[] | undefined)>
 }

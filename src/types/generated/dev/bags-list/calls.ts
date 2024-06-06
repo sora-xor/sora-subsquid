@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const rebag =  {
     name: 'BagsList.rebag',
@@ -15,10 +15,10 @@ export const rebag =  {
      * 
      * If `dislocated` does not exists, it returns an error.
      */
-    v70: new CallType(
+    v85: new CallType(
         'BagsList.rebag',
         sts.struct({
-            dislocated: v70.AccountId32,
+            dislocated: v85.AccountId32,
         })
     ),
 }
@@ -35,10 +35,10 @@ export const putInFrontOf =  {
      * - both nodes are within the same bag,
      * - and `origin` has a greater `Score` than `lighter`.
      */
-    v70: new CallType(
+    v85: new CallType(
         'BagsList.put_in_front_of',
         sts.struct({
-            lighter: v70.AccountId32,
+            lighter: v85.AccountId32,
         })
     ),
 }

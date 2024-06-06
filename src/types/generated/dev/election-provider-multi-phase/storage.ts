@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, StorageType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const round =  {
     /**
@@ -10,7 +10,7 @@ export const round =  {
      * 
      *  This is merely incremented once per every time that an upstream `elect` is called.
      */
-    v70: new StorageType('ElectionProviderMultiPhase.Round', 'Default', [], sts.number()) as RoundV70,
+    v85: new StorageType('ElectionProviderMultiPhase.Round', 'Default', [], sts.number()) as RoundV85,
 }
 
 /**
@@ -21,7 +21,7 @@ export const round =  {
  * 
  *  This is merely incremented once per every time that an upstream `elect` is called.
  */
-export interface RoundV70  {
+export interface RoundV85  {
     is(block: RuntimeCtx): boolean
     getDefault(block: Block): number
     get(block: Block): Promise<(number | undefined)>
@@ -31,31 +31,31 @@ export const currentPhase =  {
     /**
      *  Current phase.
      */
-    v70: new StorageType('ElectionProviderMultiPhase.CurrentPhase', 'Default', [], v70.Phase) as CurrentPhaseV70,
+    v85: new StorageType('ElectionProviderMultiPhase.CurrentPhase', 'Default', [], v85.Phase) as CurrentPhaseV85,
 }
 
 /**
  *  Current phase.
  */
-export interface CurrentPhaseV70  {
+export interface CurrentPhaseV85  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v70.Phase
-    get(block: Block): Promise<(v70.Phase | undefined)>
+    getDefault(block: Block): v85.Phase
+    get(block: Block): Promise<(v85.Phase | undefined)>
 }
 
 export const queuedSolution =  {
     /**
      *  Current best solution, signed or unsigned, queued to be returned upon `elect`.
      */
-    v70: new StorageType('ElectionProviderMultiPhase.QueuedSolution', 'Optional', [], v70.ReadySolution) as QueuedSolutionV70,
+    v85: new StorageType('ElectionProviderMultiPhase.QueuedSolution', 'Optional', [], v85.ReadySolution) as QueuedSolutionV85,
 }
 
 /**
  *  Current best solution, signed or unsigned, queued to be returned upon `elect`.
  */
-export interface QueuedSolutionV70  {
+export interface QueuedSolutionV85  {
     is(block: RuntimeCtx): boolean
-    get(block: Block): Promise<(v70.ReadySolution | undefined)>
+    get(block: Block): Promise<(v85.ReadySolution | undefined)>
 }
 
 export const snapshot =  {
@@ -64,7 +64,7 @@ export const snapshot =  {
      * 
      *  This is created at the beginning of the signed phase and cleared upon calling `elect`.
      */
-    v70: new StorageType('ElectionProviderMultiPhase.Snapshot', 'Optional', [], v70.RoundSnapshot) as SnapshotV70,
+    v85: new StorageType('ElectionProviderMultiPhase.Snapshot', 'Optional', [], v85.RoundSnapshot) as SnapshotV85,
 }
 
 /**
@@ -72,9 +72,9 @@ export const snapshot =  {
  * 
  *  This is created at the beginning of the signed phase and cleared upon calling `elect`.
  */
-export interface SnapshotV70  {
+export interface SnapshotV85  {
     is(block: RuntimeCtx): boolean
-    get(block: Block): Promise<(v70.RoundSnapshot | undefined)>
+    get(block: Block): Promise<(v85.RoundSnapshot | undefined)>
 }
 
 export const desiredTargets =  {
@@ -83,7 +83,7 @@ export const desiredTargets =  {
      * 
      *  Only exists when [`Snapshot`] is present.
      */
-    v70: new StorageType('ElectionProviderMultiPhase.DesiredTargets', 'Optional', [], sts.number()) as DesiredTargetsV70,
+    v85: new StorageType('ElectionProviderMultiPhase.DesiredTargets', 'Optional', [], sts.number()) as DesiredTargetsV85,
 }
 
 /**
@@ -91,7 +91,7 @@ export const desiredTargets =  {
  * 
  *  Only exists when [`Snapshot`] is present.
  */
-export interface DesiredTargetsV70  {
+export interface DesiredTargetsV85  {
     is(block: RuntimeCtx): boolean
     get(block: Block): Promise<(number | undefined)>
 }
@@ -102,7 +102,7 @@ export const snapshotMetadata =  {
      * 
      *  Only exists when [`Snapshot`] is present.
      */
-    v70: new StorageType('ElectionProviderMultiPhase.SnapshotMetadata', 'Optional', [], v70.SolutionOrSnapshotSize) as SnapshotMetadataV70,
+    v85: new StorageType('ElectionProviderMultiPhase.SnapshotMetadata', 'Optional', [], v85.SolutionOrSnapshotSize) as SnapshotMetadataV85,
 }
 
 /**
@@ -110,9 +110,9 @@ export const snapshotMetadata =  {
  * 
  *  Only exists when [`Snapshot`] is present.
  */
-export interface SnapshotMetadataV70  {
+export interface SnapshotMetadataV85  {
     is(block: RuntimeCtx): boolean
-    get(block: Block): Promise<(v70.SolutionOrSnapshotSize | undefined)>
+    get(block: Block): Promise<(v85.SolutionOrSnapshotSize | undefined)>
 }
 
 export const signedSubmissionNextIndex =  {
@@ -127,7 +127,7 @@ export const signedSubmissionNextIndex =  {
      *  capacity, it will simply saturate. We can't just iterate over `SignedSubmissionsMap`,
      *  because iteration is slow. Instead, we store the value here.
      */
-    v70: new StorageType('ElectionProviderMultiPhase.SignedSubmissionNextIndex', 'Default', [], sts.number()) as SignedSubmissionNextIndexV70,
+    v85: new StorageType('ElectionProviderMultiPhase.SignedSubmissionNextIndex', 'Default', [], sts.number()) as SignedSubmissionNextIndexV85,
 }
 
 /**
@@ -141,7 +141,7 @@ export const signedSubmissionNextIndex =  {
  *  capacity, it will simply saturate. We can't just iterate over `SignedSubmissionsMap`,
  *  because iteration is slow. Instead, we store the value here.
  */
-export interface SignedSubmissionNextIndexV70  {
+export interface SignedSubmissionNextIndexV85  {
     is(block: RuntimeCtx): boolean
     getDefault(block: Block): number
     get(block: Block): Promise<(number | undefined)>
@@ -156,7 +156,7 @@ export const signedSubmissionIndices =  {
      *  can be quite large, so we're willing to pay the cost of multiple database accesses to access
      *  them one at a time instead of reading and decoding all of them at once.
      */
-    v70: new StorageType('ElectionProviderMultiPhase.SignedSubmissionIndices', 'Default', [], sts.array(() => sts.tuple(() => [v70.ElectionScore, sts.number(), sts.number()]))) as SignedSubmissionIndicesV70,
+    v85: new StorageType('ElectionProviderMultiPhase.SignedSubmissionIndices', 'Default', [], sts.array(() => sts.tuple(() => [v85.ElectionScore, sts.number(), sts.number()]))) as SignedSubmissionIndicesV85,
 }
 
 /**
@@ -167,10 +167,10 @@ export const signedSubmissionIndices =  {
  *  can be quite large, so we're willing to pay the cost of multiple database accesses to access
  *  them one at a time instead of reading and decoding all of them at once.
  */
-export interface SignedSubmissionIndicesV70  {
+export interface SignedSubmissionIndicesV85  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): [v70.ElectionScore, number, number][]
-    get(block: Block): Promise<([v70.ElectionScore, number, number][] | undefined)>
+    getDefault(block: Block): [v85.ElectionScore, number, number][]
+    get(block: Block): Promise<([v85.ElectionScore, number, number][] | undefined)>
 }
 
 export const signedSubmissionsMap =  {
@@ -183,7 +183,7 @@ export const signedSubmissionsMap =  {
      *  Twox note: the key of the map is an auto-incrementing index which users cannot inspect or
      *  affect; we shouldn't need a cryptographically secure hasher.
      */
-    v70: new StorageType('ElectionProviderMultiPhase.SignedSubmissionsMap', 'Optional', [sts.number()], v70.SignedSubmission) as SignedSubmissionsMapV70,
+    v85: new StorageType('ElectionProviderMultiPhase.SignedSubmissionsMap', 'Optional', [sts.number()], v85.SignedSubmission) as SignedSubmissionsMapV85,
 }
 
 /**
@@ -195,18 +195,18 @@ export const signedSubmissionsMap =  {
  *  Twox note: the key of the map is an auto-incrementing index which users cannot inspect or
  *  affect; we shouldn't need a cryptographically secure hasher.
  */
-export interface SignedSubmissionsMapV70  {
+export interface SignedSubmissionsMapV85  {
     is(block: RuntimeCtx): boolean
-    get(block: Block, key: number): Promise<(v70.SignedSubmission | undefined)>
-    getMany(block: Block, keys: number[]): Promise<(v70.SignedSubmission | undefined)[]>
+    get(block: Block, key: number): Promise<(v85.SignedSubmission | undefined)>
+    getMany(block: Block, keys: number[]): Promise<(v85.SignedSubmission | undefined)[]>
     getKeys(block: Block): Promise<number[]>
     getKeys(block: Block, key: number): Promise<number[]>
     getKeysPaged(pageSize: number, block: Block): AsyncIterable<number[]>
     getKeysPaged(pageSize: number, block: Block, key: number): AsyncIterable<number[]>
-    getPairs(block: Block): Promise<[k: number, v: (v70.SignedSubmission | undefined)][]>
-    getPairs(block: Block, key: number): Promise<[k: number, v: (v70.SignedSubmission | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: number, v: (v70.SignedSubmission | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: number): AsyncIterable<[k: number, v: (v70.SignedSubmission | undefined)][]>
+    getPairs(block: Block): Promise<[k: number, v: (v85.SignedSubmission | undefined)][]>
+    getPairs(block: Block, key: number): Promise<[k: number, v: (v85.SignedSubmission | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: number, v: (v85.SignedSubmission | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: number): AsyncIterable<[k: number, v: (v85.SignedSubmission | undefined)][]>
 }
 
 export const minimumUntrustedScore =  {
@@ -216,7 +216,7 @@ export const minimumUntrustedScore =  {
      * 
      *  Can be set via `set_minimum_untrusted_score`.
      */
-    v70: new StorageType('ElectionProviderMultiPhase.MinimumUntrustedScore', 'Optional', [], v70.ElectionScore) as MinimumUntrustedScoreV70,
+    v85: new StorageType('ElectionProviderMultiPhase.MinimumUntrustedScore', 'Optional', [], v85.ElectionScore) as MinimumUntrustedScoreV85,
 }
 
 /**
@@ -225,7 +225,7 @@ export const minimumUntrustedScore =  {
  * 
  *  Can be set via `set_minimum_untrusted_score`.
  */
-export interface MinimumUntrustedScoreV70  {
+export interface MinimumUntrustedScoreV85  {
     is(block: RuntimeCtx): boolean
-    get(block: Block): Promise<(v70.ElectionScore | undefined)>
+    get(block: Block): Promise<(v85.ElectionScore | undefined)>
 }

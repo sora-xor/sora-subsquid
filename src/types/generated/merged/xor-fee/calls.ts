@@ -9,5 +9,5 @@ export const updateMultiplier = {
 	v37: productionCalls.updateMultiplier['v37'],
 	v37Stage: stageCalls.updateMultiplier['v37'],
 	v37Test: testCalls.updateMultiplier['v37'],
-	v70Dev: devCalls.updateMultiplier['v70'],
+	v85Dev: devCalls.updateMultiplier['v85'],
 }

@@ -7,7 +7,7 @@ import * as devCalls from '../../dev/timestamp/calls'
 export const set = {
 	name: 'Timestamp.set',
 	v1: productionCalls.set['v1'],
-	v33Stage: stageCalls.set['v33'],
-	v33Test: testCalls.set['v33'],
-	v70Dev: devCalls.set['v70'],
+	v1Stage: stageCalls.set['v1'],
+	v1Test: testCalls.set['v1'],
+	v85Dev: devCalls.set['v85'],
 }

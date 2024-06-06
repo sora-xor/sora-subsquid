@@ -1,15 +1,15 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const vote =  {
     name: 'HermesGovernancePlatform.vote',
     /**
      * Vote for some option
      */
-    v70: new CallType(
+    v85: new CallType(
         'HermesGovernancePlatform.vote',
         sts.struct({
-            pollId: v70.H256,
+            pollId: v85.H256,
             votingOption: sts.bytes(),
         })
     ),
@@ -20,12 +20,12 @@ export const createPoll =  {
     /**
      * Create poll
      */
-    v70: new CallType(
+    v85: new CallType(
         'HermesGovernancePlatform.create_poll',
         sts.struct({
             pollStartTimestamp: sts.bigint(),
             pollEndTimestamp: sts.bigint(),
-            title: v70.BoundedString,
+            title: v85.BoundedString,
             description: sts.bytes(),
             options: sts.array(() => sts.bytes()),
         })
@@ -37,10 +37,10 @@ export const withdrawFundsVoter =  {
     /**
      * Withdraw funds voter
      */
-    v70: new CallType(
+    v85: new CallType(
         'HermesGovernancePlatform.withdraw_funds_voter',
         sts.struct({
-            pollId: v70.H256,
+            pollId: v85.H256,
         })
     ),
 }
@@ -50,10 +50,10 @@ export const withdrawFundsCreator =  {
     /**
      * Withdraw funds creator
      */
-    v70: new CallType(
+    v85: new CallType(
         'HermesGovernancePlatform.withdraw_funds_creator',
         sts.struct({
-            pollId: v70.H256,
+            pollId: v85.H256,
         })
     ),
 }
@@ -63,7 +63,7 @@ export const changeMinHermesForVoting =  {
     /**
      * Change minimum Hermes for voting
      */
-    v70: new CallType(
+    v85: new CallType(
         'HermesGovernancePlatform.change_min_hermes_for_voting',
         sts.struct({
             hermesAmount: sts.bigint(),
@@ -76,7 +76,7 @@ export const changeMinHermesForCreatingPoll =  {
     /**
      * Change minimum Hermes for creating a poll
      */
-    v70: new CallType(
+    v85: new CallType(
         'HermesGovernancePlatform.change_min_hermes_for_creating_poll',
         sts.struct({
             hermesAmount: sts.bigint(),

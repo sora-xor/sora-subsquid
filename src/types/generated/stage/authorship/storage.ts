@@ -1,12 +1,12 @@
 import {sts, Block, Bytes, Option, Result, StorageType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
 import * as v42 from '../v42'
 
 export const uncles =  {
     /**
      *  Uncles
      */
-    v33: new StorageType('Authorship.Uncles', 'Default', [], sts.array(() => v33.UncleEntryItem)) as UnclesV33,
+    v1: new StorageType('Authorship.Uncles', 'Default', [], sts.array(() => v1.UncleEntryItem)) as UnclesV1,
     /**
      *  Uncles
      */
@@ -16,10 +16,10 @@ export const uncles =  {
 /**
  *  Uncles
  */
-export interface UnclesV33  {
+export interface UnclesV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.UncleEntryItem[]
-    get(block: Block): Promise<(v33.UncleEntryItem[] | undefined)>
+    getDefault(block: Block): v1.UncleEntryItem[]
+    get(block: Block): Promise<(v1.UncleEntryItem[] | undefined)>
 }
 
 /**
@@ -35,28 +35,28 @@ export const author =  {
     /**
      *  Author of current block.
      */
-    v33: new StorageType('Authorship.Author', 'Optional', [], v33.AccountId) as AuthorV33,
+    v1: new StorageType('Authorship.Author', 'Optional', [], v1.AccountId) as AuthorV1,
 }
 
 /**
  *  Author of current block.
  */
-export interface AuthorV33  {
+export interface AuthorV1  {
     is(block: RuntimeCtx): boolean
-    get(block: Block): Promise<(v33.AccountId | undefined)>
+    get(block: Block): Promise<(v1.AccountId | undefined)>
 }
 
 export const didSetUncles =  {
     /**
      *  Whether uncles were already set in this block.
      */
-    v33: new StorageType('Authorship.DidSetUncles', 'Default', [], sts.boolean()) as DidSetUnclesV33,
+    v1: new StorageType('Authorship.DidSetUncles', 'Default', [], sts.boolean()) as DidSetUnclesV1,
 }
 
 /**
  *  Whether uncles were already set in this block.
  */
-export interface DidSetUnclesV33  {
+export interface DidSetUnclesV1  {
     is(block: RuntimeCtx): boolean
     getDefault(block: Block): boolean
     get(block: Block): Promise<(boolean | undefined)>

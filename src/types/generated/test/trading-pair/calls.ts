@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
 import * as v42 from '../v42'
 
 export const register =  {
@@ -12,12 +12,12 @@ export const register =  {
      *  - `base_asset_id`: base asset ID.
      *  - `target_asset_id`: target asset ID.
      */
-    v33: new CallType(
+    v1: new CallType(
         'TradingPair.register',
         sts.struct({
-            dexId: v33.DEXId,
-            baseAssetId: v33.AssetId,
-            targetAssetId: v33.AssetId,
+            dexId: v1.DEXId,
+            baseAssetId: v1.AssetId,
+            targetAssetId: v1.AssetId,
         })
     ),
     /**

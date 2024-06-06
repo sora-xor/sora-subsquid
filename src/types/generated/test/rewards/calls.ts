@@ -1,12 +1,10 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
+import * as v19 from '../v19'
 import * as v33 from '../v33'
 
 export const claim =  {
     name: 'Rewards.claim',
-    /**
-     *  Claim the reward with signature.
-     */
-    v33: new CallType(
+    v1: new CallType(
         'Rewards.claim',
         sts.struct({
             signature: sts.bytes(),
@@ -19,10 +17,10 @@ export const finalizeStorageMigration =  {
     /**
      *  Finalize the update of unclaimed VAL data in storage
      */
-    v33: new CallType(
+    v19: new CallType(
         'Rewards.finalize_storage_migration',
         sts.struct({
-            amounts: sts.array(() => sts.tuple(() => [v33.EthAddress, v33.Balance])),
+            amounts: sts.array(() => sts.tuple(() => [v19.EthereumAddress, v19.Balance])),
         })
     ),
 }

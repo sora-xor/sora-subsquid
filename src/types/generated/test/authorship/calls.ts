@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
 import * as v42 from '../v42'
 
 export const setUncles =  {
@@ -7,10 +7,10 @@ export const setUncles =  {
     /**
      *  Provide a set of uncles.
      */
-    v33: new CallType(
+    v1: new CallType(
         'Authorship.set_uncles',
         sts.struct({
-            newUncles: sts.array(() => v33.Header),
+            newUncles: sts.array(() => v1.Header),
         })
     ),
     /**

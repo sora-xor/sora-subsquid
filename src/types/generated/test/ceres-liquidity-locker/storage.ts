@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, StorageType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v22 from '../v22'
 import * as v37 from '../v37'
 import * as v42 from '../v42'
 
@@ -7,68 +7,68 @@ export const feesOptionOneAccount =  {
     /**
      *  Account for collecting fees from Option 1
      */
-    v33: new StorageType('CeresLiquidityLocker.FeesOptionOneAccount', 'Default', [], v33.AccountIdOf) as FeesOptionOneAccountV33,
+    v22: new StorageType('CeresLiquidityLocker.FeesOptionOneAccount', 'Default', [], v22.AccountIdOf) as FeesOptionOneAccountV22,
 }
 
 /**
  *  Account for collecting fees from Option 1
  */
-export interface FeesOptionOneAccountV33  {
+export interface FeesOptionOneAccountV22  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.AccountIdOf
-    get(block: Block): Promise<(v33.AccountIdOf | undefined)>
+    getDefault(block: Block): v22.AccountIdOf
+    get(block: Block): Promise<(v22.AccountIdOf | undefined)>
 }
 
 export const feesOptionTwoAccount =  {
     /**
      *  Account for collecting fees from Option 2
      */
-    v33: new StorageType('CeresLiquidityLocker.FeesOptionTwoAccount', 'Default', [], v33.AccountIdOf) as FeesOptionTwoAccountV33,
+    v22: new StorageType('CeresLiquidityLocker.FeesOptionTwoAccount', 'Default', [], v22.AccountIdOf) as FeesOptionTwoAccountV22,
 }
 
 /**
  *  Account for collecting fees from Option 2
  */
-export interface FeesOptionTwoAccountV33  {
+export interface FeesOptionTwoAccountV22  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.AccountIdOf
-    get(block: Block): Promise<(v33.AccountIdOf | undefined)>
+    getDefault(block: Block): v22.AccountIdOf
+    get(block: Block): Promise<(v22.AccountIdOf | undefined)>
 }
 
 export const feesOptionTwoCeresAmount =  {
     /**
      *  Amount of CERES for locker fees option two
      */
-    v33: new StorageType('CeresLiquidityLocker.FeesOptionTwoCeresAmount', 'Default', [], v33.Balance) as FeesOptionTwoCeresAmountV33,
+    v22: new StorageType('CeresLiquidityLocker.FeesOptionTwoCeresAmount', 'Default', [], v22.Balance) as FeesOptionTwoCeresAmountV22,
 }
 
 /**
  *  Amount of CERES for locker fees option two
  */
-export interface FeesOptionTwoCeresAmountV33  {
+export interface FeesOptionTwoCeresAmountV22  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.Balance
-    get(block: Block): Promise<(v33.Balance | undefined)>
+    getDefault(block: Block): v22.Balance
+    get(block: Block): Promise<(v22.Balance | undefined)>
 }
 
 export const authorityAccount =  {
     /**
      *  Account which has permissions for changing CERES amount fee
      */
-    v33: new StorageType('CeresLiquidityLocker.AuthorityAccount', 'Default', [], v33.AccountIdOf) as AuthorityAccountV33,
+    v22: new StorageType('CeresLiquidityLocker.AuthorityAccount', 'Default', [], v22.AccountIdOf) as AuthorityAccountV22,
 }
 
 /**
  *  Account which has permissions for changing CERES amount fee
  */
-export interface AuthorityAccountV33  {
+export interface AuthorityAccountV22  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.AccountIdOf
-    get(block: Block): Promise<(v33.AccountIdOf | undefined)>
+    getDefault(block: Block): v22.AccountIdOf
+    get(block: Block): Promise<(v22.AccountIdOf | undefined)>
 }
 
 export const lockerData =  {
-    v33: new StorageType('CeresLiquidityLocker.LockerData', 'Default', [v33.AccountIdOf], sts.array(() => v33.LockInfo)) as LockerDataV33,
+    v22: new StorageType('CeresLiquidityLocker.LockerData', 'Default', [v22.AccountIdOf], sts.array(() => v22.LockInfo)) as LockerDataV22,
     /**
      *  Contains data about lockups for each account
      */
@@ -79,19 +79,19 @@ export const lockerData =  {
     v42: new StorageType('CeresLiquidityLocker.LockerData', 'Default', [v42.AccountId32], sts.array(() => v42.LockInfo)) as LockerDataV42,
 }
 
-export interface LockerDataV33  {
+export interface LockerDataV22  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.LockInfo[]
-    get(block: Block, key: v33.AccountIdOf): Promise<(v33.LockInfo[] | undefined)>
-    getMany(block: Block, keys: v33.AccountIdOf[]): Promise<(v33.LockInfo[] | undefined)[]>
-    getKeys(block: Block): Promise<v33.AccountIdOf[]>
-    getKeys(block: Block, key: v33.AccountIdOf): Promise<v33.AccountIdOf[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.AccountIdOf[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.AccountIdOf): AsyncIterable<v33.AccountIdOf[]>
-    getPairs(block: Block): Promise<[k: v33.AccountIdOf, v: (v33.LockInfo[] | undefined)][]>
-    getPairs(block: Block, key: v33.AccountIdOf): Promise<[k: v33.AccountIdOf, v: (v33.LockInfo[] | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.AccountIdOf, v: (v33.LockInfo[] | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.AccountIdOf): AsyncIterable<[k: v33.AccountIdOf, v: (v33.LockInfo[] | undefined)][]>
+    getDefault(block: Block): v22.LockInfo[]
+    get(block: Block, key: v22.AccountIdOf): Promise<(v22.LockInfo[] | undefined)>
+    getMany(block: Block, keys: v22.AccountIdOf[]): Promise<(v22.LockInfo[] | undefined)[]>
+    getKeys(block: Block): Promise<v22.AccountIdOf[]>
+    getKeys(block: Block, key: v22.AccountIdOf): Promise<v22.AccountIdOf[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v22.AccountIdOf[]>
+    getKeysPaged(pageSize: number, block: Block, key: v22.AccountIdOf): AsyncIterable<v22.AccountIdOf[]>
+    getPairs(block: Block): Promise<[k: v22.AccountIdOf, v: (v22.LockInfo[] | undefined)][]>
+    getPairs(block: Block, key: v22.AccountIdOf): Promise<[k: v22.AccountIdOf, v: (v22.LockInfo[] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v22.AccountIdOf, v: (v22.LockInfo[] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v22.AccountIdOf): AsyncIterable<[k: v22.AccountIdOf, v: (v22.LockInfo[] | undefined)][]>
 }
 
 /**
