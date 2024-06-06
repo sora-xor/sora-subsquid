@@ -22,7 +22,4 @@ export class ReferrerReward {
 
     @Column_("numeric", {transformer: marshal.bigintTransformer, nullable: false})
     amount!: bigint
-
-    @Column_("int4", {nullable: false})
-    updatedAtBlock!: number
 }

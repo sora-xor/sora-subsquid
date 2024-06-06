@@ -1,9 +1,14 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
+import * as v85 from '../v85'
 
 export const messageAccepted =  {
     name: 'BridgeOutboundChannel.MessageAccepted',
-    v70: new EventType(
+    v85: new EventType(
         'BridgeOutboundChannel.MessageAccepted',
-        sts.tuple([sts.bigint(), sts.bigint(), sts.bigint()])
+        sts.struct({
+            networkId: v85.GenericNetworkId,
+            batchNonce: sts.bigint(),
+            messageNonce: sts.bigint(),
+        })
     ),
 }

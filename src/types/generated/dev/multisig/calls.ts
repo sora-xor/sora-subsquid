@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const asMultiThreshold1 =  {
     name: 'Multisig.as_multi_threshold_1',
@@ -21,11 +21,11 @@ export const asMultiThreshold1 =  {
      * - Plus Call Weight
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'Multisig.as_multi_threshold_1',
         sts.struct({
-            otherSignatories: sts.array(() => v70.AccountId32),
-            call: v70.Call,
+            otherSignatories: sts.array(() => v85.AccountId32),
+            call: v85.Call,
         })
     ),
 }
@@ -79,14 +79,14 @@ export const asMulti =  {
      * - Plus Call Weight
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'Multisig.as_multi',
         sts.struct({
             threshold: sts.number(),
-            otherSignatories: sts.array(() => v70.AccountId32),
-            maybeTimepoint: sts.option(() => v70.Timepoint),
-            call: v70.Call,
-            maxWeight: v70.Weight,
+            otherSignatories: sts.array(() => v85.AccountId32),
+            maybeTimepoint: sts.option(() => v85.Timepoint),
+            call: v85.Call,
+            maxWeight: v85.Weight,
         })
     ),
 }
@@ -130,14 +130,14 @@ export const approveAsMulti =  {
      *     - Write: Multisig Storage, [Caller Account]
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'Multisig.approve_as_multi',
         sts.struct({
             threshold: sts.number(),
-            otherSignatories: sts.array(() => v70.AccountId32),
-            maybeTimepoint: sts.option(() => v70.Timepoint),
+            otherSignatories: sts.array(() => v85.AccountId32),
+            maybeTimepoint: sts.option(() => v85.Timepoint),
             callHash: sts.bytes(),
-            maxWeight: v70.Weight,
+            maxWeight: v85.Weight,
         })
     ),
 }
@@ -172,12 +172,12 @@ export const cancelAsMulti =  {
      *     - Write: Multisig Storage, [Caller Account], Refund Account
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'Multisig.cancel_as_multi',
         sts.struct({
             threshold: sts.number(),
-            otherSignatories: sts.array(() => v70.AccountId32),
-            timepoint: v70.Timepoint,
+            otherSignatories: sts.array(() => v85.AccountId32),
+            timepoint: v85.Timepoint,
             callHash: sts.bytes(),
         })
     ),

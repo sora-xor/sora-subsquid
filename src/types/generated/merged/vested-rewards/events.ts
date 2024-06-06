@@ -7,9 +7,9 @@ import * as devEvents from '../../dev/vested-rewards/events'
 export const rewardsVested = {
 	name: 'VestedRewards.RewardsVested',
 	v1: productionEvents.rewardsVested['v1'],
-	v33Stage: stageEvents.rewardsVested['v33'],
-	v33Test: testEvents.rewardsVested['v33'],
-	v70Dev: devEvents.rewardsVested['v70'],
+	v1Stage: stageEvents.rewardsVested['v1'],
+	v1Test: testEvents.rewardsVested['v1'],
+	v85Dev: devEvents.rewardsVested['v85'],
 }
 
 export const actualDoesntMatchAvailable = {
@@ -17,41 +17,41 @@ export const actualDoesntMatchAvailable = {
 	v7: productionEvents.actualDoesntMatchAvailable['v7'],
 	v42: productionEvents.actualDoesntMatchAvailable['v42'],
 	v45: productionEvents.actualDoesntMatchAvailable['v45'],
-	v33Stage: stageEvents.actualDoesntMatchAvailable['v33'],
+	v7Stage: stageEvents.actualDoesntMatchAvailable['v7'],
 	v42Stage: stageEvents.actualDoesntMatchAvailable['v42'],
-	v44Stage: stageEvents.actualDoesntMatchAvailable['v44'],
-	v33Test: testEvents.actualDoesntMatchAvailable['v33'],
+	v45Stage: stageEvents.actualDoesntMatchAvailable['v45'],
+	v7Test: testEvents.actualDoesntMatchAvailable['v7'],
 	v42Test: testEvents.actualDoesntMatchAvailable['v42'],
-	v44Test: testEvents.actualDoesntMatchAvailable['v44'],
-	v70Dev: devEvents.actualDoesntMatchAvailable['v70'],
+	v45Test: testEvents.actualDoesntMatchAvailable['v45'],
+	v85Dev: devEvents.actualDoesntMatchAvailable['v85'],
 }
 
 export const failedToSaveCalculatedReward = {
 	name: 'VestedRewards.FailedToSaveCalculatedReward',
 	v7: productionEvents.failedToSaveCalculatedReward['v7'],
-	v33Stage: stageEvents.failedToSaveCalculatedReward['v33'],
-	v33Test: testEvents.failedToSaveCalculatedReward['v33'],
-	v70Dev: devEvents.failedToSaveCalculatedReward['v70'],
+	v7Stage: stageEvents.failedToSaveCalculatedReward['v7'],
+	v7Test: testEvents.failedToSaveCalculatedReward['v7'],
+	v85Dev: devEvents.failedToSaveCalculatedReward['v85'],
 }
 
 export const addingZeroMarketMakerReward = {
 	name: 'VestedRewards.AddingZeroMarketMakerReward',
 	v7: productionEvents.addingZeroMarketMakerReward['v7'],
-	v33Stage: stageEvents.addingZeroMarketMakerReward['v33'],
-	v33Test: testEvents.addingZeroMarketMakerReward['v33'],
+	v7Stage: stageEvents.addingZeroMarketMakerReward['v7'],
+	v7Test: testEvents.addingZeroMarketMakerReward['v7'],
 }
 
 export const noEligibleMarketMakers = {
 	name: 'VestedRewards.NoEligibleMarketMakers',
 	v7: productionEvents.noEligibleMarketMakers['v7'],
-	v33Stage: stageEvents.noEligibleMarketMakers['v33'],
-	v33Test: testEvents.noEligibleMarketMakers['v33'],
+	v7Stage: stageEvents.noEligibleMarketMakers['v7'],
+	v7Test: testEvents.noEligibleMarketMakers['v7'],
 }
 
 export const crowdloanClaimed = {
 	name: 'VestedRewards.CrowdloanClaimed',
 	v53: productionEvents.crowdloanClaimed['v53'],
-	v52Stage: stageEvents.crowdloanClaimed['v52'],
-	v52Test: testEvents.crowdloanClaimed['v52'],
-	v70Dev: devEvents.crowdloanClaimed['v70'],
+	v53Stage: stageEvents.crowdloanClaimed['v53'],
+	v53Test: testEvents.crowdloanClaimed['v53'],
+	v85Dev: devEvents.crowdloanClaimed['v85'],
 }

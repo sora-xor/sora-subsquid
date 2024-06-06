@@ -1,6 +1,7 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
 import * as v64 from '../v64'
 import * as v70 from '../v70'
+import * as v84 from '../v84'
 
 export const messageDispatched =  {
     name: 'SubstrateDispatch.MessageDispatched',
@@ -17,6 +18,13 @@ export const messageDispatched =  {
     v70: new EventType(
         'SubstrateDispatch.MessageDispatched',
         sts.tuple([v70.MessageId, sts.result(() => sts.unit(), () => v70.DispatchError)])
+    ),
+    /**
+     * Message has been dispatched with given result.
+     */
+    v84: new EventType(
+        'SubstrateDispatch.MessageDispatched',
+        sts.tuple([v84.MessageId, sts.result(() => sts.unit(), () => v84.DispatchError)])
     ),
 }
 
@@ -36,6 +44,13 @@ export const messageRejected =  {
         'SubstrateDispatch.MessageRejected',
         v70.MessageId
     ),
+    /**
+     * Message has been rejected
+     */
+    v84: new EventType(
+        'SubstrateDispatch.MessageRejected',
+        v84.MessageId
+    ),
 }
 
 export const messageDecodeFailed =  {
@@ -53,5 +68,12 @@ export const messageDecodeFailed =  {
     v70: new EventType(
         'SubstrateDispatch.MessageDecodeFailed',
         v70.MessageId
+    ),
+    /**
+     * We have failed to decode a Call from the message.
+     */
+    v84: new EventType(
+        'SubstrateDispatch.MessageDecodeFailed',
+        v84.MessageId
     ),
 }

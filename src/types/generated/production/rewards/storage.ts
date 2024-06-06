@@ -5,12 +5,16 @@ import * as v33 from '../v33'
 import * as v42 from '../v42'
 import * as v46 from '../v46'
 import * as v57 from '../v57'
+import * as v72 from '../v72'
+import * as v74 from '../v74'
 
 export const reservesAcc =  {
     v1: new StorageType('Rewards.ReservesAcc', 'Default', [], v1.TechAccountId) as ReservesAccV1,
     v42: new StorageType('Rewards.ReservesAcc', 'Default', [], v42.TechAccountId) as ReservesAccV42,
     v46: new StorageType('Rewards.ReservesAcc', 'Default', [], v46.TechAccountId) as ReservesAccV46,
     v57: new StorageType('Rewards.ReservesAcc', 'Default', [], v57.TechAccountId) as ReservesAccV57,
+    v72: new StorageType('Rewards.ReservesAcc', 'Default', [], v72.TechAccountId) as ReservesAccV72,
+    v74: new StorageType('Rewards.ReservesAcc', 'Default', [], v74.TechAccountId) as ReservesAccV74,
 }
 
 export interface ReservesAccV1  {
@@ -35,6 +39,18 @@ export interface ReservesAccV57  {
     is(block: RuntimeCtx): boolean
     getDefault(block: Block): v57.TechAccountId
     get(block: Block): Promise<(v57.TechAccountId | undefined)>
+}
+
+export interface ReservesAccV72  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): v72.TechAccountId
+    get(block: Block): Promise<(v72.TechAccountId | undefined)>
+}
+
+export interface ReservesAccV74  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): v74.TechAccountId
+    get(block: Block): Promise<(v74.TechAccountId | undefined)>
 }
 
 export const valOwners =  {

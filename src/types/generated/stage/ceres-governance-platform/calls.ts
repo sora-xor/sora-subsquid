@@ -1,19 +1,19 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v26 from '../v26'
 import * as v37 from '../v37'
-import * as v69 from '../v69'
+import * as v70 from '../v70'
 
 export const vote =  {
     name: 'CeresGovernancePlatform.vote',
     /**
      *  Voting for option
      */
-    v33: new CallType(
+    v26: new CallType(
         'CeresGovernancePlatform.vote',
         sts.struct({
             pollId: sts.bytes(),
             votingOption: sts.number(),
-            numberOfVotes: v33.Balance,
+            numberOfVotes: v26.Balance,
         })
     ),
 }
@@ -23,13 +23,13 @@ export const createPoll =  {
     /**
      *  Create poll
      */
-    v33: new CallType(
+    v26: new CallType(
         'CeresGovernancePlatform.create_poll',
         sts.struct({
             pollId: sts.bytes(),
             numberOfOptions: sts.number(),
-            pollStartBlock: v33.BlockNumber,
-            pollEndBlock: v33.BlockNumber,
+            pollStartBlock: v26.BlockNumber,
+            pollEndBlock: v26.BlockNumber,
         })
     ),
     /**
@@ -47,13 +47,13 @@ export const createPoll =  {
     /**
      * Create poll
      */
-    v69: new CallType(
+    v70: new CallType(
         'CeresGovernancePlatform.create_poll',
         sts.struct({
-            pollAsset: v69.AssetId32,
+            pollAsset: v70.AssetId32,
             pollStartTimestamp: sts.bigint(),
             pollEndTimestamp: sts.bigint(),
-            title: v69.BoundedString,
+            title: v70.BoundedString,
             description: sts.bytes(),
             options: sts.array(() => sts.bytes()),
         })
@@ -65,7 +65,7 @@ export const withdraw =  {
     /**
      *  Withdraw voting funds
      */
-    v33: new CallType(
+    v26: new CallType(
         'CeresGovernancePlatform.withdraw',
         sts.struct({
             pollId: sts.bytes(),

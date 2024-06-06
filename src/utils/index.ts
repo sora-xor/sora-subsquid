@@ -57,7 +57,7 @@ export const shouldUpdate = (ctx: BlockContext, diff = 3_600) => {
 	const blockTimestamp = getBlockTimestamp(ctx)
 	const currentTimestamp = formatDateTimestamp(new Date())
   
-	return currentTimestamp - blockTimestamp < diff
+	return (currentTimestamp - blockTimestamp) < diff
 }
 
 export const toText = (data: Uint8Array): string => {
@@ -126,6 +126,11 @@ export const toCamelCase = (s: string): string => {
 
 	// Step 8: Return the result
 	return finalString
+}
+
+export const toPascalCase = (s: string): string => {
+	const camelCase = toCamelCase(s)
+	return camelCase.charAt(0).toUpperCase() + camelCase.slice(1)
 }
 
 export const getSnapshotTypes = (ctx: BlockContext, types: SnapshotType[]) => {

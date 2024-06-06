@@ -9,7 +9,7 @@ export const oracleEnabled = {
 	v45: productionEvents.oracleEnabled['v45'],
 	v45Stage: stageEvents.oracleEnabled['v45'],
 	v45Test: testEvents.oracleEnabled['v45'],
-	v70Dev: devEvents.oracleEnabled['v70'],
+	v85Dev: devEvents.oracleEnabled['v85'],
 }
 
 export const oracleDisabled = {
@@ -17,5 +17,5 @@ export const oracleDisabled = {
 	v45: productionEvents.oracleDisabled['v45'],
 	v45Stage: stageEvents.oracleDisabled['v45'],
 	v45Test: testEvents.oracleDisabled['v45'],
-	v70Dev: devEvents.oracleDisabled['v70'],
+	v85Dev: devEvents.oracleDisabled['v85'],
 }

@@ -1,18 +1,18 @@
 import {sts, Block, Bytes, Option, Result, StorageType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
 import * as v42 from '../v42'
 
 export const epochIndex =  {
     /**
      *  Current epoch index.
      */
-    v33: new StorageType('Babe.EpochIndex', 'Default', [], sts.bigint()) as EpochIndexV33,
+    v1: new StorageType('Babe.EpochIndex', 'Default', [], sts.bigint()) as EpochIndexV1,
 }
 
 /**
  *  Current epoch index.
  */
-export interface EpochIndexV33  {
+export interface EpochIndexV1  {
     is(block: RuntimeCtx): boolean
     getDefault(block: Block): bigint
     get(block: Block): Promise<(bigint | undefined)>
@@ -22,16 +22,16 @@ export const authorities =  {
     /**
      *  Current epoch authorities.
      */
-    v33: new StorageType('Babe.Authorities', 'Default', [], sts.array(() => sts.tuple(() => [v33.AuthorityId, v33.BabeAuthorityWeight]))) as AuthoritiesV33,
+    v1: new StorageType('Babe.Authorities', 'Default', [], sts.array(() => sts.tuple(() => [v1.AuthorityId, v1.BabeAuthorityWeight]))) as AuthoritiesV1,
 }
 
 /**
  *  Current epoch authorities.
  */
-export interface AuthoritiesV33  {
+export interface AuthoritiesV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): [v33.AuthorityId, v33.BabeAuthorityWeight][]
-    get(block: Block): Promise<([v33.AuthorityId, v33.BabeAuthorityWeight][] | undefined)>
+    getDefault(block: Block): [v1.AuthorityId, v1.BabeAuthorityWeight][]
+    get(block: Block): Promise<([v1.AuthorityId, v1.BabeAuthorityWeight][] | undefined)>
 }
 
 export const genesisSlot =  {
@@ -39,33 +39,33 @@ export const genesisSlot =  {
      *  The slot at which the first epoch actually started. This is 0
      *  until the first block of the chain.
      */
-    v33: new StorageType('Babe.GenesisSlot', 'Default', [], v33.Slot) as GenesisSlotV33,
+    v1: new StorageType('Babe.GenesisSlot', 'Default', [], v1.Slot) as GenesisSlotV1,
 }
 
 /**
  *  The slot at which the first epoch actually started. This is 0
  *  until the first block of the chain.
  */
-export interface GenesisSlotV33  {
+export interface GenesisSlotV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.Slot
-    get(block: Block): Promise<(v33.Slot | undefined)>
+    getDefault(block: Block): v1.Slot
+    get(block: Block): Promise<(v1.Slot | undefined)>
 }
 
 export const currentSlot =  {
     /**
      *  Current slot number.
      */
-    v33: new StorageType('Babe.CurrentSlot', 'Default', [], v33.Slot) as CurrentSlotV33,
+    v1: new StorageType('Babe.CurrentSlot', 'Default', [], v1.Slot) as CurrentSlotV1,
 }
 
 /**
  *  Current slot number.
  */
-export interface CurrentSlotV33  {
+export interface CurrentSlotV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.Slot
-    get(block: Block): Promise<(v33.Slot | undefined)>
+    getDefault(block: Block): v1.Slot
+    get(block: Block): Promise<(v1.Slot | undefined)>
 }
 
 export const randomness =  {
@@ -81,7 +81,7 @@ export const randomness =  {
      *  used where a number is needed that cannot have been chosen by an
      *  adversary, for purposes such as public-coin zero-knowledge proofs.
      */
-    v33: new StorageType('Babe.Randomness', 'Default', [], v33.Randomness) as RandomnessV33,
+    v1: new StorageType('Babe.Randomness', 'Default', [], v1.Randomness) as RandomnessV1,
 }
 
 /**
@@ -96,17 +96,17 @@ export const randomness =  {
  *  used where a number is needed that cannot have been chosen by an
  *  adversary, for purposes such as public-coin zero-knowledge proofs.
  */
-export interface RandomnessV33  {
+export interface RandomnessV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.Randomness
-    get(block: Block): Promise<(v33.Randomness | undefined)>
+    getDefault(block: Block): v1.Randomness
+    get(block: Block): Promise<(v1.Randomness | undefined)>
 }
 
 export const nextEpochConfig =  {
     /**
      *  Next epoch configuration, if changed.
      */
-    v33: new StorageType('Babe.NextEpochConfig', 'Optional', [], v33.NextConfigDescriptor) as NextEpochConfigV33,
+    v1: new StorageType('Babe.NextEpochConfig', 'Optional', [], v1.NextConfigDescriptor) as NextEpochConfigV1,
     /**
      *  The configuration for the next epoch, `None` if the config will not change
      *  (you can fallback to `EpochConfig` instead in that case).
@@ -117,9 +117,9 @@ export const nextEpochConfig =  {
 /**
  *  Next epoch configuration, if changed.
  */
-export interface NextEpochConfigV33  {
+export interface NextEpochConfigV1  {
     is(block: RuntimeCtx): boolean
-    get(block: Block): Promise<(v33.NextConfigDescriptor | undefined)>
+    get(block: Block): Promise<(v1.NextConfigDescriptor | undefined)>
 }
 
 /**
@@ -135,32 +135,32 @@ export const nextRandomness =  {
     /**
      *  Next epoch randomness.
      */
-    v33: new StorageType('Babe.NextRandomness', 'Default', [], v33.Randomness) as NextRandomnessV33,
+    v1: new StorageType('Babe.NextRandomness', 'Default', [], v1.Randomness) as NextRandomnessV1,
 }
 
 /**
  *  Next epoch randomness.
  */
-export interface NextRandomnessV33  {
+export interface NextRandomnessV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.Randomness
-    get(block: Block): Promise<(v33.Randomness | undefined)>
+    getDefault(block: Block): v1.Randomness
+    get(block: Block): Promise<(v1.Randomness | undefined)>
 }
 
 export const nextAuthorities =  {
     /**
      *  Next epoch authorities.
      */
-    v33: new StorageType('Babe.NextAuthorities', 'Default', [], sts.array(() => sts.tuple(() => [v33.AuthorityId, v33.BabeAuthorityWeight]))) as NextAuthoritiesV33,
+    v1: new StorageType('Babe.NextAuthorities', 'Default', [], sts.array(() => sts.tuple(() => [v1.AuthorityId, v1.BabeAuthorityWeight]))) as NextAuthoritiesV1,
 }
 
 /**
  *  Next epoch authorities.
  */
-export interface NextAuthoritiesV33  {
+export interface NextAuthoritiesV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): [v33.AuthorityId, v33.BabeAuthorityWeight][]
-    get(block: Block): Promise<([v33.AuthorityId, v33.BabeAuthorityWeight][] | undefined)>
+    getDefault(block: Block): [v1.AuthorityId, v1.BabeAuthorityWeight][]
+    get(block: Block): Promise<([v1.AuthorityId, v1.BabeAuthorityWeight][] | undefined)>
 }
 
 export const segmentIndex =  {
@@ -175,7 +175,7 @@ export const segmentIndex =  {
      *  We reset all segments and return to `0` at the beginning of every
      *  epoch.
      */
-    v33: new StorageType('Babe.SegmentIndex', 'Default', [], sts.number()) as SegmentIndexV33,
+    v1: new StorageType('Babe.SegmentIndex', 'Default', [], sts.number()) as SegmentIndexV1,
 }
 
 /**
@@ -189,7 +189,7 @@ export const segmentIndex =  {
  *  We reset all segments and return to `0` at the beginning of every
  *  epoch.
  */
-export interface SegmentIndexV33  {
+export interface SegmentIndexV1  {
     is(block: RuntimeCtx): boolean
     getDefault(block: Block): number
     get(block: Block): Promise<(number | undefined)>
@@ -199,25 +199,25 @@ export const underConstruction =  {
     /**
      *  TWOX-NOTE: `SegmentIndex` is an increasing integer, so this is okay.
      */
-    v33: new StorageType('Babe.UnderConstruction', 'Default', [sts.number()], sts.array(() => v33.Randomness)) as UnderConstructionV33,
+    v1: new StorageType('Babe.UnderConstruction', 'Default', [sts.number()], sts.array(() => v1.Randomness)) as UnderConstructionV1,
 }
 
 /**
  *  TWOX-NOTE: `SegmentIndex` is an increasing integer, so this is okay.
  */
-export interface UnderConstructionV33  {
+export interface UnderConstructionV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.Randomness[]
-    get(block: Block, key: number): Promise<(v33.Randomness[] | undefined)>
-    getMany(block: Block, keys: number[]): Promise<(v33.Randomness[] | undefined)[]>
+    getDefault(block: Block): v1.Randomness[]
+    get(block: Block, key: number): Promise<(v1.Randomness[] | undefined)>
+    getMany(block: Block, keys: number[]): Promise<(v1.Randomness[] | undefined)[]>
     getKeys(block: Block): Promise<number[]>
     getKeys(block: Block, key: number): Promise<number[]>
     getKeysPaged(pageSize: number, block: Block): AsyncIterable<number[]>
     getKeysPaged(pageSize: number, block: Block, key: number): AsyncIterable<number[]>
-    getPairs(block: Block): Promise<[k: number, v: (v33.Randomness[] | undefined)][]>
-    getPairs(block: Block, key: number): Promise<[k: number, v: (v33.Randomness[] | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: number, v: (v33.Randomness[] | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: number): AsyncIterable<[k: number, v: (v33.Randomness[] | undefined)][]>
+    getPairs(block: Block): Promise<[k: number, v: (v1.Randomness[] | undefined)][]>
+    getPairs(block: Block, key: number): Promise<[k: number, v: (v1.Randomness[] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: number, v: (v1.Randomness[] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: number): AsyncIterable<[k: number, v: (v1.Randomness[] | undefined)][]>
 }
 
 export const initialized =  {
@@ -225,7 +225,7 @@ export const initialized =  {
      *  Temporary value (cleared at block finalization) which is `Some`
      *  if per-block initialization has already been called for current block.
      */
-    v33: new StorageType('Babe.Initialized', 'Optional', [], v33.MaybeRandomness) as InitializedV33,
+    v1: new StorageType('Babe.Initialized', 'Optional', [], v1.MaybeRandomness) as InitializedV1,
     /**
      *  Temporary value (cleared at block finalization) which is `Some`
      *  if per-block initialization has already been called for current block.
@@ -237,9 +237,9 @@ export const initialized =  {
  *  Temporary value (cleared at block finalization) which is `Some`
  *  if per-block initialization has already been called for current block.
  */
-export interface InitializedV33  {
+export interface InitializedV1  {
     is(block: RuntimeCtx): boolean
-    get(block: Block): Promise<(v33.MaybeRandomness | undefined)>
+    get(block: Block): Promise<(v1.MaybeRandomness | undefined)>
 }
 
 /**
@@ -257,7 +257,7 @@ export const authorVrfRandomness =  {
      *  at this block. This field should always be populated during block processing unless
      *  secondary plain slots are enabled (which don't contain a VRF output).
      */
-    v33: new StorageType('Babe.AuthorVrfRandomness', 'Default', [], v33.MaybeRandomness) as AuthorVrfRandomnessV33,
+    v1: new StorageType('Babe.AuthorVrfRandomness', 'Default', [], v1.MaybeRandomness) as AuthorVrfRandomnessV1,
 }
 
 /**
@@ -265,10 +265,10 @@ export const authorVrfRandomness =  {
  *  at this block. This field should always be populated during block processing unless
  *  secondary plain slots are enabled (which don't contain a VRF output).
  */
-export interface AuthorVrfRandomnessV33  {
+export interface AuthorVrfRandomnessV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.MaybeRandomness
-    get(block: Block): Promise<(v33.MaybeRandomness | undefined)>
+    getDefault(block: Block): v1.MaybeRandomness
+    get(block: Block): Promise<(v1.MaybeRandomness | undefined)>
 }
 
 export const lateness =  {
@@ -279,7 +279,7 @@ export const lateness =  {
      *  on block finalization. Querying this storage entry outside of block
      *  execution context should always yield zero.
      */
-    v33: new StorageType('Babe.Lateness', 'Default', [], v33.BlockNumber) as LatenessV33,
+    v1: new StorageType('Babe.Lateness', 'Default', [], v1.BlockNumber) as LatenessV1,
 }
 
 /**
@@ -289,10 +289,10 @@ export const lateness =  {
  *  on block finalization. Querying this storage entry outside of block
  *  execution context should always yield zero.
  */
-export interface LatenessV33  {
+export interface LatenessV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.BlockNumber
-    get(block: Block): Promise<(v33.BlockNumber | undefined)>
+    getDefault(block: Block): v1.BlockNumber
+    get(block: Block): Promise<(v1.BlockNumber | undefined)>
 }
 
 export const pendingEpochConfigChange =  {

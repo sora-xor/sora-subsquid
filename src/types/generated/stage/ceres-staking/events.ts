@@ -1,14 +1,15 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v19 from '../v19'
+import * as v26 from '../v26'
 
 export const deposited =  {
     name: 'CeresStaking.Deposited',
     /**
      *  Ceres deposited. [who, amount]
      */
-    v33: new EventType(
+    v19: new EventType(
         'CeresStaking.Deposited',
-        sts.tuple([v33.AccountId, v33.Balance])
+        sts.tuple([v19.AccountId, v19.Balance])
     ),
 }
 
@@ -17,9 +18,9 @@ export const withdrawn =  {
     /**
      *  Staked Ceres and rewards withdrawn. [who, staked, rewards]
      */
-    v33: new EventType(
+    v19: new EventType(
         'CeresStaking.Withdrawn',
-        sts.tuple([v33.AccountId, v33.Balance, v33.Balance])
+        sts.tuple([v19.AccountId, v19.Balance, v19.Balance])
     ),
 }
 
@@ -28,8 +29,8 @@ export const rewardsChanged =  {
     /**
      *  Rewards changed [balance]
      */
-    v33: new EventType(
+    v26: new EventType(
         'CeresStaking.RewardsChanged',
-        v33.Balance
+        v26.Balance
     ),
 }

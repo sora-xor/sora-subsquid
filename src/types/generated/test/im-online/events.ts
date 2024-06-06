@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
 import * as v42 from '../v42'
 
 export const heartbeatReceived =  {
@@ -7,9 +7,9 @@ export const heartbeatReceived =  {
     /**
      *  A new heartbeat was received from `AuthorityId` \[authority_id\]
      */
-    v33: new EventType(
+    v1: new EventType(
         'ImOnline.HeartbeatReceived',
-        v33.AuthorityId
+        v1.AuthorityId
     ),
     /**
      * A new heartbeat was received from `AuthorityId`.
@@ -27,7 +27,7 @@ export const allGood =  {
     /**
      *  At the end of the session, no offence was committed.
      */
-    v33: new EventType(
+    v1: new EventType(
         'ImOnline.AllGood',
         sts.unit()
     ),
@@ -38,9 +38,9 @@ export const someOffline =  {
     /**
      *  At the end of the session, at least one validator was found to be \[offline\].
      */
-    v33: new EventType(
+    v1: new EventType(
         'ImOnline.SomeOffline',
-        sts.array(() => v33.IdentificationTuple)
+        sts.array(() => v1.IdentificationTuple)
     ),
     /**
      * At the end of the session, at least one validator was found to be offline.

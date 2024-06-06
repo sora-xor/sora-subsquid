@@ -1,14 +1,14 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const deposited =  {
     name: 'CeresStaking.Deposited',
     /**
      * Ceres deposited. [who, amount]
      */
-    v70: new EventType(
+    v85: new EventType(
         'CeresStaking.Deposited',
-        sts.tuple([v70.AccountId32, sts.bigint()])
+        sts.tuple([v85.AccountId32, sts.bigint()])
     ),
 }
 
@@ -17,9 +17,9 @@ export const withdrawn =  {
     /**
      * Staked Ceres and rewards withdrawn. [who, staked, rewards]
      */
-    v70: new EventType(
+    v85: new EventType(
         'CeresStaking.Withdrawn',
-        sts.tuple([v70.AccountId32, sts.bigint(), sts.bigint()])
+        sts.tuple([v85.AccountId32, sts.bigint(), sts.bigint()])
     ),
 }
 
@@ -28,7 +28,7 @@ export const rewardsChanged =  {
     /**
      * Rewards changed [balance]
      */
-    v70: new EventType(
+    v85: new EventType(
         'CeresStaking.RewardsChanged',
         sts.bigint()
     ),

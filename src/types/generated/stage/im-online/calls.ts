@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
 
 export const heartbeat =  {
     name: 'ImOnline.heartbeat',
@@ -14,11 +14,11 @@ export const heartbeat =  {
      *  - DbWrites: `ReceivedHeartbeats`
      *  # </weight>
      */
-    v33: new CallType(
+    v1: new CallType(
         'ImOnline.heartbeat',
         sts.struct({
-            heartbeat: v33.Heartbeat,
-            signature: v33.Signature,
+            heartbeat: v1.Heartbeat,
+            signature: v1.Signature,
         })
     ),
 }

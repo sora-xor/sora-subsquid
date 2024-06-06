@@ -1,15 +1,15 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const lockTokens =  {
     name: 'CeresTokenLocker.lock_tokens',
     /**
      * Lock tokens
      */
-    v70: new CallType(
+    v85: new CallType(
         'CeresTokenLocker.lock_tokens',
         sts.struct({
-            assetId: v70.AssetId32,
+            assetId: v85.AssetId32,
             unlockingTimestamp: sts.bigint(),
             numberOfTokens: sts.bigint(),
         })
@@ -21,10 +21,10 @@ export const withdrawTokens =  {
     /**
      * Withdraw tokens
      */
-    v70: new CallType(
+    v85: new CallType(
         'CeresTokenLocker.withdraw_tokens',
         sts.struct({
-            assetId: v70.AssetId32,
+            assetId: v85.AssetId32,
             unlockingTimestamp: sts.bigint(),
             numberOfTokens: sts.bigint(),
         })
@@ -36,7 +36,7 @@ export const changeFee =  {
     /**
      * Change fee
      */
-    v70: new CallType(
+    v85: new CallType(
         'CeresTokenLocker.change_fee',
         sts.struct({
             newFee: sts.bigint(),

@@ -1,33 +1,33 @@
 import {sts, Block, Bytes, Option, Result, StorageType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
 
 export const now =  {
     /**
      *  Current time for the current block.
      */
-    v33: new StorageType('Timestamp.Now', 'Default', [], v33.Moment) as NowV33,
+    v1: new StorageType('Timestamp.Now', 'Default', [], v1.Moment) as NowV1,
 }
 
 /**
  *  Current time for the current block.
  */
-export interface NowV33  {
+export interface NowV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.Moment
-    get(block: Block): Promise<(v33.Moment | undefined)>
+    getDefault(block: Block): v1.Moment
+    get(block: Block): Promise<(v1.Moment | undefined)>
 }
 
 export const didUpdate =  {
     /**
      *  Did the timestamp get updated in this block?
      */
-    v33: new StorageType('Timestamp.DidUpdate', 'Default', [], sts.boolean()) as DidUpdateV33,
+    v1: new StorageType('Timestamp.DidUpdate', 'Default', [], sts.boolean()) as DidUpdateV1,
 }
 
 /**
  *  Did the timestamp get updated in this block?
  */
-export interface DidUpdateV33  {
+export interface DidUpdateV1  {
     is(block: RuntimeCtx): boolean
     getDefault(block: Block): boolean
     get(block: Block): Promise<(boolean | undefined)>

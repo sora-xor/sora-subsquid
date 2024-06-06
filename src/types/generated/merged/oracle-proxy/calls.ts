@@ -9,7 +9,7 @@ export const enableOracle = {
 	v45: productionCalls.enableOracle['v45'],
 	v45Stage: stageCalls.enableOracle['v45'],
 	v45Test: testCalls.enableOracle['v45'],
-	v70Dev: devCalls.enableOracle['v70'],
+	v85Dev: devCalls.enableOracle['v85'],
 }
 
 export const disableOracle = {
@@ -17,5 +17,5 @@ export const disableOracle = {
 	v45: productionCalls.disableOracle['v45'],
 	v45Stage: stageCalls.disableOracle['v45'],
 	v45Test: testCalls.disableOracle['v45'],
-	v70Dev: devCalls.disableOracle['v70'],
+	v85Dev: devCalls.disableOracle['v85'],
 }

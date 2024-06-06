@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
 import * as v42 from '../v42'
 
 export const transfer =  {
@@ -33,10 +33,10 @@ export const transfer =  {
      *  - Origin account is already in memory, so no DB operations for them.
      *  # </weight>
      */
-    v33: new CallType(
+    v1: new CallType(
         'Balances.transfer',
         sts.struct({
-            dest: v33.LookupSource,
+            dest: v1.LookupSource,
             value: sts.bigint(),
         })
     ),
@@ -64,10 +64,10 @@ export const setBalance =  {
      *  - DB Weight: 1 Read, 1 Write to `who`
      *  # </weight>
      */
-    v33: new CallType(
+    v1: new CallType(
         'Balances.set_balance',
         sts.struct({
-            who: v33.LookupSource,
+            who: v1.LookupSource,
             newFree: sts.bigint(),
             newReserved: sts.bigint(),
         })
@@ -84,11 +84,11 @@ export const forceTransfer =  {
      *    not assumed to be in the overlay.
      *  # </weight>
      */
-    v33: new CallType(
+    v1: new CallType(
         'Balances.force_transfer',
         sts.struct({
-            source: v33.LookupSource,
-            dest: v33.LookupSource,
+            source: v1.LookupSource,
+            dest: v1.LookupSource,
             value: sts.bigint(),
         })
     ),
@@ -109,10 +109,10 @@ export const transferKeepAlive =  {
      *  - DB Weight: 1 Read and 1 Write to dest (sender is in overlay already)
      *  #</weight>
      */
-    v33: new CallType(
+    v1: new CallType(
         'Balances.transfer_keep_alive',
         sts.struct({
-            dest: v33.LookupSource,
+            dest: v1.LookupSource,
             value: sts.bigint(),
         })
     ),

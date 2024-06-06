@@ -1,9 +1,11 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
+import * as v22 from '../v22'
+import * as v26 from '../v26'
 import * as v42 from '../v42'
-import * as v44 from '../v44'
-import * as v48 from '../v48'
-import * as v52 from '../v52'
+import * as v45 from '../v45'
+import * as v50 from '../v50'
+import * as v53 from '../v53'
 
 export const register =  {
     name: 'Assets.register',
@@ -14,16 +16,51 @@ export const register =  {
      *  AssetSymbol should represent string with only uppercase latin chars with max length of 7.
      *  AssetName should represent string with only uppercase or lowercase latin chars or numbers or spaces, with max length of 33.
      */
-    v33: new CallType(
+    v1: new CallType(
         'Assets.register',
         sts.struct({
-            symbol: v33.AssetSymbol,
-            name: v33.AssetName,
-            initialSupply: v33.TAssetBalance,
+            symbol: v1.AssetSymbol,
+            name: v1.AssetName,
+            initialSupply: v1.TAssetBalance,
+            isMintable: sts.boolean(),
+        })
+    ),
+    /**
+     *  Performs an asset registration.
+     * 
+     *  Registers new `AssetId` for the given `origin`.
+     *  AssetSymbol should represent string with only uppercase latin chars with max length of 7.
+     *  AssetName should represent string with only uppercase or lowercase latin chars or numbers or spaces, with max length of 33.
+     */
+    v22: new CallType(
+        'Assets.register',
+        sts.struct({
+            symbol: v22.AssetSymbol,
+            name: v22.AssetName,
+            initialSupply: v22.TAssetBalance,
+            isMintable: sts.boolean(),
+            isNft: sts.boolean(),
+            optContentSrc: sts.option(() => v22.ContentSource),
+            optDesc: sts.option(() => v22.Description),
+        })
+    ),
+    /**
+     *  Performs an asset registration.
+     * 
+     *  Registers new `AssetId` for the given `origin`.
+     *  AssetSymbol should represent string with only uppercase latin chars with max length of 7.
+     *  AssetName should represent string with only uppercase or lowercase latin chars or numbers or spaces, with max length of 33.
+     */
+    v26: new CallType(
+        'Assets.register',
+        sts.struct({
+            symbol: v26.AssetSymbol,
+            name: v26.AssetName,
+            initialSupply: v26.TAssetBalance,
             isMintable: sts.boolean(),
             isIndivisible: sts.boolean(),
-            optContentSrc: sts.option(() => v33.ContentSource),
-            optDesc: sts.option(() => v33.Description),
+            optContentSrc: sts.option(() => v26.ContentSource),
+            optDesc: sts.option(() => v26.Description),
         })
     ),
 }
@@ -38,12 +75,12 @@ export const transfer =  {
      *  - `to`: Id of Account, to which Asset amount is deposited,
      *  - `amount`: transferred Asset amount.
      */
-    v33: new CallType(
+    v1: new CallType(
         'Assets.transfer',
         sts.struct({
-            assetId: v33.AssetId,
-            to: v33.AccountId,
-            amount: v33.TAssetBalance,
+            assetId: v1.AssetId,
+            to: v1.AccountId,
+            amount: v1.TAssetBalance,
         })
     ),
     /**
@@ -75,12 +112,12 @@ export const mint =  {
      *  - `to`: Id of Account, to which Asset amount is minted,
      *  - `amount`: minted Asset amount.
      */
-    v33: new CallType(
+    v1: new CallType(
         'Assets.mint',
         sts.struct({
-            assetId: v33.AssetId,
-            to: v33.AccountId,
-            amount: v33.TAssetBalance,
+            assetId: v1.AssetId,
+            to: v1.AccountId,
+            amount: v1.TAssetBalance,
         })
     ),
     /**
@@ -112,11 +149,11 @@ export const burn =  {
      *  - `asset_id`: Id of burned Asset,
      *  - `amount`: burned Asset amount.
      */
-    v33: new CallType(
+    v1: new CallType(
         'Assets.burn',
         sts.struct({
-            assetId: v33.AssetId,
-            amount: v33.TAssetBalance,
+            assetId: v1.AssetId,
+            amount: v1.TAssetBalance,
         })
     ),
     /**
@@ -145,10 +182,10 @@ export const setNonMintable =  {
      *  - `origin`: caller Account, should correspond to Asset owner
      *  - `asset_id`: Id of burned Asset,
      */
-    v33: new CallType(
+    v1: new CallType(
         'Assets.set_non_mintable',
         sts.struct({
-            assetId: v33.AssetId,
+            assetId: v1.AssetId,
         })
     ),
     /**
@@ -181,11 +218,11 @@ export const forceMint =  {
      * - `to`: Id of Account, to which Asset amount is minted,
      * - `amount`: minted Asset amount.
      */
-    v44: new CallType(
+    v45: new CallType(
         'Assets.force_mint',
         sts.struct({
-            assetId: v44.AssetId32,
-            to: v44.AccountId32,
+            assetId: v45.AssetId32,
+            to: v45.AccountId32,
             amount: sts.bigint(),
         })
     ),
@@ -202,11 +239,11 @@ export const updateBalance =  {
      * 
      * TODO: move into tests extrinsic collection pallet
      */
-    v48: new CallType(
+    v50: new CallType(
         'Assets.update_balance',
         sts.struct({
-            who: v48.AccountId32,
-            currencyId: v48.AssetId32,
+            who: v50.AccountId32,
+            currencyId: v50.AssetId32,
             amount: sts.bigint(),
         })
     ),
@@ -222,12 +259,12 @@ export const updateInfo =  {
      * - `new_symbol`: New asset symbol. If None asset symbol will not change
      * - `new_name`: New asset name. If None asset name will not change
      */
-    v52: new CallType(
+    v53: new CallType(
         'Assets.update_info',
         sts.struct({
-            assetId: v52.AssetId32,
-            newSymbol: sts.option(() => v52.AssetSymbol),
-            newName: sts.option(() => v52.AssetName),
+            assetId: v53.AssetId32,
+            newSymbol: sts.option(() => v53.AssetSymbol),
+            newName: sts.option(() => v53.AssetName),
         })
     ),
 }

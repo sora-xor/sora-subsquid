@@ -9,7 +9,7 @@ export const listNodes = {
 	v42: productionStorage.listNodes['v42'],
 	v42Stage: stageStorage.listNodes['v42'],
 	v42Test: testStorage.listNodes['v42'],
-	v70Dev: devStorage.listNodes['v70'],
+	v85Dev: devStorage.listNodes['v85'],
 }
 
 export const counterForListNodes = {
@@ -17,7 +17,7 @@ export const counterForListNodes = {
 	v42: productionStorage.counterForListNodes['v42'],
 	v42Stage: stageStorage.counterForListNodes['v42'],
 	v42Test: testStorage.counterForListNodes['v42'],
-	v70Dev: devStorage.counterForListNodes['v70'],
+	v85Dev: devStorage.counterForListNodes['v85'],
 }
 
 export const listBags = {
@@ -25,5 +25,5 @@ export const listBags = {
 	v42: productionStorage.listBags['v42'],
 	v42Stage: stageStorage.listBags['v42'],
 	v42Test: testStorage.listBags['v42'],
-	v70Dev: devStorage.listBags['v70'],
+	v85Dev: devStorage.listBags['v85'],
 }

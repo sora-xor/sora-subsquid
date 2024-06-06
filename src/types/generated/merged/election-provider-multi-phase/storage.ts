@@ -9,7 +9,7 @@ export const round = {
 	v42: productionStorage.round['v42'],
 	v42Stage: stageStorage.round['v42'],
 	v42Test: testStorage.round['v42'],
-	v70Dev: devStorage.round['v70'],
+	v85Dev: devStorage.round['v85'],
 }
 
 export const currentPhase = {
@@ -17,7 +17,7 @@ export const currentPhase = {
 	v42: productionStorage.currentPhase['v42'],
 	v42Stage: stageStorage.currentPhase['v42'],
 	v42Test: testStorage.currentPhase['v42'],
-	v70Dev: devStorage.currentPhase['v70'],
+	v85Dev: devStorage.currentPhase['v85'],
 }
 
 export const queuedSolution = {
@@ -25,7 +25,7 @@ export const queuedSolution = {
 	v42: productionStorage.queuedSolution['v42'],
 	v42Stage: stageStorage.queuedSolution['v42'],
 	v42Test: testStorage.queuedSolution['v42'],
-	v70Dev: devStorage.queuedSolution['v70'],
+	v85Dev: devStorage.queuedSolution['v85'],
 }
 
 export const snapshot = {
@@ -33,7 +33,7 @@ export const snapshot = {
 	v42: productionStorage.snapshot['v42'],
 	v42Stage: stageStorage.snapshot['v42'],
 	v42Test: testStorage.snapshot['v42'],
-	v70Dev: devStorage.snapshot['v70'],
+	v85Dev: devStorage.snapshot['v85'],
 }
 
 export const desiredTargets = {
@@ -41,7 +41,7 @@ export const desiredTargets = {
 	v42: productionStorage.desiredTargets['v42'],
 	v42Stage: stageStorage.desiredTargets['v42'],
 	v42Test: testStorage.desiredTargets['v42'],
-	v70Dev: devStorage.desiredTargets['v70'],
+	v85Dev: devStorage.desiredTargets['v85'],
 }
 
 export const snapshotMetadata = {
@@ -49,7 +49,7 @@ export const snapshotMetadata = {
 	v42: productionStorage.snapshotMetadata['v42'],
 	v42Stage: stageStorage.snapshotMetadata['v42'],
 	v42Test: testStorage.snapshotMetadata['v42'],
-	v70Dev: devStorage.snapshotMetadata['v70'],
+	v85Dev: devStorage.snapshotMetadata['v85'],
 }
 
 export const signedSubmissionNextIndex = {
@@ -57,7 +57,7 @@ export const signedSubmissionNextIndex = {
 	v42: productionStorage.signedSubmissionNextIndex['v42'],
 	v42Stage: stageStorage.signedSubmissionNextIndex['v42'],
 	v42Test: testStorage.signedSubmissionNextIndex['v42'],
-	v70Dev: devStorage.signedSubmissionNextIndex['v70'],
+	v85Dev: devStorage.signedSubmissionNextIndex['v85'],
 }
 
 export const signedSubmissionIndices = {
@@ -65,10 +65,10 @@ export const signedSubmissionIndices = {
 	v42: productionStorage.signedSubmissionIndices['v42'],
 	v53: productionStorage.signedSubmissionIndices['v53'],
 	v42Stage: stageStorage.signedSubmissionIndices['v42'],
-	v52Stage: stageStorage.signedSubmissionIndices['v52'],
+	v53Stage: stageStorage.signedSubmissionIndices['v53'],
 	v42Test: testStorage.signedSubmissionIndices['v42'],
-	v52Test: testStorage.signedSubmissionIndices['v52'],
-	v70Dev: devStorage.signedSubmissionIndices['v70'],
+	v53Test: testStorage.signedSubmissionIndices['v53'],
+	v85Dev: devStorage.signedSubmissionIndices['v85'],
 }
 
 export const signedSubmissionsMap = {
@@ -76,7 +76,7 @@ export const signedSubmissionsMap = {
 	v42: productionStorage.signedSubmissionsMap['v42'],
 	v42Stage: stageStorage.signedSubmissionsMap['v42'],
 	v42Test: testStorage.signedSubmissionsMap['v42'],
-	v70Dev: devStorage.signedSubmissionsMap['v70'],
+	v85Dev: devStorage.signedSubmissionsMap['v85'],
 }
 
 export const minimumUntrustedScore = {
@@ -84,5 +84,5 @@ export const minimumUntrustedScore = {
 	v42: productionStorage.minimumUntrustedScore['v42'],
 	v42Stage: stageStorage.minimumUntrustedScore['v42'],
 	v42Test: testStorage.minimumUntrustedScore['v42'],
-	v70Dev: devStorage.minimumUntrustedScore['v70'],
+	v85Dev: devStorage.minimumUntrustedScore['v85'],
 }

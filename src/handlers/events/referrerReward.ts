@@ -27,7 +27,6 @@ export async function referrerRewardEventHandler(ctx: BlockContext, event: Event
 	}
 
 	referrerReward.updated = getBlockTimestamp(ctx)
-	referrerReward.updatedAtBlock = ctx.block.header.height
 
 	referrerReward.amount = referrerReward.amount + amount
 

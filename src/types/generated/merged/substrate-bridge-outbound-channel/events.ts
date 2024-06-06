@@ -8,11 +8,17 @@ export const messageAccepted = {
 	name: 'SubstrateBridgeOutboundChannel.MessageAccepted',
 	v64: productionEvents.messageAccepted['v64'],
 	v70: productionEvents.messageAccepted['v70'],
-	v52Stage: stageEvents.messageAccepted['v52'],
-	v57Stage: stageEvents.messageAccepted['v57'],
+	v64Stage: stageEvents.messageAccepted['v64'],
 	v70Stage: stageEvents.messageAccepted['v70'],
-	v52Test: testEvents.messageAccepted['v52'],
-	v57Test: testEvents.messageAccepted['v57'],
+	v64Test: testEvents.messageAccepted['v64'],
 	v70Test: testEvents.messageAccepted['v70'],
-	v70Dev: devEvents.messageAccepted['v70'],
+	v85Dev: devEvents.messageAccepted['v85'],
+}
+
+export const intervalUpdated = {
+	name: 'SubstrateBridgeOutboundChannel.IntervalUpdated',
+	v72: productionEvents.intervalUpdated['v72'],
+	v72Stage: stageEvents.intervalUpdated['v72'],
+	v72Test: testEvents.intervalUpdated['v72'],
+	v85Dev: devEvents.intervalUpdated['v85'],
 }

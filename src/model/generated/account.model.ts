@@ -13,7 +13,4 @@ export class Account {
     @Index_()
     @ManyToOne_(() => HistoryElement, {nullable: true})
     latestHistoryElement!: HistoryElement | undefined | null
-
-    @Column_("int4", {nullable: false})
-    updatedAtBlock!: number
 }

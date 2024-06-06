@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v26 from '../v26'
 import * as v42 from '../v42'
 
 export const locked =  {
@@ -7,9 +7,9 @@ export const locked =  {
     /**
      *  Funds Locked [who, amount, asset]
      */
-    v33: new EventType(
+    v26: new EventType(
         'CeresTokenLocker.Locked',
-        sts.tuple([v33.AccountId, v33.Balance, v33.AssetIdOf])
+        sts.tuple([v26.AccountId, v26.Balance, v26.AssetIdOf])
     ),
     /**
      * Funds Locked [who, amount, asset]
@@ -25,9 +25,9 @@ export const withdrawn =  {
     /**
      *  Funds Withdrawn [who, amount, asset]
      */
-    v33: new EventType(
+    v26: new EventType(
         'CeresTokenLocker.Withdrawn',
-        sts.tuple([v33.AccountId, v33.Balance, v33.AssetIdOf])
+        sts.tuple([v26.AccountId, v26.Balance, v26.AssetIdOf])
     ),
     /**
      * Funds Withdrawn [who, amount, asset]
@@ -43,8 +43,8 @@ export const feeChanged =  {
     /**
      *  Fee Changed [who, amount]
      */
-    v33: new EventType(
+    v26: new EventType(
         'CeresTokenLocker.FeeChanged',
-        sts.tuple([v33.AccountId, v33.Balance])
+        sts.tuple([v26.AccountId, v26.Balance])
     ),
 }

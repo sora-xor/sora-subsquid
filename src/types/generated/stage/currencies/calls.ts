@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
 import * as v42 from '../v42'
 
 export const transfer =  {
@@ -10,11 +10,11 @@ export const transfer =  {
      *  The dispatch origin for this call must be `Signed` by the
      *  transactor.
      */
-    v33: new CallType(
+    v1: new CallType(
         'Currencies.transfer',
         sts.struct({
-            dest: v33.LookupSource,
-            currencyId: v33.CurrencyIdOf,
+            dest: v1.LookupSource,
+            currencyId: v1.CurrencyIdOf,
             amount: sts.bigint(),
         })
     ),
@@ -42,10 +42,10 @@ export const transferNativeCurrency =  {
      *  The dispatch origin for this call must be `Signed` by the
      *  transactor.
      */
-    v33: new CallType(
+    v1: new CallType(
         'Currencies.transfer_native_currency',
         sts.struct({
-            dest: v33.LookupSource,
+            dest: v1.LookupSource,
             amount: sts.bigint(),
         })
     ),
@@ -58,12 +58,12 @@ export const updateBalance =  {
      * 
      *  The dispatch origin of this call must be _Root_.
      */
-    v33: new CallType(
+    v1: new CallType(
         'Currencies.update_balance',
         sts.struct({
-            who: v33.LookupSource,
-            currencyId: v33.CurrencyIdOf,
-            amount: v33.AmountOf,
+            who: v1.LookupSource,
+            currencyId: v1.CurrencyIdOf,
+            amount: v1.AmountOf,
         })
     ),
     /**

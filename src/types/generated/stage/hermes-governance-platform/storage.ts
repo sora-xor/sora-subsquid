@@ -1,6 +1,6 @@
 import {sts, Block, Bytes, Option, Result, StorageType, RuntimeCtx} from '../support'
 import * as v47 from '../v47'
-import * as v55 from '../v55'
+import * as v57 from '../v57'
 
 export const hermesVotings =  {
     /**
@@ -10,7 +10,7 @@ export const hermesVotings =  {
     /**
      *  A vote of a particular user for a particular poll
      */
-    v55: new StorageType('HermesGovernancePlatform.HermesVotings', 'Optional', [v55.H256, v55.AccountId32], v55.HermesVotingInfo) as HermesVotingsV55,
+    v57: new StorageType('HermesGovernancePlatform.HermesVotings', 'Optional', [v57.H256, v57.AccountId32], v57.HermesVotingInfo) as HermesVotingsV57,
 }
 
 /**
@@ -37,27 +37,27 @@ export interface HermesVotingsV47  {
 /**
  *  A vote of a particular user for a particular poll
  */
-export interface HermesVotingsV55  {
+export interface HermesVotingsV57  {
     is(block: RuntimeCtx): boolean
-    get(block: Block, key1: v55.H256, key2: v55.AccountId32): Promise<(v55.HermesVotingInfo | undefined)>
-    getMany(block: Block, keys: [v55.H256, v55.AccountId32][]): Promise<(v55.HermesVotingInfo | undefined)[]>
-    getKeys(block: Block): Promise<[v55.H256, v55.AccountId32][]>
-    getKeys(block: Block, key1: v55.H256): Promise<[v55.H256, v55.AccountId32][]>
-    getKeys(block: Block, key1: v55.H256, key2: v55.AccountId32): Promise<[v55.H256, v55.AccountId32][]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v55.H256, v55.AccountId32][]>
-    getKeysPaged(pageSize: number, block: Block, key1: v55.H256): AsyncIterable<[v55.H256, v55.AccountId32][]>
-    getKeysPaged(pageSize: number, block: Block, key1: v55.H256, key2: v55.AccountId32): AsyncIterable<[v55.H256, v55.AccountId32][]>
-    getPairs(block: Block): Promise<[k: [v55.H256, v55.AccountId32], v: (v55.HermesVotingInfo | undefined)][]>
-    getPairs(block: Block, key1: v55.H256): Promise<[k: [v55.H256, v55.AccountId32], v: (v55.HermesVotingInfo | undefined)][]>
-    getPairs(block: Block, key1: v55.H256, key2: v55.AccountId32): Promise<[k: [v55.H256, v55.AccountId32], v: (v55.HermesVotingInfo | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v55.H256, v55.AccountId32], v: (v55.HermesVotingInfo | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key1: v55.H256): AsyncIterable<[k: [v55.H256, v55.AccountId32], v: (v55.HermesVotingInfo | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key1: v55.H256, key2: v55.AccountId32): AsyncIterable<[k: [v55.H256, v55.AccountId32], v: (v55.HermesVotingInfo | undefined)][]>
+    get(block: Block, key1: v57.H256, key2: v57.AccountId32): Promise<(v57.HermesVotingInfo | undefined)>
+    getMany(block: Block, keys: [v57.H256, v57.AccountId32][]): Promise<(v57.HermesVotingInfo | undefined)[]>
+    getKeys(block: Block): Promise<[v57.H256, v57.AccountId32][]>
+    getKeys(block: Block, key1: v57.H256): Promise<[v57.H256, v57.AccountId32][]>
+    getKeys(block: Block, key1: v57.H256, key2: v57.AccountId32): Promise<[v57.H256, v57.AccountId32][]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v57.H256, v57.AccountId32][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v57.H256): AsyncIterable<[v57.H256, v57.AccountId32][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v57.H256, key2: v57.AccountId32): AsyncIterable<[v57.H256, v57.AccountId32][]>
+    getPairs(block: Block): Promise<[k: [v57.H256, v57.AccountId32], v: (v57.HermesVotingInfo | undefined)][]>
+    getPairs(block: Block, key1: v57.H256): Promise<[k: [v57.H256, v57.AccountId32], v: (v57.HermesVotingInfo | undefined)][]>
+    getPairs(block: Block, key1: v57.H256, key2: v57.AccountId32): Promise<[k: [v57.H256, v57.AccountId32], v: (v57.HermesVotingInfo | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v57.H256, v57.AccountId32], v: (v57.HermesVotingInfo | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v57.H256): AsyncIterable<[k: [v57.H256, v57.AccountId32], v: (v57.HermesVotingInfo | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v57.H256, key2: v57.AccountId32): AsyncIterable<[k: [v57.H256, v57.AccountId32], v: (v57.HermesVotingInfo | undefined)][]>
 }
 
 export const hermesPollData =  {
     v47: new StorageType('HermesGovernancePlatform.HermesPollData', 'Optional', [v47.H256], v47.HermesPollInfo) as HermesPollDataV47,
-    v55: new StorageType('HermesGovernancePlatform.HermesPollData', 'Optional', [v55.H256], v55.HermesPollInfo) as HermesPollDataV55,
+    v57: new StorageType('HermesGovernancePlatform.HermesPollData', 'Optional', [v57.H256], v57.HermesPollInfo) as HermesPollDataV57,
 }
 
 export interface HermesPollDataV47  {
@@ -74,18 +74,18 @@ export interface HermesPollDataV47  {
     getPairsPaged(pageSize: number, block: Block, key: v47.H256): AsyncIterable<[k: v47.H256, v: (v47.HermesPollInfo | undefined)][]>
 }
 
-export interface HermesPollDataV55  {
+export interface HermesPollDataV57  {
     is(block: RuntimeCtx): boolean
-    get(block: Block, key: v55.H256): Promise<(v55.HermesPollInfo | undefined)>
-    getMany(block: Block, keys: v55.H256[]): Promise<(v55.HermesPollInfo | undefined)[]>
-    getKeys(block: Block): Promise<v55.H256[]>
-    getKeys(block: Block, key: v55.H256): Promise<v55.H256[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v55.H256[]>
-    getKeysPaged(pageSize: number, block: Block, key: v55.H256): AsyncIterable<v55.H256[]>
-    getPairs(block: Block): Promise<[k: v55.H256, v: (v55.HermesPollInfo | undefined)][]>
-    getPairs(block: Block, key: v55.H256): Promise<[k: v55.H256, v: (v55.HermesPollInfo | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v55.H256, v: (v55.HermesPollInfo | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v55.H256): AsyncIterable<[k: v55.H256, v: (v55.HermesPollInfo | undefined)][]>
+    get(block: Block, key: v57.H256): Promise<(v57.HermesPollInfo | undefined)>
+    getMany(block: Block, keys: v57.H256[]): Promise<(v57.HermesPollInfo | undefined)[]>
+    getKeys(block: Block): Promise<v57.H256[]>
+    getKeys(block: Block, key: v57.H256): Promise<v57.H256[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v57.H256[]>
+    getKeysPaged(pageSize: number, block: Block, key: v57.H256): AsyncIterable<v57.H256[]>
+    getPairs(block: Block): Promise<[k: v57.H256, v: (v57.HermesPollInfo | undefined)][]>
+    getPairs(block: Block, key: v57.H256): Promise<[k: v57.H256, v: (v57.HermesPollInfo | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v57.H256, v: (v57.HermesPollInfo | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v57.H256): AsyncIterable<[k: v57.H256, v: (v57.HermesPollInfo | undefined)][]>
 }
 
 export const minimumHermesVotingAmount =  {
@@ -128,14 +128,14 @@ export const palletStorageVersion =  {
     /**
      *  Pallet storage version
      */
-    v55: new StorageType('HermesGovernancePlatform.PalletStorageVersion', 'Default', [], v55.Type_795) as PalletStorageVersionV55,
+    v57: new StorageType('HermesGovernancePlatform.PalletStorageVersion', 'Default', [], v57.Type_684) as PalletStorageVersionV57,
 }
 
 /**
  *  Pallet storage version
  */
-export interface PalletStorageVersionV55  {
+export interface PalletStorageVersionV57  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v55.Type_795
-    get(block: Block): Promise<(v55.Type_795 | undefined)>
+    getDefault(block: Block): v57.Type_684
+    get(block: Block): Promise<(v57.Type_684 | undefined)>
 }

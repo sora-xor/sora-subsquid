@@ -7,7 +7,7 @@ export const offence =  {
      * (kind-specific) time slot. This event is not deposited for duplicate slashes.
      * \[kind, timeslot\].
      */
-    v70: new EventType(
+    v85: new EventType(
         'Offences.Offence',
         sts.struct({
             kind: sts.bytes(),

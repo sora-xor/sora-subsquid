@@ -1,6 +1,6 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
 import * as v47 from '../v47'
-import * as v55 from '../v55'
+import * as v57 from '../v57'
 
 export const voted =  {
     name: 'HermesGovernancePlatform.Voted',
@@ -14,9 +14,9 @@ export const voted =  {
     /**
      * Voting [who, poll, option]
      */
-    v55: new EventType(
+    v57: new EventType(
         'HermesGovernancePlatform.Voted',
-        sts.tuple([v55.AccountId32, v55.H256, v55.BoundedString])
+        sts.tuple([v57.AccountId32, v57.H256, v57.BoundedString])
     ),
 }
 
@@ -32,9 +32,9 @@ export const created =  {
     /**
      * Create poll [who, title, start_timestamp, end_timestamp]
      */
-    v55: new EventType(
+    v57: new EventType(
         'HermesGovernancePlatform.Created',
-        sts.tuple([v55.AccountId32, v55.BoundedString, sts.bigint(), sts.bigint()])
+        sts.tuple([v57.AccountId32, v57.BoundedString, sts.bigint(), sts.bigint()])
     ),
 }
 

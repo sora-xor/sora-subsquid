@@ -7,7 +7,7 @@ import * as devEvents from '../../dev/pool-xyk/events'
 export const poolIsInitialized = {
 	name: 'PoolXYK.PoolIsInitialized',
 	v1: productionEvents.poolIsInitialized['v1'],
-	v33Stage: stageEvents.poolIsInitialized['v33'],
-	v33Test: testEvents.poolIsInitialized['v33'],
-	v70Dev: devEvents.poolIsInitialized['v70'],
+	v1Stage: stageEvents.poolIsInitialized['v1'],
+	v1Test: testEvents.poolIsInitialized['v1'],
+	v85Dev: devEvents.poolIsInitialized['v85'],
 }

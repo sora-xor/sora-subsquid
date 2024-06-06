@@ -1,29 +1,29 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const initialize =  {
     name: 'BeefyLightClient.initialize',
-    v70: new CallType(
+    v85: new CallType(
         'BeefyLightClient.initialize',
         sts.struct({
-            networkId: v70.SubNetworkId,
+            networkId: v85.SubNetworkId,
             latestBeefyBlock: sts.bigint(),
-            validatorSet: v70.BeefyAuthoritySet,
-            nextValidatorSet: v70.BeefyAuthoritySet,
+            validatorSet: v85.BeefyAuthoritySet,
+            nextValidatorSet: v85.BeefyAuthoritySet,
         })
     ),
 }
 
 export const submitSignatureCommitment =  {
     name: 'BeefyLightClient.submit_signature_commitment',
-    v70: new CallType(
+    v85: new CallType(
         'BeefyLightClient.submit_signature_commitment',
         sts.struct({
-            networkId: v70.SubNetworkId,
-            commitment: v70.Commitment,
-            validatorProof: v70.ValidatorProof,
-            latestMmrLeaf: v70.MmrLeaf,
-            proof: v70.Type_590,
+            networkId: v85.SubNetworkId,
+            commitment: v85.Type_603,
+            validatorProof: v85.ValidatorProof,
+            latestMmrLeaf: v85.MmrLeaf,
+            proof: v85.Proof,
         })
     ),
 }

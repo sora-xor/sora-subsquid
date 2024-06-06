@@ -1,6 +1,7 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
 import * as v19 from '../v19'
 import * as v70 from '../v70'
+import * as v71 from '../v71'
 
 export const swap =  {
     name: 'DEXAPI.swap',
@@ -40,6 +41,12 @@ export const enableLiquiditySource =  {
             source: v70.LiquiditySourceType,
         })
     ),
+    v71: new CallType(
+        'DEXAPI.enable_liquidity_source',
+        sts.struct({
+            source: v71.LiquiditySourceType,
+        })
+    ),
 }
 
 export const disableLiquiditySource =  {
@@ -48,6 +55,12 @@ export const disableLiquiditySource =  {
         'DEXAPI.disable_liquidity_source',
         sts.struct({
             source: v70.LiquiditySourceType,
+        })
+    ),
+    v71: new CallType(
+        'DEXAPI.disable_liquidity_source',
+        sts.struct({
+            source: v71.LiquiditySourceType,
         })
     ),
 }

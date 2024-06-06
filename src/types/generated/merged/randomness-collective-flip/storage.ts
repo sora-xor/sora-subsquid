@@ -7,7 +7,7 @@ import * as devStorage from '../../dev/randomness-collective-flip/storage'
 export const randomMaterial = {
 	name: 'RandomnessCollectiveFlip.RandomMaterial',
 	v1: productionStorage.randomMaterial['v1'],
-	v33Stage: stageStorage.randomMaterial['v33'],
-	v33Test: testStorage.randomMaterial['v33'],
-	v70Dev: devStorage.randomMaterial['v70'],
+	v1Stage: stageStorage.randomMaterial['v1'],
+	v1Test: testStorage.randomMaterial['v1'],
+	v85Dev: devStorage.randomMaterial['v85'],
 }

@@ -9,7 +9,7 @@ export const submitUnsigned = {
 	v42: productionCalls.submitUnsigned['v42'],
 	v42Stage: stageCalls.submitUnsigned['v42'],
 	v42Test: testCalls.submitUnsigned['v42'],
-	v70Dev: devCalls.submitUnsigned['v70'],
+	v85Dev: devCalls.submitUnsigned['v85'],
 }
 
 export const setMinimumUntrustedScore = {
@@ -17,7 +17,7 @@ export const setMinimumUntrustedScore = {
 	v42: productionCalls.setMinimumUntrustedScore['v42'],
 	v42Stage: stageCalls.setMinimumUntrustedScore['v42'],
 	v42Test: testCalls.setMinimumUntrustedScore['v42'],
-	v70Dev: devCalls.setMinimumUntrustedScore['v70'],
+	v85Dev: devCalls.setMinimumUntrustedScore['v85'],
 }
 
 export const setEmergencyElectionResult = {
@@ -25,7 +25,7 @@ export const setEmergencyElectionResult = {
 	v42: productionCalls.setEmergencyElectionResult['v42'],
 	v42Stage: stageCalls.setEmergencyElectionResult['v42'],
 	v42Test: testCalls.setEmergencyElectionResult['v42'],
-	v70Dev: devCalls.setEmergencyElectionResult['v70'],
+	v85Dev: devCalls.setEmergencyElectionResult['v85'],
 }
 
 export const submit = {
@@ -33,7 +33,7 @@ export const submit = {
 	v42: productionCalls.submit['v42'],
 	v42Stage: stageCalls.submit['v42'],
 	v42Test: testCalls.submit['v42'],
-	v70Dev: devCalls.submit['v70'],
+	v85Dev: devCalls.submit['v85'],
 }
 
 export const governanceFallback = {
@@ -41,5 +41,5 @@ export const governanceFallback = {
 	v42: productionCalls.governanceFallback['v42'],
 	v42Stage: stageCalls.governanceFallback['v42'],
 	v42Test: testCalls.governanceFallback['v42'],
-	v70Dev: devCalls.governanceFallback['v70'],
+	v85Dev: devCalls.governanceFallback['v85'],
 }

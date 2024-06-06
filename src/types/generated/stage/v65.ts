@@ -32,7 +32,7 @@ export type GenericCommitment = GenericCommitment_EVM | GenericCommitment_Sub
 
 export interface GenericCommitment_EVM {
     __kind: 'EVM'
-    value: Type_533
+    value: Type_531
 }
 
 export interface GenericCommitment_Sub {
@@ -75,7 +75,7 @@ export interface GenericTimepoint_Unknown {
     __kind: 'Unknown'
 }
 
-export interface Type_533 {
+export interface Type_531 {
     nonce: bigint
     totalMaxGas: bigint
     messages: Message[]
@@ -98,7 +98,7 @@ export const GenericCommitmentWithBlock: sts.Type<GenericCommitmentWithBlock> = 
 
 export const GenericCommitment: sts.Type<GenericCommitment> = sts.closedEnum(() => {
     return  {
-        EVM: Type_533,
+        EVM: Type_531,
         Sub: Commitment,
     }
 })
@@ -127,7 +127,7 @@ export const GenericTimepoint: sts.Type<GenericTimepoint> = sts.closedEnum(() =>
     }
 })
 
-export const Type_533: sts.Type<Type_533> = sts.struct(() => {
+export const Type_531: sts.Type<Type_531> = sts.struct(() => {
     return  {
         nonce: sts.bigint(),
         totalMaxGas: sts.bigint(),

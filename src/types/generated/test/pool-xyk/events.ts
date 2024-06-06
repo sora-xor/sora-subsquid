@@ -1,10 +1,10 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
 
 export const poolIsInitialized =  {
     name: 'PoolXYK.PoolIsInitialized',
-    v33: new EventType(
+    v1: new EventType(
         'PoolXYK.PoolIsInitialized',
-        v33.AccountId
+        v1.AccountId
     ),
 }
