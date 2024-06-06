@@ -112,7 +112,7 @@ export const eventNames = [
 	'Kensetsu.DebtPayment',
 	'Kensetsu.Liquidated',
 	'Kensetsu.CDPClosed',
-  'XcmPallet.Attempted',
+  	'XcmPallet.Attempted',
 	'SubstrateBridgeOutboundChannel.MessageAccepted',
 	'SubstrateDispatch.MessageDispatched',
 	'BridgeProxy.RequestStatusUpdate',
