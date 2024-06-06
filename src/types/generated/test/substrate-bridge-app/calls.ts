@@ -1,169 +1,121 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v52 from '../v52'
-import * as v57 from '../v57'
-import * as v59 from '../v59'
+import * as v77 from '../v77'
+import * as v84 from '../v84'
 
 export const mint =  {
     name: 'SubstrateBridgeApp.mint',
-    v52: new CallType(
+    /**
+     * Function used to mint or unlock tokens
+     * The Origin for this call is the Bridge Origin
+     * Only the relayer can call this function
+     */
+    v77: new CallType(
         'SubstrateBridgeApp.mint',
         sts.struct({
-            assetId: v52.AssetId32,
-            sender: sts.option(() => v52.VersionedMultiLocation),
-            recipient: v52.AccountId32,
-            amount: sts.bigint(),
+            assetId: v77.AssetId32,
+            sender: v77.GenericAccount,
+            recipient: v77.AccountId32,
+            amount: v77.GenericBalance,
+        })
+    ),
+    /**
+     * Function used to mint or unlock tokens
+     * The Origin for this call is the Bridge Origin
+     * Only the relayer can call this function
+     */
+    v84: new CallType(
+        'SubstrateBridgeApp.mint',
+        sts.struct({
+            assetId: v84.AssetId32,
+            sender: v84.GenericAccount,
+            recipient: v84.AccountId32,
+            amount: v84.GenericBalance,
         })
     ),
 }
 
 export const finalizeAssetRegistration =  {
     name: 'SubstrateBridgeApp.finalize_asset_registration',
-    v52: new CallType(
+    /**
+     * Function used to finalize asset registration if everything went well on the sidechain
+     * The Origin for this call is the Bridge Origin
+     * Only the relayer can call this function
+     */
+    v77: new CallType(
         'SubstrateBridgeApp.finalize_asset_registration',
         sts.struct({
-            assetId: v52.AssetId32,
-            assetKind: v52.Type_568,
+            assetId: v77.AssetId32,
+            sidechainAssetId: v77.GenericAssetId,
+            assetKind: v77.Type_562,
+            sidechainPrecision: sts.number(),
+        })
+    ),
+}
+
+export const incomingThischainAssetRegistration =  {
+    name: 'SubstrateBridgeApp.incoming_thischain_asset_registration',
+    /**
+     * Function used to register this chain asset
+     * The Origin for this call is the Bridge Origin
+     * Only the relayer can call this function
+     * Sends the message to sidechain to finalize asset registration
+     */
+    v77: new CallType(
+        'SubstrateBridgeApp.incoming_thischain_asset_registration',
+        sts.struct({
+            assetId: v77.AssetId32,
+            sidechainAssetId: v77.GenericAssetId,
         })
     ),
 }
 
 export const burn =  {
     name: 'SubstrateBridgeApp.burn',
-    v52: new CallType(
+    /**
+     * Function used by users to send tokens to the sidechain
+     */
+    v77: new CallType(
         'SubstrateBridgeApp.burn',
         sts.struct({
-            networkId: v52.SubNetworkId,
-            assetId: v52.AssetId32,
-            recipient: v52.VersionedMultiLocation,
+            networkId: v77.SubNetworkId,
+            assetId: v77.AssetId32,
+            recipient: v77.GenericAccount,
             amount: sts.bigint(),
-        })
-    ),
-}
-
-export const registerThischainAsset =  {
-    name: 'SubstrateBridgeApp.register_thischain_asset',
-    v52: new CallType(
-        'SubstrateBridgeApp.register_thischain_asset',
-        sts.struct({
-            networkId: v52.SubNetworkId,
-            assetId: v52.AssetId32,
-            sidechainAsset: v52.V3AssetId,
-        })
-    ),
-    v57: new CallType(
-        'SubstrateBridgeApp.register_thischain_asset',
-        sts.struct({
-            networkId: v57.SubNetworkId,
-            assetId: v57.AssetId32,
-            sidechainAsset: v57.V3AssetId,
-            allowedParachains: sts.array(() => sts.number()),
-        })
-    ),
-    v59: new CallType(
-        'SubstrateBridgeApp.register_thischain_asset',
-        sts.struct({
-            networkId: v59.SubNetworkId,
-            assetId: v59.AssetId32,
-            sidechainAsset: v59.V3AssetId,
-            allowedParachains: sts.array(() => sts.number()),
-            minimalXcmAmount: sts.bigint(),
         })
     ),
 }
 
 export const registerSidechainAsset =  {
     name: 'SubstrateBridgeApp.register_sidechain_asset',
-    v52: new CallType(
-        'SubstrateBridgeApp.register_sidechain_asset',
-        sts.struct({
-            networkId: v52.SubNetworkId,
-            sidechainAsset: v52.V3AssetId,
-            symbol: v52.AssetSymbol,
-            name: v52.AssetName,
-            decimals: sts.number(),
-        })
-    ),
-    v57: new CallType(
-        'SubstrateBridgeApp.register_sidechain_asset',
-        sts.struct({
-            networkId: v57.SubNetworkId,
-            sidechainAsset: v57.V3AssetId,
-            symbol: v57.AssetSymbol,
-            name: v57.AssetName,
-            decimals: sts.number(),
-            allowedParachains: sts.array(() => sts.number()),
-        })
-    ),
-    v59: new CallType(
-        'SubstrateBridgeApp.register_sidechain_asset',
-        sts.struct({
-            networkId: v59.SubNetworkId,
-            sidechainAsset: v59.V3AssetId,
-            symbol: v59.AssetSymbol,
-            name: v59.AssetName,
-            decimals: sts.number(),
-            allowedParachains: sts.array(() => sts.number()),
-            minimalXcmAmount: sts.bigint(),
-        })
-    ),
-}
-
-export const setTransferLimit =  {
-    name: 'SubstrateBridgeApp.set_transfer_limit',
     /**
-     * Limits amount of tokens to transfer with limit precision
+     * Function used to register sidechain asset
+     * The Origin for this call is the Root Origin
+     * Only the root can call this function
+     * Sends the message to sidechain to register asset
      */
-    v57: new CallType(
-        'SubstrateBridgeApp.set_transfer_limit',
+    v77: new CallType(
+        'SubstrateBridgeApp.register_sidechain_asset',
         sts.struct({
-            limitCount: sts.option(() => sts.bigint()),
-        })
-    ),
-}
-
-export const addAssetidParaid =  {
-    name: 'SubstrateBridgeApp.add_assetid_paraid',
-    v57: new CallType(
-        'SubstrateBridgeApp.add_assetid_paraid',
-        sts.struct({
-            networkId: v57.SubNetworkId,
-            paraId: sts.number(),
-            assetId: v57.AssetId32,
-        })
-    ),
-}
-
-export const removeAssetidParaid =  {
-    name: 'SubstrateBridgeApp.remove_assetid_paraid',
-    v57: new CallType(
-        'SubstrateBridgeApp.remove_assetid_paraid',
-        sts.struct({
-            networkId: v57.SubNetworkId,
-            paraId: sts.number(),
-            assetId: v57.AssetId32,
+            networkId: v77.SubNetworkId,
+            sidechainAsset: v77.GenericAssetId,
+            symbol: v77.AssetSymbol,
+            name: v77.AssetName,
         })
     ),
 }
 
 export const updateTransactionStatus =  {
     name: 'SubstrateBridgeApp.update_transaction_status',
-    v59: new CallType(
+    /**
+     * Function used to update transaction status
+     * The Origin for this call is the Bridge Origin
+     * Only the relayer can call this function
+     */
+    v77: new CallType(
         'SubstrateBridgeApp.update_transaction_status',
         sts.struct({
-            messageId: v59.H256,
-            transferStatus: v59.XCMAppTransferStatus,
-        })
-    ),
-}
-
-export const setMinimumXcmIncomingAssetCount =  {
-    name: 'SubstrateBridgeApp.set_minimum_xcm_incoming_asset_count',
-    v59: new CallType(
-        'SubstrateBridgeApp.set_minimum_xcm_incoming_asset_count',
-        sts.struct({
-            networkId: v59.SubNetworkId,
-            assetId: v59.AssetId32,
-            minimalXcmAmount: sts.bigint(),
+            messageId: v77.H256,
+            messageStatus: v77.MessageStatus,
         })
     ),
 }

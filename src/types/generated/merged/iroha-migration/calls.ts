@@ -8,9 +8,9 @@ export const migrate = {
 	name: 'IrohaMigration.migrate',
 	v1: productionCalls.migrate['v1'],
 	v42: productionCalls.migrate['v42'],
-	v33Stage: stageCalls.migrate['v33'],
+	v1Stage: stageCalls.migrate['v1'],
 	v42Stage: stageCalls.migrate['v42'],
-	v33Test: testCalls.migrate['v33'],
+	v1Test: testCalls.migrate['v1'],
 	v42Test: testCalls.migrate['v42'],
-	v70Dev: devCalls.migrate['v70'],
+	v85Dev: devCalls.migrate['v85'],
 }

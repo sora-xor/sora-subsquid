@@ -8,22 +8,22 @@ export const reportEquivocation = {
 	name: 'Babe.report_equivocation',
 	v1: productionCalls.reportEquivocation['v1'],
 	v42: productionCalls.reportEquivocation['v42'],
-	v33Stage: stageCalls.reportEquivocation['v33'],
+	v1Stage: stageCalls.reportEquivocation['v1'],
 	v42Stage: stageCalls.reportEquivocation['v42'],
-	v33Test: testCalls.reportEquivocation['v33'],
+	v1Test: testCalls.reportEquivocation['v1'],
 	v42Test: testCalls.reportEquivocation['v42'],
-	v70Dev: devCalls.reportEquivocation['v70'],
+	v85Dev: devCalls.reportEquivocation['v85'],
 }
 
 export const reportEquivocationUnsigned = {
 	name: 'Babe.report_equivocation_unsigned',
 	v1: productionCalls.reportEquivocationUnsigned['v1'],
 	v42: productionCalls.reportEquivocationUnsigned['v42'],
-	v33Stage: stageCalls.reportEquivocationUnsigned['v33'],
+	v1Stage: stageCalls.reportEquivocationUnsigned['v1'],
 	v42Stage: stageCalls.reportEquivocationUnsigned['v42'],
-	v33Test: testCalls.reportEquivocationUnsigned['v33'],
+	v1Test: testCalls.reportEquivocationUnsigned['v1'],
 	v42Test: testCalls.reportEquivocationUnsigned['v42'],
-	v70Dev: devCalls.reportEquivocationUnsigned['v70'],
+	v85Dev: devCalls.reportEquivocationUnsigned['v85'],
 }
 
 export const planConfigChange = {
@@ -31,5 +31,5 @@ export const planConfigChange = {
 	v42: productionCalls.planConfigChange['v42'],
 	v42Stage: stageCalls.planConfigChange['v42'],
 	v42Test: testCalls.planConfigChange['v42'],
-	v70Dev: devCalls.planConfigChange['v70'],
+	v85Dev: devCalls.planConfigChange['v85'],
 }

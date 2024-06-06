@@ -1,24 +1,54 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v52 from '../v52'
+import * as v77 from '../v77'
 
 export const burned =  {
     name: 'SubstrateBridgeApp.Burned',
-    /**
-     * [network_id, asset_id, sender, recepient, amount]
-     */
-    v52: new EventType(
+    v77: new EventType(
         'SubstrateBridgeApp.Burned',
-        sts.tuple([v52.SubNetworkId, v52.AssetId32, v52.AccountId32, v52.VersionedMultiLocation, sts.bigint()])
+        sts.struct({
+            networkId: v77.SubNetworkId,
+            assetId: v77.AssetId32,
+            sender: v77.AccountId32,
+            recipient: v77.GenericAccount,
+            amount: sts.bigint(),
+        })
     ),
 }
 
 export const minted =  {
     name: 'SubstrateBridgeApp.Minted',
-    /**
-     * [network_id, asset_id, sender, recepient, amount]
-     */
-    v52: new EventType(
+    v77: new EventType(
         'SubstrateBridgeApp.Minted',
-        sts.tuple([v52.SubNetworkId, v52.AssetId32, sts.option(() => v52.VersionedMultiLocation), v52.AccountId32, sts.bigint()])
+        sts.struct({
+            networkId: v77.SubNetworkId,
+            assetId: v77.AssetId32,
+            sender: v77.GenericAccount,
+            recipient: v77.AccountId32,
+            amount: sts.bigint(),
+        })
+    ),
+}
+
+export const failedToMint =  {
+    name: 'SubstrateBridgeApp.FailedToMint',
+    v77: new EventType(
+        'SubstrateBridgeApp.FailedToMint',
+        sts.tuple([v77.H256, v77.DispatchError])
+    ),
+}
+
+export const assetRegistrationProceed =  {
+    name: 'SubstrateBridgeApp.AssetRegistrationProceed',
+    v77: new EventType(
+        'SubstrateBridgeApp.AssetRegistrationProceed',
+        v77.AssetId32
+    ),
+}
+
+export const assetRegistrationFinalized =  {
+    name: 'SubstrateBridgeApp.AssetRegistrationFinalized',
+    v77: new EventType(
+        'SubstrateBridgeApp.AssetRegistrationFinalized',
+        v77.AssetId32
     ),
 }

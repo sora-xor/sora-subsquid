@@ -1,5 +1,6 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
+import * as v22 from '../v22'
 import * as v42 from '../v42'
 
 export const initializePool =  {
@@ -7,10 +8,10 @@ export const initializePool =  {
     /**
      *  Enable exchange path on the pool for pair BaseAsset-CollateralAsset.
      */
-    v33: new CallType(
+    v1: new CallType(
         'MulticollateralBondingCurvePool.initialize_pool',
         sts.struct({
-            collateralAssetId: v33.AssetId,
+            collateralAssetId: v1.AssetId,
         })
     ),
     /**
@@ -29,10 +30,10 @@ export const setReferenceAsset =  {
     /**
      *  Change reference asset which is used to determine collateral assets value. Inteded to be e.g. stablecoin DAI.
      */
-    v33: new CallType(
+    v1: new CallType(
         'MulticollateralBondingCurvePool.set_reference_asset',
         sts.struct({
-            referenceAssetId: v33.AssetId,
+            referenceAssetId: v1.AssetId,
         })
     ),
     /**
@@ -52,11 +53,11 @@ export const setOptionalRewardMultiplier =  {
      *  Set multiplier which is applied to rewarded amount when depositing particular collateral assets.
      *  `None` value indicates reward without change, same as Some(1.0).
      */
-    v33: new CallType(
+    v1: new CallType(
         'MulticollateralBondingCurvePool.set_optional_reward_multiplier',
         sts.struct({
-            collateralAssetId: v33.AssetId,
-            multiplier: sts.option(() => v33.Fixed),
+            collateralAssetId: v1.AssetId,
+            multiplier: sts.option(() => v1.Fixed),
         })
     ),
     /**
@@ -72,15 +73,26 @@ export const setOptionalRewardMultiplier =  {
     ),
 }
 
+export const claimIncentives =  {
+    name: 'MulticollateralBondingCurvePool.claim_incentives',
+    /**
+     *  Claim all available PSWAP rewards by account signing this transaction.
+     */
+    v1: new CallType(
+        'MulticollateralBondingCurvePool.claim_incentives',
+        sts.unit()
+    ),
+}
+
 export const setPriceBias =  {
     name: 'MulticollateralBondingCurvePool.set_price_bias',
     /**
      *  Changes `initial_price` used as bias in XOR-DAI(reference asset) price calculation
      */
-    v33: new CallType(
+    v22: new CallType(
         'MulticollateralBondingCurvePool.set_price_bias',
         sts.struct({
-            priceBias: v33.Balance,
+            priceBias: v22.Balance,
         })
     ),
 }
@@ -90,11 +102,11 @@ export const setPriceChangeConfig =  {
     /**
      *  Changes price change rate and step
      */
-    v33: new CallType(
+    v22: new CallType(
         'MulticollateralBondingCurvePool.set_price_change_config',
         sts.struct({
-            priceChangeRate: v33.Balance,
-            priceChangeStep: v33.Balance,
+            priceChangeRate: v22.Balance,
+            priceChangeStep: v22.Balance,
         })
     ),
 }

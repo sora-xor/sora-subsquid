@@ -8,22 +8,22 @@ export const scheduled = {
 	name: 'Scheduler.Scheduled',
 	v1: productionEvents.scheduled['v1'],
 	v42: productionEvents.scheduled['v42'],
-	v33Stage: stageEvents.scheduled['v33'],
+	v1Stage: stageEvents.scheduled['v1'],
 	v42Stage: stageEvents.scheduled['v42'],
-	v33Test: testEvents.scheduled['v33'],
+	v1Test: testEvents.scheduled['v1'],
 	v42Test: testEvents.scheduled['v42'],
-	v70Dev: devEvents.scheduled['v70'],
+	v85Dev: devEvents.scheduled['v85'],
 }
 
 export const canceled = {
 	name: 'Scheduler.Canceled',
 	v1: productionEvents.canceled['v1'],
 	v42: productionEvents.canceled['v42'],
-	v33Stage: stageEvents.canceled['v33'],
+	v1Stage: stageEvents.canceled['v1'],
 	v42Stage: stageEvents.canceled['v42'],
-	v33Test: testEvents.canceled['v33'],
+	v1Test: testEvents.canceled['v1'],
 	v42Test: testEvents.canceled['v42'],
-	v70Dev: devEvents.canceled['v70'],
+	v85Dev: devEvents.canceled['v85'],
 }
 
 export const dispatched = {
@@ -31,13 +31,13 @@ export const dispatched = {
 	v1: productionEvents.dispatched['v1'],
 	v42: productionEvents.dispatched['v42'],
 	v53: productionEvents.dispatched['v53'],
-	v33Stage: stageEvents.dispatched['v33'],
+	v1Stage: stageEvents.dispatched['v1'],
 	v42Stage: stageEvents.dispatched['v42'],
-	v52Stage: stageEvents.dispatched['v52'],
-	v33Test: testEvents.dispatched['v33'],
+	v53Stage: stageEvents.dispatched['v53'],
+	v1Test: testEvents.dispatched['v1'],
 	v42Test: testEvents.dispatched['v42'],
-	v52Test: testEvents.dispatched['v52'],
-	v70Dev: devEvents.dispatched['v70'],
+	v53Test: testEvents.dispatched['v53'],
+	v85Dev: devEvents.dispatched['v85'],
 }
 
 export const callLookupFailed = {
@@ -50,23 +50,23 @@ export const callLookupFailed = {
 export const callUnavailable = {
 	name: 'Scheduler.CallUnavailable',
 	v53: productionEvents.callUnavailable['v53'],
-	v52Stage: stageEvents.callUnavailable['v52'],
-	v52Test: testEvents.callUnavailable['v52'],
-	v70Dev: devEvents.callUnavailable['v70'],
+	v53Stage: stageEvents.callUnavailable['v53'],
+	v53Test: testEvents.callUnavailable['v53'],
+	v85Dev: devEvents.callUnavailable['v85'],
 }
 
 export const periodicFailed = {
 	name: 'Scheduler.PeriodicFailed',
 	v53: productionEvents.periodicFailed['v53'],
-	v52Stage: stageEvents.periodicFailed['v52'],
-	v52Test: testEvents.periodicFailed['v52'],
-	v70Dev: devEvents.periodicFailed['v70'],
+	v53Stage: stageEvents.periodicFailed['v53'],
+	v53Test: testEvents.periodicFailed['v53'],
+	v85Dev: devEvents.periodicFailed['v85'],
 }
 
 export const permanentlyOverweight = {
 	name: 'Scheduler.PermanentlyOverweight',
 	v53: productionEvents.permanentlyOverweight['v53'],
-	v52Stage: stageEvents.permanentlyOverweight['v52'],
-	v52Test: testEvents.permanentlyOverweight['v52'],
-	v70Dev: devEvents.permanentlyOverweight['v70'],
+	v53Stage: stageEvents.permanentlyOverweight['v53'],
+	v53Test: testEvents.permanentlyOverweight['v53'],
+	v85Dev: devEvents.permanentlyOverweight['v85'],
 }

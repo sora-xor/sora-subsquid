@@ -12,7 +12,7 @@ export const registerToken = {
 	v42Stage: stageCalls.registerToken['v42'],
 	v33Test: testCalls.registerToken['v33'],
 	v42Test: testCalls.registerToken['v42'],
-	v70Dev: devCalls.registerToken['v70'],
+	v85Dev: devCalls.registerToken['v85'],
 }
 
 export const addPool = {
@@ -26,7 +26,7 @@ export const addPool = {
 	v33Test: testCalls.addPool['v33'],
 	v42Test: testCalls.addPool['v42'],
 	v43Test: testCalls.addPool['v43'],
-	v70Dev: devCalls.addPool['v70'],
+	v85Dev: devCalls.addPool['v85'],
 }
 
 export const deposit = {
@@ -40,7 +40,7 @@ export const deposit = {
 	v33Test: testCalls.deposit['v33'],
 	v42Test: testCalls.deposit['v42'],
 	v43Test: testCalls.deposit['v43'],
-	v70Dev: devCalls.deposit['v70'],
+	v85Dev: devCalls.deposit['v85'],
 }
 
 export const getRewards = {
@@ -54,7 +54,7 @@ export const getRewards = {
 	v33Test: testCalls.getRewards['v33'],
 	v42Test: testCalls.getRewards['v42'],
 	v43Test: testCalls.getRewards['v43'],
-	v70Dev: devCalls.getRewards['v70'],
+	v85Dev: devCalls.getRewards['v85'],
 }
 
 export const withdraw = {
@@ -68,7 +68,7 @@ export const withdraw = {
 	v33Test: testCalls.withdraw['v33'],
 	v42Test: testCalls.withdraw['v42'],
 	v43Test: testCalls.withdraw['v43'],
-	v70Dev: devCalls.withdraw['v70'],
+	v85Dev: devCalls.withdraw['v85'],
 }
 
 export const removePool = {
@@ -82,7 +82,7 @@ export const removePool = {
 	v33Test: testCalls.removePool['v33'],
 	v42Test: testCalls.removePool['v42'],
 	v43Test: testCalls.removePool['v43'],
-	v70Dev: devCalls.removePool['v70'],
+	v85Dev: devCalls.removePool['v85'],
 }
 
 export const changePoolMultiplier = {
@@ -96,7 +96,7 @@ export const changePoolMultiplier = {
 	v33Test: testCalls.changePoolMultiplier['v33'],
 	v42Test: testCalls.changePoolMultiplier['v42'],
 	v43Test: testCalls.changePoolMultiplier['v43'],
-	v70Dev: devCalls.changePoolMultiplier['v70'],
+	v85Dev: devCalls.changePoolMultiplier['v85'],
 }
 
 export const changePoolDepositFee = {
@@ -110,7 +110,7 @@ export const changePoolDepositFee = {
 	v33Test: testCalls.changePoolDepositFee['v33'],
 	v42Test: testCalls.changePoolDepositFee['v42'],
 	v43Test: testCalls.changePoolDepositFee['v43'],
-	v70Dev: devCalls.changePoolDepositFee['v70'],
+	v85Dev: devCalls.changePoolDepositFee['v85'],
 }
 
 export const changeTokenInfo = {
@@ -121,7 +121,7 @@ export const changeTokenInfo = {
 	v42Stage: stageCalls.changeTokenInfo['v42'],
 	v33Test: testCalls.changeTokenInfo['v33'],
 	v42Test: testCalls.changeTokenInfo['v42'],
-	v70Dev: devCalls.changeTokenInfo['v70'],
+	v85Dev: devCalls.changeTokenInfo['v85'],
 }
 
 export const changeTotalTokens = {
@@ -135,7 +135,7 @@ export const changeTotalTokens = {
 	v35Test: testCalls.changeTotalTokens['v35'],
 	v42Test: testCalls.changeTotalTokens['v42'],
 	v43Test: testCalls.changeTotalTokens['v43'],
-	v70Dev: devCalls.changeTotalTokens['v70'],
+	v85Dev: devCalls.changeTotalTokens['v85'],
 }
 
 export const changeInfo = {
@@ -149,5 +149,5 @@ export const changeInfo = {
 	v35Test: testCalls.changeInfo['v35'],
 	v42Test: testCalls.changeInfo['v42'],
 	v43Test: testCalls.changeInfo['v43'],
-	v70Dev: devCalls.changeInfo['v70'],
+	v85Dev: devCalls.changeInfo['v85'],
 }

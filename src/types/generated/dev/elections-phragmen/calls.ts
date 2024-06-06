@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const vote =  {
     name: 'ElectionsPhragmen.vote',
@@ -28,10 +28,10 @@ export const vote =  {
      * We assume the maximum weight among all 3 cases: vote_equal, vote_more and vote_less.
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'ElectionsPhragmen.vote',
         sts.struct({
-            votes: sts.array(() => v70.AccountId32),
+            votes: sts.array(() => v85.AccountId32),
             value: sts.bigint(),
         })
     ),
@@ -46,7 +46,7 @@ export const removeVoter =  {
      * 
      * The dispatch origin of this call must be signed and be a voter.
      */
-    v70: new CallType(
+    v85: new CallType(
         'ElectionsPhragmen.remove_voter',
         sts.unit()
     ),
@@ -71,7 +71,7 @@ export const submitCandidacy =  {
      * The number of current candidates must be provided as witness data.
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'ElectionsPhragmen.submit_candidacy',
         sts.struct({
             candidateCount: sts.number(),
@@ -101,10 +101,10 @@ export const renounceCandidacy =  {
      * The type of renouncing must be provided as witness data.
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'ElectionsPhragmen.renounce_candidacy',
         sts.struct({
-            renouncing: v70.Renouncing,
+            renouncing: v85.Renouncing,
         })
     ),
 }
@@ -131,10 +131,10 @@ export const removeMember =  {
      * will go into phragmen, we assume full block for now.
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'ElectionsPhragmen.remove_member',
         sts.struct({
-            who: v70.AccountId32,
+            who: v85.AccountId32,
             slashBond: sts.boolean(),
             rerunElection: sts.boolean(),
         })
@@ -155,7 +155,7 @@ export const cleanDefunctVoters =  {
      * The total number of voters and those that are defunct must be provided as witness data.
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'ElectionsPhragmen.clean_defunct_voters',
         sts.struct({
             numVoters: sts.number(),

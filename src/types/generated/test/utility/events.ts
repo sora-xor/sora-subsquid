@@ -1,7 +1,7 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
 import * as v42 from '../v42'
-import * as v52 from '../v52'
+import * as v53 from '../v53'
 
 export const batchInterrupted =  {
     name: 'Utility.BatchInterrupted',
@@ -9,9 +9,9 @@ export const batchInterrupted =  {
      *  Batch of dispatches did not complete fully. Index of first failing dispatch given, as
      *  well as the error. \[index, error\]
      */
-    v33: new EventType(
+    v1: new EventType(
         'Utility.BatchInterrupted',
-        sts.tuple([sts.number(), v33.DispatchError])
+        sts.tuple([sts.number(), v1.DispatchError])
     ),
     /**
      * Batch of dispatches did not complete fully. Index of first failing dispatch given, as
@@ -28,11 +28,11 @@ export const batchInterrupted =  {
      * Batch of dispatches did not complete fully. Index of first failing dispatch given, as
      * well as the error.
      */
-    v52: new EventType(
+    v53: new EventType(
         'Utility.BatchInterrupted',
         sts.struct({
             index: sts.number(),
-            error: v52.DispatchError,
+            error: v53.DispatchError,
         })
     ),
 }
@@ -42,7 +42,7 @@ export const batchCompleted =  {
     /**
      *  Batch of dispatches completed fully with no error.
      */
-    v33: new EventType(
+    v1: new EventType(
         'Utility.BatchCompleted',
         sts.unit()
     ),
@@ -84,10 +84,10 @@ export const itemFailed =  {
     /**
      * A single item within a Batch of dispatches has completed with error.
      */
-    v52: new EventType(
+    v53: new EventType(
         'Utility.ItemFailed',
         sts.struct({
-            error: v52.DispatchError,
+            error: v53.DispatchError,
         })
     ),
 }
@@ -106,10 +106,10 @@ export const dispatchedAs =  {
     /**
      * A call was dispatched.
      */
-    v52: new EventType(
+    v53: new EventType(
         'Utility.DispatchedAs',
         sts.struct({
-            result: sts.result(() => sts.unit(), () => v52.DispatchError),
+            result: sts.result(() => sts.unit(), () => v53.DispatchError),
         })
     ),
 }

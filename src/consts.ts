@@ -59,7 +59,12 @@ export const callNames = [
 	'OrderBook.place_limit_order',
 	'OrderBook.cancel_limit_order',
 	'OrderBook.cancel_limit_orders_batch',
-	'Band.relay'
+	'Band.relay',
+	'Kensetsu.createCdp',
+	'Kensetsu.depositCollateral',
+	'Kensetsu.repayDebt',
+	'Kensetsu.borrow',
+	'Kensetsu.closeCdp'
 ] as const
 
 export const eventNames = [
@@ -90,6 +95,7 @@ export const eventNames = [
 	'Staking.Rewarded',
 	'Staking.StakersElected',
 	'Staking.PayoutStarted',
+	'Staking.Withdrawn',
 	'OrderBook.OrderBookCreated',
 	'OrderBook.OrderBookStatusChanged',
 	'OrderBook.LimitOrderPlaced',
@@ -100,7 +106,13 @@ export const eventNames = [
 	'OrderBook.MarketOrderExecuted',
 	'OrderBook.LimitOrderConvertedToMarketOrder',
 	'OrderBook.LimitOrderIsSplitIntoMarketOrderAndLimitOrder',
-	'XcmPallet.Attempted',
+	'Kensetsu.CDPCreated',
+	'Kensetsu.CollateralDeposit',
+	'Kensetsu.DebtIncreased',
+	'Kensetsu.DebtPayment',
+	'Kensetsu.Liquidated',
+	'Kensetsu.CDPClosed',
+  'XcmPallet.Attempted',
 	'SubstrateBridgeOutboundChannel.MessageAccepted',
 	'SubstrateDispatch.MessageDispatched',
 	'BridgeProxy.RequestStatusUpdate',

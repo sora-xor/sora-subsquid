@@ -1,44 +1,46 @@
 import {sts, Block, Bytes, Option, Result, StorageType, RuntimeCtx} from '../support'
+import * as v1 from '../v1'
+import * as v22 from '../v22'
 import * as v33 from '../v33'
 import * as v42 from '../v42'
-import * as v44 from '../v44'
-import * as v52 from '../v52'
+import * as v45 from '../v45'
+import * as v53 from '../v53'
 
 export const rewards =  {
     /**
      *  Reserved for future use
      *  Mapping between users and their owned rewards of different kinds, which are vested.
      */
-    v33: new StorageType('VestedRewards.Rewards', 'Default', [v33.AccountId], v33.RewardInfo) as RewardsV33,
+    v1: new StorageType('VestedRewards.Rewards', 'Default', [v1.AccountId], v1.RewardInfo) as RewardsV1,
     /**
      *  Reserved for future use
      *  Mapping between users and their owned rewards of different kinds, which are vested.
      */
-    v42: new StorageType('VestedRewards.Rewards', 'Default', [v42.AccountId32], v42.Type_586) as RewardsV42,
+    v42: new StorageType('VestedRewards.Rewards', 'Default', [v42.AccountId32], v42.Type_581) as RewardsV42,
     /**
      *  Reserved for future use
      *  Mapping between users and their owned rewards of different kinds, which are vested.
      */
-    v44: new StorageType('VestedRewards.Rewards', 'Default', [v44.AccountId32], v44.Type_593) as RewardsV44,
+    v45: new StorageType('VestedRewards.Rewards', 'Default', [v45.AccountId32], v45.Type_592) as RewardsV45,
 }
 
 /**
  *  Reserved for future use
  *  Mapping between users and their owned rewards of different kinds, which are vested.
  */
-export interface RewardsV33  {
+export interface RewardsV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.RewardInfo
-    get(block: Block, key: v33.AccountId): Promise<(v33.RewardInfo | undefined)>
-    getMany(block: Block, keys: v33.AccountId[]): Promise<(v33.RewardInfo | undefined)[]>
-    getKeys(block: Block): Promise<v33.AccountId[]>
-    getKeys(block: Block, key: v33.AccountId): Promise<v33.AccountId[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.AccountId[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.AccountId): AsyncIterable<v33.AccountId[]>
-    getPairs(block: Block): Promise<[k: v33.AccountId, v: (v33.RewardInfo | undefined)][]>
-    getPairs(block: Block, key: v33.AccountId): Promise<[k: v33.AccountId, v: (v33.RewardInfo | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.AccountId, v: (v33.RewardInfo | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.AccountId): AsyncIterable<[k: v33.AccountId, v: (v33.RewardInfo | undefined)][]>
+    getDefault(block: Block): v1.RewardInfo
+    get(block: Block, key: v1.AccountId): Promise<(v1.RewardInfo | undefined)>
+    getMany(block: Block, keys: v1.AccountId[]): Promise<(v1.RewardInfo | undefined)[]>
+    getKeys(block: Block): Promise<v1.AccountId[]>
+    getKeys(block: Block, key: v1.AccountId): Promise<v1.AccountId[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.AccountId[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.AccountId): AsyncIterable<v1.AccountId[]>
+    getPairs(block: Block): Promise<[k: v1.AccountId, v: (v1.RewardInfo | undefined)][]>
+    getPairs(block: Block, key: v1.AccountId): Promise<[k: v1.AccountId, v: (v1.RewardInfo | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.AccountId, v: (v1.RewardInfo | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.AccountId): AsyncIterable<[k: v1.AccountId, v: (v1.RewardInfo | undefined)][]>
 }
 
 /**
@@ -47,36 +49,36 @@ export interface RewardsV33  {
  */
 export interface RewardsV42  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v42.Type_586
-    get(block: Block, key: v42.AccountId32): Promise<(v42.Type_586 | undefined)>
-    getMany(block: Block, keys: v42.AccountId32[]): Promise<(v42.Type_586 | undefined)[]>
+    getDefault(block: Block): v42.Type_581
+    get(block: Block, key: v42.AccountId32): Promise<(v42.Type_581 | undefined)>
+    getMany(block: Block, keys: v42.AccountId32[]): Promise<(v42.Type_581 | undefined)[]>
     getKeys(block: Block): Promise<v42.AccountId32[]>
     getKeys(block: Block, key: v42.AccountId32): Promise<v42.AccountId32[]>
     getKeysPaged(pageSize: number, block: Block): AsyncIterable<v42.AccountId32[]>
     getKeysPaged(pageSize: number, block: Block, key: v42.AccountId32): AsyncIterable<v42.AccountId32[]>
-    getPairs(block: Block): Promise<[k: v42.AccountId32, v: (v42.Type_586 | undefined)][]>
-    getPairs(block: Block, key: v42.AccountId32): Promise<[k: v42.AccountId32, v: (v42.Type_586 | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v42.AccountId32, v: (v42.Type_586 | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v42.AccountId32): AsyncIterable<[k: v42.AccountId32, v: (v42.Type_586 | undefined)][]>
+    getPairs(block: Block): Promise<[k: v42.AccountId32, v: (v42.Type_581 | undefined)][]>
+    getPairs(block: Block, key: v42.AccountId32): Promise<[k: v42.AccountId32, v: (v42.Type_581 | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v42.AccountId32, v: (v42.Type_581 | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v42.AccountId32): AsyncIterable<[k: v42.AccountId32, v: (v42.Type_581 | undefined)][]>
 }
 
 /**
  *  Reserved for future use
  *  Mapping between users and their owned rewards of different kinds, which are vested.
  */
-export interface RewardsV44  {
+export interface RewardsV45  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v44.Type_593
-    get(block: Block, key: v44.AccountId32): Promise<(v44.Type_593 | undefined)>
-    getMany(block: Block, keys: v44.AccountId32[]): Promise<(v44.Type_593 | undefined)[]>
-    getKeys(block: Block): Promise<v44.AccountId32[]>
-    getKeys(block: Block, key: v44.AccountId32): Promise<v44.AccountId32[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v44.AccountId32[]>
-    getKeysPaged(pageSize: number, block: Block, key: v44.AccountId32): AsyncIterable<v44.AccountId32[]>
-    getPairs(block: Block): Promise<[k: v44.AccountId32, v: (v44.Type_593 | undefined)][]>
-    getPairs(block: Block, key: v44.AccountId32): Promise<[k: v44.AccountId32, v: (v44.Type_593 | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v44.AccountId32, v: (v44.Type_593 | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v44.AccountId32): AsyncIterable<[k: v44.AccountId32, v: (v44.Type_593 | undefined)][]>
+    getDefault(block: Block): v45.Type_592
+    get(block: Block, key: v45.AccountId32): Promise<(v45.Type_592 | undefined)>
+    getMany(block: Block, keys: v45.AccountId32[]): Promise<(v45.Type_592 | undefined)[]>
+    getKeys(block: Block): Promise<v45.AccountId32[]>
+    getKeys(block: Block, key: v45.AccountId32): Promise<v45.AccountId32[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v45.AccountId32[]>
+    getKeysPaged(pageSize: number, block: Block, key: v45.AccountId32): AsyncIterable<v45.AccountId32[]>
+    getPairs(block: Block): Promise<[k: v45.AccountId32, v: (v45.Type_592 | undefined)][]>
+    getPairs(block: Block, key: v45.AccountId32): Promise<[k: v45.AccountId32, v: (v45.Type_592 | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v45.AccountId32, v: (v45.Type_592 | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v45.AccountId32): AsyncIterable<[k: v45.AccountId32, v: (v45.Type_592 | undefined)][]>
 }
 
 export const totalRewards =  {
@@ -84,49 +86,49 @@ export const totalRewards =  {
      *  Reserved for future use
      *  Total amount of PSWAP pending rewards.
      */
-    v33: new StorageType('VestedRewards.TotalRewards', 'Default', [], v33.Balance) as TotalRewardsV33,
+    v1: new StorageType('VestedRewards.TotalRewards', 'Default', [], v1.Balance) as TotalRewardsV1,
 }
 
 /**
  *  Reserved for future use
  *  Total amount of PSWAP pending rewards.
  */
-export interface TotalRewardsV33  {
+export interface TotalRewardsV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.Balance
-    get(block: Block): Promise<(v33.Balance | undefined)>
+    getDefault(block: Block): v1.Balance
+    get(block: Block): Promise<(v1.Balance | undefined)>
 }
 
 export const marketMakersRegistry =  {
     /**
      *  Registry of market makers with large transaction volumes (>1 XOR per transaction).
      */
-    v33: new StorageType('VestedRewards.MarketMakersRegistry', 'Default', [v33.AccountId], v33.MarketMakerInfo) as MarketMakersRegistryV33,
+    v1: new StorageType('VestedRewards.MarketMakersRegistry', 'Default', [v1.AccountId], v1.MarketMakerInfo) as MarketMakersRegistryV1,
 }
 
 /**
  *  Registry of market makers with large transaction volumes (>1 XOR per transaction).
  */
-export interface MarketMakersRegistryV33  {
+export interface MarketMakersRegistryV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.MarketMakerInfo
-    get(block: Block, key: v33.AccountId): Promise<(v33.MarketMakerInfo | undefined)>
-    getMany(block: Block, keys: v33.AccountId[]): Promise<(v33.MarketMakerInfo | undefined)[]>
-    getKeys(block: Block): Promise<v33.AccountId[]>
-    getKeys(block: Block, key: v33.AccountId): Promise<v33.AccountId[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.AccountId[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.AccountId): AsyncIterable<v33.AccountId[]>
-    getPairs(block: Block): Promise<[k: v33.AccountId, v: (v33.MarketMakerInfo | undefined)][]>
-    getPairs(block: Block, key: v33.AccountId): Promise<[k: v33.AccountId, v: (v33.MarketMakerInfo | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.AccountId, v: (v33.MarketMakerInfo | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.AccountId): AsyncIterable<[k: v33.AccountId, v: (v33.MarketMakerInfo | undefined)][]>
+    getDefault(block: Block): v1.MarketMakerInfo
+    get(block: Block, key: v1.AccountId): Promise<(v1.MarketMakerInfo | undefined)>
+    getMany(block: Block, keys: v1.AccountId[]): Promise<(v1.MarketMakerInfo | undefined)[]>
+    getKeys(block: Block): Promise<v1.AccountId[]>
+    getKeys(block: Block, key: v1.AccountId): Promise<v1.AccountId[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.AccountId[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.AccountId): AsyncIterable<v1.AccountId[]>
+    getPairs(block: Block): Promise<[k: v1.AccountId, v: (v1.MarketMakerInfo | undefined)][]>
+    getPairs(block: Block, key: v1.AccountId): Promise<[k: v1.AccountId, v: (v1.MarketMakerInfo | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.AccountId, v: (v1.MarketMakerInfo | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.AccountId): AsyncIterable<[k: v1.AccountId, v: (v1.MarketMakerInfo | undefined)][]>
 }
 
 export const marketMakingPairs =  {
     /**
      *  Market making pairs storage.
      */
-    v33: new StorageType('VestedRewards.MarketMakingPairs', 'Default', [v33.AssetId, v33.AssetId], sts.unit()) as MarketMakingPairsV33,
+    v22: new StorageType('VestedRewards.MarketMakingPairs', 'Default', [v22.AssetId, v22.AssetId], sts.unit()) as MarketMakingPairsV22,
     /**
      *  Market making pairs storage.
      */
@@ -136,23 +138,23 @@ export const marketMakingPairs =  {
 /**
  *  Market making pairs storage.
  */
-export interface MarketMakingPairsV33  {
+export interface MarketMakingPairsV22  {
     is(block: RuntimeCtx): boolean
     getDefault(block: Block): null
-    get(block: Block, key1: v33.AssetId, key2: v33.AssetId): Promise<(null | undefined)>
-    getMany(block: Block, keys: [v33.AssetId, v33.AssetId][]): Promise<(null | undefined)[]>
-    getKeys(block: Block): Promise<[v33.AssetId, v33.AssetId][]>
-    getKeys(block: Block, key1: v33.AssetId): Promise<[v33.AssetId, v33.AssetId][]>
-    getKeys(block: Block, key1: v33.AssetId, key2: v33.AssetId): Promise<[v33.AssetId, v33.AssetId][]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v33.AssetId, v33.AssetId][]>
-    getKeysPaged(pageSize: number, block: Block, key1: v33.AssetId): AsyncIterable<[v33.AssetId, v33.AssetId][]>
-    getKeysPaged(pageSize: number, block: Block, key1: v33.AssetId, key2: v33.AssetId): AsyncIterable<[v33.AssetId, v33.AssetId][]>
-    getPairs(block: Block): Promise<[k: [v33.AssetId, v33.AssetId], v: (null | undefined)][]>
-    getPairs(block: Block, key1: v33.AssetId): Promise<[k: [v33.AssetId, v33.AssetId], v: (null | undefined)][]>
-    getPairs(block: Block, key1: v33.AssetId, key2: v33.AssetId): Promise<[k: [v33.AssetId, v33.AssetId], v: (null | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v33.AssetId, v33.AssetId], v: (null | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key1: v33.AssetId): AsyncIterable<[k: [v33.AssetId, v33.AssetId], v: (null | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key1: v33.AssetId, key2: v33.AssetId): AsyncIterable<[k: [v33.AssetId, v33.AssetId], v: (null | undefined)][]>
+    get(block: Block, key1: v22.AssetId, key2: v22.AssetId): Promise<(null | undefined)>
+    getMany(block: Block, keys: [v22.AssetId, v22.AssetId][]): Promise<(null | undefined)[]>
+    getKeys(block: Block): Promise<[v22.AssetId, v22.AssetId][]>
+    getKeys(block: Block, key1: v22.AssetId): Promise<[v22.AssetId, v22.AssetId][]>
+    getKeys(block: Block, key1: v22.AssetId, key2: v22.AssetId): Promise<[v22.AssetId, v22.AssetId][]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v22.AssetId, v22.AssetId][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v22.AssetId): AsyncIterable<[v22.AssetId, v22.AssetId][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v22.AssetId, key2: v22.AssetId): AsyncIterable<[v22.AssetId, v22.AssetId][]>
+    getPairs(block: Block): Promise<[k: [v22.AssetId, v22.AssetId], v: (null | undefined)][]>
+    getPairs(block: Block, key1: v22.AssetId): Promise<[k: [v22.AssetId, v22.AssetId], v: (null | undefined)][]>
+    getPairs(block: Block, key1: v22.AssetId, key2: v22.AssetId): Promise<[k: [v22.AssetId, v22.AssetId], v: (null | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v22.AssetId, v22.AssetId], v: (null | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v22.AssetId): AsyncIterable<[k: [v22.AssetId, v22.AssetId], v: (null | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v22.AssetId, key2: v22.AssetId): AsyncIterable<[k: [v22.AssetId, v22.AssetId], v: (null | undefined)][]>
 }
 
 /**
@@ -287,50 +289,50 @@ export const crowdloanInfos =  {
     /**
      *  Information about crowdloan
      */
-    v52: new StorageType('VestedRewards.CrowdloanInfos', 'Optional', [v52.CrowdloanTag], v52.CrowdloanInfo) as CrowdloanInfosV52,
+    v53: new StorageType('VestedRewards.CrowdloanInfos', 'Optional', [v53.CrowdloanTag], v53.CrowdloanInfo) as CrowdloanInfosV53,
 }
 
 /**
  *  Information about crowdloan
  */
-export interface CrowdloanInfosV52  {
+export interface CrowdloanInfosV53  {
     is(block: RuntimeCtx): boolean
-    get(block: Block, key: v52.CrowdloanTag): Promise<(v52.CrowdloanInfo | undefined)>
-    getMany(block: Block, keys: v52.CrowdloanTag[]): Promise<(v52.CrowdloanInfo | undefined)[]>
-    getKeys(block: Block): Promise<v52.CrowdloanTag[]>
-    getKeys(block: Block, key: v52.CrowdloanTag): Promise<v52.CrowdloanTag[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v52.CrowdloanTag[]>
-    getKeysPaged(pageSize: number, block: Block, key: v52.CrowdloanTag): AsyncIterable<v52.CrowdloanTag[]>
-    getPairs(block: Block): Promise<[k: v52.CrowdloanTag, v: (v52.CrowdloanInfo | undefined)][]>
-    getPairs(block: Block, key: v52.CrowdloanTag): Promise<[k: v52.CrowdloanTag, v: (v52.CrowdloanInfo | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v52.CrowdloanTag, v: (v52.CrowdloanInfo | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v52.CrowdloanTag): AsyncIterable<[k: v52.CrowdloanTag, v: (v52.CrowdloanInfo | undefined)][]>
+    get(block: Block, key: v53.CrowdloanTag): Promise<(v53.CrowdloanInfo | undefined)>
+    getMany(block: Block, keys: v53.CrowdloanTag[]): Promise<(v53.CrowdloanInfo | undefined)[]>
+    getKeys(block: Block): Promise<v53.CrowdloanTag[]>
+    getKeys(block: Block, key: v53.CrowdloanTag): Promise<v53.CrowdloanTag[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v53.CrowdloanTag[]>
+    getKeysPaged(pageSize: number, block: Block, key: v53.CrowdloanTag): AsyncIterable<v53.CrowdloanTag[]>
+    getPairs(block: Block): Promise<[k: v53.CrowdloanTag, v: (v53.CrowdloanInfo | undefined)][]>
+    getPairs(block: Block, key: v53.CrowdloanTag): Promise<[k: v53.CrowdloanTag, v: (v53.CrowdloanInfo | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v53.CrowdloanTag, v: (v53.CrowdloanInfo | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v53.CrowdloanTag): AsyncIterable<[k: v53.CrowdloanTag, v: (v53.CrowdloanInfo | undefined)][]>
 }
 
 export const crowdloanUserInfos =  {
     /**
      *  Information about crowdloan rewards claimed by user
      */
-    v52: new StorageType('VestedRewards.CrowdloanUserInfos', 'Optional', [v52.AccountId32, v52.CrowdloanTag], v52.CrowdloanUserInfo) as CrowdloanUserInfosV52,
+    v53: new StorageType('VestedRewards.CrowdloanUserInfos', 'Optional', [v53.AccountId32, v53.CrowdloanTag], v53.CrowdloanUserInfo) as CrowdloanUserInfosV53,
 }
 
 /**
  *  Information about crowdloan rewards claimed by user
  */
-export interface CrowdloanUserInfosV52  {
+export interface CrowdloanUserInfosV53  {
     is(block: RuntimeCtx): boolean
-    get(block: Block, key1: v52.AccountId32, key2: v52.CrowdloanTag): Promise<(v52.CrowdloanUserInfo | undefined)>
-    getMany(block: Block, keys: [v52.AccountId32, v52.CrowdloanTag][]): Promise<(v52.CrowdloanUserInfo | undefined)[]>
-    getKeys(block: Block): Promise<[v52.AccountId32, v52.CrowdloanTag][]>
-    getKeys(block: Block, key1: v52.AccountId32): Promise<[v52.AccountId32, v52.CrowdloanTag][]>
-    getKeys(block: Block, key1: v52.AccountId32, key2: v52.CrowdloanTag): Promise<[v52.AccountId32, v52.CrowdloanTag][]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v52.AccountId32, v52.CrowdloanTag][]>
-    getKeysPaged(pageSize: number, block: Block, key1: v52.AccountId32): AsyncIterable<[v52.AccountId32, v52.CrowdloanTag][]>
-    getKeysPaged(pageSize: number, block: Block, key1: v52.AccountId32, key2: v52.CrowdloanTag): AsyncIterable<[v52.AccountId32, v52.CrowdloanTag][]>
-    getPairs(block: Block): Promise<[k: [v52.AccountId32, v52.CrowdloanTag], v: (v52.CrowdloanUserInfo | undefined)][]>
-    getPairs(block: Block, key1: v52.AccountId32): Promise<[k: [v52.AccountId32, v52.CrowdloanTag], v: (v52.CrowdloanUserInfo | undefined)][]>
-    getPairs(block: Block, key1: v52.AccountId32, key2: v52.CrowdloanTag): Promise<[k: [v52.AccountId32, v52.CrowdloanTag], v: (v52.CrowdloanUserInfo | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v52.AccountId32, v52.CrowdloanTag], v: (v52.CrowdloanUserInfo | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key1: v52.AccountId32): AsyncIterable<[k: [v52.AccountId32, v52.CrowdloanTag], v: (v52.CrowdloanUserInfo | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key1: v52.AccountId32, key2: v52.CrowdloanTag): AsyncIterable<[k: [v52.AccountId32, v52.CrowdloanTag], v: (v52.CrowdloanUserInfo | undefined)][]>
+    get(block: Block, key1: v53.AccountId32, key2: v53.CrowdloanTag): Promise<(v53.CrowdloanUserInfo | undefined)>
+    getMany(block: Block, keys: [v53.AccountId32, v53.CrowdloanTag][]): Promise<(v53.CrowdloanUserInfo | undefined)[]>
+    getKeys(block: Block): Promise<[v53.AccountId32, v53.CrowdloanTag][]>
+    getKeys(block: Block, key1: v53.AccountId32): Promise<[v53.AccountId32, v53.CrowdloanTag][]>
+    getKeys(block: Block, key1: v53.AccountId32, key2: v53.CrowdloanTag): Promise<[v53.AccountId32, v53.CrowdloanTag][]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v53.AccountId32, v53.CrowdloanTag][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v53.AccountId32): AsyncIterable<[v53.AccountId32, v53.CrowdloanTag][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v53.AccountId32, key2: v53.CrowdloanTag): AsyncIterable<[v53.AccountId32, v53.CrowdloanTag][]>
+    getPairs(block: Block): Promise<[k: [v53.AccountId32, v53.CrowdloanTag], v: (v53.CrowdloanUserInfo | undefined)][]>
+    getPairs(block: Block, key1: v53.AccountId32): Promise<[k: [v53.AccountId32, v53.CrowdloanTag], v: (v53.CrowdloanUserInfo | undefined)][]>
+    getPairs(block: Block, key1: v53.AccountId32, key2: v53.CrowdloanTag): Promise<[k: [v53.AccountId32, v53.CrowdloanTag], v: (v53.CrowdloanUserInfo | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v53.AccountId32, v53.CrowdloanTag], v: (v53.CrowdloanUserInfo | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v53.AccountId32): AsyncIterable<[k: [v53.AccountId32, v53.CrowdloanTag], v: (v53.CrowdloanUserInfo | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v53.AccountId32, key2: v53.CrowdloanTag): AsyncIterable<[k: [v53.AccountId32, v53.CrowdloanTag], v: (v53.CrowdloanUserInfo | undefined)][]>
 }

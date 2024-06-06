@@ -48,6 +48,7 @@ class HistoryElementsStorage {
     }
 
     private async updateElements(ctx: BlockContext) {
+		getUtilsLog(ctx).debug(`History Elements saved: ${this.elements.length}`)
         if (this.elements.length) {
 			await Promise.all(this.elements.map(element => {
 				return ctx.store.save(element)
@@ -85,6 +86,7 @@ class HistoryElementsStorage {
     }
 
     public async sync(ctx: BlockContext): Promise<void> {
+		getUtilsLog(ctx).debug(`sync`)
         await this.updateElements(ctx)
         await this.updateCalls(ctx)
         await this.updateAccounts(ctx)
@@ -98,6 +100,7 @@ class HistoryElementsStorage {
         calls: HistoryElementCall[] = [],
         accountsAddresses: Address[] = [],
     ): Promise<void> {
+		getUtilsLog(ctx).debug(`add`)
         this.elements.push(historyElement)
         this.calls.push(...calls)
         accountsAddresses.forEach((accountId) => this.accounts.set(accountId, historyElement.id))

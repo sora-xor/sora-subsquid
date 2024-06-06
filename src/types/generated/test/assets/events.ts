@@ -1,16 +1,16 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
 import * as v42 from '../v42'
-import * as v52 from '../v52'
+import * as v53 from '../v53'
 
 export const assetRegistered =  {
     name: 'Assets.AssetRegistered',
     /**
      *  New asset has been registered. [Asset Id, Asset Owner Account]
      */
-    v33: new EventType(
+    v1: new EventType(
         'Assets.AssetRegistered',
-        sts.tuple([v33.AssetId, v33.AccountId])
+        sts.tuple([v1.AssetId, v1.AccountId])
     ),
     /**
      * New asset has been registered. [Asset Id, Asset Owner Account]
@@ -26,9 +26,9 @@ export const transfer =  {
     /**
      *  Asset amount has been transfered. [From Account, To Account, Tranferred Asset Id, Amount Transferred]
      */
-    v33: new EventType(
+    v1: new EventType(
         'Assets.Transfer',
-        sts.tuple([v33.AccountId, v33.AccountId, v33.AssetId, v33.TAssetBalance])
+        sts.tuple([v1.AccountId, v1.AccountId, v1.AssetId, v1.TAssetBalance])
     ),
     /**
      * Asset amount has been transfered. [From Account, To Account, Tranferred Asset Id, Amount Transferred]
@@ -44,9 +44,9 @@ export const mint =  {
     /**
      *  Asset amount has been minted. [Issuer Account, Target Account, Minted Asset Id, Amount Minted]
      */
-    v33: new EventType(
+    v1: new EventType(
         'Assets.Mint',
-        sts.tuple([v33.AccountId, v33.AccountId, v33.AssetId, v33.TAssetBalance])
+        sts.tuple([v1.AccountId, v1.AccountId, v1.AssetId, v1.TAssetBalance])
     ),
     /**
      * Asset amount has been minted. [Issuer Account, Target Account, Minted Asset Id, Amount Minted]
@@ -62,9 +62,9 @@ export const burn =  {
     /**
      *  Asset amount has been burned. [Issuer Account, Burned Asset Id, Amount Burned]
      */
-    v33: new EventType(
+    v1: new EventType(
         'Assets.Burn',
-        sts.tuple([v33.AccountId, v33.AssetId, v33.TAssetBalance])
+        sts.tuple([v1.AccountId, v1.AssetId, v1.TAssetBalance])
     ),
     /**
      * Asset amount has been burned. [Issuer Account, Burned Asset Id, Amount Burned]
@@ -80,9 +80,9 @@ export const assetSetNonMintable =  {
     /**
      *  Asset is set as non-mintable. [Target Asset Id]
      */
-    v33: new EventType(
+    v1: new EventType(
         'Assets.AssetSetNonMintable',
-        v33.AssetId
+        v1.AssetId
     ),
     /**
      * Asset is set as non-mintable. [Target Asset Id]
@@ -98,8 +98,8 @@ export const assetUpdated =  {
     /**
      * Asset info has been updated
      */
-    v52: new EventType(
+    v53: new EventType(
         'Assets.AssetUpdated',
-        sts.tuple([v52.AssetId32, sts.option(() => v52.AssetSymbol), sts.option(() => v52.AssetName)])
+        sts.tuple([v53.AssetId32, sts.option(() => v53.AssetSymbol), sts.option(() => v53.AssetName)])
     ),
 }

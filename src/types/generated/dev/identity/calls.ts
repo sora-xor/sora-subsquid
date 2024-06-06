@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const addRegistrar =  {
     name: 'Identity.add_registrar',
@@ -18,10 +18,10 @@ export const addRegistrar =  {
      * - One event.
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'Identity.add_registrar',
         sts.struct({
-            account: v70.AccountId32,
+            account: v85.AccountId32,
         })
     ),
 }
@@ -49,10 +49,10 @@ export const setIdentity =  {
      * - One event.
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'Identity.set_identity',
         sts.struct({
-            info: v70.IdentityInfo,
+            info: v85.IdentityInfo,
         })
     ),
 }
@@ -82,10 +82,10 @@ export const setSubs =  {
      *   - One storage-exists (`IdentityOf::contains_key`).
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'Identity.set_subs',
         sts.struct({
-            subs: sts.array(() => sts.tuple(() => [v70.AccountId32, v70.Data])),
+            subs: sts.array(() => sts.tuple(() => [v85.AccountId32, v85.Data])),
         })
     ),
 }
@@ -112,7 +112,7 @@ export const clearIdentity =  {
      * - One event.
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'Identity.clear_identity',
         sts.unit()
     ),
@@ -145,7 +145,7 @@ export const requestJudgement =  {
      * - One event.
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'Identity.request_judgement',
         sts.struct({
             regIndex: sts.number(),
@@ -175,7 +175,7 @@ export const cancelRequest =  {
      * - One event
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'Identity.cancel_request',
         sts.struct({
             regIndex: sts.number(),
@@ -200,7 +200,7 @@ export const setFee =  {
      * - Benchmark: 7.315 + R * 0.329 µs (min squares analysis)
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'Identity.set_fee',
         sts.struct({
             index: sts.number(),
@@ -226,11 +226,11 @@ export const setAccountId =  {
      * - Benchmark: 8.823 + R * 0.32 µs (min squares analysis)
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'Identity.set_account_id',
         sts.struct({
             index: sts.number(),
-            new: v70.AccountId32,
+            new: v85.AccountId32,
         })
     ),
 }
@@ -252,11 +252,11 @@ export const setFields =  {
      * - Benchmark: 7.464 + R * 0.325 µs (min squares analysis)
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'Identity.set_fields',
         sts.struct({
             index: sts.number(),
-            fields: v70.BitFlags,
+            fields: v85.BitFlags,
         })
     ),
 }
@@ -285,13 +285,13 @@ export const provideJudgement =  {
      * - One event.
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'Identity.provide_judgement',
         sts.struct({
             regIndex: sts.number(),
-            target: v70.AccountId32,
-            judgement: v70.Judgement,
-            identity: v70.H256,
+            target: v85.AccountId32,
+            judgement: v85.Judgement,
+            identity: v85.H256,
         })
     ),
 }
@@ -319,10 +319,10 @@ export const killIdentity =  {
      * - One event.
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'Identity.kill_identity',
         sts.struct({
-            target: v70.AccountId32,
+            target: v85.AccountId32,
         })
     ),
 }
@@ -338,11 +338,11 @@ export const addSub =  {
      * The dispatch origin for this call must be _Signed_ and the sender must have a registered
      * sub identity of `sub`.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Identity.add_sub',
         sts.struct({
-            sub: v70.AccountId32,
-            data: v70.Data,
+            sub: v85.AccountId32,
+            data: v85.Data,
         })
     ),
 }
@@ -355,11 +355,11 @@ export const renameSub =  {
      * The dispatch origin for this call must be _Signed_ and the sender must have a registered
      * sub identity of `sub`.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Identity.rename_sub',
         sts.struct({
-            sub: v70.AccountId32,
-            data: v70.Data,
+            sub: v85.AccountId32,
+            data: v85.Data,
         })
     ),
 }
@@ -375,10 +375,10 @@ export const removeSub =  {
      * The dispatch origin for this call must be _Signed_ and the sender must have a registered
      * sub identity of `sub`.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Identity.remove_sub',
         sts.struct({
-            sub: v70.AccountId32,
+            sub: v85.AccountId32,
         })
     ),
 }
@@ -397,7 +397,7 @@ export const quitSub =  {
      * NOTE: This should not normally be used, but is provided in the case that the non-
      * controller of an account is maliciously registered as a sub-account.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Identity.quit_sub',
         sts.unit()
     ),

@@ -7,7 +7,7 @@ import * as devCalls from '../../dev/im-online/calls'
 export const heartbeat = {
 	name: 'ImOnline.heartbeat',
 	v1: productionCalls.heartbeat['v1'],
-	v33Stage: stageCalls.heartbeat['v33'],
-	v33Test: testCalls.heartbeat['v33'],
-	v70Dev: devCalls.heartbeat['v70'],
+	v1Stage: stageCalls.heartbeat['v1'],
+	v1Test: testCalls.heartbeat['v1'],
+	v85Dev: devCalls.heartbeat['v85'],
 }

@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v3 from '../v3'
 import * as v42 from '../v42'
 
 export const identitySet =  {
@@ -7,9 +7,9 @@ export const identitySet =  {
     /**
      *  A name was set or reset (which will remove all judgements). \[who\]
      */
-    v33: new EventType(
+    v3: new EventType(
         'Identity.IdentitySet',
-        v33.AccountId
+        v3.AccountId
     ),
     /**
      * A name was set or reset (which will remove all judgements).
@@ -27,9 +27,9 @@ export const identityCleared =  {
     /**
      *  A name was cleared, and the given balance returned. \[who, deposit\]
      */
-    v33: new EventType(
+    v3: new EventType(
         'Identity.IdentityCleared',
-        sts.tuple([v33.AccountId, v33.Balance])
+        sts.tuple([v3.AccountId, v3.Balance])
     ),
     /**
      * A name was cleared, and the given balance returned.
@@ -48,9 +48,9 @@ export const identityKilled =  {
     /**
      *  A name was removed and the given balance slashed. \[who, deposit\]
      */
-    v33: new EventType(
+    v3: new EventType(
         'Identity.IdentityKilled',
-        sts.tuple([v33.AccountId, v33.Balance])
+        sts.tuple([v3.AccountId, v3.Balance])
     ),
     /**
      * A name was removed and the given balance slashed.
@@ -69,9 +69,9 @@ export const judgementRequested =  {
     /**
      *  A judgement was asked from a registrar. \[who, registrar_index\]
      */
-    v33: new EventType(
+    v3: new EventType(
         'Identity.JudgementRequested',
-        sts.tuple([v33.AccountId, v33.RegistrarIndex])
+        sts.tuple([v3.AccountId, v3.RegistrarIndex])
     ),
     /**
      * A judgement was asked from a registrar.
@@ -90,9 +90,9 @@ export const judgementUnrequested =  {
     /**
      *  A judgement request was retracted. \[who, registrar_index\]
      */
-    v33: new EventType(
+    v3: new EventType(
         'Identity.JudgementUnrequested',
-        sts.tuple([v33.AccountId, v33.RegistrarIndex])
+        sts.tuple([v3.AccountId, v3.RegistrarIndex])
     ),
     /**
      * A judgement request was retracted.
@@ -111,9 +111,9 @@ export const judgementGiven =  {
     /**
      *  A judgement was given by a registrar. \[target, registrar_index\]
      */
-    v33: new EventType(
+    v3: new EventType(
         'Identity.JudgementGiven',
-        sts.tuple([v33.AccountId, v33.RegistrarIndex])
+        sts.tuple([v3.AccountId, v3.RegistrarIndex])
     ),
     /**
      * A judgement was given by a registrar.
@@ -132,9 +132,9 @@ export const registrarAdded =  {
     /**
      *  A registrar was added. \[registrar_index\]
      */
-    v33: new EventType(
+    v3: new EventType(
         'Identity.RegistrarAdded',
-        v33.RegistrarIndex
+        v3.RegistrarIndex
     ),
     /**
      * A registrar was added.
@@ -152,9 +152,9 @@ export const subIdentityAdded =  {
     /**
      *  A sub-identity was added to an identity and the deposit paid. \[sub, main, deposit\]
      */
-    v33: new EventType(
+    v3: new EventType(
         'Identity.SubIdentityAdded',
-        sts.tuple([v33.AccountId, v33.AccountId, v33.Balance])
+        sts.tuple([v3.AccountId, v3.AccountId, v3.Balance])
     ),
     /**
      * A sub-identity was added to an identity and the deposit paid.
@@ -175,9 +175,9 @@ export const subIdentityRemoved =  {
      *  A sub-identity was removed from an identity and the deposit freed.
      *  \[sub, main, deposit\]
      */
-    v33: new EventType(
+    v3: new EventType(
         'Identity.SubIdentityRemoved',
-        sts.tuple([v33.AccountId, v33.AccountId, v33.Balance])
+        sts.tuple([v3.AccountId, v3.AccountId, v3.Balance])
     ),
     /**
      * A sub-identity was removed from an identity and the deposit freed.
@@ -198,9 +198,9 @@ export const subIdentityRevoked =  {
      *  A sub-identity was cleared, and the given deposit repatriated from the
      *  main identity account to the sub-identity account. \[sub, main, deposit\]
      */
-    v33: new EventType(
+    v3: new EventType(
         'Identity.SubIdentityRevoked',
-        sts.tuple([v33.AccountId, v33.AccountId, v33.Balance])
+        sts.tuple([v3.AccountId, v3.AccountId, v3.Balance])
     ),
     /**
      * A sub-identity was cleared, and the given deposit repatriated from the

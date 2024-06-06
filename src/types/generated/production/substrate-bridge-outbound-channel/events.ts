@@ -21,3 +21,13 @@ export const messageAccepted =  {
         })
     ),
 }
+
+export const intervalUpdated =  {
+    name: 'SubstrateBridgeOutboundChannel.IntervalUpdated',
+    v72: new EventType(
+        'SubstrateBridgeOutboundChannel.IntervalUpdated',
+        sts.struct({
+            interval: sts.number(),
+        })
+    ),
+}

@@ -7,23 +7,23 @@ import * as devStorage from '../../dev/referrals/storage'
 export const referrers = {
 	name: 'Referrals.Referrers',
 	v22: productionStorage.referrers['v22'],
-	v33Stage: stageStorage.referrers['v33'],
-	v33Test: testStorage.referrers['v33'],
-	v70Dev: devStorage.referrers['v70'],
+	v22Stage: stageStorage.referrers['v22'],
+	v22Test: testStorage.referrers['v22'],
+	v85Dev: devStorage.referrers['v85'],
 }
 
 export const referrerBalances = {
 	name: 'Referrals.ReferrerBalances',
 	v22: productionStorage.referrerBalances['v22'],
-	v33Stage: stageStorage.referrerBalances['v33'],
-	v33Test: testStorage.referrerBalances['v33'],
-	v70Dev: devStorage.referrerBalances['v70'],
+	v22Stage: stageStorage.referrerBalances['v22'],
+	v22Test: testStorage.referrerBalances['v22'],
+	v85Dev: devStorage.referrerBalances['v85'],
 }
 
 export const referrals = {
 	name: 'Referrals.Referrals',
 	v22: productionStorage.referrals['v22'],
-	v33Stage: stageStorage.referrals['v33'],
-	v33Test: testStorage.referrals['v33'],
-	v70Dev: devStorage.referrals['v70'],
+	v22Stage: stageStorage.referrals['v22'],
+	v22Test: testStorage.referrals['v22'],
+	v85Dev: devStorage.referrals['v85'],
 }

@@ -121,6 +121,7 @@ class NetworkSnapshotsStorage {
 
 	async updateAccountsStats(ctx: BlockContext): Promise<void> {
 		getNetworkSnapshotsStorageLog(ctx).debug('Update accounts stats in network snapshots')
+
 		const stats = await this.networkStatsStorage.getStats(ctx)
 
 		stats.totalAccounts = stats.totalAccounts + 1
@@ -136,6 +137,7 @@ class NetworkSnapshotsStorage {
 
 	async updateTransactionsStats(ctx: BlockContext): Promise<void> {
 		getNetworkSnapshotsStorageLog(ctx).debug('Update transactions stats in network snapshots')
+
 		const stats = await this.networkStatsStorage.getStats(ctx)
 
 		stats.totalTransactions = stats.totalTransactions + 1
@@ -151,6 +153,7 @@ class NetworkSnapshotsStorage {
 
 	async updateBridgeIncomingTransactionsStats(ctx: BlockContext): Promise<void> {
 		getNetworkSnapshotsStorageLog(ctx).debug('Update bridge incoming transactions stats in network snapshots')
+		
 		const stats = await this.networkStatsStorage.getStats(ctx)
 
 		stats.totalBridgeIncomingTransactions = stats.totalBridgeIncomingTransactions + 1

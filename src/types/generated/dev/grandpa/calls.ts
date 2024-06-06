@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const reportEquivocation =  {
     name: 'Grandpa.report_equivocation',
@@ -9,11 +9,11 @@ export const reportEquivocation =  {
      * against the extracted offender. If both are valid, the offence
      * will be reported.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Grandpa.report_equivocation',
         sts.struct({
-            equivocationProof: v70.Type_306,
-            keyOwnerProof: v70.MembershipProof,
+            equivocationProof: v85.Type_325,
+            keyOwnerProof: v85.MembershipProof,
         })
     ),
 }
@@ -31,11 +31,11 @@ export const reportEquivocationUnsigned =  {
      * if the block author is defined it will be defined as the equivocation
      * reporter.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Grandpa.report_equivocation_unsigned',
         sts.struct({
-            equivocationProof: v70.Type_306,
-            keyOwnerProof: v70.MembershipProof,
+            equivocationProof: v85.Type_325,
+            keyOwnerProof: v85.MembershipProof,
         })
     ),
 }
@@ -56,7 +56,7 @@ export const noteStalled =  {
      * 
      * Only callable by root.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Grandpa.note_stalled',
         sts.struct({
             delay: sts.number(),

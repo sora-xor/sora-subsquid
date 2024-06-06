@@ -1,6 +1,6 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
-import * as v52 from '../v52'
+import * as v1 from '../v1'
+import * as v53 from '../v53'
 
 export const vote =  {
     name: 'ElectionsPhragmen.vote',
@@ -29,10 +29,10 @@ export const vote =  {
      *  We assume the maximum weight among all 3 cases: vote_equal, vote_more and vote_less.
      *  # </weight>
      */
-    v33: new CallType(
+    v1: new CallType(
         'ElectionsPhragmen.vote',
         sts.struct({
-            votes: sts.array(() => v33.AccountId),
+            votes: sts.array(() => v1.AccountId),
             value: sts.bigint(),
         })
     ),
@@ -47,7 +47,7 @@ export const removeVoter =  {
      * 
      *  The dispatch origin of this call must be signed and be a voter.
      */
-    v33: new CallType(
+    v1: new CallType(
         'ElectionsPhragmen.remove_voter',
         sts.unit()
     ),
@@ -72,7 +72,7 @@ export const submitCandidacy =  {
      *  The number of current candidates must be provided as witness data.
      *  # </weight>
      */
-    v33: new CallType(
+    v1: new CallType(
         'ElectionsPhragmen.submit_candidacy',
         sts.struct({
             candidateCount: sts.number(),
@@ -101,10 +101,10 @@ export const renounceCandidacy =  {
      *  The type of renouncing must be provided as witness data.
      *  # </weight>
      */
-    v33: new CallType(
+    v1: new CallType(
         'ElectionsPhragmen.renounce_candidacy',
         sts.struct({
-            renouncing: v33.Renouncing,
+            renouncing: v1.Renouncing,
         })
     ),
 }
@@ -127,10 +127,10 @@ export const removeMember =  {
      *  will go into phragmen, we assume full block for now.
      *  # </weight>
      */
-    v33: new CallType(
+    v1: new CallType(
         'ElectionsPhragmen.remove_member',
         sts.struct({
-            who: v33.LookupSource,
+            who: v1.LookupSource,
             hasReplacement: sts.boolean(),
         })
     ),
@@ -154,10 +154,10 @@ export const removeMember =  {
      * will go into phragmen, we assume full block for now.
      * # </weight>
      */
-    v52: new CallType(
+    v53: new CallType(
         'ElectionsPhragmen.remove_member',
         sts.struct({
-            who: v52.AccountId32,
+            who: v53.AccountId32,
             slashBond: sts.boolean(),
             rerunElection: sts.boolean(),
         })
@@ -178,7 +178,7 @@ export const cleanDefunctVoters =  {
      *  The total number of voters and those that are defunct must be provided as witness data.
      *  # </weight>
      */
-    v33: new CallType(
+    v1: new CallType(
         'ElectionsPhragmen.clean_defunct_voters',
         sts.struct({
             numVoters: sts.number(),

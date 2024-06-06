@@ -1,15 +1,17 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
+import * as v22 from '../v22'
 import * as v42 from '../v42'
+import * as v85 from '../v85'
 
 export const poolInitialized =  {
     name: 'MulticollateralBondingCurvePool.PoolInitialized',
     /**
      *  Pool is initialized for pair. [DEX Id, Collateral Asset Id]
      */
-    v33: new EventType(
+    v1: new EventType(
         'MulticollateralBondingCurvePool.PoolInitialized',
-        sts.tuple([v33.DEXId, v33.AssetId])
+        sts.tuple([v1.DEXId, v1.AssetId])
     ),
     /**
      * Pool is initialized for pair. [DEX Id, Collateral Asset Id]
@@ -25,9 +27,9 @@ export const referenceAssetChanged =  {
     /**
      *  Reference Asset has been changed for pool. [New Reference Asset Id]
      */
-    v33: new EventType(
+    v1: new EventType(
         'MulticollateralBondingCurvePool.ReferenceAssetChanged',
-        v33.AssetId
+        v1.AssetId
     ),
     /**
      * Reference Asset has been changed for pool. [New Reference Asset Id]
@@ -43,9 +45,9 @@ export const optionalRewardMultiplierUpdated =  {
     /**
      *  Multiplier for reward has been updated on particular asset. [Asset Id, New Multiplier]
      */
-    v33: new EventType(
+    v1: new EventType(
         'MulticollateralBondingCurvePool.OptionalRewardMultiplierUpdated',
-        sts.tuple([v33.AssetId, sts.option(() => v33.Fixed)])
+        sts.tuple([v1.AssetId, sts.option(() => v1.Fixed)])
     ),
     /**
      * Multiplier for reward has been updated on particular asset. [Asset Id, New Multiplier]
@@ -61,9 +63,9 @@ export const priceBiasChanged =  {
     /**
      *  Price bias was changed. [New Price Bias]
      */
-    v33: new EventType(
+    v22: new EventType(
         'MulticollateralBondingCurvePool.PriceBiasChanged',
-        v33.Balance
+        v22.Balance
     ),
 }
 
@@ -72,8 +74,19 @@ export const priceChangeConfigChanged =  {
     /**
      *  Price change config was changed. [New Price Change Rate, New Price Change Step]
      */
-    v33: new EventType(
+    v22: new EventType(
         'MulticollateralBondingCurvePool.PriceChangeConfigChanged',
-        sts.tuple([v33.Balance, v33.Balance])
+        sts.tuple([v22.Balance, v22.Balance])
+    ),
+}
+
+export const failedToDistributeFreeReserves =  {
+    name: 'MulticollateralBondingCurvePool.FailedToDistributeFreeReserves',
+    /**
+     * Free reserves distribution routine failed. [Error]
+     */
+    v85: new EventType(
+        'MulticollateralBondingCurvePool.FailedToDistributeFreeReserves',
+        v85.DispatchError
     ),
 }
