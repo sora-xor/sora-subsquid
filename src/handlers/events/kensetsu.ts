@@ -1,4 +1,4 @@
-import { Vault, VaultAccount, VaultStatus, VaultEvent, VaultEventType } from "../../model"
+import { Vault, VaultAccount, VaultStatus, VaultEvent, VaultEventType, VaultType } from "../../model"
 import { assertDefined, getBlockTimestamp, getEventId } from "../../utils"
 import { getVaultAccountEntity } from "../../utils/kensetsu"
 import { getAssetId, formatU128ToBalance, assetStorage } from "../../utils/assets"
@@ -83,18 +83,19 @@ async function handleEventType(
 		account = await getVaultAccountEntity(ctx, owner)
 
 		assertDefined(vaultType)
+		assertDefined(account)
 		vault = new Vault({
 			id: vaultId,
-			type: vaultType as any,
+			type: vaultType as VaultType,
 			status: VaultStatus.Opened,
-			owner: account.id as any,
+			owner: account,
 			collateralAsset: await assetStorage.getAsset(ctx, assetId),
 			debtAsset: await assetStorage.getAsset(ctx, debtAssetId),
 			createdAtBlock: blockHeight,
 			updatedAtBlock: blockHeight
 		})
 	} else {
-		const vaultFromStore = await ctx.store.get(Vault, vaultId)
+		const vaultFromStore = await ctx.store.get(Vault, { where: { id: vaultId }, relations: { owner: true } })
 		vault = vaultFromStore
 	}
 
@@ -118,16 +119,18 @@ async function handleEventType(
 		case VaultEventType.Closed: {
 			vault.status = Number(amount) === 0 ? VaultStatus.Liquidated : VaultStatus.Closed
 			vault.collateralAmountReturned = amount
-		break
+			break
 		}
 		case VaultEventType.Liquidated: {
 			account = await getVaultAccountEntity(ctx, vault.owner.id)
 			account.lastLiquidation = vaultEvent
-		break
+			break
 		}
 	}
 
-	if (account) await ctx.store.save(account)
+	if (account) {
+		await ctx.store.save(account)
+	}
 	await ctx.store.save(vault)
 	await ctx.store.save(vaultEvent)
 }
