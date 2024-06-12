@@ -95,7 +95,7 @@ async function handleEventType(
 			updatedAtBlock: blockHeight
 		})
 	} else {
-		const vaultFromStore = await ctx.store.get(Vault, { where: { id: vaultId }, relations: { owner: true } })
+		const vaultFromStore = await ctx.store.get(Vault, vaultId)
 		vault = vaultFromStore
 	}
 
@@ -122,17 +122,19 @@ async function handleEventType(
 			break
 		}
 		case VaultEventType.Liquidated: {
-			account = await getVaultAccountEntity(ctx, vault.owner.id)
+			const vaultWithOwner = await ctx.store.get(Vault, { where: { id: vault.id }, relations: { owner: true } })
+			assertDefined(vaultWithOwner)
+			account = vaultWithOwner.owner
 			account.lastLiquidation = vaultEvent
 			break
 		}
 	}
 
+	await ctx.store.save(vault)
+	await ctx.store.save(vaultEvent)
 	if (account) {
 		await ctx.store.save(account)
 	}
-	await ctx.store.save(vault)
-	await ctx.store.save(vaultEvent)
 }
 
 export async function vaultCreatedEvent(ctx: BlockContext, event: Event<'Kensetsu.CDPCreated'>): Promise<void> {
