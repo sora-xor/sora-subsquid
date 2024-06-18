@@ -19,7 +19,7 @@ import { ethBridgeTransferToSidechainCallHandler } from './handlers/calls/ethBri
 import { swapsCallHandler } from './handlers/calls/liquidityProxy/swaps'
 import { assetTransferCallHandler } from './handlers/calls/assets/transfer'
 import { ethSoraTransferEventHandler } from './handlers/events/ethSoraTransfer'
-import { tokenBurnEventHandler, tokenMintEventHandler, xorBurnEventHandler, xorMintEventHandler } from './handlers/events/mintAndBurn'
+import { burnEventHandler, mintEventHandler } from './handlers/events/mintAndBurn'
 import { networkFeeEventHandler } from './handlers/events/networkFee'
 import { referrerRewardEventHandler } from './handlers/events/referrerReward'
 import { transferEventHandler } from './handlers/events/transfer'
@@ -28,7 +28,7 @@ import { initializePools } from './handlers/models/initializePools'
 import { syncModels, updateDailyStats, updateAssetsWeeklyStats, updateNetworkStats } from './handlers/sync/models'
 import { syncPoolXykPrices } from './handlers/sync/prices'
 import { assetRegistrationEventHandler, syntheticAssetEnabledEventHandler } from './handlers/events/assetsRegistration'
-import { chain, archive, startBlock } from './config'
+import { chain, archive, startBlock, performanceLogMinBlockTime } from './config'
 import { stakingRewardedEventHandler } from './handlers/events/rewards'
 import { liquidityProxySwapTransferBatchCallHandler } from './handlers/calls/liquidityProxy/swapTransferBatch'
 import { stakingStakersElectedEventHandler } from './handlers/events/staking'
@@ -86,6 +86,9 @@ import { orderBookPlaceLimitOrderCallHandler } from './handlers/calls/orderBook/
 import { utilityBatchAllCallHandler } from './handlers/calls/utility/batchAll'
 import { vaultCloseCallHandler, vaultCreateCallHandler, vaultDecreaseDebtCallHandler, vaultDepositCollateralCallHandler, vaultIncreaseDeptCallHandler } from './handlers/calls/kensetsu'
 import { vaultClosedEvent, vaultCollateralDepositEvent, vaultCreatedEvent, vaultDebtIncreasedEvent, vaultDebtPaymentEvent, vaultLiquidatedEvent } from './handlers/events/kensetsu'
+import { getPerformanceLog } from './utils/logs'
+import { networkSnapshotsStorage } from './utils/network'
+import { EntityManager } from 'typeorm'
 
 export const processor = new SubstrateBatchProcessor()
 	.setRpcEndpoint({
@@ -116,6 +119,8 @@ processor.addEvent({ extrinsic: true })
 
 let lastSyncedBlock = -1
 
+processor.includeAllBlocks()
+
 processor.run(new TypeormDatabase({ supportHotBlocks: false }), async (ctx) => {
 	ctx._chain
 	const context = ctx
@@ -127,6 +132,7 @@ processor.run(new TypeormDatabase({ supportHotBlocks: false }), async (ctx) => {
 			now: performance.now(),
 		}
 
+		await networkSnapshotsStorage.init(blockContext);
 		await initializeAssets(blockContext)
 		await initializePools(blockContext)
 		await initializeOrderBooks(blockContext)
@@ -237,10 +243,8 @@ processor.run(new TypeormDatabase({ supportHotBlocks: false }), async (ctx) => {
 				await anyEventHandler(blockContext, event)
 
 				if (event.name === 'EthBridge.IncomingRequestFinalized') await ethSoraTransferEventHandler(blockContext, event)
-				if (event.name === 'Tokens.Withdrawn') await tokenBurnEventHandler(blockContext, event)
-				if (event.name === 'Balances.Withdraw') await xorBurnEventHandler(blockContext, event)
-				if (event.name === 'Tokens.Deposited') await tokenMintEventHandler(blockContext, event)
-				if (event.name === 'Balances.Deposit') await xorMintEventHandler(blockContext, event)
+				if (event.name === 'Tokens.Withdrawn' || event.name === 'Balances.Withdraw' || event.name === 'Currencies.Withdrawn') await burnEventHandler(blockContext, event)
+				if (event.name === 'Tokens.Deposited' || event.name === 'Balances.Deposit' || event.name === 'Currencies.Deposited') await mintEventHandler(blockContext, event)
 				if (event.name === 'XorFee.FeeWithdrawn') await networkFeeEventHandler(blockContext, event)
 				if (event.name === 'XorFee.ReferrerRewarded') await referrerRewardEventHandler(blockContext, event)
 				if (event.name === 'Tokens.Transfer' || event.name === 'Balances.Transfer' || event.name === 'Currencies.Transferred') await transferEventHandler(blockContext, event)
@@ -265,6 +269,29 @@ processor.run(new TypeormDatabase({ supportHotBlocks: false }), async (ctx) => {
 				if (event.name === 'Kensetsu.Liquidated') await vaultLiquidatedEvent(blockContext, event)
 				if (event.name === 'Kensetsu.CDPClosed') await vaultClosedEvent(blockContext, event)
 			}
+		}
+
+		// Update last processed block in database
+		// const entityManager: EntityManager = ctx.store['em']()
+		// const check = await entityManager.query(`
+		// 	select "hash", "height"
+		// 	from "squid_processor"."status"
+		// 	where "id" = 0;
+		// `)
+		// const result = await entityManager.query(`
+		// 	update "squid_processor"."status"
+		// 	set 
+		// 		"hash" = '${block.header.hash}',
+		// 		"height" = '${block.header.height}'
+		// 	where 
+		// 		"id" = 0;
+		// `)
+		// //console.log('check', check, block.header.height, context.blocks.length)
+		// getPerformanceLog(blockContext).info({ block: block.header.height }, 'Last processed block')
+
+		const processingTime = performance.now() - blockContext.now
+		if (processingTime > performanceLogMinBlockTime) {
+			getPerformanceLog(blockContext).info({ block: block.header.height, processingTime }, 'Slow block processing')
 		}
 	}
 })
