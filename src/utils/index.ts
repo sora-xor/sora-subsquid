@@ -133,6 +133,7 @@ export const toPascalCase = (s: string): string => {
 	return camelCase.charAt(0).toUpperCase() + camelCase.slice(1)
 }
 
+// TODO: check if this is used somewhere after the refactoring
 export const getSnapshotTypes = (ctx: BlockContext, types: SnapshotType[]) => {
 	return types.filter((type) => {
 		const diff = SnapshotTimeDepthMap[type]

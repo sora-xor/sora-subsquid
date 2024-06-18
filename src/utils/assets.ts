@@ -209,8 +209,7 @@ class AssetSnapshotsStorage {
 	private async syncSnapshots(ctx: BlockContext): Promise<void> {
 		getAssetSnapshotsStorageLog(ctx).debug(`${this.storage.size} snapshots sync`)
 
-		await ctx.store.remove([...this.storage.values()])
-		await ctx.store.insert([...this.storage.values()])
+		await ctx.store.save([...this.storage.values()])
 
 		for (const snapshot of this.storage.values()) {
 			const { type, timestamp } = snapshot
@@ -338,34 +337,37 @@ class AssetSnapshotsStorage {
 	async updateMinted(ctx: BlockContext, assetId: AssetId, amount: bigint): Promise<void> {
 		const snapshotTypes = getSnapshotTypes(ctx, AssetSnapshots)
 
+		const asset = await this.assetStorage.getAsset(ctx, assetId)
+
+		asset.supply = asset.supply + amount
+		getAssetSnapshotsStorageLog(ctx).debug({ assetId: assetId, minted: amount }, 'Asset supply updated')
+
     	for (const type of snapshotTypes) {
-			getAssetSnapshotsStorageLog(ctx).debug({ type }, 'Type')
 			const snapshot = await this.getSnapshot(ctx, assetId, type)
 
 			snapshot.mint = snapshot.mint + amount
 			getAssetSnapshotsStorageLog(ctx, true).debug({ assetId: assetId, newMinted: amount }, 'Asset snapshot mint updated')
+
+			snapshot.supply = asset.supply
 		}
-
-		const asset = await this.assetStorage.getAsset(ctx, assetId)
-
-		asset.supply = asset.supply + amount
-		getAssetSnapshotsStorageLog(ctx).debug({ assetId: assetId, minted: amount }, 'Asset minted')
 	}
 
 	async updateBurned(ctx: BlockContext, assetId: AssetId, amount: bigint): Promise<void> {
 		const snapshotTypes = getSnapshotTypes(ctx, AssetSnapshots)
+
+		const asset = await this.assetStorage.getAsset(ctx, assetId)
+
+		asset.supply = asset.supply - amount
+		getAssetSnapshotsStorageLog(ctx).debug({ assetId: assetId, supply: asset.supply }, 'Asset supply updated')
 
     	for (const type of snapshotTypes) {
 			const snapshot = await this.getSnapshot(ctx, assetId, type)
 
 			snapshot.burn = snapshot.burn + amount
 			getAssetSnapshotsStorageLog(ctx, true).debug({ assetId: assetId, burned: snapshot.burn }, 'Asset snapshot burn updated')
+
+			snapshot.supply = asset.supply
 		}
-
-		const asset = await this.assetStorage.getAsset(ctx, assetId)
-
-		asset.supply = asset.supply - amount
-		getAssetSnapshotsStorageLog(ctx).debug({ assetId: assetId, supply: asset.supply }, 'Asset supply updated')
 	}
 }
 

@@ -1,4 +1,4 @@
-import { Vault, VaultAccount, VaultStatus, VaultEvent, VaultEventType } from "../../model"
+import { Vault, VaultAccount, VaultStatus, VaultEvent, VaultEventType, VaultType } from "../../model"
 import { assertDefined, getBlockTimestamp, getEventId } from "../../utils"
 import { getVaultAccountEntity } from "../../utils/kensetsu"
 import { getAssetId, formatU128ToBalance, assetStorage } from "../../utils/assets"
@@ -14,7 +14,7 @@ async function handleEventType(
 ) {
 	logStartProcessingEvent(ctx, event)
 
-	let vault: Vault
+	let vault: Vault | undefined
 	let account: VaultAccount | null = null
 	let vaultId: string
 	let owner: string | null = null
@@ -50,26 +50,26 @@ async function handleEventType(
 			break
 		}
 		case VaultEventType.Closed: {
-			const data = getEventData(ctx, events.kensetsu.collateralDeposit, event)
+			const data = getEventData(ctx, events.kensetsu.cdpClosed, event)
 			vaultId = data.cdpId.toString()
 			owner = data.owner
 			assetId = getAssetId(data.collateralAssetId)
-			amount = formatU128ToBalance(data.amount, assetId)
+			amount = formatU128ToBalance(data.collateralAmount, assetId)
 			break
 		}
 		case VaultEventType.DebtIncreased: {
-			const data = getEventData(ctx, events.kensetsu.collateralDeposit, event)
+			const data = getEventData(ctx, events.kensetsu.debtIncreased, event)
 			vaultId = data.cdpId.toString()
 			owner = data.owner
-			assetId = getAssetId(data.collateralAssetId)
+			assetId = getAssetId(data.debtAssetId)
 			amount = formatU128ToBalance(data.amount, assetId)
 			break
 		}
 		case VaultEventType.DebtPayment: {
-			const data = getEventData(ctx, events.kensetsu.collateralDeposit, event)
+			const data = getEventData(ctx, events.kensetsu.debtPayment, event)
 			vaultId = data.cdpId.toString()
 			owner = data.owner
-			assetId = getAssetId(data.collateralAssetId)
+			assetId = getAssetId(data.debtAssetId)
 			amount = formatU128ToBalance(data.amount, assetId)
 			break
 		}
@@ -83,11 +83,12 @@ async function handleEventType(
 		account = await getVaultAccountEntity(ctx, owner)
 
 		assertDefined(vaultType)
+		assertDefined(account)
 		vault = new Vault({
 			id: vaultId,
-			type: vaultType as any,
+			type: vaultType as VaultType,
 			status: VaultStatus.Opened,
-			owner: account.id as any,
+			owner: account,
 			collateralAsset: await assetStorage.getAsset(ctx, assetId),
 			debtAsset: await assetStorage.getAsset(ctx, debtAssetId),
 			createdAtBlock: blockHeight,
@@ -95,7 +96,6 @@ async function handleEventType(
 		})
 	} else {
 		const vaultFromStore = await ctx.store.get(Vault, vaultId)
-		assertDefined(vaultFromStore)
 		vault = vaultFromStore
 	}
 
@@ -119,18 +119,22 @@ async function handleEventType(
 		case VaultEventType.Closed: {
 			vault.status = Number(amount) === 0 ? VaultStatus.Liquidated : VaultStatus.Closed
 			vault.collateralAmountReturned = amount
-		break
+			break
 		}
 		case VaultEventType.Liquidated: {
-			account = await getVaultAccountEntity(ctx, vault.owner.id)
+			const vaultWithOwner = await ctx.store.get(Vault, { where: { id: vault.id }, relations: { owner: true } })
+			assertDefined(vaultWithOwner)
+			account = vaultWithOwner.owner
 			account.lastLiquidation = vaultEvent
-		break
+			break
 		}
 	}
 
-	if (account) await ctx.store.save(account)
 	await ctx.store.save(vault)
 	await ctx.store.save(vaultEvent)
+	if (account) {
+		await ctx.store.save(account)
+	}
 }
 
 export async function vaultCreatedEvent(ctx: BlockContext, event: Event<'Kensetsu.CDPCreated'>): Promise<void> {
