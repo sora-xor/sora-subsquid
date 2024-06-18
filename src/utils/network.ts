@@ -6,8 +6,11 @@ import { getBlockTimestamp, getSnapshotIndex, getSnapshotTypes } from './index'
 import { getNetworkSnapshotsStorageLog } from './logs'
 import { orderBooksStorage } from './orderBook';
 import { poolsStorage } from './pools';
+import { LessThan, MoreThanOrEqual } from 'typeorm'
 
 const NetworkSnapshots = [SnapshotType.HOUR, SnapshotType.DAY, SnapshotType.MONTH]
+const minimumPeriodSnapshotType = SnapshotType.DEFAULT
+const maximumPeriodSnapshotType = SnapshotType.MONTH
 
 const NetworkStatsId = '0'
 
@@ -84,21 +87,59 @@ class NetworkSnapshotsStorage {
 		getNetworkSnapshotsStorageLog(ctx).debug(`${this.storage.size} snapshots in storage after sync`)
 	}
 
+	async init(ctx: BlockContext): Promise<void> {
+		getNetworkSnapshotsStorageLog(ctx).debug('Init network snapshots storage')
+
+		const currentMaximumPeriod = getSnapshotIndex(getBlockTimestamp(ctx), maximumPeriodSnapshotType)
+		const currentMinimumPeriod = getSnapshotIndex(getBlockTimestamp(ctx), minimumPeriodSnapshotType)
+		const firstMinimumPeriodInMaximumPeriod = getSnapshotIndex(currentMaximumPeriod.timestamp, minimumPeriodSnapshotType)
+
+		const snapshots = await ctx.store.findBy(NetworkSnapshot, [
+			{ type: SnapshotType.DEFAULT },
+			{ timestamp: MoreThanOrEqual(firstMinimumPeriodInMaximumPeriod.timestamp) },
+			{ timestamp: LessThan(currentMinimumPeriod.timestamp) }
+		])
+
+		const otherSnapshots: Record<SnapshotType, NetworkSnapshot> = {
+			[SnapshotType.DEFAULT]: await this.getSnapshot(ctx, SnapshotType.DEFAULT),
+			[SnapshotType.HOUR]: await this.getSnapshot(ctx, SnapshotType.HOUR),
+			[SnapshotType.DAY]: await this.getSnapshot(ctx, SnapshotType.DAY),
+			[SnapshotType.MONTH]:  await this.getSnapshot(ctx, SnapshotType.MONTH),
+		}
+
+		for (const snapshot of snapshots) {
+			this.storage.set(snapshot.id, snapshot)
+
+			for (const type of NetworkSnapshots) {
+				const otherSnapshot = otherSnapshots[type]
+
+				if (snapshot.timestamp >= otherSnapshot.timestamp) {
+					otherSnapshot.accounts += snapshot.accounts
+					otherSnapshot.transactions += snapshot.transactions
+					otherSnapshot.fees += snapshot.fees
+					otherSnapshot.liquidityUSD = new BigNumber(otherSnapshot.liquidityUSD).plus(snapshot.liquidityUSD).toFixed(2)
+					otherSnapshot.volumeUSD = new BigNumber(otherSnapshot.volumeUSD).plus(snapshot.volumeUSD).toFixed(2)
+					otherSnapshot.bridgeIncomingTransactions += snapshot.bridgeIncomingTransactions
+					otherSnapshot.bridgeOutgoingTransactions += snapshot.bridgeOutgoingTransactions
+				}	
+			}
+		}
+
+		getNetworkSnapshotsStorageLog(ctx).debug(`${this.storage.size} snapshots in network snapshots storage after init`)
+	}
+
 	public static getId(type: SnapshotType, index: number): string {
 		return [type, index].join('-')
 	}
 
 	async getSnapshot(ctx: BlockContext, type: SnapshotType): Promise<NetworkSnapshot> {
-		const blockTimestamp = getBlockTimestamp(ctx)
-		const { index, timestamp } = getSnapshotIndex(blockTimestamp, type)
+		const { index, timestamp } = getSnapshotIndex(getBlockTimestamp(ctx), type)
 		const id = NetworkSnapshotsStorage.getId(type, index)
 
 		let snapshot = this.storage.get(id)
 		if (snapshot) {
 			return snapshot
 		}
-
-		snapshot = await ctx.store.get(NetworkSnapshot, id)
 
 		if (!snapshot) {
 			snapshot = new NetworkSnapshot()

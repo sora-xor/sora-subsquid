@@ -34,10 +34,8 @@ export function getLog(ctx: BlockContext, logModule: string | null = null, attrs
 	if (performanceLogMode) {
 		const now = performance.now()
 		const timeFromLastLog = now - lastLogNow
-		const timeFromBlockStart = now - ctx.now
 		if (timeFromLastLog > performanceLogMinTime) {
 			attributes['timeFromLastLog'] = timeFromLastLog.toFixed(2) + 'ms'
-			attributes['timeFromBlockStart'] = timeFromBlockStart.toFixed(2) + 'ms'
 		}
 		lastLogNow = now
 	}
@@ -142,6 +140,10 @@ export function getUtilsLog(ctx: BlockContext, testMode: boolean = false) {
 
 export function getStreamLog(ctx: BlockContext, testMode: boolean = false) {
 	return getLog(ctx, 'Stream', {}, testMode)
+}
+
+export function getPerformanceLog(ctx: BlockContext, testMode: boolean = false) {
+	return getLog(ctx, 'Performance', {}, testMode)
 }
 
 export function logStartProcessingCall(ctx: BlockContext, callItem: Call<any>) {

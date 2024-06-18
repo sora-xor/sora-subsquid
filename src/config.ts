@@ -13,7 +13,10 @@ if (!chainConfig) {
 export const { chain, archive } = chainConfig
 export const startBlock = process.env.INDEXER_START_BLOCK ? parseInt(process.env.INDEXER_START_BLOCK) : 0
 export const testLogMode = process.env.INDEXER_TEST_LOG_MODE ? process.env.INDEXER_TEST_LOG_MODE === 'true' : false
-export const performanceLogMode = process.env.INDEXER_PERFORMANCE_LOG_MODE ? process.env.INDEXER_PERFORMANCE_LOG_MODE === 'true' : false
+export const performanceLogMode = process.env.INDEXER_PERFORMANCE_LOG_MODE ? process.env.INDEXER_PERFORMANCE_LOG_MODE === 'true' : true
 export const performanceLogMinTime = process.env.INDEXER_PERFORMANCE_LOG_MIN_TIME
 	? parseInt(process.env.INDEXER_PERFORMANCE_LOG_MIN_TIME)
-	: 0
+	: 50
+export const performanceLogMinBlockTime = process.env.INDEXER_PERFORMANCE_LOG_MIN_BLOCK_TIME
+	? parseInt(process.env.INDEXER_PERFORMANCE_LOG_MIN_BLOCK_TIME)
+	: 1000
