@@ -26,13 +26,13 @@ export async function ethSoraTransferEventHandler(
 
 	const registeredRequestEvent = findEventByExtrinsicHash(ctx, extrinsicHash, ['EthBridge.RequestRegistered'])
 
-	const balancesDepositedEvent = findEventByExtrinsicHash(ctx, extrinsicHash, ['Balances.Deposited'])
+	const balancesDepositEvent = findEventByExtrinsicHash(ctx, extrinsicHash, ['Balances.Deposit'])
 	const tokensDepositedEvent = findEventByExtrinsicHash(ctx, extrinsicHash, ['Tokens.Deposited'])
 	const balancesTransferEvent = findEventByExtrinsicHash(ctx, extrinsicHash, ['Balances.Transfer'])
 	const tokensTransferEvent = findEventByExtrinsicHash(ctx, extrinsicHash, ['Tokens.Transfer'])
 
 	const assetsTransferEvent = tokensTransferEvent || balancesTransferEvent
-	const assetsDepositedEvent = tokensDepositedEvent || balancesDepositedEvent
+	const assetsDepositedEvent = tokensDepositedEvent || balancesDepositEvent
     const currenciesEvent = assetsTransferEvent || assetsDepositedEvent
 
     if (!registeredRequestEvent || !currenciesEvent) return;

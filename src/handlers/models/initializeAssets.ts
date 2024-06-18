@@ -259,12 +259,19 @@ export async function initializeAssets(ctx: BlockContext): Promise<void> {
 		const created: Asset[] = []
         for (const entity of entities) {
             const asset = await assetStorage.getAsset(ctx, entity.id as AssetId)
-            created.push(asset)
-        }
-		// update data in memory storage
-		created.forEach((entity) => {
-			Object.assign(entity, assets.get(entity.id))
-		});
+			if (entity.supply) {
+				asset.supply = entity.supply
+			}
+			if (entity.priceUSD) {
+				asset.priceUSD = entity.priceUSD
+			}
+
+			const { data, poolXYK, ...other } = entity
+			
+			getInitializeAssetsLog(ctx).debug(other, `Asset initialized`)
+			
+			created.push(asset)
+		}
 		// save in DB
 		await ctx.store.save(created)
 		getInitializeAssetsLog(ctx).debug(`${entities.length} Assets initialized!`)
