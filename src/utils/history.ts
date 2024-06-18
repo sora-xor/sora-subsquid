@@ -175,6 +175,10 @@ export const createHistoryElement = async (
 			success,
 			error,
 		})
+	} else {
+		historyElement.execution = new ExecutionResult({
+			success: true,
+		})
 	}
 
 	if (data) {
@@ -235,7 +239,7 @@ export const createCallHistoryElement = async (
 export const createEventHistoryElement = async (
 	ctx: BlockContext,
 	event: Event<any>,
-	address: Address,
+	address?: Address,
 	data?: {},
 	calls?: HistoryElementCall[]
 ) => {
