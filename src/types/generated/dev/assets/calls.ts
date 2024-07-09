@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const register =  {
     name: 'Assets.register',
@@ -10,16 +10,16 @@ export const register =  {
      * AssetSymbol should represent string with only uppercase latin chars with max length of 7.
      * AssetName should represent string with only uppercase or lowercase latin chars or numbers or spaces, with max length of 33.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Assets.register',
         sts.struct({
-            symbol: v70.AssetSymbol,
-            name: v70.AssetName,
+            symbol: v85.AssetSymbol,
+            name: v85.AssetName,
             initialSupply: sts.bigint(),
             isMintable: sts.boolean(),
             isIndivisible: sts.boolean(),
-            optContentSrc: sts.option(() => v70.ContentSource),
-            optDesc: sts.option(() => v70.Description),
+            optContentSrc: sts.option(() => v85.ContentSource),
+            optDesc: sts.option(() => v85.Description),
         })
     ),
 }
@@ -34,11 +34,11 @@ export const transfer =  {
      * - `to`: Id of Account, to which Asset amount is deposited,
      * - `amount`: transferred Asset amount.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Assets.transfer',
         sts.struct({
-            assetId: v70.AssetId32,
-            to: v70.AccountId32,
+            assetId: v85.AssetId32,
+            to: v85.AccountId32,
             amount: sts.bigint(),
         })
     ),
@@ -55,11 +55,11 @@ export const mint =  {
      * - `to`: Id of Account, to which Asset amount is minted,
      * - `amount`: minted Asset amount.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Assets.mint',
         sts.struct({
-            assetId: v70.AssetId32,
-            to: v70.AccountId32,
+            assetId: v85.AssetId32,
+            to: v85.AccountId32,
             amount: sts.bigint(),
         })
     ),
@@ -80,11 +80,11 @@ export const forceMint =  {
      * - `to`: Id of Account, to which Asset amount is minted,
      * - `amount`: minted Asset amount.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Assets.force_mint',
         sts.struct({
-            assetId: v70.AssetId32,
-            to: v70.AccountId32,
+            assetId: v85.AssetId32,
+            to: v85.AccountId32,
             amount: sts.bigint(),
         })
     ),
@@ -100,10 +100,10 @@ export const burn =  {
      * - `asset_id`: Id of burned Asset,
      * - `amount`: burned Asset amount.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Assets.burn',
         sts.struct({
-            assetId: v70.AssetId32,
+            assetId: v85.AssetId32,
             amount: sts.bigint(),
         })
     ),
@@ -120,11 +120,11 @@ export const updateBalance =  {
      * 
      * TODO: move into tests extrinsic collection pallet
      */
-    v70: new CallType(
+    v85: new CallType(
         'Assets.update_balance',
         sts.struct({
-            who: v70.AccountId32,
-            currencyId: v70.AssetId32,
+            who: v85.AccountId32,
+            currencyId: v85.AssetId32,
             amount: sts.bigint(),
         })
     ),
@@ -139,10 +139,10 @@ export const setNonMintable =  {
      * - `origin`: caller Account, should correspond to Asset owner
      * - `asset_id`: Id of burned Asset,
      */
-    v70: new CallType(
+    v85: new CallType(
         'Assets.set_non_mintable',
         sts.struct({
-            assetId: v70.AssetId32,
+            assetId: v85.AssetId32,
         })
     ),
 }
@@ -157,12 +157,12 @@ export const updateInfo =  {
      * - `new_symbol`: New asset symbol. If None asset symbol will not change
      * - `new_name`: New asset name. If None asset name will not change
      */
-    v70: new CallType(
+    v85: new CallType(
         'Assets.update_info',
         sts.struct({
-            assetId: v70.AssetId32,
-            newSymbol: sts.option(() => v70.AssetSymbol),
-            newName: sts.option(() => v70.AssetName),
+            assetId: v85.AssetId32,
+            newSymbol: sts.option(() => v85.AssetSymbol),
+            newName: sts.option(() => v85.AssetName),
         })
     ),
 }

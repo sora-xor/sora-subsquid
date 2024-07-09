@@ -1,19 +1,19 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const orderBookCreated =  {
     name: 'OrderBook.OrderBookCreated',
     /**
      * New order book is created by user
      */
-    v70: new EventType(
+    v85: new EventType(
         'OrderBook.OrderBookCreated',
         sts.struct({
-            orderBookId: v70.OrderBookId,
+            orderBookId: v85.OrderBookId,
             /**
              * `creator` contains an address if the order book is created for an indivisible asset by the asset holder, or `None` if it is created by root / tech committee
              */
-            creator: sts.option(() => v70.AccountId32),
+            creator: sts.option(() => v85.AccountId32),
         })
     ),
 }
@@ -23,10 +23,10 @@ export const orderBookDeleted =  {
     /**
      * Order book is deleted
      */
-    v70: new EventType(
+    v85: new EventType(
         'OrderBook.OrderBookDeleted',
         sts.struct({
-            orderBookId: v70.OrderBookId,
+            orderBookId: v85.OrderBookId,
         })
     ),
 }
@@ -36,11 +36,11 @@ export const orderBookStatusChanged =  {
     /**
      * Order book status is changed
      */
-    v70: new EventType(
+    v85: new EventType(
         'OrderBook.OrderBookStatusChanged',
         sts.struct({
-            orderBookId: v70.OrderBookId,
-            newStatus: v70.OrderBookStatus,
+            orderBookId: v85.OrderBookId,
+            newStatus: v85.OrderBookStatus,
         })
     ),
 }
@@ -50,10 +50,10 @@ export const orderBookUpdated =  {
     /**
      * Order book attributes are updated
      */
-    v70: new EventType(
+    v85: new EventType(
         'OrderBook.OrderBookUpdated',
         sts.struct({
-            orderBookId: v70.OrderBookId,
+            orderBookId: v85.OrderBookId,
         })
     ),
 }
@@ -63,15 +63,15 @@ export const limitOrderPlaced =  {
     /**
      * User placed new limit order
      */
-    v70: new EventType(
+    v85: new EventType(
         'OrderBook.LimitOrderPlaced',
         sts.struct({
-            orderBookId: v70.OrderBookId,
+            orderBookId: v85.OrderBookId,
             orderId: sts.bigint(),
-            ownerId: v70.AccountId32,
-            side: v70.PriceVariant,
-            price: v70.BalanceUnit,
-            amount: v70.BalanceUnit,
+            ownerId: v85.AccountId32,
+            side: v85.PriceVariant,
+            price: v85.BalanceUnit,
+            amount: v85.BalanceUnit,
             lifetime: sts.bigint(),
         })
     ),
@@ -82,14 +82,14 @@ export const limitOrderConvertedToMarketOrder =  {
     /**
      * User tried to place the limit order out of the spread. The limit order is converted into a market order.
      */
-    v70: new EventType(
+    v85: new EventType(
         'OrderBook.LimitOrderConvertedToMarketOrder',
         sts.struct({
-            orderBookId: v70.OrderBookId,
-            ownerId: v70.AccountId32,
-            direction: v70.PriceVariant,
-            amount: v70.OrderAmount,
-            averagePrice: v70.BalanceUnit,
+            orderBookId: v85.OrderBookId,
+            ownerId: v85.AccountId32,
+            direction: v85.PriceVariant,
+            amount: v85.OrderAmount,
+            averagePrice: v85.BalanceUnit,
         })
     ),
 }
@@ -100,14 +100,14 @@ export const limitOrderIsSplitIntoMarketOrderAndLimitOrder =  {
      * User tried to place the limit order out of the spread.
      * One part of the liquidity of the limit order is converted into a market order, and the other part is placed as a limit order.
      */
-    v70: new EventType(
+    v85: new EventType(
         'OrderBook.LimitOrderIsSplitIntoMarketOrderAndLimitOrder',
         sts.struct({
-            orderBookId: v70.OrderBookId,
-            ownerId: v70.AccountId32,
-            marketOrderDirection: v70.PriceVariant,
-            marketOrderAmount: v70.OrderAmount,
-            marketOrderAveragePrice: v70.BalanceUnit,
+            orderBookId: v85.OrderBookId,
+            ownerId: v85.AccountId32,
+            marketOrderDirection: v85.PriceVariant,
+            marketOrderAmount: v85.OrderAmount,
+            marketOrderAveragePrice: v85.BalanceUnit,
             limitOrderId: sts.bigint(),
         })
     ),
@@ -118,13 +118,13 @@ export const limitOrderCanceled =  {
     /**
      * User canceled their limit order or the limit order has reached the end of its lifespan
      */
-    v70: new EventType(
+    v85: new EventType(
         'OrderBook.LimitOrderCanceled',
         sts.struct({
-            orderBookId: v70.OrderBookId,
+            orderBookId: v85.OrderBookId,
             orderId: sts.bigint(),
-            ownerId: v70.AccountId32,
-            reason: v70.CancelReason,
+            ownerId: v85.AccountId32,
+            reason: v85.CancelReason,
         })
     ),
 }
@@ -134,15 +134,15 @@ export const limitOrderExecuted =  {
     /**
      * Some amount of the limit order is executed
      */
-    v70: new EventType(
+    v85: new EventType(
         'OrderBook.LimitOrderExecuted',
         sts.struct({
-            orderBookId: v70.OrderBookId,
+            orderBookId: v85.OrderBookId,
             orderId: sts.bigint(),
-            ownerId: v70.AccountId32,
-            side: v70.PriceVariant,
-            price: v70.BalanceUnit,
-            amount: v70.OrderAmount,
+            ownerId: v85.AccountId32,
+            side: v85.PriceVariant,
+            price: v85.BalanceUnit,
+            amount: v85.OrderAmount,
         })
     ),
 }
@@ -152,12 +152,12 @@ export const limitOrderFilled =  {
     /**
      * All amount of the limit order is executed
      */
-    v70: new EventType(
+    v85: new EventType(
         'OrderBook.LimitOrderFilled',
         sts.struct({
-            orderBookId: v70.OrderBookId,
+            orderBookId: v85.OrderBookId,
             orderId: sts.bigint(),
-            ownerId: v70.AccountId32,
+            ownerId: v85.AccountId32,
         })
     ),
 }
@@ -167,13 +167,13 @@ export const limitOrderUpdated =  {
     /**
      * The limit order is updated
      */
-    v70: new EventType(
+    v85: new EventType(
         'OrderBook.LimitOrderUpdated',
         sts.struct({
-            orderBookId: v70.OrderBookId,
+            orderBookId: v85.OrderBookId,
             orderId: sts.bigint(),
-            ownerId: v70.AccountId32,
-            newAmount: v70.BalanceUnit,
+            ownerId: v85.AccountId32,
+            newAmount: v85.BalanceUnit,
         })
     ),
 }
@@ -183,15 +183,15 @@ export const marketOrderExecuted =  {
     /**
      * User executes a deal by the market order
      */
-    v70: new EventType(
+    v85: new EventType(
         'OrderBook.MarketOrderExecuted',
         sts.struct({
-            orderBookId: v70.OrderBookId,
-            ownerId: v70.AccountId32,
-            direction: v70.PriceVariant,
-            amount: v70.OrderAmount,
-            averagePrice: v70.BalanceUnit,
-            to: sts.option(() => v70.AccountId32),
+            orderBookId: v85.OrderBookId,
+            ownerId: v85.AccountId32,
+            direction: v85.PriceVariant,
+            amount: v85.OrderAmount,
+            averagePrice: v85.BalanceUnit,
+            to: sts.option(() => v85.AccountId32),
         })
     ),
 }
@@ -201,12 +201,12 @@ export const expirationFailure =  {
     /**
      * Failed to cancel expired order
      */
-    v70: new EventType(
+    v85: new EventType(
         'OrderBook.ExpirationFailure',
         sts.struct({
-            orderBookId: v70.OrderBookId,
+            orderBookId: v85.OrderBookId,
             orderId: sts.bigint(),
-            error: v70.DispatchError,
+            error: v85.DispatchError,
         })
     ),
 }
@@ -216,11 +216,11 @@ export const alignmentFailure =  {
     /**
      * Failed to cancel expired order
      */
-    v70: new EventType(
+    v85: new EventType(
         'OrderBook.AlignmentFailure',
         sts.struct({
-            orderBookId: v70.OrderBookId,
-            error: v70.DispatchError,
+            orderBookId: v85.OrderBookId,
+            error: v85.DispatchError,
         })
     ),
 }

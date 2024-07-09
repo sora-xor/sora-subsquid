@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v22 from '../v22'
 import * as v37 from '../v37'
 
 export const locked =  {
@@ -7,9 +7,9 @@ export const locked =  {
     /**
      *  Funds Locked [who, amount, block]
      */
-    v33: new EventType(
+    v22: new EventType(
         'CeresLiquidityLocker.Locked',
-        sts.tuple([v33.AccountId, v33.Balance, v33.BlockNumber])
+        sts.tuple([v22.AccountId, v22.Balance, v22.BlockNumber])
     ),
     /**
      *  Funds Locked [who, amount, timestamp]

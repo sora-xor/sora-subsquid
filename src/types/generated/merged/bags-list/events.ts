@@ -9,7 +9,7 @@ export const rebagged = {
 	v42: productionEvents.rebagged['v42'],
 	v42Stage: stageEvents.rebagged['v42'],
 	v42Test: testEvents.rebagged['v42'],
-	v70Dev: devEvents.rebagged['v70'],
+	v85Dev: devEvents.rebagged['v85'],
 }
 
 export const scoreUpdated = {
@@ -17,5 +17,5 @@ export const scoreUpdated = {
 	v42: productionEvents.scoreUpdated['v42'],
 	v42Stage: stageEvents.scoreUpdated['v42'],
 	v42Test: testEvents.scoreUpdated['v42'],
-	v70Dev: devEvents.scoreUpdated['v70'],
+	v85Dev: devEvents.scoreUpdated['v85'],
 }

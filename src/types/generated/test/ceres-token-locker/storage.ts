@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, StorageType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v26 from '../v26'
 import * as v37 from '../v37'
 import * as v42 from '../v42'
 
@@ -7,69 +7,69 @@ export const feesAccount =  {
     /**
      *  Account for collecting fees
      */
-    v33: new StorageType('CeresTokenLocker.FeesAccount', 'Default', [], v33.AccountIdOf) as FeesAccountV33,
+    v26: new StorageType('CeresTokenLocker.FeesAccount', 'Default', [], v26.AccountIdOf) as FeesAccountV26,
 }
 
 /**
  *  Account for collecting fees
  */
-export interface FeesAccountV33  {
+export interface FeesAccountV26  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.AccountIdOf
-    get(block: Block): Promise<(v33.AccountIdOf | undefined)>
+    getDefault(block: Block): v26.AccountIdOf
+    get(block: Block): Promise<(v26.AccountIdOf | undefined)>
 }
 
 export const authorityAccount =  {
     /**
      *  Account which has permissions for changing fee
      */
-    v33: new StorageType('CeresTokenLocker.AuthorityAccount', 'Default', [], v33.AccountIdOf) as AuthorityAccountV33,
+    v26: new StorageType('CeresTokenLocker.AuthorityAccount', 'Default', [], v26.AccountIdOf) as AuthorityAccountV26,
 }
 
 /**
  *  Account which has permissions for changing fee
  */
-export interface AuthorityAccountV33  {
+export interface AuthorityAccountV26  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.AccountIdOf
-    get(block: Block): Promise<(v33.AccountIdOf | undefined)>
+    getDefault(block: Block): v26.AccountIdOf
+    get(block: Block): Promise<(v26.AccountIdOf | undefined)>
 }
 
 export const feeAmount =  {
     /**
      *  Amount of CERES for locker fees option two
      */
-    v33: new StorageType('CeresTokenLocker.FeeAmount', 'Default', [], v33.Balance) as FeeAmountV33,
+    v26: new StorageType('CeresTokenLocker.FeeAmount', 'Default', [], v26.Balance) as FeeAmountV26,
 }
 
 /**
  *  Amount of CERES for locker fees option two
  */
-export interface FeeAmountV33  {
+export interface FeeAmountV26  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.Balance
-    get(block: Block): Promise<(v33.Balance | undefined)>
+    getDefault(block: Block): v26.Balance
+    get(block: Block): Promise<(v26.Balance | undefined)>
 }
 
 export const tokenLockerData =  {
-    v33: new StorageType('CeresTokenLocker.TokenLockerData', 'Default', [v33.AccountIdOf], sts.array(() => v33.TokenLockInfo)) as TokenLockerDataV33,
+    v26: new StorageType('CeresTokenLocker.TokenLockerData', 'Default', [v26.AccountIdOf], sts.array(() => v26.TokenLockInfo)) as TokenLockerDataV26,
     v37: new StorageType('CeresTokenLocker.TokenLockerData', 'Default', [v37.AccountIdOf], sts.array(() => v37.TokenLockInfo)) as TokenLockerDataV37,
     v42: new StorageType('CeresTokenLocker.TokenLockerData', 'Default', [v42.AccountId32], sts.array(() => v42.TokenLockInfo)) as TokenLockerDataV42,
 }
 
-export interface TokenLockerDataV33  {
+export interface TokenLockerDataV26  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.TokenLockInfo[]
-    get(block: Block, key: v33.AccountIdOf): Promise<(v33.TokenLockInfo[] | undefined)>
-    getMany(block: Block, keys: v33.AccountIdOf[]): Promise<(v33.TokenLockInfo[] | undefined)[]>
-    getKeys(block: Block): Promise<v33.AccountIdOf[]>
-    getKeys(block: Block, key: v33.AccountIdOf): Promise<v33.AccountIdOf[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.AccountIdOf[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.AccountIdOf): AsyncIterable<v33.AccountIdOf[]>
-    getPairs(block: Block): Promise<[k: v33.AccountIdOf, v: (v33.TokenLockInfo[] | undefined)][]>
-    getPairs(block: Block, key: v33.AccountIdOf): Promise<[k: v33.AccountIdOf, v: (v33.TokenLockInfo[] | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.AccountIdOf, v: (v33.TokenLockInfo[] | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.AccountIdOf): AsyncIterable<[k: v33.AccountIdOf, v: (v33.TokenLockInfo[] | undefined)][]>
+    getDefault(block: Block): v26.TokenLockInfo[]
+    get(block: Block, key: v26.AccountIdOf): Promise<(v26.TokenLockInfo[] | undefined)>
+    getMany(block: Block, keys: v26.AccountIdOf[]): Promise<(v26.TokenLockInfo[] | undefined)[]>
+    getKeys(block: Block): Promise<v26.AccountIdOf[]>
+    getKeys(block: Block, key: v26.AccountIdOf): Promise<v26.AccountIdOf[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v26.AccountIdOf[]>
+    getKeysPaged(pageSize: number, block: Block, key: v26.AccountIdOf): AsyncIterable<v26.AccountIdOf[]>
+    getPairs(block: Block): Promise<[k: v26.AccountIdOf, v: (v26.TokenLockInfo[] | undefined)][]>
+    getPairs(block: Block, key: v26.AccountIdOf): Promise<[k: v26.AccountIdOf, v: (v26.TokenLockInfo[] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v26.AccountIdOf, v: (v26.TokenLockInfo[] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v26.AccountIdOf): AsyncIterable<[k: v26.AccountIdOf, v: (v26.TokenLockInfo[] | undefined)][]>
 }
 
 export interface TokenLockerDataV37  {
@@ -110,7 +110,7 @@ export const palletStorageVersion =  {
     /**
      *  Pallet storage version
      */
-    v42: new StorageType('CeresTokenLocker.PalletStorageVersion', 'Default', [], v42.Type_616) as PalletStorageVersionV42,
+    v42: new StorageType('CeresTokenLocker.PalletStorageVersion', 'Default', [], v42.Type_611) as PalletStorageVersionV42,
 }
 
 /**
@@ -127,6 +127,6 @@ export interface PalletStorageVersionV37  {
  */
 export interface PalletStorageVersionV42  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v42.Type_616
-    get(block: Block): Promise<(v42.Type_616 | undefined)>
+    getDefault(block: Block): v42.Type_611
+    get(block: Block): Promise<(v42.Type_611 | undefined)>
 }

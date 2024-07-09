@@ -1,14 +1,14 @@
 import {sts, Block, Bytes, Option, Result, StorageType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v19 from '../v19'
 import * as v42 from '../v42'
 import * as v46 from '../v46'
-import * as v54 from '../v54'
+import * as v57 from '../v57'
 
 export const permissionedTechAccount =  {
     /**
      *  Technical account used to store collateral tokens.
      */
-    v33: new StorageType('XSTPool.PermissionedTechAccount', 'Default', [], v33.TechAccountId) as PermissionedTechAccountV33,
+    v19: new StorageType('XSTPool.PermissionedTechAccount', 'Default', [], v19.TechAccountId) as PermissionedTechAccountV19,
     /**
      *  Technical account used to store collateral tokens.
      */
@@ -22,10 +22,10 @@ export const permissionedTechAccount =  {
 /**
  *  Technical account used to store collateral tokens.
  */
-export interface PermissionedTechAccountV33  {
+export interface PermissionedTechAccountV19  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.TechAccountId
-    get(block: Block): Promise<(v33.TechAccountId | undefined)>
+    getDefault(block: Block): v19.TechAccountId
+    get(block: Block): Promise<(v19.TechAccountId | undefined)>
 }
 
 /**
@@ -50,7 +50,7 @@ export const baseFee =  {
     /**
      *  Base fee in XOR which is deducted on all trades, currently it's burned: 0.3%.
      */
-    v33: new StorageType('XSTPool.BaseFee', 'Default', [], v33.Fixed) as BaseFeeV33,
+    v19: new StorageType('XSTPool.BaseFee', 'Default', [], v19.Fixed) as BaseFeeV19,
     /**
      *  Base fee in XOR which is deducted on all trades, currently it's burned: 0.3%.
      */
@@ -60,10 +60,10 @@ export const baseFee =  {
 /**
  *  Base fee in XOR which is deducted on all trades, currently it's burned: 0.3%.
  */
-export interface BaseFeeV33  {
+export interface BaseFeeV19  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.Fixed
-    get(block: Block): Promise<(v33.Fixed | undefined)>
+    getDefault(block: Block): v19.Fixed
+    get(block: Block): Promise<(v19.Fixed | undefined)>
 }
 
 /**
@@ -79,7 +79,7 @@ export const enabledSynthetics =  {
     /**
      *  XST Assets allowed to be traded using XST.
      */
-    v33: new StorageType('XSTPool.EnabledSynthetics', 'Default', [], sts.array(() => v33.AssetId)) as EnabledSyntheticsV33,
+    v19: new StorageType('XSTPool.EnabledSynthetics', 'Default', [], sts.array(() => v19.AssetId)) as EnabledSyntheticsV19,
     /**
      *  XST Assets allowed to be traded using XST.
      */
@@ -89,16 +89,16 @@ export const enabledSynthetics =  {
      * 
      *  It's a programmer responsibility to keep this collection consistent with [`EnabledSymbols`].
      */
-    v54: new StorageType('XSTPool.EnabledSynthetics', 'Optional', [v54.AssetId32], v54.SyntheticInfo) as EnabledSyntheticsV54,
+    v57: new StorageType('XSTPool.EnabledSynthetics', 'Optional', [v57.AssetId32], v57.SyntheticInfo) as EnabledSyntheticsV57,
 }
 
 /**
  *  XST Assets allowed to be traded using XST.
  */
-export interface EnabledSyntheticsV33  {
+export interface EnabledSyntheticsV19  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.AssetId[]
-    get(block: Block): Promise<(v33.AssetId[] | undefined)>
+    getDefault(block: Block): v19.AssetId[]
+    get(block: Block): Promise<(v19.AssetId[] | undefined)>
 }
 
 /**
@@ -115,25 +115,25 @@ export interface EnabledSyntheticsV42  {
  * 
  *  It's a programmer responsibility to keep this collection consistent with [`EnabledSymbols`].
  */
-export interface EnabledSyntheticsV54  {
+export interface EnabledSyntheticsV57  {
     is(block: RuntimeCtx): boolean
-    get(block: Block, key: v54.AssetId32): Promise<(v54.SyntheticInfo | undefined)>
-    getMany(block: Block, keys: v54.AssetId32[]): Promise<(v54.SyntheticInfo | undefined)[]>
-    getKeys(block: Block): Promise<v54.AssetId32[]>
-    getKeys(block: Block, key: v54.AssetId32): Promise<v54.AssetId32[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v54.AssetId32[]>
-    getKeysPaged(pageSize: number, block: Block, key: v54.AssetId32): AsyncIterable<v54.AssetId32[]>
-    getPairs(block: Block): Promise<[k: v54.AssetId32, v: (v54.SyntheticInfo | undefined)][]>
-    getPairs(block: Block, key: v54.AssetId32): Promise<[k: v54.AssetId32, v: (v54.SyntheticInfo | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v54.AssetId32, v: (v54.SyntheticInfo | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v54.AssetId32): AsyncIterable<[k: v54.AssetId32, v: (v54.SyntheticInfo | undefined)][]>
+    get(block: Block, key: v57.AssetId32): Promise<(v57.SyntheticInfo | undefined)>
+    getMany(block: Block, keys: v57.AssetId32[]): Promise<(v57.SyntheticInfo | undefined)[]>
+    getKeys(block: Block): Promise<v57.AssetId32[]>
+    getKeys(block: Block, key: v57.AssetId32): Promise<v57.AssetId32[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v57.AssetId32[]>
+    getKeysPaged(pageSize: number, block: Block, key: v57.AssetId32): AsyncIterable<v57.AssetId32[]>
+    getPairs(block: Block): Promise<[k: v57.AssetId32, v: (v57.SyntheticInfo | undefined)][]>
+    getPairs(block: Block, key: v57.AssetId32): Promise<[k: v57.AssetId32, v: (v57.SyntheticInfo | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v57.AssetId32, v: (v57.SyntheticInfo | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v57.AssetId32): AsyncIterable<[k: v57.AssetId32, v: (v57.SyntheticInfo | undefined)][]>
 }
 
 export const referenceAssetId =  {
     /**
      *  Asset that is used to compare collateral assets by value, e.g., DAI.
      */
-    v33: new StorageType('XSTPool.ReferenceAssetId', 'Default', [], v33.AssetId) as ReferenceAssetIdV33,
+    v19: new StorageType('XSTPool.ReferenceAssetId', 'Default', [], v19.AssetId) as ReferenceAssetIdV19,
     /**
      *  Asset that is used to compare collateral assets by value, e.g., DAI.
      */
@@ -143,10 +143,10 @@ export const referenceAssetId =  {
 /**
  *  Asset that is used to compare collateral assets by value, e.g., DAI.
  */
-export interface ReferenceAssetIdV33  {
+export interface ReferenceAssetIdV19  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.AssetId
-    get(block: Block): Promise<(v33.AssetId | undefined)>
+    getDefault(block: Block): v19.AssetId
+    get(block: Block): Promise<(v19.AssetId | undefined)>
 }
 
 /**
@@ -162,7 +162,7 @@ export const collateralReserves =  {
     /**
      *  Current reserves balance for collateral tokens, used for client usability.
      */
-    v33: new StorageType('XSTPool.CollateralReserves', 'Default', [v33.AssetId], v33.Balance) as CollateralReservesV33,
+    v19: new StorageType('XSTPool.CollateralReserves', 'Default', [v19.AssetId], v19.Balance) as CollateralReservesV19,
     /**
      *  Current reserves balance for collateral tokens, used for client usability.
      */
@@ -172,19 +172,19 @@ export const collateralReserves =  {
 /**
  *  Current reserves balance for collateral tokens, used for client usability.
  */
-export interface CollateralReservesV33  {
+export interface CollateralReservesV19  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.Balance
-    get(block: Block, key: v33.AssetId): Promise<(v33.Balance | undefined)>
-    getMany(block: Block, keys: v33.AssetId[]): Promise<(v33.Balance | undefined)[]>
-    getKeys(block: Block): Promise<v33.AssetId[]>
-    getKeys(block: Block, key: v33.AssetId): Promise<v33.AssetId[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.AssetId[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.AssetId): AsyncIterable<v33.AssetId[]>
-    getPairs(block: Block): Promise<[k: v33.AssetId, v: (v33.Balance | undefined)][]>
-    getPairs(block: Block, key: v33.AssetId): Promise<[k: v33.AssetId, v: (v33.Balance | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.AssetId, v: (v33.Balance | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.AssetId): AsyncIterable<[k: v33.AssetId, v: (v33.Balance | undefined)][]>
+    getDefault(block: Block): v19.Balance
+    get(block: Block, key: v19.AssetId): Promise<(v19.Balance | undefined)>
+    getMany(block: Block, keys: v19.AssetId[]): Promise<(v19.Balance | undefined)[]>
+    getKeys(block: Block): Promise<v19.AssetId[]>
+    getKeys(block: Block, key: v19.AssetId): Promise<v19.AssetId[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v19.AssetId[]>
+    getKeysPaged(pageSize: number, block: Block, key: v19.AssetId): AsyncIterable<v19.AssetId[]>
+    getPairs(block: Block): Promise<[k: v19.AssetId, v: (v19.Balance | undefined)][]>
+    getPairs(block: Block, key: v19.AssetId): Promise<[k: v19.AssetId, v: (v19.Balance | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v19.AssetId, v: (v19.Balance | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v19.AssetId): AsyncIterable<[k: v19.AssetId, v: (v19.Balance | undefined)][]>
 }
 
 /**
@@ -209,13 +209,13 @@ export const syntheticBaseAssetFloorPrice =  {
     /**
      *  Floor price for the synthetic base asset.
      */
-    v44: new StorageType('XSTPool.SyntheticBaseAssetFloorPrice', 'Default', [], sts.bigint()) as SyntheticBaseAssetFloorPriceV44,
+    v45: new StorageType('XSTPool.SyntheticBaseAssetFloorPrice', 'Default', [], sts.bigint()) as SyntheticBaseAssetFloorPriceV45,
 }
 
 /**
  *  Floor price for the synthetic base asset.
  */
-export interface SyntheticBaseAssetFloorPriceV44  {
+export interface SyntheticBaseAssetFloorPriceV45  {
     is(block: RuntimeCtx): boolean
     getDefault(block: Block): bigint
     get(block: Block): Promise<(bigint | undefined)>
@@ -227,7 +227,7 @@ export const enabledSymbols =  {
      * 
      *  It's a programmer responsibility to keep this collection consistent with [`EnabledSynthetics`].
      */
-    v54: new StorageType('XSTPool.EnabledSymbols', 'Optional', [v54.SymbolName], v54.AssetId32) as EnabledSymbolsV54,
+    v57: new StorageType('XSTPool.EnabledSymbols', 'Optional', [v57.SymbolName], v57.AssetId32) as EnabledSymbolsV57,
 }
 
 /**
@@ -235,16 +235,16 @@ export const enabledSymbols =  {
  * 
  *  It's a programmer responsibility to keep this collection consistent with [`EnabledSynthetics`].
  */
-export interface EnabledSymbolsV54  {
+export interface EnabledSymbolsV57  {
     is(block: RuntimeCtx): boolean
-    get(block: Block, key: v54.SymbolName): Promise<(v54.AssetId32 | undefined)>
-    getMany(block: Block, keys: v54.SymbolName[]): Promise<(v54.AssetId32 | undefined)[]>
-    getKeys(block: Block): Promise<v54.SymbolName[]>
-    getKeys(block: Block, key: v54.SymbolName): Promise<v54.SymbolName[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v54.SymbolName[]>
-    getKeysPaged(pageSize: number, block: Block, key: v54.SymbolName): AsyncIterable<v54.SymbolName[]>
-    getPairs(block: Block): Promise<[k: v54.SymbolName, v: (v54.AssetId32 | undefined)][]>
-    getPairs(block: Block, key: v54.SymbolName): Promise<[k: v54.SymbolName, v: (v54.AssetId32 | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v54.SymbolName, v: (v54.AssetId32 | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v54.SymbolName): AsyncIterable<[k: v54.SymbolName, v: (v54.AssetId32 | undefined)][]>
+    get(block: Block, key: v57.SymbolName): Promise<(v57.AssetId32 | undefined)>
+    getMany(block: Block, keys: v57.SymbolName[]): Promise<(v57.AssetId32 | undefined)[]>
+    getKeys(block: Block): Promise<v57.SymbolName[]>
+    getKeys(block: Block, key: v57.SymbolName): Promise<v57.SymbolName[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v57.SymbolName[]>
+    getKeysPaged(pageSize: number, block: Block, key: v57.SymbolName): AsyncIterable<v57.SymbolName[]>
+    getPairs(block: Block): Promise<[k: v57.SymbolName, v: (v57.AssetId32 | undefined)][]>
+    getPairs(block: Block, key: v57.SymbolName): Promise<[k: v57.SymbolName, v: (v57.AssetId32 | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v57.SymbolName, v: (v57.AssetId32 | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v57.SymbolName): AsyncIterable<[k: v57.SymbolName, v: (v57.AssetId32 | undefined)][]>
 }

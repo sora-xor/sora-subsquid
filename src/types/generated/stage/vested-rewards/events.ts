@@ -1,17 +1,18 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
+import * as v7 from '../v7'
 import * as v42 from '../v42'
-import * as v44 from '../v44'
-import * as v52 from '../v52'
+import * as v45 from '../v45'
+import * as v53 from '../v53'
 
 export const rewardsVested =  {
     name: 'VestedRewards.RewardsVested',
     /**
      *  Rewards vested, limits were raised. [vested amount]
      */
-    v33: new EventType(
+    v1: new EventType(
         'VestedRewards.RewardsVested',
-        v33.Balance
+        v1.Balance
     ),
 }
 
@@ -20,9 +21,9 @@ export const actualDoesntMatchAvailable =  {
     /**
      *  Attempted to claim reward, but actual claimed amount is less than expected. [reason for reward]
      */
-    v33: new EventType(
+    v7: new EventType(
         'VestedRewards.ActualDoesntMatchAvailable',
-        v33.RewardReason
+        v7.RewardReason
     ),
     /**
      * Attempted to claim reward, but actual claimed amount is less than expected. [reason for reward]
@@ -34,9 +35,9 @@ export const actualDoesntMatchAvailable =  {
     /**
      * Attempted to claim reward, but actual claimed amount is less than expected. [reason for reward]
      */
-    v44: new EventType(
+    v45: new EventType(
         'VestedRewards.ActualDoesntMatchAvailable',
-        v44.RewardReason
+        v45.RewardReason
     ),
 }
 
@@ -45,9 +46,9 @@ export const failedToSaveCalculatedReward =  {
     /**
      *  Saving reward for account has failed in a distribution series. [account]
      */
-    v33: new EventType(
+    v7: new EventType(
         'VestedRewards.FailedToSaveCalculatedReward',
-        v33.AccountId
+        v7.AccountId
     ),
 }
 
@@ -56,9 +57,9 @@ export const addingZeroMarketMakerReward =  {
     /**
      *  Account was chosen as eligible for market maker rewards, however calculated reward turned into 0. [account]
      */
-    v33: new EventType(
+    v7: new EventType(
         'VestedRewards.AddingZeroMarketMakerReward',
-        v33.AccountId
+        v7.AccountId
     ),
 }
 
@@ -67,7 +68,7 @@ export const noEligibleMarketMakers =  {
     /**
      *  Couldn't find any account with enough transactions to count market maker rewards.
      */
-    v33: new EventType(
+    v7: new EventType(
         'VestedRewards.NoEligibleMarketMakers',
         sts.unit()
     ),
@@ -78,8 +79,8 @@ export const crowdloanClaimed =  {
     /**
      * Claimed crowdloan rewards
      */
-    v52: new EventType(
+    v53: new EventType(
         'VestedRewards.CrowdloanClaimed',
-        sts.tuple([v52.AccountId32, v52.AssetId32, sts.bigint()])
+        sts.tuple([v53.AccountId32, v53.AssetId32, sts.bigint()])
     ),
 }

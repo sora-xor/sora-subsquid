@@ -4,6 +4,8 @@ import * as v38 from '../v38'
 import * as v42 from '../v42'
 import * as v66 from '../v66'
 import * as v68 from '../v68'
+import * as v71 from '../v71'
+import * as v74 from '../v74'
 
 export const exchange =  {
     name: 'LiquidityProxy.Exchange',
@@ -23,6 +25,22 @@ export const exchange =  {
         'LiquidityProxy.Exchange',
         sts.tuple([v42.AccountId32, sts.number(), v42.AssetId32, v42.AssetId32, sts.bigint(), sts.bigint(), sts.bigint(), sts.array(() => v42.LiquiditySourceId)])
     ),
+    /**
+     * Exchange of tokens has been performed
+     * [Caller Account, DEX Id, Input Asset Id, Output Asset Id, Input Amount, Output Amount, Fee Amount]
+     */
+    v71: new EventType(
+        'LiquidityProxy.Exchange',
+        sts.tuple([v71.AccountId32, sts.number(), v71.AssetId32, v71.AssetId32, sts.bigint(), sts.bigint(), sts.bigint(), sts.array(() => v71.LiquiditySourceId)])
+    ),
+    /**
+     * Exchange of tokens has been performed
+     * [Caller Account, DEX Id, Input Asset Id, Output Asset Id, Input Amount, Output Amount, Fee Amount]
+     */
+    v74: new EventType(
+        'LiquidityProxy.Exchange',
+        sts.tuple([v74.AccountId32, sts.number(), v74.AssetId32, v74.AssetId32, sts.bigint(), sts.bigint(), sts.array(() => sts.tuple(() => [v74.AssetId32, sts.bigint()])), sts.array(() => v74.LiquiditySourceId)])
+    ),
 }
 
 export const liquiditySourceEnabled =  {
@@ -33,6 +51,13 @@ export const liquiditySourceEnabled =  {
     v38: new EventType(
         'LiquidityProxy.LiquiditySourceEnabled',
         v38.LiquiditySourceType
+    ),
+    /**
+     * Liquidity source was enabled
+     */
+    v71: new EventType(
+        'LiquidityProxy.LiquiditySourceEnabled',
+        v71.LiquiditySourceType
     ),
 }
 
@@ -45,6 +70,13 @@ export const liquiditySourceDisabled =  {
         'LiquidityProxy.LiquiditySourceDisabled',
         v38.LiquiditySourceType
     ),
+    /**
+     * Liquidity source was disabled
+     */
+    v71: new EventType(
+        'LiquidityProxy.LiquiditySourceDisabled',
+        v71.LiquiditySourceType
+    ),
 }
 
 export const batchSwapExecuted =  {
@@ -56,6 +88,14 @@ export const batchSwapExecuted =  {
     v57: new EventType(
         'LiquidityProxy.BatchSwapExecuted',
         sts.tuple([sts.bigint(), sts.bigint()])
+    ),
+    /**
+     * Batch of swap transfers has been performed
+     * [Input asset ADAR Fee, Input amount, Additional Data]
+     */
+    v74: new EventType(
+        'LiquidityProxy.BatchSwapExecuted',
+        sts.tuple([sts.bigint(), sts.bigint(), sts.option(() => v74.BoundedVec)])
     ),
 }
 

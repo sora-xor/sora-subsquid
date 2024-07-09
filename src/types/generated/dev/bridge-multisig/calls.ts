@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const registerMultisig =  {
     name: 'BridgeMultisig.register_multisig',
@@ -16,10 +16,10 @@ export const registerMultisig =  {
      * Total Complexity: O(M + logM)
      * # <weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'BridgeMultisig.register_multisig',
         sts.struct({
-            signatories: sts.array(() => v70.AccountId32),
+            signatories: sts.array(() => v85.AccountId32),
         })
     ),
 }
@@ -38,10 +38,10 @@ export const removeSignatory =  {
      * Total complexity - O(M)
      * # <weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'BridgeMultisig.remove_signatory',
         sts.struct({
-            signatory: v70.AccountId32,
+            signatory: v85.AccountId32,
         })
     ),
 }
@@ -61,10 +61,10 @@ export const addSignatory =  {
      * Total complexity - O(M)
      * # <weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'BridgeMultisig.add_signatory',
         sts.struct({
-            newMember: v70.AccountId32,
+            newMember: v85.AccountId32,
         })
     ),
 }
@@ -90,12 +90,12 @@ export const asMultiThreshold1 =  {
      * - Plus Call Weight
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'BridgeMultisig.as_multi_threshold_1',
         sts.struct({
-            id: v70.AccountId32,
-            call: v70.Call,
-            timepoint: v70.BridgeTimepoint,
+            id: v85.AccountId32,
+            call: v85.Call,
+            timepoint: v85.BridgeTimepoint,
         })
     ),
 }
@@ -155,14 +155,14 @@ export const asMulti =  {
      * - Plus Call Weight
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'BridgeMultisig.as_multi',
         sts.struct({
-            id: v70.AccountId32,
-            maybeTimepoint: sts.option(() => v70.BridgeTimepoint),
+            id: v85.AccountId32,
+            maybeTimepoint: sts.option(() => v85.BridgeTimepoint),
             call: sts.bytes(),
             storeCall: sts.boolean(),
-            maxWeight: v70.Weight,
+            maxWeight: v85.Weight,
         })
     ),
 }
@@ -210,13 +210,13 @@ export const approveAsMulti =  {
      *     - Write: Multisig Storage, [Caller Account]
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'BridgeMultisig.approve_as_multi',
         sts.struct({
-            id: v70.AccountId32,
-            maybeTimepoint: sts.option(() => v70.BridgeTimepoint),
+            id: v85.AccountId32,
+            maybeTimepoint: sts.option(() => v85.BridgeTimepoint),
             callHash: sts.bytes(),
-            maxWeight: v70.Weight,
+            maxWeight: v85.Weight,
         })
     ),
 }
@@ -252,11 +252,11 @@ export const cancelAsMulti =  {
      *     - Write: Multisig Storage, [Caller Account], Refund Account, Calls
      * # </weight>
      */
-    v70: new CallType(
+    v85: new CallType(
         'BridgeMultisig.cancel_as_multi',
         sts.struct({
-            id: v70.AccountId32,
-            timepoint: v70.BridgeTimepoint,
+            id: v85.AccountId32,
+            timepoint: v85.BridgeTimepoint,
             callHash: sts.bytes(),
         })
     ),

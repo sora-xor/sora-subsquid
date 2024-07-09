@@ -8,9 +8,9 @@ export const tradingPairStored = {
 	name: 'TradingPair.TradingPairStored',
 	v1: productionEvents.tradingPairStored['v1'],
 	v42: productionEvents.tradingPairStored['v42'],
-	v33Stage: stageEvents.tradingPairStored['v33'],
+	v1Stage: stageEvents.tradingPairStored['v1'],
 	v42Stage: stageEvents.tradingPairStored['v42'],
-	v33Test: testEvents.tradingPairStored['v33'],
+	v1Test: testEvents.tradingPairStored['v1'],
 	v42Test: testEvents.tradingPairStored['v42'],
-	v70Dev: devEvents.tradingPairStored['v70'],
+	v85Dev: devEvents.tradingPairStored['v85'],
 }

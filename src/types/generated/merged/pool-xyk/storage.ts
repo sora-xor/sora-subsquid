@@ -8,16 +8,18 @@ export const reserves = {
 	name: 'PoolXyk.Reserves',
 	v1: productionStorage.reserves['v1'],
 	v42: productionStorage.reserves['v42'],
-	v33Stage: stageStorage.reserves['v33'],
+	v1Stage: stageStorage.reserves['v1'],
 	v42Stage: stageStorage.reserves['v42'],
-	v33Test: testStorage.reserves['v33'],
+	v1Test: testStorage.reserves['v1'],
 	v42Test: testStorage.reserves['v42'],
-	v70Dev: devStorage.reserves['v70'],
+	v85Dev: devStorage.reserves['v85'],
 }
 
 export const markerTokensIndex = {
 	name: 'PoolXyk.MarkerTokensIndex',
 	v1: productionStorage.markerTokensIndex['v1'],
+	v1Stage: stageStorage.markerTokensIndex['v1'],
+	v1Test: testStorage.markerTokensIndex['v1'],
 }
 
 export const properties = {
@@ -25,36 +27,38 @@ export const properties = {
 	v1: productionStorage.properties['v1'],
 	v7: productionStorage.properties['v7'],
 	v42: productionStorage.properties['v42'],
-	v33Stage: stageStorage.properties['v33'],
+	v1Stage: stageStorage.properties['v1'],
+	v7Stage: stageStorage.properties['v7'],
 	v42Stage: stageStorage.properties['v42'],
-	v33Test: testStorage.properties['v33'],
+	v1Test: testStorage.properties['v1'],
+	v7Test: testStorage.properties['v7'],
 	v42Test: testStorage.properties['v42'],
-	v70Dev: devStorage.properties['v70'],
+	v85Dev: devStorage.properties['v85'],
 }
 
 export const poolProviders = {
 	name: 'PoolXyk.PoolProviders',
 	v7: productionStorage.poolProviders['v7'],
-	v33Stage: stageStorage.poolProviders['v33'],
-	v33Test: testStorage.poolProviders['v33'],
-	v70Dev: devStorage.poolProviders['v70'],
+	v7Stage: stageStorage.poolProviders['v7'],
+	v7Test: testStorage.poolProviders['v7'],
+	v85Dev: devStorage.poolProviders['v85'],
 }
 
 export const totalIssuances = {
 	name: 'PoolXyk.TotalIssuances',
 	v7: productionStorage.totalIssuances['v7'],
-	v33Stage: stageStorage.totalIssuances['v33'],
-	v33Test: testStorage.totalIssuances['v33'],
-	v70Dev: devStorage.totalIssuances['v70'],
+	v7Stage: stageStorage.totalIssuances['v7'],
+	v7Test: testStorage.totalIssuances['v7'],
+	v85Dev: devStorage.totalIssuances['v85'],
 }
 
 export const accountPools = {
 	name: 'PoolXyk.AccountPools',
 	v19: productionStorage.accountPools['v19'],
 	v42: productionStorage.accountPools['v42'],
-	v33Stage: stageStorage.accountPools['v33'],
+	v19Stage: stageStorage.accountPools['v19'],
 	v42Stage: stageStorage.accountPools['v42'],
-	v33Test: testStorage.accountPools['v33'],
+	v19Test: testStorage.accountPools['v19'],
 	v42Test: testStorage.accountPools['v42'],
-	v70Dev: devStorage.accountPools['v70'],
+	v85Dev: devStorage.accountPools['v85'],
 }

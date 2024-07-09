@@ -1,5 +1,5 @@
 import { Asset } from '../../model'
-import { BlockContext, ReferenceSymbol } from '../../types'
+import { BlockContext } from '../../types'
 
 import { assetPrecisions, assetStorage, formatU128ToBalance, getAssetId, tickerSyntheticAssetId } from '../../utils/assets'
 import { XOR } from '../../utils/consts'
@@ -15,7 +15,7 @@ let isFirstBlockIndexed = false
 
 async function getXstPoolEnabledSynthetics(ctx: BlockContext) {
 	const types = storage.xstPool.enabledSynthetics
-	const versions = ['19', '33Stage', '33Test', '42', '42Stage', '42Test'] as const
+	const versions = ['19', '19Stage', '19Test', '42', '42Stage', '42Test'] as const
 	if (isCurrentVersionIncluded(ctx, types, { kind: 'storage' }, versions)) {
 		return null
 	}

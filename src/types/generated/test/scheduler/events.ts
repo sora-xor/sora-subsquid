@@ -1,16 +1,16 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
 import * as v42 from '../v42'
-import * as v52 from '../v52'
+import * as v53 from '../v53'
 
 export const scheduled =  {
     name: 'Scheduler.Scheduled',
     /**
      *  Scheduled some task. \[when, index\]
      */
-    v33: new EventType(
+    v1: new EventType(
         'Scheduler.Scheduled',
-        sts.tuple([v33.BlockNumber, sts.number()])
+        sts.tuple([v1.BlockNumber, sts.number()])
     ),
     /**
      * Scheduled some task.
@@ -29,9 +29,9 @@ export const canceled =  {
     /**
      *  Canceled some task. \[when, index\]
      */
-    v33: new EventType(
+    v1: new EventType(
         'Scheduler.Canceled',
-        sts.tuple([v33.BlockNumber, sts.number()])
+        sts.tuple([v1.BlockNumber, sts.number()])
     ),
     /**
      * Canceled some task.
@@ -50,9 +50,9 @@ export const dispatched =  {
     /**
      *  Dispatched some task. \[task, id, result\]
      */
-    v33: new EventType(
+    v1: new EventType(
         'Scheduler.Dispatched',
-        sts.tuple([v33.TaskAddress, sts.option(() => sts.bytes()), v33.DispatchResult])
+        sts.tuple([v1.TaskAddress, sts.option(() => sts.bytes()), v1.DispatchResult])
     ),
     /**
      * Dispatched some task.
@@ -68,12 +68,12 @@ export const dispatched =  {
     /**
      * Dispatched some task.
      */
-    v52: new EventType(
+    v53: new EventType(
         'Scheduler.Dispatched',
         sts.struct({
             task: sts.tuple(() => [sts.number(), sts.number()]),
             id: sts.option(() => sts.bytes()),
-            result: sts.result(() => sts.unit(), () => v52.DispatchError),
+            result: sts.result(() => sts.unit(), () => v53.DispatchError),
         })
     ),
 }
@@ -98,7 +98,7 @@ export const callUnavailable =  {
     /**
      * The call for the provided hash was not found so the task has been aborted.
      */
-    v52: new EventType(
+    v53: new EventType(
         'Scheduler.CallUnavailable',
         sts.struct({
             task: sts.tuple(() => [sts.number(), sts.number()]),
@@ -112,7 +112,7 @@ export const periodicFailed =  {
     /**
      * The given task was unable to be renewed since the agenda is full at that block.
      */
-    v52: new EventType(
+    v53: new EventType(
         'Scheduler.PeriodicFailed',
         sts.struct({
             task: sts.tuple(() => [sts.number(), sts.number()]),
@@ -126,7 +126,7 @@ export const permanentlyOverweight =  {
     /**
      * The given task can never be executed since it is overweight.
      */
-    v52: new EventType(
+    v53: new EventType(
         'Scheduler.PermanentlyOverweight',
         sts.struct({
             task: sts.tuple(() => [sts.number(), sts.number()]),

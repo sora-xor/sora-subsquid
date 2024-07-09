@@ -1,6 +1,7 @@
 import {sts, Block, Bytes, Option, Result, StorageType, RuntimeCtx} from '../support'
 import * as v64 from '../v64'
 import * as v70 from '../v70'
+import * as v84 from '../v84'
 
 export const peers =  {
     /**
@@ -11,6 +12,10 @@ export const peers =  {
      *  Peers
      */
     v70: new StorageType('BridgeDataSigner.Peers', 'Optional', [v70.GenericNetworkId], sts.array(() => sts.bytes())) as PeersV70,
+    /**
+     *  Peers
+     */
+    v84: new StorageType('BridgeDataSigner.Peers', 'Optional', [v84.GenericNetworkId], sts.array(() => sts.bytes())) as PeersV84,
 }
 
 /**
@@ -47,6 +52,23 @@ export interface PeersV70  {
     getPairsPaged(pageSize: number, block: Block, key: v70.GenericNetworkId): AsyncIterable<[k: v70.GenericNetworkId, v: (Bytes[] | undefined)][]>
 }
 
+/**
+ *  Peers
+ */
+export interface PeersV84  {
+    is(block: RuntimeCtx): boolean
+    get(block: Block, key: v84.GenericNetworkId): Promise<(Bytes[] | undefined)>
+    getMany(block: Block, keys: v84.GenericNetworkId[]): Promise<(Bytes[] | undefined)[]>
+    getKeys(block: Block): Promise<v84.GenericNetworkId[]>
+    getKeys(block: Block, key: v84.GenericNetworkId): Promise<v84.GenericNetworkId[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v84.GenericNetworkId[]>
+    getKeysPaged(pageSize: number, block: Block, key: v84.GenericNetworkId): AsyncIterable<v84.GenericNetworkId[]>
+    getPairs(block: Block): Promise<[k: v84.GenericNetworkId, v: (Bytes[] | undefined)][]>
+    getPairs(block: Block, key: v84.GenericNetworkId): Promise<[k: v84.GenericNetworkId, v: (Bytes[] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v84.GenericNetworkId, v: (Bytes[] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v84.GenericNetworkId): AsyncIterable<[k: v84.GenericNetworkId, v: (Bytes[] | undefined)][]>
+}
+
 export const pendingPeerUpdate =  {
     /**
      *  Pending peers
@@ -56,6 +78,10 @@ export const pendingPeerUpdate =  {
      *  Pending peers
      */
     v70: new StorageType('BridgeDataSigner.PendingPeerUpdate', 'Default', [v70.GenericNetworkId], sts.boolean()) as PendingPeerUpdateV70,
+    /**
+     *  Pending peers
+     */
+    v84: new StorageType('BridgeDataSigner.PendingPeerUpdate', 'Default', [v84.GenericNetworkId], sts.boolean()) as PendingPeerUpdateV84,
 }
 
 /**
@@ -94,6 +120,24 @@ export interface PendingPeerUpdateV70  {
     getPairsPaged(pageSize: number, block: Block, key: v70.GenericNetworkId): AsyncIterable<[k: v70.GenericNetworkId, v: (boolean | undefined)][]>
 }
 
+/**
+ *  Pending peers
+ */
+export interface PendingPeerUpdateV84  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): boolean
+    get(block: Block, key: v84.GenericNetworkId): Promise<(boolean | undefined)>
+    getMany(block: Block, keys: v84.GenericNetworkId[]): Promise<(boolean | undefined)[]>
+    getKeys(block: Block): Promise<v84.GenericNetworkId[]>
+    getKeys(block: Block, key: v84.GenericNetworkId): Promise<v84.GenericNetworkId[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v84.GenericNetworkId[]>
+    getKeysPaged(pageSize: number, block: Block, key: v84.GenericNetworkId): AsyncIterable<v84.GenericNetworkId[]>
+    getPairs(block: Block): Promise<[k: v84.GenericNetworkId, v: (boolean | undefined)][]>
+    getPairs(block: Block, key: v84.GenericNetworkId): Promise<[k: v84.GenericNetworkId, v: (boolean | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v84.GenericNetworkId, v: (boolean | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v84.GenericNetworkId): AsyncIterable<[k: v84.GenericNetworkId, v: (boolean | undefined)][]>
+}
+
 export const approvals =  {
     /**
      *  Approvals
@@ -103,6 +147,10 @@ export const approvals =  {
      *  Approvals
      */
     v70: new StorageType('BridgeDataSigner.Approvals', 'Default', [v70.GenericNetworkId, v70.H256], sts.array(() => sts.tuple(() => [sts.bytes(), v70.Signature]))) as ApprovalsV70,
+    /**
+     *  Approvals
+     */
+    v84: new StorageType('BridgeDataSigner.Approvals', 'Default', [v84.GenericNetworkId, v84.H256], sts.array(() => sts.tuple(() => [sts.bytes(), v84.Signature]))) as ApprovalsV84,
 }
 
 /**
@@ -147,4 +195,26 @@ export interface ApprovalsV70  {
     getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v70.GenericNetworkId, v70.H256], v: ([Bytes, v70.Signature][] | undefined)][]>
     getPairsPaged(pageSize: number, block: Block, key1: v70.GenericNetworkId): AsyncIterable<[k: [v70.GenericNetworkId, v70.H256], v: ([Bytes, v70.Signature][] | undefined)][]>
     getPairsPaged(pageSize: number, block: Block, key1: v70.GenericNetworkId, key2: v70.H256): AsyncIterable<[k: [v70.GenericNetworkId, v70.H256], v: ([Bytes, v70.Signature][] | undefined)][]>
+}
+
+/**
+ *  Approvals
+ */
+export interface ApprovalsV84  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): [Bytes, v84.Signature][]
+    get(block: Block, key1: v84.GenericNetworkId, key2: v84.H256): Promise<([Bytes, v84.Signature][] | undefined)>
+    getMany(block: Block, keys: [v84.GenericNetworkId, v84.H256][]): Promise<([Bytes, v84.Signature][] | undefined)[]>
+    getKeys(block: Block): Promise<[v84.GenericNetworkId, v84.H256][]>
+    getKeys(block: Block, key1: v84.GenericNetworkId): Promise<[v84.GenericNetworkId, v84.H256][]>
+    getKeys(block: Block, key1: v84.GenericNetworkId, key2: v84.H256): Promise<[v84.GenericNetworkId, v84.H256][]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v84.GenericNetworkId, v84.H256][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v84.GenericNetworkId): AsyncIterable<[v84.GenericNetworkId, v84.H256][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v84.GenericNetworkId, key2: v84.H256): AsyncIterable<[v84.GenericNetworkId, v84.H256][]>
+    getPairs(block: Block): Promise<[k: [v84.GenericNetworkId, v84.H256], v: ([Bytes, v84.Signature][] | undefined)][]>
+    getPairs(block: Block, key1: v84.GenericNetworkId): Promise<[k: [v84.GenericNetworkId, v84.H256], v: ([Bytes, v84.Signature][] | undefined)][]>
+    getPairs(block: Block, key1: v84.GenericNetworkId, key2: v84.H256): Promise<[k: [v84.GenericNetworkId, v84.H256], v: ([Bytes, v84.Signature][] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v84.GenericNetworkId, v84.H256], v: ([Bytes, v84.Signature][] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v84.GenericNetworkId): AsyncIterable<[k: [v84.GenericNetworkId, v84.H256], v: ([Bytes, v84.Signature][] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v84.GenericNetworkId, key2: v84.H256): AsyncIterable<[k: [v84.GenericNetworkId, v84.H256], v: ([Bytes, v84.Signature][] | undefined)][]>
 }

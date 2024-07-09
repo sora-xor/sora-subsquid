@@ -7,7 +7,7 @@ import * as devCalls from '../../dev/pswap-distribution/calls'
 export const claimIncentive = {
 	name: 'PswapDistribution.claim_incentive',
 	v1: productionCalls.claimIncentive['v1'],
-	v33Stage: stageCalls.claimIncentive['v33'],
-	v33Test: testCalls.claimIncentive['v33'],
-	v70Dev: devCalls.claimIncentive['v70'],
+	v1Stage: stageCalls.claimIncentive['v1'],
+	v1Test: testCalls.claimIncentive['v1'],
+	v85Dev: devCalls.claimIncentive['v85'],
 }

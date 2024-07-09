@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const relay =  {
     name: 'Band.relay',
@@ -17,10 +17,10 @@ export const relay =  {
      * - `resolve_time`: symbols which rates are provided,
      * - `request_id`: id of the request sent to the *BandChain* to retrieve this data.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Band.relay',
         sts.struct({
-            rates: sts.array(() => sts.tuple(() => [v70.SymbolName, sts.bigint()])),
+            rates: sts.array(() => sts.tuple(() => [v85.SymbolName, sts.bigint()])),
             resolveTime: sts.bigint(),
             requestId: sts.bigint(),
         })
@@ -40,10 +40,10 @@ export const forceRelay =  {
      * - `resolve_time`: symbols which rates are provided,
      * - `request_id`: id of the request sent to the *BandChain* to retrieve this data.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Band.force_relay',
         sts.struct({
-            rates: sts.array(() => sts.tuple(() => [v70.SymbolName, sts.bigint()])),
+            rates: sts.array(() => sts.tuple(() => [v85.SymbolName, sts.bigint()])),
             resolveTime: sts.bigint(),
             requestId: sts.bigint(),
         })
@@ -62,10 +62,10 @@ export const addRelayers =  {
      * - `origin`: the sudo account on whose behalf the transaction is being executed,
      * - `account_ids`: list of new trusted relayers to add.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Band.add_relayers',
         sts.struct({
-            accountIds: sts.array(() => v70.AccountId32),
+            accountIds: sts.array(() => v85.AccountId32),
         })
     ),
 }
@@ -82,20 +82,20 @@ export const removeRelayers =  {
      * - `origin`: the sudo account on whose behalf the transaction is being executed,
      * - `account_ids`: list of relayers to remove.
      */
-    v70: new CallType(
+    v85: new CallType(
         'Band.remove_relayers',
         sts.struct({
-            accountIds: sts.array(() => v70.AccountId32),
+            accountIds: sts.array(() => v85.AccountId32),
         })
     ),
 }
 
 export const setDynamicFeeParameters =  {
     name: 'Band.set_dynamic_fee_parameters',
-    v70: new CallType(
+    v85: new CallType(
         'Band.set_dynamic_fee_parameters',
         sts.struct({
-            feeParameters: v70.FeeCalculationParameters,
+            feeParameters: v85.FeeCalculationParameters,
         })
     ),
 }

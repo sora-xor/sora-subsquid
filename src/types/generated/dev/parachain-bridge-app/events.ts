@@ -1,14 +1,14 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const burned =  {
     name: 'ParachainBridgeApp.Burned',
     /**
      * [network_id, asset_id, sender, recepient, amount]
      */
-    v70: new EventType(
+    v85: new EventType(
         'ParachainBridgeApp.Burned',
-        sts.tuple([v70.SubNetworkId, v70.AssetId32, v70.AccountId32, v70.VersionedMultiLocation, sts.bigint()])
+        sts.tuple([v85.SubNetworkId, v85.AssetId32, v85.AccountId32, v85.VersionedMultiLocation, sts.bigint()])
     ),
 }
 
@@ -17,8 +17,8 @@ export const minted =  {
     /**
      * [network_id, asset_id, sender, recepient, amount]
      */
-    v70: new EventType(
+    v85: new EventType(
         'ParachainBridgeApp.Minted',
-        sts.tuple([v70.SubNetworkId, v70.AssetId32, sts.option(() => v70.VersionedMultiLocation), v70.AccountId32, sts.bigint()])
+        sts.tuple([v85.SubNetworkId, v85.AssetId32, sts.option(() => v85.VersionedMultiLocation), v85.AccountId32, sts.bigint()])
     ),
 }

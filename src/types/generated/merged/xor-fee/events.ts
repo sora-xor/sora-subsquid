@@ -7,17 +7,17 @@ import * as devEvents from '../../dev/xor-fee/events'
 export const feeWithdrawn = {
 	name: 'XorFee.FeeWithdrawn',
 	v1: productionEvents.feeWithdrawn['v1'],
-	v33Stage: stageEvents.feeWithdrawn['v33'],
-	v33Test: testEvents.feeWithdrawn['v33'],
-	v70Dev: devEvents.feeWithdrawn['v70'],
+	v1Stage: stageEvents.feeWithdrawn['v1'],
+	v1Test: testEvents.feeWithdrawn['v1'],
+	v85Dev: devEvents.feeWithdrawn['v85'],
 }
 
 export const referrerRewarded = {
 	name: 'XorFee.ReferrerRewarded',
 	v22: productionEvents.referrerRewarded['v22'],
-	v33Stage: stageEvents.referrerRewarded['v33'],
-	v33Test: testEvents.referrerRewarded['v33'],
-	v70Dev: devEvents.referrerRewarded['v70'],
+	v22Stage: stageEvents.referrerRewarded['v22'],
+	v22Test: testEvents.referrerRewarded['v22'],
+	v85Dev: devEvents.referrerRewarded['v85'],
 }
 
 export const weightToFeeMultiplierUpdated = {
@@ -25,5 +25,5 @@ export const weightToFeeMultiplierUpdated = {
 	v37: productionEvents.weightToFeeMultiplierUpdated['v37'],
 	v37Stage: stageEvents.weightToFeeMultiplierUpdated['v37'],
 	v37Test: testEvents.weightToFeeMultiplierUpdated['v37'],
-	v70Dev: devEvents.weightToFeeMultiplierUpdated['v70'],
+	v85Dev: devEvents.weightToFeeMultiplierUpdated['v85'],
 }

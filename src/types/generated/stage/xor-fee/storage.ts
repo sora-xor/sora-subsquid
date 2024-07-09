@@ -1,21 +1,21 @@
 import {sts, Block, Bytes, Option, Result, StorageType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v7 from '../v7'
 import * as v37 from '../v37'
 
 export const xorToVal =  {
     /**
      *  The amount of XOR to be reminted and exchanged for VAL at the end of the session
      */
-    v33: new StorageType('XorFee.XorToVal', 'Default', [], v33.Balance) as XorToValV33,
+    v7: new StorageType('XorFee.XorToVal', 'Default', [], v7.Balance) as XorToValV7,
 }
 
 /**
  *  The amount of XOR to be reminted and exchanged for VAL at the end of the session
  */
-export interface XorToValV33  {
+export interface XorToValV7  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.Balance
-    get(block: Block): Promise<(v33.Balance | undefined)>
+    getDefault(block: Block): v7.Balance
+    get(block: Block): Promise<(v7.Balance | undefined)>
 }
 
 export const multiplier =  {

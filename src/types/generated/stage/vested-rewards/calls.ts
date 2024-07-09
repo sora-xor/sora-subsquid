@@ -1,17 +1,58 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
+import * as v7 from '../v7'
+import * as v22 from '../v22'
 import * as v33 from '../v33'
 import * as v42 from '../v42'
 import * as v46 from '../v46'
-import * as v52 from '../v52'
+import * as v53 from '../v53'
 
 export const claimRewards =  {
     name: 'VestedRewards.claim_rewards',
     /**
      *  Claim all available PSWAP rewards by account signing this transaction.
      */
-    v33: new CallType(
+    v7: new CallType(
         'VestedRewards.claim_rewards',
         sts.unit()
+    ),
+}
+
+export const injectMarketMakers =  {
+    name: 'VestedRewards.inject_market_makers',
+    /**
+     *  Inject market makers snapshot into storage.
+     */
+    v7: new CallType(
+        'VestedRewards.inject_market_makers',
+        sts.struct({
+            snapshot: sts.array(() => sts.tuple(() => [v7.AccountId, sts.number(), v7.Balance])),
+        })
+    ),
+}
+
+export const setAssetPair =  {
+    name: 'VestedRewards.set_asset_pair',
+    /**
+     *  Allow/disallow a market making pair.
+     */
+    v22: new CallType(
+        'VestedRewards.set_asset_pair',
+        sts.struct({
+            fromAssetId: v22.AssetId,
+            toAssetId: v22.AssetId,
+            marketMakingRewardsAllowed: sts.boolean(),
+        })
+    ),
+    /**
+     * Allow/disallow a market making pair.
+     */
+    v42: new CallType(
+        'VestedRewards.set_asset_pair',
+        sts.struct({
+            fromAssetId: v42.AssetId32,
+            toAssetId: v42.AssetId32,
+            marketMakingRewardsAllowed: sts.boolean(),
+        })
     ),
 }
 
@@ -29,49 +70,10 @@ export const claimCrowdloanRewards =  {
             assetId: v42.AssetId32,
         })
     ),
-    v52: new CallType(
+    v53: new CallType(
         'VestedRewards.claim_crowdloan_rewards',
         sts.struct({
-            crowdloan: v52.CrowdloanTag,
-        })
-    ),
-}
-
-export const injectMarketMakers =  {
-    name: 'VestedRewards.inject_market_makers',
-    /**
-     *  Inject market makers snapshot into storage.
-     */
-    v33: new CallType(
-        'VestedRewards.inject_market_makers',
-        sts.struct({
-            snapshot: sts.array(() => sts.tuple(() => [v33.AccountId, sts.number(), v33.Balance])),
-        })
-    ),
-}
-
-export const setAssetPair =  {
-    name: 'VestedRewards.set_asset_pair',
-    /**
-     *  Allow/disallow a market making pair.
-     */
-    v33: new CallType(
-        'VestedRewards.set_asset_pair',
-        sts.struct({
-            fromAssetId: v33.AssetId,
-            toAssetId: v33.AssetId,
-            marketMakingRewardsAllowed: sts.boolean(),
-        })
-    ),
-    /**
-     * Allow/disallow a market making pair.
-     */
-    v42: new CallType(
-        'VestedRewards.set_asset_pair',
-        sts.struct({
-            fromAssetId: v42.AssetId32,
-            toAssetId: v42.AssetId32,
-            marketMakingRewardsAllowed: sts.boolean(),
+            crowdloan: v53.CrowdloanTag,
         })
     ),
 }
@@ -88,14 +90,14 @@ export const updateRewards =  {
 
 export const registerCrowdloan =  {
     name: 'VestedRewards.register_crowdloan',
-    v52: new CallType(
+    v53: new CallType(
         'VestedRewards.register_crowdloan',
         sts.struct({
-            tag: v52.CrowdloanTag,
+            tag: v53.CrowdloanTag,
             startBlock: sts.number(),
             length: sts.number(),
-            rewards: sts.array(() => sts.tuple(() => [v52.AssetId32, sts.bigint()])),
-            contributions: sts.array(() => sts.tuple(() => [v52.AccountId32, sts.bigint()])),
+            rewards: sts.array(() => sts.tuple(() => [v53.AssetId32, sts.bigint()])),
+            contributions: sts.array(() => sts.tuple(() => [v53.AccountId32, sts.bigint()])),
         })
     ),
 }

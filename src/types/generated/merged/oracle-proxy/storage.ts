@@ -9,7 +9,7 @@ export const enabledOracles = {
 	v45: productionStorage.enabledOracles['v45'],
 	v45Stage: stageStorage.enabledOracles['v45'],
 	v45Test: testStorage.enabledOracles['v45'],
-	v70Dev: devStorage.enabledOracles['v70'],
+	v85Dev: devStorage.enabledOracles['v85'],
 }
 
 export const symbolProviders = {
@@ -17,5 +17,5 @@ export const symbolProviders = {
 	v45: productionStorage.symbolProviders['v45'],
 	v45Stage: stageStorage.symbolProviders['v45'],
 	v45Test: testStorage.symbolProviders['v45'],
-	v70Dev: devStorage.symbolProviders['v70'],
+	v85Dev: devStorage.symbolProviders['v85'],
 }

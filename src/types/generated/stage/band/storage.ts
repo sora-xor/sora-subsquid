@@ -1,38 +1,21 @@
 import {sts, Block, Bytes, Option, Result, StorageType, RuntimeCtx} from '../support'
-import * as v44 from '../v44'
 import * as v45 from '../v45'
 import * as v59 from '../v59'
 import * as v60 from '../v60'
 
 export const trustedRelayers =  {
-    v44: new StorageType('Band.TrustedRelayers', 'Optional', [], sts.array(() => v44.AccountId32)) as TrustedRelayersV44,
+    v45: new StorageType('Band.TrustedRelayers', 'Optional', [], sts.array(() => v45.AccountId32)) as TrustedRelayersV45,
 }
 
-export interface TrustedRelayersV44  {
+export interface TrustedRelayersV45  {
     is(block: RuntimeCtx): boolean
-    get(block: Block): Promise<(v44.AccountId32[] | undefined)>
+    get(block: Block): Promise<(v45.AccountId32[] | undefined)>
 }
 
 export const symbolRates =  {
-    v44: new StorageType('Band.SymbolRates', 'Default', [sts.string()], sts.option(() => v44.Rate)) as SymbolRatesV44,
     v45: new StorageType('Band.SymbolRates', 'Default', [v45.SymbolName], sts.option(() => v45.BandRate)) as SymbolRatesV45,
     v59: new StorageType('Band.SymbolRates', 'Default', [v59.SymbolName], sts.option(() => v59.BandRate)) as SymbolRatesV59,
     v60: new StorageType('Band.SymbolRates', 'Default', [v60.SymbolName], sts.option(() => v60.BandRate)) as SymbolRatesV60,
-}
-
-export interface SymbolRatesV44  {
-    is(block: RuntimeCtx): boolean
-    getDefault(block: Block): (v44.Rate | undefined)
-    get(block: Block, key: string): Promise<((v44.Rate | undefined) | undefined)>
-    getMany(block: Block, keys: string[]): Promise<((v44.Rate | undefined) | undefined)[]>
-    getKeys(block: Block): Promise<string[]>
-    getKeys(block: Block, key: string): Promise<string[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<string[]>
-    getKeysPaged(pageSize: number, block: Block, key: string): AsyncIterable<string[]>
-    getPairs(block: Block): Promise<[k: string, v: ((v44.Rate | undefined) | undefined)][]>
-    getPairs(block: Block, key: string): Promise<[k: string, v: ((v44.Rate | undefined) | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: string, v: ((v44.Rate | undefined) | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: string): AsyncIterable<[k: string, v: ((v44.Rate | undefined) | undefined)][]>
 }
 
 export interface SymbolRatesV45  {

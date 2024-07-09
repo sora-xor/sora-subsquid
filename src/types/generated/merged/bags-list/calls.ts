@@ -9,7 +9,7 @@ export const rebag = {
 	v42: productionCalls.rebag['v42'],
 	v42Stage: stageCalls.rebag['v42'],
 	v42Test: testCalls.rebag['v42'],
-	v70Dev: devCalls.rebag['v70'],
+	v85Dev: devCalls.rebag['v85'],
 }
 
 export const putInFrontOf = {
@@ -17,5 +17,5 @@ export const putInFrontOf = {
 	v42: productionCalls.putInFrontOf['v42'],
 	v42Stage: stageCalls.putInFrontOf['v42'],
 	v42Test: testCalls.putInFrontOf['v42'],
-	v70Dev: devCalls.putInFrontOf['v70'],
+	v85Dev: devCalls.putInFrontOf['v85'],
 }

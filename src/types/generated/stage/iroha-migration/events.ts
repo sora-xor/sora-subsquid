@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
 import * as v42 from '../v42'
 
 export const migrated =  {
@@ -7,9 +7,9 @@ export const migrated =  {
     /**
      *  Migrated. [source, target]
      */
-    v33: new EventType(
+    v1: new EventType(
         'IrohaMigration.Migrated',
-        sts.tuple([v33.String, v33.AccountId])
+        sts.tuple([v1.String, v1.AccountId])
     ),
     /**
      * Migrated. [source, target]

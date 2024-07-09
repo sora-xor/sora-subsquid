@@ -1,16 +1,16 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
 import * as v42 from '../v42'
-import * as v52 from '../v52'
+import * as v53 from '../v53'
 
 export const multisigAccountCreated =  {
     name: 'BridgeMultisig.MultisigAccountCreated',
     /**
      *  A new multisig created. [multisig]
      */
-    v33: new EventType(
+    v1: new EventType(
         'BridgeMultisig.MultisigAccountCreated',
-        v33.AccountId
+        v1.AccountId
     ),
 }
 
@@ -19,9 +19,9 @@ export const newMultisig =  {
     /**
      *  A new multisig operation has begun. [approving, multisig, call_hash]
      */
-    v33: new EventType(
+    v1: new EventType(
         'BridgeMultisig.NewMultisig',
-        sts.tuple([v33.AccountId, v33.AccountId, sts.bytes()])
+        sts.tuple([v1.AccountId, v1.AccountId, sts.bytes()])
     ),
 }
 
@@ -30,9 +30,9 @@ export const multisigApproval =  {
     /**
      *  A multisig operation has been approved by someone. [approving, timepoint, multisig, call_hash]
      */
-    v33: new EventType(
+    v1: new EventType(
         'BridgeMultisig.MultisigApproval',
-        sts.tuple([v33.AccountId, v33.BridgeTimepoint, v33.AccountId, sts.bytes()])
+        sts.tuple([v1.AccountId, v1.BridgeTimepoint, v1.AccountId, sts.bytes()])
     ),
 }
 
@@ -41,9 +41,9 @@ export const multisigExecuted =  {
     /**
      *  A multisig operation has been executed. [approving, timepoint, multisig, call_hash]
      */
-    v33: new EventType(
+    v1: new EventType(
         'BridgeMultisig.MultisigExecuted',
-        sts.tuple([v33.AccountId, v33.BridgeTimepoint, v33.AccountId, sts.bytes(), v33.DispatchResultWithPostInfo])
+        sts.tuple([v1.AccountId, v1.BridgeTimepoint, v1.AccountId, sts.bytes(), v1.DispatchResultWithPostInfo])
     ),
     /**
      * A multisig operation has been executed. [approving, timepoint, multisig, call_hash]
@@ -55,9 +55,9 @@ export const multisigExecuted =  {
     /**
      * A multisig operation has been executed. [approving, timepoint, multisig, call_hash]
      */
-    v52: new EventType(
+    v53: new EventType(
         'BridgeMultisig.MultisigExecuted',
-        sts.tuple([v52.AccountId32, v52.BridgeTimepoint, v52.AccountId32, sts.bytes(), sts.option(() => v52.DispatchError)])
+        sts.tuple([v53.AccountId32, v53.BridgeTimepoint, v53.AccountId32, sts.bytes(), sts.option(() => v53.DispatchError)])
     ),
 }
 
@@ -66,8 +66,8 @@ export const multisigCancelled =  {
     /**
      *  A multisig operation has been cancelled. [cancelling, timepoint, multisig, call_hash]
      */
-    v33: new EventType(
+    v1: new EventType(
         'BridgeMultisig.MultisigCancelled',
-        sts.tuple([v33.AccountId, v33.BridgeTimepoint, v33.AccountId, sts.bytes()])
+        sts.tuple([v1.AccountId, v1.BridgeTimepoint, v1.AccountId, sts.bytes()])
     ),
 }

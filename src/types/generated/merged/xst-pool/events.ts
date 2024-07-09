@@ -8,9 +8,9 @@ export const poolInitialized = {
 	name: 'XSTPool.PoolInitialized',
 	v19: productionEvents.poolInitialized['v19'],
 	v42: productionEvents.poolInitialized['v42'],
-	v33Stage: stageEvents.poolInitialized['v33'],
+	v19Stage: stageEvents.poolInitialized['v19'],
 	v42Stage: stageEvents.poolInitialized['v42'],
-	v33Test: testEvents.poolInitialized['v33'],
+	v19Test: testEvents.poolInitialized['v19'],
 	v42Test: testEvents.poolInitialized['v42'],
 }
 
@@ -18,46 +18,46 @@ export const referenceAssetChanged = {
 	name: 'XSTPool.ReferenceAssetChanged',
 	v19: productionEvents.referenceAssetChanged['v19'],
 	v42: productionEvents.referenceAssetChanged['v42'],
-	v33Stage: stageEvents.referenceAssetChanged['v33'],
+	v19Stage: stageEvents.referenceAssetChanged['v19'],
 	v42Stage: stageEvents.referenceAssetChanged['v42'],
-	v33Test: testEvents.referenceAssetChanged['v33'],
+	v19Test: testEvents.referenceAssetChanged['v19'],
 	v42Test: testEvents.referenceAssetChanged['v42'],
-	v70Dev: devEvents.referenceAssetChanged['v70'],
+	v85Dev: devEvents.referenceAssetChanged['v85'],
 }
 
 export const syntheticAssetEnabled = {
 	name: 'XSTPool.SyntheticAssetEnabled',
 	v45: productionEvents.syntheticAssetEnabled['v45'],
 	v57: productionEvents.syntheticAssetEnabled['v57'],
-	v44Stage: stageEvents.syntheticAssetEnabled['v44'],
-	v54Stage: stageEvents.syntheticAssetEnabled['v54'],
-	v44Test: testEvents.syntheticAssetEnabled['v44'],
-	v54Test: testEvents.syntheticAssetEnabled['v54'],
-	v70Dev: devEvents.syntheticAssetEnabled['v70'],
+	v45Stage: stageEvents.syntheticAssetEnabled['v45'],
+	v57Stage: stageEvents.syntheticAssetEnabled['v57'],
+	v45Test: testEvents.syntheticAssetEnabled['v45'],
+	v57Test: testEvents.syntheticAssetEnabled['v57'],
+	v85Dev: devEvents.syntheticAssetEnabled['v85'],
 }
 
 export const syntheticBaseAssetFloorPriceChanged = {
 	name: 'XSTPool.SyntheticBaseAssetFloorPriceChanged',
 	v45: productionEvents.syntheticBaseAssetFloorPriceChanged['v45'],
-	v44Stage: stageEvents.syntheticBaseAssetFloorPriceChanged['v44'],
-	v44Test: testEvents.syntheticBaseAssetFloorPriceChanged['v44'],
-	v70Dev: devEvents.syntheticBaseAssetFloorPriceChanged['v70'],
+	v45Stage: stageEvents.syntheticBaseAssetFloorPriceChanged['v45'],
+	v45Test: testEvents.syntheticBaseAssetFloorPriceChanged['v45'],
+	v85Dev: devEvents.syntheticBaseAssetFloorPriceChanged['v85'],
 }
 
 export const syntheticAssetDisabled = {
 	name: 'XSTPool.SyntheticAssetDisabled',
 	v57: productionEvents.syntheticAssetDisabled['v57'],
-	v54Stage: stageEvents.syntheticAssetDisabled['v54'],
-	v54Test: testEvents.syntheticAssetDisabled['v54'],
-	v70Dev: devEvents.syntheticAssetDisabled['v70'],
+	v57Stage: stageEvents.syntheticAssetDisabled['v57'],
+	v57Test: testEvents.syntheticAssetDisabled['v57'],
+	v85Dev: devEvents.syntheticAssetDisabled['v85'],
 }
 
 export const syntheticAssetFeeChanged = {
 	name: 'XSTPool.SyntheticAssetFeeChanged',
 	v57: productionEvents.syntheticAssetFeeChanged['v57'],
-	v54Stage: stageEvents.syntheticAssetFeeChanged['v54'],
-	v54Test: testEvents.syntheticAssetFeeChanged['v54'],
-	v70Dev: devEvents.syntheticAssetFeeChanged['v70'],
+	v57Stage: stageEvents.syntheticAssetFeeChanged['v57'],
+	v57Test: testEvents.syntheticAssetFeeChanged['v57'],
+	v85Dev: devEvents.syntheticAssetFeeChanged['v85'],
 }
 
 export const syntheticAssetRemoved = {
@@ -65,5 +65,5 @@ export const syntheticAssetRemoved = {
 	v60: productionEvents.syntheticAssetRemoved['v60'],
 	v60Stage: stageEvents.syntheticAssetRemoved['v60'],
 	v60Test: testEvents.syntheticAssetRemoved['v60'],
-	v70Dev: devEvents.syntheticAssetRemoved['v70'],
+	v85Dev: devEvents.syntheticAssetRemoved['v85'],
 }

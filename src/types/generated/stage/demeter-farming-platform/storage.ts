@@ -180,7 +180,7 @@ export const palletStorageVersion =  {
     /**
      *  Pallet storage version
      */
-    v43: new StorageType('DemeterFarmingPlatform.PalletStorageVersion', 'Default', [], v43.Type_636) as PalletStorageVersionV43,
+    v43: new StorageType('DemeterFarmingPlatform.PalletStorageVersion', 'Default', [], v43.Type_631) as PalletStorageVersionV43,
 }
 
 /**
@@ -188,6 +188,6 @@ export const palletStorageVersion =  {
  */
 export interface PalletStorageVersionV43  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v43.Type_636
-    get(block: Block): Promise<(v43.Type_636 | undefined)>
+    getDefault(block: Block): v43.Type_631
+    get(block: Block): Promise<(v43.Type_631 | undefined)>
 }

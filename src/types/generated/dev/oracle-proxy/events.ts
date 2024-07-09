@@ -1,14 +1,14 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const oracleEnabled =  {
     name: 'OracleProxy.OracleEnabled',
     /**
      * Oracle was successfully enabled. [oracle]
      */
-    v70: new EventType(
+    v85: new EventType(
         'OracleProxy.OracleEnabled',
-        v70.Oracle
+        v85.Oracle
     ),
 }
 
@@ -17,8 +17,8 @@ export const oracleDisabled =  {
     /**
      * Oracle was successfully disabled. [oracle]
      */
-    v70: new EventType(
+    v85: new EventType(
         'OracleProxy.OracleDisabled',
-        v70.Oracle
+        v85.Oracle
     ),
 }

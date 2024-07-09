@@ -6,7 +6,7 @@ export const newSession =  {
      * New session has happened. Note that the argument is the session index, not the
      * block number as the type might suggest.
      */
-    v70: new EventType(
+    v85: new EventType(
         'Session.NewSession',
         sts.struct({
             sessionIndex: sts.number(),

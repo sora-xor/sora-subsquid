@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
 
 export const offence =  {
     name: 'Offences.Offence',
@@ -9,9 +9,9 @@ export const offence =  {
      *  element indicates of the offence was applied (true) or queued (false)
      *  \[kind, timeslot, applied\].
      */
-    v33: new EventType(
+    v1: new EventType(
         'Offences.Offence',
-        sts.tuple([v33.Kind, v33.OpaqueTimeSlot, sts.boolean()])
+        sts.tuple([v1.Kind, v1.OpaqueTimeSlot, sts.boolean()])
     ),
     /**
      * There is an offence reported of the given `kind` happened at the `session_index` and

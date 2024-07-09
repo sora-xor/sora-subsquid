@@ -1,39 +1,41 @@
 import {sts, Block, Bytes, Option, Result, StorageType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
+import * as v3 from '../v3'
+import * as v19 from '../v19'
 import * as v38 from '../v38'
 import * as v42 from '../v42'
-import * as v52 from '../v52'
+import * as v53 from '../v53'
 
 export const requestsQueue =  {
     /**
      *  Registered requests queue handled by off-chain workers.
      */
-    v33: new StorageType('EthBridge.RequestsQueue', 'Default', [v33.BridgeNetworkId], sts.array(() => v33.H256)) as RequestsQueueV33,
+    v1: new StorageType('EthBridge.RequestsQueue', 'Default', [v1.NetworkId], sts.array(() => v1.H256)) as RequestsQueueV1,
 }
 
 /**
  *  Registered requests queue handled by off-chain workers.
  */
-export interface RequestsQueueV33  {
+export interface RequestsQueueV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.H256[]
-    get(block: Block, key: v33.BridgeNetworkId): Promise<(v33.H256[] | undefined)>
-    getMany(block: Block, keys: v33.BridgeNetworkId[]): Promise<(v33.H256[] | undefined)[]>
-    getKeys(block: Block): Promise<v33.BridgeNetworkId[]>
-    getKeys(block: Block, key: v33.BridgeNetworkId): Promise<v33.BridgeNetworkId[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.BridgeNetworkId[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.BridgeNetworkId): AsyncIterable<v33.BridgeNetworkId[]>
-    getPairs(block: Block): Promise<[k: v33.BridgeNetworkId, v: (v33.H256[] | undefined)][]>
-    getPairs(block: Block, key: v33.BridgeNetworkId): Promise<[k: v33.BridgeNetworkId, v: (v33.H256[] | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.BridgeNetworkId, v: (v33.H256[] | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.BridgeNetworkId): AsyncIterable<[k: v33.BridgeNetworkId, v: (v33.H256[] | undefined)][]>
+    getDefault(block: Block): v1.H256[]
+    get(block: Block, key: v1.NetworkId): Promise<(v1.H256[] | undefined)>
+    getMany(block: Block, keys: v1.NetworkId[]): Promise<(v1.H256[] | undefined)[]>
+    getKeys(block: Block): Promise<v1.NetworkId[]>
+    getKeys(block: Block, key: v1.NetworkId): Promise<v1.NetworkId[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.NetworkId[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.NetworkId): AsyncIterable<v1.NetworkId[]>
+    getPairs(block: Block): Promise<[k: v1.NetworkId, v: (v1.H256[] | undefined)][]>
+    getPairs(block: Block, key: v1.NetworkId): Promise<[k: v1.NetworkId, v: (v1.H256[] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.NetworkId, v: (v1.H256[] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.NetworkId): AsyncIterable<[k: v1.NetworkId, v: (v1.H256[] | undefined)][]>
 }
 
 export const requests =  {
     /**
      *  Registered requests.
      */
-    v33: new StorageType('EthBridge.Requests', 'Optional', [v33.BridgeNetworkId, v33.H256], v33.OffchainRequest) as RequestsV33,
+    v1: new StorageType('EthBridge.Requests', 'Optional', [v1.NetworkId, v1.H256], v1.OffchainRequest) as RequestsV1,
     /**
      *  Registered requests.
      */
@@ -43,22 +45,22 @@ export const requests =  {
 /**
  *  Registered requests.
  */
-export interface RequestsV33  {
+export interface RequestsV1  {
     is(block: RuntimeCtx): boolean
-    get(block: Block, key1: v33.BridgeNetworkId, key2: v33.H256): Promise<(v33.OffchainRequest | undefined)>
-    getMany(block: Block, keys: [v33.BridgeNetworkId, v33.H256][]): Promise<(v33.OffchainRequest | undefined)[]>
-    getKeys(block: Block): Promise<[v33.BridgeNetworkId, v33.H256][]>
-    getKeys(block: Block, key1: v33.BridgeNetworkId): Promise<[v33.BridgeNetworkId, v33.H256][]>
-    getKeys(block: Block, key1: v33.BridgeNetworkId, key2: v33.H256): Promise<[v33.BridgeNetworkId, v33.H256][]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v33.BridgeNetworkId, v33.H256][]>
-    getKeysPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId): AsyncIterable<[v33.BridgeNetworkId, v33.H256][]>
-    getKeysPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId, key2: v33.H256): AsyncIterable<[v33.BridgeNetworkId, v33.H256][]>
-    getPairs(block: Block): Promise<[k: [v33.BridgeNetworkId, v33.H256], v: (v33.OffchainRequest | undefined)][]>
-    getPairs(block: Block, key1: v33.BridgeNetworkId): Promise<[k: [v33.BridgeNetworkId, v33.H256], v: (v33.OffchainRequest | undefined)][]>
-    getPairs(block: Block, key1: v33.BridgeNetworkId, key2: v33.H256): Promise<[k: [v33.BridgeNetworkId, v33.H256], v: (v33.OffchainRequest | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v33.BridgeNetworkId, v33.H256], v: (v33.OffchainRequest | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId): AsyncIterable<[k: [v33.BridgeNetworkId, v33.H256], v: (v33.OffchainRequest | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId, key2: v33.H256): AsyncIterable<[k: [v33.BridgeNetworkId, v33.H256], v: (v33.OffchainRequest | undefined)][]>
+    get(block: Block, key1: v1.NetworkId, key2: v1.H256): Promise<(v1.OffchainRequest | undefined)>
+    getMany(block: Block, keys: [v1.NetworkId, v1.H256][]): Promise<(v1.OffchainRequest | undefined)[]>
+    getKeys(block: Block): Promise<[v1.NetworkId, v1.H256][]>
+    getKeys(block: Block, key1: v1.NetworkId): Promise<[v1.NetworkId, v1.H256][]>
+    getKeys(block: Block, key1: v1.NetworkId, key2: v1.H256): Promise<[v1.NetworkId, v1.H256][]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v1.NetworkId, v1.H256][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v1.NetworkId): AsyncIterable<[v1.NetworkId, v1.H256][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v1.NetworkId, key2: v1.H256): AsyncIterable<[v1.NetworkId, v1.H256][]>
+    getPairs(block: Block): Promise<[k: [v1.NetworkId, v1.H256], v: (v1.OffchainRequest | undefined)][]>
+    getPairs(block: Block, key1: v1.NetworkId): Promise<[k: [v1.NetworkId, v1.H256], v: (v1.OffchainRequest | undefined)][]>
+    getPairs(block: Block, key1: v1.NetworkId, key2: v1.H256): Promise<[k: [v1.NetworkId, v1.H256], v: (v1.OffchainRequest | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v1.NetworkId, v1.H256], v: (v1.OffchainRequest | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v1.NetworkId): AsyncIterable<[k: [v1.NetworkId, v1.H256], v: (v1.OffchainRequest | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v1.NetworkId, key2: v1.H256): AsyncIterable<[k: [v1.NetworkId, v1.H256], v: (v1.OffchainRequest | undefined)][]>
 }
 
 /**
@@ -86,36 +88,36 @@ export const loadToIncomingRequestHash =  {
     /**
      *  Used to identify an incoming request by the corresponding load request.
      */
-    v33: new StorageType('EthBridge.LoadToIncomingRequestHash', 'Default', [v33.BridgeNetworkId, v33.H256], v33.H256) as LoadToIncomingRequestHashV33,
+    v1: new StorageType('EthBridge.LoadToIncomingRequestHash', 'Default', [v1.NetworkId, v1.H256], v1.H256) as LoadToIncomingRequestHashV1,
 }
 
 /**
  *  Used to identify an incoming request by the corresponding load request.
  */
-export interface LoadToIncomingRequestHashV33  {
+export interface LoadToIncomingRequestHashV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.H256
-    get(block: Block, key1: v33.BridgeNetworkId, key2: v33.H256): Promise<(v33.H256 | undefined)>
-    getMany(block: Block, keys: [v33.BridgeNetworkId, v33.H256][]): Promise<(v33.H256 | undefined)[]>
-    getKeys(block: Block): Promise<[v33.BridgeNetworkId, v33.H256][]>
-    getKeys(block: Block, key1: v33.BridgeNetworkId): Promise<[v33.BridgeNetworkId, v33.H256][]>
-    getKeys(block: Block, key1: v33.BridgeNetworkId, key2: v33.H256): Promise<[v33.BridgeNetworkId, v33.H256][]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v33.BridgeNetworkId, v33.H256][]>
-    getKeysPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId): AsyncIterable<[v33.BridgeNetworkId, v33.H256][]>
-    getKeysPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId, key2: v33.H256): AsyncIterable<[v33.BridgeNetworkId, v33.H256][]>
-    getPairs(block: Block): Promise<[k: [v33.BridgeNetworkId, v33.H256], v: (v33.H256 | undefined)][]>
-    getPairs(block: Block, key1: v33.BridgeNetworkId): Promise<[k: [v33.BridgeNetworkId, v33.H256], v: (v33.H256 | undefined)][]>
-    getPairs(block: Block, key1: v33.BridgeNetworkId, key2: v33.H256): Promise<[k: [v33.BridgeNetworkId, v33.H256], v: (v33.H256 | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v33.BridgeNetworkId, v33.H256], v: (v33.H256 | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId): AsyncIterable<[k: [v33.BridgeNetworkId, v33.H256], v: (v33.H256 | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId, key2: v33.H256): AsyncIterable<[k: [v33.BridgeNetworkId, v33.H256], v: (v33.H256 | undefined)][]>
+    getDefault(block: Block): v1.H256
+    get(block: Block, key1: v1.NetworkId, key2: v1.H256): Promise<(v1.H256 | undefined)>
+    getMany(block: Block, keys: [v1.NetworkId, v1.H256][]): Promise<(v1.H256 | undefined)[]>
+    getKeys(block: Block): Promise<[v1.NetworkId, v1.H256][]>
+    getKeys(block: Block, key1: v1.NetworkId): Promise<[v1.NetworkId, v1.H256][]>
+    getKeys(block: Block, key1: v1.NetworkId, key2: v1.H256): Promise<[v1.NetworkId, v1.H256][]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v1.NetworkId, v1.H256][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v1.NetworkId): AsyncIterable<[v1.NetworkId, v1.H256][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v1.NetworkId, key2: v1.H256): AsyncIterable<[v1.NetworkId, v1.H256][]>
+    getPairs(block: Block): Promise<[k: [v1.NetworkId, v1.H256], v: (v1.H256 | undefined)][]>
+    getPairs(block: Block, key1: v1.NetworkId): Promise<[k: [v1.NetworkId, v1.H256], v: (v1.H256 | undefined)][]>
+    getPairs(block: Block, key1: v1.NetworkId, key2: v1.H256): Promise<[k: [v1.NetworkId, v1.H256], v: (v1.H256 | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v1.NetworkId, v1.H256], v: (v1.H256 | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v1.NetworkId): AsyncIterable<[k: [v1.NetworkId, v1.H256], v: (v1.H256 | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v1.NetworkId, key2: v1.H256): AsyncIterable<[k: [v1.NetworkId, v1.H256], v: (v1.H256 | undefined)][]>
 }
 
 export const requestStatuses =  {
     /**
      *  Requests statuses.
      */
-    v33: new StorageType('EthBridge.RequestStatuses', 'Optional', [v33.BridgeNetworkId, v33.H256], v33.RequestStatus) as RequestStatusesV33,
+    v1: new StorageType('EthBridge.RequestStatuses', 'Optional', [v1.NetworkId, v1.H256], v1.RequestStatus) as RequestStatusesV1,
     /**
      *  Requests statuses.
      */
@@ -123,28 +125,28 @@ export const requestStatuses =  {
     /**
      *  Requests statuses.
      */
-    v52: new StorageType('EthBridge.RequestStatuses', 'Optional', [sts.number(), v52.H256], v52.RequestStatus) as RequestStatusesV52,
+    v53: new StorageType('EthBridge.RequestStatuses', 'Optional', [sts.number(), v53.H256], v53.RequestStatus) as RequestStatusesV53,
 }
 
 /**
  *  Requests statuses.
  */
-export interface RequestStatusesV33  {
+export interface RequestStatusesV1  {
     is(block: RuntimeCtx): boolean
-    get(block: Block, key1: v33.BridgeNetworkId, key2: v33.H256): Promise<(v33.RequestStatus | undefined)>
-    getMany(block: Block, keys: [v33.BridgeNetworkId, v33.H256][]): Promise<(v33.RequestStatus | undefined)[]>
-    getKeys(block: Block): Promise<[v33.BridgeNetworkId, v33.H256][]>
-    getKeys(block: Block, key1: v33.BridgeNetworkId): Promise<[v33.BridgeNetworkId, v33.H256][]>
-    getKeys(block: Block, key1: v33.BridgeNetworkId, key2: v33.H256): Promise<[v33.BridgeNetworkId, v33.H256][]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v33.BridgeNetworkId, v33.H256][]>
-    getKeysPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId): AsyncIterable<[v33.BridgeNetworkId, v33.H256][]>
-    getKeysPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId, key2: v33.H256): AsyncIterable<[v33.BridgeNetworkId, v33.H256][]>
-    getPairs(block: Block): Promise<[k: [v33.BridgeNetworkId, v33.H256], v: (v33.RequestStatus | undefined)][]>
-    getPairs(block: Block, key1: v33.BridgeNetworkId): Promise<[k: [v33.BridgeNetworkId, v33.H256], v: (v33.RequestStatus | undefined)][]>
-    getPairs(block: Block, key1: v33.BridgeNetworkId, key2: v33.H256): Promise<[k: [v33.BridgeNetworkId, v33.H256], v: (v33.RequestStatus | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v33.BridgeNetworkId, v33.H256], v: (v33.RequestStatus | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId): AsyncIterable<[k: [v33.BridgeNetworkId, v33.H256], v: (v33.RequestStatus | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId, key2: v33.H256): AsyncIterable<[k: [v33.BridgeNetworkId, v33.H256], v: (v33.RequestStatus | undefined)][]>
+    get(block: Block, key1: v1.NetworkId, key2: v1.H256): Promise<(v1.RequestStatus | undefined)>
+    getMany(block: Block, keys: [v1.NetworkId, v1.H256][]): Promise<(v1.RequestStatus | undefined)[]>
+    getKeys(block: Block): Promise<[v1.NetworkId, v1.H256][]>
+    getKeys(block: Block, key1: v1.NetworkId): Promise<[v1.NetworkId, v1.H256][]>
+    getKeys(block: Block, key1: v1.NetworkId, key2: v1.H256): Promise<[v1.NetworkId, v1.H256][]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v1.NetworkId, v1.H256][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v1.NetworkId): AsyncIterable<[v1.NetworkId, v1.H256][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v1.NetworkId, key2: v1.H256): AsyncIterable<[v1.NetworkId, v1.H256][]>
+    getPairs(block: Block): Promise<[k: [v1.NetworkId, v1.H256], v: (v1.RequestStatus | undefined)][]>
+    getPairs(block: Block, key1: v1.NetworkId): Promise<[k: [v1.NetworkId, v1.H256], v: (v1.RequestStatus | undefined)][]>
+    getPairs(block: Block, key1: v1.NetworkId, key2: v1.H256): Promise<[k: [v1.NetworkId, v1.H256], v: (v1.RequestStatus | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v1.NetworkId, v1.H256], v: (v1.RequestStatus | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v1.NetworkId): AsyncIterable<[k: [v1.NetworkId, v1.H256], v: (v1.RequestStatus | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v1.NetworkId, key2: v1.H256): AsyncIterable<[k: [v1.NetworkId, v1.H256], v: (v1.RequestStatus | undefined)][]>
 }
 
 /**
@@ -171,112 +173,112 @@ export interface RequestStatusesV42  {
 /**
  *  Requests statuses.
  */
-export interface RequestStatusesV52  {
+export interface RequestStatusesV53  {
     is(block: RuntimeCtx): boolean
-    get(block: Block, key1: number, key2: v52.H256): Promise<(v52.RequestStatus | undefined)>
-    getMany(block: Block, keys: [number, v52.H256][]): Promise<(v52.RequestStatus | undefined)[]>
-    getKeys(block: Block): Promise<[number, v52.H256][]>
-    getKeys(block: Block, key1: number): Promise<[number, v52.H256][]>
-    getKeys(block: Block, key1: number, key2: v52.H256): Promise<[number, v52.H256][]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[number, v52.H256][]>
-    getKeysPaged(pageSize: number, block: Block, key1: number): AsyncIterable<[number, v52.H256][]>
-    getKeysPaged(pageSize: number, block: Block, key1: number, key2: v52.H256): AsyncIterable<[number, v52.H256][]>
-    getPairs(block: Block): Promise<[k: [number, v52.H256], v: (v52.RequestStatus | undefined)][]>
-    getPairs(block: Block, key1: number): Promise<[k: [number, v52.H256], v: (v52.RequestStatus | undefined)][]>
-    getPairs(block: Block, key1: number, key2: v52.H256): Promise<[k: [number, v52.H256], v: (v52.RequestStatus | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [number, v52.H256], v: (v52.RequestStatus | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key1: number): AsyncIterable<[k: [number, v52.H256], v: (v52.RequestStatus | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key1: number, key2: v52.H256): AsyncIterable<[k: [number, v52.H256], v: (v52.RequestStatus | undefined)][]>
+    get(block: Block, key1: number, key2: v53.H256): Promise<(v53.RequestStatus | undefined)>
+    getMany(block: Block, keys: [number, v53.H256][]): Promise<(v53.RequestStatus | undefined)[]>
+    getKeys(block: Block): Promise<[number, v53.H256][]>
+    getKeys(block: Block, key1: number): Promise<[number, v53.H256][]>
+    getKeys(block: Block, key1: number, key2: v53.H256): Promise<[number, v53.H256][]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[number, v53.H256][]>
+    getKeysPaged(pageSize: number, block: Block, key1: number): AsyncIterable<[number, v53.H256][]>
+    getKeysPaged(pageSize: number, block: Block, key1: number, key2: v53.H256): AsyncIterable<[number, v53.H256][]>
+    getPairs(block: Block): Promise<[k: [number, v53.H256], v: (v53.RequestStatus | undefined)][]>
+    getPairs(block: Block, key1: number): Promise<[k: [number, v53.H256], v: (v53.RequestStatus | undefined)][]>
+    getPairs(block: Block, key1: number, key2: v53.H256): Promise<[k: [number, v53.H256], v: (v53.RequestStatus | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [number, v53.H256], v: (v53.RequestStatus | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: number): AsyncIterable<[k: [number, v53.H256], v: (v53.RequestStatus | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: number, key2: v53.H256): AsyncIterable<[k: [number, v53.H256], v: (v53.RequestStatus | undefined)][]>
 }
 
 export const requestSubmissionHeight =  {
     /**
      *  Requests submission height map (on substrate).
      */
-    v33: new StorageType('EthBridge.RequestSubmissionHeight', 'Default', [v33.BridgeNetworkId, v33.H256], v33.BlockNumber) as RequestSubmissionHeightV33,
+    v1: new StorageType('EthBridge.RequestSubmissionHeight', 'Default', [v1.NetworkId, v1.H256], v1.BlockNumber) as RequestSubmissionHeightV1,
 }
 
 /**
  *  Requests submission height map (on substrate).
  */
-export interface RequestSubmissionHeightV33  {
+export interface RequestSubmissionHeightV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.BlockNumber
-    get(block: Block, key1: v33.BridgeNetworkId, key2: v33.H256): Promise<(v33.BlockNumber | undefined)>
-    getMany(block: Block, keys: [v33.BridgeNetworkId, v33.H256][]): Promise<(v33.BlockNumber | undefined)[]>
-    getKeys(block: Block): Promise<[v33.BridgeNetworkId, v33.H256][]>
-    getKeys(block: Block, key1: v33.BridgeNetworkId): Promise<[v33.BridgeNetworkId, v33.H256][]>
-    getKeys(block: Block, key1: v33.BridgeNetworkId, key2: v33.H256): Promise<[v33.BridgeNetworkId, v33.H256][]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v33.BridgeNetworkId, v33.H256][]>
-    getKeysPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId): AsyncIterable<[v33.BridgeNetworkId, v33.H256][]>
-    getKeysPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId, key2: v33.H256): AsyncIterable<[v33.BridgeNetworkId, v33.H256][]>
-    getPairs(block: Block): Promise<[k: [v33.BridgeNetworkId, v33.H256], v: (v33.BlockNumber | undefined)][]>
-    getPairs(block: Block, key1: v33.BridgeNetworkId): Promise<[k: [v33.BridgeNetworkId, v33.H256], v: (v33.BlockNumber | undefined)][]>
-    getPairs(block: Block, key1: v33.BridgeNetworkId, key2: v33.H256): Promise<[k: [v33.BridgeNetworkId, v33.H256], v: (v33.BlockNumber | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v33.BridgeNetworkId, v33.H256], v: (v33.BlockNumber | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId): AsyncIterable<[k: [v33.BridgeNetworkId, v33.H256], v: (v33.BlockNumber | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId, key2: v33.H256): AsyncIterable<[k: [v33.BridgeNetworkId, v33.H256], v: (v33.BlockNumber | undefined)][]>
+    getDefault(block: Block): v1.BlockNumber
+    get(block: Block, key1: v1.NetworkId, key2: v1.H256): Promise<(v1.BlockNumber | undefined)>
+    getMany(block: Block, keys: [v1.NetworkId, v1.H256][]): Promise<(v1.BlockNumber | undefined)[]>
+    getKeys(block: Block): Promise<[v1.NetworkId, v1.H256][]>
+    getKeys(block: Block, key1: v1.NetworkId): Promise<[v1.NetworkId, v1.H256][]>
+    getKeys(block: Block, key1: v1.NetworkId, key2: v1.H256): Promise<[v1.NetworkId, v1.H256][]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v1.NetworkId, v1.H256][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v1.NetworkId): AsyncIterable<[v1.NetworkId, v1.H256][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v1.NetworkId, key2: v1.H256): AsyncIterable<[v1.NetworkId, v1.H256][]>
+    getPairs(block: Block): Promise<[k: [v1.NetworkId, v1.H256], v: (v1.BlockNumber | undefined)][]>
+    getPairs(block: Block, key1: v1.NetworkId): Promise<[k: [v1.NetworkId, v1.H256], v: (v1.BlockNumber | undefined)][]>
+    getPairs(block: Block, key1: v1.NetworkId, key2: v1.H256): Promise<[k: [v1.NetworkId, v1.H256], v: (v1.BlockNumber | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v1.NetworkId, v1.H256], v: (v1.BlockNumber | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v1.NetworkId): AsyncIterable<[k: [v1.NetworkId, v1.H256], v: (v1.BlockNumber | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v1.NetworkId, key2: v1.H256): AsyncIterable<[k: [v1.NetworkId, v1.H256], v: (v1.BlockNumber | undefined)][]>
 }
 
 export const requestApprovals =  {
     /**
      *  Outgoing requests approvals.
      */
-    v33: new StorageType('EthBridge.RequestApprovals', 'Default', [v33.BridgeNetworkId, v33.H256], sts.array(() => v33.SignatureParams)) as RequestApprovalsV33,
+    v1: new StorageType('EthBridge.RequestApprovals', 'Default', [v1.NetworkId, v1.H256], sts.array(() => v1.SignatureParams)) as RequestApprovalsV1,
 }
 
 /**
  *  Outgoing requests approvals.
  */
-export interface RequestApprovalsV33  {
+export interface RequestApprovalsV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.SignatureParams[]
-    get(block: Block, key1: v33.BridgeNetworkId, key2: v33.H256): Promise<(v33.SignatureParams[] | undefined)>
-    getMany(block: Block, keys: [v33.BridgeNetworkId, v33.H256][]): Promise<(v33.SignatureParams[] | undefined)[]>
-    getKeys(block: Block): Promise<[v33.BridgeNetworkId, v33.H256][]>
-    getKeys(block: Block, key1: v33.BridgeNetworkId): Promise<[v33.BridgeNetworkId, v33.H256][]>
-    getKeys(block: Block, key1: v33.BridgeNetworkId, key2: v33.H256): Promise<[v33.BridgeNetworkId, v33.H256][]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v33.BridgeNetworkId, v33.H256][]>
-    getKeysPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId): AsyncIterable<[v33.BridgeNetworkId, v33.H256][]>
-    getKeysPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId, key2: v33.H256): AsyncIterable<[v33.BridgeNetworkId, v33.H256][]>
-    getPairs(block: Block): Promise<[k: [v33.BridgeNetworkId, v33.H256], v: (v33.SignatureParams[] | undefined)][]>
-    getPairs(block: Block, key1: v33.BridgeNetworkId): Promise<[k: [v33.BridgeNetworkId, v33.H256], v: (v33.SignatureParams[] | undefined)][]>
-    getPairs(block: Block, key1: v33.BridgeNetworkId, key2: v33.H256): Promise<[k: [v33.BridgeNetworkId, v33.H256], v: (v33.SignatureParams[] | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v33.BridgeNetworkId, v33.H256], v: (v33.SignatureParams[] | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId): AsyncIterable<[k: [v33.BridgeNetworkId, v33.H256], v: (v33.SignatureParams[] | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId, key2: v33.H256): AsyncIterable<[k: [v33.BridgeNetworkId, v33.H256], v: (v33.SignatureParams[] | undefined)][]>
+    getDefault(block: Block): v1.SignatureParams[]
+    get(block: Block, key1: v1.NetworkId, key2: v1.H256): Promise<(v1.SignatureParams[] | undefined)>
+    getMany(block: Block, keys: [v1.NetworkId, v1.H256][]): Promise<(v1.SignatureParams[] | undefined)[]>
+    getKeys(block: Block): Promise<[v1.NetworkId, v1.H256][]>
+    getKeys(block: Block, key1: v1.NetworkId): Promise<[v1.NetworkId, v1.H256][]>
+    getKeys(block: Block, key1: v1.NetworkId, key2: v1.H256): Promise<[v1.NetworkId, v1.H256][]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v1.NetworkId, v1.H256][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v1.NetworkId): AsyncIterable<[v1.NetworkId, v1.H256][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v1.NetworkId, key2: v1.H256): AsyncIterable<[v1.NetworkId, v1.H256][]>
+    getPairs(block: Block): Promise<[k: [v1.NetworkId, v1.H256], v: (v1.SignatureParams[] | undefined)][]>
+    getPairs(block: Block, key1: v1.NetworkId): Promise<[k: [v1.NetworkId, v1.H256], v: (v1.SignatureParams[] | undefined)][]>
+    getPairs(block: Block, key1: v1.NetworkId, key2: v1.H256): Promise<[k: [v1.NetworkId, v1.H256], v: (v1.SignatureParams[] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v1.NetworkId, v1.H256], v: (v1.SignatureParams[] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v1.NetworkId): AsyncIterable<[k: [v1.NetworkId, v1.H256], v: (v1.SignatureParams[] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v1.NetworkId, key2: v1.H256): AsyncIterable<[k: [v1.NetworkId, v1.H256], v: (v1.SignatureParams[] | undefined)][]>
 }
 
 export const accountRequests =  {
     /**
      *  Requests made by an account.
      */
-    v33: new StorageType('EthBridge.AccountRequests', 'Default', [v33.AccountId], sts.array(() => sts.tuple(() => [v33.BridgeNetworkId, v33.H256]))) as AccountRequestsV33,
+    v1: new StorageType('EthBridge.AccountRequests', 'Default', [v1.AccountId], sts.array(() => sts.tuple(() => [v1.NetworkId, v1.H256]))) as AccountRequestsV1,
 }
 
 /**
  *  Requests made by an account.
  */
-export interface AccountRequestsV33  {
+export interface AccountRequestsV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): [v33.BridgeNetworkId, v33.H256][]
-    get(block: Block, key: v33.AccountId): Promise<([v33.BridgeNetworkId, v33.H256][] | undefined)>
-    getMany(block: Block, keys: v33.AccountId[]): Promise<([v33.BridgeNetworkId, v33.H256][] | undefined)[]>
-    getKeys(block: Block): Promise<v33.AccountId[]>
-    getKeys(block: Block, key: v33.AccountId): Promise<v33.AccountId[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.AccountId[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.AccountId): AsyncIterable<v33.AccountId[]>
-    getPairs(block: Block): Promise<[k: v33.AccountId, v: ([v33.BridgeNetworkId, v33.H256][] | undefined)][]>
-    getPairs(block: Block, key: v33.AccountId): Promise<[k: v33.AccountId, v: ([v33.BridgeNetworkId, v33.H256][] | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.AccountId, v: ([v33.BridgeNetworkId, v33.H256][] | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.AccountId): AsyncIterable<[k: v33.AccountId, v: ([v33.BridgeNetworkId, v33.H256][] | undefined)][]>
+    getDefault(block: Block): [v1.NetworkId, v1.H256][]
+    get(block: Block, key: v1.AccountId): Promise<([v1.NetworkId, v1.H256][] | undefined)>
+    getMany(block: Block, keys: v1.AccountId[]): Promise<([v1.NetworkId, v1.H256][] | undefined)[]>
+    getKeys(block: Block): Promise<v1.AccountId[]>
+    getKeys(block: Block, key: v1.AccountId): Promise<v1.AccountId[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.AccountId[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.AccountId): AsyncIterable<v1.AccountId[]>
+    getPairs(block: Block): Promise<[k: v1.AccountId, v: ([v1.NetworkId, v1.H256][] | undefined)][]>
+    getPairs(block: Block, key: v1.AccountId): Promise<[k: v1.AccountId, v: ([v1.NetworkId, v1.H256][] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.AccountId, v: ([v1.NetworkId, v1.H256][] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.AccountId): AsyncIterable<[k: v1.AccountId, v: ([v1.NetworkId, v1.H256][] | undefined)][]>
 }
 
 export const registeredAsset =  {
     /**
      *  Registered asset kind.
      */
-    v33: new StorageType('EthBridge.RegisteredAsset', 'Optional', [v33.BridgeNetworkId, v33.AssetId], v33.AssetKind) as RegisteredAssetV33,
+    v1: new StorageType('EthBridge.RegisteredAsset', 'Optional', [v1.NetworkId, v1.AssetId], v1.AssetKind) as RegisteredAssetV1,
     /**
      *  Registered asset kind.
      */
@@ -286,22 +288,22 @@ export const registeredAsset =  {
 /**
  *  Registered asset kind.
  */
-export interface RegisteredAssetV33  {
+export interface RegisteredAssetV1  {
     is(block: RuntimeCtx): boolean
-    get(block: Block, key1: v33.BridgeNetworkId, key2: v33.AssetId): Promise<(v33.AssetKind | undefined)>
-    getMany(block: Block, keys: [v33.BridgeNetworkId, v33.AssetId][]): Promise<(v33.AssetKind | undefined)[]>
-    getKeys(block: Block): Promise<[v33.BridgeNetworkId, v33.AssetId][]>
-    getKeys(block: Block, key1: v33.BridgeNetworkId): Promise<[v33.BridgeNetworkId, v33.AssetId][]>
-    getKeys(block: Block, key1: v33.BridgeNetworkId, key2: v33.AssetId): Promise<[v33.BridgeNetworkId, v33.AssetId][]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v33.BridgeNetworkId, v33.AssetId][]>
-    getKeysPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId): AsyncIterable<[v33.BridgeNetworkId, v33.AssetId][]>
-    getKeysPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId, key2: v33.AssetId): AsyncIterable<[v33.BridgeNetworkId, v33.AssetId][]>
-    getPairs(block: Block): Promise<[k: [v33.BridgeNetworkId, v33.AssetId], v: (v33.AssetKind | undefined)][]>
-    getPairs(block: Block, key1: v33.BridgeNetworkId): Promise<[k: [v33.BridgeNetworkId, v33.AssetId], v: (v33.AssetKind | undefined)][]>
-    getPairs(block: Block, key1: v33.BridgeNetworkId, key2: v33.AssetId): Promise<[k: [v33.BridgeNetworkId, v33.AssetId], v: (v33.AssetKind | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v33.BridgeNetworkId, v33.AssetId], v: (v33.AssetKind | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId): AsyncIterable<[k: [v33.BridgeNetworkId, v33.AssetId], v: (v33.AssetKind | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId, key2: v33.AssetId): AsyncIterable<[k: [v33.BridgeNetworkId, v33.AssetId], v: (v33.AssetKind | undefined)][]>
+    get(block: Block, key1: v1.NetworkId, key2: v1.AssetId): Promise<(v1.AssetKind | undefined)>
+    getMany(block: Block, keys: [v1.NetworkId, v1.AssetId][]): Promise<(v1.AssetKind | undefined)[]>
+    getKeys(block: Block): Promise<[v1.NetworkId, v1.AssetId][]>
+    getKeys(block: Block, key1: v1.NetworkId): Promise<[v1.NetworkId, v1.AssetId][]>
+    getKeys(block: Block, key1: v1.NetworkId, key2: v1.AssetId): Promise<[v1.NetworkId, v1.AssetId][]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v1.NetworkId, v1.AssetId][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v1.NetworkId): AsyncIterable<[v1.NetworkId, v1.AssetId][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v1.NetworkId, key2: v1.AssetId): AsyncIterable<[v1.NetworkId, v1.AssetId][]>
+    getPairs(block: Block): Promise<[k: [v1.NetworkId, v1.AssetId], v: (v1.AssetKind | undefined)][]>
+    getPairs(block: Block, key1: v1.NetworkId): Promise<[k: [v1.NetworkId, v1.AssetId], v: (v1.AssetKind | undefined)][]>
+    getPairs(block: Block, key1: v1.NetworkId, key2: v1.AssetId): Promise<[k: [v1.NetworkId, v1.AssetId], v: (v1.AssetKind | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v1.NetworkId, v1.AssetId], v: (v1.AssetKind | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v1.NetworkId): AsyncIterable<[k: [v1.NetworkId, v1.AssetId], v: (v1.AssetKind | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v1.NetworkId, key2: v1.AssetId): AsyncIterable<[k: [v1.NetworkId, v1.AssetId], v: (v1.AssetKind | undefined)][]>
 }
 
 /**
@@ -330,7 +332,7 @@ export const sidechainAssetPrecision =  {
      *  Precision (decimals) of a registered sidechain asset. Should be the same as in the ERC-20
      *  contract.
      */
-    v33: new StorageType('EthBridge.SidechainAssetPrecision', 'Default', [v33.BridgeNetworkId, v33.AssetId], v33.BalancePrecision) as SidechainAssetPrecisionV33,
+    v1: new StorageType('EthBridge.SidechainAssetPrecision', 'Default', [v1.NetworkId, v1.AssetId], v1.BalancePrecision) as SidechainAssetPrecisionV1,
     /**
      *  Precision (decimals) of a registered sidechain asset. Should be the same as in the ERC-20
      *  contract.
@@ -342,23 +344,23 @@ export const sidechainAssetPrecision =  {
  *  Precision (decimals) of a registered sidechain asset. Should be the same as in the ERC-20
  *  contract.
  */
-export interface SidechainAssetPrecisionV33  {
+export interface SidechainAssetPrecisionV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.BalancePrecision
-    get(block: Block, key1: v33.BridgeNetworkId, key2: v33.AssetId): Promise<(v33.BalancePrecision | undefined)>
-    getMany(block: Block, keys: [v33.BridgeNetworkId, v33.AssetId][]): Promise<(v33.BalancePrecision | undefined)[]>
-    getKeys(block: Block): Promise<[v33.BridgeNetworkId, v33.AssetId][]>
-    getKeys(block: Block, key1: v33.BridgeNetworkId): Promise<[v33.BridgeNetworkId, v33.AssetId][]>
-    getKeys(block: Block, key1: v33.BridgeNetworkId, key2: v33.AssetId): Promise<[v33.BridgeNetworkId, v33.AssetId][]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v33.BridgeNetworkId, v33.AssetId][]>
-    getKeysPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId): AsyncIterable<[v33.BridgeNetworkId, v33.AssetId][]>
-    getKeysPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId, key2: v33.AssetId): AsyncIterable<[v33.BridgeNetworkId, v33.AssetId][]>
-    getPairs(block: Block): Promise<[k: [v33.BridgeNetworkId, v33.AssetId], v: (v33.BalancePrecision | undefined)][]>
-    getPairs(block: Block, key1: v33.BridgeNetworkId): Promise<[k: [v33.BridgeNetworkId, v33.AssetId], v: (v33.BalancePrecision | undefined)][]>
-    getPairs(block: Block, key1: v33.BridgeNetworkId, key2: v33.AssetId): Promise<[k: [v33.BridgeNetworkId, v33.AssetId], v: (v33.BalancePrecision | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v33.BridgeNetworkId, v33.AssetId], v: (v33.BalancePrecision | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId): AsyncIterable<[k: [v33.BridgeNetworkId, v33.AssetId], v: (v33.BalancePrecision | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId, key2: v33.AssetId): AsyncIterable<[k: [v33.BridgeNetworkId, v33.AssetId], v: (v33.BalancePrecision | undefined)][]>
+    getDefault(block: Block): v1.BalancePrecision
+    get(block: Block, key1: v1.NetworkId, key2: v1.AssetId): Promise<(v1.BalancePrecision | undefined)>
+    getMany(block: Block, keys: [v1.NetworkId, v1.AssetId][]): Promise<(v1.BalancePrecision | undefined)[]>
+    getKeys(block: Block): Promise<[v1.NetworkId, v1.AssetId][]>
+    getKeys(block: Block, key1: v1.NetworkId): Promise<[v1.NetworkId, v1.AssetId][]>
+    getKeys(block: Block, key1: v1.NetworkId, key2: v1.AssetId): Promise<[v1.NetworkId, v1.AssetId][]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v1.NetworkId, v1.AssetId][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v1.NetworkId): AsyncIterable<[v1.NetworkId, v1.AssetId][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v1.NetworkId, key2: v1.AssetId): AsyncIterable<[v1.NetworkId, v1.AssetId][]>
+    getPairs(block: Block): Promise<[k: [v1.NetworkId, v1.AssetId], v: (v1.BalancePrecision | undefined)][]>
+    getPairs(block: Block, key1: v1.NetworkId): Promise<[k: [v1.NetworkId, v1.AssetId], v: (v1.BalancePrecision | undefined)][]>
+    getPairs(block: Block, key1: v1.NetworkId, key2: v1.AssetId): Promise<[k: [v1.NetworkId, v1.AssetId], v: (v1.BalancePrecision | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v1.NetworkId, v1.AssetId], v: (v1.BalancePrecision | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v1.NetworkId): AsyncIterable<[k: [v1.NetworkId, v1.AssetId], v: (v1.BalancePrecision | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v1.NetworkId, key2: v1.AssetId): AsyncIterable<[k: [v1.NetworkId, v1.AssetId], v: (v1.BalancePrecision | undefined)][]>
 }
 
 /**
@@ -388,7 +390,7 @@ export const registeredSidechainAsset =  {
     /**
      *  Registered token `AssetId` on Thischain.
      */
-    v33: new StorageType('EthBridge.RegisteredSidechainAsset', 'Optional', [v33.BridgeNetworkId, v33.EthAddress], v33.AssetId) as RegisteredSidechainAssetV33,
+    v1: new StorageType('EthBridge.RegisteredSidechainAsset', 'Optional', [v1.NetworkId, v1.Address], v1.AssetId) as RegisteredSidechainAssetV1,
     /**
      *  Registered token `AssetId` on Thischain.
      */
@@ -398,22 +400,22 @@ export const registeredSidechainAsset =  {
 /**
  *  Registered token `AssetId` on Thischain.
  */
-export interface RegisteredSidechainAssetV33  {
+export interface RegisteredSidechainAssetV1  {
     is(block: RuntimeCtx): boolean
-    get(block: Block, key1: v33.BridgeNetworkId, key2: v33.EthAddress): Promise<(v33.AssetId | undefined)>
-    getMany(block: Block, keys: [v33.BridgeNetworkId, v33.EthAddress][]): Promise<(v33.AssetId | undefined)[]>
-    getKeys(block: Block): Promise<[v33.BridgeNetworkId, v33.EthAddress][]>
-    getKeys(block: Block, key1: v33.BridgeNetworkId): Promise<[v33.BridgeNetworkId, v33.EthAddress][]>
-    getKeys(block: Block, key1: v33.BridgeNetworkId, key2: v33.EthAddress): Promise<[v33.BridgeNetworkId, v33.EthAddress][]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v33.BridgeNetworkId, v33.EthAddress][]>
-    getKeysPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId): AsyncIterable<[v33.BridgeNetworkId, v33.EthAddress][]>
-    getKeysPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId, key2: v33.EthAddress): AsyncIterable<[v33.BridgeNetworkId, v33.EthAddress][]>
-    getPairs(block: Block): Promise<[k: [v33.BridgeNetworkId, v33.EthAddress], v: (v33.AssetId | undefined)][]>
-    getPairs(block: Block, key1: v33.BridgeNetworkId): Promise<[k: [v33.BridgeNetworkId, v33.EthAddress], v: (v33.AssetId | undefined)][]>
-    getPairs(block: Block, key1: v33.BridgeNetworkId, key2: v33.EthAddress): Promise<[k: [v33.BridgeNetworkId, v33.EthAddress], v: (v33.AssetId | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v33.BridgeNetworkId, v33.EthAddress], v: (v33.AssetId | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId): AsyncIterable<[k: [v33.BridgeNetworkId, v33.EthAddress], v: (v33.AssetId | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId, key2: v33.EthAddress): AsyncIterable<[k: [v33.BridgeNetworkId, v33.EthAddress], v: (v33.AssetId | undefined)][]>
+    get(block: Block, key1: v1.NetworkId, key2: v1.Address): Promise<(v1.AssetId | undefined)>
+    getMany(block: Block, keys: [v1.NetworkId, v1.Address][]): Promise<(v1.AssetId | undefined)[]>
+    getKeys(block: Block): Promise<[v1.NetworkId, v1.Address][]>
+    getKeys(block: Block, key1: v1.NetworkId): Promise<[v1.NetworkId, v1.Address][]>
+    getKeys(block: Block, key1: v1.NetworkId, key2: v1.Address): Promise<[v1.NetworkId, v1.Address][]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v1.NetworkId, v1.Address][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v1.NetworkId): AsyncIterable<[v1.NetworkId, v1.Address][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v1.NetworkId, key2: v1.Address): AsyncIterable<[v1.NetworkId, v1.Address][]>
+    getPairs(block: Block): Promise<[k: [v1.NetworkId, v1.Address], v: (v1.AssetId | undefined)][]>
+    getPairs(block: Block, key1: v1.NetworkId): Promise<[k: [v1.NetworkId, v1.Address], v: (v1.AssetId | undefined)][]>
+    getPairs(block: Block, key1: v1.NetworkId, key2: v1.Address): Promise<[k: [v1.NetworkId, v1.Address], v: (v1.AssetId | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v1.NetworkId, v1.Address], v: (v1.AssetId | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v1.NetworkId): AsyncIterable<[k: [v1.NetworkId, v1.Address], v: (v1.AssetId | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v1.NetworkId, key2: v1.Address): AsyncIterable<[k: [v1.NetworkId, v1.Address], v: (v1.AssetId | undefined)][]>
 }
 
 /**
@@ -441,7 +443,7 @@ export const registeredSidechainToken =  {
     /**
      *  Registered asset address on Sidechain.
      */
-    v33: new StorageType('EthBridge.RegisteredSidechainToken', 'Optional', [v33.BridgeNetworkId, v33.AssetId], v33.EthAddress) as RegisteredSidechainTokenV33,
+    v1: new StorageType('EthBridge.RegisteredSidechainToken', 'Optional', [v1.NetworkId, v1.AssetId], v1.Address) as RegisteredSidechainTokenV1,
     /**
      *  Registered asset address on Sidechain.
      */
@@ -451,22 +453,22 @@ export const registeredSidechainToken =  {
 /**
  *  Registered asset address on Sidechain.
  */
-export interface RegisteredSidechainTokenV33  {
+export interface RegisteredSidechainTokenV1  {
     is(block: RuntimeCtx): boolean
-    get(block: Block, key1: v33.BridgeNetworkId, key2: v33.AssetId): Promise<(v33.EthAddress | undefined)>
-    getMany(block: Block, keys: [v33.BridgeNetworkId, v33.AssetId][]): Promise<(v33.EthAddress | undefined)[]>
-    getKeys(block: Block): Promise<[v33.BridgeNetworkId, v33.AssetId][]>
-    getKeys(block: Block, key1: v33.BridgeNetworkId): Promise<[v33.BridgeNetworkId, v33.AssetId][]>
-    getKeys(block: Block, key1: v33.BridgeNetworkId, key2: v33.AssetId): Promise<[v33.BridgeNetworkId, v33.AssetId][]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v33.BridgeNetworkId, v33.AssetId][]>
-    getKeysPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId): AsyncIterable<[v33.BridgeNetworkId, v33.AssetId][]>
-    getKeysPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId, key2: v33.AssetId): AsyncIterable<[v33.BridgeNetworkId, v33.AssetId][]>
-    getPairs(block: Block): Promise<[k: [v33.BridgeNetworkId, v33.AssetId], v: (v33.EthAddress | undefined)][]>
-    getPairs(block: Block, key1: v33.BridgeNetworkId): Promise<[k: [v33.BridgeNetworkId, v33.AssetId], v: (v33.EthAddress | undefined)][]>
-    getPairs(block: Block, key1: v33.BridgeNetworkId, key2: v33.AssetId): Promise<[k: [v33.BridgeNetworkId, v33.AssetId], v: (v33.EthAddress | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v33.BridgeNetworkId, v33.AssetId], v: (v33.EthAddress | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId): AsyncIterable<[k: [v33.BridgeNetworkId, v33.AssetId], v: (v33.EthAddress | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId, key2: v33.AssetId): AsyncIterable<[k: [v33.BridgeNetworkId, v33.AssetId], v: (v33.EthAddress | undefined)][]>
+    get(block: Block, key1: v1.NetworkId, key2: v1.AssetId): Promise<(v1.Address | undefined)>
+    getMany(block: Block, keys: [v1.NetworkId, v1.AssetId][]): Promise<(v1.Address | undefined)[]>
+    getKeys(block: Block): Promise<[v1.NetworkId, v1.AssetId][]>
+    getKeys(block: Block, key1: v1.NetworkId): Promise<[v1.NetworkId, v1.AssetId][]>
+    getKeys(block: Block, key1: v1.NetworkId, key2: v1.AssetId): Promise<[v1.NetworkId, v1.AssetId][]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v1.NetworkId, v1.AssetId][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v1.NetworkId): AsyncIterable<[v1.NetworkId, v1.AssetId][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v1.NetworkId, key2: v1.AssetId): AsyncIterable<[v1.NetworkId, v1.AssetId][]>
+    getPairs(block: Block): Promise<[k: [v1.NetworkId, v1.AssetId], v: (v1.Address | undefined)][]>
+    getPairs(block: Block, key1: v1.NetworkId): Promise<[k: [v1.NetworkId, v1.AssetId], v: (v1.Address | undefined)][]>
+    getPairs(block: Block, key1: v1.NetworkId, key2: v1.AssetId): Promise<[k: [v1.NetworkId, v1.AssetId], v: (v1.Address | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v1.NetworkId, v1.AssetId], v: (v1.Address | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v1.NetworkId): AsyncIterable<[k: [v1.NetworkId, v1.AssetId], v: (v1.Address | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v1.NetworkId, key2: v1.AssetId): AsyncIterable<[k: [v1.NetworkId, v1.AssetId], v: (v1.Address | undefined)][]>
 }
 
 /**
@@ -494,72 +496,72 @@ export const peers =  {
     /**
      *  Network peers set.
      */
-    v33: new StorageType('EthBridge.Peers', 'Default', [v33.BridgeNetworkId], sts.array(() => v33.AccountId)) as PeersV33,
+    v1: new StorageType('EthBridge.Peers', 'Default', [v1.NetworkId], sts.array(() => v1.AccountId)) as PeersV1,
 }
 
 /**
  *  Network peers set.
  */
-export interface PeersV33  {
+export interface PeersV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.AccountId[]
-    get(block: Block, key: v33.BridgeNetworkId): Promise<(v33.AccountId[] | undefined)>
-    getMany(block: Block, keys: v33.BridgeNetworkId[]): Promise<(v33.AccountId[] | undefined)[]>
-    getKeys(block: Block): Promise<v33.BridgeNetworkId[]>
-    getKeys(block: Block, key: v33.BridgeNetworkId): Promise<v33.BridgeNetworkId[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.BridgeNetworkId[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.BridgeNetworkId): AsyncIterable<v33.BridgeNetworkId[]>
-    getPairs(block: Block): Promise<[k: v33.BridgeNetworkId, v: (v33.AccountId[] | undefined)][]>
-    getPairs(block: Block, key: v33.BridgeNetworkId): Promise<[k: v33.BridgeNetworkId, v: (v33.AccountId[] | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.BridgeNetworkId, v: (v33.AccountId[] | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.BridgeNetworkId): AsyncIterable<[k: v33.BridgeNetworkId, v: (v33.AccountId[] | undefined)][]>
+    getDefault(block: Block): v1.AccountId[]
+    get(block: Block, key: v1.NetworkId): Promise<(v1.AccountId[] | undefined)>
+    getMany(block: Block, keys: v1.NetworkId[]): Promise<(v1.AccountId[] | undefined)[]>
+    getKeys(block: Block): Promise<v1.NetworkId[]>
+    getKeys(block: Block, key: v1.NetworkId): Promise<v1.NetworkId[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.NetworkId[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.NetworkId): AsyncIterable<v1.NetworkId[]>
+    getPairs(block: Block): Promise<[k: v1.NetworkId, v: (v1.AccountId[] | undefined)][]>
+    getPairs(block: Block, key: v1.NetworkId): Promise<[k: v1.NetworkId, v: (v1.AccountId[] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.NetworkId, v: (v1.AccountId[] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.NetworkId): AsyncIterable<[k: v1.NetworkId, v: (v1.AccountId[] | undefined)][]>
 }
 
 export const pendingPeer =  {
     /**
      *  Network pending (being added/removed) peer.
      */
-    v33: new StorageType('EthBridge.PendingPeer', 'Optional', [v33.BridgeNetworkId], v33.AccountId) as PendingPeerV33,
+    v1: new StorageType('EthBridge.PendingPeer', 'Optional', [v1.NetworkId], v1.AccountId) as PendingPeerV1,
 }
 
 /**
  *  Network pending (being added/removed) peer.
  */
-export interface PendingPeerV33  {
+export interface PendingPeerV1  {
     is(block: RuntimeCtx): boolean
-    get(block: Block, key: v33.BridgeNetworkId): Promise<(v33.AccountId | undefined)>
-    getMany(block: Block, keys: v33.BridgeNetworkId[]): Promise<(v33.AccountId | undefined)[]>
-    getKeys(block: Block): Promise<v33.BridgeNetworkId[]>
-    getKeys(block: Block, key: v33.BridgeNetworkId): Promise<v33.BridgeNetworkId[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.BridgeNetworkId[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.BridgeNetworkId): AsyncIterable<v33.BridgeNetworkId[]>
-    getPairs(block: Block): Promise<[k: v33.BridgeNetworkId, v: (v33.AccountId | undefined)][]>
-    getPairs(block: Block, key: v33.BridgeNetworkId): Promise<[k: v33.BridgeNetworkId, v: (v33.AccountId | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.BridgeNetworkId, v: (v33.AccountId | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.BridgeNetworkId): AsyncIterable<[k: v33.BridgeNetworkId, v: (v33.AccountId | undefined)][]>
+    get(block: Block, key: v1.NetworkId): Promise<(v1.AccountId | undefined)>
+    getMany(block: Block, keys: v1.NetworkId[]): Promise<(v1.AccountId | undefined)[]>
+    getKeys(block: Block): Promise<v1.NetworkId[]>
+    getKeys(block: Block, key: v1.NetworkId): Promise<v1.NetworkId[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.NetworkId[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.NetworkId): AsyncIterable<v1.NetworkId[]>
+    getPairs(block: Block): Promise<[k: v1.NetworkId, v: (v1.AccountId | undefined)][]>
+    getPairs(block: Block, key: v1.NetworkId): Promise<[k: v1.NetworkId, v: (v1.AccountId | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.NetworkId, v: (v1.AccountId | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.NetworkId): AsyncIterable<[k: v1.NetworkId, v: (v1.AccountId | undefined)][]>
 }
 
 export const pendingEthPeersSync =  {
     /**
      *  Used for compatibility with XOR and VAL contracts.
      */
-    v33: new StorageType('EthBridge.PendingEthPeersSync', 'Default', [], v33.EthPeersSync) as PendingEthPeersSyncV33,
+    v1: new StorageType('EthBridge.PendingEthPeersSync', 'Default', [], v1.EthPeersSync) as PendingEthPeersSyncV1,
 }
 
 /**
  *  Used for compatibility with XOR and VAL contracts.
  */
-export interface PendingEthPeersSyncV33  {
+export interface PendingEthPeersSyncV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.EthPeersSync
-    get(block: Block): Promise<(v33.EthPeersSync | undefined)>
+    getDefault(block: Block): v1.EthPeersSync
+    get(block: Block): Promise<(v1.EthPeersSync | undefined)>
 }
 
 export const peerAccountId =  {
     /**
      *  Peer account ID on Thischain.
      */
-    v33: new StorageType('EthBridge.PeerAccountId', 'Default', [v33.BridgeNetworkId, v33.EthAddress], v33.AccountId) as PeerAccountIdV33,
+    v1: new StorageType('EthBridge.PeerAccountId', 'Default', [v1.NetworkId, v1.Address], v1.AccountId) as PeerAccountIdV1,
     /**
      *  Peer account ID on Thischain.
      */
@@ -569,23 +571,23 @@ export const peerAccountId =  {
 /**
  *  Peer account ID on Thischain.
  */
-export interface PeerAccountIdV33  {
+export interface PeerAccountIdV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.AccountId
-    get(block: Block, key1: v33.BridgeNetworkId, key2: v33.EthAddress): Promise<(v33.AccountId | undefined)>
-    getMany(block: Block, keys: [v33.BridgeNetworkId, v33.EthAddress][]): Promise<(v33.AccountId | undefined)[]>
-    getKeys(block: Block): Promise<[v33.BridgeNetworkId, v33.EthAddress][]>
-    getKeys(block: Block, key1: v33.BridgeNetworkId): Promise<[v33.BridgeNetworkId, v33.EthAddress][]>
-    getKeys(block: Block, key1: v33.BridgeNetworkId, key2: v33.EthAddress): Promise<[v33.BridgeNetworkId, v33.EthAddress][]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v33.BridgeNetworkId, v33.EthAddress][]>
-    getKeysPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId): AsyncIterable<[v33.BridgeNetworkId, v33.EthAddress][]>
-    getKeysPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId, key2: v33.EthAddress): AsyncIterable<[v33.BridgeNetworkId, v33.EthAddress][]>
-    getPairs(block: Block): Promise<[k: [v33.BridgeNetworkId, v33.EthAddress], v: (v33.AccountId | undefined)][]>
-    getPairs(block: Block, key1: v33.BridgeNetworkId): Promise<[k: [v33.BridgeNetworkId, v33.EthAddress], v: (v33.AccountId | undefined)][]>
-    getPairs(block: Block, key1: v33.BridgeNetworkId, key2: v33.EthAddress): Promise<[k: [v33.BridgeNetworkId, v33.EthAddress], v: (v33.AccountId | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v33.BridgeNetworkId, v33.EthAddress], v: (v33.AccountId | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId): AsyncIterable<[k: [v33.BridgeNetworkId, v33.EthAddress], v: (v33.AccountId | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId, key2: v33.EthAddress): AsyncIterable<[k: [v33.BridgeNetworkId, v33.EthAddress], v: (v33.AccountId | undefined)][]>
+    getDefault(block: Block): v1.AccountId
+    get(block: Block, key1: v1.NetworkId, key2: v1.Address): Promise<(v1.AccountId | undefined)>
+    getMany(block: Block, keys: [v1.NetworkId, v1.Address][]): Promise<(v1.AccountId | undefined)[]>
+    getKeys(block: Block): Promise<[v1.NetworkId, v1.Address][]>
+    getKeys(block: Block, key1: v1.NetworkId): Promise<[v1.NetworkId, v1.Address][]>
+    getKeys(block: Block, key1: v1.NetworkId, key2: v1.Address): Promise<[v1.NetworkId, v1.Address][]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v1.NetworkId, v1.Address][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v1.NetworkId): AsyncIterable<[v1.NetworkId, v1.Address][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v1.NetworkId, key2: v1.Address): AsyncIterable<[v1.NetworkId, v1.Address][]>
+    getPairs(block: Block): Promise<[k: [v1.NetworkId, v1.Address], v: (v1.AccountId | undefined)][]>
+    getPairs(block: Block, key1: v1.NetworkId): Promise<[k: [v1.NetworkId, v1.Address], v: (v1.AccountId | undefined)][]>
+    getPairs(block: Block, key1: v1.NetworkId, key2: v1.Address): Promise<[k: [v1.NetworkId, v1.Address], v: (v1.AccountId | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v1.NetworkId, v1.Address], v: (v1.AccountId | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v1.NetworkId): AsyncIterable<[k: [v1.NetworkId, v1.Address], v: (v1.AccountId | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v1.NetworkId, key2: v1.Address): AsyncIterable<[k: [v1.NetworkId, v1.Address], v: (v1.AccountId | undefined)][]>
 }
 
 /**
@@ -613,60 +615,60 @@ export const peerAddress =  {
     /**
      *  Peer address on Sidechain.
      */
-    v33: new StorageType('EthBridge.PeerAddress', 'Default', [v33.BridgeNetworkId, v33.AccountId], v33.EthAddress) as PeerAddressV33,
+    v1: new StorageType('EthBridge.PeerAddress', 'Default', [v1.NetworkId, v1.AccountId], v1.Address) as PeerAddressV1,
 }
 
 /**
  *  Peer address on Sidechain.
  */
-export interface PeerAddressV33  {
+export interface PeerAddressV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.EthAddress
-    get(block: Block, key1: v33.BridgeNetworkId, key2: v33.AccountId): Promise<(v33.EthAddress | undefined)>
-    getMany(block: Block, keys: [v33.BridgeNetworkId, v33.AccountId][]): Promise<(v33.EthAddress | undefined)[]>
-    getKeys(block: Block): Promise<[v33.BridgeNetworkId, v33.AccountId][]>
-    getKeys(block: Block, key1: v33.BridgeNetworkId): Promise<[v33.BridgeNetworkId, v33.AccountId][]>
-    getKeys(block: Block, key1: v33.BridgeNetworkId, key2: v33.AccountId): Promise<[v33.BridgeNetworkId, v33.AccountId][]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v33.BridgeNetworkId, v33.AccountId][]>
-    getKeysPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId): AsyncIterable<[v33.BridgeNetworkId, v33.AccountId][]>
-    getKeysPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId, key2: v33.AccountId): AsyncIterable<[v33.BridgeNetworkId, v33.AccountId][]>
-    getPairs(block: Block): Promise<[k: [v33.BridgeNetworkId, v33.AccountId], v: (v33.EthAddress | undefined)][]>
-    getPairs(block: Block, key1: v33.BridgeNetworkId): Promise<[k: [v33.BridgeNetworkId, v33.AccountId], v: (v33.EthAddress | undefined)][]>
-    getPairs(block: Block, key1: v33.BridgeNetworkId, key2: v33.AccountId): Promise<[k: [v33.BridgeNetworkId, v33.AccountId], v: (v33.EthAddress | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v33.BridgeNetworkId, v33.AccountId], v: (v33.EthAddress | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId): AsyncIterable<[k: [v33.BridgeNetworkId, v33.AccountId], v: (v33.EthAddress | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key1: v33.BridgeNetworkId, key2: v33.AccountId): AsyncIterable<[k: [v33.BridgeNetworkId, v33.AccountId], v: (v33.EthAddress | undefined)][]>
+    getDefault(block: Block): v1.Address
+    get(block: Block, key1: v1.NetworkId, key2: v1.AccountId): Promise<(v1.Address | undefined)>
+    getMany(block: Block, keys: [v1.NetworkId, v1.AccountId][]): Promise<(v1.Address | undefined)[]>
+    getKeys(block: Block): Promise<[v1.NetworkId, v1.AccountId][]>
+    getKeys(block: Block, key1: v1.NetworkId): Promise<[v1.NetworkId, v1.AccountId][]>
+    getKeys(block: Block, key1: v1.NetworkId, key2: v1.AccountId): Promise<[v1.NetworkId, v1.AccountId][]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<[v1.NetworkId, v1.AccountId][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v1.NetworkId): AsyncIterable<[v1.NetworkId, v1.AccountId][]>
+    getKeysPaged(pageSize: number, block: Block, key1: v1.NetworkId, key2: v1.AccountId): AsyncIterable<[v1.NetworkId, v1.AccountId][]>
+    getPairs(block: Block): Promise<[k: [v1.NetworkId, v1.AccountId], v: (v1.Address | undefined)][]>
+    getPairs(block: Block, key1: v1.NetworkId): Promise<[k: [v1.NetworkId, v1.AccountId], v: (v1.Address | undefined)][]>
+    getPairs(block: Block, key1: v1.NetworkId, key2: v1.AccountId): Promise<[k: [v1.NetworkId, v1.AccountId], v: (v1.Address | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: [v1.NetworkId, v1.AccountId], v: (v1.Address | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v1.NetworkId): AsyncIterable<[k: [v1.NetworkId, v1.AccountId], v: (v1.Address | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key1: v1.NetworkId, key2: v1.AccountId): AsyncIterable<[k: [v1.NetworkId, v1.AccountId], v: (v1.Address | undefined)][]>
 }
 
 export const bridgeAccount =  {
     /**
      *  Multi-signature bridge peers' account. `None` if there is no account and network with the given ID.
      */
-    v33: new StorageType('EthBridge.BridgeAccount', 'Optional', [v33.BridgeNetworkId], v33.AccountId) as BridgeAccountV33,
+    v1: new StorageType('EthBridge.BridgeAccount', 'Optional', [v1.NetworkId], v1.AccountId) as BridgeAccountV1,
 }
 
 /**
  *  Multi-signature bridge peers' account. `None` if there is no account and network with the given ID.
  */
-export interface BridgeAccountV33  {
+export interface BridgeAccountV1  {
     is(block: RuntimeCtx): boolean
-    get(block: Block, key: v33.BridgeNetworkId): Promise<(v33.AccountId | undefined)>
-    getMany(block: Block, keys: v33.BridgeNetworkId[]): Promise<(v33.AccountId | undefined)[]>
-    getKeys(block: Block): Promise<v33.BridgeNetworkId[]>
-    getKeys(block: Block, key: v33.BridgeNetworkId): Promise<v33.BridgeNetworkId[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.BridgeNetworkId[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.BridgeNetworkId): AsyncIterable<v33.BridgeNetworkId[]>
-    getPairs(block: Block): Promise<[k: v33.BridgeNetworkId, v: (v33.AccountId | undefined)][]>
-    getPairs(block: Block, key: v33.BridgeNetworkId): Promise<[k: v33.BridgeNetworkId, v: (v33.AccountId | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.BridgeNetworkId, v: (v33.AccountId | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.BridgeNetworkId): AsyncIterable<[k: v33.BridgeNetworkId, v: (v33.AccountId | undefined)][]>
+    get(block: Block, key: v1.NetworkId): Promise<(v1.AccountId | undefined)>
+    getMany(block: Block, keys: v1.NetworkId[]): Promise<(v1.AccountId | undefined)[]>
+    getKeys(block: Block): Promise<v1.NetworkId[]>
+    getKeys(block: Block, key: v1.NetworkId): Promise<v1.NetworkId[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.NetworkId[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.NetworkId): AsyncIterable<v1.NetworkId[]>
+    getPairs(block: Block): Promise<[k: v1.NetworkId, v: (v1.AccountId | undefined)][]>
+    getPairs(block: Block, key: v1.NetworkId): Promise<[k: v1.NetworkId, v: (v1.AccountId | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.NetworkId, v: (v1.AccountId | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.NetworkId): AsyncIterable<[k: v1.NetworkId, v: (v1.AccountId | undefined)][]>
 }
 
 export const authorityAccount =  {
     /**
      *  Thischain authority account.
      */
-    v33: new StorageType('EthBridge.AuthorityAccount', 'Default', [], v33.AccountId) as AuthorityAccountV33,
+    v1: new StorageType('EthBridge.AuthorityAccount', 'Default', [], v1.AccountId) as AuthorityAccountV1,
     /**
      *  Thischain authority account.
      */
@@ -676,10 +678,10 @@ export const authorityAccount =  {
 /**
  *  Thischain authority account.
  */
-export interface AuthorityAccountV33  {
+export interface AuthorityAccountV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.AccountId
-    get(block: Block): Promise<(v33.AccountId | undefined)>
+    getDefault(block: Block): v1.AccountId
+    get(block: Block): Promise<(v1.AccountId | undefined)>
 }
 
 /**
@@ -694,97 +696,115 @@ export const bridgeStatuses =  {
     /**
      *  Bridge status.
      */
-    v33: new StorageType('EthBridge.BridgeStatuses', 'Optional', [v33.BridgeNetworkId], v33.BridgeStatus) as BridgeStatusesV33,
+    v1: new StorageType('EthBridge.BridgeStatuses', 'Optional', [v1.NetworkId], v1.BridgeStatus) as BridgeStatusesV1,
 }
 
 /**
  *  Bridge status.
  */
-export interface BridgeStatusesV33  {
+export interface BridgeStatusesV1  {
     is(block: RuntimeCtx): boolean
-    get(block: Block, key: v33.BridgeNetworkId): Promise<(v33.BridgeStatus | undefined)>
-    getMany(block: Block, keys: v33.BridgeNetworkId[]): Promise<(v33.BridgeStatus | undefined)[]>
-    getKeys(block: Block): Promise<v33.BridgeNetworkId[]>
-    getKeys(block: Block, key: v33.BridgeNetworkId): Promise<v33.BridgeNetworkId[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.BridgeNetworkId[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.BridgeNetworkId): AsyncIterable<v33.BridgeNetworkId[]>
-    getPairs(block: Block): Promise<[k: v33.BridgeNetworkId, v: (v33.BridgeStatus | undefined)][]>
-    getPairs(block: Block, key: v33.BridgeNetworkId): Promise<[k: v33.BridgeNetworkId, v: (v33.BridgeStatus | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.BridgeNetworkId, v: (v33.BridgeStatus | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.BridgeNetworkId): AsyncIterable<[k: v33.BridgeNetworkId, v: (v33.BridgeStatus | undefined)][]>
+    get(block: Block, key: v1.NetworkId): Promise<(v1.BridgeStatus | undefined)>
+    getMany(block: Block, keys: v1.NetworkId[]): Promise<(v1.BridgeStatus | undefined)[]>
+    getKeys(block: Block): Promise<v1.NetworkId[]>
+    getKeys(block: Block, key: v1.NetworkId): Promise<v1.NetworkId[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.NetworkId[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.NetworkId): AsyncIterable<v1.NetworkId[]>
+    getPairs(block: Block): Promise<[k: v1.NetworkId, v: (v1.BridgeStatus | undefined)][]>
+    getPairs(block: Block, key: v1.NetworkId): Promise<[k: v1.NetworkId, v: (v1.BridgeStatus | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.NetworkId, v: (v1.BridgeStatus | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.NetworkId): AsyncIterable<[k: v1.NetworkId, v: (v1.BridgeStatus | undefined)][]>
 }
 
 export const bridgeContractAddress =  {
     /**
      *  Smart-contract address on Sidechain.
      */
-    v33: new StorageType('EthBridge.BridgeContractAddress', 'Default', [v33.BridgeNetworkId], v33.EthAddress) as BridgeContractAddressV33,
+    v1: new StorageType('EthBridge.BridgeContractAddress', 'Default', [v1.NetworkId], v1.Address) as BridgeContractAddressV1,
 }
 
 /**
  *  Smart-contract address on Sidechain.
  */
-export interface BridgeContractAddressV33  {
+export interface BridgeContractAddressV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.EthAddress
-    get(block: Block, key: v33.BridgeNetworkId): Promise<(v33.EthAddress | undefined)>
-    getMany(block: Block, keys: v33.BridgeNetworkId[]): Promise<(v33.EthAddress | undefined)[]>
-    getKeys(block: Block): Promise<v33.BridgeNetworkId[]>
-    getKeys(block: Block, key: v33.BridgeNetworkId): Promise<v33.BridgeNetworkId[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.BridgeNetworkId[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.BridgeNetworkId): AsyncIterable<v33.BridgeNetworkId[]>
-    getPairs(block: Block): Promise<[k: v33.BridgeNetworkId, v: (v33.EthAddress | undefined)][]>
-    getPairs(block: Block, key: v33.BridgeNetworkId): Promise<[k: v33.BridgeNetworkId, v: (v33.EthAddress | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.BridgeNetworkId, v: (v33.EthAddress | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.BridgeNetworkId): AsyncIterable<[k: v33.BridgeNetworkId, v: (v33.EthAddress | undefined)][]>
+    getDefault(block: Block): v1.Address
+    get(block: Block, key: v1.NetworkId): Promise<(v1.Address | undefined)>
+    getMany(block: Block, keys: v1.NetworkId[]): Promise<(v1.Address | undefined)[]>
+    getKeys(block: Block): Promise<v1.NetworkId[]>
+    getKeys(block: Block, key: v1.NetworkId): Promise<v1.NetworkId[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.NetworkId[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.NetworkId): AsyncIterable<v1.NetworkId[]>
+    getPairs(block: Block): Promise<[k: v1.NetworkId, v: (v1.Address | undefined)][]>
+    getPairs(block: Block, key: v1.NetworkId): Promise<[k: v1.NetworkId, v: (v1.Address | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.NetworkId, v: (v1.Address | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.NetworkId): AsyncIterable<[k: v1.NetworkId, v: (v1.Address | undefined)][]>
 }
 
 export const xorMasterContractAddress =  {
     /**
      *  Sora XOR master contract address.
      */
-    v33: new StorageType('EthBridge.XorMasterContractAddress', 'Default', [], v33.EthAddress) as XorMasterContractAddressV33,
+    v1: new StorageType('EthBridge.XorMasterContractAddress', 'Default', [], v1.Address) as XorMasterContractAddressV1,
 }
 
 /**
  *  Sora XOR master contract address.
  */
-export interface XorMasterContractAddressV33  {
+export interface XorMasterContractAddressV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.EthAddress
-    get(block: Block): Promise<(v33.EthAddress | undefined)>
+    getDefault(block: Block): v1.Address
+    get(block: Block): Promise<(v1.Address | undefined)>
 }
 
 export const valMasterContractAddress =  {
     /**
      *  Sora VAL master contract address.
      */
-    v33: new StorageType('EthBridge.ValMasterContractAddress', 'Default', [], v33.EthAddress) as ValMasterContractAddressV33,
+    v1: new StorageType('EthBridge.ValMasterContractAddress', 'Default', [], v1.Address) as ValMasterContractAddressV1,
 }
 
 /**
  *  Sora VAL master contract address.
  */
-export interface ValMasterContractAddressV33  {
+export interface ValMasterContractAddressV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.EthAddress
-    get(block: Block): Promise<(v33.EthAddress | undefined)>
+    getDefault(block: Block): v1.Address
+    get(block: Block): Promise<(v1.Address | undefined)>
 }
 
 export const nextNetworkId =  {
     /**
      *  Next Network ID counter.
      */
-    v33: new StorageType('EthBridge.NextNetworkId', 'Default', [], v33.BridgeNetworkId) as NextNetworkIdV33,
+    v1: new StorageType('EthBridge.NextNetworkId', 'Default', [], v1.NetworkId) as NextNetworkIdV1,
 }
 
 /**
  *  Next Network ID counter.
  */
-export interface NextNetworkIdV33  {
+export interface NextNetworkIdV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.BridgeNetworkId
-    get(block: Block): Promise<(v33.BridgeNetworkId | undefined)>
+    getDefault(block: Block): v1.NetworkId
+    get(block: Block): Promise<(v1.NetworkId | undefined)>
+}
+
+export const palletStorageVersion =  {
+    /**
+     *  Should be used in conjunction with `on_runtime_upgrade` to ensure an upgrade is executed
+     *  once, even if the code is not removed in time.
+     */
+    v3: new StorageType('EthBridge.PalletStorageVersion', 'Default', [], v3.StorageVersion) as PalletStorageVersionV3,
+}
+
+/**
+ *  Should be used in conjunction with `on_runtime_upgrade` to ensure an upgrade is executed
+ *  once, even if the code is not removed in time.
+ */
+export interface PalletStorageVersionV3  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): v3.StorageVersion
+    get(block: Block): Promise<(v3.StorageVersion | undefined)>
 }
 
 export const migratingRequests =  {
@@ -792,17 +812,17 @@ export const migratingRequests =  {
      *  Requests migrating from version '0.1.0' to '0.2.0'. These requests should be removed from
      *  `RequestsQueue` before migration procedure started.
      */
-    v33: new StorageType('EthBridge.MigratingRequests', 'Default', [], sts.array(() => v33.H256)) as MigratingRequestsV33,
+    v19: new StorageType('EthBridge.MigratingRequests', 'Default', [], sts.array(() => v19.H256)) as MigratingRequestsV19,
 }
 
 /**
  *  Requests migrating from version '0.1.0' to '0.2.0'. These requests should be removed from
  *  `RequestsQueue` before migration procedure started.
  */
-export interface MigratingRequestsV33  {
+export interface MigratingRequestsV19  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.H256[]
-    get(block: Block): Promise<(v33.H256[] | undefined)>
+    getDefault(block: Block): v19.H256[]
+    get(block: Block): Promise<(v19.H256[] | undefined)>
 }
 
 export const bridgeSignatureVersions =  {

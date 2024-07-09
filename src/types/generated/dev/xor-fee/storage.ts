@@ -1,28 +1,28 @@
 import {sts, Block, Bytes, Option, Result, StorageType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const xorToVal =  {
     /**
      *  The amount of XOR to be reminted and exchanged for VAL at the end of the session
      */
-    v70: new StorageType('XorFee.XorToVal', 'Default', [], sts.bigint()) as XorToValV70,
+    v85: new StorageType('XorFee.XorToVal', 'Default', [], sts.bigint()) as XorToValV85,
 }
 
 /**
  *  The amount of XOR to be reminted and exchanged for VAL at the end of the session
  */
-export interface XorToValV70  {
+export interface XorToValV85  {
     is(block: RuntimeCtx): boolean
     getDefault(block: Block): bigint
     get(block: Block): Promise<(bigint | undefined)>
 }
 
 export const multiplier =  {
-    v70: new StorageType('XorFee.Multiplier', 'Default', [], v70.FixedU128) as MultiplierV70,
+    v85: new StorageType('XorFee.Multiplier', 'Default', [], v85.FixedU128) as MultiplierV85,
 }
 
-export interface MultiplierV70  {
+export interface MultiplierV85  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v70.FixedU128
-    get(block: Block): Promise<(v70.FixedU128 | undefined)>
+    getDefault(block: Block): v85.FixedU128
+    get(block: Block): Promise<(v85.FixedU128 | undefined)>
 }

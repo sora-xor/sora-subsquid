@@ -1,6 +1,7 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
 import * as v64 from '../v64'
 import * as v70 from '../v70'
+import * as v84 from '../v84'
 
 export const registerNetwork =  {
     name: 'BridgeDataSigner.register_network',
@@ -15,6 +16,13 @@ export const registerNetwork =  {
         'BridgeDataSigner.register_network',
         sts.struct({
             networkId: v70.GenericNetworkId,
+            peers: sts.array(() => sts.bytes()),
+        })
+    ),
+    v84: new CallType(
+        'BridgeDataSigner.register_network',
+        sts.struct({
+            networkId: v84.GenericNetworkId,
             peers: sts.array(() => sts.bytes()),
         })
     ),
@@ -38,6 +46,14 @@ export const approve =  {
             signature: v70.Signature,
         })
     ),
+    v84: new CallType(
+        'BridgeDataSigner.approve',
+        sts.struct({
+            networkId: v84.GenericNetworkId,
+            data: v84.H256,
+            signature: v84.Signature,
+        })
+    ),
 }
 
 export const addPeer =  {
@@ -56,6 +72,13 @@ export const addPeer =  {
             peer: sts.bytes(),
         })
     ),
+    v84: new CallType(
+        'BridgeDataSigner.add_peer',
+        sts.struct({
+            networkId: v84.GenericNetworkId,
+            peer: sts.bytes(),
+        })
+    ),
 }
 
 export const removePeer =  {
@@ -71,6 +94,13 @@ export const removePeer =  {
         'BridgeDataSigner.remove_peer',
         sts.struct({
             networkId: v70.GenericNetworkId,
+            peer: sts.bytes(),
+        })
+    ),
+    v84: new CallType(
+        'BridgeDataSigner.remove_peer',
+        sts.struct({
+            networkId: v84.GenericNetworkId,
             peer: sts.bytes(),
         })
     ),

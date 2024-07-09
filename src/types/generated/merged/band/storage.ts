@@ -7,9 +7,9 @@ import * as devStorage from '../../dev/band/storage'
 export const trustedRelayers = {
 	name: 'Band.TrustedRelayers',
 	v45: productionStorage.trustedRelayers['v45'],
-	v44Stage: stageStorage.trustedRelayers['v44'],
-	v44Test: testStorage.trustedRelayers['v44'],
-	v70Dev: devStorage.trustedRelayers['v70'],
+	v45Stage: stageStorage.trustedRelayers['v45'],
+	v45Test: testStorage.trustedRelayers['v45'],
+	v85Dev: devStorage.trustedRelayers['v85'],
 }
 
 export const symbolRates = {
@@ -17,15 +17,13 @@ export const symbolRates = {
 	v45: productionStorage.symbolRates['v45'],
 	v59: productionStorage.symbolRates['v59'],
 	v60: productionStorage.symbolRates['v60'],
-	v44Stage: stageStorage.symbolRates['v44'],
 	v45Stage: stageStorage.symbolRates['v45'],
 	v59Stage: stageStorage.symbolRates['v59'],
 	v60Stage: stageStorage.symbolRates['v60'],
-	v44Test: testStorage.symbolRates['v44'],
 	v45Test: testStorage.symbolRates['v45'],
 	v59Test: testStorage.symbolRates['v59'],
 	v60Test: testStorage.symbolRates['v60'],
-	v70Dev: devStorage.symbolRates['v70'],
+	v85Dev: devStorage.symbolRates['v85'],
 }
 
 export const dynamicFeeParameters = {
@@ -33,7 +31,7 @@ export const dynamicFeeParameters = {
 	v59: productionStorage.dynamicFeeParameters['v59'],
 	v59Stage: stageStorage.dynamicFeeParameters['v59'],
 	v59Test: testStorage.dynamicFeeParameters['v59'],
-	v70Dev: devStorage.dynamicFeeParameters['v70'],
+	v85Dev: devStorage.dynamicFeeParameters['v85'],
 }
 
 export const symbolCheckBlock = {
@@ -41,5 +39,5 @@ export const symbolCheckBlock = {
 	v60: productionStorage.symbolCheckBlock['v60'],
 	v60Stage: stageStorage.symbolCheckBlock['v60'],
 	v60Test: testStorage.symbolCheckBlock['v60'],
-	v70Dev: devStorage.symbolCheckBlock['v70'],
+	v85Dev: devStorage.symbolCheckBlock['v85'],
 }

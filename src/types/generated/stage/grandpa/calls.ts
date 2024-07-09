@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
 
 export const reportEquivocation =  {
     name: 'Grandpa.report_equivocation',
@@ -9,11 +9,11 @@ export const reportEquivocation =  {
      *  against the extracted offender. If both are valid, the offence
      *  will be reported.
      */
-    v33: new CallType(
+    v1: new CallType(
         'Grandpa.report_equivocation',
         sts.struct({
-            equivocationProof: v33.GrandpaEquivocationProof,
-            keyOwnerProof: v33.KeyOwnerProof,
+            equivocationProof: v1.GrandpaEquivocationProof,
+            keyOwnerProof: v1.KeyOwnerProof,
         })
     ),
 }
@@ -31,11 +31,11 @@ export const reportEquivocationUnsigned =  {
      *  if the block author is defined it will be defined as the equivocation
      *  reporter.
      */
-    v33: new CallType(
+    v1: new CallType(
         'Grandpa.report_equivocation_unsigned',
         sts.struct({
-            equivocationProof: v33.GrandpaEquivocationProof,
-            keyOwnerProof: v33.KeyOwnerProof,
+            equivocationProof: v1.GrandpaEquivocationProof,
+            keyOwnerProof: v1.KeyOwnerProof,
         })
     ),
 }
@@ -51,11 +51,11 @@ export const noteStalled =  {
      *  will start the new authority set using the given finalized block as base.
      *  Only callable by root.
      */
-    v33: new CallType(
+    v1: new CallType(
         'Grandpa.note_stalled',
         sts.struct({
-            delay: v33.BlockNumber,
-            bestFinalizedBlockNumber: v33.BlockNumber,
+            delay: v1.BlockNumber,
+            bestFinalizedBlockNumber: v1.BlockNumber,
         })
     ),
 }

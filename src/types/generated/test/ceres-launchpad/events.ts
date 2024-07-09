@@ -1,4 +1,5 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
+import * as v26 from '../v26'
 import * as v33 from '../v33'
 import * as v42 from '../v42'
 
@@ -7,9 +8,9 @@ export const iloCreated =  {
     /**
      *  ILO created [who, what]
      */
-    v33: new EventType(
+    v26: new EventType(
         'CeresLaunchpad.ILOCreated',
-        sts.tuple([v33.AccountId, v33.AssetId])
+        sts.tuple([v26.AccountId, v26.AssetId])
     ),
     /**
      * ILO created [who, what]
@@ -25,9 +26,9 @@ export const contributed =  {
     /**
      *  Contribute [who, what, balance]
      */
-    v33: new EventType(
+    v26: new EventType(
         'CeresLaunchpad.Contributed',
-        sts.tuple([v33.AccountId, v33.AssetId, v33.Balance])
+        sts.tuple([v26.AccountId, v26.AssetId, v26.Balance])
     ),
     /**
      * Contribute [who, what, balance]
@@ -43,9 +44,9 @@ export const emergencyWithdrawn =  {
     /**
      *  Emergency withdraw [who, what, balance]
      */
-    v33: new EventType(
+    v26: new EventType(
         'CeresLaunchpad.EmergencyWithdrawn',
-        sts.tuple([v33.AccountId, v33.AssetId, v33.Balance])
+        sts.tuple([v26.AccountId, v26.AssetId, v26.Balance])
     ),
     /**
      * Emergency withdraw [who, what, balance]
@@ -61,9 +62,9 @@ export const iloFinished =  {
     /**
      *  ILO finished [who, what]
      */
-    v33: new EventType(
+    v26: new EventType(
         'CeresLaunchpad.ILOFinished',
-        sts.tuple([v33.AccountId, v33.AssetId])
+        sts.tuple([v26.AccountId, v26.AssetId])
     ),
     /**
      * ILO finished [who, what]
@@ -79,9 +80,9 @@ export const claimedLp =  {
     /**
      *  Claim LP Tokens [who, what]
      */
-    v33: new EventType(
+    v26: new EventType(
         'CeresLaunchpad.ClaimedLP',
-        sts.tuple([v33.AccountId, v33.AssetId])
+        sts.tuple([v26.AccountId, v26.AssetId])
     ),
     /**
      * Claim LP Tokens [who, what]
@@ -97,9 +98,9 @@ export const claimed =  {
     /**
      *  Claim tokens [who, what]
      */
-    v33: new EventType(
+    v26: new EventType(
         'CeresLaunchpad.Claimed',
-        sts.tuple([v33.AccountId, v33.AssetId])
+        sts.tuple([v26.AccountId, v26.AssetId])
     ),
     /**
      * Claim tokens [who, what]
@@ -115,9 +116,9 @@ export const feeChanged =  {
     /**
      *  Fee changed [balance]
      */
-    v33: new EventType(
+    v26: new EventType(
         'CeresLaunchpad.FeeChanged',
-        v33.Balance
+        v26.Balance
     ),
 }
 
@@ -126,7 +127,7 @@ export const claimedPswap =  {
     /**
      *  PSWAP claimed
      */
-    v33: new EventType(
+    v26: new EventType(
         'CeresLaunchpad.ClaimedPSWAP',
         sts.unit()
     ),

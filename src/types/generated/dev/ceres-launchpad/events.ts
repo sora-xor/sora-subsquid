@@ -1,14 +1,14 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const iloCreated =  {
     name: 'CeresLaunchpad.ILOCreated',
     /**
      * ILO created [who, what]
      */
-    v70: new EventType(
+    v85: new EventType(
         'CeresLaunchpad.ILOCreated',
-        sts.tuple([v70.AccountId32, v70.AssetId32])
+        sts.tuple([v85.AccountId32, v85.AssetId32])
     ),
 }
 
@@ -17,9 +17,9 @@ export const contributed =  {
     /**
      * Contribute [who, what, balance]
      */
-    v70: new EventType(
+    v85: new EventType(
         'CeresLaunchpad.Contributed',
-        sts.tuple([v70.AccountId32, v70.AssetId32, sts.bigint()])
+        sts.tuple([v85.AccountId32, v85.AssetId32, sts.bigint()])
     ),
 }
 
@@ -28,9 +28,9 @@ export const emergencyWithdrawn =  {
     /**
      * Emergency withdraw [who, what, balance]
      */
-    v70: new EventType(
+    v85: new EventType(
         'CeresLaunchpad.EmergencyWithdrawn',
-        sts.tuple([v70.AccountId32, v70.AssetId32, sts.bigint()])
+        sts.tuple([v85.AccountId32, v85.AssetId32, sts.bigint()])
     ),
 }
 
@@ -39,9 +39,9 @@ export const iloFinished =  {
     /**
      * ILO finished [who, what]
      */
-    v70: new EventType(
+    v85: new EventType(
         'CeresLaunchpad.ILOFinished',
-        sts.tuple([v70.AccountId32, v70.AssetId32])
+        sts.tuple([v85.AccountId32, v85.AssetId32])
     ),
 }
 
@@ -50,9 +50,9 @@ export const claimedLp =  {
     /**
      * Claim LP Tokens [who, what]
      */
-    v70: new EventType(
+    v85: new EventType(
         'CeresLaunchpad.ClaimedLP',
-        sts.tuple([v70.AccountId32, v70.AssetId32])
+        sts.tuple([v85.AccountId32, v85.AssetId32])
     ),
 }
 
@@ -61,9 +61,9 @@ export const claimed =  {
     /**
      * Claim tokens [who, what]
      */
-    v70: new EventType(
+    v85: new EventType(
         'CeresLaunchpad.Claimed',
-        sts.tuple([v70.AccountId32, v70.AssetId32])
+        sts.tuple([v85.AccountId32, v85.AssetId32])
     ),
 }
 
@@ -72,7 +72,7 @@ export const feeChanged =  {
     /**
      * Fee changed [balance]
      */
-    v70: new EventType(
+    v85: new EventType(
         'CeresLaunchpad.FeeChanged',
         sts.bigint()
     ),
@@ -83,7 +83,7 @@ export const claimedPswap =  {
     /**
      * PSWAP claimed
      */
-    v70: new EventType(
+    v85: new EventType(
         'CeresLaunchpad.ClaimedPSWAP',
         sts.unit()
     ),
@@ -94,9 +94,9 @@ export const whitelistedContributor =  {
     /**
      * Contributor whitelisted [who]
      */
-    v70: new EventType(
+    v85: new EventType(
         'CeresLaunchpad.WhitelistedContributor',
-        v70.AccountId32
+        v85.AccountId32
     ),
 }
 
@@ -105,9 +105,9 @@ export const whitelistedIloOrganizer =  {
     /**
      * ILO organizer whitelisted [who]
      */
-    v70: new EventType(
+    v85: new EventType(
         'CeresLaunchpad.WhitelistedIloOrganizer',
-        v70.AccountId32
+        v85.AccountId32
     ),
 }
 
@@ -116,9 +116,9 @@ export const removedWhitelistedContributor =  {
     /**
      * Contributor removed [who]
      */
-    v70: new EventType(
+    v85: new EventType(
         'CeresLaunchpad.RemovedWhitelistedContributor',
-        v70.AccountId32
+        v85.AccountId32
     ),
 }
 
@@ -127,8 +127,8 @@ export const removedWhitelistedIloOrganizer =  {
     /**
      * ILO organizer removed [who]
      */
-    v70: new EventType(
+    v85: new EventType(
         'CeresLaunchpad.RemovedWhitelistedIloOrganizer',
-        v70.AccountId32
+        v85.AccountId32
     ),
 }

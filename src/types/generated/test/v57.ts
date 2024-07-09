@@ -1,125 +1,89 @@
 import {sts, Result, Option, Bytes, BitSequence} from './support'
 
-export type GenericNetworkId = GenericNetworkId_EVM | GenericNetworkId_EVMLegacy | GenericNetworkId_Sub
+export type Type_684 = Type_684_V1 | Type_684_V2
 
-export interface GenericNetworkId_EVM {
-    __kind: 'EVM'
-    value: bigint
+export interface Type_684_V1 {
+    __kind: 'V1'
 }
 
-export interface GenericNetworkId_EVMLegacy {
-    __kind: 'EVMLegacy'
-    value: number
+export interface Type_684_V2 {
+    __kind: 'V2'
 }
 
-export interface GenericNetworkId_Sub {
-    __kind: 'Sub'
-    value: SubNetworkId
-}
-
-export const GenericNetworkId: sts.Type<GenericNetworkId> = sts.closedEnum(() => {
+export const Type_684: sts.Type<Type_684> = sts.closedEnum(() => {
     return  {
-        EVM: sts.bigint(),
-        EVMLegacy: sts.number(),
-        Sub: SubNetworkId,
+        V1: sts.unit(),
+        V2: sts.unit(),
     }
 })
+
+export interface HermesPollInfo {
+    creator: AccountId32
+    hermesLocked: bigint
+    pollStartTimestamp: bigint
+    pollEndTimestamp: bigint
+    title: BoundedString
+    description: BoundedString
+    creatorHermesWithdrawn: boolean
+    options: BoundedString[]
+}
+
+export type BoundedString = Bytes
+
+export const HermesPollInfo: sts.Type<HermesPollInfo> = sts.struct(() => {
+    return  {
+        creator: AccountId32,
+        hermesLocked: sts.bigint(),
+        pollStartTimestamp: sts.bigint(),
+        pollEndTimestamp: sts.bigint(),
+        title: BoundedString,
+        description: BoundedString,
+        creatorHermesWithdrawn: sts.boolean(),
+        options: sts.array(() => BoundedString),
+    }
+})
+
+export interface HermesVotingInfo {
+    votingOption: BoundedString
+    numberOfHermes: bigint
+    hermesWithdrawn: boolean
+}
+
+export const HermesVotingInfo: sts.Type<HermesVotingInfo> = sts.struct(() => {
+    return  {
+        votingOption: BoundedString,
+        numberOfHermes: sts.bigint(),
+        hermesWithdrawn: sts.boolean(),
+    }
+})
+
+export type AccountId32 = Bytes
+
+export type SymbolName = Bytes
 
 export interface AssetId32 {
     code: Bytes
 }
 
-export type SubNetworkId = SubNetworkId_Custom | SubNetworkId_Kusama | SubNetworkId_Mainnet | SubNetworkId_Polkadot | SubNetworkId_Rococo
-
-export interface SubNetworkId_Custom {
-    __kind: 'Custom'
-    value: number
+export interface SyntheticInfo {
+    referenceSymbol: SymbolName
+    feeRatio: FixedPoint
 }
 
-export interface SubNetworkId_Kusama {
-    __kind: 'Kusama'
+export interface FixedPoint {
+    inner: bigint
 }
 
-export interface SubNetworkId_Mainnet {
-    __kind: 'Mainnet'
-}
-
-export interface SubNetworkId_Polkadot {
-    __kind: 'Polkadot'
-}
-
-export interface SubNetworkId_Rococo {
-    __kind: 'Rococo'
-}
-
-export interface BridgeMessage {
-    payload: Bytes
-    timepoint: GenericTimepoint
-}
-
-export type GenericTimepoint = GenericTimepoint_EVM | GenericTimepoint_Parachain | GenericTimepoint_Pending | GenericTimepoint_Sora | GenericTimepoint_Unknown
-
-export interface GenericTimepoint_EVM {
-    __kind: 'EVM'
-    value: bigint
-}
-
-export interface GenericTimepoint_Parachain {
-    __kind: 'Parachain'
-    value: number
-}
-
-export interface GenericTimepoint_Pending {
-    __kind: 'Pending'
-}
-
-export interface GenericTimepoint_Sora {
-    __kind: 'Sora'
-    value: number
-}
-
-export interface GenericTimepoint_Unknown {
-    __kind: 'Unknown'
-}
-
-export const BridgeMessage: sts.Type<BridgeMessage> = sts.struct(() => {
+export const SyntheticInfo: sts.Type<SyntheticInfo> = sts.struct(() => {
     return  {
-        payload: sts.bytes(),
-        timepoint: GenericTimepoint,
+        referenceSymbol: SymbolName,
+        feeRatio: FixedPoint,
     }
 })
-
-export const GenericTimepoint: sts.Type<GenericTimepoint> = sts.closedEnum(() => {
-    return  {
-        EVM: sts.bigint(),
-        Parachain: sts.number(),
-        Pending: sts.unit(),
-        Sora: sts.number(),
-        Unknown: sts.unit(),
-    }
-})
-
-export interface Message {
-    target: H160
-    maxGas: bigint
-    payload: Bytes
-}
-
-export type H160 = Bytes
-
-export const Message: sts.Type<Message> = sts.struct(() => {
-    return  {
-        target: H160,
-        maxGas: sts.bigint(),
-        payload: sts.bytes(),
-    }
-})
-
-export const H160 = sts.bytes()
 
 export type H256 = Bytes
 
-export type Call = Call_Assets | Call_Babe | Call_BagsList | Call_Band | Call_BeefyLightClient | Call_BridgeDataSigner | Call_BridgeInboundChannel | Call_BridgeMultisig | Call_BridgeProxy | Call_CeresGovernancePlatform | Call_CeresLaunchpad | Call_CeresLiquidityLocker | Call_CeresStaking | Call_CeresTokenLocker | Call_Council | Call_DEXAPI | Call_DemeterFarmingPlatform | Call_Democracy | Call_ERC20App | Call_ElectionProviderMultiPhase | Call_ElectionsPhragmen | Call_EthApp | Call_EthBridge | Call_EthereumLightClient | Call_Faucet | Call_Grandpa | Call_HermesGovernancePlatform | Call_Identity | Call_ImOnline | Call_IrohaMigration | Call_LiquidityProxy | Call_MigrationApp | Call_MulticollateralBondingCurvePool | Call_Multisig | Call_MultisigVerifier | Call_OracleProxy | Call_Permissions | Call_PoolXYK | Call_Preimage | Call_PswapDistribution | Call_Referrals | Call_Rewards | Call_Scheduler | Call_Session | Call_Staking | Call_SubstrateBridgeApp | Call_SubstrateBridgeInboundChannel | Call_Sudo | Call_System | Call_Technical | Call_TechnicalCommittee | Call_TechnicalMembership | Call_Timestamp | Call_TradingPair | Call_Utility | Call_VestedRewards | Call_XSTPool | Call_XorFee
+export type Call = Call_Assets | Call_Babe | Call_BagsList | Call_Band | Call_BridgeMultisig | Call_CeresGovernancePlatform | Call_CeresLaunchpad | Call_CeresLiquidityLocker | Call_CeresStaking | Call_CeresTokenLocker | Call_Council | Call_DEXAPI | Call_DemeterFarmingPlatform | Call_Democracy | Call_ElectionProviderMultiPhase | Call_ElectionsPhragmen | Call_EthBridge | Call_Grandpa | Call_HermesGovernancePlatform | Call_Identity | Call_ImOnline | Call_IrohaMigration | Call_LiquidityProxy | Call_MulticollateralBondingCurvePool | Call_Multisig | Call_OracleProxy | Call_Permissions | Call_PoolXYK | Call_Preimage | Call_PswapDistribution | Call_Referrals | Call_Rewards | Call_Scheduler | Call_Session | Call_Staking | Call_System | Call_Technical | Call_TechnicalCommittee | Call_TechnicalMembership | Call_Timestamp | Call_TradingPair | Call_Utility | Call_VestedRewards | Call_XSTPool | Call_XorFee
 
 export interface Call_Assets {
     __kind: 'Assets'
@@ -141,29 +105,9 @@ export interface Call_Band {
     value: BandCall
 }
 
-export interface Call_BeefyLightClient {
-    __kind: 'BeefyLightClient'
-    value: BeefyLightClientCall
-}
-
-export interface Call_BridgeDataSigner {
-    __kind: 'BridgeDataSigner'
-    value: BridgeDataSignerCall
-}
-
-export interface Call_BridgeInboundChannel {
-    __kind: 'BridgeInboundChannel'
-    value: BridgeInboundChannelCall
-}
-
 export interface Call_BridgeMultisig {
     __kind: 'BridgeMultisig'
     value: BridgeMultisigCall
-}
-
-export interface Call_BridgeProxy {
-    __kind: 'BridgeProxy'
-    value: BridgeProxyCall
 }
 
 export interface Call_CeresGovernancePlatform {
@@ -211,11 +155,6 @@ export interface Call_Democracy {
     value: DemocracyCall
 }
 
-export interface Call_ERC20App {
-    __kind: 'ERC20App'
-    value: ERC20AppCall
-}
-
 export interface Call_ElectionProviderMultiPhase {
     __kind: 'ElectionProviderMultiPhase'
     value: ElectionProviderMultiPhaseCall
@@ -226,24 +165,9 @@ export interface Call_ElectionsPhragmen {
     value: ElectionsPhragmenCall
 }
 
-export interface Call_EthApp {
-    __kind: 'EthApp'
-    value: EthAppCall
-}
-
 export interface Call_EthBridge {
     __kind: 'EthBridge'
     value: EthBridgeCall
-}
-
-export interface Call_EthereumLightClient {
-    __kind: 'EthereumLightClient'
-    value: EthereumLightClientCall
-}
-
-export interface Call_Faucet {
-    __kind: 'Faucet'
-    value: FaucetCall
 }
 
 export interface Call_Grandpa {
@@ -276,11 +200,6 @@ export interface Call_LiquidityProxy {
     value: LiquidityProxyCall
 }
 
-export interface Call_MigrationApp {
-    __kind: 'MigrationApp'
-    value: MigrationAppCall
-}
-
 export interface Call_MulticollateralBondingCurvePool {
     __kind: 'MulticollateralBondingCurvePool'
     value: MulticollateralBondingCurvePoolCall
@@ -289,11 +208,6 @@ export interface Call_MulticollateralBondingCurvePool {
 export interface Call_Multisig {
     __kind: 'Multisig'
     value: MultisigCall
-}
-
-export interface Call_MultisigVerifier {
-    __kind: 'MultisigVerifier'
-    value: MultisigVerifierCall
 }
 
 export interface Call_OracleProxy {
@@ -344,21 +258,6 @@ export interface Call_Session {
 export interface Call_Staking {
     __kind: 'Staking'
     value: StakingCall
-}
-
-export interface Call_SubstrateBridgeApp {
-    __kind: 'SubstrateBridgeApp'
-    value: SubstrateBridgeAppCall
-}
-
-export interface Call_SubstrateBridgeInboundChannel {
-    __kind: 'SubstrateBridgeInboundChannel'
-    value: SubstrateBridgeInboundChannelCall
-}
-
-export interface Call_Sudo {
-    __kind: 'Sudo'
-    value: SudoCall
 }
 
 export interface Call_System {
@@ -507,12 +406,6 @@ export type AssetName = Bytes
 
 export type AssetSymbol = Bytes
 
-export interface FixedPoint {
-    inner: bigint
-}
-
-export type SymbolName = Bytes
-
 /**
  * Contains one variant per dispatchable that can be called by an extrinsic.
  */
@@ -565,8 +458,6 @@ export interface RewardReason_LiquidityProvisionFarming {
 export interface RewardReason_Unspecified {
     __kind: 'Unspecified'
 }
-
-export type AccountId32 = Bytes
 
 export type CrowdloanTag = Bytes
 
@@ -701,26 +592,16 @@ export interface Weight {
     proofSize: bigint
 }
 
-export type OriginCaller = OriginCaller_Council | OriginCaller_Dispatch | OriginCaller_SubstrateDispatch | OriginCaller_TechnicalCommittee | OriginCaller_Void | OriginCaller_system
+export type OriginCaller = OriginCaller_Council | OriginCaller_TechnicalCommittee | OriginCaller_Void | OriginCaller_system
 
 export interface OriginCaller_Council {
     __kind: 'Council'
-    value: Type_276
-}
-
-export interface OriginCaller_Dispatch {
-    __kind: 'Dispatch'
-    value: Type_278
-}
-
-export interface OriginCaller_SubstrateDispatch {
-    __kind: 'SubstrateDispatch'
-    value: Type_282
+    value: Type_225
 }
 
 export interface OriginCaller_TechnicalCommittee {
     __kind: 'TechnicalCommittee'
-    value: Type_277
+    value: Type_226
 }
 
 export interface OriginCaller_Void {
@@ -750,60 +631,35 @@ export interface RawOrigin_Signed {
 
 export type Void = never
 
-export type Type_277 = Type_277_Member | Type_277_Members | Type_277__Phantom
+export type Type_226 = Type_226_Member | Type_226_Members | Type_226__Phantom
 
-export interface Type_277_Member {
+export interface Type_226_Member {
     __kind: 'Member'
     value: AccountId32
 }
 
-export interface Type_277_Members {
+export interface Type_226_Members {
     __kind: 'Members'
     value: [number, number]
 }
 
-export interface Type_277__Phantom {
+export interface Type_226__Phantom {
     __kind: '_Phantom'
 }
 
-export interface Type_282 {
-    origin: Type_283
-}
+export type Type_225 = Type_225_Member | Type_225_Members | Type_225__Phantom
 
-export interface Type_283 {
-    networkId: SubNetworkId
-    messageId: H256
-    timepoint: GenericTimepoint
-}
-
-export interface Type_278 {
-    origin: CallOriginOutput
-}
-
-export interface CallOriginOutput {
-    networkId: bigint
-    messageId: H256
-    timepoint: GenericTimepoint
-    additional: AdditionalEVMInboundData
-}
-
-export interface AdditionalEVMInboundData {
-    source: H160
-}
-
-export type Type_276 = Type_276_Member | Type_276_Members | Type_276__Phantom
-
-export interface Type_276_Member {
+export interface Type_225_Member {
     __kind: 'Member'
     value: AccountId32
 }
 
-export interface Type_276_Members {
+export interface Type_225_Members {
     __kind: 'Members'
     value: [number, number]
 }
 
-export interface Type_276__Phantom {
+export interface Type_225__Phantom {
     __kind: '_Phantom'
 }
 
@@ -1269,700 +1125,6 @@ export interface SystemCall_set_storage {
 /**
  * Contains one variant per dispatchable that can be called by an extrinsic.
  */
-export type SudoCall = SudoCall_set_key | SudoCall_sudo | SudoCall_sudo_as | SudoCall_sudo_unchecked_weight
-
-/**
- * Authenticates the current sudo key and sets the given AccountId (`new`) as the new sudo
- * key.
- * 
- * The dispatch origin for this call must be _Signed_.
- * 
- * # <weight>
- * - O(1).
- * - Limited storage reads.
- * - One DB change.
- * # </weight>
- */
-export interface SudoCall_set_key {
-    __kind: 'set_key'
-    new: AccountId32
-}
-
-/**
- * Authenticates the sudo key and dispatches a function call with `Root` origin.
- * 
- * The dispatch origin for this call must be _Signed_.
- * 
- * # <weight>
- * - O(1).
- * - Limited storage reads.
- * - One DB write (event).
- * - Weight of derivative `call` execution + 10,000.
- * # </weight>
- */
-export interface SudoCall_sudo {
-    __kind: 'sudo'
-    call: Call
-}
-
-/**
- * Authenticates the sudo key and dispatches a function call with `Signed` origin from
- * a given account.
- * 
- * The dispatch origin for this call must be _Signed_.
- * 
- * # <weight>
- * - O(1).
- * - Limited storage reads.
- * - One DB write (event).
- * - Weight of derivative `call` execution + 10,000.
- * # </weight>
- */
-export interface SudoCall_sudo_as {
-    __kind: 'sudo_as'
-    who: AccountId32
-    call: Call
-}
-
-/**
- * Authenticates the sudo key and dispatches a function call with `Root` origin.
- * This function does not check the weight of the call, and instead allows the
- * Sudo user to specify the weight of the call.
- * 
- * The dispatch origin for this call must be _Signed_.
- * 
- * # <weight>
- * - O(1).
- * - The weight of this call is defined by the caller.
- * # </weight>
- */
-export interface SudoCall_sudo_unchecked_weight {
-    __kind: 'sudo_unchecked_weight'
-    call: Call
-    weight: Weight
-}
-
-/**
- * Contains one variant per dispatchable that can be called by an extrinsic.
- */
-export type SubstrateBridgeInboundChannelCall = SubstrateBridgeInboundChannelCall_submit
-
-export interface SubstrateBridgeInboundChannelCall_submit {
-    __kind: 'submit'
-    networkId: SubNetworkId
-    commitment: GenericCommitment
-    proof: MultiProof
-}
-
-export type MultiProof = MultiProof_Beefy | MultiProof_Multisig
-
-export interface MultiProof_Beefy {
-    __kind: 'Beefy'
-    value: SubstrateBridgeMessageProof
-}
-
-export interface MultiProof_Multisig {
-    __kind: 'Multisig'
-    value: Type_588
-}
-
-export interface Type_588 {
-    digest: AuxiliaryDigest
-    proof: Signature[]
-}
-
-export type Signature = Bytes
-
-export interface AuxiliaryDigest {
-    logs: AuxiliaryDigestItem[]
-}
-
-export type AuxiliaryDigestItem = AuxiliaryDigestItem_Commitment
-
-export interface AuxiliaryDigestItem_Commitment {
-    __kind: 'Commitment'
-    value: [GenericNetworkId, H256]
-}
-
-export interface SubstrateBridgeMessageProof {
-    proof: Type_571
-    leaf: MmrLeaf
-    digest: AuxiliaryDigest
-}
-
-export interface MmrLeaf {
-    version: MmrLeafVersion
-    parentNumberAndHash: [number, H256]
-    beefyNextAuthoritySet: BeefyAuthoritySet
-    leafExtra: LeafExtraData
-}
-
-export interface LeafExtraData {
-    randomSeed: H256
-    digestHash: H256
-}
-
-export interface BeefyAuthoritySet {
-    id: bigint
-    len: number
-    root: H256
-}
-
-export type MmrLeafVersion = number
-
-export interface Type_571 {
-    order: bigint
-    items: H256[]
-}
-
-export type GenericCommitment = GenericCommitment_EVM | GenericCommitment_Sub
-
-export interface GenericCommitment_EVM {
-    __kind: 'EVM'
-    value: Type_579
-}
-
-export interface GenericCommitment_Sub {
-    __kind: 'Sub'
-    value: Type_574
-}
-
-export interface Type_574 {
-    messages: BridgeMessage[]
-    nonce: bigint
-}
-
-export interface Type_579 {
-    nonce: bigint
-    totalMaxGas: bigint
-    messages: Message[]
-}
-
-/**
- * Contains one variant per dispatchable that can be called by an extrinsic.
- */
-export type SubstrateBridgeAppCall = SubstrateBridgeAppCall_add_assetid_paraid | SubstrateBridgeAppCall_burn | SubstrateBridgeAppCall_finalize_asset_registration | SubstrateBridgeAppCall_mint | SubstrateBridgeAppCall_register_sidechain_asset | SubstrateBridgeAppCall_register_thischain_asset | SubstrateBridgeAppCall_remove_assetid_paraid | SubstrateBridgeAppCall_set_transfer_limit
-
-export interface SubstrateBridgeAppCall_add_assetid_paraid {
-    __kind: 'add_assetid_paraid'
-    networkId: SubNetworkId
-    paraId: number
-    assetId: AssetId32
-}
-
-export interface SubstrateBridgeAppCall_burn {
-    __kind: 'burn'
-    networkId: SubNetworkId
-    assetId: AssetId32
-    recipient: VersionedMultiLocation
-    amount: bigint
-}
-
-export interface SubstrateBridgeAppCall_finalize_asset_registration {
-    __kind: 'finalize_asset_registration'
-    assetId: AssetId32
-    assetKind: Type_590
-}
-
-export interface SubstrateBridgeAppCall_mint {
-    __kind: 'mint'
-    assetId: AssetId32
-    sender?: (VersionedMultiLocation | undefined)
-    recipient: AccountId32
-    amount: bigint
-}
-
-export interface SubstrateBridgeAppCall_register_sidechain_asset {
-    __kind: 'register_sidechain_asset'
-    networkId: SubNetworkId
-    sidechainAsset: V3AssetId
-    symbol: AssetSymbol
-    name: AssetName
-    decimals: number
-    allowedParachains: number[]
-}
-
-export interface SubstrateBridgeAppCall_register_thischain_asset {
-    __kind: 'register_thischain_asset'
-    networkId: SubNetworkId
-    assetId: AssetId32
-    sidechainAsset: V3AssetId
-    allowedParachains: number[]
-}
-
-export interface SubstrateBridgeAppCall_remove_assetid_paraid {
-    __kind: 'remove_assetid_paraid'
-    networkId: SubNetworkId
-    paraId: number
-    assetId: AssetId32
-}
-
-/**
- * Limits amount of tokens to transfer with limit precision
- */
-export interface SubstrateBridgeAppCall_set_transfer_limit {
-    __kind: 'set_transfer_limit'
-    limitCount?: (bigint | undefined)
-}
-
-export type V3AssetId = V3AssetId_Abstract | V3AssetId_Concrete
-
-export interface V3AssetId_Abstract {
-    __kind: 'Abstract'
-    value: Bytes
-}
-
-export interface V3AssetId_Concrete {
-    __kind: 'Concrete'
-    value: V3MultiLocation
-}
-
-export interface V3MultiLocation {
-    parents: number
-    interior: V3Junctions
-}
-
-export type V3Junctions = V3Junctions_Here | V3Junctions_X1 | V3Junctions_X2 | V3Junctions_X3 | V3Junctions_X4 | V3Junctions_X5 | V3Junctions_X6 | V3Junctions_X7 | V3Junctions_X8
-
-export interface V3Junctions_Here {
-    __kind: 'Here'
-}
-
-export interface V3Junctions_X1 {
-    __kind: 'X1'
-    value: V3Junction
-}
-
-export interface V3Junctions_X2 {
-    __kind: 'X2'
-    value: [V3Junction, V3Junction]
-}
-
-export interface V3Junctions_X3 {
-    __kind: 'X3'
-    value: [V3Junction, V3Junction, V3Junction]
-}
-
-export interface V3Junctions_X4 {
-    __kind: 'X4'
-    value: [V3Junction, V3Junction, V3Junction, V3Junction]
-}
-
-export interface V3Junctions_X5 {
-    __kind: 'X5'
-    value: [V3Junction, V3Junction, V3Junction, V3Junction, V3Junction]
-}
-
-export interface V3Junctions_X6 {
-    __kind: 'X6'
-    value: [V3Junction, V3Junction, V3Junction, V3Junction, V3Junction, V3Junction]
-}
-
-export interface V3Junctions_X7 {
-    __kind: 'X7'
-    value: [V3Junction, V3Junction, V3Junction, V3Junction, V3Junction, V3Junction, V3Junction]
-}
-
-export interface V3Junctions_X8 {
-    __kind: 'X8'
-    value: [V3Junction, V3Junction, V3Junction, V3Junction, V3Junction, V3Junction, V3Junction, V3Junction]
-}
-
-export type V3Junction = V3Junction_AccountId32 | V3Junction_AccountIndex64 | V3Junction_AccountKey20 | V3Junction_GeneralIndex | V3Junction_GeneralKey | V3Junction_GlobalConsensus | V3Junction_OnlyChild | V3Junction_PalletInstance | V3Junction_Parachain | V3Junction_Plurality
-
-export interface V3Junction_AccountId32 {
-    __kind: 'AccountId32'
-    network?: (V3NetworkId | undefined)
-    id: Bytes
-}
-
-export interface V3Junction_AccountIndex64 {
-    __kind: 'AccountIndex64'
-    network?: (V3NetworkId | undefined)
-    index: bigint
-}
-
-export interface V3Junction_AccountKey20 {
-    __kind: 'AccountKey20'
-    network?: (V3NetworkId | undefined)
-    key: Bytes
-}
-
-export interface V3Junction_GeneralIndex {
-    __kind: 'GeneralIndex'
-    value: bigint
-}
-
-export interface V3Junction_GeneralKey {
-    __kind: 'GeneralKey'
-    length: number
-    data: Bytes
-}
-
-export interface V3Junction_GlobalConsensus {
-    __kind: 'GlobalConsensus'
-    value: V3NetworkId
-}
-
-export interface V3Junction_OnlyChild {
-    __kind: 'OnlyChild'
-}
-
-export interface V3Junction_PalletInstance {
-    __kind: 'PalletInstance'
-    value: number
-}
-
-export interface V3Junction_Parachain {
-    __kind: 'Parachain'
-    value: number
-}
-
-export interface V3Junction_Plurality {
-    __kind: 'Plurality'
-    id: V3BodyId
-    part: V3BodyPart
-}
-
-export type V3BodyPart = V3BodyPart_AtLeastProportion | V3BodyPart_Fraction | V3BodyPart_Members | V3BodyPart_MoreThanProportion | V3BodyPart_Voice
-
-export interface V3BodyPart_AtLeastProportion {
-    __kind: 'AtLeastProportion'
-    nom: number
-    denom: number
-}
-
-export interface V3BodyPart_Fraction {
-    __kind: 'Fraction'
-    nom: number
-    denom: number
-}
-
-export interface V3BodyPart_Members {
-    __kind: 'Members'
-    count: number
-}
-
-export interface V3BodyPart_MoreThanProportion {
-    __kind: 'MoreThanProportion'
-    nom: number
-    denom: number
-}
-
-export interface V3BodyPart_Voice {
-    __kind: 'Voice'
-}
-
-export type V3BodyId = V3BodyId_Administration | V3BodyId_Defense | V3BodyId_Executive | V3BodyId_Index | V3BodyId_Judicial | V3BodyId_Legislative | V3BodyId_Moniker | V3BodyId_Technical | V3BodyId_Treasury | V3BodyId_Unit
-
-export interface V3BodyId_Administration {
-    __kind: 'Administration'
-}
-
-export interface V3BodyId_Defense {
-    __kind: 'Defense'
-}
-
-export interface V3BodyId_Executive {
-    __kind: 'Executive'
-}
-
-export interface V3BodyId_Index {
-    __kind: 'Index'
-    value: number
-}
-
-export interface V3BodyId_Judicial {
-    __kind: 'Judicial'
-}
-
-export interface V3BodyId_Legislative {
-    __kind: 'Legislative'
-}
-
-export interface V3BodyId_Moniker {
-    __kind: 'Moniker'
-    value: Bytes
-}
-
-export interface V3BodyId_Technical {
-    __kind: 'Technical'
-}
-
-export interface V3BodyId_Treasury {
-    __kind: 'Treasury'
-}
-
-export interface V3BodyId_Unit {
-    __kind: 'Unit'
-}
-
-export type V3NetworkId = V3NetworkId_BitcoinCash | V3NetworkId_BitcoinCore | V3NetworkId_ByFork | V3NetworkId_ByGenesis | V3NetworkId_Ethereum | V3NetworkId_Kusama | V3NetworkId_Polkadot | V3NetworkId_Rococo | V3NetworkId_Westend | V3NetworkId_Wococo
-
-export interface V3NetworkId_BitcoinCash {
-    __kind: 'BitcoinCash'
-}
-
-export interface V3NetworkId_BitcoinCore {
-    __kind: 'BitcoinCore'
-}
-
-export interface V3NetworkId_ByFork {
-    __kind: 'ByFork'
-    blockNumber: bigint
-    blockHash: Bytes
-}
-
-export interface V3NetworkId_ByGenesis {
-    __kind: 'ByGenesis'
-    value: Bytes
-}
-
-export interface V3NetworkId_Ethereum {
-    __kind: 'Ethereum'
-    chainId: bigint
-}
-
-export interface V3NetworkId_Kusama {
-    __kind: 'Kusama'
-}
-
-export interface V3NetworkId_Polkadot {
-    __kind: 'Polkadot'
-}
-
-export interface V3NetworkId_Rococo {
-    __kind: 'Rococo'
-}
-
-export interface V3NetworkId_Westend {
-    __kind: 'Westend'
-}
-
-export interface V3NetworkId_Wococo {
-    __kind: 'Wococo'
-}
-
-export type Type_590 = Type_590_Sidechain | Type_590_Thischain
-
-export interface Type_590_Sidechain {
-    __kind: 'Sidechain'
-}
-
-export interface Type_590_Thischain {
-    __kind: 'Thischain'
-}
-
-export type VersionedMultiLocation = VersionedMultiLocation_V2 | VersionedMultiLocation_V3
-
-export interface VersionedMultiLocation_V2 {
-    __kind: 'V2'
-    value: V2MultiLocation
-}
-
-export interface VersionedMultiLocation_V3 {
-    __kind: 'V3'
-    value: V3MultiLocation
-}
-
-export interface V2MultiLocation {
-    parents: number
-    interior: V2Junctions
-}
-
-export type V2Junctions = V2Junctions_Here | V2Junctions_X1 | V2Junctions_X2 | V2Junctions_X3 | V2Junctions_X4 | V2Junctions_X5 | V2Junctions_X6 | V2Junctions_X7 | V2Junctions_X8
-
-export interface V2Junctions_Here {
-    __kind: 'Here'
-}
-
-export interface V2Junctions_X1 {
-    __kind: 'X1'
-    value: V2Junction
-}
-
-export interface V2Junctions_X2 {
-    __kind: 'X2'
-    value: [V2Junction, V2Junction]
-}
-
-export interface V2Junctions_X3 {
-    __kind: 'X3'
-    value: [V2Junction, V2Junction, V2Junction]
-}
-
-export interface V2Junctions_X4 {
-    __kind: 'X4'
-    value: [V2Junction, V2Junction, V2Junction, V2Junction]
-}
-
-export interface V2Junctions_X5 {
-    __kind: 'X5'
-    value: [V2Junction, V2Junction, V2Junction, V2Junction, V2Junction]
-}
-
-export interface V2Junctions_X6 {
-    __kind: 'X6'
-    value: [V2Junction, V2Junction, V2Junction, V2Junction, V2Junction, V2Junction]
-}
-
-export interface V2Junctions_X7 {
-    __kind: 'X7'
-    value: [V2Junction, V2Junction, V2Junction, V2Junction, V2Junction, V2Junction, V2Junction]
-}
-
-export interface V2Junctions_X8 {
-    __kind: 'X8'
-    value: [V2Junction, V2Junction, V2Junction, V2Junction, V2Junction, V2Junction, V2Junction, V2Junction]
-}
-
-export type V2Junction = V2Junction_AccountId32 | V2Junction_AccountIndex64 | V2Junction_AccountKey20 | V2Junction_GeneralIndex | V2Junction_GeneralKey | V2Junction_OnlyChild | V2Junction_PalletInstance | V2Junction_Parachain | V2Junction_Plurality
-
-export interface V2Junction_AccountId32 {
-    __kind: 'AccountId32'
-    network: V2NetworkId
-    id: Bytes
-}
-
-export interface V2Junction_AccountIndex64 {
-    __kind: 'AccountIndex64'
-    network: V2NetworkId
-    index: bigint
-}
-
-export interface V2Junction_AccountKey20 {
-    __kind: 'AccountKey20'
-    network: V2NetworkId
-    key: Bytes
-}
-
-export interface V2Junction_GeneralIndex {
-    __kind: 'GeneralIndex'
-    value: bigint
-}
-
-export interface V2Junction_GeneralKey {
-    __kind: 'GeneralKey'
-    value: WeakBoundedVec
-}
-
-export interface V2Junction_OnlyChild {
-    __kind: 'OnlyChild'
-}
-
-export interface V2Junction_PalletInstance {
-    __kind: 'PalletInstance'
-    value: number
-}
-
-export interface V2Junction_Parachain {
-    __kind: 'Parachain'
-    value: number
-}
-
-export interface V2Junction_Plurality {
-    __kind: 'Plurality'
-    id: V2BodyId
-    part: V2BodyPart
-}
-
-export type V2BodyPart = V2BodyPart_AtLeastProportion | V2BodyPart_Fraction | V2BodyPart_Members | V2BodyPart_MoreThanProportion | V2BodyPart_Voice
-
-export interface V2BodyPart_AtLeastProportion {
-    __kind: 'AtLeastProportion'
-    nom: number
-    denom: number
-}
-
-export interface V2BodyPart_Fraction {
-    __kind: 'Fraction'
-    nom: number
-    denom: number
-}
-
-export interface V2BodyPart_Members {
-    __kind: 'Members'
-    count: number
-}
-
-export interface V2BodyPart_MoreThanProportion {
-    __kind: 'MoreThanProportion'
-    nom: number
-    denom: number
-}
-
-export interface V2BodyPart_Voice {
-    __kind: 'Voice'
-}
-
-export type V2BodyId = V2BodyId_Administration | V2BodyId_Defense | V2BodyId_Executive | V2BodyId_Index | V2BodyId_Judicial | V2BodyId_Legislative | V2BodyId_Named | V2BodyId_Technical | V2BodyId_Treasury | V2BodyId_Unit
-
-export interface V2BodyId_Administration {
-    __kind: 'Administration'
-}
-
-export interface V2BodyId_Defense {
-    __kind: 'Defense'
-}
-
-export interface V2BodyId_Executive {
-    __kind: 'Executive'
-}
-
-export interface V2BodyId_Index {
-    __kind: 'Index'
-    value: number
-}
-
-export interface V2BodyId_Judicial {
-    __kind: 'Judicial'
-}
-
-export interface V2BodyId_Legislative {
-    __kind: 'Legislative'
-}
-
-export interface V2BodyId_Named {
-    __kind: 'Named'
-    value: WeakBoundedVec
-}
-
-export interface V2BodyId_Technical {
-    __kind: 'Technical'
-}
-
-export interface V2BodyId_Treasury {
-    __kind: 'Treasury'
-}
-
-export interface V2BodyId_Unit {
-    __kind: 'Unit'
-}
-
-export type WeakBoundedVec = Bytes
-
-export type V2NetworkId = V2NetworkId_Any | V2NetworkId_Kusama | V2NetworkId_Named | V2NetworkId_Polkadot
-
-export interface V2NetworkId_Any {
-    __kind: 'Any'
-}
-
-export interface V2NetworkId_Kusama {
-    __kind: 'Kusama'
-}
-
-export interface V2NetworkId_Named {
-    __kind: 'Named'
-    value: WeakBoundedVec
-}
-
-export interface V2NetworkId_Polkadot {
-    __kind: 'Polkadot'
-}
-
-/**
- * Contains one variant per dispatchable that can be called by an extrinsic.
- */
 export type StakingCall = StakingCall_bond | StakingCall_bond_extra | StakingCall_cancel_deferred_slash | StakingCall_chill | StakingCall_chill_other | StakingCall_force_apply_min_commission | StakingCall_force_new_era | StakingCall_force_new_era_always | StakingCall_force_no_eras | StakingCall_force_unstake | StakingCall_increase_validator_count | StakingCall_kick | StakingCall_nominate | StakingCall_payout_stakers | StakingCall_reap_stash | StakingCall_rebond | StakingCall_scale_validator_count | StakingCall_set_controller | StakingCall_set_invulnerables | StakingCall_set_min_commission | StakingCall_set_payee | StakingCall_set_staking_configs | StakingCall_set_validator_count | StakingCall_unbond | StakingCall_validate | StakingCall_withdraw_unbonded
 
 /**
@@ -2376,10 +1538,10 @@ export interface StakingCall_set_staking_configs {
     __kind: 'set_staking_configs'
     minNominatorBond: ConfigOp
     minValidatorBond: ConfigOp
-    maxNominatorCount: Type_288
-    maxValidatorCount: Type_288
-    chillThreshold: Type_289
-    minCommission: Type_290
+    maxNominatorCount: Type_231
+    maxValidatorCount: Type_231
+    chillThreshold: Type_232
+    minCommission: Type_233
 }
 
 /**
@@ -2462,47 +1624,47 @@ export interface ValidatorPrefs {
     blocked: boolean
 }
 
-export type Type_290 = Type_290_Noop | Type_290_Remove | Type_290_Set
+export type Type_233 = Type_233_Noop | Type_233_Remove | Type_233_Set
 
-export interface Type_290_Noop {
+export interface Type_233_Noop {
     __kind: 'Noop'
 }
 
-export interface Type_290_Remove {
+export interface Type_233_Remove {
     __kind: 'Remove'
 }
 
-export interface Type_290_Set {
+export interface Type_233_Set {
     __kind: 'Set'
     value: Perbill
 }
 
-export type Type_289 = Type_289_Noop | Type_289_Remove | Type_289_Set
+export type Type_232 = Type_232_Noop | Type_232_Remove | Type_232_Set
 
-export interface Type_289_Noop {
+export interface Type_232_Noop {
     __kind: 'Noop'
 }
 
-export interface Type_289_Remove {
+export interface Type_232_Remove {
     __kind: 'Remove'
 }
 
-export interface Type_289_Set {
+export interface Type_232_Set {
     __kind: 'Set'
     value: Percent
 }
 
-export type Type_288 = Type_288_Noop | Type_288_Remove | Type_288_Set
+export type Type_231 = Type_231_Noop | Type_231_Remove | Type_231_Set
 
-export interface Type_288_Noop {
+export interface Type_231_Noop {
     __kind: 'Noop'
 }
 
-export interface Type_288_Remove {
+export interface Type_231_Remove {
     __kind: 'Remove'
 }
 
-export interface Type_288_Set {
+export interface Type_231_Set {
     __kind: 'Set'
     value: number
 }
@@ -2705,6 +1867,8 @@ export interface RewardsCall_claim {
     signature: Bytes
 }
 
+export type H160 = Bytes
+
 /**
  * Contains one variant per dispatchable that can be called by an extrinsic.
  */
@@ -2866,27 +2030,6 @@ export type Oracle = Oracle_BandChainFeed
 
 export interface Oracle_BandChainFeed {
     __kind: 'BandChainFeed'
-}
-
-/**
- * Contains one variant per dispatchable that can be called by an extrinsic.
- */
-export type MultisigVerifierCall = MultisigVerifierCall_add_peer | MultisigVerifierCall_initialize | MultisigVerifierCall_remove_peer
-
-export interface MultisigVerifierCall_add_peer {
-    __kind: 'add_peer'
-    peer: Bytes
-}
-
-export interface MultisigVerifierCall_initialize {
-    __kind: 'initialize'
-    networkId: GenericNetworkId
-    peers: Bytes[]
-}
-
-export interface MultisigVerifierCall_remove_peer {
-    __kind: 'remove_peer'
-    peer: Bytes
 }
 
 /**
@@ -3107,34 +2250,6 @@ export interface MulticollateralBondingCurvePoolCall_set_price_change_config {
 export interface MulticollateralBondingCurvePoolCall_set_reference_asset {
     __kind: 'set_reference_asset'
     referenceAssetId: AssetId32
-}
-
-/**
- * Contains one variant per dispatchable that can be called by an extrinsic.
- */
-export type MigrationAppCall = MigrationAppCall_migrate_erc20 | MigrationAppCall_migrate_eth | MigrationAppCall_migrate_sidechain | MigrationAppCall_register_network
-
-export interface MigrationAppCall_migrate_erc20 {
-    __kind: 'migrate_erc20'
-    networkId: bigint
-    erc20Assets: [AssetId32, H160, number][]
-}
-
-export interface MigrationAppCall_migrate_eth {
-    __kind: 'migrate_eth'
-    networkId: bigint
-}
-
-export interface MigrationAppCall_migrate_sidechain {
-    __kind: 'migrate_sidechain'
-    networkId: bigint
-    sidechainAssets: [AssetId32, H160, number][]
-}
-
-export interface MigrationAppCall_register_network {
-    __kind: 'register_network'
-    networkId: bigint
-    contract: H160
 }
 
 /**
@@ -3986,8 +3101,6 @@ export interface HermesGovernancePlatformCall_withdraw_funds_voter {
     pollId: H256
 }
 
-export type BoundedString = Bytes
-
 /**
  * Contains one variant per dispatchable that can be called by an extrinsic.
  */
@@ -4021,7 +3134,7 @@ export interface GrandpaCall_note_stalled {
  */
 export interface GrandpaCall_report_equivocation {
     __kind: 'report_equivocation'
-    equivocationProof: Type_295
+    equivocationProof: Type_240
     keyOwnerProof: MembershipProof
 }
 
@@ -4038,7 +3151,7 @@ export interface GrandpaCall_report_equivocation {
  */
 export interface GrandpaCall_report_equivocation_unsigned {
     __kind: 'report_equivocation_unsigned'
-    equivocationProof: Type_295
+    equivocationProof: Type_240
     keyOwnerProof: MembershipProof
 }
 
@@ -4048,7 +3161,7 @@ export interface MembershipProof {
     validatorCount: number
 }
 
-export interface Type_295 {
+export interface Type_240 {
     setId: bigint
     equivocation: Equivocation
 }
@@ -4057,225 +3170,39 @@ export type Equivocation = Equivocation_Precommit | Equivocation_Prevote
 
 export interface Equivocation_Precommit {
     __kind: 'Precommit'
-    value: Type_302
+    value: Type_247
 }
 
 export interface Equivocation_Prevote {
     __kind: 'Prevote'
-    value: Type_297
+    value: Type_242
 }
 
-export interface Type_297 {
+export interface Type_242 {
     roundNumber: bigint
     identity: Public
-    first: [Prevote, Bytes]
-    second: [Prevote, Bytes]
+    first: [Prevote, Signature]
+    second: [Prevote, Signature]
 }
+
+export type Signature = Bytes
 
 export interface Prevote {
     targetHash: H256
     targetNumber: number
 }
 
-export interface Type_302 {
+export interface Type_247 {
     roundNumber: bigint
     identity: Public
-    first: [Precommit, Bytes]
-    second: [Precommit, Bytes]
+    first: [Precommit, Signature]
+    second: [Precommit, Signature]
 }
 
 export interface Precommit {
     targetHash: H256
     targetNumber: number
 }
-
-/**
- * Contains one variant per dispatchable that can be called by an extrinsic.
- */
-export type FaucetCall = FaucetCall_reset_rewards | FaucetCall_transfer | FaucetCall_update_limit
-
-export interface FaucetCall_reset_rewards {
-    __kind: 'reset_rewards'
-}
-
-/**
- * Transfers the specified amount of asset to the specified account.
- * The supported assets are: XOR, VAL, PSWAP.
- * 
- * # Errors
- * 
- * AssetNotSupported is returned if `asset_id` is something the function doesn't support.
- * AmountAboveLimit is returned if `target` has already received their daily limit of `asset_id`.
- * NotEnoughReserves is returned if `amount` is greater than the reserves
- */
-export interface FaucetCall_transfer {
-    __kind: 'transfer'
-    assetId: AssetId32
-    target: AccountId32
-    amount: bigint
-}
-
-export interface FaucetCall_update_limit {
-    __kind: 'update_limit'
-    newLimit: bigint
-}
-
-/**
- * Contains one variant per dispatchable that can be called by an extrinsic.
- */
-export type EthereumLightClientCall = EthereumLightClientCall_import_header | EthereumLightClientCall_register_network | EthereumLightClientCall_update_difficulty_config
-
-/**
- * Import a single Ethereum PoW header.
- * 
- * Note that this extrinsic has a very high weight. The weight is affected by the
- * value of `DescendantsUntilFinalized`. Regenerate weights if it changes.
- * 
- * The largest contributors to the worst case weight, in decreasing order, are:
- * - Pruning: max 2 writes per pruned header + 2 writes to finalize pruning state.
- *   Up to `HEADERS_TO_PRUNE_IN_SINGLE_IMPORT` can be pruned in one call.
- * - Ethash validation: this cost is pure CPU. EthashProver checks a merkle proof
- *   for each DAG node selected in the "hashimoto"-loop.
- * - Iterating over ancestors: min `DescendantsUntilFinalized` reads to find the
- *   newly finalized ancestor of a header.
- */
-export interface EthereumLightClientCall_import_header {
-    __kind: 'import_header'
-    networkId: bigint
-    header: Type_537
-    proof: DoubleNodeWithMerkleProof[]
-    mixNonce: MixNonce
-    submitter: AccountId32
-    signature: MultiSignature
-}
-
-export interface EthereumLightClientCall_register_network {
-    __kind: 'register_network'
-    networkConfig: NetworkConfig
-    header: Type_537
-    initialDifficulty: bigint
-}
-
-export interface EthereumLightClientCall_update_difficulty_config {
-    __kind: 'update_difficulty_config'
-    networkConfig: NetworkConfig
-}
-
-export type NetworkConfig = NetworkConfig_Classic | NetworkConfig_Custom | NetworkConfig_Goerli | NetworkConfig_Mainnet | NetworkConfig_Mordor | NetworkConfig_Rinkeby | NetworkConfig_Ropsten | NetworkConfig_Sepolia
-
-export interface NetworkConfig_Classic {
-    __kind: 'Classic'
-}
-
-export interface NetworkConfig_Custom {
-    __kind: 'Custom'
-    chainId: bigint
-    consensus: Consensus
-}
-
-export interface NetworkConfig_Goerli {
-    __kind: 'Goerli'
-}
-
-export interface NetworkConfig_Mainnet {
-    __kind: 'Mainnet'
-}
-
-export interface NetworkConfig_Mordor {
-    __kind: 'Mordor'
-}
-
-export interface NetworkConfig_Rinkeby {
-    __kind: 'Rinkeby'
-}
-
-export interface NetworkConfig_Ropsten {
-    __kind: 'Ropsten'
-}
-
-export interface NetworkConfig_Sepolia {
-    __kind: 'Sepolia'
-}
-
-export type Consensus = Consensus_Clique | Consensus_Etchash | Consensus_Ethash
-
-export interface Consensus_Clique {
-    __kind: 'Clique'
-    period: bigint
-    epoch: bigint
-}
-
-export interface Consensus_Etchash {
-    __kind: 'Etchash'
-    forkConfig: ClassicForkConfig
-}
-
-export interface Consensus_Ethash {
-    __kind: 'Ethash'
-    forkConfig: ForkConfig
-}
-
-export interface ForkConfig {
-    byzantiumForkBlock: bigint
-    constantinopleForkBlock: bigint
-    muirGlacierForkBlock: bigint
-    londonForkBlock: bigint
-    arrowGlacierForkBlock: bigint
-    grayGlacierForkBlock: bigint
-}
-
-export interface ClassicForkConfig {
-    ecip1041Block: bigint
-    ecip1099Block: bigint
-}
-
-export type MultiSignature = MultiSignature_Ecdsa | MultiSignature_Ed25519 | MultiSignature_Sr25519
-
-export interface MultiSignature_Ecdsa {
-    __kind: 'Ecdsa'
-    value: Signature
-}
-
-export interface MultiSignature_Ed25519 {
-    __kind: 'Ed25519'
-    value: Bytes
-}
-
-export interface MultiSignature_Sr25519 {
-    __kind: 'Sr25519'
-    value: Bytes
-}
-
-export type MixNonce = Bytes
-
-export interface DoubleNodeWithMerkleProof {
-    dagNodes: H512[]
-    proof: H128[]
-}
-
-export type H128 = Bytes
-
-export type H512 = Bytes
-
-export interface Type_537 {
-    parentHash: H256
-    timestamp: bigint
-    number: bigint
-    author: H160
-    transactionsRoot: H256
-    ommersHash: H256
-    extraData: Bytes
-    stateRoot: H256
-    receiptsRoot: H256
-    logsBloom: Bloom
-    gasUsed: bigint
-    gasLimit: bigint
-    difficulty: bigint
-    seal: Bytes[]
-    baseFee?: (bigint | undefined)
-}
-
-export type Bloom = Bytes
 
 /**
  * Contains one variant per dispatchable that can be called by an extrinsic.
@@ -5065,42 +3992,6 @@ export interface ArithmeticError_Underflow {
 /**
  * Contains one variant per dispatchable that can be called by an extrinsic.
  */
-export type EthAppCall = EthAppCall_burn | EthAppCall_mint | EthAppCall_register_network | EthAppCall_register_network_with_existing_asset
-
-export interface EthAppCall_burn {
-    __kind: 'burn'
-    networkId: bigint
-    recipient: H160
-    amount: bigint
-}
-
-export interface EthAppCall_mint {
-    __kind: 'mint'
-    sender: H160
-    recipient: AccountId32
-    amount: bigint
-}
-
-export interface EthAppCall_register_network {
-    __kind: 'register_network'
-    networkId: bigint
-    name: AssetName
-    symbol: AssetSymbol
-    sidechainPrecision: number
-    contract: H160
-}
-
-export interface EthAppCall_register_network_with_existing_asset {
-    __kind: 'register_network_with_existing_asset'
-    networkId: bigint
-    assetId: AssetId32
-    contract: H160
-    sidechainPrecision: number
-}
-
-/**
- * Contains one variant per dispatchable that can be called by an extrinsic.
- */
 export type ElectionsPhragmenCall = ElectionsPhragmenCall_clean_defunct_voters | ElectionsPhragmenCall_remove_member | ElectionsPhragmenCall_remove_voter | ElectionsPhragmenCall_renounce_candidacy | ElectionsPhragmenCall_submit_candidacy | ElectionsPhragmenCall_vote
 
 /**
@@ -5381,68 +4272,6 @@ export interface ElectionScore {
 export interface Support {
     total: bigint
     voters: [AccountId32, bigint][]
-}
-
-/**
- * Contains one variant per dispatchable that can be called by an extrinsic.
- */
-export type ERC20AppCall = ERC20AppCall_burn | ERC20AppCall_mint | ERC20AppCall_register_asset_internal | ERC20AppCall_register_erc20_app | ERC20AppCall_register_erc20_asset | ERC20AppCall_register_existing_erc20_asset | ERC20AppCall_register_native_app | ERC20AppCall_register_native_asset
-
-export interface ERC20AppCall_burn {
-    __kind: 'burn'
-    networkId: bigint
-    assetId: AssetId32
-    recipient: H160
-    amount: bigint
-}
-
-export interface ERC20AppCall_mint {
-    __kind: 'mint'
-    token: H160
-    sender: H160
-    recipient: AccountId32
-    amount: bigint
-}
-
-export interface ERC20AppCall_register_asset_internal {
-    __kind: 'register_asset_internal'
-    assetId: AssetId32
-    contract: H160
-}
-
-export interface ERC20AppCall_register_erc20_app {
-    __kind: 'register_erc20_app'
-    networkId: bigint
-    contract: H160
-}
-
-export interface ERC20AppCall_register_erc20_asset {
-    __kind: 'register_erc20_asset'
-    networkId: bigint
-    address: H160
-    symbol: AssetSymbol
-    name: AssetName
-    decimals: number
-}
-
-export interface ERC20AppCall_register_existing_erc20_asset {
-    __kind: 'register_existing_erc20_asset'
-    networkId: bigint
-    address: H160
-    assetId: AssetId32
-    decimals: number
-}
-
-export interface ERC20AppCall_register_native_app {
-    __kind: 'register_native_app'
-    networkId: bigint
-    contract: H160
-}
-
-export interface ERC20AppCall_register_native_asset {
-    __kind: 'register_native_asset'
-    networkId: bigint
-    assetId: AssetId32
 }
 
 /**
@@ -6474,44 +5303,6 @@ export interface CeresGovernancePlatformCall_withdraw {
 /**
  * Contains one variant per dispatchable that can be called by an extrinsic.
  */
-export type BridgeProxyCall = BridgeProxyCall_burn
-
-export interface BridgeProxyCall_burn {
-    __kind: 'burn'
-    networkId: GenericNetworkId
-    assetId: AssetId32
-    recipient: GenericAccount
-    amount: bigint
-}
-
-export type GenericAccount = GenericAccount_EVM | GenericAccount_Parachain | GenericAccount_Root | GenericAccount_Sora | GenericAccount_Unknown
-
-export interface GenericAccount_EVM {
-    __kind: 'EVM'
-    value: H160
-}
-
-export interface GenericAccount_Parachain {
-    __kind: 'Parachain'
-    value: VersionedMultiLocation
-}
-
-export interface GenericAccount_Root {
-    __kind: 'Root'
-}
-
-export interface GenericAccount_Sora {
-    __kind: 'Sora'
-    value: AccountId32
-}
-
-export interface GenericAccount_Unknown {
-    __kind: 'Unknown'
-}
-
-/**
- * Contains one variant per dispatchable that can be called by an extrinsic.
- */
 export type BridgeMultisigCall = BridgeMultisigCall_add_signatory | BridgeMultisigCall_approve_as_multi | BridgeMultisigCall_as_multi | BridgeMultisigCall_as_multi_threshold_1 | BridgeMultisigCall_cancel_as_multi | BridgeMultisigCall_register_multisig | BridgeMultisigCall_remove_signatory
 
 /**
@@ -6738,131 +5529,6 @@ export interface BridgeMultisigCall_register_multisig {
 export interface BridgeMultisigCall_remove_signatory {
     __kind: 'remove_signatory'
     signatory: AccountId32
-}
-
-/**
- * OutboundChannel event Message found.
- */
-export type BridgeInboundChannelCall = BridgeInboundChannelCall_batch_dispatched | BridgeInboundChannelCall_register_channel | BridgeInboundChannelCall_set_reward_fraction | BridgeInboundChannelCall_submit
-
-/**
- * BatchDispatched event from InboundChannel on Ethereum found, the function verifies tx
- * and changes all the batch messages statuses.
- */
-export interface BridgeInboundChannelCall_batch_dispatched {
-    __kind: 'batch_dispatched'
-    networkId: bigint
-    log: Log
-    proof: Proof
-}
-
-export interface BridgeInboundChannelCall_register_channel {
-    __kind: 'register_channel'
-    networkId: bigint
-    inboundChannel: H160
-    outboundChannel: H160
-}
-
-export interface BridgeInboundChannelCall_set_reward_fraction {
-    __kind: 'set_reward_fraction'
-    fraction: Perbill
-}
-
-export interface BridgeInboundChannelCall_submit {
-    __kind: 'submit'
-    networkId: bigint
-    log: Log
-    proof: Proof
-}
-
-export interface Proof {
-    blockHash: H256
-    txIndex: number
-    data: Bytes[]
-}
-
-export interface Log {
-    address: H160
-    topics: H256[]
-    data: Bytes
-}
-
-/**
- * Contains one variant per dispatchable that can be called by an extrinsic.
- */
-export type BridgeDataSignerCall = BridgeDataSignerCall_add_peer | BridgeDataSignerCall_approve | BridgeDataSignerCall_finish_add_peer | BridgeDataSignerCall_finish_remove_peer | BridgeDataSignerCall_register_network | BridgeDataSignerCall_remove_peer
-
-export interface BridgeDataSignerCall_add_peer {
-    __kind: 'add_peer'
-    networkId: GenericNetworkId
-    peer: Bytes
-}
-
-export interface BridgeDataSignerCall_approve {
-    __kind: 'approve'
-    networkId: GenericNetworkId
-    data: H256
-    signature: Signature
-}
-
-export interface BridgeDataSignerCall_finish_add_peer {
-    __kind: 'finish_add_peer'
-    peer: Bytes
-}
-
-export interface BridgeDataSignerCall_finish_remove_peer {
-    __kind: 'finish_remove_peer'
-    peer: Bytes
-}
-
-export interface BridgeDataSignerCall_register_network {
-    __kind: 'register_network'
-    networkId: GenericNetworkId
-    peers: Bytes[]
-}
-
-export interface BridgeDataSignerCall_remove_peer {
-    __kind: 'remove_peer'
-    networkId: GenericNetworkId
-    peer: Bytes
-}
-
-/**
- * Contains one variant per dispatchable that can be called by an extrinsic.
- */
-export type BeefyLightClientCall = BeefyLightClientCall_initialize | BeefyLightClientCall_submit_signature_commitment
-
-export interface BeefyLightClientCall_initialize {
-    __kind: 'initialize'
-    networkId: SubNetworkId
-    latestBeefyBlock: bigint
-    validatorSet: BeefyAuthoritySet
-    nextValidatorSet: BeefyAuthoritySet
-}
-
-export interface BeefyLightClientCall_submit_signature_commitment {
-    __kind: 'submit_signature_commitment'
-    networkId: SubNetworkId
-    commitment: Commitment
-    validatorProof: ValidatorProof
-    latestMmrLeaf: MmrLeaf
-    proof: Type_571
-}
-
-export interface ValidatorProof {
-    validatorClaimsBitfield: BitField
-    signatures: Bytes[]
-    positions: bigint[]
-    publicKeys: H160[]
-    publicKeyMerkleProofs: H256[][]
-}
-
-export type BitField = BitSequence
-
-export interface Commitment {
-    payload: [Bytes, Bytes][]
-    blockNumber: number
-    validatorSetId: bigint
 }
 
 /**
@@ -7224,15 +5890,177 @@ export type Description = Bytes
 
 export type ContentSource = Bytes
 
-export const H256 = sts.bytes()
+export interface DistributionAccounts {
+    xorAllocation: DistributionAccountData
+    valHolders: DistributionAccountData
+    soraCitizens: DistributionAccountData
+    storesAndShops: DistributionAccountData
+    projects: DistributionAccountData
+}
+
+export interface DistributionAccountData {
+    account: DistributionAccount
+    coefficient: FixedPoint
+}
+
+export type DistributionAccount = DistributionAccount_Account | DistributionAccount_TechAccount
+
+export interface DistributionAccount_Account {
+    __kind: 'Account'
+    value: AccountId32
+}
+
+export interface DistributionAccount_TechAccount {
+    __kind: 'TechAccount'
+    value: TechAccountId
+}
+
+export const DistributionAccounts: sts.Type<DistributionAccounts> = sts.struct(() => {
+    return  {
+        xorAllocation: DistributionAccountData,
+        valHolders: DistributionAccountData,
+        soraCitizens: DistributionAccountData,
+        storesAndShops: DistributionAccountData,
+        projects: DistributionAccountData,
+    }
+})
+
+export const DistributionAccountData: sts.Type<DistributionAccountData> = sts.struct(() => {
+    return  {
+        account: DistributionAccount,
+        coefficient: FixedPoint,
+    }
+})
+
+export const DistributionAccount: sts.Type<DistributionAccount> = sts.closedEnum(() => {
+    return  {
+        Account: AccountId32,
+        TechAccount: TechAccountId,
+    }
+})
+
+export type TechAccountId = TechAccountId_Generic | TechAccountId_None | TechAccountId_Pure | TechAccountId_Wrapped | TechAccountId_WrappedRepr
+
+export interface TechAccountId_Generic {
+    __kind: 'Generic'
+    value: [Bytes, Bytes]
+}
+
+export interface TechAccountId_None {
+    __kind: 'None'
+}
+
+export interface TechAccountId_Pure {
+    __kind: 'Pure'
+    value: [number, TechPurpose]
+}
+
+export interface TechAccountId_Wrapped {
+    __kind: 'Wrapped'
+    value: AccountId32
+}
+
+export interface TechAccountId_WrappedRepr {
+    __kind: 'WrappedRepr'
+    value: AccountId32
+}
+
+export type TechPurpose = TechPurpose_FeeCollector | TechPurpose_FeeCollectorForPair | TechPurpose_Identifier | TechPurpose_OrderBookLiquidityKeeper | TechPurpose_XykLiquidityKeeper
+
+export interface TechPurpose_FeeCollector {
+    __kind: 'FeeCollector'
+}
+
+export interface TechPurpose_FeeCollectorForPair {
+    __kind: 'FeeCollectorForPair'
+    value: Type_85
+}
+
+export interface TechPurpose_Identifier {
+    __kind: 'Identifier'
+    value: Bytes
+}
+
+export interface TechPurpose_OrderBookLiquidityKeeper {
+    __kind: 'OrderBookLiquidityKeeper'
+    value: Type_85
+}
+
+export interface TechPurpose_XykLiquidityKeeper {
+    __kind: 'XykLiquidityKeeper'
+    value: Type_85
+}
+
+export interface Type_85 {
+    baseAssetId: TechAssetId
+    targetAssetId: TechAssetId
+}
+
+export type TechAssetId = TechAssetId_Escaped | TechAssetId_Wrapped
+
+export interface TechAssetId_Escaped {
+    __kind: 'Escaped'
+    value: Bytes
+}
+
+export interface TechAssetId_Wrapped {
+    __kind: 'Wrapped'
+    value: PredefinedAssetId
+}
+
+export type PredefinedAssetId = PredefinedAssetId_DAI | PredefinedAssetId_DOT | PredefinedAssetId_ETH | PredefinedAssetId_KSM | PredefinedAssetId_PSWAP | PredefinedAssetId_TBCD | PredefinedAssetId_USDT | PredefinedAssetId_VAL | PredefinedAssetId_XOR | PredefinedAssetId_XST | PredefinedAssetId_XSTUSD
+
+export interface PredefinedAssetId_DAI {
+    __kind: 'DAI'
+}
+
+export interface PredefinedAssetId_DOT {
+    __kind: 'DOT'
+}
+
+export interface PredefinedAssetId_ETH {
+    __kind: 'ETH'
+}
+
+export interface PredefinedAssetId_KSM {
+    __kind: 'KSM'
+}
+
+export interface PredefinedAssetId_PSWAP {
+    __kind: 'PSWAP'
+}
+
+export interface PredefinedAssetId_TBCD {
+    __kind: 'TBCD'
+}
+
+export interface PredefinedAssetId_USDT {
+    __kind: 'USDT'
+}
+
+export interface PredefinedAssetId_VAL {
+    __kind: 'VAL'
+}
+
+export interface PredefinedAssetId_XOR {
+    __kind: 'XOR'
+}
+
+export interface PredefinedAssetId_XST {
+    __kind: 'XST'
+}
+
+export interface PredefinedAssetId_XSTUSD {
+    __kind: 'XSTUSD'
+}
 
 export interface EventRecord {
-    phase: Type_193
+    phase: Type_139
     event: Event
     topics: H256[]
 }
 
-export type Event = Event_Assets | Event_BagsList | Event_Balances | Event_Band | Event_BeefyLightClient | Event_BridgeDataSigner | Event_BridgeInboundChannel | Event_BridgeMultisig | Event_BridgeOutboundChannel | Event_BridgeProxy | Event_CeresGovernancePlatform | Event_CeresLaunchpad | Event_CeresLiquidityLocker | Event_CeresStaking | Event_CeresTokenLocker | Event_Council | Event_DemeterFarmingPlatform | Event_Democracy | Event_Dispatch | Event_ERC20App | Event_ElectionProviderMultiPhase | Event_ElectionsPhragmen | Event_EthApp | Event_EthBridge | Event_EthereumLightClient | Event_Faucet | Event_Grandpa | Event_HermesGovernancePlatform | Event_Identity | Event_ImOnline | Event_IrohaMigration | Event_LeafProvider | Event_LiquidityProxy | Event_MigrationApp | Event_MulticollateralBondingCurvePool | Event_Multisig | Event_MultisigVerifier | Event_Offences | Event_OracleProxy | Event_Permissions | Event_PoolXYK | Event_Preimage | Event_PriceTools | Event_PswapDistribution | Event_Rewards | Event_Scheduler | Event_Session | Event_Staking | Event_SubstrateBridgeApp | Event_SubstrateBridgeInboundChannel | Event_SubstrateBridgeOutboundChannel | Event_SubstrateDispatch | Event_Sudo | Event_System | Event_Technical | Event_TechnicalCommittee | Event_TechnicalMembership | Event_Tokens | Event_TradingPair | Event_TransactionPayment | Event_Utility | Event_VestedRewards | Event_XSTPool | Event_XorFee
+export type Event = Event_Assets | Event_BagsList | Event_Balances | Event_Band | Event_BridgeMultisig | Event_CeresGovernancePlatform | Event_CeresLaunchpad | Event_CeresLiquidityLocker | Event_CeresStaking | Event_CeresTokenLocker | Event_Council | Event_DemeterFarmingPlatform | Event_Democracy | Event_ElectionProviderMultiPhase | Event_ElectionsPhragmen | Event_EthBridge | Event_Grandpa | Event_HermesGovernancePlatform | Event_Identity | Event_ImOnline | Event_IrohaMigration | Event_LiquidityProxy | Event_MulticollateralBondingCurvePool | Event_Multisig | Event_Offences | Event_OracleProxy | Event_Permissions | Event_PoolXYK | Event_Preimage | Event_PriceTools | Event_PswapDistribution | Event_Rewards | Event_Scheduler | Event_Session | Event_Staking | Event_System | Event_Technical | Event_TechnicalCommittee | Event_TechnicalMembership | Event_Tokens | Event_TradingPair | Event_TransactionPayment | Event_Utility | Event_VestedRewards | Event_XSTPool | Event_XorFee
 
 export interface Event_Assets {
     __kind: 'Assets'
@@ -7254,34 +6082,9 @@ export interface Event_Band {
     value: BandEvent
 }
 
-export interface Event_BeefyLightClient {
-    __kind: 'BeefyLightClient'
-    value: BeefyLightClientEvent
-}
-
-export interface Event_BridgeDataSigner {
-    __kind: 'BridgeDataSigner'
-    value: BridgeDataSignerEvent
-}
-
-export interface Event_BridgeInboundChannel {
-    __kind: 'BridgeInboundChannel'
-    value: BridgeInboundChannelEvent
-}
-
 export interface Event_BridgeMultisig {
     __kind: 'BridgeMultisig'
     value: BridgeMultisigEvent
-}
-
-export interface Event_BridgeOutboundChannel {
-    __kind: 'BridgeOutboundChannel'
-    value: BridgeOutboundChannelEvent
-}
-
-export interface Event_BridgeProxy {
-    __kind: 'BridgeProxy'
-    value: BridgeProxyEvent
 }
 
 export interface Event_CeresGovernancePlatform {
@@ -7324,16 +6127,6 @@ export interface Event_Democracy {
     value: DemocracyEvent
 }
 
-export interface Event_Dispatch {
-    __kind: 'Dispatch'
-    value: DispatchEvent
-}
-
-export interface Event_ERC20App {
-    __kind: 'ERC20App'
-    value: ERC20AppEvent
-}
-
 export interface Event_ElectionProviderMultiPhase {
     __kind: 'ElectionProviderMultiPhase'
     value: ElectionProviderMultiPhaseEvent
@@ -7344,24 +6137,9 @@ export interface Event_ElectionsPhragmen {
     value: ElectionsPhragmenEvent
 }
 
-export interface Event_EthApp {
-    __kind: 'EthApp'
-    value: EthAppEvent
-}
-
 export interface Event_EthBridge {
     __kind: 'EthBridge'
     value: EthBridgeEvent
-}
-
-export interface Event_EthereumLightClient {
-    __kind: 'EthereumLightClient'
-    value: EthereumLightClientEvent
-}
-
-export interface Event_Faucet {
-    __kind: 'Faucet'
-    value: FaucetEvent
 }
 
 export interface Event_Grandpa {
@@ -7389,19 +6167,9 @@ export interface Event_IrohaMigration {
     value: IrohaMigrationEvent
 }
 
-export interface Event_LeafProvider {
-    __kind: 'LeafProvider'
-    value: LeafProviderEvent
-}
-
 export interface Event_LiquidityProxy {
     __kind: 'LiquidityProxy'
     value: LiquidityProxyEvent
-}
-
-export interface Event_MigrationApp {
-    __kind: 'MigrationApp'
-    value: MigrationAppEvent
 }
 
 export interface Event_MulticollateralBondingCurvePool {
@@ -7412,11 +6180,6 @@ export interface Event_MulticollateralBondingCurvePool {
 export interface Event_Multisig {
     __kind: 'Multisig'
     value: MultisigEvent
-}
-
-export interface Event_MultisigVerifier {
-    __kind: 'MultisigVerifier'
-    value: MultisigVerifierEvent
 }
 
 export interface Event_Offences {
@@ -7472,31 +6235,6 @@ export interface Event_Session {
 export interface Event_Staking {
     __kind: 'Staking'
     value: StakingEvent
-}
-
-export interface Event_SubstrateBridgeApp {
-    __kind: 'SubstrateBridgeApp'
-    value: SubstrateBridgeAppEvent
-}
-
-export interface Event_SubstrateBridgeInboundChannel {
-    __kind: 'SubstrateBridgeInboundChannel'
-    value: SubstrateBridgeInboundChannelEvent
-}
-
-export interface Event_SubstrateBridgeOutboundChannel {
-    __kind: 'SubstrateBridgeOutboundChannel'
-    value: SubstrateBridgeOutboundChannelEvent
-}
-
-export interface Event_SubstrateDispatch {
-    __kind: 'SubstrateDispatch'
-    value: SubstrateDispatchEvent
-}
-
-export interface Event_Sudo {
-    __kind: 'Sudo'
-    value: SudoEvent
 }
 
 export interface Event_System {
@@ -8126,121 +6864,6 @@ export interface TechnicalEvent_SwapSuccess {
     value: AccountId32
 }
 
-export type TechAccountId = TechAccountId_Generic | TechAccountId_None | TechAccountId_Pure | TechAccountId_Wrapped | TechAccountId_WrappedRepr
-
-export interface TechAccountId_Generic {
-    __kind: 'Generic'
-    value: [Bytes, Bytes]
-}
-
-export interface TechAccountId_None {
-    __kind: 'None'
-}
-
-export interface TechAccountId_Pure {
-    __kind: 'Pure'
-    value: [number, TechPurpose]
-}
-
-export interface TechAccountId_Wrapped {
-    __kind: 'Wrapped'
-    value: AccountId32
-}
-
-export interface TechAccountId_WrappedRepr {
-    __kind: 'WrappedRepr'
-    value: AccountId32
-}
-
-export type TechPurpose = TechPurpose_FeeCollector | TechPurpose_FeeCollectorForPair | TechPurpose_Identifier | TechPurpose_OrderBookLiquidityKeeper | TechPurpose_XykLiquidityKeeper
-
-export interface TechPurpose_FeeCollector {
-    __kind: 'FeeCollector'
-}
-
-export interface TechPurpose_FeeCollectorForPair {
-    __kind: 'FeeCollectorForPair'
-    value: Type_85
-}
-
-export interface TechPurpose_Identifier {
-    __kind: 'Identifier'
-    value: Bytes
-}
-
-export interface TechPurpose_OrderBookLiquidityKeeper {
-    __kind: 'OrderBookLiquidityKeeper'
-    value: Type_85
-}
-
-export interface TechPurpose_XykLiquidityKeeper {
-    __kind: 'XykLiquidityKeeper'
-    value: Type_85
-}
-
-export interface Type_85 {
-    baseAssetId: TechAssetId
-    targetAssetId: TechAssetId
-}
-
-export type TechAssetId = TechAssetId_Escaped | TechAssetId_Wrapped
-
-export interface TechAssetId_Escaped {
-    __kind: 'Escaped'
-    value: Bytes
-}
-
-export interface TechAssetId_Wrapped {
-    __kind: 'Wrapped'
-    value: PredefinedAssetId
-}
-
-export type PredefinedAssetId = PredefinedAssetId_DAI | PredefinedAssetId_DOT | PredefinedAssetId_ETH | PredefinedAssetId_KSM | PredefinedAssetId_PSWAP | PredefinedAssetId_TBCD | PredefinedAssetId_USDT | PredefinedAssetId_VAL | PredefinedAssetId_XOR | PredefinedAssetId_XST | PredefinedAssetId_XSTUSD
-
-export interface PredefinedAssetId_DAI {
-    __kind: 'DAI'
-}
-
-export interface PredefinedAssetId_DOT {
-    __kind: 'DOT'
-}
-
-export interface PredefinedAssetId_ETH {
-    __kind: 'ETH'
-}
-
-export interface PredefinedAssetId_KSM {
-    __kind: 'KSM'
-}
-
-export interface PredefinedAssetId_PSWAP {
-    __kind: 'PSWAP'
-}
-
-export interface PredefinedAssetId_TBCD {
-    __kind: 'TBCD'
-}
-
-export interface PredefinedAssetId_USDT {
-    __kind: 'USDT'
-}
-
-export interface PredefinedAssetId_VAL {
-    __kind: 'VAL'
-}
-
-export interface PredefinedAssetId_XOR {
-    __kind: 'XOR'
-}
-
-export interface PredefinedAssetId_XST {
-    __kind: 'XST'
-}
-
-export interface PredefinedAssetId_XSTUSD {
-    __kind: 'XSTUSD'
-}
-
 /**
  * Event for the System pallet.
  */
@@ -8323,133 +6946,6 @@ export interface DispatchClass_Normal {
 
 export interface DispatchClass_Operational {
     __kind: 'Operational'
-}
-
-/**
- * 
-			The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-			by this pallet.
-			
- */
-export type SudoEvent = SudoEvent_KeyChanged | SudoEvent_Sudid | SudoEvent_SudoAsDone
-
-/**
- * The \[sudoer\] just switched identity; the old key is supplied if one existed.
- */
-export interface SudoEvent_KeyChanged {
-    __kind: 'KeyChanged'
-    oldSudoer?: (AccountId32 | undefined)
-}
-
-/**
- * A sudo just took place. \[result\]
- */
-export interface SudoEvent_Sudid {
-    __kind: 'Sudid'
-    sudoResult: Result<null, DispatchError>
-}
-
-/**
- * A sudo just took place. \[result\]
- */
-export interface SudoEvent_SudoAsDone {
-    __kind: 'SudoAsDone'
-    sudoResult: Result<null, DispatchError>
-}
-
-/**
- * 
-			The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-			by this pallet.
-			
- */
-export type SubstrateDispatchEvent = SubstrateDispatchEvent_MessageDecodeFailed | SubstrateDispatchEvent_MessageDispatched | SubstrateDispatchEvent_MessageRejected
-
-/**
- * We have failed to decode a Call from the message.
- */
-export interface SubstrateDispatchEvent_MessageDecodeFailed {
-    __kind: 'MessageDecodeFailed'
-    value: MessageId
-}
-
-/**
- * Message has been dispatched with given result.
- */
-export interface SubstrateDispatchEvent_MessageDispatched {
-    __kind: 'MessageDispatched'
-    value: [MessageId, Result<null, DispatchError>]
-}
-
-/**
- * Message has been rejected
- */
-export interface SubstrateDispatchEvent_MessageRejected {
-    __kind: 'MessageRejected'
-    value: MessageId
-}
-
-export interface MessageId {
-    direction: MessageDirection
-    batchNonce?: (bigint | undefined)
-    messageNonce: bigint
-}
-
-export type MessageDirection = MessageDirection_Inbound | MessageDirection_Outbound
-
-export interface MessageDirection_Inbound {
-    __kind: 'Inbound'
-}
-
-export interface MessageDirection_Outbound {
-    __kind: 'Outbound'
-}
-
-/**
- * 
-			The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-			by this pallet.
-			
- */
-export type SubstrateBridgeOutboundChannelEvent = SubstrateBridgeOutboundChannelEvent_MessageAccepted
-
-export interface SubstrateBridgeOutboundChannelEvent_MessageAccepted {
-    __kind: 'MessageAccepted'
-    networkId: SubNetworkId
-    batchNonce: bigint
-    messageNonce: bigint
-}
-
-/**
- * 
-			The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-			by this pallet.
-			
- */
-export type SubstrateBridgeInboundChannelEvent = never
-
-/**
- * 
-			The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-			by this pallet.
-			
- */
-export type SubstrateBridgeAppEvent = SubstrateBridgeAppEvent_Burned | SubstrateBridgeAppEvent_Minted
-
-/**
- * [network_id, asset_id, sender, recepient, amount]
- */
-export interface SubstrateBridgeAppEvent_Burned {
-    __kind: 'Burned'
-    value: [SubNetworkId, AssetId32, AccountId32, VersionedMultiLocation, bigint]
-}
-
-/**
- * [network_id, asset_id, sender, recepient, amount]
- */
-export interface SubstrateBridgeAppEvent_Minted {
-    __kind: 'Minted'
-    value: [SubNetworkId, AssetId32, (VersionedMultiLocation | undefined), AccountId32, bigint]
 }
 
 /**
@@ -8935,34 +7431,6 @@ export interface OffencesEvent_Offence {
 			by this pallet.
 			
  */
-export type MultisigVerifierEvent = MultisigVerifierEvent_NetworkInitialized | MultisigVerifierEvent_PeerAdded | MultisigVerifierEvent_PeerRemoved | MultisigVerifierEvent_VerificationSuccessful
-
-export interface MultisigVerifierEvent_NetworkInitialized {
-    __kind: 'NetworkInitialized'
-    value: GenericNetworkId
-}
-
-export interface MultisigVerifierEvent_PeerAdded {
-    __kind: 'PeerAdded'
-    value: Bytes
-}
-
-export interface MultisigVerifierEvent_PeerRemoved {
-    __kind: 'PeerRemoved'
-    value: Bytes
-}
-
-export interface MultisigVerifierEvent_VerificationSuccessful {
-    __kind: 'VerificationSuccessful'
-    value: GenericNetworkId
-}
-
-/**
- * 
-			The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-			by this pallet.
-			
- */
 export type MultisigEvent = MultisigEvent_MultisigApproval | MultisigEvent_MultisigCancelled | MultisigEvent_MultisigExecuted | MultisigEvent_NewMultisig
 
 /**
@@ -9058,26 +7526,6 @@ export interface MulticollateralBondingCurvePoolEvent_ReferenceAssetChanged {
 }
 
 /**
- * Events for the ETH module.
- */
-export type MigrationAppEvent = MigrationAppEvent_Erc20Migrated | MigrationAppEvent_EthMigrated | MigrationAppEvent_SidechainMigrated
-
-export interface MigrationAppEvent_Erc20Migrated {
-    __kind: 'Erc20Migrated'
-    value: [bigint, H160]
-}
-
-export interface MigrationAppEvent_EthMigrated {
-    __kind: 'EthMigrated'
-    value: [bigint, H160]
-}
-
-export interface MigrationAppEvent_SidechainMigrated {
-    __kind: 'SidechainMigrated'
-    value: [bigint, H160]
-}
-
-/**
  * 
 			The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
 			by this pallet.
@@ -9123,14 +7571,6 @@ export interface LiquiditySourceId {
     dexId: number
     liquiditySourceIndex: LiquiditySourceType
 }
-
-/**
- * 
-			The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-			by this pallet.
-			
- */
-export type LeafProviderEvent = never
 
 /**
  * 
@@ -9382,42 +7822,6 @@ export interface GrandpaEvent_Resumed {
 			by this pallet.
 			
  */
-export type FaucetEvent = FaucetEvent_LimitUpdated | FaucetEvent_Transferred
-
-export interface FaucetEvent_LimitUpdated {
-    __kind: 'LimitUpdated'
-    value: bigint
-}
-
-export interface FaucetEvent_Transferred {
-    __kind: 'Transferred'
-    value: [AccountId32, bigint]
-}
-
-/**
- * 
-			The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-			by this pallet.
-			
- */
-export type EthereumLightClientEvent = EthereumLightClientEvent_Finalized
-
-export interface EthereumLightClientEvent_Finalized {
-    __kind: 'Finalized'
-    value: [bigint, HeaderId]
-}
-
-export interface HeaderId {
-    number: bigint
-    hash: H256
-}
-
-/**
- * 
-			The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-			by this pallet.
-			
- */
 export type EthBridgeEvent = EthBridgeEvent_ApprovalsCollected | EthBridgeEvent_CancellationFailed | EthBridgeEvent_IncomingRequestFinalizationFailed | EthBridgeEvent_IncomingRequestFinalized | EthBridgeEvent_RegisterRequestFailed | EthBridgeEvent_RequestAborted | EthBridgeEvent_RequestFinalizationFailed | EthBridgeEvent_RequestRegistered
 
 /**
@@ -9482,26 +7886,6 @@ export interface EthBridgeEvent_RequestFinalizationFailed {
 export interface EthBridgeEvent_RequestRegistered {
     __kind: 'RequestRegistered'
     value: H256
-}
-
-/**
- * Events for the ETH module.
- */
-export type EthAppEvent = EthAppEvent_Burned | EthAppEvent_Minted | EthAppEvent_Refunded
-
-export interface EthAppEvent_Burned {
-    __kind: 'Burned'
-    value: [bigint, AccountId32, H160, bigint]
-}
-
-export interface EthAppEvent_Minted {
-    __kind: 'Minted'
-    value: [bigint, H160, AccountId32, bigint]
-}
-
-export interface EthAppEvent_Refunded {
-    __kind: 'Refunded'
-    value: [bigint, AccountId32, bigint]
 }
 
 /**
@@ -9686,70 +8070,6 @@ export interface ElectionCompute_Signed {
 
 export interface ElectionCompute_Unsigned {
     __kind: 'Unsigned'
-}
-
-/**
- * 
-			The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-			by this pallet.
-			
- */
-export type ERC20AppEvent = ERC20AppEvent_Burned | ERC20AppEvent_Minted | ERC20AppEvent_Refunded
-
-/**
- * [network_id, asset_id, sender, recepient, amount]
- */
-export interface ERC20AppEvent_Burned {
-    __kind: 'Burned'
-    value: [bigint, AssetId32, AccountId32, H160, bigint]
-}
-
-/**
- * [network_id, asset_id, sender, recepient, amount]
- */
-export interface ERC20AppEvent_Minted {
-    __kind: 'Minted'
-    value: [bigint, AssetId32, H160, AccountId32, bigint]
-}
-
-/**
- * [network_id, sender, asset_id, amount]
- */
-export interface ERC20AppEvent_Refunded {
-    __kind: 'Refunded'
-    value: [bigint, AccountId32, AssetId32, bigint]
-}
-
-/**
- * 
-			The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-			by this pallet.
-			
- */
-export type DispatchEvent = DispatchEvent_MessageDecodeFailed | DispatchEvent_MessageDispatched | DispatchEvent_MessageRejected
-
-/**
- * We have failed to decode a Call from the message.
- */
-export interface DispatchEvent_MessageDecodeFailed {
-    __kind: 'MessageDecodeFailed'
-    value: MessageId
-}
-
-/**
- * Message has been dispatched with given result.
- */
-export interface DispatchEvent_MessageDispatched {
-    __kind: 'MessageDispatched'
-    value: [MessageId, Result<null, DispatchError>]
-}
-
-/**
- * Message has been rejected
- */
-export interface DispatchEvent_MessageRejected {
-    __kind: 'MessageRejected'
-    value: MessageId
 }
 
 /**
@@ -10283,60 +8603,6 @@ export interface CeresGovernancePlatformEvent_Withdrawn {
 }
 
 /**
- * Events for the ETH module.
- */
-export type BridgeProxyEvent = BridgeProxyEvent_RefundFailed | BridgeProxyEvent_RequestStatusUpdate
-
-export interface BridgeProxyEvent_RefundFailed {
-    __kind: 'RefundFailed'
-    value: H256
-}
-
-export interface BridgeProxyEvent_RequestStatusUpdate {
-    __kind: 'RequestStatusUpdate'
-    value: [H256, MessageStatus]
-}
-
-export type MessageStatus = MessageStatus_Approved | MessageStatus_Committed | MessageStatus_Done | MessageStatus_Failed | MessageStatus_InQueue | MessageStatus_Refunded
-
-export interface MessageStatus_Approved {
-    __kind: 'Approved'
-}
-
-export interface MessageStatus_Committed {
-    __kind: 'Committed'
-}
-
-export interface MessageStatus_Done {
-    __kind: 'Done'
-}
-
-export interface MessageStatus_Failed {
-    __kind: 'Failed'
-}
-
-export interface MessageStatus_InQueue {
-    __kind: 'InQueue'
-}
-
-export interface MessageStatus_Refunded {
-    __kind: 'Refunded'
-}
-
-/**
- * 
-			The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-			by this pallet.
-			
- */
-export type BridgeOutboundChannelEvent = BridgeOutboundChannelEvent_MessageAccepted
-
-export interface BridgeOutboundChannelEvent_MessageAccepted {
-    __kind: 'MessageAccepted'
-    value: [bigint, bigint, bigint]
-}
-
-/**
  * Events type.
  */
 export type BridgeMultisigEvent = BridgeMultisigEvent_MultisigAccountCreated | BridgeMultisigEvent_MultisigApproval | BridgeMultisigEvent_MultisigCancelled | BridgeMultisigEvent_MultisigExecuted | BridgeMultisigEvent_NewMultisig
@@ -10379,74 +8645,6 @@ export interface BridgeMultisigEvent_MultisigExecuted {
 export interface BridgeMultisigEvent_NewMultisig {
     __kind: 'NewMultisig'
     value: [AccountId32, AccountId32, Bytes]
-}
-
-/**
- * This module has no events
- */
-export type BridgeInboundChannelEvent = never
-
-/**
- * 
-			The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-			by this pallet.
-			
- */
-export type BridgeDataSignerEvent = BridgeDataSignerEvent_AddedPeer | BridgeDataSignerEvent_ApprovalAccepted | BridgeDataSignerEvent_Approved | BridgeDataSignerEvent_Initialized | BridgeDataSignerEvent_RemovedPeer
-
-export interface BridgeDataSignerEvent_AddedPeer {
-    __kind: 'AddedPeer'
-    networkId: GenericNetworkId
-    peer: Bytes
-}
-
-export interface BridgeDataSignerEvent_ApprovalAccepted {
-    __kind: 'ApprovalAccepted'
-    networkId: GenericNetworkId
-    data: H256
-    signature: Signature
-}
-
-export interface BridgeDataSignerEvent_Approved {
-    __kind: 'Approved'
-    networkId: GenericNetworkId
-    data: H256
-    signatures: Signature[]
-}
-
-export interface BridgeDataSignerEvent_Initialized {
-    __kind: 'Initialized'
-    networkId: GenericNetworkId
-    peers: Bytes[]
-}
-
-export interface BridgeDataSignerEvent_RemovedPeer {
-    __kind: 'RemovedPeer'
-    networkId: GenericNetworkId
-    peer: Bytes
-}
-
-/**
- * 
-			The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-			by this pallet.
-			
- */
-export type BeefyLightClientEvent = BeefyLightClientEvent_NewMMRRoot | BeefyLightClientEvent_ValidatorRegistryUpdated | BeefyLightClientEvent_VerificationSuccessful
-
-export interface BeefyLightClientEvent_NewMMRRoot {
-    __kind: 'NewMMRRoot'
-    value: [SubNetworkId, H256, bigint]
-}
-
-export interface BeefyLightClientEvent_ValidatorRegistryUpdated {
-    __kind: 'ValidatorRegistryUpdated'
-    value: [SubNetworkId, H256, number, bigint]
-}
-
-export interface BeefyLightClientEvent_VerificationSuccessful {
-    __kind: 'VerificationSuccessful'
-    value: [SubNetworkId, AccountId32, number]
 }
 
 /**
@@ -10668,24 +8866,24 @@ export interface AssetsEvent_Transfer {
     value: [AccountId32, AccountId32, AssetId32, bigint]
 }
 
-export type Type_193 = Type_193_ApplyExtrinsic | Type_193_Finalization | Type_193_Initialization
+export type Type_139 = Type_139_ApplyExtrinsic | Type_139_Finalization | Type_139_Initialization
 
-export interface Type_193_ApplyExtrinsic {
+export interface Type_139_ApplyExtrinsic {
     __kind: 'ApplyExtrinsic'
     value: number
 }
 
-export interface Type_193_Finalization {
+export interface Type_139_Finalization {
     __kind: 'Finalization'
 }
 
-export interface Type_193_Initialization {
+export interface Type_139_Initialization {
     __kind: 'Initialization'
 }
 
 export const EventRecord: sts.Type<EventRecord> = sts.struct(() => {
     return  {
-        phase: Type_193,
+        phase: Type_139,
         event: Event,
         topics: sts.array(() => H256),
     }
@@ -10697,12 +8895,7 @@ export const Event: sts.Type<Event> = sts.closedEnum(() => {
         BagsList: BagsListEvent,
         Balances: BalancesEvent,
         Band: BandEvent,
-        BeefyLightClient: BeefyLightClientEvent,
-        BridgeDataSigner: BridgeDataSignerEvent,
-        BridgeInboundChannel: BridgeInboundChannelEvent,
         BridgeMultisig: BridgeMultisigEvent,
-        BridgeOutboundChannel: BridgeOutboundChannelEvent,
-        BridgeProxy: BridgeProxyEvent,
         CeresGovernancePlatform: CeresGovernancePlatformEvent,
         CeresLaunchpad: CeresLaunchpadEvent,
         CeresLiquidityLocker: CeresLiquidityLockerEvent,
@@ -10711,25 +8904,17 @@ export const Event: sts.Type<Event> = sts.closedEnum(() => {
         Council: CouncilEvent,
         DemeterFarmingPlatform: DemeterFarmingPlatformEvent,
         Democracy: DemocracyEvent,
-        Dispatch: DispatchEvent,
-        ERC20App: ERC20AppEvent,
         ElectionProviderMultiPhase: ElectionProviderMultiPhaseEvent,
         ElectionsPhragmen: ElectionsPhragmenEvent,
-        EthApp: EthAppEvent,
         EthBridge: EthBridgeEvent,
-        EthereumLightClient: EthereumLightClientEvent,
-        Faucet: FaucetEvent,
         Grandpa: GrandpaEvent,
         HermesGovernancePlatform: HermesGovernancePlatformEvent,
         Identity: IdentityEvent,
         ImOnline: ImOnlineEvent,
         IrohaMigration: IrohaMigrationEvent,
-        LeafProvider: LeafProviderEvent,
         LiquidityProxy: LiquidityProxyEvent,
-        MigrationApp: MigrationAppEvent,
         MulticollateralBondingCurvePool: MulticollateralBondingCurvePoolEvent,
         Multisig: MultisigEvent,
-        MultisigVerifier: MultisigVerifierEvent,
         Offences: OffencesEvent,
         OracleProxy: OracleProxyEvent,
         Permissions: PermissionsEvent,
@@ -10741,11 +8926,6 @@ export const Event: sts.Type<Event> = sts.closedEnum(() => {
         Scheduler: SchedulerEvent,
         Session: SessionEvent,
         Staking: StakingEvent,
-        SubstrateBridgeApp: SubstrateBridgeAppEvent,
-        SubstrateBridgeInboundChannel: SubstrateBridgeInboundChannelEvent,
-        SubstrateBridgeOutboundChannel: SubstrateBridgeOutboundChannelEvent,
-        SubstrateDispatch: SubstrateDispatchEvent,
-        Sudo: SudoEvent,
         System: SystemEvent,
         Technical: TechnicalEvent,
         TechnicalCommittee: TechnicalCommitteeEvent,
@@ -10791,14 +8971,6 @@ export const XSTPoolEvent: sts.Type<XSTPoolEvent> = sts.closedEnum(() => {
         SyntheticBaseAssetFloorPriceChanged: sts.bigint(),
     }
 })
-
-export const FixedPoint: sts.Type<FixedPoint> = sts.struct(() => {
-    return  {
-        inner: sts.bigint(),
-    }
-})
-
-export const SymbolName = sts.bytes()
 
 /**
  * 
@@ -11110,56 +9282,6 @@ export const TechnicalEvent: sts.Type<TechnicalEvent> = sts.closedEnum(() => {
     }
 })
 
-export const TechAccountId: sts.Type<TechAccountId> = sts.closedEnum(() => {
-    return  {
-        Generic: sts.tuple(() => [sts.bytes(), sts.bytes()]),
-        None: sts.unit(),
-        Pure: sts.tuple(() => [sts.number(), TechPurpose]),
-        Wrapped: AccountId32,
-        WrappedRepr: AccountId32,
-    }
-})
-
-export const TechPurpose: sts.Type<TechPurpose> = sts.closedEnum(() => {
-    return  {
-        FeeCollector: sts.unit(),
-        FeeCollectorForPair: Type_85,
-        Identifier: sts.bytes(),
-        OrderBookLiquidityKeeper: Type_85,
-        XykLiquidityKeeper: Type_85,
-    }
-})
-
-export const Type_85: sts.Type<Type_85> = sts.struct(() => {
-    return  {
-        baseAssetId: TechAssetId,
-        targetAssetId: TechAssetId,
-    }
-})
-
-export const TechAssetId: sts.Type<TechAssetId> = sts.closedEnum(() => {
-    return  {
-        Escaped: sts.bytes(),
-        Wrapped: PredefinedAssetId,
-    }
-})
-
-export const PredefinedAssetId: sts.Type<PredefinedAssetId> = sts.closedEnum(() => {
-    return  {
-        DAI: sts.unit(),
-        DOT: sts.unit(),
-        ETH: sts.unit(),
-        KSM: sts.unit(),
-        PSWAP: sts.unit(),
-        TBCD: sts.unit(),
-        USDT: sts.unit(),
-        VAL: sts.unit(),
-        XOR: sts.unit(),
-        XST: sts.unit(),
-        XSTUSD: sts.unit(),
-    }
-})
-
 /**
  * Event for the System pallet.
  */
@@ -11206,303 +9328,6 @@ export const DispatchClass: sts.Type<DispatchClass> = sts.closedEnum(() => {
         Mandatory: sts.unit(),
         Normal: sts.unit(),
         Operational: sts.unit(),
-    }
-})
-
-/**
- * 
-			The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-			by this pallet.
-			
- */
-export const SudoEvent: sts.Type<SudoEvent> = sts.closedEnum(() => {
-    return  {
-        KeyChanged: sts.enumStruct({
-            oldSudoer: sts.option(() => AccountId32),
-        }),
-        Sudid: sts.enumStruct({
-            sudoResult: sts.result(() => sts.unit(), () => DispatchError),
-        }),
-        SudoAsDone: sts.enumStruct({
-            sudoResult: sts.result(() => sts.unit(), () => DispatchError),
-        }),
-    }
-})
-
-/**
- * 
-			The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-			by this pallet.
-			
- */
-export const SubstrateDispatchEvent: sts.Type<SubstrateDispatchEvent> = sts.closedEnum(() => {
-    return  {
-        MessageDecodeFailed: MessageId,
-        MessageDispatched: sts.tuple(() => [MessageId, sts.result(() => sts.unit(), () => DispatchError)]),
-        MessageRejected: MessageId,
-    }
-})
-
-export const MessageId: sts.Type<MessageId> = sts.struct(() => {
-    return  {
-        direction: MessageDirection,
-        batchNonce: sts.option(() => sts.bigint()),
-        messageNonce: sts.bigint(),
-    }
-})
-
-export const MessageDirection: sts.Type<MessageDirection> = sts.closedEnum(() => {
-    return  {
-        Inbound: sts.unit(),
-        Outbound: sts.unit(),
-    }
-})
-
-/**
- * 
-			The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-			by this pallet.
-			
- */
-export const SubstrateBridgeOutboundChannelEvent: sts.Type<SubstrateBridgeOutboundChannelEvent> = sts.closedEnum(() => {
-    return  {
-        MessageAccepted: sts.enumStruct({
-            networkId: SubNetworkId,
-            batchNonce: sts.bigint(),
-            messageNonce: sts.bigint(),
-        }),
-    }
-})
-
-/**
- * 
-			The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-			by this pallet.
-			
- */
-export const SubstrateBridgeInboundChannelEvent: sts.Type<SubstrateBridgeInboundChannelEvent> = sts.closedEnum(() => {
-    return  {
-    }
-})
-
-/**
- * 
-			The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-			by this pallet.
-			
- */
-export const SubstrateBridgeAppEvent: sts.Type<SubstrateBridgeAppEvent> = sts.closedEnum(() => {
-    return  {
-        Burned: sts.tuple(() => [SubNetworkId, AssetId32, AccountId32, VersionedMultiLocation, sts.bigint()]),
-        Minted: sts.tuple(() => [SubNetworkId, AssetId32, sts.option(() => VersionedMultiLocation), AccountId32, sts.bigint()]),
-    }
-})
-
-export const VersionedMultiLocation: sts.Type<VersionedMultiLocation> = sts.closedEnum(() => {
-    return  {
-        V2: V2MultiLocation,
-        V3: V3MultiLocation,
-    }
-})
-
-export const V3MultiLocation: sts.Type<V3MultiLocation> = sts.struct(() => {
-    return  {
-        parents: sts.number(),
-        interior: V3Junctions,
-    }
-})
-
-export const V3Junctions: sts.Type<V3Junctions> = sts.closedEnum(() => {
-    return  {
-        Here: sts.unit(),
-        X1: V3Junction,
-        X2: sts.tuple(() => [V3Junction, V3Junction]),
-        X3: sts.tuple(() => [V3Junction, V3Junction, V3Junction]),
-        X4: sts.tuple(() => [V3Junction, V3Junction, V3Junction, V3Junction]),
-        X5: sts.tuple(() => [V3Junction, V3Junction, V3Junction, V3Junction, V3Junction]),
-        X6: sts.tuple(() => [V3Junction, V3Junction, V3Junction, V3Junction, V3Junction, V3Junction]),
-        X7: sts.tuple(() => [V3Junction, V3Junction, V3Junction, V3Junction, V3Junction, V3Junction, V3Junction]),
-        X8: sts.tuple(() => [V3Junction, V3Junction, V3Junction, V3Junction, V3Junction, V3Junction, V3Junction, V3Junction]),
-    }
-})
-
-export const V3Junction: sts.Type<V3Junction> = sts.closedEnum(() => {
-    return  {
-        AccountId32: sts.enumStruct({
-            network: sts.option(() => V3NetworkId),
-            id: sts.bytes(),
-        }),
-        AccountIndex64: sts.enumStruct({
-            network: sts.option(() => V3NetworkId),
-            index: sts.bigint(),
-        }),
-        AccountKey20: sts.enumStruct({
-            network: sts.option(() => V3NetworkId),
-            key: sts.bytes(),
-        }),
-        GeneralIndex: sts.bigint(),
-        GeneralKey: sts.enumStruct({
-            length: sts.number(),
-            data: sts.bytes(),
-        }),
-        GlobalConsensus: V3NetworkId,
-        OnlyChild: sts.unit(),
-        PalletInstance: sts.number(),
-        Parachain: sts.number(),
-        Plurality: sts.enumStruct({
-            id: V3BodyId,
-            part: V3BodyPart,
-        }),
-    }
-})
-
-export const V3BodyPart: sts.Type<V3BodyPart> = sts.closedEnum(() => {
-    return  {
-        AtLeastProportion: sts.enumStruct({
-            nom: sts.number(),
-            denom: sts.number(),
-        }),
-        Fraction: sts.enumStruct({
-            nom: sts.number(),
-            denom: sts.number(),
-        }),
-        Members: sts.enumStruct({
-            count: sts.number(),
-        }),
-        MoreThanProportion: sts.enumStruct({
-            nom: sts.number(),
-            denom: sts.number(),
-        }),
-        Voice: sts.unit(),
-    }
-})
-
-export const V3BodyId: sts.Type<V3BodyId> = sts.closedEnum(() => {
-    return  {
-        Administration: sts.unit(),
-        Defense: sts.unit(),
-        Executive: sts.unit(),
-        Index: sts.number(),
-        Judicial: sts.unit(),
-        Legislative: sts.unit(),
-        Moniker: sts.bytes(),
-        Technical: sts.unit(),
-        Treasury: sts.unit(),
-        Unit: sts.unit(),
-    }
-})
-
-export const V3NetworkId: sts.Type<V3NetworkId> = sts.closedEnum(() => {
-    return  {
-        BitcoinCash: sts.unit(),
-        BitcoinCore: sts.unit(),
-        ByFork: sts.enumStruct({
-            blockNumber: sts.bigint(),
-            blockHash: sts.bytes(),
-        }),
-        ByGenesis: sts.bytes(),
-        Ethereum: sts.enumStruct({
-            chainId: sts.bigint(),
-        }),
-        Kusama: sts.unit(),
-        Polkadot: sts.unit(),
-        Rococo: sts.unit(),
-        Westend: sts.unit(),
-        Wococo: sts.unit(),
-    }
-})
-
-export const V2MultiLocation: sts.Type<V2MultiLocation> = sts.struct(() => {
-    return  {
-        parents: sts.number(),
-        interior: V2Junctions,
-    }
-})
-
-export const V2Junctions: sts.Type<V2Junctions> = sts.closedEnum(() => {
-    return  {
-        Here: sts.unit(),
-        X1: V2Junction,
-        X2: sts.tuple(() => [V2Junction, V2Junction]),
-        X3: sts.tuple(() => [V2Junction, V2Junction, V2Junction]),
-        X4: sts.tuple(() => [V2Junction, V2Junction, V2Junction, V2Junction]),
-        X5: sts.tuple(() => [V2Junction, V2Junction, V2Junction, V2Junction, V2Junction]),
-        X6: sts.tuple(() => [V2Junction, V2Junction, V2Junction, V2Junction, V2Junction, V2Junction]),
-        X7: sts.tuple(() => [V2Junction, V2Junction, V2Junction, V2Junction, V2Junction, V2Junction, V2Junction]),
-        X8: sts.tuple(() => [V2Junction, V2Junction, V2Junction, V2Junction, V2Junction, V2Junction, V2Junction, V2Junction]),
-    }
-})
-
-export const V2Junction: sts.Type<V2Junction> = sts.closedEnum(() => {
-    return  {
-        AccountId32: sts.enumStruct({
-            network: V2NetworkId,
-            id: sts.bytes(),
-        }),
-        AccountIndex64: sts.enumStruct({
-            network: V2NetworkId,
-            index: sts.bigint(),
-        }),
-        AccountKey20: sts.enumStruct({
-            network: V2NetworkId,
-            key: sts.bytes(),
-        }),
-        GeneralIndex: sts.bigint(),
-        GeneralKey: WeakBoundedVec,
-        OnlyChild: sts.unit(),
-        PalletInstance: sts.number(),
-        Parachain: sts.number(),
-        Plurality: sts.enumStruct({
-            id: V2BodyId,
-            part: V2BodyPart,
-        }),
-    }
-})
-
-export const V2BodyPart: sts.Type<V2BodyPart> = sts.closedEnum(() => {
-    return  {
-        AtLeastProportion: sts.enumStruct({
-            nom: sts.number(),
-            denom: sts.number(),
-        }),
-        Fraction: sts.enumStruct({
-            nom: sts.number(),
-            denom: sts.number(),
-        }),
-        Members: sts.enumStruct({
-            count: sts.number(),
-        }),
-        MoreThanProportion: sts.enumStruct({
-            nom: sts.number(),
-            denom: sts.number(),
-        }),
-        Voice: sts.unit(),
-    }
-})
-
-export const V2BodyId: sts.Type<V2BodyId> = sts.closedEnum(() => {
-    return  {
-        Administration: sts.unit(),
-        Defense: sts.unit(),
-        Executive: sts.unit(),
-        Index: sts.number(),
-        Judicial: sts.unit(),
-        Legislative: sts.unit(),
-        Named: WeakBoundedVec,
-        Technical: sts.unit(),
-        Treasury: sts.unit(),
-        Unit: sts.unit(),
-    }
-})
-
-export const WeakBoundedVec = sts.bytes()
-
-export const V2NetworkId: sts.Type<V2NetworkId> = sts.closedEnum(() => {
-    return  {
-        Any: sts.unit(),
-        Kusama: sts.unit(),
-        Named: WeakBoundedVec,
-        Polkadot: sts.unit(),
     }
 })
 
@@ -11761,21 +9586,6 @@ export const OffencesEvent: sts.Type<OffencesEvent> = sts.closedEnum(() => {
 			by this pallet.
 			
  */
-export const MultisigVerifierEvent: sts.Type<MultisigVerifierEvent> = sts.closedEnum(() => {
-    return  {
-        NetworkInitialized: GenericNetworkId,
-        PeerAdded: sts.bytes(),
-        PeerRemoved: sts.bytes(),
-        VerificationSuccessful: GenericNetworkId,
-    }
-})
-
-/**
- * 
-			The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-			by this pallet.
-			
- */
 export const MultisigEvent: sts.Type<MultisigEvent> = sts.closedEnum(() => {
     return  {
         MultisigApproval: sts.enumStruct({
@@ -11822,17 +9632,6 @@ export const MulticollateralBondingCurvePoolEvent: sts.Type<MulticollateralBondi
 })
 
 /**
- * Events for the ETH module.
- */
-export const MigrationAppEvent: sts.Type<MigrationAppEvent> = sts.closedEnum(() => {
-    return  {
-        Erc20Migrated: sts.tuple(() => [sts.bigint(), H160]),
-        EthMigrated: sts.tuple(() => [sts.bigint(), H160]),
-        SidechainMigrated: sts.tuple(() => [sts.bigint(), H160]),
-    }
-})
-
-/**
  * 
 			The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
 			by this pallet.
@@ -11864,17 +9663,6 @@ export const LiquiditySourceId: sts.Type<LiquiditySourceId> = sts.struct(() => {
     return  {
         dexId: sts.number(),
         liquiditySourceIndex: LiquiditySourceType,
-    }
-})
-
-/**
- * 
-			The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-			by this pallet.
-			
- */
-export const LeafProviderEvent: sts.Type<LeafProviderEvent> = sts.closedEnum(() => {
-    return  {
     }
 })
 
@@ -11992,8 +9780,6 @@ export const HermesGovernancePlatformEvent: sts.Type<HermesGovernancePlatformEve
     }
 })
 
-export const BoundedString = sts.bytes()
-
 /**
  * 
 			The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
@@ -12018,38 +9804,6 @@ export const Public = sts.bytes()
 			by this pallet.
 			
  */
-export const FaucetEvent: sts.Type<FaucetEvent> = sts.closedEnum(() => {
-    return  {
-        LimitUpdated: sts.bigint(),
-        Transferred: sts.tuple(() => [AccountId32, sts.bigint()]),
-    }
-})
-
-/**
- * 
-			The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-			by this pallet.
-			
- */
-export const EthereumLightClientEvent: sts.Type<EthereumLightClientEvent> = sts.closedEnum(() => {
-    return  {
-        Finalized: sts.tuple(() => [sts.bigint(), HeaderId]),
-    }
-})
-
-export const HeaderId: sts.Type<HeaderId> = sts.struct(() => {
-    return  {
-        number: sts.bigint(),
-        hash: H256,
-    }
-})
-
-/**
- * 
-			The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-			by this pallet.
-			
- */
 export const EthBridgeEvent: sts.Type<EthBridgeEvent> = sts.closedEnum(() => {
     return  {
         ApprovalsCollected: H256,
@@ -12060,17 +9814,6 @@ export const EthBridgeEvent: sts.Type<EthBridgeEvent> = sts.closedEnum(() => {
         RequestAborted: H256,
         RequestFinalizationFailed: H256,
         RequestRegistered: H256,
-    }
-})
-
-/**
- * Events for the ETH module.
- */
-export const EthAppEvent: sts.Type<EthAppEvent> = sts.closedEnum(() => {
-    return  {
-        Burned: sts.tuple(() => [sts.bigint(), AccountId32, H160, sts.bigint()]),
-        Minted: sts.tuple(() => [sts.bigint(), H160, AccountId32, sts.bigint()]),
-        Refunded: sts.tuple(() => [sts.bigint(), AccountId32, sts.bigint()]),
     }
 })
 
@@ -12162,34 +9905,6 @@ export const ElectionCompute: sts.Type<ElectionCompute> = sts.closedEnum(() => {
         OnChain: sts.unit(),
         Signed: sts.unit(),
         Unsigned: sts.unit(),
-    }
-})
-
-/**
- * 
-			The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-			by this pallet.
-			
- */
-export const ERC20AppEvent: sts.Type<ERC20AppEvent> = sts.closedEnum(() => {
-    return  {
-        Burned: sts.tuple(() => [sts.bigint(), AssetId32, AccountId32, H160, sts.bigint()]),
-        Minted: sts.tuple(() => [sts.bigint(), AssetId32, H160, AccountId32, sts.bigint()]),
-        Refunded: sts.tuple(() => [sts.bigint(), AccountId32, AssetId32, sts.bigint()]),
-    }
-})
-
-/**
- * 
-			The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-			by this pallet.
-			
- */
-export const DispatchEvent: sts.Type<DispatchEvent> = sts.closedEnum(() => {
-    return  {
-        MessageDecodeFailed: MessageId,
-        MessageDispatched: sts.tuple(() => [MessageId, sts.result(() => sts.unit(), () => DispatchError)]),
-        MessageRejected: MessageId,
     }
 })
 
@@ -12419,39 +10134,6 @@ export const CeresGovernancePlatformEvent: sts.Type<CeresGovernancePlatformEvent
 })
 
 /**
- * Events for the ETH module.
- */
-export const BridgeProxyEvent: sts.Type<BridgeProxyEvent> = sts.closedEnum(() => {
-    return  {
-        RefundFailed: H256,
-        RequestStatusUpdate: sts.tuple(() => [H256, MessageStatus]),
-    }
-})
-
-export const MessageStatus: sts.Type<MessageStatus> = sts.closedEnum(() => {
-    return  {
-        Approved: sts.unit(),
-        Committed: sts.unit(),
-        Done: sts.unit(),
-        Failed: sts.unit(),
-        InQueue: sts.unit(),
-        Refunded: sts.unit(),
-    }
-})
-
-/**
- * 
-			The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-			by this pallet.
-			
- */
-export const BridgeOutboundChannelEvent: sts.Type<BridgeOutboundChannelEvent> = sts.closedEnum(() => {
-    return  {
-        MessageAccepted: sts.tuple(() => [sts.bigint(), sts.bigint(), sts.bigint()]),
-    }
-})
-
-/**
  * Events type.
  */
 export const BridgeMultisigEvent: sts.Type<BridgeMultisigEvent> = sts.closedEnum(() => {
@@ -12461,63 +10143,6 @@ export const BridgeMultisigEvent: sts.Type<BridgeMultisigEvent> = sts.closedEnum
         MultisigCancelled: sts.tuple(() => [AccountId32, BridgeTimepoint, AccountId32, sts.bytes()]),
         MultisigExecuted: sts.tuple(() => [AccountId32, BridgeTimepoint, AccountId32, sts.bytes(), sts.option(() => DispatchError)]),
         NewMultisig: sts.tuple(() => [AccountId32, AccountId32, sts.bytes()]),
-    }
-})
-
-/**
- * This module has no events
- */
-export const BridgeInboundChannelEvent: sts.Type<BridgeInboundChannelEvent> = sts.closedEnum(() => {
-    return  {
-    }
-})
-
-/**
- * 
-			The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-			by this pallet.
-			
- */
-export const BridgeDataSignerEvent: sts.Type<BridgeDataSignerEvent> = sts.closedEnum(() => {
-    return  {
-        AddedPeer: sts.enumStruct({
-            networkId: GenericNetworkId,
-            peer: sts.bytes(),
-        }),
-        ApprovalAccepted: sts.enumStruct({
-            networkId: GenericNetworkId,
-            data: H256,
-            signature: Signature,
-        }),
-        Approved: sts.enumStruct({
-            networkId: GenericNetworkId,
-            data: H256,
-            signatures: sts.array(() => Signature),
-        }),
-        Initialized: sts.enumStruct({
-            networkId: GenericNetworkId,
-            peers: sts.array(() => sts.bytes()),
-        }),
-        RemovedPeer: sts.enumStruct({
-            networkId: GenericNetworkId,
-            peer: sts.bytes(),
-        }),
-    }
-})
-
-export const Signature = sts.bytes()
-
-/**
- * 
-			The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-			by this pallet.
-			
- */
-export const BeefyLightClientEvent: sts.Type<BeefyLightClientEvent> = sts.closedEnum(() => {
-    return  {
-        NewMMRRoot: sts.tuple(() => [SubNetworkId, H256, sts.bigint()]),
-        ValidatorRegistryUpdated: sts.tuple(() => [SubNetworkId, H256, sts.number(), sts.bigint()]),
-        VerificationSuccessful: sts.tuple(() => [SubNetworkId, AccountId32, sts.number()]),
     }
 })
 
@@ -12627,7 +10252,7 @@ export const AssetsEvent: sts.Type<AssetsEvent> = sts.closedEnum(() => {
     }
 })
 
-export const Type_193: sts.Type<Type_193> = sts.closedEnum(() => {
+export const Type_139: sts.Type<Type_139> = sts.closedEnum(() => {
     return  {
         ApplyExtrinsic: sts.number(),
         Finalization: sts.unit(),
@@ -12639,108 +10264,6 @@ export const AssetName = sts.bytes()
 
 export const AssetSymbol = sts.bytes()
 
-export const V3AssetId: sts.Type<V3AssetId> = sts.closedEnum(() => {
-    return  {
-        Abstract: sts.bytes(),
-        Concrete: V3MultiLocation,
-    }
-})
-
-export const AssetId32: sts.Type<AssetId32> = sts.struct(() => {
-    return  {
-        code: sts.bytes(),
-    }
-})
-
-export const MultiProof: sts.Type<MultiProof> = sts.closedEnum(() => {
-    return  {
-        Beefy: SubstrateBridgeMessageProof,
-        Multisig: Type_588,
-    }
-})
-
-export const Type_588: sts.Type<Type_588> = sts.struct(() => {
-    return  {
-        digest: AuxiliaryDigest,
-        proof: sts.array(() => Signature),
-    }
-})
-
-export const AuxiliaryDigest: sts.Type<AuxiliaryDigest> = sts.struct(() => {
-    return  {
-        logs: sts.array(() => AuxiliaryDigestItem),
-    }
-})
-
-export const AuxiliaryDigestItem: sts.Type<AuxiliaryDigestItem> = sts.closedEnum(() => {
-    return  {
-        Commitment: sts.tuple(() => [GenericNetworkId, H256]),
-    }
-})
-
-export const SubstrateBridgeMessageProof: sts.Type<SubstrateBridgeMessageProof> = sts.struct(() => {
-    return  {
-        proof: Type_571,
-        leaf: MmrLeaf,
-        digest: AuxiliaryDigest,
-    }
-})
-
-export const MmrLeaf: sts.Type<MmrLeaf> = sts.struct(() => {
-    return  {
-        version: MmrLeafVersion,
-        parentNumberAndHash: sts.tuple(() => [sts.number(), H256]),
-        beefyNextAuthoritySet: BeefyAuthoritySet,
-        leafExtra: LeafExtraData,
-    }
-})
-
-export const LeafExtraData: sts.Type<LeafExtraData> = sts.struct(() => {
-    return  {
-        randomSeed: H256,
-        digestHash: H256,
-    }
-})
-
-export const BeefyAuthoritySet: sts.Type<BeefyAuthoritySet> = sts.struct(() => {
-    return  {
-        id: sts.bigint(),
-        len: sts.number(),
-        root: H256,
-    }
-})
-
-export const MmrLeafVersion = sts.number()
-
-export const Type_571: sts.Type<Type_571> = sts.struct(() => {
-    return  {
-        order: sts.bigint(),
-        items: sts.array(() => H256),
-    }
-})
-
-export const GenericCommitment: sts.Type<GenericCommitment> = sts.closedEnum(() => {
-    return  {
-        EVM: Type_579,
-        Sub: Type_574,
-    }
-})
-
-export const Type_574: sts.Type<Type_574> = sts.struct(() => {
-    return  {
-        messages: sts.array(() => BridgeMessage),
-        nonce: sts.bigint(),
-    }
-})
-
-export const Type_579: sts.Type<Type_579> = sts.struct(() => {
-    return  {
-        nonce: sts.bigint(),
-        totalMaxGas: sts.bigint(),
-        messages: sts.array(() => Message),
-    }
-})
-
 export const Timepoint: sts.Type<Timepoint> = sts.struct(() => {
     return  {
         height: sts.number(),
@@ -12748,12 +10271,17 @@ export const Timepoint: sts.Type<Timepoint> = sts.struct(() => {
     }
 })
 
+export const Weight: sts.Type<Weight> = sts.struct(() => {
+    return  {
+        refTime: sts.bigint(),
+        proofSize: sts.bigint(),
+    }
+})
+
 export const OriginCaller: sts.Type<OriginCaller> = sts.closedEnum(() => {
     return  {
-        Council: Type_276,
-        Dispatch: Type_278,
-        SubstrateDispatch: Type_282,
-        TechnicalCommittee: Type_277,
+        Council: Type_225,
+        TechnicalCommittee: Type_226,
         Void: Void,
         system: RawOrigin,
     }
@@ -12772,7 +10300,7 @@ export const Void: sts.Type<Void> = sts.closedEnum(() => {
     }
 })
 
-export const Type_277: sts.Type<Type_277> = sts.closedEnum(() => {
+export const Type_226: sts.Type<Type_226> = sts.closedEnum(() => {
     return  {
         Member: AccountId32,
         Members: sts.tuple(() => [sts.number(), sts.number()]),
@@ -12780,42 +10308,7 @@ export const Type_277: sts.Type<Type_277> = sts.closedEnum(() => {
     }
 })
 
-export const Type_282: sts.Type<Type_282> = sts.struct(() => {
-    return  {
-        origin: Type_283,
-    }
-})
-
-export const Type_283: sts.Type<Type_283> = sts.struct(() => {
-    return  {
-        networkId: SubNetworkId,
-        messageId: H256,
-        timepoint: GenericTimepoint,
-    }
-})
-
-export const Type_278: sts.Type<Type_278> = sts.struct(() => {
-    return  {
-        origin: CallOriginOutput,
-    }
-})
-
-export const CallOriginOutput: sts.Type<CallOriginOutput> = sts.struct(() => {
-    return  {
-        networkId: sts.bigint(),
-        messageId: H256,
-        timepoint: GenericTimepoint,
-        additional: AdditionalEVMInboundData,
-    }
-})
-
-export const AdditionalEVMInboundData: sts.Type<AdditionalEVMInboundData> = sts.struct(() => {
-    return  {
-        source: H160,
-    }
-})
-
-export const Type_276: sts.Type<Type_276> = sts.closedEnum(() => {
+export const Type_225: sts.Type<Type_225> = sts.closedEnum(() => {
     return  {
         Member: AccountId32,
         Members: sts.tuple(() => [sts.number(), sts.number()]),
@@ -12837,26 +10330,13 @@ export const MultiChainHeight: sts.Type<MultiChainHeight> = sts.closedEnum(() =>
     }
 })
 
-export const AccountId32 = sts.bytes()
-
-export const Weight: sts.Type<Weight> = sts.struct(() => {
-    return  {
-        refTime: sts.bigint(),
-        proofSize: sts.bigint(),
-    }
-})
-
 export const Call: sts.Type<Call> = sts.closedEnum(() => {
     return  {
         Assets: AssetsCall,
         Babe: BabeCall,
         BagsList: BagsListCall,
         Band: BandCall,
-        BeefyLightClient: BeefyLightClientCall,
-        BridgeDataSigner: BridgeDataSignerCall,
-        BridgeInboundChannel: BridgeInboundChannelCall,
         BridgeMultisig: BridgeMultisigCall,
-        BridgeProxy: BridgeProxyCall,
         CeresGovernancePlatform: CeresGovernancePlatformCall,
         CeresLaunchpad: CeresLaunchpadCall,
         CeresLiquidityLocker: CeresLiquidityLockerCall,
@@ -12866,23 +10346,17 @@ export const Call: sts.Type<Call> = sts.closedEnum(() => {
         DEXAPI: DEXAPICall,
         DemeterFarmingPlatform: DemeterFarmingPlatformCall,
         Democracy: DemocracyCall,
-        ERC20App: ERC20AppCall,
         ElectionProviderMultiPhase: ElectionProviderMultiPhaseCall,
         ElectionsPhragmen: ElectionsPhragmenCall,
-        EthApp: EthAppCall,
         EthBridge: EthBridgeCall,
-        EthereumLightClient: EthereumLightClientCall,
-        Faucet: FaucetCall,
         Grandpa: GrandpaCall,
         HermesGovernancePlatform: HermesGovernancePlatformCall,
         Identity: IdentityCall,
         ImOnline: ImOnlineCall,
         IrohaMigration: IrohaMigrationCall,
         LiquidityProxy: LiquidityProxyCall,
-        MigrationApp: MigrationAppCall,
         MulticollateralBondingCurvePool: MulticollateralBondingCurvePoolCall,
         Multisig: MultisigCall,
-        MultisigVerifier: MultisigVerifierCall,
         OracleProxy: OracleProxyCall,
         Permissions: PermissionsCall,
         PoolXYK: PoolXYKCall,
@@ -12893,9 +10367,6 @@ export const Call: sts.Type<Call> = sts.closedEnum(() => {
         Scheduler: SchedulerCall,
         Session: SessionCall,
         Staking: StakingCall,
-        SubstrateBridgeApp: SubstrateBridgeAppCall,
-        SubstrateBridgeInboundChannel: SubstrateBridgeInboundChannelCall,
-        Sudo: SudoCall,
         System: SystemCall,
         Technical: TechnicalCall,
         TechnicalCommittee: TechnicalCommitteeCall,
@@ -13143,99 +10614,6 @@ export const SystemCall: sts.Type<SystemCall> = sts.closedEnum(() => {
 /**
  * Contains one variant per dispatchable that can be called by an extrinsic.
  */
-export const SudoCall: sts.Type<SudoCall> = sts.closedEnum(() => {
-    return  {
-        set_key: sts.enumStruct({
-            new: AccountId32,
-        }),
-        sudo: sts.enumStruct({
-            call: Call,
-        }),
-        sudo_as: sts.enumStruct({
-            who: AccountId32,
-            call: Call,
-        }),
-        sudo_unchecked_weight: sts.enumStruct({
-            call: Call,
-            weight: Weight,
-        }),
-    }
-})
-
-/**
- * Contains one variant per dispatchable that can be called by an extrinsic.
- */
-export const SubstrateBridgeInboundChannelCall: sts.Type<SubstrateBridgeInboundChannelCall> = sts.closedEnum(() => {
-    return  {
-        submit: sts.enumStruct({
-            networkId: SubNetworkId,
-            commitment: GenericCommitment,
-            proof: MultiProof,
-        }),
-    }
-})
-
-/**
- * Contains one variant per dispatchable that can be called by an extrinsic.
- */
-export const SubstrateBridgeAppCall: sts.Type<SubstrateBridgeAppCall> = sts.closedEnum(() => {
-    return  {
-        add_assetid_paraid: sts.enumStruct({
-            networkId: SubNetworkId,
-            paraId: sts.number(),
-            assetId: AssetId32,
-        }),
-        burn: sts.enumStruct({
-            networkId: SubNetworkId,
-            assetId: AssetId32,
-            recipient: VersionedMultiLocation,
-            amount: sts.bigint(),
-        }),
-        finalize_asset_registration: sts.enumStruct({
-            assetId: AssetId32,
-            assetKind: Type_590,
-        }),
-        mint: sts.enumStruct({
-            assetId: AssetId32,
-            sender: sts.option(() => VersionedMultiLocation),
-            recipient: AccountId32,
-            amount: sts.bigint(),
-        }),
-        register_sidechain_asset: sts.enumStruct({
-            networkId: SubNetworkId,
-            sidechainAsset: V3AssetId,
-            symbol: AssetSymbol,
-            name: AssetName,
-            decimals: sts.number(),
-            allowedParachains: sts.array(() => sts.number()),
-        }),
-        register_thischain_asset: sts.enumStruct({
-            networkId: SubNetworkId,
-            assetId: AssetId32,
-            sidechainAsset: V3AssetId,
-            allowedParachains: sts.array(() => sts.number()),
-        }),
-        remove_assetid_paraid: sts.enumStruct({
-            networkId: SubNetworkId,
-            paraId: sts.number(),
-            assetId: AssetId32,
-        }),
-        set_transfer_limit: sts.enumStruct({
-            limitCount: sts.option(() => sts.bigint()),
-        }),
-    }
-})
-
-export const Type_590: sts.Type<Type_590> = sts.closedEnum(() => {
-    return  {
-        Sidechain: sts.unit(),
-        Thischain: sts.unit(),
-    }
-})
-
-/**
- * Contains one variant per dispatchable that can be called by an extrinsic.
- */
 export const StakingCall: sts.Type<StakingCall> = sts.closedEnum(() => {
     return  {
         bond: sts.enumStruct({
@@ -13302,10 +10680,10 @@ export const StakingCall: sts.Type<StakingCall> = sts.closedEnum(() => {
         set_staking_configs: sts.enumStruct({
             minNominatorBond: ConfigOp,
             minValidatorBond: ConfigOp,
-            maxNominatorCount: Type_288,
-            maxValidatorCount: Type_288,
-            chillThreshold: Type_289,
-            minCommission: Type_290,
+            maxNominatorCount: Type_231,
+            maxValidatorCount: Type_231,
+            chillThreshold: Type_232,
+            minCommission: Type_233,
         }),
         set_validator_count: sts.enumStruct({
             new: sts.number(),
@@ -13322,7 +10700,7 @@ export const StakingCall: sts.Type<StakingCall> = sts.closedEnum(() => {
     }
 })
 
-export const Type_290: sts.Type<Type_290> = sts.closedEnum(() => {
+export const Type_233: sts.Type<Type_233> = sts.closedEnum(() => {
     return  {
         Noop: sts.unit(),
         Remove: sts.unit(),
@@ -13330,7 +10708,7 @@ export const Type_290: sts.Type<Type_290> = sts.closedEnum(() => {
     }
 })
 
-export const Type_289: sts.Type<Type_289> = sts.closedEnum(() => {
+export const Type_232: sts.Type<Type_232> = sts.closedEnum(() => {
     return  {
         Noop: sts.unit(),
         Remove: sts.unit(),
@@ -13338,7 +10716,7 @@ export const Type_289: sts.Type<Type_289> = sts.closedEnum(() => {
     }
 })
 
-export const Type_288: sts.Type<Type_288> = sts.closedEnum(() => {
+export const Type_231: sts.Type<Type_231> = sts.closedEnum(() => {
     return  {
         Noop: sts.unit(),
         Remove: sts.unit(),
@@ -13443,6 +10821,8 @@ export const RewardsCall: sts.Type<RewardsCall> = sts.closedEnum(() => {
     }
 })
 
+export const H160 = sts.bytes()
+
 /**
  * Contains one variant per dispatchable that can be called by an extrinsic.
  */
@@ -13544,24 +10924,6 @@ export const OracleProxyCall: sts.Type<OracleProxyCall> = sts.closedEnum(() => {
 /**
  * Contains one variant per dispatchable that can be called by an extrinsic.
  */
-export const MultisigVerifierCall: sts.Type<MultisigVerifierCall> = sts.closedEnum(() => {
-    return  {
-        add_peer: sts.enumStruct({
-            peer: sts.bytes(),
-        }),
-        initialize: sts.enumStruct({
-            networkId: GenericNetworkId,
-            peers: sts.array(() => sts.bytes()),
-        }),
-        remove_peer: sts.enumStruct({
-            peer: sts.bytes(),
-        }),
-    }
-})
-
-/**
- * Contains one variant per dispatchable that can be called by an extrinsic.
- */
 export const MultisigCall: sts.Type<MultisigCall> = sts.closedEnum(() => {
     return  {
         approve_as_multi: sts.enumStruct({
@@ -13612,29 +10974,6 @@ export const MulticollateralBondingCurvePoolCall: sts.Type<MulticollateralBondin
         }),
         set_reference_asset: sts.enumStruct({
             referenceAssetId: AssetId32,
-        }),
-    }
-})
-
-/**
- * Contains one variant per dispatchable that can be called by an extrinsic.
- */
-export const MigrationAppCall: sts.Type<MigrationAppCall> = sts.closedEnum(() => {
-    return  {
-        migrate_erc20: sts.enumStruct({
-            networkId: sts.bigint(),
-            erc20Assets: sts.array(() => sts.tuple(() => [AssetId32, H160, sts.number()])),
-        }),
-        migrate_eth: sts.enumStruct({
-            networkId: sts.bigint(),
-        }),
-        migrate_sidechain: sts.enumStruct({
-            networkId: sts.bigint(),
-            sidechainAssets: sts.array(() => sts.tuple(() => [AssetId32, H160, sts.number()])),
-        }),
-        register_network: sts.enumStruct({
-            networkId: sts.bigint(),
-            contract: H160,
         }),
     }
 })
@@ -13932,11 +11271,11 @@ export const GrandpaCall: sts.Type<GrandpaCall> = sts.closedEnum(() => {
             bestFinalizedBlockNumber: sts.number(),
         }),
         report_equivocation: sts.enumStruct({
-            equivocationProof: Type_295,
+            equivocationProof: Type_240,
             keyOwnerProof: MembershipProof,
         }),
         report_equivocation_unsigned: sts.enumStruct({
-            equivocationProof: Type_295,
+            equivocationProof: Type_240,
             keyOwnerProof: MembershipProof,
         }),
     }
@@ -13950,7 +11289,7 @@ export const MembershipProof: sts.Type<MembershipProof> = sts.struct(() => {
     }
 })
 
-export const Type_295: sts.Type<Type_295> = sts.struct(() => {
+export const Type_240: sts.Type<Type_240> = sts.struct(() => {
     return  {
         setId: sts.bigint(),
         equivocation: Equivocation,
@@ -13959,19 +11298,21 @@ export const Type_295: sts.Type<Type_295> = sts.struct(() => {
 
 export const Equivocation: sts.Type<Equivocation> = sts.closedEnum(() => {
     return  {
-        Precommit: Type_302,
-        Prevote: Type_297,
+        Precommit: Type_247,
+        Prevote: Type_242,
     }
 })
 
-export const Type_297: sts.Type<Type_297> = sts.struct(() => {
+export const Type_242: sts.Type<Type_242> = sts.struct(() => {
     return  {
         roundNumber: sts.bigint(),
         identity: Public,
-        first: sts.tuple(() => [Prevote, sts.bytes()]),
-        second: sts.tuple(() => [Prevote, sts.bytes()]),
+        first: sts.tuple(() => [Prevote, Signature]),
+        second: sts.tuple(() => [Prevote, Signature]),
     }
 })
+
+export const Signature = sts.bytes()
 
 export const Prevote: sts.Type<Prevote> = sts.struct(() => {
     return  {
@@ -13980,12 +11321,12 @@ export const Prevote: sts.Type<Prevote> = sts.struct(() => {
     }
 })
 
-export const Type_302: sts.Type<Type_302> = sts.struct(() => {
+export const Type_247: sts.Type<Type_247> = sts.struct(() => {
     return  {
         roundNumber: sts.bigint(),
         identity: Public,
-        first: sts.tuple(() => [Precommit, sts.bytes()]),
-        second: sts.tuple(() => [Precommit, sts.bytes()]),
+        first: sts.tuple(() => [Precommit, Signature]),
+        second: sts.tuple(() => [Precommit, Signature]),
     }
 })
 
@@ -13995,139 +11336,6 @@ export const Precommit: sts.Type<Precommit> = sts.struct(() => {
         targetNumber: sts.number(),
     }
 })
-
-/**
- * Contains one variant per dispatchable that can be called by an extrinsic.
- */
-export const FaucetCall: sts.Type<FaucetCall> = sts.closedEnum(() => {
-    return  {
-        reset_rewards: sts.unit(),
-        transfer: sts.enumStruct({
-            assetId: AssetId32,
-            target: AccountId32,
-            amount: sts.bigint(),
-        }),
-        update_limit: sts.enumStruct({
-            newLimit: sts.bigint(),
-        }),
-    }
-})
-
-/**
- * Contains one variant per dispatchable that can be called by an extrinsic.
- */
-export const EthereumLightClientCall: sts.Type<EthereumLightClientCall> = sts.closedEnum(() => {
-    return  {
-        import_header: sts.enumStruct({
-            networkId: sts.bigint(),
-            header: Type_537,
-            proof: sts.array(() => DoubleNodeWithMerkleProof),
-            mixNonce: MixNonce,
-            submitter: AccountId32,
-            signature: MultiSignature,
-        }),
-        register_network: sts.enumStruct({
-            networkConfig: NetworkConfig,
-            header: Type_537,
-            initialDifficulty: sts.bigint(),
-        }),
-        update_difficulty_config: sts.enumStruct({
-            networkConfig: NetworkConfig,
-        }),
-    }
-})
-
-export const NetworkConfig: sts.Type<NetworkConfig> = sts.closedEnum(() => {
-    return  {
-        Classic: sts.unit(),
-        Custom: sts.enumStruct({
-            chainId: sts.bigint(),
-            consensus: Consensus,
-        }),
-        Goerli: sts.unit(),
-        Mainnet: sts.unit(),
-        Mordor: sts.unit(),
-        Rinkeby: sts.unit(),
-        Ropsten: sts.unit(),
-        Sepolia: sts.unit(),
-    }
-})
-
-export const Consensus: sts.Type<Consensus> = sts.closedEnum(() => {
-    return  {
-        Clique: sts.enumStruct({
-            period: sts.bigint(),
-            epoch: sts.bigint(),
-        }),
-        Etchash: sts.enumStruct({
-            forkConfig: ClassicForkConfig,
-        }),
-        Ethash: sts.enumStruct({
-            forkConfig: ForkConfig,
-        }),
-    }
-})
-
-export const ForkConfig: sts.Type<ForkConfig> = sts.struct(() => {
-    return  {
-        byzantiumForkBlock: sts.bigint(),
-        constantinopleForkBlock: sts.bigint(),
-        muirGlacierForkBlock: sts.bigint(),
-        londonForkBlock: sts.bigint(),
-        arrowGlacierForkBlock: sts.bigint(),
-        grayGlacierForkBlock: sts.bigint(),
-    }
-})
-
-export const ClassicForkConfig: sts.Type<ClassicForkConfig> = sts.struct(() => {
-    return  {
-        ecip1041Block: sts.bigint(),
-        ecip1099Block: sts.bigint(),
-    }
-})
-
-export const MultiSignature: sts.Type<MultiSignature> = sts.closedEnum(() => {
-    return  {
-        Ecdsa: Signature,
-        Ed25519: sts.bytes(),
-        Sr25519: sts.bytes(),
-    }
-})
-
-export const MixNonce = sts.bytes()
-
-export const DoubleNodeWithMerkleProof: sts.Type<DoubleNodeWithMerkleProof> = sts.struct(() => {
-    return  {
-        dagNodes: sts.array(() => H512),
-        proof: sts.array(() => H128),
-    }
-})
-
-export const H128 = sts.bytes()
-
-export const H512 = sts.bytes()
-
-export const Type_537: sts.Type<Type_537> = sts.struct(() => {
-    return  {
-        parentHash: H256,
-        timestamp: sts.bigint(),
-        number: sts.bigint(),
-        author: H160,
-        transactionsRoot: H256,
-        ommersHash: H256,
-        extraData: sts.bytes(),
-        stateRoot: H256,
-        receiptsRoot: H256,
-        logsBloom: Bloom,
-        gasUsed: sts.bigint(),
-        gasLimit: sts.bigint(),
-        difficulty: sts.bigint(),
-        seal: sts.array(() => sts.bytes()),
-        baseFee: sts.option(() => sts.bigint()),
-    }
-})
-
-export const Bloom = sts.bytes()
 
 /**
  * Contains one variant per dispatchable that can be called by an extrinsic.
@@ -14540,37 +11748,6 @@ export const SignatureParams: sts.Type<SignatureParams> = sts.struct(() => {
 /**
  * Contains one variant per dispatchable that can be called by an extrinsic.
  */
-export const EthAppCall: sts.Type<EthAppCall> = sts.closedEnum(() => {
-    return  {
-        burn: sts.enumStruct({
-            networkId: sts.bigint(),
-            recipient: H160,
-            amount: sts.bigint(),
-        }),
-        mint: sts.enumStruct({
-            sender: H160,
-            recipient: AccountId32,
-            amount: sts.bigint(),
-        }),
-        register_network: sts.enumStruct({
-            networkId: sts.bigint(),
-            name: AssetName,
-            symbol: AssetSymbol,
-            sidechainPrecision: sts.number(),
-            contract: H160,
-        }),
-        register_network_with_existing_asset: sts.enumStruct({
-            networkId: sts.bigint(),
-            assetId: AssetId32,
-            contract: H160,
-            sidechainPrecision: sts.number(),
-        }),
-    }
-})
-
-/**
- * Contains one variant per dispatchable that can be called by an extrinsic.
- */
 export const ElectionsPhragmenCall: sts.Type<ElectionsPhragmenCall> = sts.closedEnum(() => {
     return  {
         clean_defunct_voters: sts.enumStruct({
@@ -14677,55 +11854,6 @@ export const Support: sts.Type<Support> = sts.struct(() => {
     return  {
         total: sts.bigint(),
         voters: sts.array(() => sts.tuple(() => [AccountId32, sts.bigint()])),
-    }
-})
-
-/**
- * Contains one variant per dispatchable that can be called by an extrinsic.
- */
-export const ERC20AppCall: sts.Type<ERC20AppCall> = sts.closedEnum(() => {
-    return  {
-        burn: sts.enumStruct({
-            networkId: sts.bigint(),
-            assetId: AssetId32,
-            recipient: H160,
-            amount: sts.bigint(),
-        }),
-        mint: sts.enumStruct({
-            token: H160,
-            sender: H160,
-            recipient: AccountId32,
-            amount: sts.bigint(),
-        }),
-        register_asset_internal: sts.enumStruct({
-            assetId: AssetId32,
-            contract: H160,
-        }),
-        register_erc20_app: sts.enumStruct({
-            networkId: sts.bigint(),
-            contract: H160,
-        }),
-        register_erc20_asset: sts.enumStruct({
-            networkId: sts.bigint(),
-            address: H160,
-            symbol: AssetSymbol,
-            name: AssetName,
-            decimals: sts.number(),
-        }),
-        register_existing_erc20_asset: sts.enumStruct({
-            networkId: sts.bigint(),
-            address: H160,
-            assetId: AssetId32,
-            decimals: sts.number(),
-        }),
-        register_native_app: sts.enumStruct({
-            networkId: sts.bigint(),
-            contract: H160,
-        }),
-        register_native_asset: sts.enumStruct({
-            networkId: sts.bigint(),
-            assetId: AssetId32,
-        }),
     }
 })
 
@@ -15107,30 +12235,6 @@ export const CeresGovernancePlatformCall: sts.Type<CeresGovernancePlatformCall> 
 /**
  * Contains one variant per dispatchable that can be called by an extrinsic.
  */
-export const BridgeProxyCall: sts.Type<BridgeProxyCall> = sts.closedEnum(() => {
-    return  {
-        burn: sts.enumStruct({
-            networkId: GenericNetworkId,
-            assetId: AssetId32,
-            recipient: GenericAccount,
-            amount: sts.bigint(),
-        }),
-    }
-})
-
-export const GenericAccount: sts.Type<GenericAccount> = sts.closedEnum(() => {
-    return  {
-        EVM: H160,
-        Parachain: VersionedMultiLocation,
-        Root: sts.unit(),
-        Sora: AccountId32,
-        Unknown: sts.unit(),
-    }
-})
-
-/**
- * Contains one variant per dispatchable that can be called by an extrinsic.
- */
 export const BridgeMultisigCall: sts.Type<BridgeMultisigCall> = sts.closedEnum(() => {
     return  {
         add_signatory: sts.enumStruct({
@@ -15165,120 +12269,6 @@ export const BridgeMultisigCall: sts.Type<BridgeMultisigCall> = sts.closedEnum((
         remove_signatory: sts.enumStruct({
             signatory: AccountId32,
         }),
-    }
-})
-
-/**
- * OutboundChannel event Message found.
- */
-export const BridgeInboundChannelCall: sts.Type<BridgeInboundChannelCall> = sts.closedEnum(() => {
-    return  {
-        batch_dispatched: sts.enumStruct({
-            networkId: sts.bigint(),
-            log: Log,
-            proof: Proof,
-        }),
-        register_channel: sts.enumStruct({
-            networkId: sts.bigint(),
-            inboundChannel: H160,
-            outboundChannel: H160,
-        }),
-        set_reward_fraction: sts.enumStruct({
-            fraction: Perbill,
-        }),
-        submit: sts.enumStruct({
-            networkId: sts.bigint(),
-            log: Log,
-            proof: Proof,
-        }),
-    }
-})
-
-export const Proof: sts.Type<Proof> = sts.struct(() => {
-    return  {
-        blockHash: H256,
-        txIndex: sts.number(),
-        data: sts.array(() => sts.bytes()),
-    }
-})
-
-export const Log: sts.Type<Log> = sts.struct(() => {
-    return  {
-        address: H160,
-        topics: sts.array(() => H256),
-        data: sts.bytes(),
-    }
-})
-
-/**
- * Contains one variant per dispatchable that can be called by an extrinsic.
- */
-export const BridgeDataSignerCall: sts.Type<BridgeDataSignerCall> = sts.closedEnum(() => {
-    return  {
-        add_peer: sts.enumStruct({
-            networkId: GenericNetworkId,
-            peer: sts.bytes(),
-        }),
-        approve: sts.enumStruct({
-            networkId: GenericNetworkId,
-            data: H256,
-            signature: Signature,
-        }),
-        finish_add_peer: sts.enumStruct({
-            peer: sts.bytes(),
-        }),
-        finish_remove_peer: sts.enumStruct({
-            peer: sts.bytes(),
-        }),
-        register_network: sts.enumStruct({
-            networkId: GenericNetworkId,
-            peers: sts.array(() => sts.bytes()),
-        }),
-        remove_peer: sts.enumStruct({
-            networkId: GenericNetworkId,
-            peer: sts.bytes(),
-        }),
-    }
-})
-
-/**
- * Contains one variant per dispatchable that can be called by an extrinsic.
- */
-export const BeefyLightClientCall: sts.Type<BeefyLightClientCall> = sts.closedEnum(() => {
-    return  {
-        initialize: sts.enumStruct({
-            networkId: SubNetworkId,
-            latestBeefyBlock: sts.bigint(),
-            validatorSet: BeefyAuthoritySet,
-            nextValidatorSet: BeefyAuthoritySet,
-        }),
-        submit_signature_commitment: sts.enumStruct({
-            networkId: SubNetworkId,
-            commitment: Commitment,
-            validatorProof: ValidatorProof,
-            latestMmrLeaf: MmrLeaf,
-            proof: Type_571,
-        }),
-    }
-})
-
-export const ValidatorProof: sts.Type<ValidatorProof> = sts.struct(() => {
-    return  {
-        validatorClaimsBitfield: BitField,
-        signatures: sts.array(() => sts.bytes()),
-        positions: sts.array(() => sts.bigint()),
-        publicKeys: sts.array(() => H160),
-        publicKeyMerkleProofs: sts.array(() => sts.array(() => H256)),
-    }
-})
-
-export const BitField = sts.bitseq()
-
-export const Commitment: sts.Type<Commitment> = sts.struct(() => {
-    return  {
-        payload: sts.array(() => sts.tuple(() => [sts.bytes(), sts.bytes()])),
-        blockNumber: sts.number(),
-        validatorSetId: sts.bigint(),
     }
 })
 
@@ -15446,12 +12436,72 @@ export const Description = sts.bytes()
 
 export const ContentSource = sts.bytes()
 
-export const SubNetworkId: sts.Type<SubNetworkId> = sts.closedEnum(() => {
+export const BoundedString = sts.bytes()
+
+export const H256 = sts.bytes()
+
+export const FixedPoint: sts.Type<FixedPoint> = sts.struct(() => {
     return  {
-        Custom: sts.number(),
-        Kusama: sts.unit(),
-        Mainnet: sts.unit(),
-        Polkadot: sts.unit(),
-        Rococo: sts.unit(),
+        inner: sts.bigint(),
+    }
+})
+
+export const SymbolName = sts.bytes()
+
+export const AssetId32: sts.Type<AssetId32> = sts.struct(() => {
+    return  {
+        code: sts.bytes(),
+    }
+})
+
+export const AccountId32 = sts.bytes()
+
+export const TechAccountId: sts.Type<TechAccountId> = sts.closedEnum(() => {
+    return  {
+        Generic: sts.tuple(() => [sts.bytes(), sts.bytes()]),
+        None: sts.unit(),
+        Pure: sts.tuple(() => [sts.number(), TechPurpose]),
+        Wrapped: AccountId32,
+        WrappedRepr: AccountId32,
+    }
+})
+
+export const TechPurpose: sts.Type<TechPurpose> = sts.closedEnum(() => {
+    return  {
+        FeeCollector: sts.unit(),
+        FeeCollectorForPair: Type_85,
+        Identifier: sts.bytes(),
+        OrderBookLiquidityKeeper: Type_85,
+        XykLiquidityKeeper: Type_85,
+    }
+})
+
+export const Type_85: sts.Type<Type_85> = sts.struct(() => {
+    return  {
+        baseAssetId: TechAssetId,
+        targetAssetId: TechAssetId,
+    }
+})
+
+export const TechAssetId: sts.Type<TechAssetId> = sts.closedEnum(() => {
+    return  {
+        Escaped: sts.bytes(),
+        Wrapped: PredefinedAssetId,
+    }
+})
+
+export const PredefinedAssetId: sts.Type<PredefinedAssetId> = sts.closedEnum(() => {
+    return  {
+        DAI: sts.unit(),
+        DOT: sts.unit(),
+        ETH: sts.unit(),
+        KSM: sts.unit(),
+        PSWAP: sts.unit(),
+        TBCD: sts.unit(),
+        USDT: sts.unit(),
+        VAL: sts.unit(),
+        XOR: sts.unit(),
+        XST: sts.unit(),
+        XSTUSD: sts.unit(),
     }
 })

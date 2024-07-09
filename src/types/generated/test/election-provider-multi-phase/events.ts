@@ -1,6 +1,6 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
 import * as v42 from '../v42'
-import * as v52 from '../v52'
+import * as v53 from '../v53'
 
 export const solutionStored =  {
     name: 'ElectionProviderMultiPhase.SolutionStored',
@@ -28,11 +28,11 @@ export const solutionStored =  {
      * `T::ForceOrigin`. The `bool` is `true` when a previous solution was ejected to make
      * room for this one.
      */
-    v52: new EventType(
+    v53: new EventType(
         'ElectionProviderMultiPhase.SolutionStored',
         sts.struct({
-            compute: v52.ElectionCompute,
-            origin: sts.option(() => v52.AccountId32),
+            compute: v53.ElectionCompute,
+            origin: sts.option(() => v53.AccountId32),
             prevEjected: sts.boolean(),
         })
     ),
@@ -53,11 +53,11 @@ export const electionFinalized =  {
     /**
      * The election has been finalized, with the given computation and score.
      */
-    v52: new EventType(
+    v53: new EventType(
         'ElectionProviderMultiPhase.ElectionFinalized',
         sts.struct({
-            compute: v52.ElectionCompute,
-            score: v52.ElectionScore,
+            compute: v53.ElectionCompute,
+            score: v53.ElectionScore,
         })
     ),
 }
@@ -123,7 +123,7 @@ export const electionFailed =  {
      * 
      * Not much can be said about which computes failed in the process.
      */
-    v52: new EventType(
+    v53: new EventType(
         'ElectionProviderMultiPhase.ElectionFailed',
         sts.unit()
     ),
@@ -134,11 +134,11 @@ export const phaseTransitioned =  {
     /**
      * There was a phase transition in a given round.
      */
-    v52: new EventType(
+    v53: new EventType(
         'ElectionProviderMultiPhase.PhaseTransitioned',
         sts.struct({
-            from: v52.Phase,
-            to: v52.Phase,
+            from: v53.Phase,
+            to: v53.Phase,
             round: sts.number(),
         })
     ),

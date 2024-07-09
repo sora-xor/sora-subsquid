@@ -9,19 +9,19 @@ export const lockLiquidity = {
 	v22: productionCalls.lockLiquidity['v22'],
 	v37: productionCalls.lockLiquidity['v37'],
 	v42: productionCalls.lockLiquidity['v42'],
-	v33Stage: stageCalls.lockLiquidity['v33'],
+	v22Stage: stageCalls.lockLiquidity['v22'],
 	v37Stage: stageCalls.lockLiquidity['v37'],
 	v42Stage: stageCalls.lockLiquidity['v42'],
-	v33Test: testCalls.lockLiquidity['v33'],
+	v22Test: testCalls.lockLiquidity['v22'],
 	v37Test: testCalls.lockLiquidity['v37'],
 	v42Test: testCalls.lockLiquidity['v42'],
-	v70Dev: devCalls.lockLiquidity['v70'],
+	v85Dev: devCalls.lockLiquidity['v85'],
 }
 
 export const changeCeresFee = {
 	name: 'CeresLiquidityLocker.change_ceres_fee',
 	v22: productionCalls.changeCeresFee['v22'],
-	v33Stage: stageCalls.changeCeresFee['v33'],
-	v33Test: testCalls.changeCeresFee['v33'],
-	v70Dev: devCalls.changeCeresFee['v70'],
+	v22Stage: stageCalls.changeCeresFee['v22'],
+	v22Test: testCalls.changeCeresFee['v22'],
+	v85Dev: devCalls.changeCeresFee['v85'],
 }

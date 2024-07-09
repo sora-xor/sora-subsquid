@@ -7,14 +7,12 @@ import * as devEvents from '../../dev/faucet/events'
 export const transferred = {
 	name: 'Faucet.Transferred',
 	v22: productionEvents.transferred['v22'],
-	v33Stage: stageEvents.transferred['v33'],
-	v33Test: testEvents.transferred['v33'],
-	v70Dev: devEvents.transferred['v70'],
+	v22Stage: stageEvents.transferred['v22'],
+	v22Test: testEvents.transferred['v22'],
+	v85Dev: devEvents.transferred['v85'],
 }
 
 export const limitUpdated = {
 	name: 'Faucet.LimitUpdated',
-	v37Stage: stageEvents.limitUpdated['v37'],
-	v37Test: testEvents.limitUpdated['v37'],
-	v70Dev: devEvents.limitUpdated['v70'],
+	v85Dev: devEvents.limitUpdated['v85'],
 }

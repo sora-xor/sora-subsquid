@@ -9,10 +9,10 @@ export const hermesVotings = {
 	v47: productionStorage.hermesVotings['v47'],
 	v57: productionStorage.hermesVotings['v57'],
 	v47Stage: stageStorage.hermesVotings['v47'],
-	v55Stage: stageStorage.hermesVotings['v55'],
+	v57Stage: stageStorage.hermesVotings['v57'],
 	v47Test: testStorage.hermesVotings['v47'],
-	v55Test: testStorage.hermesVotings['v55'],
-	v70Dev: devStorage.hermesVotings['v70'],
+	v57Test: testStorage.hermesVotings['v57'],
+	v85Dev: devStorage.hermesVotings['v85'],
 }
 
 export const hermesPollData = {
@@ -20,10 +20,10 @@ export const hermesPollData = {
 	v47: productionStorage.hermesPollData['v47'],
 	v57: productionStorage.hermesPollData['v57'],
 	v47Stage: stageStorage.hermesPollData['v47'],
-	v55Stage: stageStorage.hermesPollData['v55'],
+	v57Stage: stageStorage.hermesPollData['v57'],
 	v47Test: testStorage.hermesPollData['v47'],
-	v55Test: testStorage.hermesPollData['v55'],
-	v70Dev: devStorage.hermesPollData['v70'],
+	v57Test: testStorage.hermesPollData['v57'],
+	v85Dev: devStorage.hermesPollData['v85'],
 }
 
 export const minimumHermesVotingAmount = {
@@ -31,7 +31,7 @@ export const minimumHermesVotingAmount = {
 	v47: productionStorage.minimumHermesVotingAmount['v47'],
 	v47Stage: stageStorage.minimumHermesVotingAmount['v47'],
 	v47Test: testStorage.minimumHermesVotingAmount['v47'],
-	v70Dev: devStorage.minimumHermesVotingAmount['v70'],
+	v85Dev: devStorage.minimumHermesVotingAmount['v85'],
 }
 
 export const minimumHermesAmountForCreatingPoll = {
@@ -39,7 +39,7 @@ export const minimumHermesAmountForCreatingPoll = {
 	v47: productionStorage.minimumHermesAmountForCreatingPoll['v47'],
 	v47Stage: stageStorage.minimumHermesAmountForCreatingPoll['v47'],
 	v47Test: testStorage.minimumHermesAmountForCreatingPoll['v47'],
-	v70Dev: devStorage.minimumHermesAmountForCreatingPoll['v70'],
+	v85Dev: devStorage.minimumHermesAmountForCreatingPoll['v85'],
 }
 
 export const authorityAccount = {
@@ -47,13 +47,13 @@ export const authorityAccount = {
 	v47: productionStorage.authorityAccount['v47'],
 	v47Stage: stageStorage.authorityAccount['v47'],
 	v47Test: testStorage.authorityAccount['v47'],
-	v70Dev: devStorage.authorityAccount['v70'],
+	v85Dev: devStorage.authorityAccount['v85'],
 }
 
 export const palletStorageVersion = {
 	name: 'HermesGovernancePlatform.PalletStorageVersion',
 	v57: productionStorage.palletStorageVersion['v57'],
-	v55Stage: stageStorage.palletStorageVersion['v55'],
-	v55Test: testStorage.palletStorageVersion['v55'],
-	v70Dev: devStorage.palletStorageVersion['v70'],
+	v57Stage: stageStorage.palletStorageVersion['v57'],
+	v57Test: testStorage.palletStorageVersion['v57'],
+	v85Dev: devStorage.palletStorageVersion['v85'],
 }

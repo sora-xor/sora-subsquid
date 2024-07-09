@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
 import * as v42 from '../v42'
 
 export const newTerm =  {
@@ -10,9 +10,9 @@ export const newTerm =  {
      *  this purpose. A `NewTerm(\[\])` indicates that some candidates got their bond slashed and
      *  none were elected, whilst `EmptyTerm` means that no candidates existed to begin with.
      */
-    v33: new EventType(
+    v1: new EventType(
         'ElectionsPhragmen.NewTerm',
-        sts.array(() => sts.tuple(() => [v33.AccountId, v33.Balance]))
+        sts.array(() => sts.tuple(() => [v1.AccountId, v1.Balance]))
     ),
     /**
      * A new term with new_members. This indicates that enough candidates existed to run
@@ -35,7 +35,7 @@ export const emptyTerm =  {
      *  No (or not enough) candidates existed for this round. This is different from
      *  `NewTerm(\[\])`. See the description of `NewTerm`.
      */
-    v33: new EventType(
+    v1: new EventType(
         'ElectionsPhragmen.EmptyTerm',
         sts.unit()
     ),
@@ -46,7 +46,7 @@ export const electionError =  {
     /**
      *  Internal error happened while trying to perform election.
      */
-    v33: new EventType(
+    v1: new EventType(
         'ElectionsPhragmen.ElectionError',
         sts.unit()
     ),
@@ -58,9 +58,9 @@ export const memberKicked =  {
      *  A \[member\] has been removed. This should always be followed by either `NewTerm` or
      *  `EmptyTerm`.
      */
-    v33: new EventType(
+    v1: new EventType(
         'ElectionsPhragmen.MemberKicked',
-        v33.AccountId
+        v1.AccountId
     ),
     /**
      * A member has been removed. This should always be followed by either `NewTerm` or
@@ -79,9 +79,9 @@ export const renounced =  {
     /**
      *  Someone has renounced their candidacy.
      */
-    v33: new EventType(
+    v1: new EventType(
         'ElectionsPhragmen.Renounced',
-        v33.AccountId
+        v1.AccountId
     ),
     /**
      * Someone has renounced their candidacy.
@@ -102,9 +102,9 @@ export const candidateSlashed =  {
      * 
      *  Note that old members and runners-up are also candidates.
      */
-    v33: new EventType(
+    v1: new EventType(
         'ElectionsPhragmen.CandidateSlashed',
-        sts.tuple([v33.AccountId, v33.Balance])
+        sts.tuple([v1.AccountId, v1.Balance])
     ),
     /**
      * A candidate was slashed by amount due to failing to obtain a seat as member or
@@ -126,9 +126,9 @@ export const seatHolderSlashed =  {
     /**
      *  A \[seat holder\] was slashed by \[amount\] by being forcefully removed from the set.
      */
-    v33: new EventType(
+    v1: new EventType(
         'ElectionsPhragmen.SeatHolderSlashed',
-        sts.tuple([v33.AccountId, v33.Balance])
+        sts.tuple([v1.AccountId, v1.Balance])
     ),
     /**
      * A seat holder was slashed by amount by being forcefully removed from the set.

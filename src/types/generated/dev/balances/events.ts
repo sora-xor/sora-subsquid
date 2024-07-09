@@ -1,15 +1,15 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const endowed =  {
     name: 'Balances.Endowed',
     /**
      * An account was created with some free balance.
      */
-    v70: new EventType(
+    v85: new EventType(
         'Balances.Endowed',
         sts.struct({
-            account: v70.AccountId32,
+            account: v85.AccountId32,
             freeBalance: sts.bigint(),
         })
     ),
@@ -21,10 +21,10 @@ export const dustLost =  {
      * An account was removed whose balance was non-zero but below ExistentialDeposit,
      * resulting in an outright loss.
      */
-    v70: new EventType(
+    v85: new EventType(
         'Balances.DustLost',
         sts.struct({
-            account: v70.AccountId32,
+            account: v85.AccountId32,
             amount: sts.bigint(),
         })
     ),
@@ -35,11 +35,11 @@ export const transfer =  {
     /**
      * Transfer succeeded.
      */
-    v70: new EventType(
+    v85: new EventType(
         'Balances.Transfer',
         sts.struct({
-            from: v70.AccountId32,
-            to: v70.AccountId32,
+            from: v85.AccountId32,
+            to: v85.AccountId32,
             amount: sts.bigint(),
         })
     ),
@@ -50,10 +50,10 @@ export const balanceSet =  {
     /**
      * A balance was set by root.
      */
-    v70: new EventType(
+    v85: new EventType(
         'Balances.BalanceSet',
         sts.struct({
-            who: v70.AccountId32,
+            who: v85.AccountId32,
             free: sts.bigint(),
             reserved: sts.bigint(),
         })
@@ -65,10 +65,10 @@ export const reserved =  {
     /**
      * Some balance was reserved (moved from free to reserved).
      */
-    v70: new EventType(
+    v85: new EventType(
         'Balances.Reserved',
         sts.struct({
-            who: v70.AccountId32,
+            who: v85.AccountId32,
             amount: sts.bigint(),
         })
     ),
@@ -79,10 +79,10 @@ export const unreserved =  {
     /**
      * Some balance was unreserved (moved from reserved to free).
      */
-    v70: new EventType(
+    v85: new EventType(
         'Balances.Unreserved',
         sts.struct({
-            who: v70.AccountId32,
+            who: v85.AccountId32,
             amount: sts.bigint(),
         })
     ),
@@ -94,13 +94,13 @@ export const reserveRepatriated =  {
      * Some balance was moved from the reserve of the first account to the second account.
      * Final argument indicates the destination balance type.
      */
-    v70: new EventType(
+    v85: new EventType(
         'Balances.ReserveRepatriated',
         sts.struct({
-            from: v70.AccountId32,
-            to: v70.AccountId32,
+            from: v85.AccountId32,
+            to: v85.AccountId32,
             amount: sts.bigint(),
-            destinationStatus: v70.BalanceStatus,
+            destinationStatus: v85.BalanceStatus,
         })
     ),
 }
@@ -110,10 +110,10 @@ export const deposit =  {
     /**
      * Some amount was deposited (e.g. for transaction fees).
      */
-    v70: new EventType(
+    v85: new EventType(
         'Balances.Deposit',
         sts.struct({
-            who: v70.AccountId32,
+            who: v85.AccountId32,
             amount: sts.bigint(),
         })
     ),
@@ -124,10 +124,10 @@ export const withdraw =  {
     /**
      * Some amount was withdrawn from the account (e.g. for transaction fees).
      */
-    v70: new EventType(
+    v85: new EventType(
         'Balances.Withdraw',
         sts.struct({
-            who: v70.AccountId32,
+            who: v85.AccountId32,
             amount: sts.bigint(),
         })
     ),
@@ -138,10 +138,10 @@ export const slashed =  {
     /**
      * Some amount was removed from the account (e.g. for misbehavior).
      */
-    v70: new EventType(
+    v85: new EventType(
         'Balances.Slashed',
         sts.struct({
-            who: v70.AccountId32,
+            who: v85.AccountId32,
             amount: sts.bigint(),
         })
     ),

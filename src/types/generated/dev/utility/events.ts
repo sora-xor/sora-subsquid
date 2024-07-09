@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const batchInterrupted =  {
     name: 'Utility.BatchInterrupted',
@@ -7,11 +7,11 @@ export const batchInterrupted =  {
      * Batch of dispatches did not complete fully. Index of first failing dispatch given, as
      * well as the error.
      */
-    v70: new EventType(
+    v85: new EventType(
         'Utility.BatchInterrupted',
         sts.struct({
             index: sts.number(),
-            error: v70.DispatchError,
+            error: v85.DispatchError,
         })
     ),
 }
@@ -21,7 +21,7 @@ export const batchCompleted =  {
     /**
      * Batch of dispatches completed fully with no error.
      */
-    v70: new EventType(
+    v85: new EventType(
         'Utility.BatchCompleted',
         sts.unit()
     ),
@@ -32,7 +32,7 @@ export const batchCompletedWithErrors =  {
     /**
      * Batch of dispatches completed but has errors.
      */
-    v70: new EventType(
+    v85: new EventType(
         'Utility.BatchCompletedWithErrors',
         sts.unit()
     ),
@@ -43,7 +43,7 @@ export const itemCompleted =  {
     /**
      * A single item within a Batch of dispatches has completed with no error.
      */
-    v70: new EventType(
+    v85: new EventType(
         'Utility.ItemCompleted',
         sts.unit()
     ),
@@ -54,10 +54,10 @@ export const itemFailed =  {
     /**
      * A single item within a Batch of dispatches has completed with error.
      */
-    v70: new EventType(
+    v85: new EventType(
         'Utility.ItemFailed',
         sts.struct({
-            error: v70.DispatchError,
+            error: v85.DispatchError,
         })
     ),
 }
@@ -67,10 +67,10 @@ export const dispatchedAs =  {
     /**
      * A call was dispatched.
      */
-    v70: new EventType(
+    v85: new EventType(
         'Utility.DispatchedAs',
         sts.struct({
-            result: sts.result(() => sts.unit(), () => v70.DispatchError),
+            result: sts.result(() => sts.unit(), () => v85.DispatchError),
         })
     ),
 }

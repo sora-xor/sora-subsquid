@@ -1,20 +1,20 @@
 import {sts, Block, Bytes, Option, Result, StorageType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
-import * as v69 from '../v69'
+import * as v1 from '../v1'
+import * as v71 from '../v71'
 
 export const enabledSourceTypes =  {
-    v33: new StorageType('DEXAPI.EnabledSourceTypes', 'Default', [], sts.array(() => v33.LiquiditySourceType)) as EnabledSourceTypesV33,
-    v69: new StorageType('DEXAPI.EnabledSourceTypes', 'Default', [], sts.array(() => v69.LiquiditySourceType)) as EnabledSourceTypesV69,
+    v1: new StorageType('DEXAPI.EnabledSourceTypes', 'Default', [], sts.array(() => v1.LiquiditySourceType)) as EnabledSourceTypesV1,
+    v71: new StorageType('DEXAPI.EnabledSourceTypes', 'Default', [], sts.array(() => v71.LiquiditySourceType)) as EnabledSourceTypesV71,
 }
 
-export interface EnabledSourceTypesV33  {
+export interface EnabledSourceTypesV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.LiquiditySourceType[]
-    get(block: Block): Promise<(v33.LiquiditySourceType[] | undefined)>
+    getDefault(block: Block): v1.LiquiditySourceType[]
+    get(block: Block): Promise<(v1.LiquiditySourceType[] | undefined)>
 }
 
-export interface EnabledSourceTypesV69  {
+export interface EnabledSourceTypesV71  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v69.LiquiditySourceType[]
-    get(block: Block): Promise<(v69.LiquiditySourceType[] | undefined)>
+    getDefault(block: Block): v71.LiquiditySourceType[]
+    get(block: Block): Promise<(v71.LiquiditySourceType[] | undefined)>
 }

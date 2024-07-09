@@ -1,5 +1,6 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
+import * as v22 from '../v22'
 import * as v37 from '../v37'
 
 export const feeWithdrawn =  {
@@ -7,9 +8,9 @@ export const feeWithdrawn =  {
     /**
      *  Fee has been withdrawn from user. [Account Id to withdraw from, Fee Amount]
      */
-    v33: new EventType(
+    v1: new EventType(
         'XorFee.FeeWithdrawn',
-        sts.tuple([v33.AccountId, v33.Balance])
+        sts.tuple([v1.AccountId, v1.Balance])
     ),
 }
 
@@ -18,9 +19,9 @@ export const referrerRewarded =  {
     /**
      *  The portion of fee is sent to the referrer. [Referral, Referrer, Amount]
      */
-    v33: new EventType(
+    v22: new EventType(
         'XorFee.ReferrerRewarded',
-        sts.tuple([v33.AccountId, v33.AccountId, v33.Balance])
+        sts.tuple([v22.AccountId, v22.AccountId, v22.Balance])
     ),
 }
 

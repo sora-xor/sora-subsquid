@@ -1,51 +1,51 @@
 import {sts, Block, Bytes, Option, Result, StorageType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
 import * as v42 from '../v42'
-import * as v52 from '../v52'
+import * as v53 from '../v53'
 
 export const publicPropCount =  {
     /**
      *  The number of (public) proposals that have been made so far.
      */
-    v33: new StorageType('Democracy.PublicPropCount', 'Default', [], v33.PropIndex) as PublicPropCountV33,
+    v1: new StorageType('Democracy.PublicPropCount', 'Default', [], v1.PropIndex) as PublicPropCountV1,
 }
 
 /**
  *  The number of (public) proposals that have been made so far.
  */
-export interface PublicPropCountV33  {
+export interface PublicPropCountV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.PropIndex
-    get(block: Block): Promise<(v33.PropIndex | undefined)>
+    getDefault(block: Block): v1.PropIndex
+    get(block: Block): Promise<(v1.PropIndex | undefined)>
 }
 
 export const publicProps =  {
     /**
      *  The public proposals. Unsorted. The second item is the proposal's hash.
      */
-    v33: new StorageType('Democracy.PublicProps', 'Default', [], sts.array(() => sts.tuple(() => [v33.PropIndex, v33.Hash, v33.AccountId]))) as PublicPropsV33,
+    v1: new StorageType('Democracy.PublicProps', 'Default', [], sts.array(() => sts.tuple(() => [v1.PropIndex, v1.Hash, v1.AccountId]))) as PublicPropsV1,
     /**
      *  The public proposals. Unsorted. The second item is the proposal.
      */
-    v52: new StorageType('Democracy.PublicProps', 'Default', [], sts.array(() => sts.tuple(() => [sts.number(), v52.Bounded, v52.AccountId32]))) as PublicPropsV52,
+    v53: new StorageType('Democracy.PublicProps', 'Default', [], sts.array(() => sts.tuple(() => [sts.number(), v53.Bounded, v53.AccountId32]))) as PublicPropsV53,
 }
 
 /**
  *  The public proposals. Unsorted. The second item is the proposal's hash.
  */
-export interface PublicPropsV33  {
+export interface PublicPropsV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): [v33.PropIndex, v33.Hash, v33.AccountId][]
-    get(block: Block): Promise<([v33.PropIndex, v33.Hash, v33.AccountId][] | undefined)>
+    getDefault(block: Block): [v1.PropIndex, v1.Hash, v1.AccountId][]
+    get(block: Block): Promise<([v1.PropIndex, v1.Hash, v1.AccountId][] | undefined)>
 }
 
 /**
  *  The public proposals. Unsorted. The second item is the proposal.
  */
-export interface PublicPropsV52  {
+export interface PublicPropsV53  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): [number, v52.Bounded, v52.AccountId32][]
-    get(block: Block): Promise<([number, v52.Bounded, v52.AccountId32][] | undefined)>
+    getDefault(block: Block): [number, v53.Bounded, v53.AccountId32][]
+    get(block: Block): Promise<([number, v53.Bounded, v53.AccountId32][] | undefined)>
 }
 
 export const depositOf =  {
@@ -54,7 +54,7 @@ export const depositOf =  {
      * 
      *  TWOX-NOTE: Safe, as increasing integer keys are safe.
      */
-    v33: new StorageType('Democracy.DepositOf', 'Optional', [v33.PropIndex], sts.tuple(() => [sts.array(() => v33.AccountId), v33.BalanceOf])) as DepositOfV33,
+    v1: new StorageType('Democracy.DepositOf', 'Optional', [v1.PropIndex], sts.tuple(() => [sts.array(() => v1.AccountId), v1.BalanceOf])) as DepositOfV1,
 }
 
 /**
@@ -62,18 +62,18 @@ export const depositOf =  {
  * 
  *  TWOX-NOTE: Safe, as increasing integer keys are safe.
  */
-export interface DepositOfV33  {
+export interface DepositOfV1  {
     is(block: RuntimeCtx): boolean
-    get(block: Block, key: v33.PropIndex): Promise<([v33.AccountId[], v33.BalanceOf] | undefined)>
-    getMany(block: Block, keys: v33.PropIndex[]): Promise<([v33.AccountId[], v33.BalanceOf] | undefined)[]>
-    getKeys(block: Block): Promise<v33.PropIndex[]>
-    getKeys(block: Block, key: v33.PropIndex): Promise<v33.PropIndex[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.PropIndex[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.PropIndex): AsyncIterable<v33.PropIndex[]>
-    getPairs(block: Block): Promise<[k: v33.PropIndex, v: ([v33.AccountId[], v33.BalanceOf] | undefined)][]>
-    getPairs(block: Block, key: v33.PropIndex): Promise<[k: v33.PropIndex, v: ([v33.AccountId[], v33.BalanceOf] | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.PropIndex, v: ([v33.AccountId[], v33.BalanceOf] | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.PropIndex): AsyncIterable<[k: v33.PropIndex, v: ([v33.AccountId[], v33.BalanceOf] | undefined)][]>
+    get(block: Block, key: v1.PropIndex): Promise<([v1.AccountId[], v1.BalanceOf] | undefined)>
+    getMany(block: Block, keys: v1.PropIndex[]): Promise<([v1.AccountId[], v1.BalanceOf] | undefined)[]>
+    getKeys(block: Block): Promise<v1.PropIndex[]>
+    getKeys(block: Block, key: v1.PropIndex): Promise<v1.PropIndex[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.PropIndex[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.PropIndex): AsyncIterable<v1.PropIndex[]>
+    getPairs(block: Block): Promise<[k: v1.PropIndex, v: ([v1.AccountId[], v1.BalanceOf] | undefined)][]>
+    getPairs(block: Block, key: v1.PropIndex): Promise<[k: v1.PropIndex, v: ([v1.AccountId[], v1.BalanceOf] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.PropIndex, v: ([v1.AccountId[], v1.BalanceOf] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.PropIndex): AsyncIterable<[k: v1.PropIndex, v: ([v1.AccountId[], v1.BalanceOf] | undefined)][]>
 }
 
 export const preimages =  {
@@ -81,7 +81,7 @@ export const preimages =  {
      *  Map of hashes to the proposal preimage, along with who registered it and their deposit.
      *  The block number is the block at which it was deposited.
      */
-    v33: new StorageType('Democracy.Preimages', 'Optional', [v33.Hash], v33.PreimageStatus) as PreimagesV33,
+    v1: new StorageType('Democracy.Preimages', 'Optional', [v1.Hash], v1.PreimageStatus) as PreimagesV1,
     /**
      *  Map of hashes to the proposal preimage, along with who registered it and their deposit.
      *  The block number is the block at which it was deposited.
@@ -93,18 +93,18 @@ export const preimages =  {
  *  Map of hashes to the proposal preimage, along with who registered it and their deposit.
  *  The block number is the block at which it was deposited.
  */
-export interface PreimagesV33  {
+export interface PreimagesV1  {
     is(block: RuntimeCtx): boolean
-    get(block: Block, key: v33.Hash): Promise<(v33.PreimageStatus | undefined)>
-    getMany(block: Block, keys: v33.Hash[]): Promise<(v33.PreimageStatus | undefined)[]>
-    getKeys(block: Block): Promise<v33.Hash[]>
-    getKeys(block: Block, key: v33.Hash): Promise<v33.Hash[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.Hash[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.Hash): AsyncIterable<v33.Hash[]>
-    getPairs(block: Block): Promise<[k: v33.Hash, v: (v33.PreimageStatus | undefined)][]>
-    getPairs(block: Block, key: v33.Hash): Promise<[k: v33.Hash, v: (v33.PreimageStatus | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.Hash, v: (v33.PreimageStatus | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.Hash): AsyncIterable<[k: v33.Hash, v: (v33.PreimageStatus | undefined)][]>
+    get(block: Block, key: v1.Hash): Promise<(v1.PreimageStatus | undefined)>
+    getMany(block: Block, keys: v1.Hash[]): Promise<(v1.PreimageStatus | undefined)[]>
+    getKeys(block: Block): Promise<v1.Hash[]>
+    getKeys(block: Block, key: v1.Hash): Promise<v1.Hash[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.Hash[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.Hash): AsyncIterable<v1.Hash[]>
+    getPairs(block: Block): Promise<[k: v1.Hash, v: (v1.PreimageStatus | undefined)][]>
+    getPairs(block: Block, key: v1.Hash): Promise<[k: v1.Hash, v: (v1.PreimageStatus | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.Hash, v: (v1.PreimageStatus | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.Hash): AsyncIterable<[k: v1.Hash, v: (v1.PreimageStatus | undefined)][]>
 }
 
 /**
@@ -129,16 +129,16 @@ export const referendumCount =  {
     /**
      *  The next free referendum index, aka the number of referenda started so far.
      */
-    v33: new StorageType('Democracy.ReferendumCount', 'Default', [], v33.ReferendumIndex) as ReferendumCountV33,
+    v1: new StorageType('Democracy.ReferendumCount', 'Default', [], v1.ReferendumIndex) as ReferendumCountV1,
 }
 
 /**
  *  The next free referendum index, aka the number of referenda started so far.
  */
-export interface ReferendumCountV33  {
+export interface ReferendumCountV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.ReferendumIndex
-    get(block: Block): Promise<(v33.ReferendumIndex | undefined)>
+    getDefault(block: Block): v1.ReferendumIndex
+    get(block: Block): Promise<(v1.ReferendumIndex | undefined)>
 }
 
 export const lowestUnbaked =  {
@@ -146,17 +146,17 @@ export const lowestUnbaked =  {
      *  The lowest referendum index representing an unbaked referendum. Equal to
      *  `ReferendumCount` if there isn't a unbaked referendum.
      */
-    v33: new StorageType('Democracy.LowestUnbaked', 'Default', [], v33.ReferendumIndex) as LowestUnbakedV33,
+    v1: new StorageType('Democracy.LowestUnbaked', 'Default', [], v1.ReferendumIndex) as LowestUnbakedV1,
 }
 
 /**
  *  The lowest referendum index representing an unbaked referendum. Equal to
  *  `ReferendumCount` if there isn't a unbaked referendum.
  */
-export interface LowestUnbakedV33  {
+export interface LowestUnbakedV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.ReferendumIndex
-    get(block: Block): Promise<(v33.ReferendumIndex | undefined)>
+    getDefault(block: Block): v1.ReferendumIndex
+    get(block: Block): Promise<(v1.ReferendumIndex | undefined)>
 }
 
 export const referendumInfoOf =  {
@@ -165,7 +165,7 @@ export const referendumInfoOf =  {
      * 
      *  TWOX-NOTE: SAFE as indexes are not under an attacker’s control.
      */
-    v33: new StorageType('Democracy.ReferendumInfoOf', 'Optional', [v33.ReferendumIndex], v33.ReferendumInfo) as ReferendumInfoOfV33,
+    v1: new StorageType('Democracy.ReferendumInfoOf', 'Optional', [v1.ReferendumIndex], v1.ReferendumInfo) as ReferendumInfoOfV1,
     /**
      *  Information concerning any given referendum.
      * 
@@ -177,7 +177,7 @@ export const referendumInfoOf =  {
      * 
      *  TWOX-NOTE: SAFE as indexes are not under an attacker’s control.
      */
-    v52: new StorageType('Democracy.ReferendumInfoOf', 'Optional', [sts.number()], v52.ReferendumInfo) as ReferendumInfoOfV52,
+    v53: new StorageType('Democracy.ReferendumInfoOf', 'Optional', [sts.number()], v53.ReferendumInfo) as ReferendumInfoOfV53,
 }
 
 /**
@@ -185,18 +185,18 @@ export const referendumInfoOf =  {
  * 
  *  TWOX-NOTE: SAFE as indexes are not under an attacker’s control.
  */
-export interface ReferendumInfoOfV33  {
+export interface ReferendumInfoOfV1  {
     is(block: RuntimeCtx): boolean
-    get(block: Block, key: v33.ReferendumIndex): Promise<(v33.ReferendumInfo | undefined)>
-    getMany(block: Block, keys: v33.ReferendumIndex[]): Promise<(v33.ReferendumInfo | undefined)[]>
-    getKeys(block: Block): Promise<v33.ReferendumIndex[]>
-    getKeys(block: Block, key: v33.ReferendumIndex): Promise<v33.ReferendumIndex[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.ReferendumIndex[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.ReferendumIndex): AsyncIterable<v33.ReferendumIndex[]>
-    getPairs(block: Block): Promise<[k: v33.ReferendumIndex, v: (v33.ReferendumInfo | undefined)][]>
-    getPairs(block: Block, key: v33.ReferendumIndex): Promise<[k: v33.ReferendumIndex, v: (v33.ReferendumInfo | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.ReferendumIndex, v: (v33.ReferendumInfo | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.ReferendumIndex): AsyncIterable<[k: v33.ReferendumIndex, v: (v33.ReferendumInfo | undefined)][]>
+    get(block: Block, key: v1.ReferendumIndex): Promise<(v1.ReferendumInfo | undefined)>
+    getMany(block: Block, keys: v1.ReferendumIndex[]): Promise<(v1.ReferendumInfo | undefined)[]>
+    getKeys(block: Block): Promise<v1.ReferendumIndex[]>
+    getKeys(block: Block, key: v1.ReferendumIndex): Promise<v1.ReferendumIndex[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.ReferendumIndex[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.ReferendumIndex): AsyncIterable<v1.ReferendumIndex[]>
+    getPairs(block: Block): Promise<[k: v1.ReferendumIndex, v: (v1.ReferendumInfo | undefined)][]>
+    getPairs(block: Block, key: v1.ReferendumIndex): Promise<[k: v1.ReferendumIndex, v: (v1.ReferendumInfo | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.ReferendumIndex, v: (v1.ReferendumInfo | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.ReferendumIndex): AsyncIterable<[k: v1.ReferendumIndex, v: (v1.ReferendumInfo | undefined)][]>
 }
 
 /**
@@ -223,18 +223,18 @@ export interface ReferendumInfoOfV42  {
  * 
  *  TWOX-NOTE: SAFE as indexes are not under an attacker’s control.
  */
-export interface ReferendumInfoOfV52  {
+export interface ReferendumInfoOfV53  {
     is(block: RuntimeCtx): boolean
-    get(block: Block, key: number): Promise<(v52.ReferendumInfo | undefined)>
-    getMany(block: Block, keys: number[]): Promise<(v52.ReferendumInfo | undefined)[]>
+    get(block: Block, key: number): Promise<(v53.ReferendumInfo | undefined)>
+    getMany(block: Block, keys: number[]): Promise<(v53.ReferendumInfo | undefined)[]>
     getKeys(block: Block): Promise<number[]>
     getKeys(block: Block, key: number): Promise<number[]>
     getKeysPaged(pageSize: number, block: Block): AsyncIterable<number[]>
     getKeysPaged(pageSize: number, block: Block, key: number): AsyncIterable<number[]>
-    getPairs(block: Block): Promise<[k: number, v: (v52.ReferendumInfo | undefined)][]>
-    getPairs(block: Block, key: number): Promise<[k: number, v: (v52.ReferendumInfo | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: number, v: (v52.ReferendumInfo | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: number): AsyncIterable<[k: number, v: (v52.ReferendumInfo | undefined)][]>
+    getPairs(block: Block): Promise<[k: number, v: (v53.ReferendumInfo | undefined)][]>
+    getPairs(block: Block, key: number): Promise<[k: number, v: (v53.ReferendumInfo | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: number, v: (v53.ReferendumInfo | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: number): AsyncIterable<[k: number, v: (v53.ReferendumInfo | undefined)][]>
 }
 
 export const votingOf =  {
@@ -244,7 +244,7 @@ export const votingOf =  {
      * 
      *  TWOX-NOTE: SAFE as `AccountId`s are crypto hashes anyway.
      */
-    v33: new StorageType('Democracy.VotingOf', 'Default', [v33.AccountId], v33.Voting) as VotingOfV33,
+    v1: new StorageType('Democracy.VotingOf', 'Default', [v1.AccountId], v1.Voting) as VotingOfV1,
     /**
      *  All votes for a particular voter. We store the balance for the number of votes that we
      *  have recorded. The second item is the total amount of delegations, that will be added.
@@ -260,19 +260,19 @@ export const votingOf =  {
  * 
  *  TWOX-NOTE: SAFE as `AccountId`s are crypto hashes anyway.
  */
-export interface VotingOfV33  {
+export interface VotingOfV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.Voting
-    get(block: Block, key: v33.AccountId): Promise<(v33.Voting | undefined)>
-    getMany(block: Block, keys: v33.AccountId[]): Promise<(v33.Voting | undefined)[]>
-    getKeys(block: Block): Promise<v33.AccountId[]>
-    getKeys(block: Block, key: v33.AccountId): Promise<v33.AccountId[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.AccountId[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.AccountId): AsyncIterable<v33.AccountId[]>
-    getPairs(block: Block): Promise<[k: v33.AccountId, v: (v33.Voting | undefined)][]>
-    getPairs(block: Block, key: v33.AccountId): Promise<[k: v33.AccountId, v: (v33.Voting | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.AccountId, v: (v33.Voting | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.AccountId): AsyncIterable<[k: v33.AccountId, v: (v33.Voting | undefined)][]>
+    getDefault(block: Block): v1.Voting
+    get(block: Block, key: v1.AccountId): Promise<(v1.Voting | undefined)>
+    getMany(block: Block, keys: v1.AccountId[]): Promise<(v1.Voting | undefined)[]>
+    getKeys(block: Block): Promise<v1.AccountId[]>
+    getKeys(block: Block, key: v1.AccountId): Promise<v1.AccountId[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.AccountId[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.AccountId): AsyncIterable<v1.AccountId[]>
+    getPairs(block: Block): Promise<[k: v1.AccountId, v: (v1.Voting | undefined)][]>
+    getPairs(block: Block, key: v1.AccountId): Promise<[k: v1.AccountId, v: (v1.Voting | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.AccountId, v: (v1.Voting | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.AccountId): AsyncIterable<[k: v1.AccountId, v: (v1.Voting | undefined)][]>
 }
 
 /**
@@ -303,7 +303,7 @@ export const locks =  {
      * 
      *  TWOX-NOTE: OK ― `AccountId` is a secure hash.
      */
-    v33: new StorageType('Democracy.Locks', 'Optional', [v33.AccountId], v33.BlockNumber) as LocksV33,
+    v1: new StorageType('Democracy.Locks', 'Optional', [v1.AccountId], v1.BlockNumber) as LocksV1,
 }
 
 /**
@@ -312,18 +312,18 @@ export const locks =  {
  * 
  *  TWOX-NOTE: OK ― `AccountId` is a secure hash.
  */
-export interface LocksV33  {
+export interface LocksV1  {
     is(block: RuntimeCtx): boolean
-    get(block: Block, key: v33.AccountId): Promise<(v33.BlockNumber | undefined)>
-    getMany(block: Block, keys: v33.AccountId[]): Promise<(v33.BlockNumber | undefined)[]>
-    getKeys(block: Block): Promise<v33.AccountId[]>
-    getKeys(block: Block, key: v33.AccountId): Promise<v33.AccountId[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.AccountId[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.AccountId): AsyncIterable<v33.AccountId[]>
-    getPairs(block: Block): Promise<[k: v33.AccountId, v: (v33.BlockNumber | undefined)][]>
-    getPairs(block: Block, key: v33.AccountId): Promise<[k: v33.AccountId, v: (v33.BlockNumber | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.AccountId, v: (v33.BlockNumber | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.AccountId): AsyncIterable<[k: v33.AccountId, v: (v33.BlockNumber | undefined)][]>
+    get(block: Block, key: v1.AccountId): Promise<(v1.BlockNumber | undefined)>
+    getMany(block: Block, keys: v1.AccountId[]): Promise<(v1.BlockNumber | undefined)[]>
+    getKeys(block: Block): Promise<v1.AccountId[]>
+    getKeys(block: Block, key: v1.AccountId): Promise<v1.AccountId[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.AccountId[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.AccountId): AsyncIterable<v1.AccountId[]>
+    getPairs(block: Block): Promise<[k: v1.AccountId, v: (v1.BlockNumber | undefined)][]>
+    getPairs(block: Block, key: v1.AccountId): Promise<[k: v1.AccountId, v: (v1.BlockNumber | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.AccountId, v: (v1.BlockNumber | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.AccountId): AsyncIterable<[k: v1.AccountId, v: (v1.BlockNumber | undefined)][]>
 }
 
 export const lastTabledWasExternal =  {
@@ -331,14 +331,14 @@ export const lastTabledWasExternal =  {
      *  True if the last referendum tabled was submitted externally. False if it was a public
      *  proposal.
      */
-    v33: new StorageType('Democracy.LastTabledWasExternal', 'Default', [], sts.boolean()) as LastTabledWasExternalV33,
+    v1: new StorageType('Democracy.LastTabledWasExternal', 'Default', [], sts.boolean()) as LastTabledWasExternalV1,
 }
 
 /**
  *  True if the last referendum tabled was submitted externally. False if it was a public
  *  proposal.
  */
-export interface LastTabledWasExternalV33  {
+export interface LastTabledWasExternalV1  {
     is(block: RuntimeCtx): boolean
     getDefault(block: Block): boolean
     get(block: Block): Promise<(boolean | undefined)>
@@ -351,14 +351,14 @@ export const nextExternal =  {
      *  - `LastTabledWasExternal` is `false`; or
      *  - `PublicProps` is empty.
      */
-    v33: new StorageType('Democracy.NextExternal', 'Optional', [], sts.tuple(() => [v33.Hash, v33.VoteThreshold])) as NextExternalV33,
+    v1: new StorageType('Democracy.NextExternal', 'Optional', [], sts.tuple(() => [v1.Hash, v1.VoteThreshold])) as NextExternalV1,
     /**
      *  The referendum to be tabled whenever it would be valid to table an external proposal.
      *  This happens when a referendum needs to be tabled and one of two conditions are met:
      *  - `LastTabledWasExternal` is `false`; or
      *  - `PublicProps` is empty.
      */
-    v52: new StorageType('Democracy.NextExternal', 'Optional', [], sts.tuple(() => [v52.Bounded, v52.VoteThreshold])) as NextExternalV52,
+    v53: new StorageType('Democracy.NextExternal', 'Optional', [], sts.tuple(() => [v53.Bounded, v53.VoteThreshold])) as NextExternalV53,
 }
 
 /**
@@ -367,9 +367,9 @@ export const nextExternal =  {
  *  - `LastTabledWasExternal` is `false`; or
  *  - `PublicProps` is empty.
  */
-export interface NextExternalV33  {
+export interface NextExternalV1  {
     is(block: RuntimeCtx): boolean
-    get(block: Block): Promise<([v33.Hash, v33.VoteThreshold] | undefined)>
+    get(block: Block): Promise<([v1.Hash, v1.VoteThreshold] | undefined)>
 }
 
 /**
@@ -378,9 +378,9 @@ export interface NextExternalV33  {
  *  - `LastTabledWasExternal` is `false`; or
  *  - `PublicProps` is empty.
  */
-export interface NextExternalV52  {
+export interface NextExternalV53  {
     is(block: RuntimeCtx): boolean
-    get(block: Block): Promise<([v52.Bounded, v52.VoteThreshold] | undefined)>
+    get(block: Block): Promise<([v53.Bounded, v53.VoteThreshold] | undefined)>
 }
 
 export const blacklist =  {
@@ -388,50 +388,50 @@ export const blacklist =  {
      *  A record of who vetoed what. Maps proposal hash to a possible existent block number
      *  (until when it may not be resubmitted) and who vetoed it.
      */
-    v33: new StorageType('Democracy.Blacklist', 'Optional', [v33.Hash], sts.tuple(() => [v33.BlockNumber, sts.array(() => v33.AccountId)])) as BlacklistV33,
+    v1: new StorageType('Democracy.Blacklist', 'Optional', [v1.Hash], sts.tuple(() => [v1.BlockNumber, sts.array(() => v1.AccountId)])) as BlacklistV1,
 }
 
 /**
  *  A record of who vetoed what. Maps proposal hash to a possible existent block number
  *  (until when it may not be resubmitted) and who vetoed it.
  */
-export interface BlacklistV33  {
+export interface BlacklistV1  {
     is(block: RuntimeCtx): boolean
-    get(block: Block, key: v33.Hash): Promise<([v33.BlockNumber, v33.AccountId[]] | undefined)>
-    getMany(block: Block, keys: v33.Hash[]): Promise<([v33.BlockNumber, v33.AccountId[]] | undefined)[]>
-    getKeys(block: Block): Promise<v33.Hash[]>
-    getKeys(block: Block, key: v33.Hash): Promise<v33.Hash[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.Hash[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.Hash): AsyncIterable<v33.Hash[]>
-    getPairs(block: Block): Promise<[k: v33.Hash, v: ([v33.BlockNumber, v33.AccountId[]] | undefined)][]>
-    getPairs(block: Block, key: v33.Hash): Promise<[k: v33.Hash, v: ([v33.BlockNumber, v33.AccountId[]] | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.Hash, v: ([v33.BlockNumber, v33.AccountId[]] | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.Hash): AsyncIterable<[k: v33.Hash, v: ([v33.BlockNumber, v33.AccountId[]] | undefined)][]>
+    get(block: Block, key: v1.Hash): Promise<([v1.BlockNumber, v1.AccountId[]] | undefined)>
+    getMany(block: Block, keys: v1.Hash[]): Promise<([v1.BlockNumber, v1.AccountId[]] | undefined)[]>
+    getKeys(block: Block): Promise<v1.Hash[]>
+    getKeys(block: Block, key: v1.Hash): Promise<v1.Hash[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.Hash[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.Hash): AsyncIterable<v1.Hash[]>
+    getPairs(block: Block): Promise<[k: v1.Hash, v: ([v1.BlockNumber, v1.AccountId[]] | undefined)][]>
+    getPairs(block: Block, key: v1.Hash): Promise<[k: v1.Hash, v: ([v1.BlockNumber, v1.AccountId[]] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.Hash, v: ([v1.BlockNumber, v1.AccountId[]] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.Hash): AsyncIterable<[k: v1.Hash, v: ([v1.BlockNumber, v1.AccountId[]] | undefined)][]>
 }
 
 export const cancellations =  {
     /**
      *  Record of all proposals that have been subject to emergency cancellation.
      */
-    v33: new StorageType('Democracy.Cancellations', 'Default', [v33.Hash], sts.boolean()) as CancellationsV33,
+    v1: new StorageType('Democracy.Cancellations', 'Default', [v1.Hash], sts.boolean()) as CancellationsV1,
 }
 
 /**
  *  Record of all proposals that have been subject to emergency cancellation.
  */
-export interface CancellationsV33  {
+export interface CancellationsV1  {
     is(block: RuntimeCtx): boolean
     getDefault(block: Block): boolean
-    get(block: Block, key: v33.Hash): Promise<(boolean | undefined)>
-    getMany(block: Block, keys: v33.Hash[]): Promise<(boolean | undefined)[]>
-    getKeys(block: Block): Promise<v33.Hash[]>
-    getKeys(block: Block, key: v33.Hash): Promise<v33.Hash[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.Hash[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.Hash): AsyncIterable<v33.Hash[]>
-    getPairs(block: Block): Promise<[k: v33.Hash, v: (boolean | undefined)][]>
-    getPairs(block: Block, key: v33.Hash): Promise<[k: v33.Hash, v: (boolean | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.Hash, v: (boolean | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.Hash): AsyncIterable<[k: v33.Hash, v: (boolean | undefined)][]>
+    get(block: Block, key: v1.Hash): Promise<(boolean | undefined)>
+    getMany(block: Block, keys: v1.Hash[]): Promise<(boolean | undefined)[]>
+    getKeys(block: Block): Promise<v1.Hash[]>
+    getKeys(block: Block, key: v1.Hash): Promise<v1.Hash[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.Hash[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.Hash): AsyncIterable<v1.Hash[]>
+    getPairs(block: Block): Promise<[k: v1.Hash, v: (boolean | undefined)][]>
+    getPairs(block: Block, key: v1.Hash): Promise<[k: v1.Hash, v: (boolean | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.Hash, v: (boolean | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.Hash): AsyncIterable<[k: v1.Hash, v: (boolean | undefined)][]>
 }
 
 export const storageVersion =  {
@@ -440,13 +440,13 @@ export const storageVersion =  {
      * 
      *  New networks start with last version.
      */
-    v33: new StorageType('Democracy.StorageVersion', 'Optional', [], v33.Releases) as StorageVersionV33,
+    v1: new StorageType('Democracy.StorageVersion', 'Optional', [], v1.Releases) as StorageVersionV1,
     /**
      *  Storage version of the pallet.
      * 
      *  New networks start with last version.
      */
-    v42: new StorageType('Democracy.StorageVersion', 'Optional', [], v42.Type_549) as StorageVersionV42,
+    v42: new StorageType('Democracy.StorageVersion', 'Optional', [], v42.Type_544) as StorageVersionV42,
 }
 
 /**
@@ -454,9 +454,9 @@ export const storageVersion =  {
  * 
  *  New networks start with last version.
  */
-export interface StorageVersionV33  {
+export interface StorageVersionV1  {
     is(block: RuntimeCtx): boolean
-    get(block: Block): Promise<(v33.Releases | undefined)>
+    get(block: Block): Promise<(v1.Releases | undefined)>
 }
 
 /**
@@ -466,5 +466,5 @@ export interface StorageVersionV33  {
  */
 export interface StorageVersionV42  {
     is(block: RuntimeCtx): boolean
-    get(block: Block): Promise<(v42.Type_549 | undefined)>
+    get(block: Block): Promise<(v42.Type_544 | undefined)>
 }

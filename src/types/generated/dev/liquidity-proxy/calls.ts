@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const swap =  {
     name: 'LiquidityProxy.swap',
@@ -14,15 +14,15 @@ export const swap =  {
      * - `selected_source_types`: list of selected LiquiditySource types, selection effect is determined by filter_mode,
      * - `filter_mode`: indicate either to allow or forbid selected types only, or disable filtering.
      */
-    v70: new CallType(
+    v85: new CallType(
         'LiquidityProxy.swap',
         sts.struct({
             dexId: sts.number(),
-            inputAssetId: v70.AssetId32,
-            outputAssetId: v70.AssetId32,
-            swapAmount: v70.SwapAmount,
-            selectedSourceTypes: sts.array(() => v70.LiquiditySourceType),
-            filterMode: v70.FilterMode,
+            inputAssetId: v85.AssetId32,
+            outputAssetId: v85.AssetId32,
+            swapAmount: v85.SwapAmount,
+            selectedSourceTypes: sts.array(() => v85.LiquiditySourceType),
+            filterMode: v85.FilterMode,
         })
     ),
 }
@@ -41,16 +41,16 @@ export const swapTransfer =  {
      * - `selected_source_types`: list of selected LiquiditySource types, selection effect is determined by filter_mode,
      * - `filter_mode`: indicate either to allow or forbid selected types only, or disable filtering.
      */
-    v70: new CallType(
+    v85: new CallType(
         'LiquidityProxy.swap_transfer',
         sts.struct({
-            receiver: v70.AccountId32,
+            receiver: v85.AccountId32,
             dexId: sts.number(),
-            inputAssetId: v70.AssetId32,
-            outputAssetId: v70.AssetId32,
-            swapAmount: v70.SwapAmount,
-            selectedSourceTypes: sts.array(() => v70.LiquiditySourceType),
-            filterMode: v70.FilterMode,
+            inputAssetId: v85.AssetId32,
+            outputAssetId: v85.AssetId32,
+            swapAmount: v85.SwapAmount,
+            selectedSourceTypes: sts.array(() => v85.LiquiditySourceType),
+            filterMode: v85.FilterMode,
         })
     ),
 }
@@ -70,15 +70,17 @@ export const swapTransferBatch =  {
      * - `selected_source_types`: list of selected LiquiditySource types, selection effect is
      *                            determined by filter_mode,
      * - `filter_mode`: indicate either to allow or forbid selected types only, or disable filtering.
+     * - `additional_data`: data to include in swap success event.
      */
-    v70: new CallType(
+    v85: new CallType(
         'LiquidityProxy.swap_transfer_batch',
         sts.struct({
-            swapBatches: sts.array(() => v70.SwapBatchInfo),
-            inputAssetId: v70.AssetId32,
+            swapBatches: sts.array(() => v85.SwapBatchInfo),
+            inputAssetId: v85.AssetId32,
             maxInputAmount: sts.bigint(),
-            selectedSourceTypes: sts.array(() => v70.LiquiditySourceType),
-            filterMode: v70.FilterMode,
+            selectedSourceTypes: sts.array(() => v85.LiquiditySourceType),
+            filterMode: v85.FilterMode,
+            additionalData: sts.option(() => v85.BoundedVec),
         })
     ),
 }
@@ -90,10 +92,10 @@ export const enableLiquiditySource =  {
      * 
      * - `liquidity_source`: the liquidity source to be enabled.
      */
-    v70: new CallType(
+    v85: new CallType(
         'LiquidityProxy.enable_liquidity_source',
         sts.struct({
-            liquiditySource: v70.LiquiditySourceType,
+            liquiditySource: v85.LiquiditySourceType,
         })
     ),
 }
@@ -105,17 +107,17 @@ export const disableLiquiditySource =  {
      * 
      * - `liquidity_source`: the liquidity source to be disabled.
      */
-    v70: new CallType(
+    v85: new CallType(
         'LiquidityProxy.disable_liquidity_source',
         sts.struct({
-            liquiditySource: v70.LiquiditySourceType,
+            liquiditySource: v85.LiquiditySourceType,
         })
     ),
 }
 
 export const setAdarCommissionRatio =  {
     name: 'LiquidityProxy.set_adar_commission_ratio',
-    v70: new CallType(
+    v85: new CallType(
         'LiquidityProxy.set_adar_commission_ratio',
         sts.struct({
             commissionRatio: sts.bigint(),
@@ -133,18 +135,18 @@ export const xorlessTransfer =  {
      * This extrinsic is done as temporary solution for XORless transfers, in future it would be removed
      * and logic for XORless extrinsics should be moved to xor-fee pallet.
      */
-    v70: new CallType(
+    v85: new CallType(
         'LiquidityProxy.xorless_transfer',
         sts.struct({
             dexId: sts.number(),
-            assetId: v70.AssetId32,
-            receiver: v70.AccountId32,
+            assetId: v85.AssetId32,
+            receiver: v85.AccountId32,
             amount: sts.bigint(),
             desiredXorAmount: sts.bigint(),
             maxAmountIn: sts.bigint(),
-            selectedSourceTypes: sts.array(() => v70.LiquiditySourceType),
-            filterMode: v70.FilterMode,
-            additionalData: sts.option(() => v70.BoundedVec),
+            selectedSourceTypes: sts.array(() => v85.LiquiditySourceType),
+            filterMode: v85.FilterMode,
+            additionalData: sts.option(() => sts.bytes()),
         })
     ),
 }

@@ -12,7 +12,7 @@ export const assetKinds = {
 	v70Stage: stageStorage.assetKinds['v70'],
 	v64Test: testStorage.assetKinds['v64'],
 	v70Test: testStorage.assetKinds['v70'],
-	v70Dev: devStorage.assetKinds['v70'],
+	v85Dev: devStorage.assetKinds['v85'],
 }
 
 export const sidechainPrecision = {
@@ -23,7 +23,7 @@ export const sidechainPrecision = {
 	v70Stage: stageStorage.sidechainPrecision['v70'],
 	v64Test: testStorage.sidechainPrecision['v64'],
 	v70Test: testStorage.sidechainPrecision['v70'],
-	v70Dev: devStorage.sidechainPrecision['v70'],
+	v85Dev: devStorage.sidechainPrecision['v85'],
 }
 
 export const allowedParachainAssets = {
@@ -34,7 +34,7 @@ export const allowedParachainAssets = {
 	v70Stage: stageStorage.allowedParachainAssets['v70'],
 	v64Test: testStorage.allowedParachainAssets['v64'],
 	v70Test: testStorage.allowedParachainAssets['v70'],
-	v70Dev: devStorage.allowedParachainAssets['v70'],
+	v85Dev: devStorage.allowedParachainAssets['v85'],
 }
 
 export const relaychainAsset = {
@@ -45,5 +45,5 @@ export const relaychainAsset = {
 	v70Stage: stageStorage.relaychainAsset['v70'],
 	v64Test: testStorage.relaychainAsset['v64'],
 	v70Test: testStorage.relaychainAsset['v70'],
-	v70Dev: devStorage.relaychainAsset['v70'],
+	v85Dev: devStorage.relaychainAsset['v85'],
 }

@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
 import * as v42 from '../v42'
 
 export const setKeys =  {
@@ -20,10 +20,10 @@ export const setKeys =  {
      *  - DbWrites per key id: `KeyOwner`
      *  # </weight>
      */
-    v33: new CallType(
+    v1: new CallType(
         'Session.set_keys',
         sts.struct({
-            keys: v33.Keys,
+            keys: v1.Keys,
             proof: sts.bytes(),
         })
     ),
@@ -68,7 +68,7 @@ export const purgeKeys =  {
      *  - DbWrites per key id: `KeyOwnder`
      *  # </weight>
      */
-    v33: new CallType(
+    v1: new CallType(
         'Session.purge_keys',
         sts.unit()
     ),

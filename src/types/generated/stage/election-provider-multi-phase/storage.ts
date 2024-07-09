@@ -1,6 +1,6 @@
 import {sts, Block, Bytes, Option, Result, StorageType, RuntimeCtx} from '../support'
 import * as v42 from '../v42'
-import * as v52 from '../v52'
+import * as v53 from '../v53'
 
 export const round =  {
     /**
@@ -32,7 +32,7 @@ export const currentPhase =  {
     /**
      *  Current phase.
      */
-    v42: new StorageType('ElectionProviderMultiPhase.CurrentPhase', 'Default', [], v42.Type_642) as CurrentPhaseV42,
+    v42: new StorageType('ElectionProviderMultiPhase.CurrentPhase', 'Default', [], v42.Type_637) as CurrentPhaseV42,
 }
 
 /**
@@ -40,8 +40,8 @@ export const currentPhase =  {
  */
 export interface CurrentPhaseV42  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v42.Type_642
-    get(block: Block): Promise<(v42.Type_642 | undefined)>
+    getDefault(block: Block): v42.Type_637
+    get(block: Block): Promise<(v42.Type_637 | undefined)>
 }
 
 export const queuedSolution =  {
@@ -166,7 +166,7 @@ export const signedSubmissionIndices =  {
      *  can be quite large, so we're willing to pay the cost of multiple database accesses to access
      *  them one at a time instead of reading and decoding all of them at once.
      */
-    v52: new StorageType('ElectionProviderMultiPhase.SignedSubmissionIndices', 'Default', [], sts.array(() => sts.tuple(() => [v52.ElectionScore, sts.number(), sts.number()]))) as SignedSubmissionIndicesV52,
+    v53: new StorageType('ElectionProviderMultiPhase.SignedSubmissionIndices', 'Default', [], sts.array(() => sts.tuple(() => [v53.ElectionScore, sts.number(), sts.number()]))) as SignedSubmissionIndicesV53,
 }
 
 /**
@@ -191,10 +191,10 @@ export interface SignedSubmissionIndicesV42  {
  *  can be quite large, so we're willing to pay the cost of multiple database accesses to access
  *  them one at a time instead of reading and decoding all of them at once.
  */
-export interface SignedSubmissionIndicesV52  {
+export interface SignedSubmissionIndicesV53  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): [v52.ElectionScore, number, number][]
-    get(block: Block): Promise<([v52.ElectionScore, number, number][] | undefined)>
+    getDefault(block: Block): [v53.ElectionScore, number, number][]
+    get(block: Block): Promise<([v53.ElectionScore, number, number][] | undefined)>
 }
 
 export const signedSubmissionsMap =  {

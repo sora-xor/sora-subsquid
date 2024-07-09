@@ -7,15 +7,15 @@ import * as devStorage from '../../dev/timestamp/storage'
 export const now = {
 	name: 'Timestamp.Now',
 	v1: productionStorage.now['v1'],
-	v33Stage: stageStorage.now['v33'],
-	v33Test: testStorage.now['v33'],
-	v70Dev: devStorage.now['v70'],
+	v1Stage: stageStorage.now['v1'],
+	v1Test: testStorage.now['v1'],
+	v85Dev: devStorage.now['v85'],
 }
 
 export const didUpdate = {
 	name: 'Timestamp.DidUpdate',
 	v1: productionStorage.didUpdate['v1'],
-	v33Stage: stageStorage.didUpdate['v33'],
-	v33Test: testStorage.didUpdate['v33'],
-	v70Dev: devStorage.didUpdate['v70'],
+	v1Stage: stageStorage.didUpdate['v1'],
+	v1Test: testStorage.didUpdate['v1'],
+	v85Dev: devStorage.didUpdate['v85'],
 }

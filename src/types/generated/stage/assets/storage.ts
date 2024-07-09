@@ -1,13 +1,20 @@
 import {sts, Block, Bytes, Option, Result, StorageType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
+import * as v7 from '../v7'
+import * as v22 from '../v22'
+import * as v26 from '../v26'
 import * as v42 from '../v42'
-import * as v69 from '../v69'
+import * as v71 from '../v71'
 
 export const assetOwners =  {
     /**
      *  Asset Id -> Owner Account Id
      */
-    v33: new StorageType('Assets.AssetOwners', 'Optional', [v33.AssetId], v33.AccountId) as AssetOwnersV33,
+    v1: new StorageType('Assets.AssetOwners', 'Default', [v1.AssetId], v1.AccountId) as AssetOwnersV1,
+    /**
+     *  Asset Id -> Owner Account Id
+     */
+    v7: new StorageType('Assets.AssetOwners', 'Optional', [v7.AssetId], v7.AccountId) as AssetOwnersV7,
     /**
      *  Asset Id -> Owner Account Id
      */
@@ -17,18 +24,36 @@ export const assetOwners =  {
 /**
  *  Asset Id -> Owner Account Id
  */
-export interface AssetOwnersV33  {
+export interface AssetOwnersV1  {
     is(block: RuntimeCtx): boolean
-    get(block: Block, key: v33.AssetId): Promise<(v33.AccountId | undefined)>
-    getMany(block: Block, keys: v33.AssetId[]): Promise<(v33.AccountId | undefined)[]>
-    getKeys(block: Block): Promise<v33.AssetId[]>
-    getKeys(block: Block, key: v33.AssetId): Promise<v33.AssetId[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.AssetId[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.AssetId): AsyncIterable<v33.AssetId[]>
-    getPairs(block: Block): Promise<[k: v33.AssetId, v: (v33.AccountId | undefined)][]>
-    getPairs(block: Block, key: v33.AssetId): Promise<[k: v33.AssetId, v: (v33.AccountId | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.AssetId, v: (v33.AccountId | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.AssetId): AsyncIterable<[k: v33.AssetId, v: (v33.AccountId | undefined)][]>
+    getDefault(block: Block): v1.AccountId
+    get(block: Block, key: v1.AssetId): Promise<(v1.AccountId | undefined)>
+    getMany(block: Block, keys: v1.AssetId[]): Promise<(v1.AccountId | undefined)[]>
+    getKeys(block: Block): Promise<v1.AssetId[]>
+    getKeys(block: Block, key: v1.AssetId): Promise<v1.AssetId[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.AssetId[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.AssetId): AsyncIterable<v1.AssetId[]>
+    getPairs(block: Block): Promise<[k: v1.AssetId, v: (v1.AccountId | undefined)][]>
+    getPairs(block: Block, key: v1.AssetId): Promise<[k: v1.AssetId, v: (v1.AccountId | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.AssetId, v: (v1.AccountId | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.AssetId): AsyncIterable<[k: v1.AssetId, v: (v1.AccountId | undefined)][]>
+}
+
+/**
+ *  Asset Id -> Owner Account Id
+ */
+export interface AssetOwnersV7  {
+    is(block: RuntimeCtx): boolean
+    get(block: Block, key: v7.AssetId): Promise<(v7.AccountId | undefined)>
+    getMany(block: Block, keys: v7.AssetId[]): Promise<(v7.AccountId | undefined)[]>
+    getKeys(block: Block): Promise<v7.AssetId[]>
+    getKeys(block: Block, key: v7.AssetId): Promise<v7.AssetId[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v7.AssetId[]>
+    getKeysPaged(pageSize: number, block: Block, key: v7.AssetId): AsyncIterable<v7.AssetId[]>
+    getPairs(block: Block): Promise<[k: v7.AssetId, v: (v7.AccountId | undefined)][]>
+    getPairs(block: Block, key: v7.AssetId): Promise<[k: v7.AssetId, v: (v7.AccountId | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v7.AssetId, v: (v7.AccountId | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v7.AssetId): AsyncIterable<[k: v7.AssetId, v: (v7.AccountId | undefined)][]>
 }
 
 /**
@@ -50,9 +75,13 @@ export interface AssetOwnersV42  {
 
 export const assetInfos =  {
     /**
+     *  Asset Id -> (Symbol, Precision, Is Mintable)
+     */
+    v1: new StorageType('Assets.AssetInfos', 'Default', [v1.AssetId], sts.tuple(() => [v1.AssetSymbol, v1.AssetName, v1.BalancePrecision, sts.boolean()])) as AssetInfosV1,
+    /**
      *  Asset Id -> (Symbol, Name, Precision, Is Mintable, Content Source, Description)
      */
-    v33: new StorageType('Assets.AssetInfos', 'Default', [v33.AssetId], sts.tuple(() => [v33.AssetSymbol, v33.AssetName, v33.BalancePrecision, sts.boolean(), sts.option(() => v33.ContentSource), sts.option(() => v33.Description)])) as AssetInfosV33,
+    v26: new StorageType('Assets.AssetInfos', 'Default', [v26.AssetId], sts.tuple(() => [v26.AssetSymbol, v26.AssetName, v26.BalancePrecision, sts.boolean(), sts.option(() => v26.ContentSource), sts.option(() => v26.Description)])) as AssetInfosV26,
     /**
      *  Asset Id -> (Symbol, Name, Precision, Is Mintable, Content Source, Description)
      */
@@ -60,21 +89,39 @@ export const assetInfos =  {
 }
 
 /**
+ *  Asset Id -> (Symbol, Precision, Is Mintable)
+ */
+export interface AssetInfosV1  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): [v1.AssetSymbol, v1.AssetName, v1.BalancePrecision, boolean]
+    get(block: Block, key: v1.AssetId): Promise<([v1.AssetSymbol, v1.AssetName, v1.BalancePrecision, boolean] | undefined)>
+    getMany(block: Block, keys: v1.AssetId[]): Promise<([v1.AssetSymbol, v1.AssetName, v1.BalancePrecision, boolean] | undefined)[]>
+    getKeys(block: Block): Promise<v1.AssetId[]>
+    getKeys(block: Block, key: v1.AssetId): Promise<v1.AssetId[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.AssetId[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.AssetId): AsyncIterable<v1.AssetId[]>
+    getPairs(block: Block): Promise<[k: v1.AssetId, v: ([v1.AssetSymbol, v1.AssetName, v1.BalancePrecision, boolean] | undefined)][]>
+    getPairs(block: Block, key: v1.AssetId): Promise<[k: v1.AssetId, v: ([v1.AssetSymbol, v1.AssetName, v1.BalancePrecision, boolean] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.AssetId, v: ([v1.AssetSymbol, v1.AssetName, v1.BalancePrecision, boolean] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.AssetId): AsyncIterable<[k: v1.AssetId, v: ([v1.AssetSymbol, v1.AssetName, v1.BalancePrecision, boolean] | undefined)][]>
+}
+
+/**
  *  Asset Id -> (Symbol, Name, Precision, Is Mintable, Content Source, Description)
  */
-export interface AssetInfosV33  {
+export interface AssetInfosV26  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): [v33.AssetSymbol, v33.AssetName, v33.BalancePrecision, boolean, (v33.ContentSource | undefined), (v33.Description | undefined)]
-    get(block: Block, key: v33.AssetId): Promise<([v33.AssetSymbol, v33.AssetName, v33.BalancePrecision, boolean, (v33.ContentSource | undefined), (v33.Description | undefined)] | undefined)>
-    getMany(block: Block, keys: v33.AssetId[]): Promise<([v33.AssetSymbol, v33.AssetName, v33.BalancePrecision, boolean, (v33.ContentSource | undefined), (v33.Description | undefined)] | undefined)[]>
-    getKeys(block: Block): Promise<v33.AssetId[]>
-    getKeys(block: Block, key: v33.AssetId): Promise<v33.AssetId[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.AssetId[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.AssetId): AsyncIterable<v33.AssetId[]>
-    getPairs(block: Block): Promise<[k: v33.AssetId, v: ([v33.AssetSymbol, v33.AssetName, v33.BalancePrecision, boolean, (v33.ContentSource | undefined), (v33.Description | undefined)] | undefined)][]>
-    getPairs(block: Block, key: v33.AssetId): Promise<[k: v33.AssetId, v: ([v33.AssetSymbol, v33.AssetName, v33.BalancePrecision, boolean, (v33.ContentSource | undefined), (v33.Description | undefined)] | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.AssetId, v: ([v33.AssetSymbol, v33.AssetName, v33.BalancePrecision, boolean, (v33.ContentSource | undefined), (v33.Description | undefined)] | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.AssetId): AsyncIterable<[k: v33.AssetId, v: ([v33.AssetSymbol, v33.AssetName, v33.BalancePrecision, boolean, (v33.ContentSource | undefined), (v33.Description | undefined)] | undefined)][]>
+    getDefault(block: Block): [v26.AssetSymbol, v26.AssetName, v26.BalancePrecision, boolean, (v26.ContentSource | undefined), (v26.Description | undefined)]
+    get(block: Block, key: v26.AssetId): Promise<([v26.AssetSymbol, v26.AssetName, v26.BalancePrecision, boolean, (v26.ContentSource | undefined), (v26.Description | undefined)] | undefined)>
+    getMany(block: Block, keys: v26.AssetId[]): Promise<([v26.AssetSymbol, v26.AssetName, v26.BalancePrecision, boolean, (v26.ContentSource | undefined), (v26.Description | undefined)] | undefined)[]>
+    getKeys(block: Block): Promise<v26.AssetId[]>
+    getKeys(block: Block, key: v26.AssetId): Promise<v26.AssetId[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v26.AssetId[]>
+    getKeysPaged(pageSize: number, block: Block, key: v26.AssetId): AsyncIterable<v26.AssetId[]>
+    getPairs(block: Block): Promise<[k: v26.AssetId, v: ([v26.AssetSymbol, v26.AssetName, v26.BalancePrecision, boolean, (v26.ContentSource | undefined), (v26.Description | undefined)] | undefined)][]>
+    getPairs(block: Block, key: v26.AssetId): Promise<[k: v26.AssetId, v: ([v26.AssetSymbol, v26.AssetName, v26.BalancePrecision, boolean, (v26.ContentSource | undefined), (v26.Description | undefined)] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v26.AssetId, v: ([v26.AssetSymbol, v26.AssetName, v26.BalancePrecision, boolean, (v26.ContentSource | undefined), (v26.Description | undefined)] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v26.AssetId): AsyncIterable<[k: v26.AssetId, v: ([v26.AssetSymbol, v26.AssetName, v26.BalancePrecision, boolean, (v26.ContentSource | undefined), (v26.Description | undefined)] | undefined)][]>
 }
 
 /**
@@ -99,7 +146,7 @@ export const assetRecordAssetId =  {
     /**
      *  Asset Id -> AssetRecord<T>
      */
-    v33: new StorageType('Assets.AssetRecordAssetId', 'Optional', [v33.AssetId], v33.AssetRecord) as AssetRecordAssetIdV33,
+    v1: new StorageType('Assets.AssetRecordAssetId', 'Optional', [v1.AssetId], v1.AssetRecord) as AssetRecordAssetIdV1,
     /**
      *  Asset Id -> AssetRecord<T>
      */
@@ -107,24 +154,24 @@ export const assetRecordAssetId =  {
     /**
      *  Asset Id -> AssetRecord<T>
      */
-    v69: new StorageType('Assets.AssetRecordAssetId', 'Optional', [v69.AssetId32], v69.AssetRecord) as AssetRecordAssetIdV69,
+    v71: new StorageType('Assets.AssetRecordAssetId', 'Optional', [v71.AssetId32], v71.AssetRecord) as AssetRecordAssetIdV71,
 }
 
 /**
  *  Asset Id -> AssetRecord<T>
  */
-export interface AssetRecordAssetIdV33  {
+export interface AssetRecordAssetIdV1  {
     is(block: RuntimeCtx): boolean
-    get(block: Block, key: v33.AssetId): Promise<(v33.AssetRecord | undefined)>
-    getMany(block: Block, keys: v33.AssetId[]): Promise<(v33.AssetRecord | undefined)[]>
-    getKeys(block: Block): Promise<v33.AssetId[]>
-    getKeys(block: Block, key: v33.AssetId): Promise<v33.AssetId[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.AssetId[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.AssetId): AsyncIterable<v33.AssetId[]>
-    getPairs(block: Block): Promise<[k: v33.AssetId, v: (v33.AssetRecord | undefined)][]>
-    getPairs(block: Block, key: v33.AssetId): Promise<[k: v33.AssetId, v: (v33.AssetRecord | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.AssetId, v: (v33.AssetRecord | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.AssetId): AsyncIterable<[k: v33.AssetId, v: (v33.AssetRecord | undefined)][]>
+    get(block: Block, key: v1.AssetId): Promise<(v1.AssetRecord | undefined)>
+    getMany(block: Block, keys: v1.AssetId[]): Promise<(v1.AssetRecord | undefined)[]>
+    getKeys(block: Block): Promise<v1.AssetId[]>
+    getKeys(block: Block, key: v1.AssetId): Promise<v1.AssetId[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.AssetId[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.AssetId): AsyncIterable<v1.AssetId[]>
+    getPairs(block: Block): Promise<[k: v1.AssetId, v: (v1.AssetRecord | undefined)][]>
+    getPairs(block: Block, key: v1.AssetId): Promise<[k: v1.AssetId, v: (v1.AssetRecord | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.AssetId, v: (v1.AssetRecord | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.AssetId): AsyncIterable<[k: v1.AssetId, v: (v1.AssetRecord | undefined)][]>
 }
 
 /**
@@ -147,16 +194,64 @@ export interface AssetRecordAssetIdV42  {
 /**
  *  Asset Id -> AssetRecord<T>
  */
-export interface AssetRecordAssetIdV69  {
+export interface AssetRecordAssetIdV71  {
     is(block: RuntimeCtx): boolean
-    get(block: Block, key: v69.AssetId32): Promise<(v69.AssetRecord | undefined)>
-    getMany(block: Block, keys: v69.AssetId32[]): Promise<(v69.AssetRecord | undefined)[]>
-    getKeys(block: Block): Promise<v69.AssetId32[]>
-    getKeys(block: Block, key: v69.AssetId32): Promise<v69.AssetId32[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v69.AssetId32[]>
-    getKeysPaged(pageSize: number, block: Block, key: v69.AssetId32): AsyncIterable<v69.AssetId32[]>
-    getPairs(block: Block): Promise<[k: v69.AssetId32, v: (v69.AssetRecord | undefined)][]>
-    getPairs(block: Block, key: v69.AssetId32): Promise<[k: v69.AssetId32, v: (v69.AssetRecord | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v69.AssetId32, v: (v69.AssetRecord | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v69.AssetId32): AsyncIterable<[k: v69.AssetId32, v: (v69.AssetRecord | undefined)][]>
+    get(block: Block, key: v71.AssetId32): Promise<(v71.AssetRecord | undefined)>
+    getMany(block: Block, keys: v71.AssetId32[]): Promise<(v71.AssetRecord | undefined)[]>
+    getKeys(block: Block): Promise<v71.AssetId32[]>
+    getKeys(block: Block, key: v71.AssetId32): Promise<v71.AssetId32[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v71.AssetId32[]>
+    getKeysPaged(pageSize: number, block: Block, key: v71.AssetId32): AsyncIterable<v71.AssetId32[]>
+    getPairs(block: Block): Promise<[k: v71.AssetId32, v: (v71.AssetRecord | undefined)][]>
+    getPairs(block: Block, key: v71.AssetId32): Promise<[k: v71.AssetId32, v: (v71.AssetRecord | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v71.AssetId32, v: (v71.AssetRecord | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v71.AssetId32): AsyncIterable<[k: v71.AssetId32, v: (v71.AssetRecord | undefined)][]>
+}
+
+export const assetContentSource =  {
+    /**
+     *  Asset Id -> Content Source
+     */
+    v22: new StorageType('Assets.AssetContentSource', 'Optional', [v22.AssetId], v22.ContentSource) as AssetContentSourceV22,
+}
+
+/**
+ *  Asset Id -> Content Source
+ */
+export interface AssetContentSourceV22  {
+    is(block: RuntimeCtx): boolean
+    get(block: Block, key: v22.AssetId): Promise<(v22.ContentSource | undefined)>
+    getMany(block: Block, keys: v22.AssetId[]): Promise<(v22.ContentSource | undefined)[]>
+    getKeys(block: Block): Promise<v22.AssetId[]>
+    getKeys(block: Block, key: v22.AssetId): Promise<v22.AssetId[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v22.AssetId[]>
+    getKeysPaged(pageSize: number, block: Block, key: v22.AssetId): AsyncIterable<v22.AssetId[]>
+    getPairs(block: Block): Promise<[k: v22.AssetId, v: (v22.ContentSource | undefined)][]>
+    getPairs(block: Block, key: v22.AssetId): Promise<[k: v22.AssetId, v: (v22.ContentSource | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v22.AssetId, v: (v22.ContentSource | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v22.AssetId): AsyncIterable<[k: v22.AssetId, v: (v22.ContentSource | undefined)][]>
+}
+
+export const assetDescription =  {
+    /**
+     *  Asset Id -> Description
+     */
+    v22: new StorageType('Assets.AssetDescription', 'Optional', [v22.AssetId], v22.Description) as AssetDescriptionV22,
+}
+
+/**
+ *  Asset Id -> Description
+ */
+export interface AssetDescriptionV22  {
+    is(block: RuntimeCtx): boolean
+    get(block: Block, key: v22.AssetId): Promise<(v22.Description | undefined)>
+    getMany(block: Block, keys: v22.AssetId[]): Promise<(v22.Description | undefined)[]>
+    getKeys(block: Block): Promise<v22.AssetId[]>
+    getKeys(block: Block, key: v22.AssetId): Promise<v22.AssetId[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v22.AssetId[]>
+    getKeysPaged(pageSize: number, block: Block, key: v22.AssetId): AsyncIterable<v22.AssetId[]>
+    getPairs(block: Block): Promise<[k: v22.AssetId, v: (v22.Description | undefined)][]>
+    getPairs(block: Block, key: v22.AssetId): Promise<[k: v22.AssetId, v: (v22.Description | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v22.AssetId, v: (v22.Description | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v22.AssetId): AsyncIterable<[k: v22.AssetId, v: (v22.Description | undefined)][]>
 }

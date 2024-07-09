@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const newTerm =  {
     name: 'ElectionsPhragmen.NewTerm',
@@ -10,10 +10,10 @@ export const newTerm =  {
      * slashed and none were elected, whilst `EmptyTerm` means that no candidates existed to
      * begin with.
      */
-    v70: new EventType(
+    v85: new EventType(
         'ElectionsPhragmen.NewTerm',
         sts.struct({
-            newMembers: sts.array(() => sts.tuple(() => [v70.AccountId32, sts.bigint()])),
+            newMembers: sts.array(() => sts.tuple(() => [v85.AccountId32, sts.bigint()])),
         })
     ),
 }
@@ -24,7 +24,7 @@ export const emptyTerm =  {
      * No (or not enough) candidates existed for this round. This is different from
      * `NewTerm(\[\])`. See the description of `NewTerm`.
      */
-    v70: new EventType(
+    v85: new EventType(
         'ElectionsPhragmen.EmptyTerm',
         sts.unit()
     ),
@@ -35,7 +35,7 @@ export const electionError =  {
     /**
      * Internal error happened while trying to perform election.
      */
-    v70: new EventType(
+    v85: new EventType(
         'ElectionsPhragmen.ElectionError',
         sts.unit()
     ),
@@ -47,10 +47,10 @@ export const memberKicked =  {
      * A member has been removed. This should always be followed by either `NewTerm` or
      * `EmptyTerm`.
      */
-    v70: new EventType(
+    v85: new EventType(
         'ElectionsPhragmen.MemberKicked',
         sts.struct({
-            member: v70.AccountId32,
+            member: v85.AccountId32,
         })
     ),
 }
@@ -60,10 +60,10 @@ export const renounced =  {
     /**
      * Someone has renounced their candidacy.
      */
-    v70: new EventType(
+    v85: new EventType(
         'ElectionsPhragmen.Renounced',
         sts.struct({
-            candidate: v70.AccountId32,
+            candidate: v85.AccountId32,
         })
     ),
 }
@@ -76,10 +76,10 @@ export const candidateSlashed =  {
      * 
      * Note that old members and runners-up are also candidates.
      */
-    v70: new EventType(
+    v85: new EventType(
         'ElectionsPhragmen.CandidateSlashed',
         sts.struct({
-            candidate: v70.AccountId32,
+            candidate: v85.AccountId32,
             amount: sts.bigint(),
         })
     ),
@@ -90,10 +90,10 @@ export const seatHolderSlashed =  {
     /**
      * A seat holder was slashed by amount by being forcefully removed from the set.
      */
-    v70: new EventType(
+    v85: new EventType(
         'ElectionsPhragmen.SeatHolderSlashed',
         sts.struct({
-            seatHolder: v70.AccountId32,
+            seatHolder: v85.AccountId32,
             amount: sts.bigint(),
         })
     ),

@@ -1,13 +1,14 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v54 from '../v54'
+import * as v64 from '../v64'
 import * as v70 from '../v70'
+import * as v84 from '../v84'
 
 export const initialized =  {
     name: 'BridgeDataSigner.Initialized',
-    v54: new EventType(
+    v64: new EventType(
         'BridgeDataSigner.Initialized',
         sts.struct({
-            networkId: v54.GenericNetworkId,
+            networkId: v64.GenericNetworkId,
             peers: sts.array(() => sts.bytes()),
         })
     ),
@@ -15,6 +16,13 @@ export const initialized =  {
         'BridgeDataSigner.Initialized',
         sts.struct({
             networkId: v70.GenericNetworkId,
+            peers: sts.array(() => sts.bytes()),
+        })
+    ),
+    v84: new EventType(
+        'BridgeDataSigner.Initialized',
+        sts.struct({
+            networkId: v84.GenericNetworkId,
             peers: sts.array(() => sts.bytes()),
         })
     ),
@@ -22,10 +30,10 @@ export const initialized =  {
 
 export const addedPeer =  {
     name: 'BridgeDataSigner.AddedPeer',
-    v54: new EventType(
+    v64: new EventType(
         'BridgeDataSigner.AddedPeer',
         sts.struct({
-            networkId: v54.GenericNetworkId,
+            networkId: v64.GenericNetworkId,
             peer: sts.bytes(),
         })
     ),
@@ -33,6 +41,13 @@ export const addedPeer =  {
         'BridgeDataSigner.AddedPeer',
         sts.struct({
             networkId: v70.GenericNetworkId,
+            peer: sts.bytes(),
+        })
+    ),
+    v84: new EventType(
+        'BridgeDataSigner.AddedPeer',
+        sts.struct({
+            networkId: v84.GenericNetworkId,
             peer: sts.bytes(),
         })
     ),
@@ -40,10 +55,10 @@ export const addedPeer =  {
 
 export const removedPeer =  {
     name: 'BridgeDataSigner.RemovedPeer',
-    v54: new EventType(
+    v64: new EventType(
         'BridgeDataSigner.RemovedPeer',
         sts.struct({
-            networkId: v54.GenericNetworkId,
+            networkId: v64.GenericNetworkId,
             peer: sts.bytes(),
         })
     ),
@@ -54,16 +69,23 @@ export const removedPeer =  {
             peer: sts.bytes(),
         })
     ),
+    v84: new EventType(
+        'BridgeDataSigner.RemovedPeer',
+        sts.struct({
+            networkId: v84.GenericNetworkId,
+            peer: sts.bytes(),
+        })
+    ),
 }
 
 export const approvalAccepted =  {
     name: 'BridgeDataSigner.ApprovalAccepted',
-    v54: new EventType(
+    v64: new EventType(
         'BridgeDataSigner.ApprovalAccepted',
         sts.struct({
-            networkId: v54.GenericNetworkId,
-            data: v54.H256,
-            signature: v54.Signature,
+            networkId: v64.GenericNetworkId,
+            data: v64.H256,
+            signature: v64.Signature,
         })
     ),
     v70: new EventType(
@@ -74,16 +96,24 @@ export const approvalAccepted =  {
             signature: v70.Signature,
         })
     ),
+    v84: new EventType(
+        'BridgeDataSigner.ApprovalAccepted',
+        sts.struct({
+            networkId: v84.GenericNetworkId,
+            data: v84.H256,
+            signature: v84.Signature,
+        })
+    ),
 }
 
 export const approved =  {
     name: 'BridgeDataSigner.Approved',
-    v54: new EventType(
+    v64: new EventType(
         'BridgeDataSigner.Approved',
         sts.struct({
-            networkId: v54.GenericNetworkId,
-            data: v54.H256,
-            signatures: sts.array(() => v54.Signature),
+            networkId: v64.GenericNetworkId,
+            data: v64.H256,
+            signatures: sts.array(() => v64.Signature),
         })
     ),
     v70: new EventType(
@@ -92,6 +122,14 @@ export const approved =  {
             networkId: v70.GenericNetworkId,
             data: v70.H256,
             signatures: sts.array(() => v70.Signature),
+        })
+    ),
+    v84: new EventType(
+        'BridgeDataSigner.Approved',
+        sts.struct({
+            networkId: v84.GenericNetworkId,
+            data: v84.H256,
+            signatures: sts.array(() => v84.Signature),
         })
     ),
 }

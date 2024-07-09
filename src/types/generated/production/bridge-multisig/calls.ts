@@ -25,6 +25,11 @@ import * as v63 from '../v63'
 import * as v64 from '../v64'
 import * as v66 from '../v66'
 import * as v70 from '../v70'
+import * as v71 from '../v71'
+import * as v72 from '../v72'
+import * as v74 from '../v74'
+import * as v77 from '../v77'
+import * as v84 from '../v84'
 
 export const registerMultisig =  {
     name: 'BridgeMultisig.register_multisig',
@@ -815,6 +820,141 @@ export const asMultiThreshold1 =  {
             id: v70.AccountId32,
             call: v70.Call,
             timepoint: v70.BridgeTimepoint,
+        })
+    ),
+    /**
+     * Immediately dispatch a multi-signature call using a single approval from the caller.
+     * 
+     * The dispatch origin for this call must be _Signed_.
+     * 
+     * - `other_signatories`: The accounts (other than the sender) who are part of the
+     * multi-signature, but do not participate in the approval process.
+     * - `call`: The call to be executed.
+     * 
+     * Result is equivalent to the dispatched result.
+     * 
+     * # <weight>
+     * O(Z + C) where Z is the length of the call and C its execution weight.
+     * -------------------------------
+     * - Base Weight: 33.72 + 0.002 * Z µs
+     * - DB Weight: None
+     * - Plus Call Weight
+     * # </weight>
+     */
+    v71: new CallType(
+        'BridgeMultisig.as_multi_threshold_1',
+        sts.struct({
+            id: v71.AccountId32,
+            call: v71.Call,
+            timepoint: v71.BridgeTimepoint,
+        })
+    ),
+    /**
+     * Immediately dispatch a multi-signature call using a single approval from the caller.
+     * 
+     * The dispatch origin for this call must be _Signed_.
+     * 
+     * - `other_signatories`: The accounts (other than the sender) who are part of the
+     * multi-signature, but do not participate in the approval process.
+     * - `call`: The call to be executed.
+     * 
+     * Result is equivalent to the dispatched result.
+     * 
+     * # <weight>
+     * O(Z + C) where Z is the length of the call and C its execution weight.
+     * -------------------------------
+     * - Base Weight: 33.72 + 0.002 * Z µs
+     * - DB Weight: None
+     * - Plus Call Weight
+     * # </weight>
+     */
+    v72: new CallType(
+        'BridgeMultisig.as_multi_threshold_1',
+        sts.struct({
+            id: v72.AccountId32,
+            call: v72.Call,
+            timepoint: v72.BridgeTimepoint,
+        })
+    ),
+    /**
+     * Immediately dispatch a multi-signature call using a single approval from the caller.
+     * 
+     * The dispatch origin for this call must be _Signed_.
+     * 
+     * - `other_signatories`: The accounts (other than the sender) who are part of the
+     * multi-signature, but do not participate in the approval process.
+     * - `call`: The call to be executed.
+     * 
+     * Result is equivalent to the dispatched result.
+     * 
+     * # <weight>
+     * O(Z + C) where Z is the length of the call and C its execution weight.
+     * -------------------------------
+     * - Base Weight: 33.72 + 0.002 * Z µs
+     * - DB Weight: None
+     * - Plus Call Weight
+     * # </weight>
+     */
+    v74: new CallType(
+        'BridgeMultisig.as_multi_threshold_1',
+        sts.struct({
+            id: v74.AccountId32,
+            call: v74.Call,
+            timepoint: v74.BridgeTimepoint,
+        })
+    ),
+    /**
+     * Immediately dispatch a multi-signature call using a single approval from the caller.
+     * 
+     * The dispatch origin for this call must be _Signed_.
+     * 
+     * - `other_signatories`: The accounts (other than the sender) who are part of the
+     * multi-signature, but do not participate in the approval process.
+     * - `call`: The call to be executed.
+     * 
+     * Result is equivalent to the dispatched result.
+     * 
+     * # <weight>
+     * O(Z + C) where Z is the length of the call and C its execution weight.
+     * -------------------------------
+     * - Base Weight: 33.72 + 0.002 * Z µs
+     * - DB Weight: None
+     * - Plus Call Weight
+     * # </weight>
+     */
+    v77: new CallType(
+        'BridgeMultisig.as_multi_threshold_1',
+        sts.struct({
+            id: v77.AccountId32,
+            call: v77.Call,
+            timepoint: v77.BridgeTimepoint,
+        })
+    ),
+    /**
+     * Immediately dispatch a multi-signature call using a single approval from the caller.
+     * 
+     * The dispatch origin for this call must be _Signed_.
+     * 
+     * - `other_signatories`: The accounts (other than the sender) who are part of the
+     * multi-signature, but do not participate in the approval process.
+     * - `call`: The call to be executed.
+     * 
+     * Result is equivalent to the dispatched result.
+     * 
+     * # <weight>
+     * O(Z + C) where Z is the length of the call and C its execution weight.
+     * -------------------------------
+     * - Base Weight: 33.72 + 0.002 * Z µs
+     * - DB Weight: None
+     * - Plus Call Weight
+     * # </weight>
+     */
+    v84: new CallType(
+        'BridgeMultisig.as_multi_threshold_1',
+        sts.struct({
+            id: v84.AccountId32,
+            call: v84.Call,
+            timepoint: v84.BridgeTimepoint,
         })
     ),
 }

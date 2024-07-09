@@ -1,20 +1,26 @@
 import {sts, Block, Bytes, Option, Result, StorageType, RuntimeCtx} from '../support'
+import * as v1 from '../v1'
+import * as v19 from '../v19'
 import * as v33 from '../v33'
 import * as v42 from '../v42'
 import * as v46 from '../v46'
-import * as v54 from '../v54'
+import * as v57 from '../v57'
+import * as v72 from '../v72'
+import * as v74 from '../v74'
 
 export const reservesAcc =  {
-    v33: new StorageType('Rewards.ReservesAcc', 'Default', [], v33.TechAccountId) as ReservesAccV33,
+    v1: new StorageType('Rewards.ReservesAcc', 'Default', [], v1.TechAccountId) as ReservesAccV1,
     v42: new StorageType('Rewards.ReservesAcc', 'Default', [], v42.TechAccountId) as ReservesAccV42,
     v46: new StorageType('Rewards.ReservesAcc', 'Default', [], v46.TechAccountId) as ReservesAccV46,
-    v54: new StorageType('Rewards.ReservesAcc', 'Default', [], v54.TechAccountId) as ReservesAccV54,
+    v57: new StorageType('Rewards.ReservesAcc', 'Default', [], v57.TechAccountId) as ReservesAccV57,
+    v72: new StorageType('Rewards.ReservesAcc', 'Default', [], v72.TechAccountId) as ReservesAccV72,
+    v74: new StorageType('Rewards.ReservesAcc', 'Default', [], v74.TechAccountId) as ReservesAccV74,
 }
 
-export interface ReservesAccV33  {
+export interface ReservesAccV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.TechAccountId
-    get(block: Block): Promise<(v33.TechAccountId | undefined)>
+    getDefault(block: Block): v1.TechAccountId
+    get(block: Block): Promise<(v1.TechAccountId | undefined)>
 }
 
 export interface ReservesAccV42  {
@@ -29,39 +35,67 @@ export interface ReservesAccV46  {
     get(block: Block): Promise<(v46.TechAccountId | undefined)>
 }
 
-export interface ReservesAccV54  {
+export interface ReservesAccV57  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v54.TechAccountId
-    get(block: Block): Promise<(v54.TechAccountId | undefined)>
+    getDefault(block: Block): v57.TechAccountId
+    get(block: Block): Promise<(v57.TechAccountId | undefined)>
+}
+
+export interface ReservesAccV72  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): v72.TechAccountId
+    get(block: Block): Promise<(v72.TechAccountId | undefined)>
+}
+
+export interface ReservesAccV74  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): v74.TechAccountId
+    get(block: Block): Promise<(v74.TechAccountId | undefined)>
 }
 
 export const valOwners =  {
+    v1: new StorageType('Rewards.ValOwners', 'Default', [v1.EthereumAddress], v1.Balance) as ValOwnersV1,
     /**
      *  A map EthAddresses -> RewardInfo, that is claimable and remaining vested amounts per address
      */
-    v33: new StorageType('Rewards.ValOwners', 'Default', [v33.EthAddress], v33.RewardInfo) as ValOwnersV33,
+    v19: new StorageType('Rewards.ValOwners', 'Default', [v19.EthereumAddress], v19.RewardInfo) as ValOwnersV19,
     /**
      *  A map EthAddresses -> RewardInfo, that is claimable and remaining vested amounts per address
      */
     v42: new StorageType('Rewards.ValOwners', 'Default', [v42.H160], v42.RewardInfo) as ValOwnersV42,
 }
 
+export interface ValOwnersV1  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): v1.Balance
+    get(block: Block, key: v1.EthereumAddress): Promise<(v1.Balance | undefined)>
+    getMany(block: Block, keys: v1.EthereumAddress[]): Promise<(v1.Balance | undefined)[]>
+    getKeys(block: Block): Promise<v1.EthereumAddress[]>
+    getKeys(block: Block, key: v1.EthereumAddress): Promise<v1.EthereumAddress[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.EthereumAddress[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.EthereumAddress): AsyncIterable<v1.EthereumAddress[]>
+    getPairs(block: Block): Promise<[k: v1.EthereumAddress, v: (v1.Balance | undefined)][]>
+    getPairs(block: Block, key: v1.EthereumAddress): Promise<[k: v1.EthereumAddress, v: (v1.Balance | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.EthereumAddress, v: (v1.Balance | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.EthereumAddress): AsyncIterable<[k: v1.EthereumAddress, v: (v1.Balance | undefined)][]>
+}
+
 /**
  *  A map EthAddresses -> RewardInfo, that is claimable and remaining vested amounts per address
  */
-export interface ValOwnersV33  {
+export interface ValOwnersV19  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.RewardInfo
-    get(block: Block, key: v33.EthAddress): Promise<(v33.RewardInfo | undefined)>
-    getMany(block: Block, keys: v33.EthAddress[]): Promise<(v33.RewardInfo | undefined)[]>
-    getKeys(block: Block): Promise<v33.EthAddress[]>
-    getKeys(block: Block, key: v33.EthAddress): Promise<v33.EthAddress[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.EthAddress[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.EthAddress): AsyncIterable<v33.EthAddress[]>
-    getPairs(block: Block): Promise<[k: v33.EthAddress, v: (v33.RewardInfo | undefined)][]>
-    getPairs(block: Block, key: v33.EthAddress): Promise<[k: v33.EthAddress, v: (v33.RewardInfo | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.EthAddress, v: (v33.RewardInfo | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.EthAddress): AsyncIterable<[k: v33.EthAddress, v: (v33.RewardInfo | undefined)][]>
+    getDefault(block: Block): v19.RewardInfo
+    get(block: Block, key: v19.EthereumAddress): Promise<(v19.RewardInfo | undefined)>
+    getMany(block: Block, keys: v19.EthereumAddress[]): Promise<(v19.RewardInfo | undefined)[]>
+    getKeys(block: Block): Promise<v19.EthereumAddress[]>
+    getKeys(block: Block, key: v19.EthereumAddress): Promise<v19.EthereumAddress[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v19.EthereumAddress[]>
+    getKeysPaged(pageSize: number, block: Block, key: v19.EthereumAddress): AsyncIterable<v19.EthereumAddress[]>
+    getPairs(block: Block): Promise<[k: v19.EthereumAddress, v: (v19.RewardInfo | undefined)][]>
+    getPairs(block: Block, key: v19.EthereumAddress): Promise<[k: v19.EthereumAddress, v: (v19.RewardInfo | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v19.EthereumAddress, v: (v19.RewardInfo | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v19.EthereumAddress): AsyncIterable<[k: v19.EthereumAddress, v: (v19.RewardInfo | undefined)][]>
 }
 
 /**
@@ -83,41 +117,146 @@ export interface ValOwnersV42  {
 }
 
 export const pswapFarmOwners =  {
-    v33: new StorageType('Rewards.PswapFarmOwners', 'Default', [v33.EthAddress], v33.Balance) as PswapFarmOwnersV33,
+    v1: new StorageType('Rewards.PswapFarmOwners', 'Default', [v1.EthereumAddress], v1.Balance) as PswapFarmOwnersV1,
 }
 
-export interface PswapFarmOwnersV33  {
+export interface PswapFarmOwnersV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.Balance
-    get(block: Block, key: v33.EthAddress): Promise<(v33.Balance | undefined)>
-    getMany(block: Block, keys: v33.EthAddress[]): Promise<(v33.Balance | undefined)[]>
-    getKeys(block: Block): Promise<v33.EthAddress[]>
-    getKeys(block: Block, key: v33.EthAddress): Promise<v33.EthAddress[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.EthAddress[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.EthAddress): AsyncIterable<v33.EthAddress[]>
-    getPairs(block: Block): Promise<[k: v33.EthAddress, v: (v33.Balance | undefined)][]>
-    getPairs(block: Block, key: v33.EthAddress): Promise<[k: v33.EthAddress, v: (v33.Balance | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.EthAddress, v: (v33.Balance | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.EthAddress): AsyncIterable<[k: v33.EthAddress, v: (v33.Balance | undefined)][]>
+    getDefault(block: Block): v1.Balance
+    get(block: Block, key: v1.EthereumAddress): Promise<(v1.Balance | undefined)>
+    getMany(block: Block, keys: v1.EthereumAddress[]): Promise<(v1.Balance | undefined)[]>
+    getKeys(block: Block): Promise<v1.EthereumAddress[]>
+    getKeys(block: Block, key: v1.EthereumAddress): Promise<v1.EthereumAddress[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.EthereumAddress[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.EthereumAddress): AsyncIterable<v1.EthereumAddress[]>
+    getPairs(block: Block): Promise<[k: v1.EthereumAddress, v: (v1.Balance | undefined)][]>
+    getPairs(block: Block, key: v1.EthereumAddress): Promise<[k: v1.EthereumAddress, v: (v1.Balance | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.EthereumAddress, v: (v1.Balance | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.EthereumAddress): AsyncIterable<[k: v1.EthereumAddress, v: (v1.Balance | undefined)][]>
 }
 
 export const pswapWaifuOwners =  {
-    v33: new StorageType('Rewards.PswapWaifuOwners', 'Default', [v33.EthAddress], v33.Balance) as PswapWaifuOwnersV33,
+    v1: new StorageType('Rewards.PswapWaifuOwners', 'Default', [v1.EthereumAddress], v1.Balance) as PswapWaifuOwnersV1,
 }
 
-export interface PswapWaifuOwnersV33  {
+export interface PswapWaifuOwnersV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.Balance
-    get(block: Block, key: v33.EthAddress): Promise<(v33.Balance | undefined)>
-    getMany(block: Block, keys: v33.EthAddress[]): Promise<(v33.Balance | undefined)[]>
-    getKeys(block: Block): Promise<v33.EthAddress[]>
-    getKeys(block: Block, key: v33.EthAddress): Promise<v33.EthAddress[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v33.EthAddress[]>
-    getKeysPaged(pageSize: number, block: Block, key: v33.EthAddress): AsyncIterable<v33.EthAddress[]>
-    getPairs(block: Block): Promise<[k: v33.EthAddress, v: (v33.Balance | undefined)][]>
-    getPairs(block: Block, key: v33.EthAddress): Promise<[k: v33.EthAddress, v: (v33.Balance | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.EthAddress, v: (v33.Balance | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: v33.EthAddress): AsyncIterable<[k: v33.EthAddress, v: (v33.Balance | undefined)][]>
+    getDefault(block: Block): v1.Balance
+    get(block: Block, key: v1.EthereumAddress): Promise<(v1.Balance | undefined)>
+    getMany(block: Block, keys: v1.EthereumAddress[]): Promise<(v1.Balance | undefined)[]>
+    getKeys(block: Block): Promise<v1.EthereumAddress[]>
+    getKeys(block: Block, key: v1.EthereumAddress): Promise<v1.EthereumAddress[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<v1.EthereumAddress[]>
+    getKeysPaged(pageSize: number, block: Block, key: v1.EthereumAddress): AsyncIterable<v1.EthereumAddress[]>
+    getPairs(block: Block): Promise<[k: v1.EthereumAddress, v: (v1.Balance | undefined)][]>
+    getPairs(block: Block, key: v1.EthereumAddress): Promise<[k: v1.EthereumAddress, v: (v1.Balance | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v1.EthereumAddress, v: (v1.Balance | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: v1.EthereumAddress): AsyncIterable<[k: v1.EthereumAddress, v: (v1.Balance | undefined)][]>
+}
+
+export const valBurnedSinceLastVesting =  {
+    /**
+     *  Amount of VAL burned since last vesting
+     */
+    v19: new StorageType('Rewards.ValBurnedSinceLastVesting', 'Default', [], v19.Balance) as ValBurnedSinceLastVestingV19,
+}
+
+/**
+ *  Amount of VAL burned since last vesting
+ */
+export interface ValBurnedSinceLastVestingV19  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): v19.Balance
+    get(block: Block): Promise<(v19.Balance | undefined)>
+}
+
+export const currentClaimableVal =  {
+    /**
+     *  Amount of VAL currently being vested (aggregated over the previous period of 14,400 blocks)
+     */
+    v19: new StorageType('Rewards.CurrentClaimableVal', 'Default', [], v19.Balance) as CurrentClaimableValV19,
+}
+
+/**
+ *  Amount of VAL currently being vested (aggregated over the previous period of 14,400 blocks)
+ */
+export interface CurrentClaimableValV19  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): v19.Balance
+    get(block: Block): Promise<(v19.Balance | undefined)>
+}
+
+export const ethAddresses =  {
+    /**
+     *  All addresses are split in batches, `AddressBatches` maps batch number to a set of addresses
+     */
+    v19: new StorageType('Rewards.EthAddresses', 'Default', [sts.number()], sts.array(() => v19.EthereumAddress)) as EthAddressesV19,
+}
+
+/**
+ *  All addresses are split in batches, `AddressBatches` maps batch number to a set of addresses
+ */
+export interface EthAddressesV19  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): v19.EthereumAddress[]
+    get(block: Block, key: number): Promise<(v19.EthereumAddress[] | undefined)>
+    getMany(block: Block, keys: number[]): Promise<(v19.EthereumAddress[] | undefined)[]>
+    getKeys(block: Block): Promise<number[]>
+    getKeys(block: Block, key: number): Promise<number[]>
+    getKeysPaged(pageSize: number, block: Block): AsyncIterable<number[]>
+    getKeysPaged(pageSize: number, block: Block, key: number): AsyncIterable<number[]>
+    getPairs(block: Block): Promise<[k: number, v: (v19.EthereumAddress[] | undefined)][]>
+    getPairs(block: Block, key: number): Promise<[k: number, v: (v19.EthereumAddress[] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: number, v: (v19.EthereumAddress[] | undefined)][]>
+    getPairsPaged(pageSize: number, block: Block, key: number): AsyncIterable<[k: number, v: (v19.EthereumAddress[] | undefined)][]>
+}
+
+export const totalValRewards =  {
+    /**
+     *  Total amount of VAL rewards either claimable now or some time in the future
+     */
+    v19: new StorageType('Rewards.TotalValRewards', 'Default', [], v19.Balance) as TotalValRewardsV19,
+}
+
+/**
+ *  Total amount of VAL rewards either claimable now or some time in the future
+ */
+export interface TotalValRewardsV19  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): v19.Balance
+    get(block: Block): Promise<(v19.Balance | undefined)>
+}
+
+export const totalClaimableVal =  {
+    /**
+     *  Total amount of VAL that can be claimed by users at current point in time
+     */
+    v19: new StorageType('Rewards.TotalClaimableVal', 'Default', [], v19.Balance) as TotalClaimableValV19,
+}
+
+/**
+ *  Total amount of VAL that can be claimed by users at current point in time
+ */
+export interface TotalClaimableValV19  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): v19.Balance
+    get(block: Block): Promise<(v19.Balance | undefined)>
+}
+
+export const migrationPending =  {
+    /**
+     *  A flag indicating whether VAL rewards data migration has been finalized
+     */
+    v19: new StorageType('Rewards.MigrationPending', 'Default', [], sts.boolean()) as MigrationPendingV19,
+}
+
+/**
+ *  A flag indicating whether VAL rewards data migration has been finalized
+ */
+export interface MigrationPendingV19  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): boolean
+    get(block: Block): Promise<(boolean | undefined)>
 }
 
 export const umiNftReceivers =  {
@@ -143,111 +282,6 @@ export interface UmiNftReceiversV33  {
     getPairs(block: Block, key: v33.EthAddress): Promise<[k: v33.EthAddress, v: (v33.Balance[] | undefined)][]>
     getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v33.EthAddress, v: (v33.Balance[] | undefined)][]>
     getPairsPaged(pageSize: number, block: Block, key: v33.EthAddress): AsyncIterable<[k: v33.EthAddress, v: (v33.Balance[] | undefined)][]>
-}
-
-export const valBurnedSinceLastVesting =  {
-    /**
-     *  Amount of VAL burned since last vesting
-     */
-    v33: new StorageType('Rewards.ValBurnedSinceLastVesting', 'Default', [], v33.Balance) as ValBurnedSinceLastVestingV33,
-}
-
-/**
- *  Amount of VAL burned since last vesting
- */
-export interface ValBurnedSinceLastVestingV33  {
-    is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.Balance
-    get(block: Block): Promise<(v33.Balance | undefined)>
-}
-
-export const currentClaimableVal =  {
-    /**
-     *  Amount of VAL currently being vested (aggregated over the previous period of 14,400 blocks)
-     */
-    v33: new StorageType('Rewards.CurrentClaimableVal', 'Default', [], v33.Balance) as CurrentClaimableValV33,
-}
-
-/**
- *  Amount of VAL currently being vested (aggregated over the previous period of 14,400 blocks)
- */
-export interface CurrentClaimableValV33  {
-    is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.Balance
-    get(block: Block): Promise<(v33.Balance | undefined)>
-}
-
-export const ethAddresses =  {
-    /**
-     *  All addresses are split in batches, `AddressBatches` maps batch number to a set of addresses
-     */
-    v33: new StorageType('Rewards.EthAddresses', 'Default', [sts.number()], sts.array(() => v33.EthAddress)) as EthAddressesV33,
-}
-
-/**
- *  All addresses are split in batches, `AddressBatches` maps batch number to a set of addresses
- */
-export interface EthAddressesV33  {
-    is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.EthAddress[]
-    get(block: Block, key: number): Promise<(v33.EthAddress[] | undefined)>
-    getMany(block: Block, keys: number[]): Promise<(v33.EthAddress[] | undefined)[]>
-    getKeys(block: Block): Promise<number[]>
-    getKeys(block: Block, key: number): Promise<number[]>
-    getKeysPaged(pageSize: number, block: Block): AsyncIterable<number[]>
-    getKeysPaged(pageSize: number, block: Block, key: number): AsyncIterable<number[]>
-    getPairs(block: Block): Promise<[k: number, v: (v33.EthAddress[] | undefined)][]>
-    getPairs(block: Block, key: number): Promise<[k: number, v: (v33.EthAddress[] | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: number, v: (v33.EthAddress[] | undefined)][]>
-    getPairsPaged(pageSize: number, block: Block, key: number): AsyncIterable<[k: number, v: (v33.EthAddress[] | undefined)][]>
-}
-
-export const totalValRewards =  {
-    /**
-     *  Total amount of VAL rewards either claimable now or some time in the future
-     */
-    v33: new StorageType('Rewards.TotalValRewards', 'Default', [], v33.Balance) as TotalValRewardsV33,
-}
-
-/**
- *  Total amount of VAL rewards either claimable now or some time in the future
- */
-export interface TotalValRewardsV33  {
-    is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.Balance
-    get(block: Block): Promise<(v33.Balance | undefined)>
-}
-
-export const totalClaimableVal =  {
-    /**
-     *  Total amount of VAL that can be claimed by users at current point in time
-     */
-    v33: new StorageType('Rewards.TotalClaimableVal', 'Default', [], v33.Balance) as TotalClaimableValV33,
-}
-
-/**
- *  Total amount of VAL that can be claimed by users at current point in time
- */
-export interface TotalClaimableValV33  {
-    is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.Balance
-    get(block: Block): Promise<(v33.Balance | undefined)>
-}
-
-export const migrationPending =  {
-    /**
-     *  A flag indicating whether VAL rewards data migration has been finalized
-     */
-    v33: new StorageType('Rewards.MigrationPending', 'Default', [], sts.boolean()) as MigrationPendingV33,
-}
-
-/**
- *  A flag indicating whether VAL rewards data migration has been finalized
- */
-export interface MigrationPendingV33  {
-    is(block: RuntimeCtx): boolean
-    getDefault(block: Block): boolean
-    get(block: Block): Promise<(boolean | undefined)>
 }
 
 export const umiNfts =  {

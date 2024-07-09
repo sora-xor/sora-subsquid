@@ -1,8 +1,10 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
+import * as v1 from '../v1'
+import * as v32 from '../v32'
 import * as v33 from '../v33'
 import * as v38 from '../v38'
 import * as v42 from '../v42'
-import * as v52 from '../v52'
+import * as v53 from '../v53'
 
 export const registerBridge =  {
     name: 'EthBridge.register_bridge',
@@ -14,11 +16,11 @@ export const registerBridge =  {
      *  network.
      *  - `initial_peers` - a set of initial network peers.
      */
-    v33: new CallType(
+    v1: new CallType(
         'EthBridge.register_bridge',
         sts.struct({
-            bridgeContractAddress: v33.EthAddress,
-            initialPeers: sts.array(() => v33.AccountId),
+            bridgeContractAddress: v1.EthereumAddress,
+            initialPeers: sts.array(() => v1.AccountId),
         })
     ),
     /**
@@ -44,17 +46,15 @@ export const addAsset =  {
     /**
      *  Add a Thischain asset to the bridge whitelist.
      * 
-     *  Can only be called by root.
-     * 
      *  Parameters:
      *  - `asset_id` - Thischain asset identifier.
      *  - `network_id` - network identifier to which the asset should be added.
      */
-    v33: new CallType(
+    v1: new CallType(
         'EthBridge.add_asset',
         sts.struct({
-            assetId: v33.AssetIdOf,
-            networkId: v33.BridgeNetworkId,
+            assetId: v1.AssetIdOf,
+            networkId: v1.BridgeNetworkId,
         })
     ),
     /**
@@ -87,14 +87,14 @@ export const addSidechainToken =  {
      *  - `decimals` -  token precision.
      *  - `network_id` - network identifier.
      */
-    v33: new CallType(
+    v1: new CallType(
         'EthBridge.add_sidechain_token',
         sts.struct({
-            tokenAddress: v33.EthAddress,
-            symbol: v33.String,
-            name: v33.String,
+            tokenAddress: v1.EthereumAddress,
+            symbol: v1.String,
+            name: v1.String,
             decimals: sts.number(),
-            networkId: v33.BridgeNetworkId,
+            networkId: v1.BridgeNetworkId,
         })
     ),
     /**
@@ -137,13 +137,13 @@ export const transferToSidechain =  {
      *  - `amount` - amount of the asset.
      *  - `network_id` - network identifier.
      */
-    v33: new CallType(
+    v1: new CallType(
         'EthBridge.transfer_to_sidechain',
         sts.struct({
-            assetId: v33.AssetIdOf,
-            to: v33.EthAddress,
-            amount: v33.Balance,
-            networkId: v33.BridgeNetworkId,
+            assetId: v1.AssetIdOf,
+            to: v1.EthereumAddress,
+            amount: v1.Balance,
+            networkId: v1.BridgeNetworkId,
         })
     ),
     /**
@@ -183,12 +183,12 @@ export const requestFromSidechain =  {
      *  - `kind` - incoming request type.
      *  - `network_id` - network identifier.
      */
-    v33: new CallType(
+    v1: new CallType(
         'EthBridge.request_from_sidechain',
         sts.struct({
-            ethTxHash: v33.H256,
-            kind: v33.IncomingRequestKind,
-            networkId: v33.BridgeNetworkId,
+            ethTxHash: v1.H256,
+            kind: v1.IncomingRequestKind,
+            networkId: v1.BridgeNetworkId,
         })
     ),
 }
@@ -204,11 +204,11 @@ export const finalizeIncomingRequest =  {
      *  - `request` - an incoming request.
      *  - `network_id` - network identifier.
      */
-    v33: new CallType(
+    v1: new CallType(
         'EthBridge.finalize_incoming_request',
         sts.struct({
-            hash: v33.H256,
-            networkId: v33.BridgeNetworkId,
+            hash: v1.H256,
+            networkId: v1.BridgeNetworkId,
         })
     ),
 }
@@ -223,18 +223,32 @@ export const addPeer =  {
      *  - `address` - account id on sidechain.
      *  - `network_id` - network identifier.
      */
-    v33: new CallType(
+    v1: new CallType(
         'EthBridge.add_peer',
         sts.struct({
-            accountId: v33.AccountId,
-            address: v33.EthAddress,
-            networkId: v33.BridgeNetworkId,
+            accountId: v1.AccountId,
+            address: v1.EthereumAddress,
+            networkId: v1.BridgeNetworkId,
         })
     ),
 }
 
 export const removePeer =  {
     name: 'EthBridge.remove_peer',
+    /**
+     *  Remove peer from the the bridge peers set.
+     * 
+     *  Parameters:
+     *  - `account_id` - account id on thischain.
+     *  - `network_id` - network identifier.
+     */
+    v1: new CallType(
+        'EthBridge.remove_peer',
+        sts.struct({
+            accountId: v1.AccountId,
+            networkId: v1.BridgeNetworkId,
+        })
+    ),
     /**
      *  Remove peer from the the bridge peers set.
      * 
@@ -262,10 +276,10 @@ export const prepareForMigration =  {
      *  Parameters:
      *  - `network_id` - bridge network identifier.
      */
-    v33: new CallType(
+    v1: new CallType(
         'EthBridge.prepare_for_migration',
         sts.struct({
-            networkId: v33.BridgeNetworkId,
+            networkId: v1.BridgeNetworkId,
         })
     ),
 }
@@ -282,12 +296,12 @@ export const migrate =  {
      *  - `erc20_native_tokens` - migrated assets ids.
      *  - `network_id` - bridge network identifier.
      */
-    v33: new CallType(
+    v1: new CallType(
         'EthBridge.migrate',
         sts.struct({
-            newContractAddress: v33.EthAddress,
-            erc20NativeTokens: sts.array(() => v33.EthAddress),
-            networkId: v33.BridgeNetworkId,
+            newContractAddress: v1.EthereumAddress,
+            erc20NativeTokens: sts.array(() => v1.EthereumAddress),
+            networkId: v1.BridgeNetworkId,
         })
     ),
     /**
@@ -321,10 +335,10 @@ export const registerIncomingRequest =  {
      * 
      *  Can only be called by a bridge account.
      */
-    v33: new CallType(
+    v1: new CallType(
         'EthBridge.register_incoming_request',
         sts.struct({
-            incomingRequest: v33.IncomingRequest,
+            incomingRequest: v1.IncomingRequest,
         })
     ),
     /**
@@ -353,11 +367,11 @@ export const importIncomingRequest =  {
      * 
      *  Can only be called by a bridge account.
      */
-    v33: new CallType(
+    v1: new CallType(
         'EthBridge.import_incoming_request',
         sts.struct({
-            loadIncomingRequest: v33.LoadIncomingRequest,
-            incomingRequestResult: sts.result(() => v33.IncomingRequest, () => v33.DispatchError),
+            loadIncomingRequest: v1.LoadIncomingRequest,
+            incomingRequestResult: sts.result(() => v1.IncomingRequest, () => v1.DispatchError),
         })
     ),
     /**
@@ -383,11 +397,11 @@ export const importIncomingRequest =  {
      * 
      * Can only be called by a bridge account.
      */
-    v52: new CallType(
+    v53: new CallType(
         'EthBridge.import_incoming_request',
         sts.struct({
-            loadIncomingRequest: v52.LoadIncomingRequest,
-            incomingRequestResult: sts.result(() => v52.IncomingRequest, () => v52.DispatchError),
+            loadIncomingRequest: v53.LoadIncomingRequest,
+            incomingRequestResult: sts.result(() => v53.IncomingRequest, () => v53.DispatchError),
         })
     ),
 }
@@ -400,13 +414,13 @@ export const approveRequest =  {
      *  Verifies the peer signature of the given request and adds it to `RequestApprovals`.
      *  Once quorum is collected, the request gets finalized and removed from request queue.
      */
-    v33: new CallType(
+    v1: new CallType(
         'EthBridge.approve_request',
         sts.struct({
-            ocwPublic: v33.Public,
-            hash: v33.H256,
-            signatureParams: v33.SignatureParams,
-            networkId: v33.BridgeNetworkId,
+            ocwPublic: v1.Public,
+            hash: v1.H256,
+            signatureParams: v1.SignatureParams,
+            networkId: v1.NetworkId,
         })
     ),
 }
@@ -421,12 +435,12 @@ export const abortRequest =  {
      * 
      *  Can only be called from a bridge account.
      */
-    v33: new CallType(
+    v1: new CallType(
         'EthBridge.abort_request',
         sts.struct({
-            hash: v33.H256,
-            error: v33.DispatchError,
-            networkId: v33.BridgeNetworkId,
+            hash: v1.H256,
+            error: v1.DispatchError,
+            networkId: v1.BridgeNetworkId,
         })
     ),
     /**
@@ -453,11 +467,11 @@ export const abortRequest =  {
      * 
      * Can only be called from a bridge account.
      */
-    v52: new CallType(
+    v53: new CallType(
         'EthBridge.abort_request',
         sts.struct({
-            hash: v52.H256,
-            error: v52.DispatchError,
+            hash: v53.H256,
+            error: v53.DispatchError,
             networkId: sts.number(),
         })
     ),
@@ -470,19 +484,19 @@ export const forceAddPeer =  {
      * 
      *  Can only be called by a root account.
      */
-    v33: new CallType(
+    v1: new CallType(
         'EthBridge.force_add_peer',
         sts.struct({
-            who: v33.AccountId,
-            address: v33.EthAddress,
-            networkId: v33.BridgeNetworkId,
+            who: v1.AccountId,
+            address: v1.EthereumAddress,
+            networkId: v1.BridgeNetworkId,
         })
     ),
 }
 
 export const migrateTo020 =  {
     name: 'EthBridge.migrate_to_0_2_0',
-    v33: new CallType(
+    v19: new CallType(
         'EthBridge.migrate_to_0_2_0',
         sts.unit()
     ),
@@ -495,11 +509,11 @@ export const removeSidechainAsset =  {
      * 
      *  Can only be called by root.
      */
-    v33: new CallType(
+    v32: new CallType(
         'EthBridge.remove_sidechain_asset',
         sts.struct({
-            assetId: v33.AssetIdOf,
-            networkId: v33.BridgeNetworkId,
+            assetId: v32.AssetIdOf,
+            networkId: v32.BridgeNetworkId,
         })
     ),
     /**
@@ -523,12 +537,12 @@ export const registerExistingSidechainAsset =  {
      * 
      *  Can only be called by root.
      */
-    v33: new CallType(
+    v32: new CallType(
         'EthBridge.register_existing_sidechain_asset',
         sts.struct({
-            assetId: v33.AssetIdOf,
-            tokenAddress: v33.EthAddress,
-            networkId: v33.BridgeNetworkId,
+            assetId: v32.AssetIdOf,
+            tokenAddress: v32.EthereumAddress,
+            networkId: v32.BridgeNetworkId,
         })
     ),
     /**

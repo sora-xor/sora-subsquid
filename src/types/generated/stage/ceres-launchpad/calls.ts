@@ -1,4 +1,5 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
+import * as v26 from '../v26'
 import * as v33 from '../v33'
 import * as v37 from '../v37'
 import * as v42 from '../v42'
@@ -6,6 +7,31 @@ import * as v47 from '../v47'
 
 export const createIlo =  {
     name: 'CeresLaunchpad.create_ilo',
+    /**
+     *  Create ILO
+     */
+    v26: new CallType(
+        'CeresLaunchpad.create_ilo',
+        sts.struct({
+            assetId: v26.AssetIdOf,
+            tokensForIlo: v26.Balance,
+            tokensForLiquidity: v26.Balance,
+            iloPrice: v26.Balance,
+            softCap: v26.Balance,
+            hardCap: v26.Balance,
+            minContribution: v26.Balance,
+            maxContribution: v26.Balance,
+            refundType: sts.boolean(),
+            liquidityPercent: v26.Balance,
+            listingPrice: v26.Balance,
+            lockupDays: sts.number(),
+            startBlock: v26.BlockNumber,
+            endBlock: v26.BlockNumber,
+            firstReleasePercent: v26.Balance,
+            vestingPeriod: v26.BlockNumber,
+            vestingPercent: v26.Balance,
+        })
+    ),
     /**
      *  Create ILO
      */
@@ -130,11 +156,11 @@ export const contribute =  {
     /**
      *  Contribute
      */
-    v33: new CallType(
+    v26: new CallType(
         'CeresLaunchpad.contribute',
         sts.struct({
-            assetId: v33.AssetIdOf,
-            fundsToContribute: v33.Balance,
+            assetId: v26.AssetIdOf,
+            fundsToContribute: v26.Balance,
         })
     ),
     /**
@@ -154,10 +180,10 @@ export const emergencyWithdraw =  {
     /**
      *  Emergency withdraw
      */
-    v33: new CallType(
+    v26: new CallType(
         'CeresLaunchpad.emergency_withdraw',
         sts.struct({
-            assetId: v33.AssetIdOf,
+            assetId: v26.AssetIdOf,
         })
     ),
     /**
@@ -176,10 +202,10 @@ export const finishIlo =  {
     /**
      *  Finish ILO
      */
-    v33: new CallType(
+    v26: new CallType(
         'CeresLaunchpad.finish_ilo',
         sts.struct({
-            assetId: v33.AssetIdOf,
+            assetId: v26.AssetIdOf,
         })
     ),
     /**
@@ -198,10 +224,10 @@ export const claimLpTokens =  {
     /**
      *  Claim LP tokens
      */
-    v33: new CallType(
+    v26: new CallType(
         'CeresLaunchpad.claim_lp_tokens',
         sts.struct({
-            assetId: v33.AssetIdOf,
+            assetId: v26.AssetIdOf,
         })
     ),
     /**
@@ -220,10 +246,10 @@ export const claim =  {
     /**
      *  Claim tokens
      */
-    v33: new CallType(
+    v26: new CallType(
         'CeresLaunchpad.claim',
         sts.struct({
-            assetId: v33.AssetIdOf,
+            assetId: v26.AssetIdOf,
         })
     ),
     /**
@@ -242,10 +268,10 @@ export const changeCeresBurnFee =  {
     /**
      *  Change CERES burn fee
      */
-    v33: new CallType(
+    v26: new CallType(
         'CeresLaunchpad.change_ceres_burn_fee',
         sts.struct({
-            ceresFee: v33.Balance,
+            ceresFee: v26.Balance,
         })
     ),
 }
@@ -255,10 +281,10 @@ export const changeCeresContributionFee =  {
     /**
      *  Change CERES contribution fee
      */
-    v33: new CallType(
+    v26: new CallType(
         'CeresLaunchpad.change_ceres_contribution_fee',
         sts.struct({
-            ceresFee: v33.Balance,
+            ceresFee: v26.Balance,
         })
     ),
 }
@@ -268,7 +294,7 @@ export const claimPswapRewards =  {
     /**
      *  Claim PSWAP rewards
      */
-    v33: new CallType(
+    v26: new CallType(
         'CeresLaunchpad.claim_pswap_rewards',
         sts.unit()
     ),

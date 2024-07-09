@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
 
 export const newSession =  {
     name: 'Session.NewSession',
@@ -7,9 +7,9 @@ export const newSession =  {
      *  New session has happened. Note that the argument is the \[session_index\], not the block
      *  number as the type might suggest.
      */
-    v33: new EventType(
+    v1: new EventType(
         'Session.NewSession',
-        v33.SessionIndex
+        v1.SessionIndex
     ),
     /**
      * New session has happened. Note that the argument is the session index, not the

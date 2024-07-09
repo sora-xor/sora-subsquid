@@ -8,27 +8,25 @@ export const symbolsRelayed = {
 	name: 'Band.SymbolsRelayed',
 	v45: productionEvents.symbolsRelayed['v45'],
 	v57: productionEvents.symbolsRelayed['v57'],
-	v44Stage: stageEvents.symbolsRelayed['v44'],
 	v45Stage: stageEvents.symbolsRelayed['v45'],
-	v54Stage: stageEvents.symbolsRelayed['v54'],
-	v44Test: testEvents.symbolsRelayed['v44'],
+	v57Stage: stageEvents.symbolsRelayed['v57'],
 	v45Test: testEvents.symbolsRelayed['v45'],
-	v54Test: testEvents.symbolsRelayed['v54'],
-	v70Dev: devEvents.symbolsRelayed['v70'],
+	v57Test: testEvents.symbolsRelayed['v57'],
+	v85Dev: devEvents.symbolsRelayed['v85'],
 }
 
 export const relayersAdded = {
 	name: 'Band.RelayersAdded',
 	v45: productionEvents.relayersAdded['v45'],
-	v44Stage: stageEvents.relayersAdded['v44'],
-	v44Test: testEvents.relayersAdded['v44'],
-	v70Dev: devEvents.relayersAdded['v70'],
+	v45Stage: stageEvents.relayersAdded['v45'],
+	v45Test: testEvents.relayersAdded['v45'],
+	v85Dev: devEvents.relayersAdded['v85'],
 }
 
 export const relayersRemoved = {
 	name: 'Band.RelayersRemoved',
 	v45: productionEvents.relayersRemoved['v45'],
-	v44Stage: stageEvents.relayersRemoved['v44'],
-	v44Test: testEvents.relayersRemoved['v44'],
-	v70Dev: devEvents.relayersRemoved['v70'],
+	v45Stage: stageEvents.relayersRemoved['v45'],
+	v45Test: testEvents.relayersRemoved['v45'],
+	v85Dev: devEvents.relayersRemoved['v85'],
 }

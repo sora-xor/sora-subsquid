@@ -21,7 +21,7 @@ export const finalizeAssetRegistration =  {
         'ParachainBridgeApp.finalize_asset_registration',
         sts.struct({
             assetId: v64.AssetId32,
-            assetKind: v64.Type_543,
+            assetKind: v64.Type_541,
         })
     ),
 }

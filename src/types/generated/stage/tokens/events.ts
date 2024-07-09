@@ -1,16 +1,16 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
 import * as v42 from '../v42'
-import * as v52 from '../v52'
+import * as v53 from '../v53'
 
 export const transferred =  {
     name: 'Tokens.Transferred',
     /**
      *  Token transfer success. \[currency_id, from, to, amount\]
      */
-    v33: new EventType(
+    v1: new EventType(
         'Tokens.Transferred',
-        sts.tuple([v33.CurrencyId, v33.AccountId, v33.AccountId, v33.Balance])
+        sts.tuple([v1.CurrencyId, v1.AccountId, v1.AccountId, v1.Balance])
     ),
 }
 
@@ -21,9 +21,9 @@ export const dustLost =  {
      *  ExistentialDeposit, resulting in an outright loss. \[account,
      *  currency_id, amount\]
      */
-    v33: new EventType(
+    v1: new EventType(
         'Tokens.DustLost',
-        sts.tuple([v33.AccountId, v33.CurrencyId, v33.Balance])
+        sts.tuple([v1.AccountId, v1.CurrencyId, v1.Balance])
     ),
     /**
      * An account was removed whose balance was non-zero but below
@@ -230,11 +230,11 @@ export const locked =  {
     /**
      * Some free balance was locked.
      */
-    v52: new EventType(
+    v53: new EventType(
         'Tokens.Locked',
         sts.struct({
-            currencyId: v52.AssetId32,
-            who: v52.AccountId32,
+            currencyId: v53.AssetId32,
+            who: v53.AccountId32,
             amount: sts.bigint(),
         })
     ),
@@ -245,11 +245,11 @@ export const unlocked =  {
     /**
      * Some locked balance was freed.
      */
-    v52: new EventType(
+    v53: new EventType(
         'Tokens.Unlocked',
         sts.struct({
-            currencyId: v52.AssetId32,
-            who: v52.AccountId32,
+            currencyId: v53.AssetId32,
+            who: v53.AccountId32,
             amount: sts.bigint(),
         })
     ),

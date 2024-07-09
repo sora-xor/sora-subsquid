@@ -193,6 +193,15 @@ class AssetSnapshotsStorage {
 		return [assetId, type, index].join('-')
 	}
 
+	private async save(ctx: BlockContext, snapshot: AssetSnapshot, force = false): Promise<void> {
+	  if (force || shouldUpdate(ctx, 60)) {
+		await ctx.store.remove(snapshot)
+		await ctx.store.insert(snapshot)
+  
+		getAssetSnapshotsStorageLog(ctx).debug({ id: snapshot.id }, 'Asset snapshot saved')
+	  }
+	}
+
 	async sync(ctx: BlockContext): Promise<void> {
 		await this.syncSnapshots(ctx)
 	}
@@ -200,7 +209,8 @@ class AssetSnapshotsStorage {
 	private async syncSnapshots(ctx: BlockContext): Promise<void> {
 		getAssetSnapshotsStorageLog(ctx).debug(`${this.storage.size} snapshots sync`)
 
-		await ctx.store.save([...this.storage.values()])
+		await ctx.store.remove([...this.storage.values()])
+		await ctx.store.insert([...this.storage.values()])
 
 		for (const snapshot of this.storage.values()) {
 			const { type, timestamp } = snapshot
@@ -290,6 +300,8 @@ class AssetSnapshotsStorage {
 			}
 		
 			getAssetSnapshotsStorageLog(ctx, true).debug({ assetId, newPrice: price }, 'Asset snapshot price updated')
+
+			await this.save(ctx, snapshot);
 		}
 		await this.assetStorage.updatePrice(ctx, assetId, price)
 	}

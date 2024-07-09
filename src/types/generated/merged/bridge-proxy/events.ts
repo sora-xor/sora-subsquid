@@ -7,15 +7,15 @@ import * as devEvents from '../../dev/bridge-proxy/events'
 export const requestStatusUpdate = {
 	name: 'BridgeProxy.RequestStatusUpdate',
 	v64: productionEvents.requestStatusUpdate['v64'],
-	v54Stage: stageEvents.requestStatusUpdate['v54'],
-	v54Test: testEvents.requestStatusUpdate['v54'],
-	v70Dev: devEvents.requestStatusUpdate['v70'],
+	v64Stage: stageEvents.requestStatusUpdate['v64'],
+	v64Test: testEvents.requestStatusUpdate['v64'],
+	v85Dev: devEvents.requestStatusUpdate['v85'],
 }
 
 export const refundFailed = {
 	name: 'BridgeProxy.RefundFailed',
 	v64: productionEvents.refundFailed['v64'],
-	v54Stage: stageEvents.refundFailed['v54'],
-	v54Test: testEvents.refundFailed['v54'],
-	v70Dev: devEvents.refundFailed['v70'],
+	v64Stage: stageEvents.refundFailed['v64'],
+	v64Test: testEvents.refundFailed['v64'],
+	v85Dev: devEvents.refundFailed['v85'],
 }

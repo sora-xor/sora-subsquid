@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const enableOracle =  {
     name: 'OracleProxy.enable_oracle',
@@ -11,10 +11,10 @@ export const enableOracle =  {
      * - `origin`: the sudo account
      * - `oracle`: oracle variant which should be enabled
      */
-    v70: new CallType(
+    v85: new CallType(
         'OracleProxy.enable_oracle',
         sts.struct({
-            oracle: v70.Oracle,
+            oracle: v85.Oracle,
         })
     ),
 }
@@ -29,10 +29,10 @@ export const disableOracle =  {
      * - `origin`: the sudo account
      * - `oracle`: oracle variant which should be disabled
      */
-    v70: new CallType(
+    v85: new CallType(
         'OracleProxy.disable_oracle',
         sts.struct({
-            oracle: v70.Oracle,
+            oracle: v85.Oracle,
         })
     ),
 }

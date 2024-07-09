@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v22 from '../v22'
 import * as v37 from '../v37'
 import * as v42 from '../v42'
 
@@ -8,13 +8,13 @@ export const lockLiquidity =  {
     /**
      *  Lock liquidity
      */
-    v33: new CallType(
+    v22: new CallType(
         'CeresLiquidityLocker.lock_liquidity',
         sts.struct({
-            assetA: v33.AssetIdOf,
-            assetB: v33.AssetIdOf,
-            unlockingBlock: v33.BlockNumber,
-            percentageOfPoolTokens: v33.Balance,
+            assetA: v22.AssetIdOf,
+            assetB: v22.AssetIdOf,
+            unlockingBlock: v22.BlockNumber,
+            percentageOfPoolTokens: v22.Balance,
             option: sts.boolean(),
         })
     ),
@@ -51,10 +51,10 @@ export const changeCeresFee =  {
     /**
      *  Change CERES fee
      */
-    v33: new CallType(
+    v22: new CallType(
         'CeresLiquidityLocker.change_ceres_fee',
         sts.struct({
-            ceresFee: v33.Balance,
+            ceresFee: v22.Balance,
         })
     ),
 }

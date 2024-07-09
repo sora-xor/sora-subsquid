@@ -10,7 +10,7 @@ import { XOR, predefinedAssets } from './consts'
 import { networkSnapshotsStorage } from './network'
 import { getStorageRepresentation, isCurrentVersionIncluded } from './entities'
 import { storage } from '../types/generated/merged'
-import { TechAssetId } from '../types/generated/production/v57'
+import { TechAssetId } from '../types/generated/production/v74'
 import { versionsWithStringAssetId } from '../consts'
 
 const calcVolume = (snapshots: OrderBookSnapshot[]): BigNumber => {
@@ -151,8 +151,6 @@ export class OrderBooksStorage {
 					const quoteAsset = getAssetIdFromTech(baseAssetId)
 					const baseAsset = getAssetIdFromTech(targetAssetId)
 					const orderBookId = OrderBooksStorage.getId(dexId, baseAsset, quoteAsset)
-
-					getOrderBooksStorageLog(ctx, true).debug({ id: orderBookId }, 'Order Book account id added')
 		
 					this.accountIds.set(toAddress(accountId), orderBookId)
 				}

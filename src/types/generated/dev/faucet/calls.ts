@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const transfer =  {
     name: 'Faucet.transfer',
@@ -13,11 +13,11 @@ export const transfer =  {
      * AmountAboveLimit is returned if `target` has already received their daily limit of `asset_id`.
      * NotEnoughReserves is returned if `amount` is greater than the reserves
      */
-    v70: new CallType(
+    v85: new CallType(
         'Faucet.transfer',
         sts.struct({
-            assetId: v70.AssetId32,
-            target: v70.AccountId32,
+            assetId: v85.AssetId32,
+            target: v85.AccountId32,
             amount: sts.bigint(),
         })
     ),
@@ -25,7 +25,7 @@ export const transfer =  {
 
 export const resetRewards =  {
     name: 'Faucet.reset_rewards',
-    v70: new CallType(
+    v85: new CallType(
         'Faucet.reset_rewards',
         sts.unit()
     ),
@@ -33,7 +33,7 @@ export const resetRewards =  {
 
 export const updateLimit =  {
     name: 'Faucet.update_limit',
-    v70: new CallType(
+    v85: new CallType(
         'Faucet.update_limit',
         sts.struct({
             newLimit: sts.bigint(),

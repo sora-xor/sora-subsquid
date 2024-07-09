@@ -1,14 +1,14 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const claimed =  {
     name: 'Rewards.Claimed',
     /**
      * The account has claimed their rewards. [account]
      */
-    v70: new EventType(
+    v85: new EventType(
         'Rewards.Claimed',
-        v70.AccountId32
+        v85.AccountId32
     ),
 }
 
@@ -17,7 +17,7 @@ export const migrationCompleted =  {
     /**
      * Storage migration to version 1.2.0 completed
      */
-    v70: new EventType(
+    v85: new EventType(
         'Rewards.MigrationCompleted',
         sts.unit()
     ),

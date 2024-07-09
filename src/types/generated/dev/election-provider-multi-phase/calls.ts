@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const submitUnsigned =  {
     name: 'ElectionProviderMultiPhase.submit_unsigned',
@@ -19,11 +19,11 @@ export const submitUnsigned =  {
      * 
      * No deposit or reward is associated with this submission.
      */
-    v70: new CallType(
+    v85: new CallType(
         'ElectionProviderMultiPhase.submit_unsigned',
         sts.struct({
-            rawSolution: v70.RawSolution,
-            witness: v70.SolutionOrSnapshotSize,
+            rawSolution: v85.RawSolution,
+            witness: v85.SolutionOrSnapshotSize,
         })
     ),
 }
@@ -37,10 +37,10 @@ export const setMinimumUntrustedScore =  {
      * 
      * This check can be turned off by setting the value to `None`.
      */
-    v70: new CallType(
+    v85: new CallType(
         'ElectionProviderMultiPhase.set_minimum_untrusted_score',
         sts.struct({
-            maybeNextScore: sts.option(() => v70.ElectionScore),
+            maybeNextScore: sts.option(() => v85.ElectionScore),
         })
     ),
 }
@@ -57,10 +57,10 @@ export const setEmergencyElectionResult =  {
      * feasibility check itself can in principle cause the election process to fail (due to
      * memory/weight constrains).
      */
-    v70: new CallType(
+    v85: new CallType(
         'ElectionProviderMultiPhase.set_emergency_election_result',
         sts.struct({
-            supports: sts.array(() => sts.tuple(() => [v70.AccountId32, v70.Support])),
+            supports: sts.array(() => sts.tuple(() => [v85.AccountId32, v85.Support])),
         })
     ),
 }
@@ -78,10 +78,10 @@ export const submit =  {
      * A deposit is reserved and recorded for the solution. Based on the outcome, the solution
      * might be rewarded, slashed, or get all or a part of the deposit back.
      */
-    v70: new CallType(
+    v85: new CallType(
         'ElectionProviderMultiPhase.submit',
         sts.struct({
-            rawSolution: v70.RawSolution,
+            rawSolution: v85.RawSolution,
         })
     ),
 }
@@ -94,7 +94,7 @@ export const governanceFallback =  {
      * This can only be called when [`Phase::Emergency`] is enabled, as an alternative to
      * calling [`Call::set_emergency_election_result`].
      */
-    v70: new CallType(
+    v85: new CallType(
         'ElectionProviderMultiPhase.governance_fallback',
         sts.struct({
             maybeMaxVoters: sts.option(() => sts.number()),

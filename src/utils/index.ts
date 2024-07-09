@@ -57,7 +57,7 @@ export const shouldUpdate = (ctx: BlockContext, diff = 3_600) => {
 	const blockTimestamp = getBlockTimestamp(ctx)
 	const currentTimestamp = formatDateTimestamp(new Date())
   
-	return currentTimestamp - blockTimestamp < diff
+	return (currentTimestamp - blockTimestamp) < diff
 }
 
 export const toText = (data: Uint8Array): string => {

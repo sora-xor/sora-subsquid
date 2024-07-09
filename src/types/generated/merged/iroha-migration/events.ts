@@ -8,9 +8,9 @@ export const migrated = {
 	name: 'IrohaMigration.Migrated',
 	v1: productionEvents.migrated['v1'],
 	v42: productionEvents.migrated['v42'],
-	v33Stage: stageEvents.migrated['v33'],
+	v1Stage: stageEvents.migrated['v1'],
 	v42Stage: stageEvents.migrated['v42'],
-	v33Test: testEvents.migrated['v33'],
+	v1Test: testEvents.migrated['v1'],
 	v42Test: testEvents.migrated['v42'],
-	v70Dev: devEvents.migrated['v70'],
+	v85Dev: devEvents.migrated['v85'],
 }

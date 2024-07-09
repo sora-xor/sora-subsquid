@@ -12,7 +12,7 @@ export const tokenInfos = {
 	v42Stage: stageStorage.tokenInfos['v42'],
 	v33Test: testStorage.tokenInfos['v33'],
 	v42Test: testStorage.tokenInfos['v42'],
-	v70Dev: devStorage.tokenInfos['v70'],
+	v85Dev: devStorage.tokenInfos['v85'],
 }
 
 export const userInfos = {
@@ -26,7 +26,7 @@ export const userInfos = {
 	v33Test: testStorage.userInfos['v33'],
 	v42Test: testStorage.userInfos['v42'],
 	v43Test: testStorage.userInfos['v43'],
-	v70Dev: devStorage.userInfos['v70'],
+	v85Dev: devStorage.userInfos['v85'],
 }
 
 export const pools = {
@@ -40,7 +40,7 @@ export const pools = {
 	v33Test: testStorage.pools['v33'],
 	v42Test: testStorage.pools['v42'],
 	v43Test: testStorage.pools['v43'],
-	v70Dev: devStorage.pools['v70'],
+	v85Dev: devStorage.pools['v85'],
 }
 
 export const authorityAccount = {
@@ -48,7 +48,7 @@ export const authorityAccount = {
 	v33: productionStorage.authorityAccount['v33'],
 	v33Stage: stageStorage.authorityAccount['v33'],
 	v33Test: testStorage.authorityAccount['v33'],
-	v70Dev: devStorage.authorityAccount['v70'],
+	v85Dev: devStorage.authorityAccount['v85'],
 }
 
 export const feeAccount = {
@@ -56,7 +56,7 @@ export const feeAccount = {
 	v33: productionStorage.feeAccount['v33'],
 	v33Stage: stageStorage.feeAccount['v33'],
 	v33Test: testStorage.feeAccount['v33'],
-	v70Dev: devStorage.feeAccount['v70'],
+	v85Dev: devStorage.feeAccount['v85'],
 }
 
 export const palletStorageVersion = {
@@ -64,5 +64,5 @@ export const palletStorageVersion = {
 	v43: productionStorage.palletStorageVersion['v43'],
 	v43Stage: stageStorage.palletStorageVersion['v43'],
 	v43Test: testStorage.palletStorageVersion['v43'],
-	v70Dev: devStorage.palletStorageVersion['v70'],
+	v85Dev: devStorage.palletStorageVersion['v85'],
 }

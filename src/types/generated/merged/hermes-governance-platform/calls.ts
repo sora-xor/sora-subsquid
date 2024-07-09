@@ -9,10 +9,10 @@ export const vote = {
 	v47: productionCalls.vote['v47'],
 	v57: productionCalls.vote['v57'],
 	v47Stage: stageCalls.vote['v47'],
-	v55Stage: stageCalls.vote['v55'],
+	v57Stage: stageCalls.vote['v57'],
 	v47Test: testCalls.vote['v47'],
-	v55Test: testCalls.vote['v55'],
-	v70Dev: devCalls.vote['v70'],
+	v57Test: testCalls.vote['v57'],
+	v85Dev: devCalls.vote['v85'],
 }
 
 export const createPoll = {
@@ -20,10 +20,10 @@ export const createPoll = {
 	v47: productionCalls.createPoll['v47'],
 	v57: productionCalls.createPoll['v57'],
 	v47Stage: stageCalls.createPoll['v47'],
-	v55Stage: stageCalls.createPoll['v55'],
+	v57Stage: stageCalls.createPoll['v57'],
 	v47Test: testCalls.createPoll['v47'],
-	v55Test: testCalls.createPoll['v55'],
-	v70Dev: devCalls.createPoll['v70'],
+	v57Test: testCalls.createPoll['v57'],
+	v85Dev: devCalls.createPoll['v85'],
 }
 
 export const withdrawFundsVoter = {
@@ -31,7 +31,7 @@ export const withdrawFundsVoter = {
 	v47: productionCalls.withdrawFundsVoter['v47'],
 	v47Stage: stageCalls.withdrawFundsVoter['v47'],
 	v47Test: testCalls.withdrawFundsVoter['v47'],
-	v70Dev: devCalls.withdrawFundsVoter['v70'],
+	v85Dev: devCalls.withdrawFundsVoter['v85'],
 }
 
 export const withdrawFundsCreator = {
@@ -39,7 +39,7 @@ export const withdrawFundsCreator = {
 	v47: productionCalls.withdrawFundsCreator['v47'],
 	v47Stage: stageCalls.withdrawFundsCreator['v47'],
 	v47Test: testCalls.withdrawFundsCreator['v47'],
-	v70Dev: devCalls.withdrawFundsCreator['v70'],
+	v85Dev: devCalls.withdrawFundsCreator['v85'],
 }
 
 export const changeMinHermesForVoting = {
@@ -47,7 +47,7 @@ export const changeMinHermesForVoting = {
 	v47: productionCalls.changeMinHermesForVoting['v47'],
 	v47Stage: stageCalls.changeMinHermesForVoting['v47'],
 	v47Test: testCalls.changeMinHermesForVoting['v47'],
-	v70Dev: devCalls.changeMinHermesForVoting['v70'],
+	v85Dev: devCalls.changeMinHermesForVoting['v85'],
 }
 
 export const changeMinHermesForCreatingPoll = {
@@ -55,5 +55,5 @@ export const changeMinHermesForCreatingPoll = {
 	v47: productionCalls.changeMinHermesForCreatingPoll['v47'],
 	v47Stage: stageCalls.changeMinHermesForCreatingPoll['v47'],
 	v47Test: testCalls.changeMinHermesForCreatingPoll['v47'],
-	v70Dev: devCalls.changeMinHermesForCreatingPoll['v70'],
+	v85Dev: devCalls.changeMinHermesForCreatingPoll['v85'],
 }

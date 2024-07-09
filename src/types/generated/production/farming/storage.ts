@@ -69,3 +69,13 @@ export interface SavedValuesV7  {
     getPairsPaged(pageSize: number, block: Block): AsyncIterable<[k: v7.BlockNumber, v: ([v7.AccountId, v7.PoolFarmer[]][] | undefined)][]>
     getPairsPaged(pageSize: number, block: Block, key: v7.BlockNumber): AsyncIterable<[k: v7.BlockNumber, v: ([v7.AccountId, v7.PoolFarmer[]][] | undefined)][]>
 }
+
+export const lpMinXorForBonusReward =  {
+    v77: new StorageType('Farming.LpMinXorForBonusReward', 'Default', [], sts.bigint()) as LpMinXorForBonusRewardV77,
+}
+
+export interface LpMinXorForBonusRewardV77  {
+    is(block: RuntimeCtx): boolean
+    getDefault(block: Block): bigint
+    get(block: Block): Promise<(bigint | undefined)>
+}

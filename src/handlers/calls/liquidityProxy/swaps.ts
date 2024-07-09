@@ -5,12 +5,11 @@ import { getCallData, getEventData } from '../../../utils/entities'
 import { assetSnapshotsStorage, formatU128ToBalance, getAssetId } from '../../../utils/assets'
 import { findEventByExtrinsicHash } from '../../../utils/events'
 import { networkSnapshotsStorage } from '../../../utils/network'
-import { createCallHistoryElement } from '../../../utils/history'
-import { XOR } from '../../../utils/consts'
 import { assertDefined, toAddress } from '../../../utils'
 import { logStartProcessingCall } from '../../../utils/logs'
 import { calls, events } from '../../../types/generated/merged'
 import { AssetId } from '../../../types'
+import { createCallHistoryElement } from '../../../utils/history'
 
 const receiveExtrinsicSwapAmounts = (swapAmount: SwapAmount, assetId: AssetId): string[] => {
     if (swapAmount.kind === 'WithDesiredOutput') {
@@ -59,14 +58,12 @@ export async function swapsCallHandler(
 		selectedMarket?: string
 		baseAssetAmount?: string
 		targetAssetAmount?: string
-		liquidityProviderFee?: string
 		to?: string
 	} = {}
 
 	details.baseAssetId = baseAssetId
     details.targetAssetId = targetAssetId
     details.selectedMarket = liquiditySources.toString()
-    details.liquidityProviderFee = '0'
     details.baseAssetAmount = receiveExtrinsicSwapAmounts(swapAmount, baseAssetId)[0]
     details.targetAssetAmount = receiveExtrinsicSwapAmounts(swapAmount, targetAssetId)[1]
 
@@ -92,7 +89,6 @@ export async function swapsCallHandler(
 
 		details.baseAssetAmount = formatU128ToBalance(baseAssetAmount, baseAssetId)
 		details.targetAssetAmount = formatU128ToBalance(targetAssetAmount, targetAssetId)
-		details.liquidityProviderFee = formatU128ToBalance(liquidityProviderFee, XOR)
 
 		const aVolumeUSD = await assetSnapshotsStorage.updateVolume(ctx, baseAssetId, BigNumber(details.baseAssetAmount))
 		const bVolumeUSD = await assetSnapshotsStorage.updateVolume(ctx, targetAssetId, BigNumber(details.targetAssetAmount))

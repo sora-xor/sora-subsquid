@@ -113,26 +113,26 @@ export const ReadySolution: sts.Type<ReadySolution> = sts.struct(() => {
     }
 })
 
-export type Type_642 = Type_642_Emergency | Type_642_Off | Type_642_Signed | Type_642_Unsigned
+export type Type_637 = Type_637_Emergency | Type_637_Off | Type_637_Signed | Type_637_Unsigned
 
-export interface Type_642_Emergency {
+export interface Type_637_Emergency {
     __kind: 'Emergency'
 }
 
-export interface Type_642_Off {
+export interface Type_637_Off {
     __kind: 'Off'
 }
 
-export interface Type_642_Signed {
+export interface Type_637_Signed {
     __kind: 'Signed'
 }
 
-export interface Type_642_Unsigned {
+export interface Type_637_Unsigned {
     __kind: 'Unsigned'
     value: [boolean, number]
 }
 
-export const Type_642: sts.Type<Type_642> = sts.closedEnum(() => {
+export const Type_637: sts.Type<Type_637> = sts.closedEnum(() => {
     return  {
         Emergency: sts.unit(),
         Off: sts.unit(),
@@ -337,34 +337,34 @@ export const ContributorsVesting: sts.Type<ContributorsVesting> = sts.struct(() 
     }
 })
 
-export type Type_623 = Type_623_V1 | Type_623_V2
+export type Type_618 = Type_618_V1 | Type_618_V2
 
-export interface Type_623_V1 {
+export interface Type_618_V1 {
     __kind: 'V1'
 }
 
-export interface Type_623_V2 {
+export interface Type_618_V2 {
     __kind: 'V2'
 }
 
-export const Type_623: sts.Type<Type_623> = sts.closedEnum(() => {
+export const Type_618: sts.Type<Type_618> = sts.closedEnum(() => {
     return  {
         V1: sts.unit(),
         V2: sts.unit(),
     }
 })
 
-export type Type_616 = Type_616_V1 | Type_616_V2
+export type Type_611 = Type_611_V1 | Type_611_V2
 
-export interface Type_616_V1 {
+export interface Type_611_V1 {
     __kind: 'V1'
 }
 
-export interface Type_616_V2 {
+export interface Type_611_V2 {
     __kind: 'V2'
 }
 
-export const Type_616: sts.Type<Type_616> = sts.closedEnum(() => {
+export const Type_611: sts.Type<Type_611> = sts.closedEnum(() => {
     return  {
         V1: sts.unit(),
         V2: sts.unit(),
@@ -460,7 +460,7 @@ export const CrowdloanReward: sts.Type<CrowdloanReward> = sts.struct(() => {
     }
 })
 
-export interface Type_586 {
+export interface Type_581 {
     limit: bigint
     totalAvailable: bigint
     rewards: [RewardReason, bigint][]
@@ -488,7 +488,7 @@ export interface RewardReason_Unspecified {
     __kind: 'Unspecified'
 }
 
-export const Type_586: sts.Type<Type_586> = sts.struct(() => {
+export const Type_581: sts.Type<Type_581> = sts.struct(() => {
     return  {
         limit: sts.bigint(),
         totalAvailable: sts.bigint(),
@@ -540,12 +540,12 @@ export type OriginCaller = OriginCaller_Council | OriginCaller_TechnicalCommitte
 
 export interface OriginCaller_Council {
     __kind: 'Council'
-    value: Type_195
+    value: Type_209
 }
 
 export interface OriginCaller_TechnicalCommittee {
     __kind: 'TechnicalCommittee'
-    value: Type_196
+    value: Type_210
 }
 
 export interface OriginCaller_Void {
@@ -575,35 +575,35 @@ export interface RawOrigin_Signed {
 
 export type Void = never
 
-export type Type_196 = Type_196_Member | Type_196_Members | Type_196__Phantom
+export type Type_210 = Type_210_Member | Type_210_Members | Type_210__Phantom
 
-export interface Type_196_Member {
+export interface Type_210_Member {
     __kind: 'Member'
     value: AccountId32
 }
 
-export interface Type_196_Members {
+export interface Type_210_Members {
     __kind: 'Members'
     value: [number, number]
 }
 
-export interface Type_196__Phantom {
+export interface Type_210__Phantom {
     __kind: '_Phantom'
 }
 
-export type Type_195 = Type_195_Member | Type_195_Members | Type_195__Phantom
+export type Type_209 = Type_209_Member | Type_209_Members | Type_209__Phantom
 
-export interface Type_195_Member {
+export interface Type_209_Member {
     __kind: 'Member'
     value: AccountId32
 }
 
-export interface Type_195_Members {
+export interface Type_209_Members {
     __kind: 'Members'
     value: [number, number]
 }
 
-export interface Type_195__Phantom {
+export interface Type_209__Phantom {
     __kind: '_Phantom'
 }
 
@@ -1320,13 +1320,13 @@ export const OutgoingAddAsset: sts.Type<OutgoingAddAsset> = sts.struct(() => {
     }
 })
 
-export type Type_549 = Type_549_V1
+export type Type_544 = Type_544_V1
 
-export interface Type_549_V1 {
+export interface Type_544_V1 {
     __kind: 'V1'
 }
 
-export const Type_549: sts.Type<Type_549> = sts.closedEnum(() => {
+export const Type_544: sts.Type<Type_544> = sts.closedEnum(() => {
     return  {
         V1: sts.unit(),
     }
@@ -1541,7 +1541,7 @@ export const PreimageStatus: sts.Type<PreimageStatus> = sts.closedEnum(() => {
 
 export type H256 = Bytes
 
-export type Call = Call_Assets | Call_Authorship | Call_Babe | Call_BagsList | Call_Balances | Call_BridgeMultisig | Call_CeresGovernancePlatform | Call_CeresLaunchpad | Call_CeresLiquidityLocker | Call_CeresStaking | Call_CeresTokenLocker | Call_Council | Call_Currencies | Call_DEXAPI | Call_DemeterFarmingPlatform | Call_Democracy | Call_ElectionProviderMultiPhase | Call_ElectionsPhragmen | Call_EthBridge | Call_Faucet | Call_Grandpa | Call_Identity | Call_ImOnline | Call_IrohaMigration | Call_LiquidityProxy | Call_MulticollateralBondingCurvePool | Call_Multisig | Call_Permissions | Call_PoolXYK | Call_PswapDistribution | Call_Referrals | Call_Rewards | Call_Scheduler | Call_Session | Call_Staking | Call_Sudo | Call_System | Call_Technical | Call_TechnicalCommittee | Call_TechnicalMembership | Call_Timestamp | Call_TradingPair | Call_Utility | Call_VestedRewards | Call_XSTPool | Call_XorFee
+export type Call = Call_Assets | Call_Authorship | Call_Babe | Call_BagsList | Call_Balances | Call_BridgeMultisig | Call_CeresGovernancePlatform | Call_CeresLaunchpad | Call_CeresLiquidityLocker | Call_CeresStaking | Call_CeresTokenLocker | Call_Council | Call_Currencies | Call_DEXAPI | Call_DemeterFarmingPlatform | Call_Democracy | Call_ElectionProviderMultiPhase | Call_ElectionsPhragmen | Call_EthBridge | Call_Grandpa | Call_Identity | Call_ImOnline | Call_IrohaMigration | Call_LiquidityProxy | Call_MulticollateralBondingCurvePool | Call_Multisig | Call_Permissions | Call_PoolXYK | Call_PswapDistribution | Call_Referrals | Call_Rewards | Call_Scheduler | Call_Session | Call_Staking | Call_System | Call_Technical | Call_TechnicalCommittee | Call_TechnicalMembership | Call_Timestamp | Call_TradingPair | Call_Utility | Call_VestedRewards | Call_XSTPool | Call_XorFee
 
 export interface Call_Assets {
     __kind: 'Assets'
@@ -1638,11 +1638,6 @@ export interface Call_EthBridge {
     value: EthBridgeCall
 }
 
-export interface Call_Faucet {
-    __kind: 'Faucet'
-    value: FaucetCall
-}
-
 export interface Call_Grandpa {
     __kind: 'Grandpa'
     value: GrandpaCall
@@ -1716,11 +1711,6 @@ export interface Call_Session {
 export interface Call_Staking {
     __kind: 'Staking'
     value: StakingCall
-}
-
-export interface Call_Sudo {
-    __kind: 'Sudo'
-    value: SudoCall
 }
 
 export interface Call_System {
@@ -2381,82 +2371,6 @@ export interface SystemCall_set_storage {
 /**
  * Contains one variant per dispatchable that can be called by an extrinsic.
  */
-export type SudoCall = SudoCall_set_key | SudoCall_sudo | SudoCall_sudo_as | SudoCall_sudo_unchecked_weight
-
-/**
- * Authenticates the current sudo key and sets the given AccountId (`new`) as the new sudo
- * key.
- * 
- * The dispatch origin for this call must be _Signed_.
- * 
- * # <weight>
- * - O(1).
- * - Limited storage reads.
- * - One DB change.
- * # </weight>
- */
-export interface SudoCall_set_key {
-    __kind: 'set_key'
-    new: AccountId32
-}
-
-/**
- * Authenticates the sudo key and dispatches a function call with `Root` origin.
- * 
- * The dispatch origin for this call must be _Signed_.
- * 
- * # <weight>
- * - O(1).
- * - Limited storage reads.
- * - One DB write (event).
- * - Weight of derivative `call` execution + 10,000.
- * # </weight>
- */
-export interface SudoCall_sudo {
-    __kind: 'sudo'
-    call: Call
-}
-
-/**
- * Authenticates the sudo key and dispatches a function call with `Signed` origin from
- * a given account.
- * 
- * The dispatch origin for this call must be _Signed_.
- * 
- * # <weight>
- * - O(1).
- * - Limited storage reads.
- * - One DB write (event).
- * - Weight of derivative `call` execution + 10,000.
- * # </weight>
- */
-export interface SudoCall_sudo_as {
-    __kind: 'sudo_as'
-    who: AccountId32
-    call: Call
-}
-
-/**
- * Authenticates the sudo key and dispatches a function call with `Root` origin.
- * This function does not check the weight of the call, and instead allows the
- * Sudo user to specify the weight of the call.
- * 
- * The dispatch origin for this call must be _Signed_.
- * 
- * # <weight>
- * - O(1).
- * - The weight of this call is defined by the caller.
- * # </weight>
- */
-export interface SudoCall_sudo_unchecked_weight {
-    __kind: 'sudo_unchecked_weight'
-    call: Call
-    weight: bigint
-}
-
-/**
- * Contains one variant per dispatchable that can be called by an extrinsic.
- */
 export type StakingCall = StakingCall_bond | StakingCall_bond_extra | StakingCall_cancel_deferred_slash | StakingCall_chill | StakingCall_chill_other | StakingCall_force_apply_min_commission | StakingCall_force_new_era | StakingCall_force_new_era_always | StakingCall_force_no_eras | StakingCall_force_unstake | StakingCall_increase_validator_count | StakingCall_kick | StakingCall_nominate | StakingCall_payout_stakers | StakingCall_reap_stash | StakingCall_rebond | StakingCall_scale_validator_count | StakingCall_set_controller | StakingCall_set_history_depth | StakingCall_set_invulnerables | StakingCall_set_payee | StakingCall_set_staking_configs | StakingCall_set_validator_count | StakingCall_unbond | StakingCall_validate | StakingCall_withdraw_unbonded
 
 /**
@@ -2887,10 +2801,10 @@ export interface StakingCall_set_staking_configs {
     __kind: 'set_staking_configs'
     minNominatorBond: ConfigOp
     minValidatorBond: ConfigOp
-    maxNominatorCount: Type_205
-    maxValidatorCount: Type_205
-    chillThreshold: Type_206
-    minCommission: Type_207
+    maxNominatorCount: Type_217
+    maxValidatorCount: Type_217
+    chillThreshold: Type_218
+    minCommission: Type_219
 }
 
 /**
@@ -2973,47 +2887,47 @@ export interface ValidatorPrefs {
     blocked: boolean
 }
 
-export type Type_207 = Type_207_Noop | Type_207_Remove | Type_207_Set
+export type Type_219 = Type_219_Noop | Type_219_Remove | Type_219_Set
 
-export interface Type_207_Noop {
+export interface Type_219_Noop {
     __kind: 'Noop'
 }
 
-export interface Type_207_Remove {
+export interface Type_219_Remove {
     __kind: 'Remove'
 }
 
-export interface Type_207_Set {
+export interface Type_219_Set {
     __kind: 'Set'
     value: Perbill
 }
 
-export type Type_206 = Type_206_Noop | Type_206_Remove | Type_206_Set
+export type Type_218 = Type_218_Noop | Type_218_Remove | Type_218_Set
 
-export interface Type_206_Noop {
+export interface Type_218_Noop {
     __kind: 'Noop'
 }
 
-export interface Type_206_Remove {
+export interface Type_218_Remove {
     __kind: 'Remove'
 }
 
-export interface Type_206_Set {
+export interface Type_218_Set {
     __kind: 'Set'
     value: Percent
 }
 
-export type Type_205 = Type_205_Noop | Type_205_Remove | Type_205_Set
+export type Type_217 = Type_217_Noop | Type_217_Remove | Type_217_Set
 
-export interface Type_205_Noop {
+export interface Type_217_Noop {
     __kind: 'Noop'
 }
 
-export interface Type_205_Remove {
+export interface Type_217_Remove {
     __kind: 'Remove'
 }
 
-export interface Type_205_Set {
+export interface Type_217_Set {
     __kind: 'Set'
     value: number
 }
@@ -4249,7 +4163,7 @@ export interface GrandpaCall_note_stalled {
  */
 export interface GrandpaCall_report_equivocation {
     __kind: 'report_equivocation'
-    equivocationProof: Type_214
+    equivocationProof: Type_226
     keyOwnerProof: MembershipProof
 }
 
@@ -4266,7 +4180,7 @@ export interface GrandpaCall_report_equivocation {
  */
 export interface GrandpaCall_report_equivocation_unsigned {
     __kind: 'report_equivocation_unsigned'
-    equivocationProof: Type_214
+    equivocationProof: Type_226
     keyOwnerProof: MembershipProof
 }
 
@@ -4276,7 +4190,7 @@ export interface MembershipProof {
     validatorCount: number
 }
 
-export interface Type_214 {
+export interface Type_226 {
     setId: bigint
     equivocation: Equivocation
 }
@@ -4285,15 +4199,15 @@ export type Equivocation = Equivocation_Precommit | Equivocation_Prevote
 
 export interface Equivocation_Precommit {
     __kind: 'Precommit'
-    value: Type_221
+    value: Type_233
 }
 
 export interface Equivocation_Prevote {
     __kind: 'Prevote'
-    value: Type_216
+    value: Type_228
 }
 
-export interface Type_216 {
+export interface Type_228 {
     roundNumber: bigint
     identity: Public
     first: [Prevote, Signature]
@@ -4309,7 +4223,7 @@ export interface Prevote {
 
 export type Public = Bytes
 
-export interface Type_221 {
+export interface Type_233 {
     roundNumber: bigint
     identity: Public
     first: [Precommit, Signature]
@@ -4319,37 +4233,6 @@ export interface Type_221 {
 export interface Precommit {
     targetHash: H256
     targetNumber: number
-}
-
-/**
- * Contains one variant per dispatchable that can be called by an extrinsic.
- */
-export type FaucetCall = FaucetCall_reset_rewards | FaucetCall_transfer | FaucetCall_update_limit
-
-export interface FaucetCall_reset_rewards {
-    __kind: 'reset_rewards'
-}
-
-/**
- * Transfers the specified amount of asset to the specified account.
- * The supported assets are: XOR, VAL, PSWAP.
- * 
- * # Errors
- * 
- * AssetNotSupported is returned if `asset_id` is something the function doesn't support.
- * AmountAboveLimit is returned if `target` has already received their daily limit of `asset_id`.
- * NotEnoughReserves is returned if `amount` is greater than the reserves
- */
-export interface FaucetCall_transfer {
-    __kind: 'transfer'
-    assetId: AssetId32
-    target: AccountId32
-    amount: bigint
-}
-
-export interface FaucetCall_update_limit {
-    __kind: 'update_limit'
-    newLimit: bigint
 }
 
 /**
@@ -6733,23 +6616,23 @@ export interface LiquiditySourceType_XYKPool {
     __kind: 'XYKPool'
 }
 
-export interface Type_502 {
+export interface Type_497 {
     amount: bigint
 }
 
-export const Type_502: sts.Type<Type_502> = sts.struct(() => {
+export const Type_497: sts.Type<Type_497> = sts.struct(() => {
     return  {
         amount: sts.bigint(),
     }
 })
 
-export interface Type_500 {
+export interface Type_495 {
     free: bigint
     reserved: bigint
     frozen: bigint
 }
 
-export const Type_500: sts.Type<Type_500> = sts.struct(() => {
+export const Type_495: sts.Type<Type_495> = sts.struct(() => {
     return  {
         free: sts.bigint(),
         reserved: sts.bigint(),
@@ -6757,12 +6640,12 @@ export const Type_500: sts.Type<Type_500> = sts.struct(() => {
     }
 })
 
-export interface Type_498 {
+export interface Type_493 {
     id: Bytes
     amount: bigint
 }
 
-export const Type_498: sts.Type<Type_498> = sts.struct(() => {
+export const Type_493: sts.Type<Type_493> = sts.struct(() => {
     return  {
         id: sts.bytes(),
         amount: sts.bigint(),
@@ -6777,45 +6660,45 @@ export type Perbill = number
 
 export const Perbill = sts.number()
 
-export type Type_475 = Type_475_V1_0_0Ancient | Type_475_V2_0_0 | Type_475_V3_0_0 | Type_475_V4_0_0 | Type_475_V5_0_0 | Type_475_V6_0_0 | Type_475_V7_0_0 | Type_475_V8_0_0 | Type_475_V9_0_0
+export type Type_470 = Type_470_V1_0_0Ancient | Type_470_V2_0_0 | Type_470_V3_0_0 | Type_470_V4_0_0 | Type_470_V5_0_0 | Type_470_V6_0_0 | Type_470_V7_0_0 | Type_470_V8_0_0 | Type_470_V9_0_0
 
-export interface Type_475_V1_0_0Ancient {
+export interface Type_470_V1_0_0Ancient {
     __kind: 'V1_0_0Ancient'
 }
 
-export interface Type_475_V2_0_0 {
+export interface Type_470_V2_0_0 {
     __kind: 'V2_0_0'
 }
 
-export interface Type_475_V3_0_0 {
+export interface Type_470_V3_0_0 {
     __kind: 'V3_0_0'
 }
 
-export interface Type_475_V4_0_0 {
+export interface Type_470_V4_0_0 {
     __kind: 'V4_0_0'
 }
 
-export interface Type_475_V5_0_0 {
+export interface Type_470_V5_0_0 {
     __kind: 'V5_0_0'
 }
 
-export interface Type_475_V6_0_0 {
+export interface Type_470_V6_0_0 {
     __kind: 'V6_0_0'
 }
 
-export interface Type_475_V7_0_0 {
+export interface Type_470_V7_0_0 {
     __kind: 'V7_0_0'
 }
 
-export interface Type_475_V8_0_0 {
+export interface Type_470_V8_0_0 {
     __kind: 'V8_0_0'
 }
 
-export interface Type_475_V9_0_0 {
+export interface Type_470_V9_0_0 {
     __kind: 'V9_0_0'
 }
 
-export const Type_475: sts.Type<Type_475> = sts.closedEnum(() => {
+export const Type_470: sts.Type<Type_470> = sts.closedEnum(() => {
     return  {
         V1_0_0Ancient: sts.unit(),
         V2_0_0: sts.unit(),
@@ -7105,7 +6988,7 @@ export interface TechPurpose_FeeCollector {
 
 export interface TechPurpose_FeeCollectorForPair {
     __kind: 'FeeCollectorForPair'
-    value: Type_79
+    value: Type_77
 }
 
 export interface TechPurpose_Identifier {
@@ -7115,10 +6998,10 @@ export interface TechPurpose_Identifier {
 
 export interface TechPurpose_LiquidityKeeper {
     __kind: 'LiquidityKeeper'
-    value: Type_79
+    value: Type_77
 }
 
-export interface Type_79 {
+export interface Type_77 {
     baseAssetId: TechAssetId
     targetAssetId: TechAssetId
 }
@@ -7177,17 +7060,17 @@ export interface PredefinedAssetId_XSTUSD {
     __kind: 'XSTUSD'
 }
 
-export type Type_433 = Type_433_V1Ancient | Type_433_V2
+export type Type_178 = Type_178_V1Ancient | Type_178_V2
 
-export interface Type_433_V1Ancient {
+export interface Type_178_V1Ancient {
     __kind: 'V1Ancient'
 }
 
-export interface Type_433_V2 {
+export interface Type_178_V2 {
     __kind: 'V2'
 }
 
-export const Type_433: sts.Type<Type_433> = sts.closedEnum(() => {
+export const Type_178: sts.Type<Type_178> = sts.closedEnum(() => {
     return  {
         V1Ancient: sts.unit(),
         V2: sts.unit(),
@@ -7239,7 +7122,7 @@ export interface EventRecord {
     topics: H256[]
 }
 
-export type Event = Event_Assets | Event_BagsList | Event_Balances | Event_BridgeMultisig | Event_CeresGovernancePlatform | Event_CeresLaunchpad | Event_CeresLiquidityLocker | Event_CeresStaking | Event_CeresTokenLocker | Event_Council | Event_DemeterFarmingPlatform | Event_Democracy | Event_ElectionProviderMultiPhase | Event_ElectionsPhragmen | Event_EthBridge | Event_Faucet | Event_Grandpa | Event_Identity | Event_ImOnline | Event_IrohaMigration | Event_LiquidityProxy | Event_MulticollateralBondingCurvePool | Event_Multisig | Event_Offences | Event_Permissions | Event_PoolXYK | Event_PriceTools | Event_PswapDistribution | Event_Rewards | Event_Scheduler | Event_Session | Event_Staking | Event_Sudo | Event_System | Event_Technical | Event_TechnicalCommittee | Event_TechnicalMembership | Event_Tokens | Event_TradingPair | Event_Utility | Event_VestedRewards | Event_XSTPool | Event_XorFee
+export type Event = Event_Assets | Event_BagsList | Event_Balances | Event_BridgeMultisig | Event_CeresGovernancePlatform | Event_CeresLaunchpad | Event_CeresLiquidityLocker | Event_CeresStaking | Event_CeresTokenLocker | Event_Council | Event_DemeterFarmingPlatform | Event_Democracy | Event_ElectionProviderMultiPhase | Event_ElectionsPhragmen | Event_EthBridge | Event_Grandpa | Event_Identity | Event_ImOnline | Event_IrohaMigration | Event_LiquidityProxy | Event_MulticollateralBondingCurvePool | Event_Multisig | Event_Offences | Event_Permissions | Event_PoolXYK | Event_PriceTools | Event_PswapDistribution | Event_Rewards | Event_Scheduler | Event_Session | Event_Staking | Event_System | Event_Technical | Event_TechnicalCommittee | Event_TechnicalMembership | Event_Tokens | Event_TradingPair | Event_Utility | Event_VestedRewards | Event_XSTPool | Event_XorFee
 
 export interface Event_Assets {
     __kind: 'Assets'
@@ -7314,11 +7197,6 @@ export interface Event_ElectionsPhragmen {
 export interface Event_EthBridge {
     __kind: 'EthBridge'
     value: EthBridgeEvent
-}
-
-export interface Event_Faucet {
-    __kind: 'Faucet'
-    value: FaucetEvent
 }
 
 export interface Event_Grandpa {
@@ -7399,11 +7277,6 @@ export interface Event_Session {
 export interface Event_Staking {
     __kind: 'Staking'
     value: StakingEvent
-}
-
-export interface Event_Sudo {
-    __kind: 'Sudo'
-    value: SudoEvent
 }
 
 export interface Event_System {
@@ -8049,38 +7922,6 @@ export interface DispatchClass_Normal {
 
 export interface DispatchClass_Operational {
     __kind: 'Operational'
-}
-
-/**
- * 
-			The [event](https://docs.substrate.io/v3/runtime/events-and-errors) emitted
-			by this pallet.
-			
- */
-export type SudoEvent = SudoEvent_KeyChanged | SudoEvent_Sudid | SudoEvent_SudoAsDone
-
-/**
- * The \[sudoer\] just switched identity; the old key is supplied if one existed.
- */
-export interface SudoEvent_KeyChanged {
-    __kind: 'KeyChanged'
-    oldSudoer?: (AccountId32 | undefined)
-}
-
-/**
- * A sudo just took place. \[result\]
- */
-export interface SudoEvent_Sudid {
-    __kind: 'Sudid'
-    sudoResult: Result<null, DispatchError>
-}
-
-/**
- * A sudo just took place. \[result\]
- */
-export interface SudoEvent_SudoAsDone {
-    __kind: 'SudoAsDone'
-    sudoResult: Result<null, DispatchError>
 }
 
 /**
@@ -8778,24 +8619,6 @@ export interface GrandpaEvent_Paused {
  */
 export interface GrandpaEvent_Resumed {
     __kind: 'Resumed'
-}
-
-/**
- * 
-			The [event](https://docs.substrate.io/v3/runtime/events-and-errors) emitted
-			by this pallet.
-			
- */
-export type FaucetEvent = FaucetEvent_LimitUpdated | FaucetEvent_Transferred
-
-export interface FaucetEvent_LimitUpdated {
-    __kind: 'LimitUpdated'
-    value: bigint
-}
-
-export interface FaucetEvent_Transferred {
-    __kind: 'Transferred'
-    value: [AccountId32, bigint]
 }
 
 /**
@@ -9839,7 +9662,6 @@ export const Event: sts.Type<Event> = sts.closedEnum(() => {
         ElectionProviderMultiPhase: ElectionProviderMultiPhaseEvent,
         ElectionsPhragmen: ElectionsPhragmenEvent,
         EthBridge: EthBridgeEvent,
-        Faucet: FaucetEvent,
         Grandpa: GrandpaEvent,
         Identity: IdentityEvent,
         ImOnline: ImOnlineEvent,
@@ -9856,7 +9678,6 @@ export const Event: sts.Type<Event> = sts.closedEnum(() => {
         Scheduler: SchedulerEvent,
         Session: SessionEvent,
         Staking: StakingEvent,
-        Sudo: SudoEvent,
         System: SystemEvent,
         Technical: TechnicalEvent,
         TechnicalCommittee: TechnicalCommitteeEvent,
@@ -10130,26 +9951,6 @@ export const SystemEvent: sts.Type<SystemEvent> = sts.closedEnum(() => {
         Remarked: sts.enumStruct({
             sender: AccountId32,
             hash: H256,
-        }),
-    }
-})
-
-/**
- * 
-			The [event](https://docs.substrate.io/v3/runtime/events-and-errors) emitted
-			by this pallet.
-			
- */
-export const SudoEvent: sts.Type<SudoEvent> = sts.closedEnum(() => {
-    return  {
-        KeyChanged: sts.enumStruct({
-            oldSudoer: sts.option(() => AccountId32),
-        }),
-        Sudid: sts.enumStruct({
-            sudoResult: sts.result(() => sts.unit(), () => DispatchError),
-        }),
-        SudoAsDone: sts.enumStruct({
-            sudoResult: sts.result(() => sts.unit(), () => DispatchError),
         }),
     }
 })
@@ -10460,19 +10261,6 @@ export const GrandpaEvent: sts.Type<GrandpaEvent> = sts.closedEnum(() => {
         }),
         Paused: sts.unit(),
         Resumed: sts.unit(),
-    }
-})
-
-/**
- * 
-			The [event](https://docs.substrate.io/v3/runtime/events-and-errors) emitted
-			by this pallet.
-			
- */
-export const FaucetEvent: sts.Type<FaucetEvent> = sts.closedEnum(() => {
-    return  {
-        LimitUpdated: sts.bigint(),
-        Transferred: sts.tuple(() => [AccountId32, sts.bigint()]),
     }
 })
 
@@ -11255,7 +11043,7 @@ export const SwapAmount: sts.Type<SwapAmount> = sts.closedEnum(() => {
     }
 })
 
-export const Type_207: sts.Type<Type_207> = sts.closedEnum(() => {
+export const Type_219: sts.Type<Type_219> = sts.closedEnum(() => {
     return  {
         Noop: sts.unit(),
         Remove: sts.unit(),
@@ -11263,7 +11051,7 @@ export const Type_207: sts.Type<Type_207> = sts.closedEnum(() => {
     }
 })
 
-export const Type_206: sts.Type<Type_206> = sts.closedEnum(() => {
+export const Type_218: sts.Type<Type_218> = sts.closedEnum(() => {
     return  {
         Noop: sts.unit(),
         Remove: sts.unit(),
@@ -11271,7 +11059,7 @@ export const Type_206: sts.Type<Type_206> = sts.closedEnum(() => {
     }
 })
 
-export const Type_205: sts.Type<Type_205> = sts.closedEnum(() => {
+export const Type_217: sts.Type<Type_217> = sts.closedEnum(() => {
     return  {
         Noop: sts.unit(),
         Remove: sts.unit(),
@@ -11334,8 +11122,8 @@ export const SessionKeys: sts.Type<SessionKeys> = sts.struct(() => {
 
 export const OriginCaller: sts.Type<OriginCaller> = sts.closedEnum(() => {
     return  {
-        Council: Type_195,
-        TechnicalCommittee: Type_196,
+        Council: Type_209,
+        TechnicalCommittee: Type_210,
         Void: Void,
         system: RawOrigin,
     }
@@ -11354,7 +11142,7 @@ export const Void: sts.Type<Void> = sts.closedEnum(() => {
     }
 })
 
-export const Type_196: sts.Type<Type_196> = sts.closedEnum(() => {
+export const Type_210: sts.Type<Type_210> = sts.closedEnum(() => {
     return  {
         Member: AccountId32,
         Members: sts.tuple(() => [sts.number(), sts.number()]),
@@ -11362,7 +11150,7 @@ export const Type_196: sts.Type<Type_196> = sts.closedEnum(() => {
     }
 })
 
-export const Type_195: sts.Type<Type_195> = sts.closedEnum(() => {
+export const Type_209: sts.Type<Type_209> = sts.closedEnum(() => {
     return  {
         Member: AccountId32,
         Members: sts.tuple(() => [sts.number(), sts.number()]),
@@ -11391,7 +11179,6 @@ export const Call: sts.Type<Call> = sts.closedEnum(() => {
         ElectionProviderMultiPhase: ElectionProviderMultiPhaseCall,
         ElectionsPhragmen: ElectionsPhragmenCall,
         EthBridge: EthBridgeCall,
-        Faucet: FaucetCall,
         Grandpa: GrandpaCall,
         Identity: IdentityCall,
         ImOnline: ImOnlineCall,
@@ -11407,7 +11194,6 @@ export const Call: sts.Type<Call> = sts.closedEnum(() => {
         Scheduler: SchedulerCall,
         Session: SessionCall,
         Staking: StakingCall,
-        Sudo: SudoCall,
         System: SystemCall,
         Technical: TechnicalCall,
         TechnicalCommittee: TechnicalCommitteeCall,
@@ -11626,28 +11412,6 @@ export const SystemCall: sts.Type<SystemCall> = sts.closedEnum(() => {
 /**
  * Contains one variant per dispatchable that can be called by an extrinsic.
  */
-export const SudoCall: sts.Type<SudoCall> = sts.closedEnum(() => {
-    return  {
-        set_key: sts.enumStruct({
-            new: AccountId32,
-        }),
-        sudo: sts.enumStruct({
-            call: Call,
-        }),
-        sudo_as: sts.enumStruct({
-            who: AccountId32,
-            call: Call,
-        }),
-        sudo_unchecked_weight: sts.enumStruct({
-            call: Call,
-            weight: sts.bigint(),
-        }),
-    }
-})
-
-/**
- * Contains one variant per dispatchable that can be called by an extrinsic.
- */
 export const StakingCall: sts.Type<StakingCall> = sts.closedEnum(() => {
     return  {
         bond: sts.enumStruct({
@@ -11715,10 +11479,10 @@ export const StakingCall: sts.Type<StakingCall> = sts.closedEnum(() => {
         set_staking_configs: sts.enumStruct({
             minNominatorBond: ConfigOp,
             minValidatorBond: ConfigOp,
-            maxNominatorCount: Type_205,
-            maxValidatorCount: Type_205,
-            chillThreshold: Type_206,
-            minCommission: Type_207,
+            maxNominatorCount: Type_217,
+            maxValidatorCount: Type_217,
+            chillThreshold: Type_218,
+            minCommission: Type_219,
         }),
         set_validator_count: sts.enumStruct({
             new: sts.number(),
@@ -12150,17 +11914,17 @@ export const GrandpaCall: sts.Type<GrandpaCall> = sts.closedEnum(() => {
             bestFinalizedBlockNumber: sts.number(),
         }),
         report_equivocation: sts.enumStruct({
-            equivocationProof: Type_214,
+            equivocationProof: Type_226,
             keyOwnerProof: MembershipProof,
         }),
         report_equivocation_unsigned: sts.enumStruct({
-            equivocationProof: Type_214,
+            equivocationProof: Type_226,
             keyOwnerProof: MembershipProof,
         }),
     }
 })
 
-export const Type_214: sts.Type<Type_214> = sts.struct(() => {
+export const Type_226: sts.Type<Type_226> = sts.struct(() => {
     return  {
         setId: sts.bigint(),
         equivocation: Equivocation,
@@ -12169,12 +11933,12 @@ export const Type_214: sts.Type<Type_214> = sts.struct(() => {
 
 export const Equivocation: sts.Type<Equivocation> = sts.closedEnum(() => {
     return  {
-        Precommit: Type_221,
-        Prevote: Type_216,
+        Precommit: Type_233,
+        Prevote: Type_228,
     }
 })
 
-export const Type_216: sts.Type<Type_216> = sts.struct(() => {
+export const Type_228: sts.Type<Type_228> = sts.struct(() => {
     return  {
         roundNumber: sts.bigint(),
         identity: Public,
@@ -12192,7 +11956,7 @@ export const Prevote: sts.Type<Prevote> = sts.struct(() => {
     }
 })
 
-export const Type_221: sts.Type<Type_221> = sts.struct(() => {
+export const Type_233: sts.Type<Type_233> = sts.struct(() => {
     return  {
         roundNumber: sts.bigint(),
         identity: Public,
@@ -12205,23 +11969,6 @@ export const Precommit: sts.Type<Precommit> = sts.struct(() => {
     return  {
         targetHash: H256,
         targetNumber: sts.number(),
-    }
-})
-
-/**
- * Contains one variant per dispatchable that can be called by an extrinsic.
- */
-export const FaucetCall: sts.Type<FaucetCall> = sts.closedEnum(() => {
-    return  {
-        reset_rewards: sts.unit(),
-        transfer: sts.enumStruct({
-            assetId: AssetId32,
-            target: AccountId32,
-            amount: sts.bigint(),
-        }),
-        update_limit: sts.enumStruct({
-            newLimit: sts.bigint(),
-        }),
     }
 })
 
@@ -13011,13 +12758,13 @@ export const TechAccountId: sts.Type<TechAccountId> = sts.closedEnum(() => {
 export const TechPurpose: sts.Type<TechPurpose> = sts.closedEnum(() => {
     return  {
         FeeCollector: sts.unit(),
-        FeeCollectorForPair: Type_79,
+        FeeCollectorForPair: Type_77,
         Identifier: sts.bytes(),
-        LiquidityKeeper: Type_79,
+        LiquidityKeeper: Type_77,
     }
 })
 
-export const Type_79: sts.Type<Type_79> = sts.struct(() => {
+export const Type_77: sts.Type<Type_77> = sts.struct(() => {
     return  {
         baseAssetId: TechAssetId,
         targetAssetId: TechAssetId,

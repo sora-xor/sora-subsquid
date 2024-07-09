@@ -1,8 +1,8 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v19 from '../v19'
 import * as v42 from '../v42'
-import * as v44 from '../v44'
-import * as v54 from '../v54'
+import * as v45 from '../v45'
+import * as v57 from '../v57'
 import * as v60 from '../v60'
 
 export const poolInitialized =  {
@@ -10,9 +10,9 @@ export const poolInitialized =  {
     /**
      *  Pool is initialized for pair. [DEX Id, Synthetic Asset Id]
      */
-    v33: new EventType(
+    v19: new EventType(
         'XSTPool.PoolInitialized',
-        sts.tuple([v33.DEXId, v33.AssetId])
+        sts.tuple([v19.DEXId, v19.AssetId])
     ),
     /**
      * Pool is initialized for pair. [DEX Id, Synthetic Asset Id]
@@ -28,9 +28,9 @@ export const referenceAssetChanged =  {
     /**
      *  Reference Asset has been changed for pool. [New Reference Asset Id]
      */
-    v33: new EventType(
+    v19: new EventType(
         'XSTPool.ReferenceAssetChanged',
-        v33.AssetId
+        v19.AssetId
     ),
     /**
      * Reference Asset has been changed for pool. [New Reference Asset Id]
@@ -46,16 +46,16 @@ export const syntheticAssetEnabled =  {
     /**
      * Synthetic asset was enabled. [Synthetic Asset Id]
      */
-    v44: new EventType(
+    v45: new EventType(
         'XSTPool.SyntheticAssetEnabled',
-        v44.AssetId32
+        v45.AssetId32
     ),
     /**
      * Synthetic asset has been enabled. [Synthetic Asset Id, Reference Symbol]
      */
-    v54: new EventType(
+    v57: new EventType(
         'XSTPool.SyntheticAssetEnabled',
-        sts.tuple([v54.AssetId32, v54.SymbolName])
+        sts.tuple([v57.AssetId32, v57.SymbolName])
     ),
 }
 
@@ -64,7 +64,7 @@ export const syntheticBaseAssetFloorPriceChanged =  {
     /**
      * Floor price of the synthetic base asset has been changed. [New Floor Price]
      */
-    v44: new EventType(
+    v45: new EventType(
         'XSTPool.SyntheticBaseAssetFloorPriceChanged',
         sts.bigint()
     ),
@@ -75,9 +75,9 @@ export const syntheticAssetDisabled =  {
     /**
      * Synthetic asset has been disabled. [Synthetic Asset Id]
      */
-    v54: new EventType(
+    v57: new EventType(
         'XSTPool.SyntheticAssetDisabled',
-        v54.AssetId32
+        v57.AssetId32
     ),
 }
 
@@ -86,9 +86,9 @@ export const syntheticAssetFeeChanged =  {
     /**
      * Synthetic asset fee has been changed. [Synthetic Asset Id, New Fee]
      */
-    v54: new EventType(
+    v57: new EventType(
         'XSTPool.SyntheticAssetFeeChanged',
-        sts.tuple([v54.AssetId32, v54.FixedPoint])
+        sts.tuple([v57.AssetId32, v57.FixedPoint])
     ),
 }
 

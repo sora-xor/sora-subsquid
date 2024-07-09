@@ -2,7 +2,7 @@ import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../suppor
 
 export const migrate =  {
     name: 'IrohaMigration.migrate',
-    v70: new CallType(
+    v85: new CallType(
         'IrohaMigration.migrate',
         sts.struct({
             irohaAddress: sts.string(),

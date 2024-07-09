@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, StorageType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
 
 export const randomMaterial =  {
     /**
@@ -7,7 +7,7 @@ export const randomMaterial =  {
      *  is arranged as a ring buffer with `block_number % 81` being the index into the `Vec` of
      *  the oldest hash.
      */
-    v33: new StorageType('RandomnessCollectiveFlip.RandomMaterial', 'Default', [], sts.array(() => v33.Hash)) as RandomMaterialV33,
+    v1: new StorageType('RandomnessCollectiveFlip.RandomMaterial', 'Default', [], sts.array(() => v1.Hash)) as RandomMaterialV1,
 }
 
 /**
@@ -15,8 +15,8 @@ export const randomMaterial =  {
  *  is arranged as a ring buffer with `block_number % 81` being the index into the `Vec` of
  *  the oldest hash.
  */
-export interface RandomMaterialV33  {
+export interface RandomMaterialV1  {
     is(block: RuntimeCtx): boolean
-    getDefault(block: Block): v33.Hash[]
-    get(block: Block): Promise<(v33.Hash[] | undefined)>
+    getDefault(block: Block): v1.Hash[]
+    get(block: Block): Promise<(v1.Hash[] | undefined)>
 }

@@ -9,7 +9,7 @@ export const authorities = {
 	v42: productionStorage.authorities['v42'],
 	v42Stage: stageStorage.authorities['v42'],
 	v42Test: testStorage.authorities['v42'],
-	v70Dev: devStorage.authorities['v70'],
+	v85Dev: devStorage.authorities['v85'],
 }
 
 export const validatorSetId = {
@@ -17,7 +17,7 @@ export const validatorSetId = {
 	v42: productionStorage.validatorSetId['v42'],
 	v42Stage: stageStorage.validatorSetId['v42'],
 	v42Test: testStorage.validatorSetId['v42'],
-	v70Dev: devStorage.validatorSetId['v70'],
+	v85Dev: devStorage.validatorSetId['v85'],
 }
 
 export const nextAuthorities = {
@@ -25,5 +25,5 @@ export const nextAuthorities = {
 	v42: productionStorage.nextAuthorities['v42'],
 	v42Stage: stageStorage.nextAuthorities['v42'],
 	v42Test: testStorage.nextAuthorities['v42'],
-	v70Dev: devStorage.nextAuthorities['v70'],
+	v85Dev: devStorage.nextAuthorities['v85'],
 }

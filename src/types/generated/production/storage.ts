@@ -60,3 +60,6 @@ export * as substrateBridgeOutboundChannel from './substrate-bridge-outbound-cha
 export * as parachainBridgeApp from './parachain-bridge-app/storage'
 export * as bridgeDataSigner from './bridge-data-signer/storage'
 export * as multisigVerifier from './multisig-verifier/storage'
+export * as orderBook from './order-book/storage'
+export * as substrateBridgeApp from './substrate-bridge-app/storage'
+export * as kensetsu from './kensetsu/storage'

@@ -1,16 +1,16 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v33 from '../v33'
+import * as v1 from '../v1'
 import * as v42 from '../v42'
-import * as v52 from '../v52'
+import * as v53 from '../v53'
 
 export const newMultisig =  {
     name: 'Multisig.NewMultisig',
     /**
      *  A new multisig operation has begun. \[approving, multisig, call_hash\]
      */
-    v33: new EventType(
+    v1: new EventType(
         'Multisig.NewMultisig',
-        sts.tuple([v33.AccountId, v33.AccountId, v33.CallHash])
+        sts.tuple([v1.AccountId, v1.AccountId, v1.CallHash])
     ),
     /**
      * A new multisig operation has begun.
@@ -31,9 +31,9 @@ export const multisigApproval =  {
      *  A multisig operation has been approved by someone.
      *  \[approving, timepoint, multisig, call_hash\]
      */
-    v33: new EventType(
+    v1: new EventType(
         'Multisig.MultisigApproval',
-        sts.tuple([v33.AccountId, v33.Timepoint, v33.AccountId, v33.CallHash])
+        sts.tuple([v1.AccountId, v1.Timepoint, v1.AccountId, v1.CallHash])
     ),
     /**
      * A multisig operation has been approved by someone.
@@ -54,9 +54,9 @@ export const multisigExecuted =  {
     /**
      *  A multisig operation has been executed. \[approving, timepoint, multisig, call_hash\]
      */
-    v33: new EventType(
+    v1: new EventType(
         'Multisig.MultisigExecuted',
-        sts.tuple([v33.AccountId, v33.Timepoint, v33.AccountId, v33.CallHash, v33.DispatchResult])
+        sts.tuple([v1.AccountId, v1.Timepoint, v1.AccountId, v1.CallHash, v1.DispatchResult])
     ),
     /**
      * A multisig operation has been executed.
@@ -74,14 +74,14 @@ export const multisigExecuted =  {
     /**
      * A multisig operation has been executed.
      */
-    v52: new EventType(
+    v53: new EventType(
         'Multisig.MultisigExecuted',
         sts.struct({
-            approving: v52.AccountId32,
-            timepoint: v52.Timepoint,
-            multisig: v52.AccountId32,
+            approving: v53.AccountId32,
+            timepoint: v53.Timepoint,
+            multisig: v53.AccountId32,
             callHash: sts.bytes(),
-            result: sts.result(() => sts.unit(), () => v52.DispatchError),
+            result: sts.result(() => sts.unit(), () => v53.DispatchError),
         })
     ),
 }
@@ -91,9 +91,9 @@ export const multisigCancelled =  {
     /**
      *  A multisig operation has been cancelled. \[cancelling, timepoint, multisig, call_hash\]
      */
-    v33: new EventType(
+    v1: new EventType(
         'Multisig.MultisigCancelled',
-        sts.tuple([v33.AccountId, v33.Timepoint, v33.AccountId, v33.CallHash])
+        sts.tuple([v1.AccountId, v1.Timepoint, v1.AccountId, v1.CallHash])
     ),
     /**
      * A multisig operation has been cancelled.

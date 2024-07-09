@@ -1,6 +1,7 @@
 import {sts, Block, Bytes, Option, Result, CallType, RuntimeCtx} from '../support'
 import * as v64 from '../v64'
 import * as v70 from '../v70'
+import * as v84 from '../v84'
 
 export const initialize =  {
     name: 'MultisigVerifier.initialize',
@@ -15,6 +16,13 @@ export const initialize =  {
         'MultisigVerifier.initialize',
         sts.struct({
             networkId: v70.GenericNetworkId,
+            peers: sts.array(() => sts.bytes()),
+        })
+    ),
+    v84: new CallType(
+        'MultisigVerifier.initialize',
+        sts.struct({
+            networkId: v84.GenericNetworkId,
             peers: sts.array(() => sts.bytes()),
         })
     ),

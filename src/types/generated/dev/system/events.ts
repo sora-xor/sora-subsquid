@@ -1,15 +1,15 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const extrinsicSuccess =  {
     name: 'System.ExtrinsicSuccess',
     /**
      * An extrinsic completed successfully.
      */
-    v70: new EventType(
+    v85: new EventType(
         'System.ExtrinsicSuccess',
         sts.struct({
-            dispatchInfo: v70.DispatchInfo,
+            dispatchInfo: v85.DispatchInfo,
         })
     ),
 }
@@ -19,11 +19,11 @@ export const extrinsicFailed =  {
     /**
      * An extrinsic failed.
      */
-    v70: new EventType(
+    v85: new EventType(
         'System.ExtrinsicFailed',
         sts.struct({
-            dispatchError: v70.DispatchError,
-            dispatchInfo: v70.DispatchInfo,
+            dispatchError: v85.DispatchError,
+            dispatchInfo: v85.DispatchInfo,
         })
     ),
 }
@@ -33,7 +33,7 @@ export const codeUpdated =  {
     /**
      * `:code` was updated.
      */
-    v70: new EventType(
+    v85: new EventType(
         'System.CodeUpdated',
         sts.unit()
     ),
@@ -44,10 +44,10 @@ export const newAccount =  {
     /**
      * A new account was created.
      */
-    v70: new EventType(
+    v85: new EventType(
         'System.NewAccount',
         sts.struct({
-            account: v70.AccountId32,
+            account: v85.AccountId32,
         })
     ),
 }
@@ -57,10 +57,10 @@ export const killedAccount =  {
     /**
      * An account was reaped.
      */
-    v70: new EventType(
+    v85: new EventType(
         'System.KilledAccount',
         sts.struct({
-            account: v70.AccountId32,
+            account: v85.AccountId32,
         })
     ),
 }
@@ -70,11 +70,11 @@ export const remarked =  {
     /**
      * On on-chain remark happened.
      */
-    v70: new EventType(
+    v85: new EventType(
         'System.Remarked',
         sts.struct({
-            sender: v70.AccountId32,
-            hash: v70.H256,
+            sender: v85.AccountId32,
+            hash: v85.H256,
         })
     ),
 }

@@ -1,5 +1,5 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v70 from '../v70'
+import * as v85 from '../v85'
 
 export const minted =  {
     name: 'Technical.Minted',
@@ -8,9 +8,9 @@ export const minted =  {
      * This is not only for pure TechAccountId.
      * TechAccountId can be just wrapped AccountId.
      */
-    v70: new EventType(
+    v85: new EventType(
         'Technical.Minted',
-        sts.tuple([v70.TechAssetId, v70.TechAccountId, sts.bigint(), sts.bigint()])
+        sts.tuple([v85.TechAssetId, v85.TechAccountId, sts.bigint(), sts.bigint()])
     ),
 }
 
@@ -20,9 +20,9 @@ export const burned =  {
      * Some pure technical assets were burned. [asset, owner, burned_amount, total_exist].
      * For full kind of accounts like in Minted.
      */
-    v70: new EventType(
+    v85: new EventType(
         'Technical.Burned',
-        sts.tuple([v70.TechAssetId, v70.TechAccountId, sts.bigint(), sts.bigint()])
+        sts.tuple([v85.TechAssetId, v85.TechAccountId, sts.bigint(), sts.bigint()])
     ),
 }
 
@@ -32,9 +32,9 @@ export const outputTransferred =  {
      * Some assets were transferred out. [asset, from, to, amount].
      * TechAccountId is only pure TechAccountId.
      */
-    v70: new EventType(
+    v85: new EventType(
         'Technical.OutputTransferred',
-        sts.tuple([v70.TechAssetId, v70.TechAccountId, v70.AccountId32, sts.bigint()])
+        sts.tuple([v85.TechAssetId, v85.TechAccountId, v85.AccountId32, sts.bigint()])
     ),
 }
 
@@ -44,9 +44,9 @@ export const inputTransferred =  {
      * Some assets were transferred in. [asset, from, to, amount].
      * TechAccountId is only pure TechAccountId.
      */
-    v70: new EventType(
+    v85: new EventType(
         'Technical.InputTransferred',
-        sts.tuple([v70.TechAssetId, v70.AccountId32, v70.TechAccountId, sts.bigint()])
+        sts.tuple([v85.TechAssetId, v85.AccountId32, v85.TechAccountId, sts.bigint()])
     ),
 }
 
@@ -56,8 +56,8 @@ export const swapSuccess =  {
      * Swap operaction is finalised [initiator, finaliser].
      * TechAccountId is only pure TechAccountId.
      */
-    v70: new EventType(
+    v85: new EventType(
         'Technical.SwapSuccess',
-        v70.AccountId32
+        v85.AccountId32
     ),
 }
