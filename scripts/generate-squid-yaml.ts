@@ -65,6 +65,7 @@ const configuration = {
 		},
 		api: {
 			profile: details.scaleProfiles.api,
+			replicas: details.apiReplicas,
 		},
 	},
 }
