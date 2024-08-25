@@ -11,6 +11,8 @@ enum ScaleProfile {
 	LARGE = 'large',
 }
 
+type ApiReplicas = number
+
 interface ChainAddresses {
 	name: string
 	description: string
@@ -23,6 +25,7 @@ interface ChainAddresses {
 		processor: ScaleProfile
 		api: ScaleProfile
 	}
+	apiReplicas: number
 }
 
 type Chains = {
@@ -44,6 +47,7 @@ export const chains: Chains = {
 			processor: ScaleProfile.LARGE,
 			api: ScaleProfile.LARGE,
 		},
+		apiReplicas: 2
 	},
 	[Chain.STAGE]: {
 		name: 'sora-stage',
@@ -57,6 +61,7 @@ export const chains: Chains = {
 			processor: ScaleProfile.SMALL,
 			api: ScaleProfile.SMALL,
 		},
+		apiReplicas: 1
 	},
 	[Chain.TEST]: {
 		name: 'sora-test',
@@ -70,6 +75,7 @@ export const chains: Chains = {
 			processor: ScaleProfile.SMALL,
 			api: ScaleProfile.SMALL,
 		},
+		apiReplicas: 1
 	},
 	[Chain.DEV]: {
 		name: 'sora-dev',
@@ -83,6 +89,7 @@ export const chains: Chains = {
 			processor: ScaleProfile.LARGE,
 			api: ScaleProfile.LARGE,
 		},
+		apiReplicas: 1
 	},
 }
 
