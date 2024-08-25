@@ -116,7 +116,7 @@ export const getAssetsTransferEventData = (
 	}
 }
 
-export const getBalancesDepositEventData = (ctx: BlockContext, event: Event<'Balances.Deposited'>): DepositEventData => {
+export const getBalancesDepositEventData = (ctx: BlockContext, event: Event<'Balances.Deposit'>): DepositEventData => {
 	const data = getEventData(ctx, events.balances.deposit, event)
 
 	return {
@@ -136,13 +136,72 @@ export const getTokensDepositedEventData = (ctx: BlockContext, event: Event<'Tok
 	}
 }
 
+export const getCurrenciesDepositedEventData = (ctx: BlockContext, event: Event<'Currencies.Deposited'>): DepositEventData => {
+	const [ currencyId, who, amount ] = getEventData(ctx, events.currencies.deposited, event)
+
+	return {
+		assetId: getAssetId(currencyId),
+		to: toAddress(who),
+		amount: amount as AssetAmount,
+	}
+}
+
 export const getAssetsDepositEventData = (
 	ctx: BlockContext,
-	event: Event<'Balances.Deposited'> | Event<'Tokens.Deposited'>,
+	event: Event<'Balances.Deposit'> | Event<'Tokens.Deposited'> | Event<'Currencies.Deposited'>,
 ): DepositEventData => {
-	if (event.name === 'Balances.Deposited') {
+	if (event.name === 'Balances.Deposit') {
 		return getBalancesDepositEventData(ctx, event)
-	} else {
+	} else if (event.name === 'Tokens.Deposited') {
 		return getTokensDepositedEventData(ctx, event)
+	} else if (event.name === 'Currencies.Deposited'){
+		return getCurrenciesDepositedEventData(ctx, event)
+	} else {
+		throw new Error(`Unknown event name: ${event.name}`)
+	}
+}
+
+export const getBalancesWithdrawnEventData = (ctx: BlockContext, event: Event<'Balances.Withdraw'>): DepositEventData => {
+	const data = getEventData(ctx, events.balances.withdraw, event)
+
+	return {
+		assetId: XOR,
+		to: toAddress('who' in data ? data.who : data[0]),
+		amount: ('amount' in data ? data.amount : data[1]) as AssetAmount,
+	}
+}
+
+export const getTokensWithdrawnEventData = (ctx: BlockContext, event: Event<'Tokens.Withdrawn'>): DepositEventData => {
+	const { currencyId, who, amount } = getEventData(ctx, events.tokens.withdrawn, event)
+
+	return {
+		assetId: getAssetId(currencyId),
+		to: toAddress(who),
+		amount: amount as AssetAmount,
+	}
+}
+
+export const getCurrenciesWithdrawnEventData = (ctx: BlockContext, event: Event<'Currencies.Withdrawn'>): DepositEventData => {
+	const [ currencyId, who, amount ] = getEventData(ctx, events.currencies.withdrawn, event)
+
+	return {
+		assetId: getAssetId(currencyId),
+		to: toAddress(who),
+		amount: amount as AssetAmount,
+	}
+}
+
+export const getAssetsWithdrawnEventData = (
+	ctx: BlockContext,
+	event: Event<'Balances.Withdraw'> | Event<'Tokens.Withdrawn'> | Event<'Currencies.Withdrawn'>,
+): DepositEventData => {
+	if (event.name === 'Balances.Withdraw') {
+		return getBalancesWithdrawnEventData(ctx, event)
+	} else if (event.name === 'Tokens.Withdrawn') {
+		return getTokensWithdrawnEventData(ctx, event)
+	} else if (event.name === 'Currencies.Withdrawn') {
+		return getCurrenciesWithdrawnEventData(ctx, event)
+	} else {
+		throw new Error(`Unknown event name: ${event.name}`)
 	}
 }
